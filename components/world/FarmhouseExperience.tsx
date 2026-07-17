@@ -72,7 +72,6 @@ export function FarmhouseExperience({
   // Travel stops: overview, then each area, then each interactive object.
   const areas = useMemo(() => room.areas ?? [], [room.areas]);
   const objectStart = 1 + areas.length;
-  const stopCount = objectStart + room.objects.length;
   const currentArea =
     focusIndex >= 1 && focusIndex < objectStart ? areas[focusIndex - 1] : null;
   const currentObject =
@@ -96,8 +95,14 @@ export function FarmhouseExperience({
     router.replace(`${pathname}?room=${id}`, { scroll: false });
   }
 
+  // Scroll / arrows travel between the "hot areas" (overview + areas). Objects
+  // are reached by clicking their item, not by scrolling past them.
+  const travelMax = objectStart - 1;
   function step(delta: number) {
-    setFocusIndex((i) => Math.min(Math.max(i + delta, 0), stopCount - 1));
+    setFocusIndex((i) => {
+      const base = Math.min(i, travelMax);
+      return Math.min(Math.max(base + delta, 0), travelMax);
+    });
   }
 
   function onWheel(e: React.WheelEvent) {
@@ -235,7 +240,9 @@ export function FarmhouseExperience({
             title={
               currentObject?.label ??
               currentArea?.label ??
-              (hovered ? hovered.label : "Drag to look · scroll or ‹ › to explore")
+              (hovered
+                ? hovered.label
+                : "Drag to look · scroll to travel · click an item")
             }
             subtitle={currentObject?.hint ?? null}
             canOpen={!!currentObject}
@@ -245,8 +252,8 @@ export function FarmhouseExperience({
               !member
             }
             openText={currentObject ? openLabel(currentObject) : ""}
-            index={focusIndex}
-            count={stopCount}
+            index={Math.min(focusIndex, travelMax)}
+            count={objectStart}
             onPrev={() => step(-1)}
             onNext={() => step(1)}
             onOpen={() => currentObject && setActive(currentObject)}

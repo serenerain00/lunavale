@@ -16,7 +16,7 @@
 
 import { Component, Suspense, useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls, Environment, useGLTF, useTexture } from "@react-three/drei";
+import { Environment, useGLTF, useTexture } from "@react-three/drei";
 import { EffectComposer, Bloom, Vignette, SMAA, N8AO } from "@react-three/postprocessing";
 import gsap from "gsap";
 import * as THREE from "three";
@@ -1230,9 +1230,20 @@ function focusView(room: Room, focus: WorldObject | null) {
   return { pos, target };
 }
 
+/** Yaw/pitch (Euler YXZ) that makes a camera at `pos` look at `target`. */
+function lookYawPitch(pos: THREE.Vector3, target: THREE.Vector3) {
+  const dummy = new THREE.Object3D();
+  dummy.position.copy(pos);
+  dummy.up.set(0, 1, 0);
+  dummy.lookAt(target);
+  const e = new THREE.Euler().setFromQuaternion(dummy.quaternion, "YXZ");
+  return { yaw: e.y, pitch: e.x };
+}
+
 /**
- * Cinematic waypoint navigation: drag to look (cursor stays free), and the
- * camera glides + zooms to whichever focus point is selected. No mouse trap.
+ * First-person look navigation: drag turns your view where you stand (the
+ * cursor stays free), and the camera glides between areas/hotspots. Rotation
+ * happens around your own position, not a distant anchor.
  */
 function World({
   room,
@@ -1242,66 +1253,97 @@ function World({
   onHoverChange,
   onSelectObject,
 }: SceneProps) {
-  const { camera } = useThree();
-  const controls = useRef<React.ComponentRef<typeof OrbitControls>>(null);
+  const { camera, gl } = useThree();
+  const yaw = useRef(0);
+  const pitch = useRef(0);
 
-  // Glide the camera whenever the focus, area, or room changes.
+  // Drag-to-look: rotate the view in place, cursor free.
   useEffect(() => {
-    const c = controls.current;
-    if (!c) return;
+    camera.rotation.order = "YXZ";
+    const el = gl.domElement;
+    let dragging = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    const down = (e: PointerEvent) => {
+      dragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+    };
+    const move = (e: PointerEvent) => {
+      if (!dragging) return;
+      gsap.killTweensOf(yaw);
+      gsap.killTweensOf(pitch);
+      yaw.current -= (e.clientX - lastX) * 0.005;
+      pitch.current = THREE.MathUtils.clamp(
+        pitch.current - (e.clientY - lastY) * 0.005,
+        -1.2,
+        1.2,
+      );
+      lastX = e.clientX;
+      lastY = e.clientY;
+    };
+    const up = () => {
+      dragging = false;
+    };
+
+    el.addEventListener("pointerdown", down);
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+    return () => {
+      el.removeEventListener("pointerdown", down);
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+    };
+  }, [camera, gl]);
+
+  // Glide position + turn to face the destination when focus/area/room changes.
+  useEffect(() => {
     const { pos, target } = vantage
       ? {
           pos: new THREE.Vector3(...vantage.camera),
           target: new THREE.Vector3(...vantage.target),
         }
       : focusView(room, focus);
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const look = lookYawPitch(pos, target);
+    // Take the shortest angular path for yaw.
+    let destYaw = look.yaw;
+    while (destYaw - yaw.current > Math.PI) destYaw -= Math.PI * 2;
+    while (destYaw - yaw.current < -Math.PI) destYaw += Math.PI * 2;
 
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     gsap.killTweensOf(camera.position);
-    gsap.killTweensOf(c.target);
+    gsap.killTweensOf(yaw);
+    gsap.killTweensOf(pitch);
 
     if (reduce) {
       camera.position.copy(pos);
-      c.target.copy(target);
-      c.update();
+      yaw.current = destYaw;
+      pitch.current = look.pitch;
       return;
     }
-    c.enabled = false;
     gsap.to(camera.position, {
       x: pos.x,
       y: pos.y,
       z: pos.z,
       duration: 1.15,
       ease: "power2.inOut",
-      onUpdate: () => c.update(),
     });
-    gsap.to(c.target, {
-      x: target.x,
-      y: target.y,
-      z: target.z,
+    gsap.to(yaw, { current: destYaw, duration: 1.15, ease: "power2.inOut" });
+    gsap.to(pitch, {
+      current: look.pitch,
       duration: 1.15,
       ease: "power2.inOut",
-      onComplete: () => {
-        c.enabled = true;
-        c.update();
-      },
     });
   }, [focus, vantage, room, camera]);
 
+  // Apply the look each frame.
+  useFrame(() => {
+    camera.rotation.set(pitch.current, yaw.current, 0, "YXZ");
+  });
+
   return (
     <>
-      <OrbitControls
-        ref={controls}
-        makeDefault
-        enablePan={false}
-        enableZoom={false}
-        enableDamping
-        dampingFactor={0.08}
-        rotateSpeed={-0.32}
-        minPolarAngle={0.5}
-        maxPolarAngle={Math.PI - 0.4}
-        target={[0, 1.4, -3]}
-      />
       {room.objects.map((obj) => (
         <Marker
           key={obj.id}

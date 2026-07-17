@@ -24,7 +24,7 @@ import type { Room, RoomScan, RoomPano, WorldObject } from "@/lib/content/world"
 
 export type TimeOfDay = "day" | "night";
 
-const ROOM = { width: 9, depth: 9, height: 3.2 };
+const ROOM = { width: 9, depth: 15, height: 3.6 };
 
 const COLOR = {
   fire: "#e5a24e",
@@ -220,8 +220,10 @@ function PlaceholderRoom({ room }: { room: Room }) {
 
   const w = ROOM.width / 2;
   const d = ROOM.depth / 2;
-  // The kitchen's right wall is a floor-to-ceiling window (drawn by KitchenFurniture).
+  // The kitchen is an open-concept great room: the right wall is glass, and the
+  // front wall opens into the living room (both drawn by KitchenFurniture).
   const openRight = room.id === "kitchen";
+  const openFront = room.id === "kitchen";
 
   return (
     <group>
@@ -237,13 +239,15 @@ function PlaceholderRoom({ room }: { room: Room }) {
       </mesh>
       {/* Walls */}
       <Wall maps={wallMaps} tint={wallTint} position={[0, ROOM.height / 2, -d]} args={[ROOM.width, ROOM.height]} />
-      <Wall
-        maps={wallMaps}
-        tint={wallTint}
-        position={[0, ROOM.height / 2, d]}
-        rotation={[0, Math.PI, 0]}
-        args={[ROOM.width, ROOM.height]}
-      />
+      {!openFront && (
+        <Wall
+          maps={wallMaps}
+          tint={wallTint}
+          position={[0, ROOM.height / 2, d]}
+          rotation={[0, Math.PI, 0]}
+          args={[ROOM.width, ROOM.height]}
+        />
+      )}
       <Wall
         maps={wallMaps}
         tint={wallTint}
@@ -261,10 +265,10 @@ function PlaceholderRoom({ room }: { room: Room }) {
         />
       )}
 
-      {/* Ceiling beams */}
-      {[-2.4, 0, 2.4].map((x) => (
+      {/* Ceiling beams (run the length of the great room) */}
+      {[-3, -1, 1, 3].map((x) => (
         <mesh key={x} position={[x, ROOM.height - 0.15, 0]} castShadow>
-          <boxGeometry args={[0.2, 0.2, ROOM.depth]} />
+          <boxGeometry args={[0.22, 0.24, ROOM.depth]} />
           <meshStandardMaterial {...woodMaps} />
         </mesh>
       ))}
@@ -444,26 +448,24 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
         </group>
       ))}
 
-      {/* Wrap-around counter run along the left wall (L-shaped kitchen) */}
-      <LeftWallCounter x={-w} wood={wood} stone={stone} />
+      {/* Wrap-around counter along the left wall (kitchen end) */}
+      <LeftWallCounter x={-w} zCenter={-5} length={5} wood={wood} stone={stone} />
 
       {/* Warm under-cabinet glow — kept low for a dim, intimate feel */}
       <pointLight position={[-2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={1.3} distance={3} decay={2} />
       <pointLight position={[2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={1.3} distance={3} decay={2} />
-      <pointLight position={[-w + 0.9, 1.15, -2]} color="#ffb060" intensity={1.2} distance={3} decay={2} />
+      <pointLight position={[-w + 0.9, 1.15, -5]} color="#ffb060" intensity={1.2} distance={3} decay={2} />
 
-      {/* Island: walnut base + stone top */}
-      <group position={[0, 0, 0.5]}>
+      {/* Island — seating overhang faces the living room (+z) */}
+      <group position={[0, 0, -5]}>
         <mesh position={[0, 0.48, 0]} castShadow receiveShadow>
           <boxGeometry args={[2.8, 0.86, 1.4]} />
           <meshStandardMaterial {...wood} />
         </mesh>
-        {/* toe kick */}
         <mesh position={[0, 0.06, 0.6]}>
           <boxGeometry args={[2.8, 0.12, 0.16]} />
           <meshStandardMaterial color="#0d0906" roughness={1} />
         </mesh>
-        {/* cabinet doors on the seating side */}
         {[-0.9, 0, 0.9].map((dx) => (
           <group key={dx} position={[dx, 0.5, 0.705]}>
             <mesh position={[0.45, 0, 0]}>
@@ -476,12 +478,10 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
             </mesh>
           </group>
         ))}
-        {/* stone top with a seating overhang on the near side */}
         <mesh position={[0, 0.95, 0.18]} castShadow receiveShadow>
-          <boxGeometry args={[3.0, 0.1, 1.94] } />
+          <boxGeometry args={[3.0, 0.1, 1.94]} />
           <meshStandardMaterial {...stone} />
         </mesh>
-        {/* a candle on the island — for the slow dance after dinner */}
         <mesh position={[-1.1, 1.08, 0.2]}>
           <cylinderGeometry args={[0.04, 0.04, 0.16, 10]} />
           <meshStandardMaterial color="#e8dcc4" roughness={0.6} />
@@ -493,55 +493,50 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
         <pointLight ref={candleLight} position={[-1.1, 1.23, 0.2]} color="#ff9a40" intensity={2.6} distance={3} decay={2} />
       </group>
 
-      {/* Amber pendant lights over the island */}
+      {/* Pendants over the island */}
       {[-0.8, 0, 0.8].map((x) => (
-        <Pendant key={x} position={[x, 0, 0.5]} />
+        <Pendant key={x} position={[x, 0, -5]} />
       ))}
 
-      {/* Floor-to-ceiling windows on the right wall (open — sky + sun stream in) */}
+      {/* Right-wall windows (full length) */}
       <Windows x={w} />
 
-      {/* Exterior door on the front wall */}
-      <ExteriorDoor z={d} wood={wood} />
+      {/* Fridge at the kitchen end of the left wall */}
+      <Fridge x={-w} z={-3} />
 
-      {/* Stainless fridge on the left wall */}
-      <Fridge x={-w} />
-
-      {/* Built-in espresso machine on the right counter — Josh's splurge */}
+      {/* Espresso machine on the right counter — Josh's splurge */}
       <EspressoMachine position={[3.35, 1.0, -d + 0.4]} />
 
-      {/* Prop models + framed pictures — the decoration layer, guarded. */}
+      {/* Open-concept living room in the front half (fireplace + TV + sofas) */}
+      <LivingRoom z={d} wood={wood} stone={stone} />
+
+      {/* Prop models + framed pictures — guarded so a bad asset can't blank the room. */}
       <DecorBoundary>
         <Suspense fallback={null}>
-          {/* stools wrapping the island: four along the seating side + one each end */}
-          <Prop url={MODELS.barChair} position={[-1.1, 0, 1.75]} rotationY={Math.PI} />
-          <Prop url={MODELS.barChair} position={[-0.37, 0, 1.78]} rotationY={Math.PI} />
-          <Prop url={MODELS.barChair} position={[0.37, 0, 1.78]} rotationY={Math.PI} />
-          <Prop url={MODELS.barChair} position={[1.1, 0, 1.75]} rotationY={Math.PI} />
-          <Prop url={MODELS.barChair} position={[1.85, 0, 0.65]} rotationY={-Math.PI / 2} />
-          <Prop url={MODELS.barChair} position={[-1.85, 0, 0.65]} rotationY={Math.PI / 2} />
+          {/* stools wrapping the island */}
+          <Prop url={MODELS.barChair} position={[-1.1, 0, -3.6]} rotationY={Math.PI} />
+          <Prop url={MODELS.barChair} position={[-0.37, 0, -3.57]} rotationY={Math.PI} />
+          <Prop url={MODELS.barChair} position={[0.37, 0, -3.57]} rotationY={Math.PI} />
+          <Prop url={MODELS.barChair} position={[1.1, 0, -3.6]} rotationY={Math.PI} />
+          <Prop url={MODELS.barChair} position={[1.85, 0, -5]} rotationY={-Math.PI / 2} />
+          <Prop url={MODELS.barChair} position={[-1.85, 0, -5]} rotationY={Math.PI / 2} />
 
-          {/* floor */}
-          <Prop url={MODELS.plant} position={[3.6, 0, 3.4]} />
+          {/* living-room plant */}
+          <Prop url={MODELS.plant} position={[3.7, 0, 5.2]} />
           {/* island */}
-          <Prop url={MODELS.bowl} position={[0.9, 1.0, 0.5]} />
-          {/* left counter run */}
+          <Prop url={MODELS.bowl} position={[0.9, 1.0, -5]} />
+          {/* back + left counters */}
           <Prop url={MODELS.microwave} position={[-3.5, 1.0, -d + 0.42]} />
           <Prop url={MODELS.pot} position={[-2.5, 0.99, -d + 0.42]} />
           <Prop url={MODELS.kettle} position={[-1.8, 1.0, -d + 0.42]} />
-          {/* right counter run (espresso machine lives here too) */}
           <Prop url={MODELS.cuttingBoard} position={[1.8, 1.0, -d + 0.42]} rotationY={0.15} />
           <Prop url={MODELS.vase} position={[2.6, 1.0, -d + 0.42]} />
 
-          <FramedPicture
-            src="/posters/luna-josh-first-morning.jpg"
-            position={[-w + 0.03, 1.7, -1.6]}
-            rotationY={Math.PI / 2}
-          />
+          {/* a framed still on the left living-room wall */}
           <FramedPicture
             src="/posters/tyson-luna-lakehouse-fire.jpg"
-            position={[1.6, 1.75, d - 0.03]}
-            rotationY={Math.PI}
+            position={[-w + 0.03, 1.6, 3]}
+            rotationY={Math.PI / 2}
           />
         </Suspense>
       </DecorBoundary>
@@ -552,15 +547,19 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
 /** A counter run along the left wall (runs along z), for an L-shaped kitchen. */
 function LeftWallCounter({
   x,
+  zCenter,
+  length,
   wood,
   stone,
 }: {
   x: number;
+  zCenter: number;
+  length: number;
   wood: PBRMaps;
   stone: PBRMaps;
 }) {
-  const zc = -1.7; // centre of the run
-  const len = 4.4;
+  const zc = zCenter;
+  const len = length;
   return (
     <group position={[x + 0.31, 0, zc]}>
       {/* lower cabinet */}
@@ -644,42 +643,199 @@ function Windows({ x }: { x: number }) {
   );
 }
 
-/** A wood exterior door with frame and handle on the front wall. */
-function ExteriorDoor({ z, wood }: { z: number; wood: PBRMaps }) {
-  const frame = { color: "#1c130c", roughness: 0.7, metalness: 0 };
+/** Mullioned window section on the front wall, flanking the fireplace. */
+function FrontWindow({ x, z }: { x: number; z: number }) {
+  const frame = { color: "#241812", roughness: 0.6, metalness: 0 };
+  const H = ROOM.height;
+  const width = 2.4;
   return (
-    <group position={[-2.6, 0, z - 0.06]}>
-      {/* jamb */}
-      <mesh position={[-0.62, 1.12, 0]}>
-        <boxGeometry args={[0.12, 2.24, 0.16]} />
-        <meshStandardMaterial {...frame} />
+    <group position={[x, 0, z - 0.05]}>
+      <mesh position={[0, H / 2, 0]}>
+        <planeGeometry args={[width, H - 0.2]} />
+        <meshPhysicalMaterial
+          transparent
+          opacity={0.16}
+          roughness={0.04}
+          metalness={0}
+          ior={1.45}
+          color="#cfe0ec"
+          side={THREE.DoubleSide}
+        />
       </mesh>
-      <mesh position={[0.62, 1.12, 0]}>
-        <boxGeometry args={[0.12, 2.24, 0.16]} />
-        <meshStandardMaterial {...frame} />
+      {[-width / 2, 0, width / 2].map((bx) => (
+        <mesh key={bx} position={[bx, H / 2, 0.03]} castShadow>
+          <boxGeometry args={[0.08, H, 0.08]} />
+          <meshStandardMaterial {...frame} />
+        </mesh>
+      ))}
+      {[0.1, 1.6, H - 0.1].map((by) => (
+        <mesh key={by} position={[0, by, 0.03]} castShadow>
+          <boxGeometry args={[width, 0.08, 0.08]} />
+          <meshStandardMaterial {...frame} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+/** The TV screen — shows a scene still, dimly lit like a screen at night. */
+function TVScreen({ z }: { z: number }) {
+  const tex = useTexture("/posters/luna-josh-first-morning.jpg");
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return (
+    <mesh position={[0, 2.35, z]}>
+      <planeGeometry args={[1.85, 1.0]} />
+      <meshStandardMaterial
+        map={tex}
+        emissive="#ffffff"
+        emissiveMap={tex}
+        emissiveIntensity={0.35}
+        toneMapped={false}
+      />
+    </mesh>
+  );
+}
+
+/** A simple upholstered sofa built from boxes. */
+function Sofa({
+  position,
+  rotationY,
+}: {
+  position: [number, number, number];
+  rotationY: number;
+}) {
+  const fabric = { color: "#c9bfa8", roughness: 0.95, metalness: 0 };
+  return (
+    <group position={position} rotation={[0, rotationY, 0]}>
+      <mesh position={[0, 0.32, 0]} castShadow receiveShadow>
+        <boxGeometry args={[2.2, 0.4, 0.95]} />
+        <meshStandardMaterial {...fabric} />
       </mesh>
-      <mesh position={[0, 2.2, 0]}>
-        <boxGeometry args={[1.36, 0.14, 0.16]} />
-        <meshStandardMaterial {...frame} />
+      <mesh position={[0, 0.56, 0.06]} castShadow>
+        <boxGeometry args={[2.06, 0.2, 0.82]} />
+        <meshStandardMaterial {...fabric} />
       </mesh>
-      {/* slab */}
-      <mesh position={[0, 1.05, 0.02]} castShadow>
-        <boxGeometry args={[1.05, 2.1, 0.07]} />
-        <meshStandardMaterial {...wood} />
+      <mesh position={[0, 0.72, -0.36]} castShadow>
+        <boxGeometry args={[2.2, 0.66, 0.24]} />
+        <meshStandardMaterial {...fabric} />
       </mesh>
-      {/* handle */}
-      <mesh position={[0.4, 1.05, 0.08]}>
-        <sphereGeometry args={[0.05, 12, 12]} />
-        <meshStandardMaterial {...METAL} />
+      <mesh position={[-1.05, 0.5, 0]} castShadow>
+        <boxGeometry args={[0.2, 0.5, 0.95]} />
+        <meshStandardMaterial {...fabric} />
+      </mesh>
+      <mesh position={[1.05, 0.5, 0]} castShadow>
+        <boxGeometry args={[0.2, 0.5, 0.95]} />
+        <meshStandardMaterial {...fabric} />
       </mesh>
     </group>
   );
 }
 
-/** A tall stainless double-door fridge standing against a wall. */
-function Fridge({ x }: { x: number }) {
+/** A wood coffee table. */
+function CoffeeTable({
+  position,
+  wood,
+}: {
+  position: [number, number, number];
+  wood: PBRMaps;
+}) {
   return (
-    <group position={[x + 0.4, 0, 1.8]}>
+    <group position={position}>
+      <mesh position={[0, 0.4, 0]} castShadow receiveShadow>
+        <boxGeometry args={[1.3, 0.12, 0.7]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      {[
+        [-0.55, -0.28],
+        [0.55, -0.28],
+        [-0.55, 0.28],
+        [0.55, 0.28],
+      ].map((p, i) => (
+        <mesh key={i} position={[p[0], 0.18, p[1]]} castShadow>
+          <boxGeometry args={[0.08, 0.36, 0.08]} />
+          <meshStandardMaterial color="#2a1c12" roughness={0.7} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+/**
+ * The open-concept living room: floor-to-ceiling stone fireplace with a timber
+ * mantel and a large mounted TV, flanked by windows, with sofas facing it.
+ */
+function LivingRoom({
+  z,
+  wood,
+  stone,
+}: {
+  z: number;
+  wood: PBRMaps;
+  stone: PBRMaps;
+}) {
+  const fireLight = useRef<THREE.PointLight>(null);
+  const fireGlow = useRef<THREE.Mesh>(null);
+
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    const f = 1 + Math.sin(t * 10) * 0.16 + Math.sin(t * 24) * 0.09;
+    if (fireLight.current) fireLight.current.intensity = 4 * f;
+    if (fireGlow.current) {
+      (fireGlow.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
+        1.7 * f;
+    }
+  });
+
+  return (
+    <group>
+      {/* Stone chimney breast, floor to ceiling */}
+      <mesh position={[0, ROOM.height / 2, z - 0.25]} castShadow receiveShadow>
+        <boxGeometry args={[3.0, ROOM.height, 0.5]} />
+        <meshStandardMaterial {...stone} />
+      </mesh>
+      {/* Flanking windows */}
+      <FrontWindow x={-3.2} z={z} />
+      <FrontWindow x={3.2} z={z} />
+      {/* Timber mantel */}
+      <mesh position={[0, 1.4, z - 0.34]} castShadow>
+        <boxGeometry args={[2.6, 0.3, 0.5]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      {/* Firebox + fire glow */}
+      <mesh position={[0, 0.7, z - 0.42]}>
+        <boxGeometry args={[1.3, 0.9, 0.12]} />
+        <meshStandardMaterial color="#0a0806" roughness={1} />
+      </mesh>
+      <mesh ref={fireGlow} position={[0, 0.55, z - 0.46]}>
+        <planeGeometry args={[1.1, 0.6]} />
+        <meshStandardMaterial color="#ff8a30" emissive="#ff8a30" emissiveIntensity={1.7} toneMapped={false} />
+      </mesh>
+      <pointLight ref={fireLight} position={[0, 0.7, z - 0.95]} color="#ff7a28" intensity={4} distance={8} decay={2} />
+      {/* Large TV above the mantel */}
+      <mesh position={[0, 2.35, z - 0.32]} castShadow>
+        <boxGeometry args={[2.0, 1.15, 0.08]} />
+        <meshStandardMaterial color="#050506" metalness={0.5} roughness={0.3} />
+      </mesh>
+      <TVScreen z={z - 0.27} />
+      {/* Sofas facing each other, fireplace at the head */}
+      <Sofa position={[-2.4, 0, z - 3.2]} rotationY={Math.PI / 2} />
+      <Sofa position={[2.4, 0, z - 3.2]} rotationY={-Math.PI / 2} />
+      {/* Coffee table + rug */}
+      <CoffeeTable position={[0, 0, z - 3.2]} wood={wood} />
+      <mesh position={[0, 0.02, z - 3.2]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <planeGeometry args={[3.4, 2.8]} />
+        <meshStandardMaterial color="#3a2418" roughness={0.95} />
+      </mesh>
+      {/* soft living-room fill */}
+      <pointLight position={[0, 1.7, z - 3.6]} color="#ffcf9a" intensity={1.1} distance={6} decay={2} />
+    </group>
+  );
+}
+
+/** A tall stainless double-door fridge standing against a wall. */
+function Fridge({ x, z }: { x: number; z: number }) {
+  return (
+    <group position={[x + 0.4, 0, z]}>
       <mesh position={[0, 1.05, 0]} castShadow receiveShadow>
         <boxGeometry args={[0.72, 2.1, 0.78]} />
         <meshStandardMaterial {...STAINLESS} />
@@ -947,7 +1103,7 @@ function focusView(room: Room, focus: WorldObject | null) {
   if (!focus) {
     return {
       pos: new THREE.Vector3(room.spawn[0], room.spawn[1], room.spawn[2]),
-      target: new THREE.Vector3(0, 1.2, -0.5),
+      target: new THREE.Vector3(0, 1.4, -3),
     };
   }
   const p = new THREE.Vector3(...focus.position);
@@ -1026,7 +1182,7 @@ function World({
         rotateSpeed={-0.32}
         minPolarAngle={0.5}
         maxPolarAngle={Math.PI - 0.4}
-        target={[0, 1.2, -0.5]}
+        target={[0, 1.4, -3]}
       />
       {room.objects.map((obj) => (
         <Marker

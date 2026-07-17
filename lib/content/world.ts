@@ -87,10 +87,10 @@ export const environments: Environment[] = [
     rooms: [
       {
         id: "kitchen",
-        name: "Kitchen",
+        name: "Kitchen & Living Room",
         description:
-          "The heart of the house — stone hearth, warm wood, and the open floor where they'd slow-dance after dinner.",
-        spawn: [0, 1.6, 3.6],
+          "The open heart of the house — the kitchen where they'd slow-dance after dinner, opening onto the living room and its great stone fireplace.",
+        spawn: [0, 1.7, 2],
         accent: "#6b5238",
         objects: [
           {
@@ -98,7 +98,7 @@ export const environments: Environment[] = [
             label: "Josh's Note",
             kind: "journal",
             hint: "Read it",
-            position: [-0.55, 1.05, 0.35],
+            position: [-0.55, 1.05, -4.65],
             placeholder:
               "A note left on the island before he went to work: \"Didn't want to wake you. Coffee's still warm. — J\". Small, ordinary, the kind of thing you only understand the weight of later.",
             access: "free",
@@ -107,8 +107,8 @@ export const environments: Environment[] = [
             id: "first-morning-clip",
             label: "First Morning",
             kind: "clip",
-            hint: "Watch the scene",
-            position: [-4.1, 1.68, -1.6],
+            hint: "Watch on the TV",
+            position: [0, 2.0, 6.5],
             videoSlug: "luna-josh-first-morning",
             placeholder: "A scene from the farmhouse.",
             access: "free",
@@ -118,7 +118,7 @@ export const environments: Environment[] = [
             label: "The Coffee Mug",
             kind: "memory",
             hint: "Pick it up",
-            position: [0.7, 1.05, 0.55],
+            position: [0.7, 1.05, -4.65],
             placeholder:
               "A chipped mug on the island. Josh and Luna's mornings lived in small rituals like this one.",
             access: "free",

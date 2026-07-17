@@ -444,9 +444,13 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
         </group>
       ))}
 
+      {/* Wrap-around counter run along the left wall (L-shaped kitchen) */}
+      <LeftWallCounter x={-w} wood={wood} stone={stone} />
+
       {/* Warm under-cabinet glow — kept low for a dim, intimate feel */}
       <pointLight position={[-2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={1.3} distance={3} decay={2} />
       <pointLight position={[2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={1.3} distance={3} decay={2} />
+      <pointLight position={[-w + 0.9, 1.15, -2]} color="#ffb060" intensity={1.2} distance={3} decay={2} />
 
       {/* Island: walnut base + stone top */}
       <group position={[0, 0, 0.5]}>
@@ -472,8 +476,9 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
             </mesh>
           </group>
         ))}
-        <mesh position={[0, 0.95, 0]} castShadow receiveShadow>
-          <boxGeometry args={[3.0, 0.1, 1.6]} />
+        {/* stone top with a seating overhang on the near side */}
+        <mesh position={[0, 0.95, 0.18]} castShadow receiveShadow>
+          <boxGeometry args={[3.0, 0.1, 1.94] } />
           <meshStandardMaterial {...stone} />
         </mesh>
         {/* a candle on the island — for the slow dance after dinner */}
@@ -508,9 +513,13 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
       {/* Prop models + framed pictures — the decoration layer, guarded. */}
       <DecorBoundary>
         <Suspense fallback={null}>
-          <Prop url={MODELS.barChair} position={[-0.9, 0, 1.55]} rotationY={Math.PI} />
-          <Prop url={MODELS.barChair} position={[0, 0, 1.6]} rotationY={Math.PI} />
-          <Prop url={MODELS.barChair} position={[0.9, 0, 1.55]} rotationY={Math.PI} />
+          {/* stools wrapping the island: four along the seating side + one each end */}
+          <Prop url={MODELS.barChair} position={[-1.1, 0, 1.75]} rotationY={Math.PI} />
+          <Prop url={MODELS.barChair} position={[-0.37, 0, 1.78]} rotationY={Math.PI} />
+          <Prop url={MODELS.barChair} position={[0.37, 0, 1.78]} rotationY={Math.PI} />
+          <Prop url={MODELS.barChair} position={[1.1, 0, 1.75]} rotationY={Math.PI} />
+          <Prop url={MODELS.barChair} position={[1.85, 0, 0.65]} rotationY={-Math.PI / 2} />
+          <Prop url={MODELS.barChair} position={[-1.85, 0, 0.65]} rotationY={Math.PI / 2} />
 
           {/* floor */}
           <Prop url={MODELS.plant} position={[3.6, 0, 3.4]} />
@@ -536,6 +545,57 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
           />
         </Suspense>
       </DecorBoundary>
+    </group>
+  );
+}
+
+/** A counter run along the left wall (runs along z), for an L-shaped kitchen. */
+function LeftWallCounter({
+  x,
+  wood,
+  stone,
+}: {
+  x: number;
+  wood: PBRMaps;
+  stone: PBRMaps;
+}) {
+  const zc = -1.7; // centre of the run
+  const len = 4.4;
+  return (
+    <group position={[x + 0.31, 0, zc]}>
+      {/* lower cabinet */}
+      <mesh position={[0, 0.48, 0]} castShadow receiveShadow>
+        <boxGeometry args={[0.62, 0.86, len]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      {/* toe kick */}
+      <mesh position={[0.24, 0.06, 0]}>
+        <boxGeometry args={[0.14, 0.12, len]} />
+        <meshStandardMaterial color="#0d0906" roughness={1} />
+      </mesh>
+      {/* stone counter */}
+      <mesh position={[0.02, 0.95, 0]} castShadow receiveShadow>
+        <boxGeometry args={[0.66, 0.09, len + 0.08]} />
+        <meshStandardMaterial {...stone} />
+      </mesh>
+      {/* door seams + handles along the run */}
+      {[-1.6, -0.8, 0, 0.8, 1.6].map((dz) => (
+        <group key={dz} position={[0.315, 0.5, dz]}>
+          <mesh position={[0, 0, 0.38]}>
+            <boxGeometry args={[0.02, 0.78, 0.02]} />
+            <meshStandardMaterial color="#0d0906" roughness={1} />
+          </mesh>
+          <mesh position={[0.02, 0.24, 0.22]} rotation={[Math.PI / 2, 0, 0]}>
+            <cylinderGeometry args={[0.012, 0.012, 0.14, 8]} />
+            <meshStandardMaterial {...METAL} />
+          </mesh>
+        </group>
+      ))}
+      {/* upper cabinets */}
+      <mesh position={[-0.14, 2.35, 0]} castShadow>
+        <boxGeometry args={[0.34, 0.72, 3.4]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
     </group>
   );
 }

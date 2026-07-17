@@ -529,9 +529,6 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
           <Prop url={MODELS.plant2} position={[-3.9, 0, 5.6]} />
           <Prop url={MODELS.plant} position={[-3.9, 0, 1.6]} />
           <Prop url={MODELS.plant2} position={[3.2, 0, 6.9]} />
-          {/* woven armchairs flanking the seating, angled toward the fire */}
-          <Prop url={MODELS.armchair} position={[-2.3, 0, 4.7]} rotationY={0.4} />
-          <Prop url={MODELS.armchair} position={[2.3, 0, 4.7]} rotationY={-0.4} />
           {/* island */}
           <Prop url={MODELS.bowl} position={[0.9, 1.0, -5]} />
           {/* back + left counters */}
@@ -759,30 +756,6 @@ function Sectional({ z }: { z: number }) {
       <SofaSeg position={[0, 0, backZ]} rotationY={0} length={5.0} maps={fabric} />
       <SofaSeg position={[-2.4, 0, sideZc]} rotationY={Math.PI / 2} length={sideLen} maps={fabric} />
       <SofaSeg position={[2.4, 0, sideZc]} rotationY={-Math.PI / 2} length={sideLen} maps={fabric} />
-      {/* throw draped over the back-run backrest (Luna's writing corner) */}
-      <mesh position={[-1.4, 0.92, backZ - 0.28]} rotation={[0.4, 0, 0]} castShadow>
-        <boxGeometry args={[1.0, 0.55, 0.09]} />
-        <meshStandardMaterial {...fabric} color="#8a6f52" roughness={1} />
-      </mesh>
-      {/* pillows piled across the back run */}
-      {[
-        [-2.2, "#7a6b50"],
-        [-1.5, "#9a8a68"],
-        [-0.5, "#7a6b50"],
-        [0.6, "#9a8a68"],
-        [1.5, "#7a6b50"],
-        [2.2, "#9a8a68"],
-      ].map(([x, c], i) => (
-        <mesh
-          key={i}
-          position={[x as number, 0.82, backZ + 0.12]}
-          rotation={[0, 0, i % 2 ? -0.18 : 0.2]}
-          castShadow
-        >
-          <boxGeometry args={[0.44, 0.44, 0.18]} />
-          <meshStandardMaterial {...fabric} color={c as string} roughness={1} />
-        </mesh>
-      ))}
     </group>
   );
 }

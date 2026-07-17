@@ -13,7 +13,7 @@
 
 /* eslint-disable react-hooks/immutability -- Imperative Three.js: per-frame mutation of the camera and reused scratch vectors inside useFrame is the intended, performant R3F pattern; treating them as immutable would reallocate every frame. */
 
-import { Suspense, useRef, useMemo, useEffect } from "react";
+import { Component, Suspense, useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, useGLTF, useTexture } from "@react-three/drei";
 import gsap from "gsap";
@@ -205,7 +205,82 @@ function PlaceholderRoom({ room }: { room: Room }) {
 }
 
 const METAL = { color: "#17181c", metalness: 0.75, roughness: 0.45 };
-const LEATHER = { color: "#3a281c", roughness: 0.5, metalness: 0 };
+
+const MODELS = {
+  barChair: "/models/bar_chair_round_01/bar_chair_round_01_1k.gltf",
+  plant: "/models/potted_plant_01/potted_plant_01_1k.gltf",
+  vase: "/models/ceramic_vase_01/ceramic_vase_01_1k.gltf",
+  pot: "/models/brass_pot_01/brass_pot_01_1k.gltf",
+  books: "/models/book_encyclopedia_set_01/book_encyclopedia_set_01_1k.gltf",
+};
+
+/** A CC0 glTF prop, cloned so one model can be placed many times. */
+function Prop({
+  url,
+  position,
+  rotationY = 0,
+  scale = 1,
+}: {
+  url: string;
+  position: [number, number, number];
+  rotationY?: number;
+  scale?: number;
+}) {
+  const { scene } = useGLTF(url);
+  const obj = useMemo(() => scene.clone(true), [scene]);
+  return (
+    <primitive
+      object={obj}
+      position={position}
+      rotation={[0, rotationY, 0]}
+      scale={scale}
+    />
+  );
+}
+
+/** A framed picture on the wall, using a poster image. */
+function FramedPicture({
+  src,
+  position,
+  rotationY,
+  w = 0.7,
+  h = 0.5,
+}: {
+  src: string;
+  position: [number, number, number];
+  rotationY: number;
+  w?: number;
+  h?: number;
+}) {
+  const tex = useTexture(src);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return (
+    <group position={position} rotation={[0, rotationY, 0]}>
+      <mesh>
+        <boxGeometry args={[w + 0.06, h + 0.06, 0.04]} />
+        <meshStandardMaterial color="#241812" roughness={0.6} />
+      </mesh>
+      <mesh position={[0, 0, 0.025]}>
+        <planeGeometry args={[w, h]} />
+        <meshStandardMaterial map={tex} roughness={0.7} />
+      </mesh>
+    </group>
+  );
+}
+
+/** Keeps a failed decor load from crashing the whole scene. */
+class DecorBoundary extends Component<
+  { children: React.ReactNode },
+  { failed: boolean }
+> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
 
 /** Rustic mountain-farmhouse kitchen — island, stone hood, cabinets, pendants. */
 function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
@@ -295,11 +370,6 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
         <pointLight ref={candleLight} position={[-0.9, 1.23, 0]} color="#ff9a40" intensity={2.6} distance={3} decay={2} />
       </group>
 
-      {/* Leather bar stools along the near side of the island */}
-      {[-0.9, 0, 0.9].map((x) => (
-        <Stool key={x} position={[x, 0, 1.55]} />
-      ))}
-
       {/* Amber pendant lights over the island — the kitchen's key light */}
       {[-0.8, 0, 0.8].map((x) => (
         <Pendant key={x} position={[x, 0, 0.5]} />
@@ -311,6 +381,35 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
         <meshStandardMaterial color="#1a2028" emissive="#26323e" emissiveIntensity={0.25} toneMapped={false} />
       </mesh>
       <pointLight position={[ROOM.width / 2 - 0.6, 1.9, -0.6]} color="#6f8bb0" intensity={1.4} distance={6} decay={2} />
+
+      {/* Real CC0 prop models + framed pictures — the decoration layer.
+          Loaded lazily and guarded so a bad asset can't blank the room. */}
+      <DecorBoundary>
+        <Suspense fallback={null}>
+          {/* Round leather bar stools facing the island */}
+          <Prop url={MODELS.barChair} position={[-0.9, 0, 1.5]} rotationY={Math.PI} />
+          <Prop url={MODELS.barChair} position={[0, 0, 1.55]} rotationY={Math.PI} />
+          <Prop url={MODELS.barChair} position={[0.9, 0, 1.5]} rotationY={Math.PI} />
+
+          {/* Counter + island clutter */}
+          <Prop url={MODELS.plant} position={[3.4, 0, 2.2]} />
+          <Prop url={MODELS.vase} position={[1.05, 1.0, 0.2]} />
+          <Prop url={MODELS.pot} position={[-2.7, 0.99, -3.95]} />
+          <Prop url={MODELS.books} position={[-0.95, 1.0, -0.35]} rotationY={0.4} />
+
+          {/* Framed pictures on the side walls (using scene stills) */}
+          <FramedPicture
+            src="/posters/luna-josh-first-morning.jpg"
+            position={[-ROOM.width / 2 + 0.03, 1.7, 1.4]}
+            rotationY={Math.PI / 2}
+          />
+          <FramedPicture
+            src="/posters/tyson-luna-lakehouse-fire.jpg"
+            position={[ROOM.width / 2 - 0.03, 1.85, 2.7]}
+            rotationY={-Math.PI / 2}
+          />
+        </Suspense>
+      </DecorBoundary>
     </group>
   );
 }
@@ -395,26 +494,6 @@ function GenericFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
       <mesh position={[-w + 0.5, 0.45, 1.8]}>
         <boxGeometry args={[0.8, 0.9, 1.4]} />
         <meshStandardMaterial {...wood} />
-      </mesh>
-    </group>
-  );
-}
-
-/** A round leather bar stool on a metal pedestal. */
-function Stool({ position }: { position: [number, number, number] }) {
-  return (
-    <group position={position}>
-      <mesh position={[0, 0.66, 0]}>
-        <cylinderGeometry args={[0.22, 0.22, 0.1, 20]} />
-        <meshStandardMaterial {...LEATHER} />
-      </mesh>
-      <mesh position={[0, 0.33, 0]}>
-        <cylinderGeometry args={[0.04, 0.05, 0.62, 12]} />
-        <meshStandardMaterial {...METAL} />
-      </mesh>
-      <mesh position={[0, 0.02, 0]}>
-        <cylinderGeometry args={[0.2, 0.2, 0.04, 20]} />
-        <meshStandardMaterial {...METAL} />
       </mesh>
     </group>
   );

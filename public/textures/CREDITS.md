@@ -12,3 +12,10 @@ PBR material sets used for the placeholder farmhouse rooms. All are **CC0**
 | `stone/` | Rock051           | Hearth stone                |
 
 Each folder holds `color.jpg`, `normal.jpg` (OpenGL), and `roughness.jpg` at 1K.
+
+## Prop models (`public/models/`)
+
+CC0 glTF models from **Poly Haven** (https://polyhaven.com), 1K textures:
+`bar_chair_round_01`, `potted_plant_01`, `ceramic_vase_01`, `brass_pot_01`,
+`book_encyclopedia_set_01`. Same CC0 terms — commercial use OK, no attribution
+required.

@@ -54,8 +54,8 @@ export function FarmhouseScene({
       camera={{ position: room.spawn, fov: 70, near: 0.1, far: 100 }}
       gl={{ antialias: true }}
     >
-      <color attach="background" args={["#161009"]} />
-      <fog attach="fog" args={["#161009", 14, 40]} />
+      <color attach="background" args={["#0b0805"]} />
+      <fog attach="fog" args={["#0b0805", 7, 26]} />
       <Suspense fallback={null}>
         <RoomModel room={room} />
       </Suspense>
@@ -111,24 +111,43 @@ function ScannedRoom({ scan }: { scan: RoomScan }) {
   );
 }
 
-/** Tinted primitive room used until a scan is delivered. */
+/**
+ * Placeholder room, dressed for a warm, candlelit, low-key ambience — deep
+ * shadows with warm pools of light from a lamp, a candle, and the hearth, to
+ * match the intimate mood of the reference stills (no photoreal art required).
+ */
 function PlaceholderRoom({ accent }: { accent: string }) {
   const fireLight = useRef<THREE.PointLight>(null);
   const fireGlow = useRef<THREE.Mesh>(null);
+  const candleLight = useRef<THREE.PointLight>(null);
+  const candleFlame = useRef<THREE.Mesh>(null);
 
-  const wall = useMemo(() => accent, [accent]);
-  const furniture = useMemo(
-    () => new THREE.Color(accent).multiplyScalar(0.7).getStyle(),
+  // Darker, richer surfaces so the light does the storytelling.
+  const wall = useMemo(
+    () => new THREE.Color(accent).multiplyScalar(0.55).getStyle(),
     [accent],
   );
+  const furniture = useMemo(
+    () => new THREE.Color(accent).multiplyScalar(0.4).getStyle(),
+    [accent],
+  );
+  const floorCol = "#241a12";
+  const beamCol = "#160f08";
+  const stoneCol = "#221a12";
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
-    const flicker = 1 + Math.sin(t * 11) * 0.12 + Math.sin(t * 27) * 0.06;
-    if (fireLight.current) fireLight.current.intensity = 18 * flicker;
+    const fire = 1 + Math.sin(t * 11) * 0.12 + Math.sin(t * 27) * 0.06;
+    const cand = 1 + Math.sin(t * 9 + 2) * 0.18 + Math.sin(t * 23) * 0.1;
+    if (fireLight.current) fireLight.current.intensity = 9 * fire;
     if (fireGlow.current) {
-      const m = fireGlow.current.material as THREE.MeshStandardMaterial;
-      m.emissiveIntensity = 1.4 * flicker;
+      (fireGlow.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
+        1.2 * fire;
+    }
+    if (candleLight.current) candleLight.current.intensity = 3.4 * cand;
+    if (candleFlame.current) {
+      (candleFlame.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
+        2.4 * cand;
     }
   });
 
@@ -137,25 +156,18 @@ function PlaceholderRoom({ accent }: { accent: string }) {
 
   return (
     <group>
-      <ambientLight intensity={0.9} color="#b89b78" />
-      <hemisphereLight args={["#6b5238", "#241a12", 0.7]} />
-      <pointLight
-        position={[0, ROOM.height - 0.4, 1]}
-        color="#d9b892"
-        intensity={12}
-        distance={16}
-        decay={1.4}
-      />
+      {/* Barely-there warm fill; the fixtures below carry the room. */}
+      <ambientLight intensity={0.14} color="#4a2f18" />
 
       {/* Floor */}
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[ROOM.width, ROOM.depth]} />
-        <meshStandardMaterial color={COLOR.floor} roughness={0.9} />
+        <meshStandardMaterial color={floorCol} roughness={0.9} />
       </mesh>
       {/* Ceiling */}
       <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, ROOM.height, 0]}>
         <planeGeometry args={[ROOM.width, ROOM.depth]} />
-        <meshStandardMaterial color={COLOR.beam} roughness={1} />
+        <meshStandardMaterial color={beamCol} roughness={1} />
       </mesh>
       {/* Walls */}
       <Wall color={wall} position={[0, ROOM.height / 2, -d]} args={[ROOM.width, ROOM.height]} />
@@ -182,21 +194,21 @@ function PlaceholderRoom({ accent }: { accent: string }) {
       {[-2.4, 0, 2.4].map((x) => (
         <mesh key={x} position={[x, ROOM.height - 0.15, 0]}>
           <boxGeometry args={[0.2, 0.2, ROOM.depth]} />
-          <meshStandardMaterial color={COLOR.beam} roughness={1} />
+          <meshStandardMaterial color={beamCol} roughness={1} />
         </mesh>
       ))}
 
-      {/* Hearth */}
+      {/* Hearth — a low, warm key on the back wall */}
       <mesh position={[0, 0.9, -d + 0.35]}>
         <boxGeometry args={[2.4, 1.8, 0.6]} />
-        <meshStandardMaterial color={COLOR.hearthStone} roughness={1} />
+        <meshStandardMaterial color={stoneCol} roughness={1} />
       </mesh>
       <mesh ref={fireGlow} position={[0, 0.55, -d + 0.68]}>
         <planeGeometry args={[1.3, 0.7]} />
         <meshStandardMaterial
           color={COLOR.fire}
           emissive={COLOR.fire}
-          emissiveIntensity={1.4}
+          emissiveIntensity={1.2}
           toneMapped={false}
         />
       </mesh>
@@ -204,10 +216,60 @@ function PlaceholderRoom({ accent }: { accent: string }) {
         ref={fireLight}
         position={[0, 0.7, -d + 1]}
         color={COLOR.fire}
-        intensity={18}
-        distance={16}
-        decay={1.5}
+        intensity={9}
+        distance={12}
+        decay={1.8}
       />
+
+      {/* Bedside-style lamp — the main warm pool, like the reference */}
+      <group position={[w - 1.4, 0, 1.6]}>
+        <mesh position={[0, 0.62, 0]}>
+          <cylinderGeometry args={[0.03, 0.03, 1.24, 8]} />
+          <meshStandardMaterial color="#2a201a" roughness={0.7} />
+        </mesh>
+        <mesh position={[0, 1.28, 0]}>
+          <coneGeometry args={[0.26, 0.34, 20, 1, true]} />
+          <meshStandardMaterial
+            color="#e9c79a"
+            emissive="#ffca8a"
+            emissiveIntensity={1.3}
+            side={THREE.DoubleSide}
+            toneMapped={false}
+          />
+        </mesh>
+        <pointLight
+          position={[0, 1.22, 0]}
+          color="#ffb060"
+          intensity={10}
+          distance={7}
+          decay={2}
+        />
+      </group>
+
+      {/* A single candle on the low table */}
+      <group position={[0, 0, -1.1]}>
+        <mesh position={[0, 0.62, 0]}>
+          <cylinderGeometry args={[0.04, 0.04, 0.18, 10]} />
+          <meshStandardMaterial color="#e8dcc4" roughness={0.6} />
+        </mesh>
+        <mesh ref={candleFlame} position={[0, 0.75, 0]}>
+          <sphereGeometry args={[0.035, 8, 8]} />
+          <meshStandardMaterial
+            color="#ffd090"
+            emissive="#ffb060"
+            emissiveIntensity={2.4}
+            toneMapped={false}
+          />
+        </mesh>
+        <pointLight
+          ref={candleLight}
+          position={[0, 0.78, 0]}
+          color="#ff9a40"
+          intensity={3.4}
+          distance={3.4}
+          decay={2}
+        />
+      </group>
 
       {/* Blocked-in furniture */}
       <mesh position={[0, 0.4, 0.4]}>

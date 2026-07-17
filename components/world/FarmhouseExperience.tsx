@@ -56,6 +56,7 @@ export function FarmhouseExperience({
     : firstRoomId;
 
   const [roomId, setRoomId] = useState(validInitial);
+  const [timeOfDay, setTimeOfDay] = useState<"day" | "night">("day");
   const [mode, setMode] = useState<"deciding" | "3d" | "simple">("deciding");
   const [entered, setEntered] = useState(false);
   const [focusIndex, setFocusIndex] = useState(0); // 0 = overview
@@ -133,6 +134,7 @@ export function FarmhouseExperience({
         room={room}
         member={member}
         focus={currentFocus}
+        timeOfDay={timeOfDay}
         onHoverChange={setHovered}
         onSelectObject={(obj) => {
           const idx = room.objects.findIndex((o) => o.id === obj.id);
@@ -159,6 +161,14 @@ export function FarmhouseExperience({
           ))}
         </div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={() =>
+              setTimeOfDay((t) => (t === "day" ? "night" : "day"))
+            }
+            className="rounded-full bg-void/70 px-3 py-1.5 text-sm text-stone backdrop-blur-sm hover:text-ivory"
+          >
+            {timeOfDay === "day" ? "☀ Day" : "☾ Night"}
+          </button>
           <button
             onClick={() => setMode("simple")}
             className="rounded-full bg-void/70 px-3 py-1.5 text-sm text-stone backdrop-blur-sm hover:text-ivory"

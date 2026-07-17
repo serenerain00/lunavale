@@ -15,10 +15,13 @@
 
 import { Component, Suspense, useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls, useGLTF, useTexture } from "@react-three/drei";
+import { OrbitControls, Environment, useGLTF, useTexture } from "@react-three/drei";
+import { EffectComposer, Bloom, Vignette, SMAA } from "@react-three/postprocessing";
 import gsap from "gsap";
 import * as THREE from "three";
 import type { Room, RoomScan, RoomPano, WorldObject } from "@/lib/content/world";
+
+export type TimeOfDay = "day" | "night";
 
 const ROOM = { width: 9, depth: 9, height: 3.2 };
 
@@ -44,18 +47,20 @@ export function FarmhouseScene({
   room,
   member,
   focus,
+  timeOfDay,
   onHoverChange,
   onSelectObject,
-}: SceneProps) {
+}: SceneProps & { timeOfDay: TimeOfDay }) {
+  const day = timeOfDay === "day";
   return (
     <Canvas
+      shadows
       dpr={[1, 1.75]}
       camera={{ position: room.spawn, fov: 60, near: 0.1, far: 100 }}
-      gl={{ antialias: true }}
+      gl={{ antialias: false }}
     >
-      <color attach="background" args={["#0b0805"]} />
-      <fog attach="fog" args={["#0b0805", 7, 26]} />
       <Suspense fallback={null}>
+        <Lighting day={day} />
         <RoomModel room={room} />
       </Suspense>
       <World
@@ -65,7 +70,66 @@ export function FarmhouseScene({
         onHoverChange={onHoverChange}
         onSelectObject={onSelectObject}
       />
+      <EffectComposer multisampling={0}>
+        <SMAA />
+        <Bloom
+          intensity={day ? 0.5 : 0.9}
+          luminanceThreshold={0.75}
+          luminanceSmoothing={0.2}
+          mipmapBlur
+        />
+        <Vignette eskil={false} offset={0.15} darkness={day ? 0.5 : 0.75} />
+      </EffectComposer>
     </Canvas>
+  );
+}
+
+/** Day/night lighting: HDRI sky + IBL, plus a sun or moon casting shadows. */
+function Lighting({ day }: { day: boolean }) {
+  return (
+    <>
+      <Environment
+        files={day ? "/hdri/day.hdr" : "/hdri/night.hdr"}
+        background
+      />
+      {day ? (
+        <>
+          <ambientLight intensity={0.5} color="#ffe7cc" />
+          <directionalLight
+            position={[11, 9, 3]}
+            intensity={3.4}
+            color="#fff1d8"
+            castShadow
+            shadow-mapSize={[2048, 2048]}
+            shadow-camera-left={-8}
+            shadow-camera-right={8}
+            shadow-camera-top={8}
+            shadow-camera-bottom={-8}
+            shadow-camera-near={0.5}
+            shadow-camera-far={40}
+            shadow-bias={-0.0004}
+          />
+        </>
+      ) : (
+        <>
+          <ambientLight intensity={0.1} color="#3d4c68" />
+          <directionalLight
+            position={[9, 11, 5]}
+            intensity={0.55}
+            color="#9fbdec"
+            castShadow
+            shadow-mapSize={[2048, 2048]}
+            shadow-camera-left={-8}
+            shadow-camera-right={8}
+            shadow-camera-top={8}
+            shadow-camera-bottom={-8}
+            shadow-camera-near={0.5}
+            shadow-camera-far={40}
+            shadow-bias={-0.0004}
+          />
+        </>
+      )}
+    </>
   );
 }
 
@@ -147,14 +211,13 @@ function PlaceholderRoom({ room }: { room: Room }) {
 
   const w = ROOM.width / 2;
   const d = ROOM.depth / 2;
+  // The kitchen's right wall is a floor-to-ceiling window (drawn by KitchenFurniture).
+  const openRight = room.id === "kitchen";
 
   return (
     <group>
-      {/* Barely-there warm fill; the fixtures carry the room. */}
-      <ambientLight intensity={0.16} color="#4a2f18" />
-
       {/* Floor */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]}>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[ROOM.width, ROOM.depth]} />
         <meshStandardMaterial {...floorMaps} />
       </mesh>
@@ -179,17 +242,19 @@ function PlaceholderRoom({ room }: { room: Room }) {
         rotation={[0, Math.PI / 2, 0]}
         args={[ROOM.depth, ROOM.height]}
       />
-      <Wall
-        maps={wallMaps}
-        tint={wallTint}
-        position={[w, ROOM.height / 2, 0]}
-        rotation={[0, -Math.PI / 2, 0]}
-        args={[ROOM.depth, ROOM.height]}
-      />
+      {!openRight && (
+        <Wall
+          maps={wallMaps}
+          tint={wallTint}
+          position={[w, ROOM.height / 2, 0]}
+          rotation={[0, -Math.PI / 2, 0]}
+          args={[ROOM.depth, ROOM.height]}
+        />
+      )}
 
       {/* Ceiling beams */}
       {[-2.4, 0, 2.4].map((x) => (
-        <mesh key={x} position={[x, ROOM.height - 0.15, 0]}>
+        <mesh key={x} position={[x, ROOM.height - 0.15, 0]} castShadow>
           <boxGeometry args={[0.2, 0.2, ROOM.depth]} />
           <meshStandardMaterial {...woodMaps} />
         </mesh>
@@ -211,8 +276,14 @@ const MODELS = {
   plant: "/models/potted_plant_01/potted_plant_01_1k.gltf",
   vase: "/models/ceramic_vase_01/ceramic_vase_01_1k.gltf",
   pot: "/models/brass_pot_01/brass_pot_01_1k.gltf",
-  books: "/models/book_encyclopedia_set_01/book_encyclopedia_set_01_1k.gltf",
+  microwave: "/models/vintage_microwave/vintage_microwave_1k.gltf",
+  kettle: "/models/vintage_electric_kettle/vintage_electric_kettle_1k.gltf",
+  bowl: "/models/wooden_bowl_01/wooden_bowl_01_1k.gltf",
+  cuttingBoard: "/models/wooden_cutting_board/wooden_cutting_board_1k.gltf",
+  wine: "/models/wine_bottles_01/wine_bottles_01_1k.gltf",
 };
+
+const STAINLESS = { color: "#b9bdc4", metalness: 1, roughness: 0.3 };
 
 /** A CC0 glTF prop, cloned so one model can be placed many times. */
 function Prop({
@@ -227,7 +298,16 @@ function Prop({
   scale?: number;
 }) {
   const { scene } = useGLTF(url);
-  const obj = useMemo(() => scene.clone(true), [scene]);
+  const obj = useMemo(() => {
+    const c = scene.clone(true);
+    c.traverse((o) => {
+      if ((o as THREE.Mesh).isMesh) {
+        o.castShadow = true;
+        o.receiveShadow = true;
+      }
+    });
+    return c;
+  }, [scene]);
   return (
     <primitive
       object={obj}
@@ -298,118 +378,243 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
     }
   });
 
+  const w = ROOM.width / 2;
+
   return (
     <group>
       {/* Floor-to-ceiling stone chimney / range hood on the back wall */}
-      <mesh position={[0, ROOM.height / 2, -d + 0.26]}>
+      <mesh position={[0, ROOM.height / 2, -d + 0.26]} castShadow receiveShadow>
         <boxGeometry args={[2.3, ROOM.height, 0.52]} />
         <meshStandardMaterial {...stone} />
       </mesh>
-      {/* Wood hood mantel */}
-      <mesh position={[0, 2.05, -d + 0.62]}>
+      <mesh position={[0, 2.05, -d + 0.62]} castShadow>
         <boxGeometry args={[1.9, 0.55, 0.7]} />
         <meshStandardMaterial {...wood} />
       </mesh>
-      {/* Stainless range under the hood */}
-      <mesh position={[0, 0.45, -d + 0.55]}>
+      <mesh position={[0, 0.45, -d + 0.55]} castShadow>
         <boxGeometry args={[1.1, 0.9, 0.66]} />
-        <meshStandardMaterial {...METAL} />
+        <meshStandardMaterial {...STAINLESS} />
       </mesh>
 
       {/* Lower cabinets + stone counters flanking the range */}
       {[-2.75, 2.75].map((x) => (
         <group key={x} position={[x, 0, -d + 0.35]}>
-          <mesh position={[0, 0.45, 0]}>
+          <mesh position={[0, 0.45, 0]} castShadow receiveShadow>
             <boxGeometry args={[2.9, 0.9, 0.62]} />
             <meshStandardMaterial {...wood} />
           </mesh>
-          <mesh position={[0, 0.95, 0]}>
+          <mesh position={[0, 0.95, 0]} castShadow receiveShadow>
             <boxGeometry args={[3.0, 0.09, 0.66]} />
             <meshStandardMaterial {...stone} />
           </mesh>
-          {/* upper cabinet */}
-          <mesh position={[0, 2.35, 0.05]}>
+          <mesh position={[0, 2.35, 0.05]} castShadow>
             <boxGeometry args={[2.6, 0.72, 0.34]} />
             <meshStandardMaterial {...wood} />
           </mesh>
         </group>
       ))}
 
-      {/* Warm under-cabinet glow on the backsplash */}
-      <pointLight position={[-2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={2.4} distance={3.2} decay={2} />
-      <pointLight position={[2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={2.4} distance={3.2} decay={2} />
+      {/* Warm under-cabinet glow */}
+      <pointLight position={[-2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={2.2} distance={3.2} decay={2} />
+      <pointLight position={[2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={2.2} distance={3.2} decay={2} />
 
-      {/* Island: walnut base + stone top, with an open shelf + basket */}
+      {/* Island: walnut base + stone top */}
       <group position={[0, 0, 0.5]}>
-        <mesh position={[0, 0.45, 0]}>
+        <mesh position={[0, 0.45, 0]} castShadow receiveShadow>
           <boxGeometry args={[2.8, 0.9, 1.4]} />
           <meshStandardMaterial {...wood} />
         </mesh>
-        <mesh position={[0, 0.95, 0]}>
+        <mesh position={[0, 0.95, 0]} castShadow receiveShadow>
           <boxGeometry args={[3.0, 0.1, 1.6]} />
           <meshStandardMaterial {...stone} />
         </mesh>
-        {/* open shelf recess on the near side */}
-        <mesh position={[0.7, 0.35, 0.66]}>
-          <boxGeometry args={[1.2, 0.5, 0.12]} />
-          <meshStandardMaterial color="#0f0a06" roughness={1} />
-        </mesh>
-        <mesh position={[0.7, 0.28, 0.6]}>
-          <cylinderGeometry args={[0.22, 0.18, 0.32, 12]} />
-          <meshStandardMaterial color="#4a361f" roughness={0.9} />
-        </mesh>
         {/* a candle on the island — for the slow dance after dinner */}
-        <mesh position={[-0.9, 1.08, 0]}>
+        <mesh position={[-1.1, 1.08, 0.2]}>
           <cylinderGeometry args={[0.04, 0.04, 0.16, 10]} />
           <meshStandardMaterial color="#e8dcc4" roughness={0.6} />
         </mesh>
-        <mesh ref={candleFlame} position={[-0.9, 1.2, 0]}>
+        <mesh ref={candleFlame} position={[-1.1, 1.2, 0.2]}>
           <sphereGeometry args={[0.03, 8, 8]} />
           <meshStandardMaterial color="#ffd090" emissive="#ffb060" emissiveIntensity={2.4} toneMapped={false} />
         </mesh>
-        <pointLight ref={candleLight} position={[-0.9, 1.23, 0]} color="#ff9a40" intensity={2.6} distance={3} decay={2} />
+        <pointLight ref={candleLight} position={[-1.1, 1.23, 0.2]} color="#ff9a40" intensity={2.6} distance={3} decay={2} />
       </group>
 
-      {/* Amber pendant lights over the island — the kitchen's key light */}
+      {/* Amber pendant lights over the island */}
       {[-0.8, 0, 0.8].map((x) => (
         <Pendant key={x} position={[x, 0, 0.5]} />
       ))}
 
-      {/* Tall window on the side wall — dark evening glass, faint cool moonlight */}
-      <mesh position={[ROOM.width / 2 - 0.03, 1.7, -0.6]}>
-        <boxGeometry args={[0.05, 2.3, 3.2]} />
-        <meshStandardMaterial color="#1a2028" emissive="#26323e" emissiveIntensity={0.25} toneMapped={false} />
-      </mesh>
-      <pointLight position={[ROOM.width / 2 - 0.6, 1.9, -0.6]} color="#6f8bb0" intensity={1.4} distance={6} decay={2} />
+      {/* Floor-to-ceiling windows on the right wall (open — sky + sun stream in) */}
+      <Windows x={w} />
 
-      {/* Real CC0 prop models + framed pictures — the decoration layer.
-          Loaded lazily and guarded so a bad asset can't blank the room. */}
+      {/* Exterior door on the front wall */}
+      <ExteriorDoor z={d} wood={wood} />
+
+      {/* Stainless fridge on the left wall */}
+      <Fridge x={-w} />
+
+      {/* Built-in espresso machine on the right counter — Josh's splurge */}
+      <EspressoMachine position={[3.35, 1.0, -d + 0.4]} />
+
+      {/* Prop models + framed pictures — the decoration layer, guarded. */}
       <DecorBoundary>
         <Suspense fallback={null}>
-          {/* Round leather bar stools facing the island */}
-          <Prop url={MODELS.barChair} position={[-0.9, 0, 1.5]} rotationY={Math.PI} />
-          <Prop url={MODELS.barChair} position={[0, 0, 1.55]} rotationY={Math.PI} />
-          <Prop url={MODELS.barChair} position={[0.9, 0, 1.5]} rotationY={Math.PI} />
+          <Prop url={MODELS.barChair} position={[-0.9, 0, 1.55]} rotationY={Math.PI} />
+          <Prop url={MODELS.barChair} position={[0, 0, 1.6]} rotationY={Math.PI} />
+          <Prop url={MODELS.barChair} position={[0.9, 0, 1.55]} rotationY={Math.PI} />
 
-          {/* Counter + island clutter */}
-          <Prop url={MODELS.plant} position={[3.4, 0, 2.2]} />
-          <Prop url={MODELS.vase} position={[1.05, 1.0, 0.2]} />
-          <Prop url={MODELS.pot} position={[-2.7, 0.99, -3.95]} />
-          <Prop url={MODELS.books} position={[-0.95, 1.0, -0.35]} rotationY={0.4} />
+          <Prop url={MODELS.plant} position={[3.4, 0, 3.3]} />
+          <Prop url={MODELS.bowl} position={[0.5, 1.0, 0.5]} />
+          <Prop url={MODELS.wine} position={[-1.0, 1.0, -0.2]} />
+          <Prop url={MODELS.pot} position={[-2.6, 0.99, -d + 0.4]} />
+          <Prop url={MODELS.microwave} position={[-3.4, 1.0, -d + 0.4]} />
+          <Prop url={MODELS.kettle} position={[-1.9, 1.0, -d + 0.4]} />
+          <Prop url={MODELS.cuttingBoard} position={[1.7, 1.0, -d + 0.4]} rotationY={0.2} />
+          <Prop url={MODELS.vase} position={[2.6, 1.0, -d + 0.4]} />
 
-          {/* Framed pictures on the side walls (using scene stills) */}
           <FramedPicture
             src="/posters/luna-josh-first-morning.jpg"
-            position={[-ROOM.width / 2 + 0.03, 1.7, 1.4]}
+            position={[-w + 0.03, 1.7, -1.6]}
             rotationY={Math.PI / 2}
           />
           <FramedPicture
             src="/posters/tyson-luna-lakehouse-fire.jpg"
-            position={[ROOM.width / 2 - 0.03, 1.85, 2.7]}
-            rotationY={-Math.PI / 2}
+            position={[1.6, 1.75, d - 0.03]}
+            rotationY={Math.PI}
           />
         </Suspense>
       </DecorBoundary>
+    </group>
+  );
+}
+
+/** Floor-to-ceiling mullioned windows filling a wall (open to the sky). */
+function Windows({ x }: { x: number }) {
+  const frame = { color: "#241812", roughness: 0.6, metalness: 0 };
+  const H = ROOM.height;
+  const zs = [-4, -2, 0, 2, 4]; // vertical mullions
+  return (
+    <group position={[x - 0.06, 0, 0]}>
+      {/* sill + head */}
+      {[0.08, H - 0.08].map((y) => (
+        <mesh key={y} position={[0, y, 0]}>
+          <boxGeometry args={[0.12, 0.16, ROOM.depth]} />
+          <meshStandardMaterial {...frame} />
+        </mesh>
+      ))}
+      {/* mid rail */}
+      <mesh position={[0, 1.6, 0]}>
+        <boxGeometry args={[0.1, 0.1, ROOM.depth]} />
+        <meshStandardMaterial {...frame} />
+      </mesh>
+      {/* vertical mullions */}
+      {zs.map((z) => (
+        <mesh key={z} position={[0, H / 2, z]}>
+          <boxGeometry args={[0.1, H, 0.1]} />
+          <meshStandardMaterial {...frame} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+/** A wood exterior door with frame and handle on the front wall. */
+function ExteriorDoor({ z, wood }: { z: number; wood: PBRMaps }) {
+  const frame = { color: "#1c130c", roughness: 0.7, metalness: 0 };
+  return (
+    <group position={[-2.6, 0, z - 0.06]}>
+      {/* jamb */}
+      <mesh position={[-0.62, 1.12, 0]}>
+        <boxGeometry args={[0.12, 2.24, 0.16]} />
+        <meshStandardMaterial {...frame} />
+      </mesh>
+      <mesh position={[0.62, 1.12, 0]}>
+        <boxGeometry args={[0.12, 2.24, 0.16]} />
+        <meshStandardMaterial {...frame} />
+      </mesh>
+      <mesh position={[0, 2.2, 0]}>
+        <boxGeometry args={[1.36, 0.14, 0.16]} />
+        <meshStandardMaterial {...frame} />
+      </mesh>
+      {/* slab */}
+      <mesh position={[0, 1.05, 0.02]} castShadow>
+        <boxGeometry args={[1.05, 2.1, 0.07]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      {/* handle */}
+      <mesh position={[0.4, 1.05, 0.08]}>
+        <sphereGeometry args={[0.05, 12, 12]} />
+        <meshStandardMaterial {...METAL} />
+      </mesh>
+    </group>
+  );
+}
+
+/** A tall stainless double-door fridge standing against a wall. */
+function Fridge({ x }: { x: number }) {
+  return (
+    <group position={[x + 0.4, 0, 1.8]}>
+      <mesh position={[0, 1.05, 0]} castShadow receiveShadow>
+        <boxGeometry args={[0.72, 2.1, 0.78]} />
+        <meshStandardMaterial {...STAINLESS} />
+      </mesh>
+      {/* door seams */}
+      <mesh position={[0.37, 1.45, 0]}>
+        <boxGeometry args={[0.02, 1.28, 0.8]} />
+        <meshStandardMaterial color="#2a2c30" metalness={0.6} roughness={0.5} />
+      </mesh>
+      <mesh position={[0.37, 0.55, 0]}>
+        <boxGeometry args={[0.02, 0.02, 0.8]} />
+        <meshStandardMaterial color="#2a2c30" metalness={0.6} roughness={0.5} />
+      </mesh>
+      {/* handles */}
+      {[1.5, 0.7].map((y) => (
+        <mesh key={y} position={[0.38, y, 0.2]}>
+          <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} />
+          <meshStandardMaterial {...METAL} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+/** A premium stainless/black espresso machine. */
+function EspressoMachine({
+  position,
+}: {
+  position: [number, number, number];
+}) {
+  return (
+    <group position={position}>
+      <mesh position={[0, 0.18, 0]} castShadow receiveShadow>
+        <boxGeometry args={[0.44, 0.36, 0.42]} />
+        <meshStandardMaterial {...STAINLESS} />
+      </mesh>
+      <mesh position={[0, 0.4, 0]} castShadow>
+        <boxGeometry args={[0.44, 0.08, 0.42]} />
+        <meshStandardMaterial color="#141416" metalness={0.6} roughness={0.4} />
+      </mesh>
+      {/* group head */}
+      <mesh position={[0, 0.12, 0.24]}>
+        <cylinderGeometry args={[0.045, 0.045, 0.12, 12]} />
+        <meshStandardMaterial {...METAL} />
+      </mesh>
+      {/* portafilter handle */}
+      <mesh position={[0, 0.06, 0.34]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.018, 0.018, 0.16, 8]} />
+        <meshStandardMaterial color="#141416" roughness={0.5} />
+      </mesh>
+      {/* steam wand */}
+      <mesh position={[0.18, 0.2, 0.18]} rotation={[0.5, 0, 0]}>
+        <cylinderGeometry args={[0.008, 0.008, 0.22, 8]} />
+        <meshStandardMaterial {...METAL} />
+      </mesh>
+      {/* espresso cup */}
+      <mesh position={[0, 0.02, 0.24]}>
+        <cylinderGeometry args={[0.035, 0.03, 0.05, 12]} />
+        <meshStandardMaterial color="#efe9dd" roughness={0.4} />
+      </mesh>
     </group>
   );
 }
@@ -537,7 +742,7 @@ function Wall({
   args: [number, number];
 }) {
   return (
-    <mesh position={position} rotation={rotation}>
+    <mesh position={position} rotation={rotation} receiveShadow>
       <planeGeometry args={args} />
       <meshStandardMaterial {...maps} color={tint} side={THREE.FrontSide} />
     </mesh>
@@ -672,7 +877,7 @@ function Marker({
     const mat = m.material as THREE.MeshStandardMaterial;
     mat.emissiveIntensity = THREE.MathUtils.lerp(
       mat.emissiveIntensity,
-      emphasized ? 2.6 : 1,
+      emphasized ? 1.7 : 0.6,
       0.15,
     );
   });
@@ -699,11 +904,11 @@ function Marker({
         onSelect(object);
       }}
     >
-      <icosahedronGeometry args={[0.12, 0]} />
+      <icosahedronGeometry args={[0.07, 0]} />
       <meshStandardMaterial
         color={color}
         emissive={color}
-        emissiveIntensity={1}
+        emissiveIntensity={0.6}
         toneMapped={false}
       />
     </mesh>

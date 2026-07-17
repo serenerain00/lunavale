@@ -1,13 +1,14 @@
 /**
- * FarmhouseScene — the walkable 3D room.
+ * FarmhouseScene — the 3D room.
  *
  * Renders the active room: a real photogrammetry GLB when the room has a `scan`
- * (see docs/world/SCAN_CAPTURE.md), otherwise tinted placeholder geometry so the
- * interaction is fully playable before scans exist. Interactive objects are
- * glowing markers targeted with the centre crosshair (press E / click).
+ * (see docs/world/SCAN_CAPTURE.md), a 360° panorama when it has a `pano`, else
+ * textured placeholder geometry dressed with props. Day/night HDRI lighting +
+ * sun/moon shadows; post-processing (N8AO, bloom, vignette).
  *
- * Navigation: WASD + mouse-look via PointerLockControls, clamped to room bounds
- * (bounds apply to the placeholder; real scans get per-scan bounds on delivery).
+ * Navigation: cinematic waypoints — drag to look (OrbitControls, cursor free),
+ * and the camera glides to whichever focus point is selected. Interactive
+ * objects are glowing, clickable hotspots.
  */
 "use client";
 
@@ -16,7 +17,7 @@
 import { Component, Suspense, useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Environment, useGLTF, useTexture } from "@react-three/drei";
-import { EffectComposer, Bloom, Vignette, SMAA } from "@react-three/postprocessing";
+import { EffectComposer, Bloom, Vignette, SMAA, N8AO } from "@react-three/postprocessing";
 import gsap from "gsap";
 import * as THREE from "three";
 import type { Room, RoomScan, RoomPano, WorldObject } from "@/lib/content/world";
@@ -55,7 +56,7 @@ export function FarmhouseScene({
   return (
     <Canvas
       shadows
-      dpr={[1, 1.75]}
+      dpr={[1, 2]}
       camera={{ position: room.spawn, fov: 60, near: 0.1, far: 100 }}
       gl={{ antialias: false }}
     >
@@ -71,10 +72,17 @@ export function FarmhouseScene({
         onSelectObject={onSelectObject}
       />
       <EffectComposer multisampling={0}>
+        <N8AO
+          aoRadius={1.1}
+          distanceFalloff={1}
+          intensity={2.4}
+          halfRes
+          color="black"
+        />
         <SMAA />
         <Bloom
           intensity={day ? 0.5 : 0.9}
-          luminanceThreshold={0.75}
+          luminanceThreshold={0.8}
           luminanceSmoothing={0.2}
           mipmapBlur
         />
@@ -100,7 +108,7 @@ function Lighting({ day }: { day: boolean }) {
             intensity={3.4}
             color="#fff1d8"
             castShadow
-            shadow-mapSize={[2048, 2048]}
+            shadow-mapSize={[4096, 4096]}
             shadow-camera-left={-8}
             shadow-camera-right={8}
             shadow-camera-top={8}
@@ -118,7 +126,7 @@ function Lighting({ day }: { day: boolean }) {
             intensity={0.55}
             color="#9fbdec"
             castShadow
-            shadow-mapSize={[2048, 2048]}
+            shadow-mapSize={[4096, 4096]}
             shadow-camera-left={-8}
             shadow-camera-right={8}
             shadow-camera-top={8}
@@ -185,6 +193,7 @@ function usePBR(folder: string, repeat: number) {
   for (const t of [maps.map, maps.normalMap, maps.roughnessMap]) {
     t.wrapS = t.wrapT = THREE.RepeatWrapping;
     t.repeat.set(repeat, repeat);
+    t.anisotropy = 8; // keep textures sharp at grazing angles (floor, counters)
   }
   return maps;
 }

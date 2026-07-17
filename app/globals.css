@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+  Luna Vault design tokens.
+  Palette per docs/ui/DESIGN_SYSTEM.md: near-black, warm charcoal, soft ivory,
+  muted stone, a single controlled warm-metallic accent. No neon, no glass.
+  Motion tokens mirror docs/interaction/GSAP_SYSTEM.md so CSS and GSAP agree.
+*/
+@theme {
+  /* Surfaces — warm, near-black, cinematic */
+  --color-void: #0a0908;
+  --color-obsidian: #12100e;
+  --color-charcoal: #1c1917;
+  --color-charcoal-raised: #262220;
+
+  /* Text — soft ivory + muted stone, never pure white */
+  --color-ivory: #f2ece4;
+  --color-stone: #a89f94;
+  --color-stone-dim: #6f665c;
+
+  /* Accent — a single controlled warm metallic (amber), with a wine support */
+  --color-amber: #c98a3e;
+  --color-amber-soft: #e0b072;
+  --color-wine: #7a2f3d;
+
+  /* Lines */
+  --color-hairline: rgba(242, 236, 228, 0.08);
+
+  /* Typography */
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+
+  /* Motion — durations (s) and eases, shared with lib/motion/tokens.ts */
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-cinematic: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-quick: 300ms;
+  --duration-standard: 600ms;
+  --duration-cinematic: 1200ms;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-void);
+  color: var(--color-ivory);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Respect the platform-wide rule: no motion when the user opts out. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible focus everywhere — accessibility is a Definition-of-Done gate. */
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+  border-radius: 2px;
 }

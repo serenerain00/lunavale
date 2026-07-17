@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { videos } from "@/lib/content/videos";
 import { isMember } from "@/lib/access/entitlement";
 import { VideoCard } from "@/components/browse/VideoCard";
@@ -22,12 +23,26 @@ export default async function Home() {
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-stone">
             Original scenes from the lakehouse, the farmhouse, and the places
-            in between. Watch the free scenes, then unlock the rest.
+            in between. Step inside a location, or watch the scenes directly.
           </p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link
+              href="/world/farmhouse"
+              className="rounded-full bg-amber px-7 py-3 text-sm font-medium text-void transition-colors duration-[--duration-quick] hover:bg-amber-soft"
+            >
+              Enter the farmhouse
+            </Link>
+            <a
+              href="#library"
+              className="rounded-full border border-hairline px-7 py-3 text-sm text-ivory transition-colors duration-[--duration-quick] hover:border-amber hover:text-amber"
+            >
+              Browse scenes
+            </a>
+          </div>
         </section>
 
         {/* Library */}
-        <section aria-labelledby="library-heading">
+        <section id="library" aria-labelledby="library-heading" className="scroll-mt-24">
           <h2
             id="library-heading"
             className="mb-6 font-display text-2xl font-medium text-ivory"

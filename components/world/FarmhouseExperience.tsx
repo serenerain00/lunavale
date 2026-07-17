@@ -1,17 +1,17 @@
 /**
  * FarmhouseExperience — client shell around the 3D scene.
  *
- *  - Loads the WebGL scene client-only (ssr:false).
- *  - Room-to-room navigation (deep-linkable ?room=<id>). Room switching happens
- *    while unlocked; press Esc to release the mouse, then pick a room.
- *  - Entry gate + HUD; opens the content panel for the targeted object.
- *  - Accessibility fallback: reduced-motion / touch / no-pointer-lock users get a
- *    conventional keyboard-navigable list of every room and object, opening the
- *    SAME panels. No content is reachable only through the 3D layer.
+ * Cinematic waypoint navigation (not FPS): drag to look around (cursor stays
+ * free, so the user can always exit), and scroll / prev-next / clicking a hotspot
+ * moves between predefined focus points. Selecting a point glides + zooms the
+ * camera onto that asset; "Open" reveals its content.
+ *
+ * Accessibility fallback: reduced-motion / touch users get a conventional
+ * keyboard-navigable list of every room and object opening the SAME panels.
  */
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -36,6 +36,12 @@ interface Props {
   initialRoomId?: string;
 }
 
+function openLabel(obj: WorldObject) {
+  if (obj.kind === "clip") return "Watch";
+  if (obj.kind === "journal") return "Read";
+  return "Open";
+}
+
 export function FarmhouseExperience({
   environment,
   member,
@@ -51,29 +57,50 @@ export function FarmhouseExperience({
 
   const [roomId, setRoomId] = useState(validInitial);
   const [mode, setMode] = useState<"deciding" | "3d" | "simple">("deciding");
-  const [started, setStarted] = useState(false);
-  const [locked, setLocked] = useState(false);
+  const [entered, setEntered] = useState(false);
+  const [focusIndex, setFocusIndex] = useState(0); // 0 = overview
   const [hovered, setHovered] = useState<WorldObject | null>(null);
   const [active, setActive] = useState<WorldObject | null>(null);
+  const wheelAt = useRef(0);
 
   const room = useMemo(
     () => environment.rooms.find((r) => r.id === roomId) ?? environment.rooms[0],
     [environment.rooms, roomId],
   );
 
+  // Focus points: overview (null) followed by each object.
+  const focusPoints = useMemo<(WorldObject | null)[]>(
+    () => [null, ...room.objects],
+    [room.objects],
+  );
+  const currentFocus = focusPoints[focusIndex] ?? null;
+
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const coarse = window.matchMedia("(pointer: coarse)").matches;
-    const noLock = !("requestPointerLock" in document.documentElement);
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time client capability/preference detection on mount; runs once, not a cascading render
-    setMode(reduce || coarse || noLock ? "simple" : "3d");
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time client capability/preference detection on mount
+    setMode(reduce || coarse ? "simple" : "3d");
   }, []);
 
   function goToRoom(id: string) {
     setRoomId(id);
+    setFocusIndex(0);
     setActive(null);
     setHovered(null);
     router.replace(`${pathname}?room=${id}`, { scroll: false });
+  }
+
+  function step(delta: number) {
+    setFocusIndex((i) =>
+      Math.min(Math.max(i + delta, 0), focusPoints.length - 1),
+    );
+  }
+
+  function onWheel(e: React.WheelEvent) {
+    const now = performance.now();
+    if (now - wheelAt.current < 450) return; // one waypoint per gesture
+    wheelAt.current = now;
+    step(e.deltaY > 0 ? 1 : -1);
   }
 
   if (mode === "deciding") {
@@ -94,25 +121,28 @@ export function FarmhouseExperience({
         onClose={() => setActive(null)}
         onTry3D={() => {
           setMode("3d");
-          setStarted(false);
+          setEntered(false);
         }}
       />
     );
   }
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-void">
+    <div className="absolute inset-0 overflow-hidden bg-void" onWheel={onWheel}>
       <FarmhouseScene
         room={room}
         member={member}
+        focus={currentFocus}
         onHoverChange={setHovered}
-        onActivate={(obj) => setActive(obj)}
-        onLockChange={setLocked}
+        onSelectObject={(obj) => {
+          const idx = room.objects.findIndex((o) => o.id === obj.id);
+          if (idx >= 0) setFocusIndex(idx + 1);
+        }}
       />
 
-      {/* Room switcher — usable only when not pointer-locked */}
-      {!locked && !active && (
-        <div className="absolute inset-x-0 top-0 z-20 flex flex-wrap items-center justify-center gap-2 p-4">
+      {/* Top bar — rooms + exit, always usable (cursor is never trapped) */}
+      <div className="absolute inset-x-0 top-0 z-20 flex items-center justify-between gap-3 p-4">
+        <div className="flex flex-wrap gap-2">
           {environment.rooms.map((r) => (
             <button
               key={r.id}
@@ -128,29 +158,25 @@ export function FarmhouseExperience({
             </button>
           ))}
         </div>
-      )}
-
-      {/* Crosshair + hint while looking around */}
-      {started && locked && !active && (
-        <>
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-ivory/70"
-          />
-          {hovered && (
-            <div className="pointer-events-none absolute left-1/2 top-[calc(50%+28px)] -translate-x-1/2 rounded-full bg-void/80 px-3 py-1.5 text-sm text-ivory backdrop-blur-sm">
-              {hovered.hint}
-              <span className="ml-2 rounded bg-charcoal px-1.5 py-0.5 text-xs text-amber">
-                E
-              </span>
-            </div>
-          )}
-        </>
-      )}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setMode("simple")}
+            className="rounded-full bg-void/70 px-3 py-1.5 text-sm text-stone backdrop-blur-sm hover:text-ivory"
+          >
+            Simple view
+          </button>
+          <Link
+            href="/"
+            className="rounded-full bg-void/70 px-4 py-1.5 text-sm text-stone backdrop-blur-sm hover:text-ivory"
+          >
+            Exit
+          </Link>
+        </div>
+      </div>
 
       {/* Entry gate */}
-      {!started && !active && (
-        <Overlay>
+      {!entered && (
+        <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-void/70 px-6 text-center backdrop-blur-sm">
           <p className="text-xs uppercase tracking-[0.2em] text-amber">
             {environment.belongsTo}
           </p>
@@ -161,34 +187,32 @@ export function FarmhouseExperience({
             {room.description}
           </p>
           <button
-            onClick={() => setStarted(true)}
+            onClick={() => setEntered(true)}
             className="mt-6 rounded-full bg-amber px-7 py-3 text-sm font-medium text-void transition-colors hover:bg-amber-soft"
           >
-            Enter {room.name.toLowerCase().startsWith("the") ? "" : "the "}
-            {room.name}
+            Step inside
           </button>
-          <button
-            onClick={() => setMode("simple")}
-            className="mt-3 text-sm text-stone underline-offset-4 hover:text-ivory hover:underline"
-          >
-            Use the simple view instead
-          </button>
-        </Overlay>
+        </div>
       )}
 
-      {/* Resume prompt after entering / closing a panel / switching room */}
-      {started && !locked && !active && (
-        <Overlay dim>
-          <p className="text-ivory">Click to look around</p>
-          <p className="mt-2 text-sm text-stone">
-            {!room.pano && (
-              <>
-                <Key>W</Key> <Key>A</Key> <Key>S</Key> <Key>D</Key> to move ·{" "}
-              </>
-            )}
-            <Key>E</Key> or click to interact · <Key>Esc</Key> to change rooms
-          </p>
-        </Overlay>
+      {/* Bottom navigation dock */}
+      {entered && !active && (
+        <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col items-center gap-3 p-5">
+          <NavDock
+            focus={currentFocus}
+            hovered={hovered}
+            index={focusIndex}
+            count={focusPoints.length}
+            locked={
+              !!currentFocus &&
+              currentFocus.access === "premium" &&
+              !member
+            }
+            onPrev={() => step(-1)}
+            onNext={() => step(1)}
+            onOpen={() => currentFocus && setActive(currentFocus)}
+          />
+        </div>
       )}
 
       {active && (
@@ -202,29 +226,69 @@ export function FarmhouseExperience({
   );
 }
 
-function Overlay({
-  children,
-  dim = false,
+function NavDock({
+  focus,
+  hovered,
+  index,
+  count,
+  locked,
+  onPrev,
+  onNext,
+  onOpen,
 }: {
-  children: React.ReactNode;
-  dim?: boolean;
+  focus: WorldObject | null;
+  hovered: WorldObject | null;
+  index: number;
+  count: number;
+  locked: boolean;
+  onPrev: () => void;
+  onNext: () => void;
+  onOpen: () => void;
 }) {
   return (
-    <div
-      className={`absolute inset-0 z-10 flex flex-col items-center justify-center px-6 text-center ${
-        dim ? "bg-void/40" : "bg-void/70"
-      } backdrop-blur-sm`}
-    >
-      {children}
-    </div>
-  );
-}
+    <div className="flex items-center gap-4 rounded-full border border-hairline bg-void/80 px-4 py-2.5 backdrop-blur-md">
+      <button
+        onClick={onPrev}
+        disabled={index === 0}
+        aria-label="Previous point"
+        className="text-lg text-stone transition-colors hover:text-ivory disabled:opacity-30"
+      >
+        ‹
+      </button>
 
-function Key({ children }: { children: React.ReactNode }) {
-  return (
-    <kbd className="rounded bg-charcoal px-1.5 py-0.5 text-xs text-amber">
-      {children}
-    </kbd>
+      <div className="min-w-52 text-center">
+        {focus ? (
+          <>
+            <p className="font-display text-base text-ivory">{focus.label}</p>
+            <p className="text-xs text-stone">{focus.hint}</p>
+          </>
+        ) : (
+          <p className="text-sm text-stone">
+            {hovered
+              ? hovered.label
+              : "Drag to look · scroll or use ‹ › to explore"}
+          </p>
+        )}
+      </div>
+
+      {focus && (
+        <button
+          onClick={onOpen}
+          className="rounded-full bg-amber px-4 py-1.5 text-sm font-medium text-void transition-colors hover:bg-amber-soft"
+        >
+          {locked ? "Members" : openLabel(focus)}
+        </button>
+      )}
+
+      <button
+        onClick={onNext}
+        disabled={index === count - 1}
+        aria-label="Next point"
+        className="text-lg text-stone transition-colors hover:text-ivory disabled:opacity-30"
+      >
+        ›
+      </button>
+    </div>
   );
 }
 

@@ -13,45 +13,44 @@
 
 /* eslint-disable react-hooks/immutability -- Imperative Three.js: per-frame mutation of the camera and reused scratch vectors inside useFrame is the intended, performant R3F pattern; treating them as immutable would reallocate every frame. */
 
-import { Suspense, useRef, useMemo, useEffect, useCallback } from "react";
+import { Suspense, useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { PointerLockControls, useGLTF, useTexture } from "@react-three/drei";
+import { OrbitControls, useGLTF, useTexture } from "@react-three/drei";
+import gsap from "gsap";
 import * as THREE from "three";
 import type { Room, RoomScan, RoomPano, WorldObject } from "@/lib/content/world";
 
 const ROOM = { width: 9, depth: 9, height: 3.2 };
-const EYE_HEIGHT = 1.6;
-const MOVE_SPEED = 3.2; // metres/second
-const REACH = 2.6; // how close the crosshair must be to target an object
 
 const COLOR = {
-  floor: "#5c4634",
-  beam: "#33271c",
-  hearthStone: "#3d332a",
   fire: "#e5a24e",
   markerFree: "#f0c48a",
   markerLocked: "#c8899a",
 };
 
+const SCRATCH = new THREE.Vector3();
+
 interface SceneProps {
   room: Room;
   member: boolean;
+  /** Current focus point (an object) or null for the room overview. */
+  focus: WorldObject | null;
   onHoverChange: (obj: WorldObject | null) => void;
-  onActivate: (obj: WorldObject) => void;
-  onLockChange: (locked: boolean) => void;
+  /** A hotspot was clicked in the scene. */
+  onSelectObject: (obj: WorldObject) => void;
 }
 
 export function FarmhouseScene({
   room,
   member,
+  focus,
   onHoverChange,
-  onActivate,
-  onLockChange,
+  onSelectObject,
 }: SceneProps) {
   return (
     <Canvas
       dpr={[1, 1.75]}
-      camera={{ position: room.spawn, fov: 70, near: 0.1, far: 100 }}
+      camera={{ position: room.spawn, fov: 60, near: 0.1, far: 100 }}
       gl={{ antialias: true }}
     >
       <color attach="background" args={["#0b0805"]} />
@@ -62,9 +61,9 @@ export function FarmhouseScene({
       <World
         room={room}
         member={member}
+        focus={focus}
         onHoverChange={onHoverChange}
-        onActivate={onActivate}
-        onLockChange={onLockChange}
+        onSelectObject={onSelectObject}
       />
     </Canvas>
   );
@@ -74,7 +73,7 @@ export function FarmhouseScene({
 function RoomModel({ room }: { room: Room }) {
   if (room.pano) return <PanoRoom pano={room.pano} />;
   if (room.scan) return <ScannedRoom scan={room.scan} />;
-  return <PlaceholderRoom accent={room.accent} />;
+  return <PlaceholderRoom room={room} />;
 }
 
 /** Equirectangular 360° panorama, viewed from inside — stand and look around. */
@@ -127,52 +126,32 @@ function usePBR(folder: string, repeat: number) {
 }
 
 /**
- * Placeholder room, dressed with real CC0 PBR textures (wood floor, plaster
- * walls, walnut beams/furniture, stone hearth) under warm, candlelit, low-key
- * lighting — matching the intimate mood and materials of the reference still.
+ * Placeholder room: a real CC0 PBR shell (wood floor, plaster walls, walnut
+ * beams) under warm low-key lighting, dressed with room-specific furniture.
+ * Materials follow Melissa's reference direction; swap for a scan/pano anytime.
  */
-function PlaceholderRoom({ accent }: { accent: string }) {
-  const fireLight = useRef<THREE.PointLight>(null);
-  const fireGlow = useRef<THREE.Mesh>(null);
-  const candleLight = useRef<THREE.PointLight>(null);
-  const candleFlame = useRef<THREE.Mesh>(null);
-
+function PlaceholderRoom({ room }: { room: Room }) {
   const floorMaps = usePBR("floor", 5);
   const wallMaps = usePBR("wall", 3);
   const woodMaps = usePBR("wood", 3);
   const stoneMaps = usePBR("stone", 2);
 
-  // A faint per-room tint on the plaster keeps rooms distinct without losing cream.
   const wallTint = useMemo(
     () =>
-      new THREE.Color(accent).lerp(new THREE.Color("#e6d8bf"), 0.72).getStyle(),
-    [accent],
+      new THREE.Color(room.accent)
+        .lerp(new THREE.Color("#e6d8bf"), 0.72)
+        .getStyle(),
+    [room.accent],
   );
   const beamCol = "#160f08";
-
-  useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
-    const fire = 1 + Math.sin(t * 11) * 0.12 + Math.sin(t * 27) * 0.06;
-    const cand = 1 + Math.sin(t * 9 + 2) * 0.18 + Math.sin(t * 23) * 0.1;
-    if (fireLight.current) fireLight.current.intensity = 9 * fire;
-    if (fireGlow.current) {
-      (fireGlow.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
-        1.2 * fire;
-    }
-    if (candleLight.current) candleLight.current.intensity = 3.4 * cand;
-    if (candleFlame.current) {
-      (candleFlame.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
-        2.4 * cand;
-    }
-  });
 
   const w = ROOM.width / 2;
   const d = ROOM.depth / 2;
 
   return (
     <group>
-      {/* Barely-there warm fill; the fixtures below carry the room. */}
-      <ambientLight intensity={0.14} color="#4a2f18" />
+      {/* Barely-there warm fill; the fixtures carry the room. */}
+      <ambientLight intensity={0.16} color="#4a2f18" />
 
       {/* Floor */}
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
@@ -216,30 +195,165 @@ function PlaceholderRoom({ accent }: { accent: string }) {
         </mesh>
       ))}
 
-      {/* Hearth — a low, warm key on the back wall */}
+      {room.id === "kitchen" ? (
+        <KitchenFurniture wood={woodMaps} stone={stoneMaps} />
+      ) : (
+        <GenericFurniture wood={woodMaps} stone={stoneMaps} />
+      )}
+    </group>
+  );
+}
+
+const METAL = { color: "#17181c", metalness: 0.75, roughness: 0.45 };
+const LEATHER = { color: "#3a281c", roughness: 0.5, metalness: 0 };
+
+/** Rustic mountain-farmhouse kitchen — island, stone hood, cabinets, pendants. */
+function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
+  const candleFlame = useRef<THREE.Mesh>(null);
+  const candleLight = useRef<THREE.PointLight>(null);
+  const d = ROOM.depth / 2;
+
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    const cand = 1 + Math.sin(t * 9 + 2) * 0.18 + Math.sin(t * 23) * 0.1;
+    if (candleLight.current) candleLight.current.intensity = 2.6 * cand;
+    if (candleFlame.current) {
+      (candleFlame.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
+        2.4 * cand;
+    }
+  });
+
+  return (
+    <group>
+      {/* Floor-to-ceiling stone chimney / range hood on the back wall */}
+      <mesh position={[0, ROOM.height / 2, -d + 0.26]}>
+        <boxGeometry args={[2.3, ROOM.height, 0.52]} />
+        <meshStandardMaterial {...stone} />
+      </mesh>
+      {/* Wood hood mantel */}
+      <mesh position={[0, 2.05, -d + 0.62]}>
+        <boxGeometry args={[1.9, 0.55, 0.7]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      {/* Stainless range under the hood */}
+      <mesh position={[0, 0.45, -d + 0.55]}>
+        <boxGeometry args={[1.1, 0.9, 0.66]} />
+        <meshStandardMaterial {...METAL} />
+      </mesh>
+
+      {/* Lower cabinets + stone counters flanking the range */}
+      {[-2.75, 2.75].map((x) => (
+        <group key={x} position={[x, 0, -d + 0.35]}>
+          <mesh position={[0, 0.45, 0]}>
+            <boxGeometry args={[2.9, 0.9, 0.62]} />
+            <meshStandardMaterial {...wood} />
+          </mesh>
+          <mesh position={[0, 0.95, 0]}>
+            <boxGeometry args={[3.0, 0.09, 0.66]} />
+            <meshStandardMaterial {...stone} />
+          </mesh>
+          {/* upper cabinet */}
+          <mesh position={[0, 2.35, 0.05]}>
+            <boxGeometry args={[2.6, 0.72, 0.34]} />
+            <meshStandardMaterial {...wood} />
+          </mesh>
+        </group>
+      ))}
+
+      {/* Warm under-cabinet glow on the backsplash */}
+      <pointLight position={[-2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={2.4} distance={3.2} decay={2} />
+      <pointLight position={[2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={2.4} distance={3.2} decay={2} />
+
+      {/* Island: walnut base + stone top, with an open shelf + basket */}
+      <group position={[0, 0, 0.5]}>
+        <mesh position={[0, 0.45, 0]}>
+          <boxGeometry args={[2.8, 0.9, 1.4]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+        <mesh position={[0, 0.95, 0]}>
+          <boxGeometry args={[3.0, 0.1, 1.6]} />
+          <meshStandardMaterial {...stone} />
+        </mesh>
+        {/* open shelf recess on the near side */}
+        <mesh position={[0.7, 0.35, 0.66]}>
+          <boxGeometry args={[1.2, 0.5, 0.12]} />
+          <meshStandardMaterial color="#0f0a06" roughness={1} />
+        </mesh>
+        <mesh position={[0.7, 0.28, 0.6]}>
+          <cylinderGeometry args={[0.22, 0.18, 0.32, 12]} />
+          <meshStandardMaterial color="#4a361f" roughness={0.9} />
+        </mesh>
+        {/* a candle on the island — for the slow dance after dinner */}
+        <mesh position={[-0.9, 1.08, 0]}>
+          <cylinderGeometry args={[0.04, 0.04, 0.16, 10]} />
+          <meshStandardMaterial color="#e8dcc4" roughness={0.6} />
+        </mesh>
+        <mesh ref={candleFlame} position={[-0.9, 1.2, 0]}>
+          <sphereGeometry args={[0.03, 8, 8]} />
+          <meshStandardMaterial color="#ffd090" emissive="#ffb060" emissiveIntensity={2.4} toneMapped={false} />
+        </mesh>
+        <pointLight ref={candleLight} position={[-0.9, 1.23, 0]} color="#ff9a40" intensity={2.6} distance={3} decay={2} />
+      </group>
+
+      {/* Leather bar stools along the near side of the island */}
+      {[-0.9, 0, 0.9].map((x) => (
+        <Stool key={x} position={[x, 0, 1.55]} />
+      ))}
+
+      {/* Amber pendant lights over the island — the kitchen's key light */}
+      {[-0.8, 0, 0.8].map((x) => (
+        <Pendant key={x} position={[x, 0, 0.5]} />
+      ))}
+
+      {/* Tall window on the side wall — dark evening glass, faint cool moonlight */}
+      <mesh position={[ROOM.width / 2 - 0.03, 1.7, -0.6]}>
+        <boxGeometry args={[0.05, 2.3, 3.2]} />
+        <meshStandardMaterial color="#1a2028" emissive="#26323e" emissiveIntensity={0.25} toneMapped={false} />
+      </mesh>
+      <pointLight position={[ROOM.width / 2 - 0.6, 1.9, -0.6]} color="#6f8bb0" intensity={1.4} distance={6} decay={2} />
+    </group>
+  );
+}
+
+/** Warm intimate sitting-room dressing used for the non-kitchen rooms. */
+function GenericFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
+  const fireLight = useRef<THREE.PointLight>(null);
+  const fireGlow = useRef<THREE.Mesh>(null);
+  const candleLight = useRef<THREE.PointLight>(null);
+  const candleFlame = useRef<THREE.Mesh>(null);
+  const w = ROOM.width / 2;
+  const d = ROOM.depth / 2;
+
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    const fire = 1 + Math.sin(t * 11) * 0.12 + Math.sin(t * 27) * 0.06;
+    const cand = 1 + Math.sin(t * 9 + 2) * 0.18 + Math.sin(t * 23) * 0.1;
+    if (fireLight.current) fireLight.current.intensity = 9 * fire;
+    if (fireGlow.current) {
+      (fireGlow.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
+        1.2 * fire;
+    }
+    if (candleLight.current) candleLight.current.intensity = 3.4 * cand;
+    if (candleFlame.current) {
+      (candleFlame.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
+        2.4 * cand;
+    }
+  });
+
+  return (
+    <group>
+      {/* Hearth */}
       <mesh position={[0, 0.9, -d + 0.35]}>
         <boxGeometry args={[2.4, 1.8, 0.6]} />
-        <meshStandardMaterial {...stoneMaps} />
+        <meshStandardMaterial {...stone} />
       </mesh>
       <mesh ref={fireGlow} position={[0, 0.55, -d + 0.68]}>
         <planeGeometry args={[1.3, 0.7]} />
-        <meshStandardMaterial
-          color={COLOR.fire}
-          emissive={COLOR.fire}
-          emissiveIntensity={1.2}
-          toneMapped={false}
-        />
+        <meshStandardMaterial color={COLOR.fire} emissive={COLOR.fire} emissiveIntensity={1.2} toneMapped={false} />
       </mesh>
-      <pointLight
-        ref={fireLight}
-        position={[0, 0.7, -d + 1]}
-        color={COLOR.fire}
-        intensity={9}
-        distance={12}
-        decay={1.8}
-      />
+      <pointLight ref={fireLight} position={[0, 0.7, -d + 1]} color={COLOR.fire} intensity={9} distance={12} decay={1.8} />
 
-      {/* Bedside-style lamp — the main warm pool, like the reference */}
+      {/* Bedside-style lamp */}
       <group position={[w - 1.4, 0, 1.6]}>
         <mesh position={[0, 0.62, 0]}>
           <cylinderGeometry args={[0.03, 0.03, 1.24, 8]} />
@@ -247,24 +361,12 @@ function PlaceholderRoom({ accent }: { accent: string }) {
         </mesh>
         <mesh position={[0, 1.28, 0]}>
           <coneGeometry args={[0.26, 0.34, 20, 1, true]} />
-          <meshStandardMaterial
-            color="#e9c79a"
-            emissive="#ffca8a"
-            emissiveIntensity={1.3}
-            side={THREE.DoubleSide}
-            toneMapped={false}
-          />
+          <meshStandardMaterial color="#e9c79a" emissive="#ffca8a" emissiveIntensity={1.3} side={THREE.DoubleSide} toneMapped={false} />
         </mesh>
-        <pointLight
-          position={[0, 1.22, 0]}
-          color="#ffb060"
-          intensity={10}
-          distance={7}
-          decay={2}
-        />
+        <pointLight position={[0, 1.22, 0]} color="#ffb060" intensity={10} distance={7} decay={2} />
       </group>
 
-      {/* A single candle on the low table */}
+      {/* Candle on the low table */}
       <group position={[0, 0, -1.1]}>
         <mesh position={[0, 0.62, 0]}>
           <cylinderGeometry args={[0.04, 0.04, 0.18, 10]} />
@@ -272,40 +374,66 @@ function PlaceholderRoom({ accent }: { accent: string }) {
         </mesh>
         <mesh ref={candleFlame} position={[0, 0.75, 0]}>
           <sphereGeometry args={[0.035, 8, 8]} />
-          <meshStandardMaterial
-            color="#ffd090"
-            emissive="#ffb060"
-            emissiveIntensity={2.4}
-            toneMapped={false}
-          />
+          <meshStandardMaterial color="#ffd090" emissive="#ffb060" emissiveIntensity={2.4} toneMapped={false} />
         </mesh>
-        <pointLight
-          ref={candleLight}
-          position={[0, 0.78, 0]}
-          color="#ff9a40"
-          intensity={3.4}
-          distance={3.4}
-          decay={2}
-        />
+        <pointLight ref={candleLight} position={[0, 0.78, 0]} color="#ff9a40" intensity={3.4} distance={3.4} decay={2} />
       </group>
 
       {/* Blocked-in furniture (walnut) */}
       <mesh position={[0, 0.4, 0.4]}>
         <boxGeometry args={[2.6, 0.8, 1]} />
-        <meshStandardMaterial {...woodMaps} />
+        <meshStandardMaterial {...wood} />
       </mesh>
       <mesh position={[0, 0.3, -1.3]}>
         <boxGeometry args={[1.4, 0.5, 0.7]} />
-        <meshStandardMaterial {...woodMaps} />
+        <meshStandardMaterial {...wood} />
       </mesh>
       <mesh position={[w - 0.5, 0.5, -1.2]}>
         <boxGeometry args={[0.9, 1, 3.4]} />
-        <meshStandardMaterial {...woodMaps} />
+        <meshStandardMaterial {...wood} />
       </mesh>
       <mesh position={[-w + 0.5, 0.45, 1.8]}>
         <boxGeometry args={[0.8, 0.9, 1.4]} />
-        <meshStandardMaterial {...woodMaps} />
+        <meshStandardMaterial {...wood} />
       </mesh>
+    </group>
+  );
+}
+
+/** A round leather bar stool on a metal pedestal. */
+function Stool({ position }: { position: [number, number, number] }) {
+  return (
+    <group position={position}>
+      <mesh position={[0, 0.66, 0]}>
+        <cylinderGeometry args={[0.22, 0.22, 0.1, 20]} />
+        <meshStandardMaterial {...LEATHER} />
+      </mesh>
+      <mesh position={[0, 0.33, 0]}>
+        <cylinderGeometry args={[0.04, 0.05, 0.62, 12]} />
+        <meshStandardMaterial {...METAL} />
+      </mesh>
+      <mesh position={[0, 0.02, 0]}>
+        <cylinderGeometry args={[0.2, 0.2, 0.04, 20]} />
+        <meshStandardMaterial {...METAL} />
+      </mesh>
+    </group>
+  );
+}
+
+/** An amber glass pendant hanging from the ceiling. */
+function Pendant({ position }: { position: [number, number, number] }) {
+  const y = 2.25;
+  return (
+    <group position={position}>
+      <mesh position={[0, (ROOM.height + y) / 2, 0]}>
+        <cylinderGeometry args={[0.008, 0.008, ROOM.height - y, 6]} />
+        <meshStandardMaterial color="#0a0a0a" />
+      </mesh>
+      <mesh position={[0, y, 0]}>
+        <sphereGeometry args={[0.12, 16, 16]} />
+        <meshStandardMaterial color="#ffb765" emissive="#ffa94d" emissiveIntensity={1.6} toneMapped={false} />
+      </mesh>
+      <pointLight position={[0, y - 0.1, 0]} color="#ffb060" intensity={6} distance={5.5} decay={2} />
     </group>
   );
 }
@@ -338,171 +466,134 @@ function Wall({
 }
 
 /** Movement, crosshair raycasting, and interactive markers for the active room. */
+/** Camera position + look target for a focus point (or the room overview). */
+function focusView(room: Room, focus: WorldObject | null) {
+  if (!focus) {
+    return {
+      pos: new THREE.Vector3(room.spawn[0], room.spawn[1], room.spawn[2]),
+      target: new THREE.Vector3(0, 1.2, -0.5),
+    };
+  }
+  const p = new THREE.Vector3(...focus.position);
+  const target = p.clone();
+  // Approach the asset from the open side of the room (toward the entrance).
+  const dir = new THREE.Vector3(0, p.y, 3.8).sub(p);
+  dir.y = 0;
+  if (dir.lengthSq() < 1e-4) dir.set(0, 0, 1);
+  dir.normalize();
+  const pos = p.clone().add(dir.multiplyScalar(1.35));
+  pos.y = p.y + 0.28;
+  return { pos, target };
+}
+
+/**
+ * Cinematic waypoint navigation: drag to look (cursor stays free), and the
+ * camera glides + zooms to whichever focus point is selected. No mouse trap.
+ */
 function World({
   room,
   member,
+  focus,
   onHoverChange,
-  onActivate,
-  onLockChange,
+  onSelectObject,
 }: SceneProps) {
   const { camera } = useThree();
+  const controls = useRef<React.ComponentRef<typeof OrbitControls>>(null);
 
-  const markers = useRef<Map<string, THREE.Mesh>>(new Map());
-  const objectById = useMemo(
-    () => new Map(room.objects.map((o) => [o.id, o])),
-    [room.objects],
-  );
-
-  const keys = useRef<Record<string, boolean>>({});
-  const hoveredId = useRef<string | null>(null);
-  const raycaster = useMemo(() => new THREE.Raycaster(), []);
-  const center = useMemo(() => new THREE.Vector2(0, 0), []);
-  const forward = useMemo(() => new THREE.Vector3(), []);
-  const right = useMemo(() => new THREE.Vector3(), []);
-  const up = useMemo(() => new THREE.Vector3(0, 1, 0), []);
-
-  const halfW = ROOM.width / 2 - 0.4;
-  const halfD = ROOM.depth / 2 - 0.4;
-  // Panorama rooms are a fixed viewpoint: look around, don't walk.
-  const canMove = !room.pano;
-
-  // Re-spawn and clear hover when the room changes.
+  // Glide the camera whenever the focus (or room) changes.
   useEffect(() => {
-    camera.position.set(room.spawn[0], room.spawn[1], room.spawn[2]);
-    hoveredId.current = null;
-    onHoverChange(null);
-    keys.current = {};
-  }, [room.id, room.spawn, camera, onHoverChange]);
+    const c = controls.current;
+    if (!c) return;
+    const { pos, target } = focusView(room, focus);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const registerMarker = useCallback((id: string, mesh: THREE.Mesh | null) => {
-    if (mesh) markers.current.set(id, mesh);
-    else markers.current.delete(id);
-  }, []);
+    gsap.killTweensOf(camera.position);
+    gsap.killTweensOf(c.target);
 
-  const activateHovered = useCallback(() => {
-    const id = hoveredId.current;
-    if (!id) return;
-    const obj = objectById.get(id);
-    if (obj) {
-      if (document.pointerLockElement) document.exitPointerLock();
-      onActivate(obj);
+    if (reduce) {
+      camera.position.copy(pos);
+      c.target.copy(target);
+      c.update();
+      return;
     }
-  }, [objectById, onActivate]);
-
-  useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      keys.current[e.code] = true;
-      if (e.code === "KeyE") activateHovered();
-    };
-    const up2 = (e: KeyboardEvent) => {
-      keys.current[e.code] = false;
-    };
-    window.addEventListener("keydown", down);
-    window.addEventListener("keyup", up2);
-    return () => {
-      window.removeEventListener("keydown", down);
-      window.removeEventListener("keyup", up2);
-    };
-  }, [activateHovered]);
-
-  useEffect(() => {
-    const onMouseDown = () => {
-      if (document.pointerLockElement) activateHovered();
-    };
-    window.addEventListener("mousedown", onMouseDown);
-    return () => window.removeEventListener("mousedown", onMouseDown);
-  }, [activateHovered]);
-
-  useFrame((_, delta) => {
-    const dt = Math.min(delta, 0.05);
-
-    if (canMove) {
-      camera.getWorldDirection(forward);
-      forward.y = 0;
-      forward.normalize();
-      right.crossVectors(forward, up).normalize();
-
-      const k = keys.current;
-      const move = new THREE.Vector3();
-      if (k["KeyW"] || k["ArrowUp"]) move.add(forward);
-      if (k["KeyS"] || k["ArrowDown"]) move.sub(forward);
-      if (k["KeyD"] || k["ArrowRight"]) move.add(right);
-      if (k["KeyA"] || k["ArrowLeft"]) move.sub(right);
-      if (move.lengthSq() > 0) {
-        move.normalize().multiplyScalar(MOVE_SPEED * dt);
-        camera.position.x = THREE.MathUtils.clamp(
-          camera.position.x + move.x,
-          -halfW,
-          halfW,
-        );
-        camera.position.z = THREE.MathUtils.clamp(
-          camera.position.z + move.z,
-          -halfD,
-          halfD,
-        );
-      }
-      camera.position.y = EYE_HEIGHT;
-    }
-
-    raycaster.setFromCamera(center, camera);
-    const meshes = Array.from(markers.current.values());
-    const hits = raycaster.intersectObjects(meshes, false);
-    const hit = hits.find((h) => h.distance <= REACH);
-    const newId = hit ? (hit.object.userData.objectId as string) : null;
-    if (newId !== hoveredId.current) {
-      hoveredId.current = newId;
-      onHoverChange(newId ? objectById.get(newId) ?? null : null);
-    }
-  });
+    c.enabled = false;
+    gsap.to(camera.position, {
+      x: pos.x,
+      y: pos.y,
+      z: pos.z,
+      duration: 1.15,
+      ease: "power2.inOut",
+      onUpdate: () => c.update(),
+    });
+    gsap.to(c.target, {
+      x: target.x,
+      y: target.y,
+      z: target.z,
+      duration: 1.15,
+      ease: "power2.inOut",
+      onComplete: () => {
+        c.enabled = true;
+        c.update();
+      },
+    });
+  }, [focus, room, camera]);
 
   return (
     <>
-      <PointerLockControls
-        onLock={() => onLockChange(true)}
-        onUnlock={() => onLockChange(false)}
+      <OrbitControls
+        ref={controls}
+        makeDefault
+        enablePan={false}
+        enableZoom={false}
+        enableDamping
+        dampingFactor={0.08}
+        rotateSpeed={-0.32}
+        minPolarAngle={0.5}
+        maxPolarAngle={Math.PI - 0.4}
+        target={[0, 1.2, -0.5]}
       />
       {room.objects.map((obj) => (
         <Marker
           key={obj.id}
           object={obj}
           locked={obj.access === "premium" && !member}
-          hoveredRef={hoveredId}
-          register={registerMarker}
+          active={focus?.id === obj.id}
+          onHover={onHoverChange}
+          onSelect={onSelectObject}
         />
       ))}
     </>
   );
 }
 
+/** A glowing, clickable hotspot for a focus point. */
 function Marker({
   object,
   locked,
-  hoveredRef,
-  register,
+  active,
+  onHover,
+  onSelect,
 }: {
   object: WorldObject;
   locked: boolean;
-  hoveredRef: React.RefObject<string | null>;
-  register: (id: string, mesh: THREE.Mesh | null) => void;
+  active: boolean;
+  onHover: (obj: WorldObject | null) => void;
+  onSelect: (obj: WorldObject) => void;
 }) {
   const mesh = useRef<THREE.Mesh>(null);
-
-  useEffect(() => {
-    register(object.id, mesh.current);
-    return () => register(object.id, null);
-  }, [object.id, register]);
+  const hovered = useRef(false);
 
   useFrame(({ clock }) => {
     const m = mesh.current;
     if (!m) return;
-    const hovered = hoveredRef.current === object.id;
     m.position.y = object.position[1] + Math.sin(clock.elapsedTime * 2) * 0.04;
-    const target = hovered ? 1.5 : 1;
-    m.scale.lerp(new THREE.Vector3(target, target, target), 0.15);
+    const emphasized = hovered.current || active;
+    const s = emphasized ? 1.5 : 1;
+    m.scale.lerp(SCRATCH.set(s, s, s), 0.15);
     const mat = m.material as THREE.MeshStandardMaterial;
     mat.emissiveIntensity = THREE.MathUtils.lerp(
       mat.emissiveIntensity,
-      hovered ? 2.4 : 1,
+      emphasized ? 2.6 : 1,
       0.15,
     );
   });
@@ -510,7 +601,25 @@ function Marker({
   const color = locked ? COLOR.markerLocked : COLOR.markerFree;
 
   return (
-    <mesh ref={mesh} position={object.position} userData={{ objectId: object.id }}>
+    <mesh
+      ref={mesh}
+      position={object.position}
+      onPointerOver={(e) => {
+        e.stopPropagation();
+        hovered.current = true;
+        document.body.style.cursor = "pointer";
+        onHover(object);
+      }}
+      onPointerOut={() => {
+        hovered.current = false;
+        document.body.style.cursor = "auto";
+        onHover(null);
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+        onSelect(object);
+      }}
+    >
       <icosahedronGeometry args={[0.12, 0]} />
       <meshStandardMaterial
         color={color}

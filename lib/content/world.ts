@@ -86,19 +86,29 @@ export const environments: Environment[] = [
     belongsTo: "Josh & Luna",
     rooms: [
       {
-        id: "dining-room",
-        name: "Dining Room",
+        id: "kitchen",
+        name: "Kitchen",
         description:
-          "The heart of the house. Long table, morning light, the room where most of it was said — or wasn't.",
-        spawn: [0, 1.6, 3],
+          "The heart of the house — stone hearth, warm wood, and the open floor where they'd slow-dance after dinner.",
+        spawn: [0, 1.6, 3.6],
         accent: "#6b5238",
         objects: [
+          {
+            id: "josh-note",
+            label: "Josh's Note",
+            kind: "journal",
+            hint: "Read it",
+            position: [-0.2, 1.11, 0.5],
+            placeholder:
+              "A note left on the island before he went to work: \"Didn't want to wake you. Coffee's still warm. — J\". Small, ordinary, the kind of thing you only understand the weight of later.",
+            access: "free",
+          },
           {
             id: "first-morning-clip",
             label: "First Morning",
             kind: "clip",
             hint: "Watch the scene",
-            position: [-2.4, 1.1, -1.4],
+            position: [2.2, 1.2, -1.1],
             videoSlug: "luna-josh-first-morning",
             placeholder: "A scene from the farmhouse.",
             access: "free",
@@ -108,9 +118,9 @@ export const environments: Environment[] = [
             label: "The Coffee Mug",
             kind: "memory",
             hint: "Pick it up",
-            position: [2.4, 0.95, -1.2],
+            position: [0.6, 1.12, 0.5],
             placeholder:
-              "A chipped mug left on the table. Josh and Luna's mornings lived in small rituals like this one.",
+              "A chipped mug on the island. Josh and Luna's mornings lived in small rituals like this one.",
             access: "free",
           },
         ],

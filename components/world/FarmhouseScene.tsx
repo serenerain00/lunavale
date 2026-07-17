@@ -1,44 +1,40 @@
 /**
- * FarmhouseScene — the walkable 3D placeholder room.
+ * FarmhouseScene — the walkable 3D room.
  *
- * Everything here is primitive geometry standing in for real art: warm walls, a
- * plank floor, a stone hearth with flickering firelight, and blocked-in furniture.
- * Interactive objects are glowing markers; you target them with the centre
- * crosshair and press E / click to open them.
+ * Renders the active room: a real photogrammetry GLB when the room has a `scan`
+ * (see docs/world/SCAN_CAPTURE.md), otherwise tinted placeholder geometry so the
+ * interaction is fully playable before scans exist. Interactive objects are
+ * glowing markers targeted with the centre crosshair (press E / click).
  *
- * Swap-in point: replace the <Room/> primitives (and optionally load a .glb via
- * drei's useGLTF) with Melissa's real farmhouse model. Object positions come from
- * lib/content/world.ts, so content placement survives the art swap.
+ * Navigation: WASD + mouse-look via PointerLockControls, clamped to room bounds
+ * (bounds apply to the placeholder; real scans get per-scan bounds on delivery).
  */
 "use client";
 
 /* eslint-disable react-hooks/immutability -- Imperative Three.js: per-frame mutation of the camera and reused scratch vectors inside useFrame is the intended, performant R3F pattern; treating them as immutable would reallocate every frame. */
 
-import { useRef, useMemo, useEffect, useCallback } from "react";
+import { Suspense, useRef, useMemo, useEffect, useCallback } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { PointerLockControls } from "@react-three/drei";
+import { PointerLockControls, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
-import type { WorldObject } from "@/lib/content/world";
+import type { Room, RoomScan, WorldObject } from "@/lib/content/world";
 
 const ROOM = { width: 9, depth: 9, height: 3.2 };
 const EYE_HEIGHT = 1.6;
 const MOVE_SPEED = 3.2; // metres/second
 const REACH = 2.6; // how close the crosshair must be to target an object
 
-// Palette — the warm farmhouse direction, as THREE colors.
 const COLOR = {
-  wall: "#2a221c",
-  floor: "#3a2c20",
-  beam: "#1c150f",
-  hearthStone: "#211b16",
-  fire: "#c98a3e",
-  furniture: "#463525",
-  markerFree: "#e0b072",
-  markerLocked: "#7a2f3d",
+  floor: "#5c4634",
+  beam: "#33271c",
+  hearthStone: "#3d332a",
+  fire: "#e5a24e",
+  markerFree: "#f0c48a",
+  markerLocked: "#c8899a",
 };
 
 interface SceneProps {
-  objects: WorldObject[];
+  room: Room;
   member: boolean;
   onHoverChange: (obj: WorldObject | null) => void;
   onActivate: (obj: WorldObject) => void;
@@ -46,7 +42,7 @@ interface SceneProps {
 }
 
 export function FarmhouseScene({
-  objects,
+  room,
   member,
   onHoverChange,
   onActivate,
@@ -55,15 +51,16 @@ export function FarmhouseScene({
   return (
     <Canvas
       dpr={[1, 1.75]}
-      camera={{ position: [0, EYE_HEIGHT, 3], fov: 70, near: 0.1, far: 100 }}
+      camera={{ position: room.spawn, fov: 70, near: 0.1, far: 100 }}
       gl={{ antialias: true }}
-      shadows={false}
     >
-      <color attach="background" args={["#0a0908"]} />
-      <fog attach="fog" args={["#0a0908", 6, 16]} />
-      <Room />
+      <color attach="background" args={["#161009"]} />
+      <fog attach="fog" args={["#161009", 14, 40]} />
+      <Suspense fallback={null}>
+        <RoomModel room={room} />
+      </Suspense>
       <World
-        objects={objects}
+        room={room}
         member={member}
         onHoverChange={onHoverChange}
         onActivate={onActivate}
@@ -73,18 +70,43 @@ export function FarmhouseScene({
   );
 }
 
-/** Static placeholder geometry for the room + hearth firelight. */
-function Room() {
+/** Real scan when present, else placeholder. */
+function RoomModel({ room }: { room: Room }) {
+  if (room.scan) return <ScannedRoom scan={room.scan} />;
+  return <PlaceholderRoom accent={room.accent} />;
+}
+
+/** Loads a captured room GLB and seats it in scene space. */
+function ScannedRoom({ scan }: { scan: RoomScan }) {
+  const gltf = useGLTF(scan.src);
+  return (
+    <group
+      position={scan.position ?? [0, 0, 0]}
+      rotation={[0, scan.rotationY ?? 0, 0]}
+      scale={scan.scale ?? 1}
+    >
+      {/* Scans carry baked lighting; a soft ambient keeps them from reading flat. */}
+      <ambientLight intensity={0.7} color="#d9c3a3" />
+      <primitive object={gltf.scene} />
+    </group>
+  );
+}
+
+/** Tinted primitive room used until a scan is delivered. */
+function PlaceholderRoom({ accent }: { accent: string }) {
   const fireLight = useRef<THREE.PointLight>(null);
   const fireGlow = useRef<THREE.Mesh>(null);
 
-  // Flicker the hearth so the room feels alive (paused automatically under
-  // reduced motion via the parent gate — this component only mounts when moving).
+  const wall = useMemo(() => accent, [accent]);
+  const furniture = useMemo(
+    () => new THREE.Color(accent).multiplyScalar(0.7).getStyle(),
+    [accent],
+  );
+
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
-    const flicker =
-      1 + Math.sin(t * 11) * 0.12 + Math.sin(t * 27) * 0.06;
-    if (fireLight.current) fireLight.current.intensity = 6 * flicker;
+    const flicker = 1 + Math.sin(t * 11) * 0.12 + Math.sin(t * 27) * 0.06;
+    if (fireLight.current) fireLight.current.intensity = 18 * flicker;
     if (fireGlow.current) {
       const m = fireGlow.current.material as THREE.MeshStandardMaterial;
       m.emissiveIntensity = 1.4 * flicker;
@@ -96,12 +118,18 @@ function Room() {
 
   return (
     <group>
-      {/* Ambient + soft key so it's moody, not black */}
-      <ambientLight intensity={0.25} color="#6f665c" />
-      <hemisphereLight args={["#2a221c", "#100c08", 0.4]} />
+      <ambientLight intensity={0.9} color="#b89b78" />
+      <hemisphereLight args={["#6b5238", "#241a12", 0.7]} />
+      <pointLight
+        position={[0, ROOM.height - 0.4, 1]}
+        color="#d9b892"
+        intensity={12}
+        distance={16}
+        decay={1.4}
+      />
 
       {/* Floor */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
+      <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[ROOM.width, ROOM.depth]} />
         <meshStandardMaterial color={COLOR.floor} roughness={0.9} />
       </mesh>
@@ -111,18 +139,21 @@ function Room() {
         <meshStandardMaterial color={COLOR.beam} roughness={1} />
       </mesh>
       {/* Walls */}
-      <Wall position={[0, ROOM.height / 2, -d]} args={[ROOM.width, ROOM.height]} />
+      <Wall color={wall} position={[0, ROOM.height / 2, -d]} args={[ROOM.width, ROOM.height]} />
       <Wall
+        color={wall}
         position={[0, ROOM.height / 2, d]}
         rotation={[0, Math.PI, 0]}
         args={[ROOM.width, ROOM.height]}
       />
       <Wall
+        color={wall}
         position={[-w, ROOM.height / 2, 0]}
         rotation={[0, Math.PI / 2, 0]}
         args={[ROOM.depth, ROOM.height]}
       />
       <Wall
+        color={wall}
         position={[w, ROOM.height / 2, 0]}
         rotation={[0, -Math.PI / 2, 0]}
         args={[ROOM.depth, ROOM.height]}
@@ -136,12 +167,11 @@ function Room() {
         </mesh>
       ))}
 
-      {/* Hearth on the back wall */}
+      {/* Hearth */}
       <mesh position={[0, 0.9, -d + 0.35]}>
         <boxGeometry args={[2.4, 1.8, 0.6]} />
         <meshStandardMaterial color={COLOR.hearthStone} roughness={1} />
       </mesh>
-      {/* Firebox glow */}
       <mesh ref={fireGlow} position={[0, 0.55, -d + 0.68]}>
         <planeGeometry args={[1.3, 0.7]} />
         <meshStandardMaterial
@@ -155,41 +185,39 @@ function Room() {
         ref={fireLight}
         position={[0, 0.7, -d + 1]}
         color={COLOR.fire}
-        intensity={6}
-        distance={12}
-        decay={2}
+        intensity={18}
+        distance={16}
+        decay={1.5}
       />
 
       {/* Blocked-in furniture */}
-      {/* Sofa facing hearth */}
       <mesh position={[0, 0.4, 0.4]}>
         <boxGeometry args={[2.6, 0.8, 1]} />
-        <meshStandardMaterial color={COLOR.furniture} roughness={0.85} />
+        <meshStandardMaterial color={furniture} roughness={0.85} />
       </mesh>
-      {/* Coffee table */}
       <mesh position={[0, 0.3, -1.3]}>
         <boxGeometry args={[1.4, 0.5, 0.7]} />
-        <meshStandardMaterial color={COLOR.furniture} roughness={0.8} />
+        <meshStandardMaterial color={furniture} roughness={0.8} />
       </mesh>
-      {/* Kitchen counter, right wall */}
       <mesh position={[w - 0.5, 0.5, -1.2]}>
         <boxGeometry args={[0.9, 1, 3.4]} />
-        <meshStandardMaterial color={COLOR.furniture} roughness={0.8} />
+        <meshStandardMaterial color={furniture} roughness={0.8} />
       </mesh>
-      {/* Writing desk, left wall */}
       <mesh position={[-w + 0.5, 0.45, 1.8]}>
         <boxGeometry args={[0.8, 0.9, 1.4]} />
-        <meshStandardMaterial color={COLOR.furniture} roughness={0.8} />
+        <meshStandardMaterial color={furniture} roughness={0.8} />
       </mesh>
     </group>
   );
 }
 
 function Wall({
+  color,
   position,
   rotation = [0, 0, 0],
   args,
 }: {
+  color: string;
   position: [number, number, number];
   rotation?: [number, number, number];
   args: [number, number];
@@ -197,28 +225,25 @@ function Wall({
   return (
     <mesh position={position} rotation={rotation}>
       <planeGeometry args={args} />
-      <meshStandardMaterial color={COLOR.wall} roughness={1} side={THREE.FrontSide} />
+      <meshStandardMaterial color={color} roughness={1} side={THREE.FrontSide} />
     </mesh>
   );
 }
 
-/**
- * World — movement, crosshair raycasting, and the interactive object markers.
- */
+/** Movement, crosshair raycasting, and interactive markers for the active room. */
 function World({
-  objects,
+  room,
   member,
   onHoverChange,
   onActivate,
   onLockChange,
-}: Omit<SceneProps, never>) {
+}: SceneProps) {
   const { camera } = useThree();
 
-  // Marker meshes registered by id for raycasting.
   const markers = useRef<Map<string, THREE.Mesh>>(new Map());
   const objectById = useMemo(
-    () => new Map(objects.map((o) => [o.id, o])),
-    [objects],
+    () => new Map(room.objects.map((o) => [o.id, o])),
+    [room.objects],
   );
 
   const keys = useRef<Record<string, boolean>>({});
@@ -232,6 +257,14 @@ function World({
   const halfW = ROOM.width / 2 - 0.4;
   const halfD = ROOM.depth / 2 - 0.4;
 
+  // Re-spawn and clear hover when the room changes.
+  useEffect(() => {
+    camera.position.set(room.spawn[0], room.spawn[1], room.spawn[2]);
+    hoveredId.current = null;
+    onHoverChange(null);
+    keys.current = {};
+  }, [room.id, room.spawn, camera, onHoverChange]);
+
   const registerMarker = useCallback((id: string, mesh: THREE.Mesh | null) => {
     if (mesh) markers.current.set(id, mesh);
     else markers.current.delete(id);
@@ -242,13 +275,11 @@ function World({
     if (!id) return;
     const obj = objectById.get(id);
     if (obj) {
-      // Release the mouse so the content overlay is usable.
       if (document.pointerLockElement) document.exitPointerLock();
       onActivate(obj);
     }
   }, [objectById, onActivate]);
 
-  // Keyboard: movement + E-to-activate.
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       keys.current[e.code] = true;
@@ -265,7 +296,6 @@ function World({
     };
   }, [activateHovered]);
 
-  // Click while locked = activate whatever the crosshair is on.
   useEffect(() => {
     const onMouseDown = () => {
       if (document.pointerLockElement) activateHovered();
@@ -277,7 +307,6 @@ function World({
   useFrame((_, delta) => {
     const dt = Math.min(delta, 0.05);
 
-    // Movement relative to look direction, on the XZ plane.
     camera.getWorldDirection(forward);
     forward.y = 0;
     forward.normalize();
@@ -304,7 +333,6 @@ function World({
     }
     camera.position.y = EYE_HEIGHT;
 
-    // Crosshair raycast to find the targeted object.
     raycaster.setFromCamera(center, camera);
     const meshes = Array.from(markers.current.values());
     const hits = raycaster.intersectObjects(meshes, false);
@@ -322,7 +350,7 @@ function World({
         onLock={() => onLockChange(true)}
         onUnlock={() => onLockChange(false)}
       />
-      {objects.map((obj) => (
+      {room.objects.map((obj) => (
         <Marker
           key={obj.id}
           object={obj}
@@ -357,7 +385,6 @@ function Marker({
     const m = mesh.current;
     if (!m) return;
     const hovered = hoveredRef.current === object.id;
-    // Gentle bob + hover emphasis.
     m.position.y = object.position[1] + Math.sin(clock.elapsedTime * 2) * 0.04;
     const target = hovered ? 1.5 : 1;
     m.scale.lerp(new THREE.Vector3(target, target, target), 0.15);
@@ -372,11 +399,7 @@ function Marker({
   const color = locked ? COLOR.markerLocked : COLOR.markerFree;
 
   return (
-    <mesh
-      ref={mesh}
-      position={object.position}
-      userData={{ objectId: object.id }}
-    >
+    <mesh ref={mesh} position={object.position} userData={{ objectId: object.id }}>
       <icosahedronGeometry args={[0.12, 0]} />
       <meshStandardMaterial
         color={color}

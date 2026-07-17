@@ -45,6 +45,15 @@ stories/**/*.webm
 *.mov
 *.webm
 
+# photogrammetry room scans — large binaries, delivered/hosted out of band
+# (see docs/world/SCAN_CAPTURE.md)
+public/scans/**
+*.glb
+*.gltf
+*.ply
+*.splat
+*.ksplat
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

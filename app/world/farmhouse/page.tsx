@@ -16,17 +16,25 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default async function FarmhousePage() {
+export default async function FarmhousePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ room?: string }>;
+}) {
   const environment = getEnvironment(SLUG);
   if (!environment) notFound();
 
-  const member = await isMember();
+  const [{ room }, member] = await Promise.all([searchParams, isMember()]);
 
   return (
     <>
       <SiteHeader member={member} />
       <div className="relative flex-1">
-        <FarmhouseExperience environment={environment} member={member} />
+        <FarmhouseExperience
+          environment={environment}
+          member={member}
+          initialRoomId={room}
+        />
       </div>
     </>
   );

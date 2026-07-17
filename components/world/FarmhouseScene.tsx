@@ -81,9 +81,9 @@ export function FarmhouseScene({
         />
         <SMAA />
         <Bloom
-          intensity={day ? 0.5 : 0.9}
-          luminanceThreshold={0.8}
-          luminanceSmoothing={0.2}
+          intensity={day ? 0.35 : 0.7}
+          luminanceThreshold={0.9}
+          luminanceSmoothing={0.25}
           mipmapBlur
         />
         <Vignette eskil={false} offset={0.15} darkness={day ? 0.5 : 0.75} />
@@ -408,17 +408,41 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
       {/* Lower cabinets + stone counters flanking the range */}
       {[-2.75, 2.75].map((x) => (
         <group key={x} position={[x, 0, -d + 0.35]}>
-          <mesh position={[0, 0.45, 0]} castShadow receiveShadow>
-            <boxGeometry args={[2.9, 0.9, 0.62]} />
+          <mesh position={[0, 0.48, 0]} castShadow receiveShadow>
+            <boxGeometry args={[2.9, 0.86, 0.62]} />
             <meshStandardMaterial {...wood} />
           </mesh>
+          {/* toe kick (recessed dark base) */}
+          <mesh position={[0, 0.06, 0.24]}>
+            <boxGeometry args={[2.9, 0.12, 0.14]} />
+            <meshStandardMaterial color="#0d0906" roughness={1} />
+          </mesh>
+          {/* door seams + handles */}
+          {[-0.96, 0, 0.96].map((dx) => (
+            <group key={dx} position={[dx, 0.5, 0.315]}>
+              <mesh position={[0.45, 0, 0.005]}>
+                <boxGeometry args={[0.02, 0.78, 0.02]} />
+                <meshStandardMaterial color="#0d0906" roughness={1} />
+              </mesh>
+              <mesh position={[0.3, 0.24, 0.03]} rotation={[0, 0, Math.PI / 2]}>
+                <cylinderGeometry args={[0.012, 0.012, 0.14, 8]} />
+                <meshStandardMaterial {...METAL} />
+              </mesh>
+            </group>
+          ))}
+          {/* stone counter */}
           <mesh position={[0, 0.95, 0]} castShadow receiveShadow>
             <boxGeometry args={[3.0, 0.09, 0.66]} />
             <meshStandardMaterial {...stone} />
           </mesh>
+          {/* upper cabinet */}
           <mesh position={[0, 2.35, 0.05]} castShadow>
             <boxGeometry args={[2.6, 0.72, 0.34]} />
             <meshStandardMaterial {...wood} />
+          </mesh>
+          <mesh position={[0, 2.05, 0.23]}>
+            <boxGeometry args={[2.6, 0.02, 0.02]} />
+            <meshStandardMaterial {...METAL} />
           </mesh>
         </group>
       ))}
@@ -429,10 +453,28 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
 
       {/* Island: walnut base + stone top */}
       <group position={[0, 0, 0.5]}>
-        <mesh position={[0, 0.45, 0]} castShadow receiveShadow>
-          <boxGeometry args={[2.8, 0.9, 1.4]} />
+        <mesh position={[0, 0.48, 0]} castShadow receiveShadow>
+          <boxGeometry args={[2.8, 0.86, 1.4]} />
           <meshStandardMaterial {...wood} />
         </mesh>
+        {/* toe kick */}
+        <mesh position={[0, 0.06, 0.6]}>
+          <boxGeometry args={[2.8, 0.12, 0.16]} />
+          <meshStandardMaterial color="#0d0906" roughness={1} />
+        </mesh>
+        {/* cabinet doors on the seating side */}
+        {[-0.9, 0, 0.9].map((dx) => (
+          <group key={dx} position={[dx, 0.5, 0.705]}>
+            <mesh position={[0.45, 0, 0]}>
+              <boxGeometry args={[0.02, 0.78, 0.02]} />
+              <meshStandardMaterial color="#0d0906" roughness={1} />
+            </mesh>
+            <mesh position={[0.3, 0.26, 0.02]} rotation={[0, 0, Math.PI / 2]}>
+              <cylinderGeometry args={[0.012, 0.012, 0.14, 8]} />
+              <meshStandardMaterial {...METAL} />
+            </mesh>
+          </group>
+        ))}
         <mesh position={[0, 0.95, 0]} castShadow receiveShadow>
           <boxGeometry args={[3.0, 0.1, 1.6]} />
           <meshStandardMaterial {...stone} />
@@ -498,28 +540,42 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
   );
 }
 
-/** Floor-to-ceiling mullioned windows filling a wall (open to the sky). */
+/** Floor-to-ceiling mullioned windows filling a wall, with real glass. */
 function Windows({ x }: { x: number }) {
   const frame = { color: "#241812", roughness: 0.6, metalness: 0 };
   const H = ROOM.height;
   const zs = [-4, -2, 0, 2, 4]; // vertical mullions
   return (
     <group position={[x - 0.06, 0, 0]}>
+      {/* Glass pane — clear, faintly reflective, so the snowy forest reads through it */}
+      <mesh position={[0.02, H / 2, 0]} rotation={[0, Math.PI / 2, 0]}>
+        <planeGeometry args={[ROOM.depth - 0.2, H - 0.2]} />
+        <meshPhysicalMaterial
+          transparent
+          opacity={0.16}
+          roughness={0.04}
+          metalness={0}
+          transmission={0}
+          ior={1.45}
+          color="#cfe0ec"
+          side={THREE.DoubleSide}
+        />
+      </mesh>
       {/* sill + head */}
       {[0.08, H - 0.08].map((y) => (
-        <mesh key={y} position={[0, y, 0]}>
+        <mesh key={y} position={[0, y, 0]} castShadow>
           <boxGeometry args={[0.12, 0.16, ROOM.depth]} />
           <meshStandardMaterial {...frame} />
         </mesh>
       ))}
       {/* mid rail */}
-      <mesh position={[0, 1.6, 0]}>
+      <mesh position={[0, 1.6, 0]} castShadow>
         <boxGeometry args={[0.1, 0.1, ROOM.depth]} />
         <meshStandardMaterial {...frame} />
       </mesh>
       {/* vertical mullions */}
       {zs.map((z) => (
-        <mesh key={z} position={[0, H / 2, z]}>
+        <mesh key={z} position={[0, H / 2, z]} castShadow>
           <boxGeometry args={[0.1, H, 0.1]} />
           <meshStandardMaterial {...frame} />
         </mesh>
@@ -722,11 +778,24 @@ function Pendant({ position }: { position: [number, number, number] }) {
         <cylinderGeometry args={[0.008, 0.008, ROOM.height - y, 6]} />
         <meshStandardMaterial color="#0a0a0a" />
       </mesh>
-      <mesh position={[0, y, 0]}>
-        <sphereGeometry args={[0.12, 16, 16]} />
-        <meshStandardMaterial color="#ffb765" emissive="#ffa94d" emissiveIntensity={1.6} toneMapped={false} />
+      {/* metal shade cap */}
+      <mesh position={[0, y + 0.11, 0]}>
+        <coneGeometry args={[0.11, 0.12, 16]} />
+        <meshStandardMaterial color="#1c1a17" metalness={0.7} roughness={0.4} />
       </mesh>
-      <pointLight position={[0, y - 0.1, 0]} color="#ffb060" intensity={6} distance={5.5} decay={2} />
+      {/* amber glass globe — glows without blowing out */}
+      <mesh position={[0, y, 0]}>
+        <sphereGeometry args={[0.1, 16, 16]} />
+        <meshStandardMaterial
+          color="#ffcf8f"
+          emissive="#ffab52"
+          emissiveIntensity={0.85}
+          transparent
+          opacity={0.92}
+          toneMapped={false}
+        />
+      </mesh>
+      <pointLight position={[0, y - 0.1, 0]} color="#ffb060" intensity={5} distance={5} decay={2} />
     </group>
   );
 }

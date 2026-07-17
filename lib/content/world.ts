@@ -56,6 +56,16 @@ export interface RoomPano {
   rotationY?: number;
 }
 
+/** A photoreal Gaussian splat capture of a room (see docs/world/SPLAT_CAPTURE.md). */
+export interface RoomSplat {
+  /** Path to a .splat/.ply under /public, e.g. /splats/farmhouse/living.splat */
+  src: string;
+  /** Transform to seat the splat in scene space (tuned per capture on delivery). */
+  position?: [number, number, number];
+  rotation?: [number, number, number];
+  scale?: number;
+}
+
 /** A named vantage point within a room the camera can travel to (an "area"). */
 export interface Vantage {
   id: string;
@@ -73,10 +83,11 @@ export interface Room {
   /** Camera start position when entering the room. */
   spawn: [number, number, number];
   /**
-   * Environment source, in priority order: an AI/photo 360° panorama (stand and
-   * look around), then a captured GLB scan (walk through), else placeholder
-   * geometry. Fill whichever you have; the rest stays undefined.
+   * Environment source, in priority order: a photoreal Gaussian splat, then a
+   * 360° panorama, then a captured GLB scan, else placeholder geometry. Fill
+   * whichever you have; the rest stays undefined.
    */
+  splat?: RoomSplat;
   pano?: RoomPano;
   scan?: RoomScan;
   /** Placeholder tint so rooms feel distinct before real art arrives. */

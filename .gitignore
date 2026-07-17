@@ -57,6 +57,9 @@ public/scans/**
 # 360° panorama room environments (see docs/world/PANORAMA_ENVIRONMENTS.md)
 public/panos/**
 
+# Gaussian splat room captures (see docs/world/SPLAT_CAPTURE.md)
+public/splats/**
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

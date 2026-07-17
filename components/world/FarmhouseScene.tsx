@@ -16,7 +16,7 @@
 
 import { Component, Suspense, useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Environment, useGLTF, useTexture } from "@react-three/drei";
+import { Environment, Splat, useGLTF, useTexture } from "@react-three/drei";
 import { EffectComposer, Bloom, Vignette, SMAA, N8AO } from "@react-three/postprocessing";
 import gsap from "gsap";
 import * as THREE from "three";
@@ -147,11 +147,27 @@ function Lighting({ day }: { day: boolean }) {
   );
 }
 
-/** Environment source, in priority order: panorama, scan, else placeholder. */
+/** Environment source, in priority order: splat, panorama, scan, else placeholder. */
 function RoomModel({ room }: { room: Room }) {
+  if (room.splat) return <SplatRoom splat={room.splat} />;
   if (room.pano) return <PanoRoom pano={room.pano} />;
   if (room.scan) return <ScannedRoom scan={room.scan} />;
   return <PlaceholderRoom room={room} />;
+}
+
+/** Photoreal Gaussian splat capture — its own baked lighting; hotspots overlay it. */
+function SplatRoom({ splat }: { splat: NonNullable<Room["splat"]> }) {
+  return (
+    <group
+      position={splat.position ?? [0, 0, 0]}
+      rotation={splat.rotation ?? [0, 0, 0]}
+      scale={splat.scale ?? 1}
+    >
+      {/* A little ambient so the overlaid hotspot items read against the splat. */}
+      <ambientLight intensity={0.5} color="#ffffff" />
+      <Splat src={splat.src} />
+    </group>
+  );
 }
 
 /** Equirectangular 360° panorama, viewed from inside — stand and look around. */

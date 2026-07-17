@@ -111,10 +111,25 @@ function ScannedRoom({ scan }: { scan: RoomScan }) {
   );
 }
 
+/** Load a CC0 PBR set (color/normal/roughness) and tile it. */
+function usePBR(folder: string, repeat: number) {
+  const maps = useTexture({
+    map: `/textures/${folder}/color.jpg`,
+    normalMap: `/textures/${folder}/normal.jpg`,
+    roughnessMap: `/textures/${folder}/roughness.jpg`,
+  });
+  maps.map.colorSpace = THREE.SRGBColorSpace;
+  for (const t of [maps.map, maps.normalMap, maps.roughnessMap]) {
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(repeat, repeat);
+  }
+  return maps;
+}
+
 /**
- * Placeholder room, dressed for a warm, candlelit, low-key ambience — deep
- * shadows with warm pools of light from a lamp, a candle, and the hearth, to
- * match the intimate mood of the reference stills (no photoreal art required).
+ * Placeholder room, dressed with real CC0 PBR textures (wood floor, plaster
+ * walls, walnut beams/furniture, stone hearth) under warm, candlelit, low-key
+ * lighting — matching the intimate mood and materials of the reference still.
  */
 function PlaceholderRoom({ accent }: { accent: string }) {
   const fireLight = useRef<THREE.PointLight>(null);
@@ -122,18 +137,18 @@ function PlaceholderRoom({ accent }: { accent: string }) {
   const candleLight = useRef<THREE.PointLight>(null);
   const candleFlame = useRef<THREE.Mesh>(null);
 
-  // Darker, richer surfaces so the light does the storytelling.
-  const wall = useMemo(
-    () => new THREE.Color(accent).multiplyScalar(0.55).getStyle(),
+  const floorMaps = usePBR("floor", 5);
+  const wallMaps = usePBR("wall", 3);
+  const woodMaps = usePBR("wood", 3);
+  const stoneMaps = usePBR("stone", 2);
+
+  // A faint per-room tint on the plaster keeps rooms distinct without losing cream.
+  const wallTint = useMemo(
+    () =>
+      new THREE.Color(accent).lerp(new THREE.Color("#e6d8bf"), 0.72).getStyle(),
     [accent],
   );
-  const furniture = useMemo(
-    () => new THREE.Color(accent).multiplyScalar(0.4).getStyle(),
-    [accent],
-  );
-  const floorCol = "#241a12";
   const beamCol = "#160f08";
-  const stoneCol = "#221a12";
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
@@ -162,7 +177,7 @@ function PlaceholderRoom({ accent }: { accent: string }) {
       {/* Floor */}
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[ROOM.width, ROOM.depth]} />
-        <meshStandardMaterial color={floorCol} roughness={0.9} />
+        <meshStandardMaterial {...floorMaps} />
       </mesh>
       {/* Ceiling */}
       <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, ROOM.height, 0]}>
@@ -170,21 +185,24 @@ function PlaceholderRoom({ accent }: { accent: string }) {
         <meshStandardMaterial color={beamCol} roughness={1} />
       </mesh>
       {/* Walls */}
-      <Wall color={wall} position={[0, ROOM.height / 2, -d]} args={[ROOM.width, ROOM.height]} />
+      <Wall maps={wallMaps} tint={wallTint} position={[0, ROOM.height / 2, -d]} args={[ROOM.width, ROOM.height]} />
       <Wall
-        color={wall}
+        maps={wallMaps}
+        tint={wallTint}
         position={[0, ROOM.height / 2, d]}
         rotation={[0, Math.PI, 0]}
         args={[ROOM.width, ROOM.height]}
       />
       <Wall
-        color={wall}
+        maps={wallMaps}
+        tint={wallTint}
         position={[-w, ROOM.height / 2, 0]}
         rotation={[0, Math.PI / 2, 0]}
         args={[ROOM.depth, ROOM.height]}
       />
       <Wall
-        color={wall}
+        maps={wallMaps}
+        tint={wallTint}
         position={[w, ROOM.height / 2, 0]}
         rotation={[0, -Math.PI / 2, 0]}
         args={[ROOM.depth, ROOM.height]}
@@ -194,14 +212,14 @@ function PlaceholderRoom({ accent }: { accent: string }) {
       {[-2.4, 0, 2.4].map((x) => (
         <mesh key={x} position={[x, ROOM.height - 0.15, 0]}>
           <boxGeometry args={[0.2, 0.2, ROOM.depth]} />
-          <meshStandardMaterial color={beamCol} roughness={1} />
+          <meshStandardMaterial {...woodMaps} />
         </mesh>
       ))}
 
       {/* Hearth — a low, warm key on the back wall */}
       <mesh position={[0, 0.9, -d + 0.35]}>
         <boxGeometry args={[2.4, 1.8, 0.6]} />
-        <meshStandardMaterial color={stoneCol} roughness={1} />
+        <meshStandardMaterial {...stoneMaps} />
       </mesh>
       <mesh ref={fireGlow} position={[0, 0.55, -d + 0.68]}>
         <planeGeometry args={[1.3, 0.7]} />
@@ -271,34 +289,42 @@ function PlaceholderRoom({ accent }: { accent: string }) {
         />
       </group>
 
-      {/* Blocked-in furniture */}
+      {/* Blocked-in furniture (walnut) */}
       <mesh position={[0, 0.4, 0.4]}>
         <boxGeometry args={[2.6, 0.8, 1]} />
-        <meshStandardMaterial color={furniture} roughness={0.85} />
+        <meshStandardMaterial {...woodMaps} />
       </mesh>
       <mesh position={[0, 0.3, -1.3]}>
         <boxGeometry args={[1.4, 0.5, 0.7]} />
-        <meshStandardMaterial color={furniture} roughness={0.8} />
+        <meshStandardMaterial {...woodMaps} />
       </mesh>
       <mesh position={[w - 0.5, 0.5, -1.2]}>
         <boxGeometry args={[0.9, 1, 3.4]} />
-        <meshStandardMaterial color={furniture} roughness={0.8} />
+        <meshStandardMaterial {...woodMaps} />
       </mesh>
       <mesh position={[-w + 0.5, 0.45, 1.8]}>
         <boxGeometry args={[0.8, 0.9, 1.4]} />
-        <meshStandardMaterial color={furniture} roughness={0.8} />
+        <meshStandardMaterial {...woodMaps} />
       </mesh>
     </group>
   );
 }
 
+type PBRMaps = {
+  map: THREE.Texture;
+  normalMap: THREE.Texture;
+  roughnessMap: THREE.Texture;
+};
+
 function Wall({
-  color,
+  maps,
+  tint,
   position,
   rotation = [0, 0, 0],
   args,
 }: {
-  color: string;
+  maps: PBRMaps;
+  tint: string;
   position: [number, number, number];
   rotation?: [number, number, number];
   args: [number, number];
@@ -306,7 +332,7 @@ function Wall({
   return (
     <mesh position={position} rotation={rotation}>
       <planeGeometry args={args} />
-      <meshStandardMaterial color={color} roughness={1} side={THREE.FrontSide} />
+      <meshStandardMaterial {...maps} color={tint} side={THREE.FrontSide} />
     </mesh>
   );
 }

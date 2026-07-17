@@ -126,7 +126,7 @@ function Lighting({ day }: { day: boolean }) {
         </>
       ) : (
         <>
-          <ambientLight intensity={0.1} color="#3d4c68" />
+          <ambientLight intensity={0.18} color="#5a4632" />
           <directionalLight
             position={[9, 11, 5]}
             intensity={0.55}
@@ -211,17 +211,12 @@ function usePBR(folder: string, repeat: number) {
  */
 function PlaceholderRoom({ room }: { room: Room }) {
   const floorMaps = usePBR("floor", 5);
-  const wallMaps = usePBR("wall", 3);
+  const wallMaps = usePBR("wallwood", 8);
   const woodMaps = usePBR("wood", 3);
   const stoneMaps = usePBR("stone", 2);
 
-  const wallTint = useMemo(
-    () =>
-      new THREE.Color(room.accent)
-        .lerp(new THREE.Color("#e6d8bf"), 0.72)
-        .getStyle(),
-    [room.accent],
-  );
+  // Warm reclaimed-wood plank walls (light tint so the grain reads, not muddy).
+  const wallTint = "#d8c2a0";
   const beamCol = "#160f08";
 
   const w = ROOM.width / 2;
@@ -292,7 +287,9 @@ const METAL = { color: "#17181c", metalness: 0.75, roughness: 0.45 };
 
 const MODELS = {
   barChair: "/models/bar_chair_round_01/bar_chair_round_01_1k.gltf",
+  armchair: "/models/ArmChair_01/ArmChair_01_1k.gltf",
   plant: "/models/potted_plant_01/potted_plant_01_1k.gltf",
+  plant2: "/models/potted_plant_02/potted_plant_02_1k.gltf",
   vase: "/models/ceramic_vase_01/ceramic_vase_01_1k.gltf",
   pot: "/models/brass_pot_01/brass_pot_01_1k.gltf",
   microwave: "/models/vintage_microwave/vintage_microwave_1k.gltf",
@@ -527,8 +524,14 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
           <Prop url={MODELS.barChair} position={[1.85, 0, -5]} rotationY={-Math.PI / 2} />
           <Prop url={MODELS.barChair} position={[-1.85, 0, -5]} rotationY={Math.PI / 2} />
 
-          {/* living-room plant */}
-          <Prop url={MODELS.plant} position={[3.7, 0, 5.2]} />
+          {/* living-room greenery — lots of plants, per the reference */}
+          <Prop url={MODELS.plant} position={[3.9, 0, 5.6]} />
+          <Prop url={MODELS.plant2} position={[-3.9, 0, 5.6]} />
+          <Prop url={MODELS.plant} position={[-3.9, 0, 1.6]} />
+          <Prop url={MODELS.plant2} position={[3.2, 0, 6.9]} />
+          {/* woven armchairs flanking the seating, angled toward the fire */}
+          <Prop url={MODELS.armchair} position={[-2.3, 0, 4.7]} rotationY={0.4} />
+          <Prop url={MODELS.armchair} position={[2.3, 0, 4.7]} rotationY={-0.4} />
           {/* island */}
           <Prop url={MODELS.bowl} position={[0.9, 1.0, -5]} />
           {/* back + left counters */}
@@ -761,16 +764,19 @@ function Sectional({ z }: { z: number }) {
         <boxGeometry args={[1.0, 0.55, 0.09]} />
         <meshStandardMaterial {...fabric} color="#8a6f52" roughness={1} />
       </mesh>
-      {/* pillows */}
+      {/* pillows piled across the back run */}
       {[
-        [-1.9, "#9a8a68"],
-        [-0.4, "#7a6b50"],
-        [1.6, "#9a8a68"],
+        [-2.2, "#7a6b50"],
+        [-1.5, "#9a8a68"],
+        [-0.5, "#7a6b50"],
+        [0.6, "#9a8a68"],
+        [1.5, "#7a6b50"],
+        [2.2, "#9a8a68"],
       ].map(([x, c], i) => (
         <mesh
           key={i}
           position={[x as number, 0.82, backZ + 0.12]}
-          rotation={[0, 0, 0.2]}
+          rotation={[0, 0, i % 2 ? -0.18 : 0.2]}
           castShadow
         >
           <boxGeometry args={[0.44, 0.44, 0.18]} />
@@ -937,6 +943,24 @@ function LivingRoom({
         <boxGeometry args={[2.6, 0.3, 0.5]} />
         <meshStandardMaterial {...wood} />
       </mesh>
+      {/* mantel candlesticks */}
+      {[-0.95, 0.95].map((x) => (
+        <group key={x} position={[x, 1.55, z - 0.42]}>
+          <mesh castShadow>
+            <cylinderGeometry args={[0.035, 0.05, 0.06, 12]} />
+            <meshStandardMaterial color="#1c1a17" metalness={0.6} roughness={0.4} />
+          </mesh>
+          <mesh position={[0, 0.13, 0]}>
+            <cylinderGeometry args={[0.022, 0.022, 0.2, 10]} />
+            <meshStandardMaterial color="#e8dcc4" roughness={0.6} />
+          </mesh>
+          <mesh position={[0, 0.25, 0]}>
+            <sphereGeometry args={[0.02, 8, 8]} />
+            <meshStandardMaterial color="#ffd090" emissive="#ffb060" emissiveIntensity={2} toneMapped={false} />
+          </mesh>
+          <pointLight position={[0, 0.27, 0]} color="#ff9a40" intensity={1.4} distance={2.2} decay={2} />
+        </group>
+      ))}
       {/* Firebox + fire glow */}
       <mesh position={[0, 0.7, z - 0.42]}>
         <boxGeometry args={[1.3, 0.9, 0.12]} />
@@ -963,8 +987,12 @@ function LivingRoom({
         <planeGeometry args={[4.4, 3.4]} />
         <meshStandardMaterial {...rug} color="#7a5236" roughness={1} />
       </mesh>
-      {/* books on the coffee table */}
-      <Books position={[0.15, 0.46, z - 4.2]} />
+      {/* wood tray + books on the coffee table */}
+      <mesh position={[-0.35, 0.47, z - 4.2]} castShadow>
+        <boxGeometry args={[0.5, 0.04, 0.36]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      <Books position={[0.4, 0.46, z - 4.05]} />
       {/* side tables with warm lamps at the sectional ends */}
       <TableLamp position={[-3.5, 0, z - 5.6]} />
       <TableLamp position={[3.5, 0, z - 5.6]} />
@@ -975,8 +1003,9 @@ function LivingRoom({
       </mesh>
       {/* firewood beside the hearth */}
       <Firewood position={[-1.85, 0, z - 0.5]} />
-      {/* soft living-room fill */}
-      <pointLight position={[0, 1.8, z - 4.2]} color="#ffcf9a" intensity={0.9} distance={7} decay={2} />
+      {/* warm living-room fill so it reads cozy, not murky */}
+      <pointLight position={[0, 1.9, z - 4.2]} color="#ffcf9a" intensity={1.5} distance={8} decay={2} />
+      <pointLight position={[0, 2.6, z - 6]} color="#ffdca8" intensity={0.9} distance={9} decay={2} />
     </group>
   );
 }

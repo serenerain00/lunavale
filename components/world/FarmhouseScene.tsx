@@ -14,13 +14,19 @@
 
 /* eslint-disable react-hooks/immutability -- Imperative Three.js: per-frame mutation of the camera and reused scratch vectors inside useFrame is the intended, performant R3F pattern; treating them as immutable would reallocate every frame. */
 
-import { Component, Suspense, useRef, useMemo, useEffect } from "react";
+import { Component, Suspense, useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Environment, useGLTF, useTexture } from "@react-three/drei";
 import { EffectComposer, Bloom, Vignette, SMAA, N8AO } from "@react-three/postprocessing";
 import gsap from "gsap";
 import * as THREE from "three";
-import type { Room, RoomScan, RoomPano, WorldObject } from "@/lib/content/world";
+import type {
+  Room,
+  RoomScan,
+  RoomPano,
+  WorldObject,
+  ItemKind,
+} from "@/lib/content/world";
 
 export type TimeOfDay = "day" | "night";
 
@@ -28,11 +34,7 @@ const ROOM = { width: 9, depth: 15, height: 3.6 };
 
 const COLOR = {
   fire: "#e5a24e",
-  markerFree: "#f0c48a",
-  markerLocked: "#c8899a",
 };
-
-const SCRATCH = new THREE.Vector3();
 
 interface SceneProps {
   room: Room;
@@ -687,8 +689,8 @@ function TVScreen({ z }: { z: number }) {
   const tex = useTexture("/posters/luna-josh-first-morning.jpg");
   tex.colorSpace = THREE.SRGBColorSpace;
   return (
-    <mesh position={[0, 2.35, z]}>
-      <planeGeometry args={[1.85, 1.0]} />
+    <mesh position={[0, 2.45, z]}>
+      <planeGeometry args={[2.65, 1.5]} />
       <meshStandardMaterial
         map={tex}
         emissive="#ffffff"
@@ -700,46 +702,69 @@ function TVScreen({ z }: { z: number }) {
   );
 }
 
-/** A simple upholstered sofa built from boxes. */
-function Sofa({
+const SOFA_FABRIC = { color: "#c9bfa8", roughness: 0.95, metalness: 0 };
+
+/** One straight run of a sofa (seat + back + arms), facing local +z. */
+function SofaSeg({
   position,
   rotationY,
+  length,
 }: {
   position: [number, number, number];
   rotationY: number;
+  length: number;
 }) {
-  const fabric = { color: "#c9bfa8", roughness: 0.95, metalness: 0 };
   return (
     <group position={position} rotation={[0, rotationY, 0]}>
       <mesh position={[0, 0.32, 0]} castShadow receiveShadow>
-        <boxGeometry args={[2.2, 0.4, 0.95]} />
-        <meshStandardMaterial {...fabric} />
+        <boxGeometry args={[length, 0.4, 0.98]} />
+        <meshStandardMaterial {...SOFA_FABRIC} />
       </mesh>
-      <mesh position={[0, 0.56, 0.06]} castShadow>
-        <boxGeometry args={[2.06, 0.2, 0.82]} />
-        <meshStandardMaterial {...fabric} />
+      <mesh position={[0, 0.56, 0.08]} castShadow>
+        <boxGeometry args={[length - 0.1, 0.22, 0.82]} />
+        <meshStandardMaterial {...SOFA_FABRIC} />
       </mesh>
-      <mesh position={[0, 0.72, -0.36]} castShadow>
-        <boxGeometry args={[2.2, 0.66, 0.24]} />
-        <meshStandardMaterial {...fabric} />
+      <mesh position={[0, 0.74, -0.38]} castShadow>
+        <boxGeometry args={[length, 0.7, 0.24]} />
+        <meshStandardMaterial {...SOFA_FABRIC} />
       </mesh>
-      <mesh position={[-1.05, 0.5, 0]} castShadow>
-        <boxGeometry args={[0.2, 0.5, 0.95]} />
-        <meshStandardMaterial {...fabric} />
+    </group>
+  );
+}
+
+/** Large wraparound (U-shaped) sectional facing the fireplace, with pillows and
+ *  a throw draped over the back — the spot where Luna wrote in her journal. */
+function Sectional({ z }: { z: number }) {
+  const backZ = z - 5.6; // back run, farthest from the fireplace
+  const sideFront = z - 3.7;
+  const sideZc = (backZ + sideFront) / 2;
+  const sideLen = sideFront - backZ;
+  return (
+    <group>
+      <SofaSeg position={[0, 0, backZ]} rotationY={0} length={5.0} />
+      <SofaSeg position={[-2.4, 0, sideZc]} rotationY={Math.PI / 2} length={sideLen} />
+      <SofaSeg position={[2.4, 0, sideZc]} rotationY={-Math.PI / 2} length={sideLen} />
+      {/* throw draped over the back-run backrest (Luna's writing corner) */}
+      <mesh position={[-1.4, 0.86, backZ - 0.3]} rotation={[0.35, 0, 0]} castShadow>
+        <boxGeometry args={[1.0, 0.55, 0.08]} />
+        <meshStandardMaterial color="#8a6f52" roughness={0.95} />
       </mesh>
-      <mesh position={[1.05, 0.5, 0]} castShadow>
-        <boxGeometry args={[0.2, 0.5, 0.95]} />
-        <meshStandardMaterial {...fabric} />
-      </mesh>
-      {/* throw pillows */}
-      <mesh position={[-0.62, 0.78, -0.18]} rotation={[0, 0, 0.25]} castShadow>
-        <boxGeometry args={[0.42, 0.42, 0.16]} />
-        <meshStandardMaterial color="#8a7a5c" roughness={0.95} />
-      </mesh>
-      <mesh position={[0.58, 0.78, -0.18]} rotation={[0, 0, -0.2]} castShadow>
-        <boxGeometry args={[0.42, 0.42, 0.16]} />
-        <meshStandardMaterial color="#6e5f47" roughness={0.95} />
-      </mesh>
+      {/* pillows */}
+      {[
+        [-1.9, "#8a7a5c"],
+        [-0.4, "#6e5f47"],
+        [1.6, "#8a7a5c"],
+      ].map(([x, c], i) => (
+        <mesh
+          key={i}
+          position={[x as number, 0.78, backZ + 0.1]}
+          rotation={[0, 0, 0.2]}
+          castShadow
+        >
+          <boxGeometry args={[0.44, 0.44, 0.16]} />
+          <meshStandardMaterial color={c as string} roughness={0.95} />
+        </mesh>
+      ))}
     </group>
   );
 }
@@ -884,38 +909,37 @@ function LivingRoom({
         <meshStandardMaterial color="#ff8a30" emissive="#ff8a30" emissiveIntensity={1.7} toneMapped={false} />
       </mesh>
       <pointLight ref={fireLight} position={[0, 0.7, z - 0.95]} color="#ff7a28" intensity={4} distance={8} decay={2} />
-      {/* Large TV above the mantel */}
-      <mesh position={[0, 2.35, z - 0.32]} castShadow>
-        <boxGeometry args={[2.0, 1.15, 0.08]} />
+      {/* Large wall-mounted TV above the mantel */}
+      <mesh position={[0, 2.45, z - 0.31]} castShadow>
+        <boxGeometry args={[2.8, 1.6, 0.08]} />
         <meshStandardMaterial color="#050506" metalness={0.5} roughness={0.3} />
       </mesh>
-      <TVScreen z={z - 0.27} />
-      {/* Sofas facing each other, fireplace at the head */}
-      <Sofa position={[-2.4, 0, z - 3.2]} rotationY={Math.PI / 2} />
-      <Sofa position={[2.4, 0, z - 3.2]} rotationY={-Math.PI / 2} />
-      {/* Coffee table + rug */}
-      <CoffeeTable position={[0, 0, z - 3.2]} wood={wood} />
-      <mesh position={[0, 0.02, z - 3.2]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-        <planeGeometry args={[3.4, 2.8]} />
+      <TVScreen z={z - 0.26} />
+      {/* Wraparound sectional facing the fireplace */}
+      <Sectional z={z} />
+      {/* Coffee table + rug inside the sectional */}
+      <CoffeeTable position={[0, 0, z - 4.2]} wood={wood} />
+      <mesh position={[0, 0.02, z - 4.4]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <planeGeometry args={[4.4, 3.4]} />
         <meshStandardMaterial color="#3a2418" roughness={0.95} />
       </mesh>
-      {/* books/tray on the coffee table */}
-      <mesh position={[0.1, 0.49, z - 3.2]} rotation={[0, 0.3, 0]} castShadow>
+      {/* books on the coffee table */}
+      <mesh position={[0.1, 0.49, z - 4.2]} rotation={[0, 0.3, 0]} castShadow>
         <boxGeometry args={[0.5, 0.07, 0.34]} />
         <meshStandardMaterial color="#5a3a28" roughness={0.7} />
       </mesh>
-      {/* side tables with warm lamps at the sofa ends */}
-      <TableLamp position={[-3.55, 0, z - 4.7]} />
-      <TableLamp position={[3.55, 0, z - 4.7]} />
-      {/* pouf / ottoman */}
-      <mesh position={[-1.5, 0.22, z - 4.4]} castShadow receiveShadow>
+      {/* side tables with warm lamps at the sectional ends */}
+      <TableLamp position={[-3.5, 0, z - 5.6]} />
+      <TableLamp position={[3.5, 0, z - 5.6]} />
+      {/* pouf / ottoman near the opening */}
+      <mesh position={[1.3, 0.22, z - 3.9]} castShadow receiveShadow>
         <cylinderGeometry args={[0.32, 0.32, 0.42, 20]} />
         <meshStandardMaterial color="#b8a888" roughness={0.95} />
       </mesh>
       {/* firewood beside the hearth */}
       <Firewood position={[-1.85, 0, z - 0.5]} />
       {/* soft living-room fill */}
-      <pointLight position={[0, 1.7, z - 3.6]} color="#ffcf9a" intensity={0.9} distance={6} decay={2} />
+      <pointLight position={[0, 1.8, z - 4.2]} color="#ffcf9a" intensity={0.9} distance={7} decay={2} />
     </group>
   );
 }
@@ -1292,7 +1316,10 @@ function World({
   );
 }
 
-/** A glowing, clickable hotspot for a focus point. */
+/**
+ * A hotspot rendered as the real item (note, mug, journal, remote). It carries a
+ * faint idle glow so it's discoverable, brightens on hover, and opens on click.
+ */
 function Marker({
   object,
   locked,
@@ -1306,38 +1333,23 @@ function Marker({
   onHover: (obj: WorldObject | null) => void;
   onSelect: (obj: WorldObject) => void;
 }) {
-  const mesh = useRef<THREE.Mesh>(null);
-  const hovered = useRef(false);
-
-  useFrame(({ clock }) => {
-    const m = mesh.current;
-    if (!m) return;
-    m.position.y = object.position[1] + Math.sin(clock.elapsedTime * 2) * 0.015;
-    const emphasized = hovered.current || active;
-    const s = emphasized ? 1.5 : 1;
-    m.scale.lerp(SCRATCH.set(s, s, s), 0.15);
-    const mat = m.material as THREE.MeshStandardMaterial;
-    mat.emissiveIntensity = THREE.MathUtils.lerp(
-      mat.emissiveIntensity,
-      emphasized ? 1.7 : 0.6,
-      0.15,
-    );
-  });
-
-  const color = locked ? COLOR.markerLocked : COLOR.markerFree;
+  const [hovered, setHovered] = useState(false);
+  const emphasized = hovered || active;
+  // Locked items glow a touch cooler; the glow signals interactivity.
+  const glow = emphasized ? 0.55 : 0.08;
+  const emissive = locked ? "#c8899a" : "#ffcf8f";
 
   return (
-    <mesh
-      ref={mesh}
+    <group
       position={object.position}
       onPointerOver={(e) => {
         e.stopPropagation();
-        hovered.current = true;
+        setHovered(true);
         document.body.style.cursor = "pointer";
         onHover(object);
       }}
       onPointerOut={() => {
-        hovered.current = false;
+        setHovered(false);
         document.body.style.cursor = "auto";
         onHover(null);
       }}
@@ -1346,12 +1358,82 @@ function Marker({
         onSelect(object);
       }}
     >
-      <icosahedronGeometry args={[0.07, 0]} />
+      <ItemMesh item={object.item ?? "note"} emissive={emissive} glow={glow} />
+    </group>
+  );
+}
+
+/** Small built geometry for each interactive item kind. */
+function ItemMesh({
+  item,
+  emissive,
+  glow,
+}: {
+  item: ItemKind;
+  emissive: string;
+  glow: number;
+}) {
+  if (item === "mug") {
+    return (
+      <group>
+        <mesh castShadow>
+          <cylinderGeometry args={[0.05, 0.045, 0.1, 20]} />
+          <meshStandardMaterial
+            color="#e8e2d6"
+            roughness={0.4}
+            emissive={emissive}
+            emissiveIntensity={glow}
+          />
+        </mesh>
+        <mesh position={[0.065, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[0.028, 0.009, 8, 16, Math.PI]} />
+          <meshStandardMaterial color="#e8e2d6" roughness={0.4} />
+        </mesh>
+      </group>
+    );
+  }
+  if (item === "journal") {
+    return (
+      <group rotation={[0, 0.3, 0]}>
+        <mesh castShadow>
+          <boxGeometry args={[0.22, 0.045, 0.16]} />
+          <meshStandardMaterial
+            color="#5a3a28"
+            roughness={0.6}
+            emissive={emissive}
+            emissiveIntensity={glow}
+          />
+        </mesh>
+        <mesh position={[0.006, 0.026, 0]}>
+          <boxGeometry args={[0.2, 0.012, 0.14]} />
+          <meshStandardMaterial color="#e8dcc4" roughness={0.7} />
+        </mesh>
+      </group>
+    );
+  }
+  if (item === "remote") {
+    return (
+      <mesh castShadow>
+        <boxGeometry args={[0.055, 0.02, 0.17]} />
+        <meshStandardMaterial
+          color="#1a1a1c"
+          roughness={0.4}
+          emissive={emissive}
+          emissiveIntensity={glow}
+        />
+      </mesh>
+    );
+  }
+  // note — a sheet of paper resting on the surface
+  return (
+    <mesh castShadow rotation={[-Math.PI / 2, 0, 0.18]}>
+      <planeGeometry args={[0.16, 0.12]} />
       <meshStandardMaterial
-        color={color}
-        emissive={color}
-        emissiveIntensity={0.6}
-        toneMapped={false}
+        color="#efe9dc"
+        roughness={0.75}
+        side={THREE.DoubleSide}
+        emissive={emissive}
+        emissiveIntensity={glow}
       />
     </mesh>
   );

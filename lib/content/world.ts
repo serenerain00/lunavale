@@ -17,11 +17,16 @@ import type { AccessLevel } from "@/lib/content/videos";
 
 export type ObjectKind = "clip" | "journal" | "memory" | "artifact";
 
+/** The physical item rendered for a hotspot (hover to highlight, click to open). */
+export type ItemKind = "note" | "mug" | "journal" | "remote";
+
 export interface WorldObject {
   /** Stable id, unique within the room. Used in URLs (?focus=) and analytics. */
   id: string;
   label: string;
   kind: ObjectKind;
+  /** Which real item to render as the hotspot. */
+  item?: ItemKind;
   /** Short prompt shown on hover/focus. */
   hint: string;
   /** World position [x, y, z] of the object's focus point. */
@@ -123,31 +128,45 @@ export const environments: Environment[] = [
             id: "josh-note",
             label: "Josh's Note",
             kind: "journal",
+            item: "note",
             hint: "Read it",
-            position: [-0.55, 1.05, -4.65],
+            position: [-0.55, 1.0, -4.55],
             placeholder:
               "A note left on the island before he went to work: \"Didn't want to wake you. Coffee's still warm. — J\". Small, ordinary, the kind of thing you only understand the weight of later.",
-            access: "free",
-          },
-          {
-            id: "first-morning-clip",
-            label: "First Morning",
-            kind: "clip",
-            hint: "Watch on the TV",
-            position: [0, 2.0, 6.5],
-            videoSlug: "luna-josh-first-morning",
-            placeholder: "A scene from the farmhouse.",
             access: "free",
           },
           {
             id: "kitchen-mug",
             label: "The Coffee Mug",
             kind: "memory",
+            item: "mug",
             hint: "Pick it up",
-            position: [0.7, 1.05, -4.65],
+            position: [0.7, 1.05, -4.55],
             placeholder:
               "A chipped mug on the island. Josh and Luna's mornings lived in small rituals like this one.",
             access: "free",
+          },
+          {
+            id: "first-morning-clip",
+            label: "First Morning",
+            kind: "clip",
+            item: "remote",
+            hint: "Play on the TV",
+            position: [0.35, 0.5, 3.3],
+            videoSlug: "luna-josh-first-morning",
+            placeholder: "A scene from the farmhouse.",
+            access: "free",
+          },
+          {
+            id: "luna-journal",
+            label: "Luna's Journal",
+            kind: "journal",
+            item: "journal",
+            hint: "Read her journal",
+            position: [-1.4, 0.62, 2.0],
+            placeholder:
+              "Luna's journal, left on the sofa where she wrote most nights. Her private account — members can read the entries.",
+            access: "premium",
           },
         ],
       },

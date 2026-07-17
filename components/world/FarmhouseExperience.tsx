@@ -56,7 +56,7 @@ export function FarmhouseExperience({
     : firstRoomId;
 
   const [roomId, setRoomId] = useState(validInitial);
-  const [timeOfDay, setTimeOfDay] = useState<"day" | "night">("day");
+  const [timeOfDay, setTimeOfDay] = useState<"day" | "night">("night");
   const [mode, setMode] = useState<"deciding" | "3d" | "simple">("deciding");
   const [entered, setEntered] = useState(false);
   const [focusIndex, setFocusIndex] = useState(0); // 0 = overview

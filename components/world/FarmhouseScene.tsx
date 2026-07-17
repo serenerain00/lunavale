@@ -400,10 +400,7 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
         <boxGeometry args={[1.9, 0.55, 0.7]} />
         <meshStandardMaterial {...wood} />
       </mesh>
-      <mesh position={[0, 0.45, -d + 0.55]} castShadow>
-        <boxGeometry args={[1.1, 0.9, 0.66]} />
-        <meshStandardMaterial {...STAINLESS} />
-      </mesh>
+      <Range position={[0, 0, -d + 0.55]} />
 
       {/* Lower cabinets + stone counters flanking the range */}
       {[-2.75, 2.75].map((x) => (
@@ -447,9 +444,9 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
         </group>
       ))}
 
-      {/* Warm under-cabinet glow */}
-      <pointLight position={[-2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={2.2} distance={3.2} decay={2} />
-      <pointLight position={[2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={2.2} distance={3.2} decay={2} />
+      {/* Warm under-cabinet glow — kept low for a dim, intimate feel */}
+      <pointLight position={[-2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={1.3} distance={3} decay={2} />
+      <pointLight position={[2.4, 1.15, -d + 0.9]} color="#ffb060" intensity={1.3} distance={3} decay={2} />
 
       {/* Island: walnut base + stone top */}
       <group position={[0, 0, 0.5]}>
@@ -515,14 +512,17 @@ function KitchenFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
           <Prop url={MODELS.barChair} position={[0, 0, 1.6]} rotationY={Math.PI} />
           <Prop url={MODELS.barChair} position={[0.9, 0, 1.55]} rotationY={Math.PI} />
 
-          <Prop url={MODELS.plant} position={[3.4, 0, 3.3]} />
-          <Prop url={MODELS.bowl} position={[0.5, 1.0, 0.5]} />
-          <Prop url={MODELS.wine} position={[-1.0, 1.0, -0.2]} />
-          <Prop url={MODELS.pot} position={[-2.6, 0.99, -d + 0.4]} />
-          <Prop url={MODELS.microwave} position={[-3.4, 1.0, -d + 0.4]} />
-          <Prop url={MODELS.kettle} position={[-1.9, 1.0, -d + 0.4]} />
-          <Prop url={MODELS.cuttingBoard} position={[1.7, 1.0, -d + 0.4]} rotationY={0.2} />
-          <Prop url={MODELS.vase} position={[2.6, 1.0, -d + 0.4]} />
+          {/* floor */}
+          <Prop url={MODELS.plant} position={[3.6, 0, 3.4]} />
+          {/* island */}
+          <Prop url={MODELS.bowl} position={[0.9, 1.0, 0.5]} />
+          {/* left counter run */}
+          <Prop url={MODELS.microwave} position={[-3.5, 1.0, -d + 0.42]} />
+          <Prop url={MODELS.pot} position={[-2.5, 0.99, -d + 0.42]} />
+          <Prop url={MODELS.kettle} position={[-1.8, 1.0, -d + 0.42]} />
+          {/* right counter run (espresso machine lives here too) */}
+          <Prop url={MODELS.cuttingBoard} position={[1.8, 1.0, -d + 0.42]} rotationY={0.15} />
+          <Prop url={MODELS.vase} position={[2.6, 1.0, -d + 0.42]} />
 
           <FramedPicture
             src="/posters/luna-josh-first-morning.jpg"
@@ -638,6 +638,60 @@ function Fridge({ x }: { x: number }) {
         <mesh key={y} position={[0.38, y, 0.2]}>
           <cylinderGeometry args={[0.02, 0.02, 0.5, 8]} />
           <meshStandardMaterial {...METAL} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+/** A range/oven: stainless body, dark glass oven door, cooktop with burners. */
+function Range({ position }: { position: [number, number, number] }) {
+  return (
+    <group position={position}>
+      {/* body */}
+      <mesh position={[0, 0.45, 0]} castShadow receiveShadow>
+        <boxGeometry args={[1.1, 0.9, 0.66]} />
+        <meshStandardMaterial {...STAINLESS} />
+      </mesh>
+      {/* oven door (dark glass) */}
+      <mesh position={[0, 0.4, 0.34]}>
+        <boxGeometry args={[0.92, 0.56, 0.02]} />
+        <meshStandardMaterial color="#0c0d10" metalness={0.5} roughness={0.15} />
+      </mesh>
+      {/* handle */}
+      <mesh position={[0, 0.72, 0.37]}>
+        <boxGeometry args={[0.82, 0.04, 0.05]} />
+        <meshStandardMaterial {...METAL} />
+      </mesh>
+      {/* control panel + knobs */}
+      <mesh position={[0, 0.86, 0.33]}>
+        <boxGeometry args={[1.06, 0.12, 0.02]} />
+        <meshStandardMaterial color="#17181c" metalness={0.6} roughness={0.4} />
+      </mesh>
+      {[-0.42, -0.22, 0.22, 0.42].map((x) => (
+        <mesh key={x} position={[x, 0.86, 0.35]} rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.025, 0.025, 0.03, 12]} />
+          <meshStandardMaterial {...METAL} />
+        </mesh>
+      ))}
+      {/* cooktop + burners */}
+      <mesh position={[0, 0.915, 0]}>
+        <boxGeometry args={[1.06, 0.03, 0.62]} />
+        <meshStandardMaterial color="#141414" roughness={0.35} metalness={0.4} />
+      </mesh>
+      {[
+        [-0.26, -0.15],
+        [0.26, -0.15],
+        [-0.26, 0.15],
+        [0.26, 0.15],
+      ].map((p, i) => (
+        <mesh
+          key={i}
+          position={[p[0], 0.935, p[1]]}
+          rotation={[Math.PI / 2, 0, 0]}
+        >
+          <cylinderGeometry args={[0.1, 0.1, 0.01, 20]} />
+          <meshStandardMaterial color="#0a0a0a" roughness={0.5} />
         </mesh>
       ))}
     </group>
@@ -795,7 +849,7 @@ function Pendant({ position }: { position: [number, number, number] }) {
           toneMapped={false}
         />
       </mesh>
-      <pointLight position={[0, y - 0.1, 0]} color="#ffb060" intensity={5} distance={5} decay={2} />
+      <pointLight position={[0, y - 0.1, 0]} color="#ffb060" intensity={3.2} distance={4.5} decay={2} />
     </group>
   );
 }
@@ -948,7 +1002,7 @@ function Marker({
   useFrame(({ clock }) => {
     const m = mesh.current;
     if (!m) return;
-    m.position.y = object.position[1] + Math.sin(clock.elapsedTime * 2) * 0.04;
+    m.position.y = object.position[1] + Math.sin(clock.elapsedTime * 2) * 0.015;
     const emphasized = hovered.current || active;
     const s = emphasized ? 1.5 : 1;
     m.scale.lerp(SCRATCH.set(s, s, s), 0.15);

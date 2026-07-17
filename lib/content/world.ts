@@ -98,7 +98,7 @@ export const environments: Environment[] = [
             label: "Josh's Note",
             kind: "journal",
             hint: "Read it",
-            position: [-0.2, 1.11, 0.5],
+            position: [-0.55, 1.05, 0.35],
             placeholder:
               "A note left on the island before he went to work: \"Didn't want to wake you. Coffee's still warm. — J\". Small, ordinary, the kind of thing you only understand the weight of later.",
             access: "free",
@@ -108,7 +108,7 @@ export const environments: Environment[] = [
             label: "First Morning",
             kind: "clip",
             hint: "Watch the scene",
-            position: [2.2, 1.2, -1.1],
+            position: [-4.1, 1.68, -1.6],
             videoSlug: "luna-josh-first-morning",
             placeholder: "A scene from the farmhouse.",
             access: "free",
@@ -118,7 +118,7 @@ export const environments: Environment[] = [
             label: "The Coffee Mug",
             kind: "memory",
             hint: "Pick it up",
-            position: [0.6, 1.12, 0.5],
+            position: [0.7, 1.05, 0.55],
             placeholder:
               "A chipped mug on the island. Josh and Luna's mornings lived in small rituals like this one.",
             access: "free",

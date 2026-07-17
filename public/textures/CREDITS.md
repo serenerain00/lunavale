@@ -10,6 +10,8 @@ PBR material sets used for the placeholder farmhouse rooms. All are **CC0**
 | `wood/`  | Planks037A        | Beams, furniture (walnut)   |
 | `wall/`  | PaintedPlaster017 | Plaster walls (cream tint)  |
 | `stone/` | Rock051           | Hearth stone                |
+| `fabric/`| Fabric066         | Sofa upholstery             |
+| `rug/`   | Carpet016         | Living-room rug             |
 
 Each folder holds `color.jpg`, `normal.jpg` (OpenGL), and `roughness.jpg` at 1K.
 

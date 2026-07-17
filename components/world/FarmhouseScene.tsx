@@ -690,44 +690,55 @@ function TVScreen({ z }: { z: number }) {
   tex.colorSpace = THREE.SRGBColorSpace;
   return (
     <mesh position={[0, 2.45, z]}>
-      <planeGeometry args={[2.65, 1.5]} />
+      <planeGeometry args={[2.72, 1.5]} />
       <meshStandardMaterial
         map={tex}
         emissive="#ffffff"
         emissiveMap={tex}
-        emissiveIntensity={0.35}
+        emissiveIntensity={0.9}
         toneMapped={false}
       />
     </mesh>
   );
 }
 
-const SOFA_FABRIC = { color: "#c9bfa8", roughness: 0.95, metalness: 0 };
-
-/** One straight run of a sofa (seat + back + arms), facing local +z. */
+/** One straight run of a sectional (base + individual seat/back cushions). */
 function SofaSeg({
   position,
   rotationY,
   length,
+  maps,
 }: {
   position: [number, number, number];
   rotationY: number;
   length: number;
+  maps: PBRMaps;
 }) {
+  const seats = Math.max(2, Math.round(length / 1.1));
+  const seatW = length / seats;
   return (
     <group position={position} rotation={[0, rotationY, 0]}>
-      <mesh position={[0, 0.32, 0]} castShadow receiveShadow>
-        <boxGeometry args={[length, 0.4, 0.98]} />
-        <meshStandardMaterial {...SOFA_FABRIC} />
+      {/* base frame */}
+      <mesh position={[0, 0.22, 0]} castShadow receiveShadow>
+        <boxGeometry args={[length, 0.44, 0.98]} />
+        <meshStandardMaterial {...maps} color="#b9ad92" roughness={1} />
       </mesh>
-      <mesh position={[0, 0.56, 0.08]} castShadow>
-        <boxGeometry args={[length - 0.1, 0.22, 0.82]} />
-        <meshStandardMaterial {...SOFA_FABRIC} />
-      </mesh>
-      <mesh position={[0, 0.74, -0.38]} castShadow>
-        <boxGeometry args={[length, 0.7, 0.24]} />
-        <meshStandardMaterial {...SOFA_FABRIC} />
-      </mesh>
+      {/* seat + back cushions */}
+      {Array.from({ length: seats }).map((_, i) => {
+        const x = -length / 2 + seatW * (i + 0.5);
+        return (
+          <group key={i}>
+            <mesh position={[x, 0.54, 0.08]} castShadow>
+              <boxGeometry args={[seatW - 0.05, 0.22, 0.82]} />
+              <meshStandardMaterial {...maps} color="#cabfa6" roughness={1} />
+            </mesh>
+            <mesh position={[x, 0.76, -0.34]} castShadow>
+              <boxGeometry args={[seatW - 0.05, 0.62, 0.3]} />
+              <meshStandardMaterial {...maps} color="#c1b59a" roughness={1} />
+            </mesh>
+          </group>
+        );
+      })}
     </group>
   );
 }
@@ -735,35 +746,61 @@ function SofaSeg({
 /** Large wraparound (U-shaped) sectional facing the fireplace, with pillows and
  *  a throw draped over the back — the spot where Luna wrote in her journal. */
 function Sectional({ z }: { z: number }) {
+  const fabric = usePBR("fabric", 2.5);
   const backZ = z - 5.6; // back run, farthest from the fireplace
   const sideFront = z - 3.7;
   const sideZc = (backZ + sideFront) / 2;
   const sideLen = sideFront - backZ;
   return (
     <group>
-      <SofaSeg position={[0, 0, backZ]} rotationY={0} length={5.0} />
-      <SofaSeg position={[-2.4, 0, sideZc]} rotationY={Math.PI / 2} length={sideLen} />
-      <SofaSeg position={[2.4, 0, sideZc]} rotationY={-Math.PI / 2} length={sideLen} />
+      <SofaSeg position={[0, 0, backZ]} rotationY={0} length={5.0} maps={fabric} />
+      <SofaSeg position={[-2.4, 0, sideZc]} rotationY={Math.PI / 2} length={sideLen} maps={fabric} />
+      <SofaSeg position={[2.4, 0, sideZc]} rotationY={-Math.PI / 2} length={sideLen} maps={fabric} />
       {/* throw draped over the back-run backrest (Luna's writing corner) */}
-      <mesh position={[-1.4, 0.86, backZ - 0.3]} rotation={[0.35, 0, 0]} castShadow>
-        <boxGeometry args={[1.0, 0.55, 0.08]} />
-        <meshStandardMaterial color="#8a6f52" roughness={0.95} />
+      <mesh position={[-1.4, 0.92, backZ - 0.28]} rotation={[0.4, 0, 0]} castShadow>
+        <boxGeometry args={[1.0, 0.55, 0.09]} />
+        <meshStandardMaterial {...fabric} color="#8a6f52" roughness={1} />
       </mesh>
       {/* pillows */}
       {[
-        [-1.9, "#8a7a5c"],
-        [-0.4, "#6e5f47"],
-        [1.6, "#8a7a5c"],
+        [-1.9, "#9a8a68"],
+        [-0.4, "#7a6b50"],
+        [1.6, "#9a8a68"],
       ].map(([x, c], i) => (
         <mesh
           key={i}
-          position={[x as number, 0.78, backZ + 0.1]}
+          position={[x as number, 0.82, backZ + 0.12]}
           rotation={[0, 0, 0.2]}
           castShadow
         >
-          <boxGeometry args={[0.44, 0.44, 0.16]} />
-          <meshStandardMaterial color={c as string} roughness={0.95} />
+          <boxGeometry args={[0.44, 0.44, 0.18]} />
+          <meshStandardMaterial {...fabric} color={c as string} roughness={1} />
         </mesh>
+      ))}
+    </group>
+  );
+}
+
+/** A small stack of books. */
+function Books({ position }: { position: [number, number, number] }) {
+  const books: [number, number, number, string][] = [
+    [0, 0.03, 0.2, "#5a3a28"],
+    [0.02, 0.09, -0.1, "#37473a"],
+    [-0.02, 0.15, 0.35, "#6e5f47"],
+  ];
+  return (
+    <group position={position}>
+      {books.map(([x, y, r, c], i) => (
+        <group key={i} position={[x, y, 0]} rotation={[0, r, 0]}>
+          <mesh castShadow>
+            <boxGeometry args={[0.48 - i * 0.03, 0.055, 0.33 - i * 0.02]} />
+            <meshStandardMaterial color={c} roughness={0.6} />
+          </mesh>
+          <mesh position={[0, 0.001, 0]}>
+            <boxGeometry args={[0.44 - i * 0.03, 0.05, 0.29 - i * 0.02]} />
+            <meshStandardMaterial color="#e8dcc4" roughness={0.8} />
+          </mesh>
+        </group>
       ))}
     </group>
   );
@@ -873,6 +910,7 @@ function LivingRoom({
 }) {
   const fireLight = useRef<THREE.PointLight>(null);
   const fireGlow = useRef<THREE.Mesh>(null);
+  const rug = usePBR("rug", 3);
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
@@ -910,24 +948,23 @@ function LivingRoom({
       </mesh>
       <pointLight ref={fireLight} position={[0, 0.7, z - 0.95]} color="#ff7a28" intensity={4} distance={8} decay={2} />
       {/* Large wall-mounted TV above the mantel */}
-      <mesh position={[0, 2.45, z - 0.31]} castShadow>
-        <boxGeometry args={[2.8, 1.6, 0.08]} />
+      <mesh position={[0, 2.45, z - 0.32]} castShadow>
+        <boxGeometry args={[2.9, 1.66, 0.09]} />
         <meshStandardMaterial color="#050506" metalness={0.5} roughness={0.3} />
       </mesh>
       <TVScreen z={z - 0.26} />
+      {/* faint glow from the lit screen */}
+      <pointLight position={[0, 2.45, z - 1.2]} color="#9fb8d8" intensity={0.9} distance={4} decay={2} />
       {/* Wraparound sectional facing the fireplace */}
       <Sectional z={z} />
       {/* Coffee table + rug inside the sectional */}
       <CoffeeTable position={[0, 0, z - 4.2]} wood={wood} />
       <mesh position={[0, 0.02, z - 4.4]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[4.4, 3.4]} />
-        <meshStandardMaterial color="#3a2418" roughness={0.95} />
+        <meshStandardMaterial {...rug} color="#7a5236" roughness={1} />
       </mesh>
       {/* books on the coffee table */}
-      <mesh position={[0.1, 0.49, z - 4.2]} rotation={[0, 0.3, 0]} castShadow>
-        <boxGeometry args={[0.5, 0.07, 0.34]} />
-        <meshStandardMaterial color="#5a3a28" roughness={0.7} />
-      </mesh>
+      <Books position={[0.15, 0.46, z - 4.2]} />
       {/* side tables with warm lamps at the sectional ends */}
       <TableLamp position={[-3.5, 0, z - 5.6]} />
       <TableLamp position={[3.5, 0, z - 5.6]} />
@@ -1449,6 +1486,11 @@ function ItemMesh({
         <mesh position={[0.006, 0.026, 0]}>
           <boxGeometry args={[0.2, 0.012, 0.14]} />
           <meshStandardMaterial color="#e8dcc4" roughness={0.7} />
+        </mesh>
+        {/* bookmark ribbon */}
+        <mesh position={[0.05, 0.005, 0.1]} rotation={[0.25, 0, 0]}>
+          <boxGeometry args={[0.018, 0.008, 0.09]} />
+          <meshStandardMaterial color="#7a2f3d" roughness={0.7} />
         </mesh>
       </group>
     );

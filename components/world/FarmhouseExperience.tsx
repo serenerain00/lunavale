@@ -69,12 +69,17 @@ export function FarmhouseExperience({
     [environment.rooms, roomId],
   );
 
-  // Focus points: overview (null) followed by each object.
-  const focusPoints = useMemo<(WorldObject | null)[]>(
-    () => [null, ...room.objects],
-    [room.objects],
-  );
-  const currentFocus = focusPoints[focusIndex] ?? null;
+  // Travel stops: overview, then each area, then each interactive object.
+  const areas = useMemo(() => room.areas ?? [], [room.areas]);
+  const objectStart = 1 + areas.length;
+  const stopCount = objectStart + room.objects.length;
+  const currentArea =
+    focusIndex >= 1 && focusIndex < objectStart ? areas[focusIndex - 1] : null;
+  const currentObject =
+    focusIndex >= objectStart ? room.objects[focusIndex - objectStart] : null;
+  const currentVantage = currentArea
+    ? { camera: currentArea.camera, target: currentArea.target }
+    : null;
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -92,9 +97,7 @@ export function FarmhouseExperience({
   }
 
   function step(delta: number) {
-    setFocusIndex((i) =>
-      Math.min(Math.max(i + delta, 0), focusPoints.length - 1),
-    );
+    setFocusIndex((i) => Math.min(Math.max(i + delta, 0), stopCount - 1));
   }
 
   function onWheel(e: React.WheelEvent) {
@@ -133,12 +136,13 @@ export function FarmhouseExperience({
       <FarmhouseScene
         room={room}
         member={member}
-        focus={currentFocus}
+        focus={currentObject}
+        vantage={currentVantage}
         timeOfDay={timeOfDay}
         onHoverChange={setHovered}
         onSelectObject={(obj) => {
           const idx = room.objects.findIndex((o) => o.id === obj.id);
-          if (idx >= 0) setFocusIndex(idx + 1);
+          if (idx >= 0) setFocusIndex(objectStart + idx);
         }}
       />
 
@@ -208,19 +212,44 @@ export function FarmhouseExperience({
       {/* Bottom navigation dock */}
       {entered && !active && (
         <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col items-center gap-3 p-5">
+          {/* Area travel chips */}
+          {areas.length > 0 && (
+            <div className="flex gap-2">
+              {areas.map((a, i) => (
+                <button
+                  key={a.id}
+                  onClick={() => setFocusIndex(1 + i)}
+                  aria-current={focusIndex === 1 + i}
+                  className={`rounded-full px-4 py-1.5 text-sm backdrop-blur-sm transition-colors ${
+                    focusIndex === 1 + i
+                      ? "bg-amber text-void"
+                      : "bg-void/70 text-stone hover:text-ivory"
+                  }`}
+                >
+                  {a.label}
+                </button>
+              ))}
+            </div>
+          )}
           <NavDock
-            focus={currentFocus}
-            hovered={hovered}
-            index={focusIndex}
-            count={focusPoints.length}
+            title={
+              currentObject?.label ??
+              currentArea?.label ??
+              (hovered ? hovered.label : "Drag to look · scroll or ‹ › to explore")
+            }
+            subtitle={currentObject?.hint ?? null}
+            canOpen={!!currentObject}
             locked={
-              !!currentFocus &&
-              currentFocus.access === "premium" &&
+              !!currentObject &&
+              currentObject.access === "premium" &&
               !member
             }
+            openText={currentObject ? openLabel(currentObject) : ""}
+            index={focusIndex}
+            count={stopCount}
             onPrev={() => step(-1)}
             onNext={() => step(1)}
-            onOpen={() => currentFocus && setActive(currentFocus)}
+            onOpen={() => currentObject && setActive(currentObject)}
           />
         </div>
       )}
@@ -237,20 +266,24 @@ export function FarmhouseExperience({
 }
 
 function NavDock({
-  focus,
-  hovered,
+  title,
+  subtitle,
+  canOpen,
+  locked,
+  openText,
   index,
   count,
-  locked,
   onPrev,
   onNext,
   onOpen,
 }: {
-  focus: WorldObject | null;
-  hovered: WorldObject | null;
+  title: string;
+  subtitle: string | null;
+  canOpen: boolean;
+  locked: boolean;
+  openText: string;
   index: number;
   count: number;
-  locked: boolean;
   onPrev: () => void;
   onNext: () => void;
   onOpen: () => void;
@@ -267,26 +300,24 @@ function NavDock({
       </button>
 
       <div className="min-w-52 text-center">
-        {focus ? (
-          <>
-            <p className="font-display text-base text-ivory">{focus.label}</p>
-            <p className="text-xs text-stone">{focus.hint}</p>
-          </>
-        ) : (
-          <p className="text-sm text-stone">
-            {hovered
-              ? hovered.label
-              : "Drag to look · scroll or use ‹ › to explore"}
-          </p>
-        )}
+        <p
+          className={
+            subtitle
+              ? "font-display text-base text-ivory"
+              : "text-sm text-stone"
+          }
+        >
+          {title}
+        </p>
+        {subtitle && <p className="text-xs text-stone">{subtitle}</p>}
       </div>
 
-      {focus && (
+      {canOpen && (
         <button
           onClick={onOpen}
           className="rounded-full bg-amber px-4 py-1.5 text-sm font-medium text-void transition-colors hover:bg-amber-soft"
         >
-          {locked ? "Members" : openLabel(focus)}
+          {locked ? "Members" : openText}
         </button>
       )}
 

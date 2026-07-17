@@ -39,6 +39,8 @@ interface SceneProps {
   member: boolean;
   /** Current focus point (an object) or null for the room overview. */
   focus: WorldObject | null;
+  /** An area vantage to fly to (overrides object framing when set). */
+  vantage: { camera: [number, number, number]; target: [number, number, number] } | null;
   onHoverChange: (obj: WorldObject | null) => void;
   /** A hotspot was clicked in the scene. */
   onSelectObject: (obj: WorldObject) => void;
@@ -48,6 +50,7 @@ export function FarmhouseScene({
   room,
   member,
   focus,
+  vantage,
   timeOfDay,
   onHoverChange,
   onSelectObject,
@@ -68,6 +71,7 @@ export function FarmhouseScene({
         room={room}
         member={member}
         focus={focus}
+        vantage={vantage}
         onHoverChange={onHoverChange}
         onSelectObject={onSelectObject}
       />
@@ -727,6 +731,75 @@ function Sofa({
         <boxGeometry args={[0.2, 0.5, 0.95]} />
         <meshStandardMaterial {...fabric} />
       </mesh>
+      {/* throw pillows */}
+      <mesh position={[-0.62, 0.78, -0.18]} rotation={[0, 0, 0.25]} castShadow>
+        <boxGeometry args={[0.42, 0.42, 0.16]} />
+        <meshStandardMaterial color="#8a7a5c" roughness={0.95} />
+      </mesh>
+      <mesh position={[0.58, 0.78, -0.18]} rotation={[0, 0, -0.2]} castShadow>
+        <boxGeometry args={[0.42, 0.42, 0.16]} />
+        <meshStandardMaterial color="#6e5f47" roughness={0.95} />
+      </mesh>
+    </group>
+  );
+}
+
+/** A side table with a warm reading lamp. */
+function TableLamp({ position }: { position: [number, number, number] }) {
+  return (
+    <group position={position}>
+      <mesh position={[0, 0.28, 0]} castShadow receiveShadow>
+        <boxGeometry args={[0.5, 0.06, 0.5]} />
+        <meshStandardMaterial color="#3a2418" roughness={0.7} />
+      </mesh>
+      {[
+        [-0.2, -0.2],
+        [0.2, -0.2],
+        [-0.2, 0.2],
+        [0.2, 0.2],
+      ].map((p, i) => (
+        <mesh key={i} position={[p[0], 0.14, p[1]]}>
+          <boxGeometry args={[0.04, 0.28, 0.04]} />
+          <meshStandardMaterial color="#2a1c12" />
+        </mesh>
+      ))}
+      <mesh position={[0, 0.42, 0]}>
+        <cylinderGeometry args={[0.05, 0.06, 0.28, 10]} />
+        <meshStandardMaterial color="#1c1a17" metalness={0.5} roughness={0.4} />
+      </mesh>
+      <mesh position={[0, 0.62, 0]}>
+        <cylinderGeometry args={[0.14, 0.18, 0.22, 16, 1, true]} />
+        <meshStandardMaterial
+          color="#e9c79a"
+          emissive="#ffca8a"
+          emissiveIntensity={0.9}
+          side={THREE.DoubleSide}
+          toneMapped={false}
+        />
+      </mesh>
+      <pointLight position={[0, 0.6, 0]} color="#ffb060" intensity={2.2} distance={4} decay={2} />
+    </group>
+  );
+}
+
+/** A small stack of firewood logs. */
+function Firewood({ position }: { position: [number, number, number] }) {
+  const logs: [number, number][] = [
+    [-0.16, 0.1],
+    [0, 0.1],
+    [0.16, 0.1],
+    [-0.08, 0.24],
+    [0.08, 0.24],
+    [0, 0.38],
+  ];
+  return (
+    <group position={position}>
+      {logs.map(([x, y], i) => (
+        <mesh key={i} position={[x, y, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
+          <cylinderGeometry args={[0.07, 0.07, 0.5, 10]} />
+          <meshStandardMaterial color="#4a3423" roughness={0.9} />
+        </mesh>
+      ))}
     </group>
   );
 }
@@ -826,8 +899,23 @@ function LivingRoom({
         <planeGeometry args={[3.4, 2.8]} />
         <meshStandardMaterial color="#3a2418" roughness={0.95} />
       </mesh>
+      {/* books/tray on the coffee table */}
+      <mesh position={[0.1, 0.49, z - 3.2]} rotation={[0, 0.3, 0]} castShadow>
+        <boxGeometry args={[0.5, 0.07, 0.34]} />
+        <meshStandardMaterial color="#5a3a28" roughness={0.7} />
+      </mesh>
+      {/* side tables with warm lamps at the sofa ends */}
+      <TableLamp position={[-3.55, 0, z - 4.7]} />
+      <TableLamp position={[3.55, 0, z - 4.7]} />
+      {/* pouf / ottoman */}
+      <mesh position={[-1.5, 0.22, z - 4.4]} castShadow receiveShadow>
+        <cylinderGeometry args={[0.32, 0.32, 0.42, 20]} />
+        <meshStandardMaterial color="#b8a888" roughness={0.95} />
+      </mesh>
+      {/* firewood beside the hearth */}
+      <Firewood position={[-1.85, 0, z - 0.5]} />
       {/* soft living-room fill */}
-      <pointLight position={[0, 1.7, z - 3.6]} color="#ffcf9a" intensity={1.1} distance={6} decay={2} />
+      <pointLight position={[0, 1.7, z - 3.6]} color="#ffcf9a" intensity={0.9} distance={6} decay={2} />
     </group>
   );
 }
@@ -1126,17 +1214,23 @@ function World({
   room,
   member,
   focus,
+  vantage,
   onHoverChange,
   onSelectObject,
 }: SceneProps) {
   const { camera } = useThree();
   const controls = useRef<React.ComponentRef<typeof OrbitControls>>(null);
 
-  // Glide the camera whenever the focus (or room) changes.
+  // Glide the camera whenever the focus, area, or room changes.
   useEffect(() => {
     const c = controls.current;
     if (!c) return;
-    const { pos, target } = focusView(room, focus);
+    const { pos, target } = vantage
+      ? {
+          pos: new THREE.Vector3(...vantage.camera),
+          target: new THREE.Vector3(...vantage.target),
+        }
+      : focusView(room, focus);
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     gsap.killTweensOf(camera.position);
@@ -1168,7 +1262,7 @@ function World({
         c.update();
       },
     });
-  }, [focus, room, camera]);
+  }, [focus, vantage, room, camera]);
 
   return (
     <>

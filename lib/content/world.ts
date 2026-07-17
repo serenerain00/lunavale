@@ -51,6 +51,16 @@ export interface RoomPano {
   rotationY?: number;
 }
 
+/** A named vantage point within a room the camera can travel to (an "area"). */
+export interface Vantage {
+  id: string;
+  label: string;
+  /** Camera position. */
+  camera: [number, number, number];
+  /** Point the camera looks at. */
+  target: [number, number, number];
+}
+
 export interface Room {
   id: string;
   name: string;
@@ -66,6 +76,8 @@ export interface Room {
   scan?: RoomScan;
   /** Placeholder tint so rooms feel distinct before real art arrives. */
   accent: string;
+  /** Named vantage points to travel between (e.g. Kitchen, Living Room). */
+  areas?: Vantage[];
   objects: WorldObject[];
 }
 
@@ -92,6 +104,20 @@ export const environments: Environment[] = [
           "The open heart of the house — the kitchen where they'd slow-dance after dinner, opening onto the living room and its great stone fireplace.",
         spawn: [0, 1.7, 2],
         accent: "#6b5238",
+        areas: [
+          {
+            id: "living-room",
+            label: "Living Room",
+            camera: [0, 1.7, 3.4],
+            target: [0, 1.5, 7],
+          },
+          {
+            id: "kitchen-area",
+            label: "Kitchen",
+            camera: [0, 1.7, -2.8],
+            target: [0, 1.3, -6],
+          },
+        ],
         objects: [
           {
             id: "josh-note",

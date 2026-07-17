@@ -54,6 +54,9 @@ public/scans/**
 *.splat
 *.ksplat
 
+# 360° panorama room environments (see docs/world/PANORAMA_ENVIRONMENTS.md)
+public/panos/**
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

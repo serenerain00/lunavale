@@ -181,7 +181,11 @@ export function FarmhouseExperience({
         <Overlay dim>
           <p className="text-ivory">Click to look around</p>
           <p className="mt-2 text-sm text-stone">
-            <Key>W</Key> <Key>A</Key> <Key>S</Key> <Key>D</Key> to move ·{" "}
+            {!room.pano && (
+              <>
+                <Key>W</Key> <Key>A</Key> <Key>S</Key> <Key>D</Key> to move ·{" "}
+              </>
+            )}
             <Key>E</Key> or click to interact · <Key>Esc</Key> to change rooms
           </p>
         </Overlay>

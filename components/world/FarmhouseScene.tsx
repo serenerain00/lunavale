@@ -15,9 +15,9 @@
 
 import { Suspense, useRef, useMemo, useEffect, useCallback } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { PointerLockControls, useGLTF } from "@react-three/drei";
+import { PointerLockControls, useGLTF, useTexture } from "@react-three/drei";
 import * as THREE from "three";
-import type { Room, RoomScan, WorldObject } from "@/lib/content/world";
+import type { Room, RoomScan, RoomPano, WorldObject } from "@/lib/content/world";
 
 const ROOM = { width: 9, depth: 9, height: 3.2 };
 const EYE_HEIGHT = 1.6;
@@ -70,10 +70,29 @@ export function FarmhouseScene({
   );
 }
 
-/** Real scan when present, else placeholder. */
+/** Environment source, in priority order: panorama, scan, else placeholder. */
 function RoomModel({ room }: { room: Room }) {
+  if (room.pano) return <PanoRoom pano={room.pano} />;
   if (room.scan) return <ScannedRoom scan={room.scan} />;
   return <PlaceholderRoom accent={room.accent} />;
+}
+
+/** Equirectangular 360° panorama, viewed from inside — stand and look around. */
+function PanoRoom({ pano }: { pano: RoomPano }) {
+  const texture = useTexture(pano.src);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return (
+    <mesh rotation={[0, pano.rotationY ?? 0, 0]}>
+      <sphereGeometry args={[16, 60, 40]} />
+      {/* Unlit, inside-facing, fog-exempt so the pano reads exactly as generated. */}
+      <meshBasicMaterial
+        map={texture}
+        side={THREE.BackSide}
+        fog={false}
+        toneMapped={false}
+      />
+    </mesh>
+  );
 }
 
 /** Loads a captured room GLB and seats it in scene space. */
@@ -256,6 +275,8 @@ function World({
 
   const halfW = ROOM.width / 2 - 0.4;
   const halfD = ROOM.depth / 2 - 0.4;
+  // Panorama rooms are a fixed viewpoint: look around, don't walk.
+  const canMove = !room.pano;
 
   // Re-spawn and clear hover when the room changes.
   useEffect(() => {
@@ -307,31 +328,33 @@ function World({
   useFrame((_, delta) => {
     const dt = Math.min(delta, 0.05);
 
-    camera.getWorldDirection(forward);
-    forward.y = 0;
-    forward.normalize();
-    right.crossVectors(forward, up).normalize();
+    if (canMove) {
+      camera.getWorldDirection(forward);
+      forward.y = 0;
+      forward.normalize();
+      right.crossVectors(forward, up).normalize();
 
-    const k = keys.current;
-    const move = new THREE.Vector3();
-    if (k["KeyW"] || k["ArrowUp"]) move.add(forward);
-    if (k["KeyS"] || k["ArrowDown"]) move.sub(forward);
-    if (k["KeyD"] || k["ArrowRight"]) move.add(right);
-    if (k["KeyA"] || k["ArrowLeft"]) move.sub(right);
-    if (move.lengthSq() > 0) {
-      move.normalize().multiplyScalar(MOVE_SPEED * dt);
-      camera.position.x = THREE.MathUtils.clamp(
-        camera.position.x + move.x,
-        -halfW,
-        halfW,
-      );
-      camera.position.z = THREE.MathUtils.clamp(
-        camera.position.z + move.z,
-        -halfD,
-        halfD,
-      );
+      const k = keys.current;
+      const move = new THREE.Vector3();
+      if (k["KeyW"] || k["ArrowUp"]) move.add(forward);
+      if (k["KeyS"] || k["ArrowDown"]) move.sub(forward);
+      if (k["KeyD"] || k["ArrowRight"]) move.add(right);
+      if (k["KeyA"] || k["ArrowLeft"]) move.sub(right);
+      if (move.lengthSq() > 0) {
+        move.normalize().multiplyScalar(MOVE_SPEED * dt);
+        camera.position.x = THREE.MathUtils.clamp(
+          camera.position.x + move.x,
+          -halfW,
+          halfW,
+        );
+        camera.position.z = THREE.MathUtils.clamp(
+          camera.position.z + move.z,
+          -halfD,
+          halfD,
+        );
+      }
+      camera.position.y = EYE_HEIGHT;
     }
-    camera.position.y = EYE_HEIGHT;
 
     raycaster.setFromCamera(center, camera);
     const meshes = Array.from(markers.current.values());

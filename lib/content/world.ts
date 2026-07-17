@@ -44,15 +44,27 @@ export interface RoomScan {
   scale?: number;
 }
 
+export interface RoomPano {
+  /** Equirectangular 2:1 panorama under /public, e.g. /panos/farmhouse/dining-room.jpg */
+  src: string;
+  /** Yaw offset (radians) to face the panorama's focal point on entry. */
+  rotationY?: number;
+}
+
 export interface Room {
   id: string;
   name: string;
   description: string;
   /** Camera start position when entering the room. */
   spawn: [number, number, number];
-  /** Real captured space; undefined => placeholder geometry. */
+  /**
+   * Environment source, in priority order: an AI/photo 360° panorama (stand and
+   * look around), then a captured GLB scan (walk through), else placeholder
+   * geometry. Fill whichever you have; the rest stays undefined.
+   */
+  pano?: RoomPano;
   scan?: RoomScan;
-  /** Placeholder tint so rooms feel distinct before scans arrive. */
+  /** Placeholder tint so rooms feel distinct before real art arrives. */
   accent: string;
   objects: WorldObject[];
 }

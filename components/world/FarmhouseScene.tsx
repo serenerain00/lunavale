@@ -27,6 +27,7 @@ import type {
   WorldObject,
   ItemKind,
 } from "@/lib/content/world";
+import { getGallery } from "@/lib/content/gallery";
 
 export type TimeOfDay = "day" | "night";
 
@@ -46,6 +47,8 @@ interface SceneProps {
   onHoverChange: (obj: WorldObject | null) => void;
   /** A hotspot was clicked in the scene. */
   onSelectObject: (obj: WorldObject) => void;
+  /** A gallery projection was clicked — open the lightbox at that index. */
+  onOpenImage: (images: string[], index: number) => void;
 }
 
 export function FarmhouseScene({
@@ -56,6 +59,7 @@ export function FarmhouseScene({
   timeOfDay,
   onHoverChange,
   onSelectObject,
+  onOpenImage,
 }: SceneProps & { timeOfDay: TimeOfDay }) {
   const day = timeOfDay === "day";
   return (
@@ -76,6 +80,7 @@ export function FarmhouseScene({
         vantage={vantage}
         onHoverChange={onHoverChange}
         onSelectObject={onSelectObject}
+        onOpenImage={onOpenImage}
       />
       <EffectComposer multisampling={0}>
         <N8AO
@@ -1307,8 +1312,10 @@ function World({
   vantage,
   onHoverChange,
   onSelectObject,
+  onOpenImage,
 }: SceneProps) {
   const { camera, gl } = useThree();
+  const gallery = room.galleryId ? getGallery(room.galleryId) : undefined;
   const yaw = useRef(0);
   const pitch = useRef(0);
 
@@ -1409,7 +1416,95 @@ function World({
           onSelect={onSelectObject}
         />
       ))}
+      {gallery && (
+        <Suspense fallback={null}>
+          <GalleryWall
+            images={gallery.images}
+            onOpen={(i) => onOpenImage(gallery.images, i)}
+          />
+        </Suspense>
+      )}
     </>
+  );
+}
+
+/** A row of glowing still "projections" hung along the left wall of the room. */
+function GalleryWall({
+  images,
+  onOpen,
+}: {
+  images: string[];
+  onOpen: (index: number) => void;
+}) {
+  const x = -ROOM.width / 2 + 0.05;
+  const n = images.length;
+  const z0 = -6;
+  const z1 = 7;
+  return (
+    <>
+      {images.map((src, i) => {
+        const z = n > 1 ? z0 + (z1 - z0) * (i / (n - 1)) : (z0 + z1) / 2;
+        return (
+          <ArtFrame
+            key={src}
+            src={src}
+            position={[x, 1.65, z]}
+            onClick={() => onOpen(i)}
+          />
+        );
+      })}
+    </>
+  );
+}
+
+/** A single framed, softly-glowing projection of a still. */
+function ArtFrame({
+  src,
+  position,
+  onClick,
+}: {
+  src: string;
+  position: [number, number, number];
+  onClick: () => void;
+}) {
+  const tex = useTexture(src);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const [hover, setHover] = useState(false);
+  const W = 0.92;
+  const H = (W * 9) / 16; // stills are 16:9
+  return (
+    <group
+      position={position}
+      rotation={[0, Math.PI / 2, 0]}
+      onPointerOver={(e) => {
+        e.stopPropagation();
+        setHover(true);
+        document.body.style.cursor = "pointer";
+      }}
+      onPointerOut={() => {
+        setHover(false);
+        document.body.style.cursor = "auto";
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
+    >
+      <mesh position={[0, 0, -0.012]}>
+        <boxGeometry args={[W + 0.07, H + 0.07, 0.05]} />
+        <meshStandardMaterial color="#1a120c" roughness={0.6} />
+      </mesh>
+      <mesh position={[0, 0, 0.02]}>
+        <planeGeometry args={[W, H]} />
+        <meshStandardMaterial
+          map={tex}
+          emissive="#ffffff"
+          emissiveMap={tex}
+          emissiveIntensity={hover ? 0.8 : 0.4}
+          toneMapped={false}
+        />
+      </mesh>
+    </group>
   );
 }
 

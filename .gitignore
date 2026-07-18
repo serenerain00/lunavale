@@ -60,6 +60,9 @@ public/panos/**
 # Gaussian splat room captures (see docs/world/SPLAT_CAPTURE.md)
 public/splats/**
 
+# source event stills (large originals); optimized web copies live in public/gallery
+public/stills/**
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

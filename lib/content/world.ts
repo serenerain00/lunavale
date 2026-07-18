@@ -94,6 +94,8 @@ export interface Room {
   accent: string;
   /** Named vantage points to travel between (e.g. Kitchen, Living Room). */
   areas?: Vantage[];
+  /** Optional still gallery hung on this room's wall (id from lib/content/gallery). */
+  galleryId?: string;
   objects: WorldObject[];
 }
 
@@ -133,7 +135,14 @@ export const environments: Environment[] = [
             camera: [0, 1.7, -2.8],
             target: [0, 1.3, -6],
           },
+          {
+            id: "dinner-gallery",
+            label: "Dinner Gallery",
+            camera: [-1.2, 1.7, 0.5],
+            target: [-4.5, 1.55, 0.5],
+          },
         ],
+        galleryId: "josh-luna-dinner",
         objects: [
           {
             id: "josh-note",

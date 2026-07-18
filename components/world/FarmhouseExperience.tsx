@@ -62,6 +62,10 @@ export function FarmhouseExperience({
   const [focusIndex, setFocusIndex] = useState(0); // 0 = overview
   const [hovered, setHovered] = useState<WorldObject | null>(null);
   const [active, setActive] = useState<WorldObject | null>(null);
+  const [lightbox, setLightbox] = useState<{
+    images: string[];
+    index: number;
+  } | null>(null);
   const wheelAt = useRef(0);
 
   const room = useMemo(
@@ -149,6 +153,7 @@ export function FarmhouseExperience({
           const idx = room.objects.findIndex((o) => o.id === obj.id);
           if (idx >= 0) setFocusIndex(objectStart + idx);
         }}
+        onOpenImage={(images, index) => setLightbox({ images, index })}
       />
 
       {/* Top bar — rooms + exit, always usable (cursor is never trapped) */}
@@ -268,6 +273,83 @@ export function FarmhouseExperience({
           onClose={() => setActive(null)}
         />
       )}
+
+      {lightbox && (
+        <ImageLightbox
+          images={lightbox.images}
+          index={lightbox.index}
+          onIndex={(i) => setLightbox({ ...lightbox, index: i })}
+          onClose={() => setLightbox(null)}
+        />
+      )}
+    </div>
+  );
+}
+
+/** Full-view museum lightbox for the gallery stills, with prev/next browsing. */
+function ImageLightbox({
+  images,
+  index,
+  onIndex,
+  onClose,
+}: {
+  images: string[];
+  index: number;
+  onIndex: (i: number) => void;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") onIndex((index + 1) % images.length);
+      if (e.key === "ArrowLeft")
+        onIndex((index - 1 + images.length) % images.length);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [index, images.length, onIndex, onClose]);
+
+  return (
+    <div
+      className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-void/90 p-6 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-5xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={images[index]}
+          alt={`Still ${index + 1} of ${images.length}`}
+          className="max-h-[80vh] w-full rounded-lg object-contain"
+        />
+        <div className="mt-4 flex items-center justify-center gap-6">
+          <button
+            onClick={() =>
+              onIndex((index - 1 + images.length) % images.length)
+            }
+            className="rounded-full border border-hairline px-4 py-1.5 text-sm text-stone hover:text-ivory"
+          >
+            ‹ Prev
+          </button>
+          <span className="text-sm tabular-nums text-stone">
+            {index + 1} / {images.length}
+          </span>
+          <button
+            onClick={() => onIndex((index + 1) % images.length)}
+            className="rounded-full border border-hairline px-4 py-1.5 text-sm text-stone hover:text-ivory"
+          >
+            Next ›
+          </button>
+        </div>
+      </div>
+      <button
+        onClick={onClose}
+        className="absolute right-5 top-5 rounded-full bg-void/70 px-4 py-1.5 text-sm text-stone backdrop-blur-sm hover:text-ivory"
+      >
+        Close
+      </button>
     </div>
   );
 }

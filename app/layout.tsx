@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
+import { authConfigured } from "@/lib/billing/provider";
 import { Caveat, Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -70,7 +72,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
+  const body = (
     <html
       lang="en"
       className={`${fraunces.variable} ${inter.variable} ${caveat.variable} h-full`}
@@ -80,4 +82,11 @@ export default function RootLayout({
       </body>
     </html>
   );
+
+  /*
+    Wrapped only when Clerk has keys. ClerkProvider throws without a
+    publishable key, and the site is live — a deploy that hasn't been given
+    credentials yet has to keep rendering rather than white-screen.
+  */
+  return authConfigured() ? <ClerkProvider>{body}</ClerkProvider> : body;
 }

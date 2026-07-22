@@ -23,7 +23,9 @@ import {
   tierCovers,
   type TierId,
 } from "@/lib/content/membership";
-import { billingConfigured } from "@/lib/billing/provider";
+import { authConfigured, billingLive } from "@/lib/billing/provider";
+import { tierForUser } from "@/lib/db/memberships";
+import { previewTier } from "@/lib/access/preview";
 import type { AccessLevel } from "@/lib/content/videos";
 
 export const MEMBER_COOKIE = "lv_member";
@@ -43,8 +45,29 @@ export interface Membership {
   preview: boolean;
 }
 
-/** Read the viewer's tier. Server-only. Unknown values degrade to "free". */
+/**
+ * Read the viewer's tier. Server-only. Unknown values degrade to "free".
+ *
+ * This is the seam the whole app hangs off. When auth and billing are live it
+ * asks Clerk who this is and the database what they bought; until then it
+ * falls back to the preview cookie, so a half-configured deploy keeps working
+ * instead of locking everybody out of a live site.
+ */
 async function readTier(): Promise<TierId> {
+  // Checked first so the member experience stays reviewable even once real
+  // billing is live. Does nothing in production without PREVIEW_SECRET.
+  const previewing = await previewTier();
+  if (previewing) return previewing;
+
+  if (authConfigured()) {
+    // Imported lazily so the Clerk SDK is never loaded — and never throws for
+    // want of keys — on a deploy that hasn't been given any.
+    const { auth } = await import("@clerk/nextjs/server");
+    const { userId } = await auth();
+    if (!userId) return "free";
+    return tierForUser(userId);
+  }
+
   const store = await cookies();
   const raw = store.get(MEMBER_COOKIE)?.value;
   if (!raw) return "free";
@@ -57,11 +80,14 @@ async function readTier(): Promise<TierId> {
 }
 
 export async function getMembership(): Promise<Membership> {
-  const tier = await readTier();
+  const [tier, previewing] = await Promise.all([readTier(), previewTier()]);
   return {
     tier,
     active: tier !== "free",
-    preview: tier !== "free" && !billingConfigured(),
+    // Either nothing is charging cards yet, or this is an explicit override.
+    // Both must say so — an unlabelled preview is how you end up believing
+    // the paywall works.
+    preview: tier !== "free" && (Boolean(previewing) || !billingLive()),
   };
 }
 

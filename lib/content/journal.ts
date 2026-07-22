@@ -36,19 +36,24 @@
  * previous/next links both read from that order. Insert new entries in place
  * rather than appending.
  *
- * ACCESS: roughly four in five entries are members-only, which is the split
- * Melissa asked for. docs/monetization/MONETIZATION.md lists journals under
- * Vault Membership and the membership page sells "Luna's writing, in her own
- * words", so the bulk has to sit behind it or those claims stop being true.
+ * ACCESS: the open entries are the shop window. They were picked to run as a
+ * readable sequence rather than a scatter — the end of the ten years, Tyson
+ * turning up in week two, the diner, the Carrera, the evening she notices him,
+ * month four, the firepit, Josh's call, and the hour before the dinner. A
+ * visitor can read that straight through and arrive at a real cliff: she is
+ * about to have dinner with the man who left, and she has just decided not to
+ * tell her best friend.
  *
- * The four that are open were chosen to be worth reading on their own without
- * giving the plot away: the end of the ten years, Tyson turning up in week
- * two, the afternoon in the Carrera, and the hour in the bath. They prove the
- * writing is worth paying for. The turns — the lie, Josh already having told
- * him, the park — are the ones you buy.
+ * Everything after that point is members-only, because everything after that
+ * point is the story: the lie, Josh having already told him, the silence
+ * ritual failing, the bar, the park, and the night.
  *
- * If you change a free/premium flag, keep that shape: open the entries that
- * show the voice, keep the ones that move the story.
+ * docs/monetization/MONETIZATION.md lists journals under Vault Membership and
+ * the membership page sells "Luna's writing, in her own words", so the bulk
+ * has to stay behind it or those claims stop being true.
+ *
+ * If you move a flag, keep the shape: open the entries that establish the
+ * voice and the situation, keep the ones that turn it.
  */
 
 import type { AccessLevel } from "@/lib/content/videos";
@@ -146,7 +151,7 @@ export const journal: JournalEntry[] = [
     place: "lakehouse",
     where: "The back deck",
     about: ["luna", "tyson"],
-    access: "premium",
+    access: "free",
     mature: false,
     body: [
       "I am going to write one sentence in this book that I will not say out loud, and then I am going to close it and go to bed.",
@@ -160,7 +165,7 @@ export const journal: JournalEntry[] = [
     place: "lakehouse",
     where: "The back deck",
     about: ["luna", "tyson"],
-    access: "premium",
+    access: "free",
     mature: false,
     body: [
       "He was fixing the rail on the deck and had his sleeves up, and I looked at his forearms for slightly too long, and then I looked away, and then I sat with the fact that I had needed to look away.",
@@ -176,7 +181,7 @@ export const journal: JournalEntry[] = [
     where: "The firepit",
     about: ["tyson"],
     sceneSlug: "tyson-luna-lakehouse-fire",
-    access: "premium",
+    access: "free",
     mature: false,
     body: [
       "He built the fire the way he does everything — like it had already been decided and he was just catching up to it. Ex-military hands. No wasted movement. I watched him crouched over the wood and thought: I am not going to say anything tonight.",
@@ -192,7 +197,7 @@ export const journal: JournalEntry[] = [
     dateline: "He called this morning",
     place: "lakehouse",
     about: ["josh"],
-    access: "premium",
+    access: "free",
     mature: false,
     body: [
       "Six months of nothing and then his name on my phone at seven in the morning like no time had passed at all.",
@@ -221,7 +226,7 @@ export const journal: JournalEntry[] = [
     place: "lakehouse",
     where: "The kitchen",
     about: ["tyson", "josh"],
-    access: "premium",
+    access: "free",
     mature: false,
     body: [
       "I can't tell him.",

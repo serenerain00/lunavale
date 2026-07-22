@@ -4,6 +4,8 @@ import { cancelMembership } from "@/app/actions/session";
 import { PreviewNotice } from "@/components/membership/PreviewNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
+import { authConfigured, billingLive } from "@/lib/billing/provider";
+import { membershipForUser } from "@/lib/db/memberships";
 import {
   benefitsFor,
   formatPrice,
@@ -29,6 +31,11 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
   ]);
   const current = getTier(tier)!;
   const unlocked = benefitsFor(tier);
+
+  // Real billing state, when there is any. Shown instead of the static tier
+  // copy so the page reports what Stripe actually thinks rather than what the
+  // content file says the plan costs.
+  const record = billingLive() ? await currentRecord() : null;
 
   return (
     <>
@@ -83,7 +90,18 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
                   label="Price"
                   value={`${formatPrice(current.priceMonthlyCents)} / month`}
                 />
-                <Field label="Terms" value={current.commitment} />
+                <Field
+                  label={record?.status === "canceled" ? "Access until" : "Renews"}
+                  value={
+                    record?.currentPeriodEnd
+                      ? record.currentPeriodEnd.toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })
+                      : current.commitment
+                  }
+                />
               </dl>
             </section>
 
@@ -146,16 +164,16 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
                 Ending your membership
               </h2>
               <p className="mt-2 max-w-xl text-sm leading-relaxed text-stone">
-                One click, effective immediately, with no further charges. Your
-                progress through the world is kept, so everything is where you
-                left it if you come back.
+                {billingLive()
+                  ? "This opens Stripe's billing portal, where you can cancel in one click. You keep access until the end of the period you've already paid for, and you won't be charged again."
+                  : "One click, effective immediately, with no further charges. Your progress through the world is kept, so everything is where you left it if you come back."}
               </p>
               <form action={cancelMembership} className="mt-5">
                 <button
                   type="submit"
                   className="inline-flex min-h-11 items-center rounded-full border border-hairline px-6 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-wine hover:text-ivory"
                 >
-                  End membership
+                  {billingLive() ? "Manage or cancel" : "End membership"}
                 </button>
               </form>
             </section>
@@ -214,4 +232,13 @@ function Banner({
       {children}
     </p>
   );
+}
+
+/** The signed-in viewer's billing record, or null. */
+async function currentRecord() {
+  if (!authConfigured()) return null;
+  const { auth } = await import("@clerk/nextjs/server");
+  const { userId } = await auth();
+  if (!userId) return null;
+  return membershipForUser(userId);
 }

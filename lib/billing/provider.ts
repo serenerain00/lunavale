@@ -1,27 +1,80 @@
 /**
- * Billing provider seam.
+ * Billing and auth configuration — the one place that knows what is wired up.
  *
- * There is no payment processor connected yet, and the app is required to be
- * honest about that rather than mimic a checkout. This module is the single
- * place that knows, so the answer can't drift between the pitch page, the
- * account page and the entitlement layer.
+ * Everything about payments is env-driven rather than build-time, for one
+ * blunt reason: the site is live. Until every piece is configured the app must
+ * behave exactly as it did before, so that flipping billing on is a matter of
+ * adding environment variables rather than shipping a different app and hoping.
  *
- * Wiring Phase 3 (see docs/roadmap/ROADMAP.md) means, in order:
- *   1. real authentication, so a subscription can belong to somebody
- *   2. a `memberships` record keyed by user, holding tier + period end
- *   3. `startCheckout` below redirecting to a Stripe Checkout session
- *   4. a webhook writing the subscription state into that record
- *   5. `lib/access/entitlement.ts#readTier` reading it instead of a cookie
- *
- * Until step 1 exists, none of the rest can be built honestly — a checkout
- * with nowhere to attach the result is theatre.
+ * The pieces have to arrive together. A Stripe key with no database would take
+ * payments it could not record; a database with no auth would have nobody to
+ * attach a subscription to. `billingLive()` is therefore an AND, and the app
+ * stays in preview mode until all three are present.
  */
 
+import type { TierId } from "@/lib/content/membership";
+
+/** Clerk — who the person is. */
+export function authConfigured(): boolean {
+  return Boolean(
+    process.env.CLERK_SECRET_KEY &&
+      process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+  );
+}
+
+/** Stripe — taking the money. */
+export function stripeConfigured(): boolean {
+  return Boolean(
+    process.env.STRIPE_SECRET_KEY && process.env.STRIPE_WEBHOOK_SECRET,
+  );
+}
+
+/** Neon — remembering the result. */
+export function databaseConfigured(): boolean {
+  return Boolean(process.env.DATABASE_URL);
+}
+
 /**
- * Whether a payment provider is configured. Env-driven so that turning billing
- * on is a deployment decision, not a code change, and so preview deployments
- * can run without keys.
+ * True only when real memberships can be sold, recorded and honoured.
+ * While false, `startMembership` grants a clearly-labelled preview instead and
+ * every membership surface says so.
  */
-export function billingConfigured(): boolean {
-  return Boolean(process.env.STRIPE_SECRET_KEY);
+export function billingLive(): boolean {
+  return authConfigured() && stripeConfigured() && databaseConfigured();
+}
+
+/**
+ * The Stripe price for a tier, from the environment.
+ *
+ * Kept out of lib/content/membership.ts on purpose: that file is content, and
+ * price ids differ between Stripe's test and live modes. Putting them in
+ * content would mean either committing live billing identifiers or having the
+ * same tier mean different things per environment.
+ *
+ *   STRIPE_PRICE_VAULT=price_...
+ *   STRIPE_PRICE_PATRON=price_...
+ */
+export function priceIdFor(tier: TierId): string | undefined {
+  return process.env[`STRIPE_PRICE_${tier.toUpperCase()}`];
+}
+
+/** Reverse lookup, for turning a webhook's price back into a tier. */
+export function tierForPriceId(priceId: string): TierId | undefined {
+  for (const tier of ["vault", "patron"] as const) {
+    if (priceIdFor(tier) === priceId) return tier;
+  }
+  return undefined;
+}
+
+/**
+ * Absolute base URL, for Stripe redirect targets.
+ * Vercel sets VERCEL_PROJECT_PRODUCTION_URL; NEXT_PUBLIC_SITE_URL overrides it
+ * so preview deployments and local runs can point somewhere sensible.
+ */
+export function siteUrl(): string {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  }
+  return "http://localhost:3000";
 }

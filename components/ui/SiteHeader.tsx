@@ -1,10 +1,17 @@
 import Link from "next/link";
+import { authConfigured } from "@/lib/billing/provider";
 
 interface SiteHeaderProps {
   member: boolean;
 }
 
-export function SiteHeader({ member }: SiteHeaderProps) {
+/**
+ * Async so it can ask Clerk whether anyone is signed in without every page
+ * having to thread that through. `member` stays a prop because the pages have
+ * already resolved it and a second lookup would be waste.
+ */
+export async function SiteHeader({ member }: SiteHeaderProps) {
+  const signedIn = await isSignedIn();
   return (
     <header className="sticky top-0 z-20 border-b border-hairline bg-void/80 backdrop-blur-md">
       {/*
@@ -51,7 +58,16 @@ export function SiteHeader({ member }: SiteHeaderProps) {
           )}
         </div>
 
-        <Link
+        <div className="flex items-center gap-3">
+          {authConfigured() && !signedIn && (
+            <Link
+              href="/sign-in"
+              className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber sm:inline"
+            >
+              Sign in
+            </Link>
+          )}
+          <Link
           href={member ? "/account" : "/membership"}
           className={`inline-flex min-h-9 items-center whitespace-nowrap rounded-full px-3.5 text-sm transition-colors duration-(--duration-quick) sm:px-4 ${
             member
@@ -68,8 +84,19 @@ export function SiteHeader({ member }: SiteHeaderProps) {
               <span className="hidden sm:inline">Become a member</span>
             </>
           )}
-        </Link>
+          </Link>
+        </div>
       </div>
     </header>
   );
+}
+
+/**
+ * Whether Clerk has a session. Returns false when Clerk isn't configured, so
+ * an unkeyed deploy renders the signed-out header rather than throwing.
+ */
+async function isSignedIn(): Promise<boolean> {
+  if (!authConfigured()) return false;
+  const { auth } = await import("@clerk/nextjs/server");
+  return Boolean((await auth()).userId);
 }

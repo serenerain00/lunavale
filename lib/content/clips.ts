@@ -20,6 +20,7 @@
  * copy and should replace these.
  */
 
+import type { ContentNoteId } from "@/lib/content/content-notes";
 import type { PersonId } from "@/lib/content/taxonomy";
 
 export interface Clip {
@@ -36,6 +37,8 @@ export interface Clip {
   /** Who's in it. */
   about: PersonId[];
   mature: boolean;
+  /** See lib/content/content-notes.ts. A clip carrying one does not autoplay. */
+  notes?: ContentNoteId[];
 }
 
 /** Every vertical clip is free — see the note above. */

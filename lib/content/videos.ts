@@ -10,6 +10,7 @@
  * The `slug`, `file`, and `access` fields are load-bearing and should stay stable.
  */
 
+import type { ContentNoteId } from "@/lib/content/content-notes";
 import type { FeelingId, PlaceId } from "@/lib/content/taxonomy";
 
 export type AccessLevel = "free" | "premium";
@@ -31,6 +32,12 @@ export interface Video {
   access: AccessLevel;
   /** Mature-content flag — surfaced as a label per content rules. */
   mature: boolean;
+  /**
+   * What's in it beyond nudity. `mature` reads as sex to a viewer, so violence
+   * and coercive control get their own notes, shown above the player before
+   * anything plays. See lib/content/content-notes.ts.
+   */
+  notes?: ContentNoteId[];
   /**
    * Emotional context — how this scene is browsed in the catalog. A scene can
    * carry more than one. PLACEHOLDER tagging pending Melissa's canon pass.

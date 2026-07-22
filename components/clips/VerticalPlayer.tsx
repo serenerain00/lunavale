@@ -24,15 +24,20 @@ export function VerticalPlayer({ clip }: VerticalPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
 
+  // A content notice that appears above a clip which has already started
+  // playing is decoration. If there is something to say about this one, the
+  // viewer presses play themselves.
+  const hasNotice = (clip.notes?.length ?? 0) > 0;
+
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || hasNotice) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     // play() rejects when the browser declines autoplay. That is a normal
     // outcome, not an error — the poster and controls are still there.
     void video.play().catch(() => {});
-  }, []);
+  }, [hasNotice]);
 
   const toggleSound = () => {
     const video = videoRef.current;

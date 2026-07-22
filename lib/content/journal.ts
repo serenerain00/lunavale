@@ -36,13 +36,23 @@
  * previous/next links both read from that order. Insert new entries in place
  * rather than appending.
  *
- * ACCESS: premium, with two open. docs/monetization/MONETIZATION.md lists
- * journals under Vault Membership, the membership page sells "Luna's writing,
- * in her own words", and the journal objects in lib/content/world.ts say
- * members can read them. Free entries would make all three false.
+ * ACCESS: roughly four in five entries are members-only, which is the split
+ * Melissa asked for. docs/monetization/MONETIZATION.md lists journals under
+ * Vault Membership and the membership page sells "Luna's writing, in her own
+ * words", so the bulk has to sit behind it or those claims stop being true.
+ *
+ * The four that are open were chosen to be worth reading on their own without
+ * giving the plot away: the end of the ten years, Tyson turning up in week
+ * two, the afternoon in the Carrera, and the hour in the bath. They prove the
+ * writing is worth paying for. The turns — the lie, Josh already having told
+ * him, the park — are the ones you buy.
+ *
+ * If you change a free/premium flag, keep that shape: open the entries that
+ * show the voice, keep the ones that move the story.
  */
 
 import type { AccessLevel } from "@/lib/content/videos";
+import type { ContentNoteId } from "@/lib/content/content-notes";
 import type { PersonId, PlaceId } from "@/lib/content/taxonomy";
 
 export interface JournalEntry {
@@ -69,6 +79,8 @@ export interface JournalEntry {
   body: string[];
   access: AccessLevel;
   mature: boolean;
+  /** See lib/content/content-notes.ts. Shown above the page. */
+  notes?: ContentNoteId[];
 }
 
 export const journal: JournalEntry[] = [
@@ -105,7 +117,7 @@ export const journal: JournalEntry[] = [
     dateline: "Sunday, and he had the car out",
     place: "lakehouse",
     about: ["tyson"],
-    access: "premium",
+    access: "free",
     mature: false,
     body: [
       "The Carrera came out of the garage, which means he had decided I was getting out of the house today whether or not I agreed to it.",
@@ -321,6 +333,7 @@ export const journal: JournalEntry[] = [
     sceneSlug: "luna-josh-bed",
     access: "premium",
     mature: true,
+    notes: ["control"],
     body: [
       "Josh asleep beside me, breathing the way he has breathed next to me for ten years, and I lay there running a two-minute conversation on a loop.",
       "How often does Tyson come up here. Said lightly, at the sink, not looking at me. And I heard myself do the arithmetic before I answered — not the truth, the number that would land best — and that is a thing I have never had to do in this house.",
@@ -336,6 +349,7 @@ export const journal: JournalEntry[] = [
     sceneSlug: "tyson-park-fight",
     access: "premium",
     mature: true,
+    notes: ["violence"],
     body: [
       "Open ground. Nowhere for either of them to put their eyes except on each other, and nowhere for me to stand that wasn't a side.",
       "The worst of it isn't what was said. It's that they have both clearly been carrying it long enough to have it ready.",
@@ -351,6 +365,7 @@ export const journal: JournalEntry[] = [
     sceneSlug: "luna-josh-house",
     access: "premium",
     mature: true,
+    notes: ["control"],
     body: [
       "My phone was face-down on the counter and it is now face-up, and I know that I left it face-down.",
       "The first time round he never once asked me where I'd been. I used to take that as trust. I am no longer certain what it was, but I know what this is, because it has a shape and the shape is getting more familiar every week.",
@@ -365,7 +380,7 @@ export const journal: JournalEntry[] = [
     where: "The bathroom",
     about: ["luna"],
     sceneSlug: "luna-bathtub",
-    access: "premium",
+    access: "free",
     mature: true,
     body: [
       "Candles, because the overhead light is honest and I wasn't up to it.",

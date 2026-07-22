@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { JournalPaper } from "@/components/journal/JournalPaper";
+import { ContentNotice } from "@/components/ui/ContentNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { canWatch, isMember } from "@/lib/access/entitlement";
 import { getEntry, journal, opening } from "@/lib/content/journal";
@@ -101,6 +102,8 @@ export default async function JournalEntryPage({ params }: EntryPageProps) {
             {entry.dateline}
           </h1>
         </header>
+
+        <ContentNotice notes={entry.notes} className="mx-auto mb-6 max-w-2xl" />
 
         {allowed ? (
           <JournalPaper entry={entry} tilt={tilt} />

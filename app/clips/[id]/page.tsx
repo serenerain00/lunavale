@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { VerticalPlayer } from "@/components/clips/VerticalPlayer";
+import { ContentNotice } from "@/components/ui/ContentNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { clipNeighbours, clips, getClip } from "@/lib/content/clips";
@@ -55,6 +56,11 @@ export default async function ClipPage({ params }: ClipPageProps) {
             ← All clips
           </Link>
         </nav>
+
+        <ContentNotice
+          notes={clip.notes}
+          className="mx-auto mb-4 max-w-sm"
+        />
 
         <VerticalPlayer clip={clip} />
 

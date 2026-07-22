@@ -5,6 +5,7 @@ import { getVideo, videos, formatDuration } from "@/lib/content/videos";
 import { canWatch, isMember } from "@/lib/access/entitlement";
 import { VideoPlayer } from "@/components/media/VideoPlayer";
 import { LockedNotice } from "@/components/membership/LockedNotice";
+import { ContentNotice } from "@/components/ui/ContentNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 
 interface WatchPageProps {
@@ -53,6 +54,9 @@ export default async function WatchPage({ params }: WatchPageProps) {
             ← Back to the catalog
           </Link>
         </nav>
+
+        {/* Above the player, so it is read before anything plays. */}
+        <ContentNotice notes={video.notes} className="mb-4" />
 
         <div className="overflow-hidden rounded-xl bg-black ring-1 ring-hairline">
           <div className="relative aspect-video">

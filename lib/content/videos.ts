@@ -119,7 +119,7 @@ export const videos: Video[] = [
       "Tyson lets himself in with shopping she didn't ask for. She's on her phone, and she doesn't put it down.",
     file: "luna-tyson-bathroom.proxy.mp4",
     poster: "/posters/luna-tyson-bathroom.jpg",
-    durationSeconds: 75,
+    durationSeconds: 76,
     access: "free",
     mature: true,
     feelings: ["desire", "lies"],

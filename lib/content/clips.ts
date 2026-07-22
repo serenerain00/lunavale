@@ -7,10 +7,13 @@
  *   1. Shape. They are portrait. Dropped into a 16:9 rail they would either be
  *      pillarboxed into a sliver or cropped to nonsense, and every layout that
  *      touches them wants to know their aspect up front.
- *   2. Access. They have already been published publicly on Instagram, so
- *      there is nothing left to gate. Putting them behind the Vault would be
- *      selling something anybody can already scroll past for free — which is
- *      the sort of thing docs/monetization/MONETIZATION.md exists to prevent.
+ *   2. Access. Most of them ran publicly on Instagram, so there is nothing
+ *      left to gate — putting those behind the Vault would be selling
+ *      something anybody can already scroll past for free, which
+ *      docs/monetization/MONETIZATION.md exists to prevent. But not all of
+ *      them are the social cuts. Anything explicit was never on Instagram
+ *      (it wouldn't have passed their rules), so it carries its own access
+ *      and its own rating — see `access` and `explicit` below.
  *
  * Which camera export each one came from is recorded in
  * scripts/import-clips.sh, identified by frames at 15/45/75% of runtime.
@@ -22,6 +25,7 @@
 
 import type { ContentNoteId } from "@/lib/content/content-notes";
 import type { PersonId } from "@/lib/content/taxonomy";
+import type { AccessLevel } from "@/lib/content/videos";
 
 export interface Clip {
   /** Stable id — appears in /clips/<id>. Do not rename casually. */
@@ -37,12 +41,27 @@ export interface Clip {
   /** Who's in it. */
   about: PersonId[];
   mature: boolean;
+  /**
+   * Explicit / X-rated — a stronger signal than `mature`, which reads as
+   * "intimate" but not graphic. An explicit clip states so before it plays,
+   * never autoplays, and its poster is withheld on the public grid. Explicit
+   * implies mature; the badge shows "Explicit" in place of it.
+   */
+  explicit?: boolean;
+  /**
+   * Free unless stated. A gated clip streams only to members, and its poster
+   * is locked on the index — the whole point of gating a sex scene is that a
+   * signed-out visitor can't see it, which includes the still frame.
+   */
+  access?: AccessLevel;
   /** See lib/content/content-notes.ts. A clip carrying one does not autoplay. */
   notes?: ContentNoteId[];
 }
 
-/** Every vertical clip is free — see the note above. */
-export const CLIP_ACCESS = "free" as const;
+/** A clip's effective access. Free is the default, so entries stay terse. */
+export function clipAccess(clip: Clip): AccessLevel {
+  return clip.access ?? "free";
+}
 
 export const clips: Clip[] = [
   {
@@ -87,6 +106,9 @@ export const clips: Clip[] = [
     durationSeconds: 213,
     about: ["luna", "tyson"],
     mature: true,
+    // A sex scene: gated to members, rated explicit, poster withheld.
+    explicit: true,
+    access: "premium",
   },
   {
     id: "morning-after",
@@ -106,16 +128,6 @@ export const clips: Clip[] = [
     poster: "/posters/said-out-loud.jpg",
     durationSeconds: 69,
     about: ["luna"],
-    mature: true,
-  },
-  {
-    id: "ty-luna-bed",
-    title: "Nowhere To Be",
-    caption: "A whole afternoon, and no reason to get up.",
-    file: "ty-luna-bed.proxy.mp4",
-    poster: "/posters/ty-luna-bed.jpg",
-    durationSeconds: 210,
-    about: ["luna", "tyson"],
     mature: true,
   },
 ];

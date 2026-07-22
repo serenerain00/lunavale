@@ -8,7 +8,7 @@
  * the route about another module.
  */
 
-import { CLIP_ACCESS, clips, getClip } from "@/lib/content/clips";
+import { clipAccess, clips, getClip } from "@/lib/content/clips";
 import { getVideo, videos, type AccessLevel } from "@/lib/content/videos";
 
 export interface Streamable {
@@ -23,7 +23,7 @@ export function getStreamable(slug: string): Streamable | undefined {
   if (video) return { slug, file: video.file, access: video.access };
 
   const clip = getClip(slug);
-  if (clip) return { slug, file: clip.file, access: CLIP_ACCESS };
+  if (clip) return { slug, file: clip.file, access: clipAccess(clip) };
 
   return undefined;
 }

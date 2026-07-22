@@ -60,7 +60,10 @@ CUTS=(
   # Scored mix: -35.5 dB -> -27.3 dB. Runs 2.1s longer.
   "ty-luna-farm-road|stories/withAudio/ScreenRecording_07-20-2026 00-49-25_1.mov"
   # The groceries, the phone, and five seconds of the staring game.
-  "luna-tyson-bathroom|stories/luna-tyson-bathroom/ty-luna-bathroom.mp4|46"
+  # Using the .mov: same cut as ty-luna-bathroom.mp4 but with the scored mix
+  # (-33 vs -35.5 dB). Lower source res, but the 720p proxy barely notices and
+  # the music matters more here than the extra pixels.
+  "luna-tyson-bathroom|stories/luna-tyson-bathroom/luna-ty-bathroom.mov|46"
   # AMBIGUOUS: the folder also holds 0713.mp4 (285.6s, higher resolution).
   # Taking the newer date. Swap this line if 0713 is the keeper.
   # Poster at 0.5s: this cut opens on a brief cutaway that reads as a

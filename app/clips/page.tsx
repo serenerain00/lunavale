@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
+import { RatingBadge } from "@/components/ui/RatingBadge";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
-import { clips } from "@/lib/content/clips";
+import { clipAccess, clips } from "@/lib/content/clips";
 import { formatDuration } from "@/lib/content/videos";
 
 export const metadata: Metadata = {
   title: "Clips",
   description:
-    "The vertical cuts from Luna's world — the ones that ran on Instagram, collected in one place. Free to watch.",
+    "The vertical cuts from Luna's world — the short pieces, collected in one place.",
   alternates: { canonical: "/clips" },
 };
 
@@ -30,9 +31,9 @@ export default async function ClipsPage() {
             Clips.
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
-            The vertical cuts that ran on Instagram, kept together here so they
-            don&rsquo;t disappear down someone else&rsquo;s feed. All free, all
-            with sound.
+            The vertical cuts from Luna&rsquo;s world, kept together here so
+            they don&rsquo;t disappear down someone else&rsquo;s feed. Most are
+            free; a few are part of the membership.
           </p>
         </header>
 
@@ -43,48 +44,82 @@ export default async function ClipsPage() {
           scroller ends up taller than the viewport on mobile.
         */}
         <Reveal className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-          {clips.map((clip) => (
-            <Link
-              key={clip.id}
-              href={`/clips/${clip.id}`}
-              data-reveal-item
-              className="group relative block overflow-hidden rounded-lg bg-charcoal ring-1 ring-hairline transition-transform duration-(--duration-standard) ease-(--ease-standard) hover:-translate-y-1 focus-visible:-translate-y-1"
-            >
-              <div className="relative aspect-[9/16]">
-                <Image
-                  src={clip.poster}
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover brightness-90 transition-[transform,filter] duration-(--duration-cinematic) ease-(--ease-cinematic) group-hover:scale-[1.04] group-hover:brightness-100"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-void via-void/10 to-transparent" />
+          {clips.map((clip) => {
+            // A gated clip a non-member can't open has its poster withheld —
+            // for a sex scene the still frame is exactly the thing not to show
+            // on a public page. Members see it normally.
+            const locked = clipAccess(clip) === "premium" && !member;
 
-                <div className="absolute left-2.5 top-2.5 flex flex-wrap gap-1.5">
-                  <span className="rounded-full bg-void/70 px-2 py-0.5 text-[0.65rem] font-medium text-stone backdrop-blur-sm">
-                    Free
+            return (
+              <Link
+                key={clip.id}
+                href={`/clips/${clip.id}`}
+                data-reveal-item
+                className="group relative block overflow-hidden rounded-lg bg-charcoal ring-1 ring-hairline transition-transform duration-(--duration-standard) ease-(--ease-standard) hover:-translate-y-1 focus-visible:-translate-y-1"
+              >
+                <div className="relative aspect-[9/16]">
+                  <Image
+                    src={clip.poster}
+                    alt=""
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className={`object-cover transition-[transform,filter] duration-(--duration-cinematic) ease-(--ease-cinematic) group-hover:scale-[1.04] ${
+                      locked
+                        ? "scale-105 brightness-[0.28] blur-xl"
+                        : "brightness-90 group-hover:brightness-100"
+                    }`}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-void via-void/10 to-transparent" />
+
+                  <div className="absolute left-2.5 top-2.5 flex flex-wrap gap-1.5">
+                    {locked ? (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-void/70 px-2 py-0.5 text-[0.65rem] font-medium text-amber-soft backdrop-blur-sm">
+                        <LockGlyph />
+                        Members
+                      </span>
+                    ) : (
+                      <span className="rounded-full bg-void/70 px-2 py-0.5 text-[0.65rem] font-medium text-stone backdrop-blur-sm">
+                        Free
+                      </span>
+                    )}
+                    <RatingBadge
+                      mature={clip.mature}
+                      explicit={clip.explicit}
+                      variant="pill"
+                    />
+                  </div>
+
+                  <span className="absolute bottom-2.5 right-2.5 rounded bg-void/70 px-1.5 py-0.5 text-[0.65rem] tabular-nums text-stone backdrop-blur-sm">
+                    {formatDuration(clip.durationSeconds)}
                   </span>
-                  {clip.mature && (
-                    <span className="rounded-full bg-void/70 px-2 py-0.5 text-[0.65rem] font-medium text-stone backdrop-blur-sm">
-                      Mature
-                    </span>
-                  )}
-                </div>
 
-                <span className="absolute bottom-2.5 right-2.5 rounded bg-void/70 px-1.5 py-0.5 text-[0.65rem] tabular-nums text-stone backdrop-blur-sm">
-                  {formatDuration(clip.durationSeconds)}
-                </span>
-
-                <div className="absolute inset-x-0 bottom-0 p-3">
-                  <h2 className="font-display text-base leading-tight text-ivory">
-                    {clip.title}
-                  </h2>
+                  <div className="absolute inset-x-0 bottom-0 p-3">
+                    <h2 className="font-display text-base leading-tight text-ivory">
+                      {clip.title}
+                    </h2>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </Reveal>
       </main>
     </>
+  );
+}
+
+function LockGlyph() {
+  return (
+    <svg
+      width="9"
+      height="9"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className="shrink-0"
+    >
+      <rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" strokeWidth="2.5" />
+      <path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+    </svg>
   );
 }

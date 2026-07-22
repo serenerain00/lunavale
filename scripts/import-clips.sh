@@ -24,7 +24,6 @@ CLIPS=(
   "still-awake|stories/withAudio/ScreenRecording_07-09-2026 22-06-35_1.mov|32"
   "morning-after|stories/withAudio/copy_2983A1B7-D3AE-4D16-BA2A-8385701504AC.MOV|23"
   "said-out-loud|stories/withAudio/copy_F73B2C7E-2355-459B-9F22-D84FDE635960.MOV|10"
-  "ty-luna-bed|stories/withAudio/ty-luna-bed.MP4|32"
 )
 
 want=("$@")

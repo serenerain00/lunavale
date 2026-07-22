@@ -3,11 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { VerticalPlayer } from "@/components/clips/VerticalPlayer";
 import { ContentNotice } from "@/components/ui/ContentNotice";
+import { RatingBadge } from "@/components/ui/RatingBadge";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { getMembership } from "@/lib/access/entitlement";
-import { clipNeighbours, clips, getClip } from "@/lib/content/clips";
+import { canWatch, isMember } from "@/lib/access/entitlement";
+import { clipAccess, clipNeighbours, clips, getClip } from "@/lib/content/clips";
 import { getPerson } from "@/lib/content/taxonomy";
 import { formatDuration } from "@/lib/content/videos";
+import { ClipLocked } from "@/components/clips/ClipLocked";
 
 interface ClipPageProps {
   params: Promise<{ id: string }>;
@@ -40,7 +42,10 @@ export default async function ClipPage({ params }: ClipPageProps) {
   const clip = getClip(id);
   if (!clip) notFound();
 
-  const { active: member } = await getMembership();
+  const [allowed, member] = await Promise.all([
+    canWatch({ access: clipAccess(clip) }),
+    isMember(),
+  ]);
   const { previous, next } = clipNeighbours(clip.id);
 
   return (
@@ -57,12 +62,28 @@ export default async function ClipPage({ params }: ClipPageProps) {
           </Link>
         </nav>
 
-        <ContentNotice
-          notes={clip.notes}
-          className="mx-auto mb-4 max-w-sm"
-        />
+        {/* Explicit is stated up front regardless of the notes vocabulary —
+            it's a rating, not a content note. Only shown to someone who can
+            actually open it; a non-member gets the locked panel instead. */}
+        {allowed && clip.explicit && (
+          <aside
+            aria-label="Content rating"
+            className="mx-auto mb-4 max-w-sm rounded-lg border border-amber/30 bg-charcoal/50 px-4 py-3 text-sm leading-relaxed text-stone"
+          >
+            <span className="font-medium text-amber-soft">
+              Explicit · 18+.
+            </span>{" "}
+            This clip contains sexually explicit material.
+          </aside>
+        )}
 
-        <VerticalPlayer clip={clip} />
+        <ContentNotice notes={clip.notes} className="mx-auto mb-4 max-w-sm" />
+
+        {allowed ? (
+          <VerticalPlayer clip={clip} />
+        ) : (
+          <ClipLocked clip={clip} />
+        )}
 
         <div className="mx-auto mt-8 max-w-sm">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone">
@@ -73,10 +94,10 @@ export default async function ClipPage({ params }: ClipPageProps) {
             <span>
               {clip.about.map((p) => getPerson(p)?.label ?? p).join(" & ")}
             </span>
-            {clip.mature && (
+            {(clip.mature || clip.explicit) && (
               <>
                 <span aria-hidden>·</span>
-                <span>Mature</span>
+                <RatingBadge mature={clip.mature} explicit={clip.explicit} />
               </>
             )}
           </div>

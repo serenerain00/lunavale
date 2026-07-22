@@ -28,20 +28,20 @@ export function VerticalPlayer({ clip }: VerticalPlayerProps) {
   // has already given up on.
   const [attempt, setAttempt] = useState(0);
 
-  // A content notice that appears above a clip which has already started
-  // playing is decoration. If there is something to say about this one, the
-  // viewer presses play themselves.
-  const hasNotice = (clip.notes?.length ?? 0) > 0;
+  // Don't autoplay anything that needs stating first — a content note, or an
+  // explicit rating. Stating what's in something that has already started
+  // playing is pointless; the viewer presses play themselves.
+  const holdForConsent = (clip.notes?.length ?? 0) > 0 || Boolean(clip.explicit);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || hasNotice) return;
+    if (!video || holdForConsent) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     // play() rejects when the browser declines autoplay. That is a normal
     // outcome, not an error — the poster and controls are still there.
     void video.play().catch(() => {});
-  }, [hasNotice]);
+  }, [holdForConsent]);
 
   const toggleSound = () => {
     const video = videoRef.current;

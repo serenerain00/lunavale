@@ -41,6 +41,9 @@ cd "$(dirname "$0")/.."
 # slug|source path|poster seconds (optional, default 3)
 CUTS=(
   "luna-tyson-bar|stories/luna-tyson-bar/luna-tyson-bar.mp4"
+  # The coffee Josh called about, which restarts everything. Identified from
+  # the footage plus the story beat; it had no shooting folder of its own.
+  "luna-josh-coffee|stories/withAudio/ScreenRecording_07-12-2026 08-15-54_1.mov|85"
   # SILENT (-91 dB, digital silence). No match found in withAudio/ — the only
   # unclaimed cuts are portrait or the wrong length. Needs a scored export.
   "luna-josh-bed|stories/luna-josh-bed/0715.mp4"

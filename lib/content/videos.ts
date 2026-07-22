@@ -106,6 +106,19 @@ export const videos: Video[] = [
     place: "bar",
   },
   {
+    slug: "luna-josh-coffee",
+    title: "Coffee",
+    synopsis:
+      "Six months of silence, and then a phone call. Neutral ground, chosen for exactly that reason.",
+    file: "luna-josh-coffee.proxy.mp4",
+    poster: "/posters/luna-josh-coffee.jpg",
+    durationSeconds: 129,
+    access: "free",
+    mature: false,
+    feelings: ["trust", "desire"],
+    place: "coffee-shop",
+  },
+  {
     slug: "luna-josh-bed",
     title: "Sunday",
     synopsis:

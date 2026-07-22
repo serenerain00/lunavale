@@ -94,6 +94,11 @@ export const places = [
     label: "The Lake",
     blurb: "Open water at the far edge of the farm, well out of earshot.",
   },
+  {
+    id: "coffee-shop",
+    label: "The Coffee Shop",
+    blurb: "Neutral ground, chosen for exactly that reason.",
+  },
 ] as const satisfies readonly Place[];
 
 /**
@@ -104,12 +109,13 @@ export const people = [
   {
     id: "josh",
     label: "Josh",
-    blurb: "The one she built a life with.",
+    blurb:
+      "Ten years, six months apart, and a phone call that started it again.",
   },
   {
     id: "tyson",
     label: "Tyson",
-    blurb: "The one she didn't plan on.",
+    blurb: "Twenty years her best friend, and the six months that changed it.",
   },
   {
     id: "luna",

@@ -78,7 +78,7 @@ export const videos: Video[] = [
     slug: "tyson-park-fight",
     title: "The Park",
     synopsis:
-      "A confrontation in the park breaks the surface of a rivalry that's been building for weeks.",
+      "Luna asks Tyson to meet her. He comes, and then says almost nothing at all — until he says one thing.",
     file: "tyson-park-fight.proxy.mp4",
     poster: "/posters/tyson-park-fight.jpg",
     durationSeconds: 155,

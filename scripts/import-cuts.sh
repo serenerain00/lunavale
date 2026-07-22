@@ -23,15 +23,39 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+# AUDIO. The scored mixes live in stories/withAudio/ under camera filenames.
+# Sources below were matched to scenes by frame content at 40% duration plus
+# duration, not by filename — the names carry no meaning and guessing would
+# put the wrong soundtrack under the wrong scene.
+#
+# Measured with `ffmpeg -af volumedetect`, four scenes turned out to ALREADY
+# carry the scored mix, because the cut in the scene folder was itself
+# exported with it (identical mean volume, to the decibel):
+#   luna-bathtub              -14.3 dB   = ScreenRecording_07-13-2026 20-01-01
+#   luna-josh-house           -19.4 dB   = ScreenRecording_07-12-2026 20-38-29
+#   tyson-luna-lakehouse-fire -27.0 dB   = ScreenRecording_07-14-2026 22-43-02
+#   tyson-park-fight          -22.0 dB   = ScreenRecording_07-16-2026 21-35-46
+# Those keep their existing, higher-resolution sources — re-pointing them at a
+# screen recording would cost picture quality and gain nothing.
+#
 # slug|source path|poster seconds (optional, default 3)
 CUTS=(
   "luna-tyson-bar|stories/luna-tyson-bar/luna-tyson-bar.mp4"
+  # SILENT (-91 dB, digital silence). No match found in withAudio/ — the only
+  # unclaimed cuts are portrait or the wrong length. Needs a scored export.
   "luna-josh-bed|stories/luna-josh-bed/0715.mp4"
-  "luna-josh-dinner-house|stories/luna-josh-dinner-house/0717.mp4"
+  # Scored mix: -37.5 dB -> -26.8 dB. Runs 2.8s longer than the silent cut.
+  "luna-josh-dinner-house|stories/withAudio/copy_A062089B-FB53-461E-BC18-DD0BD3F26458.MOV"
+  # NEAR-SILENT (-51 dB). Its only candidate is portrait (1080x1822) and would
+  # letterbox to a sliver in a 16:9 player, so it stays on the silent cut until
+  # there is a landscape export.
   "luna-josh-kitchen-kiss|stories/luna-josh-farm-kitchen-kiss/luna-josh-kitchen-kiss.mp4"
   "luna-josh-house|stories/luna-josh-house/0715.mp4"
-  "ty-luna-lake-fight|stories/ty-luna-farm-lake/ty-luna-lake-fight.mp4"
-  "ty-luna-farm-road|stories/ty-luna-farmRd/Ty-luna.mp4"
+  # Scored mix: -31.4 dB -> -27.8 dB. NOTE this is also a shorter edit,
+  # 162.1s against 172.1s — ten seconds of picture differ, not just the sound.
+  "ty-luna-lake-fight|stories/withAudio/ScreenRecording_07-20-2026 01-28-11_1.mov"
+  # Scored mix: -35.5 dB -> -27.3 dB. Runs 2.1s longer.
+  "ty-luna-farm-road|stories/withAudio/ScreenRecording_07-20-2026 00-49-25_1.mov"
   # AMBIGUOUS: the folder also holds 0713.mp4 (285.6s, higher resolution).
   # Taking the newer date. Swap this line if 0713 is the keeper.
   # Poster at 0.5s: this cut opens on a brief cutaway that reads as a

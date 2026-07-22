@@ -11,8 +11,8 @@ interface HeroProps {
 }
 
 /** The public trailer loop, built by scripts/make-hero-loop.sh. */
-const HERO_VIDEO = "/hero/lakehouse-loop.mp4";
-const HERO_POSTER = "/hero/lakehouse-loop.jpg";
+const HERO_VIDEO = "/hero/bar-loop.mp4";
+const HERO_POSTER = "/hero/bar-loop.jpg";
 
 /**
  * The landing hero: one frame of the actual work, at full bleed, with the

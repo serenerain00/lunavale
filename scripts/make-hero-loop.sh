@@ -16,28 +16,29 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-SOURCE="stories/tyson-luna-lakehouse-fire.proxy.mp4"
-# A near-static shot: the couple by the fire, lake and sunset behind them. The
-# loop point is invisible precisely because the framing barely moves — pick the
-# same kind of shot if you recut this.
-START=118
+SOURCE="public/gallery/tyson-luna-bar/luna-tyson-bar.mp4"
+# Luna and Tyson at the bar. Unlike a single locked-off shot, this span carries
+# three cuts, so it reads as a trailer rather than a moving wallpaper — and the
+# loop point lands on a cut, which is the one place a wrap is invisible.
+# Recutting is just these two numbers.
+START=26
 DURATION=12
 
 OUT_DIR="public/hero"
-OUT_VIDEO="$OUT_DIR/lakehouse-loop.mp4"
-OUT_POSTER="$OUT_DIR/lakehouse-loop.jpg"
+OUT_VIDEO="$OUT_DIR/bar-loop.mp4"
+OUT_POSTER="$OUT_DIR/bar-loop.jpg"
 
 if [ ! -f "$SOURCE" ]; then
   echo "Source not found: $SOURCE" >&2
-  echo "Story media is gitignored — restore it before rebuilding the hero." >&2
+  echo "Source media is gitignored — restore it before rebuilding the hero." >&2
   exit 1
 fi
 
 mkdir -p "$OUT_DIR"
 
-# 30fps is plenty for an ambient background and halves the bitrate of the 60fps
-# source. yuv420p + faststart so it plays inline on iOS and starts before the
-# whole file has arrived.
+# 30fps and 1280 wide keep an ambient background well under a megabyte from a
+# 1080p master. yuv420p + faststart so it plays inline on iOS and starts before
+# the whole file has arrived.
 ffmpeg -y -v error \
   -ss "$START" -t "$DURATION" -i "$SOURCE" \
   -an \

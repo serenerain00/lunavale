@@ -50,6 +50,15 @@ stories/**/*.webm
 # /public — story media still only reaches a viewer through /api/stream.
 !public/hero/*.mp4
 
+# Per-scene working folders under stories/ are source material, whole and
+# entire: dozens of raw takes plus hundreds of uncompressed screenshots (583MB
+# and climbing at the time of writing). Only the derived web copies are
+# committed — public/posters/*.jpg and public/gallery/**, built by
+# scripts/optimize-media.sh. The *.mp4 rules above already caught the video;
+# this catches the stills, which are individually 6MB and are the easy thing
+# to sweep in by accident with `git add -A`.
+stories/*/
+
 # photogrammetry room scans — large binaries, delivered/hosted out of band
 # (see docs/world/SCAN_CAPTURE.md)
 public/scans/**

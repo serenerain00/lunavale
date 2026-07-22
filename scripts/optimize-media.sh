@@ -11,6 +11,7 @@
 #   scripts/optimize-media.sh cover   <event-id> NN  # make gallery card cover from still NN
 #   scripts/optimize-media.sh poster  <slug>         # frame from stories/<slug>.mp4 -> public/posters
 #   scripts/optimize-media.sh video   <slug>         # stories/<slug>.mp4 -> <slug>.proxy.mp4
+#   scripts/optimize-media.sh import  <slug> <src> [at] # cut -> proxy + poster ([at]=poster seconds)
 #
 # Requires ffmpeg (brew install ffmpeg).
 
@@ -92,8 +93,43 @@ case "$cmd" in
     echo "proxy -> stories/$slug.proxy.mp4 ($(du -h "stories/$slug.proxy.mp4" | cut -f1))"
     ;;
 
+  import)
+    # Bring an assembled cut out of a per-scene working folder and into the
+    # shape the app expects. Shooting folders hold dozens of raw takes beside
+    # the finished edit, with names nobody chose (kling_…_0.mp4), so the source
+    # is named explicitly rather than guessed — publishing the wrong take is
+    # not a mistake you want a glob to be able to make.
+    #
+    # Everything downstream keys off <slug>, so the proxy lands in stories/
+    # root under the standard name and no route or content field needs to know
+    # the cut came from a subfolder.
+    slug="${1:?usage: optimize-media.sh import <slug> <source> [poster-seconds]}"
+    src="${2:?usage: optimize-media.sh import <slug> <source> [poster-seconds]}"
+    # A few seconds in clears any fade-up, but some cuts open on a flash-
+    # forward or a cutaway that misrepresents the scene on a card. Override
+    # per scene rather than shipping a poster that promises the wrong thing.
+    at="${3:-3}"
+    [ -f "$src" ] || die "no source at $src"
+
+    out="stories/$slug.proxy.mp4"
+    ffmpeg -y -loglevel error -i "$src" \
+      -vf "scale=-2:$PROXY_HEIGHT" \
+      -c:v libx264 -preset medium -crf "$PROXY_CRF" -pix_fmt yuv420p \
+      -c:a aac -b:a 128k -movflags +faststart \
+      "$out"
+
+    ffmpeg -y -loglevel error -ss "$at" -i "$src" -frames:v 1 \
+      -vf "scale=$CARD_WIDTH:$CARD_HEIGHT:force_original_aspect_ratio=increase,crop=$CARD_WIDTH:$CARD_HEIGHT" \
+      -q:v "$STILL_Q" "public/posters/$slug.jpg"
+
+    dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src")
+    printf '%-34s proxy %-6s poster %-6s durationSeconds: %.0f\n' \
+      "$slug" "$(du -h "$out" | cut -f1)" \
+      "$(du -h "public/posters/$slug.jpg" | cut -f1)" "$dur"
+    ;;
+
   *)
-    sed -n '3,16p' "$0"
+    sed -n '3,17p' "$0"
     exit 1
     ;;
 esac

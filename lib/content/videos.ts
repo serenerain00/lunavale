@@ -80,6 +80,125 @@ export const videos: Video[] = [
     feelings: ["hurt", "lies"],
     place: "park",
   },
+
+  /* --------------------------------------------------------------------------
+   * Scenes imported from the per-scene shooting folders under stories/.
+   * Which assembled cut each one came from is recorded in
+   * scripts/import-cuts.sh — including the folders deliberately skipped.
+   *
+   * All eight are `access: "free"` and `mature: true` by decision, pending a
+   * canon pass. Titles, synopses and feeling tags are PLACEHOLDER: they were
+   * written from the folder names and a look at the footage, not from story
+   * canon, so treat every line below as a first draft.
+   * ----------------------------------------------------------------------- */
+
+  {
+    slug: "luna-tyson-bar",
+    title: "Last Call",
+    synopsis:
+      "Luna and Tyson at the bar, close enough to be overheard and talking anyway.",
+    file: "luna-tyson-bar.proxy.mp4",
+    poster: "/posters/luna-tyson-bar.jpg",
+    durationSeconds: 71,
+    access: "free",
+    mature: true,
+    feelings: ["desire", "distance"],
+    place: "bar",
+  },
+  {
+    slug: "luna-josh-bed",
+    title: "Sunday",
+    synopsis:
+      "A morning that neither of them is in any hurry to end.",
+    file: "luna-josh-bed.proxy.mp4",
+    poster: "/posters/luna-josh-bed.jpg",
+    durationSeconds: 86,
+    access: "free",
+    mature: true,
+    feelings: ["desire", "trust"],
+    place: "farmhouse",
+  },
+  {
+    slug: "luna-josh-kitchen-kiss",
+    title: "The Kitchen",
+    synopsis:
+      "Something ordinary in the farmhouse kitchen turns into something else.",
+    file: "luna-josh-kitchen-kiss.proxy.mp4",
+    poster: "/posters/luna-josh-kitchen-kiss.jpg",
+    durationSeconds: 150,
+    access: "free",
+    mature: true,
+    feelings: ["desire", "trust"],
+    place: "farmhouse",
+  },
+  {
+    slug: "luna-josh-dinner-house",
+    title: "The Long Table",
+    synopsis:
+      "Dinner at the house, and the conversation neither of them starts.",
+    file: "luna-josh-dinner-house.proxy.mp4",
+    poster: "/posters/luna-josh-dinner-house.jpg",
+    durationSeconds: 112,
+    access: "free",
+    mature: true,
+    feelings: ["trust", "distance"],
+    place: "farmhouse",
+  },
+  {
+    slug: "luna-josh-house",
+    title: "The House",
+    synopsis:
+      "Dinner out, the drive back, and everything that surfaces once the door is closed.",
+    file: "luna-josh-house.proxy.mp4",
+    poster: "/posters/luna-josh-house.jpg",
+    durationSeconds: 263,
+    access: "free",
+    mature: true,
+    feelings: ["trust", "distance"],
+    place: "farmhouse",
+  },
+  {
+    slug: "luna-bathtub",
+    title: "Still Water",
+    synopsis:
+      "Luna alone, at the end of a day she hasn't told anyone about.",
+    file: "luna-bathtub.proxy.mp4",
+    poster: "/posters/luna-bathtub.jpg",
+    durationSeconds: 287,
+    access: "free",
+    mature: true,
+    feelings: ["grief", "desire"],
+    place: "farmhouse",
+  },
+  {
+    slug: "ty-luna-lake-fight",
+    title: "Out at the Lake",
+    synopsis:
+      "Far enough from the house that they can finally raise their voices.",
+    file: "ty-luna-lake-fight.proxy.mp4",
+    poster: "/posters/ty-luna-lake-fight.jpg",
+    durationSeconds: 172,
+    access: "free",
+    mature: true,
+    feelings: ["hurt", "lies"],
+    place: "lake",
+  },
+  {
+    // PLACEHOLDER placement: a road on the farm, filed under the farmhouse
+    // because the property is the location. Give it its own place if the road
+    // matters to the story.
+    slug: "ty-luna-farm-road",
+    title: "The Road Back",
+    synopsis:
+      "Tyson and Luna on the farm road, walking off something neither will name.",
+    file: "ty-luna-farm-road.proxy.mp4",
+    poster: "/posters/ty-luna-farm-road.jpg",
+    durationSeconds: 125,
+    access: "free",
+    mature: true,
+    feelings: ["distance", "hurt"],
+    place: "farmhouse",
+  },
 ];
 
 export function getVideo(slug: string): Video | undefined {

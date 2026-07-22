@@ -84,6 +84,16 @@ export const places = [
     label: "The Park",
     blurb: "Open ground, nowhere to hide.",
   },
+  {
+    id: "bar",
+    label: "The Bar",
+    blurb: "Low light, other people's noise, and room to say the real thing.",
+  },
+  {
+    id: "lake",
+    label: "The Lake",
+    blurb: "Open water at the far edge of the farm, well out of earshot.",
+  },
 ] as const satisfies readonly Place[];
 
 export type FeelingId = (typeof feelings)[number]["id"];

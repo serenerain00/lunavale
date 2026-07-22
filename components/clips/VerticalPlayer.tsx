@@ -23,6 +23,10 @@ interface VerticalPlayerProps {
 export function VerticalPlayer({ clip }: VerticalPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
+  const [failed, setFailed] = useState(false);
+  // Remounting is the only reliable way to make a <video> retry a source it
+  // has already given up on.
+  const [attempt, setAttempt] = useState(0);
 
   // A content notice that appears above a clip which has already started
   // playing is decoration. If there is something to say about this one, the
@@ -52,7 +56,35 @@ export function VerticalPlayer({ clip }: VerticalPlayerProps) {
   return (
     <div className="relative mx-auto w-full max-w-sm">
       <div className="relative overflow-hidden rounded-xl bg-black ring-1 ring-hairline">
+        {failed ? (
+          // A greyed-out control with no explanation reads as a broken site.
+          // Say what happened and offer the one useful action.
+          <div className="relative aspect-[9/16] w-full">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={clip.poster}
+              alt=""
+              className="absolute inset-0 size-full object-cover opacity-40"
+            />
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center">
+              <p className="text-balance leading-relaxed text-ivory">
+                This clip won&rsquo;t play right now.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setFailed(false);
+                  setAttempt((n) => n + 1);
+                }}
+                className="inline-flex min-h-11 items-center rounded-full border border-hairline px-6 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+              >
+                Try again
+              </button>
+            </div>
+          </div>
+        ) : (
         <video
+          key={attempt}
           ref={videoRef}
           // aspect-[9/16] on the wrapper would fight a clip that isn't exactly
           // 9:16; letting the element size itself keeps every clip honest.
@@ -64,12 +96,15 @@ export function VerticalPlayer({ clip }: VerticalPlayerProps) {
           muted
           preload="metadata"
           aria-label={clip.title}
+          onError={() => setFailed(true)}
         >
           <source src={`/api/stream/${clip.id}`} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        )}
       </div>
 
+      {!failed && (
       <button
         type="button"
         onClick={toggleSound}
@@ -79,6 +114,7 @@ export function VerticalPlayer({ clip }: VerticalPlayerProps) {
         {muted ? <MutedGlyph /> : <SoundGlyph />}
         {muted ? "Turn the sound on" : "Mute"}
       </button>
+      )}
     </div>
   );
 }

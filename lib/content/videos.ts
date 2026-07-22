@@ -113,6 +113,19 @@ export const videos: Video[] = [
     place: "bar",
   },
   {
+    slug: "luna-tyson-bathroom",
+    title: "Groceries",
+    synopsis:
+      "Tyson lets himself in with shopping she didn't ask for. She's on her phone, and she doesn't put it down.",
+    file: "luna-tyson-bathroom.proxy.mp4",
+    poster: "/posters/luna-tyson-bathroom.jpg",
+    durationSeconds: 75,
+    access: "free",
+    mature: true,
+    feelings: ["desire", "lies"],
+    place: "lakehouse",
+  },
+  {
     slug: "luna-josh-coffee",
     title: "Coffee",
     synopsis:

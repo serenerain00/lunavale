@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getVideo, videos, formatDuration } from "@/lib/content/videos";
 import { canWatch, isMember } from "@/lib/access/entitlement";
 import { VideoPlayer } from "@/components/media/VideoPlayer";
+import { LockedNotice } from "@/components/membership/LockedNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { enterPreviewMembership } from "@/app/actions/session";
 
 interface WatchPageProps {
   params: Promise<{ slug: string }>;
@@ -48,10 +47,10 @@ export default async function WatchPage({ params }: WatchPageProps) {
       <main className="mx-auto w-full max-w-5xl flex-1 px-5 pb-24 sm:px-8">
         <nav className="py-5 text-sm">
           <Link
-            href="/"
+            href="/browse"
             className="text-stone transition-colors hover:text-ivory"
           >
-            ← All scenes
+            ← Back to the catalog
           </Link>
         </nav>
 
@@ -64,7 +63,7 @@ export default async function WatchPage({ params }: WatchPageProps) {
                 title={video.title}
               />
             ) : (
-              <LockedState video={video} />
+              <LockedNotice cover={video.poster} subject="This scene" />
             )}
           </div>
         </div>
@@ -96,40 +95,5 @@ export default async function WatchPage({ params }: WatchPageProps) {
         </div>
       </main>
     </>
-  );
-}
-
-function LockedState({
-  video,
-}: {
-  video: NonNullable<ReturnType<typeof getVideo>>;
-}) {
-  return (
-    <div className="absolute inset-0">
-      <Image
-        src={video.poster}
-        alt=""
-        fill
-        sizes="(max-width: 1024px) 100vw, 1024px"
-        className="object-cover brightness-[0.35]"
-      />
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full bg-void/70 px-3 py-1 text-sm text-amber-soft backdrop-blur-sm">
-          Members only
-        </span>
-        <p className="max-w-md text-balance leading-relaxed text-ivory">
-          This scene is part of the membership. Preview access to watch it and
-          everything else in the Vault.
-        </p>
-        <form action={enterPreviewMembership}>
-          <button
-            type="submit"
-            className="rounded-full bg-amber px-6 py-2.5 text-sm font-medium text-void transition-colors duration-[--duration-quick] hover:bg-amber-soft"
-          >
-            Preview membership
-          </button>
-        </form>
-      </div>
-    </div>
   );
 }

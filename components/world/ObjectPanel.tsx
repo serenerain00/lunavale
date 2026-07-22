@@ -5,10 +5,10 @@
  */
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { getVideo, formatDuration } from "@/lib/content/videos";
 import { VideoPlayer } from "@/components/media/VideoPlayer";
-import { enterPreviewMembership } from "@/app/actions/session";
 import type { WorldObject } from "@/lib/content/world";
 
 interface ObjectPanelProps {
@@ -98,16 +98,17 @@ function LockedBody({ object }: { object: WorldObject }) {
         {object.placeholder}
       </p>
       <p className="text-sm text-stone-dim">
-        This discovery is part of the membership. Preview access to open it.
+        This discovery is part of the Vault, along with the rest of the locked
+        rooms in this location.
       </p>
-      <form action={enterPreviewMembership}>
-        <button
-          type="submit"
-          className="rounded-full bg-amber px-6 py-2.5 text-sm font-medium text-void transition-colors hover:bg-amber-soft"
-        >
-          Preview membership
-        </button>
-      </form>
+      {/* Out to the pitch rather than granting access inline: a locked object
+          is a conversion moment, not a checkout. */}
+      <Link
+        href="/membership"
+        className="inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+      >
+        See what membership opens
+      </Link>
     </div>
   );
 }

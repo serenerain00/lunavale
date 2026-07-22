@@ -45,6 +45,11 @@ stories/**/*.webm
 *.mov
 *.webm
 
+# …except the public trailer/hero loops. These are small, deliberately public
+# marketing cuts built by scripts/make-hero-loop.sh and served straight from
+# /public — story media still only reaches a viewer through /api/stream.
+!public/hero/*.mp4
+
 # photogrammetry room scans — large binaries, delivered/hosted out of band
 # (see docs/world/SCAN_CAPTURE.md)
 public/scans/**

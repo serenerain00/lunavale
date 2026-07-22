@@ -15,8 +15,8 @@
  *   - clear cancellation: `TIERS[n].commitment` is shown wherever price is
  *
  * ┌─────────────────────────────────────────────────────────────────────────┐
- * │ PLACEHOLDER: prices, tier names and every benefit line below are filler  │
- * │ pending Melissa's decisions. `id` values are load-bearing (they appear   │
+ * │ Vault is confirmed at $8/month. Tier names and benefit lines are still   │
+ * │ placeholder pending sign-off. `id` values are load-bearing (they appear  │
  * │ in URLs, cookies and entitlement checks) — change copy freely, change    │
  * │ ids deliberately.                                                        │
  * └─────────────────────────────────────────────────────────────────────────┘

@@ -113,6 +113,19 @@ export const videos: Video[] = [
     place: "bar",
   },
   {
+    slug: "josh-tyson-barn",
+    title: "The Barn",
+    synopsis:
+      "Josh and Tyson at the tractor before the day starts. Two men who work well together, and everything neither of them is saying.",
+    file: "josh-tyson-barn.proxy.mp4",
+    poster: "/posters/josh-tyson-barn.jpg",
+    durationSeconds: 68,
+    access: "free",
+    mature: false,
+    feelings: ["distance"],
+    place: "farmhouse",
+  },
+  {
     slug: "luna-tyson-bathroom",
     title: "Groceries",
     synopsis:

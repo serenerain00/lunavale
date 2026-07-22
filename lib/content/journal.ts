@@ -36,24 +36,15 @@
  * previous/next links both read from that order. Insert new entries in place
  * rather than appending.
  *
- * ACCESS: the open entries are the shop window. They were picked to run as a
- * readable sequence rather than a scatter — the end of the ten years, Tyson
- * turning up in week two, the diner, the Carrera, the evening she notices him,
- * month four, the firepit, Josh's call, and the hour before the dinner. A
- * visitor can read that straight through and arrive at a real cliff: she is
- * about to have dinner with the man who left, and she has just decided not to
- * tell her best friend.
+ * ACCESS: about four in five entries are members-only, the split Melissa
+ * asked for. The six that stay open are the shop window — the last box, Tyson
+ * turning up in week two, the Carrera, Josh's call, the coffee, and the hour
+ * in the bath. They establish the voice, the friendship and the premise
+ * without giving away a single turn: a visitor can read them and know exactly
+ * what they'd be paying for, which is her deciding what to do about it.
  *
- * Everything after that point is members-only, because everything after that
- * point is the story: the lie, Josh having already told him, the silence
- * ritual failing, the bar, the park, and the night.
- *
- * docs/monetization/MONETIZATION.md lists journals under Vault Membership and
- * the membership page sells "Luna's writing, in her own words", so the bulk
- * has to stay behind it or those claims stop being true.
- *
- * If you move a flag, keep the shape: open the entries that establish the
- * voice and the situation, keep the ones that turn it.
+ * Everything with a turn in it — the growing feelings, the lie, the night — is
+ * behind the Vault, because that is the story and the story is the product.
  */
 
 import type { AccessLevel } from "@/lib/content/videos";
@@ -136,7 +127,7 @@ export const journal: JournalEntry[] = [
     dateline: "Thursday, the usual",
     place: "lakehouse",
     about: ["tyson"],
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "Diner at the bottom of the hill, same booth, and he ordered for both of us wrong on purpose, which is a thing we have been doing to each other since we were twenty-two and which has never once been funny to anybody else.",
@@ -151,7 +142,7 @@ export const journal: JournalEntry[] = [
     place: "lakehouse",
     where: "The back deck",
     about: ["luna", "tyson"],
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "I am going to write one sentence in this book that I will not say out loud, and then I am going to close it and go to bed.",
@@ -165,7 +156,7 @@ export const journal: JournalEntry[] = [
     place: "lakehouse",
     where: "The back deck",
     about: ["luna", "tyson"],
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "He was fixing the rail on the deck and had his sleeves up, and I looked at his forearms for slightly too long, and then I looked away, and then I sat with the fact that I had needed to look away.",
@@ -181,7 +172,7 @@ export const journal: JournalEntry[] = [
     where: "The firepit",
     about: ["tyson"],
     sceneSlug: "tyson-luna-lakehouse-fire",
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "He built the fire the way he does everything — like it had already been decided and he was just catching up to it. Ex-military hands. No wasted movement. I watched him crouched over the wood and thought: I am not going to say anything tonight.",
@@ -235,7 +226,7 @@ export const journal: JournalEntry[] = [
     place: "lakehouse",
     where: "The kitchen",
     about: ["tyson", "josh"],
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "I can't tell him.",
@@ -579,7 +570,7 @@ export const journal: JournalEntry[] = [
     dateline: "No date, I've lost track",
     place: "farmhouse",
     about: ["luna"],
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "Sad in the morning. Angry by about four. By the evening I am mostly just tired and slightly amazed at how much a person can feel in one day about a situation that hasn't moved an inch.",

@@ -41,6 +41,9 @@ cd "$(dirname "$0")/.."
 # slug|source path|poster seconds (optional, default 3)
 CUTS=(
   "luna-tyson-bar|stories/luna-tyson-bar/luna-tyson-bar.mp4"
+  # Josh and Tyson on the tractor — the two men, no Luna. Poster at 20s,
+  # past the sunrise establishing shots and onto the pair working.
+  "josh-tyson-barn|stories/josh-tyson-farm/josh-ty-barn.mp4|20"
   # The coffee Josh called about, which restarts everything. Identified from
   # the footage plus the story beat; it had no shooting folder of its own.
   "luna-josh-coffee|stories/withAudio/ScreenRecording_07-12-2026 08-15-54_1.mov|85"

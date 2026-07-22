@@ -26,9 +26,19 @@
   /* Lines */
   --color-hairline: rgba(242, 236, 228, 0.08);
 
+  /* Paper — the journal, and only the journal. The one warm light surface in
+     a near-black product, so it reads as a physical object brought into the
+     room rather than another panel. */
+  --color-paper: #efe6d4;
+  --color-paper-shade: #e3d7c0;
+  --color-ink: #2f3a4a;
+  --color-ink-soft: #5b6473;
+  --color-margin-rule: #b8746e;
+
   /* Typography */
   --font-display: var(--font-fraunces);
   --font-sans: var(--font-inter);
+  --font-hand: var(--font-caveat);
 
   /* Motion — durations (s) and eases, shared with lib/motion/tokens.ts */
   --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);

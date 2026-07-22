@@ -27,6 +27,12 @@ export function SiteHeader({ member }: SiteHeaderProps) {
           >
             Browse
           </Link>
+          <Link
+            href="/journal"
+            className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber sm:inline"
+          >
+            Journal
+          </Link>
           {/* Members already bought this; showing them the pitch is the kind
               of nagging the monetization rules rule out. They get Account. */}
           {!member && (

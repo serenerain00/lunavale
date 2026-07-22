@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Caveat, Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 
 // Display serif for titles; highly readable sans for controls and metadata.
@@ -14,6 +14,20 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
+});
+
+// Luna's hand, for the journal pages only. Caveat over the more authentic-
+// looking script faces on purpose: those become genuinely unreadable at
+// paragraph length, and an entry nobody can read is not atmosphere, it is a
+// locked door. Every page can still be switched to plain text — see
+// components/journal/JournalPaper.tsx.
+const caveat = Caveat({
+  // Named for the face; app/globals.css aliases it to --font-hand, matching
+  // how the display and sans faces are wired.
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -59,7 +73,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${inter.variable} h-full`}
+      className={`${fraunces.variable} ${inter.variable} ${caveat.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-void text-ivory">
         {children}

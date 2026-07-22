@@ -96,8 +96,42 @@ export const places = [
   },
 ] as const satisfies readonly Place[];
 
+/**
+ * The people Luna writes about. A third browse axis, used by the journal:
+ * an entry is filed by where it was written and by who it is about.
+ */
+export const people = [
+  {
+    id: "josh",
+    label: "Josh",
+    blurb: "The one she built a life with.",
+  },
+  {
+    id: "tyson",
+    label: "Tyson",
+    blurb: "The one she didn't plan on.",
+  },
+  {
+    id: "luna",
+    label: "Herself",
+    blurb: "The entries that aren't about anyone else.",
+  },
+] as const satisfies readonly Person[];
+
+export interface Person {
+  /** Stable id — appears in ?about= URLs. Do not rename casually. */
+  id: string;
+  label: string;
+  blurb: string;
+}
+
 export type FeelingId = (typeof feelings)[number]["id"];
 export type PlaceId = (typeof places)[number]["id"];
+export type PersonId = (typeof people)[number]["id"];
+
+export function getPerson(id: string): Person | undefined {
+  return people.find((p) => p.id === id);
+}
 
 export function getFeeling(id: string): Feeling | undefined {
   return feelings.find((f) => f.id === id);

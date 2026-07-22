@@ -1,14 +1,23 @@
 /**
- * Gated video stream.
+ * Gated media stream — the only way bytes reach a viewer.
  *
- * Serves media from `stories/` ONLY after a server-side entitlement check, with
- * HTTP Range support so the browser can seek. Premium scenes return 403 to
- * non-members — the file bytes never leave the server without authorization, and
- * no permanent media URL is exposed to the client (CLAUDE.md).
+ * The entitlement check happens here and nowhere else matters: premium content
+ * returns 403 to a non-member, and no durable media URL is ever handed to the
+ * client (CLAUDE.md).
  *
- * Phase 3 note: `stories/` is gitignored and not deployed. On real infrastructure
- * this route becomes a signed-URL redirect / proxy to a hosted video provider.
- * The URL shape (/api/stream/[slug]) and the auth gate stay identical.
+ * Two backends, chosen at request time by lib/media/storage.ts:
+ *
+ *   Production — Vercel Blob. The blobs are PRIVATE, so their URLs are useless
+ *   on their own. After the gate passes we mint a short-lived signed URL and
+ *   redirect to it, which hands the range requests, seeking and CDN delivery to
+ *   Blob instead of pushing 456MB of video through a serverless function. A URL
+ *   scraped out of devtools stops working within the hour.
+ *
+ *   Local — the file on disk in stories/, streamed with Range support so
+ *   seeking works with nothing configured.
+ *
+ * The URL shape (/api/stream/[slug]) and the gate are identical either way, so
+ * nothing else in the app knows or cares which is in play.
  */
 
 import { createReadStream } from "node:fs";
@@ -17,6 +26,11 @@ import path from "node:path";
 import { Readable } from "node:stream";
 import { getStreamable } from "@/lib/content/streamable";
 import { canWatch } from "@/lib/access/entitlement";
+import {
+  blobConfigured,
+  blobPathFor,
+  SIGNED_URL_TTL_SECONDS,
+} from "@/lib/media/storage";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -39,6 +53,39 @@ export async function GET(
     return new Response("Membership required", { status: 403 });
   }
 
+  // ---- Production path: signed redirect to private Blob storage ------------
+  if (blobConfigured()) {
+    try {
+      // Imported lazily so local development never pays for the SDK, and so a
+      // missing dependency can't break the on-disk path.
+      const { issueSignedToken, presignUrl } = await import("@vercel/blob");
+      const pathname = blobPathFor(media.file);
+      const validUntil = Date.now() + SIGNED_URL_TTL_SECONDS * 1000;
+
+      // Scoped to this one pathname and to reads only — a token minted for one
+      // scene cannot be replayed against another, or used to write anything.
+      const token = await issueSignedToken({
+        pathname,
+        operations: ["get"],
+        validUntil,
+      });
+      const { presignedUrl } = await presignUrl(token, {
+        operation: "get",
+        access: "private",
+        pathname,
+        validUntil,
+      });
+
+      // 307 keeps the method and lets the browser reissue its Range requests
+      // straight at Blob, so the video never passes through this function.
+      return Response.redirect(presignedUrl, 307);
+    } catch (error) {
+      console.error(`stream: blob lookup failed for ${media.file}`, error);
+      return new Response("Media unavailable", { status: 404 });
+    }
+  }
+
+  // ---- Local path: read it off disk ---------------------------------------
   // `media.file` comes from our own data, not user input, but resolve-and-verify
   // anyway so a bad entry can never escape the stories directory.
   const filePath = path.join(STORIES_DIR, media.file);

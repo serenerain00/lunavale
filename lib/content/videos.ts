@@ -10,6 +10,8 @@
  * The `slug`, `file`, and `access` fields are load-bearing and should stay stable.
  */
 
+import type { FeelingId, PlaceId } from "@/lib/content/taxonomy";
+
 export type AccessLevel = "free" | "premium";
 
 export interface Video {
@@ -29,6 +31,13 @@ export interface Video {
   access: AccessLevel;
   /** Mature-content flag — surfaced as a label per content rules. */
   mature: boolean;
+  /**
+   * Emotional context — how this scene is browsed in the catalog. A scene can
+   * carry more than one. PLACEHOLDER tagging pending Melissa's canon pass.
+   */
+  feelings: FeelingId[];
+  /** Where in the world it happens. */
+  place: PlaceId;
 }
 
 export const videos: Video[] = [
@@ -42,6 +51,8 @@ export const videos: Video[] = [
     durationSeconds: 143,
     access: "free",
     mature: false,
+    feelings: ["trust", "desire"],
+    place: "farmhouse",
   },
   {
     slug: "tyson-luna-lakehouse-fire",
@@ -53,6 +64,8 @@ export const videos: Video[] = [
     durationSeconds: 281,
     access: "premium",
     mature: true,
+    feelings: ["desire", "distance"],
+    place: "lakehouse",
   },
   {
     slug: "tyson-park-fight",
@@ -64,6 +77,8 @@ export const videos: Video[] = [
     durationSeconds: 155,
     access: "premium",
     mature: true,
+    feelings: ["hurt", "lies"],
+    place: "park",
   },
 ];
 

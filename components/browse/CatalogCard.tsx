@@ -1,29 +1,40 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatDuration, type Video } from "@/lib/content/videos";
+import type { CatalogItem } from "@/lib/content/catalog";
 
-interface VideoCardProps {
-  video: Video;
-  /** Whether the current viewer is entitled to watch (drives the lock state). */
+interface CatalogCardProps {
+  item: CatalogItem;
+  /** Whether the current viewer is entitled to open it (drives the lock state). */
   unlocked: boolean;
+  /** Sizes hint for the responsive image; set by the layout using the card. */
+  sizes?: string;
 }
 
-export function VideoCard({ video, unlocked }: VideoCardProps) {
-  const locked = video.access === "premium" && !unlocked;
+/**
+ * One browsable thing — a scene or a still gallery. Kind-agnostic on purpose:
+ * the catalog projects every content type into `CatalogItem`, so new kinds
+ * inherit this card for free.
+ */
+export function CatalogCard({
+  item,
+  unlocked,
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+}: CatalogCardProps) {
+  const locked = item.access === "premium" && !unlocked;
 
   return (
     <Link
-      href={`/watch/${video.slug}`}
+      href={item.href}
       data-reveal-item
-      className="group relative block overflow-hidden rounded-lg bg-charcoal ring-1 ring-hairline transition-transform duration-[--duration-standard] ease-[--ease-standard] hover:-translate-y-1 focus-visible:-translate-y-1"
+      className="group relative flex h-full flex-col overflow-hidden rounded-lg bg-charcoal ring-1 ring-hairline transition-transform duration-(--duration-standard) ease-(--ease-standard) hover:-translate-y-1 focus-visible:-translate-y-1"
     >
       <div className="relative aspect-video overflow-hidden">
         <Image
-          src={video.poster}
+          src={item.poster}
           alt=""
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className={`object-cover transition-transform duration-[--duration-cinematic] ease-[--ease-cinematic] group-hover:scale-[1.04] ${
+          sizes={sizes}
+          className={`object-cover transition-transform duration-(--duration-cinematic) ease-(--ease-cinematic) group-hover:scale-[1.04] ${
             locked ? "brightness-[0.55]" : "brightness-90 group-hover:brightness-100"
           }`}
         />
@@ -31,18 +42,23 @@ export function VideoCard({ video, unlocked }: VideoCardProps) {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/90 via-void/10 to-transparent" />
 
         {/* Access + maturity badges */}
-        <div className="absolute left-3 top-3 flex gap-2">
+        <div className="absolute left-3 top-3 flex flex-wrap gap-2">
           {locked ? (
             <span className="inline-flex items-center gap-1 rounded-full bg-void/70 px-2.5 py-1 text-xs font-medium text-amber-soft backdrop-blur-sm">
               <LockGlyph />
               Members
             </span>
-          ) : video.access === "free" ? (
+          ) : item.access === "free" ? (
             <span className="rounded-full bg-void/70 px-2.5 py-1 text-xs font-medium text-stone backdrop-blur-sm">
               Free
             </span>
           ) : null}
-          {video.mature && (
+          {item.kind === "gallery" && (
+            <span className="rounded-full bg-void/70 px-2.5 py-1 text-xs font-medium text-stone backdrop-blur-sm">
+              Stills
+            </span>
+          )}
+          {item.mature && (
             <span className="rounded-full bg-void/70 px-2.5 py-1 text-xs font-medium text-stone backdrop-blur-sm">
               Mature
             </span>
@@ -50,16 +66,16 @@ export function VideoCard({ video, unlocked }: VideoCardProps) {
         </div>
 
         <span className="absolute bottom-3 right-3 rounded bg-void/70 px-2 py-0.5 text-xs tabular-nums text-stone backdrop-blur-sm">
-          {formatDuration(video.durationSeconds)}
+          {item.meta}
         </span>
       </div>
 
       <div className="p-4">
         <h3 className="font-display text-xl font-medium leading-tight text-ivory">
-          {video.title}
+          {item.title}
         </h3>
         <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-stone">
-          {video.synopsis}
+          {item.synopsis}
         </p>
       </div>
     </Link>

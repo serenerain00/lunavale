@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -36,6 +36,19 @@ export const metadata: Metadata = {
     title: "Luna Vault",
     description: "An explorable cinematic universe of original stories.",
   },
+};
+
+/**
+ * `viewportFit: "cover"` lets full-bleed surfaces (the lightbox, rails that
+ * run to the screen edge) reach into a phone's rounded corners, with
+ * env(safe-area-inset-*) keeping controls out of the notch and home indicator.
+ * Pinch-zoom is left enabled on purpose — disabling it fails WCAG 1.4.4.
+ */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0a0908",
 };
 
 export default function RootLayout({

@@ -6,6 +6,9 @@
  * Optimized web copies live in public/gallery/<event>/NN.jpg and are committed.
  */
 
+import type { AccessLevel } from "@/lib/content/videos";
+import type { FeelingId, PlaceId } from "@/lib/content/taxonomy";
+
 export interface StillGallery {
   /** Matches the source stills folder name. */
   id: string;
@@ -13,6 +16,14 @@ export interface StillGallery {
   subtitle: string;
   /** Optimized web image paths under /public, in display order. */
   images: string[];
+  /** Compressed cover used as the catalog card image. */
+  cover: string;
+  /** Emotional context — how this set is browsed in the catalog. */
+  feelings: FeelingId[];
+  /** Where in the world it happens. */
+  place: PlaceId;
+  access: AccessLevel;
+  mature: boolean;
 }
 
 function seq(event: string, count: number): string[] {
@@ -28,6 +39,11 @@ export const galleries: StillGallery[] = [
     title: "Dinner",
     subtitle: "Josh & Luna",
     images: seq("josh-luna-dinner", 14),
+    cover: "/gallery/josh-luna-dinner/cover.jpg",
+    feelings: ["trust", "desire"],
+    place: "farmhouse",
+    access: "free",
+    mature: false,
   },
 ];
 

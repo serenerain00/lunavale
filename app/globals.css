@@ -42,6 +42,12 @@ html {
   color-scheme: dark;
 }
 
+:root {
+  /* Height of the sticky site header — surfaces that stick below it
+     (e.g. the /browse filter bar) offset by this instead of guessing. */
+  --header-h: 3.8125rem;
+}
+
 body {
   background: var(--color-void);
   color: var(--color-ivory);
@@ -67,4 +73,35 @@ body {
   outline: 2px solid var(--color-amber);
   outline-offset: 2px;
   border-radius: 2px;
+}
+
+/*
+  Horizontal rails (components/browse/Rail.tsx).
+
+  The native scrollbar is suppressed because the rail draws its own progress
+  indicator, which is always visible — on macOS and iOS the system bar is an
+  overlay that only appears mid-gesture, so it can never be the affordance.
+
+  overscroll-behavior is the important mobile fix: without it a swipe that
+  reaches the end of a rail chains outward and either scrolls the page
+  sideways or triggers the browser's back-swipe gesture mid-browse.
+*/
+.rail-scroller {
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  /* Momentum scrolling stays on iOS even with snapping applied. */
+  -webkit-overflow-scrolling: touch;
+}
+
+.rail-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+  Nothing should ever push the page sideways on a phone. Rails scroll inside
+  their own box; the document itself has no horizontal axis to travel on.
+*/
+html,
+body {
+  overflow-x: clip;
 }

@@ -1,45 +1,46 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AmbientVideo } from "@/components/home/AmbientVideo";
+import type { Hero as HeroContent } from "@/lib/content/hero";
 
 interface HeroProps {
-  /** Where the primary "watch" button goes — a real, free scene. */
-  watchHref: string;
-  watchLabel: string;
-  /** Whether the viewer already has a membership, which changes the second CTA. */
+  hero: HeroContent;
+  /** Whether the viewer already has a membership. */
   member: boolean;
+  /** Whether this viewer may actually watch the hero's scene. */
+  unlocked: boolean;
 }
 
-/** The public trailer loop, built by scripts/make-hero-loop.sh. */
-const HERO_VIDEO = "/hero/bar-loop.mp4";
-const HERO_POSTER = "/hero/bar-loop.jpg";
-
 /**
- * The landing hero: one frame of the actual work, at full bleed, with the
- * fewest possible words on top of it.
+ * The landing hero: twelve seconds of a real scene at full bleed, the fewest
+ * possible words on top of it, and a play button that plays the scene you are
+ * looking at. Which scene that is rotates daily — see lib/content/hero.ts.
  *
  * Height is capped in `svh` rather than `vh` so a phone's collapsing browser
  * chrome can't crop the buttons off the bottom, and floored in `rem` so the
  * composition doesn't collapse on a short laptop window.
- *
- * The scrims are doing real work, not decoration: the bottom one guarantees
- * text contrast over footage whose brightness changes every frame, and the
- * last one blends the image into the page background so the rails below read
- * as the same surface rather than a separate widget.
  */
-export function Hero({ watchHref, watchLabel, member }: HeroProps) {
+export function Hero({ hero, member, unlocked }: HeroProps) {
+  const { video } = hero;
+
   return (
     <section className="relative isolate flex min-h-[34rem] flex-col justify-end overflow-hidden [height:78svh] sm:[height:82svh]">
       <div className="absolute inset-0 -z-10">
+        {/*
+          Keyed on the slug so a rotation change swaps the element rather than
+          mutating one in place — otherwise the browser can hold the previous
+          day's decoded frame while the new source loads.
+        */}
         <Image
-          src={HERO_POSTER}
+          key={hero.poster}
+          src={hero.poster}
           alt=""
           fill
           priority
           sizes="100vw"
           className="object-cover object-[60%_center] sm:object-center"
         />
-        <AmbientVideo src={HERO_VIDEO} poster={HERO_POSTER} />
+        <AmbientVideo key={hero.loop} src={hero.loop} poster={hero.poster} />
 
         {/*
           Three scrims, each doing one job, kept as light as legibility allows
@@ -63,6 +64,10 @@ export function Hero({ watchHref, watchLabel, member }: HeroProps) {
         <h1 className="mt-4 max-w-2xl font-display text-4xl font-light leading-[1.05] text-ivory sm:text-6xl lg:text-7xl">
           Enter the world of Luna.
         </h1>
+
+        {/* The pitch stays generic — a first-time visitor needs to know what
+            this place is before they need to know which scene is playing
+            behind it. The button carries the tie-in by naming the scene. */}
         <p className="mt-5 max-w-lg text-base leading-relaxed text-stone sm:text-lg">
           Original scenes from the lakehouse, the farmhouse, and the places in
           between. Walk into a location, or watch the story straight through.
@@ -70,11 +75,13 @@ export function Hero({ watchHref, watchLabel, member }: HeroProps) {
 
         <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
           <Link
-            href={watchHref}
+            href={`/watch/${video.slug}`}
             className="inline-flex min-h-12 items-center gap-2.5 rounded-full bg-ivory px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-white sm:px-7"
           >
-            <PlayGlyph />
-            {watchLabel}
+            {/* A locked hero says so on the button rather than promising
+                playback and delivering a paywall on the next screen. */}
+            {unlocked ? <PlayGlyph /> : <LockGlyph />}
+            Play {video.title}
           </Link>
           <Link
             href="/world/farmhouse"
@@ -102,6 +109,28 @@ function PlayGlyph() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
       <path d="M7 4.5v15l13-7.5z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function LockGlyph() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect
+        x="5"
+        y="11"
+        width="14"
+        height="9"
+        rx="2"
+        stroke="currentColor"
+        strokeWidth="2"
+      />
+      <path
+        d="M8 11V8a4 4 0 0 1 8 0v3"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }

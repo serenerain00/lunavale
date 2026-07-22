@@ -9,8 +9,9 @@ import {
 import { Hero } from "@/components/home/Hero";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { getMembership } from "@/lib/access/entitlement";
+import { canWatch, getMembership } from "@/lib/access/entitlement";
 import { catalog, shelves, type CatalogItem } from "@/lib/content/catalog";
+import { heroForTime } from "@/lib/content/hero";
 import { formatPrice, getTier } from "@/lib/content/membership";
 
 export default async function Home() {
@@ -18,21 +19,21 @@ export default async function Home() {
 
   const free = catalog.filter((item) => item.access === "free");
   const premium = catalog.filter((item) => item.access === "premium");
-  // The hero's play button has to land somewhere that actually plays for
-  // everyone, so it points at free material — never at a locked door.
-  const opener = free[0] ?? catalog[0];
   const vault = getTier("vault")!;
+
+  // Rotates daily. Resolved per request rather than at build time, so the
+  // turnover doesn't wait for a deploy.
+  const hero = heroForTime();
+  const heroUnlocked = hero ? await canWatch(hero.video) : false;
 
   return (
     <>
       <SiteHeader member={member} />
 
       <main className="flex-1 pb-24">
-        <Hero
-          watchHref={opener ? opener.href : "/browse"}
-          watchLabel={opener ? `Play ${opener.title}` : "Browse the catalog"}
-          member={member}
-        />
+        {hero && (
+          <Hero hero={hero} member={member} unlocked={heroUnlocked} />
+        )}
 
         {/* Rails start immediately under the hero — the streaming grammar
             everyone already reads: one striking frame, then rows to pick from. */}

@@ -15,7 +15,7 @@ import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
 import path from "node:path";
 import { Readable } from "node:stream";
-import { getVideo } from "@/lib/content/videos";
+import { getStreamable } from "@/lib/content/streamable";
 import { canWatch } from "@/lib/access/entitlement";
 
 export const runtime = "nodejs";
@@ -28,18 +28,20 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> },
 ) {
   const { slug } = await params;
-  const video = getVideo(slug);
-  if (!video) {
+  // Scenes and vertical clips both stream through here — see
+  // lib/content/streamable.ts for why that lookup lives in one place.
+  const media = getStreamable(slug);
+  if (!media) {
     return new Response("Not found", { status: 404 });
   }
 
-  if (!(await canWatch(video))) {
+  if (!(await canWatch(media))) {
     return new Response("Membership required", { status: 403 });
   }
 
-  // `video.file` comes from our own data, not user input, but resolve-and-verify
+  // `media.file` comes from our own data, not user input, but resolve-and-verify
   // anyway so a bad entry can never escape the stories directory.
-  const filePath = path.join(STORIES_DIR, video.file);
+  const filePath = path.join(STORIES_DIR, media.file);
   if (path.dirname(filePath) !== STORIES_DIR) {
     return new Response("Invalid media path", { status: 400 });
   }

@@ -12,6 +12,7 @@
 #   scripts/optimize-media.sh poster  <slug>         # frame from stories/<slug>.mp4 -> public/posters
 #   scripts/optimize-media.sh video   <slug>         # stories/<slug>.mp4 -> <slug>.proxy.mp4
 #   scripts/optimize-media.sh import  <slug> <src> [at] # cut -> proxy + poster ([at]=poster seconds)
+#   scripts/optimize-media.sh vertical <slug> <src> [at] # same, for 9:16 portrait cuts
 #
 # Requires ffmpeg (brew install ffmpeg).
 
@@ -27,7 +28,9 @@ STILL_WIDTH=1600      # long edge for gallery stills
 STILL_Q=5             # ffmpeg mjpeg quality (2 best … 31 worst); ~5 keeps grain
 CARD_WIDTH=1280       # 16:9 card art (covers, posters)
 CARD_HEIGHT=720
-PROXY_HEIGHT=720      # streaming proxy height
+PROXY_HEIGHT=720      # streaming proxy height (landscape: sized by height)
+VERTICAL_WIDTH=720    # portrait proxy width — 9:16 is sized by width instead
+VERTICAL_HEIGHT=1280
 PROXY_CRF=23          # x264 quality; lower = larger file
 
 die() { echo "error: $*" >&2; exit 1; }
@@ -128,8 +131,35 @@ case "$cmd" in
       "$(du -h "public/posters/$slug.jpg" | cut -f1)" "$dur"
     ;;
 
+  vertical)
+    # Portrait cuts (the Instagram ones). Same idea as `import`, but sized by
+    # WIDTH — scaling a 9:16 clip to 720 tall would leave it 405 wide, which is
+    # smaller than the phone it was made for.
+    slug="${1:?usage: optimize-media.sh vertical <slug> <source> [poster-seconds]}"
+    src="${2:?usage: optimize-media.sh vertical <slug> <source> [poster-seconds]}"
+    at="${3:-3}"
+    [ -f "$src" ] || die "no source at $src"
+
+    out="stories/$slug.proxy.mp4"
+    ffmpeg -y -loglevel error -i "$src" \
+      -vf "scale=$VERTICAL_WIDTH:-2" \
+      -c:v libx264 -preset medium -crf "$PROXY_CRF" -pix_fmt yuv420p \
+      -c:a aac -b:a 128k -movflags +faststart \
+      "$out"
+
+    # Portrait poster, cropped to a true 9:16 so the cards tile evenly.
+    ffmpeg -y -loglevel error -ss "$at" -i "$src" -frames:v 1 \
+      -vf "scale=$VERTICAL_WIDTH:$VERTICAL_HEIGHT:force_original_aspect_ratio=increase,crop=$VERTICAL_WIDTH:$VERTICAL_HEIGHT" \
+      -q:v "$STILL_Q" "public/posters/$slug.jpg"
+
+    dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src")
+    printf '%-26s proxy %-6s poster %-6s durationSeconds: %.0f\n' \
+      "$slug" "$(du -h "$out" | cut -f1)" \
+      "$(du -h "public/posters/$slug.jpg" | cut -f1)" "$dur"
+    ;;
+
   *)
-    sed -n '3,17p' "$0"
+    sed -n '3,18p' "$0"
     exit 1
     ;;
 esac

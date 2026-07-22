@@ -28,6 +28,12 @@ export function SiteHeader({ member }: SiteHeaderProps) {
             Browse
           </Link>
           <Link
+            href="/clips"
+            className="text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
+          >
+            Clips
+          </Link>
+          <Link
             href="/journal"
             className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber sm:inline"
           >

@@ -36,42 +36,13 @@ export default async function Home() {
           <Hero hero={hero} member={member} unlocked={heroUnlocked} />
         )}
 
-        {/* Rails start immediately under the hero — the streaming grammar
-            everyone already reads: one striking frame, then rows to pick from. */}
-        <div className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14">
-          {free.length > 0 && (
-            <Row
-              heading="Start here"
-              blurb="Open to everyone, in full. No account needed."
-              href="/browse"
-              hrefLabel="All scenes"
-              items={free}
-              member={member}
-            />
-          )}
-
-          {premium.length > 0 && (
-            <Row
-              heading="In the Vault"
-              blurb={
-                member
-                  ? "Yours, as part of your membership."
-                  : "Members see these in full — and the locked rooms they came from."
-              }
-              href={member ? "/browse" : "/membership"}
-              hrefLabel={member ? "All scenes" : "What membership opens"}
-              items={premium}
-              member={member}
-            />
-          )}
-        </div>
-
         {/* -------------------------------------------------------- journal */}
-        {/* The writing is the hook — free pages of Luna's hand, shown as real
-            paper, are the strongest thing to lead a stranger in with. */}
+        {/* Leads the page, right under the hero: the writing is the hook,
+            and free pages of Luna's hand are the strongest way to draw a
+            stranger in — before the video rails. */}
         <section
           aria-labelledby="journal-heading"
-          className="mx-auto w-full max-w-6xl px-5 pt-4 sm:px-8 sm:pt-8"
+          className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14"
         >
           <div className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
             <div className="min-w-0">
@@ -135,6 +106,36 @@ export default async function Home() {
               ))}
           </Reveal>
         </section>
+
+        {/* Then the scene rails — the streaming grammar everyone already
+            reads: rows of frames to pick from. */}
+        <div className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14">
+          {free.length > 0 && (
+            <Row
+              heading="Start here"
+              blurb="Open to everyone, in full. No account needed."
+              href="/browse"
+              hrefLabel="All scenes"
+              items={free}
+              member={member}
+            />
+          )}
+
+          {premium.length > 0 && (
+            <Row
+              heading="In the Vault"
+              blurb={
+                member
+                  ? "Yours, as part of your membership."
+                  : "Members see these in full — and the locked rooms they came from."
+              }
+              href={member ? "/browse" : "/membership"}
+              hrefLabel={member ? "All scenes" : "What membership opens"}
+              items={premium}
+              member={member}
+            />
+          )}
+        </div>
 
         {/* ----------------------------------------------------- membership */}
         {!member && (

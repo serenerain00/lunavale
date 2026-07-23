@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { ClerkProvider } from "@clerk/nextjs";
 import { authConfigured } from "@/lib/billing/provider";
 import { Caveat, Fraunces, Inter } from "next/font/google";
@@ -79,6 +80,18 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-void text-ivory">
         {children}
+
+        {/*
+          Microsoft Clarity — traffic + session analytics. Production only, so
+          local dev and preview deploys don't pollute the numbers.
+          afterInteractive loads it once the page is usable, off the critical
+          path. Project id xr14rpnqlh.
+        */}
+        {process.env.NODE_ENV === "production" && (
+          <Script id="ms-clarity" strategy="afterInteractive">
+            {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xr14rpnqlh");`}
+          </Script>
+        )}
       </body>
     </html>
   );

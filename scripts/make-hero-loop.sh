@@ -27,13 +27,13 @@ cd "$(dirname "$0")/.."
 # shot, or one where the loop point lands on a cut.
 HEROES=(
   # Night interior, warm. Three cuts; the wrap lands on one.
-  "luna-tyson-bar|stories/luna-tyson-bar/luna-tyson-bar.mp4|26|12"
+  "luna-tyson-bar|stories/luna-tyson-bar/luna-tyson-bar.mp4|26|40"
   # Day interior, warm. Opens wide on the kitchen as Josh comes through.
-  "luna-josh-kitchen-kiss|stories/luna-josh-farm-kitchen-kiss/luna-josh-kitchen-kiss.mp4|2|12"
+  "luna-josh-kitchen-kiss|stories/luna-josh-farm-kitchen-kiss/luna-josh-kitchen-kiss.mp4|2|40"
   # Night exterior, cool. Rain on the dock, lantern and far-shore lights.
-  "ty-luna-lake-fight|stories/ty-luna-farm-lake/ty-luna-lake-fight.mp4|18|12"
+  "ty-luna-lake-fight|stories/ty-luna-farm-lake/ty-luna-lake-fight.mp4|18|40"
   # Day exterior, green. The road, the truck, and the walk up it.
-  "ty-luna-farm-road|stories/ty-luna-farmRd/Ty-luna.mp4|0.5|12"
+  "ty-luna-farm-road|stories/ty-luna-farmRd/Ty-luna.mp4|0.5|40"
 )
 
 OUT_DIR="public/hero"

@@ -48,6 +48,16 @@ export interface Hero {
 /** One full turn of the rotation. */
 export const HERO_ROTATION_MS = 24 * 60 * 60 * 1000;
 
+/**
+ * Shift the changeover off midnight UTC to overnight in the US, the primary
+ * audience. 00:00 UTC is 8pm Eastern / 5pm Pacific — mid-evening, so the new
+ * hero appears while people are still up and the change reads as "same as I saw
+ * earlier." Offsetting 7 hours moves the flip to 07:00 UTC (3am Eastern /
+ * midnight Pacific), overnight on both coasts, so a full local day shows one
+ * hero and it turns over while nobody's watching.
+ */
+const ROTATION_OFFSET_MS = 7 * 60 * 60 * 1000;
+
 /** The rotation, with each slug resolved to its scene. Unknown slugs dropped. */
 export function heroes(): Hero[] {
   return HERO_SLUGS.flatMap((slug) => {
@@ -70,18 +80,20 @@ export function heroes(): Hero[] {
  * Deterministic from the clock rather than random: the same request has to
  * produce the same hero on every server that handles it, or a visitor
  * refreshing would shuffle the page under themselves and any cached HTML would
- * disagree with the next render. Whole UTC days since the epoch, modulo the
- * rotation length — so it turns over at 00:00 UTC, and adding a fifth hero
- * simply makes the cycle five days long.
+ * disagree with the next render. Whole days since the epoch, offset to the US
+ * overnight (see ROTATION_OFFSET_MS), modulo the number of heroes — so adding a
+ * fifth hero simply makes the cycle five days long.
  */
 export function heroForTime(now: number = Date.now()): Hero | undefined {
   const all = heroes();
   if (all.length === 0) return undefined;
-  const day = Math.floor(now / HERO_ROTATION_MS);
+  const day = Math.floor((now - ROTATION_OFFSET_MS) / HERO_ROTATION_MS);
   return all[day % all.length];
 }
 
 /** Milliseconds until the next rotation — used to bound page caching. */
 export function msUntilNextHero(now: number = Date.now()): number {
-  return HERO_ROTATION_MS - (now % HERO_ROTATION_MS);
+  return (
+    HERO_ROTATION_MS - ((now - ROTATION_OFFSET_MS) % HERO_ROTATION_MS)
+  );
 }

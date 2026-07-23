@@ -23,7 +23,11 @@
 import type Stripe from "stripe";
 import { stripe } from "@/lib/billing/stripe";
 import { stripeConfigured, tierForPriceId } from "@/lib/billing/provider";
-import { claimEvent, recordMembership } from "@/lib/db/memberships";
+import {
+  eventHandled,
+  markEventHandled,
+  recordMembership,
+} from "@/lib/db/memberships";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -65,14 +69,23 @@ export async function POST(request: Request) {
   }
 
   try {
-    const fresh = await claimEvent(event.id, event.type);
-    if (!fresh) return Response.json({ duplicate: event.id });
+    // Skip only events already applied. This is a check, not a claim: if the
+    // work below throws, we return 500, Stripe retries, and the retry re-applies
+    // rather than being waved through as a duplicate. Recording the id happens
+    // AFTER the work succeeds, so a transient failure can't drop a membership.
+    if (await eventHandled(event.id)) {
+      return Response.json({ duplicate: event.id });
+    }
 
+    // Idempotent — re-reads the subscription and upserts its current state — so
+    // a concurrent double-delivery that both reach here is harmless.
     await applyEvent(event);
+    await markEventHandled(event.id, event.type);
     return Response.json({ ok: true });
   } catch (error) {
-    // 500 asks Stripe to retry. A transient database failure must not silently
-    // drop somebody's membership.
+    // 500 asks Stripe to retry. A transient failure must not silently drop
+    // somebody's membership, which is exactly what claiming-before-applying
+    // used to do here.
     console.error(`stripe webhook: handling ${event.type} failed`, error);
     return new Response("Handler failed", { status: 500 });
   }

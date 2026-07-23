@@ -132,21 +132,36 @@ export async function recordMembership(input: {
 }
 
 /**
- * True the first time an event id is seen.
+ * Whether this Stripe event has already been fully processed.
  *
- * Stripe retries deliveries and does not guarantee order, so the handler has
- * to be idempotent. Claiming the id in the same statement that inserts it
- * means two concurrent deliveries of the same event can't both win.
+ * A read, not a claim, and that distinction is load-bearing: the webhook
+ * checks this BEFORE doing the work and only records the id AFTER the work
+ * succeeds (markEventHandled). If it claimed the id up front and then the work
+ * failed, Stripe's retry would see the claim, treat the event as a duplicate,
+ * and the update would be lost forever.
  */
-export async function claimEvent(
+export async function eventHandled(eventId: string): Promise<boolean> {
+  const rows = (await sql()`
+    SELECT 1 FROM billing_events WHERE event_id = ${eventId} LIMIT 1
+  `) as unknown[];
+  return rows.length > 0;
+}
+
+/**
+ * Record an event as processed. Called only after its effect is applied.
+ *
+ * Concurrency safety does not come from here — two simultaneous deliveries can
+ * both pass eventHandled() and both apply. That's fine because the apply is an
+ * idempotent upsert of the subscription's current state, so they write the
+ * same thing. The ON CONFLICT keeps the second insert from erroring.
+ */
+export async function markEventHandled(
   eventId: string,
   type: string,
-): Promise<boolean> {
-  const rows = (await sql()`
+): Promise<void> {
+  await sql()`
     INSERT INTO billing_events (event_id, type)
     VALUES (${eventId}, ${type})
     ON CONFLICT (event_id) DO NOTHING
-    RETURNING event_id
-  `) as Array<{ event_id: string }>;
-  return rows.length > 0;
+  `;
 }

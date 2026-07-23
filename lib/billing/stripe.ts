@@ -20,7 +20,13 @@ export function stripe(): Stripe {
   if (!key) throw new Error("STRIPE_SECRET_KEY is not set");
   // Cached across invocations — Fluid Compute reuses instances, so rebuilding
   // the client per request would be waste.
-  client ??= new Stripe(key);
+  client ??= new Stripe(key, {
+    // Pin the wire version explicitly. stripe-node already defaults to the
+    // version its types are generated against, so this doesn't change today's
+    // behaviour — it makes a future SDK upgrade a deliberate decision rather
+    // than a silent change to what the API receives.
+    apiVersion: "2026-06-24.dahlia",
+  });
   return client;
 }
 

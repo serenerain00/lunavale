@@ -56,8 +56,9 @@ export default async function Home() {
                 Read from Luna&rsquo;s journal
               </h2>
               <p className="mt-2 max-w-lg leading-relaxed text-stone">
-                What she wrote when nobody was going to read it. These pages
-                are open to everyone — no account needed.
+                What she wrote when nobody was going to read it. These few are
+                free to read — the rest of the journal is part of the
+                membership.
               </p>
             </div>
             <Link

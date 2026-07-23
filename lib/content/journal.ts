@@ -654,6 +654,11 @@ export function entriesForScene(slug: string): JournalEntry[] {
   return journal.filter((e) => e.sceneSlug === slug);
 }
 
+/** The entries free to read, in story order — the journal's shop window. */
+export function freeEntries(): JournalEntry[] {
+  return journal.filter((e) => e.access === "free");
+}
+
 /** The first line, used as a card preview. */
 export function opening(entry: JournalEntry, max = 110): string {
   const first = entry.body[0] ?? "";

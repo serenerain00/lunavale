@@ -12,6 +12,7 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
 import { canWatch, getMembership } from "@/lib/access/entitlement";
 import { catalog, shelves, type CatalogItem } from "@/lib/content/catalog";
 import { heroForTime } from "@/lib/content/hero";
+import { freeEntries, opening } from "@/lib/content/journal";
 import { formatPrice, getTier } from "@/lib/content/membership";
 
 export default async function Home() {
@@ -64,6 +65,76 @@ export default async function Home() {
             />
           )}
         </div>
+
+        {/* -------------------------------------------------------- journal */}
+        {/* The writing is the hook — free pages of Luna's hand, shown as real
+            paper, are the strongest thing to lead a stranger in with. */}
+        <section
+          aria-labelledby="journal-heading"
+          className="mx-auto w-full max-w-6xl px-5 pt-4 sm:px-8 sm:pt-8"
+        >
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+            <div className="min-w-0">
+              <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                Her own hand
+              </p>
+              <h2
+                id="journal-heading"
+                className="mt-2 font-display text-2xl font-medium text-ivory sm:text-3xl"
+              >
+                Read from Luna&rsquo;s journal
+              </h2>
+              <p className="mt-2 max-w-lg leading-relaxed text-stone">
+                What she wrote when nobody was going to read it. These pages
+                are open to everyone — no account needed.
+              </p>
+            </div>
+            <Link
+              href="/journal"
+              className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+            >
+              The whole journal
+            </Link>
+          </div>
+
+          <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+            {freeEntries()
+              .slice(0, 3)
+              .map((entry) => (
+                <Link
+                  key={entry.id}
+                  href={`/journal/${entry.id}`}
+                  data-reveal-item
+                  className="group relative block overflow-hidden rounded-sm bg-paper shadow-[0_12px_34px_-12px_rgba(0,0,0,0.85)] transition-transform duration-(--duration-standard) ease-(--ease-standard) hover:-translate-y-1 focus-visible:-translate-y-1"
+                >
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        "repeating-linear-gradient(to bottom, transparent 0 21px, rgba(47,58,74,0.11) 21px 22px)",
+                      backgroundPosition: "0 3.5rem",
+                    }}
+                  />
+                  <div className="relative p-5">
+                    <p className="font-hand text-xl leading-tight text-ink-soft">
+                      {entry.dateline}
+                    </p>
+                    <p className="font-hand mt-3 line-clamp-4 text-xl leading-[1.4rem] text-ink">
+                      {opening(entry, 150)}
+                    </p>
+                    <p className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-margin-rule/15 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-[#9a4b45]">
+                      Free to read
+                    </p>
+                  </div>
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-paper-shade to-transparent"
+                  />
+                </Link>
+              ))}
+          </Reveal>
+        </section>
 
         {/* ----------------------------------------------------- membership */}
         {!member && (

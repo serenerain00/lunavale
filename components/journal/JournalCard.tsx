@@ -16,6 +16,9 @@ interface JournalCardProps {
  */
 export function JournalCard({ entry, unlocked }: JournalCardProps) {
   const locked = entry.access === "premium" && !unlocked;
+  // A positive "read this now" signal on the open entries, shown to visitors so
+  // the free pages read as an invitation instead of getting lost among locks.
+  const freeToRead = entry.access === "free" && !unlocked;
 
   return (
     <Link
@@ -55,6 +58,11 @@ export function JournalCard({ entry, unlocked }: JournalCardProps) {
           <p className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-ink-soft">
             <LockGlyph />
             The rest is in the Vault
+          </p>
+        )}
+        {freeToRead && (
+          <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-margin-rule/15 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-[#9a4b45]">
+            Free to read
           </p>
         )}
       </div>

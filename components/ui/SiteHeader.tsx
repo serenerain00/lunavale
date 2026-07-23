@@ -34,15 +34,17 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
           >
             Browse
           </Link>
+          {/* Clips steps aside on the narrowest screens so Journal — now a
+              primary surface — always has room in the nav. */}
           <Link
             href="/clips"
-            className="text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
+            className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber min-[380px]:inline"
           >
             Clips
           </Link>
           <Link
             href="/journal"
-            className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber sm:inline"
+            className="text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
           >
             Journal
           </Link>

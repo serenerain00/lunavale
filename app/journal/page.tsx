@@ -4,7 +4,11 @@ import { JournalCard } from "@/components/journal/JournalCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
-import { journal, type JournalEntry } from "@/lib/content/journal";
+import {
+  freeEntries,
+  journal,
+  type JournalEntry,
+} from "@/lib/content/journal";
 import {
   getPerson,
   getPlace,
@@ -113,6 +117,35 @@ export default async function JournalIndexPage({
           </section>
         ) : (
           <div className="pt-10">
+            {/* Lead with the free pages so a visitor lands on an open door,
+                not a wall of locks. Members already have everything, so this
+                shop-window row is only worth showing to non-members. */}
+            {!member && freeEntries().length > 0 && (
+              <section
+                aria-labelledby="free-heading"
+                className="mb-14 rounded-xl border border-amber/25 bg-amber/[0.04] p-5 sm:p-6"
+              >
+                <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <div>
+                    <h2
+                      id="free-heading"
+                      className="font-display text-2xl font-medium text-ivory sm:text-3xl"
+                    >
+                      Start here — free to read
+                    </h2>
+                    <p className="mt-1 max-w-md text-sm leading-relaxed text-stone">
+                      A handful of her pages, open to everyone. No account
+                      needed.
+                    </p>
+                  </div>
+                  <span className="text-sm text-stone-dim">
+                    {freeEntries().length} of {journal.length} entries
+                  </span>
+                </div>
+                <Grid entries={freeEntries()} member={member} />
+              </section>
+            )}
+
             {groups.map((group) => (
               <section
                 key={group.place.id}

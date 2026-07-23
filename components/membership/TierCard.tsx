@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { startMembership } from "@/app/actions/session";
 import {
   benefitsAddedBy,
   formatPrice,
@@ -101,20 +100,20 @@ export function TierCard({ tier, held }: TierCardProps) {
             {tier.cta}
           </Link>
         ) : (
-          // Bound server-side: the tier is baked into the action, not posted
-          // from a field the page could be edited to change.
-          <form action={startMembership.bind(null, tier.id)}>
-            <button
-              type="submit"
-              className={`w-full rounded-full px-5 py-3 text-sm font-medium transition-colors duration-(--duration-quick) ${
-                tier.featured
-                  ? "bg-amber text-void hover:bg-amber-soft"
-                  : "border border-hairline text-ivory hover:border-amber hover:text-amber"
-              }`}
-            >
-              {tier.cta}
-            </button>
-          </form>
+          // One link into the whole flow: /membership/start handles sign-in
+          // and checkout as a single continuous path, so a new visitor never
+          // lands back here to click again. The tier is validated server-side
+          // against the real list, so a hand-edited href can't invent a plan.
+          <Link
+            href={`/membership/start?tier=${tier.id}`}
+            className={`block rounded-full px-5 py-3 text-center text-sm font-medium transition-colors duration-(--duration-quick) ${
+              tier.featured
+                ? "bg-amber text-void hover:bg-amber-soft"
+                : "border border-hairline text-ivory hover:border-amber hover:text-amber"
+            }`}
+          >
+            {tier.cta}
+          </Link>
         )}
       </div>
     </div>

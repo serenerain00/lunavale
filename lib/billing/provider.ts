@@ -36,7 +36,7 @@ export function databaseConfigured(): boolean {
 
 /**
  * True only when real memberships can be sold, recorded and honoured.
- * While false, `startMembership` grants a clearly-labelled preview instead and
+ * While false, /membership/start grants a clearly-labelled preview instead and
  * every membership surface says so.
  */
 export function billingLive(): boolean {

@@ -7,6 +7,7 @@ import {
   RAIL_ITEM_SIZES,
 } from "@/components/browse/Rail";
 import { Hero } from "@/components/home/Hero";
+import { InterviewHero } from "@/components/home/InterviewHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { canWatch, getMembership } from "@/lib/access/entitlement";
@@ -32,9 +33,12 @@ export default async function Home() {
       <SiteHeader member={member} />
 
       <main className="flex-1 pb-24">
-        {hero && (
-          <Hero hero={hero} member={member} unlocked={heroUnlocked} />
-        )}
+        {hero &&
+          (hero.playInline ? (
+            <InterviewHero hero={hero} member={member} />
+          ) : (
+            <Hero hero={hero} member={member} unlocked={heroUnlocked} />
+          ))}
 
         {/* -------------------------------------------------------- journal */}
         {/* Leads the page, right under the hero: the writing is the hook,

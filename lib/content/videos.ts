@@ -39,6 +39,12 @@ export interface Video {
    */
   notes?: ContentNoteId[];
   /**
+   * Watchable but not part of the story catalog — the cast interview is the
+   * hero, not a scene to browse under a feeling. Streaming and /watch still
+   * work; lib/content/catalog.ts just leaves it off the shelves.
+   */
+  hidden?: boolean;
+  /**
    * Emotional context — how this scene is browsed in the catalog. A scene can
    * carry more than one. PLACEHOLDER tagging pending Melissa's canon pass.
    */
@@ -48,6 +54,23 @@ export interface Video {
 }
 
 export const videos: Video[] = [
+  {
+    // The cast interview — the pinned hero, playable in full from the home
+    // page. Hidden from the browse catalog (it isn't a story scene); /watch and
+    // streaming still work. See lib/content/hero.ts.
+    slug: "interview",
+    title: "The Interview",
+    synopsis:
+      "The cast sit down together — the world, the characters, and what it took to make it.",
+    file: "interview.proxy.mp4",
+    poster: "/posters/interview.jpg",
+    durationSeconds: 363,
+    access: "free",
+    mature: false,
+    hidden: true,
+    feelings: [],
+    place: "farmhouse",
+  },
   {
     slug: "luna-josh-first-morning",
     title: "First Morning",

@@ -46,7 +46,12 @@ export interface CatalogItem {
 
 /** Every browsable item, newest content kinds projected into one list. */
 export const catalog: CatalogItem[] = [
-  ...videos.map(
+  ...videos
+    // Some videos are watchable but not part of the story catalog — the cast
+    // interview, for instance, is the hero, not a scene to shelve under a
+    // feeling. Streaming and /watch still work; it just isn't browsed.
+    .filter((v) => !v.hidden)
+    .map(
     (v): CatalogItem => ({
       id: `scene:${v.slug}`,
       kind: "scene",

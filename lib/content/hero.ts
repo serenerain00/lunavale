@@ -43,7 +43,22 @@ export interface Hero {
   loop: string;
   /** First frame of the loop; also the whole hero when motion is reduced. */
   poster: string;
+  /**
+   * When true, the hero IS the full thing — clicking play unmutes and plays it
+   * in place, right in the hero, rather than sending the visitor to a watch
+   * page. Used for the cast interview, which is content in its own right, not a
+   * teaser for a scene elsewhere.
+   */
+  playInline?: boolean;
 }
+
+/**
+ * When set, this slug is shown as the hero always, overriding the daily
+ * rotation — used to feature one piece (the cast interview). Its loop and
+ * poster live at /hero/<slug>.{mp4,jpg} like any hero, and its `video` is the
+ * full thing (played inline). Set to null to return to the daily rotation.
+ */
+const PINNED_HERO_SLUG: string | null = "interview";
 
 /** One full turn of the rotation. */
 export const HERO_ROTATION_MS = 24 * 60 * 60 * 1000;
@@ -85,6 +100,20 @@ export function heroes(): Hero[] {
  * fifth hero simply makes the cycle five days long.
  */
 export function heroForTime(now: number = Date.now()): Hero | undefined {
+  // A pinned hero overrides the rotation. Its video is played inline.
+  if (PINNED_HERO_SLUG) {
+    const video = getVideo(PINNED_HERO_SLUG);
+    if (video) {
+      return {
+        slug: PINNED_HERO_SLUG,
+        video,
+        loop: `/hero/${PINNED_HERO_SLUG}.mp4`,
+        poster: `/hero/${PINNED_HERO_SLUG}.jpg`,
+        playInline: true,
+      };
+    }
+  }
+
   const all = heroes();
   if (all.length === 0) return undefined;
   const day = Math.floor((now - ROTATION_OFFSET_MS) / HERO_ROTATION_MS);

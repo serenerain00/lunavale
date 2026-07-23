@@ -23,7 +23,7 @@ import {
   tierCovers,
   type TierId,
 } from "@/lib/content/membership";
-import { authConfigured, billingLive } from "@/lib/billing/provider";
+import { billingLive } from "@/lib/billing/provider";
 import { tierForUser } from "@/lib/db/memberships";
 import { previewTier } from "@/lib/access/preview";
 import type { AccessLevel } from "@/lib/content/videos";
@@ -59,7 +59,12 @@ async function readTier(): Promise<TierId> {
   const previewing = await previewTier();
   if (previewing) return previewing;
 
-  if (authConfigured()) {
+  // Gate on billingLive(), not authConfigured() alone. Connecting Clerk (or
+  // Neon) to an environment before Stripe is ready must NOT flip the app onto
+  // the database-backed path — the database is empty until real subscriptions
+  // exist, so it would resolve everyone to "free" and quietly kill the preview
+  // demo. Everything stays on the cookie path until all three are live.
+  if (billingLive()) {
     // Imported lazily so the Clerk SDK is never loaded — and never throws for
     // want of keys — on a deploy that hasn't been given any.
     const { auth } = await import("@clerk/nextjs/server");

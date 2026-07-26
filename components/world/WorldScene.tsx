@@ -1,5 +1,5 @@
 /**
- * FarmhouseScene — the 3D room.
+ * WorldScene — the 3D room, for any environment.
  *
  * Renders the active room: a real photogrammetry GLB when the room has a `scan`
  * (see docs/world/SCAN_CAPTURE.md), a 360° panorama when it has a `pano`, else
@@ -51,7 +51,7 @@ interface SceneProps {
   onOpenImage: (images: string[], index: number) => void;
 }
 
-export function FarmhouseScene({
+export function WorldScene({
   room,
   member,
   focus,
@@ -244,8 +244,8 @@ function PlaceholderRoom({ room }: { room: Room }) {
   const d = ROOM.depth / 2;
   // The kitchen is an open-concept great room: the right wall is glass, and the
   // front wall opens into the living room (both drawn by KitchenFurniture).
-  const openRight = room.id === "kitchen";
-  const openFront = room.id === "kitchen";
+  const openRight = room.dressing === "kitchen-living";
+  const openFront = room.dressing === "kitchen-living";
 
   return (
     <group>
@@ -295,7 +295,10 @@ function PlaceholderRoom({ room }: { room: Room }) {
         </mesh>
       ))}
 
-      {room.id === "kitchen" ? (
+      {/* Bespoke furniture per room dressing; unbuilt dressings fall back to a
+          generic set so the room is still navigable. Add a case as each room
+          is detailed (see RoomDressing in lib/content/world.ts). */}
+      {room.dressing === "kitchen-living" ? (
         <KitchenFurniture wood={woodMaps} stone={stoneMaps} />
       ) : (
         <GenericFurniture wood={woodMaps} stone={stoneMaps} />

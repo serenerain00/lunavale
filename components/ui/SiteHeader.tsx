@@ -28,9 +28,17 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
           >
             Luna Vault
           </Link>
+          {/* The explorable world is the signature experience — it leads the
+              nav, ahead of the conventional Browse index. */}
+          <Link
+            href="/world"
+            className="text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
+          >
+            World
+          </Link>
           <Link
             href="/browse"
-            className="text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
+            className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber min-[380px]:inline"
           >
             Browse
           </Link>

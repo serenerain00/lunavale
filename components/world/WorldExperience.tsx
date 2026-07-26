@@ -1,5 +1,5 @@
 /**
- * FarmhouseExperience — client shell around the 3D scene.
+ * WorldExperience — client shell around the 3D scene, for any environment.
  *
  * Cinematic waypoint navigation (not FPS): drag to look around (cursor stays
  * free, so the user can always exit), and scroll / prev-next / clicking a hotspot
@@ -18,13 +18,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { ObjectPanel } from "@/components/world/ObjectPanel";
 import type { Environment, Room, WorldObject } from "@/lib/content/world";
 
-const FarmhouseScene = dynamic(
-  () => import("@/components/world/FarmhouseScene").then((m) => m.FarmhouseScene),
+const WorldScene = dynamic(
+  () => import("@/components/world/WorldScene").then((m) => m.WorldScene),
   {
     ssr: false,
     loading: () => (
       <div className="flex h-full items-center justify-center text-stone">
-        Loading the farmhouse…
+        Loading the scene…
       </div>
     ),
   },
@@ -42,7 +42,7 @@ function openLabel(obj: WorldObject) {
   return "Open";
 }
 
-export function FarmhouseExperience({
+export function WorldExperience({
   environment,
   member,
   initialRoomId,
@@ -119,7 +119,7 @@ export function FarmhouseExperience({
   if (mode === "deciding") {
     return (
       <div className="absolute inset-0 flex items-center justify-center text-stone">
-        Preparing the farmhouse…
+        Preparing {environment.name}…
       </div>
     );
   }
@@ -142,7 +142,7 @@ export function FarmhouseExperience({
 
   return (
     <div className="absolute inset-0 overflow-hidden bg-void" onWheel={onWheel}>
-      <FarmhouseScene
+      <WorldScene
         room={room}
         member={member}
         focus={currentObject}

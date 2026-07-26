@@ -78,26 +78,31 @@ export const places = [
     id: "lakehouse",
     label: "The Lakehouse",
     blurb: "Water, firelight, and the nights that changed things.",
+    environmentSlug: "lakehouse",
   },
   {
     id: "park",
     label: "The Park",
     blurb: "Open ground, nowhere to hide.",
+    environmentSlug: "park",
   },
   {
     id: "bar",
     label: "The Bar",
     blurb: "Low light, other people's noise, and room to say the real thing.",
+    environmentSlug: "bar",
   },
   {
     id: "lake",
     label: "The Lake",
     blurb: "Open water at the far edge of the farm, well out of earshot.",
+    environmentSlug: "lake",
   },
   {
     id: "coffee-shop",
     label: "The Coffee Shop",
     blurb: "Neutral ground, chosen for exactly that reason.",
+    environmentSlug: "coffee-shop",
   },
 ] as const satisfies readonly Place[];
 

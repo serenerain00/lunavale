@@ -20,6 +20,31 @@ export type ObjectKind = "clip" | "journal" | "memory" | "artifact";
 /** The physical item rendered for a hotspot (hover to highlight, click to open). */
 export type ItemKind = "note" | "mug" | "journal" | "remote";
 
+/**
+ * Which hand-built furniture set dresses a room. The 3D scene switches on this
+ * (not on room id, which can repeat across environments) to draw the right
+ * geometry; an unimplemented dressing falls back to a generic shell, so the
+ * room stays navigable while its bespoke build is still pending. Add a value
+ * here and a matching case in WorldScene as each room is detailed.
+ */
+export type RoomDressing =
+  | "kitchen-living"
+  | "bedroom"
+  | "workshop"
+  | "porch"
+  | "deck"
+  | "great-room"
+  | "dock"
+  | "bar"
+  | "shore"
+  | "cafe"
+  | "park"
+  | "pit"
+  | "trackside"
+  | "barn"
+  | "restaurant"
+  | "street";
+
 export interface WorldObject {
   /** Stable id, unique within the room. Used in URLs (?focus=) and analytics. */
   id: string;
@@ -82,6 +107,8 @@ export interface Room {
   description: string;
   /** Camera start position when entering the room. */
   spawn: [number, number, number];
+  /** Which hand-built furniture set to draw (procedural path). */
+  dressing?: RoomDressing;
   /**
    * Environment source, in priority order: a photoreal Gaussian splat, then a
    * 360° panorama, then a captured GLB scan, else placeholder geometry. Fill
@@ -121,6 +148,7 @@ export const environments: Environment[] = [
         description:
           "The open heart of the house — the kitchen where they'd slow-dance after dinner, opening onto the living room and its great stone fireplace.",
         spawn: [0, 1.7, 2],
+        dressing: "kitchen-living",
         accent: "#6b5238",
         areas: [
           {
@@ -196,6 +224,7 @@ export const environments: Environment[] = [
         description:
           "The room they shared. Quiet now — where Luna kept the things she never said out loud.",
         spawn: [0, 1.6, 3],
+        dressing: "bedroom",
         accent: "#5f4a5a",
         objects: [
           {
@@ -226,6 +255,7 @@ export const environments: Environment[] = [
         description:
           "Josh's place. Engine parts, sawdust, and the projects he disappeared into.",
         spawn: [0, 1.6, 3.5],
+        dressing: "workshop",
         accent: "#4f5a4a",
         objects: [
           {
@@ -256,6 +286,7 @@ export const environments: Environment[] = [
         description:
           "The threshold of the house. Where conversations started, and where some of them ended.",
         spawn: [0, 1.6, 3],
+        dressing: "porch",
         accent: "#5a5238",
         objects: [
           {
@@ -276,6 +307,554 @@ export const environments: Environment[] = [
             position: [2.4, 1.1, -1.6],
             placeholder:
               "One particular evening, near the end. Members can stay for the whole of it.",
+            access: "premium",
+          },
+        ],
+      },
+    ],
+  },
+
+  /* ======================================================================
+   * The rest of the world. Rooms carry a `dressing` naming the bespoke
+   * furniture set they'll get; until that set is built in WorldScene they
+   * render as navigable tinted shells with their real hotspots. Objects link
+   * real video slugs (lib/content/videos.ts) so the explorable world and the
+   * watch views stay one source of truth.
+   * ==================================================================== */
+
+  {
+    slug: "lakehouse",
+    name: "The Lakehouse",
+    tagline:
+      "Luna's own place now — water, firelight, and the room to feel all of it.",
+    belongsTo: "Luna",
+    rooms: [
+      {
+        id: "deck",
+        name: "The Deck",
+        description:
+          "Out over the water, the firepit still ringed by two chairs. Where Luna processes everything, and where one night with Tyson refused to stay unspoken.",
+        spawn: [0, 1.7, 3.5],
+        dressing: "deck",
+        accent: "#3a5560",
+        objects: [
+          {
+            id: "fireside",
+            label: "Fireside",
+            kind: "clip",
+            hint: "Stay by the fire",
+            position: [0, 0.6, -2.2],
+            videoSlug: "tyson-luna-lakehouse-fire",
+            placeholder:
+              "Late at the firepit, Luna and Tyson circle the things they haven't said. No fear in it — just the twenty years, and everything underneath.",
+            access: "premium",
+          },
+          {
+            id: "two-chairs",
+            label: "Two Chairs",
+            kind: "memory",
+            hint: "Look closer",
+            position: [-2.4, 1.0, -1.4],
+            placeholder:
+              "Two chairs, always two, pulled close to the fire. One of them was his more often than she'd admit.",
+            access: "free",
+          },
+          {
+            id: "luna-journal",
+            label: "Luna's Journal",
+            kind: "journal",
+            item: "journal",
+            hint: "Read her entry",
+            position: [2.2, 0.7, -1.2],
+            placeholder:
+              "The pages she fills out here, alone by the water — the ones about Tyson she'd never let him see.",
+            access: "premium",
+          },
+        ],
+      },
+      {
+        id: "great-room",
+        name: "The Great Room",
+        description:
+          "Firelight on the water through the glass. The quiet interior where she comes back to herself.",
+        spawn: [0, 1.6, 3],
+        dressing: "great-room",
+        accent: "#4a3f4a",
+        objects: [
+          {
+            id: "the-window",
+            label: "The Window on the Water",
+            kind: "memory",
+            hint: "Look out",
+            position: [0, 1.4, -4.4],
+            placeholder:
+              "The whole far wall is glass. On still nights the lake holds the fire twice.",
+            access: "free",
+          },
+          {
+            id: "luna-journal",
+            label: "Luna's Journal",
+            kind: "journal",
+            item: "journal",
+            hint: "Read her entry",
+            position: [-2.6, 0.7, 1.4],
+            placeholder:
+              "Left open on the arm of the couch. Members can read what she wrote.",
+            access: "premium",
+          },
+        ],
+      },
+      {
+        id: "dock",
+        name: "The Dock",
+        description:
+          "Where the yard runs out and the water starts. The boat, and the keys she keeps meaning to use.",
+        spawn: [0, 1.6, 4],
+        dressing: "dock",
+        accent: "#2f4a55",
+        objects: [
+          {
+            id: "boat-keys",
+            label: "The Boat Keys",
+            kind: "artifact",
+            hint: "Examine them",
+            position: [-1.8, 1.0, -1.0],
+            placeholder:
+              "Keys on a nail by the cleat. There's a morning on the water tied to them she hasn't told anyone about.",
+            access: "premium",
+          },
+          {
+            id: "waters-edge",
+            label: "The Water's Edge",
+            kind: "memory",
+            hint: "Stand a while",
+            position: [2.2, 0.6, -2.2],
+            placeholder:
+              "The last plank before the drop. She stands here more than she'd like to.",
+            access: "free",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "bar",
+    name: "The Bar",
+    tagline:
+      "Low light, other people's noise, and room to finally say the real thing.",
+    belongsTo: "Tyson & Luna",
+    rooms: [
+      {
+        id: "the-bar",
+        name: "The Bar",
+        description:
+          "Close enough to be overheard, talking anyway. Where Tyson told her he'd been noticing her — in a few words, the way he does.",
+        spawn: [0, 1.6, 3],
+        dressing: "bar",
+        accent: "#5a3a2f",
+        objects: [
+          {
+            id: "last-call",
+            label: "Last Call",
+            kind: "clip",
+            item: "remote",
+            hint: "Watch",
+            position: [0, 0.7, -2.4],
+            videoSlug: "luna-tyson-bar",
+            placeholder:
+              "Luna and Tyson at the bar, close enough to be overheard. A conversation that never quite happened, and they both understood every word.",
+            access: "free",
+          },
+          {
+            id: "second-drink",
+            label: "The Second Drink",
+            kind: "memory",
+            item: "mug",
+            hint: "Look closer",
+            position: [1.6, 1.05, -1.6],
+            placeholder:
+              "The one that sat untouched between them while neither of them left.",
+            access: "free",
+          },
+          {
+            id: "bar-journal",
+            label: "Luna's Journal",
+            kind: "journal",
+            item: "journal",
+            hint: "Read her entry",
+            position: [-1.8, 0.95, -1.2],
+            placeholder:
+              "What she wrote after — about the staring game, and the way he wouldn't look away.",
+            access: "premium",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "lake",
+    name: "The Lake",
+    tagline:
+      "Open water at the far edge of the farm, out of earshot — where things finally get said.",
+    belongsTo: "Tyson & Luna",
+    rooms: [
+      {
+        id: "the-shore",
+        name: "The Far Shore",
+        description:
+          "Far enough from the house that they can raise their voices. So they did.",
+        spawn: [0, 1.6, 3.5],
+        dressing: "shore",
+        accent: "#3f5245",
+        objects: [
+          {
+            id: "out-at-the-lake",
+            label: "Out at the Lake",
+            kind: "clip",
+            hint: "Watch",
+            position: [0, 0.6, -2.6],
+            videoSlug: "ty-luna-lake-fight",
+            placeholder:
+              "Far enough from the house that they can finally raise their voices. It doesn't go the way either of them wanted.",
+            access: "free",
+          },
+          {
+            id: "the-waterline",
+            label: "The Waterline",
+            kind: "memory",
+            hint: "Stand a while",
+            position: [-2.6, 0.5, -1.4],
+            placeholder:
+              "Where the ground gives way to water. She keeps ending up here.",
+            access: "free",
+          },
+          {
+            id: "lake-journal",
+            label: "Luna's Journal",
+            kind: "journal",
+            item: "journal",
+            hint: "Read her entry",
+            position: [2.4, 0.7, -1.0],
+            placeholder:
+              "The entry she wrote the night of the fight, when she still couldn't tell whose fault it was.",
+            access: "premium",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "coffee-shop",
+    name: "The Coffee Shop",
+    tagline:
+      "Neutral ground, chosen for exactly that reason — where Josh restarts it.",
+    belongsTo: "Josh & Luna",
+    rooms: [
+      {
+        id: "the-cafe",
+        name: "The Café",
+        description:
+          "Six months of silence, and then a phone call. He grazed her lip mid-sentence and all her defenses came down.",
+        spawn: [0, 1.6, 2.5],
+        dressing: "cafe",
+        accent: "#6b4a30",
+        objects: [
+          {
+            id: "coffee",
+            label: "Coffee",
+            kind: "clip",
+            item: "mug",
+            hint: "Watch",
+            position: [0, 0.75, -2.2],
+            videoSlug: "luna-josh-coffee",
+            placeholder:
+              "Neutral ground, chosen for exactly that reason. He touches her, gets close, makes her laugh — the man she first fell for.",
+            access: "free",
+          },
+          {
+            id: "the-corner-table",
+            label: "The Corner Table",
+            kind: "memory",
+            hint: "Sit down",
+            position: [-2.0, 0.9, -1.4],
+            placeholder:
+              "The table by the window they always took. She meant to say no here.",
+            access: "free",
+          },
+          {
+            id: "coffee-journal",
+            label: "Luna's Journal",
+            kind: "journal",
+            item: "journal",
+            hint: "Read her entry",
+            position: [2.0, 0.9, -1.2],
+            placeholder:
+              "What she wrote about the lip, the laugh, and saying yes when she'd meant to say no.",
+            access: "premium",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "park",
+    name: "The Park",
+    tagline: "Open ground, nowhere to hide.",
+    belongsTo: "Tyson & Luna",
+    rooms: [
+      {
+        id: "open-ground",
+        name: "Open Ground",
+        description:
+          "She asked him to meet her. He came, stayed silent, wouldn't look at her — then said eight words she still can't put down.",
+        spawn: [0, 1.6, 3.5],
+        dressing: "park",
+        accent: "#43542f",
+        objects: [
+          {
+            id: "the-park",
+            label: "The Park",
+            kind: "clip",
+            hint: "Watch",
+            position: [0, 0.6, -2.6],
+            videoSlug: "tyson-park-fight",
+            placeholder:
+              "Luna asks Tyson to meet her. He comes, and says almost nothing at all — until he says the one thing.",
+            access: "premium",
+          },
+          {
+            id: "the-space-between",
+            label: "The Space Between",
+            kind: "memory",
+            hint: "Stand in it",
+            position: [-2.2, 1.0, -1.6],
+            placeholder:
+              "\"You're standing here, and I can't do anything about it.\" Little words. All of it in them.",
+            access: "premium",
+          },
+          {
+            id: "park-journal",
+            label: "Luna's Journal",
+            kind: "journal",
+            item: "journal",
+            hint: "Read her entry",
+            position: [2.4, 0.7, -1.2],
+            placeholder:
+              "The page she wrote afterward, trying to hold the eight words still long enough to understand them.",
+            access: "premium",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "track",
+    name: "The Track",
+    tagline:
+      "Tyson's world — engines, adrenaline, and the one corner he takes slow.",
+    belongsTo: "Tyson",
+    rooms: [
+      {
+        id: "the-pit",
+        name: "The Pit",
+        description:
+          "The garage where Tyson lives between runs. Helmets on the shelf, and the black Carrera that's his baby.",
+        spawn: [0, 1.6, 3.5],
+        dressing: "pit",
+        accent: "#3a3a40",
+        objects: [
+          {
+            id: "helmet-shelf",
+            label: "The Helmet Shelf",
+            kind: "memory",
+            hint: "Look them over",
+            position: [-2.8, 1.4, -1.4],
+            placeholder:
+              "A shelf of helmets, each with its own dents and its own story. Ex-military, extreme sports — this is where Tyson comes from.",
+            access: "free",
+          },
+          {
+            id: "the-carrera",
+            label: "The Carrera",
+            kind: "artifact",
+            hint: "Examine it",
+            position: [2.4, 0.7, -1.2],
+            placeholder:
+              "A black 2020 Porsche Carrera, his one careful thing. He'll ride a motorcycle like he's daring it — but he won't take a hard corner with Luna in the passenger seat.",
+            access: "premium",
+          },
+        ],
+      },
+      {
+        id: "trackside",
+        name: "Trackside",
+        description:
+          "Out on the tarmac, where he's fastest and most himself — except for one corner.",
+        spawn: [0, 1.6, 3],
+        dressing: "trackside",
+        accent: "#4a4a3a",
+        objects: [
+          {
+            id: "the-slow-corner",
+            label: "The Slow Corner",
+            kind: "memory",
+            hint: "Stand a while",
+            position: [0, 0.6, -3.0],
+            placeholder:
+              "The corner he takes slow every single lap she's ever been with him. He's never explained it. He doesn't have to.",
+            access: "free",
+          },
+          {
+            id: "track-journal",
+            label: "Luna's Journal",
+            kind: "journal",
+            item: "journal",
+            hint: "Read her entry",
+            position: [2.4, 0.7, -1.4],
+            placeholder:
+              "About the slow corner, and what it means that the reckless one is careful with only her.",
+            access: "premium",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "barn",
+    name: "The Barn",
+    tagline:
+      "On the farm, before the day starts — two men and everything they don't say.",
+    belongsTo: "Josh & Tyson",
+    rooms: [
+      {
+        id: "the-barn",
+        name: "The Barn",
+        description:
+          "Josh and Tyson at the tractor before the day starts. Family, co-workers, distant cousins — and the thing between them nobody names.",
+        spawn: [0, 1.6, 3.5],
+        dressing: "barn",
+        accent: "#5a4a30",
+        objects: [
+          {
+            id: "the-barn-scene",
+            label: "The Barn",
+            kind: "clip",
+            hint: "Watch",
+            position: [0, 0.7, -2.6],
+            videoSlug: "josh-tyson-barn",
+            placeholder:
+              "Two men who work well together, and everything neither of them is saying. The morning Josh mentioned dinner with Luna, casual as weather.",
+            access: "free",
+          },
+          {
+            id: "the-tractor",
+            label: "The Tractor",
+            kind: "memory",
+            hint: "Look it over",
+            position: [-2.6, 0.9, -1.4],
+            placeholder:
+              "The old tractor they both keep running. More conversations happen over this engine than anywhere else on the farm.",
+            access: "free",
+          },
+          {
+            id: "the-loft",
+            label: "The Hayloft",
+            kind: "memory",
+            hint: "Climb up",
+            position: [2.4, 1.8, -1.6],
+            placeholder:
+              "Up in the loft, out of the wind. Some things only get said where no one walks in.",
+            access: "premium",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    slug: "downtown",
+    name: "Downtown",
+    tagline:
+      "Dinner out, the drive back, and everything that surfaces once the door closes.",
+    belongsTo: "Josh & Luna",
+    rooms: [
+      {
+        id: "the-restaurant",
+        name: "The Restaurant",
+        description:
+          "The dinner she said yes to. Candlelight, the old charm, and the lie she was already telling by not telling Tyson.",
+        spawn: [0, 1.6, 2.5],
+        dressing: "restaurant",
+        accent: "#4a2f38",
+        objects: [
+          {
+            id: "the-house",
+            label: "The House",
+            kind: "clip",
+            hint: "Watch",
+            position: [0, 0.8, -2.4],
+            videoSlug: "luna-josh-house",
+            placeholder:
+              "Dinner out, the drive back, and everything that surfaces once the door is closed.",
+            access: "free",
+          },
+          {
+            id: "the-set-table",
+            label: "The Set Table",
+            kind: "memory",
+            hint: "Sit down",
+            position: [-2.0, 0.9, -1.4],
+            placeholder:
+              "Two places, candle between them. He remembered how she took everything. That was always the problem.",
+            access: "free",
+          },
+          {
+            id: "restaurant-journal",
+            label: "Luna's Journal",
+            kind: "journal",
+            item: "journal",
+            hint: "Read her entry",
+            position: [2.0, 0.9, -1.2],
+            placeholder:
+              "\"I can't tell Tyson I'm having dinner with Josh.\" The entry where the first real lie in twenty years gets written down.",
+            access: "premium",
+          },
+        ],
+      },
+      {
+        id: "the-drive",
+        name: "The Drive Back",
+        description:
+          "City lights, then the dark road home. The quiet where the evening turns.",
+        spawn: [0, 1.6, 3],
+        dressing: "street",
+        accent: "#2f2f3a",
+        objects: [
+          {
+            id: "the-drive-back",
+            label: "The Drive Back",
+            kind: "memory",
+            hint: "Stay for it",
+            position: [0, 1.0, -3.0],
+            placeholder:
+              "The drive when neither of them talks, and both of them know the night isn't over.",
+            access: "premium",
+          },
+          {
+            id: "downtown-journal",
+            label: "Luna's Journal",
+            kind: "journal",
+            item: "journal",
+            hint: "Read her entry",
+            position: [2.4, 0.9, -1.2],
+            placeholder:
+              "What she let herself write about the drive, once she was alone again.",
             access: "premium",
           },
         ],

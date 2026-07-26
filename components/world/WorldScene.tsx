@@ -296,13 +296,9 @@ function PlaceholderRoom({ room }: { room: Room }) {
       ))}
 
       {/* Bespoke furniture per room dressing; unbuilt dressings fall back to a
-          generic set so the room is still navigable. Add a case as each room
-          is detailed (see RoomDressing in lib/content/world.ts). */}
-      {room.dressing === "kitchen-living" ? (
-        <KitchenFurniture wood={woodMaps} stone={stoneMaps} />
-      ) : (
-        <GenericFurniture wood={woodMaps} stone={stoneMaps} />
-      )}
+          generic set so the room stays navigable (see RoomDressing in
+          lib/content/world.ts). */}
+      <RoomFurniture room={room} wood={woodMaps} stone={stoneMaps} />
     </group>
   );
 }
@@ -1209,6 +1205,445 @@ function GenericFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
       <mesh position={[-w + 0.5, 0.45, 1.8]}>
         <boxGeometry args={[0.8, 0.9, 1.4]} />
         <meshStandardMaterial {...wood} />
+      </mesh>
+    </group>
+  );
+}
+
+/**
+ * Picks the hand-built furniture set for a room by its `dressing`. Rooms whose
+ * dressing has no case yet fall back to the generic set, so they stay
+ * navigable while their bespoke build is pending.
+ */
+function RoomFurniture({
+  room,
+  wood,
+  stone,
+}: {
+  room: Room;
+  wood: PBRMaps;
+  stone: PBRMaps;
+}) {
+  switch (room.dressing) {
+    case "kitchen-living":
+      return <KitchenFurniture wood={wood} stone={stone} />;
+    case "bedroom":
+      return <BedroomFurniture wood={wood} />;
+    case "workshop":
+      return <WorkshopFurniture wood={wood} />;
+    case "porch":
+      return <PorchFurniture wood={wood} />;
+    default:
+      return <GenericFurniture wood={wood} stone={stone} />;
+  }
+}
+
+/**
+ * The master bedroom — a low wood bed with headboard and linens, flanking
+ * nightstands under warm lamps, a dresser holding the framed photograph
+ * (the `bedside-photo` hotspot), a reading chair with Luna's journal on a
+ * small table (the `luna-journal` hotspot), and a rug grounding it all.
+ */
+function BedroomFurniture({ wood }: { wood: PBRMaps }) {
+  const linen = usePBR("fabric", 2.5);
+  const rug = usePBR("rug", 1);
+  const candleFlame = useRef<THREE.Mesh>(null);
+  const candleLight = useRef<THREE.PointLight>(null);
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    const cand = 1 + Math.sin(t * 9 + 2) * 0.18 + Math.sin(t * 23) * 0.1;
+    if (candleLight.current) candleLight.current.intensity = 2.6 * cand;
+    if (candleFlame.current) {
+      (candleFlame.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
+        2.4 * cand;
+    }
+  });
+  const headZ = -3.2;
+  return (
+    <group>
+      {/* Rug under the bed */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.012, -1.4]} receiveShadow>
+        <planeGeometry args={[4.6, 4.8]} />
+        <meshStandardMaterial {...rug} />
+      </mesh>
+
+      {/* Bed: frame, mattress, folded duvet, headboard, pillows */}
+      <mesh position={[0, 0.28, -1.3]} castShadow receiveShadow>
+        <boxGeometry args={[2.7, 0.4, 3.9]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      <mesh position={[0, 0.58, -1.25]} castShadow receiveShadow>
+        <boxGeometry args={[2.55, 0.3, 3.7]} />
+        <meshStandardMaterial {...linen} color="#cabfa6" roughness={1} />
+      </mesh>
+      <mesh position={[0, 0.66, -0.2]} castShadow>
+        <boxGeometry args={[2.55, 0.16, 1.7]} />
+        <meshStandardMaterial {...linen} color="#b3a688" roughness={1} />
+      </mesh>
+      <mesh position={[0, 0.98, headZ]} castShadow>
+        <boxGeometry args={[2.8, 1.3, 0.18]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      {[-0.62, 0.62].map((x, i) => (
+        <mesh key={i} position={[x, 0.8, -2.75]} rotation={[-0.14, 0, 0]} castShadow>
+          <boxGeometry args={[1.0, 0.24, 0.62]} />
+          <meshStandardMaterial {...linen} color="#d8ccb2" roughness={1} />
+        </mesh>
+      ))}
+
+      {/* Nightstands + warm lamps flanking the headboard */}
+      {[-1.8, 1.8].map((x, i) => (
+        <group key={i} position={[x, 0, -2.9]}>
+          <mesh position={[0, 0.3, 0]} castShadow receiveShadow>
+            <boxGeometry args={[0.72, 0.6, 0.6]} />
+            <meshStandardMaterial {...wood} />
+          </mesh>
+          <mesh position={[0, 0.74, 0]}>
+            <cylinderGeometry args={[0.03, 0.04, 0.28, 8]} />
+            <meshStandardMaterial color="#2a201a" roughness={0.7} />
+          </mesh>
+          <mesh position={[0, 0.94, 0]}>
+            <coneGeometry args={[0.16, 0.22, 18, 1, true]} />
+            <meshStandardMaterial
+              color="#e9c79a"
+              emissive="#ffca8a"
+              emissiveIntensity={1.2}
+              side={THREE.DoubleSide}
+              toneMapped={false}
+            />
+          </mesh>
+          <pointLight position={[0, 0.9, 0]} color="#ffb060" intensity={5} distance={5.5} decay={2} />
+        </group>
+      ))}
+
+      {/* Candle on the left nightstand, for a little life */}
+      <group position={[-1.8, 0.6, -2.7]}>
+        <mesh position={[0, 0.09, 0]}>
+          <cylinderGeometry args={[0.035, 0.035, 0.16, 10]} />
+          <meshStandardMaterial color="#e8dcc4" roughness={0.6} />
+        </mesh>
+        <mesh ref={candleFlame} position={[0, 0.2, 0]}>
+          <sphereGeometry args={[0.03, 8, 8]} />
+          <meshStandardMaterial color="#ffd090" emissive="#ffb060" emissiveIntensity={2.4} toneMapped={false} />
+        </mesh>
+        <pointLight ref={candleLight} position={[0, 0.22, 0]} color="#ff9a40" intensity={2.6} distance={3} decay={2} />
+      </group>
+
+      {/* Dresser holding the framed photo (bedside-photo hotspot ≈ [2.2,1.0,-1.8]) */}
+      <mesh position={[2.7, 0.42, -1.8]} castShadow receiveShadow>
+        <boxGeometry args={[1.0, 0.84, 0.6]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      <FramedPicture
+        src="/posters/luna-josh-first-morning.jpg"
+        position={[2.4, 1.06, -1.8]}
+        rotationY={-Math.PI / 2 - 0.3}
+        w={0.34}
+        h={0.26}
+      />
+
+      {/* Reading nook: armchair + small table with the journal (luna-journal ≈ [-2.6,0.95,1.6]) */}
+      <DecorBoundary>
+        <Prop url={MODELS.armchair} position={[-3.1, 0, 1.9]} rotationY={Math.PI * 0.82} />
+      </DecorBoundary>
+      <mesh position={[-2.6, 0.4, 1.6]} castShadow receiveShadow>
+        <cylinderGeometry args={[0.3, 0.33, 0.8, 16]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      <mesh position={[-2.6, 0.83, 1.6]} rotation={[0, 0.4, 0]} castShadow>
+        <boxGeometry args={[0.34, 0.05, 0.24]} />
+        <meshStandardMaterial color="#4a2f2a" roughness={0.6} />
+      </mesh>
+
+      {/* Framed pictures on the back wall + a corner plant */}
+      <FramedPicture src="/posters/luna-josh-bed.jpg" position={[-1.0, 1.9, -ROOM.depth / 2 + 0.06]} rotationY={0} w={0.6} h={0.44} />
+      <FramedPicture src="/posters/tyson-luna-lakehouse-fire.jpg" position={[1.0, 1.9, -ROOM.depth / 2 + 0.06]} rotationY={0} w={0.6} h={0.44} />
+      <DecorBoundary>
+        <Prop url={MODELS.plant2} position={[3.7, 0, -3.4]} />
+      </DecorBoundary>
+    </group>
+  );
+}
+
+/**
+ * Josh's garage & shop — a long workbench with a vise and tools against one
+ * wall (the `workbench` hotspot), a covered project car up on its wheels
+ * (the `project-car` hotspot), a pegboard, steel shelving, an oil drum and a
+ * tire stack, lit cooler than the house by a hanging work lamp.
+ */
+function WorkshopFurniture({ wood }: { wood: PBRMaps }) {
+  const worklight = useRef<THREE.PointLight>(null);
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    // Old fluorescent: mostly steady with the occasional dropout.
+    const f = 1 + Math.sin(t * 40) * 0.03 + (Math.sin(t * 3.3) > 0.97 ? -0.3 : 0);
+    if (worklight.current) worklight.current.intensity = 6 * f;
+  });
+  const w = ROOM.width / 2;
+  const d = ROOM.depth / 2;
+  return (
+    <group>
+      {/* Concrete pad laid over the plank floor */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, -1]} receiveShadow>
+        <planeGeometry args={[8, 9]} />
+        <meshStandardMaterial color="#3a3a3e" roughness={0.95} />
+      </mesh>
+
+      {/* Workbench along the left wall (workbench hotspot ≈ [-2.8,1.0,-1.5]) */}
+      <group position={[-w + 0.7, 0, -1.2]}>
+        <mesh position={[0, 0.9, 0]} castShadow receiveShadow>
+          <boxGeometry args={[1.1, 0.12, 4.2]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+        {[
+          [-0.45, -1.9],
+          [0.45, -1.9],
+          [-0.45, 1.9],
+          [0.45, 1.9],
+        ].map((p, i) => (
+          <mesh key={i} position={[p[0], 0.45, p[1]]} castShadow>
+            <boxGeometry args={[0.1, 0.9, 0.1]} />
+            <meshStandardMaterial color="#2a2018" roughness={0.7} />
+          </mesh>
+        ))}
+        {/* vise */}
+        <mesh position={[0.24, 1.02, -1.6]} castShadow>
+          <boxGeometry args={[0.3, 0.2, 0.26]} />
+          <meshStandardMaterial {...METAL} />
+        </mesh>
+        {/* tools scattered on the top */}
+        {[
+          [-0.1, -0.6],
+          [0.15, 0.3],
+          [-0.2, 1.2],
+        ].map((p, i) => (
+          <mesh key={`t${i}`} position={[p[0], 1.0, p[1]]} rotation={[0, i, 0]} castShadow>
+            <boxGeometry args={[0.36, 0.05, 0.08]} />
+            <meshStandardMaterial {...STAINLESS} />
+          </mesh>
+        ))}
+        {/* red tool chest under the bench */}
+        <mesh position={[0, 0.4, 1.5]} castShadow receiveShadow>
+          <boxGeometry args={[0.9, 0.8, 1.0]} />
+          <meshStandardMaterial color="#7a2a24" metalness={0.4} roughness={0.5} />
+        </mesh>
+      </group>
+
+      {/* Pegboard + hanging tools on the left wall */}
+      <mesh position={[-w + 0.06, 1.95, -1.2]} rotation={[0, Math.PI / 2, 0]}>
+        <planeGeometry args={[3.4, 1.2]} />
+        <meshStandardMaterial color="#6a5030" roughness={0.85} />
+      </mesh>
+      {[-1.0, -0.3, 0.4, 1.1].map((z, i) => (
+        <mesh key={`pg${i}`} position={[-w + 0.16, 1.95, z]} rotation={[0, Math.PI / 2, 0]} castShadow>
+          <boxGeometry args={[0.1, 0.5, 0.03]} />
+          <meshStandardMaterial {...METAL} />
+        </mesh>
+      ))}
+
+      {/* The unfinished project car, up on its wheels under a half-draped tarp
+          (project-car hotspot ≈ [2.6,0.8,-1.0]) */}
+      <group position={[2.4, 0, -1.0]}>
+        {[
+          [-0.8, -1.4],
+          [0.8, -1.4],
+          [-0.8, 1.4],
+          [0.8, 1.4],
+        ].map((p, i) => (
+          <mesh key={i} position={[p[0], 0.34, p[1]]} rotation={[0, 0, Math.PI / 2]} castShadow>
+            <cylinderGeometry args={[0.34, 0.34, 0.26, 20]} />
+            <meshStandardMaterial color="#0d0d0f" roughness={0.8} />
+          </mesh>
+        ))}
+        <mesh position={[0, 0.62, 0]} castShadow receiveShadow>
+          <boxGeometry args={[1.8, 0.55, 3.7]} />
+          <meshStandardMaterial color="#3a2a26" metalness={0.5} roughness={0.5} />
+        </mesh>
+        <mesh position={[0, 1.02, 0.1]} castShadow>
+          <boxGeometry args={[1.55, 0.5, 1.7]} />
+          <meshStandardMaterial color="#2a1e1b" metalness={0.4} roughness={0.5} />
+        </mesh>
+        {/* canvas tarp draped over the front end */}
+        <mesh position={[0, 0.98, -1.3]} rotation={[0.1, 0, 0]} castShadow>
+          <boxGeometry args={[2.05, 0.9, 1.7]} />
+          <meshStandardMaterial color="#6b6f6a" roughness={1} />
+        </mesh>
+      </group>
+
+      {/* Oil drum + tire stack in the far corner */}
+      <mesh position={[w - 0.9, 0.5, 3.2]} castShadow>
+        <cylinderGeometry args={[0.35, 0.35, 1.0, 20]} />
+        <meshStandardMaterial color="#3a4a3a" metalness={0.5} roughness={0.5} />
+      </mesh>
+      {[0.2, 0.55, 0.9].map((y, i) => (
+        <mesh key={`ti${i}`} position={[w - 1.1, y, 4.2]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+          <torusGeometry args={[0.34, 0.16, 10, 24]} />
+          <meshStandardMaterial color="#111113" roughness={0.9} />
+        </mesh>
+      ))}
+
+      {/* Steel shelving with parts boxes on the back wall */}
+      <group position={[1.5, 0, -d + 0.4]}>
+        {[0.6, 1.4, 2.2].map((y, i) => (
+          <mesh key={i} position={[0, y, 0]} castShadow receiveShadow>
+            <boxGeometry args={[3, 0.06, 0.5]} />
+            <meshStandardMaterial {...METAL} />
+          </mesh>
+        ))}
+        {[
+          [-1, 0.78],
+          [0, 0.78],
+          [1.1, 0.78],
+          [-0.8, 1.58],
+          [0.9, 1.58],
+        ].map((p, i) => (
+          <mesh key={`b${i}`} position={[p[0], p[1], 0]} castShadow>
+            <boxGeometry args={[0.5, 0.3, 0.34]} />
+            <meshStandardMaterial color={i % 2 ? "#5a4a34" : "#4a4038"} roughness={0.85} />
+          </mesh>
+        ))}
+      </group>
+
+      {/* Cool hanging work lamp over the car, plus one warm bulb over the bench */}
+      <group position={[2.4, 0, -1.0]}>
+        <mesh position={[0, ROOM.height - 0.02, 0]}>
+          <cylinderGeometry args={[0.006, 0.006, 0.6, 6]} />
+          <meshStandardMaterial color="#0a0a0a" />
+        </mesh>
+        <mesh position={[0, ROOM.height - 0.32, 0]}>
+          <coneGeometry args={[0.28, 0.16, 20, 1, true]} />
+          <meshStandardMaterial color="#cfd6dd" metalness={0.6} roughness={0.4} side={THREE.DoubleSide} />
+        </mesh>
+        <mesh position={[0, ROOM.height - 0.36, 0]}>
+          <sphereGeometry args={[0.08, 12, 12]} />
+          <meshStandardMaterial color="#eef2f6" emissive="#dfe9f5" emissiveIntensity={1.4} toneMapped={false} />
+        </mesh>
+        <pointLight ref={worklight} position={[0, ROOM.height - 0.4, 0]} color="#dfeaff" intensity={6} distance={9} decay={2} />
+      </group>
+      <pointLight position={[-w + 0.9, 2.6, -1.2]} color="#ffcf8f" intensity={3} distance={6} decay={2} />
+    </group>
+  );
+}
+
+/**
+ * The front porch — a hung slatted swing (the `porch-swing` hotspot), a cozy
+ * corner of two chairs and a side table with a glowing lantern (the
+ * `porch-evening` hotspot), a front railing with balusters and posts, potted
+ * plants, and a doormat. Warm lantern light for the evening mood.
+ */
+function PorchFurniture({ wood }: { wood: PBRMaps }) {
+  const lantern = useRef<THREE.PointLight>(null);
+  const lanternGlow = useRef<THREE.Mesh>(null);
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    const f = 1 + Math.sin(t * 7 + 1) * 0.1 + Math.sin(t * 19) * 0.05;
+    if (lantern.current) lantern.current.intensity = 3.2 * f;
+    if (lanternGlow.current) {
+      (lanternGlow.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
+        1.6 * f;
+    }
+  });
+  const w = ROOM.width / 2;
+  const d = ROOM.depth / 2;
+  return (
+    <group>
+      {/* Posts at the front corners */}
+      {[-w + 0.4, w - 0.4].map((x, i) => (
+        <mesh key={i} position={[x, 1.6, d - 0.6]} castShadow>
+          <boxGeometry args={[0.22, 3.2, 0.22]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+      ))}
+
+      {/* Front railing: top + bottom rail with balusters */}
+      <group position={[0, 0, d - 0.6]}>
+        <mesh position={[0, 1.0, 0]} castShadow>
+          <boxGeometry args={[ROOM.width - 1.2, 0.1, 0.1]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+        <mesh position={[0, 0.5, 0]} castShadow>
+          <boxGeometry args={[ROOM.width - 1.2, 0.08, 0.08]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+        {Array.from({ length: 15 }).map((_, i) => {
+          const x = -w + 0.9 + i * ((ROOM.width - 1.8) / 14);
+          return (
+            <mesh key={i} position={[x, 0.75, 0]} castShadow>
+              <boxGeometry args={[0.05, 0.5, 0.05]} />
+              <meshStandardMaterial {...wood} />
+            </mesh>
+          );
+        })}
+      </group>
+
+      {/* Porch swing hung by ropes (porch-swing hotspot ≈ [-2.2,1.0,-1.2]) */}
+      <group position={[-2.2, 0, -1.2]}>
+        {[-0.7, 0.7].map((x, i) => (
+          <mesh key={i} position={[x, 1.4, 0]}>
+            <cylinderGeometry args={[0.015, 0.015, 1.6, 6]} />
+            <meshStandardMaterial color="#3a2c1c" />
+          </mesh>
+        ))}
+        <mesh position={[0, 0.6, 0]} castShadow receiveShadow>
+          <boxGeometry args={[1.7, 0.1, 0.6]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+        <mesh position={[0, 0.9, -0.28]} rotation={[-0.2, 0, 0]} castShadow>
+          <boxGeometry args={[1.7, 0.5, 0.08]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+        <mesh position={[0, 0.7, 0.02]} castShadow>
+          <boxGeometry args={[1.6, 0.12, 0.55]} />
+          <meshStandardMaterial color="#8a7250" roughness={1} />
+        </mesh>
+      </group>
+
+      {/* Cozy corner: two chairs + side table with a lantern (porch-evening ≈ [2.4,1.1,-1.6]) */}
+      <DecorBoundary>
+        <Prop url={MODELS.armchair} position={[2.0, 0, -0.5]} rotationY={-Math.PI * 0.82} />
+        <Prop url={MODELS.armchair} position={[3.2, 0, -1.7]} rotationY={Math.PI * 0.9} />
+      </DecorBoundary>
+      <mesh position={[2.5, 0.4, -1.2]} castShadow receiveShadow>
+        <cylinderGeometry args={[0.3, 0.32, 0.8, 16]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      <group position={[2.5, 0.82, -1.2]}>
+        <mesh position={[0, 0.14, 0]}>
+          <boxGeometry args={[0.18, 0.28, 0.18]} />
+          <meshStandardMaterial color="#20201c" metalness={0.6} roughness={0.5} />
+        </mesh>
+        <mesh ref={lanternGlow} position={[0, 0.14, 0]}>
+          <boxGeometry args={[0.12, 0.2, 0.12]} />
+          <meshStandardMaterial color="#ffcf8f" emissive="#ffab52" emissiveIntensity={1.6} toneMapped={false} />
+        </mesh>
+        <pointLight ref={lantern} position={[0, 0.18, 0]} color="#ffb060" intensity={3.2} distance={5} decay={2} />
+      </group>
+
+      {/* Hanging lantern over the swing */}
+      <group position={[-2.2, 0, 0]}>
+        <mesh position={[0, ROOM.height - 0.4, 0]}>
+          <cylinderGeometry args={[0.006, 0.006, 0.8, 6]} />
+          <meshStandardMaterial color="#0a0a0a" />
+        </mesh>
+        <mesh position={[0, ROOM.height - 0.85, 0]}>
+          <boxGeometry args={[0.2, 0.3, 0.2]} />
+          <meshStandardMaterial color="#20201c" metalness={0.6} roughness={0.5} />
+        </mesh>
+        <mesh position={[0, ROOM.height - 0.85, 0]}>
+          <boxGeometry args={[0.13, 0.22, 0.13]} />
+          <meshStandardMaterial color="#ffcf8f" emissive="#ffab52" emissiveIntensity={1.3} toneMapped={false} />
+        </mesh>
+        <pointLight position={[0, ROOM.height - 0.9, 0]} color="#ffb060" intensity={3} distance={6} decay={2} />
+      </group>
+
+      {/* Potted plants along the railing + a doormat */}
+      <DecorBoundary>
+        <Prop url={MODELS.plant} position={[w - 1.2, 0, d - 1.0]} />
+        <Prop url={MODELS.plant2} position={[-w + 1.2, 0, d - 1.0]} />
+      </DecorBoundary>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, d - 1.6]}>
+        <planeGeometry args={[1.2, 0.7]} />
+        <meshStandardMaterial color="#4a3a28" roughness={1} />
       </mesh>
     </group>
   );

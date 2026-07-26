@@ -236,6 +236,12 @@ function PlaceholderRoom({ room }: { room: Room }) {
   const woodMaps = usePBR("wood", 3);
   const stoneMaps = usePBR("stone", 2);
 
+  // Exterior rooms (deck, dock, shore, park, trackside, street) get an open-air
+  // shell under the HDRI sky instead of the enclosed one.
+  if (room.setting === "exterior") {
+    return <ExteriorShell room={room} wood={woodMaps} stone={stoneMaps} />;
+  }
+
   // Warm reclaimed-wood plank walls (light tint so the grain reads, not muddy).
   const wallTint = "#d8c2a0";
   const beamCol = "#160f08";
@@ -1233,6 +1239,12 @@ function RoomFurniture({
       return <WorkshopFurniture wood={wood} />;
     case "porch":
       return <PorchFurniture wood={wood} />;
+    case "deck":
+      return <DeckFurniture wood={wood} stone={stone} />;
+    case "great-room":
+      return <GreatRoomFurniture wood={wood} stone={stone} />;
+    case "dock":
+      return <DockFurniture wood={wood} />;
     default:
       return <GenericFurniture wood={wood} stone={stone} />;
   }
@@ -1645,6 +1657,402 @@ function PorchFurniture({ wood }: { wood: PBRMaps }) {
         <planeGeometry args={[1.2, 0.7]} />
         <meshStandardMaterial color="#4a3a28" roughness={1} />
       </mesh>
+    </group>
+  );
+}
+
+/**
+ * Open-air shell for exterior rooms: a ground platform under the HDRI sky (no
+ * walls or ceiling), plus a wide water plane where the scene sits on the water.
+ * The dressing draws everything above the ground.
+ */
+function ExteriorShell({
+  room,
+  wood,
+  stone,
+}: {
+  room: Room;
+  wood: PBRMaps;
+  stone: PBRMaps;
+}) {
+  const onWater =
+    room.dressing === "deck" ||
+    room.dressing === "dock" ||
+    room.dressing === "shore";
+  const d = ROOM.depth / 2;
+
+  let ground: React.ReactNode;
+  if (room.dressing === "park") {
+    ground = (
+      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <planeGeometry args={[ROOM.width * 3, ROOM.depth * 2]} />
+        <meshStandardMaterial color="#37451f" roughness={1} />
+      </mesh>
+    );
+  } else if (room.dressing === "shore") {
+    ground = (
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, d - 3]} receiveShadow>
+        <planeGeometry args={[ROOM.width * 3, ROOM.depth]} />
+        <meshStandardMaterial color="#6b5f47" roughness={1} />
+      </mesh>
+    );
+  } else if (room.dressing === "trackside" || room.dressing === "street") {
+    ground = (
+      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <planeGeometry args={[ROOM.width * 4, ROOM.depth * 2]} />
+        <meshStandardMaterial color="#26262a" roughness={0.85} />
+      </mesh>
+    );
+  } else {
+    // deck / dock: wood planks (the dock is a narrower walkway over water)
+    const width = room.dressing === "dock" ? 4.4 : ROOM.width;
+    ground = (
+      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <planeGeometry args={[width, ROOM.depth]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+    );
+  }
+
+  return (
+    <group>
+      {ground}
+      {onWater && (
+        <mesh
+          rotation={[-Math.PI / 2, 0, 0]}
+          position={[0, -0.28, 0]}
+          receiveShadow
+        >
+          <planeGeometry args={[300, 300]} />
+          <meshStandardMaterial color="#12313c" metalness={0.2} roughness={0.06} />
+        </mesh>
+      )}
+      <RoomFurniture room={room} wood={wood} stone={stone} />
+    </group>
+  );
+}
+
+/** A railing that runs the two sides and far edge of a deck, over the water. */
+function DeckRailing({ wood }: { wood: PBRMaps }) {
+  const w = ROOM.width / 2;
+  const d = ROOM.depth / 2;
+  const posts: [number, number][] = [];
+  for (let i = 0; i <= 6; i++) posts.push([-w + (i * ROOM.width) / 6, -d + 0.2]);
+  for (let i = 1; i <= 6; i++) {
+    posts.push([-w + 0.2, -d + (i * ROOM.depth) / 7]);
+    posts.push([w - 0.2, -d + (i * ROOM.depth) / 7]);
+  }
+  return (
+    <group>
+      {posts.map((p, i) => (
+        <mesh key={i} position={[p[0], 0.5, p[1]]} castShadow>
+          <boxGeometry args={[0.08, 1.0, 0.08]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+      ))}
+      <mesh position={[0, 1.0, -d + 0.2]} castShadow>
+        <boxGeometry args={[ROOM.width, 0.08, 0.08]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      <mesh position={[-w + 0.2, 1.0, 0]} castShadow>
+        <boxGeometry args={[0.08, 0.08, ROOM.depth]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      <mesh position={[w - 0.2, 1.0, 0]} castShadow>
+        <boxGeometry args={[0.08, 0.08, ROOM.depth]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+    </group>
+  );
+}
+
+/** A simple Adirondack-style deck chair. */
+function DeckChair({
+  position,
+  rotationY,
+  wood,
+}: {
+  position: [number, number, number];
+  rotationY: number;
+  wood: PBRMaps;
+}) {
+  return (
+    <group position={position} rotation={[0, rotationY, 0]}>
+      <mesh position={[0, 0.32, 0]} rotation={[-0.12, 0, 0]} castShadow receiveShadow>
+        <boxGeometry args={[0.62, 0.08, 0.6]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      <mesh position={[0, 0.72, -0.32]} rotation={[-0.35, 0, 0]} castShadow>
+        <boxGeometry args={[0.62, 0.82, 0.06]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      {[-0.28, 0.28].map((x, i) => (
+        <mesh key={i} position={[x, 0.16, 0.24]} castShadow>
+          <boxGeometry args={[0.06, 0.32, 0.06]} />
+          <meshStandardMaterial color="#2a1c12" />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
+/**
+ * The Lakehouse deck — a stone firepit ringed by chairs out over the water,
+ * a side table holding Luna's journal, a perimeter railing, and warm string
+ * lights. (Exterior: it sits on the deck plank + water from ExteriorShell.)
+ */
+function DeckFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
+  const fireLight = useRef<THREE.PointLight>(null);
+  const fireGlow = useRef<THREE.Mesh>(null);
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    const fire = 1 + Math.sin(t * 11) * 0.13 + Math.sin(t * 27) * 0.07;
+    if (fireLight.current) fireLight.current.intensity = 8 * fire;
+    if (fireGlow.current) {
+      (fireGlow.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
+        1.4 * fire;
+    }
+  });
+  const w = ROOM.width / 2;
+  const d = ROOM.depth / 2;
+  return (
+    <group>
+      <DeckRailing wood={wood} />
+
+      {/* Firepit (fireside hotspot ≈ [0,0.6,-2.2]) */}
+      <group position={[0, 0, -2.2]}>
+        <mesh position={[0, 0.2, 0]} castShadow receiveShadow>
+          <cylinderGeometry args={[0.6, 0.68, 0.4, 24]} />
+          <meshStandardMaterial {...stone} />
+        </mesh>
+        <mesh ref={fireGlow} position={[0, 0.42, 0]}>
+          <cylinderGeometry args={[0.42, 0.42, 0.05, 20]} />
+          <meshStandardMaterial color={COLOR.fire} emissive={COLOR.fire} emissiveIntensity={1.4} toneMapped={false} />
+        </mesh>
+        {[0, 1, 2].map((i) => (
+          <mesh key={i} position={[0, 0.4, 0]} rotation={[0, (i * Math.PI) / 3, Math.PI / 2]} castShadow>
+            <cylinderGeometry args={[0.06, 0.06, 0.7, 8]} />
+            <meshStandardMaterial color="#3a2a1c" roughness={0.9} />
+          </mesh>
+        ))}
+        <pointLight ref={fireLight} position={[0, 0.5, 0]} color={COLOR.fire} intensity={8} distance={11} decay={1.8} />
+      </group>
+
+      {/* Two chairs by the fire (two-chairs hotspot ≈ [-2.4,1.0,-1.4]) + one more */}
+      <DeckChair position={[-2.4, 0, -1.4]} rotationY={Math.PI * 0.72} wood={wood} />
+      <DeckChair position={[-1.5, 0, -3.3]} rotationY={Math.PI * 1.05} wood={wood} />
+      <DeckChair position={[2.7, 0, -2.7]} rotationY={-Math.PI * 0.85} wood={wood} />
+
+      {/* Side table with the journal (luna-journal hotspot ≈ [2.2,0.7,-1.2]) */}
+      <mesh position={[2.2, 0.32, -1.2]} castShadow receiveShadow>
+        <cylinderGeometry args={[0.28, 0.3, 0.64, 14]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      <mesh position={[2.2, 0.67, -1.2]} rotation={[0, 0.3, 0]} castShadow>
+        <boxGeometry args={[0.32, 0.05, 0.24]} />
+        <meshStandardMaterial color="#4a2f2a" roughness={0.6} />
+      </mesh>
+
+      {/* Warm string lights along the far railing */}
+      {Array.from({ length: 9 }).map((_, i) => {
+        const x = -w + 0.8 + i * ((ROOM.width - 1.6) / 8);
+        return (
+          <mesh key={i} position={[x, 1.7, -d + 0.3]}>
+            <sphereGeometry args={[0.05, 8, 8]} />
+            <meshStandardMaterial color="#ffcf8f" emissive="#ffab52" emissiveIntensity={1.4} toneMapped={false} />
+          </mesh>
+        );
+      })}
+      <pointLight position={[0, 1.8, -d + 0.6]} color="#ffb060" intensity={2.4} distance={9} decay={2} />
+      <DecorBoundary>
+        <Prop url={MODELS.plant} position={[w - 0.8, 0, d - 0.8]} />
+      </DecorBoundary>
+    </group>
+  );
+}
+
+/**
+ * The Lakehouse great room — a floor-to-ceiling window on the water (the
+ * `the-window` hotspot) with a low linear fireplace beneath it, a sofa and
+ * coffee table facing the view on a rug, and a reading chair with Luna's
+ * journal by the entrance (the `luna-journal` hotspot).
+ */
+function GreatRoomFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
+  const fabric = usePBR("fabric", 2.5);
+  const rug = usePBR("rug", 1);
+  const fireLight = useRef<THREE.PointLight>(null);
+  const fireGlow = useRef<THREE.Mesh>(null);
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    const fire = 1 + Math.sin(t * 11) * 0.12 + Math.sin(t * 27) * 0.06;
+    if (fireLight.current) fireLight.current.intensity = 6.5 * fire;
+    if (fireGlow.current) {
+      (fireGlow.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
+        1.2 * fire;
+    }
+  });
+  const d = ROOM.depth / 2;
+  return (
+    <group>
+      {/* Window on the water, set into the back wall (the-window ≈ [0,1.4,-4.4]) */}
+      <group position={[0, 0, -d + 0.08]}>
+        <mesh position={[0, 1.7, -0.02]}>
+          <planeGeometry args={[5.7, 3.0]} />
+          <meshStandardMaterial color="#160f08" />
+        </mesh>
+        <mesh position={[0, 1.7, 0]}>
+          <planeGeometry args={[5.4, 2.8]} />
+          <meshStandardMaterial color="#16323d" emissive="#1b3a44" emissiveIntensity={0.75} toneMapped={false} />
+        </mesh>
+        {[-1.8, 0, 1.8].map((x, i) => (
+          <mesh key={i} position={[x, 1.7, 0.03]}>
+            <boxGeometry args={[0.06, 2.8, 0.06]} />
+            <meshStandardMaterial color="#1a1512" />
+          </mesh>
+        ))}
+        <mesh position={[0, 1.7, 0.03]}>
+          <boxGeometry args={[5.4, 0.06, 0.06]} />
+          <meshStandardMaterial color="#1a1512" />
+        </mesh>
+      </group>
+
+      {/* Low linear fireplace beneath the window */}
+      <mesh position={[0, 0.35, -d + 0.55]} castShadow receiveShadow>
+        <boxGeometry args={[3.4, 0.7, 0.6]} />
+        <meshStandardMaterial {...stone} />
+      </mesh>
+      <mesh ref={fireGlow} position={[0, 0.4, -d + 0.86]}>
+        <planeGeometry args={[1.7, 0.28]} />
+        <meshStandardMaterial color={COLOR.fire} emissive={COLOR.fire} emissiveIntensity={1.2} toneMapped={false} />
+      </mesh>
+      <pointLight ref={fireLight} position={[0, 0.5, -d + 1.2]} color={COLOR.fire} intensity={6.5} distance={11} decay={1.8} />
+
+      {/* Sofa + coffee table facing the window, on a rug */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.012, -2.0]} receiveShadow>
+        <planeGeometry args={[4.2, 3.6]} />
+        <meshStandardMaterial {...rug} />
+      </mesh>
+      <SofaSeg position={[0, 0, -1.0]} rotationY={Math.PI} length={3.0} maps={fabric} />
+      <CoffeeTable position={[0, 0, -2.5]} wood={wood} />
+
+      {/* Reading chair + side table with the journal (luna-journal ≈ [-2.6,0.7,1.4]) */}
+      <DecorBoundary>
+        <Prop url={MODELS.armchair} position={[-2.9, 0, 1.0]} rotationY={Math.PI * 0.9} />
+      </DecorBoundary>
+      <mesh position={[-2.6, 0.35, 1.4]} castShadow receiveShadow>
+        <cylinderGeometry args={[0.28, 0.3, 0.7, 14]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      <mesh position={[-2.6, 0.72, 1.4]} rotation={[0, 0.3, 0]} castShadow>
+        <boxGeometry args={[0.32, 0.05, 0.24]} />
+        <meshStandardMaterial color="#4a2f2a" roughness={0.6} />
+      </mesh>
+      <TableLamp position={[2.7, 0, 1.2]} />
+      <DecorBoundary>
+        <Prop url={MODELS.plant2} position={[3.6, 0, -3.2]} />
+      </DecorBoundary>
+    </group>
+  );
+}
+
+/** A small wooden rowboat, for the dock. */
+function Rowboat({
+  position,
+  rotationY,
+  wood,
+}: {
+  position: [number, number, number];
+  rotationY: number;
+  wood: PBRMaps;
+}) {
+  return (
+    <group position={position} rotation={[0, rotationY, 0]}>
+      <mesh position={[0, 0.2, 0]} castShadow receiveShadow>
+        <boxGeometry args={[1.0, 0.4, 2.6]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      <mesh position={[0, 0.12, 0]}>
+        <boxGeometry args={[0.82, 0.3, 2.3]} />
+        <meshStandardMaterial color="#2a1e14" roughness={0.9} />
+      </mesh>
+      {[-0.6, 0.6].map((z, i) => (
+        <mesh key={i} position={[0, 0.32, z]} castShadow>
+          <boxGeometry args={[0.9, 0.06, 0.2]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+      ))}
+      <mesh position={[0.35, 0.45, -0.2]} rotation={[0, 0.2, Math.PI / 2.2]} castShadow>
+        <cylinderGeometry args={[0.03, 0.03, 1.6, 8]} />
+        <meshStandardMaterial color="#5a4632" />
+      </mesh>
+    </group>
+  );
+}
+
+/**
+ * The Lakehouse dock — pilings down each edge, a piling with a hung lantern and
+ * the boat keys (the `boat-keys` hotspot), a rowboat tied alongside in the
+ * water, and a cleat with coiled rope at the water's edge (the `waters-edge`
+ * hotspot).
+ */
+function DockFurniture({ wood }: { wood: PBRMaps }) {
+  const lantern = useRef<THREE.PointLight>(null);
+  const lanternGlow = useRef<THREE.Mesh>(null);
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    const f = 1 + Math.sin(t * 7 + 1) * 0.1 + Math.sin(t * 19) * 0.05;
+    if (lantern.current) lantern.current.intensity = 3 * f;
+    if (lanternGlow.current) {
+      (lanternGlow.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
+        1.6 * f;
+    }
+  });
+  const d = ROOM.depth / 2;
+  return (
+    <group>
+      {/* Pilings down the two dock edges */}
+      {[-2.0, 2.0].map((x) =>
+        [-d + 1, -d + 4.5, -0.5, d - 2].map((z, i) => (
+          <mesh key={`${x}-${i}`} position={[x, 0.4, z]} castShadow>
+            <cylinderGeometry args={[0.12, 0.14, 1.3, 10]} />
+            <meshStandardMaterial {...wood} />
+          </mesh>
+        )),
+      )}
+
+      {/* Piling with the boat keys + a hung lantern (boat-keys ≈ [-1.8,1.0,-1.0]) */}
+      <mesh position={[-1.9, 0.6, -1.0]} castShadow>
+        <cylinderGeometry args={[0.13, 0.15, 1.7, 10]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      <group position={[-1.75, 1.05, -1.0]}>
+        <mesh>
+          <boxGeometry args={[0.16, 0.24, 0.16]} />
+          <meshStandardMaterial color="#20201c" metalness={0.6} roughness={0.5} />
+        </mesh>
+        <mesh ref={lanternGlow}>
+          <boxGeometry args={[0.1, 0.17, 0.1]} />
+          <meshStandardMaterial color="#ffcf8f" emissive="#ffab52" emissiveIntensity={1.6} toneMapped={false} />
+        </mesh>
+        <pointLight ref={lantern} color="#ffb060" intensity={3} distance={6} decay={2} />
+      </group>
+
+      {/* Rowboat tied alongside, sitting in the water off the -x edge */}
+      <Rowboat position={[-3.4, -0.16, -2.6]} rotationY={0.3} wood={wood} />
+
+      {/* Cleat + coiled rope at the water's edge (waters-edge ≈ [2.2,0.6,-2.2]) */}
+      <mesh position={[2.2, 0.08, -2.2]} castShadow>
+        <boxGeometry args={[0.3, 0.14, 0.12]} />
+        <meshStandardMaterial {...METAL} />
+      </mesh>
+      <mesh position={[2.2, 0.16, -2.2]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+        <torusGeometry args={[0.16, 0.05, 8, 20]} />
+        <meshStandardMaterial color="#6a5a3a" roughness={0.9} />
+      </mesh>
+
+      <DecorBoundary>
+        <Prop url={MODELS.plant} position={[1.9, 0, d - 0.8]} />
+      </DecorBoundary>
     </group>
   );
 }

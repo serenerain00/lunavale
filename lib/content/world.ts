@@ -107,6 +107,12 @@ export interface Room {
   description: string;
   /** Camera start position when entering the room. */
   spawn: [number, number, number];
+  /**
+   * Interior rooms get an enclosed shell (walls, ceiling); exterior rooms get
+   * open ground under the HDRI sky, with water where the scene calls for it.
+   * Defaults to interior.
+   */
+  setting?: "interior" | "exterior";
   /** Which hand-built furniture set to draw (procedural path). */
   dressing?: RoomDressing;
   /**
@@ -335,6 +341,7 @@ export const environments: Environment[] = [
         description:
           "Out over the water, the firepit still ringed by two chairs. Where Luna processes everything, and where one night with Tyson refused to stay unspoken.",
         spawn: [0, 1.7, 3.5],
+        setting: "exterior",
         dressing: "deck",
         accent: "#3a5560",
         objects: [
@@ -410,6 +417,7 @@ export const environments: Environment[] = [
         description:
           "Where the yard runs out and the water starts. The boat, and the keys she keeps meaning to use.",
         spawn: [0, 1.6, 4],
+        setting: "exterior",
         dressing: "dock",
         accent: "#2f4a55",
         objects: [
@@ -506,6 +514,7 @@ export const environments: Environment[] = [
         description:
           "Far enough from the house that they can raise their voices. So they did.",
         spawn: [0, 1.6, 3.5],
+        setting: "exterior",
         dressing: "shore",
         accent: "#3f5245",
         objects: [
@@ -612,6 +621,7 @@ export const environments: Environment[] = [
         description:
           "She asked him to meet her. He came, stayed silent, wouldn't look at her — then said eight words she still can't put down.",
         spawn: [0, 1.6, 3.5],
+        setting: "exterior",
         dressing: "park",
         accent: "#43542f",
         objects: [
@@ -696,6 +706,7 @@ export const environments: Environment[] = [
         description:
           "Out on the tarmac, where he's fastest and most himself — except for one corner.",
         spawn: [0, 1.6, 3],
+        setting: "exterior",
         dressing: "trackside",
         accent: "#4a4a3a",
         objects: [
@@ -833,6 +844,7 @@ export const environments: Environment[] = [
         description:
           "City lights, then the dark road home. The quiet where the evening turns.",
         spawn: [0, 1.6, 3],
+        setting: "exterior",
         dressing: "street",
         accent: "#2f2f3a",
         objects: [

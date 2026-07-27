@@ -424,7 +424,7 @@ export const journal: JournalEntry[] = [
     place: "lake",
     where: "The dock",
     about: ["tyson"],
-    sceneSlug: "ty-luna-lake-fight",
+    // sceneSlug: "ty-luna-lake-fight" — restore when the recut scene is back.
     access: "premium",
     mature: false,
     body: [

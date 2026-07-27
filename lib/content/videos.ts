@@ -239,19 +239,10 @@ export const videos: Video[] = [
     feelings: ["grief", "desire"],
     place: "farmhouse",
   },
-  {
-    slug: "ty-luna-lake-fight",
-    title: "Out at the Lake",
-    synopsis:
-      "Far enough from the house that they can finally raise their voices.",
-    file: "ty-luna-lake-fight.proxy.mp4",
-    poster: "/posters/ty-luna-lake-fight.jpg",
-    durationSeconds: 162,
-    access: "free",
-    mature: true,
-    feelings: ["hurt", "lies"],
-    place: "lake",
-  },
+  // "Out at the Lake" (ty-luna-lake-fight) was pulled 2026-07-27 to be recut.
+  // Its stills and poster are still on disk; re-add the entry here when the
+  // new cut lands, then restore the world object and hero slug that went with
+  // it (lib/content/world.ts "the-shore", lib/content/hero.ts).
   {
     // PLACEHOLDER placement: a road on the farm, filed under the farmhouse
     // because the property is the location. Give it its own place if the road

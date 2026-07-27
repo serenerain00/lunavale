@@ -31,7 +31,8 @@ import { getVideo, type Video } from "@/lib/content/videos";
 export const HERO_SLUGS: string[] = [
   "luna-tyson-bar",
   "luna-josh-kitchen-kiss",
-  "ty-luna-lake-fight",
+  // "ty-luna-lake-fight" sat here — pulled 2026-07-27 while the scene is
+  // recut. Re-add once the new cut has a loop under public/hero/.
   "ty-luna-farm-road",
 ];
 

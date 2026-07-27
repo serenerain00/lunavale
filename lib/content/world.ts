@@ -518,17 +518,9 @@ export const environments: Environment[] = [
         dressing: "shore",
         accent: "#3f5245",
         objects: [
-          {
-            id: "out-at-the-lake",
-            label: "Out at the Lake",
-            kind: "clip",
-            hint: "Watch",
-            position: [0, 0.6, -2.6],
-            videoSlug: "ty-luna-lake-fight",
-            placeholder:
-              "Far enough from the house that they can finally raise their voices. It doesn't go the way either of them wanted.",
-            access: "free",
-          },
+          // The "Out at the Lake" clip object was removed 2026-07-27 while the
+          // scene is recut. Restore it here (kind: "clip", videoSlug:
+          // "ty-luna-lake-fight") when the new cut is back in videos.ts.
           {
             id: "the-waterline",
             label: "The Waterline",

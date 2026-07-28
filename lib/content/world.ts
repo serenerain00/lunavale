@@ -412,6 +412,54 @@ export const environments: Environment[] = [
         ],
       },
       {
+        id: "bedroom",
+        name: "The Bedroom",
+        description:
+          "Up under the roof, facing the water. The room where twenty years of not saying it finally stopped.",
+        spawn: [0, 1.6, 3],
+        dressing: "bedroom",
+        accent: "#584454",
+        objects: [
+          {
+            // One object for one scene, even though two edits exist behind it.
+            // The world never advertises the members' cut as a separate thing
+            // to find — /watch decides what plays. Access stays "free" because
+            // the public cut is: a locked object here would misrepresent what
+            // clicking it does.
+            id: "the-morning",
+            label: "The Morning",
+            kind: "clip",
+            hint: "Watch",
+            position: [0, 0.7, -2.8],
+            videoSlug: "ty-luna-bed",
+            placeholder:
+              "The light coming up, and neither of them reaching for a reason to leave.",
+            access: "free",
+          },
+          {
+            id: "the-far-side",
+            label: "The Far Side of the Bed",
+            kind: "memory",
+            hint: "Stand a while",
+            position: [-2.4, 0.6, -1.2],
+            placeholder:
+              "Slept in. She hasn't decided yet whether to be glad about that.",
+            access: "free",
+          },
+          {
+            id: "bedroom-journal",
+            label: "Luna's Journal",
+            kind: "journal",
+            item: "journal",
+            hint: "Read her entry",
+            position: [2.4, 0.8, -1.0],
+            placeholder:
+              "What she wrote the morning after, before he was properly awake.",
+            access: "premium",
+          },
+        ],
+      },
+      {
         id: "dock",
         name: "The Dock",
         description:

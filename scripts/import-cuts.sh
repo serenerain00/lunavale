@@ -72,15 +72,39 @@ CUTS=(
   # Poster at 0.5s: this cut opens on a brief cutaway that reads as a
   # different scene entirely on a card.
   "luna-bathtub|stories/luna-bathtub/0715(1).mp4|0.5"
+  # Tyson and Luna, the lakehouse bedroom. Poster at 6s — the first seconds are
+  # a slow fade up off black and grab as a near-empty frame.
+  #
+  # The identical cut also sits at tyson-luna-bed/luna-tyson-bed.mp4 (same
+  # 227.346576s, re-export). This folder is the keeper.
+  "ty-luna-bed|stories/ty-luna-bed/ty-luna-bed-morning.mp4|6"
+)
+
+# The members-only edit of a scene that also has a public one (Video.premium).
+# Kept in its own list because these get NO poster: a poster lands in public/
+# at an ungated URL, and the whole point of these cuts is that they are not
+# public. The card and the /watch page both use the public cut's poster.
+EXPLICIT_CUTS=(
+  "ty-luna-bed-explicit|stories/tyson-luna-bed/explicit/ty-luna-bed-sex2.mp4"
 )
 
 want=("$@")
+
+wanted() {
+  [ ${#want[@]} -eq 0 ] && return 0
+  for w in "${want[@]}"; do [ "$w" = "$1" ] && return 0; done
+  return 1
+}
+
 for entry in "${CUTS[@]}"; do
   IFS='|' read -r slug src at <<<"$entry"
-  if [ ${#want[@]} -gt 0 ]; then
-    match=0
-    for w in "${want[@]}"; do [ "$w" = "$slug" ] && match=1; done
-    [ $match -eq 1 ] || continue
-  fi
+  wanted "$slug" || continue
   ./scripts/optimize-media.sh import "$slug" "$src" ${at:+"$at"}
+done
+
+# Proxy only, deliberately no poster — see the note on EXPLICIT_CUTS.
+for entry in "${EXPLICIT_CUTS[@]}"; do
+  IFS='|' read -r slug src <<<"$entry"
+  wanted "$slug" || continue
+  ./scripts/optimize-media.sh proxy-only "$slug" "$src"
 done

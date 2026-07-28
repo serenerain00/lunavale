@@ -47,6 +47,10 @@ async function mediaFiles() {
   const files = [];
   for (const source of sources) {
     const text = await readFile(path.join(ROOT, source), "utf8");
+    // Matches both `file:` on a scene or clip and the `file:` inside a
+    // Video.premium block — a scene's members-only cut is a separate proxy
+    // that has to reach Blob too, and it is the one nobody notices is
+    // missing until a member hits play and gets a 404.
     for (const match of text.matchAll(/file:\s*"([^"]+)"/g)) {
       files.push(match[1]);
     }

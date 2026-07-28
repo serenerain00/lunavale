@@ -1,0 +1,39 @@
+# What never gets uploaded to a deployment.
+#
+# Without this file the CLI walks the whole working directory, and this repo
+# keeps 15GB of story masters in stories/ — a `vercel deploy` that includes
+# them does not finish.
+#
+# The second reason matters more than the first. Anything uploaded here is
+# served from the deployment; anything under public/ ends up at a permanent,
+# ungated URL. Premium media must reach a viewer ONLY through the gated routes
+# (/api/stream, /api/still), which mint short-lived signed URLs from private
+# Vercel Blob after the entitlement check. So the private source folders below
+# are excluded on purpose, not merely for size.
+#
+# Keep this in step with .gitignore: a path that is gitignored but NOT listed
+# here still ships, because the CLI uploads the working directory, not HEAD.
+
+# Story video — masters and streaming proxies. Production reads these from
+# private Blob (scripts/upload-media.mjs); see lib/media/storage.ts.
+stories
+
+# Members-only stills, and the raw source they are cut from. Same private-Blob
+# model as the video above. public/gallery/** (the free card covers) still
+# ships — that is the only still imagery meant to be public.
+stills-private
+stills
+stills-src
+public/stills
+
+# Large room-capture binaries, hosted out of band.
+public/scans
+public/panos
+public/splats
+
+# Build output — Vercel builds from source.
+.next
+
+# Local env and tooling.
+.env*.local
+.git

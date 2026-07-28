@@ -13,6 +13,7 @@
 #   scripts/optimize-media.sh video   <slug>         # stories/<slug>.mp4 -> <slug>.proxy.mp4
 #   scripts/optimize-media.sh import  <slug> <src> [at] # cut -> proxy + poster ([at]=poster seconds)
 #   scripts/optimize-media.sh vertical <slug> <src> [at] # same, for 9:16 portrait cuts
+#   scripts/optimize-media.sh proxy-only <slug> <src> # proxy, NO poster (members' cut)
 #
 # Requires ffmpeg (brew install ffmpeg).
 
@@ -129,6 +130,30 @@ case "$cmd" in
     printf '%-34s proxy %-6s poster %-6s durationSeconds: %.0f\n' \
       "$slug" "$(du -h "$out" | cut -f1)" \
       "$(du -h "public/posters/$slug.jpg" | cut -f1)" "$dur"
+    ;;
+
+  proxy-only)
+    # Like `import`, minus the poster — for a members-only cut of a scene that
+    # also has a public one (Video.premium).
+    #
+    # The missing poster is the entire point, not an omission. public/ is
+    # served ungated and permanently, so generating a card frame from an
+    # explicit cut would publish exactly the thing membership is meant to
+    # gate. These cuts are displayed using the public cut's poster.
+    slug="${1:?usage: optimize-media.sh proxy-only <slug> <source>}"
+    src="${2:?usage: optimize-media.sh proxy-only <slug> <source>}"
+    [ -f "$src" ] || die "no source at $src"
+
+    out="stories/$slug.proxy.mp4"
+    ffmpeg -y -loglevel error -i "$src" \
+      -vf "scale=-2:$PROXY_HEIGHT" \
+      -c:v libx264 -preset medium -crf "$PROXY_CRF" -pix_fmt yuv420p \
+      -c:a aac -b:a 128k -movflags +faststart \
+      "$out"
+
+    dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src")
+    printf '%-34s proxy %-6s poster %-6s durationSeconds: %.0f\n' \
+      "$slug" "$(du -h "$out" | cut -f1)" "none" "$dur"
     ;;
 
   vertical)

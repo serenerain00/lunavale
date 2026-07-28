@@ -16,11 +16,24 @@ export interface Streamable {
   /** Basename of the proxy inside stories/. */
   file: string;
   access: AccessLevel;
+  /**
+   * A fuller cut of the same piece, served INSTEAD of `file` to members. The
+   * route picks between the two after the tier check; see Video.premium. Both
+   * names live server-side only — resolving a Streamable never reveals this
+   * filename to a client.
+   */
+  premiumFile?: string;
 }
 
 export function getStreamable(slug: string): Streamable | undefined {
   const video = getVideo(slug);
-  if (video) return { slug, file: video.file, access: video.access };
+  if (video)
+    return {
+      slug,
+      file: video.file,
+      access: video.access,
+      premiumFile: video.premium?.file,
+    };
 
   const clip = getClip(slug);
   if (clip) return { slug, file: clip.file, access: clipAccess(clip) };

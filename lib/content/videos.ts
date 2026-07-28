@@ -15,6 +15,26 @@ import type { FeelingId, PlaceId } from "@/lib/content/taxonomy";
 
 export type AccessLevel = "free" | "premium";
 
+/**
+ * The members-only edit of a scene that also has a public one. See
+ * `Video.premium`.
+ */
+export interface PremiumCut {
+  /** Basename of the proxy inside `stories/`. Never sent to a non-member. */
+  file: string;
+  /** Runtime of THIS cut — differs from the public one, that being the point. */
+  durationSeconds: number;
+  /**
+   * Graphic rather than merely intimate. `mature` reads as "there is sex in
+   * this"; `explicit` says it is shown. Surfaced as "Explicit · 18+" in place
+   * of "Mature" (components/ui/RatingBadge.tsx), stated before anything plays,
+   * and never carried by a public poster or a hero loop.
+   */
+  explicit?: boolean;
+  /** Notes that apply to this cut only. See lib/content/content-notes.ts. */
+  notes?: ContentNoteId[];
+}
+
 export interface Video {
   /** Stable identifier — used in URLs and to locate the media file. Do not rename casually. */
   slug: string;
@@ -32,6 +52,20 @@ export interface Video {
   access: AccessLevel;
   /** Mature-content flag — surfaced as a label per content rules. */
   mature: boolean;
+  /**
+   * A fuller cut of the SAME scene, streamed to members in place of `file`.
+   *
+   * This is one scene with two edits, not two scenes: one slug, one card, one
+   * page. A signed-out visitor gets `file` and is told a longer cut exists; a
+   * member gets this one. The swap is made server-side in the stream route
+   * after the tier check — the client is never handed both filenames, so the
+   * members' cut cannot be reached by editing a URL.
+   *
+   * `poster` always belongs to the PUBLIC cut. Posters live in /public at a
+   * permanent, unguessable-but-ungated URL, so a frame from an explicit
+   * variant must never become one. Same reasoning as clips.ts.
+   */
+  premium?: PremiumCut;
   /**
    * What's in it beyond nudity. `mature` reads as sex to a viewer, so violence
    * and coercive control get their own notes, shown above the player before
@@ -238,6 +272,27 @@ export const videos: Video[] = [
     mature: true,
     feelings: ["grief", "desire"],
     place: "farmhouse",
+  },
+  {
+    // One scene, two edits. The public cut is the morning; members get the
+    // longer, explicit one in its place — see `premium` and the note on the
+    // field. PLACEHOLDER title and synopsis, pending Melissa's copy.
+    slug: "ty-luna-bed",
+    title: "The Morning",
+    synopsis:
+      "Twenty years of not saying it, and then a room with the light coming up in it.",
+    file: "ty-luna-bed.proxy.mp4",
+    poster: "/posters/ty-luna-bed.jpg",
+    durationSeconds: 227,
+    access: "free",
+    mature: true,
+    premium: {
+      file: "ty-luna-bed-explicit.proxy.mp4",
+      durationSeconds: 354,
+      explicit: true,
+    },
+    feelings: ["desire", "trust"],
+    place: "lakehouse",
   },
   // "Out at the Lake" (ty-luna-lake-fight) was pulled 2026-07-27 to be recut.
   // Its stills and poster are still on disk; re-add the entry here when the

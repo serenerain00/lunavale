@@ -25,7 +25,7 @@ import { stat } from "node:fs/promises";
 import path from "node:path";
 import { Readable } from "node:stream";
 import { getStreamable } from "@/lib/content/streamable";
-import { canWatch } from "@/lib/access/entitlement";
+import { canWatch, hasTier, PREMIUM_TIER } from "@/lib/access/entitlement";
 import {
   blobConfigured,
   blobPathFor,
@@ -53,13 +53,23 @@ export async function GET(
     return new Response("Membership required", { status: 403 });
   }
 
+  // Some scenes exist as two edits: a public one and a longer members' cut
+  // (Video.premium). Which one a request gets is decided HERE, from the
+  // viewer's tier — not from anything the client sent. The slug is the same
+  // either way, so there is no URL to guess: a non-member asking for this
+  // scene is served the public file and has no way to name the other.
+  const file =
+    media.premiumFile && (await hasTier(PREMIUM_TIER))
+      ? media.premiumFile
+      : media.file;
+
   // ---- Production path: signed redirect to private Blob storage ------------
   if (blobConfigured()) {
     try {
       // Imported lazily so local development never pays for the SDK, and so a
       // missing dependency can't break the on-disk path.
       const { issueSignedToken, presignUrl } = await import("@vercel/blob");
-      const pathname = blobPathFor(media.file);
+      const pathname = blobPathFor(file);
       const validUntil = Date.now() + SIGNED_URL_TTL_SECONDS * 1000;
 
       // Scoped to this one pathname and to reads only — a token minted for one
@@ -80,15 +90,15 @@ export async function GET(
       // straight at Blob, so the video never passes through this function.
       return Response.redirect(presignedUrl, 307);
     } catch (error) {
-      console.error(`stream: blob lookup failed for ${media.file}`, error);
+      console.error(`stream: blob lookup failed for ${file}`, error);
       return new Response("Media unavailable", { status: 404 });
     }
   }
 
   // ---- Local path: read it off disk ---------------------------------------
-  // `media.file` comes from our own data, not user input, but resolve-and-verify
+  // `file` comes from our own data, not user input, but resolve-and-verify
   // anyway so a bad entry can never escape the stories directory.
-  const filePath = path.join(STORIES_DIR, media.file);
+  const filePath = path.join(STORIES_DIR, file);
   if (path.dirname(filePath) !== STORIES_DIR) {
     return new Response("Invalid media path", { status: 400 });
   }

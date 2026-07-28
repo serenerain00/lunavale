@@ -2,11 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LockedNotice } from "@/components/membership/LockedNotice";
-import { StillWall } from "@/components/browse/StillWall";
+import { StillGalleryView, type ViewStill } from "@/components/browse/StillGalleryView";
+import { ContentNotice } from "@/components/ui/ContentNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { canWatch, isMember } from "@/lib/access/entitlement";
-import { galleries, getGallery } from "@/lib/content/gallery";
+import {
+  galleries,
+  getGallery,
+  stillMeta,
+  stillSrc,
+} from "@/lib/content/gallery";
+import { getEntry } from "@/lib/content/journal";
 import { getPlace } from "@/lib/content/taxonomy";
+import { getVideo } from "@/lib/content/videos";
 
 interface GalleryPageProps {
   params: Promise<{ id: string }>;
@@ -24,9 +32,9 @@ export async function generateMetadata({
   const gallery = getGallery(id);
   if (!gallery) return { title: "Gallery not found" };
 
-  const description = `${gallery.images.length} stills — ${gallery.subtitle}.`;
+  const description = `${gallery.count} stills — ${gallery.subtitle}. ${gallery.description[0] ?? ""}`.trim();
   return {
-    title: `${gallery.title} — Stills`,
+    title: `${gallery.title} — Stills | Luna Vault`,
     description,
     openGraph: {
       title: `${gallery.title} — Stills`,
@@ -46,6 +54,33 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
     isMember(),
   ]);
   const place = getPlace(gallery.place);
+  const scene = gallery.sceneSlug ? getVideo(gallery.sceneSlug) : undefined;
+  const entry = gallery.journalEntryId
+    ? getEntry(gallery.journalEntryId)
+    : undefined;
+
+  // Only build the (gated) image list for a viewer who may see it.
+  const items: ViewStill[] = allowed
+    ? Array.from({ length: gallery.count }, (_, i) => {
+        const n = i + 1;
+        const meta = stillMeta(gallery, n);
+        const j = meta?.journal;
+        const jEntry = j ? getEntry(j.entryId) : undefined;
+        return {
+          thumb: stillSrc(gallery, n, "thumb"),
+          full: stillSrc(gallery, n, "full"),
+          caption: meta?.caption,
+          journal:
+            j && jEntry
+              ? {
+                  excerpt: j.excerpt,
+                  href: `/journal/${j.entryId}`,
+                  dateline: jEntry.dateline,
+                }
+              : undefined,
+        };
+      })
+    : [];
 
   return (
     <>
@@ -63,7 +98,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
 
         <header className="mb-8">
           <div className="flex flex-wrap items-center gap-3 text-xs text-stone">
-            <span>{gallery.images.length} stills</span>
+            <span>{gallery.count} stills</span>
             {place && (
               <>
                 <span aria-hidden>·</span>
@@ -76,26 +111,64 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
                 <span>Mature</span>
               </>
             )}
+            {gallery.access === "premium" && (
+              <>
+                <span aria-hidden>·</span>
+                <span className="text-amber-soft">Members</span>
+              </>
+            )}
           </div>
           <h1 className="mt-2 font-display text-3xl font-light text-ivory sm:text-4xl">
             {gallery.title}
           </h1>
-          <p className="mt-3 max-w-2xl leading-relaxed text-stone">
+          <p className="mt-1 text-sm uppercase tracking-[0.2em] text-stone-dim">
             {gallery.subtitle}
           </p>
 
-          {place?.environmentSlug && (
-            <Link
-              href={`/world/${place.environmentSlug}`}
-              className="mt-5 inline-block rounded-full border border-hairline px-5 py-2 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
-            >
-              See these hung in {place.label} →
-            </Link>
-          )}
+          <div className="mt-4 max-w-2xl space-y-3">
+            {gallery.description.map((para) => (
+              <p key={para} className="leading-relaxed text-stone">
+                {para}
+              </p>
+            ))}
+          </div>
+
+          <ContentNotice notes={gallery.notes} className="mt-5 max-w-2xl" />
+
+          <div className="mt-5 flex flex-wrap gap-3">
+            {scene && (
+              <Link
+                href={`/watch/${scene.slug}`}
+                className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+              >
+                Watch the scene →
+              </Link>
+            )}
+            {entry && (
+              <Link
+                href={`/journal/${entry.id}`}
+                className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+              >
+                Read what she wrote →
+              </Link>
+            )}
+            {place?.environmentSlug && (
+              <Link
+                href={`/world/${place.environmentSlug}`}
+                className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+              >
+                See these hung in {place.label} →
+              </Link>
+            )}
+          </div>
         </header>
 
         {allowed ? (
-          <StillWall images={gallery.images} title={gallery.title} />
+          <StillGalleryView
+            items={items}
+            title={gallery.title}
+            gated={gallery.gated}
+          />
         ) : (
           <div className="relative aspect-video overflow-hidden rounded-xl ring-1 ring-hairline">
             <LockedNotice cover={gallery.cover} subject="This set of stills" />

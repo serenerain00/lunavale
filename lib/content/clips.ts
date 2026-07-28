@@ -121,6 +121,20 @@ export const clips: Clip[] = [
     mature: true,
   },
   {
+    // Free, like the rest of the social cuts. It reads as a mood piece rather
+    // than a turn, and it is the shortest route a stranger has to Tyson —
+    // which is what the character pages need most.
+    id: "discipline",
+    title: "Discipline",
+    caption:
+      "The sign on his wall has been there for years. He has never once mentioned it.",
+    file: "discipline.proxy.mp4",
+    poster: "/posters/discipline.jpg",
+    durationSeconds: 87,
+    about: ["luna", "tyson"],
+    mature: true,
+  },
+  {
     id: "said-out-loud",
     title: "Said Out Loud",
     caption: "The sentence she'd been carrying around for a month.",

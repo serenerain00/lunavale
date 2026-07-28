@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getVideo, videos, formatDuration } from "@/lib/content/videos";
 import { canWatch, isMember } from "@/lib/access/entitlement";
 import { entriesForScene } from "@/lib/content/journal";
+import { galleryForScene } from "@/lib/content/gallery";
 import { VideoPlayer } from "@/components/media/VideoPlayer";
 import { JournalCard } from "@/components/journal/JournalCard";
 import { LockedNotice } from "@/components/membership/LockedNotice";
@@ -50,8 +51,9 @@ export default async function WatchPage({ params }: WatchPageProps) {
   const cut = member && video.premium ? video.premium : null;
   const runtime = cut ? cut.durationSeconds : video.durationSeconds;
   // Her voice, tied to the scene — so it reaches people watching, not only
-  // those who go to /journal.
+  // those who go to /journal. Stills from the same event get a link too.
   const journalEntries = entriesForScene(slug);
+  const stills = galleryForScene(slug);
 
   return (
     <>
@@ -139,6 +141,14 @@ export default async function WatchPage({ params }: WatchPageProps) {
             </p>
           )}
 
+          {stills && (
+            <Link
+              href={`/gallery/${stills.id}`}
+              className="mt-5 inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+            >
+              See the stills from this scene — {stills.count} frames →
+            </Link>
+          )}
         </div>
 
         {journalEntries.length > 0 && (

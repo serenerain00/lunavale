@@ -105,16 +105,42 @@ export const characters: Character[] = [
     intro: [
       "Ten years, and by the end of them he had gone lazy — stopped noticing the house, the calendar, her. He could not tell you the day it started, because there wasn't one.",
       "That is only half of him, and the half that makes the other half land. He is caring, passionate, commanding, genuinely funny, and she loved all of it. He owns a shop and a large farm and puts work first, which for most of the ten years read as reliability.",
+      "Where he learned it is not a mystery. His father is the same combination — magnetic and in charge, and unable to tell the difference. Josh grew up being run rather than loved, and became a man who does that to the woman he wants to keep.",
       "Then he calls. Coffee, then dinner the same night, and it starts again — and once he begins to suspect what Luna and Tyson are to each other, the same intensity that made him magnetic turns into jealousy, then possession, then control.",
     ],
     details: [
       "Owns the shop and the farm; work comes first and always has",
       "Grazes her lower lip mid-sentence and knows exactly what it does",
       "Told Tyson about the dinner the same morning, casually, as family do",
+      "Still stands up when his father stays sitting",
       "Is not sorry in the way she needs him to be sorry",
     ],
     pullQuote: "That I'm not the villain.",
     pullQuoteSource: "The cast interview",
+  },
+  {
+    // Supporting, and deliberately given a page anyway: he is the explanation
+    // for the lead. Thin on content for now — one scene and two notes — which
+    // the hub states honestly rather than padding.
+    id: "rick",
+    name: "Rick",
+    role: "Josh's father",
+    tagline:
+      "Dominance with charisma, and no idea how to put love into a form his son could use.",
+    portrait: "/characters/rick.jpg",
+    intro: [
+      "Think boss. He runs a room by sitting still in it, and he has never once had to raise his voice to end a conversation.",
+      "Josh did not invent himself. The charm that gets used as control, the certainty, the way being wanted and being obeyed blur into the same thing — all of it was learned in his father's study, from a man who is genuinely strong and genuinely cares, and who has never managed to deliver either in a form his son could do anything with.",
+      "He is disappointed in Josh for losing Luna. He also always thought Luna was too good for him. He holds both at once without difficulty, and says neither in a way that helps — which is the whole inheritance, handed down intact.",
+    ],
+    details: [
+      "Stays in the chair. Josh stands",
+      "The framed photograph on the shelf behind him is the two of them",
+      "Thought Luna was too good for his son, and never told his son that",
+      "Cares, demonstrably. Not once in a language Josh can read",
+    ],
+    pullQuote: "Everything Josh does to Luna, he learned in this room.",
+    pullQuoteSource: "The Study",
   },
 ];
 

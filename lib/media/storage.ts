@@ -28,6 +28,27 @@ export function blobPathFor(file: string): string {
   return `stories/${file}`;
 }
 
+/**
+ * Members-only stills follow the same private-Blob model as video: the
+ * optimized copies live under `stills/<gallery>/` in PRIVATE Blob and on disk
+ * under `stills-private/<gallery>/`, and only ever reach a viewer through the
+ * gated /api/still route. `n` is 1-based; a thumbnail is the same name with a
+ * `.t` before the extension (see scripts/optimize-media.sh private-stills).
+ */
+export function stillFileName(n: number, size: "thumb" | "full"): string {
+  const nn = String(n).padStart(2, "0");
+  return size === "thumb" ? `${nn}.t.jpg` : `${nn}.jpg`;
+}
+
+/** Blob path for a still, e.g. "stills/the-bar/03.jpg". */
+export function stillBlobPathFor(
+  gallery: string,
+  n: number,
+  size: "thumb" | "full",
+): string {
+  return `stills/${gallery}/${stillFileName(n, size)}`;
+}
+
 export function blobConfigured(): boolean {
   return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 }

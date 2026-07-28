@@ -114,7 +114,12 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
             {catalog.length === 0 ? (
               <EmptyState />
             ) : (
-              shelves().map((shelf, index, all) => (
+              <>
+                <StillsRail
+                  items={catalog.filter((item) => item.kind === "gallery")}
+                  member={member}
+                />
+                {shelves().map((shelf, index, all) => (
                 <Shelf
                   key={shelf.feelingId}
                   index={index}
@@ -125,7 +130,8 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
                   items={shelf.items}
                   member={member}
                 />
-              ))
+                ))}
+              </>
             )}
           </div>
         )}
@@ -255,6 +261,67 @@ function ShelfEndCap({
         </span>
       </span>
     </Link>
+  );
+}
+
+/**
+ * A dedicated Stills row, pinned above the feeling shelves.
+ *
+ * Browse is the highest-traffic tab, and the still galleries are the newest
+ * members-facing thing in the vault — so they lead, rather than being scattered
+ * across the emotion shelves where a visitor has to already be hunting to find
+ * them. Same rail affordances as the shelves, so it reads as part of the set.
+ */
+function StillsRail({
+  items,
+  member,
+}: {
+  items: CatalogItem[];
+  member: boolean;
+}) {
+  if (items.length === 0) return null;
+
+  return (
+    <section aria-labelledby="stills-rail" className="mb-16 sm:mb-20">
+      <div className="mb-4 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+        <div className="min-w-0">
+          <p className="font-display text-xs tabular-nums tracking-[0.3em] text-amber">
+            STILLS
+          </p>
+          <h2
+            id="stills-rail"
+            className="mt-1.5 font-display text-2xl font-medium text-ivory sm:text-3xl"
+          >
+            The frames between the frames
+          </h2>
+          <p className="mt-1.5 max-w-md text-sm leading-relaxed text-balance text-stone">
+            Sets of stills from the scenes that matter — Luna&rsquo;s journal
+            turned to the same night. Members see them full size.
+          </p>
+        </div>
+
+        <Link
+          href="/gallery"
+          className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+        >
+          All {items.length} galleries
+        </Link>
+      </div>
+
+      <Reveal>
+        <Rail label="Still galleries">
+          {items.map((item) => (
+            <RailItem key={item.id}>
+              <CatalogCard
+                item={item}
+                unlocked={member}
+                sizes={RAIL_ITEM_SIZES}
+              />
+            </RailItem>
+          ))}
+        </Rail>
+      </Reveal>
+    </section>
   );
 }
 

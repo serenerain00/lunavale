@@ -26,7 +26,7 @@ Clerk; billing via Stripe; membership state in Neon Postgres.
 
 ---
 
-## The three characters
+## The characters
 
 ### Luna — the protagonist
 The story is her interior life. She has a **streak**: she likes danger (that's
@@ -70,6 +70,25 @@ feelings for him** in that window, and so did he. **Neither will admit it.**
 When Josh comes back, Tyson **starts putting distance** between himself and
 Luna — because distance is the only way he can keep hiding that he's in love
 with her.
+
+### Rick — Josh's father
+*(Canon set by Melissa, 2026-07-28.)*
+
+**Think boss.** Dominance with charisma — the same combination Josh has, which
+is the point: **their dynamic is most of the reason Josh is the way he is.**
+Rick is where Josh learned that being magnetic and being in control are the
+same act.
+
+He is **strong**, and he is **possessive in his own way**. What he is not is
+able to express love well enough for it to have done Josh any good. The care is
+real; it never arrives in a form his son can use. Josh grew up being run rather
+than loved, and turned into a man who does the same thing to the woman he wants
+to keep.
+
+He is **disappointed in Josh for losing Luna** — and at the same time he always
+**knew Luna was too good for him.** Both are true and he holds them at once,
+which is exactly the kind of father he is: the judgement lands on his son, the
+admiration goes to somebody else, and neither is ever said in a way that helps.
 
 ---
 

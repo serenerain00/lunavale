@@ -77,6 +77,18 @@ public/splats/**
 # source event stills (large originals); optimized web copies live in public/gallery
 public/stills/**
 
+# flat drop folder of raw stills, and per-gallery staged originals — source
+# material, individually 6MB, never committed. Curated by scripts/stage source.
+/stills/
+/stills-src/**
+
+# members-only optimized stills. These deliberately do NOT live in /public — a
+# premium still must never sit at a permanent public URL. They ship to PRIVATE
+# Vercel Blob (scripts/upload-media.mjs) and reach a viewer only through the
+# gated /api/still route. Only the public card covers (public/gallery/**) are
+# committed. Mirrors how story video is handled (stories/**/*.mp4 + Blob).
+/stills-private/**
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -8,6 +8,7 @@
 #
 # Usage:
 #   scripts/optimize-media.sh stills  <event-id>     # public/stills/<id> -> public/gallery/<id>
+#   scripts/optimize-media.sh private-stills <id>    # stills-src/<id> -> stills-private/<id> (gated) + public cover
 #   scripts/optimize-media.sh cover   <event-id> NN  # make gallery card cover from still NN
 #   scripts/optimize-media.sh poster  <slug>         # frame from stories/<slug>.mp4 -> public/posters
 #   scripts/optimize-media.sh video   <slug>         # stories/<slug>.mp4 -> <slug>.proxy.mp4
@@ -60,6 +61,44 @@ case "$cmd" in
 
     echo "$n stills written to $out"
     echo "Remember: set images/cover + count in lib/content/gallery.ts"
+    ;;
+
+  private-stills)
+    # Members-only stills. Unlike `stills`, the optimized copies do NOT go in
+    # /public — a premium still must never sit at a permanent public URL
+    # (CLAUDE.md). They land in stills-private/<id>/ (gitignored), get uploaded
+    # to PRIVATE Vercel Blob by scripts/upload-media.mjs, and reach a viewer only
+    # through the gated /api/still route after an entitlement check.
+    #
+    # Two sizes per still: NN.jpg (full, for the lightbox) and NN.t.jpg (thumb,
+    # for the grid) so a phone isn't pulling 1600px frames to fill a wall.
+    # The ONE public artefact is the card cover, built from still 01 — a teaser
+    # is meant to be seen, exactly like a premium scene's poster.
+    id="${1:?usage: optimize-media.sh private-stills <id>}"
+    src="stills-src/$id"
+    out="stills-private/$id"
+    [ -d "$src" ] || die "no source stills at $src"
+    mkdir -p "$out" "public/gallery/$id"
+
+    n=0
+    while IFS= read -r f; do
+      n=$((n + 1))
+      printf -v full "%s/%02d.jpg" "$out" "$n"
+      printf -v thumb "%s/%02d.t.jpg" "$out" "$n"
+      ffmpeg -y -loglevel error -i "$f" \
+        -vf "scale='min($STILL_WIDTH,iw)':-2" -q:v "$STILL_Q" "$full"
+      ffmpeg -y -loglevel error -i "$f" \
+        -vf "scale='min(640,iw)':-2" -q:v 6 "$thumb"
+      echo "  $(basename "$f") -> $full ($(du -h "$full" | cut -f1)) + thumb ($(du -h "$thumb" | cut -f1))"
+    done < <(find "$src" -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) | sort)
+
+    # Public card cover from the first still.
+    ffmpeg -y -loglevel error -i "$out/01.jpg" \
+      -vf "scale=$CARD_WIDTH:$CARD_HEIGHT:force_original_aspect_ratio=increase,crop=$CARD_WIDTH:$CARD_HEIGHT" \
+      -q:v "$STILL_Q" "public/gallery/$id/cover.jpg"
+
+    echo "$n private stills -> $out  (+ public/gallery/$id/cover.jpg)"
+    echo "Remember: set count in lib/content/gallery.ts, then run scripts/upload-media.mjs"
     ;;
 
   cover)

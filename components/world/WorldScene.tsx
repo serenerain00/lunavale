@@ -27,7 +27,7 @@ import type {
   WorldObject,
   ItemKind,
 } from "@/lib/content/world";
-import { getGallery } from "@/lib/content/gallery";
+import { galleryImages, getGallery } from "@/lib/content/gallery";
 
 export type TimeOfDay = "day" | "night";
 
@@ -2265,8 +2265,8 @@ function World({
       {gallery && (
         <Suspense fallback={null}>
           <GalleryWall
-            images={gallery.images}
-            onOpen={(i) => onOpenImage(gallery.images, i)}
+            images={galleryImages(gallery, "full")}
+            onOpen={(i) => onOpenImage(galleryImages(gallery, "full"), i)}
           />
         </Suspense>
       )}

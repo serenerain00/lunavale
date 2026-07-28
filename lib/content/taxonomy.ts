@@ -104,6 +104,22 @@ export const places = [
     blurb: "Neutral ground, chosen for exactly that reason.",
     environmentSlug: "coffee-shop",
   },
+  {
+    // No `environmentSlug` yet — the garage is a place content is filed under
+    // before it is a room anyone can walk into. Add the slug when the
+    // environment gets built (CLAUDE.md lists it among the locations).
+    id: "garage",
+    label: "The Garage",
+    blurb: "Where he goes instead of saying anything.",
+  },
+  {
+    // Rick's room. Likely to become one room of a larger "Rick's house" once
+    // more of it is shot — filed narrowly for now rather than folded into the
+    // farmhouse, which belongs to Josh and Luna and means something else.
+    id: "the-study",
+    label: "The Study",
+    blurb: "His father's room, and the only chair in it that matters.",
+  },
 ] as const satisfies readonly Place[];
 
 /**
@@ -126,6 +142,14 @@ export const people = [
     id: "luna",
     label: "Herself",
     blurb: "The entries that aren't about anyone else.",
+  },
+  {
+    // Josh's father. Luna has written nothing about him — this axis exists so
+    // scenes and stills can be filed under him, and it renders only where
+    // there is content (lib/content/catalog.ts).
+    id: "rick",
+    label: "Rick",
+    blurb: "Josh's father, and most of the reason Josh is the way he is.",
   },
 ] as const satisfies readonly Person[];
 

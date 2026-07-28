@@ -278,6 +278,23 @@ export const videos: Video[] = [
     about: ["luna", "josh"],
   },
   {
+    // Josh and his father. Free on purpose: it explains Josh rather than
+    // advancing him, so it costs no turn to give away and it is the fastest
+    // way to make a visitor understand why he is the way he is.
+    slug: "josh-rick-study",
+    title: "The Study",
+    synopsis:
+      "Josh stands. His father does not get up. Everything Josh does to Luna, he learned in this room.",
+    file: "josh-rick-study.proxy.mp4",
+    poster: "/posters/josh-rick-study.jpg",
+    durationSeconds: 57,
+    access: "free",
+    mature: false,
+    feelings: ["distance", "hurt"],
+    place: "the-study",
+    about: ["josh", "rick"],
+  },
+  {
     slug: "luna-bathtub",
     title: "Still Water",
     synopsis:

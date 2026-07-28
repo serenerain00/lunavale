@@ -426,6 +426,21 @@ export const notes: SetNote[] = [
     ],
   },
   {
+    id: "josh-the-study",
+    author: "josh",
+    kind: "insight",
+    heading: "Where he got it",
+    dateline: "Day 18 · the study",
+    sceneSlug: "josh-rick-study",
+    place: "the-study",
+    access: "free",
+    body: [
+      "Melissa staged this before either of us said a line. He sits. I stand. Neither of us is allowed to change that for the whole scene, and nobody in it ever remarks on it.",
+      "Everything Josh does to Luna is in this room first. The charm that is also an instruction. Being wanted and being obeyed treated as the same thing. He is not doing anything to her he was not taught.",
+      "It is the only scene in the film where I get to play Josh as somebody's kid, and it took me two takes to stop performing and just wait to be told I had done badly.",
+    ],
+  },
+  {
     id: "josh-the-house",
     author: "josh",
     kind: "insight",
@@ -437,6 +452,22 @@ export const notes: SetNote[] = [
     body: [
       "The suspicion arrives before the evidence does, and it does not arrive as anger. It arrives as attention. He starts noticing her — the calendar, the phone, the drive back — after years of not noticing anything.",
       "That is the cruel part and we played it straight: the thing she wanted from him for ten years is the exact thing that is about to be used against her. He is finally paying attention. It is the worst news of her life.",
+    ],
+  },
+  /* ------------------------------------------------------------------ Rick */
+  {
+    id: "rick-the-chair",
+    author: "rick",
+    kind: "craft",
+    heading: "Don't get up",
+    dateline: "Day 18 · the study",
+    sceneSlug: "josh-rick-study",
+    place: "the-study",
+    access: "premium",
+    body: [
+      "The only direction I was given for the whole scene was: don't get up. Not when he comes in, not when he raises his voice, not at the end.",
+      "You do not have to play power if you are the only one sitting down. The room does it. I spent the day with a glass in one hand working out how little I could do and still be the reason he is standing there.",
+      "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work than I am.",
     ],
   },
 ];

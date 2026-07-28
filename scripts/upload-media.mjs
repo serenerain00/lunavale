@@ -18,7 +18,7 @@
  *   node scripts/upload-media.mjs --dry-run
  */
 
-import { readFile, stat } from "node:fs/promises";
+import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { head, put } from "@vercel/blob";
@@ -62,10 +62,12 @@ const files = (await mediaFiles()).filter(
   (file) => wanted.length === 0 || wanted.some((w) => file.startsWith(w)),
 );
 
-if (files.length === 0) {
+if (files.length === 0 && wanted.length === 0) {
   console.error("Nothing matched. Known slugs come from lib/content/*.ts");
   process.exit(1);
 }
+// A slug that matches no video may still match a stills gallery below, so a
+// filtered run with no video hits is not an error — fall through to stills.
 
 let uploaded = 0;
 let skipped = 0;
@@ -109,6 +111,64 @@ for (const file of files) {
     allowOverwrite: true,
   });
   console.log(`  uploaded ${file} (${mb(size)})`);
+  uploaded += 1;
+}
+
+// --- Members-only stills --------------------------------------------------
+// Same private-Blob model as the video above: the optimized copies under
+// stills-private/<gallery>/ ship to `stills/<gallery>/...` with access:private,
+// and reach a viewer only through the gated /api/still route. Enumerated off
+// disk rather than the content module, so whatever `optimize-media.sh
+// private-stills` produced gets pushed.
+const STILLS_DIR = path.join(ROOT, "stills-private");
+
+async function stillFiles() {
+  const out = [];
+  let galleries;
+  try {
+    galleries = await readdir(STILLS_DIR, { withFileTypes: true });
+  } catch {
+    return out; // nothing optimized locally yet
+  }
+  for (const g of galleries) {
+    if (!g.isDirectory()) continue;
+    if (wanted.length && !wanted.some((w) => g.name.startsWith(w))) continue;
+    const dir = path.join(STILLS_DIR, g.name);
+    for (const f of await readdir(dir)) {
+      if (f.endsWith(".jpg")) out.push({ gallery: g.name, file: f });
+    }
+  }
+  return out;
+}
+
+for (const { gallery, file } of await stillFiles()) {
+  const local = path.join(STILLS_DIR, gallery, file);
+  const pathname = `stills/${gallery}/${file}`;
+  const size = (await stat(local)).size;
+
+  try {
+    const existing = await head(pathname);
+    if (existing.size === size) {
+      console.log(`  skip     ${gallery}/${file} (${mb(size)})`);
+      skipped += 1;
+      continue;
+    }
+  } catch {
+    // Not present yet — fall through and upload.
+  }
+
+  if (dryRun) {
+    console.log(`  would    ${gallery}/${file} (${mb(size)})`);
+    continue;
+  }
+
+  await put(pathname, await readFile(local), {
+    access: "private",
+    contentType: "image/jpeg",
+    addRandomSuffix: false,
+    allowOverwrite: true,
+  });
+  console.log(`  uploaded ${gallery}/${file} (${mb(size)})`);
   uploaded += 1;
 }
 

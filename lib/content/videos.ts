@@ -11,7 +11,7 @@
  */
 
 import type { ContentNoteId } from "@/lib/content/content-notes";
-import type { FeelingId, PlaceId } from "@/lib/content/taxonomy";
+import type { FeelingId, PersonId, PlaceId } from "@/lib/content/taxonomy";
 
 export type AccessLevel = "free" | "premium";
 
@@ -85,6 +85,11 @@ export interface Video {
   feelings: FeelingId[];
   /** Where in the world it happens. */
   place: PlaceId;
+  /**
+   * Who is in it. The third browse axis, shared with clips, galleries and the
+   * journal — and what lib/content/characters.ts gathers a person's work by.
+   */
+  about: PersonId[];
 }
 
 export const videos: Video[] = [
@@ -104,6 +109,7 @@ export const videos: Video[] = [
     hidden: true,
     feelings: [],
     place: "farmhouse",
+    about: ["luna", "tyson", "josh"],
   },
   {
     slug: "luna-josh-first-morning",
@@ -117,6 +123,7 @@ export const videos: Video[] = [
     mature: false,
     feelings: ["trust", "desire"],
     place: "farmhouse",
+    about: ["luna", "josh"],
   },
   {
     slug: "tyson-luna-lakehouse-fire",
@@ -130,6 +137,7 @@ export const videos: Video[] = [
     mature: true,
     feelings: ["desire", "distance"],
     place: "lakehouse",
+    about: ["luna", "tyson"],
   },
   {
     slug: "tyson-park-fight",
@@ -143,6 +151,7 @@ export const videos: Video[] = [
     mature: true,
     feelings: ["hurt", "lies"],
     place: "park",
+    about: ["luna", "tyson"],
   },
 
   /* --------------------------------------------------------------------------
@@ -168,6 +177,7 @@ export const videos: Video[] = [
     mature: true,
     feelings: ["desire", "distance"],
     place: "bar",
+    about: ["luna", "tyson"],
   },
   {
     slug: "josh-tyson-barn",
@@ -181,6 +191,7 @@ export const videos: Video[] = [
     mature: false,
     feelings: ["distance"],
     place: "farmhouse",
+    about: ["josh", "tyson"],
   },
   {
     slug: "luna-tyson-bathroom",
@@ -194,6 +205,7 @@ export const videos: Video[] = [
     mature: true,
     feelings: ["desire", "lies"],
     place: "lakehouse",
+    about: ["luna", "tyson"],
   },
   {
     slug: "luna-josh-coffee",
@@ -207,6 +219,7 @@ export const videos: Video[] = [
     mature: false,
     feelings: ["trust", "desire"],
     place: "coffee-shop",
+    about: ["luna", "josh"],
   },
   {
     slug: "luna-josh-bed",
@@ -220,6 +233,7 @@ export const videos: Video[] = [
     mature: true,
     feelings: ["desire", "trust"],
     place: "farmhouse",
+    about: ["luna", "josh"],
   },
   {
     slug: "luna-josh-kitchen-kiss",
@@ -233,6 +247,7 @@ export const videos: Video[] = [
     mature: true,
     feelings: ["desire", "trust"],
     place: "farmhouse",
+    about: ["luna", "josh"],
   },
   {
     slug: "luna-josh-dinner-house",
@@ -246,6 +261,7 @@ export const videos: Video[] = [
     mature: true,
     feelings: ["trust", "distance"],
     place: "farmhouse",
+    about: ["luna", "josh"],
   },
   {
     slug: "luna-josh-house",
@@ -259,6 +275,7 @@ export const videos: Video[] = [
     mature: true,
     feelings: ["trust", "distance"],
     place: "farmhouse",
+    about: ["luna", "josh"],
   },
   {
     slug: "luna-bathtub",
@@ -272,6 +289,7 @@ export const videos: Video[] = [
     mature: true,
     feelings: ["grief", "desire"],
     place: "farmhouse",
+    about: ["luna"],
   },
   {
     // One scene, two edits. The public cut is the morning; members get the
@@ -293,6 +311,7 @@ export const videos: Video[] = [
     },
     feelings: ["desire", "trust"],
     place: "lakehouse",
+    about: ["luna", "tyson"],
   },
   // "Out at the Lake" (ty-luna-lake-fight) was pulled 2026-07-27 to be recut.
   // Its stills and poster are still on disk; re-add the entry here when the
@@ -313,6 +332,7 @@ export const videos: Video[] = [
     mature: true,
     feelings: ["distance", "hurt"],
     place: "farmhouse",
+    about: ["luna", "tyson"],
   },
 ];
 

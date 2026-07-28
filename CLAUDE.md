@@ -147,7 +147,12 @@ Before making structural decisions, read:
 - `docs/content/STORIES_FOLDER.md`
 - `docs/architecture/TECHNICAL_ARCHITECTURE.md`
 - `docs/monetization/MONETIZATION.md`
+- `docs/monetization/MEMBERSHIP_OPTIMIZATION.md`
 - `docs/roadmap/ROADMAP.md`
+
+`MEMBERSHIP_OPTIMIZATION.md` sets the growth and retention strategy. It is
+subordinate to this file: where it and the Experience Principles below disagree,
+this file wins.
 
 ## Engineering Rules
 

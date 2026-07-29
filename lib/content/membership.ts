@@ -245,9 +245,15 @@ export const BENEFITS: Benefit[] = [
     group: "Behind it",
   },
   {
-    id: "commentary",
-    label: "Creator commentary",
-    detail: "Melissa talking through the choices, scene by scene.",
+    // Replaces the "Creator commentary" line, which promised Melissa talking
+    // through the choices scene by scene. That does not exist and was never
+    // made. This is what is actually on the site today: 22 members-only notes
+    // in lib/content/between-takes.ts, on the character pages, with 9 more
+    // open so a visitor can see the register before paying.
+    id: "between-takes",
+    label: "Between Takes",
+    detail:
+      "The cast's notebook from set — why a beat was played the way it was, and what was happening off camera.",
     from: "vault",
     group: "Behind it",
   },

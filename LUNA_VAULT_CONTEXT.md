@@ -13,7 +13,7 @@ written to this canon* — the canon below is what's authoritative.
 story world. Not a Netflix clone and not a plain portfolio: visitors move
 through *places* (farmhouse, lakehouse, the bar, the lake, the coffee shop,
 the park) and discover scenes, still galleries, short vertical clips, and
-Luna's private journal. A paid **Vault membership ($8/month)** unlocks the
+Luna's private journal. A paid **LunaVerse membership ($8/month)** unlocks the
 locked rooms, the full scene library, the mature/explicit cuts, and ~80% of
 Luna's journal.
 
@@ -23,6 +23,18 @@ Never cartoonish or melodramatic.
 **Creator:** Melissa Casole. **Stack:** Next.js (App Router) + TypeScript +
 GSAP, deployed on Vercel. Video served privately from Vercel Blob; auth via
 Clerk; billing via Stripe; membership state in Neon Postgres.
+
+---
+
+## Naming
+
+The membership is **the LunaVerse** (set by Melissa, 2026-07-29). It used to be
+called "the Vault" and every visitor-facing string was changed over.
+
+The tier's `id` is still the string `"vault"` and must stay that way — it is in
+URLs, the `lv_member` cookie, entitlement checks and `STRIPE_PRICE_VAULT`.
+Renaming the id would sign existing members out and break billing lookups. Name
+and id are allowed to disagree; only one of them is a promise to a customer.
 
 ---
 

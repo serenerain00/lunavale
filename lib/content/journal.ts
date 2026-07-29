@@ -44,7 +44,7 @@
  * what they'd be paying for, which is her deciding what to do about it.
  *
  * Everything with a turn in it — the growing feelings, the lie, the night — is
- * behind the Vault, because that is the story and the story is the product.
+ * behind the LunaVerse, because that is the story and the story is the product.
  */
 
 import type { AccessLevel } from "@/lib/content/videos";

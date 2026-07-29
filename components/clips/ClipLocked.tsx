@@ -35,8 +35,8 @@ export function ClipLocked({ clip }: { clip: Clip }) {
           </span>
           <p className="text-balance leading-relaxed text-ivory">
             {clip.explicit
-              ? "This one is explicit, and it's part of the Vault."
-              : "This clip is part of the Vault."}
+              ? "This one is explicit, and it's part of the LunaVerse."
+              : "This clip is part of the LunaVerse."}
           </p>
           <Link
             href="/membership"

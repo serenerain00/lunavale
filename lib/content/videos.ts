@@ -302,7 +302,7 @@ export const videos: Video[] = [
     // else public about him is charm; this is him being good at something that
     // costs him patience. A visitor has to like him here or his turn later
     // reads as a different man. What it cost her to be pushed through it is in
-    // the journal, behind the Vault — watch it free, read what she thought for
+    // the journal, behind the LunaVerse — watch it free, read what she thought for
     // eight dollars.
     slug: "josh-luna-bolt",
     title: "The Bolt",

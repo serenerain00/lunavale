@@ -98,7 +98,7 @@ function LockedBody({ object }: { object: WorldObject }) {
         {object.placeholder}
       </p>
       <p className="text-sm text-stone-dim">
-        This discovery is part of the Vault, along with the rest of the locked
+        This discovery is part of the LunaVerse, along with the rest of the locked
         rooms in this location.
       </p>
       {/* Out to the pitch rather than granting access inline: a locked object

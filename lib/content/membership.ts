@@ -15,7 +15,9 @@
  *   - clear cancellation: `TIERS[n].commitment` is shown wherever price is
  *
  * ┌─────────────────────────────────────────────────────────────────────────┐
- * │ Vault is confirmed at $8/month. Tier names and benefit lines are still   │
+ * │ The LunaVerse tier is confirmed at $8/month. Its `id` stays "vault" —     │
+ * │ that string is in URLs, cookies, entitlement checks and                   │
+ * │ STRIPE_PRICE_VAULT, so the NAME changed and the id deliberately did not.  │
  * │ placeholder pending sign-off. `id` values are load-bearing (they appear  │
  * │ in URLs, cookies and entitlement checks) — change copy freely, change    │
  * │ ids deliberately.                                                        │
@@ -71,13 +73,13 @@ const ALL_TIERS: Tier[] = [
   },
   {
     id: "vault",
-    name: "Vault",
+    name: "LunaVerse",
     tagline: "The rooms that are locked.",
     priceMonthlyCents: 800,
     priceYearlyCents: 8000,
     blurb:
       "The full scene library, the mature cuts, the private journals, and the parts of each location a visitor can see but not open. New material lands every month.",
-    cta: "Open the Vault",
+    cta: "Join the LunaVerse",
     commitment: "Monthly · cancel any time",
     featured: true,
     available: true,
@@ -89,7 +91,7 @@ const ALL_TIERS: Tier[] = [
     priceMonthlyCents: 2000,
     priceYearlyCents: 20000,
     blurb:
-      "Everything in the Vault, plus the production side: monthly breakdowns, the scripts and shot plans, and your name in the credits of what you helped fund.",
+      "Everything in the LunaVerse, plus the production side: monthly breakdowns, the scripts and shot plans, and your name in the credits of what you helped fund.",
     cta: "Become a Patron",
     commitment: "Monthly · cancel any time",
     // Not on sale yet — the production-side material has to exist before it
@@ -235,7 +237,7 @@ export const BENEFITS: Benefit[] = [
   // weather, with their own moments". Pulled 2026-07-28. There is no weather
   // system and no variant content, and the nearest thing that does exist —
   // the day/night toggle in components/world/WorldExperience.tsx — is free to
-  // everyone, so it could not honestly be rewritten as a Vault benefit either.
+  // everyone, so it could not honestly be rewritten as a LunaVerse benefit either.
   // Put it back when locations genuinely have gated states of their own.
   {
     id: "bts",

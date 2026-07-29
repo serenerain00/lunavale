@@ -203,7 +203,7 @@ function LockedEntry({
             Members only
           </span>
           <p className="max-w-sm text-balance text-sm leading-relaxed text-ivory">
-            The rest of this page, and every other entry, is part of the Vault.
+            The rest of this page, and every other entry, is part of the LunaVerse.
           </p>
           <Link
             href="/membership"

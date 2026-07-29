@@ -28,7 +28,7 @@
  * ones that give away a technique rather than a turn — enough for a visitor to
  * know exactly what the rest of the notebook is, which is the whole job of a
  * shop window. Everything that explains a scene the visitor has not been able
- * to watch yet stays in the Vault, because otherwise the note spoils a scene
+ * to watch yet stays in the LunaVerse, because otherwise the note spoils a scene
  * membership is meant to sell.
  *
  * TONE RULE, inherited from CLAUDE.md: lead with story and craft. These are

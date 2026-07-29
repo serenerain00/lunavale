@@ -128,7 +128,7 @@ export default async function Home() {
 
           {premium.length > 0 && (
             <Row
-              heading="In the Vault"
+              heading="In the LunaVerse"
               blurb={
                 member
                   ? "Yours, as part of your membership."

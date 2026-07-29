@@ -25,7 +25,7 @@ The user is not simply paying for a larger video list. They are receiving keys t
 - Selected account-only memories
 - Release notifications
 
-## Vault Membership
+## LunaVerse Membership
 
 Potential benefits:
 
@@ -47,7 +47,7 @@ Potential benefits:
 
 Potential benefits:
 
-- Everything in Vault Membership
+- Everything in LunaVerse Membership
 - Monthly production breakdown
 - Supporter credits
 - Creator Q&A

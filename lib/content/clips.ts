@@ -8,7 +8,7 @@
  *      pillarboxed into a sliver or cropped to nonsense, and every layout that
  *      touches them wants to know their aspect up front.
  *   2. Access. Most of them ran publicly on Instagram, so there is nothing
- *      left to gate — putting those behind the Vault would be selling
+ *      left to gate — putting those behind the LunaVerse would be selling
  *      something anybody can already scroll past for free, which
  *      docs/monetization/MONETIZATION.md exists to prevent. But not all of
  *      them are the social cuts. Anything explicit was never on Instagram

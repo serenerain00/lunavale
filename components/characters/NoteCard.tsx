@@ -68,7 +68,7 @@ export function NoteCard({ note, unlocked }: NoteCardProps) {
         {locked && (
           <p className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-ink-soft">
             <LockGlyph />
-            The rest of this note is in the Vault
+            The rest of this note is in the LunaVerse
           </p>
         )}
       </div>

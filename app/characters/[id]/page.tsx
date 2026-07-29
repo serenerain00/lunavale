@@ -299,7 +299,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
           {!member && locked > 0 && (
             <section className="mt-16 rounded-xl border border-amber/25 bg-amber/[0.04] p-6 sm:p-8">
               <h2 className="font-display text-2xl font-medium text-ivory sm:text-3xl">
-                {locked} of {character.name}’s pages are in the Vault
+                {locked} of {character.name}’s pages are in the LunaVerse
               </h2>
               <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
                 The rest of the notebook, the scenes that are not public, and
@@ -310,7 +310,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
                 href="/membership"
                 className="mt-5 inline-flex min-h-10 items-center rounded-full bg-amber px-5 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
               >
-                Open the Vault
+                Join the LunaVerse
               </Link>
             </section>
           )}

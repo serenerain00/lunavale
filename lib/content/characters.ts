@@ -191,7 +191,7 @@ export function countFor(id: PersonId): number {
 }
 
 /**
- * How much of a person's material is behind the Vault. Drives the honest
+ * How much of a person's material is behind the LunaVerse. Drives the honest
  * "N of M are members-only" line on the hub rather than a vague promise of
  * "more inside".
  */

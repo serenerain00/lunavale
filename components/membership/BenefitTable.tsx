@@ -11,7 +11,7 @@ import {
  * The tier cards answer "what does the next step add"; this answers "does tier
  * X include Y", which is the question someone asks right before they decide to
  * trust the page. A genuine <table> with scoped headers means a screen reader
- * announces "Locked rooms, Vault, included" rather than reading a grid of
+ * announces "Locked rooms, LunaVerse, included" rather than reading a grid of
  * disembodied ticks — and it stays legible at 320px because the tier columns
  * are narrow and only the label column needs room.
  */

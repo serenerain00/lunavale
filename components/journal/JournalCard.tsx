@@ -57,7 +57,7 @@ export function JournalCard({ entry, unlocked }: JournalCardProps) {
         {locked && (
           <p className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-ink-soft">
             <LockGlyph />
-            The rest is in the Vault
+            The rest is in the LunaVerse
           </p>
         )}
         {freeToRead && (

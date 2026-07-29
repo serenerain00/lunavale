@@ -170,6 +170,54 @@ export const galleries: StillGallery[] = [
     mature: false,
   },
 
+  /* -------------------------------------------------------------- the bolt */
+  {
+    id: "josh-luna-bolt",
+    title: "The Bolt",
+    subtitle: "Luna & Josh",
+    description: [
+      "A bolt on the tractor that has been seized since before either of them owned the place, an afternoon that is far too hot for it, and Luna at the end of what she believes she is capable of.",
+      "He does not take the wrench off her. That is the whole scene. He could do it in a second and they both know it, and he stands there with his hands off it and tells her to give it one more.",
+    ],
+    count: 17,
+    gated: true,
+    cover: "/gallery/josh-luna-bolt/cover.jpg",
+    feelings: ["trust", "desire"],
+    place: "farmhouse",
+    about: ["luna", "josh"],
+    sceneSlug: "josh-luna-bolt",
+    journalEntryId: "the-bolt",
+    stills: [
+      { caption: "Two hours in and neither of them has said anything for a while." },
+      {},
+      {},
+      { caption: "This is the part where she decides it is a fact about her rather than a fact about the bolt." },
+      {},
+      {},
+      {},
+      {
+        journal: {
+          entryId: "the-bolt",
+          excerpt:
+            "He didn't take the wrench. That's the part. Ten years and I know exactly how fast he could have done it himself.",
+        },
+      },
+      {},
+      {},
+      { caption: "It goes. The noise she makes is not a dignified noise." },
+      {},
+      {},
+      {},
+      // The figure in the doorway is not identified anywhere in canon. Left
+      // uncaptioned on purpose rather than named on a guess.
+      {},
+      {},
+      {},
+    ],
+    access: "premium",
+    mature: false,
+  },
+
   /* --------------------------------------------------------------- the run */
   {
     // Free on purpose. It is the one set with no turn in it — Luna alone, an

@@ -426,6 +426,23 @@ export const notes: SetNote[] = [
     ],
   },
   {
+    id: "josh-the-bolt",
+    author: "josh",
+    kind: "insight",
+    heading: "Hands off it",
+    dateline: "Day 9 · the barn",
+    sceneSlug: "josh-luna-bolt",
+    gallerySlug: "josh-luna-bolt",
+    place: "farmhouse",
+    access: "free",
+    body: [
+      "The whole scene is one decision and it is a decision about my hands. He could undo that bolt in a second and everybody watching knows it. If I touch the wrench once, even to help, he becomes a man doing it for her and the scene is worth nothing.",
+      "So I keep my hands off it for four minutes, which is much harder than it sounds, and I get one instruction: give it one more.",
+      "Melissa was very clear that he does not look pleased with himself afterwards. No I-knew-you-could. The second he takes any credit he has taken it off her, and this is the one thing in the film that is entirely hers.",
+      "It is the scene I would show somebody who thinks they already know what happens to these two. He is good here. Genuinely, unshowily good. That is not a set-up for anything — it is just true, and everything later costs more because of it.",
+    ],
+  },
+  {
     id: "josh-the-study",
     author: "josh",
     kind: "insight",

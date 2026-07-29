@@ -375,6 +375,32 @@ export const journal: JournalEntry[] = [
     ],
   },
   {
+    // Placed here on purpose: the warmest entry she writes about him sits
+    // immediately before the one where week three starts going the way week
+    // three went the first time. The doubt in the last three lines is the
+    // whole point of the entry — she gets to the question and then does not
+    // answer it, which is how she handles everything about him.
+    id: "the-bolt",
+    dateline: "After, and my hands won't close properly",
+    place: "farmhouse",
+    where: "The barn",
+    about: ["luna", "josh"],
+    sceneSlug: "josh-luna-bolt",
+    access: "premium",
+    mature: false,
+    body: [
+      "There is a bolt on that tractor that has been seized since before either of us. I got maybe a degree out of it and told him I was done, and I meant it — I had already turned it into a fact about me instead of a fact about the bolt, which is a thing I do and have always done and did not know I did until this afternoon.",
+      "He didn't take the wrench. That's the part. Ten years and I know exactly how fast he could have done it himself, and he stood there with his hands off it and said give it one more. Not loudly. No speech about it. Just — one more, Luna.",
+      "So I gave it one more and it went. It just went, all at once, and I nearly put myself on the floor of the barn, and the noise I made was not a dignified noise.",
+      "And he didn't make it about himself either. He didn't say he'd known I could. He didn't stand there looking pleased with his own patience, which is a thing men do and I have watched them do it. He said there it is, and went back to what he was doing, and let it be mine.",
+      "I have been carrying that around all evening — that I can be walked right up to the edge of what I think I'm capable of and pushed one step past it, and the person who did that to me was him. I learned something today and he is the reason. I want that written down while it's still exactly true.",
+      "And then the other thing, which I'm only writing because nobody is reading this.",
+      "I gave it one more because he asked me to. Not because I had anything left. What if it hadn't moved? If I'd stood there and pulled and it had stayed exactly where it was — what would his face have done.",
+      "Nothing. I know the answer. He'd have shrugged and taken the wrench and it would have been fine and he'd have forgotten it by dinner.",
+      "So why did I need to know.",
+    ],
+  },
+  {
     id: "the-part-i-forgot",
     dateline: "Three weeks in",
     place: "farmhouse",

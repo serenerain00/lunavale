@@ -295,6 +295,26 @@ export const videos: Video[] = [
     about: ["josh", "rick"],
   },
   {
+    // Free, and the most useful free thing on the site for Josh. Everything
+    // else public about him is charm; this is him being good at something that
+    // costs him patience. A visitor has to like him here or his turn later
+    // reads as a different man. What it cost her to be pushed through it is in
+    // the journal, behind the Vault — watch it free, read what she thought for
+    // eight dollars.
+    slug: "josh-luna-bolt",
+    title: "The Bolt",
+    synopsis:
+      "A seized bolt on the tractor, and Luna ready to quit. Josh doesn't take the wrench off her — he tells her to give it one more.",
+    file: "josh-luna-bolt.proxy.mp4",
+    poster: "/posters/josh-luna-bolt.jpg",
+    durationSeconds: 55,
+    access: "free",
+    mature: false,
+    feelings: ["trust", "desire"],
+    place: "farmhouse",
+    about: ["luna", "josh"],
+  },
+  {
     slug: "luna-bathtub",
     title: "Still Water",
     synopsis:

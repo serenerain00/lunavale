@@ -284,7 +284,7 @@ export const videos: Video[] = [
     slug: "josh-rick-study",
     title: "The Study",
     synopsis:
-      "Josh stands. His father does not get up. Everything Josh does to Luna, he learned in this room.",
+      "Josh stands the whole time. His father stays down until the last thing he says — and it's about Luna.",
     file: "josh-rick-study.proxy.mp4",
     poster: "/posters/josh-rick-study.jpg",
     durationSeconds: 57,

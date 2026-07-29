@@ -134,12 +134,12 @@ export const characters: Character[] = [
       "He is disappointed in Josh for losing Luna. He also always thought Luna was too good for him. He holds both at once without difficulty, and says neither in a way that helps — which is the whole inheritance, handed down intact.",
     ],
     details: [
-      "Stays in the chair. Josh stands",
+      "Stays in the chair while Josh stands — until the last thing he says",
       "The framed photograph on the shelf behind him is the two of them",
       "Thought Luna was too good for his son, and never told his son that",
       "Cares, demonstrably. Not once in a language Josh can read",
     ],
-    pullQuote: "Everything Josh does to Luna, he learned in this room.",
+    pullQuote: "You think you're handling it? You're not.",
     pullQuoteSource: "The Study",
   },
 ];

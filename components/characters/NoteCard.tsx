@@ -3,6 +3,7 @@ import { getNoteKind, type SetNote } from "@/lib/content/between-takes";
 import { getVideo } from "@/lib/content/videos";
 import { getClip } from "@/lib/content/clips";
 import { getGallery } from "@/lib/content/gallery";
+import type { PersonId } from "@/lib/content/taxonomy";
 
 interface NoteCardProps {
   note: SetNote;
@@ -89,9 +90,23 @@ export function NoteCard({ note, unlocked }: NoteCardProps) {
   );
 }
 
-/** Signed the way you'd sign a note you left for someone. */
+/**
+ * Signed the way you'd sign a note you left for someone.
+ *
+ * A total record rather than a chain of ternaries: the previous version fell
+ * through to "J" for anyone it did not recognise, so Rick's notes went out
+ * signed by Josh. Adding a person to the taxonomy without adding them here is
+ * now a type error instead of a wrong initial nobody notices.
+ */
+const SIGNATURES: Record<PersonId, string> = {
+  luna: "— L",
+  tyson: "— T",
+  josh: "— J",
+  rick: "— R",
+};
+
 function signature(note: SetNote): string {
-  return note.author === "luna" ? "— L" : note.author === "tyson" ? "— T" : "— J";
+  return SIGNATURES[note.author];
 }
 
 /**

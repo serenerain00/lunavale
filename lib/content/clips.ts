@@ -121,6 +121,23 @@ export const clips: Clip[] = [
     mature: true,
   },
   {
+    // The 9:16 of The Bolt, scored. Named for the line it turns on, which is
+    // also the line her journal entry and Josh's set note both quote — the
+    // three pieces say the same four words and arrive at different places.
+    //
+    // Free, and the best thing on the site to put in front of a stranger:
+    // it is 58 seconds, it needs no context, and somebody wins something.
+    id: "one-more",
+    title: "One More",
+    caption:
+      "She can't shift it and she's done arguing about it. He doesn't take the wrench off her.",
+    file: "one-more.proxy.mp4",
+    poster: "/posters/one-more.jpg",
+    durationSeconds: 58,
+    about: ["luna", "josh"],
+    mature: false,
+  },
+  {
     // Free, like the rest of the social cuts. It reads as a mood piece rather
     // than a turn, and it is the shortest route a stranger has to Tyson —
     // which is what the character pages need most.

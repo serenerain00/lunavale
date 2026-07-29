@@ -186,6 +186,7 @@ export const galleries: StillGallery[] = [
     place: "farmhouse",
     about: ["luna", "josh", "tyson"],
     sceneSlug: "josh-luna-bolt",
+    clipId: "one-more",
     journalEntryId: "the-bolt",
     stills: [
       { caption: "Two hours in and neither of them has said anything for a while." },

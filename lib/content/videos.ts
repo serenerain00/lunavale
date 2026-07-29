@@ -307,7 +307,10 @@ export const videos: Video[] = [
       "A seized bolt on the tractor, and Luna ready to quit. Josh doesn't take the wrench off her — he tells her to give it one more.",
     file: "josh-luna-bolt.proxy.mp4",
     poster: "/posters/josh-luna-bolt.jpg",
-    durationSeconds: 55,
+    // Scored cut. The dialogue is identical to the unscored master —
+    // "easy, don't force it, don't fight it… just give it one more" — so this
+    // is the same scene with Melissa's music under it, not a different edit.
+    durationSeconds: 57,
     access: "free",
     mature: false,
     feelings: ["trust", "desire"],

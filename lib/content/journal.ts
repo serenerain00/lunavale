@@ -392,6 +392,7 @@ export const journal: JournalEntry[] = [
     where: "The barn",
     about: ["luna", "josh"],
     sceneSlug: "josh-luna-bolt",
+    clipId: "one-more",
     access: "premium",
     mature: false,
     body: [

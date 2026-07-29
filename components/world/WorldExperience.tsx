@@ -16,7 +16,13 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ObjectPanel } from "@/components/world/ObjectPanel";
-import type { Environment, Room, WorldObject } from "@/lib/content/world";
+import {
+  hasRealArt,
+  PLACEHOLDER_NOTICE,
+  type Environment,
+  type Room,
+  type WorldObject,
+} from "@/lib/content/world";
 
 const WorldScene = dynamic(
   () => import("@/components/world/WorldScene").then((m) => m.WorldScene),
@@ -210,6 +216,14 @@ export function WorldExperience({
           <p className="mt-3 max-w-md text-balance text-stone">
             {room.description}
           </p>
+          {/* Told at the door, before they are standing in it — the only
+              moment where saying so reads as candour rather than an excuse. */}
+          {!hasRealArt(room) && (
+            <p className="mt-4 max-w-sm rounded-lg border border-amber/25 bg-amber/[0.05] px-4 py-3 text-sm leading-relaxed text-stone">
+              <span className="font-medium text-amber-soft">In progress. </span>
+              {PLACEHOLDER_NOTICE}
+            </p>
+          )}
           <button
             onClick={() => setEntered(true)}
             className="mt-6 rounded-full bg-amber px-7 py-3 text-sm font-medium text-void transition-colors hover:bg-amber-soft"

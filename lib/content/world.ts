@@ -140,6 +140,50 @@ export interface Environment {
   rooms: Room[];
 }
 
+/* ------------------------------------------------------- build readiness -- */
+
+/**
+ * Whether a room has real captured art, or is still the placeholder box.
+ *
+ * DERIVED, never hand-set. A boolean anyone has to remember to flip would drift
+ * the moment art landed, and the failure mode is the worst one available: a
+ * room that says it is finished while rendering a tinted box with a stock
+ * armchair in it. The instant a `splat`/`pano`/`scan` slot is filled, this
+ * turns true and every "in progress" label in the app disappears on its own.
+ */
+export function hasRealArt(room: Room): boolean {
+  return Boolean(room.splat ?? room.pano ?? room.scan);
+}
+
+export type BuildState = "built" | "partial" | "placeholder";
+
+export interface Readiness {
+  /** Rooms with captured art. */
+  dressed: number;
+  total: number;
+  state: BuildState;
+}
+
+export function readiness(env: Environment): Readiness {
+  const dressed = env.rooms.filter(hasRealArt).length;
+  const total = env.rooms.length;
+  return {
+    dressed,
+    total,
+    state: dressed === 0 ? "placeholder" : dressed < total ? "partial" : "built",
+  };
+}
+
+/**
+ * What to tell a visitor standing in an undressed room. Said plainly: the
+ * geometry is a stand-in, the things in the room are real. Being straight about
+ * a half-built room costs less than letting somebody conclude this is what the
+ * finished product looks like — and it is the difference between "unfinished"
+ * and "bad", which a visitor cannot tell apart on their own.
+ */
+export const PLACEHOLDER_NOTICE =
+  "This room is still being built. The layout you're standing in is a stand-in — everything in it is real and the space around it is being replaced.";
+
 export const environments: Environment[] = [
   {
     slug: "farmhouse",

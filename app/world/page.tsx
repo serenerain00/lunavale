@@ -4,7 +4,11 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { Reveal } from "@/components/motion/Reveal";
 import { getMembership } from "@/lib/access/entitlement";
-import { environments, type Environment } from "@/lib/content/world";
+import {
+  environments,
+  readiness,
+  type Environment,
+} from "@/lib/content/world";
 import { getVideo } from "@/lib/content/videos";
 
 export const metadata: Metadata = {
@@ -56,6 +60,7 @@ export default async function WorldPage() {
             {environments.map((env) => {
               const cover = coverFor(env);
               const accent = env.rooms[0]?.accent ?? "#3a3a40";
+              const build = readiness(env);
               return (
                 <Link
                   key={env.slug}
@@ -82,6 +87,21 @@ export default async function WorldPage() {
                   )}
                   {/* Scrim for legibility over the bottom third. */}
                   <div className="absolute inset-0 bg-gradient-to-t from-void via-void/30 via-50% to-transparent" />
+
+                  {/* Said up front rather than discovered on arrival. A visitor
+                      who walks into a placeholder box unwarned concludes the
+                      product is bad; one who was told concludes it is early. */}
+                  {build.state !== "built" && (
+                    <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-void/75 px-2.5 py-1 text-[0.6875rem] font-medium uppercase tracking-[0.1em] text-stone backdrop-blur-sm">
+                      <span
+                        aria-hidden
+                        className="h-1.5 w-1.5 rounded-full bg-amber/80"
+                      />
+                      {build.state === "placeholder"
+                        ? "In progress"
+                        : `${build.dressed} of ${build.total} built`}
+                    </span>
+                  )}
 
                   <div className="relative p-5">
                     <p className="text-[0.7rem] uppercase tracking-[0.18em] text-amber-soft">

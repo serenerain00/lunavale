@@ -332,14 +332,14 @@ export const videos: Video[] = [
     slug: "luna-josh-beach",
     title: "The Beach",
     synopsis:
-      "A whole evening on the sand and in the water, from the walk down to the last of the light.",
+      "Mexico, five years in. A whole evening on the sand and in the water — the week that reminded her why.",
     file: "luna-josh-beach.proxy.mp4",
     poster: "/posters/luna-josh-beach.jpg",
     durationSeconds: 284,
     access: "premium",
     mature: true,
     feelings: ["desire", "trust"],
-    place: "lake",
+    place: "mexico",
     about: ["luna", "josh"],
   },
   {

@@ -97,6 +97,27 @@ not."** He means losing Luna. He does not use her name.
 
 ---
 
+### Mexico — the flashback
+*(Canon set by Melissa, 2026-07-29.)*
+
+**Five years into the ten**, Josh took Luna to **Mexico**. He booked it himself.
+
+The trip was **good** — properly good. Whatever they had been carrying, they
+put down at the airport and neither of them picked it back up while they were
+there. They got close again. It was romantic. **He treated her the way she
+wanted to be treated**, which is to say the way he had at the start, and it
+**reminded her exactly why she fell in love with him.**
+
+She came home feeling like it had been a **reset**.
+
+It is the warmest material in the story and it is a **flashback** — it sits
+five years before everything else. That is what makes it useful: it is the
+evidence that the man Josh becomes is not the only man he is, and that when
+Luna gives him another chance she is not being stupid. She has seen this
+version of him. She is trying to get back to Mexico.
+
+---
+
 ## The engine of the story
 
 - **They never lie to each other** — Luna and Tyson, twenty years, not once.

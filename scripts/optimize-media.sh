@@ -92,6 +92,19 @@ case "$cmd" in
       echo "  $(basename "$f") -> $full ($(du -h "$full" | cut -f1)) + thumb ($(du -h "$thumb" | cut -f1))"
     done < <(find "$src" -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) | sort)
 
+    # Open preview stills, when the gallery declares a freePreviewCount. These
+    # are the ONLY frames of a gated set that sit at a public URL, and they are
+    # deliberate — see `freePreviewCount` in lib/content/gallery.ts.
+    free="${2:-0}"
+    if [ "$free" -gt 0 ]; then
+      for k in $(seq 1 "$free"); do
+        nn=$(printf %02d "$k")
+        [ -f "$out/$nn.jpg" ] || continue
+        cp "$out/$nn.jpg" "public/gallery/$id/$nn.jpg"
+        echo "  open preview -> public/gallery/$id/$nn.jpg"
+      done
+    fi
+
     # Public card cover from the first still.
     ffmpeg -y -loglevel error -i "$out/01.jpg" \
       -vf "scale=$CARD_WIDTH:$CARD_HEIGHT:force_original_aspect_ratio=increase,crop=$CARD_WIDTH:$CARD_HEIGHT" \

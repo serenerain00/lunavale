@@ -59,9 +59,11 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
     ? getEntry(gallery.journalEntryId)
     : undefined;
 
-  // Only build the (gated) image list for a viewer who may see it.
-  const items: ViewStill[] = allowed
-    ? Array.from({ length: gallery.count }, (_, i) => {
+  // A gated gallery may open its first few stills to everybody
+  // (`freePreviewCount`), so a non-member gets a list too — just a short one.
+  const shown = allowed ? gallery.count : (gallery.freePreviewCount ?? 0);
+  const items: ViewStill[] = shown
+    ? Array.from({ length: shown }, (_, i) => {
         const n = i + 1;
         const meta = stillMeta(gallery, n);
         const j = meta?.journal;

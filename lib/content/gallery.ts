@@ -55,6 +55,16 @@ export interface StillGallery {
    * True  → images are served through the gated /api/still route (members only).
    */
   gated: boolean;
+  /**
+   * How many of a GATED gallery's stills are open to everybody — the first N,
+   * in order. They are written to public/gallery/<id>/ alongside the private
+   * copies and served from there, so a visitor sees real frames rather than a
+   * locked wall, and the count of what they are missing is stated honestly.
+   *
+   * Only meaningful when `gated` is true. Keep it small: it is a shop window,
+   * not the set.
+   */
+  freePreviewCount?: number;
   /** Compressed public cover used as the catalog card image and locked teaser. */
   cover: string;
   /** Emotional context — how this set is browsed in the catalog. */
@@ -168,6 +178,69 @@ export const galleries: StillGallery[] = [
     ],
     access: "premium",
     mature: false,
+  },
+
+  /* ---------------------------------------------------------------- Mexico */
+  {
+    // The flashback. Five years into the ten, and the warmest material in the
+    // story — see LUNA_VAULT_CONTEXT.md.
+    //
+    // Gated, but with the first two stills open. That is the shop window
+    // Melissa asked for: roughly 10% of the set, real frames rather than a
+    // locked wall, and the page states plainly how many more there are.
+    id: "josh-luna-beach",
+    title: "Mexico",
+    subtitle: "Luna & Josh, five years in",
+    description: [
+      "He booked it himself and told her on a Tuesday like it was nothing. Six days, and whatever they had been carrying they put down at the airport and neither of them went back for it.",
+      "This is the week she is trying to get back to. It is the evidence that the man he becomes is not the only man he is — which is exactly what makes everything after it cost so much.",
+    ],
+    count: 15,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/josh-luna-beach/cover.jpg",
+    feelings: ["trust", "desire"],
+    place: "mexico",
+    about: ["luna", "josh"],
+    sceneSlug: "luna-josh-beach",
+    clipId: "beach-preview",
+    journalEntryId: "mexico-the-last-night",
+    stills: [
+      { caption: "The walk down, on the first evening." },
+      {},
+      {},
+      {
+        journal: {
+          entryId: "mexico-the-last-night",
+          excerpt:
+            "He put his phone in the safe on the first morning and never mentioned it once.",
+        },
+      },
+      {},
+      {},
+      {},
+      {
+        journal: {
+          entryId: "mexico-the-last-night",
+          excerpt:
+            "And he looked at me. That is all it is, in the end. He looked at me and he waited for the ends of my sentences.",
+        },
+      },
+      {},
+      {},
+      {},
+      { caption: "They stayed in the water until the light went." },
+      {},
+      {},
+      {
+        journal: {
+          entryId: "mexico-the-last-night",
+          excerpt: "I want to remember it exactly. In case I need it.",
+        },
+      },
+    ],
+    access: "premium",
+    mature: true,
   },
 
   /* -------------------------------------------------------------- the bolt */
@@ -531,7 +604,9 @@ export function stillSrc(
   n: number,
   size: "thumb" | "full",
 ): string {
-  if (!gallery.gated) {
+  // A free set, or one of a gated set's open preview stills, comes straight
+  // from /public. Everything else goes through the entitlement check.
+  if (!gallery.gated || n <= (gallery.freePreviewCount ?? 0)) {
     return `/gallery/${gallery.id}/${String(n).padStart(2, "0")}.jpg`;
   }
   return `/api/still/${gallery.id}/${n}${size === "thumb" ? "?size=thumb" : ""}`;

@@ -86,6 +86,49 @@ export interface JournalEntry {
 }
 
 export const journal: JournalEntry[] = [
+  /* ------------------------------------------------- five years in: Mexico ---
+   * A FLASHBACK, and the only material in the journal that predates the
+   * breakup — which is why it sits at the top rather than in sequence. The
+   * journal now opens on the best week she ever had with him and then goes
+   * straight to the last box going out the door.
+   *
+   * Both are FREE, per Melissa. They are the strongest free pages in the
+   * product: a visitor reads them, likes Josh, and is then far more invested in
+   * what the locked entries are about. Nothing is withheld here because nothing
+   * needs to be — the whole point is that this week was good.
+   */
+  {
+    id: "mexico-on-the-way",
+    dateline: "Five years in — somewhere over the water",
+    place: "mexico",
+    about: ["luna", "josh"],
+    access: "free",
+    mature: false,
+    body: [
+      "He booked this himself. Not me — him. He booked it, paid for it, and told me on a Tuesday like it was nothing, and I have been turning that over since the taxi and I cannot get it to sit still.",
+      "Because here is the part I would not say out loud to anybody: I don't know what we're going to be like when we get there. The last few months I have been talking to the back of his head. The shop takes him at six. I have got very good at having whole conversations with a man who is already thinking about a delivery.",
+      "And a week away is an expensive way to find out whether two people still like each other. That is the fear. Not that we'll fight — we don't really fight. That we'll get there and it will be the same two people in a nicer room, and I will have to look straight at it with nothing to do all day but look.",
+      "I am writing this down on the plane so that if it goes well I have to sit here afterwards and admit I was wrong. Which I would like to be. I would very much like to be wrong about this.",
+    ],
+  },
+  {
+    id: "mexico-the-last-night",
+    dateline: "Five years in — the last night, and I don't want to go home",
+    place: "mexico",
+    about: ["luna", "josh"],
+    sceneSlug: "luna-josh-beach",
+    access: "free",
+    mature: false,
+    body: [
+      "I was wrong. Writing that first, because I said I would.",
+      "He put his phone in the safe on the first morning and never mentioned it once. Not as a gesture, not as a thing I was supposed to notice — he just put it away and left it there for six days. I noticed on the third day and did not say anything either.",
+      "Whatever we were carrying, we put it down at the airport and neither of us went back for it. I keep waiting for the sentence where one of us picks it up again and it hasn't come.",
+      "And he looked at me. That is all it is, in the end. He looked at me and he waited for the ends of my sentences and he laughed at the thing I said about the man with the pelican, and today he took me down to the water and we stayed in it until the light went, and there was nothing else he was doing, nowhere else he was.",
+      "This is the man I met. He was in there the whole time. I don't think he went anywhere — I think we just stopped making room for him.",
+      "So: a reset. That is what this week has been. We go back Thursday and I am taking this with me.",
+      "I want to remember it exactly. In case I need it.",
+    ],
+  },
   /* ---------------------------------------------------- the six months ---- */
   {
     id: "the-last-box",

@@ -119,6 +119,15 @@ export const places = [
     environmentSlug: "downtown",
   },
   {
+    // Not part of the present-day world — the Mexico trip is a flashback to five
+    // years into the relationship. Filed as its own place so the two journal
+    // entries and the beach material sit somewhere true rather than being
+    // squeezed into "the lake".
+    id: "mexico",
+    label: "Mexico",
+    blurb: "Five years in, and a week that felt like a reset.",
+  },
+  {
     // Rick's room. Likely to become one room of a larger "Rick's house" once
     // more of it is shot — filed narrowly for now rather than folded into the
     // farmhouse, which belongs to Josh and Luna and means something else.

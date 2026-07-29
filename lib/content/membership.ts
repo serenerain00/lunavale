@@ -169,8 +169,10 @@ export const BENEFITS: Benefit[] = [
   {
     id: "full-library",
     label: "The full scene library",
+    // True as of 2026-07-29: 12 of the 19 scenes are members-only. Before the
+    // gating pass this line was selling two extra scenes and reading as a lie.
     detail:
-      "Every scene in the vault, including the ones that never go public.",
+      "Twelve scenes that never go public, including the whole of The Beach.",
     from: "vault",
     group: "Watching",
   },
@@ -178,25 +180,25 @@ export const BENEFITS: Benefit[] = [
     id: "mature",
     label: "Mature cuts",
     detail:
-      "The unedited versions of scenes that are trimmed for the public release.",
+      "Every intimate scene in the story. The public side keeps the quiet ones.",
     from: "vault",
     group: "Watching",
   },
   {
     id: "extended",
-    label: "Extended and alternate edits",
+    label: "Full-length scenes",
+    // Was "Extended and alternate edits", which promised plural alternates
+    // against exactly one. This says the true and better thing: the clips are
+    // teasers and the scenes they come from run minutes, not seconds.
     detail:
-      "Longer cuts, different endings, and the takes that changed the scene.",
+      "The clips are previews. Members get the scenes they were cut from, in full.",
     from: "vault",
     group: "Watching",
   },
-  {
-    id: "early",
-    label: "Early access",
-    detail: "New scenes land for members before they land anywhere else.",
-    from: "vault",
-    group: "Watching",
-  },
+  // "Early access" was here — "scenes land for members first". Pulled
+  // 2026-07-29: there is no release-scheduling mechanism anywhere in the
+  // codebase, so there was no sense in which anything landed for members
+  // first. Put it back when a scene can actually hold a members-only window.
   {
     id: "open-world",
     label: "Walk the locations",

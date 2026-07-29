@@ -173,7 +173,7 @@ export const videos: Video[] = [
     file: "luna-tyson-bar.proxy.mp4",
     poster: "/posters/luna-tyson-bar.jpg",
     durationSeconds: 71,
-    access: "free",
+    access: "premium",
     mature: true,
     feelings: ["desire", "distance"],
     place: "bar",
@@ -201,7 +201,7 @@ export const videos: Video[] = [
     file: "luna-tyson-bathroom.proxy.mp4",
     poster: "/posters/luna-tyson-bathroom.jpg",
     durationSeconds: 76,
-    access: "free",
+    access: "premium",
     mature: true,
     feelings: ["desire", "lies"],
     place: "lakehouse",
@@ -229,7 +229,7 @@ export const videos: Video[] = [
     file: "luna-josh-bed.proxy.mp4",
     poster: "/posters/luna-josh-bed.jpg",
     durationSeconds: 86,
-    access: "free",
+    access: "premium",
     mature: true,
     feelings: ["desire", "trust"],
     place: "farmhouse",
@@ -246,7 +246,7 @@ export const videos: Video[] = [
     // -51dB mean — the dialogue was in it but inaudible on a phone. This one
     // carries a song instead, at -16.7dB.
     durationSeconds: 154,
-    access: "free",
+    access: "premium",
     mature: true,
     feelings: ["desire", "trust"],
     place: "farmhouse",
@@ -260,7 +260,7 @@ export const videos: Video[] = [
     file: "luna-josh-dinner-house.proxy.mp4",
     poster: "/posters/luna-josh-dinner-house.jpg",
     durationSeconds: 115,
-    access: "free",
+    access: "premium",
     mature: true,
     feelings: ["trust", "distance"],
     place: "farmhouse",
@@ -274,7 +274,7 @@ export const videos: Video[] = [
     file: "luna-josh-house.proxy.mp4",
     poster: "/posters/luna-josh-house.jpg",
     durationSeconds: 263,
-    access: "free",
+    access: "premium",
     mature: true,
     feelings: ["trust", "distance"],
     place: "farmhouse",
@@ -322,6 +322,27 @@ export const videos: Video[] = [
     about: ["luna", "josh", "tyson"],
   },
   {
+    // The beach, in full — 4m44s, and members-only. The free 9:16 preview of it
+    // is a clip (lib/content/clips.ts, "beach-preview"), which is the shop
+    // window for this one.
+    //
+    // NOTE: Melissa also delivered luna-josh-beach-sound.mov, the same cut with
+    // a commercially released song mixed in. That file is deliberately NOT the
+    // source here — see the licensing note in the commit and in clips.ts.
+    slug: "luna-josh-beach",
+    title: "The Beach",
+    synopsis:
+      "A whole evening on the sand and in the water, from the walk down to the last of the light.",
+    file: "luna-josh-beach.proxy.mp4",
+    poster: "/posters/luna-josh-beach.jpg",
+    durationSeconds: 284,
+    access: "premium",
+    mature: true,
+    feelings: ["desire", "trust"],
+    place: "lake",
+    about: ["luna", "josh"],
+  },
+  {
     slug: "luna-bathtub",
     title: "Still Water",
     synopsis:
@@ -329,7 +350,7 @@ export const videos: Video[] = [
     file: "luna-bathtub.proxy.mp4",
     poster: "/posters/luna-bathtub.jpg",
     durationSeconds: 287,
-    access: "free",
+    access: "premium",
     mature: true,
     feelings: ["grief", "desire"],
     place: "farmhouse",
@@ -346,7 +367,7 @@ export const videos: Video[] = [
     file: "ty-luna-bed.proxy.mp4",
     poster: "/posters/ty-luna-bed.jpg",
     durationSeconds: 227,
-    access: "free",
+    access: "premium",
     mature: true,
     premium: {
       file: "ty-luna-bed-explicit.proxy.mp4",
@@ -372,7 +393,7 @@ export const videos: Video[] = [
     file: "ty-luna-farm-road.proxy.mp4",
     poster: "/posters/ty-luna-farm-road.jpg",
     durationSeconds: 128,
-    access: "free",
+    access: "premium",
     mature: true,
     feelings: ["distance", "hurt"],
     place: "farmhouse",

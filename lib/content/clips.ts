@@ -56,6 +56,12 @@ export interface Clip {
   access?: AccessLevel;
   /** See lib/content/content-notes.ts. A clip carrying one does not autoplay. */
   notes?: ContentNoteId[];
+  /**
+   * When this clip is a preview of a longer scene, that scene's slug. Lets the
+   * clip page say what the full thing is and where it lives, instead of leaving
+   * a visitor to guess that thirty seconds is all there is.
+   */
+  fullSceneSlug?: string;
 }
 
 /** A clip's effective access. Free is the default, so entries stay terse. */
@@ -119,6 +125,27 @@ export const clips: Clip[] = [
     durationSeconds: 152,
     about: ["luna", "josh"],
     mature: true,
+  },
+  {
+    // The free preview of "The Beach" (lib/content/videos.ts), which is
+    // members-only and 4m44s. Deliberately the Luna-weighted cut: 18s of her
+    // alone before anything happens, so what it withholds IS the pitch.
+    //
+    // LICENSING: built from luna-josh-beach-color.mp4, NOT from
+    // luna-josh-beach-sound.mov. That file has a commercially released song
+    // mixed into it, and this is a paid product — see stories/trailer/build.sh,
+    // which sets the rule: Melissa's own music, nothing licensed. The audio
+    // here is the master's own location sound.
+    id: "beach-preview",
+    title: "The Beach",
+    caption:
+      "Thirty seconds of an evening that runs nearly five minutes. The rest is in the LunaVerse.",
+    file: "beach-preview.proxy.mp4",
+    poster: "/posters/beach-preview.jpg",
+    durationSeconds: 30,
+    about: ["luna", "josh"],
+    mature: true,
+    fullSceneSlug: "luna-josh-beach",
   },
   {
     // The 9:16 of The Bolt, scored. Named for the line it turns on, which is

@@ -71,6 +71,12 @@ export interface JournalEntry {
   about: PersonId[];
   /** The scene this sits beside, when it's the same day. */
   sceneSlug?: string;
+  /**
+   * The vertical clip it sits beside. Several of the most intimate moments
+   * exist only as 9:16 cuts and never as a landscape scene, so without this
+   * her account of them has nothing to point at.
+   */
+  clipId?: string;
   /** Paragraphs, in order. One entry fits one sheet of paper. */
   body: string[];
   access: AccessLevel;
@@ -401,6 +407,25 @@ export const journal: JournalEntry[] = [
     ],
   },
   {
+    // FREE and PG-13 by construction: the entry is about restraint, so there is
+    // nothing to withhold. It is also the best advert the journal has — a
+    // visitor who reads this understands exactly what the locked pages are.
+    id: "close-quarters",
+    dateline: "An hour in the truck, waiting out the rain",
+    place: "farmhouse",
+    where: "The farm road",
+    about: ["luna", "tyson"],
+    clipId: "close-quarters",
+    access: "free",
+    mature: false,
+    body: [
+      "Nothing happened. I am putting that at the top because I know how this will read back to me in a year and I want the record to be accurate before I start editing it.",
+      "The rain came in and we sat it out in the truck, and there is not enough room in that cab for two people to pretend they are unaware of each other. So we didn't talk. And the not-talking got extremely loud.",
+      "At one point he went to change gear and stopped, because there was nowhere to put his arm that wasn't near me, and he put it back on the wheel. That is the entire event. That is everything that happened.",
+      "An hour. Two adults who have known each other since we were nineteen. Nothing happened, and I have thought about it four times today, and here I am writing it down.",
+    ],
+  },
+  {
     id: "the-part-i-forgot",
     dateline: "Three weeks in",
     place: "farmhouse",
@@ -411,6 +436,24 @@ export const journal: JournalEntry[] = [
       "The shop takes him at six and gives him back at eight, and the farm takes what's left, and I know all of this because I lived it for a decade.",
       "Tonight he fell asleep in the chair before I'd finished telling him about my day. Not unkindly. He just wasn't there for the end of it.",
       "It is week three. I remember week three. I remember it going like this the first time, only slower, and I remember telling myself the same thing I am about to write down here, which is that he is tired and it is a busy season and this is not the same.",
+    ],
+  },
+  {
+    // The second free one. Also PG-13, also about an absence rather than an
+    // event — and it does the thing the free pages are supposed to do: it is
+    // warm right up until the third paragraph, which is where the story is.
+    id: "the-quiet-after",
+    dateline: "Sunday, and neither of us has said anything",
+    place: "farmhouse",
+    about: ["luna", "josh"],
+    clipId: "morning-after",
+    access: "free",
+    mature: false,
+    body: [
+      "Neither of us has said a word all morning and it isn't awkward. That's the bit I want to look at.",
+      "Ten years buys you that. You can be in a room with somebody and not have to perform being in a room with them. He made the coffee, I read, and neither of us was working at it.",
+      "And here is the part I don't like. I could not tell you whether that is intimacy or whether we have both just stopped bothering. From the inside they are identical. They were identical the first time too, right up until the day I noticed they weren't.",
+      "I'm going to put this down and go and sit with him and not find out.",
     ],
   },
   {
@@ -515,6 +558,23 @@ export const journal: JournalEntry[] = [
     ],
   },
   {
+    id: "the-window",
+    dateline: "The city, very late, and I should be asleep",
+    place: "downtown",
+    where: "The window",
+    about: ["luna", "tyson"],
+    clipId: "apartment-window",
+    access: "premium",
+    mature: true,
+    body: [
+      "We were talking about nothing. Whether he should sell the bike. Whether I should cut my hair. The conversation you have when you have both decided not to have the other one.",
+      "And then there was a gap in it, and I knew exactly where he was standing without looking, and he knew that I knew, and neither of us filled it. Twenty years of filling every silence between us and we let that one sit there.",
+      "He said my name. Just that. Not a question and not the start of a sentence — he said it the way you put something down carefully because you have decided not to carry it any further.",
+      "I said what. He said nothing. Then he said he should go, and he went, and I stood at that window for a long time afterwards being a person I do not particularly want to be.",
+      "Here is what I am not writing down: what I would have said if he had stayed another ten seconds. I know the answer. I have known it for months. I am not putting it in my own handwriting, because as long as it isn't on paper I can still be somebody who never said it.",
+    ],
+  },
+  {
     id: "the-park",
     dateline: "The park, and he wouldn't look at me",
     place: "park",
@@ -589,6 +649,22 @@ export const journal: JournalEntry[] = [
       "Candles, because the overhead light is honest and I wasn't up to it.",
       "An hour in there. For the first forty minutes I thought about both of them, and for the last twenty I didn't think about either of them, and those twenty are the only rest I have had in a month.",
       "Note for whoever I turn out to be after this: it was possible. Even in the middle of it. That's worth knowing.",
+    ],
+  },
+  {
+    id: "the-sentence",
+    dateline: "Alone, and I've been carrying this about a month",
+    place: "lakehouse",
+    about: ["luna"],
+    clipId: "said-out-loud",
+    access: "premium",
+    mature: true,
+    body: [
+      "I have been carrying a sentence around for about a month and tonight I said it out loud in an empty room to find out what it sounded like.",
+      "It sounded true. That is the whole problem.",
+      "It is not a nice sentence and it is not the version of me I would like to be. It has his name in it and it is not about friendship, and it is not the name of the man I live with.",
+      "I am not writing it here, and I know exactly what I am doing by not writing it. As long as it is not in my own handwriting I get to stay a person who never said it, and I would like to keep that for a little longer.",
+      "What I will put down is this: I said it, the room did not fall in, and I have been a different person for four hours.",
     ],
   },
   {

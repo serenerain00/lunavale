@@ -113,6 +113,12 @@ export const places = [
     blurb: "Where he goes instead of saying anything.",
   },
   {
+    id: "downtown",
+    label: "Downtown",
+    blurb: "The city, and the drive home from it.",
+    environmentSlug: "downtown",
+  },
+  {
     // Rick's room. Likely to become one room of a larger "Rick's house" once
     // more of it is shot — filed narrowly for now rather than folded into the
     // farmhouse, which belongs to Josh and Luna and means something else.

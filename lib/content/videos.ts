@@ -242,7 +242,10 @@ export const videos: Video[] = [
       "Something ordinary in the farmhouse kitchen turns into something else.",
     file: "luna-josh-kitchen-kiss.proxy.mp4",
     poster: "/posters/luna-josh-kitchen-kiss.jpg",
-    durationSeconds: 150,
+    // Scored cut, swapped in 2026-07-29. The previous file's audio sat at
+    // -51dB mean — the dialogue was in it but inaudible on a phone. This one
+    // carries a song instead, at -16.7dB.
+    durationSeconds: 154,
     access: "free",
     mature: true,
     feelings: ["desire", "trust"],

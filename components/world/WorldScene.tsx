@@ -232,7 +232,8 @@ function usePBR(folder: string, repeat: number) {
  */
 function PlaceholderRoom({ room }: { room: Room }) {
   const floorMaps = usePBR("floor", 5);
-  const wallMaps = usePBR("wallwood", 8);
+  const plankWall = usePBR("wallwood", 8);
+  const plasterWall = usePBR("wall", 6);
   const woodMaps = usePBR("wood", 3);
   const stoneMaps = usePBR("stone", 2);
 
@@ -243,8 +244,12 @@ function PlaceholderRoom({ room }: { room: Room }) {
   }
 
   // Warm reclaimed-wood plank walls (light tint so the grain reads, not muddy).
-  const wallTint = "#d8c2a0";
-  const beamCol = "#160f08";
+  // The pit is the exception: a working garage is block and concrete, and the
+  // farmhouse plank treatment made it read as a barn.
+  const shop = room.dressing === "pit";
+  const wallMaps = shop ? plasterWall : plankWall;
+  const wallTint = shop ? "#8d9198" : "#d8c2a0";
+  const beamCol = shop ? "#26282c" : "#160f08";
 
   const w = ROOM.width / 2;
   const d = ROOM.depth / 2;
@@ -297,7 +302,11 @@ function PlaceholderRoom({ room }: { room: Room }) {
       {[-3, -1, 1, 3].map((x) => (
         <mesh key={x} position={[x, ROOM.height - 0.15, 0]} castShadow>
           <boxGeometry args={[0.22, 0.24, ROOM.depth]} />
-          <meshStandardMaterial {...woodMaps} />
+          {shop ? (
+            <meshStandardMaterial color="#3a3d43" metalness={0.6} roughness={0.6} />
+          ) : (
+            <meshStandardMaterial {...woodMaps} />
+          )}
         </mesh>
       ))}
 
@@ -1132,6 +1141,291 @@ function EspressoMachine({
 }
 
 /** Warm intimate sitting-room dressing used for the non-kitchen rooms. */
+/**
+ * A painted wall sign, rendered to a canvas because no font is loaded into the
+ * scene. Cheap (one 512×128 texture, generated once) and it means the sign
+ * actually reads rather than being three suggestive light-coloured bars.
+ */
+function useSignTexture(lines: string[]) {
+  return useMemo(() => {
+    const c = document.createElement("canvas");
+    c.width = 512;
+    c.height = 128 * lines.length;
+    const g = c.getContext("2d");
+    if (!g) return null;
+    g.fillStyle = "#141519";
+    g.fillRect(0, 0, c.width, c.height);
+    g.fillStyle = "#d8cfc0";
+    g.textAlign = "center";
+    g.textBaseline = "middle";
+    lines.forEach((line, i) => {
+      g.font = "bold 74px Helvetica, Arial, sans-serif";
+      g.fillText(line, c.width / 2, 128 * i + 64, c.width - 40);
+    });
+    const tex = new THREE.CanvasTexture(c);
+    tex.anisotropy = 4;
+    return tex;
+  }, [lines]);
+}
+
+const SIGN_LINES = ["DISCIPLINE", "EQUALS FREEDOM"];
+
+/**
+ * The Pit — Tyson's garage, which is also his gym.
+ *
+ * Two halves of the same man in one room: the machines on the right (the
+ * Carrera he is careful with, the bike he is not) and the iron on the left,
+ * with the helmet shelf between them. Cold overhead strips over the whole
+ * floor, one warm lamp at the bench — the light he actually works under.
+ *
+ * Serves the room's two hotspots at their declared positions:
+ *   helmet-shelf  ≈ [-2.8, 1.4, -1.4]
+ *   the-carrera   ≈ [ 2.4, 0.7, -1.2]
+ */
+function PitFurniture() {
+  const strip = useRef<THREE.PointLight>(null);
+  const sign = useSignTexture(SIGN_LINES);
+  useFrame(({ clock }) => {
+    // Shop fluorescents: steady, with the faint hum-flicker of old tubes.
+    const t = clock.getElapsedTime();
+    if (strip.current) strip.current.intensity = 5.5 * (1 + Math.sin(t * 50) * 0.02);
+  });
+  const w = ROOM.width / 2;
+
+  return (
+    <group>
+      {/* Sealed concrete, wall to wall — the plank floor underneath belongs to
+          the farmhouse and showed at the ends when this pad was smaller. */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]} receiveShadow>
+        <planeGeometry args={[ROOM.width, ROOM.depth]} />
+        <meshStandardMaterial color="#33343a" roughness={0.9} metalness={0.05} />
+      </mesh>
+      {/* Painted bay lines, the only tidy thing he does to the floor */}
+      {[-1.5, 3.4].map((x, i) => (
+        <mesh key={`ln${i}`} rotation={[-Math.PI / 2, 0, 0]} position={[x, 0.03, -1]}>
+          <planeGeometry args={[0.08, 9]} />
+          <meshStandardMaterial color="#c8b86a" roughness={0.9} />
+        </mesh>
+      ))}
+
+      {/* Roller shutter across the back — the thing that makes it a garage
+          rather than a room with a car in it. */}
+      <group position={[0, 0, -ROOM.depth / 2 + 0.12]}>
+        <mesh position={[0, 1.55, 0]} receiveShadow>
+          <planeGeometry args={[6.4, 3.1]} />
+          <meshStandardMaterial color="#585c63" metalness={0.55} roughness={0.55} />
+        </mesh>
+        {Array.from({ length: 16 }, (_, i) => (
+          <mesh key={`sl${i}`} position={[0, 0.16 + i * 0.19, 0.02]}>
+            <boxGeometry args={[6.4, 0.16, 0.03]} />
+            <meshStandardMaterial color="#4a4e55" metalness={0.6} roughness={0.45} />
+          </mesh>
+        ))}
+      </group>
+
+      {/* Overhead strip lights — cold, and the only general light in here */}
+      {[-3.5, -0.5, 2.5].map((z, i) => (
+        <group key={`fl${i}`} position={[0, 3.2, z]}>
+          <mesh>
+            <boxGeometry args={[3.4, 0.08, 0.24]} />
+            <meshStandardMaterial
+              color="#cfd6dd"
+              emissive="#aebfd0"
+              emissiveIntensity={1.6}
+            />
+          </mesh>
+        </group>
+      ))}
+      <pointLight ref={strip} position={[0, 3, -0.5]} color="#c8d6e4" distance={16} decay={2} />
+
+      {/* ---- LEFT: the helmet shelf (hotspot) and the iron ------------------ */}
+      {/* Steel shelving, four bays of helmets, each one with its own history */}
+      <group position={[-w + 0.55, 0, -1.4]}>
+        {[0.55, 1.05, 1.55, 2.05].map((y, i) => (
+          <mesh key={`sh${i}`} position={[0, y, 0]} castShadow receiveShadow>
+            <boxGeometry args={[0.62, 0.04, 3.4]} />
+            <meshStandardMaterial {...STAINLESS} roughness={0.55} />
+          </mesh>
+        ))}
+        {[-1.6, 1.6].map((z, i) => (
+          <mesh key={`up${i}`} position={[0, 1.3, z]} castShadow>
+            <boxGeometry args={[0.06, 2.6, 0.06]} />
+            <meshStandardMaterial {...METAL} />
+          </mesh>
+        ))}
+        {/* The helmets themselves — dented, none of them matching */}
+        {[
+          [1.4, "#1b1c20"],
+          [0.5, "#7a2a24"],
+          [-0.4, "#d8cfc0"],
+          [-1.3, "#2c3742"],
+        ].map(([z, col], i) => (
+          <mesh
+            key={`hl${i}`}
+            position={[0, 1.72, z as number]}
+            rotation={[0.1, i * 1.2, 0]}
+            castShadow
+          >
+            <sphereGeometry args={[0.17, 20, 16, 0, Math.PI * 2, 0, Math.PI * 0.62]} />
+            <meshStandardMaterial color={col as string} metalness={0.5} roughness={0.34} />
+          </mesh>
+        ))}
+      </group>
+
+      {/* The sign. He has never once mentioned it. */}
+      {sign && (
+        <mesh position={[-w + 0.08, 2.5, -4.4]} rotation={[0, Math.PI / 2, 0]}>
+          <planeGeometry args={[2.2, 1.1]} />
+          <meshStandardMaterial map={sign} roughness={0.9} />
+        </mesh>
+      )}
+
+      {/* Pull-up bar, bolted between two uprights */}
+      <group position={[-2.6, 0, -4.6]}>
+        {[-0.85, 0.85].map((x, i) => (
+          <mesh key={`pu${i}`} position={[x, 1.2, 0]} castShadow>
+            <boxGeometry args={[0.1, 2.4, 0.1]} />
+            <meshStandardMaterial {...METAL} />
+          </mesh>
+        ))}
+        <mesh position={[0, 2.32, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
+          <cylinderGeometry args={[0.035, 0.035, 1.8, 12]} />
+          <meshStandardMaterial {...STAINLESS} />
+        </mesh>
+      </group>
+
+      {/* Flat bench and a dumbbell rack — no machines, nothing chrome */}
+      <group position={[-2.5, 0, -2.9]}>
+        <mesh position={[0, 0.46, 0]} castShadow receiveShadow>
+          <boxGeometry args={[0.34, 0.1, 1.3]} />
+          <meshStandardMaterial color="#1a1b1f" roughness={0.7} />
+        </mesh>
+        {[-0.55, 0.55].map((z, i) => (
+          <mesh key={`bl${i}`} position={[0, 0.22, z]} castShadow>
+            <boxGeometry args={[0.28, 0.44, 0.08]} />
+            <meshStandardMaterial {...METAL} />
+          </mesh>
+        ))}
+      </group>
+      <group position={[-3.5, 0, -1.9]}>
+        <mesh position={[0, 0.32, 0]} castShadow receiveShadow>
+          <boxGeometry args={[0.5, 0.08, 1.5]} />
+          <meshStandardMaterial {...METAL} />
+        </mesh>
+        {[-0.5, -0.1, 0.3, 0.68].map((z, i) => (
+          <group key={`db${i}`} position={[0, 0.45, z]} rotation={[0, 0, Math.PI / 2]}>
+            <mesh castShadow>
+              <cylinderGeometry args={[0.035, 0.035, 0.34, 8]} />
+              <meshStandardMaterial {...STAINLESS} />
+            </mesh>
+            {[-0.15, 0.15].map((y, k) => (
+              <mesh key={k} position={[0, y, 0]} castShadow>
+                <cylinderGeometry args={[0.1 + i * 0.012, 0.1 + i * 0.012, 0.06, 14]} />
+                <meshStandardMaterial color="#141519" roughness={0.85} />
+              </mesh>
+            ))}
+          </group>
+        ))}
+      </group>
+
+      {/* ---- RIGHT: the machines ------------------------------------------- */}
+      {/* The Carrera (hotspot). Low, black, and the only clean thing in here. */}
+      <group position={[2.4, 0, -1.2]} rotation={[0, -0.12, 0]}>
+        <mesh position={[0, 0.55, 0]} castShadow receiveShadow>
+          <boxGeometry args={[1.85, 0.5, 4.3]} />
+          <meshStandardMaterial color="#0c0d10" metalness={0.05} roughness={0.62} />
+        </mesh>
+        {/* cabin, set back the way a 911's is */}
+        <mesh position={[0, 0.95, 0.35]} castShadow>
+          <boxGeometry args={[1.55, 0.42, 1.9]} />
+          <meshStandardMaterial color="#090a0c" metalness={0.05} roughness={0.5} />
+        </mesh>
+        {[
+          [-0.92, -1.45],
+          [0.92, -1.45],
+          [-0.92, 1.5],
+          [0.92, 1.5],
+        ].map((p, i) => (
+          <mesh
+            key={`wh${i}`}
+            position={[p[0], 0.33, p[1]]}
+            rotation={[0, 0, Math.PI / 2]}
+            castShadow
+          >
+            <cylinderGeometry args={[0.33, 0.33, 0.26, 20]} />
+            <meshStandardMaterial color="#111216" roughness={0.9} />
+          </mesh>
+        ))}
+      </group>
+
+      {/* The bike he is not careful with, mid-strip on a paddock stand */}
+      <group position={[0.35, 0, 1.9]} rotation={[0, 0.5, 0]}>
+        {[-0.62, 0.62].map((z, i) => (
+          <mesh key={`bw${i}`} position={[0, 0.31, z]} rotation={[0, 0, Math.PI / 2]} castShadow>
+            <cylinderGeometry args={[0.31, 0.31, 0.12, 18]} />
+            <meshStandardMaterial color="#101116" roughness={0.9} />
+          </mesh>
+        ))}
+        <mesh position={[0, 0.62, 0]} castShadow>
+          <boxGeometry args={[0.2, 0.26, 1.15]} />
+          <meshStandardMaterial color="#1d2a20" metalness={0.7} roughness={0.3} />
+        </mesh>
+        <mesh position={[0, 0.86, -0.12]} castShadow>
+          <boxGeometry args={[0.3, 0.22, 0.62]} />
+          <meshStandardMaterial color="#25452c" metalness={0.75} roughness={0.22} />
+        </mesh>
+      </group>
+
+      {/* Workbench and pegboard down the right wall — the room read empty with
+          everything clustered on the left, and this is where the work happens. */}
+      <group position={[w - 0.72, 0, -2.6]}>
+        <mesh position={[0, 0.92, 0]} castShadow receiveShadow>
+          <boxGeometry args={[1.1, 0.1, 4.6]} />
+          <meshStandardMaterial color="#2f3238" metalness={0.4} roughness={0.6} />
+        </mesh>
+        {[-2.1, 2.1].map((z, i) => (
+          <mesh key={`bg${i}`} position={[0, 0.44, z]} castShadow>
+            <boxGeometry args={[0.9, 0.88, 0.1]} />
+            <meshStandardMaterial {...METAL} />
+          </mesh>
+        ))}
+        {/* parts and a torque wrench left where he put them down */}
+        {[-1.4, -0.2, 1.1, 1.9].map((z, i) => (
+          <mesh key={`pt${i}`} position={[0.05, 1.0, z]} rotation={[0, i * 0.9, 0]} castShadow>
+            <boxGeometry args={[0.4, 0.07, 0.1]} />
+            <meshStandardMaterial {...STAINLESS} />
+          </mesh>
+        ))}
+      </group>
+      <mesh position={[w - 0.06, 2.1, -2.6]} rotation={[0, -Math.PI / 2, 0]}>
+        <planeGeometry args={[4.2, 1.4]} />
+        <meshStandardMaterial color="#3d4149" roughness={0.9} />
+      </mesh>
+      {[-1.7, -0.9, -0.1, 0.7, 1.5].map((z, i) => (
+        <mesh key={`pw${i}`} position={[w - 0.16, 2.1, z - 2.6]} rotation={[0, -Math.PI / 2, 0]} castShadow>
+          <boxGeometry args={[0.08, 0.46, 0.03]} />
+          <meshStandardMaterial {...STAINLESS} />
+        </mesh>
+      ))}
+
+      {/* Tool chest and a stack of takeoffs against the right wall */}
+      <mesh position={[w - 0.75, 0.48, 2.6]} castShadow receiveShadow>
+        <boxGeometry args={[0.75, 0.96, 1.5]} />
+        <meshStandardMaterial color="#6d2723" metalness={0.45} roughness={0.45} />
+      </mesh>
+      {[0, 1, 2].map((i) => (
+        <mesh key={`ty${i}`} position={[w - 0.85, 0.13 + i * 0.24, 4.1]} castShadow receiveShadow>
+          <torusGeometry args={[0.36, 0.13, 10, 22]} />
+          <meshStandardMaterial color="#141518" roughness={0.95} />
+        </mesh>
+      ))}
+
+      {/* The one warm light in the room, over the bench */}
+      <pointLight position={[-2.6, 2.1, -2.4]} color="#ffb060" intensity={2.2} distance={5.5} decay={2} />
+    </group>
+  );
+}
+
 function GenericFurniture({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
   const fireLight = useRef<THREE.PointLight>(null);
   const fireGlow = useRef<THREE.Mesh>(null);
@@ -1245,6 +1539,8 @@ function RoomFurniture({
       return <GreatRoomFurniture wood={wood} stone={stone} />;
     case "dock":
       return <DockFurniture wood={wood} />;
+    case "pit":
+      return <PitFurniture />;
     default:
       return <GenericFurniture wood={wood} stone={stone} />;
   }

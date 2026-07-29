@@ -184,7 +184,7 @@ export const galleries: StillGallery[] = [
     cover: "/gallery/josh-luna-bolt/cover.jpg",
     feelings: ["trust", "desire"],
     place: "farmhouse",
-    about: ["luna", "josh"],
+    about: ["luna", "josh", "tyson"],
     sceneSlug: "josh-luna-bolt",
     journalEntryId: "the-bolt",
     stills: [
@@ -208,11 +208,15 @@ export const galleries: StillGallery[] = [
       {},
       {},
       {},
-      // The figure in the doorway is not identified anywhere in canon. Left
-      // uncaptioned on purpose rather than named on a guess.
+      {
+        caption:
+          "Tyson, at the door. He works this farm — there is nothing strange about him being here. Only about how long he stands there before he goes.",
+      },
       {},
-      {},
-      {},
+      {
+        caption:
+          "He doesn't come in, and he never mentions it afterwards. Her account of this afternoon does not have him in it at all.",
+      },
     ],
     access: "premium",
     mature: false,

@@ -310,6 +310,23 @@ export const notes: SetNote[] = [
     ],
   },
   {
+    id: "tyson-the-doorway",
+    author: "tyson",
+    kind: "insight",
+    heading: "The doorway",
+    dateline: "Day 9 · the barn",
+    sceneSlug: "josh-luna-bolt",
+    gallerySlug: "josh-luna-bolt",
+    place: "farmhouse",
+    access: "premium",
+    body: [
+      "I am in this one for about four seconds and I have no lines. I stand in the door of the barn, I watch the two of them get a bolt loose, and I go.",
+      "It is the hardest thing I do in the film. Everywhere else he is careless with her, or worse, and that gives Tyson somewhere to put it. Here he is patient with her, and good at it, and he steps back and lets her have the win. There is nothing to hold against him. That is the whole problem.",
+      "Melissa's note was: you are not allowed to look hurt. Just look at it, for slightly too long, and then leave before either of them turns round.",
+      "He never says a word about it. Not that day, not ever. And when you read her account of that afternoon he is not in it — she does not mention him once, because as far as she knows there was nothing to mention.",
+    ],
+  },
+  {
     id: "tyson-the-morning",
     author: "tyson",
     kind: "craft",

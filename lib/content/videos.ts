@@ -312,7 +312,8 @@ export const videos: Video[] = [
     mature: false,
     feelings: ["trust", "desire"],
     place: "farmhouse",
-    about: ["luna", "josh"],
+    // Tyson is in it, in the doorway, for a few seconds and no lines.
+    about: ["luna", "josh", "tyson"],
   },
   {
     slug: "luna-bathtub",

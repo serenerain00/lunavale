@@ -165,12 +165,37 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
           </div>
         </header>
 
-        {allowed ? (
-          <StillGalleryView
-            items={items}
-            title={gallery.title}
-            gated={gallery.gated}
-          />
+        {/* A member sees the wall. A visitor sees the open preview stills when
+            the set has any, then the lock stating exactly how many are behind
+            it — real frames plus an honest count, rather than one cover image
+            and a promise. Only a set with nothing open falls back to the
+            bare notice. */}
+        {items.length > 0 ? (
+          <>
+            <StillGalleryView
+              items={items}
+              title={gallery.title}
+              gated={gallery.gated}
+            />
+            {!allowed && (
+              <div className="mt-8 rounded-xl border border-amber/25 bg-amber/[0.04] p-6 sm:p-8">
+                <h2 className="font-display text-2xl font-medium text-ivory sm:text-3xl">
+                  {gallery.count - items.length} more from this set
+                </h2>
+                <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
+                  You&rsquo;re seeing {items.length} of {gallery.count}. Members
+                  get the whole set at full resolution, and the scene it was cut
+                  from in full.
+                </p>
+                <Link
+                  href="/membership"
+                  className="mt-5 inline-flex min-h-10 items-center rounded-full bg-amber px-5 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+                >
+                  Join the LunaVerse
+                </Link>
+              </div>
+            )}
+          </>
         ) : (
           <div className="relative aspect-video overflow-hidden rounded-xl ring-1 ring-hairline">
             <LockedNotice cover={gallery.cover} subject="This set of stills" />

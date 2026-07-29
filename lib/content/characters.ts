@@ -112,7 +112,7 @@ export const characters: Character[] = [
       "Owns the shop and the farm; work comes first and always has",
       "Grazes her lower lip mid-sentence and knows exactly what it does",
       "Told Tyson about the dinner the same morning, casually, as family do",
-      "Still stands up when his father stays sitting",
+      "Takes it sitting down, in the one room where he never argues back",
       "Is not sorry in the way she needs him to be sorry",
     ],
     pullQuote: "That I'm not the villain.",
@@ -134,7 +134,7 @@ export const characters: Character[] = [
       "He is disappointed in Josh for losing Luna. He also always thought Luna was too good for him. He holds both at once without difficulty, and says neither in a way that helps — which is the whole inheritance, handed down intact.",
     ],
     details: [
-      "Stays in the chair while Josh stands — until the last thing he says",
+      "The only man in the room who gets up, and only for the last line",
       "The framed photograph on the shelf behind him is the two of them",
       "Thought Luna was too good for his son, and never told his son that",
       "Cares, demonstrably. Not once in a language Josh can read",

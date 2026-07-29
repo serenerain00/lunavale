@@ -90,9 +90,10 @@ He is **disappointed in Josh for losing Luna** — and at the same time he alway
 which is exactly the kind of father he is: the judgement lands on his son, the
 admiration goes to somebody else, and neither is ever said in a way that helps.
 
-In **The Study** he stays seated for the whole scene while Josh stands, and
-**gets up once, at the very end**, to say: **"You think you're handling it?
-You're not."** He means losing Luna. He does not use her name.
+In **The Study**, **both men stay seated for the whole scene** — Josh never
+stands up to him, not once — and Rick **gets up once, at the very end**, the
+only man in the room who does, to say: **"You think you're handling it? You're
+not."** He means losing Luna. He does not use her name.
 
 ---
 

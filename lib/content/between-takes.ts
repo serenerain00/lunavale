@@ -435,7 +435,7 @@ export const notes: SetNote[] = [
     place: "the-study",
     access: "free",
     body: [
-      "Melissa staged this before either of us said a line. He sits. I stand. Neither of us is allowed to change that for the whole scene, and nobody in it ever remarks on it.",
+      "Melissa staged this before either of us said a line. We both sit, and neither of us is allowed to get up. I asked twice. The answer was no both times, and the second no was the one that explained it: Josh does not stand up to this man. Not once, not ever, not even to leave.",
       "Everything Josh does to Luna is in this room first. The charm that is also an instruction. Being wanted and being obeyed treated as the same thing. He is not doing anything to her he was not taught.",
       "It is the only scene in the film where I get to play Josh as somebody's kid, and it took me two takes to stop performing and just wait to be told I had done badly.",
     ],
@@ -465,8 +465,8 @@ export const notes: SetNote[] = [
     place: "the-study",
     access: "premium",
     body: [
-      "The direction was: stay down. Not when he comes in, not when he raises his voice, not when he thinks he has finished. You do not have to play power if you are the only one sitting — the room does it for you.",
-      "Then, at the very end, I stand. Once. That is the whole architecture of the scene: you spend four minutes teaching an audience that this man does not move, so that when he does it lands like a door going.",
+      "Nobody stands in this scene. We are both in chairs and both of us are told to stay there — which sounds like nothing until you are doing it, and you realise you have no way to win a room except with your face and the pause before you answer.",
+      "Then, at the very end, I get up. Once, and I am the only one who does. That is the whole architecture of it: you spend the scene establishing that neither man moves, so the one who finally does owns everything after it.",
       "It buys one line. “You think you’re handling it? You’re not.” He is talking about Luna, and he will not say her name, and that is the closest he comes in the whole film to admitting he thought she was worth something.",
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work than I am.",
     ],

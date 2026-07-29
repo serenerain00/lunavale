@@ -229,14 +229,12 @@ export const BENEFITS: Benefit[] = [
     from: "vault",
     group: "The world",
   },
-  {
-    id: "variants",
-    label: "Member-only variants",
-    detail:
-      "Locations at other hours and in other weather, with their own moments.",
-    from: "vault",
-    group: "The world",
-  },
+  // "Member-only variants" was here — "locations at other hours and in other
+  // weather, with their own moments". Pulled 2026-07-28. There is no weather
+  // system and no variant content, and the nearest thing that does exist —
+  // the day/night toggle in components/world/WorldExperience.tsx — is free to
+  // everyone, so it could not honestly be rewritten as a Vault benefit either.
+  // Put it back when locations genuinely have gated states of their own.
   {
     id: "bts",
     label: "Selected behind the scenes",

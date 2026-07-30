@@ -8,6 +8,7 @@ import { authConfigured } from "@/lib/billing/provider";
 import { people } from "@/lib/content/taxonomy";
 import {
   FREE_POST_ALLOWANCE,
+  MELISSA,
   OPENING_POSTS,
   type OpeningPost,
 } from "@/lib/content/overheard";
@@ -91,7 +92,7 @@ export default async function OverheardPage() {
               because a host talking first is only fine if it is obvious that is
               what is happening. */}
           {OPENING_POSTS.map((post) => (
-            <FromMelissa key={post.id} post={post} />
+            <Pinned key={post.id} post={post} />
           ))}
 
           {posts.length === 0 ? (
@@ -141,15 +142,17 @@ function Post({ post }: { post: OverheardPost }) {
   );
 }
 
-/** A pinned post from the filmmaker. Amber-edged, badged, and never counted
- *  among the visitor posts — see OPENING_POSTS in lib/content/overheard.ts. */
-function FromMelissa({ post }: { post: OpeningPost }) {
+/** A pinned post from Melissa or from one of the cast. Amber-edged, badged, and
+ *  never counted among the visitor posts — see OPENING_POSTS in
+ *  lib/content/overheard.ts. */
+function Pinned({ post }: { post: OpeningPost }) {
+  const author = post.author ?? MELISSA;
   return (
     <article className="rounded-xl border border-amber/25 bg-amber/[0.04] p-5">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <p className="font-display text-lg text-ivory">Melissa</p>
+        <p className="font-display text-lg text-ivory">{author.name}</p>
         <span className="rounded-full bg-amber/15 px-2.5 py-0.5 text-[0.6875rem] uppercase tracking-[0.1em] text-amber-soft">
-          Filmmaker
+          {author.role}
         </span>
         <span className="ml-auto text-xs text-stone-dim">Pinned</span>
       </div>

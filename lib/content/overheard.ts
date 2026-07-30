@@ -38,10 +38,19 @@ export const MAX_POST_LENGTH = 900;
  */
 export interface OpeningPost {
   id: string;
+  /**
+   * Who it is from. Defaults to Melissa. A character author is what makes the
+   * cast answering a visible fact rather than a promise — the site already has
+   * them speaking in the interview and signing the Between Takes notes, so this
+   * is the same conceit, not a new one.
+   */
+  author?: { name: string; role: string };
   /** Addressee id, or null for the room. Matches the wall's own values. */
   addressedTo: string | null;
   body: string[];
 }
+
+export const MELISSA = { name: "Melissa", role: "Filmmaker" };
 
 export const OPENING_POSTS: OpeningPost[] = [
   {
@@ -66,7 +75,16 @@ export const OPENING_POSTS: OpeningPost[] = [
     addressedTo: null,
     body: [
       "You can address a post to Luna, Tyson, Josh or Rick — there's a dropdown on the box.",
-      "Ask them something. I'll answer as them, in their voice, and I will not soften anything to make them look better. Rick in particular will not be nice about it.",
+      "Do. They answer these themselves, in their own words, and I don't tidy it up afterwards to make anybody look better. Rick in particular will not be nice about it.",
     ],
+  },
+  {
+    // The demonstration. One line from Tyson is worth more than a paragraph
+    // from me promising he'll turn up, and refusing to answer is more in
+    // character than answering would be.
+    id: "tyson-declines",
+    author: { name: "Tyson", role: "Tyson" },
+    addressedTo: null,
+    body: ["Not answering that one."],
   },
 ];

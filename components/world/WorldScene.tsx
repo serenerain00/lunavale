@@ -243,6 +243,14 @@ function PlaceholderRoom({ room }: { room: Room }) {
     return <ExteriorShell room={room} wood={woodMaps} stone={stoneMaps} />;
   }
 
+  // The porch is neither. It was getting the enclosed four-wall shell, which
+  // put you inside the house — and the open-air shell would be wrong too,
+  // because a porch has a roof over it and the house at your back. So it gets
+  // its own: deck, house wall with the door, roof, open on three sides.
+  if (room.dressing === "porch") {
+    return <PorchShell wood={woodMaps} stone={stoneMaps} />;
+  }
+
   // Warm reclaimed-wood plank walls (light tint so the grain reads, not muddy).
   // The pit is the exception: a working garage is block and concrete, and the
   // farmhouse plank treatment made it read as a barn.
@@ -1962,6 +1970,152 @@ function PorchFurniture({ wood }: { wood: PBRMaps }) {
  * walls or ceiling), plus a wide water plane where the scene sits on the water.
  * The dressing draws everything above the ground.
  */
+/**
+ * The front porch: the threshold, built as one.
+ *
+ * Three things make it read as outside-but-covered rather than as a room — the
+ * house wall behind you with its door, the roof overhead, and nothing at all on
+ * the other three sides, so the HDRI sky and the yard carry through. It was
+ * previously falling to the enclosed interior shell, which put a visitor inside
+ * the house on a porch.
+ *
+ * PorchFurniture already places the posts and railing along the front edge, so
+ * this only builds what those stand between.
+ */
+function PorchShell({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
+  const w = ROOM.width / 2;
+  const d = ROOM.depth / 2;
+  const GROUND_Y = -0.55; // the deck stands proud of the yard
+
+  return (
+    <group>
+      {/* The yard, running well past the deck so no edge is ever visible. */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, GROUND_Y, 0]} receiveShadow>
+        <planeGeometry args={[ROOM.width * 10, ROOM.depth * 8]} />
+        {/* Muted and desaturated to sit under the forest HDRI. A brighter green
+            read as a flat plane meeting the sky at a hard line. */}
+        <meshStandardMaterial color="#3b3d2a" roughness={1} />
+      </mesh>
+
+      {/* A packed path leading away from the steps. */}
+      <mesh
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, GROUND_Y + 0.01, d + 6]}
+        receiveShadow
+      >
+        <planeGeometry args={[2.6, 14]} />
+        <meshStandardMaterial color="#4a4133" roughness={1} />
+      </mesh>
+
+      {/* Deck boards. */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <planeGeometry args={[ROOM.width, ROOM.depth]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+
+      {/* Skirt around the raised deck, so it reads as standing off the ground. */}
+      <mesh position={[0, GROUND_Y / 2, d]} castShadow receiveShadow>
+        <boxGeometry args={[ROOM.width, 0.55, 0.12]} />
+        <meshStandardMaterial color="#2f2519" roughness={0.95} />
+      </mesh>
+      {[-w, w].map((x, i) => (
+        <mesh key={`sk${i}`} position={[x, GROUND_Y / 2, 0]} castShadow receiveShadow>
+          <boxGeometry args={[0.12, 0.55, ROOM.depth]} />
+          <meshStandardMaterial color="#2f2519" roughness={0.95} />
+        </mesh>
+      ))}
+
+      {/* Steps down to the path. */}
+      {[0, 1, 2].map((i) => (
+        <mesh
+          key={`st${i}`}
+          position={[0, -0.09 - i * 0.18, d + 0.35 + i * 0.32]}
+          castShadow
+          receiveShadow
+        >
+          <boxGeometry args={[3.2, 0.16, 0.34]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+      ))}
+
+      {/* THE HOUSE, at your back — the single thing that makes this a porch. */}
+      <mesh position={[0, 1.9, -d]} receiveShadow>
+        <planeGeometry args={[ROOM.width, 3.8]} />
+        <meshStandardMaterial color="#7d7261" roughness={0.9} />
+      </mesh>
+      {/* Clapboard lines. Flat colour reads as a backdrop rather than a wall. */}
+      {Array.from({ length: 14 }).map((_, i) => (
+        <mesh key={`cb${i}`} position={[0, 0.15 + i * 0.27, -d + 0.02]}>
+          <boxGeometry args={[ROOM.width, 0.015, 0.02]} />
+          <meshStandardMaterial color="#5f5647" roughness={1} />
+        </mesh>
+      ))}
+
+      {/* The front door, off-centre the way a real elevation is. */}
+      <group position={[-1.5, 0, -d + 0.06]}>
+        <mesh position={[0, 1.05, 0.06]}>
+          <boxGeometry args={[1.18, 2.24, 0.05]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+        <mesh position={[0, 1.05, 0.1]} castShadow>
+          <boxGeometry args={[1.05, 2.1, 0.06]} />
+          <meshStandardMaterial color="#3f2b1d" roughness={0.7} />
+        </mesh>
+        <mesh position={[0.38, 1.0, 0.15]} castShadow>
+          <sphereGeometry args={[0.05, 12, 12]} />
+          <meshStandardMaterial color="#b8925a" metalness={0.8} roughness={0.35} />
+        </mesh>
+      </group>
+
+      {/* A lit window beside it — somebody is in. */}
+      <group position={[1.9, 0, -d + 0.05]}>
+        <mesh position={[0, 1.6, 0.03]}>
+          <boxGeometry args={[1.62, 1.32, 0.04]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+        <mesh position={[0, 1.6, 0.06]}>
+          <planeGeometry args={[1.5, 1.2]} />
+          <meshStandardMaterial
+            color="#e8c98a"
+            emissive="#e8b163"
+            emissiveIntensity={0.6}
+            roughness={0.6}
+          />
+        </mesh>
+        <mesh position={[0, 1.6, 0.08]}>
+          <boxGeometry args={[0.05, 1.2, 0.03]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+      </group>
+      <pointLight
+        position={[1.9, 1.6, -d + 1.4]}
+        color="#ffbe73"
+        intensity={1.5}
+        distance={7}
+        decay={2}
+      />
+
+      {/* The roof. Shallow pitch, overhanging the front so its edge reads
+          against the sky when you look up from underneath. */}
+      <mesh position={[0, 3.35, 0.4]} rotation={[-0.06, 0, 0]} castShadow receiveShadow>
+        <boxGeometry args={[ROOM.width + 0.6, 0.14, ROOM.depth + 1.4]} />
+        <meshStandardMaterial {...stone} color="#6d6355" />
+      </mesh>
+      <mesh position={[0, 3.2, d + 1.05]} castShadow>
+        <boxGeometry args={[ROOM.width + 0.6, 0.26, 0.12]} />
+        <meshStandardMaterial {...wood} />
+      </mesh>
+      {/* The beams the posts carry, running front to back. */}
+      {[-w + 0.4, w - 0.4].map((x, i) => (
+        <mesh key={`bm${i}`} position={[x, 3.18, 0]} castShadow>
+          <boxGeometry args={[0.16, 0.2, ROOM.depth + 1]} />
+          <meshStandardMaterial {...wood} />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
 function ExteriorShell({
   room,
   wood,

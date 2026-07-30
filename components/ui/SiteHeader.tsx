@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { authConfigured } from "@/lib/billing/provider";
+import { SignOut } from "@/components/ui/SignOut";
 
 interface SiteHeaderProps {
   member: boolean;
@@ -82,14 +83,19 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
         </div>
 
         <div className="flex items-center gap-3">
-          {authConfigured() && !signedIn && (
-            <Link
-              href="/sign-in"
-              className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber sm:inline"
-            >
-              Sign in
-            </Link>
-          )}
+          {authConfigured() &&
+            (signedIn ? (
+              <span className="hidden sm:inline">
+                <SignOut />
+              </span>
+            ) : (
+              <Link
+                href="/sign-in"
+                className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber sm:inline"
+              >
+                Sign in
+              </Link>
+            ))}
           <Link
           href={member ? "/account" : "/membership"}
           className={`inline-flex min-h-9 items-center whitespace-nowrap rounded-full px-3.5 text-sm transition-colors duration-(--duration-quick) sm:px-4 ${

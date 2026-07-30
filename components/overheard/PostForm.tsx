@@ -45,7 +45,7 @@ export function PostForm({
         <h2 className="font-display text-2xl text-ivory">Say something</h2>
         <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
           Anyone can read Overheard. To post you need an account — it&rsquo;s
-          free, and it comes with three posts to start.
+          free, and it comes with three posts.
         </p>
         <Link
           href="/sign-up"
@@ -128,8 +128,8 @@ export function PostForm({
           {member
             ? "Member — post as often as you like."
             : left === 1
-              ? "One post left before the LunaVerse."
-              : `${left} posts left before the LunaVerse.`}
+              ? "One post left, then you'll need a membership."
+              : `${left} posts left, then you'll need a membership.`}
         </p>
         <button
           type="submit"

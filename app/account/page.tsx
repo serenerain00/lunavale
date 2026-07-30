@@ -3,6 +3,7 @@ import Link from "next/link";
 import { cancelMembership } from "@/app/actions/session";
 import { PreviewNotice } from "@/components/membership/PreviewNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
+import { SignOut } from "@/components/ui/SignOut";
 import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured, billingLive } from "@/lib/billing/provider";
 import { membershipForUser } from "@/lib/db/memberships";
@@ -195,7 +196,12 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
             </Link>
           </section>
         )}
-      </main>
+              {/* Always available, including on phones where the header hides it. */}
+        <div className="mt-12 border-t border-hairline pt-6">
+          <SignOut className="text-sm text-stone-dim underline decoration-hairline underline-offset-4 transition-colors hover:text-amber" />
+        </div>
+
+</main>
     </>
   );
 }

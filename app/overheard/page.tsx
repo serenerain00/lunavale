@@ -34,9 +34,12 @@ const ADDRESSEE_LABELS: [string, string][] = [
   ...people.map((p) => [p.id, `To ${p.label === "Herself" ? "Luna" : p.label}`] as [string, string]),
 ];
 
+/** Bare name for the row's "Luna to Tyson" line — the "To " prefix belongs to
+ *  the form's dropdown, not to the transcript. */
 function labelFor(value: string | null): string | null {
   if (!value) return null;
-  return ADDRESSEE_LABELS.find(([v]) => v === value)?.[1] ?? null;
+  const label = ADDRESSEE_LABELS.find(([v]) => v === value)?.[1];
+  return label ? label.replace(/^To /, "") : null;
 }
 
 export default async function OverheardPage() {
@@ -70,7 +73,7 @@ export default async function OverheardPage() {
             A place to talk about the story with other people who&rsquo;ve
             watched it — what you made of it, what you think happens next, and
             anything you want to ask Melissa or put straight to Luna, Tyson,
-            Josh or Rick.
+            Josh, or Rick.
           </p>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-stone-dim">
             Anyone can read it. Posting takes a free account and comes with{" "}
@@ -94,7 +97,7 @@ export default async function OverheardPage() {
           addressees={ADDRESSEE_LABELS}
         />
 
-        <section aria-label="Posts" className="mt-12 space-y-5">
+        <section aria-label="Messages" className="mt-12 divide-y divide-hairline/40">
           {/* Melissa's openers, pinned. Visually distinct from a visitor post,
               because a host talking first is only fine if it is obvious that is
               what is happening. */}
@@ -105,7 +108,7 @@ export default async function OverheardPage() {
           {posts.length === 0 ? (
             <NoRepliesYet />
           ) : (
-            <Reveal className="space-y-5">
+            <Reveal>
               {posts.map((post) => (
                 <Post key={post.id} post={post} />
               ))}
@@ -117,62 +120,101 @@ export default async function OverheardPage() {
   );
 }
 
-function Post({ post }: { post: OverheardPost }) {
-  const to = labelFor(post.addressedTo);
+/**
+ * One line of the room.
+ *
+ * Chat layout rather than cards: a time gutter, the author, and the body
+ * indented underneath. The cards this replaced had borders and rounded corners,
+ * which made every message look like a link into something — and nothing here
+ * is clickable.
+ */
+function Message({
+  at,
+  author,
+  tint,
+  to,
+  body,
+  pinned = false,
+}: {
+  at: string;
+  author: string;
+  tint?: string;
+  to?: string | null;
+  body: string[];
+  pinned?: boolean;
+}) {
   return (
-    <article
-      data-reveal-item
-      className="rounded-xl border border-hairline bg-charcoal/50 p-5"
-    >
-      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <p className="font-display text-lg text-ivory">{post.authorName}</p>
-        {to && (
-          <span className="rounded-full bg-amber/10 px-2.5 py-0.5 text-[0.6875rem] uppercase tracking-[0.1em] text-amber-soft">
-            {to}
+    <div className="-mx-3 flex gap-3 rounded px-3 py-2 transition-colors duration-(--duration-quick) hover:bg-ivory/[0.025]">
+      <span className="w-11 shrink-0 pt-[0.2rem] text-right text-[0.6875rem] tabular-nums leading-5 text-stone-dim">
+        {at}
+      </span>
+      <div className="min-w-0 flex-1">
+        <p className="flex flex-wrap items-baseline gap-x-2 leading-5">
+          <span
+            className="text-sm font-semibold"
+            style={tint ? { color: tint } : undefined}
+          >
+            {author}
           </span>
-        )}
-        <time
-          dateTime={post.createdAt.toISOString()}
-          className="ml-auto text-xs text-stone-dim"
-        >
-          {post.createdAt.toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-          })}
-        </time>
+          {to && (
+            <span className="text-[0.6875rem] text-stone-dim">to {to}</span>
+          )}
+          {pinned && (
+            <span className="text-[0.6875rem] uppercase tracking-[0.1em] text-stone-dim">
+              pinned
+            </span>
+          )}
+        </p>
+        {body.map((para, i) => (
+          <p
+            key={i}
+            className="mt-1 whitespace-pre-line text-[0.9375rem] leading-relaxed text-stone"
+          >
+            {para}
+          </p>
+        ))}
       </div>
-      {/* whitespace-pre-line so paragraph breaks survive without allowing markup. */}
-      <p className="mt-3 whitespace-pre-line text-base leading-relaxed text-stone">
-        {post.body}
-      </p>
-    </article>
+    </div>
   );
 }
 
-/** A pinned post from Melissa or from one of the cast. Amber-edged, badged, and
- *  never counted among the visitor posts — see OPENING_POSTS in
- *  lib/content/overheard.ts. */
+/** A pinned line from Melissa or one of the cast. */
 function Pinned({ post }: { post: OpeningPost }) {
   const author = post.author ?? MELISSA;
   return (
-    <article className="rounded-xl border border-amber/25 bg-amber/[0.04] p-5">
-      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <p className="font-display text-lg text-ivory">{author.name}</p>
-        <span className="rounded-full bg-amber/15 px-2.5 py-0.5 text-[0.6875rem] uppercase tracking-[0.1em] text-amber-soft">
-          {author.role}
-        </span>
-        <span className="ml-auto text-xs text-stone-dim">Pinned</span>
-      </div>
-      {post.body.map((para, i) => (
-        <p
-          key={i}
-          className={`text-base leading-relaxed text-stone ${i === 0 ? "mt-3" : "mt-3"}`}
-        >
-          {para}
-        </p>
-      ))}
-    </article>
+    <Message
+      at={post.at}
+      author={author.name}
+      tint={author.tint}
+      to={labelFor(post.addressedTo)}
+      body={post.body}
+      pinned
+    />
   );
+}
+
+/** A real post, from a real account. */
+function Post({ post }: { post: OverheardPost }) {
+  return (
+    <Message
+      at={clockFor(post.createdAt)}
+      author={post.authorName}
+      to={labelFor(post.addressedTo)}
+      body={post.body.split("\n\n")}
+    />
+  );
+}
+
+/** Time for today, date for anything older — what a chat gutter wants. */
+function clockFor(d: Date): string {
+  const today = new Date();
+  const sameDay =
+    d.getFullYear() === today.getFullYear() &&
+    d.getMonth() === today.getMonth() &&
+    d.getDate() === today.getDate();
+  return sameDay
+    ? d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })
+    : d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
 /**

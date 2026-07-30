@@ -20,7 +20,7 @@ import {
 export const metadata: Metadata = {
   title: "Overheard",
   description:
-    "The room next to the story. Anyone can read it; anyone can say three things; members stay in the conversation.",
+    "Talk about Luna Vale with other people who've watched it — and put questions straight to Melissa, Luna, Tyson, Josh or Rick.",
   alternates: { canonical: "/overheard" },
 };
 
@@ -59,17 +59,22 @@ export default async function OverheardPage() {
             Overheard
           </p>
           <h1 className="mt-4 font-display text-3xl font-light leading-[1.15] text-ivory sm:text-5xl">
-            The room next to the story.
+            Say what you actually think.
           </h1>
+          {/* Plain on purpose. This replaced a bar metaphor that assumed the
+              visitor had already watched the bar scene, and whose "nobody can
+              prove you said it" was worse than obscure — it was wrong, because
+              posts here are public and carry your name. */}
           <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
-            The bar in this story is loud enough that you can say the real thing
-            and nobody can prove you said it. This is that, for everyone else —
-            what you made of it, what you think happens next, and anything you
-            want to put to Melissa or to the three of them.
+            A place to talk about the story with other people who&rsquo;ve
+            watched it — what you made of it, what you think happens next, and
+            anything you want to ask Melissa or put straight to Luna, Tyson,
+            Josh or Rick.
           </p>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-stone-dim">
-            Reading is open to everybody, always. Posting takes a free account,
-            and comes with {FREE_POST_ALLOWANCE} posts.
+            Anyone can read it. Posting takes a free account and comes with{" "}
+            {FREE_POST_ALLOWANCE} posts — after that it&rsquo;s part of the
+            LunaVerse. Your name shows on what you write.
           </p>
         </header>
 

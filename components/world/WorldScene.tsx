@@ -2457,7 +2457,18 @@ function World({
   onOpenImage,
 }: SceneProps) {
   const { camera, gl } = useThree();
+  // What of this room's gallery THIS viewer can actually load. A gated set's
+  // stills come from /api/still, which refuses a non-member — hanging them
+  // regardless would paper the wall with failed textures rather than leak
+  // anything, which is a different bug but still a bug. A gated set with an
+  // open preview hangs just those; one with none hangs nothing.
   const gallery = room.galleryId ? getGallery(room.galleryId) : undefined;
+  const wallImages = useMemo(() => {
+    if (!gallery) return [];
+    const all = galleryImages(gallery, "full");
+    if (gallery.access !== "premium" || member) return all;
+    return all.slice(0, gallery.freePreviewCount ?? 0);
+  }, [gallery, member]);
   const yaw = useRef(0);
   const pitch = useRef(0);
 
@@ -2558,11 +2569,11 @@ function World({
           onSelect={onSelectObject}
         />
       ))}
-      {gallery && (
+      {wallImages.length > 0 && (
         <Suspense fallback={null}>
           <GalleryWall
-            images={galleryImages(gallery, "full")}
-            onOpen={(i) => onOpenImage(galleryImages(gallery, "full"), i)}
+            images={wallImages}
+            onOpen={(i) => onOpenImage(wallImages, i)}
           />
         </Suspense>
       )}

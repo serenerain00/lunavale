@@ -275,6 +275,7 @@ export const environments: Environment[] = [
           "The room they shared. Quiet now — where Luna kept the things she never said out loud.",
         spawn: [0, 1.6, 3],
         dressing: "bedroom",
+        galleryId: "josh-luna-bed",
         accent: "#5f4a5a",
         objects: [
           {
@@ -387,6 +388,7 @@ export const environments: Environment[] = [
         spawn: [0, 1.7, 3.5],
         setting: "exterior",
         dressing: "deck",
+        galleryId: "the-firepit",
         accent: "#3a5560",
         objects: [
           {
@@ -462,6 +464,7 @@ export const environments: Environment[] = [
           "Up under the roof, facing the water. The room where twenty years of not saying it finally stopped.",
         spawn: [0, 1.6, 3],
         dressing: "bedroom",
+        galleryId: "the-night",
         accent: "#584454",
         objects: [
           {
@@ -552,6 +555,7 @@ export const environments: Environment[] = [
           "Close enough to be overheard, talking anyway. Where Tyson told her he'd been noticing her — in a few words, the way he does.",
         spawn: [0, 1.6, 3],
         dressing: "bar",
+        galleryId: "the-bar",
         accent: "#5a3a2f",
         objects: [
           {
@@ -608,6 +612,7 @@ export const environments: Environment[] = [
         spawn: [0, 1.6, 3.5],
         setting: "exterior",
         dressing: "shore",
+        galleryId: "the-run",
         accent: "#3f5245",
         objects: [
           // The "Out at the Lake" clip object was removed 2026-07-27 while the
@@ -707,6 +712,7 @@ export const environments: Environment[] = [
         spawn: [0, 1.6, 3.5],
         setting: "exterior",
         dressing: "park",
+        galleryId: "the-park",
         accent: "#43542f",
         objects: [
           {
@@ -760,6 +766,7 @@ export const environments: Environment[] = [
           "The garage where Tyson lives between runs. Helmets on the shelf, and the black Carrera that's his baby.",
         spawn: [0, 1.6, 3.5],
         dressing: "pit",
+        galleryId: "the-garage",
         accent: "#3a3a40",
         objects: [
           {
@@ -834,6 +841,7 @@ export const environments: Environment[] = [
           "Josh and Tyson at the tractor before the day starts. Family, co-workers, distant cousins — and the thing between them nobody names.",
         spawn: [0, 1.6, 3.5],
         dressing: "barn",
+        galleryId: "josh-luna-bolt",
         accent: "#5a4a30",
         objects: [
           {

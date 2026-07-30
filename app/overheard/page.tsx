@@ -6,7 +6,11 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
 import { people } from "@/lib/content/taxonomy";
-import { FREE_POST_ALLOWANCE } from "@/lib/content/overheard";
+import {
+  FREE_POST_ALLOWANCE,
+  OPENING_POSTS,
+  type OpeningPost,
+} from "@/lib/content/overheard";
 import {
   postCountForUser,
   recentPosts,
@@ -77,9 +81,16 @@ export default async function OverheardPage() {
           addressees={ADDRESSEE_LABELS}
         />
 
-        <section aria-label="Posts" className="mt-12">
+        <section aria-label="Posts" className="mt-12 space-y-5">
+          {/* Melissa's openers, pinned. Visually distinct from a visitor post,
+              because a host talking first is only fine if it is obvious that is
+              what is happening. */}
+          {OPENING_POSTS.map((post) => (
+            <FromMelissa key={post.id} post={post} />
+          ))}
+
           {posts.length === 0 ? (
-            <Empty />
+            <NoRepliesYet />
           ) : (
             <Reveal className="space-y-5">
               {posts.map((post) => (
@@ -125,20 +136,44 @@ function Post({ post }: { post: OverheardPost }) {
   );
 }
 
+/** A pinned post from the filmmaker. Amber-edged, badged, and never counted
+ *  among the visitor posts — see OPENING_POSTS in lib/content/overheard.ts. */
+function FromMelissa({ post }: { post: OpeningPost }) {
+  return (
+    <article className="rounded-xl border border-amber/25 bg-amber/[0.04] p-5">
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <p className="font-display text-lg text-ivory">Melissa</p>
+        <span className="rounded-full bg-amber/15 px-2.5 py-0.5 text-[0.6875rem] uppercase tracking-[0.1em] text-amber-soft">
+          Filmmaker
+        </span>
+        <span className="ml-auto text-xs text-stone-dim">Pinned</span>
+      </div>
+      {post.body.map((para, i) => (
+        <p
+          key={i}
+          className={`text-base leading-relaxed text-stone ${i === 0 ? "mt-3" : "mt-3"}`}
+        >
+          {para}
+        </p>
+      ))}
+    </article>
+  );
+}
+
 /**
- * The empty state, which is the state this page is in on day one. It says so
- * plainly instead of pretending — "be the first" is a real invitation, and a
- * visitor who is told the room is new reads it very differently from one who
- * concludes everybody left.
+ * Shown while the openers are up but nobody has replied. Deliberately does NOT
+ * claim the room is busy — the posts above are the host's, and pretending three
+ * of her own remarks constitute a conversation is the exact dishonesty this
+ * page is built to avoid.
  */
-function Empty() {
+function NoRepliesYet() {
   return (
     <div className="rounded-xl border border-hairline bg-charcoal/40 p-10 text-center">
       <p className="font-display text-xl text-ivory">
-        Nobody has said anything yet.
+        Nobody has replied yet.
       </p>
       <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-stone">
-        This room is new. Whoever posts first gets the whole wall to themselves
+        This room is new. Whoever goes first gets the whole wall to themselves
         for a while, which is not the worst offer.
       </p>
       <Link

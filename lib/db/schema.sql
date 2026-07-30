@@ -76,6 +76,18 @@ CREATE TABLE IF NOT EXISTS overheard_posts (
   -- remark to the room, which is the default and the common case.
   addressed_to TEXT,
 
+  -- What this is answering, as the transcript's own line key: "post:123" for a
+  -- real post, "cast:d4-2" for one of the scripted cast messages. Text rather
+  -- than a foreign key precisely because half the thread is not in this table —
+  -- the cast script lives in lib/content/overheard.ts, so a FK could only ever
+  -- express half the replies.
+  reply_to    TEXT,
+
+  -- Set when the poster is OWNER_USER_ID. Stored rather than inferred from the
+  -- name, because a visitor can call themselves Melissa and a badge that can be
+  -- spoofed is worse than no badge.
+  is_owner    BOOLEAN     NOT NULL DEFAULT false,
+
   -- Melissa can hide anything without destroying it. Hidden posts still count
   -- against their author's allowance, so deleting-and-reposting isn't a way to
   -- get free turns.

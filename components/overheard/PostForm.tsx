@@ -12,8 +12,8 @@ interface PostFormProps {
   /** Posts already used, for the "one left" line. Ignored for members. */
   used: number;
   allowance: number;
-  /** Who a post can be addressed to: [value, label]. */
-  addressees: [string, string][];
+  /** The line being answered, when the URL asks for one. */
+  replyingTo?: { key: string; author: string; snippet: string } | null;
 }
 
 /**
@@ -29,7 +29,7 @@ export function PostForm({
   member,
   used,
   allowance,
-  addressees,
+  replyingTo = null,
 }: PostFormProps) {
   const [state, action, pending] = useActionState<PostResult | null, FormData>(
     async (_prev, formData) => submitPost(formData),
@@ -81,8 +81,29 @@ export function PostForm({
   return (
     <form
       action={action}
+      id="say"
       className="rounded-xl border border-hairline bg-charcoal/60 p-5 sm:p-6"
     >
+      {/* Carried in the URL rather than client state, so a "reply to this" link
+          is an ordinary link — shareable, and it survives a refresh. */}
+      <input type="hidden" name="replyTo" value={replyingTo?.key ?? ""} />
+      {replyingTo && (
+        <div className="mb-4 flex items-start gap-3 rounded-lg border-l-2 border-amber/50 bg-void/40 py-2 pl-3 pr-2">
+          <p className="min-w-0 flex-1 text-xs leading-relaxed text-stone-dim">
+            Replying to{" "}
+            <span className="text-stone">{replyingTo.author}</span>
+            <span className="block truncate italic">
+              {replyingTo.snippet}
+            </span>
+          </p>
+          <Link
+            href="/overheard#say"
+            className="shrink-0 text-xs text-stone-dim underline decoration-hairline underline-offset-2 hover:text-amber"
+          >
+            Cancel
+          </Link>
+        </div>
+      )}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <label
           htmlFor="body"
@@ -90,23 +111,6 @@ export function PostForm({
         >
           Say something
         </label>
-        <div className="flex items-center gap-2 text-xs text-stone-dim">
-          <label htmlFor="addressedTo" className="sr-only">
-            Who this is for
-          </label>
-          <select
-            id="addressedTo"
-            name="addressedTo"
-            defaultValue=""
-            className="rounded-full border border-hairline bg-void px-3 py-1.5 text-xs text-stone focus:border-amber focus:outline-none"
-          >
-            {addressees.map(([value, label]) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </div>
       </div>
 
       <textarea
@@ -115,7 +119,7 @@ export function PostForm({
         rows={4}
         maxLength={MAX_POST_LENGTH}
         required
-        placeholder="What did you make of it?"
+        placeholder="What did you make of it? Use @Luna, @Tyson, @Josh, @Rick or @Melissa to tag someone."
         className="mt-4 w-full resize-y rounded-lg border border-hairline bg-void px-4 py-3 text-base leading-relaxed text-ivory placeholder:text-stone-dim focus:border-amber focus:outline-none"
       />
 

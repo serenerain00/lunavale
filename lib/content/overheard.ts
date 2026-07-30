@@ -60,6 +60,7 @@ export interface CastMessage {
   at: string;
   author: CastAuthor;
   /** Who they're answering, or null for the room. */
+  /** Retained for filtering; the visible mention lives in the body. */
   addressedTo: string | null;
   body: string[];
 }
@@ -70,30 +71,30 @@ export const CAST_THREAD: CastMessage[] = [
     "Melissa has given the four of us accounts on here, which I think she may regret by Thursday.",
     "Ask us things. I'll answer honestly, which is not the same as answering completely.",
   ] },
-  { id: "d0-2", day: 0, at: "09:03", author: TYSON, addressedTo: "luna", body: ["Define honestly."] },
-  { id: "d0-3", day: 0, at: "09:04", author: LUNA, addressedTo: "tyson", body: ["Don't."] },
+  { id: "d0-2", day: 0, at: "09:03", author: TYSON, addressedTo: "luna", body: ["@Luna Define honestly."] },
+  { id: "d0-3", day: 0, at: "09:04", author: LUNA, addressedTo: "tyson", body: ["@Tyson Don't."] },
   { id: "d0-4", day: 0, at: "09:11", author: JOSH, addressedTo: null, body: [
     "Before anybody asks: no, I don't think I'm the villain of this. I've read what gets written about me. Some of it is fair.",
     "Ask me whatever you want. I'd rather you asked me than decided.",
   ] },
   { id: "d0-5", day: 0, at: "09:14", author: RICK, addressedTo: "josh", body: [
-    "You've read what people write about you. That's the most work you've put into any of it.",
+    "@Josh You've read what people write about you. That's the most work you've put into any of it.",
   ] },
-  { id: "d0-6", day: 0, at: "09:15", author: JOSH, addressedTo: "rick", body: ["Hello, Dad."] },
+  { id: "d0-6", day: 0, at: "09:15", author: JOSH, addressedTo: "rick", body: ["@Rick Hello, Dad."] },
   { id: "d0-7", day: 0, at: "09:16", author: RICK, addressedTo: "tyson", body: [
-    "You're the only one of them I'd have hired.",
+    "@Tyson You're the only one of them I'd have hired.",
   ] },
   { id: "d0-8", day: 0, at: "09:20", author: TYSON, addressedTo: null, body: ["I won't be much use. Ask anyway."] },
   { id: "d0-9", day: 0, at: "09:21", author: LUNA, addressedTo: null, body: [
     "He'll answer. It will be four words and you'll think about it for a week.",
   ] },
-  { id: "d0-10", day: 0, at: "09:22", author: TYSON, addressedTo: "luna", body: ["Six."] },
+  { id: "d0-10", day: 0, at: "09:22", author: TYSON, addressedTo: "luna", body: ["@Luna Six."] },
   { id: "d0-11", day: 0, at: "09:28", author: JOSH, addressedTo: null, body: [
     "Here's what I actually want to know, and nobody ever answers it.",
     "Not what you think of us. What you would have done — in the kitchen, in the car, on that first phone call. Same ten years, same Tuesday. Go on.",
   ] },
   { id: "d0-12", day: 0, at: "09:31", author: LUNA, addressedTo: "josh", body: [
-    "That's the only question on here I'm frightened of.",
+    "@Josh That's the only question on here I'm frightened of.",
   ] },
   { id: "d0-13", day: 0, at: "09:36", author: RICK, addressedTo: null, body: [
     "Ask me whatever you like. I won't be kind about any of them. Particularly my son.",
@@ -104,7 +105,7 @@ export const CAST_THREAD: CastMessage[] = [
   { id: "d1-1", day: 1, at: "08:40", author: JOSH, addressedTo: null, body: [
     "Nobody has asked me anything yet. I'm choosing to read that as respect.",
   ] },
-  { id: "d1-2", day: 1, at: "08:52", author: TYSON, addressedTo: "josh", body: ["Read it how you like."] },
+  { id: "d1-2", day: 1, at: "08:52", author: TYSON, addressedTo: "josh", body: ["@Josh Read it how you like."] },
 
   /* ---------------------------------------------------------------- day 2 */
   { id: "d2-1", day: 2, at: "21:15", author: LUNA, addressedTo: null, body: [
@@ -115,14 +116,14 @@ export const CAST_THREAD: CastMessage[] = [
   { id: "d3-1", day: 3, at: "19:30", author: RICK, addressedTo: null, body: [
     "Watched the coffee shop again. He's good in it. Don't tell him.",
   ] },
-  { id: "d3-2", day: 3, at: "19:34", author: JOSH, addressedTo: "rick", body: ["Too late."] },
+  { id: "d3-2", day: 3, at: "19:34", author: JOSH, addressedTo: "rick", body: ["@Rick Too late."] },
 
   /* ---------------------------------------------------------------- day 4 */
   { id: "d4-1", day: 4, at: "07:05", author: TYSON, addressedTo: null, body: ["Cold this morning. Bike stays in."] },
   { id: "d4-2", day: 4, at: "07:41", author: LUNA, addressedTo: "tyson", body: [
-    "You drove the car to the end of the road and came back. I watched you do it.",
+    "@Tyson You drove the car to the end of the road and came back. I watched you do it.",
   ] },
-  { id: "d4-3", day: 4, at: "07:44", author: TYSON, addressedTo: "luna", body: ["It needed running."] },
+  { id: "d4-3", day: 4, at: "07:44", author: TYSON, addressedTo: "luna", body: ["@Luna It needed running."] },
 
   /* ---------------------------------------------------------------- day 5 */
   { id: "d5-1", day: 5, at: "22:10", author: JOSH, addressedTo: null, body: [
@@ -131,7 +132,7 @@ export const CAST_THREAD: CastMessage[] = [
 
   /* ---------------------------------------------------------------- day 6 */
   { id: "d6-1", day: 6, at: "09:20", author: LUNA, addressedTo: "josh", body: [
-    "People like you. That has always been the problem.",
+    "@Josh People like you. That has always been the problem.",
   ] },
 
   /* ---------------------------------------------------------------- day 7 */
@@ -148,9 +149,9 @@ export const CAST_THREAD: CastMessage[] = [
   ] },
 
   /* --------------------------------------------------------------- day 10 */
-  { id: "d10-1", day: 10, at: "08:05", author: JOSH, addressedTo: "luna", body: ["You alright?"] },
-  { id: "d10-2", day: 10, at: "08:31", author: LUNA, addressedTo: "josh", body: ["Yes."] },
-  { id: "d10-3", day: 10, at: "08:33", author: TYSON, addressedTo: "josh", body: ["She isn't."] },
+  { id: "d10-1", day: 10, at: "08:05", author: JOSH, addressedTo: "luna", body: ["@Luna You alright?"] },
+  { id: "d10-2", day: 10, at: "08:31", author: LUNA, addressedTo: "josh", body: ["@Josh Yes."] },
+  { id: "d10-3", day: 10, at: "08:33", author: TYSON, addressedTo: "josh", body: ["@Josh She isn't."] },
 
   /* --------------------------------------------------------------- day 11 */
   { id: "d11-1", day: 11, at: "20:40", author: RICK, addressedTo: null, body: [
@@ -161,13 +162,13 @@ export const CAST_THREAD: CastMessage[] = [
   { id: "d12-1", day: 12, at: "09:12", author: LUNA, addressedTo: null, body: [
     "That is the most Rick has ever said in one go.",
   ] },
-  { id: "d12-2", day: 12, at: "09:19", author: RICK, addressedTo: "luna", body: ["Don't get used to it."] },
+  { id: "d12-2", day: 12, at: "09:19", author: RICK, addressedTo: "luna", body: ["@Luna Don't get used to it."] },
 
   /* --------------------------------------------------------------- day 13 */
   { id: "d13-1", day: 13, at: "21:55", author: JOSH, addressedTo: null, body: [
     "Watched the barn scene with the sound off. Better scene with the sound off. Don't tell Melissa.",
   ] },
-  { id: "d13-2", day: 13, at: "22:03", author: TYSON, addressedTo: "josh", body: ["She reads this."] },
+  { id: "d13-2", day: 13, at: "22:03", author: TYSON, addressedTo: "josh", body: ["@Josh She reads this."] },
 
   /* --------------------------------------------------------------- day 14 */
   { id: "d14-1", day: 14, at: "07:30", author: TYSON, addressedTo: null, body: ["Still here."] },

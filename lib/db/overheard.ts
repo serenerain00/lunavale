@@ -36,6 +36,10 @@ export interface OverheardPost {
   authorName: string;
   body: string;
   addressedTo: string | null;
+  /** Transcript line key this answers: "post:123" or "cast:d4-2". */
+  replyTo: string | null;
+  /** Posted by Melissa. Rendered as a badge; never inferred from the name. */
+  isOwner: boolean;
   createdAt: Date;
 }
 
@@ -43,7 +47,7 @@ export interface OverheardPost {
 export async function recentPosts(limit = 50): Promise<OverheardPost[]> {
   if (!databaseConfigured()) return [];
   const rows = (await sql()`
-    SELECT id, author_name, body, addressed_to, created_at
+    SELECT id, author_name, body, addressed_to, reply_to, is_owner, created_at
     FROM overheard_posts
     WHERE hidden = false
     ORDER BY created_at DESC
@@ -53,6 +57,8 @@ export async function recentPosts(limit = 50): Promise<OverheardPost[]> {
     author_name: string;
     body: string;
     addressed_to: string | null;
+    reply_to: string | null;
+    is_owner: boolean;
     created_at: string;
   }>;
   return rows.map((r) => ({
@@ -60,6 +66,8 @@ export async function recentPosts(limit = 50): Promise<OverheardPost[]> {
     authorName: r.author_name,
     body: r.body,
     addressedTo: r.addressed_to,
+    replyTo: r.reply_to,
+    isOwner: r.is_owner,
     createdAt: new Date(r.created_at),
   }));
 }
@@ -82,13 +90,48 @@ export async function addPost(input: {
   authorName: string;
   body: string;
   addressedTo?: string | null;
+  replyTo?: string | null;
+  isOwner?: boolean;
 }): Promise<void> {
   if (!databaseConfigured()) throw new Error("DATABASE_URL is not set");
   await sql()`
-    INSERT INTO overheard_posts (user_id, author_name, body, addressed_to)
+    INSERT INTO overheard_posts (user_id, author_name, body, addressed_to, reply_to, is_owner)
     VALUES (${input.userId}, ${input.authorName}, ${input.body},
-            ${input.addressedTo ?? null})
+            ${input.addressedTo ?? null}, ${input.replyTo ?? null},
+            ${input.isOwner ?? false})
   `;
+}
+
+/** Everything, including hidden, for the moderation view. */
+export async function allPostsForModeration(limit = 200): Promise<
+  (OverheardPost & { hidden: boolean })[]
+> {
+  if (!databaseConfigured()) return [];
+  const rows = (await sql()`
+    SELECT id, author_name, body, addressed_to, reply_to, is_owner, hidden, created_at
+    FROM overheard_posts
+    ORDER BY created_at DESC
+    LIMIT ${limit}
+  `) as Array<{
+    id: string;
+    author_name: string;
+    body: string;
+    addressed_to: string | null;
+    reply_to: string | null;
+    is_owner: boolean;
+    hidden: boolean;
+    created_at: string;
+  }>;
+  return rows.map((r) => ({
+    id: String(r.id),
+    authorName: r.author_name,
+    body: r.body,
+    addressedTo: r.addressed_to,
+    replyTo: r.reply_to,
+    isOwner: r.is_owner,
+    hidden: r.hidden,
+    createdAt: new Date(r.created_at),
+  }));
 }
 
 /** Moderation. Hiding rather than deleting keeps the audit trail and the count. */

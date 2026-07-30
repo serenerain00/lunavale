@@ -4,7 +4,6 @@ import { PostForm } from "@/components/overheard/PostForm";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
-import { people } from "@/lib/content/taxonomy";
 import { FREE_POST_ALLOWANCE, landedMessages } from "@/lib/content/overheard";
 import {
   postCountForUser,
@@ -22,44 +21,32 @@ export const metadata: Metadata = {
 /** Nothing here is cached: the thread grows daily and posts land live. */
 export const dynamic = "force-dynamic";
 
-const ADDRESSEE_LABELS: [string, string][] = [
-  ["", "To the room"],
-  ["melissa", "To Melissa"],
-  ...people.map(
-    (p) =>
-      [p.id, `To ${p.label === "Herself" ? "Luna" : p.label}`] as [
-        string,
-        string,
-      ],
-  ),
-];
-
-/** Bare name for the "Luna to Tyson" line — the "To " prefix belongs to the
- *  form's dropdown, not to a transcript. */
-function labelFor(value: string | null): string | null {
-  if (!value) return null;
-  const label = ADDRESSEE_LABELS.find(([v]) => v === value)?.[1];
-  return label ? label.replace(/^To /, "") : null;
-}
-
 /** One line of the room, whichever side it came from. */
 interface Line {
   key: string;
   at: Date;
   author: string;
   tint?: string;
-  to: string | null;
   body: string[];
+  /** Posted by Melissa — earns the Director badge. */
+  owner?: boolean;
+  /** The line this answers, if any. */
+  replyTo?: string | null;
 }
 
-export default async function OverheardPage() {
+interface PageProps {
+  searchParams: Promise<{ reply?: string }>;
+}
+
+export default async function OverheardPage({ searchParams }: PageProps) {
   const [{ active: member }, signedIn] = await Promise.all([
     getMembership(),
     isSignedIn(),
   ]);
-  const [posts, used] = await Promise.all([
+  const [posts, used, params] = await Promise.all([
     recentPosts(),
     currentUserPostCount(),
+    searchParams,
   ]);
 
   // The cast's messages and everyone else's, merged into one transcript in the
@@ -71,17 +58,29 @@ export default async function OverheardPage() {
       at: m.landedAt,
       author: m.author.name,
       tint: m.author.tint,
-      to: labelFor(m.addressedTo),
       body: m.body,
     })),
     ...posts.map((p: OverheardPost) => ({
       key: `post:${p.id}`,
       at: p.createdAt,
       author: p.authorName,
-      to: labelFor(p.addressedTo),
       body: p.body.split("\n\n"),
+      replyTo: p.replyTo,
+      owner: p.isOwner,
     })),
   ].sort((a, b) => a.at.getTime() - b.at.getTime());
+
+  // One pass so a reply can render a stub of what it answers without the
+  // transcript doing a lookup per line.
+  const byKey = new Map(lines.map((l) => [l.key, l]));
+  const target = params.reply ? byKey.get(params.reply) : undefined;
+  const replyingTo = target
+    ? {
+        key: target.key,
+        author: target.author,
+        snippet: snippet(target.body),
+      }
+    : null;
 
   return (
     <>
@@ -119,7 +118,10 @@ export default async function OverheardPage() {
           {lines.map((line, i) => (
             <div key={line.key}>
               {startsNewDay(lines, i) && <DayDivider at={line.at} />}
-              <Message line={line} />
+              <Message
+                line={line}
+                answering={line.replyTo ? byKey.get(line.replyTo) : undefined}
+              />
             </div>
           ))}
         </section>
@@ -132,7 +134,7 @@ export default async function OverheardPage() {
             member={member}
             used={used}
             allowance={FREE_POST_ALLOWANCE}
-            addressees={ADDRESSEE_LABELS}
+            replyingTo={replyingTo}
           />
         </div>
       </main>
@@ -191,9 +193,15 @@ function dayLabel(d: Date): string {
  * indented underneath. The cards this replaced had borders and rounded corners,
  * so every message looked like a link into something, and nothing here is.
  */
-function Message({ line }: { line: Line }) {
+function Message({
+  line,
+  answering,
+}: {
+  line: Line;
+  answering?: Line;
+}) {
   return (
-    <div className="-mx-3 flex gap-3 rounded px-3 py-2 transition-colors duration-(--duration-quick) hover:bg-ivory/[0.025]">
+    <div className="group -mx-3 flex gap-3 rounded px-3 py-2 transition-colors duration-(--duration-quick) hover:bg-ivory/[0.025]">
       <time
         dateTime={line.at.toISOString()}
         className="w-12 shrink-0 pt-[0.2rem] text-right text-[0.6875rem] tabular-nums leading-5 text-stone-dim"
@@ -211,21 +219,65 @@ function Message({ line }: { line: Line }) {
           >
             {line.author}
           </span>
-          {line.to && (
-            <span className="text-[0.6875rem] text-stone-dim">to {line.to}</span>
+          {line.owner && (
+            <span className="rounded-full bg-amber/15 px-2 py-0.5 text-[0.625rem] uppercase tracking-[0.1em] text-amber-soft">
+              Director
+            </span>
           )}
         </p>
+        {/* What it answers, quoted above it — the way a message app shows it,
+            so you never have to scroll up to find out what "no it isn't" meant. */}
+        {answering && (
+          <p className="mt-1 border-l-2 border-hairline pl-2.5 text-xs leading-relaxed text-stone-dim">
+            <span className="text-stone">{answering.author}</span>{" "}
+            <span className="italic">{snippet(answering.body)}</span>
+          </p>
+        )}
         {line.body.map((para, i) => (
           <p
             key={i}
             className="mt-1 whitespace-pre-line text-[0.9375rem] leading-relaxed text-stone"
           >
-            {para}
+            {withMentions(para)}
           </p>
         ))}
+        {/* Appears on hover and on keyboard focus — never a permanent row of
+            controls under every line. */}
+        <Link
+          href={`/overheard?reply=${encodeURIComponent(line.key)}#say`}
+          scroll={false}
+          className="mt-1 inline-block text-[0.6875rem] text-stone-dim opacity-0 transition-opacity focus:opacity-100 group-hover:opacity-100"
+        >
+          Reply
+        </Link>
       </div>
     </div>
   );
+}
+
+/**
+ * Renders @Name in amber. Only the five real names light up — an unknown @word
+ * stays plain text rather than implying somebody was tagged who wasn't.
+ */
+const MENTIONABLE = new Set(["Luna", "Tyson", "Josh", "Rick", "Melissa"]);
+
+function withMentions(text: string) {
+  return text.split(/(@\w+)/g).map((part, i) => {
+    if (part.startsWith("@") && MENTIONABLE.has(part.slice(1))) {
+      return (
+        <span key={i} className="font-medium text-amber-soft">
+          {part}
+        </span>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
+
+/** First line of a message, trimmed — enough to recognise it by. */
+function snippet(body: string[], max = 90): string {
+  const first = (body[0] ?? "").trim();
+  return first.length > max ? `${first.slice(0, max - 1)}…` : first;
 }
 
 async function isSignedIn(): Promise<boolean> {

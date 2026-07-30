@@ -196,7 +196,18 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
             </Link>
           </section>
         )}
-              {/* Always available, including on phones where the header hides it. */}
+              {process.env.OWNER_USER_ID && (
+          <div className="mt-10">
+            <Link
+              href="/account/overheard"
+              className="text-sm text-amber underline decoration-hairline underline-offset-4"
+            >
+              Moderate Overheard →
+            </Link>
+          </div>
+        )}
+
+        {/* Always available, including on phones where the header hides it. */}
         <div className="mt-12 border-t border-hairline pt-6">
           <SignOut className="text-sm text-stone-dim underline decoration-hairline underline-offset-4 transition-colors hover:text-amber" />
         </div>

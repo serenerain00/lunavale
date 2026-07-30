@@ -22,13 +22,7 @@ import {
   databaseConfigured,
   postCountForUser,
 } from "@/lib/db/overheard";
-import { people } from "@/lib/content/taxonomy";
-
-/** Who a post may be addressed to. `null` — the default — is the room. */
-const ADDRESSEES = new Set<string>([
-  "melissa",
-  ...people.map((p) => p.id),
-]);
+import { CAST_THREAD } from "@/lib/content/overheard";
 
 export interface PostResult {
   ok: boolean;
@@ -59,8 +53,17 @@ export async function submitPost(formData: FormData): Promise<PostResult> {
     };
   }
 
-  const rawTo = String(formData.get("addressedTo") ?? "");
-  const addressedTo = ADDRESSEES.has(rawTo) ? rawTo : null;
+  // A reply target has to name a line that exists. A cast key is checked
+  // against the script; a post key is trusted only in shape, because a post
+  // that was later hidden is still a legitimate thing to have replied to and
+  // re-querying for it on every write buys nothing.
+  const rawReply = String(formData.get("replyTo") ?? "").trim();
+  const replyTo =
+    /^post:\d+$/.test(rawReply) ||
+    (rawReply.startsWith("cast:") &&
+      CAST_THREAD.some((m) => `cast:${m.id}` === rawReply))
+      ? rawReply
+      : null;
 
   // The allowance. Members are unlimited; everyone else gets three, ever.
   const member = await isMember();
@@ -77,13 +80,20 @@ export async function submitPost(formData: FormData): Promise<PostResult> {
 
   // A display name, with fallbacks: Clerk lets people have neither a username
   // nor a first name, and "" next to a post looks like a bug.
-  const user = await currentUser();
-  const authorName =
-    user?.username?.trim() ||
-    [user?.firstName, user?.lastName].filter(Boolean).join(" ").trim() ||
-    "A visitor";
+  // Melissa posts under her own name with a badge. Checked against the env var,
+  // not against whatever she happens to have called herself in Clerk.
+  const isOwner = Boolean(
+    process.env.OWNER_USER_ID && userId === process.env.OWNER_USER_ID,
+  );
 
-  await addPost({ userId, authorName, body, addressedTo });
+  const user = await currentUser();
+  const authorName = isOwner
+    ? "Melissa"
+    : user?.username?.trim() ||
+      [user?.firstName, user?.lastName].filter(Boolean).join(" ").trim() ||
+      "A visitor";
+
+  await addPost({ userId, authorName, body, replyTo, isOwner });
   revalidatePath("/overheard");
   return { ok: true };
 }

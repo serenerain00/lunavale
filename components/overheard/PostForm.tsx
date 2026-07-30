@@ -2,6 +2,7 @@
 
 import { useActionState, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { submitPost, type PostResult } from "@/app/overheard/actions";
 import { MAX_POST_LENGTH, MENTIONABLE } from "@/lib/content/overheard";
 
@@ -31,14 +32,6 @@ export function PostForm({
   allowance,
   replyingTo = null,
 }: PostFormProps) {
-  const [state, action, pending] = useActionState<PostResult | null, FormData>(
-    async (_prev, formData) => submitPost(formData),
-    null,
-  );
-
-  const left = Math.max(0, allowance - used);
-  const spent = !member && left === 0;
-
   // --- @ picker ------------------------------------------------------------
   // Driven off the caret rather than off the whole value, so tagging works
   // mid-sentence and not only at the end.
@@ -80,6 +73,14 @@ export function PostForm({
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    // Checked before the picker: ⌘/Ctrl+Enter always means send, whether or
+    // not the tag list happens to be open.
+    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+      e.preventDefault();
+      setQuery(null);
+      formRef.current?.requestSubmit();
+      return;
+    }
     if (!open) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();
@@ -97,6 +98,27 @@ export function PostForm({
       setQuery(null);
     }
   }
+
+  const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const [state, action, pending] = useActionState<PostResult | null, FormData>(
+    async (_prev, formData) => {
+      const result = await submitPost(formData);
+      if (result.ok) {
+        setText("");
+        // Clear the reply target as well. It lives in the URL, so leaving it
+        // there would quietly attach the NEXT post to the same message —
+        // the sort of thing you only notice after you have done it twice.
+        if (replyingTo) router.replace("/overheard#say", { scroll: false });
+      }
+      return result;
+    },
+    null,
+  );
+
+  const left = Math.max(0, allowance - used);
+  const spent = !member && left === 0;
 
   if (!signedIn) {
     return (
@@ -139,6 +161,7 @@ export function PostForm({
 
   return (
     <form
+      ref={formRef}
       action={action}
       id="say"
       className="rounded-xl border border-hairline bg-charcoal/60 p-5 sm:p-6"
@@ -244,6 +267,11 @@ export function PostForm({
               ? "One post left, then you'll need a membership."
               : `${left} posts left, then you'll need a membership.`}
         </p>
+        {/* Both labels rather than sniffing the platform: no JS, nothing to
+            mismatch on hydration, and unambiguous on either machine. */}
+        <span className="ml-auto mr-3 text-[0.6875rem] text-stone-dim">
+          ⌘ / Ctrl + Enter
+        </span>
         <button
           type="submit"
           disabled={pending}

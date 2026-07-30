@@ -199,10 +199,10 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
               {process.env.OWNER_USER_ID && (
           <div className="mt-10">
             <Link
-              href="/account/overheard"
+              href="/admin"
               className="text-sm text-amber underline decoration-hairline underline-offset-4"
             >
-              Moderate Overheard →
+              Admin →
             </Link>
           </div>
         )}

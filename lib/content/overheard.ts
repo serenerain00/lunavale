@@ -308,3 +308,16 @@ export function resolveMention(typed: string): string | null {
   );
   return hit ? hit.name : null;
 }
+
+/** Days of scripted cast thread still to come. Zero means it has run dry. */
+export function threadRunway(now: Date): { lastDay: Date; daysLeft: number } {
+  const start = new Date(THREAD_START);
+  const maxDay = CAST_THREAD.reduce((m, x) => Math.max(m, x.day), 0);
+  const lastDay = new Date(start);
+  lastDay.setUTCDate(lastDay.getUTCDate() + maxDay);
+  const daysLeft = Math.max(
+    0,
+    Math.ceil((lastDay.getTime() - now.getTime()) / 86_400_000),
+  );
+  return { lastDay, daysLeft };
+}

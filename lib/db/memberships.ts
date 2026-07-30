@@ -165,3 +165,16 @@ export async function markEventHandled(
     ON CONFLICT (event_id) DO NOTHING
   `;
 }
+
+/** Membership counts by tier and status, for the admin dashboard. */
+export async function membershipSummary(): Promise<
+  { tier: string; status: string; n: number }[]
+> {
+  if (!databaseConfigured()) return [];
+  return (await sql()`
+    SELECT tier, status, count(*)::int AS n
+    FROM memberships
+    GROUP BY tier, status
+    ORDER BY n DESC
+  `) as { tier: string; status: string; n: number }[];
+}

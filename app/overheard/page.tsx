@@ -73,7 +73,7 @@ export default async function OverheardPage() {
           </p>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-stone-dim">
             Anyone can read it. Posting takes a free account and comes with{" "}
-            {FREE_POST_ALLOWANCE} posts — after that it&rsquo;s part of the
+            {FREE_POST_ALLOWANCE}{" "}posts — after that it&rsquo;s part of the
             LunaVerse. Your name shows on what you write.
           </p>
         </header>

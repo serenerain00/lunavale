@@ -22,7 +22,7 @@ import {
   databaseConfigured,
   postCountForUser,
 } from "@/lib/db/overheard";
-import { CAST_THREAD } from "@/lib/content/overheard";
+import { CAST_THREAD, resolveMention } from "@/lib/content/overheard";
 
 export interface PostResult {
   ok: boolean;
@@ -86,14 +86,23 @@ export async function submitPost(formData: FormData): Promise<PostResult> {
     process.env.OWNER_USER_ID && userId === process.env.OWNER_USER_ID,
   );
 
+  // Melissa can answer in a character's voice. The row still records HER
+  // user_id — only the byline changes — so the allowance, the moderation view
+  // and any future audit all still point at a real account.
+  const rawCast = String(formData.get("castAs") ?? "").trim();
+  const castAs =
+    isOwner && rawCast && rawCast !== "Melissa" ? resolveMention(rawCast) : null;
+
   const user = await currentUser();
-  const authorName = isOwner
+  const authorName = castAs
+    ? castAs
+    : isOwner
     ? "Melissa"
     : user?.username?.trim() ||
       [user?.firstName, user?.lastName].filter(Boolean).join(" ").trim() ||
       "A visitor";
 
-  await addPost({ userId, authorName, body, replyTo, isOwner });
+  await addPost({ userId, authorName, body, replyTo, isOwner, castAs });
   revalidatePath("/overheard");
   return { ok: true };
 }

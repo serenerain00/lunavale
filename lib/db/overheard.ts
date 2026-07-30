@@ -40,6 +40,8 @@ export interface OverheardPost {
   replyTo: string | null;
   /** Posted by Melissa. Rendered as a badge; never inferred from the name. */
   isOwner: boolean;
+  /** Character byline, when Melissa answered in their voice. */
+  castAs: string | null;
   createdAt: Date;
 }
 
@@ -47,7 +49,7 @@ export interface OverheardPost {
 export async function recentPosts(limit = 50): Promise<OverheardPost[]> {
   if (!databaseConfigured()) return [];
   const rows = (await sql()`
-    SELECT id, author_name, body, addressed_to, reply_to, is_owner, created_at
+    SELECT id, author_name, body, addressed_to, reply_to, is_owner, cast_as, created_at
     FROM overheard_posts
     WHERE hidden = false
     ORDER BY created_at DESC
@@ -59,6 +61,7 @@ export async function recentPosts(limit = 50): Promise<OverheardPost[]> {
     addressed_to: string | null;
     reply_to: string | null;
     is_owner: boolean;
+    cast_as: string | null;
     created_at: string;
   }>;
   return rows.map((r) => ({
@@ -68,6 +71,7 @@ export async function recentPosts(limit = 50): Promise<OverheardPost[]> {
     addressedTo: r.addressed_to,
     replyTo: r.reply_to,
     isOwner: r.is_owner,
+    castAs: r.cast_as,
     createdAt: new Date(r.created_at),
   }));
 }
@@ -92,13 +96,14 @@ export async function addPost(input: {
   addressedTo?: string | null;
   replyTo?: string | null;
   isOwner?: boolean;
+  castAs?: string | null;
 }): Promise<void> {
   if (!databaseConfigured()) throw new Error("DATABASE_URL is not set");
   await sql()`
-    INSERT INTO overheard_posts (user_id, author_name, body, addressed_to, reply_to, is_owner)
+    INSERT INTO overheard_posts (user_id, author_name, body, addressed_to, reply_to, is_owner, cast_as)
     VALUES (${input.userId}, ${input.authorName}, ${input.body},
             ${input.addressedTo ?? null}, ${input.replyTo ?? null},
-            ${input.isOwner ?? false})
+            ${input.isOwner ?? false}, ${input.castAs ?? null})
   `;
 }
 
@@ -108,7 +113,7 @@ export async function allPostsForModeration(limit = 200): Promise<
 > {
   if (!databaseConfigured()) return [];
   const rows = (await sql()`
-    SELECT id, author_name, body, addressed_to, reply_to, is_owner, hidden, created_at
+    SELECT id, author_name, body, addressed_to, reply_to, is_owner, cast_as, hidden, created_at
     FROM overheard_posts
     ORDER BY created_at DESC
     LIMIT ${limit}
@@ -119,6 +124,7 @@ export async function allPostsForModeration(limit = 200): Promise<
     addressed_to: string | null;
     reply_to: string | null;
     is_owner: boolean;
+    cast_as: string | null;
     hidden: boolean;
     created_at: string;
   }>;
@@ -129,6 +135,7 @@ export async function allPostsForModeration(limit = 200): Promise<
     addressedTo: r.addressed_to,
     replyTo: r.reply_to,
     isOwner: r.is_owner,
+    castAs: r.cast_as,
     hidden: r.hidden,
     createdAt: new Date(r.created_at),
   }));

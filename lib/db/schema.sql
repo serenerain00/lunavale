@@ -83,6 +83,13 @@ CREATE TABLE IF NOT EXISTS overheard_posts (
   -- express half the replies.
   reply_to    TEXT,
 
+  -- When Melissa answers in a character's voice, the character's name. The row
+  -- still records HER user_id — the account is always the real one, and only
+  -- the byline changes. That is what keeps the allowance and moderation honest
+  -- while letting the cast reply to people, which is the whole promise of the
+  -- room.
+  cast_as     TEXT,
+
   -- Set when the poster is OWNER_USER_ID. Stored rather than inferred from the
   -- name, because a visitor can call themselves Melissa and a badge that can be
   -- spoofed is worse than no badge.

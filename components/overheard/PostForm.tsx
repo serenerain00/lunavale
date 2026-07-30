@@ -15,6 +15,8 @@ interface PostFormProps {
   allowance: number;
   /** The line being answered, when the URL asks for one. */
   replyingTo?: { key: string; author: string; snippet: string } | null;
+  /** Melissa only: lets her answer in a character's voice. */
+  canPostAsCast?: boolean;
 }
 
 /**
@@ -31,6 +33,7 @@ export function PostForm({
   used,
   allowance,
   replyingTo = null,
+  canPostAsCast = false,
 }: PostFormProps) {
   // --- @ picker ------------------------------------------------------------
   // Driven off the caret rather than off the whole value, so tagging works
@@ -187,12 +190,29 @@ export function PostForm({
         </div>
       )}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <label
-          htmlFor="body"
-          className="font-display text-xl text-ivory"
-        >
+        <label htmlFor="body" className="font-display text-xl text-ivory">
           Say something
         </label>
+        {/* Owner only. This is how the cast actually answer anybody — the whole
+            promise of the room depends on it being one click, not a code edit. */}
+        {canPostAsCast && (
+          <span className="flex items-center gap-2 text-xs text-stone-dim">
+            <label htmlFor="castAs">as</label>
+            <select
+              id="castAs"
+              name="castAs"
+              defaultValue="Melissa"
+              className="rounded-full border border-hairline bg-void px-3 py-1.5 text-xs text-stone focus:border-amber focus:outline-none"
+            >
+              <option value="Melissa">Melissa</option>
+              {MENTIONABLE.filter((m) => m.name !== "Melissa").map((m) => (
+                <option key={m.name} value={m.name}>
+                  {m.name}
+                </option>
+              ))}
+            </select>
+          </span>
+        )}
       </div>
 
       <div className="relative mt-4">

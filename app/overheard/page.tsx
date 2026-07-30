@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
 import {
+  CAST_TINTS,
   FREE_POST_ALLOWANCE,
   landedMessages,
   resolveMention,
@@ -43,9 +44,10 @@ interface PageProps {
 }
 
 export default async function OverheardPage({ searchParams }: PageProps) {
-  const [{ active: member }, signedIn] = await Promise.all([
+  const [{ active: member }, signedIn, isOwnerViewer] = await Promise.all([
     getMembership(),
     isSignedIn(),
+    viewerIsOwner(),
   ]);
   const [posts, used, params] = await Promise.all([
     recentPosts(),
@@ -70,7 +72,8 @@ export default async function OverheardPage({ searchParams }: PageProps) {
       author: p.authorName,
       body: p.body.split("\n\n"),
       replyTo: p.replyTo,
-      owner: p.isOwner,
+      owner: p.isOwner && !p.castAs,
+      tint: p.castAs ? CAST_TINTS[p.castAs] : undefined,
     })),
   ].sort((a, b) => a.at.getTime() - b.at.getTime());
 
@@ -139,6 +142,7 @@ export default async function OverheardPage({ searchParams }: PageProps) {
             used={used}
             allowance={FREE_POST_ALLOWANCE}
             replyingTo={replyingTo}
+            canPostAsCast={isOwnerViewer}
           />
         </div>
       </main>
@@ -283,6 +287,14 @@ function withMentions(text: string) {
 function snippet(body: string[], max = 90): string {
   const first = (body[0] ?? "").trim();
   return first.length > max ? `${first.slice(0, max - 1)}…` : first;
+}
+
+async function viewerIsOwner(): Promise<boolean> {
+  const owner = process.env.OWNER_USER_ID;
+  if (!owner || !authConfigured()) return false;
+  const { auth } = await import("@clerk/nextjs/server");
+  const { userId } = await auth();
+  return userId === owner;
 }
 
 async function isSignedIn(): Promise<boolean> {

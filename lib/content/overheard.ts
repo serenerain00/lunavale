@@ -172,6 +172,83 @@ export const CAST_THREAD: CastMessage[] = [
 
   /* --------------------------------------------------------------- day 14 */
   { id: "d14-1", day: 14, at: "07:30", author: TYSON, addressedTo: null, body: ["Still here."] },
+
+  /* --------------------------------------------------------------- day 15 */
+  { id: "d15-1", day: 15, at: "08:12", author: JOSH, addressedTo: null, body: ["Somebody asked what I eat for breakfast. THAT is the question. Not the ten years."] },
+  { id: "d15-2", day: 15, at: "08:20", author: LUNA, addressedTo: null, body: ["@Josh It's four coffees and whatever is nearest."] },
+  { id: "d15-3", day: 15, at: "08:22", author: JOSH, addressedTo: null, body: ["@Luna Three."] },
+
+  /* --------------------------------------------------------------- day 16 */
+  { id: "d16-1", day: 16, at: "17:40", author: TYSON, addressedTo: null, body: ["Rode out to the coast. Didn't tell anyone. Telling you now."] },
+  { id: "d16-2", day: 16, at: "18:02", author: LUNA, addressedTo: null, body: ["@Tyson That is not how not telling anyone works."] },
+
+  /* --------------------------------------------------------------- day 17 */
+  { id: "d17-1", day: 17, at: "12:30", author: RICK, addressedTo: null, body: ["Somebody on here called me a boss. I've been called worse and less accurately."] },
+
+  /* --------------------------------------------------------------- day 18 */
+  { id: "d18-1", day: 18, at: "20:15", author: LUNA, addressedTo: null, body: [
+    "Question for the room, and I want real answers.",
+    "What's the smallest thing somebody has ever done that made you decide about them? Not the big thing. The small one.",
+  ] },
+  { id: "d18-2", day: 18, at: "20:31", author: TYSON, addressedTo: null, body: ["@Luna Cupboards."] },
+  { id: "d18-3", day: 18, at: "20:33", author: LUNA, addressedTo: null, body: ["@Tyson I'm going to let that one sit there."] },
+
+  /* --------------------------------------------------------------- day 19 */
+  { id: "d19-1", day: 19, at: "09:45", author: JOSH, addressedTo: null, body: ["Fixed the gate. Nobody is going to notice the gate. I'm mentioning the gate."] },
+
+  /* --------------------------------------------------------------- day 20 */
+  { id: "d20-1", day: 20, at: "21:20", author: RICK, addressedTo: null, body: ["@Josh Your grandfather hung that gate in 1971. You've adjusted it."] },
+  { id: "d20-2", day: 20, at: "21:26", author: JOSH, addressedTo: null, body: ["@Rick I'll take it."] },
+
+  /* --------------------------------------------------------------- day 21 */
+  { id: "d21-1", day: 21, at: "07:50", author: LUNA, addressedTo: null, body: ["Ran the long way round for the first time since April. Nothing happened. That's the update. That's the whole update."] },
+
+  /* --------------------------------------------------------------- day 22 */
+  { id: "d22-1", day: 22, at: "19:05", author: TYSON, addressedTo: null, body: ["Somebody asked what I listen to on the bike. Nothing. That's the point of the bike."] },
+
+  /* --------------------------------------------------------------- day 23 */
+  { id: "d23-1", day: 23, at: "13:10", author: JOSH, addressedTo: null, body: ["Genuinely enjoying this. Nobody warned me you'd all be funny."] },
+  { id: "d23-2", day: 23, at: "13:44", author: RICK, addressedTo: null, body: ["@Josh Give it a fortnight."] },
+
+  /* --------------------------------------------------------------- day 24 */
+  { id: "d24-1", day: 24, at: "22:40", author: LUNA, addressedTo: null, body: ["Can't sleep. Not a bad thing this time — just awake. Anybody else up?"] },
+  { id: "d24-2", day: 24, at: "22:44", author: TYSON, addressedTo: null, body: ["@Luna Yeah."] },
+
+  /* --------------------------------------------------------------- day 25 */
+  { id: "d25-1", day: 25, at: "11:00", author: RICK, addressedTo: null, body: ["Right. Ask me the thing you've all been circling. I'll answer it once."] },
+
+  /* --------------------------------------------------------------- day 26 */
+  { id: "d26-1", day: 26, at: "18:30", author: JOSH, addressedTo: null, body: ["@Rick They're not circling anything. They just like you more than me and it's fine."] },
+  { id: "d26-2", day: 26, at: "18:35", author: RICK, addressedTo: null, body: ["@Josh It is not a competition. You'd lose."] },
+  { id: "d26-3", day: 26, at: "18:41", author: LUNA, addressedTo: null, body: ["Every single time."] },
+
+  /* --------------------------------------------------------------- day 27 */
+  { id: "d27-1", day: 27, at: "08:25", author: TYSON, addressedTo: null, body: ["Car's booked in. Two weeks. I'll be unbearable."] },
+  { id: "d27-2", day: 27, at: "08:31", author: LUNA, addressedTo: null, body: ["@Tyson Will be?"] },
+
+  /* --------------------------------------------------------------- day 28 */
+  { id: "d28-1", day: 28, at: "20:00", author: JOSH, addressedTo: null, body: [
+    "Serious one, then I'll stop.",
+    "Thanks for arguing with me on here instead of just deciding. It's more than I get most places.",
+  ] },
+
+  /* --------------------------------------------------------------- day 29 */
+  { id: "d29-1", day: 29, at: "09:15", author: LUNA, addressedTo: null, body: ["That's the nicest thing he's said in weeks and he made it about himself in the second sentence. Consistency."] },
+  { id: "d29-2", day: 29, at: "09:22", author: JOSH, addressedTo: null, body: ["@Luna Fair."] },
+
+  /* --------------------------------------------------------------- day 30 */
+  { id: "d30-1", day: 30, at: "16:50", author: RICK, addressedTo: null, body: ["Been reading. Not posting. There's a difference and most of you could learn it."] },
+
+  /* --------------------------------------------------------------- day 31 */
+  { id: "d31-1", day: 31, at: "10:05", author: TYSON, addressedTo: null, body: ["End of the month. Still here. Still not much use."] },
+  { id: "d31-2", day: 31, at: "10:20", author: LUNA, addressedTo: null, body: ["@Tyson You answered forty things this month. I counted."] },
+  { id: "d31-3", day: 31, at: "10:24", author: TYSON, addressedTo: null, body: ["@Luna Thirty-eight."] },
+
+  /* --------------------------------------------------------------- day 32 */
+  { id: "d32-1", day: 32, at: "19:30", author: LUNA, addressedTo: null, body: [
+    "Last day of August. Thank you for being in here — genuinely.",
+    "Keep going. We're not going anywhere.",
+  ] },
 ];
 
 /** A cast message with its landing time resolved. */
@@ -215,6 +292,14 @@ export const MENTIONABLE = [
   { name: "Rick", hint: "Josh's father" },
   { name: "Melissa", hint: "the filmmaker" },
 ] as const;
+
+/** Byline colours for cast replies, keyed by canonical name. */
+export const CAST_TINTS: Record<string, string> = {
+  Luna: "#e0b072",
+  Tyson: "#9fb3c8",
+  Josh: "#d99a8f",
+  Rick: "#b8a98c",
+};
 
 /** Canonical spelling for a typed name, or null if it isn't one of ours. */
 export function resolveMention(typed: string): string | null {

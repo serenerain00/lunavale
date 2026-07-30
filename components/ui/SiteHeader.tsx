@@ -62,6 +62,13 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
           >
             Journal
           </Link>
+          {/* Last of the content links, first of the ones that talk back. */}
+          <Link
+            href="/overheard"
+            className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber min-[640px]:inline"
+          >
+            Overheard
+          </Link>
           {/* Members already bought this; showing them the pitch is the kind
               of nagging the monetization rules rule out. They get Account. */}
           {!member && (

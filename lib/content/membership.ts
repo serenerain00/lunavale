@@ -240,6 +240,23 @@ export const BENEFITS: Benefit[] = [
   // everyone, so it could not honestly be rewritten as a LunaVerse benefit either.
   // Put it back when locations genuinely have gated states of their own.
   {
+    // Overheard's three-post allowance is the only place the free tier meets a
+    // hard limit, so it is stated on both rows rather than only on the paid one.
+    id: "overheard-free",
+    label: "Overheard",
+    detail: "Read the wall, and leave three posts on it.",
+    from: "free",
+    group: "The world",
+  },
+  {
+    id: "overheard-member",
+    label: "Stay in the conversation",
+    detail:
+      "Post on Overheard as often as you like, and reply to anyone on it.",
+    from: "vault",
+    group: "The world",
+  },
+  {
     id: "bts",
     label: "Selected behind the scenes",
     detail: "How a few of the public scenes came together.",

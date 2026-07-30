@@ -4,7 +4,11 @@ import { PostForm } from "@/components/overheard/PostForm";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
-import { FREE_POST_ALLOWANCE, landedMessages } from "@/lib/content/overheard";
+import {
+  FREE_POST_ALLOWANCE,
+  landedMessages,
+  resolveMention,
+} from "@/lib/content/overheard";
 import {
   postCountForUser,
   recentPosts,
@@ -259,14 +263,15 @@ function Message({
  * Renders @Name in amber. Only the five real names light up — an unknown @word
  * stays plain text rather than implying somebody was tagged who wasn't.
  */
-const MENTIONABLE = new Set(["Luna", "Tyson", "Josh", "Rick", "Melissa"]);
-
 function withMentions(text: string) {
   return text.split(/(@\w+)/g).map((part, i) => {
-    if (part.startsWith("@") && MENTIONABLE.has(part.slice(1))) {
+    // Case-insensitive: "@melissa" has plainly tagged Melissa, and a mention
+    // that fails on a capital letter is worse than no mention at all.
+    const canonical = part.startsWith("@") ? resolveMention(part.slice(1)) : null;
+    if (canonical) {
       return (
         <span key={i} className="font-medium text-amber-soft">
-          {part}
+          @{canonical}
         </span>
       );
     }

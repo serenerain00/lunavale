@@ -197,3 +197,29 @@ export function landedMessages(now: Date): LandedMessage[] {
     .filter((m) => m.landedAt <= now)
     .sort((a, b) => a.landedAt.getTime() - b.landedAt.getTime());
 }
+
+/* ----------------------------------------------------------- @ mentions --- */
+
+/**
+ * Who can be tagged. The cast plus Melissa — a small, fixed set, so the picker
+ * needs no user directory and no lookup.
+ *
+ * Matching is CASE-INSENSITIVE everywhere. Somebody typing "@melissa" has
+ * plainly tagged Melissa, and a mention that silently fails to register because
+ * of a capital letter is worse than no mention at all.
+ */
+export const MENTIONABLE = [
+  { name: "Luna", hint: "the one it happens to" },
+  { name: "Tyson", hint: "her best friend of twenty years" },
+  { name: "Josh", hint: "her partner of ten years" },
+  { name: "Rick", hint: "Josh's father" },
+  { name: "Melissa", hint: "the filmmaker" },
+] as const;
+
+/** Canonical spelling for a typed name, or null if it isn't one of ours. */
+export function resolveMention(typed: string): string | null {
+  const hit = MENTIONABLE.find(
+    (m) => m.name.toLowerCase() === typed.toLowerCase(),
+  );
+  return hit ? hit.name : null;
+}

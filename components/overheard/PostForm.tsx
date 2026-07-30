@@ -1,9 +1,9 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useRef, useState } from "react";
 import Link from "next/link";
 import { submitPost, type PostResult } from "@/app/overheard/actions";
-import { MAX_POST_LENGTH } from "@/lib/content/overheard";
+import { MAX_POST_LENGTH, MENTIONABLE } from "@/lib/content/overheard";
 
 interface PostFormProps {
   /** Signed in at all. Without this there is nothing to count against. */
@@ -38,6 +38,65 @@ export function PostForm({
 
   const left = Math.max(0, allowance - used);
   const spent = !member && left === 0;
+
+  // --- @ picker ------------------------------------------------------------
+  // Driven off the caret rather than off the whole value, so tagging works
+  // mid-sentence and not only at the end.
+  const boxRef = useRef<HTMLTextAreaElement>(null);
+  const [text, setText] = useState("");
+  const [query, setQuery] = useState<string | null>(null);
+  const [active, setActive] = useState(0);
+
+  const matches =
+    query === null
+      ? []
+      : MENTIONABLE.filter((m) =>
+          m.name.toLowerCase().startsWith(query.toLowerCase()),
+        );
+  const open = matches.length > 0;
+
+  /** The @token the caret is sitting in, or null. */
+  function readToken(el: HTMLTextAreaElement) {
+    const upto = el.value.slice(0, el.selectionStart ?? 0);
+    const m = /@(\w*)$/.exec(upto);
+    setQuery(m ? m[1] : null);
+    setActive(0);
+  }
+
+  /** Replace the token under the caret with a canonical @Name and a space. */
+  function choose(name: string) {
+    const el = boxRef.current;
+    if (!el) return;
+    const caret = el.selectionStart ?? 0;
+    const before = el.value.slice(0, caret).replace(/@(\w*)$/, `@${name} `);
+    const next = before + el.value.slice(caret);
+    setText(next);
+    setQuery(null);
+    // Put the caret after the inserted name, not at the end of the message.
+    requestAnimationFrame(() => {
+      el.focus();
+      el.setSelectionRange(before.length, before.length);
+    });
+  }
+
+  function onKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (!open) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActive((i) => (i + 1) % matches.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActive((i) => (i - 1 + matches.length) % matches.length);
+    } else if (e.key === "Enter" || e.key === "Tab") {
+      // Enter picks the name instead of submitting — the picker is open, so
+      // that is unambiguously what Enter means here.
+      e.preventDefault();
+      choose(matches[active].name);
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      setQuery(null);
+    }
+  }
 
   if (!signedIn) {
     return (
@@ -113,15 +172,65 @@ export function PostForm({
         </label>
       </div>
 
-      <textarea
-        id="body"
-        name="body"
-        rows={4}
-        maxLength={MAX_POST_LENGTH}
-        required
-        placeholder="What did you make of it? Use @Luna, @Tyson, @Josh, @Rick or @Melissa to tag someone."
-        className="mt-4 w-full resize-y rounded-lg border border-hairline bg-void px-4 py-3 text-base leading-relaxed text-ivory placeholder:text-stone-dim focus:border-amber focus:outline-none"
-      />
+      <div className="relative mt-4">
+        <textarea
+          ref={boxRef}
+          id="body"
+          name="body"
+          rows={4}
+          maxLength={MAX_POST_LENGTH}
+          required
+          value={text}
+          onChange={(e) => {
+            setText(e.target.value);
+            readToken(e.target);
+          }}
+          onKeyUp={(e) => readToken(e.currentTarget)}
+          onClick={(e) => readToken(e.currentTarget)}
+          onBlur={() => setTimeout(() => setQuery(null), 120)}
+          onKeyDown={onKeyDown}
+          placeholder="What did you make of it? Type @ to tag someone."
+          role="combobox"
+          aria-expanded={open}
+          aria-controls="mention-list"
+          aria-autocomplete="list"
+          className="w-full resize-y rounded-lg border border-hairline bg-void px-4 py-3 text-base leading-relaxed text-ivory placeholder:text-stone-dim focus:border-amber focus:outline-none"
+        />
+
+        {/* Anchored under the box rather than at the caret: simpler, and with
+            five names it never has far to travel. */}
+        {open && (
+          <ul
+            id="mention-list"
+            role="listbox"
+            aria-label="Tag someone"
+            className="absolute left-0 right-0 top-full z-10 mt-1 overflow-hidden rounded-lg border border-hairline bg-charcoal shadow-[0_16px_40px_-16px_rgba(0,0,0,0.9)]"
+          >
+            {matches.map((m, i) => (
+              <li key={m.name} role="option" aria-selected={i === active}>
+                <button
+                  type="button"
+                  // onMouseDown, not onClick: blur fires first and would close
+                  // the list before a click ever landed.
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    choose(m.name);
+                  }}
+                  onMouseEnter={() => setActive(i)}
+                  className={`flex w-full items-baseline gap-2 px-4 py-2 text-left text-sm transition-colors ${
+                    i === active
+                      ? "bg-amber/15 text-ivory"
+                      : "text-stone hover:bg-ivory/[0.03]"
+                  }`}
+                >
+                  <span className="font-medium text-amber-soft">@{m.name}</span>
+                  <span className="text-xs text-stone-dim">{m.hint}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
       {state?.error && (
         <p className="mt-3 text-sm text-amber-soft">{state.error}</p>

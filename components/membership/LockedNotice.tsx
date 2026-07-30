@@ -38,8 +38,8 @@ export function LockedNotice({ cover, subject }: LockedNoticeProps) {
           Members only
         </span>
         <p className="max-w-md text-balance leading-relaxed text-ivory">
-          {subject} is part of the LunaVerse, along with the full scene library, the
-          locked rooms, and Luna&rsquo;s journals.
+          {subject} is part of the LunaVerse — the membership — along with the
+          full scene library, the locked rooms, and Luna&rsquo;s journals.
         </p>
         <Link
           href="/membership"

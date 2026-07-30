@@ -74,7 +74,10 @@ const ALL_TIERS: Tier[] = [
   {
     id: "vault",
     name: "LunaVerse",
-    tagline: "The rooms that are locked.",
+    // The tagline is the first thing under the name, and "the rooms that are
+    // locked" left a visitor to infer that LunaVerse meant the membership. It
+    // now says so.
+    tagline: "The membership. The rooms that are locked.",
     priceMonthlyCents: 800,
     priceYearlyCents: 8000,
     blurb:

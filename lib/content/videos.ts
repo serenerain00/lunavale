@@ -343,6 +343,34 @@ export const videos: Video[] = [
     about: ["luna", "josh"],
   },
   {
+    // One scene, two edits — the mechanism this field exists for. A visitor
+    // gets the 30s teaser and is told a longer cut exists; a member gets the
+    // whole night. One slug, one card, one page, and the swap happens
+    // server-side after the tier check.
+    //
+    // The members' cut here is the DIALOGUE version. Melissa also delivered
+    // tyson-luna-dance-music.mov, which has commercially released recordings
+    // mixed into it — see the licensing note in the commit. That file is not
+    // referenced anywhere and should not be until the rights are cleared;
+    // swapping it in later is one line.
+    slug: "luna-tyson-dance",
+    title: "Something to Talk About",
+    synopsis:
+      "A month after he moved out, Tyson takes her somewhere loud. She makes him dance. For most of the night it works.",
+    file: "luna-tyson-dance.proxy.mp4",
+    poster: "/posters/luna-tyson-dance.jpg",
+    durationSeconds: 30,
+    access: "free",
+    mature: false,
+    premium: {
+      file: "luna-tyson-dance-full.proxy.mp4",
+      durationSeconds: 232,
+    },
+    feelings: ["trust", "desire", "distance"],
+    place: "bar",
+    about: ["luna", "tyson"],
+  },
+  {
     slug: "luna-bathtub",
     title: "Still Water",
     synopsis:

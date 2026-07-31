@@ -142,6 +142,32 @@ version of him. She is trying to get back to Mexico.
 - **Luna is torn** between Josh and Tyson as her future — and stays *with Josh*
   giving it another try, which is what makes everything harder.
 
+### The night at the bar — month one
+*(Canon set by Melissa, 2026-07-31.)*
+
+**One month** after Josh moved out. Luna needs to get out of the house and
+stop thinking about him, and **Tyson takes her somewhere loud** and spends the
+night working to keep her happy.
+
+He asks whether she has heard from Josh. **A couple of texts. She hasn't
+answered them.** She says she doesn't want to talk about it — and then thinks
+about it anyway, all night.
+
+**She makes him dance.** An upbeat song, and it is genuinely joyful — a lot of
+laughing, Tyson being goofy, Luna laughing properly for the first time in
+weeks. Then a slow song fades in and the room changes with it.
+
+Luna starts to step back. **Tyson pulls her in closer** — to stop her going
+somewhere in her head. He tells her she is thinking; he can **literally see
+it**. He tells her to **let the night be simple**. She says she doesn't know
+why she does this to herself.
+
+This is where **Luna starts seeing Tyson differently.** She is still tied up in
+Josh, so it is not a switch being flipped — it is the beginning of something
+bigger, and **more complicated than Josh alone.**
+
+---
+
 ### The "staring game" (a signature detail)
 An inside thing Luna and Tyson have always done, **learned in the military**:
 when one of them thinks the other is lying, they **go silent, move closer to

@@ -343,34 +343,30 @@ export const videos: Video[] = [
     about: ["luna", "josh"],
   },
   {
-    // One scene, two edits — the mechanism this field exists for. A visitor
-    // gets the 30s teaser and is told a longer cut exists; a member gets the
-    // whole night. One slug, one card, one page, and the swap happens
-    // server-side after the tier check.
+    // The whole night, free — Melissa's call, 2026-07-31. It was briefly a 30s
+    // teaser with the full cut behind the membership (Video.premium); she
+    // decided the scene should be open instead. The teaser still exists at
+    // stories/luna-tyson-dance-teaser.mp4 and is what went to Instagram; it is
+    // just no longer what the site serves.
     //
-    // The members' cut is the SCORED version (tyson-luna-dance-music.mov),
-    // swapped in 2026-07-31 at Melissa's instruction. It carries commercially
-    // released recordings and the rights are not cleared; she has said she is
-    // handling that. Her call, her site — recorded here so the next person to
-    // read this file knows it is a known state and not an oversight.
+    // This file is the SCORED cut, which carries commercially released
+    // recordings whose rights are not cleared. Melissa has said she is handling
+    // that. Noting it here because the scene is now public rather than behind a
+    // login, so it is a known state, not an oversight.
     //
-    // TO REVERT: re-encode from luna-tyson-dance/luna-tyson-dance.mp4 with
+    // TO REVERT to a licence-clean cut: re-encode from
+    // luna-tyson-dance/luna-tyson-dance.mp4 (1920x1080, dialogue only) with
     //   scripts/optimize-media.sh proxy-only luna-tyson-dance-full <that file>
-    // and set durationSeconds below back to 232. The dialogue cut is
-    // licence-clean and higher resolution.
+    // and set durationSeconds to 232.
     slug: "luna-tyson-dance",
     title: "Something to Talk About",
     synopsis:
       "A month after he moved out, Tyson takes her somewhere loud. She makes him dance. For most of the night it works.",
-    file: "luna-tyson-dance.proxy.mp4",
+    file: "luna-tyson-dance-full.proxy.mp4",
     poster: "/posters/luna-tyson-dance.jpg",
-    durationSeconds: 30,
+    durationSeconds: 239,
     access: "free",
     mature: false,
-    premium: {
-      file: "luna-tyson-dance-full.proxy.mp4",
-      durationSeconds: 239,
-    },
     feelings: ["trust", "desire", "distance"],
     place: "bar",
     about: ["luna", "tyson"],

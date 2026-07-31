@@ -193,9 +193,12 @@ export function PostForm({
         <label htmlFor="body" className="font-display text-xl text-ivory">
           Say something
         </label>
-        {/* Owner only. This is how the cast actually answer anybody — the whole
-            promise of the room depends on it being one click, not a code edit. */}
-        {canPostAsCast && (
+        {/* Owner only, and only while replying to something — which is when
+            answering in a character's voice is actually what you want. It sat
+            in the header the rest of the time competing with "Say something"
+            for no reason. Posting as a character without replying is still
+            possible: hit Reply on anything, or ask for a toggle. */}
+        {canPostAsCast && replyingTo && (
           <span className="flex items-center gap-2 text-xs text-stone-dim">
             <label htmlFor="castAs">as</label>
             <select

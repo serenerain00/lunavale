@@ -1,124 +1,109 @@
 import Link from "next/link";
 import { authConfigured } from "@/lib/billing/provider";
 import { SignOut } from "@/components/ui/SignOut";
+import { MobileNav, type NavItem } from "@/components/ui/MobileNav";
 
 interface SiteHeaderProps {
   member: boolean;
 }
 
 /**
+ * The bar at the top of every page.
+ *
+ * ONE list of links, rendered two ways: inline from md up, and inside a menu
+ * below that. It used to be one list with a different min-width on each item,
+ * which meant every new surface got hidden behind a bigger breakpoint until, on
+ * a 390px phone, Clips, Overheard, Help, Membership and sign-in were all
+ * unreachable — on the device most visitors arrive from. Adding a link here now
+ * costs nothing on mobile, which is the point.
+ *
  * Async so it can ask Clerk whether anyone is signed in without every page
  * having to thread that through. `member` stays a prop because the pages have
  * already resolved it and a second lookup would be waste.
  */
 export async function SiteHeader({ member }: SiteHeaderProps) {
   const signedIn = await isSignedIn();
+
+  const items: NavItem[] = [
+    // The explorable world is the signature experience, so it leads.
+    { href: "/world", label: "World" },
+    { href: "/browse", label: "Browse" },
+    { href: "/clips", label: "Clips" },
+    { href: "/characters", label: "Cast" },
+    { href: "/journal", label: "Journal" },
+    { href: "/overheard", label: "Overheard" },
+    { href: "/help", label: "Help" },
+    // Members already bought this; showing them the pitch is the kind of
+    // nagging the monetization rules exist to prevent. They get Account.
+    ...(member ? [] : [{ href: "/membership", label: "Membership" }]),
+  ];
+
   return (
-    <header className="sticky top-0 z-20 border-b border-hairline bg-void/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-hairline bg-void/80 backdrop-blur-md">
       {/*
         min-h rather than a fixed h: surfaces below stick at --header-h, so if
-        this bar ever grew past that height it would sit under them. Nothing
-        inside is allowed to wrap, which is what keeps the two agreeing down
-        to a 320px screen.
+        this bar ever grew past that height it would sit under them.
       */}
       <div className="mx-auto flex min-h-(--header-h) w-full max-w-6xl items-center justify-between gap-3 px-5 sm:px-8">
-        <div className="flex items-baseline gap-4 sm:gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
+          <MobileNav
+            items={items}
+            signedIn={signedIn}
+            showSignIn={authConfigured()}
+          />
+
           <Link
             href="/"
             className="whitespace-nowrap font-display text-base font-medium tracking-wide text-ivory sm:text-lg"
           >
             Luna Vault
           </Link>
-          {/* The explorable world is the signature experience — it leads the
-              nav, ahead of the conventional Browse index. */}
-          <Link
-            href="/world"
-            className="text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
-          >
-            World
-          </Link>
-          <Link
-            href="/browse"
-            className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber min-[380px]:inline"
-          >
-            Browse
-          </Link>
-          {/* Clips and Cast step aside on the narrowest screens so Journal —
-              a primary surface — always has room in the nav. */}
-          <Link
-            href="/clips"
-            className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber min-[520px]:inline"
-          >
-            Clips
-          </Link>
-          <Link
-            href="/characters"
-            className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber min-[380px]:inline"
-          >
-            Cast
-          </Link>
-          <Link
-            href="/journal"
-            className="text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
-          >
-            Journal
-          </Link>
-          {/* Last of the content links, first of the ones that talk back. */}
-          <Link
-            href="/overheard"
-            className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber min-[640px]:inline"
-          >
-            Overheard
-          </Link>
-          {/* Members already bought this; showing them the pitch is the kind
-              of nagging the monetization rules rule out. They get Account. */}
-          <Link
-            href="/help"
-            className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber min-[900px]:inline"
-          >
-            Help
-          </Link>
-          {!member && (
-            <Link
-              href="/membership"
-              className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber sm:inline"
-            >
-              Membership
-            </Link>
-          )}
+
+          {/* The inline nav, from md up. Below that, the menu carries it. */}
+          <nav aria-label="Site" className="hidden items-baseline gap-5 md:flex">
+            {items.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="whitespace-nowrap text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
         </div>
 
         <div className="flex items-center gap-3">
           {authConfigured() &&
             (signedIn ? (
-              <span className="hidden sm:inline">
+              <span className="hidden md:inline">
                 <SignOut />
               </span>
             ) : (
               <Link
                 href="/sign-in"
-                className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber sm:inline"
+                className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber md:inline"
               >
                 Sign in
               </Link>
             ))}
           <Link
-          href={member ? "/account" : "/membership"}
-          className={`inline-flex min-h-9 items-center whitespace-nowrap rounded-full px-3.5 text-sm transition-colors duration-(--duration-quick) sm:px-4 ${
-            member
-              ? "border border-hairline text-stone hover:border-amber hover:text-amber"
-              : "bg-amber font-medium text-void hover:bg-amber-soft"
-          }`}
-        >
-          {member ? (
-            "Account"
-          ) : (
-            <>
-              {/* The full label needs room a phone doesn't have. */}
-              <span className="sm:hidden">Join</span>
-              <span className="hidden sm:inline">Become a member</span>
-            </>
-          )}
+            href={member ? "/account" : "/membership"}
+            className={`inline-flex min-h-9 items-center whitespace-nowrap rounded-full px-3.5 text-sm transition-colors duration-(--duration-quick) sm:px-4 ${
+              member
+                ? "border border-hairline text-stone hover:border-amber hover:text-amber"
+                : "bg-amber font-medium text-void hover:bg-amber-soft"
+            }`}
+          >
+            {member ? (
+              "Account"
+            ) : (
+              <>
+                {/* The full label needs room a phone doesn't have. */}
+                <span className="sm:hidden">Join</span>
+                <span className="hidden sm:inline">Become a member</span>
+              </>
+            )}
           </Link>
         </div>
       </div>

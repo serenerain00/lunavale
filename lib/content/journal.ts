@@ -186,6 +186,34 @@ export const journal: JournalEntry[] = [
     ],
   },
   {
+    // Month one, so it sits after the ordinary Thursdays and before "month
+    // four" — the night the pattern between them stops being only a pattern.
+    // Members-only: there is a turn in it, which is the rule the rest of the
+    // journal follows. The scene's 30s teaser is free; this is what she thought.
+    id: "the-night-at-the-bar",
+    dateline: "A month, and he made me go out",
+    place: "bar",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-tyson-dance",
+    access: "premium",
+    mature: false,
+    body: [
+      "A month. I have started counting in months, which is new, and which I do not love.",
+      "Tyson turned up at seven and did not ask whether I wanted to go out. He asked what I was wearing, which is the same question with the argument already won.",
+      "He asked once whether I had heard from Josh. I said a couple of texts. He didn't ask what they said, and I didn't tell him I haven't answered them, and I have spent the rest of the night working out which of those two omissions is the worse one.",
+      "Then I made him dance, because I did not want to sit in a booth being handled.",
+      "He does the thing where he claims he can't. Twenty years of claiming he can't, and he moves like a man who has been to a great many weddings and enjoyed every one of them. He was ridiculous. He was doing it to be ridiculous. And I laughed — properly, out loud, in a room full of strangers, for what must have been half an hour. I had genuinely forgotten I could still do that.",
+      "Then the song changed, and the room changed with it, and neither of us said anything about that either.",
+      "I went to step back. I could not tell you what I was stepping back from. And he moved his hand about an inch and kept me exactly where I was.",
+      "He said: you're thinking. He said he could see it happening, on my face, in real time. That is the cost of being known for twenty years — there is no expression of mine he has not already read at least once.",
+      "He said let the night be simple.",
+      "I said I don't know why I do this to myself. He didn't answer that, which I think was the kindest available option.",
+      "And here is the part I am only putting down because it is nearly four and nobody is ever going to read this.",
+      "For about a minute, somewhere in the middle of that song, I was not thinking about Josh at all. Not managing not to. Not deciding not to. Just — not.",
+      "I don't know what to do with that yet. It was easier when the problem was one man.",
+    ],
+  },
+  {
     id: "month-four",
     dateline: "Somewhere around month four",
     place: "lakehouse",

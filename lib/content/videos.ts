@@ -348,11 +348,16 @@ export const videos: Video[] = [
     // whole night. One slug, one card, one page, and the swap happens
     // server-side after the tier check.
     //
-    // The members' cut here is the DIALOGUE version. Melissa also delivered
-    // tyson-luna-dance-music.mov, which has commercially released recordings
-    // mixed into it — see the licensing note in the commit. That file is not
-    // referenced anywhere and should not be until the rights are cleared;
-    // swapping it in later is one line.
+    // The members' cut is the SCORED version (tyson-luna-dance-music.mov),
+    // swapped in 2026-07-31 at Melissa's instruction. It carries commercially
+    // released recordings and the rights are not cleared; she has said she is
+    // handling that. Her call, her site — recorded here so the next person to
+    // read this file knows it is a known state and not an oversight.
+    //
+    // TO REVERT: re-encode from luna-tyson-dance/luna-tyson-dance.mp4 with
+    //   scripts/optimize-media.sh proxy-only luna-tyson-dance-full <that file>
+    // and set durationSeconds below back to 232. The dialogue cut is
+    // licence-clean and higher resolution.
     slug: "luna-tyson-dance",
     title: "Something to Talk About",
     synopsis:
@@ -364,7 +369,7 @@ export const videos: Video[] = [
     mature: false,
     premium: {
       file: "luna-tyson-dance-full.proxy.mp4",
-      durationSeconds: 232,
+      durationSeconds: 239,
     },
     feelings: ["trust", "desire", "distance"],
     place: "bar",

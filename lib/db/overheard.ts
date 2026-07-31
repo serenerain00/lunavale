@@ -146,3 +146,21 @@ export async function setHidden(id: string, hidden: boolean): Promise<void> {
   if (!databaseConfigured()) return;
   await sql()`UPDATE overheard_posts SET hidden = ${hidden} WHERE id = ${id}`;
 }
+
+/** Overheard's own funnel: who signed up, who actually spoke, who ran out. */
+export async function posterStats(allowance: number): Promise<{
+  posters: number;
+  spent: number;
+}> {
+  if (!databaseConfigured()) return { posters: 0, spent: 0 };
+  const rows = (await sql()`
+    SELECT count(*)::int AS posters,
+           count(*) FILTER (WHERE n >= ${allowance})::int AS spent
+    FROM (
+      SELECT user_id, count(*)::int AS n
+      FROM overheard_posts
+      GROUP BY user_id
+    ) per_user
+  `) as Array<{ posters: number; spent: number }>;
+  return rows[0] ?? { posters: 0, spent: 0 };
+}

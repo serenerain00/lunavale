@@ -5,8 +5,8 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
 import { membershipSummary } from "@/lib/db/memberships";
-import { allPostsForModeration } from "@/lib/db/overheard";
-import { threadRunway } from "@/lib/content/overheard";
+import { allPostsForModeration, posterStats } from "@/lib/db/overheard";
+import { threadRunway, FREE_POST_ALLOWANCE } from "@/lib/content/overheard";
 import { videos } from "@/lib/content/videos";
 import { clips, clipAccess } from "@/lib/content/clips";
 import { galleries } from "@/lib/content/gallery";
@@ -35,11 +35,14 @@ export default async function AdminPage() {
   if (!authConfigured() || !(await isOwner())) notFound();
 
   const now = new Date();
-  const [{ active: member }, members, posts] = await Promise.all([
-    getMembership(),
-    membershipSummary(),
-    allPostsForModeration(20),
-  ]);
+  const [{ active: member }, members, posts, posters, signups] =
+    await Promise.all([
+      getMembership(),
+      membershipSummary(),
+      allPostsForModeration(20),
+      posterStats(FREE_POST_ALLOWANCE),
+      freeAccountCount(),
+    ]);
 
   const paying = members
     .filter((m) => ["active", "trialing", "past_due"].includes(m.status))
@@ -139,6 +142,12 @@ export default async function AdminPage() {
           action={{ href: "/account/overheard", label: "Moderate" }}
         >
           <div className="flex flex-wrap gap-8">
+            <Stat
+              label="Free accounts"
+              value={signups === null ? "—" : String(signups)}
+            />
+            <Stat label="Have posted" value={String(posters.posters)} />
+            <Stat label="Used all three" value={String(posters.spent)} />
             <Stat label="Posts" value={String(posts.length)} />
             <Stat label="Showing" value={String(visible.length)} />
             <Stat
@@ -148,6 +157,11 @@ export default async function AdminPage() {
             />
           </div>
           <p className="mt-4 text-xs text-stone-dim">
+            Every account is an email address you own, which is the point of
+            making people sign up to post. &ldquo;Used all three&rdquo; is the
+            number of people the LunaVerse is the next step for.
+          </p>
+          <p className="mt-2 text-xs text-stone-dim">
             Scripted cast messages run to{" "}
             {runway.lastDay.toLocaleDateString("en-US", {
               weekday: "long",
@@ -270,6 +284,21 @@ function Stat({
       </p>
     </div>
   );
+}
+
+/**
+ * Free accounts, from Clerk — it owns the person, we own what they can open.
+ * Returns null rather than throwing if Clerk is unreachable, so one flaky call
+ * shows a dash instead of taking the whole dashboard down.
+ */
+async function freeAccountCount(): Promise<number | null> {
+  try {
+    const { clerkClient } = await import("@clerk/nextjs/server");
+    const client = await clerkClient();
+    return await client.users.getCount();
+  } catch {
+    return null;
+  }
 }
 
 async function isOwner(): Promise<boolean> {

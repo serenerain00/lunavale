@@ -6,6 +6,7 @@ import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
 import { membershipSummary } from "@/lib/db/memberships";
 import { allPostsForModeration, posterStats } from "@/lib/db/overheard";
+import { recentHelpMessages } from "@/lib/db/help";
 import { threadRunway, FREE_POST_ALLOWANCE } from "@/lib/content/overheard";
 import { videos } from "@/lib/content/videos";
 import { clips, clipAccess } from "@/lib/content/clips";
@@ -43,6 +44,8 @@ export default async function AdminPage() {
       posterStats(FREE_POST_ALLOWANCE),
       freeAccountCount(),
     ]);
+  const help = await recentHelpMessages(20);
+  const openHelp = help.filter((h) => !h.handled);
 
   const paying = members
     .filter((m) => ["active", "trialing", "past_due"].includes(m.status))
@@ -189,6 +192,70 @@ export default async function AdminPage() {
               ))}
             </ul>
           )}
+        </Section>
+
+        {/* ---------------------------------------------------------- inbox */}
+        <Section title="Help">
+          <div className="flex flex-wrap gap-8">
+            <Stat
+              label="Waiting"
+              value={String(openHelp.length)}
+              warn={openHelp.length > 0}
+            />
+            <Stat label="All time" value={String(help.length)} />
+          </div>
+          {help.length === 0 ? (
+            <p className="mt-4 text-sm text-stone-dim">
+              Nothing yet. The form is at{" "}
+              <Link href="/help" className="text-amber underline decoration-hairline underline-offset-4">
+                /help
+              </Link>
+              .
+            </p>
+          ) : (
+            <ul className="mt-5 divide-y divide-hairline">
+              {help.map((h) => (
+                <li key={h.id} className={`py-4 ${h.handled ? "opacity-45" : ""}`}>
+                  <p className="flex flex-wrap items-baseline gap-x-2 text-sm">
+                    <span className="font-semibold text-ivory">{h.subject}</span>
+                    <span className="text-xs text-stone-dim">
+                      {h.createdAt.toLocaleString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit",
+                      })}
+                    </span>
+                    {h.handled && (
+                      <span className="text-[0.6875rem] uppercase tracking-wide text-stone-dim">
+                        handled
+                      </span>
+                    )}
+                  </p>
+                  <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-stone">
+                    {h.body}
+                  </p>
+                  <p className="mt-1.5 text-xs text-stone-dim">
+                    {h.replyTo ? (
+                      <a
+                        href={`mailto:${h.replyTo}`}
+                        className="text-amber underline decoration-hairline underline-offset-4"
+                      >
+                        {h.replyTo}
+                      </a>
+                    ) : (
+                      "no reply address given"
+                    )}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          )}
+          <p className="mt-4 text-xs text-stone-dim">
+            Messages land here whatever happens. They are also emailed to you
+            once RESEND_API_KEY, OWNER_EMAIL and HELP_FROM_EMAIL are set — the
+            database is the record, the email is only the nudge.
+          </p>
         </Section>
 
         {/* ----------------------------------------------------- what exists */}

@@ -72,6 +72,12 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
           </Link>
           {/* Members already bought this; showing them the pitch is the kind
               of nagging the monetization rules rule out. They get Account. */}
+          <Link
+            href="/help"
+            className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber min-[900px]:inline"
+          >
+            Help
+          </Link>
           {!member && (
             <Link
               href="/membership"

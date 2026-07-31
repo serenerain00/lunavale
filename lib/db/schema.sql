@@ -110,3 +110,36 @@ CREATE INDEX IF NOT EXISTS overheard_posts_visible_idx
 -- Counting a person's posts to enforce the allowance.
 CREATE INDEX IF NOT EXISTS overheard_posts_user_idx
   ON overheard_posts (user_id);
+
+-- ---------------------------------------------------------------------------
+-- Help — messages to Melissa from anyone, without exposing her address.
+--
+-- Deliberately NOT a mailto: link. A mailto puts her real address in the page
+-- source, where every scraper on the internet reads it, and it dumps the
+-- visitor into a mail client they may not have. This lands the message on the
+-- server, shows it on /admin, and forwards it on if a mail provider is
+-- configured — the sender never learns where it went.
+--
+-- No account required. Someone who cannot sign in is exactly the person most
+-- likely to need help, so gating this behind auth would lock out the case it
+-- exists for.
+CREATE TABLE IF NOT EXISTS help_messages (
+  id         BIGSERIAL PRIMARY KEY,
+
+  -- Optional: how to reply. Blank is allowed — some people just want to say a
+  -- thing, and demanding an address to say it costs more than it collects.
+  reply_to   TEXT,
+  -- Clerk user id when they happened to be signed in. Not required.
+  user_id    TEXT,
+
+  subject    TEXT        NOT NULL,
+  body       TEXT        NOT NULL,
+
+  -- Melissa marks it done rather than deleting it, same as Overheard.
+  handled    BOOLEAN     NOT NULL DEFAULT false,
+
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS help_messages_open_idx
+  ON help_messages (created_at DESC) WHERE handled = false;

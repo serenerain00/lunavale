@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import {
   howToWatch,
+  inProduction,
   premise,
   startingPoints,
   type AboutSection,
@@ -118,6 +119,12 @@ export default async function AboutPage() {
           </ul>
         </section>
 
+        {/* Placed after "where to start" on purpose: orient, then let them
+            begin, and only then say the thing that asks something of them.
+            Leading with "you can shape it" would be pitching to somebody who
+            still doesn't know who Luna is. */}
+        <Prose section={inProduction} />
+
         {/* ------------------------------------------------- the order of it */}
         <section aria-labelledby="chronology" className="mt-14">
           <h2
@@ -196,6 +203,19 @@ function Prose({ section }: { section: AboutSection }) {
           {bold(para)}
         </p>
       ))}
+      {section.links && (
+        <p className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+          {section.links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm text-amber underline decoration-hairline underline-offset-4 transition-colors duration-(--duration-quick) hover:decoration-amber"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </p>
+      )}
     </section>
   );
 }

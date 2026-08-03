@@ -33,6 +33,15 @@ export interface AboutSection {
   id: string;
   heading: string;
   body: string[];
+  /**
+   * Places to go from this section, rendered as a row underneath it.
+   *
+   * Structured rather than written into the prose as markdown links: the only
+   * section that wants them needs two, and parsing link syntax to save two
+   * fields would be the wrong trade. See `bold()` in the page for the same
+   * reasoning about emphasis.
+   */
+  links?: { href: string; label: string }[];
 }
 
 /** The premise. Free, always — this is the page's whole reason for existing. */
@@ -85,6 +94,46 @@ export const howToWatch: AboutSection = {
     "Scenes are released as they are finished, not as they happen. A night from the first month can land after something from much later; a five-year-old memory can arrive in the middle of the present.",
     "So if you have watched a few and felt like you missed one — you didn't. There is no episode you skipped. The pieces are being handed to you out of sequence and they are meant to add up gradually.",
     "Two things make it click faster. Every scene says where it sits when you open it, and Luna's journal runs in the order it actually happened — so if you would rather have the spine before the fragments, start there.",
+  ],
+};
+
+/**
+ * Being made right now — the section that turns a reader into a participant.
+ *
+ * THREE CLAIMS, and all three are promises the product has to keep, so they
+ * are worded as what is actually true rather than as what would sell hardest:
+ *
+ *   "In production" — it is. Scenes are still being shot and cut.
+ *   "Members shape what gets made next" — the mechanism is Overheard and
+ *     nothing more formal. There is no vote, no poll, no roadmap board, so
+ *     the copy points at the room instead of implying machinery that would
+ *     have to be built to make the sentence true.
+ *   "It may become a series" — a conversation, and said as one. Not
+ *     "announcing", not "coming soon". If it firms up, this paragraph is the
+ *     place to say so; if it dies, this paragraph comes out.
+ *
+ * "Low budget" is stated as "independently, on a small budget", which is the
+ * same fact without the apology. For this audience it is a reason to care,
+ * not a warning about quality — but only if it is said like one.
+ *
+ * The Virgin River comparison is Melissa's reference for the shape and is
+ * deliberately NOT on the page. Name-checking a network show is pitch-deck
+ * language, and the tone rules in CLAUDE.md rule that out. The idea it stands
+ * for — ordinary days, a few places, runs for years rather than resolving —
+ * is in the copy on its own terms.
+ */
+export const inProduction: AboutSection = {
+  id: "being-made",
+  heading: "It's being made right now",
+  body: [
+    "This isn't a finished thing being rolled out on a schedule. The film is in production while you read this — made independently, on a small budget, by a very small number of people.",
+    "Which is the part worth knowing: the next scene isn't fixed yet. What gets made, who it follows and which room it happens in are still open questions, and members are in the conversation where those get decided. A character somebody can't stop thinking about, a room they want to go back into, a question they want answered — at this size, that genuinely moves things.",
+    "**Overheard** is where that happens. Luna, Tyson, Josh and Rick post there most days, and members write back — ask them things, tell them what they should have done, or say straight out what isn't working. It goes to Melissa, who is in there too.",
+    "And it may not stay a film. There is a conversation going on about extending it into a series, which is a shape this story can take: it is built out of ordinary days, in a handful of places, between people whose situation does not resolve neatly. That is the kind of story that runs for years rather than finishing in ninety minutes.",
+  ],
+  links: [
+    { href: "/overheard", label: "The Overheard wall" },
+    { href: "/membership", label: "What membership opens" },
   ],
 };
 

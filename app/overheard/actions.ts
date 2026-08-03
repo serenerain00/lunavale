@@ -38,7 +38,8 @@ export async function submitPost(formData: FormData): Promise<PostResult> {
   const { auth, currentUser } = await import("@clerk/nextjs/server");
   const { userId } = await auth();
   if (!userId) {
-    return { ok: false, error: "You need an account to post. It's free." };
+    // Not "it's free" any more — an account on its own opens nothing here.
+    return { ok: false, error: "Sign in to post." };
   }
 
   const body = String(formData.get("body") ?? "").trim();

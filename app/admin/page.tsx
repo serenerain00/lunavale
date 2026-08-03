@@ -146,11 +146,11 @@ export default async function AdminPage() {
         >
           <div className="flex flex-wrap gap-8">
             <Stat
-              label="Free accounts"
+              label="Accounts"
               value={signups === null ? "—" : String(signups)}
             />
             <Stat label="Have posted" value={String(posters.posters)} />
-            <Stat label="Used all three" value={String(posters.spent)} />
+            <Stat label="Spent the old three" value={String(posters.spent)} />
             <Stat label="Posts" value={String(posts.length)} />
             <Stat label="Showing" value={String(visible.length)} />
             <Stat
@@ -160,9 +160,20 @@ export default async function AdminPage() {
             />
           </div>
           <p className="mt-4 text-xs text-stone-dim">
-            Every account is an email address you own, which is the point of
-            making people sign up to post. &ldquo;Used all three&rdquo; is the
-            number of people the LunaVerse is the next step for.
+            &ldquo;Accounts&rdquo; is every login Clerk holds, members
+            included — it is not a count of people who have not paid.{" "}
+            <strong className="font-normal text-stone">
+              Both of the next two numbers are history now.
+            </strong>{" "}
+            Overheard went members-only on 3 August, so nobody signs up in
+            order to post any more and nobody else will ever spend the old
+            three-post allowance. They describe the people who came through
+            while the wall was public.
+          </p>
+          <p className="mt-2 text-xs text-stone-dim">
+            Which also means new email addresses now only arrive with a
+            payment. There is no longer a step where somebody interested but
+            undecided hands you one.
           </p>
           <p className="mt-2 text-xs text-stone-dim">
             Scripted cast messages run to{" "}

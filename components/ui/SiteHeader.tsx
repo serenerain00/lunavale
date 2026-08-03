@@ -25,7 +25,11 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
   const signedIn = await isSignedIn();
 
   const items: NavItem[] = [
-    // The explorable world is the signature experience, so it leads.
+    // First, and deliberately so. Most arrivals come off a thirty-second clip
+    // with no idea who these people are, and the rest of this bar assumes they
+    // already know — "Browse" and "Cast" are only useful once you care.
+    { href: "/about", label: "What this is" },
+    // The explorable world is the signature experience, so it leads the rest.
     { href: "/world", label: "World" },
     { href: "/browse", label: "Browse" },
     { href: "/clips", label: "Clips" },

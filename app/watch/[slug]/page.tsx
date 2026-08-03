@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getVideo, videos, formatDuration } from "@/lib/content/videos";
 import { canWatch, isMember } from "@/lib/access/entitlement";
 import { entriesForScene } from "@/lib/content/journal";
+import { HowThisCameTogether } from "@/components/takes/HowThisCameTogether";
 import { galleryForScene } from "@/lib/content/gallery";
 import { VideoPlayer } from "@/components/media/VideoPlayer";
 import { JournalCard } from "@/components/journal/JournalCard";
@@ -128,9 +129,18 @@ export default async function WatchPage({ params }: WatchPageProps) {
               what they are already watching. See MONETIZATION.md. */}
           {video.premium && !member && (
             <p className="mt-5 max-w-2xl rounded-lg border border-hairline px-4 py-3 text-sm leading-relaxed text-stone">
-              Members watch a longer cut of this scene —{" "}
-              {formatDuration(video.premium.durationSeconds)} against{" "}
-              {formatDuration(video.durationSeconds)}
+              {/* Runtime is the pitch only when runtime is the difference.
+                  See PremiumCut.difference — comparing 2:41 to 2:39 sells a
+                  differently-edited scene as two extra seconds. */}
+              {video.premium.difference ? (
+                <>Members watch {video.premium.difference}</>
+              ) : (
+                <>
+                  Members watch a longer cut of this scene —{" "}
+                  {formatDuration(video.premium.durationSeconds)} against{" "}
+                  {formatDuration(video.durationSeconds)}
+                </>
+              )}
               {video.premium.explicit && ", and explicit"}.{" "}
               <Link
                 href="/membership"
@@ -175,6 +185,11 @@ export default async function WatchPage({ params }: WatchPageProps) {
             </Reveal>
           </section>
         )}
+
+        {/* Last on the page on purpose: the finished scene, then her account
+            of it, and only then the machinery behind it. Leading with process
+            would put the making in front of the story. */}
+        <HowThisCameTogether sceneSlug={slug} member={member} />
       </main>
     </>
   );

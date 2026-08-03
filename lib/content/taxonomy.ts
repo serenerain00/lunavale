@@ -119,6 +119,16 @@ export const places = [
     environmentSlug: "downtown",
   },
   {
+    // No `environmentSlug` — the fair is a night, not a room, and it is the
+    // one place in the world that will not be there next week. Filed as a
+    // place because the scene has to live somewhere true, and folding an
+    // autumn fair into "downtown" would lose the only thing about it that
+    // matters: everybody they know is in one field at the same time.
+    id: "fair",
+    label: "The Fair",
+    blurb: "Lights strung over a field, and nowhere to have a private word.",
+  },
+  {
     // Not part of the present-day world — the Mexico trip is a flashback to five
     // years into the relationship. Filed as its own place so the two journal
     // entries and the beach material sit somewhere true rather than being

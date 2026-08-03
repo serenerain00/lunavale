@@ -498,6 +498,37 @@ export const journal: JournalEntry[] = [
     ],
   },
   {
+    /* Week two of trying again, and the first time the distance is a thing
+     * happening TO her rather than something she has noticed in herself. Sits
+     * between the truck in the rain (nothing happened, and she thought about
+     * it four times) and week three (Josh asleep in the chair) — she is being
+     * closed out at one end while the other end goes quiet.
+     *
+     * She does not know why, and this entry must not know either. The reader
+     * has more than she does by now, and that gap is the whole tension: he is
+     * putting a field between them because he cannot trust himself in a room
+     * with her, and she is reading it as something she did.
+     */
+    id: "the-fair",
+    dateline: "The fair, and I've come back to the truck to write this",
+    place: "fair",
+    about: ["luna", "tyson", "josh"],
+    sceneSlug: "luna-josh-fair",
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh saw him before I did. He said it lightly — did you know he'd be here — and I said no, and it was true, and I have been turning over why I felt caught out by a question I could answer honestly.",
+      "Eight days. Two calls and I don't know how many messages, and what I get back is that he's been busy. Tyson has been busy in front of me for twenty years and it has never once meant he was unavailable.",
+      "So I went over. And he was pleasant, which is the part I cannot get past. Pleasant is what he is with people he doesn't know.",
+      "I told him he can talk to me. I told him we don't do this — we have never once been two people who avoid each other, that is not a thing that has ever been true about us, and I asked him not to start.",
+      "That's when he took my elbow and moved me out of the light, round the side of the barn where nobody was, and I want to be honest about the half-second where I thought he was finally going to say something.",
+      "What he said was: not here. It's complicated. I'll talk to you.",
+      "Three sentences. I have taken them apart four times sitting in this truck and they do not add up to anything. Not here — where, then. Complicated by what. I'll talk to you — when.",
+      "And the worst of it is I said okay. I stood there in the dark behind a barn and let a man I have known since I was nineteen hand me nothing, and I said okay, and I went and found Josh and rode the ferris wheel.",
+      "He is not going to talk to me. I knew it while he was saying it. I don't know how I knew and I am writing it down here so that when he doesn't, I have proof I wasn't surprised.",
+    ],
+  },
+  {
     id: "the-part-i-forgot",
     dateline: "Three weeks in",
     place: "farmhouse",
@@ -769,6 +800,48 @@ export const journal: JournalEntry[] = [
       "And I love Tyson. I have loved him for a while, probably longer than the six months, and I have never said it, and he has never said it, and now he is putting a field between us every time he comes up here — and I am fairly sure he is doing it because he does not trust himself in the same room as me any more.",
       "So: do I leave. Do I tell him. Do I tell him and stay. Do I say nothing and let both of them go on being half-answered.",
       "The lake was moving tonight. Wind off the far shore. I don't think it means anything. I'm writing it down anyway, because the last time I sat out here it was completely still, and I want the record to show that things move.",
+    ],
+  },
+
+  /* --------------------------------------------------------- the drive ----
+   * The hinge. Everything above is her deciding; this is the night the
+   * deciding stops being hers to do slowly. It sits last in "it turns" and
+   * immediately before the lakehouse, because the scene ends with Tyson
+   * telling her that is where they are going — which is where "much later"
+   * opens.
+   *
+   * SHE DOES NOT SAY WHAT JOSH DID, and that is deliberate twice over. On
+   * screen she gets three words out and stops; and what the fight actually
+   * was is still open canon (LUNA_VAULT_CONTEXT.md, "What Josh did — NOT YET
+   * FIXED"). Writing it here would fix it by accident, in the most
+   * canon-sensitive prose in the product. She refuses the page the same way
+   * she refused it in "the-sentence" — in character, and reversible.
+   *
+   * For the same reason this carries `control` and `panic` but NOT
+   * `violence`: the entry does not depict an assault, and tagging one would
+   * both overstate the text and give away the thing it is withholding. Add
+   * `violence` when Melissa settles the fight and it is written.
+   */
+  {
+    id: "the-drive",
+    dateline: "The lakehouse. Not my choice — his",
+    place: "lakehouse",
+    about: ["luna", "josh", "tyson"],
+    sceneSlug: "luna-truck-breakdown",
+    access: "premium",
+    mature: false,
+    notes: ["control", "panic"],
+    body: [
+      "I drove to him with both hands on the wheel and told myself to breathe about four hundred times, and the record should show that it did not work once.",
+      "I had nothing on. No radio, no window down. I have thought about why since and I think it was that I did not want anything in the truck that could be louder than my own head — I was trying to talk myself down, and you cannot do that over a chorus.",
+      "It came in waves. I would get it back for about a mile — sit up, unlock my hands, do the counting — and then lose it again over nothing at all. A set of headlights. The sign for the exit. My arms would not stay where I put them. I kept moving them like there was somewhere better to be.",
+      "I cried in the middle of it and then stopped, and stopping was worse, because it felt like evidence I was fine.",
+      "I got as far as him and then I did not have to hold it any more, so I didn't. I have never done that in front of anybody. Not once in ten years, not even at the worst of it.",
+      "He didn't ask me anything. He put his arms around me and said breathe — the same instruction I had been failing all the way there, except this time somebody else was doing the counting.",
+      "I said I can't. He knew I did not mean the drive.",
+      "Then I started a sentence about Josh and stopped three words into it, and I am going to stop three words into it here as well. I know exactly what I am doing by not writing it down. It is the same thing I did with the sentence, and that bought me about a month, and I do not expect this one to last as long.",
+      "There is an entry a few pages back where I wrote that I was not frightened of him, and asked to be held to it if I ever read it back and disagreed. I am reading it back.",
+      "He said we're going to the lakehouse. Not asked — said. Somebody made a decision for me tonight and it did not feel like being managed, and I am too tired to work out whether that is because it wasn't, or because it was him.",
     ],
   },
 

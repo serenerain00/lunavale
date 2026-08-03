@@ -166,6 +166,74 @@ This is where **Luna starts seeing Tyson differently.** She is still tied up in
 Josh, so it is not a switch being flipped — it is the beginning of something
 bigger, and **more complicated than Josh alone.**
 
+### The fall fair — week two of trying again
+*(Canon set by Melissa, 2026-08-02.)*
+
+**Josh takes Luna to the fall fair**, about **two weeks into** them trying
+again. **Josh notices Tyson** across the field and **asks Luna whether she knew
+he'd be there.** She didn't.
+
+For **the past week Tyson has been putting space between himself and Luna** —
+**not answering her calls or her texts.** When she goes over to speak to him he
+says **he's been busy.**
+
+She doesn't know what's wrong. She tells him **he can talk to her** — that
+**they don't avoid each other**, that this is not a thing they have ever done —
+and **asks him not to start.**
+
+**That is when he pulls her aside**, out of the light, and says **he can't do
+this here. It's complicated. He'll talk to her eventually.**
+
+**He is lying about the last part**, more or less, and on some level she knows
+it while he is saying it. He is not avoiding her because he is busy — he is
+avoiding her because **distance is the only way he can keep hiding what he
+feels**, which is the engine already described above.
+
+**Luna is left with nothing to hold**, and reads the closing-out as something
+she has done. The reader knows more than she does here, and that gap is the
+point.
+
+### The drive — the night she leaves the farm
+*(Canon set by Melissa, 2026-08-02. Much later than the bar: Josh is back, and
+this is where "it turns" turns.)*
+
+**A very bad fight with Josh**, and Luna leaves the farm. She is driving to
+Tyson, not because she has decided anything, but because **she needs him** and
+there is nowhere else the need points.
+
+**The whole ride is silent** — no dialogue, no music, no one to hear it. She is
+**talking to herself**: reminding herself to breathe, trying to hold her
+composure until she gets there, and **failing**. Anxiety takes the cab. She
+**fidgets, her arms won't stay still**, tears come and stop and come again, her
+**breathing breaks and so does her voice.** She does not get it back before she
+arrives.
+
+**She gets to Tyson and lets herself fall apart.** She has held it for the
+entire drive and she puts it down the second she is in front of him. **He
+holds her. He tells her to breathe. He tells her they are going to the
+lakehouse** — a decision, not a question, because she is in no state to make
+one.
+
+Two lines carry it:
+
+- **"I can't."** Said as she falls into him. She does not mean the drive or the
+  night. She means she **cannot keep doing this with Josh.**
+- **"He held me…"** — and she does not finish it.
+
+#### What Josh did — NOT YET FIXED
+> **Melissa is still deciding this. Do not treat the paragraph below as settled
+> canon and do not write it into scene copy, synopses or public-facing text.**
+
+The direction she is working toward: during the fight **Josh held Luna down,
+forcefully, against her will — and would not let her up.** What frightens her
+is not only the act but that **he has never done that before.** It is the point
+where possessiveness stops being a mood and becomes something done to her body.
+
+This is deliberately kept **off screen**. The truck scene shows the drive and
+the collapse, never the fight, and "he held me…" is the only account anyone
+gets. Whatever the fight finally becomes, it should stay off screen: the story
+is what it does to her, and that is already in the take.
+
 ---
 
 ### The "staring game" (a signature detail)
@@ -184,6 +252,10 @@ enough. In this situation it stops being a game.
 - **The bar:** Tyson **subliminally tells Luna he's been noticing her** — a
   few words, big meaning, the way he looks at her and won't look away, the long
   silences. "A conversation that never happened, and I understood every word."
+- **The fair:** Tyson is **pleasant** with her — which is what he is with
+  people he doesn't know. Then, out of the light: **"Not here. It's
+  complicated. I'll talk to you."** Three sentences that add up to nothing, and
+  she says okay.
 - **The park:** Luna and Tyson. He stays **silent**, won't look at her while
   she asks what's wrong. Then eight words: **"You're standing here, and I can't
   do anything about it."** Little words, huge meaning — that's Tyson.

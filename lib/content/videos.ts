@@ -25,6 +25,21 @@ export interface PremiumCut {
   /** Runtime of THIS cut — differs from the public one, that being the point. */
   durationSeconds: number;
   /**
+   * What members actually get, WHEN IT IS NOT SIMPLY MORE MINUTES. A short
+   * noun phrase, completing "Members watch …".
+   *
+   * The default pitch compares the two runtimes, which works when the cuts are
+   * 0:15 and 2:53. It falls apart when they are 2:41 and 2:39: "a longer cut —
+   * 2:41 against 2:39" prices a differently-edited scene at two seconds and
+   * makes the membership look like a swindle. That is not honest just because
+   * the arithmetic is right — the difference is real, it is simply not
+   * duration, so the copy has to be able to name it.
+   *
+   * Set this whenever runtime is not the story. Leave it off and the runtime
+   * comparison is used, which is correct for a teaser.
+   */
+  difference?: string;
+  /**
    * Graphic rather than merely intimate. `mature` reads as "there is sex in
    * this"; `explicit` says it is shown. Surfaced as "Explicit · 18+" in place
    * of "Mature" (components/ui/RatingBadge.tsx), stated before anything plays,
@@ -384,6 +399,95 @@ export const videos: Video[] = [
     feelings: ["grief", "desire"],
     place: "farmhouse",
     about: ["luna"],
+  },
+  {
+    // One scene, two edits — the same night, cut twice. The public one is the
+    // DIALOGUE cut; members get the SCORED one in its place.
+    //
+    // TWO THINGS MELISSA SHOULD KNOW, both her call, neither a blocker:
+    //
+    //   1. LICENSING. The members' cut carries a commercially released
+    //      recording, on a paid site, with no sync licence on file. Same
+    //      situation as luna-tyson-dance, where she has said she is handling
+    //      it. Noting it here so it stays a known state rather than becoming
+    //      a surprise. To pull it, delete the `premium` block: the scene
+    //      keeps working and everyone gets the dialogue cut.
+    //   2. RESOLUTION. The scored cut is 1320x780; the dialogue cut is
+    //      1920x1080. So the members' version is the SMALLER one, which is
+    //      backwards from every other premium cut here — a paid edit should
+    //      not be the lower-resolution edit. Worth a re-export at 1080 if the
+    //      source allows it.
+    //
+    // The turn is Tyson, not Josh. Josh clocks him across the field and asks
+    // whether Luna knew he would be here; the rest of the scene is Luna
+    // trying to get a straight answer out of a man who has not picked up the
+    // phone in a week. The synopsis stops short of what he actually says.
+    slug: "luna-josh-fair",
+    title: "Not Here",
+    synopsis:
+      "Week two of trying again, and Josh takes her to the fall fair. Tyson is there too — and he hasn't answered her calls in a week.",
+    file: "luna-josh-fair.proxy.mp4",
+    poster: "/posters/luna-josh-fair.jpg",
+    durationSeconds: 159,
+    access: "free",
+    mature: false,
+    premium: {
+      file: "luna-josh-fair-music.proxy.mp4",
+      durationSeconds: 161,
+      // Two seconds longer, so the runtime pitch would be insulting. What is
+      // actually on offer is the score.
+      difference: "the scored cut — the same night, with the music it was edited to",
+    },
+    feelings: ["distance", "lies"],
+    place: "fair",
+    about: ["luna", "josh", "tyson"],
+  },
+  {
+    // One scene, two edits — and unusually, the public one did not exist until
+    // it was built. The master is 2m53s of a single locked-off wide shot with
+    // no dialogue: Luna alone in the cab, driving to Tyson after the worst
+    // night with Josh, losing a fight with her own breathing. You cannot make
+    // a preview out of that by taking the first fifteen seconds, because the
+    // first fifteen seconds of an unbroken performance are the setup.
+    //
+    // So the public cut is ASSEMBLED — five beats dissolved together, in the
+    // order the panic escalates. The spans are recorded in
+    // scripts/make-preview-cut.sh; rebuild with:
+    //   scripts/make-preview-cut.sh luna-truck-breakdown
+    //   scripts/optimize-media.sh import luna-truck-breakdown \
+    //     stories/luna-truck-breakdown/luna-truck-breakdown-preview.mp4 2
+    //
+    // WHAT THE PREVIEW WITHHOLDS is the point of it. It draws only from the
+    // first 70 seconds. Tyson does not appear until 2:06, and the scene's
+    // whole reason for existing — her getting to him, "I can't", "he held
+    // me…", him deciding for her that they are going to the lakehouse — is in
+    // the last forty seconds. A visitor watches her alone and does not learn
+    // whether anyone is waiting at the end of the drive.
+    //
+    // The synopsis says she is driving to Tyson because the poster and the
+    // preview would make a mystery of it for no gain. It does not say why she
+    // left, and it must not: what Josh did is off screen, unfinished canon
+    // (LUNA_VAULT_CONTEXT.md), and hers to tell in the journal.
+    slug: "luna-truck-breakdown",
+    title: "Breathe",
+    synopsis:
+      "She leaves the farm at night without telling anyone and drives to Tyson. The whole way there, she is trying to hold herself together.",
+    file: "luna-truck-breakdown.proxy.mp4",
+    poster: "/posters/luna-truck-breakdown.jpg",
+    durationSeconds: 15,
+    access: "free",
+    mature: false,
+    // On the public cut too — fifteen seconds of it is still fifteen seconds
+    // of a panic attack, and the note has to be readable before the thing it
+    // describes plays, not only for members.
+    notes: ["panic"],
+    premium: {
+      file: "luna-truck-breakdown-full.proxy.mp4",
+      durationSeconds: 173,
+    },
+    feelings: ["hurt", "distance"],
+    place: "downtown",
+    about: ["luna", "tyson"],
   },
   {
     // One scene, two edits. The public cut is the morning; members get the

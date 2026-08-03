@@ -20,7 +20,7 @@
  * one line under a title.
  */
 
-export type ContentNoteId = "violence" | "control";
+export type ContentNoteId = "violence" | "control" | "panic";
 
 export interface ContentNote {
   id: ContentNoteId;
@@ -41,6 +41,17 @@ export const CONTENT_NOTES: Record<ContentNoteId, ContentNote> = {
     label: "controlling behaviour",
     detail:
       "This scene includes possessive, controlling or coercive behaviour in a relationship.",
+  },
+  // Added for the truck drive, which is two unbroken minutes of one. Neither
+  // of the notes above fits it — nothing is done to her on screen and nobody
+  // else is in the frame — and "mature" would tell a viewer to brace for the
+  // wrong thing entirely. Same rule as the rest of this file: it states what
+  // is in the piece, at length, and lets an adult decide.
+  panic: {
+    id: "panic",
+    label: "a panic attack",
+    detail:
+      "This scene shows a character having a prolonged panic attack, in real time.",
   },
 };
 

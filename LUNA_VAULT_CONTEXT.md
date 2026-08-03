@@ -40,6 +40,17 @@ and id are allowed to disagree; only one of them is a promise to a customer.
 
 ## The characters
 
+**It is a three-hander.** *(Clarified by Melissa, 2026-08-03.)* The story is
+**Luna, Josh and Tyson** — those three and no others. Everyone below them is
+**tertiary**: they exist to explain one of the three, and the story does not
+become theirs.
+
+That includes **Rick**, despite the amount written about him here. It will also
+include **Luna's mother**, who surfaces later, and **others still to come**.
+Weight of detail in this document is not a measure of standing — Rick has a
+long section because his dynamic with Josh needs explaining, not because he is
+a fourth lead.
+
 ### Luna — the protagonist
 The story is her interior life. She has a **streak**: she likes danger (that's
 Josh) but she is loyal (that's Tyson). Through the story she is conflicted,
@@ -84,7 +95,8 @@ Luna — because distance is the only way he can keep hiding that he's in love
 with her.
 
 ### Rick — Josh's father
-*(Canon set by Melissa, 2026-07-28.)*
+*(Canon set by Melissa, 2026-07-28. **Tertiary** — see the note at the top of
+this section. He is here to explain Josh, not to carry anything himself.)*
 
 **Think boss.** Dominance with charisma — the same combination Josh has, which
 is the point: **their dynamic is most of the reason Josh is the way he is.**

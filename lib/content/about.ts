@@ -41,7 +41,7 @@ export const premise: AboutSection[] = [
     id: "what-this-is",
     heading: "What this is",
     body: [
-      "Luna Vault is a story about four people, told in scenes you watch, pages from a diary you were never meant to read, and photographs from rooms they were alone in.",
+      "Luna Vault is a story about three people, told in scenes you watch, pages from a diary you were never meant to read, and photographs from rooms they were alone in.",
       "It is set on a working farm, at a lakehouse, in a bar, on a track, and along the roads between them. It is for adults, and it is quiet rather than loud — the kind of story where the worst thing that happens in a room is something somebody doesn't say.",
     ],
   },
@@ -64,11 +64,11 @@ export const premise: AboutSection[] = [
     ],
   },
   {
-    id: "rick",
-    heading: "And Josh's father",
+    id: "around-them",
+    heading: "And the people around them",
     body: [
-      "Rick is dominance with charisma, and most of the reason Josh is the way he is. He loves his son in a form his son has never been able to use.",
-      "He is disappointed in Josh for losing Luna, and he always thought she was too good for him. He holds both at once and says neither in a way that helps anybody.",
+      "**Rick** is Josh's father — dominance with charisma, and most of the reason Josh is the way he is. He loves his son in a form his son has never been able to use. He is disappointed in Josh for losing Luna, and he always thought she was too good for him; he holds both at once and says neither in a way that helps anybody.",
+      "He is not one of the three. Neither are the others who arrive later — Luna's mother among them. They matter because of what they explain about Luna, Josh and Tyson, and the story stays those three.",
     ],
   },
 ];

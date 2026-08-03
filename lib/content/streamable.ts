@@ -9,6 +9,12 @@
  */
 
 import { clipAccess, clips, getClip } from "@/lib/content/clips";
+import {
+  allTakeSlugs,
+  getTake,
+  takeFile,
+  TAKES_ACCESS,
+} from "@/lib/content/takes";
 import { getVideo, videos, type AccessLevel } from "@/lib/content/videos";
 
 export interface Streamable {
@@ -38,6 +44,12 @@ export function getStreamable(slug: string): Streamable | undefined {
   const clip = getClip(slug);
   if (clip) return { slug, file: clip.file, access: clipAccess(clip) };
 
+  // Raw attempts at a scene's beats. Members-only without exception, and the
+  // file is derived from the slug rather than stored — see lib/content/takes.
+  if (getTake(slug)) {
+    return { slug, file: takeFile(slug), access: TAKES_ACCESS };
+  }
+
   return undefined;
 }
 
@@ -51,7 +63,11 @@ export function getStreamable(slug: string): Streamable | undefined {
 if (process.env.NODE_ENV !== "production") {
   const seen = new Set<string>();
   const clashes: string[] = [];
-  for (const slug of [...videos.map((v) => v.slug), ...clips.map((c) => c.id)]) {
+  for (const slug of [
+    ...videos.map((v) => v.slug),
+    ...clips.map((c) => c.id),
+    ...allTakeSlugs(),
+  ]) {
     if (seen.has(slug)) clashes.push(slug);
     seen.add(slug);
   }

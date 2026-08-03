@@ -55,7 +55,38 @@ async function mediaFiles() {
       files.push(match[1]);
     }
   }
+
+  // Takes carry no `file:` field — the proxy name is derived from the slug
+  // (lib/content/takes.ts `takeFile`), so there is nothing for the pattern
+  // above to find. Read the slugs out of the generated manifests and rebuild
+  // the same name here. Driven off the manifests rather than a glob over
+  // stories/ so a take that was removed from the data does not keep getting
+  // pushed.
+  for (const slug of await takeSlugs()) {
+    files.push(`${slug}.proxy.mp4`);
+  }
+
   return [...new Set(files)];
+}
+
+const TAKES_DATA_DIR = path.join(ROOT, "lib/content/takes-data");
+
+async function takeSlugs() {
+  const slugs = [];
+  let entries;
+  try {
+    entries = await readdir(TAKES_DATA_DIR);
+  } catch {
+    return slugs; // no scene has takes yet
+  }
+  for (const entry of entries) {
+    if (!entry.endsWith(".ts")) continue;
+    const text = await readFile(path.join(TAKES_DATA_DIR, entry), "utf8");
+    for (const match of text.matchAll(/slug:\s*"(take-[^"]+)"/g)) {
+      slugs.push(match[1]);
+    }
+  }
+  return slugs;
 }
 
 const files = (await mediaFiles()).filter(
@@ -169,6 +200,64 @@ for (const { gallery, file } of await stillFiles()) {
     allowOverwrite: true,
   });
   console.log(`  uploaded ${gallery}/${file} (${mb(size)})`);
+  uploaded += 1;
+}
+
+// --- Take poster frames ----------------------------------------------------
+// takes-private/<scene>/<take-slug>.jpg -> `takes/<scene>/<take-slug>.jpg`,
+// private, reachable only through the gated /api/take route. Identical shape
+// to the stills loop above; separate because the prefix and the local
+// directory differ, and folding them together would make both harder to read
+// than the fifteen duplicated lines are worth.
+const TAKES_DIR = path.join(ROOT, "takes-private");
+
+async function takePosterFiles() {
+  const out = [];
+  let scenes;
+  try {
+    scenes = await readdir(TAKES_DIR, { withFileTypes: true });
+  } catch {
+    return out; // no takes imported locally yet
+  }
+  for (const s of scenes) {
+    if (!s.isDirectory()) continue;
+    if (wanted.length && !wanted.some((w) => s.name.startsWith(w))) continue;
+    const dir = path.join(TAKES_DIR, s.name);
+    for (const f of await readdir(dir)) {
+      if (f.endsWith(".jpg")) out.push({ scene: s.name, file: f });
+    }
+  }
+  return out;
+}
+
+for (const { scene, file } of await takePosterFiles()) {
+  const local = path.join(TAKES_DIR, scene, file);
+  const pathname = `takes/${scene}/${file}`;
+  const size = (await stat(local)).size;
+
+  try {
+    const existing = await head(pathname);
+    if (existing.size === size) {
+      console.log(`  skip     ${scene}/${file} (${mb(size)})`);
+      skipped += 1;
+      continue;
+    }
+  } catch {
+    // Not present yet — fall through and upload.
+  }
+
+  if (dryRun) {
+    console.log(`  would    ${scene}/${file} (${mb(size)})`);
+    continue;
+  }
+
+  await put(pathname, await readFile(local), {
+    access: "private",
+    contentType: "image/jpeg",
+    addRandomSuffix: false,
+    allowOverwrite: true,
+  });
+  console.log(`  uploaded ${scene}/${file} (${mb(size)})`);
   uploaded += 1;
 }
 

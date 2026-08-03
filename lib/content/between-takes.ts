@@ -488,6 +488,23 @@ export const notes: SetNote[] = [
       "That is the cruel part and we played it straight: the thing she wanted from him for ten years is the exact thing that is about to be used against her. He is finally paying attention. It is the worst news of her life.",
     ],
   },
+  {
+    id: "josh-mexico",
+    author: "josh",
+    kind: "insight",
+    heading: "He doesn't know yet",
+    dateline: "Day 20 · Mexico",
+    sceneSlug: "luna-josh-beach",
+    gallerySlug: "josh-luna-beach",
+    place: "mexico",
+    access: "premium",
+    body: [
+      "Melissa held this to the very end of the schedule and would not be argued out of it. By the time we got to the water we had already shot every bad thing that happens after it, which I assumed was going to be the problem.",
+      "It turned out to be the note instead. He does not know. Nothing of the man he becomes, no shadow laid over any of it, nothing for anybody to catch on a second watch. He booked the six days himself, nobody made him, and he is having a genuinely good week.",
+      "What I had to give up here was charm. Everywhere else he is working — getting something, holding something, winning a room. On that beach he wants nothing from her, and it is the longest stretch in the film where that is true.",
+      "People will reach the second half and ask why she goes back to him. This is the answer and it is not a small one. She has been here. She is not being stupid. She is trying to get back to a week she has already had.",
+    ],
+  },
   /* ------------------------------------------------------------------ Rick */
   {
     id: "rick-the-chair",

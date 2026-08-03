@@ -7,12 +7,8 @@ import { submitPost, type PostResult } from "@/app/overheard/actions";
 import { MAX_POST_LENGTH, MENTIONABLE } from "@/lib/content/overheard";
 
 interface PostFormProps {
-  /** Signed in at all. Without this there is nothing to count against. */
+  /** Signed in at all — see the note on the sign-in branch below. */
   signedIn: boolean;
-  member: boolean;
-  /** Posts already used, for the "one left" line. Ignored for members. */
-  used: number;
-  allowance: number;
   /** The line being answered, when the URL asks for one. */
   replyingTo?: { key: string; author: string; snippet: string } | null;
   /** Melissa only: lets her answer in a character's voice. */
@@ -20,18 +16,16 @@ interface PostFormProps {
 }
 
 /**
- * The box. Three states, and the difference between them is the whole feature:
- * not signed in, has turns left, out of turns.
+ * The box.
  *
- * The remaining count is stated plainly rather than counted down dramatically —
- * MONETIZATION.md rules out fake urgency, and "one left" is information a
- * person is entitled to before they spend it, not a lever.
+ * It used to have three states — not signed in, turns left, out of turns —
+ * because the room was free to read and an account came with three posts. The
+ * room went members-only on 2026-08-03, so the page no longer renders this for
+ * anyone who could run out, and the counting is gone rather than left in as an
+ * unreachable branch.
  */
 export function PostForm({
   signedIn,
-  member,
-  used,
-  allowance,
   replyingTo = null,
   canPostAsCast = false,
 }: PostFormProps) {
@@ -120,43 +114,27 @@ export function PostForm({
     null,
   );
 
-  const left = Math.max(0, allowance - used);
-  const spent = !member && left === 0;
-
+  // A member who is not signed in. In production that combination cannot
+  // happen — membership is resolved from the signed-in user — so this is the
+  // dev preview cookie, and increasingly the only way to reach this branch.
+  // The old copy here ("anyone can read Overheard… it comes with three
+  // posts") sold a free tier the room no longer has.
+  //
+  // The "that's your three" branch that used to follow is gone with it: the
+  // page does not render this form for a non-member at all, so the allowance
+  // can no longer be spent by anybody.
   if (!signedIn) {
     return (
       <div className="rounded-xl border border-hairline bg-charcoal/60 p-6 sm:p-8">
         <h2 className="font-display text-2xl text-ivory">Say something</h2>
         <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
-          Anyone can read Overheard. To post you need an account — it&rsquo;s
-          free, and it comes with three posts.
+          Sign in and the box is yours — your name shows on what you write.
         </p>
         <Link
-          href="/sign-up"
+          href="/sign-in"
           className="mt-5 inline-flex min-h-10 items-center rounded-full bg-amber px-5 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
         >
-          Create a free account
-        </Link>
-      </div>
-    );
-  }
-
-  if (spent) {
-    return (
-      <div className="rounded-xl border border-amber/25 bg-amber/[0.04] p-6 sm:p-8">
-        <h2 className="font-display text-2xl text-ivory">
-          That&rsquo;s your three
-        </h2>
-        <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
-          Members talk as much as they like. Everything you&rsquo;ve already
-          said stays up either way — and you can keep reading for as long as
-          you want.
-        </p>
-        <Link
-          href="/membership"
-          className="mt-5 inline-flex min-h-10 items-center rounded-full bg-amber px-5 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
-        >
-          Join the LunaVerse
+          Sign in
         </Link>
       </div>
     );
@@ -283,13 +261,7 @@ export function PostForm({
       )}
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-xs text-stone-dim">
-          {member
-            ? "Member — post as often as you like."
-            : left === 1
-              ? "One post left, then you'll need a membership."
-              : `${left} posts left, then you'll need a membership.`}
-        </p>
+        <p className="text-xs text-stone-dim">Post as often as you like.</p>
         {/* Both labels rather than sniffing the platform: no JS, nothing to
             mismatch on hydration, and unambiguous on either machine. */}
         <span className="ml-auto mr-3 text-[0.6875rem] text-stone-dim">

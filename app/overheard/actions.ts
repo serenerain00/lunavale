@@ -3,25 +3,22 @@
 /**
  * Posting to Overheard.
  *
- * The allowance is enforced HERE, on the server, after the auth check — not in
- * the form. A disabled button is a hint; this is the rule. Anyone can call a
- * server action, so the count has to be re-read and re-checked on every write,
- * and it is deliberately checked against the database rather than anything the
- * client sent along.
+ * Membership is enforced HERE, on the server, after the auth check — not in
+ * the form. A form that was never rendered is a hint; this is the rule. Anyone
+ * can call a server action whatever the page showed them, so entitlement is
+ * re-read on every write.
+ *
+ * The room used to be free to read with a three-post allowance for anyone with
+ * an account. It is members-only throughout now, so the quota is gone rather
+ * than merely unreachable — a countdown nobody can be subject to is a rule the
+ * next reader has to work out is dead.
  */
 
 import { revalidatePath } from "next/cache";
 import { authConfigured } from "@/lib/billing/provider";
 import { isMember } from "@/lib/access/entitlement";
-import {
-  FREE_POST_ALLOWANCE,
-  MAX_POST_LENGTH,
-} from "@/lib/content/overheard";
-import {
-  addPost,
-  databaseConfigured,
-  postCountForUser,
-} from "@/lib/db/overheard";
+import { MAX_POST_LENGTH } from "@/lib/content/overheard";
+import { addPost, databaseConfigured } from "@/lib/db/overheard";
 import { CAST_THREAD, resolveMention } from "@/lib/content/overheard";
 
 export interface PostResult {
@@ -65,17 +62,17 @@ export async function submitPost(formData: FormData): Promise<PostResult> {
       ? rawReply
       : null;
 
-  // The allowance. Members are unlimited; everyone else gets three, ever.
-  const member = await isMember();
-  if (!member) {
-    const used = await postCountForUser(userId);
-    if (used >= FREE_POST_ALLOWANCE) {
-      return {
-        ok: false,
-        error:
-          "That's your three. Join the LunaVerse to keep talking — everything you've already said stays up.",
-      };
-    }
+  // Membership, not an allowance. The whole room went members-only —
+  // reading and writing are the same door now — so there is no free quota
+  // left to count down. Anyone can call a server action regardless of what
+  // the page rendered, which is exactly why this check is here and not only
+  // in the component that decided whether to draw a box.
+  if (!(await isMember())) {
+    return {
+      ok: false,
+      error:
+        "Overheard is part of the LunaVerse. Everything you've already said stays up.",
+    };
   }
 
   // A display name, with fallbacks: Clerk lets people have neither a username

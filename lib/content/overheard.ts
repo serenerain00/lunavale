@@ -8,7 +8,18 @@
  * stays in lib/db.
  */
 
-/** Posts a non-member may leave before the LunaVerse is required. */
+/**
+ * HISTORICAL. Posts a non-member could leave before the LunaVerse was
+ * required, back when the room was free to read.
+ *
+ * Overheard went members-only on 2026-08-03 and the allowance no longer gates
+ * anything — app/overheard/actions.ts checks membership and nothing else. It
+ * survives because the rows it produced are still in the database and
+ * app/admin still reports against it ("how far each free account got"), which
+ * is a question about the past and stays answerable.
+ *
+ * If you are looking for the rule that decides who may post, it is not this.
+ */
 export const FREE_POST_ALLOWANCE = 3;
 
 /** Longest a single post may be — enough to say something, short enough to read. */

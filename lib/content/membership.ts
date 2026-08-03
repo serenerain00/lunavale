@@ -242,20 +242,16 @@ export const BENEFITS: Benefit[] = [
   // the day/night toggle in components/world/WorldExperience.tsx — is free to
   // everyone, so it could not honestly be rewritten as a LunaVerse benefit either.
   // Put it back when locations genuinely have gated states of their own.
-  {
-    // Overheard's three-post allowance is the only place the free tier meets a
-    // hard limit, so it is stated on both rows rather than only on the paid one.
-    id: "overheard-free",
-    label: "Overheard",
-    detail: "Read the wall, and leave three posts on it.",
-    from: "free",
-    group: "The world",
-  },
+  // The free "Overheard — read the wall, and leave three posts on it" row was
+  // here. Pulled 2026-08-03, when the room went members-only: reading it and
+  // writing in it are the same door now, so there is no free half of it left
+  // to advertise. A benefits table that still offered it would be promising
+  // something the product refuses at the page.
   {
     id: "overheard-member",
-    label: "Stay in the conversation",
+    label: "Overheard",
     detail:
-      "Post on Overheard as often as you like, and reply to anyone on it.",
+      "The room where Luna, Tyson, Josh and Rick talk most days — read it, answer them, and reply to anyone else in there.",
     from: "vault",
     group: "The world",
   },

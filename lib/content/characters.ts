@@ -142,6 +142,36 @@ export const characters: Character[] = [
     pullQuote: "You think you're handling it? You're not.",
     pullQuoteSource: "The Study",
   },
+  {
+    // PORTRAIT BREAKS THE RULE at the top of this file, and it has to. The
+    // others are frames from the cast interview precisely so a character hub
+    // is about the person rather than one moment of theirs — but Cathy is not
+    // in the interview, which was shot before she existed. This is a 3:4 crop
+    // from "Long Distance", chosen for being the most neutral frame of her in
+    // it: listening, not yet upset. Replace it if she is ever interviewed.
+    id: "cathy",
+    name: "Cathy",
+    role: "Luna's mother",
+    tagline:
+      "Two thousand miles away, defending a man she has only ever met with the door open.",
+    portrait: "/characters/cathy.jpg",
+    intro: [
+      "Sixty-five, divorced, and in Atlanta — which is the problem. Her daughter is in Colorado, alone in a lakehouse in the dark, and the only thing Cathy can actually do about that is ring her.",
+      "She is a good mother and she is a pushy one, and those are not in tension. She calls until you answer. She asks the question again. Luna needs a breath before she picks up, the way most daughters do, and there is nothing underneath it — no damage, no old wound, a childhood that was genuinely fine.",
+      "What there is, is a gap. She has known Josh for ten years and never once from inside the room, so when he rings her sounding wrecked she believes him, because he is not lying. She is holding one half of it and asking her daughter to be kinder about the half she can see.",
+    ],
+    details: [
+      "Made Luna and Tyson lunches when they were teenagers",
+      "Was there for Luna the whole time Tyson was deployed",
+      "Loves Tyson like a son, and knows exactly whose best friend he is",
+      "A shelf of framed photographs of people she cannot get on the phone",
+      "Two daughters. The other one has not come up yet",
+    ],
+    // Written to Melissa's canon rather than transcribed off the cut — the
+    // same standing as the prose above, and the same caveat.
+    pullQuote: "He doesn't sound like himself.",
+    pullQuoteSource: "Long Distance",
+  },
 ];
 
 export function getCharacter(id: string): Character | undefined {

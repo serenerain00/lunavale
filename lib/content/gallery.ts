@@ -333,6 +333,57 @@ export const galleries: StillGallery[] = [
     mature: false,
   },
 
+  /* -------------------------------------------------------- the phone call */
+  {
+    // Frames from "Long Distance". The scene itself is free — this is the
+    // model working as intended: the scene brings people in, the stills are
+    // one of the things they get for paying.
+    //
+    // ORDER IS DELIBERATE and not the order the frames were captured in.
+    // 01 is Cathy and 02 is Luna picking up, so the two open previews are one
+    // of each — a visitor sees both ends of the call and neither of them
+    // alone. The set then runs the conversation and finishes on the wide from
+    // behind, which is where she stops taking part.
+    //
+    // Cover is Cathy rather than still 01 by coincidence: she is new, and it
+    // keeps the gallery card from being the same frame as the scene's poster.
+    id: "the-phone-call",
+    title: "The Phone Call",
+    subtitle: "Luna and her mother",
+    description: [
+      "A week after she moved out, and nine days of watching her mother's name come up and putting the phone face down. This is the one she finally answers.",
+      "Two rooms two thousand miles apart, and the distance is in the frames before either of them says anything about it: Cathy surrounded by photographs of all of them, Luna with an entire lake behind her and nobody in the house.",
+    ],
+    count: 8,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/the-phone-call/cover.jpg",
+    feelings: ["grief", "distance"],
+    place: "lakehouse",
+    about: ["luna", "cathy", "josh"],
+    sceneSlug: "luna-cathy-phone",
+    journalEntryId: "my-mother-called",
+    stills: [
+      { caption: "Atlanta. A lamp on, and a shelf of photographs of everybody she can't reach." },
+      { caption: "Nine days of letting it ring." },
+      {},
+      {},
+      {
+        caption: "She has known him ten years and never once from inside the room.",
+        journal: {
+          entryId: "my-mother-called",
+          excerpt:
+            "She isn't wrong about what she heard. He does sound like that. He is hurting. Both of those are true and neither of them is the thing.",
+        },
+      },
+      {},
+      {},
+      { caption: "Thirty seconds of her mother talking, and she is already at the glass." },
+    ],
+    access: "premium",
+    mature: false,
+  },
+
   /* ------------------------------------------------------------ the garage */
   {
     id: "the-garage",

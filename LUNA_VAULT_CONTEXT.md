@@ -190,7 +190,9 @@ her mother is sympathising with the man who hurt her.
 > her the rest. Neither of them is behaving badly.
 
 #### The phone call — a week into the separation
-*Shot, not yet cut. Source clips in `Downloads/luna-mom-phone/`.*
+*CUT AND PUBLISHED 2026-08-03 as **"Long Distance"** (`luna-cathy-phone`),
+1:32, free. Raw takes still sitting beside it in `stories/luna-mom-phone/`.
+Luna's account of it is the journal entry **"my-mother-called"**.*
 
 **A week in**, and that week was **Luna moving out** and dealing with her own
 head. She has been **dodging her family** the whole time — which is why this

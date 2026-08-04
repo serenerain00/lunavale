@@ -144,6 +144,40 @@ export const journal: JournalEntry[] = [
     ],
   },
   {
+    /* Cathy's first appearance in the journal, sitting the same week as the
+     * last box. Free, like the entries either side of it — this run is the
+     * shop window, and a mother-and-daughter phone call gives away nothing.
+     *
+     * The scene is 31 seconds of Cathy talking while Luna stands at the
+     * window with her back turned, so what Luna writes afterwards is mostly
+     * what she did NOT say on the phone. That is the entry: the argument she
+     * had silently, at the glass, while her mother filled the air.
+     *
+     * She does not land on being angry with Cathy, and must not. Melissa's
+     * canon is explicit that nothing is wrong between them — Cathy is a good
+     * mother working from incomplete information, and Luna knows it while it
+     * is happening. An entry that made her mother the problem would be a
+     * different, cheaper story.
+     */
+    id: "my-mother-called",
+    dateline: "She finally got me on the phone",
+    place: "lakehouse",
+    about: ["luna", "cathy", "josh"],
+    sceneSlug: "luna-cathy-phone",
+    access: "free",
+    mature: false,
+    body: [
+      "Nine days of watching her name come up and putting the phone face down. Today I picked up, and the first thing out of her was pick up the phone when I call, which is fair, and which I let her have.",
+      "She is two thousand miles away with a lamp on and a shelf full of photographs of all of us, and she cannot see any of this, and she is doing the only thing she can do about it, which is ring me.",
+      "Then she told me Josh has been calling her. That he doesn't sound like himself. That he's hurting.",
+      "I walked to the window while she said it. I want to write that down honestly: I didn't argue, I didn't correct her, I just turned around and looked at the water and let her talk, and she talked for a long time.",
+      "Because what am I supposed to say. She has known him ten years and she has never once been in a room with him when the door was shut. She isn't wrong about what she heard. He does sound like that. He is hurting. Both of those are true and neither of them is the thing.",
+      "She's not the problem. She has never been the problem. She is just holding one half of it and asking me why I'm not being kinder about the half she can see.",
+      "I could give her the rest. I'd have to give her all of it, and then she'd be up at two in the morning in Atlanta with a lamp on, unable to do anything about it, and there would be two of us like that instead of one.",
+      "So I said I was fine and that I'd call Sunday. And she said okay in the voice that means she knows I won't.",
+    ],
+  },
+  {
     id: "tyson-shows-up",
     dateline: "Week two, and he's here again",
     place: "lakehouse",

@@ -358,6 +358,41 @@ export const videos: Video[] = [
     about: ["luna", "josh"],
   },
   {
+    // Cathy's introduction, and the earliest thing in the present-day story —
+    // a week after Luna moved out, which puts it just before the month-one
+    // material below.
+    //
+    // FREE, deliberately. It has no turn in it to give away, it is
+    // licence-clean (dialogue only, no score — checked on the spectrogram,
+    // unlike luna-tyson-dance and luna-josh-fair), and it introduces a whole
+    // character. That makes it the best shop-window scene in the library for
+    // the /about funnel, which now tells confused arrivals to start at the
+    // beginning.
+    //
+    // THE POSTER IS THE PREMISE: the phone face-up on the counter, screen lit,
+    // reading "Mom", and Luna standing over it deciding. She has been dodging
+    // her family for a week. It gives away nothing and explains everything.
+    //
+    // The cut is worth knowing about if it is ever recut: shots 8 and 9 run
+    // 8.1s and 9.1s against 2-5s everywhere else, covering Luna walking to the
+    // window and turning her back — while the audio runs 31 seconds without a
+    // pause over 0.6s. Cathy talks straight through Luna's withdrawal. Picture
+    // and sound carry the same idea independently, and shortening either would
+    // cost it.
+    slug: "luna-cathy-phone",
+    title: "Long Distance",
+    synopsis:
+      "A week after she moved out, Luna finally picks up. Her mother has been calling — and Josh has been calling her mother.",
+    file: "luna-cathy-phone.proxy.mp4",
+    poster: "/posters/luna-cathy-phone.jpg",
+    durationSeconds: 92,
+    access: "free",
+    mature: false,
+    feelings: ["grief", "distance"],
+    place: "lakehouse",
+    about: ["luna", "cathy", "josh"],
+  },
+  {
     // The whole night, free — Melissa's call, 2026-07-31. It was briefly a 30s
     // teaser with the full cut behind the membership (Video.premium); she
     // decided the scene should be open instead. The teaser still exists at

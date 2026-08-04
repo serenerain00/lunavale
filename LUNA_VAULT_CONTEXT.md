@@ -94,6 +94,27 @@ When Josh comes back, Tyson **starts putting distance** between himself and
 Luna — because distance is the only way he can keep hiding that he's in love
 with her.
 
+### Cathy — Luna's mother
+*(Introduced by Melissa, 2026-08-03. **Tertiary**, per the note above — the
+first of the "others" that section anticipated.)*
+
+**ESTABLISHED SO FAR: her name, and that she is Luna's mother.** That is
+genuinely all of it. Everything else below is what the footage shows, recorded
+as observation and clearly **not** canon — do not write her from it.
+
+Shot but not yet cut, in `Downloads/luna-mom-phone/`: **a phone call between
+Luna and Cathy**, intercut between two rooms.
+
+- **Cathy** is somewhere warm and settled — a living room, a lamp, and a shelf
+  of **framed family photographs** behind her. Late fifties or sixties, silver
+  through dark hair, a wedding ring. In the still she is **listening rather
+  than talking**, and holding something back.
+- **Luna** takes the call at **the lakehouse** — the water visible through the
+  glass behind her, hair up, coffee on the counter.
+
+**STILL OPEN, and needed before she can be written:** what Cathy knows, and
+what Luna is willing to tell her. Those two answers decide every line she has.
+
 ### Rick — Josh's father
 *(Canon set by Melissa, 2026-07-28. **Tertiary** — see the note at the top of
 this section. He is here to explain Josh, not to carry anything himself.)*

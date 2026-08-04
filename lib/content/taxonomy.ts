@@ -176,6 +176,19 @@ export const people = [
     label: "Rick",
     blurb: "Josh's father, and most of the reason Josh is the way he is.",
   },
+  {
+    // Luna's mother, new on 2026-08-03. Registered ahead of her first scene so
+    // it has somewhere to be filed the moment it lands; renders nowhere until
+    // then, and adding her here does NOT put her on /characters (that page has
+    // its own list) or in Overheard's @ picker (MENTIONABLE is separate).
+    //
+    // PLACEHOLDER BLURB. It says only what is established — that she is Luna's
+    // mother — because nothing else about her is canon yet. Replace it with
+    // Melissa's line rather than guessing at a personality from one still.
+    id: "cathy",
+    label: "Cathy",
+    blurb: "Luna's mother.",
+  },
 ] as const satisfies readonly Person[];
 
 export interface Person {

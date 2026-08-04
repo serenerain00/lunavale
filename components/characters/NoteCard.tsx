@@ -103,6 +103,7 @@ const SIGNATURES: Record<PersonId, string> = {
   tyson: "— T",
   josh: "— J",
   rick: "— R",
+  cathy: "— C",
 };
 
 function signature(note: SetNote): string {

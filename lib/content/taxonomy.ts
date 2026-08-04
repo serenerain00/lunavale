@@ -182,12 +182,10 @@ export const people = [
     // then, and adding her here does NOT put her on /characters (that page has
     // its own list) or in Overheard's @ picker (MENTIONABLE is separate).
     //
-    // PLACEHOLDER BLURB. It says only what is established — that she is Luna's
-    // mother — because nothing else about her is canon yet. Replace it with
-    // Melissa's line rather than guessing at a personality from one still.
     id: "cathy",
     label: "Cathy",
-    blurb: "Luna's mother.",
+    blurb:
+      "Two thousand miles away in Atlanta, defending a man she only half knows.",
   },
 ] as const satisfies readonly Person[];
 

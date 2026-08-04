@@ -38,6 +38,19 @@ and id are allowed to disagree; only one of them is a promise to a customer.
 
 ---
 
+## Where it happens
+*(Canon set by Melissa, 2026-08-03.)*
+
+**Luna lives in Denver, Colorado** — the farm, the lakehouse, the bar, the
+track and the roads between them are all Colorado. **Cathy is in Atlanta,
+Georgia**, and the distance is a plot fact rather than colour: when Luna is in
+trouble her mother is a phone call and a flight away, not a drive.
+
+*(Mexico stays what it already was — a flashback to a trip, not a place anyone
+lives.)*
+
+---
+
 ## The characters
 
 **It is a three-hander.** *(Clarified by Melissa, 2026-08-03.)* The story is
@@ -78,12 +91,40 @@ know it was about to get **much worse**: once he starts to suspect Luna and
 Tyson are more than friends, he turns **jealous, possessive, controlling, even
 abusive** — worse than before.
 
+**What is underneath it** *(canon added 2026-08-03):* Josh is **charismatic in
+public** and knows exactly **how to talk to people into doing what he wants** —
+his father's trick, learned at home. But he is **the child in that dynamic**: a
+man still trying to **fill Rick's shoes and please him**, and underneath the
+command presence a **scared little boy**.
+
+He **does not take no for an answer**, he **has no idea what to do with an
+emotion**, and **his anger can turn violent**. Those three in one man is the
+whole danger of him — and the reason Luna cannot separate the thrill from the
+fear.
+
 ### Tyson — her best friend of twenty years
 **Ex-military.** Friend of the family, **distant cousin of Josh**, and helps
 Josh on the **farm** here and there (they're friends and co-workers). Into
 **extreme sports** — snowboarding, motorcycles, track days — and owns a
 **black 2020 Porsche Carrera** that's his baby (he'll ride a motorcycle
 recklessly but won't take a hard corner with Luna in the passenger seat).
+
+**Cousins, and it shows** *(2026-08-03).* Josh and Tyson are **distant
+cousins — second or third, Melissa is deciding which** — and they are meant to
+**share some features**, which is worth landing on screen rather than only in
+the family tree.
+
+**After the military** he came out with a **discipline that does not waver**,
+and he makes his living **several different ways** rather than one — the
+extreme sports are part of who he is, not a hobby he fits around a job. Where
+Josh is a **farm-boy workaholic and a businessman**, Tyson is the one with no
+boss and no performance to keep up.
+
+> **TO CONFIRM — who helps whom.** Melissa's note says that when Tyson retired,
+> "he had Josh help him out with work on the farm". The established canon is
+> the other way round: **Josh owns the farm** and Tyson helps *him* on it. Most
+> likely a slip, so nothing has been changed — but if Tyson has land of his own
+> that Josh works, say so, because it changes the balance between them.
 
 Over the six months Luna was without Josh, **Tyson and Luna grew closer than
 ever** — he felt responsible for keeping her head above water while she
@@ -95,25 +136,65 @@ Luna — because distance is the only way he can keep hiding that he's in love
 with her.
 
 ### Cathy — Luna's mother
-*(Introduced by Melissa, 2026-08-03. **Tertiary**, per the note above — the
+*(Canon set by Melissa, 2026-08-03. **Tertiary**, per the note above — the
 first of the "others" that section anticipated.)*
 
-**ESTABLISHED SO FAR: her name, and that she is Luna's mother.** That is
-genuinely all of it. Everything else below is what the footage shows, recorded
-as observation and clearly **not** canon — do not write her from it.
+**65.** Lives in **Atlanta, Georgia**, which matters more than a biographical
+detail normally would: Luna is in **Colorado**, so Cathy is two thousand miles
+from a daughter she is frightened for and can do nothing but phone. She is
+**divorced**, and has **two daughters** — Luna, and a **sister who is not named
+or cast yet.** The sister exists and the family all know each other; she stays
+off screen until Melissa knows who she is.
 
-Shot but not yet cut, in `Downloads/luna-mom-phone/`: **a phone call between
-Luna and Cathy**, intercut between two rooms.
+She is a **caring, loving, well-meaning mother**, and right now a **worried
+one**. What she is picturing is Luna **alone at the lakehouse, in the dark, in
+another state**, after the breakup.
 
-- **Cathy** is somewhere warm and settled — a living room, a lamp, and a shelf
-  of **framed family photographs** behind her. Late fifties or sixties, silver
-  through dark hair, a wedding ring. In the still she is **listening rather
-  than talking**, and holding something back.
-- **Luna** takes the call at **the lakehouse** — the water visible through the
-  glass behind her, hair up, coffee on the counter.
+She is also **pushy**, and Luna knows it. That is the entire dynamic and there
+is **nothing dark in it** — **Luna had a good childhood.** It is only that a
+call from her mother is a thing Luna has to **take a breath before answering**,
+the way most daughters do. They love each other. Cathy means well.
 
-**STILL OPEN, and needed before she can be written:** what Cathy knows, and
-what Luna is willing to tell her. Those two answers decide every line she has.
+**Cathy and Tyson.** She has known him **the whole twenty years** he and Luna
+have been friends. She **made the two of them lunches as teenagers.** She was
+**there for Luna when Tyson deployed.** She loves him **like a son** — with
+Melissa's caveat attached: she knows perfectly well he is Luna's *best friend*,
+and **it is going to get complicated**, given where Luna and Tyson end up.
+
+**Cathy and Josh.** She has known him as long as Luna has, and closely across
+**the ten years of the relationship.** What she does **not** have is what Luna
+has — the quirks, the ins and outs, what he is like once the door is shut.
+
+So **Cathy defends Josh.** He has been **calling her**, and she passes on that
+**he doesn't sound like himself, that he's hurting.** She is being kind, and
+she is not wrong about what she has heard. **Luna is bitter about it**, because
+her mother is sympathising with the man who hurt her.
+
+> **That asymmetry is the engine of every scene these two have.** Cathy is
+> being a good mother with incomplete information; Luna is not ready to hand
+> her the rest. Neither of them is behaving badly.
+
+#### The phone call — a weekend into the separation
+*Shot, not yet cut. Source clips in `Downloads/luna-mom-phone/`.*
+
+Cathy **has not been able to reach Luna for days.** When she finally gets
+through, the first thing she says is a version of **"pick up the phone when I
+call."**
+
+Then she tells her **Josh has been calling her** — and that he doesn't sound
+like himself, and that he's hurting. **Luna takes it badly**, because of what
+he actually did.
+
+Shot as an **intercut between two rooms**: Cathy somewhere warm and settled, a
+lamp and a shelf of **framed family photographs** behind her; Luna at **the
+lakehouse**, water through the glass, hair up, coffee on the counter. The two
+rooms do a lot of the work — the distance is in the frame before anyone says
+anything about it.
+
+**TO CONFIRM:** which separation. "A weekend in" reads as the **six-month
+split** — Josh hurting and calling her mother fits that far better than
+anything later — which would place this near **"The day the last box went"** in
+the journal. Say if it belongs somewhere else.
 
 ### Rick — Josh's father
 *(Canon set by Melissa, 2026-07-28. **Tertiary** — see the note at the top of
@@ -123,6 +204,22 @@ this section. He is here to explain Josh, not to carry anything himself.)*
 is the point: **their dynamic is most of the reason Josh is the way he is.**
 Rick is where Josh learned that being magnetic and being in control are the
 same act.
+
+**He is a CEO**, in a similar line of business to Josh *(2026-08-03)*. The
+register Melissa wants off him is **mob boss without being one** — a
+**commanding, dominant presence that barely has to do anything to get its
+way.** That is the thing Josh inherited and does a louder, less certain version
+of.
+
+**Drink runs through the family.** Rick is **a big drinker — very fine
+liquor**, never anything cheap, and there is **a brewery in the family**.
+
+> **TO CONFIRM — whose brewery.** The note reads "Rick's father also owns a
+> brewery", which would put it a generation above him and make it
+> great-grandfather territory for Josh. It may equally have meant **Rick**
+> owns it. Left unresolved rather than guessed, because "the family has owned a
+> brewery for three generations" and "Rick bought a brewery" are different
+> facts about these people.
 
 He is **strong**, and he is **possessive in his own way**. What he is not is
 able to express love well enough for it to have done Josh any good. The care is

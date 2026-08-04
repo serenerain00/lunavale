@@ -23,6 +23,7 @@
  */
 
 import "server-only";
+import { cache } from "react";
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import { getTier, type TierId } from "@/lib/content/membership";
@@ -69,7 +70,9 @@ export function previewCookieValue(tier: TierId): string {
  * cookie could only have been set legitimately: unsetting PREVIEW_SECRET must
  * close the door on sessions already holding it open.
  */
-export async function previewTier(): Promise<TierId | undefined> {
+export const previewTier = cache(async function previewTier(): Promise<
+  TierId | undefined
+> {
   if (!previewAllowed()) return undefined;
 
   const raw = (await cookies()).get(PREVIEW_COOKIE)?.value;
@@ -87,7 +90,7 @@ export async function previewTier(): Promise<TierId | undefined> {
   if (!constantTimeEqual(signature, sign(tier, secret))) return undefined;
 
   return getTier(tier)?.id;
-}
+});
 
 function sign(tier: string, secret: string): string {
   return createHmac("sha256", secret).update(tier).digest("hex");

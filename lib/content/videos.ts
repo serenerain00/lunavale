@@ -376,7 +376,12 @@ export const videos: Video[] = [
     slug: "luna-tyson-dance",
     title: "Something to Talk About",
     synopsis:
-      "A month after he moved out, Tyson takes her somewhere loud. She makes him dance. For most of the night it works.",
+      // Was "A month after he moved out" until 2026-08-03, when the property
+      // canon settled: the farm is Josh's, the lakehouse is Luna's, so she is
+      // the one who left. This is live public copy on a free scene, which is
+      // why it gets corrected rather than left as the one place on the site
+      // still telling it the old way.
+      "A month after she moved out, Tyson takes her somewhere loud. She makes him dance. For most of the night it works.",
     file: "luna-tyson-dance-full.proxy.mp4",
     poster: "/posters/luna-tyson-dance.jpg",
     durationSeconds: 239,

@@ -49,6 +49,20 @@ trouble her mother is a phone call and a flight away, not a drive.
 *(Mexico stays what it already was — a flashback to a trip, not a place anyone
 lives.)*
 
+### Who owns what
+*(Canon set by Melissa, 2026-08-03. Load-bearing — it decides who leaves.)*
+
+- **The farm is Josh's.** It is where he and Luna lived together for the ten
+  years. Tyson does contract work on it; he has no stake in it.
+- **The lakehouse is Luna's** — **her family's**, and **has been for a long
+  time**. Her **retreat**, her home away from home, and the one place in this
+  story that is hers outright.
+
+**This is why the separation goes the way it does.** They were living on his
+land, so when it ended **Luna is the one who left** — and she had somewhere of
+her own to go. It is also why the lakehouse carries what it carries later:
+every important thing that happens to her there happens on her own ground.
+
 ---
 
 ## The characters
@@ -120,11 +134,12 @@ extreme sports are part of who he is, not a hobby he fits around a job. Where
 Josh is a **farm-boy workaholic and a businessman**, Tyson is the one with no
 boss and no performance to keep up.
 
-> **TO CONFIRM — who helps whom.** Melissa's note says that when Tyson retired,
-> "he had Josh help him out with work on the farm". The established canon is
-> the other way round: **Josh owns the farm** and Tyson helps *him* on it. Most
-> likely a slip, so nothing has been changed — but if Tyson has land of his own
-> that Josh works, say so, because it changes the balance between them.
+**Settled 2026-08-03: Josh owns the farm; Tyson does not.** When Tyson came out
+of the military, **Josh helped him get work there — contract work**, and it is
+**only part of what Tyson earns.** He is not an employee and he is not a
+partner; he is a retired man with several irons in the fire, one of which is
+his cousin's farm. Which is exactly why he is around the place enough for any
+of this to happen.
 
 Over the six months Luna was without Josh, **Tyson and Luna grew closer than
 ever** — he felt responsible for keeping her head above water while she
@@ -174,8 +189,14 @@ her mother is sympathising with the man who hurt her.
 > being a good mother with incomplete information; Luna is not ready to hand
 > her the rest. Neither of them is behaving badly.
 
-#### The phone call — a weekend into the separation
+#### The phone call — a week into the separation
 *Shot, not yet cut. Source clips in `Downloads/luna-mom-phone/`.*
+
+**A week in**, and that week was **Luna moving out** and dealing with her own
+head. She has been **dodging her family** the whole time — which is why this
+call is the one that finally connects, and why it opens the way it does.
+
+It sits **beside "The day the last box went"** in the journal.
 
 Cathy **has not been able to reach Luna for days.** When she finally gets
 through, the first thing she says is a version of **"pick up the phone when I
@@ -191,10 +212,8 @@ lakehouse**, water through the glass, hair up, coffee on the counter. The two
 rooms do a lot of the work — the distance is in the frame before anyone says
 anything about it.
 
-**TO CONFIRM:** which separation. "A weekend in" reads as the **six-month
-split** — Josh hurting and calling her mother fits that far better than
-anything later — which would place this near **"The day the last box went"** in
-the journal. Say if it belongs somewhere else.
+*That Luna is at the lakehouse is the point, not set dressing: she has been
+there about a week, because it is where she went.*
 
 ### Rick — Josh's father
 *(Canon set by Melissa, 2026-07-28. **Tertiary** — see the note at the top of
@@ -211,15 +230,14 @@ register Melissa wants off him is **mob boss without being one** — a
 way.** That is the thing Josh inherited and does a louder, less certain version
 of.
 
-**Drink runs through the family.** Rick is **a big drinker — very fine
-liquor**, never anything cheap, and there is **a brewery in the family**.
+**Rick owns a brewery** *(settled 2026-08-03)*. His, not an inherited one —
+**there is no generation above Rick in this story** and the family tree does not
+go back further. What runs in the line is **business ownership itself**, which
+is the thing Josh is measuring himself against.
 
-> **TO CONFIRM — whose brewery.** The note reads "Rick's father also owns a
-> brewery", which would put it a generation above him and make it
-> great-grandfather territory for Josh. It may equally have meant **Rick**
-> owns it. Left unresolved rather than guessed, because "the family has owned a
-> brewery for three generations" and "Rick bought a brewery" are different
-> facts about these people.
+He is also **a big drinker — very fine liquor**, never anything cheap. A man
+who owns a brewery and drinks something better than what he makes is worth
+sitting with for a second.
 
 He is **strong**, and he is **possessive in his own way**. What he is not is
 able to express love well enough for it to have done Josh any good. The care is
@@ -275,9 +293,14 @@ version of him. She is trying to get back to Mexico.
 ### The night at the bar — month one
 *(Canon set by Melissa, 2026-07-31.)*
 
-**One month** after Josh moved out. Luna needs to get out of the house and
+**One month** after **Luna moved out**. She needs to get out of the house and
 stop thinking about him, and **Tyson takes her somewhere loud** and spends the
 night working to keep her happy.
+
+> *Corrected 2026-08-03.* This read "after Josh moved out" from 2026-07-31
+> until the property canon was settled. The farm is his and the lakehouse is
+> hers, so **she** is the one who left — and "the house" she needs to get out
+> of in the line above is therefore the lakehouse, not the farm.
 
 He asks whether she has heard from Josh. **A couple of texts. She hasn't
 answered them.** She says she doesn't want to talk about it — and then thinks

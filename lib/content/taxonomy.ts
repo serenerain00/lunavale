@@ -119,16 +119,22 @@ export const places = [
     environmentSlug: "downtown",
   },
   {
-    // Her place in Denver. Not new material so much as a location that was
-    // always here and never named: the "The Apartment" clip has been filed
-    // under nothing since it landed, and it is plainly the same room — same
-    // city bokeh through the same glass at night.
+    // Her own place in Denver — confirmed by Melissa 2026-08-04. Not new
+    // material so much as a location that was always here and never named: the
+    // "The Apartment" clip has been filed under nothing since it landed and is
+    // plainly the same room.
     //
     // Distinct from `downtown`, which is the restaurant and the drive. This is
     // where she is when the day is over.
+    //
+    // WHAT IS OUTSIDE THE WINDOW IS DELIBERATELY UNSTATED here and in the copy
+    // on the scene. It reads as a lit skyline; Melissa has said she may play it
+    // as her porch instead, and neither the blurb nor the synopsis commits to
+    // either, so that stays her call rather than something the site has already
+    // decided for her.
     id: "apartment",
     label: "The Apartment",
-    blurb: "Her place in the city, and the hours nobody else sees.",
+    blurb: "Her own place in Denver, and the hours nobody else sees.",
   },
   {
     // No `environmentSlug` — the fair is a night, not a room, and it is the

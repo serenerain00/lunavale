@@ -244,12 +244,13 @@ which is the device the journal side is built on.
 It is **the smile she needed** after a week of getting through this on her own.
 She laughs properly, for the first time since the boxes.
 
-> **TO CONFIRM — where she is.** Melissa's brief placed this after "her week at
-> the lakehouse", and the footage is plainly **not** the lakehouse: a city
-> bedroom, lit buildings through the glass, a TV on the dresser. It reads as
-> her **Denver apartment**, on a night after the lakehouse week, and it is
-> filed there. If the lakehouse was meant, the scene and the journal entry both
-> move.
+**Where she is: her own place in Denver** *(settled 2026-08-04)* — a night
+after the lakehouse week, not the lakehouse itself. Filed under the new
+`apartment` place, which is the same room as "The Apartment" clip.
+
+*The lights outside the window are deliberately unnamed in all the copy. They
+read as a skyline; Melissa may play them as her porch. Nothing on the site
+commits to either.*
 
 ### Rick — Josh's father
 *(Canon set by Melissa, 2026-07-28. **Tertiary** — see the note at the top of

@@ -403,12 +403,13 @@ export const videos: Video[] = [
     // would put someone on the cast page that nobody can actually meet. One
     // line to change if that call goes the other way.
     //
-    // LOCATION — WORTH CONFIRMING. Melissa's brief said this comes after "her
-    // week at the lakehouse", and the footage is plainly NOT the lakehouse: a
-    // city bedroom, buildings lit through the glass, a TV on the dresser. It
-    // matches "The Apartment" clip, which had been filed under nowhere until
-    // now. Read as her Denver place, on a night after the lakehouse week — but
-    // if the intent was the lakehouse, this and the journal entry both move.
+    // LOCATION — settled 2026-08-04. Her own place in Denver, on a night after
+    // the lakehouse week, not the lakehouse itself. Same room as "The
+    // Apartment" clip, which had been filed under nowhere until now.
+    //
+    // Nothing here names what is lit outside the window. It reads as a
+    // skyline; Melissa may play it as her porch. Leaving it unsaid costs the
+    // copy nothing and keeps the decision hers.
     //
     // THE POSTER IS THE PREMISE, again by luck: she is mid-journal-entry, pen
     // in hand, and the iPad beside her is lighting up with Avery's name. The

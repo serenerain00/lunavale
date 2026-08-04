@@ -212,6 +212,13 @@ export const people = [
     label: "Avery",
     blurb: "Ten years younger, and the only one who doesn't have to ask.",
   },
+  {
+    // Tyson's oldest friend, added 2026-08-04. Ten years a SEAL beside him,
+    // and the only person who knows about the promise to Josh.
+    id: "cole",
+    label: "Cole",
+    blurb: "The one Tyson talks to when the subject is Luna.",
+  },
 ] as const satisfies readonly Person[];
 
 export interface Person {

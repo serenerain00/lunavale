@@ -105,6 +105,9 @@ const SIGNATURES: Record<PersonId, string> = {
   rick: "— R",
   cathy: "— C",
   avery: "— A",
+  // Cathy already has "— C", so Cole cannot. Initials are not unique across a
+  // growing cast and this record is the place that notices.
+  cole: "— Cole",
 };
 
 function signature(note: SetNote): string {

@@ -476,6 +476,42 @@ export const videos: Video[] = [
     about: ["luna"],
   },
   {
+    // Cole's introduction, and the first time the promise to Josh is said out
+    // loud anywhere in the story.
+    //
+    // PREMIUM, and this one is not a close call. Every other recent scene went
+    // free because it had no turn in it to protect — this is the opposite. It
+    // contains the mechanism the whole deadlock runs on: Tyson gave Josh his
+    // word he would help win Luna back, months before he understood what he
+    // felt. That is the thing people are paying to find out, so the title and
+    // synopsis are written to intrigue on a locked card without giving it up.
+    //
+    // TRIMMED AT 41.3s. Both delivered masters ran long: the first had 63
+    // seconds of black on the end, and the replacement still carried a CapCut
+    // watermark outro after the hard cut. Neither belongs on a paid scene.
+    // Source of truth is tyson-cole-bar-trimmed.mov beside the master; if the
+    // scene is ever re-exported, check the tail before encoding.
+    //
+    // PLACE — filed under `bar`, and worth a second look. The sign on screen
+    // reads BURNETT'S BILLIARDS & BAR and it is plainly NOT the bar Tyson
+    // takes Luna dancing to — different room, pool tables, different dressing.
+    // The existing blurb ("room to say the real thing") happens to fit this
+    // scene exactly, so it sits fine for now. If Burnett's is Cole's, it
+    // probably wants its own place.
+    slug: "tyson-cole-bar",
+    title: "What Would You Do",
+    synopsis:
+      "There is one subject Tyson can't raise with Luna. So he takes it to the only other person who knows all of them.",
+    file: "tyson-cole-bar.proxy.mp4",
+    poster: "/posters/tyson-cole-bar.jpg",
+    durationSeconds: 41,
+    access: "premium",
+    mature: false,
+    feelings: ["distance", "lies"],
+    place: "bar",
+    about: ["tyson", "cole", "luna", "josh"],
+  },
+  {
     // One scene, two edits — the same night, cut twice. The public one is the
     // DIALOGUE cut; members get the SCORED one in its place.
     //

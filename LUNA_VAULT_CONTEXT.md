@@ -117,8 +117,10 @@ whole danger of him — and the reason Luna cannot separate the thrill from the
 fear.
 
 ### Tyson — her best friend of twenty years
-**Ex-military.** Friend of the family, **distant cousin of Josh**, and helps
-Josh on the **farm** here and there (they're friends and co-workers). Into
+**38** *(2026-08-04)*. **Navy SEAL for ten years** — "ex-military" everywhere
+above means this specifically. Friend of the family, **distant cousin of
+Josh**, and helps Josh on the **farm** here and there (they're friends and
+co-workers). Into
 **extreme sports** — snowboarding, motorcycles, track days — and owns a
 **black 2020 Porsche Carrera** that's his baby (he'll ride a motorcycle
 recklessly but won't take a hard corner with Luna in the passenger seat).
@@ -149,6 +151,39 @@ feelings for him** in that window, and so did he. **Neither will admit it.**
 When Josh comes back, Tyson **starts putting distance** between himself and
 Luna — because distance is the only way he can keep hiding that he's in love
 with her.
+
+### Cole — Tyson's oldest friend
+*(Canon set by Melissa, 2026-08-04. **Tertiary**, but load-bearing: he is the
+only person Tyson can say any of this to.)*
+
+**40**, two years older than Tyson, and **local to Denver**. They were **Navy
+SEALs together for ten years** — Cole was **two years ahead of him at the
+academy** and already in when Tyson arrived — and they have kept in touch ever
+since.
+
+He is **Tyson's closest friend after Luna**, and specifically **the person
+Tyson goes to when the thing he needs to say is about Luna.** That is the
+function: Luna is the one he talks to about everything, so the one subject he
+cannot raise with her needs somewhere else to go.
+
+**He knows all of them.** He knows **Luna** — they have met several times,
+birthday parties and barbecues, and she knows who he is. He knows **Josh**, and
+he knows **how close Josh and Tyson are** — that they are family. So when he
+gives Tyson advice he is not weighing an abstraction; he knows every person it
+would cost.
+
+**Crucially, he knows about the promise** (below). He is the only one who does.
+
+> **OBSERVED, NOT YET CANON — he works the bar.** In the footage Cole is
+> **behind the bar** in a staff shirt reading **BURNETT'S BILLIARDS & BAR**,
+> pouring, with the back-bar behind him. It is legible on screen, so it is
+> effectively established. It is also **not the same bar** as the one Tyson
+> takes Luna dancing to — different room, pool tables, different dressing.
+> Worth confirming whether Burnett's is his, and whether it becomes its own
+> place in the taxonomy.
+
+*Melissa is writing Luna's journal entry about Cole and Tyson's friendship
+herself — it is hers, not to be drafted.*
 
 ### Cathy — Luna's mother
 *(Canon set by Melissa, 2026-08-03. **Tertiary**, per the note above — the
@@ -327,6 +362,41 @@ version of him. She is trying to get back to Mexico.
 - **Luna is torn** between Josh and Tyson as her future — and stays *with Josh*
   giving it another try, which is what makes everything harder.
 
+### THE PROMISE — why Tyson can't just say it
+*(Canon set by Melissa, 2026-08-04. This is the mechanism the whole deadlock
+runs on, and it was missing from this document until now.)*
+
+**Josh asked Tyson to help him get Luna back, and Tyson said yes.**
+
+It happened the way it would: Tyson does contract work on Josh's farm, so the
+two of them are together constantly, and over those months **Josh talked about
+her.** He wanted to try again. He was going to reach out. He asked for
+**Tyson's support, his good word, and a nudge in the right direction** — from
+the man who has been Luna's best friend for twenty years and whose opinion she
+actually trusts.
+
+**Tyson gave his word before he understood what he felt.** The promise came a
+few months *ahead* of him working out that he was in love with her — so he did
+not agree to it dishonestly, and he cannot get out of it honourably.
+
+**THE TIMING IS EXACT AND IT MATTERS:**
+
+- The separation runs **six months**.
+- **Tyson starts falling for Luna about four months in** — i.e. roughly **two
+  months before Josh calls her** for the coffee and the dinner.
+- So by the time Josh actually makes his move, Tyson has been in love with her
+  for two months **and is already committed to helping.**
+
+> **This is why the deadlock is a trap rather than shyness.** Tyson is not
+> staying quiet because he is scared. He is staying quiet because speaking
+> would make him a man who took his cousin's wife-in-all-but-name after
+> promising to help win her back — and Josh is family. The distance he puts
+> between himself and Luna is the only way to keep a promise he no longer
+> wants to have made.
+
+**Only Cole knows.** Luna does not — which is why she reads the distance as
+something she did.
+
 ### The night at the bar — month one
 *(Canon set by Melissa, 2026-07-31.)*
 
@@ -382,6 +452,23 @@ feels**, which is the engine already described above.
 **Luna is left with nothing to hold**, and reads the closing-out as something
 she has done. The reader knows more than she does here, and that gap is the
 point.
+
+### Tyson and Cole at the bar — asking the only person he can
+*(Canon set by Melissa, 2026-08-04. Shot; awaiting a recut master — the first
+export ran 1:44 with 63 seconds of black on the end. The scene itself is
+**40 seconds**.)*
+
+Tyson goes to Cole and **asks him what he would do.** It is the only place the
+question can be asked, because the two people it is about are the two people he
+cannot ask.
+
+**Cole does not tell him what to do.** What he says is closer to: **you are
+going to lose her if you keep avoiding her — and I know you made a promise.**
+Then he leaves it there. He sympathises rather than advising, because he can
+see there is no clean move, and saying so is the most honest thing available.
+
+That refusal is the point of the scene. Nobody arrives at an answer. Tyson
+came for permission and got understanding instead, which is worse.
 
 ### The drive — the night she leaves the farm
 *(Canon set by Melissa, 2026-08-02. Much later than the bar: Josh is back, and

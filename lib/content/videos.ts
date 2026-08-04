@@ -442,53 +442,29 @@ export const videos: Video[] = [
     place: "fair",
     about: ["luna", "josh", "tyson"],
   },
-  {
-    // One scene, two edits — and unusually, the public one did not exist until
-    // it was built. The master is 2m53s of a single locked-off wide shot with
-    // no dialogue: Luna alone in the cab, driving to Tyson after the worst
-    // night with Josh, losing a fight with her own breathing. You cannot make
-    // a preview out of that by taking the first fifteen seconds, because the
-    // first fifteen seconds of an unbroken performance are the setup.
-    //
-    // So the public cut is ASSEMBLED — five beats dissolved together, in the
-    // order the panic escalates. The spans are recorded in
-    // scripts/make-preview-cut.sh; rebuild with:
-    //   scripts/make-preview-cut.sh luna-truck-breakdown
-    //   scripts/optimize-media.sh import luna-truck-breakdown \
-    //     stories/luna-truck-breakdown/luna-truck-breakdown-preview.mp4 2
-    //
-    // WHAT THE PREVIEW WITHHOLDS is the point of it. It draws only from the
-    // first 70 seconds. Tyson does not appear until 2:06, and the scene's
-    // whole reason for existing — her getting to him, "I can't", "he held
-    // me…", him deciding for her that they are going to the lakehouse — is in
-    // the last forty seconds. A visitor watches her alone and does not learn
-    // whether anyone is waiting at the end of the drive.
-    //
-    // The synopsis says she is driving to Tyson because the poster and the
-    // preview would make a mystery of it for no gain. It does not say why she
-    // left, and it must not: what Josh did is off screen, unfinished canon
-    // (LUNA_VAULT_CONTEXT.md), and hers to tell in the journal.
-    slug: "luna-truck-breakdown",
-    title: "Breathe",
-    synopsis:
-      "She leaves the farm at night without telling anyone and drives to Tyson. The whole way there, she is trying to hold herself together.",
-    file: "luna-truck-breakdown.proxy.mp4",
-    poster: "/posters/luna-truck-breakdown.jpg",
-    durationSeconds: 15,
-    access: "free",
-    mature: false,
-    // On the public cut too — fifteen seconds of it is still fifteen seconds
-    // of a panic attack, and the note has to be readable before the thing it
-    // describes plays, not only for members.
-    notes: ["panic"],
-    premium: {
-      file: "luna-truck-breakdown-full.proxy.mp4",
-      durationSeconds: 173,
-    },
-    feelings: ["hurt", "distance"],
-    place: "downtown",
-    about: ["luna", "tyson"],
-  },
+  // "Breathe" (luna-truck-breakdown) was PULLED 2026-08-03, pending the recut
+  // master. Melissa is replacing the source with a longer cut, so the fifteen-
+  // second preview has to be reassembled against new picture and both proxies
+  // re-encoded — and until that happens there is nothing behind this scene in
+  // Blob. It shipped for a few hours with a card that 404'd on play, which is
+  // why it is out rather than merely unlisted: `hidden` would have taken it
+  // off the shelves and left /watch/luna-truck-breakdown just as broken.
+  //
+  // Same treatment as ty-luna-lake-fight above, for the same reason.
+  //
+  // TO RESTORE, once stories/luna-truck-breakdown/luna-truck-breakdown.mp4 is
+  // the new master:
+  //   scripts/make-preview-cut.sh luna-truck-breakdown      (repick the beats)
+  //   scripts/optimize-media.sh import luna-truck-breakdown \
+  //     stories/luna-truck-breakdown/luna-truck-breakdown-preview.mp4 2
+  //   scripts/optimize-media.sh proxy-only luna-truck-breakdown-full \
+  //     stories/luna-truck-breakdown/luna-truck-breakdown.mp4
+  //   node --env-file=.env.local scripts/upload-media.mjs luna-truck-breakdown
+  // then bring the entry back:  git show c060262 -- lib/content/videos.ts
+  //
+  // Her journal entry "the-drive" and the canon STAY. The entry keeps its
+  // sceneSlug and simply stops rendering a scene link — getVideo returns
+  // undefined and every surface already handles that.
   {
     // One scene, two edits. The public cut is the morning; members get the
     // longer, explicit one in its place — see `premium` and the note on the

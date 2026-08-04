@@ -19,9 +19,15 @@ import type { TakeBeat } from "@/lib/content/takes";
 
 interface TakeReelProps {
   beat: TakeBeat;
+  /**
+   * Poster URLs by take slug, signed in one batch while the page rendered.
+   * Absent in local development, where there is no Blob to sign against and
+   * /api/take reads the file off disk instead. See lib/media/presign.ts.
+   */
+  posters?: Record<string, string>;
 }
 
-export function TakeReel({ beat }: TakeReelProps) {
+export function TakeReel({ beat, posters }: TakeReelProps) {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const [failed, setFailed] = useState(false);
 
@@ -102,7 +108,7 @@ export function TakeReel({ beat }: TakeReelProps) {
                     have. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={`/api/take/${take.slug}`}
+                  src={posters?.[take.slug] ?? `/api/take/${take.slug}`}
                   alt={`${beat.label} — take ${take.n}${
                     take.used ? ", the one in the finished scene" : ""
                   }`}

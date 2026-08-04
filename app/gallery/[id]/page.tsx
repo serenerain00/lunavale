@@ -13,6 +13,7 @@ import {
   stillSrc,
 } from "@/lib/content/gallery";
 import { getEntry } from "@/lib/content/journal";
+import { signGalleryStills } from "@/lib/media/presign";
 import { getPlace } from "@/lib/content/taxonomy";
 import { getVideo } from "@/lib/content/videos";
 
@@ -62,15 +63,32 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
   // A gated gallery may open its first few stills to everybody
   // (`freePreviewCount`), so a non-member gets a list too — just a short one.
   const shown = allowed ? gallery.count : (gallery.freePreviewCount ?? 0);
+
+  // Sign the gated stills in one batch instead of letting each tile call
+  // /api/still — one function invocation per image, and another on every
+  // reload, since a 307 is not cacheable. The open preview stills are ordinary
+  // /public files and are left alone. See lib/media/presign.ts; null means no
+  // Blob configured, and stillSrc's route URLs still work.
+  const gatedNumbers =
+    gallery.gated && allowed
+      ? Array.from({ length: shown }, (_, i) => i + 1).filter(
+          (n) => n > (gallery.freePreviewCount ?? 0),
+        )
+      : [];
+  const signed = gatedNumbers.length
+    ? await signGalleryStills(gallery.id, gatedNumbers)
+    : null;
+
   const items: ViewStill[] = shown
     ? Array.from({ length: shown }, (_, i) => {
         const n = i + 1;
         const meta = stillMeta(gallery, n);
         const j = meta?.journal;
         const jEntry = j ? getEntry(j.entryId) : undefined;
+        const direct = signed?.get(n);
         return {
-          thumb: stillSrc(gallery, n, "thumb"),
-          full: stillSrc(gallery, n, "full"),
+          thumb: direct?.thumb || stillSrc(gallery, n, "thumb"),
+          full: direct?.full || stillSrc(gallery, n, "full"),
           caption: meta?.caption,
           journal:
             j && jEntry

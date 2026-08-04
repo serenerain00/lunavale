@@ -22,6 +22,7 @@ import {
   takesForScene,
   unusedCount,
 } from "@/lib/content/takes";
+import { signTakePosters } from "@/lib/media/presign";
 
 interface HowThisCameTogetherProps {
   sceneSlug: string;
@@ -29,7 +30,7 @@ interface HowThisCameTogetherProps {
   member: boolean;
 }
 
-export function HowThisCameTogether({
+export async function HowThisCameTogether({
   sceneSlug,
   member,
 }: HowThisCameTogetherProps) {
@@ -39,6 +40,18 @@ export function HowThisCameTogether({
   const total = takeCount(scene);
   const unused = unusedCount(scene);
   const beats = scene.beats.length;
+
+  // Signed here, once, for the whole grid — and only after `member` has been
+  // decided upstream. Twenty-nine tiles used to mean twenty-nine calls to
+  // /api/take, and another twenty-nine on every reload, because a 307 is not
+  // cacheable. See lib/media/presign.ts. Null (no Blob configured, i.e. local
+  // development) falls back to the route, which reads the files off disk.
+  const posters = member
+    ? await signTakePosters(
+        sceneSlug,
+        scene.beats.flatMap((b) => b.takes.map((t) => t.slug)),
+      )
+    : null;
 
   return (
     <section
@@ -61,7 +74,11 @@ export function HowThisCameTogether({
       {member ? (
         <div className="mt-8">
           {scene.beats.map((beat) => (
-            <TakeReel key={beat.id} beat={beat} />
+            <TakeReel
+              key={beat.id}
+              beat={beat}
+              posters={posters ? Object.fromEntries(posters) : undefined}
+            />
           ))}
         </div>
       ) : (

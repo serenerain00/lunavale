@@ -178,6 +178,40 @@ export const journal: JournalEntry[] = [
     ],
   },
   {
+    /* Avery's first appearance, a night or two after the call with their
+     * mother — Cathy got nothing out of Luna and rang her other daughter
+     * about it.
+     *
+     * THE DEVICE IS IN THE FOOTAGE, not invented: the scene opens on Luna
+     * writing in this journal, pen in hand, when the iPad lights up. So the
+     * entry is the one she was in the middle of, abandoned mid-thought and
+     * finished afterwards. It is the only entry in the book that gets
+     * interrupted, and the interruption is the good news.
+     *
+     * Free, and it should stay free even if the run around it is gated. The
+     * pages either side of it are Luna managing people; this is the one where
+     * somebody manages her, and it is the least guarded she is in the whole
+     * first act.
+     */
+    id: "avery-called",
+    dateline: "Interrupted, and I'm glad",
+    place: "apartment",
+    about: ["luna", "avery", "cathy"],
+    sceneSlug: "luna-avery-ipad",
+    access: "free",
+    mature: false,
+    body: [
+      "I was three lines into feeling sorry for myself when the iPad went off, and it was my sister, and I have left those three lines in because they were true at the time.",
+      "Mom got nothing out of me on Tuesday, so obviously she rang Avery. That is how it works in our family — she cannot fix it, so she deploys the one person I have never once been able to lie to.",
+      "And Avery didn't ask how I was. She has never asked me that in her life. She said hi and then talked for eleven minutes about a man at her work who microwaves fish, and by the end of it I was laughing so hard I had to put the pen down.",
+      "Ten years between us. When she was born I was already old enough to hold her properly, and for a long time she was a small person I was responsible for. I don't know exactly when that turned around. Tonight it was very obviously the other way up and neither of us said anything about it.",
+      "She let me get to it myself. Somewhere around minute forty I said the thing out loud — that I don't know what I'm doing — and she didn't flinch and she didn't advise me. She said okay. Tell me the rest.",
+      "That is the difference between her and Mom and I would never say it to either of them. Mom loves me at me. Avery just leaves the door open and waits.",
+      "She's coming out at some point. She said it like it was already booked and I think she may have actually booked it.",
+      "Two hours. My face hurts. I have not laughed like that since before the boxes, and I want it written down that it was my little sister who did it, because she will absolutely ask me one day and I intend to have proof.",
+    ],
+  },
+  {
     id: "tyson-shows-up",
     dateline: "Week two, and he's here again",
     place: "lakehouse",

@@ -104,6 +104,7 @@ const SIGNATURES: Record<PersonId, string> = {
   josh: "— J",
   rick: "— R",
   cathy: "— C",
+  avery: "— A",
 };
 
 function signature(note: SetNote): string {

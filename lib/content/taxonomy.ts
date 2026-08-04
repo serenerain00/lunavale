@@ -119,6 +119,18 @@ export const places = [
     environmentSlug: "downtown",
   },
   {
+    // Her place in Denver. Not new material so much as a location that was
+    // always here and never named: the "The Apartment" clip has been filed
+    // under nothing since it landed, and it is plainly the same room — same
+    // city bokeh through the same glass at night.
+    //
+    // Distinct from `downtown`, which is the restaurant and the drive. This is
+    // where she is when the day is over.
+    id: "apartment",
+    label: "The Apartment",
+    blurb: "Her place in the city, and the hours nobody else sees.",
+  },
+  {
     // No `environmentSlug` — the fair is a night, not a room, and it is the
     // one place in the world that will not be there next week. Filed as a
     // place because the scene has to live somewhere true, and folding an
@@ -186,6 +198,13 @@ export const people = [
     label: "Cathy",
     blurb:
       "Two thousand miles away in Atlanta, defending a man she only half knows.",
+  },
+  {
+    // Luna's younger sister, named 2026-08-04. Ten years between them, both
+    // ends of the same open door. Still in Atlanta with their mother.
+    id: "avery",
+    label: "Avery",
+    blurb: "Ten years younger, and the only one who doesn't have to ask.",
   },
 ] as const satisfies readonly Person[];
 

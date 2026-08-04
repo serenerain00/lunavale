@@ -20,9 +20,14 @@
 #   - Files sort by name within a beat, which is the order they were made in
 #     and the order the story is told in. Kling's own filenames already sort
 #     correctly; leave them alone.
-#   - Prefix exactly one file per beat with `used-` — the take that made the
-#     final cut. That star is doing most of the narrative work here, and a beat
-#     without one just shows no star.
+#   - Prefix with `used-` any take that made the final cut. That star is doing
+#     most of the narrative work here, and a beat without one just shows no
+#     star.
+#
+#     More than one per beat is FINE and often correct. In an intercut
+#     conversation the edit returns to the same setup repeatedly and pulls a
+#     different generation each time — "The Phone Call" uses four of the six
+#     Cathy takes. A beat is a setup, not a single cut.
 #
 # WHY THE HORRIBLE ONES STAY. The failures are the only evidence that the good
 # frames were chosen rather than found, which is the entire reason a member
@@ -92,7 +97,7 @@ while IFS= read -r beat_dir; do
     # Flat in stories/, deliberately: the stream route requires media to sit
     # directly in that directory and refuses anything that resolves elsewhere.
     # Long filenames are the cost of keeping that check as simple as it is.
-    ffmpeg -y -loglevel error -i "$take_src" \
+    ffmpeg -nostdin -y -loglevel error -i "$take_src" \
       -vf "scale=-2:$TAKE_HEIGHT" \
       -c:v libx264 -preset medium -crf "$TAKE_CRF" -pix_fmt yuv420p \
       -c:a aac -b:a 128k -movflags +faststart \
@@ -101,10 +106,10 @@ while IFS= read -r beat_dir; do
     # Poster frame for the grid. NOT in public/ — a take's frame is as
     # members-only as the take, so it lives beside the private stills and is
     # served through the gated /api/take route.
-    ffmpeg -y -loglevel error -ss 0.5 -i "$take_src" -frames:v 1 \
+    ffmpeg -nostdin -y -loglevel error -ss 0.5 -i "$take_src" -frames:v 1 \
       -vf "scale=$THUMB_WIDTH:-2" -q:v 5 "$poster_dir/$take_slug.jpg"
 
-    dur="$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$take_src")"
+    dur="$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$take_src" </dev/null)"
 
     used=""
     case "$(basename "$take_src")" in
@@ -125,9 +130,7 @@ while IFS= read -r beat_dir; do
   [ "$n" -gt 0 ] || continue
   beat_count=$((beat_count + 1))
 
-  if [ "$beat_used" -gt 1 ]; then
-    echo "  warning: beat '$beat_label' marks $beat_used takes as used — at most one should be" >&2
-  elif [ "$beat_used" -eq 0 ]; then
+  if [ "$beat_used" -eq 0 ]; then
     echo "  note: beat '$beat_label' has no used- take, so nothing will be starred" >&2
   fi
 

@@ -28,6 +28,8 @@
 
 import type { AccessLevel } from "@/lib/content/videos";
 
+import { lunaCathyPhoneTakes } from "@/lib/content/takes-data/luna-cathy-phone";
+
 /** One attempt at one beat. */
 export interface Take {
   /**
@@ -43,7 +45,13 @@ export interface Take {
   /** Position within its beat, 1-based — the order they were made in. */
   n: number;
   durationSeconds: number;
-  /** True for the take that is in the finished scene. At most one per beat. */
+  /**
+   * True for a take that made the finished scene.
+   *
+   * More than one per beat is normal. In an intercut conversation the edit
+   * returns to the same setup repeatedly and pulls a different generation each
+   * time — "The Phone Call" uses four of its six Cathy takes.
+   */
   used?: boolean;
 }
 
@@ -70,14 +78,12 @@ export const TAKES_ACCESS: AccessLevel = "premium";
  * globbed: adding a scene should be a line someone reviewed, and the app
  * should not gain content because a stray folder appeared on disk.
  *
- * EMPTY ON PURPOSE, for now. The machinery is finished and the first scene's
- * raw takes have not been sorted into beat folders yet — see
- * scripts/import-takes.sh for the layout. Running it writes
- * lib/content/takes-data/<scene>.ts and prints the one import line to add
- * here. Until then every surface degrades to nothing rendered, which is the
- * correct empty state rather than a placeholder.
+ * Add a scene by sorting its raw clips into beat folders and running
+ * scripts/import-takes.sh, which writes lib/content/takes-data/<scene>.ts and
+ * prints the import line to add here. A scene with no takes renders nothing
+ * rather than an empty shell.
  */
-export const takes: SceneTakes[] = [];
+export const takes: SceneTakes[] = [lunaCathyPhoneTakes];
 
 /** Proxy basename inside stories/, for the gated stream route. */
 export function takeFile(slug: string): string {

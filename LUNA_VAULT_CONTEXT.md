@@ -72,11 +72,11 @@ every important thing that happens to her there happens on her own ground.
 **tertiary**: they exist to explain one of the three, and the story does not
 become theirs.
 
-That includes **Rick**, despite the amount written about him here. It will also
-include **Luna's mother**, who surfaces later, and **others still to come**.
-Weight of detail in this document is not a measure of standing — Rick has a
-long section because his dynamic with Josh needs explaining, not because he is
-a fourth lead.
+That includes **Rick**, despite the amount written about him here. It includes
+**Cathy** and **Avery**, who have both since arrived, and **others still to
+come**. Weight of detail in this document is not a measure of standing — Rick
+has a long section because his dynamic with Josh needs explaining, not because
+he is a fourth lead.
 
 ### Luna — the protagonist
 The story is her interior life. She has a **streak**: she likes danger (that's
@@ -157,9 +157,8 @@ first of the "others" that section anticipated.)*
 **65.** Lives in **Atlanta, Georgia**, which matters more than a biographical
 detail normally would: Luna is in **Colorado**, so Cathy is two thousand miles
 from a daughter she is frightened for and can do nothing but phone. She is
-**divorced**, and has **two daughters** — Luna, and a **sister who is not named
-or cast yet.** The sister exists and the family all know each other; she stays
-off screen until Melissa knows who she is.
+**divorced**, and has **two daughters** — Luna, and **Avery**, ten years younger — see
+her own section below. The family all know each other.
 
 She is a **caring, loving, well-meaning mother**, and right now a **worried
 one**. What she is picturing is Luna **alone at the lakehouse, in the dark, in
@@ -216,6 +215,41 @@ anything about it.
 
 *That Luna is at the lakehouse is the point, not set dressing: she has been
 there about a week, because it is where she went.*
+
+### Avery — Luna's younger sister
+*(Canon set by Melissa, 2026-08-04. **Tertiary.** She is the sister the Cathy
+section had been holding a space for since 2026-08-03 — now named and cast.)*
+
+**Ten years younger than Luna**, and still in **Atlanta**, where their mother
+is. Luna is in Denver, so the sisters are as far apart as Luna and Cathy are.
+
+They have **always had an open relationship** — nothing withheld, in either
+direction — and **both of them have grown to miss the other.** The ten years
+between them stopped mattering somewhere along the way, and neither has ever
+said when.
+
+**How she gets in when nobody else can.** Cathy told Avery she had spoken to
+Luna, so Avery rings — and she is not calling to find out whether Luna is all
+right. **She already knows she isn't.** That is the whole difference between
+the two calls: their mother asks, and Avery doesn't have to.
+
+#### The iPad call
+*CUT AND PUBLISHED 2026-08-04 as **"Little Sister"** (`luna-avery-ipad`),
+1:35, free. Luna's account of it is the journal entry **"avery-called"**.*
+
+A night or two after Cathy's call. Luna is **in bed, writing in her journal**,
+when the iPad lights up with Avery's name — so the call **interrupts an entry**,
+which is the device the journal side is built on.
+
+It is **the smile she needed** after a week of getting through this on her own.
+She laughs properly, for the first time since the boxes.
+
+> **TO CONFIRM — where she is.** Melissa's brief placed this after "her week at
+> the lakehouse", and the footage is plainly **not** the lakehouse: a city
+> bedroom, lit buildings through the glass, a TV on the dresser. It reads as
+> her **Denver apartment**, on a night after the lakehouse week, and it is
+> filed there. If the lakehouse was meant, the scene and the journal entry both
+> move.
 
 ### Rick — Josh's father
 *(Canon set by Melissa, 2026-07-28. **Tertiary** — see the note at the top of

@@ -393,6 +393,40 @@ export const videos: Video[] = [
     about: ["luna", "cathy", "josh"],
   },
   {
+    // Avery's introduction, and the answer to the scene above it. Cathy got
+    // nothing out of Luna and rang her other daughter about it; Avery calls
+    // already knowing, which is the entire difference between them.
+    //
+    // FREE, for the same reason "Long Distance" is: no turn to protect, a new
+    // character nobody would otherwise know exists, and it is the warmest
+    // ninety seconds in the library. Gating a character's only appearance
+    // would put someone on the cast page that nobody can actually meet. One
+    // line to change if that call goes the other way.
+    //
+    // LOCATION — WORTH CONFIRMING. Melissa's brief said this comes after "her
+    // week at the lakehouse", and the footage is plainly NOT the lakehouse: a
+    // city bedroom, buildings lit through the glass, a TV on the dresser. It
+    // matches "The Apartment" clip, which had been filed under nowhere until
+    // now. Read as her Denver place, on a night after the lakehouse week — but
+    // if the intent was the lakehouse, this and the journal entry both move.
+    //
+    // THE POSTER IS THE PREMISE, again by luck: she is mid-journal-entry, pen
+    // in hand, and the iPad beside her is lighting up with Avery's name. The
+    // scene and the journal feature explaining each other in one frame.
+    slug: "luna-avery-ipad",
+    title: "Little Sister",
+    synopsis:
+      "Their mother has already made her calls. Avery rings from Atlanta knowing the answer, and for the first time in a week Luna laughs.",
+    file: "luna-avery-ipad.proxy.mp4",
+    poster: "/posters/luna-avery-ipad.jpg",
+    durationSeconds: 95,
+    access: "free",
+    mature: false,
+    feelings: ["trust", "grief"],
+    place: "apartment",
+    about: ["luna", "avery"],
+  },
+  {
     // The whole night, free — Melissa's call, 2026-07-31. It was briefly a 30s
     // teaser with the full cut behind the membership (Video.premium); she
     // decided the scene should be open instead. The teaser still exists at

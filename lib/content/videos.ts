@@ -492,12 +492,13 @@ export const videos: Video[] = [
     // Source of truth is tyson-cole-bar-trimmed.mov beside the master; if the
     // scene is ever re-exported, check the tail before encoding.
     //
-    // PLACE — filed under `bar`, and worth a second look. The sign on screen
-    // reads BURNETT'S BILLIARDS & BAR and it is plainly NOT the bar Tyson
-    // takes Luna dancing to — different room, pool tables, different dressing.
-    // The existing blurb ("room to say the real thing") happens to fit this
-    // scene exactly, so it sits fine for now. If Burnett's is Cole's, it
-    // probably wants its own place.
+    // PLACE — `burnetts`, settled 2026-08-04. The bar is Cole's; his surname
+    // is Burnett. Kept apart from `bar` (where Tyson takes Luna dancing)
+    // because they are different rooms doing different jobs, and because it
+    // matters that Tyson came HERE: to his friend's own counter, where Cole is
+    // working and can't leave, in a room with other people in it. The least
+    // private place to say the most private thing, which is probably the only
+    // reason he manages to say it.
     slug: "tyson-cole-bar",
     title: "What Would You Do",
     synopsis:
@@ -508,7 +509,7 @@ export const videos: Video[] = [
     access: "premium",
     mature: false,
     feelings: ["distance", "lies"],
-    place: "bar",
+    place: "burnetts",
     about: ["tyson", "cole", "luna", "josh"],
   },
   {

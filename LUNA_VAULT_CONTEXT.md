@@ -152,7 +152,7 @@ When Josh comes back, Tyson **starts putting distance** between himself and
 Luna — because distance is the only way he can keep hiding that he's in love
 with her.
 
-### Cole — Tyson's oldest friend
+### Cole Burnett — Tyson's oldest friend
 *(Canon set by Melissa, 2026-08-04. **Tertiary**, but load-bearing: he is the
 only person Tyson can say any of this to.)*
 
@@ -174,13 +174,23 @@ would cost.
 
 **Crucially, he knows about the promise** (below). He is the only one who does.
 
-> **OBSERVED, NOT YET CANON — he works the bar.** In the footage Cole is
-> **behind the bar** in a staff shirt reading **BURNETT'S BILLIARDS & BAR**,
-> pouring, with the back-bar behind him. It is legible on screen, so it is
-> effectively established. It is also **not the same bar** as the one Tyson
-> takes Luna dancing to — different room, pool tables, different dressing.
-> Worth confirming whether Burnett's is his, and whether it becomes its own
-> place in the taxonomy.
+**HE OWNS THE BAR** *(confirmed 2026-08-04)*. His surname is **Burnett**, and
+**Burnett's Billiards & Bar** is his — the sign is legible on screen and he is
+behind the counter working it.
+
+That is a better fact than it first looks. It means Tyson is not meeting Cole
+somewhere neutral; he is going **to Cole's place**, where Cole is working and
+cannot leave, and where the conversation happens across a bar with other people
+in the room. It is the least private way to say the most private thing, which
+is exactly why Tyson can manage to say it at all.
+
+**It is NOT the bar Tyson takes Luna dancing to** — different room, pool
+tables, different dressing. Two distinct bars, and they now have distinct
+places in the taxonomy (`burnetts` and `bar`).
+
+> *Loose thread, not a problem:* Tyson took Luna dancing somewhere else rather
+> than to his oldest friend's bar. That may be nothing, or it may be that he
+> was avoiding the one room where Cole would have watched him with her.
 
 *Melissa is writing Luna's journal entry about Cole and Tyson's friendship
 herself — it is hers, not to be drafted.*

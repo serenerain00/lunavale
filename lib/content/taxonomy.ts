@@ -137,6 +137,16 @@ export const places = [
     blurb: "Her own place in Denver, and the hours nobody else sees.",
   },
   {
+    // Cole's bar, confirmed his 2026-08-04 — his surname is Burnett and the
+    // sign is on screen. Kept separate from `bar` rather than folded into it:
+    // they are visibly different rooms, and more to the point they do
+    // different jobs. `bar` is where Tyson takes Luna; this is where he goes
+    // when the thing he needs to say is about her.
+    id: "burnetts",
+    label: "Burnett's",
+    blurb: "Cole's place. Where Tyson says the things he can't say to Luna.",
+  },
+  {
     // No `environmentSlug` — the fair is a night, not a room, and it is the
     // one place in the world that will not be there next week. Filed as a
     // place because the scene has to live somewhere true, and folding an

@@ -49,19 +49,29 @@ export async function GET(
     return new Response("Not found", { status: 404 });
   }
 
-  if (!(await canWatch(media))) {
+  // WHICH FILE THIS REQUEST GETS IS DECIDED HERE, from the viewer's tier and
+  // nothing the client sent. The slug is the same for everybody, so there is
+  // no URL to guess and no second filename on the page to try.
+  //
+  //   allowed + members' cut exists  -> the members' cut
+  //   allowed                        -> the scene
+  //   not allowed + preview exists   -> the opening minute (Video.preview)
+  //   not allowed                    -> refused
+  //
+  // The preview is a SEPARATE, SHORTER FILE. Serving the whole scene and
+  // trusting the player to stop after a minute would deliver every byte of it
+  // to somebody who has not paid; a non-member never receives the real file.
+  let file: string;
+  if (await canWatch(media)) {
+    file =
+      media.premiumFile && (await hasTier(PREMIUM_TIER))
+        ? media.premiumFile
+        : media.file;
+  } else if (media.previewFile) {
+    file = media.previewFile;
+  } else {
     return new Response("Membership required", { status: 403 });
   }
-
-  // Some scenes exist as two edits: a public one and a longer members' cut
-  // (Video.premium). Which one a request gets is decided HERE, from the
-  // viewer's tier — not from anything the client sent. The slug is the same
-  // either way, so there is no URL to guess: a non-member asking for this
-  // scene is served the public file and has no way to name the other.
-  const file =
-    media.premiumFile && (await hasTier(PREMIUM_TIER))
-      ? media.premiumFile
-      : media.file;
 
   // ---- Production path: signed redirect to private Blob storage ------------
   if (blobConfigured()) {

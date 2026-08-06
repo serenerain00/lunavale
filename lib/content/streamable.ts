@@ -29,6 +29,12 @@ export interface Streamable {
    * filename to a client.
    */
   premiumFile?: string;
+  /**
+   * The opening of a members-only piece, served to somebody who may NOT watch
+   * it. See Video.preview — the route falls back to this instead of refusing,
+   * so a visitor gets a real minute of the real scene and then the membership.
+   */
+  previewFile?: string;
 }
 
 export function getStreamable(slug: string): Streamable | undefined {
@@ -39,6 +45,7 @@ export function getStreamable(slug: string): Streamable | undefined {
       file: video.file,
       access: video.access,
       premiumFile: video.premium?.file,
+      previewFile: video.preview?.file,
     };
 
   const clip = getClip(slug);

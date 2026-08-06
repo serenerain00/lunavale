@@ -50,7 +50,13 @@ export default async function WatchPage({ params }: WatchPageProps) {
   // which one actually plays; this only decides what the page SAYS about it,
   // and must agree with that decision or the runtime is a surprise.
   const cut = member && video.premium ? video.premium : null;
-  const runtime = cut ? cut.durationSeconds : video.durationSeconds;
+  // The runtime shown must match the file that is actually going to play, or
+  // the page promises six minutes and delivers one.
+  const runtime = !allowed && video.preview
+    ? video.preview.durationSeconds
+    : cut
+      ? cut.durationSeconds
+      : video.durationSeconds;
   // Her voice, tied to the scene — so it reaches people watching, not only
   // those who go to /journal. Stills from the same event get a link too.
   const journalEntries = entriesForScene(slug);
@@ -89,7 +95,7 @@ export default async function WatchPage({ params }: WatchPageProps) {
 
         <div className="overflow-hidden rounded-xl bg-black ring-1 ring-hairline">
           <div className="relative aspect-video">
-            {allowed ? (
+            {allowed || video.preview ? (
               <VideoPlayer
                 slug={video.slug}
                 poster={video.poster}
@@ -100,6 +106,25 @@ export default async function WatchPage({ params }: WatchPageProps) {
             )}
           </div>
         </div>
+
+        {/* A visitor gets the opening of the scene and then this. Stated once,
+            under the player, with the real numbers — not a countdown over the
+            footage and not a dialog. The player above is genuinely playing the
+            preview file; there is no full version behind it to reach. */}
+        {!allowed && video.preview && (
+          <div className="mt-4 rounded-lg border border-amber/25 bg-amber/[0.04] px-4 py-3 text-sm leading-relaxed text-stone">
+            You&rsquo;re watching the first{" "}
+            {formatDuration(video.preview.durationSeconds)} of{" "}
+            {formatDuration(video.durationSeconds)}. The rest is part of{" "}
+            <Link
+              href="/membership"
+              className="text-amber underline-offset-4 transition-colors duration-(--duration-quick) hover:underline"
+            >
+              the LunaVerse
+            </Link>
+            .
+          </div>
+        )}
 
         <div className="mt-6">
           <div className="flex flex-wrap items-center gap-3 text-xs text-stone">

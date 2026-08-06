@@ -82,6 +82,32 @@ export interface Video {
    */
   premium?: PremiumCut;
   /**
+   * The opening of a members-only scene, played to people who aren't members.
+   *
+   * The model, per Melissa (2026-08-05): a visitor watches the start of any
+   * premium scene and then meets the membership — a real piece of the real
+   * thing rather than a locked poster.
+   *
+   * THIS IS A SEPARATE FILE AND HAS TO BE. The tempting version is to serve
+   * the whole scene and stop the player after a minute, which hands the entire
+   * file to anybody who opens devtools. A non-member is never sent the bytes
+   * of what they have not paid for; the swap happens in the stream route,
+   * server-side, after the entitlement check — the same place the members'
+   * cut is chosen.
+   *
+   * Cut by scripts/make-previews.mjs at the lesser of 60s and a third of the
+   * runtime, always from the opening, and always from `file` rather than
+   * `premium.file` (an explicit cut is the upgrade, not the shop window).
+   *
+   * Only meaningful on `access: "premium"`. Absent means the old behaviour:
+   * the scene is locked outright and the stream route refuses it.
+   */
+  preview?: {
+    /** Basename of the preview proxy inside `stories/`. */
+    file: string;
+    durationSeconds: number;
+  };
+  /**
    * What's in it beyond nudity. `mature` reads as sex to a viewer, so violence
    * and coercive control get their own notes, shown above the player before
    * anything plays. See lib/content/content-notes.ts.
@@ -150,6 +176,10 @@ export const videos: Video[] = [
     durationSeconds: 281,
     access: "premium",
     mature: true,
+    preview: {
+      file: "tyson-luna-lakehouse-fire-preview.proxy.mp4",
+      durationSeconds: 60,
+    },
     feelings: ["desire", "distance"],
     place: "lakehouse",
     about: ["luna", "tyson"],
@@ -164,6 +194,10 @@ export const videos: Video[] = [
     durationSeconds: 155,
     access: "premium",
     mature: true,
+    preview: {
+      file: "tyson-park-fight-preview.proxy.mp4",
+      durationSeconds: 51,
+    },
     feelings: ["hurt", "lies"],
     place: "park",
     about: ["luna", "tyson"],
@@ -190,6 +224,10 @@ export const videos: Video[] = [
     durationSeconds: 71,
     access: "premium",
     mature: true,
+    preview: {
+      file: "luna-tyson-bar-preview.proxy.mp4",
+      durationSeconds: 23,
+    },
     feelings: ["desire", "distance"],
     place: "bar",
     about: ["luna", "tyson"],
@@ -218,6 +256,10 @@ export const videos: Video[] = [
     durationSeconds: 76,
     access: "premium",
     mature: true,
+    preview: {
+      file: "luna-tyson-bathroom-preview.proxy.mp4",
+      durationSeconds: 25,
+    },
     feelings: ["desire", "lies"],
     place: "lakehouse",
     about: ["luna", "tyson"],
@@ -246,6 +288,10 @@ export const videos: Video[] = [
     durationSeconds: 86,
     access: "premium",
     mature: true,
+    preview: {
+      file: "luna-josh-bed-preview.proxy.mp4",
+      durationSeconds: 28,
+    },
     feelings: ["desire", "trust"],
     place: "farmhouse",
     about: ["luna", "josh"],
@@ -263,6 +309,10 @@ export const videos: Video[] = [
     durationSeconds: 154,
     access: "premium",
     mature: true,
+    preview: {
+      file: "luna-josh-kitchen-kiss-preview.proxy.mp4",
+      durationSeconds: 51,
+    },
     feelings: ["desire", "trust"],
     place: "farmhouse",
     about: ["luna", "josh"],
@@ -277,6 +327,10 @@ export const videos: Video[] = [
     durationSeconds: 115,
     access: "premium",
     mature: true,
+    preview: {
+      file: "luna-josh-dinner-house-preview.proxy.mp4",
+      durationSeconds: 38,
+    },
     feelings: ["trust", "distance"],
     place: "farmhouse",
     about: ["luna", "josh"],
@@ -291,6 +345,10 @@ export const videos: Video[] = [
     durationSeconds: 263,
     access: "premium",
     mature: true,
+    preview: {
+      file: "luna-josh-house-preview.proxy.mp4",
+      durationSeconds: 60,
+    },
     feelings: ["trust", "distance"],
     place: "farmhouse",
     about: ["luna", "josh"],
@@ -353,6 +411,10 @@ export const videos: Video[] = [
     durationSeconds: 284,
     access: "premium",
     mature: true,
+    preview: {
+      file: "luna-josh-beach-preview.proxy.mp4",
+      durationSeconds: 60,
+    },
     feelings: ["desire", "trust"],
     place: "mexico",
     about: ["luna", "josh"],
@@ -471,6 +533,10 @@ export const videos: Video[] = [
     durationSeconds: 287,
     access: "premium",
     mature: true,
+    preview: {
+      file: "luna-bathtub-preview.proxy.mp4",
+      durationSeconds: 60,
+    },
     feelings: ["grief", "desire"],
     place: "farmhouse",
     about: ["luna"],
@@ -510,6 +576,10 @@ export const videos: Video[] = [
     durationSeconds: 367,
     access: "premium",
     mature: true,
+    preview: {
+      file: "josh-luna-wall-preview.proxy.mp4",
+      durationSeconds: 60,
+    },
     notes: ["strangling", "coercion", "control"],
     feelings: ["hurt", "lies"],
     place: "farmhouse",
@@ -548,6 +618,10 @@ export const videos: Video[] = [
     durationSeconds: 41,
     access: "premium",
     mature: false,
+    preview: {
+      file: "tyson-cole-bar-preview.proxy.mp4",
+      durationSeconds: 13,
+    },
     feelings: ["distance", "lies"],
     place: "burnetts",
     about: ["tyson", "cole", "luna", "josh"],
@@ -651,6 +725,10 @@ export const videos: Video[] = [
     durationSeconds: 227,
     access: "premium",
     mature: true,
+    preview: {
+      file: "ty-luna-bed-preview.proxy.mp4",
+      durationSeconds: 60,
+    },
     premium: {
       file: "ty-luna-bed-explicit.proxy.mp4",
       durationSeconds: 354,
@@ -677,6 +755,10 @@ export const videos: Video[] = [
     durationSeconds: 128,
     access: "premium",
     mature: true,
+    preview: {
+      file: "ty-luna-farm-road-preview.proxy.mp4",
+      durationSeconds: 42,
+    },
     feelings: ["distance", "hurt"],
     place: "farmhouse",
     about: ["luna", "tyson"],

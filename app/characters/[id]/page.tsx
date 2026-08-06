@@ -133,6 +133,26 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
                 ))}
               </div>
 
+              {/* The dossier, above the quote. Scannable before the prose,
+                  because "38, ex-SEAL, drives a Carrera he treats like
+                  something on loan" is what somebody actually wants first —
+                  and it is the part they come back to check. Rows only exist
+                  where the canon does; see Character.facts. */}
+              {character.facts && character.facts.length > 0 && (
+                <dl className="mt-7 grid gap-x-8 gap-y-3 border-y border-hairline py-6 sm:grid-cols-2">
+                  {character.facts.map((fact) => (
+                    <div key={fact.label}>
+                      <dt className="text-xs uppercase tracking-[0.14em] text-amber">
+                        {fact.label}
+                      </dt>
+                      <dd className="mt-1 text-sm leading-relaxed text-stone">
+                        {fact.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+
               <figure className="mt-7 border-l-2 border-amber/50 pl-5">
                 <blockquote className="font-display text-2xl font-light leading-snug text-ivory">
                   “{character.pullQuote}”

@@ -51,6 +51,22 @@ const MAX_SECONDS = 15;
 const MAX_FRACTION = 1 / 3;
 
 /**
+ * Per-scene exceptions, in seconds. Melissa's call, scene by scene.
+ *
+ * The default is deliberately short and the same for everything, so an
+ * override should have a reason attached — otherwise this table becomes the
+ * real rule and the constant above becomes decoration.
+ */
+const OVERRIDES = {
+  // The one scene where fifteen seconds is not a taste of anything. It is a
+  // single unbroken six-minute take with no cuts to punctuate it, so fifteen
+  // is barely an establishing beat — the confrontation has not had time to
+  // read as one before it stops. Thirty gives it room to land while still
+  // being a twelfth of the scene, against the sixth a minute would have been.
+  "josh-luna-wall": 30,
+};
+
+/**
  * Scraped out of the content module rather than imported, for the same reason
  * upload-media.mjs does it: this is a plain node script and videos.ts is
  * TypeScript with path aliases.
@@ -82,7 +98,7 @@ if (scenes.length === 0) {
 let cut = 0;
 for (const scene of scenes) {
   const seconds = Math.min(
-    MAX_SECONDS,
+    OVERRIDES[scene.slug] ?? MAX_SECONDS,
     Math.floor(scene.duration * MAX_FRACTION),
   );
   const src = path.join(ROOT, "stories", scene.file);

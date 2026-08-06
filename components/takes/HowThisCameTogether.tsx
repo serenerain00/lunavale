@@ -12,6 +12,14 @@
  * docs/monetization/MONETIZATION.md it says its piece once and links out; it
  * does not follow anybody around.
  *
+ * WHEN NOTHING IS STARRED the summary says so instead of counting. `unused`
+ * is "takes without a star", and the default copy calls that "never made it
+ * in" — which is true when the starring is reliable and a lie when it isn't.
+ * On a scene shot as one continuous take in one setup, frame-matching cannot
+ * separate the attempts at all (measured: zero gap between best and
+ * runner-up), so every take is unstarred and the default line would assert
+ * that 250 clips were all rejected. They were not; we just cannot tell which.
+ *
  * Renders nothing when a scene has no takes, so /watch doesn't need to guard.
  */
 
@@ -66,9 +74,21 @@ export async function HowThisCameTogether({
       </h2>
       <p className="mt-2 max-w-2xl leading-relaxed text-stone">
         {total} attempts at {beats} {beats === 1 ? "moment" : "moments"}, in the
-        order they were made. {unused} of them never made it in — the near
-        misses, the ones where a hand lands wrong, and the genuinely bad ones.
-        Nothing has been tidied up.
+        order they were made.{" "}
+        {unused === total ? (
+          <>
+            Which of them made the finished scene isn&rsquo;t marked here.
+            It is one unbroken take in one setup, and the attempts are too
+            alike to tell apart with any confidence — so rather than guess,
+            none of them is starred.
+          </>
+        ) : (
+          <>
+            {unused} of them never made it in — the near misses, the ones
+            where a hand lands wrong, and the genuinely bad ones. Nothing has
+            been tidied up.
+          </>
+        )}
       </p>
 
       {member ? (

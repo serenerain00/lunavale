@@ -30,6 +30,7 @@ import type { AccessLevel } from "@/lib/content/videos";
 
 import { lunaCathyPhoneTakes } from "@/lib/content/takes-data/luna-cathy-phone";
 import { tysonColeBarTakes } from "@/lib/content/takes-data/tyson-cole-bar";
+import { joshLunaWallTakes } from "@/lib/content/takes-data/josh-luna-wall";
 
 /** One attempt at one beat. */
 export interface Take {
@@ -84,7 +85,11 @@ export const TAKES_ACCESS: AccessLevel = "premium";
  * prints the import line to add here. A scene with no takes renders nothing
  * rather than an empty shell.
  */
-export const takes: SceneTakes[] = [lunaCathyPhoneTakes, tysonColeBarTakes];
+export const takes: SceneTakes[] = [
+  lunaCathyPhoneTakes,
+  tysonColeBarTakes,
+  joshLunaWallTakes,
+];
 
 /** Proxy basename inside stories/, for the gated stream route. */
 export function takeFile(slug: string): string {

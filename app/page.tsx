@@ -12,7 +12,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { canWatch, getMembership } from "@/lib/access/entitlement";
 import { catalog, shelves, type CatalogItem } from "@/lib/content/catalog";
-import { heroForTime } from "@/lib/content/hero";
+import { pickHero } from "@/lib/content/hero";
 import { freeEntries, opening } from "@/lib/content/journal";
 import { formatPrice, getTier } from "@/lib/content/membership";
 
@@ -25,7 +25,7 @@ export default async function Home() {
 
   // Rotates daily. Resolved per request rather than at build time, so the
   // turnover doesn't wait for a deploy.
-  const hero = heroForTime();
+  const hero = pickHero();
   const heroUnlocked = hero ? await canWatch(hero.video) : false;
 
   return (

@@ -99,6 +99,41 @@ export default async function MembershipPage() {
         </section>
 
         {/* --------------------------------------------------------- trust */}
+        {/* --------------------------------------------------- where it goes */}
+        {/* Placed directly after the price, because that is the moment the
+            question occurs to somebody. Stated as a mechanism rather than an
+            appeal: no "help us", no thermometer, no talk of the project being
+            in danger. MONETIZATION.md rules out manufactured urgency, and a
+            story about a woman being pressured is a poor place to start
+            pressuring the audience. */}
+        <section
+          aria-labelledby="funds-heading"
+          className="mx-auto w-full max-w-6xl px-5 pt-20 sm:px-8 sm:pt-28"
+        >
+          <h2
+            id="funds-heading"
+            className="font-display text-2xl font-medium text-ivory sm:text-3xl"
+          >
+            Where the money goes
+          </h2>
+          <div className="mt-3 max-w-2xl space-y-3 leading-relaxed text-stone">
+            <p>
+              There is no studio behind this. It is made independently, on a
+              small budget, by a very small number of people — so a membership
+              is not a subscription to a back catalogue that already exists.
+            </p>
+            <p>
+              It is what pays for the next one to get made: the shoot, the cut,
+              the score, the stills, the hours. Scene by scene, that is the
+              whole mechanism, and there isn&rsquo;t another one.
+            </p>
+            <p className="text-ivory">
+              If you have watched this far and want more of it, that is how
+              more of it happens.
+            </p>
+          </div>
+        </section>
+
         <section
           aria-labelledby="trust-heading"
           className="mx-auto w-full max-w-6xl px-5 pt-20 sm:px-8 sm:pt-28"

@@ -166,6 +166,15 @@ export default async function Home() {
                 <p className="mt-4 max-w-lg leading-relaxed text-stone">
                   {`The full scene library, the cuts that never go public, Luna’s journals, and the rooms you’ve already walked past without being able to open. From ${formatPrice(vault.priceMonthlyCents)} a month, cancel any time, and nothing that’s free today ever moves behind it.`}
                 </p>
+                {/* SUBTLE ON PURPOSE — Melissa asked for it "somewhere
+                    subtle", and this is a home page, not a fundraiser. One
+                    line, in the dim text, under the offer rather than in
+                    place of it: a fact about where the money goes, not an
+                    appeal. The full version lives on /membership. */}
+                <p className="mt-4 max-w-lg text-sm leading-relaxed text-stone-dim">
+                  It also pays for the next scene. This is made independently,
+                  and memberships are what fund the ones still being shot.
+                </p>
                 <div className="mt-8 flex flex-wrap gap-4">
                   <Link
                     href="/membership"

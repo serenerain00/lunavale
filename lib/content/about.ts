@@ -77,7 +77,9 @@ export const premise: AboutSection[] = [
     heading: "And the people around them",
     body: [
       "**Rick** is Josh's father — dominance with charisma, and most of the reason Josh is the way he is. He loves his son in a form his son has never been able to use. He is disappointed in Josh for losing Luna, and he always thought she was too good for him; he holds both at once and says neither in a way that helps anybody.",
-      "He is not one of the three. Neither are the others who arrive later — Luna's mother among them. They matter because of what they explain about Luna, Josh and Tyson, and the story stays those three.",
+      "**Cathy** is Luna's mother, sixty-five and two thousand miles away in Atlanta. She rings until Luna picks up. She has known Josh for ten years and never once from inside the room, so when he calls her sounding wrecked she believes him — and she is not wrong about what she heard.",
+      "**Avery** is Luna's sister, ten years younger, still in Atlanta with their mother. She does not ask Luna how she is. She never has. She calls and talks about nothing until Luna is laughing, and then waits.",
+      "None of them is one of the three. They matter for what they explain about Luna, Josh and Tyson — and the story stays those three.",
     ],
   },
 ];

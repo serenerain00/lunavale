@@ -58,8 +58,10 @@ export function TierCard({ tier, held }: TierCardProps) {
         {monthsFree > 0 && (
           <>
             {" · "}
-            {formatPrice(tier.priceYearlyCents!)} yearly, {monthsFree} months
-            free
+            {/* Explicit space — a plain one is stripped where the text after
+                an expression wraps. See LockedNotice. */}
+            {formatPrice(tier.priceYearlyCents!)} yearly, {monthsFree}{" "}
+            months free
           </>
         )}
       </p>

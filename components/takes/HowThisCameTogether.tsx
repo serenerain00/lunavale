@@ -84,9 +84,12 @@ export async function HowThisCameTogether({
           </>
         ) : (
           <>
-            {unused} of them never made it in — the near misses, the ones
-            where a hand lands wrong, and the genuinely bad ones. Nothing has
-            been tidied up.
+            {/* Explicit space — a plain one is stripped where the text after
+                an expression wraps. See LockedNotice. */}
+            {unused}{" "}
+            of them never made it in — the near misses, the ones where a hand
+            lands wrong, and the genuinely bad ones. Nothing has been tidied
+            up.
           </>
         )}
       </p>

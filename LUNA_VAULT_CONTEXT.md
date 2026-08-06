@@ -480,6 +480,40 @@ see there is no clean move, and saying so is the most honest thing available.
 That refusal is the point of the scene. Nobody arrives at an answer. Tyson
 came for permission and got understanding instead, which is worse.
 
+### The wall — Josh at the farmhouse
+*(Canon set by Melissa, 2026-08-05. CUT AND PUBLISHED as **"The Way You Looked
+at Him"** (`josh-luna-wall`), 6:07, **members-only**.)*
+
+**Josh confronts Luna at the farmhouse.** He says **he saw her look at him** —
+at Tyson — and he has decided what that look meant. He is **convinced she has
+cheated.**
+
+He **pins her against the wall** and kisses her, **aggressively**, and **takes
+his time**. He **grabs her by the throat**, pushes her up against the wall,
+holds her there. Six unbroken minutes, one continuous take, and **he never
+raises his voice** — which is what makes it what it is.
+
+**This is the scene that puts Josh past the point of return.** Everything
+before it can be read as a difficult man; this cannot.
+
+> **HOW IT IS PUBLISHED, and why it breaks the house pattern.** Members-only
+> with **no free cut**. Every other scene with a premium version has a short
+> public one selling it; that would be wrong twice here — a strangulation is
+> not a shop window, and a pre-play disclaimer means little if a minute of what
+> it describes is public two clicks away. It carries a **raised** content
+> notice (`strangling`, `coercion`, `control`) that reads "Before you play
+> this".
+
+> **OPEN — is this the fight the truck scene refers to?** The drive
+> (`luna-truck-breakdown`) has Luna saying **"he held me…"** and the canon note
+> "What Josh did — NOT YET FIXED" describes him **holding her down, forcefully,
+> and not letting her up.** That is very close to this. If it is the same
+> night, this scene closes that thread and the drive is its aftermath. If it is
+> a separate, earlier escalation, they need distinguishing — because the truck
+> scene's whole weight depends on being *the* night.
+
+*No journal entry — Melissa is holding that one.*
+
 ### The drive — the night she leaves the farm
 *(Canon set by Melissa, 2026-08-02. Much later than the bar: Josh is back, and
 this is where "it turns" turns.)*

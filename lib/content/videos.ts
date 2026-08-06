@@ -476,6 +476,46 @@ export const videos: Video[] = [
     about: ["luna"],
   },
   {
+    // The farmhouse confrontation. Josh has decided what Luna's face meant
+    // when Tyson was in the room, and spends six unbroken minutes on it.
+    //
+    // MEMBERS-ONLY, WITH NO FREE CUT, and that is a deliberate departure from
+    // every other scene here. The house pattern is a short public cut that
+    // sells the longer one (Video.premium) — that would be wrong twice over
+    // for this. A scene depicting strangulation is not a shop window, and a
+    // pre-play disclaimer is close to meaningless if a minute of the thing it
+    // describes is playing publicly two clicks away. One line to reverse if
+    // Melissa disagrees; nothing else depends on it.
+    //
+    // THE NOTES ARE THE POINT, and two of them are `severe`, so the notice
+    // renders raised and says "Before you play this" rather than "Contains".
+    // `violence` is deliberately NOT among them: it is true but useless here,
+    // and "physical violence" sitting alongside the specific words would blunt
+    // them. See lib/content/content-notes.ts.
+    //
+    // THE POSTER WAS CHOSEN AGAINST THE OBVIOUS ONES. Most frames in this
+    // scene are two faces close together in low light, and out of context they
+    // read as a love scene — which is the single worst thing a card for this
+    // could do. This one is 364s in: her brow drawn, a tear track on her
+    // cheek, his face in shadow. It cannot be misread. It is dim (p95 49) and
+    // that is correct rather than a defect.
+    //
+    // One continuous six-minute take — scene detection finds no cuts at all.
+    slug: "josh-luna-wall",
+    title: "The Way You Looked at Him",
+    synopsis:
+      "Josh has decided what he saw in her face when Tyson was in the room. He never raises his voice, and he does not let her leave the wall.",
+    file: "josh-luna-wall.proxy.mp4",
+    poster: "/posters/josh-luna-wall.jpg",
+    durationSeconds: 367,
+    access: "premium",
+    mature: true,
+    notes: ["strangling", "coercion", "control"],
+    feelings: ["hurt", "lies"],
+    place: "farmhouse",
+    about: ["luna", "josh", "tyson"],
+  },
+  {
     // Cole's introduction, and the first time the promise to Josh is said out
     // loud anywhere in the story.
     //

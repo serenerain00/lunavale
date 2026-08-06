@@ -878,17 +878,23 @@ export const journal: JournalEntry[] = [
    * telling her that is where they are going — which is where "much later"
    * opens.
    *
-   * SHE DOES NOT SAY WHAT JOSH DID, and that is deliberate twice over. On
-   * screen she gets three words out and stops; and what the fight actually
-   * was is still open canon (LUNA_VAULT_CONTEXT.md, "What Josh did — NOT YET
-   * FIXED"). Writing it here would fix it by accident, in the most
-   * canon-sensitive prose in the product. She refuses the page the same way
-   * she refused it in "the-sentence" — in character, and reversible.
+   * SHE STILL DOES NOT SAY WHAT JOSH DID, and it now takes one reason rather
+   * than two. It used to be partly because the fight was unwritten canon;
+   * that closed on 2026-08-05 — it is the wall, and it is on screen in full
+   * as "The Way You Looked at Him" (josh-luna-wall). So the prose did NOT
+   * change, because the remaining reason was always the real one: she gets
+   * three words out on screen and stops, and she refuses the page here the
+   * same way she refused it in "the-sentence". That is character.
    *
-   * For the same reason this carries `control` and `panic` but NOT
-   * `violence`: the entry does not depict an assault, and tagging one would
-   * both overstate the text and give away the thing it is withholding. Add
-   * `violence` when Melissa settles the fight and it is written.
+   * If anything, it is stronger now. A reader who has watched the wall knows
+   * exactly what she is not writing down, and the withholding stops being a
+   * gap and becomes a person unable to put a sentence to it.
+   *
+   * NOTES: still `control` and `panic`, still NOT `violence`, and now for a
+   * cleaner reason than before — the assault has its own scene carrying
+   * `strangling` and `coercion`. This entry is the morning after, not the
+   * night, and tagging it as an assault would misdescribe what is on the
+   * page.
    */
   {
     id: "the-drive",

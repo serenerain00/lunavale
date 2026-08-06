@@ -617,6 +617,14 @@ export const videos: Video[] = [
   // Her journal entry "the-drive" and the canon STAY. The entry keeps its
   // sceneSlug and simply stops rendering a scene link — getVideo returns
   // undefined and every surface already handles that.
+  //
+  // WHEN YOU RESTORE IT, FIX THE COMMENT THAT COMES BACK WITH IT. The archived
+  // entry says what Josh did is "off screen, unfinished canon". That was true
+  // when it was written and is not now: it is josh-luna-wall, on screen and in
+  // full, and settled 2026-08-05. The two are ONE NIGHT — the wall is the
+  // event, this drive is the hour after it — which is worth saying in the
+  // restored comment, because the drive's whole weight comes from being the
+  // aftermath of something a member has just watched.
   {
     // One scene, two edits. The public cut is the morning; members get the
     // longer, explicit one in its place — see `premium` and the note on the

@@ -504,13 +504,11 @@ before it can be read as a difficult man; this cannot.
 > notice (`strangling`, `coercion`, `control`) that reads "Before you play
 > this".
 
-> **OPEN — is this the fight the truck scene refers to?** The drive
-> (`luna-truck-breakdown`) has Luna saying **"he held me…"** and the canon note
-> "What Josh did — NOT YET FIXED" describes him **holding her down, forcefully,
-> and not letting her up.** That is very close to this. If it is the same
-> night, this scene closes that thread and the drive is its aftermath. If it is
-> a separate, earlier escalation, they need distinguishing — because the truck
-> scene's whole weight depends on being *the* night.
+> **THIS IS THE FIGHT THE DRIVE IS RUNNING FROM** *(confirmed 2026-08-05)*.
+> `luna-truck-breakdown` is the hour after this one: Luna leaves the farm and
+> drives to Tyson, and **"he held me…"** — the three words she cannot finish in
+> his arms — is this. The long-open "What Josh did" question is closed; see
+> that section below.
 
 *No journal entry — Melissa is holding that one.*
 
@@ -518,7 +516,8 @@ before it can be read as a difficult man; this cannot.
 *(Canon set by Melissa, 2026-08-02. Much later than the bar: Josh is back, and
 this is where "it turns" turns.)*
 
-**A very bad fight with Josh**, and Luna leaves the farm. She is driving to
+**The fight is the wall** (`josh-luna-wall`, above — settled 2026-08-05), and
+Luna leaves the farm. She is driving to
 Tyson, not because she has decided anything, but because **she needs him** and
 there is nowhere else the need points.
 
@@ -541,19 +540,29 @@ Two lines carry it:
   night. She means she **cannot keep doing this with Josh.**
 - **"He held me…"** — and she does not finish it.
 
-#### What Josh did — NOT YET FIXED
-> **Melissa is still deciding this. Do not treat the paragraph below as settled
-> canon and do not write it into scene copy, synopses or public-facing text.**
+#### What Josh did — SETTLED 2026-08-05
+**It is the wall.** The fight Luna is driving away from is
+**"The Way You Looked at Him"** (`josh-luna-wall`) — Josh pinning her to the
+farmhouse wall, hand on her throat, convinced she has looked at Tyson. See that
+section above for the scene itself.
 
-The direction she is working toward: during the fight **Josh held Luna down,
-forcefully, against her will — and would not let her up.** What frightens her
-is not only the act but that **he has never done that before.** It is the point
-where possessiveness stops being a mood and becomes something done to her body.
+So **"he held me…"**, the three words she gets out in Tyson's arms and cannot
+finish, is that. And what frightens her is not only the act but that **he has
+never done that before** — possessiveness stopping being a mood and becoming
+something done to her body.
 
-This is deliberately kept **off screen**. The truck scene shows the drive and
-the collapse, never the fight, and "he held me…" is the only account anyone
-gets. Whatever the fight finally becomes, it should stay off screen: the story
-is what it does to her, and that is already in the take.
+> **This was written up for months as deliberately OFF SCREEN** — "the story is
+> what it does to her, and that is already in the take." That reasoning is now
+> obsolete and the note is kept only so nobody re-derives it: the fight is on
+> screen, in full, for six minutes, behind the membership and behind a raised
+> disclaimer. What stays true is that **Luna still never says it.** She stops
+> three words in on screen and refuses the page in her journal, and both of
+> those are character, not a canon gap.
+
+**THE TWO SCENES ARE ONE NIGHT.** The wall is the event; the drive is the hour
+after it. That is worth protecting in any recut or re-ordering — the drive's
+entire weight comes from being the aftermath of something the audience has just
+watched, or is about to.
 
 ---
 

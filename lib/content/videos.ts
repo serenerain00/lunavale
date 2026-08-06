@@ -63,6 +63,15 @@ export interface Video {
   poster: string;
   /** Runtime in whole seconds (from ffprobe on the master). */
   durationSeconds: number;
+  /**
+   * The day this scene went up, ISO `YYYY-MM-DD`. Drives the "New" section on
+   * the home page — see `latestScene()`.
+   *
+   * Only set on scenes released since the field existed. An undated scene is
+   * treated as older than every dated one, which is true and means nothing had
+   * to be back-filled by guesswork.
+   */
+  addedOn?: string;
   /** Whether this scene is publicly viewable or requires membership. */
   access: AccessLevel;
   /** Mature-content flag — surfaced as a label per content rules. */
@@ -448,6 +457,7 @@ export const videos: Video[] = [
     file: "luna-cathy-phone.proxy.mp4",
     poster: "/posters/luna-cathy-phone.jpg",
     durationSeconds: 92,
+    addedOn: "2026-08-03",
     access: "free",
     mature: false,
     feelings: ["grief", "distance"],
@@ -483,6 +493,7 @@ export const videos: Video[] = [
     file: "luna-avery-ipad.proxy.mp4",
     poster: "/posters/luna-avery-ipad.jpg",
     durationSeconds: 95,
+    addedOn: "2026-08-04",
     access: "free",
     mature: false,
     feelings: ["trust", "grief"],
@@ -589,6 +600,7 @@ export const videos: Video[] = [
     file: "josh-luna-wall.proxy.mp4",
     poster: "/posters/josh-luna-wall.jpg",
     durationSeconds: 367,
+    addedOn: "2026-08-05",
     access: "premium",
     mature: true,
     preview: {
@@ -631,6 +643,7 @@ export const videos: Video[] = [
     file: "tyson-cole-bar.proxy.mp4",
     poster: "/posters/tyson-cole-bar.jpg",
     durationSeconds: 41,
+    addedOn: "2026-08-04",
     access: "premium",
     mature: false,
     preview: {
@@ -672,6 +685,7 @@ export const videos: Video[] = [
     file: "luna-josh-fair.proxy.mp4",
     poster: "/posters/luna-josh-fair.jpg",
     durationSeconds: 159,
+    addedOn: "2026-08-02",
     access: "free",
     mature: false,
     premium: {
@@ -797,6 +811,32 @@ export const videos: Video[] = [
     about: ["luna", "tyson"],
   },
 ];
+
+/**
+ * The most recently released scene, for the "New" section on the home page.
+ *
+ * Dated scenes only, newest first, ties broken by whichever is later in the
+ * library. An undated scene never wins — the field was added on 2026-08-06 and
+ * back-filling twenty older entries from memory would have invented facts to
+ * power a badge.
+ *
+ * Returns undefined when nothing is dated, so the section simply does not
+ * render rather than featuring something arbitrary.
+ */
+export function latestScene(): Video | undefined {
+  const dated = videos.filter((v) => v.addedOn && !v.hidden);
+  if (dated.length === 0) return undefined;
+  return dated.reduce((newest, v) =>
+    v.addedOn! >= newest.addedOn! ? v : newest,
+  );
+}
+
+/** Whether a release is recent enough to still be worth calling new. */
+export function isRecent(video: Video, now: Date = new Date()): boolean {
+  if (!video.addedOn) return false;
+  const days = (now.getTime() - new Date(video.addedOn).getTime()) / 86_400_000;
+  return days <= 14;
+}
 
 export function getVideo(slug: string): Video | undefined {
   return videos.find((v) => v.slug === slug);

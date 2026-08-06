@@ -42,9 +42,32 @@ and id are allowed to disagree; only one of them is a promise to a customer.
 *(Canon set by Melissa, 2026-08-03.)*
 
 **Luna lives in Denver, Colorado** — the farm, the lakehouse, the bar, the
-track and the roads between them are all Colorado. **Cathy is in Atlanta,
-Georgia**, and the distance is a plot fact rather than colour: when Luna is in
-trouble her mother is a phone call and a flight away, not a drive.
+track and the roads between them are all Colorado. **Cathy and Avery are in
+Atlanta, Georgia**, and the distance is a plot fact rather than colour: when
+Luna is in trouble her family is a phone call and a flight away, not a drive.
+
+### How everyone ended up in Colorado
+*(Canon set by Melissa, 2026-08-05. This is the origin of the whole
+arrangement and the document did not have it.)*
+
+**Luna is from Atlanta.** So are **Cathy**, **Avery** and **Tyson** — the
+family and the best friend all come from the same place.
+
+**Josh is from Denver**, and his father **Rick lives there too.** He met Luna
+**in Atlanta, on business.** They **dated long distance**, and then —
+**ten years ago — Luna moved to Colorado** to live with him on his farm.
+
+**Tyson followed, but not for her.** He came out of the SEALs and moved from
+Atlanta to Denver wanting **a change of pace**. That Luna was already moving
+there was a bonus rather than a reason, and **Josh — his distant cousin — had
+work for him on the farm**, which made it practical.
+
+> So the geography is not a coincidence, and it is not a love triangle
+> engineered by proximity either. **Everyone Luna is from moved to where Josh
+> is.** She is the one who left home; the two men were already related, and one
+> of them followed later for his own reasons. It explains why Tyson is on that
+> farm every day, and why Luna's mother and sister are two thousand miles from
+> everything that happens to her.
 
 *(Mexico stays what it already was — a flashback to a trip, not a place anyone
 lives.)*
@@ -54,9 +77,24 @@ lives.)*
 
 - **The farm is Josh's.** It is where he and Luna lived together for the ten
   years. Tyson does contract work on it; he has no stake in it.
-- **The lakehouse is Luna's** — **her family's**, and **has been for a long
-  time**. Her **retreat**, her home away from home, and the one place in this
+- **The lakehouse is Luna's** — her **retreat**, and the one place in this
   story that is hers outright.
+
+> **CONFLICT, NEEDS ONE WORD FROM MELISSA.** On 2026-08-03 this was set down
+> as **her family's, for a long time** — inherited, the place she grew up going
+> to. On 2026-08-05 it was described as something **Luna bought when she and
+> Josh broke up.**
+>
+> Both work; they are different stories. **Inherited** makes it the place she
+> retreats *back* to, older than Josh, with her mother and sister in it.
+> **Bought** makes it the first thing she chose entirely for herself, at
+> thirty-eight, with her own money, the week her ten years ended — which given
+> she is trying to work out whether any of her life was chosen on purpose is
+> arguably the stronger version.
+>
+> Nothing on the site states either, so nothing is wrong right now. It matters
+> the moment a journal entry or a scene says how long she has been going there.
+> Left unresolved rather than picked.
 
 **This is why the separation goes the way it does.** They were living on his
 land, so when it ended **Luna is the one who left** — and she had somewhere of
@@ -66,6 +104,10 @@ every important thing that happens to her there happens on her own ground.
 ---
 
 ## The characters
+
+**The family name is VALE** *(2026-08-05)* — Luna Vale, Cathy Vale, Avery
+Vale. It is already on screen in the title card and in the domain; it had
+never been written down here.
 
 **It is a three-hander.** *(Clarified by Melissa, 2026-08-03.)* The story is
 **Luna, Josh and Tyson** — those three and no others. Everyone below them is
@@ -78,7 +120,11 @@ come**. Weight of detail in this document is not a measure of standing — Rick
 has a long section because his dynamic with Josh needs explaining, not because
 he is a fourth lead.
 
-### Luna — the protagonist
+### Luna Vale — the protagonist
+**38** (ten years older than Avery, same age as Tyson). **She models — that is
+her income** *(2026-08-05)*, and it is the only thing in the story that is
+entirely her own: not Josh's farm, not a job he found her, and it travels.
+
 The story is her interior life. She has a **streak**: she likes danger (that's
 Josh) but she is loyal (that's Tyson). Through the story she is conflicted,
 tormented, sad, angry, lost, "not found yet," confused — living day by day,
@@ -124,6 +170,11 @@ co-workers). Into
 **extreme sports** — snowboarding, motorcycles, track days — and owns a
 **black 2020 Porsche Carrera** that's his baby (he'll ride a motorcycle
 recklessly but won't take a hard corner with Luna in the passenger seat).
+
+**He is from Atlanta too** *(2026-08-05)* — same city as Luna, Cathy and
+Avery. He has known the family for twenty years, **thinks of Avery as a little
+sister**, and is **protective of the whole Vale family**, not only Luna. He
+came and went for a decade while he was serving; some of that was deployment.
 
 **Cousins, and it shows** *(2026-08-03).* Josh and Tyson are **distant
 cousins — second or third, Melissa is deciding which** — and they are meant to
@@ -261,17 +312,40 @@ anything about it.
 *That Luna is at the lakehouse is the point, not set dressing: she has been
 there about a week, because it is where she went.*
 
-### Avery — Luna's younger sister
-*(Canon set by Melissa, 2026-08-04. **Tertiary.** She is the sister the Cathy
-section had been holding a space for since 2026-08-03 — now named and cast.)*
+### Avery Vale — Luna's younger sister
+*(Canon set by Melissa, 2026-08-04, expanded 2026-08-05. **Tertiary.**)*
 
-**Ten years younger than Luna**, and still in **Atlanta**, where their mother
-is. Luna is in Denver, so the sisters are as far apart as Luna and Cathy are.
+**28**, ten years younger than Luna, and still in **Atlanta** where their
+mother is.
+
+**They have been close her entire life.** Luna **always wanted a baby sister**,
+and before she left for Colorado she was **Avery's go-to for everything** —
+less big sister than best friend. Avery **looks up to her**, and the two of
+them are **alike in a lot of ways, including how they look.**
 
 They have **always had an open relationship** — nothing withheld, in either
-direction — and **both of them have grown to miss the other.** The ten years
-between them stopped mattering somewhere along the way, and neither has ever
-said when.
+direction — and **both of them miss the other.**
+
+**But she does not call often.** Usually only when there is **a family matter**,
+or when **Cathy has nagged her into it.** That is not distance; it is a
+28-year-old with a job. And it cuts both ways — **Luna is not good at relaying
+things over the phone anyway**, which is exactly why the call in "Little
+Sister" works and the one with their mother does not.
+
+**She has known Tyson almost her whole life** — the same twenty years — and
+**thinks of him as a big brother.**
+
+#### Her work — SETTLED 2026-08-05
+**A third-year psychiatry resident (PGY-3) in Atlanta.** Confirmed by Melissa
+after checking what 28 realistically allows: four years of undergraduate, four
+of medical school finishing around 26, then a four-year residency — so a fully
+licensed attending psychiatrist is 30 or 31 at the earliest, and at 28 she is
+**about two years off qualifying.**
+
+**This earns its keep rather than merely being accurate.** A resident works
+punishing hours on rotating call, which is a far better reason for not phoning
+her sister than indifference — and it means that when she *does* ring, she has
+made room for it.
 
 **How she gets in when nobody else can.** Cathy told Avery she had spoken to
 Luna, so Avery rings — and she is not calling to find out whether Luna is all

@@ -62,10 +62,12 @@ export const characters: Character[] = [
     portrait: "/characters/luna.jpg",
     intro: [
       "The story is her interior life. Everything else — the farmhouse, the lake, both men — is weather moving across it.",
+      "She is from Atlanta. Josh was a man she met there on business, and for a while they did it long distance — and then, ten years ago, she left her mother, her sister and everyone she had known since she was a child, and moved to Colorado to live on his farm. That is the size of the bet, and it is worth holding onto when she is deciding whether to make another one.",
       "She has a streak: she likes danger, and she is loyal, and those two things point at different people. She is not a victim and she is not stupid. She sees the situation clearly, chooses badly, and knows she is doing it while she does it.",
       "What she is actually trying to work out is not which one of them to keep. It is whether there is a version of her life that she chose on purpose.",
     ],
     details: [
+      "Models for a living — the one part of her life that was never his",
       "Writes everything down, then argues with what she wrote",
       "Runs six miles when she cannot think straight",
       "Moved to the lakehouse alone and has not stopped calling it temporary",
@@ -165,7 +167,7 @@ export const characters: Character[] = [
       "Was there for Luna the whole time Tyson was deployed",
       "Loves Tyson like a son, and knows exactly whose best friend he is",
       "A shelf of framed photographs of people she cannot get on the phone",
-      "Two daughters. The other one has not come up yet",
+      "Two daughters, and she will get one of them to call the other",
     ],
     // Written to Melissa's canon rather than transcribed off the cut — the
     // same standing as the prose above, and the same caveat.
@@ -189,15 +191,16 @@ export const characters: Character[] = [
       "Ten years younger, two thousand miles away, and the only one who doesn't have to ask.",
     portrait: "/characters/avery.jpg",
     intro: [
-      "Ten years between them, and Luna was old enough to hold her properly when she arrived. For a long time Avery was a small person Luna was responsible for. Neither of them can say exactly when that turned around, and neither of them mentions that it has.",
-      "She is still in Atlanta, where their mother is. So she gets Luna the same way Cathy does — down a line, on a screen, from too far away to do anything practical about it.",
-      "The difference is what she does with that. Cathy calls to find out how her daughter is. Avery already knows, because their mother told her, and because she would have known anyway. So she doesn't ask. She talks about nothing in particular until Luna is laughing, and then she waits, and lets Luna get to it herself.",
+      "Twenty-eight, ten years behind Luna, and close to her for every one of them. Luna wanted a baby sister before there was one, and got her — and until Luna left for Colorado she was the person Avery took everything to first. Less big sister than best friend, and it shows in how alike they are, down to the face.",
+      "She is still in Atlanta, where their mother is, three years into a psychiatry residency and on the hours that come with it. So she does not call often. Usually there is a family matter, or their mother has worn her down into it — and Luna is no good at saying anything real down a phone line anyway.",
+      "Which is why the call works when it works. Cathy rings to find out how her daughter is. Avery already knows, because their mother told her and because she would have known regardless. So she doesn't ask. She talks about nothing in particular until Luna is laughing, and then she waits, and lets her get to it herself.",
     ],
     details: [
       "Has never once asked Luna how she is",
+      "Third-year psychiatry resident, which is most of why she doesn't ring",
       "Opened with eleven minutes about a man at her work who microwaves fish",
       "Says okay rather than advice",
-      "Booked the flight before she mentioned the flight",
+      "Has known Tyson as long as she has been alive, and calls him a brother",
       "The one person Luna has never been able to lie to",
     ],
     // From "avery-called" rather than from the scene: the line is in Luna's

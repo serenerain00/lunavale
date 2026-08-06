@@ -594,37 +594,50 @@ export const videos: Video[] = [
     place: "fair",
     about: ["luna", "josh", "tyson"],
   },
-  // "Breathe" (luna-truck-breakdown) was PULLED 2026-08-03, pending the recut
-  // master. Melissa is replacing the source with a longer cut, so the fifteen-
-  // second preview has to be reassembled against new picture and both proxies
-  // re-encoded — and until that happens there is nothing behind this scene in
-  // Blob. It shipped for a few hours with a card that 404'd on play, which is
-  // why it is out rather than merely unlisted: `hidden` would have taken it
-  // off the shelves and left /watch/luna-truck-breakdown just as broken.
-  //
-  // Same treatment as ty-luna-lake-fight above, for the same reason.
-  //
-  // TO RESTORE, once stories/luna-truck-breakdown/luna-truck-breakdown.mp4 is
-  // the new master:
-  //   scripts/make-preview-cut.sh luna-truck-breakdown      (repick the beats)
-  //   scripts/optimize-media.sh import luna-truck-breakdown \
-  //     stories/luna-truck-breakdown/luna-truck-breakdown-preview.mp4 2
-  //   scripts/optimize-media.sh proxy-only luna-truck-breakdown-full \
-  //     stories/luna-truck-breakdown/luna-truck-breakdown.mp4
-  //   node --env-file=.env.local scripts/upload-media.mjs luna-truck-breakdown
-  // then bring the entry back:  git show c060262 -- lib/content/videos.ts
-  //
-  // Her journal entry "the-drive" and the canon STAY. The entry keeps its
-  // sceneSlug and simply stops rendering a scene link — getVideo returns
-  // undefined and every surface already handles that.
-  //
-  // WHEN YOU RESTORE IT, FIX THE COMMENT THAT COMES BACK WITH IT. The archived
-  // entry says what Josh did is "off screen, unfinished canon". That was true
-  // when it was written and is not now: it is josh-luna-wall, on screen and in
-  // full, and settled 2026-08-05. The two are ONE NIGHT — the wall is the
-  // event, this drive is the hour after it — which is worth saying in the
-  // restored comment, because the drive's whole weight comes from being the
-  // aftermath of something a member has just watched.
+{
+    // "Breathe" — the hour after the wall. Luna leaves the farm and drives to
+    // Tyson; this is the drive.
+    //
+    // RESTORED 2026-08-05 after being pulled on the 3rd for missing media.
+    // The "recut master" that was being waited on turned out never to have
+    // happened: the file delivered as "luna-truck-breakdown 2.mp4" is
+    // byte-identical to the one that has been there since 1 August (same
+    // sha256). So the assembled preview and both proxies, built from that
+    // exact file, were still correct and only needed uploading.
+    //
+    // ONE SCENE, TWO EDITS. The public cut is fifteen seconds ASSEMBLED from
+    // five beats across the first seventy seconds — see
+    // scripts/make-preview-cut.sh, which records the spans. It stops before
+    // Tyson appears at 2:06, so a visitor watches her alone and never learns
+    // whether anyone is waiting at the end of the drive.
+    //
+    // THE FIGHT IS NO LONGER OFF SCREEN. When this was first written, what
+    // Josh did was unsettled canon and deliberately unseen. It is settled now
+    // (2026-08-05): it is josh-luna-wall, and the two are ONE NIGHT — the wall
+    // is the event, this is the hour after it. The synopsis still does not say
+    // so, because a visitor meeting this scene first should meet it the way
+    // Luna does.
+    slug: "luna-truck-breakdown",
+    title: "Breathe",
+    synopsis:
+      "She leaves the farm at night without telling anyone and drives to Tyson. The whole way there, she is trying to hold herself together.",
+    file: "luna-truck-breakdown.proxy.mp4",
+    poster: "/posters/luna-truck-breakdown.jpg",
+    durationSeconds: 15,
+    access: "free",
+    mature: false,
+    // On the public cut too — fifteen seconds of it is still fifteen seconds
+    // of a panic attack, and the note has to be readable before the thing it
+    // describes plays, not only for members.
+    notes: ["panic"],
+    premium: {
+      file: "luna-truck-breakdown-full.proxy.mp4",
+      durationSeconds: 173,
+    },
+    feelings: ["hurt", "distance"],
+    place: "downtown",
+    about: ["luna", "tyson"],
+  },
   {
     // One scene, two edits. The public cut is the morning; members get the
     // longer, explicit one in its place — see `premium` and the note on the

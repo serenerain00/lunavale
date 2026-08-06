@@ -566,6 +566,21 @@ export const videos: Video[] = [
     // cheek, his face in shadow. It cannot be misread. It is dim (p95 49) and
     // that is correct rather than a defect.
     //
+    // NOW THE SCORED CUT (2026-08-05). The dialogue-only master is still at
+    // stories/josh-luna-wall/josh-luna-wall.mp4 if this needs reverting.
+    //
+    // The score became the scene rather than a members' upgrade, because this
+    // scene has no free tier for an unscored version to live in — only the
+    // one-minute preview, which is re-cut from this file so the public minute
+    // carries the same mix. One version of the scene, not two.
+    //
+    // IT COSTS RESOLUTION: 1320x818 against the dialogue master's 1930x1080,
+    // and 1.61 rather than 1.79, so it pillarboxes slightly in a 16:9 player.
+    // Same trade as luna-josh-fair. Worth a re-export at 1080 if the source
+    // allows it.
+    //
+    // Delivered with 18 seconds of black on the end; trimmed at 367.7s. That
+    // is three of the last four deliveries, so check the tail every time.
     // One continuous six-minute take — scene detection finds no cuts at all.
     slug: "josh-luna-wall",
     title: "The Way You Looked at Him",

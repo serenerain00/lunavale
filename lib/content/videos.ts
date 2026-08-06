@@ -166,9 +166,13 @@ export const videos: Video[] = [
     title: "First Morning",
     synopsis:
       "A quiet farmhouse morning between Luna and Josh — the calm before everything shifts.",
+    // Rescored 2026-08-06 from luna-josh-dinner-at-house/luna-josh-firstnight.
+    // Same scene and same shots, re-exported with a new mix and a tighter
+    // frame (1320x764 against the old 1320x890), which is why the poster moved
+    // to 0:08 — the old grab sat outside the new crop.
     file: "luna-josh-first-morning.proxy.mp4",
     poster: "/posters/luna-josh-first-morning.jpg",
-    durationSeconds: 143,
+    durationSeconds: 141,
     access: "free",
     mature: false,
     feelings: ["trust", "desire"],

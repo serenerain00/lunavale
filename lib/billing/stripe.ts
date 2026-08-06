@@ -69,6 +69,12 @@ export async function createCheckoutSession(input: {
     success_url: `${siteUrl()}/account?started=1`,
     cancel_url: `${siteUrl()}/membership`,
     allow_promotion_codes: true,
+    // Don't demand a card when nothing is owed. Stripe's default for
+    // subscriptions is to collect one regardless, which turns a 100%-off comp
+    // code — the way somebody is given the site for free — into a checkout
+    // that still asks for card details. It changes nothing for a paying
+    // member: if there is an amount due, Stripe still collects.
+    payment_method_collection: "if_required",
   });
 
   if (!session.url) throw new Error("Stripe returned no checkout URL");

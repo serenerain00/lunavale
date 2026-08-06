@@ -60,10 +60,15 @@ const MAX_FRACTION = 1 / 3;
 const OVERRIDES = {
   // The one scene where fifteen seconds is not a taste of anything. It is a
   // single unbroken six-minute take with no cuts to punctuate it, so fifteen
-  // is barely an establishing beat — the confrontation has not had time to
-  // read as one before it stops. Thirty gives it room to land while still
-  // being a twelfth of the scene, against the sixth a minute would have been.
-  "josh-luna-wall": 30,
+  // is barely an establishing beat and thirty still cuts away mid-thought.
+  // A minute lets the confrontation actually play. It is a sixth of the
+  // scene, which is more than anything else here gives away — the trade is
+  // deliberate and it is Melissa's.
+  //
+  // Note this preview now carries the SCORE, because the scene's `file` is
+  // the scored cut as of 2026-08-05. The 60s version that existed before the
+  // swap was from the dialogue master and sounded different.
+  "josh-luna-wall": 60,
 };
 
 /**

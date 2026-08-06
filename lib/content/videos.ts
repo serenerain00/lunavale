@@ -605,7 +605,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "josh-luna-wall-preview.proxy.mp4",
-      durationSeconds: 30,
+      durationSeconds: 60,
     },
     notes: ["strangling", "coercion", "control"],
     feelings: ["hurt", "lies"],

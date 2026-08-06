@@ -6,26 +6,29 @@
  * poster behind it — a real piece of the real scene, and then the ask.
  *
  * WHY THESE ARE REAL FILES rather than a timer in the player. The obvious
- * implementation is to serve the whole scene and stop playback at sixty
+ * implementation is to serve the whole scene and stop playback after fifteen
  * seconds, and it is worthless: the full file has already been delivered, and
  * anyone who opens devtools has the lot. Every other decision in this repo —
  * private Blob, per-request signed URLs, entitlement resolved server-side —
  * exists to stop exactly that. So the preview is its own file, and a
  * non-member is never sent the bytes of the thing they have not paid for.
  *
- * LENGTH: the lesser of 60s and a THIRD of the runtime. A flat minute is fine
- * for a six-minute scene and absurd for a forty-second one — "tyson-cole-bar"
- * is 0:41, and a one-minute preview of it is the whole scene. The cap keeps a
- * short scene a taste rather than a giveaway.
+ * LENGTH: the lesser of 15s and a THIRD of the runtime. Melissa's call — it
+ * started at 60s and came down on 2026-08-06.
  *
- * IT IS ALWAYS THE OPENING. No hunting for a flattering minute: a visitor who
- * is told they saw the first minute should have seen the first minute. It also
- * removes the temptation to cherry-pick, which on some of this material would
- * be the difference between a trailer and a misrepresentation.
+ * The FRACTION still matters even at fifteen seconds, and is the reason this
+ * is not just a constant: "tyson-cole-bar" runs 0:41, so a flat fifteen would
+ * hand over more than a third of it. It gets 0:13 instead. Every scene longer
+ * than about three-quarters of a minute gets the full fifteen.
+ *
+ * IT IS ALWAYS THE OPENING. No hunting for a flattering fifteen seconds: a
+ * visitor told they saw the start should have seen the start. It also removes
+ * the temptation to cherry-pick, which on some of this material would be the
+ * difference between a trailer and a misrepresentation.
  *
  * SOURCE IS `file`, NEVER `premium.file`. Where a scene has an explicit cut
  * (ty-luna-bed), the explicit one is the members' upgrade and must not be the
- * thing a stranger is shown sixty seconds of.
+ * thing a stranger is shown the opening of.
  *
  * Usage:
  *   node scripts/make-previews.mjs            # every premium scene
@@ -44,7 +47,7 @@ const listOnly = args.includes("--list");
 const wanted = args.filter((a) => !a.startsWith("--"));
 
 /** Longest a preview may run, and the fraction of a short scene it may take. */
-const MAX_SECONDS = 60;
+const MAX_SECONDS = 15;
 const MAX_FRACTION = 1 / 3;
 
 /**
@@ -99,8 +102,8 @@ for (const scene of scenes) {
   }
 
   // Re-encoded rather than stream-copied: a copy cuts on the nearest keyframe,
-  // which can overshoot by seconds, and "the first minute" should be the first
-  // minute. Fade the last second so it stops rather than snapping to black.
+  // which at fifteen seconds could overshoot by a meaningful fraction of the
+  // whole preview. Fade the last second so it stops rather than snapping.
   execFileSync(
     "ffmpeg",
     [

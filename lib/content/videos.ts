@@ -187,7 +187,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "tyson-luna-lakehouse-fire-preview.proxy.mp4",
-      durationSeconds: 60,
+      durationSeconds: 15,
     },
     feelings: ["desire", "distance"],
     place: "lakehouse",
@@ -205,7 +205,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "tyson-park-fight-preview.proxy.mp4",
-      durationSeconds: 51,
+      durationSeconds: 15,
     },
     feelings: ["hurt", "lies"],
     place: "park",
@@ -235,7 +235,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-tyson-bar-preview.proxy.mp4",
-      durationSeconds: 23,
+      durationSeconds: 15,
     },
     feelings: ["desire", "distance"],
     place: "bar",
@@ -267,7 +267,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-tyson-bathroom-preview.proxy.mp4",
-      durationSeconds: 25,
+      durationSeconds: 15,
     },
     feelings: ["desire", "lies"],
     place: "lakehouse",
@@ -299,7 +299,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-josh-bed-preview.proxy.mp4",
-      durationSeconds: 28,
+      durationSeconds: 15,
     },
     feelings: ["desire", "trust"],
     place: "farmhouse",
@@ -320,7 +320,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-josh-kitchen-kiss-preview.proxy.mp4",
-      durationSeconds: 51,
+      durationSeconds: 15,
     },
     feelings: ["desire", "trust"],
     place: "farmhouse",
@@ -338,7 +338,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-josh-dinner-house-preview.proxy.mp4",
-      durationSeconds: 38,
+      durationSeconds: 15,
     },
     feelings: ["trust", "distance"],
     place: "farmhouse",
@@ -356,7 +356,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-josh-house-preview.proxy.mp4",
-      durationSeconds: 60,
+      durationSeconds: 15,
     },
     feelings: ["trust", "distance"],
     place: "farmhouse",
@@ -422,7 +422,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-josh-beach-preview.proxy.mp4",
-      durationSeconds: 60,
+      durationSeconds: 15,
     },
     feelings: ["desire", "trust"],
     place: "mexico",
@@ -546,7 +546,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-bathtub-preview.proxy.mp4",
-      durationSeconds: 60,
+      durationSeconds: 15,
     },
     feelings: ["grief", "desire"],
     place: "farmhouse",
@@ -605,7 +605,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "josh-luna-wall-preview.proxy.mp4",
-      durationSeconds: 60,
+      durationSeconds: 15,
     },
     notes: ["strangling", "coercion", "control"],
     feelings: ["hurt", "lies"],
@@ -774,7 +774,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "ty-luna-bed-preview.proxy.mp4",
-      durationSeconds: 60,
+      durationSeconds: 15,
     },
     premium: {
       file: "ty-luna-bed-explicit.proxy.mp4",
@@ -804,7 +804,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "ty-luna-farm-road-preview.proxy.mp4",
-      durationSeconds: 42,
+      durationSeconds: 15,
     },
     feelings: ["distance", "hurt"],
     place: "farmhouse",

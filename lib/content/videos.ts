@@ -705,8 +705,23 @@ export const videos: Video[] = [
     // describes plays, not only for members.
     notes: ["panic"],
     premium: {
-      file: "luna-truck-breakdown-full.proxy.mp4",
-      durationSeconds: 173,
+      // SWAPPED TO THE SCORED CUT 2026-08-05. The dialogue-only full cut is
+      // still on disk and in Blob as luna-truck-breakdown-full.proxy.mp4;
+      // reverting is this block, two values.
+      //
+      // Not a straight re-mix of the same picture: 3:01 against 2:53 and
+      // 1758x1080 against 1912x1080, so it is a re-framed edit as well as a
+      // scored one. Both are 1080 tall, so the crop costs no resolution.
+      //
+      // LICENSING, same as luna-tyson-dance and luna-josh-fair: this carries
+      // music on a paid site and there is no sync licence on file. Melissa
+      // has said she is handling that. Noted here so it stays a known state.
+      file: "luna-truck-breakdown-music.proxy.mp4",
+      durationSeconds: 181,
+      // Runtime is not the pitch — 3:01 against a 0:15 teaser is true but
+      // beside the point. What members get is the score.
+      difference:
+        "the scored cut — the whole drive, with the music it was edited to",
     },
     feelings: ["hurt", "distance"],
     place: "downtown",

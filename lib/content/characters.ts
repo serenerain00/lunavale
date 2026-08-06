@@ -172,6 +172,40 @@ export const characters: Character[] = [
     pullQuote: "He doesn't sound like himself.",
     pullQuoteSource: "Long Distance",
   },
+  {
+    // PORTRAIT BREAKS THE RULE AGAIN, and differently from Cathy's. Avery has
+    // never been in the same room as a camera in this story — she exists only
+    // on the screen of Luna's iPad. So this is a crop of that screen, upscaled
+    // about two-thirds, and it is softer than every other portrait here.
+    //
+    // Kept anyway, because the softness is not a defect on this one: it is
+    // what a person looks like when the only way you ever see them is a video
+    // call from two thousand miles away. Replace it the day Avery is shot in a
+    // room.
+    id: "avery",
+    name: "Avery",
+    role: "Luna's sister",
+    tagline:
+      "Ten years younger, two thousand miles away, and the only one who doesn't have to ask.",
+    portrait: "/characters/avery.jpg",
+    intro: [
+      "Ten years between them, and Luna was old enough to hold her properly when she arrived. For a long time Avery was a small person Luna was responsible for. Neither of them can say exactly when that turned around, and neither of them mentions that it has.",
+      "She is still in Atlanta, where their mother is. So she gets Luna the same way Cathy does — down a line, on a screen, from too far away to do anything practical about it.",
+      "The difference is what she does with that. Cathy calls to find out how her daughter is. Avery already knows, because their mother told her, and because she would have known anyway. So she doesn't ask. She talks about nothing in particular until Luna is laughing, and then she waits, and lets Luna get to it herself.",
+    ],
+    details: [
+      "Has never once asked Luna how she is",
+      "Opened with eleven minutes about a man at her work who microwaves fish",
+      "Says okay rather than advice",
+      "Booked the flight before she mentioned the flight",
+      "The one person Luna has never been able to lie to",
+    ],
+    // From "avery-called" rather than from the scene: the line is in Luna's
+    // account of the call, not in dialogue on screen. Draft prose, same
+    // standing as the rest of the journal — see the header of journal.ts.
+    pullQuote: "Okay. Tell me the rest.",
+    pullQuoteSource: "Luna's journal",
+  },
 ];
 
 export function getCharacter(id: string): Character | undefined {

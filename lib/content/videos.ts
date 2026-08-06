@@ -632,12 +632,14 @@ export const videos: Video[] = [
     //
     // TWO THINGS MELISSA SHOULD KNOW, both her call, neither a blocker:
     //
-    //   1. LICENSING. The members' cut carries a commercially released
-    //      recording, on a paid site, with no sync licence on file. Same
-    //      situation as luna-tyson-dance, where she has said she is handling
-    //      it. Noting it here so it stays a known state rather than becoming
-    //      a surprise. To pull it, delete the `premium` block: the scene
-    //      keeps working and everyone gets the dialogue cut.
+    //   1. MUSIC. The members' cut is scored. This used to be written up as
+    //      an unlicensed-music risk; that was probably wrong. The dance's
+    //      working folder contains ES_ files ("ES_Give Me All That -
+    //      Mondays.mp3"), which is Epidemic Sound's download naming, and an
+    //      Epidemic Sound subscription licenses exactly this use. Treat the
+    //      music as licensed unless Melissa says otherwise. To pull it
+    //      anyway, delete the `premium` block: the scene keeps working and
+    //      everyone gets the dialogue cut.
     //   2. RESOLUTION. The scored cut is 1320x780; the dialogue cut is
     //      1920x1080. So the members' version is the SMALLER one, which is
     //      backwards from every other premium cut here — a paid edit should
@@ -713,9 +715,10 @@ export const videos: Video[] = [
       // 1758x1080 against 1912x1080, so it is a re-framed edit as well as a
       // scored one. Both are 1080 tall, so the crop costs no resolution.
       //
-      // LICENSING, same as luna-tyson-dance and luna-josh-fair: this carries
-      // music on a paid site and there is no sync licence on file. Melissa
-      // has said she is handling that. Noted here so it stays a known state.
+      // MUSIC, same as luna-tyson-dance and luna-josh-fair. Previously noted
+      // here as a licensing risk; see the fair's entry — the ES_ files in the
+      // dance folder are Epidemic Sound, which licenses this use, so the
+      // earlier alarm was most likely unfounded.
       file: "luna-truck-breakdown-music.proxy.mp4",
       durationSeconds: 181,
       // Runtime is not the pitch — 3:01 against a 0:15 teaser is true but

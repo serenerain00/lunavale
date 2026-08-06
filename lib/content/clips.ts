@@ -188,31 +188,6 @@ export const clips: Clip[] = [
     about: ["luna"],
     mature: true,
   },
-  {
-    // From Instagram, and one of the best-performing things there — which is
-    // exactly why it is FREE. clips.ts already argues this: putting a cut that
-    // ran publicly behind the LunaVerse would be selling something anybody can
-    // scroll past, and docs/monetization/MONETIZATION.md exists to prevent
-    // that. It also arrives with its audience already warmed up.
-    //
-    // Dialogue and room tone, no score — checked on the spectrogram rather
-    // than assumed, which matters because three scenes here now carry
-    // unlicensed music. This one does not.
-    //
-    // Same garage as the "the-garage" stills, and Tyson's rather than Josh's:
-    // his bike, his tools, and a DISCIPLINE EQUALS FREEDOM sign on the wall
-    // that the clip proceeds to make a joke of. No `fullSceneSlug` — there is
-    // no landscape scene of this; the vertical cut is the whole of it.
-    id: "tyson-luna-garage",
-    title: "Discipline",
-    caption:
-      "A bike that doesn't need fixing, a sign on the wall about discipline, and neither of them leaving.",
-    file: "tyson-luna-garage.proxy.mp4",
-    poster: "/posters/tyson-luna-garage.jpg",
-    durationSeconds: 88,
-    about: ["luna", "tyson"],
-    mature: true,
-  },
 ];
 
 export function getClip(id: string): Clip | undefined {

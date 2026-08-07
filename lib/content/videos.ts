@@ -384,6 +384,40 @@ export const videos: Video[] = [
     about: ["josh", "rick"],
   },
   {
+    // The second Josh-and-his-father scene, and FREE for the same reason the
+    // study is: it explains Josh instead of advancing him. Two of these now
+    // sit next to each other, which is the point — the study is Rick indoors
+    // on his own ground, this is Rick outdoors with his hands busy.
+    //
+    // PLACE is `lake`, not `lakehouse` — "open water at the far edge of the
+    // farm, well out of earshot" is exactly the shot, and it keeps Luna's
+    // lakehouse out of a scene she is not in.
+    //
+    // NO SCORE, and Melissa does not intend to add one. It is the only scene
+    // on the site carrying itself on dialogue alone: mean level -34.7dB with
+    // peaks at -8.3dB, against about -16dB for anything scored. Do not "fix"
+    // the quiet.
+    //
+    // Delivered with 2.1s of black on the end, trimmed at 57.2s. That is four
+    // of the last five deliveries — see the note on josh-luna-wall.
+    //
+    // PLACEHOLDER synopsis, written from the picture rather than the words,
+    // pending Melissa's copy.
+    slug: "josh-rick-lake",
+    title: "The Lake",
+    synopsis:
+      "Rick has a line in the water and no reason to hurry. Josh stands next to him and takes it, the way he always has.",
+    file: "josh-rick-lake.proxy.mp4",
+    poster: "/posters/josh-rick-lake.jpg",
+    durationSeconds: 57,
+    addedOn: "2026-08-06",
+    access: "free",
+    mature: false,
+    feelings: ["distance", "hurt"],
+    place: "lake",
+    about: ["josh", "rick"],
+  },
+  {
     // Free, and the most useful free thing on the site for Josh. Everything
     // else public about him is charm; this is him being good at something that
     // costs him patience. A visitor has to like him here or his turn later

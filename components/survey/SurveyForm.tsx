@@ -22,7 +22,32 @@ import {
  * own required-field behaviour all come free and all of them are things a
  * bespoke control gets wrong.
  */
-export function SurveyForm({ scenes }: { scenes: SurveyOption[] }) {
+export function SurveyForm({
+  scenes,
+  questionIds,
+  compact = false,
+  footer,
+}: {
+  scenes: SurveyOption[];
+  /**
+   * Which questions to show, by id. Omitted means all of them.
+   *
+   * The drawer on the home page passes the three REQUIRED ones, which is what
+   * makes it a real submission rather than a teaser: those three are exactly
+   * the fields submitSurvey insists on, so a drawer answer is a complete row
+   * and lands in the same table as a long-form one. There is no second code
+   * path and no partial-response state to reason about.
+   */
+  questionIds?: string[];
+  /** Tighter spacing and a shorter thank-you, for the drawer. */
+  compact?: boolean;
+  /** Rendered under the button — the drawer puts its "all six" link here. */
+  footer?: React.ReactNode;
+}) {
+  const shown = questionIds
+    ? questions.filter((q) => questionIds.includes(q.id))
+    : questions;
+
   const [state, action, pending] = useActionState<SurveyResult | null, FormData>(
     async (_prev, formData) => submitSurvey(formData),
     null,
@@ -30,7 +55,13 @@ export function SurveyForm({ scenes }: { scenes: SurveyOption[] }) {
 
   if (state?.ok) {
     return (
-      <div className="rounded-xl border border-amber/25 bg-amber/[0.04] p-6 sm:p-8">
+      <div
+        className={
+          compact
+            ? ""
+            : "rounded-xl border border-amber/25 bg-amber/[0.04] p-6 sm:p-8"
+        }
+      >
         <h2 className="font-display text-2xl font-light text-ivory">
           That&rsquo;s in. Thank you.
         </h2>
@@ -58,7 +89,10 @@ export function SurveyForm({ scenes }: { scenes: SurveyOption[] }) {
   }
 
   return (
-    <form action={action} className="mt-10 space-y-10">
+    <form
+      action={action}
+      className={compact ? "mt-6 space-y-7" : "mt-10 space-y-10"}
+    >
       {/* Honeypot. Hidden from people and from screen readers; bots fill it. */}
       <div aria-hidden className="hidden">
         <label htmlFor="website">Website</label>
@@ -71,8 +105,8 @@ export function SurveyForm({ scenes }: { scenes: SurveyOption[] }) {
         />
       </div>
 
-      {questions.map((q) => (
-        <Question key={q.id} q={q} scenes={scenes} />
+      {shown.map((q) => (
+        <Question key={q.id} q={q} scenes={scenes} compact={compact} />
       ))}
 
       {state?.error && (
@@ -96,14 +130,28 @@ export function SurveyForm({ scenes }: { scenes: SurveyOption[] }) {
           No email, no account, nothing shared.
         </p>
       </div>
+
+      {footer}
     </form>
   );
 }
 
-function Question({ q, scenes }: { q: SurveyQuestion; scenes: SurveyOption[] }) {
+function Question({
+  q,
+  scenes,
+  compact,
+}: {
+  q: SurveyQuestion;
+  scenes: SurveyOption[];
+  compact?: boolean;
+}) {
   return (
     <fieldset className="border-0 p-0">
-      <legend className="font-display text-xl font-light text-ivory sm:text-2xl">
+      <legend
+        className={`font-display font-light text-ivory ${
+          compact ? "text-lg" : "text-xl sm:text-2xl"
+        }`}
+      >
         {q.prompt}
         {!q.required && (
           <span className="ml-2 align-middle text-xs uppercase tracking-[0.14em] text-stone-dim">
@@ -116,8 +164,12 @@ function Question({ q, scenes }: { q: SurveyQuestion; scenes: SurveyOption[] }) 
       )}
 
       <div className="mt-4">
-        {q.kind === "single" && <Choices q={q} type="radio" />}
-        {q.kind === "multi" && <Choices q={q} type="checkbox" />}
+        {q.kind === "single" && (
+          <Choices q={q} type="radio" compact={compact} />
+        )}
+        {q.kind === "multi" && (
+          <Choices q={q} type="checkbox" compact={compact} />
+        )}
         {q.kind === "scene" && <SceneSelect q={q} scenes={scenes} />}
         {q.kind === "text" && <TextAnswer q={q} />}
       </div>
@@ -128,13 +180,15 @@ function Question({ q, scenes }: { q: SurveyQuestion; scenes: SurveyOption[] }) 
 function Choices({
   q,
   type,
+  compact,
 }: {
   q: SurveyQuestion;
   type: "radio" | "checkbox";
+  compact?: boolean;
 }) {
-  const name = type === "checkbox" ? q.id : q.id;
+  const name = q.id;
   return (
-    <div className="grid gap-2.5 sm:grid-cols-2">
+    <div className={`grid gap-2.5 ${compact ? "" : "sm:grid-cols-2"}`}>
       {(q.options ?? []).map((o) => (
         <label
           key={o.id}

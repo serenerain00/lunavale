@@ -9,6 +9,7 @@ import {
 import { Hero } from "@/components/home/Hero";
 import { InterviewHero } from "@/components/home/InterviewHero";
 import { Reveal } from "@/components/motion/Reveal";
+import { SurveyDrawer } from "@/components/survey/SurveyDrawer";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { canWatch, getMembership } from "@/lib/access/entitlement";
 import { catalog, shelves, type CatalogItem } from "@/lib/content/catalog";
@@ -16,6 +17,9 @@ import { pickHero } from "@/lib/content/hero";
 import { freeEntries, opening } from "@/lib/content/journal";
 import { formatPrice, getTier } from "@/lib/content/membership";
 import { formatDuration, isRecent, latestScene } from "@/lib/content/videos";
+import { ANSWERED_COOKIE, sceneOptions } from "@/lib/content/survey";
+import { hasAnswered } from "@/lib/db/survey";
+import { cookies } from "next/headers";
 
 export default async function Home() {
   const { active: member } = await getMembership();
@@ -34,6 +38,12 @@ export default async function Home() {
   // than keeping a "New" label on something that is not.
   const latest = latestScene();
   const showLatest = latest && isRecent(latest);
+
+  // Nobody who has already answered gets asked again. Read server-side rather
+  // than from document.cookie, so the band is simply absent from the HTML for
+  // them instead of appearing and then vanishing once JavaScript catches up.
+  const jar = await cookies();
+  const surveyAnswered = await hasAnswered(jar.get(ANSWERED_COOKIE)?.value ?? "");
 
   return (
     <>
@@ -130,6 +140,17 @@ export default async function Home() {
                 )}
               </div>
             </div>
+          </section>
+        )}
+
+        {/* --------------------------------------------------------- survey */}
+        {/* Straight after the newest scene, which is the point at which
+            somebody has just been shown the thing they might have an opinion
+            about — and well above the rails, since anything below those is a
+            link nobody scrolls to. Absent entirely once they have answered. */}
+        {!surveyAnswered && (
+          <section className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14">
+            <SurveyDrawer scenes={sceneOptions()} />
           </section>
         )}
 

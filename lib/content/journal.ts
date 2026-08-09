@@ -36,12 +36,19 @@
  * previous/next links both read from that order. Insert new entries in place
  * rather than appending.
  *
- * ACCESS: about four in five entries are members-only, the split Melissa
- * asked for. The six that stay open are the shop window — the last box, Tyson
- * turning up in week two, the Carrera, Josh's call, the coffee, and the hour
- * in the bath. They establish the voice, the friendship and the premise
- * without giving away a single turn: a visitor can read them and know exactly
- * what they'd be paying for, which is her deciding what to do about it.
+ * ACCESS: roughly three in four entries are members-only, the split Melissa
+ * asked for. The open ones are the shop window — Mexico, the last box, her
+ * mother's call, Avery's, Tyson turning up in week two, the Carrera, Josh's
+ * call, the coffee, an hour in the truck, the quiet Sunday, the hour in the
+ * bath, a day at work, and Josh's father. They establish the voice, the
+ * friendship and the premise without giving away a single turn: a visitor can
+ * read them and know exactly what they'd be paying for, which is her deciding
+ * what to do about it.
+ *
+ * (This note used to say "four in five" and "the six that stay open", and had
+ * been wrong on both counts for a while — the free set had quietly grown to
+ * twelve. Count them again if you change the split rather than trusting the
+ * sentence.)
  *
  * Everything with a turn in it — the growing feelings, the lie, the night — is
  * behind the LunaVerse, because that is the story and the story is the product.
@@ -143,6 +150,33 @@ export const journal: JournalEntry[] = [
       "I keep waiting to be angry. What I am is tired, and underneath the tired is something I'm not writing down yet.",
     ],
   },
+  /* ------------------------------------------------------------ her work ---
+   * FREE, and the first entry anywhere about the job. Melissa settled on
+   * 2026-08-05 that Luna MODELS and that it is her income — "the only thing in
+   * the story that is entirely her own: not Josh's farm, not a job he found
+   * her, and it travels" — and until now the journal had not mentioned it once
+   * in forty-six entries. A woman with no visible means of support reads as
+   * somebody's dependent, which is the opposite of who she is.
+   *
+   * It gives away nothing, which is what qualifies it for the shop window: no
+   * Tyson, no turn, just a competent adult having a good day at work.
+   */
+  {
+    id: "the-work",
+    dateline: "A shoot day, and I needed one",
+    place: "downtown",
+    about: ["luna"],
+    access: "free",
+    mature: false,
+    body: [
+      "Up at five, in the chair by six, and a woman I have never met spent forty minutes on my face while I thought about nothing at all. Best I have felt in three weeks.",
+      "People assume this job is about being looked at. It isn't, not from the inside. From the inside it is a room full of people solving a problem, and for eight hours the problem is not me — it's that the light is wrong, the wall is the wrong grey, the jacket does something stupid at the shoulder. I am the least complicated thing in the room. I get to stand still and be handled and nobody wants anything from me except my chin two inches left.",
+      "And it is mine. That is the part I would not say at a dinner table without sounding like I was making a point. The farm is his. The shop is his. This is the one thing nobody found for me and nobody has a view on, and it travels, which means there is always somewhere I am expected that has nothing to do with anybody else's day.",
+      "I don't think he has ever had to understand that. Everything he has, he built or was handed, and either way it has his name on it.",
+      "Eight hours of being good at something, and a cheque with my name on it, and I drove back with the window down.",
+      "Writing it here because I want to be able to find it later: today I remembered I am a person who is good at something.",
+    ],
+  },
   {
     /* Cathy's first appearance in the journal, sitting the same week as the
      * last box. Free, like the entries either side of it — this run is the
@@ -175,6 +209,35 @@ export const journal: JournalEntry[] = [
       "She's not the problem. She has never been the problem. She is just holding one half of it and asking me why I'm not being kinder about the half she can see.",
       "I could give her the rest. I'd have to give her all of it, and then she'd be up at two in the morning in Atlanta with a lamp on, unable to do anything about it, and there would be two of us like that instead of one.",
       "So I said I was fine and that I'd call Sunday. And she said okay in the voice that means she knows I won't.",
+    ],
+  },
+  /* -------------------------------------------- what her mother was told ---
+   * PREMIUM, and the turn the free entry beside it cannot carry: Josh got to
+   * Cathy first. Canon (2026-08-03) is explicit that she has known him ten
+   * years and never once from inside the room, so when he rings her sounding
+   * wrecked she believes him — "and she is not wrong about what she heard".
+   * That last part is the whole entry. He is not performing.
+   *
+   * Shares luna-cathy-phone with `my-mother-called`; the watch page renders
+   * every entry filed to a scene, so the free account of the call and the
+   * private one sit next to each other, which is the point.
+   */
+  {
+    id: "my-mother-likes-him",
+    dateline: "After she rang off, and I have worked something out",
+    place: "lakehouse",
+    about: ["luna", "cathy", "josh"],
+    sceneSlug: "luna-cathy-phone",
+    access: "premium",
+    mature: false,
+    body: [
+      "She defended him. My mother, who has been in a room with that man perhaps eleven times in ten years, defended him to me, down the phone, in my own kitchen.",
+      "It took me until this evening to work out why, and the answer is that he got there first.",
+      "He rang her. Of course he rang her. Before I had said one word to anybody he had already been the man on the phone who could not get through a sentence, and she heard that, and here is the part I cannot get around: she was not wrong about what she heard. He wasn't performing. He was wrecked. He is entirely capable of being genuinely wrecked about a thing he chose to do.",
+      "So there is now a version of this in Atlanta that I did not write and cannot correct without sounding like a woman keeping score.",
+      "And if I gave her the rest of it she would not sleep. She is sixty-five and two thousand miles away and there is nothing she could do with it except carry it around, so what I would actually be doing is handing my mother a weight to hold on my behalf and calling it honesty.",
+      "So I said I'm fine. She said okay in the voice that means she knows I'm not. Then we did her neighbour's roof for twenty minutes and both of us were glad of the roof.",
+      "I am not angry with her. I want that on the page. She is being kind to somebody with the only information anybody gave her.",
     ],
   },
   {
@@ -363,6 +426,37 @@ export const journal: JournalEntry[] = [
       "What is wrong with me.",
       "Six months of work. Six months of Tyson driving out here to make sure I'd eaten. Six months of turning into somebody who does not do this. And I'm about to put all of it out the window of a coffee shop because he touched my lip.",
       "I'm going to go home and pick something to wear. That's the honest end of this entry.",
+    ],
+  },
+  /* --------------------------------------------------------- Josh's father ---
+   * FREE, and the journal's first word about Rick in forty-six entries — he
+   * had not appeared once, despite being, in Melissa's canon, "most of the
+   * reason Josh is the way he is". This is the job the /about page gives him:
+   * he explains Josh, and explaining Josh gives away nothing, which is what
+   * makes it publishable.
+   *
+   * WRITTEN AS REFLECTION, NOT AN EVENT. She has known the man ten years, so
+   * she can think about him without a scene having to happen — deliberately,
+   * so this invents no beat. Canon used: dominance with charisma, never has to
+   * raise his voice, proud in a way that never lands as pride, and the thing
+   * he holds at once — disappointed in Josh for losing her, and always having
+   * thought she was too good for him.
+   */
+  {
+    id: "joshs-father",
+    dateline: "Thinking about Rick, of all people",
+    place: "farmhouse",
+    about: ["luna", "josh", "rick"],
+    access: "free",
+    mature: false,
+    body: [
+      "I have been thinking about Josh's father, which is not a sentence I expected to write this year.",
+      "Ten years and I have never heard that man raise his voice. Not once. He doesn't need to. He comes into a room, takes the best chair without appearing to choose it, and everybody quietly rearranges themselves around what he might want next. It is the most impressive thing I have ever watched a person do and I would not wish it on anybody's son.",
+      "Because here is what I have finally understood, a decade late. Josh is doing an impression. All of it — the certainty, the way a decision arrives already made and the rest of us are simply told — he learned in that family from a man who does it better and does not have to try. Josh does a louder version because he isn't sure it's working.",
+      "And Rick is proud of him in a way that has never once landed as pride. He watches his son the way you watch somebody carry something expensive across a room.",
+      "He has always been kind to me, and it has a strange quality to it. Twice now he has said something to me that, if you turn it over afterwards, is not really a compliment to Josh.",
+      "I don't think he knows he does it. I think he means well and it comes out as weather.",
+      "Anyway. I understand my own life slightly better than I did this morning, which is not the same as it being any easier.",
     ],
   },
   {
@@ -767,6 +861,34 @@ export const journal: JournalEntry[] = [
       "I'll apologise tomorrow. I'll do it badly.",
     ],
   },
+  /* ------------------------------------------------ the apology, next day ---
+   * PREMIUM, and the other half of `your-date` — she ends that entry saying
+   * she will apologise tomorrow and do it badly, and an unkept promise in a
+   * diary is a loose end.
+   *
+   * TYSON SAYS ALMOST NOTHING, deliberately. Anything he explains about Casey
+   * here becomes canon about Casey, and she is four hours old; keeping him to
+   * two words is both truer to the man and leaves Melissa's hands free.
+   */
+  {
+    id: "i-apologised",
+    dateline: "Did it badly, as advertised",
+    place: "lakehouse",
+    about: ["luna", "tyson", "casey"],
+    access: "premium",
+    mature: false,
+    body: [
+      "Apologised. Did it badly, exactly as forecast.",
+      "I had the whole thing ready in the truck on the way over. Measured, adult. One sentence about the drinking, one about the tone, and nothing whatsoever about Casey, because Casey was never the point and I had known that since about six in the morning.",
+      "What came out was that I was out of order, and that I don't like not knowing who she is.",
+      "Which is the true version, and the one I had specifically decided not to say.",
+      "He let it sit there a while, which is how that man tells you that you were right about yourself. Then he said it's fine. Two words. He meant them, and that made it worse, because I had driven over wanting him to be annoyed with me. If he had been annoyed we could have had it out properly and I would have something to push against. Instead he was kind and I drove home feeling precisely as small as I had earned.",
+      "Here is the thing I did not say and am not going to.",
+      "I wasn't asking who she is. I was asking what I am.",
+      "Which is a question I have no business putting to a man I am not with, about a woman he has done nothing with, at the end of a night I started by drinking on my own because of a man I am with.",
+      "I know. It's in the book now, so I can't pretend tomorrow that I didn't.",
+    ],
+  },
   {
     id: "the-window",
     dateline: "The city, very late, and I should be asleep",
@@ -782,6 +904,34 @@ export const journal: JournalEntry[] = [
       "He said my name. Just that. Not a question and not the start of a sentence — he said it the way you put something down carefully because you have decided not to carry it any further.",
       "I said what. He said nothing. Then he said he should go, and he went, and I stood at that window for a long time afterwards being a person I do not particularly want to be.",
       "Here is what I am not writing down: what I would have said if he had stayed another ten seconds. I know the answer. I have known it for months. I am not putting it in my own handwriting, because as long as it isn't on paper I can still be somebody who never said it.",
+    ],
+  },
+  /* ------------------------------------------------------ three days away ---
+   * PREMIUM. Josh's possessiveness, written as the thing it feels like from
+   * inside rather than as an incident — no shouting, nothing quotable, a man
+   * who misses her. It is placed in the run where canon has jealousy turning
+   * into control, and it uses her work as the pressure point because the work
+   * is the one part of her life with nothing of his in it (see `the-work`).
+   *
+   * The last line is the whole entry: she does not catch him doing something,
+   * she catches herself having already changed.
+   */
+  {
+    id: "the-job",
+    dateline: "Three days in the city, and the phone did not stop",
+    place: "downtown",
+    about: ["luna", "josh"],
+    access: "premium",
+    mature: false,
+    notes: ["control"],
+    body: [
+      "Three days of work. Booked eight weeks ago, in the diary he looks at, on a job he called good news at the time and meant it.",
+      "He rang at seven. Then at ten. Then at half eleven, and when I didn't pick up — because I was standing on a mark with three people around me and my phone in another room — he rang the hotel.",
+      "Not angry. I want that written down, because it is the whole difficulty. Not once angry. Warm. Funny about the traffic. Asking how the shoot went and actually listening to the answer.",
+      "And by the third day I had started checking the time before I did anything.",
+      "That is the bit I have only just noticed, and I have had to sit down about it. Not that he called. That I have begun arranging my day around the next one, and nobody asked me to, and if I described any single one of those calls out loud it would sound like a man who misses his girlfriend.",
+      "Nine weeks ago this job was good news. It is the same job.",
+      "I got dressed this morning and thought about what he would make of it. I am two thousand miles from him and he was never going to see it.",
     ],
   },
   {
@@ -828,6 +978,34 @@ export const journal: JournalEntry[] = [
       "I don't know. I don't know. I want him to say it and I have no idea what I would do with it, which probably makes me the worst person in this whole situation.",
       "All I have got is this: I have not stopped thinking about him. Not for one full day. Not since the park.",
       "It's not okay. None of it is okay. I am so bad at this.",
+    ],
+  },
+  /* ------------------------------------------------ the gap Avery leaves ---
+   * PREMIUM, and it only works here — after `on-paper`, where she writes down
+   * that she is in love with Tyson. Before that entry she has nothing to
+   * nearly-say.
+   *
+   * Canon (2026-08-04): Avery does not ask how she is and never has. She calls
+   * and talks about nothing until Luna is laughing, and then waits. The free
+   * entry `avery-called` is that method working. This is the same method not
+   * working, which is a different and better scene.
+   */
+  {
+    id: "nearly-told-avery",
+    dateline: "She left the gap and I didn't take it",
+    place: "apartment",
+    about: ["luna", "avery"],
+    access: "premium",
+    mature: false,
+    body: [
+      "She did the thing again. Forty minutes of nothing — a man at her work, a dog she has decided she is going to steal, a story about a patient with every identifying detail sanded off — until I was laughing properly.",
+      "And then the pause.",
+      "She never asks. That's her entire method and she has been running it on me since she was about nineteen: she doesn't ask, she just stops talking at exactly the moment I could say something, and waits to find out whether I will.",
+      "I had it in my mouth. All of it. That I am in love with a man who has been my best friend since before she could read.",
+      "I said the fridge is making a noise.",
+      "And she let me have that too, which is somehow worse. She didn't push. She said which noise, and we did four minutes on the fridge, and she knew exactly what had just happened and let it go past like weather.",
+      "Why I didn't say it, honestly, since this is the only place I have to be honest: because on this page it is a thing I think, and out loud to Avery it is a thing that is true in the world.",
+      "And because she would tell me to leave. Not cruelly — she'd say it once, in a completely ordinary voice, the way she says everything. And then I would have to live in a world where somebody had said it out loud, and I am not ready for that world, and I would like it noted that I know exactly how that sentence sounds.",
     ],
   },
   {
@@ -890,6 +1068,32 @@ export const journal: JournalEntry[] = [
       "So: today. Just today. Get through today and see what today wants to be.",
       "Whatever is meant to happen is going to happen whether or not I sit up at two in the morning arranging it in my head. That is either wisdom or it is the most convenient thing I have ever told myself, and honestly, at the moment, I'll take either.",
       "I am not lost. I am somewhere, and I don't know where it is yet. Those are different.",
+    ],
+  },
+  /* ---------------------------------------------------- the four versions ---
+   * PREMIUM. Distinct from `day-by-day`, which is her internal weather; this
+   * is the performance she runs on everybody else, and it ties the family
+   * entries and the work entry into one place.
+   *
+   * The last line is the point of it: the person who would notice is the one
+   * she is lying to about the one thing.
+   */
+  {
+    id: "the-version-i-give",
+    dateline: "The one I hand people",
+    place: "farmhouse",
+    about: ["luna"],
+    access: "premium",
+    mature: false,
+    body: [
+      "There are four versions of this in circulation and I wrote every one of them.",
+      "Mom gets busy, tired, fine. Avery gets a bit more because she can hear it anyway, but still nothing with a name attached. The women I work with get a funny version, in which Josh is a character and the farm is charming and I am somebody with an interesting life.",
+      "Tyson gets nearly all of it. Which is its own problem, given the one thing I keep from him is the thing that is about him.",
+      "And this book gets the rest, and the book is the only reason I can run the other four without going mad.",
+      "I used to think that made me a liar. I have decided it doesn't, quite — everybody edits. What bothers me is how good I have got at it. I can do the fine voice now while thinking about something else entirely, the way you drive a road you know.",
+      "Here's the test, and I already don't like the answer. If all four of them compared notes tonight, would any of them recognise the same woman?",
+      "Mom would say she's tired. Avery would say something is wrong. Work would say she's great, honestly, great. Tyson wouldn't say anything at all.",
+      "He'd just get in the truck.",
     ],
   },
   {
@@ -964,6 +1168,11 @@ export const journal: JournalEntry[] = [
     dateline: "Much later — and I need to write this down properly",
     place: "lakehouse",
     about: ["tyson"],
+    // Filed to ty-luna-bed 2026-08-09. That scene is "Twenty years of not
+    // saying it, and then a room with the light coming up in it" — this night,
+    // from outside. It was the only scene with Luna in it and no entry beside
+    // it, and the entry existed all along; nothing linked the two.
+    sceneSlug: "ty-luna-bed",
     access: "premium",
     mature: true,
     body: [

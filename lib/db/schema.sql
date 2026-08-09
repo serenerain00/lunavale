@@ -143,3 +143,49 @@ CREATE TABLE IF NOT EXISTS help_messages (
 
 CREATE INDEX IF NOT EXISTS help_messages_open_idx
   ON help_messages (created_at DESC) WHERE handled = false;
+
+-- ---------------------------------------------------------------------------
+-- Survey — what people think of it, and what they want it to be.
+--
+-- Open to everyone, account or not (see lib/content/survey.ts): the audience
+-- worth measuring is the one that has watched a fragment on Instagram and has
+-- an opinion and no reason to sign up.
+--
+-- COLUMNS RATHER THAN A JSON BLOB. Every question here is one Melissa wants to
+-- count — how many said series, how many said day one — and counting is what
+-- SQL is for. A JSONB blob would make adding a question free and every single
+-- read afterwards a chore. Adding a question later is a migration, and that is
+-- the right trade for six questions that are not going to churn.
+--
+-- Answers are stored as the OPTION IDS from lib/content/survey.ts, never the
+-- labels, so the wording can be rewritten without orphaning what people said.
+CREATE TABLE IF NOT EXISTS survey_responses (
+  id              BIGSERIAL PRIMARY KEY,
+
+  -- The three required ones.
+  enjoyment       TEXT        NOT NULL,
+  format          TEXT        NOT NULL,
+  would_watch     TEXT        NOT NULL,
+
+  -- Optional. A scene slug from lib/content/videos.ts; null if nothing has
+  -- stayed with them yet, which is itself worth knowing.
+  favourite_scene TEXT,
+  -- Multi-select, so an array. Empty rather than null when they picked none.
+  wants           TEXT[]      NOT NULL DEFAULT '{}',
+  comment         TEXT,
+
+  -- Clerk user id when they were signed in, so a member's answer can be read
+  -- next to their membership. Null for everybody else, which will be most.
+  user_id         TEXT,
+
+  -- One answer per browser. NOT security — a private window defeats it, and it
+  -- is meant to: this stops an honest person answering twice by accident, not
+  -- a determined person voting a hundred times. If that ever starts happening
+  -- the fix is a real one, not a longer cookie.
+  client_token    TEXT        NOT NULL UNIQUE,
+
+  created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS survey_responses_recent_idx
+  ON survey_responses (created_at DESC);

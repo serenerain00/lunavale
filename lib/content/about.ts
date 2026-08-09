@@ -131,9 +131,11 @@ export const inProduction: AboutSection = {
     "This isn't a finished thing being rolled out on a schedule. The film is in production while you read this — made independently, on a small budget, by a very small number of people.",
     "Which is the part worth knowing: the next scene isn't fixed yet. What gets made, who it follows and which room it happens in are still open questions, and members are in the conversation where those get decided. A character somebody can't stop thinking about, a room they want to go back into, a question they want answered — at this size, that genuinely moves things.",
     "**Overheard** is where that happens. Luna, Tyson, Josh and Rick post there most days, and members write back — ask them things, tell them what they should have done, or say straight out what isn't working. It goes to Melissa, who is in there too.",
+    "And if you'd rather just answer six questions, there's a short survey — what's landing, what isn't, and whether you'd watch this as a series or a film. No account, no email, about a minute.",
     "And it may not stay a film. There is a conversation going on about extending it into a series, which is a shape this story can take: it is built out of ordinary days, in a handful of places, between people whose situation does not resolve neatly. That is the kind of story that runs for years rather than finishing in ninety minutes.",
   ],
   links: [
+    { href: "/survey", label: "Answer six questions" },
     { href: "/overheard", label: "The Overheard wall" },
     { href: "/membership", label: "What membership opens" },
   ],

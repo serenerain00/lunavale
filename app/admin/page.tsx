@@ -7,6 +7,8 @@ import { authConfigured } from "@/lib/billing/provider";
 import { membershipSummary } from "@/lib/db/memberships";
 import { allPostsForModeration, posterStats } from "@/lib/db/overheard";
 import { recentHelpMessages } from "@/lib/db/help";
+import { surveyResults, type Tally } from "@/lib/db/survey";
+import { labelFor } from "@/lib/content/survey";
 import { threadRunway, FREE_POST_ALLOWANCE } from "@/lib/content/overheard";
 import { videos } from "@/lib/content/videos";
 import { clips, clipAccess } from "@/lib/content/clips";
@@ -44,7 +46,28 @@ export default async function AdminPage() {
       posterStats(FREE_POST_ALLOWANCE),
       freeAccountCount(),
     ]);
-  const help = await recentHelpMessages(20);
+  const [help, survey] = await Promise.all([
+    recentHelpMessages(20),
+    surveyResults(25),
+  ]);
+
+  // The two numbers Melissa actually wants off this page, pulled out of the
+  // tallies so they can sit at the top as headline stats. "Would watch" counts
+  // day-one and probably together — "if someone I trusted told me to" is a
+  // real answer but it is not a yes, and rolling it in would flatter the
+  // number on the strength of the softest option on the list.
+  const share = (rows: Tally[], ids: string[]) =>
+    survey.total === 0
+      ? 0
+      : Math.round(
+          (rows
+            .filter((r) => ids.includes(r.optionId))
+            .reduce((n, r) => n + r.count, 0) /
+            survey.total) *
+            100,
+        );
+  const wouldWatchPct = share(survey.wouldWatch, ["day-one", "probably"]);
+  const seriesPct = share(survey.format, ["series"]);
   const openHelp = help.filter((h) => !h.handled);
 
   const paying = members
@@ -205,6 +228,85 @@ export default async function AdminPage() {
           )}
         </Section>
 
+        {/* --------------------------------------------------------- survey */}
+        <Section title="Survey">
+          {survey.total === 0 ? (
+            <p className="mt-1 text-sm text-stone-dim">
+              No answers yet. The form is at{" "}
+              <Link
+                href="/survey"
+                className="text-amber underline decoration-hairline underline-offset-4"
+              >
+                /survey
+              </Link>
+              .
+            </p>
+          ) : (
+            <>
+              <div className="flex flex-wrap gap-8">
+                <Stat label="Responses" value={String(survey.total)} />
+                <Stat
+                  label="Would watch it"
+                  value={`${wouldWatchPct}%`}
+                  warn={wouldWatchPct < 50}
+                />
+                <Stat label="Want a series" value={`${seriesPct}%`} />
+              </div>
+              <div className="mt-6 grid gap-8 sm:grid-cols-2">
+                <Tallies
+                  heading="How they're finding it"
+                  questionId="enjoyment"
+                  rows={survey.enjoyment}
+                  total={survey.total}
+                />
+                <Tallies
+                  heading="Series or film"
+                  questionId="format"
+                  rows={survey.format}
+                  total={survey.total}
+                />
+                <Tallies
+                  heading="Would you watch it on a platform"
+                  questionId="would_watch"
+                  rows={survey.wouldWatch}
+                  total={survey.total}
+                />
+                <Tallies
+                  heading="Want more of"
+                  questionId="wants"
+                  rows={survey.wants}
+                  total={survey.total}
+                />
+                <Tallies
+                  heading="Stayed with them"
+                  questionId="favourite_scene"
+                  rows={survey.favouriteScene}
+                  total={survey.total}
+                />
+              </div>
+              {survey.comments.length > 0 && (
+                <ul className="mt-8 divide-y divide-hairline border-t border-hairline">
+                  {survey.comments.map((c, i) => (
+                    <li key={i} className="py-4">
+                      <p className="whitespace-pre-line text-sm leading-relaxed text-stone">
+                        {c.comment}
+                      </p>
+                      <p className="mt-1.5 text-xs text-stone-dim">
+                        {c.createdAt.toLocaleString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "2-digit",
+                        })}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
+          )}
+        </Section>
+
         {/* ---------------------------------------------------------- inbox */}
         <Section title="Help">
           <div className="flex flex-wrap gap-8">
@@ -360,6 +462,58 @@ function Stat({
       <p className="mt-1 text-xs uppercase tracking-[0.1em] text-stone-dim">
         {label}
       </p>
+    </div>
+  );
+}
+
+/**
+ * One question's answers, as counts and bars.
+ *
+ * Percentages are of RESPONDENTS, not of answers, which is why "want more of"
+ * can add up to well over a hundred — it is a multi-select, and "62% of people
+ * want more Luna and Tyson" is the sentence Melissa needs, not "Luna and Tyson
+ * was 24% of all boxes ticked".
+ */
+function Tallies({
+  heading,
+  questionId,
+  rows,
+  total,
+}: {
+  heading: string;
+  questionId: string;
+  rows: Tally[];
+  total: number;
+}) {
+  if (rows.length === 0) return null;
+  return (
+    <div>
+      <p className="text-xs uppercase tracking-[0.1em] text-stone-dim">
+        {heading}
+      </p>
+      <ul className="mt-3 space-y-2">
+        {rows.map((r) => {
+          const pct = total === 0 ? 0 : Math.round((r.count / total) * 100);
+          return (
+            <li key={r.optionId}>
+              <div className="flex items-baseline justify-between gap-3 text-sm">
+                <span className="text-ivory">
+                  {labelFor(questionId, r.optionId)}
+                </span>
+                <span className="shrink-0 tabular-nums text-stone-dim">
+                  {r.count} · {pct}%
+                </span>
+              </div>
+              <div className="mt-1 h-1 w-full rounded-full bg-hairline">
+                <div
+                  className="h-1 rounded-full bg-amber"
+                  style={{ width: `${pct}%` }}
+                />
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

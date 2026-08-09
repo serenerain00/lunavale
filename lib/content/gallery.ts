@@ -131,6 +131,39 @@ export const galleries: StillGallery[] = [
     mature: false,
   },
 
+  /* --------------------------------------------------------------- casey's */
+  {
+    // The same bar as `the-bar`, a different night and a third person in it.
+    // Kept as its own set rather than folded into that one: the-bar is the two
+    // of them alone saying things sideways, and this is what that looks like
+    // when somebody else is standing there.
+    //
+    // ORDERED BY CAPTURE TIME, not filename — the source screenshots are named
+    // "… at 4.13.41 PM" and "… at 11.40.47 PM", which sort backwards
+    // alphabetically and would have run the night in reverse.
+    //
+    // No captions yet. The ones on the-bar are Melissa's voice and the wrong
+    // thing to invent — the set reads fine without them and they can be added
+    // per still whenever she wants.
+    id: "casey-bar",
+    title: "Your Date",
+    subtitle: "Luna, Tyson & Casey",
+    description: [
+      "The same bar, and the first night Luna has walked into it and found somebody else already standing where she stands.",
+      "Casey is a friend from the track. That is the whole of what anybody says out loud, and Luna spends the night deciding whether to believe it — which is not really a question about Casey.",
+    ],
+    count: 31,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/casey-bar/cover.jpg",
+    feelings: ["hurt", "distance"],
+    place: "bar",
+    about: ["luna", "tyson", "casey"],
+    sceneSlug: "luna-tyson-casey-bar",
+    access: "premium",
+    mature: true,
+  },
+
   /* -------------------------------------------------------------- the park */
   {
     id: "the-park",

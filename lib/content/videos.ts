@@ -246,6 +246,43 @@ export const videos: Video[] = [
     about: ["luna", "tyson"],
   },
   {
+    // Casey's first scene, and the first time the bar has had a third person
+    // in it. PLACE is `bar` and not `burnetts` — this is Luna and Tyson's
+    // place, the one Last Call and the dance happen in. Burnett's is Cole's,
+    // and Luna has never been in it.
+    //
+    // ABOUT includes casey. She is in the room for most of it and the whole
+    // scene is Luna deciding who she is, which makes her a subject rather than
+    // set dressing — see the note in taxonomy.ts.
+    //
+    // 60s PREVIEW, Melissa's call: "we can show the first 1min". That is the
+    // fight in full before the ask, and it is registered in the OVERRIDES
+    // table in scripts/make-previews.mjs so re-running the script does not
+    // quietly cut it back to fifteen.
+    //
+    // NO SCORE YET — a music pass is coming. The bar ambience is already in
+    // the mix (zero near-silent seconds), so what is missing is the score, not
+    // the room. When it lands, decide then whether it replaces this cut or
+    // becomes the members' one, the way luna-josh-fair went.
+    slug: "luna-tyson-casey-bar",
+    title: "Your Date",
+    synopsis:
+      "A fight with Josh leaves Luna in their bar on her own and several drinks in. Tyson comes in with someone he has never mentioned, and by the time she puts her glass down she has decided what it means.",
+    file: "luna-tyson-casey-bar.proxy.mp4",
+    poster: "/posters/luna-tyson-casey-bar.jpg",
+    durationSeconds: 204,
+    addedOn: "2026-08-09",
+    access: "premium",
+    mature: true,
+    preview: {
+      file: "luna-tyson-casey-bar-preview.proxy.mp4",
+      durationSeconds: 60,
+    },
+    feelings: ["hurt", "distance"],
+    place: "bar",
+    about: ["luna", "tyson", "casey"],
+  },
+  {
     slug: "josh-tyson-barn",
     title: "The Barn",
     synopsis:

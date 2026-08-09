@@ -229,6 +229,15 @@ export const people = [
     label: "Cole",
     blurb: "The one Tyson talks to when the subject is Luna.",
   },
+  {
+    // A friend of Tyson's from the track, added 2026-08-09 with her first
+    // scene. Filed as a person because Luna spends that scene deciding who
+    // she is — which makes her someone the story is ABOUT, not set dressing,
+    // whatever she turns out to be to Tyson.
+    id: "casey",
+    label: "Casey",
+    blurb: "A friend from the track, which is all anyone has said so far.",
+  },
 ] as const satisfies readonly Person[];
 
 export interface Person {

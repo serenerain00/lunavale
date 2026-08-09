@@ -554,6 +554,41 @@ see there is no clean move, and saying so is the most honest thing available.
 That refusal is the point of the scene. Nobody arrives at an answer. Tyson
 came for permission and got understanding instead, which is worse.
 
+### Casey at the bar — "I'll let you get back to your date"
+*(Canon set by Melissa, 2026-08-09. CUT AND PUBLISHED as **"Your Date"**
+(`luna-tyson-casey-bar`), 3:24, **members-only**, first minute open. Score not
+yet made; the bar ambience is in the mix, the music is not.)*
+
+**Casey is new.** A friend of Tyson's **from the track**. That is the whole of
+what is established about her, and the scene works because it stays that thin —
+Luna is not given enough to be wrong about, which is exactly her problem.
+
+The night starts with **a fight with Josh**. Luna ends up at **the bar — theirs,
+hers and Tyson's** — on her own, and she has been there a while before anything
+happens. **She is already drunk when Tyson walks in**, and that is load-bearing:
+everything she does next is her judgement with a few drinks on it.
+
+Tyson is with Casey. Luna **jumps to a conclusion about who Casey is to him**.
+Tyson tells her the truth — a friend from the track — and it does not land.
+
+**Casey goes to get a drink**, and in that gap Luna and Tyson have the real
+conversation. What actually offends her is not that Casey exists. It is that
+**she had never heard of her.** Twenty years, and there is a person he sees at
+the track that he never once mentioned.
+
+Then **Tyson works out that she has been drinking**, and says so. **She takes
+that badly** — worse than the Casey question, because it reframes everything she
+has just said as something that can be dismissed.
+
+It ends with her **finishing her drink** and: **"I'll let you get back to your
+date."** She is not asking a question. She is handing him a version of the night
+and leaving before he can correct it.
+
+**Why it matters:** this is the first time Luna's jealousy is pointed at Tyson
+rather than the other way round, and the first time she is the one behaving
+badly in a room. She does not get to be the wronged party in this one, and the
+scene does not offer her the excuse.
+
 ### The wall — Josh at the farmhouse
 *(Canon set by Melissa, 2026-08-05. CUT AND PUBLISHED as **"The Way You Looked
 at Him"** (`josh-luna-wall`), 6:07, **members-only**.)*

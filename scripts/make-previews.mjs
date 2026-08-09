@@ -69,6 +69,13 @@ const OVERRIDES = {
   // the scored cut as of 2026-08-05. The 60s version that existed before the
   // swap was from the dialogue master and sounded different.
   "josh-luna-wall": 60,
+
+  // Melissa's call on release: "we can show the first 1min of it". Fifteen
+  // seconds of this one is Luna alone at the bar before Tyson has walked in —
+  // the situation the scene is about has not started yet. A minute gets a
+  // visitor through the introduction and into the argument, which is the part
+  // worth paying for the end of. Just under a third of the 3:24 runtime.
+  "luna-tyson-casey-bar": 60,
 };
 
 /**

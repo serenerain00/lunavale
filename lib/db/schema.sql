@@ -189,3 +189,46 @@ CREATE TABLE IF NOT EXISTS survey_responses (
 
 CREATE INDEX IF NOT EXISTS survey_responses_recent_idx
   ON survey_responses (created_at DESC);
+
+-- ---------------------------------------------------------------------------
+-- Scene comments — what somebody thought, said at the moment they finished it.
+--
+-- NOT A PUBLIC COMMENT THREAD, and the form says so in as many words. These go
+-- to Melissa and appear on /admin, nowhere else.
+--
+-- That is a deliberate choice rather than a half-built feature. A public
+-- thread under intimate footage on a site run by one person is a moderation
+-- job that arrives whether or not anybody has time for it, and the first
+-- abusive post is live until she happens to look. Private feedback gets her
+-- the thing she asked for — what people think, per scene — with none of that,
+-- and going public later is additive: this table already holds the text.
+--
+-- No account required, same reasoning as help_messages: the people most worth
+-- hearing from here are the ones who arrived from Instagram and have no login.
+CREATE TABLE IF NOT EXISTS scene_comments (
+  id           BIGSERIAL PRIMARY KEY,
+
+  -- Slug from lib/content/videos.ts. Not a foreign key — the catalog lives in
+  -- TypeScript, and a comment should survive a scene being renamed or pulled
+  -- rather than vanishing with it.
+  scene_slug   TEXT        NOT NULL,
+
+  body         TEXT        NOT NULL,
+
+  -- Clerk user id when they happened to be signed in. Usually null.
+  user_id      TEXT,
+  -- Whether they could watch the whole thing or only the public preview, at
+  -- the moment they wrote it. "This ended too soon" from someone who saw sixty
+  -- seconds means something different from the same words after 3:25.
+  was_member   BOOLEAN     NOT NULL DEFAULT false,
+
+  -- Melissa marks it read rather than deleting it, same as Overheard and help.
+  handled      BOOLEAN     NOT NULL DEFAULT false,
+
+  created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS scene_comments_recent_idx
+  ON scene_comments (created_at DESC);
+CREATE INDEX IF NOT EXISTS scene_comments_scene_idx
+  ON scene_comments (scene_slug, created_at DESC);

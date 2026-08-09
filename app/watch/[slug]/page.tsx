@@ -6,13 +6,16 @@ import { canWatch, isMember } from "@/lib/access/entitlement";
 import { entriesForScene } from "@/lib/content/journal";
 import { HowThisCameTogether } from "@/components/takes/HowThisCameTogether";
 import { galleryForScene } from "@/lib/content/gallery";
-import { VideoPlayer } from "@/components/media/VideoPlayer";
+import { SceneWatch } from "@/components/media/SceneWatch";
 import { JournalCard } from "@/components/journal/JournalCard";
 import { LockedNotice } from "@/components/membership/LockedNotice";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContentNotice } from "@/components/ui/ContentNotice";
 import { RatingBadge } from "@/components/ui/RatingBadge";
 import { SiteHeader } from "@/components/ui/SiteHeader";
+import { ANSWERED_COOKIE } from "@/lib/content/survey";
+import { hasAnswered } from "@/lib/db/survey";
+import { cookies } from "next/headers";
 
 interface WatchPageProps {
   params: Promise<{ slug: string }>;
@@ -45,7 +48,17 @@ export default async function WatchPage({ params }: WatchPageProps) {
   const video = getVideo(slug);
   if (!video) notFound();
 
-  const [allowed, member] = await Promise.all([canWatch(video), isMember()]);
+  const [allowed, member, jar] = await Promise.all([
+    canWatch(video),
+    isMember(),
+    cookies(),
+  ]);
+  // Whether to bother them with the survey when the scene ends. Read here, on
+  // the server, rather than from document.cookie — the panel is client-side
+  // but the answer is not something the client should be deciding.
+  const surveyAnswered = await hasAnswered(
+    jar.get(ANSWERED_COOKIE)?.value ?? "",
+  );
   // A scene can exist as two edits (Video.premium). The stream route decides
   // which one actually plays; this only decides what the page SAYS about it,
   // and must agree with that decision or the runtime is a surprise.
@@ -93,19 +106,21 @@ export default async function WatchPage({ params }: WatchPageProps) {
           </p>
         )}
 
-        <div className="overflow-hidden rounded-xl bg-black ring-1 ring-hairline">
-          <div className="relative aspect-video">
-            {allowed || video.preview ? (
-              <VideoPlayer
-                slug={video.slug}
-                poster={video.poster}
-                title={video.title}
-              />
-            ) : (
+        {allowed || video.preview ? (
+          <SceneWatch
+            slug={video.slug}
+            poster={video.poster}
+            title={video.title}
+            surveyAnswered={surveyAnswered}
+            preview={!allowed && Boolean(video.preview)}
+          />
+        ) : (
+          <div className="overflow-hidden rounded-xl bg-black ring-1 ring-hairline">
+            <div className="relative aspect-video">
               <LockedNotice cover={video.poster} subject="This scene" />
-            )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* A visitor gets the opening of the scene and then this. Stated once,
             under the player, with the real numbers — not a countdown over the

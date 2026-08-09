@@ -8,6 +8,8 @@ import { membershipSummary } from "@/lib/db/memberships";
 import { allPostsForModeration, posterStats } from "@/lib/db/overheard";
 import { recentHelpMessages } from "@/lib/db/help";
 import { surveyResults, type Tally } from "@/lib/db/survey";
+import { commentCountsByScene, recentSceneComments } from "@/lib/db/comments";
+import { getVideo } from "@/lib/content/videos";
 import { labelFor } from "@/lib/content/survey";
 import { threadRunway, FREE_POST_ALLOWANCE } from "@/lib/content/overheard";
 import { videos } from "@/lib/content/videos";
@@ -46,10 +48,13 @@ export default async function AdminPage() {
       posterStats(FREE_POST_ALLOWANCE),
       freeAccountCount(),
     ]);
-  const [help, survey] = await Promise.all([
+  const [help, survey, sceneComments, commentCounts] = await Promise.all([
     recentHelpMessages(20),
     surveyResults(25),
+    recentSceneComments(30),
+    commentCountsByScene(),
   ]);
+  const unreadComments = sceneComments.filter((c) => !c.handled).length;
 
   // The two numbers Melissa actually wants off this page, pulled out of the
   // tallies so they can sit at the top as headline stats. "Would watch" counts
@@ -225,6 +230,80 @@ export default async function AdminPage() {
                 </li>
               ))}
             </ul>
+          )}
+        </Section>
+
+        {/* ------------------------------------------------ scene comments */}
+        <Section title="What they said about the scenes">
+          {sceneComments.length === 0 ? (
+            <p className="mt-1 text-sm text-stone-dim">
+              Nothing yet. The box appears under a scene once somebody has
+              watched it to the end.
+            </p>
+          ) : (
+            <>
+              <div className="flex flex-wrap gap-8">
+                <Stat label="Comments" value={String(sceneComments.length)} />
+                <Stat
+                  label="Unread"
+                  value={String(unreadComments)}
+                  warn={unreadComments > 0}
+                />
+                <Stat
+                  label="Scenes talked about"
+                  value={String(commentCounts.length)}
+                />
+              </div>
+
+              {commentCounts.length > 1 && (
+                <p className="mt-4 text-xs leading-relaxed text-stone-dim">
+                  Most written about:{" "}
+                  {commentCounts.slice(0, 5).map((c, i) => (
+                    <span key={c.sceneSlug}>
+                      {i > 0 && " · "}
+                      <span className="text-stone">
+                        {getVideo(c.sceneSlug)?.title ?? c.sceneSlug}
+                      </span>{" "}
+                      {c.count}
+                    </span>
+                  ))}
+                </p>
+              )}
+
+              <ul className="mt-5 divide-y divide-hairline">
+                {sceneComments.map((c) => (
+                  <li
+                    key={c.id}
+                    className={`py-4 ${c.handled ? "opacity-45" : ""}`}
+                  >
+                    <p className="flex flex-wrap items-baseline gap-x-2 text-sm">
+                      <Link
+                        href={`/watch/${c.sceneSlug}`}
+                        className="font-semibold text-ivory underline decoration-hairline underline-offset-4"
+                      >
+                        {getVideo(c.sceneSlug)?.title ?? c.sceneSlug}
+                      </Link>
+                      <span className="text-xs text-stone-dim">
+                        {c.createdAt.toLocaleString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "2-digit",
+                        })}
+                      </span>
+                      {/* Whether they had seen the whole thing when they
+                          wrote it — it changes what the words mean. */}
+                      <span className="text-[0.6875rem] uppercase tracking-wide text-stone-dim">
+                        {c.wasMember ? "saw all of it" : "preview only"}
+                      </span>
+                    </p>
+                    <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-stone">
+                      {c.body}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </>
           )}
         </Section>
 

@@ -728,6 +728,45 @@ export const journal: JournalEntry[] = [
       "I want to be clear with myself, since this book is the only place I'm allowed to be: nothing has happened. I am not writing a confession. I am writing down that I have started keeping track of what I don't mention, and the list is now long enough to be its own kind of work.",
     ],
   },
+  /* ------------------------------------------------- the night with Casey ---
+   * PLACED HERE on purpose. It only works once she has admitted to herself
+   * what Tyson is to her (last-call, reading-it-back) and once Josh has
+   * started asking about him — a woman who had not yet worked out her own
+   * feelings would have had no reason to care who Casey was. It reads as
+   * jealousy because by this point it is.
+   *
+   * The dateline deliberately echoes last-call's "Home from the bar". Same
+   * bar, same walk home, and the difference between the two nights is the
+   * whole point: that one she came home understood, this one she came home
+   * having been the problem.
+   *
+   * MOVE IT if Melissa's chronology puts the fight with Josh somewhere else —
+   * the order is the story and this is my inference, not her instruction.
+   */
+  {
+    id: "your-date",
+    dateline: "Home from the bar again, and this one is mine",
+    place: "bar",
+    about: ["tyson", "casey"],
+    sceneSlug: "luna-tyson-casey-bar",
+    access: "premium",
+    mature: false,
+    body: [
+      "I said it like a line. I even left a gap before it, so it would land. I'll let you get back to your date.",
+      "I had been in there about two hours before any of this. Josh and I had it out again and I could not be in that house, and the bar is where I go, so that is where I went. That is the honest order of it. I did not go there looking for Tyson.",
+      "But I was pleased when he walked in. For about four seconds I was so pleased I nearly stood up. Then I saw who came in behind him.",
+      "Her name is Casey. She's a friend from the track. That is what he told me, and it is almost certainly the truth, and I decided it was a lie somewhere around the second time he said it.",
+      "Here is the part I want on the page while I still think it, because tomorrow I will have talked myself out of it: I was not angry that she exists. He is allowed people. I was angry that I had never heard her name. Twenty years. I know which corner at the track he hates. I know what he calls the man who services the car. And there is a woman he sees out there often enough to bring to our bar, and in twenty years the name has never once come up.",
+      "That is not nothing. He kept her separate. I would like to know why, and I would like to have asked it in a way that got me an answer.",
+      "Instead I asked it like that.",
+      "And then he worked out how long I'd been sitting there. He didn't say it unkindly — four words, no edge on them, the way he says everything. I have never wanted to throw something at him before tonight.",
+      "Because the moment he said it, everything I'd said stopped counting. That is the trick of it. You can be right about a thing and be drinking at the same time, and only one of those gets discussed.",
+      "I know what I sounded like. I'm not going to sit here and pretend I don't.",
+      "He hasn't done anything. That's where I keep arriving and then walking away from. He hasn't done a single thing wrong. He is allowed a whole life I am not in — he is supposed to have one, he doesn't belong to me, I am not even—",
+      "I'm not finishing that sentence.",
+      "I'll apologise tomorrow. I'll do it badly.",
+    ],
+  },
   {
     id: "the-window",
     dateline: "The city, very late, and I should be asleep",

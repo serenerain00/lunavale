@@ -16,11 +16,18 @@
 # derives both the media paths and the link target from the slug. A loop whose
 # name doesn't match a slug in lib/content/videos.ts will not appear.
 #
-# FREE SCENES ONLY (Melissa, 2026-08-05). The hero used to rotate through
-# premium scenes, so the front page led with footage a visitor could not watch
-# and a play button that opened a locked door. hero.ts now drops any non-free
-# slug outright, so adding a premium one here does nothing — but do not add one
-# and wonder why.
+# FREE SCENES, OR PREMIUM ONES WITH A PUBLIC PREVIEW. The hero used to rotate
+# through premium scenes with nothing to watch behind them, so the front page
+# led with a play button that opened a locked door; the rule was free-only from
+# 2026-08-05 until previews existed. hero.ts now drops any scene that has
+# neither free access nor a preview, so adding one of those here does nothing —
+# but do not add one and wonder why.
+#
+# Publishing a loop from a members-only scene is a deliberate choice each time:
+# those seconds become public permanently, at a public URL, the way a premium
+# scene's poster already is. It still cannot widen what a non-member can watch
+# of the scene itself, because the gated route remains the only way to its
+# bytes.
 #
 # OUTPUT IS EXACTLY 1280x720, cropped to fill rather than scaled to fit. The
 # hero is a full-bleed background with a headline over it, so a 3:2 source was
@@ -52,6 +59,18 @@ HEROES=(
   "josh-tyson-barn|stories/josh-tyson-barn.proxy.mp4|10|40"
   # Hands, a wrench, someone actually doing something.
   "josh-luna-bolt|stories/josh-luna-bolt.proxy.mp4|6|40"
+  # The bar, mid-argument. THE FIRST MEMBERS-ONLY HERO — allowed because the
+  # scene has a public preview, so the play button does not open a locked door
+  # (see lib/content/hero.ts).
+  #
+  # 30 SECONDS FROM THE MIDDLE, Melissa's ask. 86s is just after a cut and
+  # 86+30=116 lands on the next one, so the wrap-around reads as an edit rather
+  # than a jump — and it centres on 101s of a 205s scene, which is the middle.
+  #
+  # SOURCE IS THE MASTER, unlike every line above. This scene's proxy is
+  # 1116x720, so cropping it to 1280x720 would upscale; the 1320x852 master
+  # crops down instead.
+  "luna-tyson-casey-bar|stories/luna-tyson-casey-bar/luna-tyson-casey-bar-music.mov|86|30"
   #
   # Sources are the 720p proxies rather than masters: the output is 720 tall,
   # so a master buys nothing here, and every free scene is guaranteed to have a

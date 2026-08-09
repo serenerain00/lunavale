@@ -20,12 +20,22 @@ import { getVideo, type Video } from "@/lib/content/videos";
 /**
  * The pool the hero is drawn from.
  *
- * FREE SCENES ONLY (Melissa, 2026-08-05), and `heroes()` enforces it rather
- * than trusting this list. The rotation used to be luna-tyson-bar,
- * luna-josh-kitchen-kiss and ty-luna-farm-road — all three PREMIUM — so the
- * front page led with footage a visitor could not watch, under a play button
- * that opened a locked door. That is the worst possible first impression on a
- * page whose whole job is to make somebody want in.
+ * FREE SCENES, OR PREMIUM ONES WITH A PUBLIC PREVIEW, and `heroes()` enforces
+ * it rather than trusting this list.
+ *
+ * The rule started out as free-only (Melissa, 2026-08-05). The rotation had
+ * been luna-tyson-bar, luna-josh-kitchen-kiss and ty-luna-farm-road — all
+ * three PREMIUM — so the front page led with footage a visitor could not
+ * watch, under a play button that opened a locked door. That is the worst
+ * possible first impression on a page whose whole job is to make somebody
+ * want in.
+ *
+ * What changed on 2026-08-06 is that premium scenes got real previews. The
+ * objection was never "premium" — it was the locked door, and a scene with a
+ * preview does not have one: the play button lands on a page that plays a
+ * genuine minute of the scene. So the test is now the door rather than the
+ * price, which is why it reads `!video.preview` and not `access !== "free"`.
+ * A premium scene with NO preview is still excluded, and still would be.
  *
  * Loops are built by scripts/make-hero-loop.sh, which crops every one to
  * exactly 1280x720, so "widescreen" is guaranteed by construction and not by
@@ -45,6 +55,10 @@ export const HERO_SLUGS: string[] = [
   "luna-avery-ipad",
   "josh-tyson-barn",
   "josh-luna-bolt",
+  // The first members-only scene in the rotation (Melissa, 2026-08-09: "I just
+  // want people to have a sneak peek"). Allowed by the preview rule above —
+  // its play button opens a page that plays the first minute for anybody.
+  "luna-tyson-casey-bar",
 ];
 
 export interface Hero {
@@ -90,7 +104,8 @@ export function heroes(): Hero[] {
   return HERO_SLUGS.flatMap((slug) => {
     const video = getVideo(slug);
     if (!video) return [];
-    if (video.access !== "free") return [];
+    // The door, not the price — see the note on HERO_SLUGS.
+    if (video.access !== "free" && !video.preview) return [];
     return [
       {
         slug,

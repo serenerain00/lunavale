@@ -75,12 +75,19 @@ export async function HowThisCameTogether({
       <p className="mt-2 max-w-2xl leading-relaxed text-stone">
         {total} attempts at {beats} {beats === 1 ? "moment" : "moments"}, in the
         order they were made.{" "}
+        {/* The no-stars case. This copy used to describe the wall specifically
+            — "one unbroken take in one setup" — which was true of the only
+            scene that had it and became false the moment a second, intercut
+            scene arrived with nothing starred either. The reason they share is
+            the honest one: the finished cut could not be traced back to the
+            attempts with enough confidence to mark any, and a wrong star is
+            worse than no star. Keep it about the matching, not the shot. */}
         {unused === total ? (
           <>
             Which of them made the finished scene isn&rsquo;t marked here.
-            It is one unbroken take in one setup, and the attempts are too
-            alike to tell apart with any confidence — so rather than guess,
-            none of them is starred.
+            Tracing a finished cut back to the attempt it came from is guesswork
+            on material this similar, and a star in the wrong place would be
+            worse than none — so none of them is starred.
           </>
         ) : (
           <>

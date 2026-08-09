@@ -260,17 +260,32 @@ export const videos: Video[] = [
     // table in scripts/make-previews.mjs so re-running the script does not
     // quietly cut it back to fifteen.
     //
-    // NO SCORE YET — a music pass is coming. The bar ambience is already in
-    // the mix (zero near-silent seconds), so what is missing is the score, not
-    // the room. When it lands, decide then whether it replaces this cut or
-    // becomes the members' one, the way luna-josh-fair went.
+    // SCORED CUT, swapped in 2026-08-09. It REPLACES the dialogue cut rather
+    // than sitting beside it as a members' upgrade the way luna-josh-fair
+    // does, because that split only earns its keep on a scene whose public cut
+    // somebody can actually watch. This one is members-only already, so a
+    // second members' cut would upgrade nobody and leave the dialogue version
+    // serving nothing but the preview.
+    //
+    // Confirmed the music is really there rather than trusting the filename:
+    // the scored mix has a continuous low band the dialogue one does not, and
+    // its noise floor sits at 0.56 of the median against 0.49. It is a
+    // re-export, not a remix — the two are not frame-aligned, and it runs
+    // about 4s longer.
+    //
+    // 1320x852 (1.55) against the dialogue cut's 1936x1080 (1.79), so it
+    // pillarboxes slightly in the 16:9 player. The wall's scored cut already
+    // does this at 1.61; this is the most pronounced so far. Worth an export
+    // at 16:9 whenever Melissa is back in the timeline.
+    //
+    // Delivered with 3.8s of black on the end, trimmed at 205.0s.
     slug: "luna-tyson-casey-bar",
     title: "Your Date",
     synopsis:
       "A fight with Josh leaves Luna in their bar on her own and several drinks in. Tyson comes in with someone he has never mentioned, and by the time she puts her glass down she has decided what it means.",
     file: "luna-tyson-casey-bar.proxy.mp4",
     poster: "/posters/luna-tyson-casey-bar.jpg",
-    durationSeconds: 204,
+    durationSeconds: 205,
     addedOn: "2026-08-09",
     access: "premium",
     mature: true,

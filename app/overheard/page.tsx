@@ -4,8 +4,10 @@ import { PostForm } from "@/components/overheard/PostForm";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
+import { notFound } from "next/navigation";
 import {
   CAST_TINTS,
+  OVERHEARD_ARCHIVED,
   landedMessages,
   resolveMention,
 } from "@/lib/content/overheard";
@@ -39,6 +41,11 @@ interface PageProps {
 }
 
 export default async function OverheardPage({ searchParams }: PageProps) {
+  // Archived — see OVERHEARD_ARCHIVED. notFound() rather than a "gone" page:
+  // there is nothing to read here while it is off, and a page explaining that
+  // the wall is closed is still a page about an empty wall.
+  if (OVERHEARD_ARCHIVED) notFound();
+
   const [{ active: member }, signedIn, isOwnerViewer] = await Promise.all([
     getMembership(),
     isSignedIn(),

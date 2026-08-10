@@ -247,14 +247,11 @@ export const BENEFITS: Benefit[] = [
   // writing in it are the same door now, so there is no free half of it left
   // to advertise. A benefits table that still offered it would be promising
   // something the product refuses at the page.
-  {
-    id: "overheard-member",
-    label: "Overheard",
-    detail:
-      "The room where Luna, Tyson, Josh and Rick talk most days — read it, answer them, and reply to anyone else in there.",
-    from: "vault",
-    group: "The world",
-  },
+  // The "Overheard" member row was here and came out on 2026-08-10, when the
+  // wall was archived (lib/content/overheard.ts). It is the third thing this
+  // table has had to stop promising, and the rule is the same each time: a
+  // benefits list is a contract, and a row for a room nobody can enter is a
+  // lie you are charging for. Put it back with the wall.
   {
     id: "bts",
     label: "Selected behind the scenes",

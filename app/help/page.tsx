@@ -86,15 +86,7 @@ export default async function HelpPage() {
 
         <p className="mt-6 text-xs leading-relaxed text-stone-dim">
           Your message is stored so she can answer it, and is never shown to
-          anyone else or published anywhere. If you want to say something in
-          public instead, that is what{" "}
-          <Link
-            href="/overheard"
-            className="text-amber underline decoration-hairline underline-offset-4"
-          >
-            Overheard
-          </Link>{" "}
-          is for.
+          anyone else or published anywhere.
         </p>
       </main>
     </>

@@ -168,10 +168,11 @@ export default async function AdminPage() {
         </Section>
 
         {/* ------------------------------------------------------- the room */}
-        <Section
-          title="Overheard"
-          action={{ href: "/account/overheard", label: "Moderate" }}
-        >
+        {/* ARCHIVED 2026-08-10 — the moderation link is gone with it, since
+            that page 404s now. The numbers stay: they are the record of what
+            the room did while it was open, which is the evidence behind
+            archiving it. */}
+        <Section title="Overheard (archived)">
           <div className="flex flex-wrap gap-8">
             <Stat
               label="Accounts"

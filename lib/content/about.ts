@@ -106,10 +106,11 @@ export const howToWatch: AboutSection = {
  * are worded as what is actually true rather than as what would sell hardest:
  *
  *   "In production" — it is. Scenes are still being shot and cut.
- *   "Members shape what gets made next" — the mechanism is Overheard and
- *     nothing more formal. There is no vote, no poll, no roadmap board, so
- *     the copy points at the room instead of implying machinery that would
- *     have to be built to make the sentence true.
+ *   "Members shape what gets made next" — the mechanism was Overheard until
+ *     it was archived on 2026-08-10 (see lib/content/overheard.ts). It is now
+ *     the per-scene comment box and the survey, which are the two things that
+ *     actually reach her. Still no vote, no poll, no roadmap board: the copy
+ *     points at what exists rather than implying machinery.
  *   "It may become a series" — a conversation, and said as one. Not
  *     "announcing", not "coming soon". If it firms up, this paragraph is the
  *     place to say so; if it dies, this paragraph comes out.
@@ -130,13 +131,12 @@ export const inProduction: AboutSection = {
   body: [
     "This isn't a finished thing being rolled out on a schedule. The film is in production while you read this — made independently, on a small budget, by a very small number of people.",
     "Which is the part worth knowing: the next scene isn't fixed yet. What gets made, who it follows and which room it happens in are still open questions, and members are in the conversation where those get decided. A character somebody can't stop thinking about, a room they want to go back into, a question they want answered — at this size, that genuinely moves things.",
-    "**Overheard** is where that happens. Luna, Tyson, Josh and Rick post there most days, and members write back — ask them things, tell them what they should have done, or say straight out what isn't working. It goes to Melissa, who is in there too.",
+    "The way to be in that conversation is to say something. There's a box at the end of every scene that goes straight to Melissa, and a short survey about where this should go next. She reads all of it — at this size, a few people saying the same thing genuinely moves what gets shot.",
     "And if you'd rather just answer six questions, there's a short survey — what's landing, what isn't, and whether you'd watch this as a series or a film. No account, no email, about a minute.",
     "And it may not stay a film. There is a conversation going on about extending it into a series, which is a shape this story can take: it is built out of ordinary days, in a handful of places, between people whose situation does not resolve neatly. That is the kind of story that runs for years rather than finishing in ninety minutes.",
   ],
   links: [
     { href: "/survey", label: "Answer six questions" },
-    { href: "/overheard", label: "The Overheard wall" },
     { href: "/membership", label: "What membership opens" },
   ],
 };

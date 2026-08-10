@@ -40,7 +40,8 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
     // for World and Membership to go and said nothing about these two, and
     // dropping a whole section on inference is not a thing to do quietly.
     { href: "/clips", label: "Clips" },
-    { href: "/overheard", label: "Overheard" },
+    // Overheard is archived (lib/content/overheard.ts). The link goes with it —
+    // a nav item pointing at a 404 is worse than a missing nav item.
     // HELP IS MEMBERS-ONLY IN THE NAV now, her call.
     //
     // Worth knowing what it trades: /help exists because "someone who cannot

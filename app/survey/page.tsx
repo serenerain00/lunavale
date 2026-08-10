@@ -67,17 +67,17 @@ export default async function SurveyPage() {
               You&rsquo;ve already answered this one.
             </h2>
             <p className="mt-3 max-w-lg leading-relaxed text-stone">
-              And it was counted — thank you. If something has changed your mind
-              since, or you&rsquo;ve watched something that got under your skin,
-              the wall is the better place for it: that goes to Melissa too, and
-              she can actually write back.
+              And it was counted — thank you. If something has changed your
+              mind since, or you&rsquo;ve watched something that got under your
+              skin, the box at the end of any scene goes straight to Melissa
+              and she reads every one.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
-                href="/overheard"
+                href="/journal"
                 className="inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
               >
-                The Overheard wall
+                Read her journal
               </Link>
               <Link
                 href="/browse"

@@ -42,13 +42,15 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-07-28:
+Recounted 2026-08-10 (the 2026-07-28 figures had drifted a long way — journal
+entries, clips and two more scenes have landed since):
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 8 | 44 | 23 |
-| Tyson | 8 | 44 | 33 |
-| Josh | 8 | 35 | 21 |
+| Luna | 8 | 82 | 52 |
+| Tyson | 9 | 63 | 50 |
+| Josh | 10 | 60 | 36 |
+| Rick | 2 | 5 | 2 |
 
 **Josh is the thinnest** and is the one who benefits most from more. He is the
 hardest character to hold an audience's sympathy for, the whole story depends
@@ -72,3 +74,4 @@ not a changelog.
 | Week of | What shipped | Who |
 | --- | --- | --- |
 | 2026-07-28 | Character hubs built; 24 Between Takes notes (8 each), 7 free | all three |
+| 2026-08-10 | Between Takes note — "Whose water it is", on The Lake. Rick's second. | rick |

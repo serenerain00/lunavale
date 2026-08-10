@@ -117,9 +117,13 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
               "Account"
             ) : (
               <>
-                {/* The full label needs room a phone doesn't have. */}
-                <span className="sm:hidden">Join</span>
-                <span className="hidden sm:inline">Become a member</span>
+                {/* The full label needs room a phone doesn't have.
+                    "Become a member" named the transaction; this names what
+                    they get, which is the whole point of the 2026-08-10
+                    strategy rewrite. Kept short because it is a bar button —
+                    the long-form version of the argument is on /membership. */}
+                <span className="sm:hidden">Read on</span>
+                <span className="hidden sm:inline">Keep reading her</span>
               </>
             )}
           </Link>

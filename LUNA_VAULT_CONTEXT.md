@@ -413,6 +413,28 @@ not."** He means losing Luna. He does not use her name.
 
 ---
 
+#### Rick and Cathy have spoken — OFF-SCREEN, referenced only
+*(Established by the dialogue in `josh-rick-lake`; confirmed by Melissa
+2026-08-10: "I never had a video about rick speaking with cathy, he just
+mentions it to josh".)*
+
+At the lake Rick tells Josh: **I talked to Cathy. She said Luna's been staying
+out at the lakehouse.** Josh's answer is that Tyson said the same.
+
+**There is no scene of that call and there is not meant to be.** It happens
+between two people the story never puts in a room together, and it reaches the
+audience the way it reaches Josh — secondhand, from a man who already knew.
+
+**Why it matters:** it means the two families are talking, and that Luna's own
+mother is the one telling Josh's father where she is sleeping. Cathy is not
+betraying her — she has known Josh ten years and never once from inside the
+room (see her section above), so to her this is family keeping track of family.
+It is the same mechanism as the phone call: Cathy is kind to whoever is in
+front of her, with the only information anybody gives her.
+
+It also puts Rick a step ahead of his son in a scene where Josh has come
+looking for help, which is the joke of that scene and the reason it lands.
+
 ### Mexico — the flashback
 *(Canon set by Melissa, 2026-07-29.)*
 

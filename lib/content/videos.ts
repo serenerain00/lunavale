@@ -209,6 +209,9 @@ export const videos: Video[] = [
     preview: {
       file: "tyson-luna-lakehouse-fire-preview.proxy.mp4",
       durationSeconds: 15,
+      hookStart: 224,
+      hookNote:
+        "ends on “Can I ask you something?” — the answer she is about to be asked for is “why are you so good to me”",
     },
     feelings: ["desire", "distance"],
     place: "lakehouse",
@@ -227,6 +230,9 @@ export const videos: Video[] = [
     preview: {
       file: "tyson-park-fight-preview.proxy.mp4",
       durationSeconds: 15,
+      hookStart: 49,
+      hookNote:
+        "ends hard on him saying stop — withholds her “since when did you start hiding from me” and his eight words",
     },
     feelings: ["hurt", "lies"],
     place: "park",
@@ -309,6 +315,9 @@ export const videos: Video[] = [
     preview: {
       file: "luna-tyson-casey-bar-preview.proxy.mp4",
       durationSeconds: 60,
+      hookStart: 131,
+      hookNote:
+        "ends on “I'm not drunk”, one beat before “I'll let you get back to your date”",
     },
     feelings: ["hurt", "distance"],
     place: "bar",
@@ -763,6 +772,9 @@ export const videos: Video[] = [
     preview: {
       file: "tyson-cole-bar-preview.proxy.mp4",
       durationSeconds: 13,
+      hookStart: 10,
+      hookNote:
+        "ends on Cole's “Would you?”, withholding “Luna isn't going to let you avoid her forever”",
     },
     feelings: ["distance", "lies"],
     place: "burnetts",
@@ -889,6 +901,9 @@ export const videos: Video[] = [
     preview: {
       file: "ty-luna-bed-preview.proxy.mp4",
       durationSeconds: 15,
+      hookStart: 65,
+      hookNote:
+        "ends on “Do you remember last night?”, withholding her answer",
     },
     premium: {
       file: "ty-luna-bed-explicit.proxy.mp4",

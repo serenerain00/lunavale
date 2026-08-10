@@ -52,8 +52,22 @@ const asJson = args.includes("--json");
 const wantAll = args.includes("--all");
 const slugs = args.filter((a) => !a.startsWith("--"));
 
-/** Preview length, mirroring make-previews.mjs. */
-const WINDOW = 15;
+/**
+ * Preview length, mirroring make-previews.mjs EXACTLY — including its
+ * per-scene overrides and its one-third-of-runtime cap.
+ *
+ * It was a flat 15 here at first, which quietly produced wrong hookStart
+ * values for the two scenes that get a minute: the tool subtracted 15 from the
+ * end of the window and the cutter then ran 60 seconds from that point, ending
+ * three quarters of a minute past the line the hook was chosen for. If these
+ * two ever disagree again, the candidates are silently wrong rather than
+ * visibly broken, so they are kept in one shape.
+ */
+const MAX_SECONDS = 15;
+const MAX_FRACTION = 1 / 3;
+const OVERRIDES = { "josh-luna-wall": 60, "luna-tyson-casey-bar": 60 };
+const windowFor = (slug, duration) =>
+  Math.min(OVERRIDES[slug] ?? MAX_SECONDS, Math.floor(duration * MAX_FRACTION));
 
 /**
  * Lines that make somebody need the next one.
@@ -175,6 +189,7 @@ for (const scene of chosen) {
   if (!asJson) console.error(`transcribing ${scene.slug}…`);
   const lines = transcribe(src, scene.slug);
 
+  const WINDOW = windowFor(scene.slug, scene.duration);
   const scored = lines.map((line, i) => {
     const next = lines[i + 1];
     const gapAfter = next ? next.from - line.to : 0;
@@ -189,6 +204,7 @@ for (const scene of chosen) {
     slug: scene.slug,
     title: scene.title,
     duration: scene.duration,
+    window: WINDOW,
     lineCount: lines.length,
     candidates: best.map((c) => ({
       // End ON the line, so the preview contains it and stops. The window

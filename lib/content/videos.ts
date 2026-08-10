@@ -104,9 +104,16 @@ export interface Video {
    * server-side, after the entitlement check — the same place the members'
    * cut is chosen.
    *
-   * Cut by scripts/make-previews.mjs at the lesser of 60s and a third of the
-   * runtime, always from the opening, and always from `file` rather than
+   * Cut by scripts/make-previews.mjs, always from `file` rather than
    * `premium.file` (an explicit cut is the upgrade, not the shop window).
+   *
+   * IT IS NO LONGER ALWAYS THE OPENING. Every preview used to start at 0:00,
+   * which meant it stopped rather than ended — the viewer got a beginning,
+   * felt finished, and left. Melissa's rewrite of the strategy (2026-08-10) is
+   * that a preview should end IMMEDIATELY BEFORE the thing you want to know:
+   * the answer, the confession, the decision. `hookStart` is where that window
+   * begins. Omitted still means the opening, which is right for scenes that
+   * open on their own best question.
    *
    * Only meaningful on `access: "premium"`. Absent means the old behaviour:
    * the scene is locked outright and the stream route refuses it.
@@ -115,6 +122,16 @@ export interface Video {
     /** Basename of the preview proxy inside `stories/`. */
     file: string;
     durationSeconds: number;
+    /**
+     * Seconds into the scene where the preview starts. Omitted = 0.
+     *
+     * Chosen per scene against the transcript and the canon, not by a
+     * heuristic — see scripts/find-hooks.mjs, which proposes candidates for a
+     * human to pick from rather than deciding.
+     */
+    hookStart?: number;
+    /** Why this window, in a few words. Shows up nowhere; it is for Melissa. */
+    hookNote?: string;
   };
   /**
    * What's in it beyond nudity. `mature` reads as sex to a viewer, so violence
@@ -453,12 +470,19 @@ export const videos: Video[] = [
     // Delivered with 2.1s of black on the end, trimmed at 57.2s. That is four
     // of the last five deliveries — see the note on josh-luna-wall.
     //
-    // PLACEHOLDER synopsis, written from the picture rather than the words,
-    // pending Melissa's copy.
+    // SYNOPSIS REWRITTEN 2026-08-10 from the actual dialogue, which is now
+    // readable: whisper transcribes this scene cleanly precisely because it
+    // has no score. The old one was written from the picture alone and said
+    // nothing about what happens, because I could not hear it.
+    //
+    // What happens: Josh says he doesn't know how to fix this. Rick tells him
+    // he doesn't — "you fix you". Rick has spoken to CATHY, who told him Luna
+    // is staying out at the lakehouse. Josh admits she won't see him. Rick
+    // says: good. Now you know how she felt.
     slug: "josh-rick-lake",
     title: "The Lake",
     synopsis:
-      "Rick has a line in the water and no reason to hurry. Josh stands next to him and takes it, the way he always has.",
+      "Josh has come to his father for a way to fix it. Rick has a line in the water, has already spoken to her mother, and knows exactly where Luna is staying.",
     file: "josh-rick-lake.proxy.mp4",
     poster: "/posters/josh-rick-lake.jpg",
     durationSeconds: 57,

@@ -21,10 +21,17 @@
  * hand over more than a third of it. It gets 0:13 instead. Every scene longer
  * than about three-quarters of a minute gets the full fifteen.
  *
- * IT IS ALWAYS THE OPENING. No hunting for a flattering fifteen seconds: a
- * visitor told they saw the start should have seen the start. It also removes
- * the temptation to cherry-pick, which on some of this material would be the
- * difference between a trailer and a misrepresentation.
+ * IT USED TO BE ALWAYS THE OPENING, on the argument that a visitor told they
+ * saw the start should have seen the start. Melissa replaced that on
+ * 2026-08-10: an opening makes somebody feel finished, and the job of a
+ * preview is to make them feel the opposite. A window now starts at
+ * `preview.hookStart` and ends one beat BEFORE the answer.
+ *
+ * THE HONESTY PROBLEM THAT ARGUMENT WAS PROTECTING IS REAL AND STILL HANDLED:
+ * the page under the player states exactly what was shown and what the whole
+ * runtime is, so nobody is told they saw the start of anything. What is gone
+ * is the pretence that a beginning is the most representative slice — on this
+ * material it usually is not.
  *
  * SOURCE IS `file`, NEVER `premium.file`. Where a scene has an explicit cut
  * (ty-luna-bed), the explicit one is the members' upgrade and must not be the
@@ -91,8 +98,11 @@ function premiumScenes() {
     const access = block.match(/access: "(\w+)"/)?.[1];
     const file = block.match(/file: "([^"]+)"/)?.[1];
     const duration = Number(block.match(/durationSeconds: (\d+)/)?.[1]);
+    // Where the hook window starts. Absent = the opening, which is the old
+    // behaviour and still right for a scene that opens on its best question.
+    const hookStart = Number(block.match(/hookStart: ([\d.]+)/)?.[1] ?? 0);
     if (slug && access === "premium" && file && duration) {
-      out.push({ slug, file, duration });
+      out.push({ slug, file, duration, hookStart });
     }
   }
   return out;
@@ -113,12 +123,22 @@ for (const scene of scenes) {
     OVERRIDES[scene.slug] ?? MAX_SECONDS,
     Math.floor(scene.duration * MAX_FRACTION),
   );
+  // Clamped so a hookStart that outlived an edit cannot silently produce a
+  // preview that runs off the end of the scene into nothing.
+  const start = Math.max(0, Math.min(scene.hookStart, Math.max(0, scene.duration - seconds)));
+  if (scene.hookStart && start !== scene.hookStart) {
+    console.error(
+      `  WARNING ${scene.slug}: hookStart ${scene.hookStart}s doesn't fit a ${seconds}s window in a ${scene.duration}s scene — using ${start}s`,
+    );
+  }
   const src = path.join(ROOT, "stories", scene.file);
   const outName = `${scene.slug}-preview.proxy.mp4`;
   const out = path.join(ROOT, "stories", outName);
 
-  const mmss = (n) => `${Math.floor(n / 60)}:${String(n % 60).padStart(2, "0")}`;
-  const plan = `${scene.slug.padEnd(28)} ${mmss(scene.duration)} -> ${mmss(seconds)}`;
+  const mmss = (n) => `${Math.floor(n / 60)}:${String(Math.round(n) % 60).padStart(2, "0")}`;
+  const plan =
+    `${scene.slug.padEnd(28)} ${mmss(scene.duration)} -> ${mmss(seconds)}` +
+    (start ? ` from ${mmss(start)}` : " from the top");
 
   if (listOnly) {
     console.log(`  ${plan}`);
@@ -131,15 +151,26 @@ for (const scene of scenes) {
 
   // Re-encoded rather than stream-copied: a copy cuts on the nearest keyframe,
   // which at fifteen seconds could overshoot by a meaningful fraction of the
-  // whole preview. Fade the last second so it stops rather than snapping.
+  // whole preview.
+  //
+  // NO FADE-OUT ANY MORE, and this is the point of the rewrite. A fade is the
+  // grammar of an ending — it tells a viewer the thing is over and they are
+  // free to go. These are meant to stop mid-breath, one beat before the answer,
+  // so that the last thing somebody feels is a question rather than a full
+  // stop. The hard cut IS the hook.
+  //
+  // The fade IN at the start stays, on the other hand: a window that begins
+  // mid-scene lands hard, and a quarter-second up is the difference between
+  // arriving somewhere and being dropped there.
+  const fadeIn = start > 0 ? ["-vf", "fade=t=in:st=0:d=0.25", "-af", "afade=t=in:st=0:d=0.25"] : [];
   execFileSync(
     "ffmpeg",
     [
       "-nostdin", "-y", "-loglevel", "error",
+      "-ss", String(start),
       "-i", src,
       "-t", String(seconds),
-      "-vf", `fade=t=out:st=${seconds - 1}:d=1`,
-      "-af", `afade=t=out:st=${seconds - 1}:d=1`,
+      ...fadeIn,
       "-c:v", "libx264", "-preset", "medium", "-crf", "23",
       "-pix_fmt", "yuv420p",
       "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart",

@@ -36,19 +36,28 @@
  * previous/next links both read from that order. Insert new entries in place
  * rather than appending.
  *
- * ACCESS: roughly three in four entries are members-only, the split Melissa
- * asked for. The open ones are the shop window — Mexico, the last box, her
- * mother's call, Avery's, Tyson turning up in week two, the Carrera, Josh's
- * call, the coffee, an hour in the truck, the quiet Sunday, the hour in the
- * bath, a day at work, and Josh's father. They establish the voice, the
- * friendship and the premise without giving away a single turn: a visitor can
- * read them and know exactly what they'd be paying for, which is her deciding
- * what to do about it.
+ * ACCESS: FIVE entries are open and the other forty-eight are not (Melissa,
+ * 2026-08-10, cutting the free set down from fourteen).
  *
- * (This note used to say "four in five" and "the six that stay open", and had
- * been wrong on both counts for a while — the free set had quietly grown to
- * twelve. Count them again if you change the split rather than trusting the
- * sentence.)
+ * The five are chosen as an ARC rather than as a sample, because five is too
+ * few to be representative and just enough to be a story:
+ *
+ *   the-last-box    ten years ending, and her carrying it out herself
+ *   tyson-shows-up  who Tyson is, before anybody has a reason to wonder
+ *   the-carrera     the friendship working — and the entry the home page
+ *                   quotes, so it has to stay readable or that link is a wall
+ *   he-called       Josh comes back
+ *   coffee          she says yes, having meant to say no
+ *
+ * It stops exactly where it starts to get complicated, which is the point: a
+ * stranger can read all five, understand the situation completely, and be left
+ * with the one question the other forty-eight answer.
+ *
+ * WHAT CAME OUT, and what it cost: both Mexico entries (the strongest writing
+ * in the free set, now a members' reward), her mother's call, Avery's, the day
+ * at work, Josh's father, and the quiet ones. The Mexico pair in particular
+ * used to do real work — a visitor read them, liked Josh, and cared more about
+ * everything locked. That argument was sound and it lost to a smaller number.
  *
  * Everything with a turn in it — the growing feelings, the lie, the night — is
  * behind the LunaVerse, because that is the story and the story is the product.
@@ -109,7 +118,7 @@ export const journal: JournalEntry[] = [
     dateline: "Five years in — somewhere over the water",
     place: "mexico",
     about: ["luna", "josh"],
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "He booked this himself. Not me — him. He booked it, paid for it, and told me on a Tuesday like it was nothing, and I have been turning that over since the taxi and I cannot get it to sit still.",
@@ -124,7 +133,7 @@ export const journal: JournalEntry[] = [
     place: "mexico",
     about: ["luna", "josh"],
     sceneSlug: "luna-josh-beach",
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "I was wrong. Writing that first, because I said I would.",
@@ -166,7 +175,7 @@ export const journal: JournalEntry[] = [
     dateline: "A shoot day, and I needed one",
     place: "downtown",
     about: ["luna"],
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "Up at five, in the chair by six, and a woman I have never met spent forty minutes on my face while I thought about nothing at all. Best I have felt in three weeks.",
@@ -198,7 +207,7 @@ export const journal: JournalEntry[] = [
     place: "lakehouse",
     about: ["luna", "cathy", "josh"],
     sceneSlug: "luna-cathy-phone",
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "Nine days of watching her name come up and putting the phone face down. Today I picked up, and the first thing out of her was pick up the phone when I call, which is fair, and which I let her have.",
@@ -261,7 +270,7 @@ export const journal: JournalEntry[] = [
     place: "apartment",
     about: ["luna", "avery", "cathy"],
     sceneSlug: "luna-avery-ipad",
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "I was three lines into feeling sorry for myself when the iPad went off, and it was my sister, and I have left those three lines in because they were true at the time.",
@@ -447,7 +456,7 @@ export const journal: JournalEntry[] = [
     dateline: "Thinking about Rick, of all people",
     place: "farmhouse",
     about: ["luna", "josh", "rick"],
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "I have been thinking about Josh's father, which is not a sentence I expected to write this year.",
@@ -650,7 +659,7 @@ export const journal: JournalEntry[] = [
     where: "The farm road",
     about: ["luna", "tyson"],
     clipId: "close-quarters",
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "Nothing happened. I am putting that at the top because I know how this will read back to me in a year and I want the record to be accurate before I start editing it.",
@@ -712,7 +721,7 @@ export const journal: JournalEntry[] = [
     place: "farmhouse",
     about: ["luna", "josh"],
     clipId: "morning-after",
-    access: "free",
+    access: "premium",
     mature: false,
     body: [
       "Neither of us has said a word all morning and it isn't awkward. That's the bit I want to look at.",
@@ -1031,7 +1040,7 @@ export const journal: JournalEntry[] = [
     where: "The bathroom",
     about: ["luna"],
     sceneSlug: "luna-bathtub",
-    access: "free",
+    access: "premium",
     mature: true,
     body: [
       "Candles, because the overhead light is honest and I wasn't up to it.",

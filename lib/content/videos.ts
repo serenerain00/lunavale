@@ -926,14 +926,20 @@ export const videos: Video[] = [
     // and not something Melissa has said, so it is a placement rather than a
     // canon claim; move it if the two are different days.
     //
-    // PREMIUM, AND THIS ONE IS NOT A CLOSE CALL EVEN THOUGH IT LOOKS LIKE ONE.
-    // It is the most shareable thing on the site — short, warm, actually funny
-    // — which is exactly the argument for making it free while the site needs
-    // reach. But three separate places promise that "what is free today stays
-    // free", so publishing it free is a ONE-WAY DOOR. And what it shows is
-    // Tyson half-dressed in her kitchen the morning after, which is the
-    // question the whole story is built on. Free would answer it permanently,
-    // for everyone, in forty-six seconds. Premium is reversible; free is not.
+    // FREE — Melissa, 2026-08-11, overruling the premium call I shipped an
+    // hour earlier. Her scene, her decision, and the reasoning holds up: it is
+    // the most shareable thing on this site, the site's entire problem right
+    // now is that strangers never reach it, and forty-six funny seconds travel
+    // where a locked door does not.
+    //
+    // WHAT IT COSTS, recorded because free is a ONE-WAY DOOR here — three
+    // separate places promise "what is free today stays free", so this cannot
+    // quietly go back. It shows Tyson half-dressed in her kitchen the morning
+    // after, which is the question the whole story is built on. That answer is
+    // now public and permanent.
+    //
+    // No preview block: a free scene streams in full, so there is nothing to
+    // preview. The 15s hook cut for it is deleted rather than left orphaned.
     //
     // SCORED CUT SHIPPED, per Melissa's standing rule that scored cuts get
     // used — verified rather than assumed: the scored mix has no silent second
@@ -948,15 +954,8 @@ export const videos: Video[] = [
     poster: "/posters/luna-tyson-gingerale.jpg",
     durationSeconds: 47,
     addedOn: "2026-08-11",
-    access: "premium",
+    access: "free",
     mature: false,
-    preview: {
-      file: "luna-tyson-gingerale-preview.proxy.mp4",
-      durationSeconds: 15,
-      hookStart: 11,
-      hookNote:
-        "ends on “What's in your hand right now?” — the accusation, with the answer and the punchline both withheld",
-    },
     feelings: ["trust", "desire"],
     place: "lakehouse",
     about: ["luna", "tyson"],

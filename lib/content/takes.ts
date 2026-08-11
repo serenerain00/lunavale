@@ -32,6 +32,7 @@ import { lunaCathyPhoneTakes } from "@/lib/content/takes-data/luna-cathy-phone";
 import { tysonColeBarTakes } from "@/lib/content/takes-data/tyson-cole-bar";
 import { joshLunaWallTakes } from "@/lib/content/takes-data/josh-luna-wall";
 import { lunaTysonCaseyBarTakes } from "@/lib/content/takes-data/luna-tyson-casey-bar";
+import { lunaTysonGingeraleTakes } from "@/lib/content/takes-data/luna-tyson-gingerale";
 
 /** One attempt at one beat. */
 export interface Take {
@@ -91,6 +92,7 @@ export const takes: SceneTakes[] = [
   tysonColeBarTakes,
   joshLunaWallTakes,
   lunaTysonCaseyBarTakes,
+  lunaTysonGingeraleTakes,
 ];
 
 /** Proxy basename inside stories/, for the gated stream route. */

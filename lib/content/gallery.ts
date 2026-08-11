@@ -131,6 +131,36 @@ export const galleries: StillGallery[] = [
     mature: false,
   },
 
+  /* ------------------------------------------------------------ gingerale */
+  {
+    // The stills from the funny one. Ordered by capture time, not filename —
+    // the screenshots are named "… at 11.21 AM" and "… at 12.18 PM", which
+    // sort backwards alphabetically and would have run the morning in reverse.
+    //
+    // GATED, even though the SCENE is free. Those are different products: the
+    // forty-seven seconds are the thing that travels and the stills are part
+    // of what a membership is. Two are open, which is the newer pattern, and
+    // this direction is the safe one — a gated set can be opened later, and
+    // "what is free today stays free" means the reverse is not true.
+    id: "gingerale",
+    title: "Ginger Ale",
+    subtitle: "Luna & Tyson",
+    description: [
+      "The morning after, in her kitchen, over a can of Canada Dry — twenty years of friendship doing the only thing it does easily.",
+      "It is the lightest set here, and it is the one that explains why the rest of it costs her so much.",
+    ],
+    count: 11,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/gingerale/cover.jpg",
+    feelings: ["trust", "desire"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-tyson-gingerale",
+    access: "premium",
+    mature: false,
+  },
+
   /* --------------------------------------------------------------- casey's */
   {
     // The same bar as `the-bar`, a different night and a third person in it.

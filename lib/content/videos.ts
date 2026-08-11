@@ -914,6 +914,53 @@ export const videos: Video[] = [
     place: "lakehouse",
     about: ["luna", "tyson"],
   },
+  {
+    // The only funny scene on the site, and the transcript is the whole of it:
+    // "Ty, did you drink my last ginger ale?" / "Why are you yelling?" /
+    // "What's in your hand right now?" / "You're drinking my medicine." /
+    // "I'll go buy more." / "Well, I'll be sober by then."
+    //
+    // PLACED NEXT TO ty-luna-bed BECAUSE IT LOOKS LIKE THE SAME MORNING —
+    // she is hungover, he is shirtless in her kitchen, and that scene's own
+    // dialogue mentions a wine hangover. That is an inference from the footage
+    // and not something Melissa has said, so it is a placement rather than a
+    // canon claim; move it if the two are different days.
+    //
+    // PREMIUM, AND THIS ONE IS NOT A CLOSE CALL EVEN THOUGH IT LOOKS LIKE ONE.
+    // It is the most shareable thing on the site — short, warm, actually funny
+    // — which is exactly the argument for making it free while the site needs
+    // reach. But three separate places promise that "what is free today stays
+    // free", so publishing it free is a ONE-WAY DOOR. And what it shows is
+    // Tyson half-dressed in her kitchen the morning after, which is the
+    // question the whole story is built on. Free would answer it permanently,
+    // for everyone, in forty-six seconds. Premium is reversible; free is not.
+    //
+    // SCORED CUT SHIPPED, per Melissa's standing rule that scored cuts get
+    // used — verified rather than assumed: the scored mix has no silent second
+    // in it where the dialogue cut has two. The trade is resolution and shape,
+    // 1320x800 against the dialogue cut's 1912x1080, so this one pillarboxes
+    // slightly where the dialogue version would not have.
+    slug: "luna-tyson-gingerale",
+    title: "Ginger Ale",
+    synopsis:
+      "Luna wants the one thing that will fix her head. Tyson is already drinking it, and has decided to enjoy this.",
+    file: "luna-tyson-gingerale.proxy.mp4",
+    poster: "/posters/luna-tyson-gingerale.jpg",
+    durationSeconds: 47,
+    addedOn: "2026-08-11",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "luna-tyson-gingerale-preview.proxy.mp4",
+      durationSeconds: 15,
+      hookStart: 11,
+      hookNote:
+        "ends on “What's in your hand right now?” — the accusation, with the answer and the punchline both withheld",
+    },
+    feelings: ["trust", "desire"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+  },
   // "Out at the Lake" (ty-luna-lake-fight) was pulled 2026-07-27 to be recut.
   // Its stills and poster are still on disk; re-add the entry here when the
   // new cut lands, then restore the world object and hero slug that went with

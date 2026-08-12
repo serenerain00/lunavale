@@ -24,7 +24,7 @@
  * interview already set, and introducing separate performer names here would
  * contradict it.
  *
- * ACCESS: seven of the twenty-four are open. They are the funny ones and the
+ * ACCESS: nine of the twenty-nine are open. They are the funny ones and the
  * ones that give away a technique rather than a turn — enough for a visitor to
  * know exactly what the rest of the notebook is, which is the whole job of a
  * shop window. Everything that explains a scene the visitor has not been able
@@ -503,6 +503,22 @@ export const notes: SetNote[] = [
       "Then, at the very end, I get up. Once, and I am the only one who does. That is the whole architecture of it: you spend the scene establishing that neither man moves, so the one who finally does owns everything after it.",
       "It buys one line. “You think you’re handling it? You’re not.” He is talking about Luna, and he will not say her name, and that is the closest he comes in the whole film to admitting he thought she was worth something.",
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work than I am.",
+    ],
+  },
+  {
+    id: "rick-whose-water-it-is",
+    author: "rick",
+    kind: "insight",
+    heading: "Whose water it is",
+    dateline: "Day 20 · the far edge of the farm",
+    sceneSlug: "josh-rick-lake",
+    place: "lake",
+    access: "premium",
+    body: [
+      "The study is my room. This one is his — his farm, his water, his gate I came through to get down here. It changes nothing at all, and that was the note for the whole scene.",
+      "It is cut between two faces and only one of them is ever pointed at the other. I have a line in the water and I keep my eyes on it. He looks over every time he finishes saying something, and not for an answer. To see how it did.",
+      "That is the entire man in one habit. He owns everything you can see from where we are standing and he is still waiting to be told he has done it right. I never tell him. Not out of cruelty — it simply does not occur to me that it is owed.",
+      "There is no music under this one. I asked whether there would be and there is not, so what you get is water, wind, and the length of the pauses. Which means the pauses have to be right, because nothing is covering them.",
     ],
   },
 ];

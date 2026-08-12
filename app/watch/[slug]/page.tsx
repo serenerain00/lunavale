@@ -102,7 +102,7 @@ export default async function WatchPage({ params }: WatchPageProps) {
             Gated on `allowed` and on BOTH explicit flags. It used to read
             `cut?.explicit` alone, which meant it only fired for a scene built
             as two edits (ty-luna-bed) and stayed silent for one that is
-            explicit in itself (josh-luna-bed-sex) — that scene's graphic nine
+            explicit in itself (luna-josh-first-night) — that scene's graphic nine
             minutes played for a member with the rating sitting under the
             player instead of above it, which is the thing this notice exists
             to prevent.

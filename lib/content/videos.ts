@@ -80,7 +80,7 @@ export interface Video {
    * Graphic all the way through, rather than merely intimate.
    *
    * This lived only on PremiumCut, which assumes a scene has a tame public
-   * edit and an explicit members' one. josh-luna-bed-sex has no tame edit —
+   * edit and an explicit members' one. luna-josh-first-night has no tame edit —
    * past the first ninety seconds it is one thing the rest of the way — so
    * there was nowhere to say so, and the page would have labelled it "Mature"
    * like a kiss.
@@ -483,19 +483,37 @@ export const videos: Video[] = [
     // TITLE from Melissa, 2026-08-12, replacing my placeholder ("All Night").
     // Hers is the accurate one: it is the first night since he came back, and
     // the entry beside it is her account of the same morning.
-    slug: "josh-luna-bed-sex",
+    //
+    // SLUG RENAMED the same day, also hers: "the word sex is out of the URL".
+    // Was josh-luna-bed-sex. This is the URL, so the old address is kept alive
+    // by a 308 in next.config.ts — the scene had already shipped under it.
+    //
+    // The rename went further than the slug ON PURPOSE, because the slug is
+    // not the only place a viewer sees a filename:
+    //
+    //   poster  /posters/ is public and ungated, so the old path was the word
+    //           sitting in the page source of every card that shows this scene
+    //   proxies the stream route 307s to a signed Blob URL whose pathname is
+    //           the proxy's basename — visible in devtools on any play
+    //
+    // So the poster and both proxies were renamed too and the proxies
+    // re-uploaded. The source folder stories/josh-luna-bed-sex/ and its masters
+    // keep the old name deliberately: it is gitignored and in .vercelignore, it
+    // never reaches a browser, and the delivered filenames are what Melissa
+    // sent — renaming them would only make her originals harder to find.
+    slug: "luna-josh-first-night",
     title: "First Night",
     synopsis:
       "He can't sleep, so he wakes her. Six in the morning, and six months since the last time.",
-    file: "josh-luna-bed-sex.proxy.mp4",
-    poster: "/posters/josh-luna-bed-sex.jpg",
+    file: "luna-josh-first-night.proxy.mp4",
+    poster: "/posters/luna-josh-first-night.jpg",
     durationSeconds: 537,
     addedOn: "2026-08-12",
     access: "premium",
     mature: true,
     explicit: true,
     preview: {
-      file: "josh-luna-bed-sex-preview.proxy.mp4",
+      file: "luna-josh-first-night-preview.proxy.mp4",
       durationSeconds: 90,
     },
     // "trust" added with the retitle: the scene's first ninety seconds are him
@@ -780,8 +798,9 @@ export const videos: Video[] = [
     // the explicit scenes sit behind membership. Checked the whole 287s rather
     // than trusting `mature`: she is nude throughout, and the intercut close
     // shots make it a sex scene she is having on her own. That is "shown", not
-    // "intimate", so it takes `explicit` for the same reason josh-luna-bed-sex
-    // does — the page said "Mature" for a nude scene, which was the wrong word.
+    // "intimate", so it takes `explicit` for the same reason
+    // luna-josh-first-night does — the page said "Mature" for a nude scene,
+    // which was the wrong word.
     //
     // THE PREVIEW IS GONE, and it was the actual leak. A 15s cut is served to
     // people with NO ACCOUNT AND NO AGE CHECK, and this one opened on a wide

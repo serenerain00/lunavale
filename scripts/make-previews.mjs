@@ -99,7 +99,7 @@ const OVERRIDES = {
   // It is also very quiet: the score sits far down, around -49dB across this
   // window. Melissa has confirmed that is the mix and not a fault, so the cut
   // carries the audio untouched.
-  "josh-luna-bed-sex": 90,
+  "luna-josh-first-night": 90,
 };
 
 /**

@@ -569,7 +569,7 @@ export const journal: JournalEntry[] = [
     place: "farmhouse",
     where: "Our bedroom",
     about: ["luna", "josh"],
-    sceneSlug: "josh-luna-bed-sex",
+    sceneSlug: "luna-josh-first-night",
     access: "premium",
     mature: true,
     body: [

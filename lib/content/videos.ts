@@ -425,32 +425,49 @@ export const videos: Video[] = [
     //
     // Kept here because it is the one thing worth knowing about this file: a
     // preview COULD come straight off the head, with no assembled beat cut, if
-    // that call is ever revisited. Two caveats if it is. The opening is nearly
-    // SILENT — mean -46.8dB over the first 95s, peaking at -27.1 — which plays
-    // as a quiet room inside the full scene but reads as broken audio in a
-    // sixty-second cut on a phone. And a preview that shows only the tenderness
-    // sells a nine-minute explicit scene as something gentler than it is.
+    // that call is ever revisited. Two caveats if it is. The opening is very
+    // QUIET — mean -46.8dB over the first 95s, peaking at -27.1 — because the
+    // score sits far down in the mix there (see the audio note below); that
+    // plays as a hushed room inside the full scene and would read as broken
+    // audio in a sixty-second cut on a phone. And a preview that shows only
+    // the tenderness sells a nine-minute explicit scene as gentler than it is.
     //
     // It ships LOCKED.
     //
-    // THE SCORED CUT IS OUTSTANDING. Melissa asked on 2026-08-12 whether the
-    // published file was the one with music. It is not, and no scored export of
-    // this scene has ever reached the repo — the only full-length file is the
-    // 542s master, which sits in stories/josh-luna-bed-sex/ twice (identical
-    // bytes, once at the top and once under video/), and the proxy carries its
-    // audio unchanged. Measured against the thresholds this file already uses:
+    // THE SCORED CUT IS ALREADY WHAT SHIPS, and it took two wrong turns to
+    // establish it. Melissa asked on 2026-08-12 whether the published file was
+    // the one with music, and pointed at luna-josh-bed-sex-music.mov. It is
+    // BYTE-FOR-BYTE IDENTICAL to josh-luna-bed-sex.mov (`cmp` clean, 752663447
+    // bytes, and the copy in her Downloads matches both). Same export, two
+    // names. So the proxy on the site already carries the score and there was
+    // never anything to swap in.
     //
-    //   this scene   mean -35.6dB, peak -15.8dB, and 15 stretches below -50dB
-    //   josh-rick-lake (confirmed NO SCORE)      mean -34.5dB
-    //   luna-josh-kitchen-kiss (carries a song)  mean -16.7dB
+    // I first read this file as unscored, on levels, and that was wrong. LEVELS
+    // CANNOT SEPARATE SCORED FROM BARE ON THIS SITE:
     //
-    // Windowed in 60s steps it runs -49dB at the head to -30dB at the end,
-    // rising with the scene and never approaching the ~-16dB of a scored mix.
-    // The fifteen dropouts settle it: no music bed goes silent fifteen times.
+    //   luna-josh-kitchen-kiss  scored, a song      mean -16.7dB
+    //   luna-tyson-gingerale    scored              mean -31.5dB
+    //   this scene                                  mean -35.6dB
+    //   josh-rick-lake          confirmed NO SCORE  mean -34.5dB
     //
-    // So the standing rule that scored cuts get used has not been applied here
-    // for want of a file. When the scored export lands, swap it in and delete
-    // the silence caveat above — it exists only because this mix is bare.
+    // Gingerale is scored and sits 3dB from the unscored baseline, so the
+    // "about -16dB for anything scored" rule further up this file describes
+    // kitchen-kiss and nothing more general. USE A SPECTROGRAM instead:
+    //
+    //   ffmpeg -ss 5 -t 40 -i <file> \
+    //     -lavfi "volume=28dB,showspectrumpic=s=900x400:scale=log" out.png
+    //
+    // At +28dB the opening shows an evenly spaced harmonic ladder low in the
+    // band with a periodic pulse over it — tonal, sustained, rhythmic. The same
+    // treatment of josh-rick-lake shows speech bursts and no ladder. That is
+    // the score, sitting very low in the mix.
+    //
+    // What is actually true about this audio: the score is here, it is MIXED
+    // FAR DOWN, and it is not continuous — 15 stretches totalling 13.3s fall
+    // below -50dB. Per Melissa's standing note that a score burying the
+    // dialogue is intentional, none of that is a fault to "fix" without her
+    // say. But at -49dB across the first minute it is inaudible on a phone,
+    // which is worth one decision from her: leave it, or take a level pass.
     //
     // 886x534 MASTER, which is far below anything else here (the next lowest
     // is 1320x800). The proxy is encoded at native size rather than upscaled

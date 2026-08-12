@@ -77,6 +77,17 @@ export interface Video {
   /** Mature-content flag — surfaced as a label per content rules. */
   mature: boolean;
   /**
+   * Graphic all the way through, rather than merely intimate.
+   *
+   * This lived only on PremiumCut, which assumes a scene has a tame public
+   * edit and an explicit members' one. josh-luna-bed-sex has no tame edit —
+   * it is nine minutes of one thing — so there was nowhere to say so, and the
+   * page would have labelled it "Mature" like a kiss.
+   *
+   * `mature` reads as "there is sex in this". This says it is shown.
+   */
+  explicit?: boolean;
+  /**
    * A fuller cut of the SAME scene, streamed to members in place of `file`.
    *
    * This is one scene with two edits, not two scenes: one slug, one card, one
@@ -384,6 +395,44 @@ export const videos: Video[] = [
       durationSeconds: 15,
     },
     feelings: ["desire", "trust"],
+    place: "farmhouse",
+    about: ["luna", "josh"],
+  },
+  {
+    // NO PREVIEW, PENDING MELISSA'S CALL — she asked for the first minute and
+    // I have not cut it. Every other premium scene's preview is served to
+    // people with NO ACCOUNT AND NO AGE CHECK, which is fine for a fight or a
+    // confession and is a different thing entirely for nine minutes of
+    // explicit sex. It is also the one kind of material the site has never put
+    // in front of a signed-out visitor: ty-luna-bed's public cut is the tame
+    // one, and the still-awake clip has no preview at all.
+    //
+    // There is no safer window either — I sampled the whole thing and it does
+    // not have a non-explicit stretch to draw sixty seconds from.
+    //
+    // So it ships LOCKED, which is the reversible state, and she can say the
+    // word. Adding a preview later is one line and one script run.
+    //
+    // 886x534 MASTER, which is far below anything else here (the next lowest
+    // is 1320x800). The proxy is encoded at native size rather than upscaled
+    // to the usual 720 — upscaling adds bytes and invents no detail. Worth a
+    // re-export at a proper size if the source allows it.
+    //
+    // Delivered with 6s of black on the end, trimmed at 537s.
+    //
+    // PLACEHOLDER TITLE, pending her copy.
+    slug: "josh-luna-bed-sex",
+    title: "All Night",
+    synopsis:
+      "Josh and Luna, and the thing that has always worked between them when nothing else does.",
+    file: "josh-luna-bed-sex.proxy.mp4",
+    poster: "/posters/josh-luna-bed-sex.jpg",
+    durationSeconds: 537,
+    addedOn: "2026-08-12",
+    access: "premium",
+    mature: true,
+    explicit: true,
+    feelings: ["desire"],
     place: "farmhouse",
     about: ["luna", "josh"],
   },

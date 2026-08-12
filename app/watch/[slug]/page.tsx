@@ -144,10 +144,10 @@ export default async function WatchPage({ params }: WatchPageProps) {
         <div className="mt-6">
           <div className="flex flex-wrap items-center gap-3 text-xs text-stone">
             <span className="tabular-nums">{formatDuration(runtime)}</span>
-            {(video.mature || cut?.explicit) && (
+            {(video.mature || video.explicit || cut?.explicit) && (
               <>
                 <span aria-hidden>·</span>
-                <RatingBadge mature={video.mature} explicit={cut?.explicit} />
+                <RatingBadge mature={video.mature} explicit={video.explicit || cut?.explicit} />
               </>
             )}
             {video.access === "premium" && (

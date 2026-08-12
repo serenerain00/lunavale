@@ -433,10 +433,30 @@ export const videos: Video[] = [
     //
     // It ships LOCKED.
     //
+    // THE SCORED CUT IS OUTSTANDING. Melissa asked on 2026-08-12 whether the
+    // published file was the one with music. It is not, and no scored export of
+    // this scene has ever reached the repo — the only full-length file is the
+    // 542s master, which sits in stories/josh-luna-bed-sex/ twice (identical
+    // bytes, once at the top and once under video/), and the proxy carries its
+    // audio unchanged. Measured against the thresholds this file already uses:
+    //
+    //   this scene   mean -35.6dB, peak -15.8dB, and 15 stretches below -50dB
+    //   josh-rick-lake (confirmed NO SCORE)      mean -34.5dB
+    //   luna-josh-kitchen-kiss (carries a song)  mean -16.7dB
+    //
+    // Windowed in 60s steps it runs -49dB at the head to -30dB at the end,
+    // rising with the scene and never approaching the ~-16dB of a scored mix.
+    // The fifteen dropouts settle it: no music bed goes silent fifteen times.
+    //
+    // So the standing rule that scored cuts get used has not been applied here
+    // for want of a file. When the scored export lands, swap it in and delete
+    // the silence caveat above — it exists only because this mix is bare.
+    //
     // 886x534 MASTER, which is far below anything else here (the next lowest
     // is 1320x800). The proxy is encoded at native size rather than upscaled
     // to the usual 720 — upscaling adds bytes and invents no detail. Worth a
-    // re-export at a proper size if the source allows it.
+    // re-export at a proper size if the source allows it, and the scored
+    // export is the natural moment to do it.
     //
     // Delivered with 6s of black on the end, trimmed at 537s.
     //

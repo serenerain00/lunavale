@@ -81,8 +81,9 @@ export interface Video {
    *
    * This lived only on PremiumCut, which assumes a scene has a tame public
    * edit and an explicit members' one. josh-luna-bed-sex has no tame edit —
-   * it is nine minutes of one thing — so there was nowhere to say so, and the
-   * page would have labelled it "Mature" like a kiss.
+   * past the first ninety seconds it is one thing the rest of the way — so
+   * there was nowhere to say so, and the page would have labelled it "Mature"
+   * like a kiss.
    *
    * `mature` reads as "there is sex in this". This says it is shown.
    */
@@ -399,19 +400,38 @@ export const videos: Video[] = [
     about: ["luna", "josh"],
   },
   {
-    // NO PREVIEW, PENDING MELISSA'S CALL — she asked for the first minute and
-    // I have not cut it. Every other premium scene's preview is served to
-    // people with NO ACCOUNT AND NO AGE CHECK, which is fine for a fight or a
-    // confession and is a different thing entirely for nine minutes of
-    // explicit sex. It is also the one kind of material the site has never put
-    // in front of a signed-out visitor: ty-luna-bed's public cut is the tame
-    // one, and the still-awake clip has no preview at all.
+    // NO PREVIEW, SETTLED — Melissa, 2026-08-12: the explicit scenes go behind
+    // membership, so the sixty seconds do not get cut after all. Recorded
+    // because she had earlier asked for the first minute and this reverses it.
     //
-    // There is no safer window either — I sampled the whole thing and it does
-    // not have a non-explicit stretch to draw sixty seconds from.
+    // The reasoning she settled on is the one the rest of the file already
+    // follows. Every other premium scene's preview is served to people with NO
+    // ACCOUNT AND NO AGE CHECK, which is fine for a fight or a confession and
+    // is a different thing entirely for a nine-minute explicit scene. It is
+    // also the one kind of material the site has never put in front of a
+    // signed-out visitor: ty-luna-bed's public cut is the tame one, and the
+    // still-awake clip has no preview at all.
     //
-    // So it ships LOCKED, which is the reversible state, and she can say the
-    // word. Adding a preview later is one line and one script run.
+    // CORRECTION, 2026-08-12: my earlier note here said there was no
+    // non-explicit stretch to draw sixty seconds from. That was wrong. I had
+    // sampled across the whole take and read the opening as part of the scene
+    // it leads into. Melissa said the first ninety seconds are him waking her,
+    // and she is right — checked frame by frame at 2s intervals:
+    //
+    //   0:00–1:35  the room dark, her asleep in a camisole, his face in the
+    //              back of her neck, her waking up and laughing. Held, not
+    //              undressed. No nudity, nothing explicit.
+    //   ~1:40      it turns, and there is no way back after it.
+    //
+    // Kept here because it is the one thing worth knowing about this file: a
+    // preview COULD come straight off the head, with no assembled beat cut, if
+    // that call is ever revisited. Two caveats if it is. The opening is nearly
+    // SILENT — mean -46.8dB over the first 95s, peaking at -27.1 — which plays
+    // as a quiet room inside the full scene but reads as broken audio in a
+    // sixty-second cut on a phone. And a preview that shows only the tenderness
+    // sells a nine-minute explicit scene as something gentler than it is.
+    //
+    // It ships LOCKED.
     //
     // 886x534 MASTER, which is far below anything else here (the next lowest
     // is 1320x800). The proxy is encoded at native size rather than upscaled
@@ -420,11 +440,13 @@ export const videos: Video[] = [
     //
     // Delivered with 6s of black on the end, trimmed at 537s.
     //
-    // PLACEHOLDER TITLE, pending her copy.
+    // TITLE from Melissa, 2026-08-12, replacing my placeholder ("All Night").
+    // Hers is the accurate one: it is the first night since he came back, and
+    // the entry beside it is her account of the same morning.
     slug: "josh-luna-bed-sex",
-    title: "All Night",
+    title: "First Night",
     synopsis:
-      "Josh and Luna, and the thing that has always worked between them when nothing else does.",
+      "He can't sleep, so he wakes her. Six in the morning, and six months since the last time.",
     file: "josh-luna-bed-sex.proxy.mp4",
     poster: "/posters/josh-luna-bed-sex.jpg",
     durationSeconds: 537,
@@ -432,7 +454,10 @@ export const videos: Video[] = [
     access: "premium",
     mature: true,
     explicit: true,
-    feelings: ["desire"],
+    // "trust" added with the retitle: the scene's first ninety seconds are him
+    // holding her and making her laugh, which is the axis a browser looking for
+    // that would want it on. It is not only desire.
+    feelings: ["desire", "trust"],
     place: "farmhouse",
     about: ["luna", "josh"],
   },
@@ -707,6 +732,32 @@ export const videos: Video[] = [
     about: ["luna", "tyson"],
   },
   {
+    // EXPLICIT AND FULLY LOCKED as of 2026-08-12, on Melissa's instruction that
+    // the explicit scenes sit behind membership. Checked the whole 287s rather
+    // than trusting `mature`: she is nude throughout, and the intercut close
+    // shots make it a sex scene she is having on her own. That is "shown", not
+    // "intimate", so it takes `explicit` for the same reason josh-luna-bed-sex
+    // does — the page said "Mature" for a nude scene, which was the wrong word.
+    //
+    // THE PREVIEW IS GONE, and it was the actual leak. A 15s cut is served to
+    // people with NO ACCOUNT AND NO AGE CHECK, and this one opened on a wide
+    // shot of her in the bath and cut to a hand on wet skin and her face. That
+    // is the one thing the site has never shown a signed-out visitor.
+    //
+    // Removing the block is sufficient to close it: app/api/stream/[slug]
+    // resolves the file from this data and nothing the client sends, so with no
+    // `preview` here a non-member gets a 403 and the preview file is
+    // unreachable. luna-bathtub-preview.proxy.mp4 is LEFT ON DISK rather than
+    // deleted like the gingerale hook — there is no single master for this
+    // scene (stories/luna-bathtub/ is three source parts), so a deleted cut
+    // could not be regenerated.
+    //
+    // POSTER RE-GRABBED to 118s, two mouths about to meet. Posters live in
+    // /public at a permanent ungated URL — no flag gates them, `explicit` only
+    // drives a badge — so the old one was full-frame nudity on the public
+    // browse grid, reachable by anyone with the URL and by any crawler. The new
+    // frame carries the scene without carrying the nudity. If you want the
+    // stronger fix, explicit posters need to move behind /api/still.
     slug: "luna-bathtub",
     title: "Still Water",
     synopsis:
@@ -716,10 +767,7 @@ export const videos: Video[] = [
     durationSeconds: 287,
     access: "premium",
     mature: true,
-    preview: {
-      file: "luna-bathtub-preview.proxy.mp4",
-      durationSeconds: 15,
-    },
+    explicit: true,
     feelings: ["grief", "desire"],
     place: "farmhouse",
     about: ["luna"],

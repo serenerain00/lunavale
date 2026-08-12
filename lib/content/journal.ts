@@ -36,7 +36,7 @@
  * previous/next links both read from that order. Insert new entries in place
  * rather than appending.
  *
- * ACCESS: FIVE entries are open and the other forty-eight are not (Melissa,
+ * ACCESS: FIVE entries are open and the other forty-nine are not (Melissa,
  * 2026-08-10, cutting the free set down from fourteen).
  *
  * The five are chosen as an ARC rather than as a sample, because five is too
@@ -51,7 +51,7 @@
  *
  * It stops exactly where it starts to get complicated, which is the point: a
  * stranger can read all five, understand the situation completely, and be left
- * with the one question the other forty-eight answer.
+ * with the one question the other forty-nine answer.
  *
  * WHAT CAME OUT, and what it cost: both Mexico entries (the strongest writing
  * in the free set, now a members' reward), her mother's call, Avery's, the day
@@ -539,6 +539,53 @@ export const journal: JournalEntry[] = [
       "And I said yes. First night. Six months of silence, one coffee, one dinner, and I said yes before he had finished asking, the way I have said yes to that man since I was twenty-eight.",
       "Here is the part I'm not proud of and am writing down anyway: I wasn't swept away. I knew exactly what I was doing. There is something in me that goes towards the drop rather than away from it, and it has been in me a long time, and Josh is the only person who has ever looked at it straight and not tried to talk me out of it.",
       "I lay awake after and thought about Tyson putting the shopping in the wrong cupboards.",
+    ],
+  },
+  {
+    /* The morning of the same night, and it sits HERE rather than before
+     * `i-said-yes` on purpose: `the-long-table` ends on "I got home at one in
+     * the morning", `i-said-yes` takes that back, and an in-the-moment page
+     * from that bedroom placed any earlier gives the correction away.
+     *
+     * CANON, from Melissa (2026-08-12), and it reads against `i-said-yes` more
+     * closely than it looks. What she said yes to that night was staying —
+     * "I lay awake after" is her, awake, in his bed. Six in the morning is when
+     * it is actually the first time in six months, and it starts with him
+     * unable to sleep and waking her, which is the whole reason the scene is
+     * called First Night and not something about the dinner.
+     *
+     * The other new fact is the ignored call: Tyson rang DURING dinner and she
+     * turned the phone over. She does not know yet that Josh had already told
+     * him that morning — that lands two entries later, in `he-already-knew` —
+     * so nothing here can hint that she knows why he was ringing.
+     *
+     * Her defence is the six months, not the bathroom: the chances she gave him
+     * are `firepit-not-saying` and `not-just-a-friend`, both of which are her
+     * leaving a gap he declines to step into. The staring game in the yard has
+     * not happened yet.
+     */
+    id: "first-night",
+    dateline: "Six in the morning — he's asleep now and I'm not",
+    place: "farmhouse",
+    where: "Our bedroom",
+    about: ["luna", "josh"],
+    sceneSlug: "josh-luna-bed-sex",
+    access: "premium",
+    mature: true,
+    body: [
+      "He woke me up. I want that down before the rest of it crowds it out, because the rest of it is what I'll be carrying around all day and this is the part that actually got me.",
+      "It was still dark. He couldn't sleep — he never can when a day has gone well, which is a thing about that man I had somehow managed to forget entirely — and rather than lie there being awake on his own, he woke me. Anybody else does that at six in the morning and gets an elbow.",
+      "And he didn't want anything. That's the bit I keep going back to. He got his face into the back of my neck and said something so stupid that I laughed before I had my eyes properly open, and then he just held on. For a long time. Long enough that I stopped waiting for it to turn into something else.",
+      "Then it turned into something else, and I'm not writing that part down like a girl of nineteen. What goes in here is this: six months, and I had to tell him nothing. Not one thing. He remembered the order of it. He remembered things I have never once said out loud to him in my life, because I never had to — he watched, and he kept it, and that is the thing about him nobody outside this house has ever understood.",
+      "Somewhere in the middle of it I was twenty-eight again. Not remembering being twenty-eight — being it. The flat over the shop, no money, laughing at four in the morning about nothing. I have not been that far out of my own head since the last box went out of the door.",
+      "And last night was good, and I'm putting that down while it's still allowed to be simply true. He was funny. He asked me things and stayed for the answers. He put his hand flat on my back going through the door the way he has always done and I nearly said something about it and didn't.",
+      "Tyson rang while we were eating. I watched his name come up on the table between the water and the bread, and I turned the phone over, and I did not go outside, and I did not ring him back, and then I picked my glass up with the same hand.",
+      "Nobody made me do that. That one is mine.",
+      "So here is my defence, made at six in the morning to absolutely nobody. I left it open for him for six months. At the firepit, out on the deck, on every one of those nights I put the thing down next to the thing and waited, and he let it go cold every single time. He is the bravest man I have ever met about everything on this earth except this. And I am not going to spend the rest of my life standing in a doorway waiting on one sentence.",
+      "It's a good defence. I have been rehearsing it since about four, which tells me something I would rather not look at this morning.",
+      "My bag is by the door because I have to drive back to the lake to change for work, which is a sentence I would like somebody to explain to me.",
+      "He's asleep now. He can sleep now, apparently. And I am sat up in the dark with a pen, and the last thing I did before I picked it up was check my phone to see whether Tyson had rung a second time.",
+      "He hadn't.",
     ],
   },
   {

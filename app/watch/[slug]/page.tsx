@@ -97,12 +97,27 @@ export default async function WatchPage({ params }: WatchPageProps) {
           className="mb-4"
         />
 
-        {/* An explicit cut says so before it plays, never after. */}
-        {cut?.explicit && (
+        {/* An explicit cut says so before it plays, never after.
+
+            Gated on `allowed` and on BOTH explicit flags. It used to read
+            `cut?.explicit` alone, which meant it only fired for a scene built
+            as two edits (ty-luna-bed) and stayed silent for one that is
+            explicit in itself (josh-luna-bed-sex) — that scene's graphic nine
+            minutes played for a member with the rating sitting under the
+            player instead of above it, which is the thing this notice exists
+            to prevent.
+
+            `allowed` matters now that an explicit scene can have a public
+            window: a signed-out visitor gets the safe 90 seconds, so telling
+            them they are about to watch something graphic would be false. They
+            get the "first 1:30 of 8:57" note below the player instead. */}
+        {allowed && (video.explicit || cut?.explicit) && (
           <p className="mb-4 rounded-lg border border-amber/25 bg-amber/5 px-4 py-3 text-sm leading-relaxed text-stone">
             <span className="font-medium text-amber-soft">Explicit · 18+</span>{" "}
-            — you&rsquo;re watching the full cut, which is graphic. The public
-            version of this scene is shorter and is not.
+            — you&rsquo;re watching the full cut, which is graphic.
+            {video.preview
+              ? " The public version of this scene is shorter and is not."
+              : ""}
           </p>
         )}
 

@@ -400,37 +400,40 @@ export const videos: Video[] = [
     about: ["luna", "josh"],
   },
   {
-    // NO PREVIEW, SETTLED — Melissa, 2026-08-12: the explicit scenes go behind
-    // membership, so the sixty seconds do not get cut after all. Recorded
-    // because she had earlier asked for the first minute and this reverses it.
+    // A 90s PUBLIC WINDOW ON AN EXPLICIT SCENE — Melissa, 2026-08-12: "The
+    // First Night should have the first 1:30 free to watch. its safe". This is
+    // the only explicit scene on the site with a public preview, so the reason
+    // is written down rather than assumed.
     //
-    // The reasoning she settled on is the one the rest of the file already
-    // follows. Every other premium scene's preview is served to people with NO
-    // ACCOUNT AND NO AGE CHECK, which is fine for a fight or a confession and
-    // is a different thing entirely for a nine-minute explicit scene. It is
-    // also the one kind of material the site has never put in front of a
-    // signed-out visitor: ty-luna-bed's public cut is the tame one, and the
-    // still-awake clip has no preview at all.
-    //
-    // CORRECTION, 2026-08-12: my earlier note here said there was no
-    // non-explicit stretch to draw sixty seconds from. That was wrong. I had
-    // sampled across the whole take and read the opening as part of the scene
-    // it leads into. Melissa said the first ninety seconds are him waking her,
-    // and she is right — checked frame by frame at 2s intervals:
+    // It is safe, verified frame by frame at 2s intervals rather than taken on
+    // trust, because a preview is served with NO ACCOUNT AND NO AGE CHECK:
     //
     //   0:00–1:35  the room dark, her asleep in a camisole, his face in the
     //              back of her neck, her waking up and laughing. Held, not
     //              undressed. No nudity, nothing explicit.
     //   ~1:40      it turns, and there is no way back after it.
     //
-    // Kept here because it is the one thing worth knowing about this file: a
-    // preview COULD come straight off the head, with no assembled beat cut, if
-    // that call is ever revisited. Two caveats if it is. The opening is very
-    // QUIET — mean -46.8dB over the first 95s, peaking at -27.1 — because the
-    // score sits far down in the mix there (see the audio note below); that
-    // plays as a hushed room inside the full scene and would read as broken
-    // audio in a sixty-second cut on a phone. And a preview that shows only
-    // the tenderness sells a nine-minute explicit scene as gentler than it is.
+    // The cut ends at 1:30, ten seconds clear of the turn, and its last frames
+    // are him kissing her jaw in the dark — checked after cutting, not just
+    // before. Length and reason live in scripts/make-previews.mjs OVERRIDES.
+    //
+    // It takes the OPENING, against this file's usual hookStart rule that an
+    // opening makes somebody feel finished. Here the opening is the hook — he
+    // cannot sleep, so he wakes her — and it is the only stretch that can be
+    // shown at all. `explicit` still drives the "Explicit · 18+" badge and the
+    // notice before it plays, so nobody meets these 90 seconds unlabelled.
+    //
+    // I had this backwards twice and both corrections are worth keeping. First
+    // I wrote that the scene had no non-explicit stretch to draw a preview
+    // from; I had sampled across the whole take and read the opening as part of
+    // the scene it leads into. Then I recorded her "explicit goes behind
+    // membership" instruction as settling this scene too, which she has now
+    // narrowed: Still Water stays fully locked, this one gets its 90 seconds.
+    //
+    // The window is very QUIET — around -49dB across it, because the score sits
+    // far down (see the audio note below). Melissa confirmed on 2026-08-12 that
+    // the volume is low but the audio is there and that is the mix, so the cut
+    // carries it UNTOUCHED. Do not normalise it to make a preview louder.
     //
     // It ships LOCKED.
     //
@@ -491,6 +494,10 @@ export const videos: Video[] = [
     access: "premium",
     mature: true,
     explicit: true,
+    preview: {
+      file: "josh-luna-bed-sex-preview.proxy.mp4",
+      durationSeconds: 90,
+    },
     // "trust" added with the retitle: the scene's first ninety seconds are him
     // holding her and making her laugh, which is the axis a browser looking for
     // that would want it on. It is not only desire.

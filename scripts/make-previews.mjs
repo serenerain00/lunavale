@@ -83,6 +83,23 @@ const OVERRIDES = {
   // visitor through the introduction and into the argument, which is the part
   // worth paying for the end of. Just under a third of the 3:24 runtime.
   "luna-tyson-casey-bar": 60,
+
+  // Melissa, 2026-08-12: "The First Night should have the first 1:30 free to
+  // watch. its safe" — and it is. The only explicit scene with a public window,
+  // which is a real exception to how the rest of this file treats them, so the
+  // margin matters: verified frame by frame that 0:00–1:35 is Josh waking her,
+  // dark room, her in a camisole, nothing explicit and no nudity. It turns at
+  // about 1:40, so a 90s cut stops a clear ten seconds short of the turn.
+  //
+  // THIS IS THE OPENING, deliberately, against the hookStart rule above. The
+  // rule exists because an opening usually makes somebody feel finished; here
+  // the opening IS the hook — he cannot sleep so he wakes her, and it is the
+  // only stretch of the scene that can be shown at all.
+  //
+  // It is also very quiet: the score sits far down, around -49dB across this
+  // window. Melissa has confirmed that is the mix and not a fault, so the cut
+  // carries the audio untouched.
+  "josh-luna-bed-sex": 90,
 };
 
 /**

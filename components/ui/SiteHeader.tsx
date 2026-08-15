@@ -22,7 +22,7 @@ interface SiteHeaderProps {
  * already resolved it and a second lookup would be waste.
  */
 export async function SiteHeader({ member }: SiteHeaderProps) {
-  const signedIn = await isSignedIn();
+  const { signedIn, email } = await session();
 
   // Order and membership set by Melissa, 2026-08-10.
   const items: NavItem[] = [
@@ -40,6 +40,12 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
     // for World and Membership to go and said nothing about these two, and
     // dropping a whole section on inference is not a thing to do quietly.
     { href: "/clips", label: "Clips" },
+    // ADDED 2026-08-13 with the notebook itself. Not part of the 08-10 reorder
+    // above — a destination with no link in the bar is a destination nobody
+    // finds, which is the exact failure the mobile sign-in link had this
+    // morning. Sits after Clips because it is behind-the-scenes material and
+    // the four above it are the story.
+    { href: "/between-takes", label: "Between Takes" },
     // Overheard is archived (lib/content/overheard.ts). The link goes with it —
     // a nav item pointing at a 404 is worse than a missing nav item.
     // HELP IS MEMBERS-ONLY IN THE NAV now, her call.
@@ -68,6 +74,7 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
           <MobileNav
             items={items}
             signedIn={signedIn}
+            email={email}
             showSignIn={authConfigured()}
           />
 
@@ -75,7 +82,7 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
             href="/"
             className="whitespace-nowrap font-display text-base font-medium tracking-wide text-ivory sm:text-lg"
           >
-            Luna Vault
+            Luna Vale
           </Link>
 
           {/* The inline nav, from md up. Below that, the menu carries it. */}
@@ -95,7 +102,17 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
         <div className="flex items-center gap-3">
           {authConfigured() &&
             (signedIn ? (
-              <span className="hidden md:inline">
+              <span className="hidden items-baseline gap-3 md:inline-flex">
+                {email && (
+                  // max-w + truncate: a long address must not push the account
+                  // button off a narrow desktop window.
+                  <span
+                    className="max-w-[16ch] truncate text-xs text-stone-dim"
+                    title={email}
+                  >
+                    {email}
+                  </span>
+                )}
                 <SignOut />
               </span>
             ) : (
@@ -135,11 +152,36 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
 }
 
 /**
- * Whether Clerk has a session. Returns false when Clerk isn't configured, so
- * an unkeyed deploy renders the signed-out header rather than throwing.
+ * Who is signed in, if anyone.
+ *
+ * The EMAIL is the part that earns its keep. Until 2026-08-13 the header knew
+ * only yes-or-no, and showed "Sign out" and nothing else — so a person with
+ * more than one account had no way to tell which one they were in. That is not
+ * a hypothetical: it cost Melissa a day of believing mobile sign-in was broken,
+ * when what was actually happening was that "Continue with Google" on her phone
+ * signed her into a second account of her own that held no membership. Every
+ * door was correctly locked against an account that had bought nothing, and the
+ * UI had no way to say so.
+ *
+ * Returns signed-out when Clerk isn't configured, so an unkeyed deploy renders
+ * the signed-out header rather than throwing.
  */
-async function isSignedIn(): Promise<boolean> {
-  if (!authConfigured()) return false;
-  const { auth } = await import("@clerk/nextjs/server");
-  return Boolean((await auth()).userId);
+async function session(): Promise<{ signedIn: boolean; email: string | null }> {
+  if (!authConfigured()) return { signedIn: false, email: null };
+
+  const { auth, currentUser } = await import("@clerk/nextjs/server");
+  const { userId } = await auth();
+  if (!userId) return { signedIn: false, email: null };
+
+  // A failure here must not take the header — and therefore every page — down
+  // over a decoration. Signed-in with no address still renders correctly.
+  try {
+    const user = await currentUser();
+    return {
+      signedIn: true,
+      email: user?.primaryEmailAddress?.emailAddress ?? null,
+    };
+  } catch {
+    return { signedIn: true, email: null };
+  }
 }

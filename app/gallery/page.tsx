@@ -4,12 +4,14 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { isMember } from "@/lib/access/entitlement";
 import { catalog } from "@/lib/content/catalog";
+import { pageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
-  title: "Stills | Luna Vault",
+export const metadata: Metadata = pageMetadata({
+  title: "Stills",
   description:
     "Still galleries from Luna's world — the bar, the park, the firepit, the farmhouse — with her journal threaded through them. Most are members-only.",
-};
+  path: "/gallery",
+});
 
 export default async function StillsIndexPage() {
   const member = await isMember();

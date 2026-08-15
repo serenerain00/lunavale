@@ -11,13 +11,14 @@ import {
 } from "@/lib/content/about";
 import { journal } from "@/lib/content/journal";
 import { getVideo } from "@/lib/content/videos";
+import { pageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "What this is",
   description:
     "Luna spent ten years with Josh, six months without him, and twenty years with Tyson as her best friend. Who everyone is, and why the scenes arrive out of order.",
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 /**
  * The orientation page — written for somebody who arrived from a thirty-second

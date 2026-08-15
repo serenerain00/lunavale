@@ -8,6 +8,7 @@ import { canWatch, isMember } from "@/lib/access/entitlement";
 import { getEntry, journal, opening } from "@/lib/content/journal";
 import { getPerson, getPlace } from "@/lib/content/taxonomy";
 import { getVideo } from "@/lib/content/videos";
+import { pageMetadata } from "@/lib/seo/metadata";
 
 interface EntryPageProps {
   params: Promise<{ id: string }>;
@@ -24,7 +25,7 @@ export async function generateMetadata({
   const entry = getEntry(id);
   if (!entry) return { title: "Entry not found" };
 
-  return {
+  return pageMetadata({
     title: `${entry.dateline} — Luna's Journal`,
     // Premium entries describe themselves without quoting themselves: the
     // opening line is the visitor's taste to find, not the search engine's.
@@ -34,7 +35,11 @@ export async function generateMetadata({
         : `An entry from Luna's journal, written at ${
             getPlace(entry.place)?.label ?? "the house"
           }.`,
-  };
+    path: `/journal/${entry.id}`,
+    // No per-entry image on purpose. The journal has no art of its own, and
+    // borrowing a scene poster would put a photograph of two people on a card
+    // for a page that is one woman's handwriting.
+  });
 }
 
 export default async function JournalEntryPage({ params }: EntryPageProps) {

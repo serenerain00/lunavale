@@ -17,13 +17,14 @@ import {
   type PersonId,
   type PlaceId,
 } from "@/lib/content/taxonomy";
+import { pageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Luna's Journal",
   description:
     "Luna's private account, in her own hand — filed by where each entry was written and who it is about.",
-  alternates: { canonical: "/journal" },
-};
+  path: "/journal",
+});
 
 interface JournalPageProps {
   searchParams: Promise<{ place?: string; about?: string }>;

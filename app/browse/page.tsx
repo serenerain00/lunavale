@@ -10,6 +10,7 @@ import {
 } from "@/components/browse/Rail";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
+import { pageMetadata } from "@/lib/seo/metadata";
 import {
   catalog,
   filterCatalog,
@@ -33,13 +34,16 @@ export async function generateMetadata({
   const query = parseQuery(await searchParams);
   const label = describe(query);
 
-  return {
-    title: label ? `Browse — ${label} | Luna Vault` : "Browse | Luna Vault",
+  return pageMetadata({
+    // No "| Luna Vale" suffix here — app/layout.tsx's title template already
+    // appends "· Luna Vale", so writing it by hand produced
+    // "Browse | Luna Vale · Luna Vale" in the tab.
+    title: label ? `Browse — ${label}` : "Browse",
     description:
       "Every scene and still in Luna's world, browsable by what it feels like and where it happens.",
     // Filtered views are variations of one page — keep /browse the indexed one.
-    alternates: { canonical: "/browse" },
-  };
+    path: "/browse",
+  });
 }
 
 export default async function BrowsePage({ searchParams }: BrowsePageProps) {

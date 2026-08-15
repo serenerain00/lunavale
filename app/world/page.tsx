@@ -10,12 +10,14 @@ import {
   type Environment,
 } from "@/lib/content/world";
 import { getVideo } from "@/lib/content/videos";
+import { pageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "The World of Luna",
   description:
     "Move through the places the story lives — the farmhouse, the lakehouse, the bar, the lake, and the rest of Luna's world.",
-};
+  path: "/world",
+});
 
 /** An environment's cover: the poster of the first scene you can find inside it. */
 function coverFor(env: Environment): string | null {

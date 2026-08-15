@@ -35,7 +35,7 @@ export async function generateMetadata({
 
   const description = `${gallery.count} stills — ${gallery.subtitle}. ${gallery.description[0] ?? ""}`.trim();
   return {
-    title: `${gallery.title} — Stills | Luna Vault`,
+    title: `${gallery.title} — Stills`,
     description,
     openGraph: {
       title: `${gallery.title} — Stills`,

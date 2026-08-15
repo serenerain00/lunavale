@@ -7,13 +7,14 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { clipAccess, clips } from "@/lib/content/clips";
 import { formatDuration } from "@/lib/content/videos";
+import { pageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Clips",
   description:
     "The vertical cuts from Luna's world — the short pieces, collected in one place.",
-  alternates: { canonical: "/clips" },
-};
+  path: "/clips",
+});
 
 export default async function ClipsPage() {
   const { active: member } = await getMembership();

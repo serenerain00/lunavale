@@ -19,7 +19,7 @@ Use a **360° / equirectangular skybox generator**, not a normal image generator
 - **PanoPulse / PanoramaGenerator / 3DTexel** — free-to-try alternatives; verify
   each tool's commercial license terms before shipping.
 
-> Licensing matters: Luna Vault is a paid product. Only ship panoramas whose
+> Licensing matters: Luna Vale is a paid product. Only ship panoramas whose
 > license permits commercial use.
 
 ## Prompt guidance

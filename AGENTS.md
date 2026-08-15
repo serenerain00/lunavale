@@ -1,8 +1,8 @@
-# Codex Project Instructions — Luna Vault
+# Codex Project Instructions — Luna Vale
 
 ## Project Identity
 
-**Product name:** Luna Vault  
+**Product name:** Luna Vale  
 **Creator:** Melissa Casole  
 **Product type:** Explorable cinematic story world, premium streaming platform, creator portfolio, and monetized audience experience  
 **Primary deployment:** Vercel  
@@ -10,7 +10,7 @@
 **Recommended framework:** Next.js with TypeScript  
 **Motion system:** GSAP
 
-Luna Vault is not a conventional portfolio and should not be built as a standard Netflix clone.
+Luna Vale is not a conventional portfolio and should not be built as a standard Netflix clone.
 
 It is an explorable cinematic universe where visitors move through meaningful environments such as the lakehouse, farmhouse, track, park, coffee shop, downtown, garage, barn, dock, and future locations. Each environment contains stories, scenes, objects, memories, character connections, premium discoveries, and behind-the-scenes material.
 

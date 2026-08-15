@@ -1,6 +1,6 @@
-# Luna Vault
+# Luna Vale
 
-Luna Vault is an explorable cinematic universe built around original stories, recurring characters, meaningful environments, and premium audience experiences.
+Luna Vale is an explorable cinematic universe built around original stories, recurring characters, meaningful environments, and premium audience experiences.
 
 The platform combines:
 
@@ -27,7 +27,7 @@ A mug in the farmhouse kitchen may connect to Luna and Josh's past.
 
 ## Product Position
 
-Luna Vault should feel like:
+Luna Vale should feel like:
 
 - An independent streaming service
 - An explorable story world

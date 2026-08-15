@@ -34,23 +34,35 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lunavault.com"),
+  /*
+    The real domain. This said lunavault.com until 2026-08-13 — a domain
+    Melissa does not own, parked and listed for sale. metadataBase is what
+    every relative Open Graph and Twitter image URL is resolved against, so
+    each time anyone shared a link the preview card was pointed at a
+    squatter's page rather than at the site.
+
+    Apex rather than www, matching what Clerk already treats as home
+    (its home_url and after_sign_in_url are both the apex). Both hosts
+    currently serve the app directly with no redirect between them, so this
+    is also the file that decides which of the two is the canonical one.
+  */
+  metadataBase: new URL("https://lunavale38.com"),
   title: {
-    default: "Luna Vault",
-    template: "%s · Luna Vault",
+    default: "Luna Vale",
+    template: "%s · Luna Vale",
   },
   description:
     "An explorable cinematic universe of original stories. Enter the world, discover scenes, and unlock deeper access.",
   openGraph: {
-    title: "Luna Vault",
+    title: "Luna Vale",
     description:
       "An explorable cinematic universe of original stories.",
-    siteName: "Luna Vault",
+    siteName: "Luna Vale",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Luna Vault",
+    title: "Luna Vale",
     description: "An explorable cinematic universe of original stories.",
   },
 };

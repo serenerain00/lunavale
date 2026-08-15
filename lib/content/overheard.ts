@@ -64,7 +64,7 @@ export const MAX_POST_LENGTH = 900;
  * the visitor posts underneath carry on as normal. Extend by appending; `day`
  * is days after THREAD_START, so nothing already published shifts.
  *
- * DRAFT COPY in their voices, per LUNA_VAULT_CONTEXT.md: Luna interior and
+ * DRAFT COPY in their voices, per LUNA_VALE_CONTEXT.md: Luna interior and
  * self-revising, Tyson almost nothing but it lands, Josh charming and certain
  * he isn't the villain, Rick unkind in a way that is also accurate.
  */

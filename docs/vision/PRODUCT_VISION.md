@@ -2,7 +2,7 @@
 
 ## One-Sentence Vision
 
-Luna Vault is an explorable cinematic story platform where audiences move through emotionally meaningful environments to discover stories, characters, memories, and premium experiences.
+Luna Vale is an explorable cinematic story platform where audiences move through emotionally meaningful environments to discover stories, characters, memories, and premium experiences.
 
 ## Why This Product Exists
 
@@ -20,13 +20,13 @@ The work already contains:
 
 Social platforms are useful for discovery but poor at preserving context. Scenes appear out of order, audiences miss relationship history, algorithms control reach, mature work is restricted, and the creator does not fully own the audience relationship.
 
-Luna Vault gives the universe a permanent home.
+Luna Vale gives the universe a permanent home.
 
 ## Signature Difference
 
 Most creator platforms organize work through menus and feeds.
 
-Luna Vault organizes story through place.
+Luna Vale organizes story through place.
 
 Locations retain emotional meaning. A visitor returns to the lakehouse because something happened there. The farmhouse can first feel warm and later threatening. The track can reveal Tyson's identity through objects, sounds, machinery, and memories.
 

@@ -1,4 +1,4 @@
-# Luna Vault — Project & Story Context
+# Luna Vale — Project & Story Context
 
 A single-file briefing to re-load context (for ChatGPT or any assistant that
 has lost the thread). Everything here is **canon as set by Melissa Casole**,
@@ -9,7 +9,7 @@ written to this canon* — the canon below is what's authoritative.
 
 ## What the product is
 
-**Luna Vault** (live at **lunavale38.com**) — a premium, explorable cinematic
+**Luna Vale** (live at **lunavale38.com**) — a premium, explorable cinematic
 story world. Not a Netflix clone and not a plain portfolio: visitors move
 through *places* (farmhouse, lakehouse, the bar, the lake, the coffee shop,
 the park) and discover scenes, still galleries, short vertical clips, and

@@ -24,7 +24,7 @@
  * product, and a page written to reduce confusion must not solve it by giving
  * the plot away.
  *
- * DRAFT PROSE, written to Melissa's canon in LUNA_VAULT_CONTEXT.md. The beats
+ * DRAFT PROSE, written to Melissa's canon in LUNA_VALE_CONTEXT.md. The beats
  * are hers; the sentences are not.
  */
 
@@ -50,7 +50,7 @@ export const premise: AboutSection[] = [
     id: "what-this-is",
     heading: "What this is",
     body: [
-      "Luna Vault is a story about three people, told in scenes you watch, pages from a diary you were never meant to read, and photographs from rooms they were alone in.",
+      "Luna Vale is a story about three people, told in scenes you watch, pages from a diary you were never meant to read, and photographs from rooms they were alone in.",
       "It is set on a working farm, at a lakehouse, in a bar, on a track, and along the roads between them. It is for adults, and it is quiet rather than loud — the kind of story where the worst thing that happens in a room is something somebody doesn't say.",
     ],
   },

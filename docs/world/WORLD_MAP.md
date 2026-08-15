@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The world map is the central navigation model for Luna Vault.
+The world map is the central navigation model for Luna Vale.
 
 It should show how stories, characters, and environments connect without forcing every story into one rigid chronological path.
 

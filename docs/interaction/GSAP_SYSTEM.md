@@ -2,7 +2,7 @@
 
 ## Purpose
 
-GSAP is the primary motion engine for Luna Vault.
+GSAP is the primary motion engine for Luna Vale.
 
 It should support cinematic transitions, environment exploration, camera-like movement, scroll-based storytelling, object discovery, and restrained interface feedback.
 

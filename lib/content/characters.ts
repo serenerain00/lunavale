@@ -9,7 +9,7 @@
  * has once they are attached to someone, and it is the one the catalog's
  * feeling/place axes cannot answer.
  *
- * The prose below is DRAFT, written to the canon in LUNA_VAULT_CONTEXT.md
+ * The prose below is DRAFT, written to the canon in LUNA_VALE_CONTEXT.md
  * (Melissa's, 2026-07-22). The beats are hers; the sentences are not. `id` is
  * load-bearing — it is the PersonId from taxonomy.ts and appears in URLs.
  *
@@ -48,7 +48,7 @@ export interface Character {
    * blank or, worse, invite somebody to fill them in — and this is a story
    * where a made-up fact becomes canon the moment it is on a page.
    *
-   * So: only what LUNA_VAULT_CONTEXT.md actually establishes. Labels are kept
+   * So: only what LUNA_VALE_CONTEXT.md actually establishes. Labels are kept
    * consistent where they apply (Age, From, Lives, Work) so the pages still
    * read as one set. If a row you want is missing, the canon is missing it.
    */

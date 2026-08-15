@@ -91,6 +91,39 @@ export interface StillGallery {
 }
 
 export const galleries: StillGallery[] = [
+  /* ------------------------------------------------------ the night she left */
+  {
+    id: "luna-josh-break",
+    title: "Six Months",
+    subtitle: "The night she left",
+    description: [
+      "Sixty-nine frames from the night Luna finally goes. She packs two bags meaning to drive to the lakehouse, and she calls Tyson before she does it — she already knows Josh will try to stop her.",
+      "Most of what is here is the lakehouse, and that is the ache of it. The lakehouse has never held a bad memory for her. It is her family's: her mother and father, summers, a house that was always loud and always full and always laughing. Tyson has been in it for twenty years. Josh has been in it since she was twenty-eight. She is arriving now for the first time because something went wrong, and every warm room she walks through is one she is remembering rather than living in.",
+    ],
+    count: 69,
+    gated: true,
+    // Two open frames, the house rule for a gated set. They are the shop
+    // window and the only images here that sit at a public URL.
+    freePreviewCount: 2,
+    cover: "/gallery/luna-josh-break/cover.jpg",
+    feelings: ["hurt", "distance"],
+    // The lakehouse, not the farmhouse — the scene STARTS at the farmhouse but
+    // the overwhelming majority of these frames are the lake, which is where
+    // somebody browsing by place would expect to find them.
+    place: "lakehouse",
+    about: ["luna", "josh", "tyson"],
+    sceneSlug: "luna-josh-break",
+    journalEntryId: "the-night-i-left",
+    // `stills` is deliberately omitted for now: it carries per-frame captions
+    // and journal pull-quotes, and inventing sixty-nine of those would be
+    // writing over the top of Melissa's own material. The wall works without
+    // it; captions can be added a frame at a time.
+    access: "premium",
+    mature: true,
+    // Same call as the scene: he blocks her leaving and tries to get her out
+    // of the car. Controlling, not violent.
+    notes: ["control"],
+  },
   /* --------------------------------------------------------------- the bar */
   {
     id: "the-bar",
@@ -246,7 +279,7 @@ export const galleries: StillGallery[] = [
   /* ---------------------------------------------------------------- Mexico */
   {
     // The flashback. Five years into the ten, and the warmest material in the
-    // story — see LUNA_VAULT_CONTEXT.md.
+    // story — see LUNA_VALE_CONTEXT.md.
     //
     // Gated, but with the first two stills open. That is the shop window
     // Melissa asked for: roughly 10% of the set, real frames rather than a

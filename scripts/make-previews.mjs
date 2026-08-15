@@ -100,6 +100,12 @@ const OVERRIDES = {
   // window. Melissa has confirmed that is the mix and not a fault, so the cut
   // carries the audio untouched.
   "luna-josh-first-night": 90,
+  // A FULL MINUTE, Melissa's call on 2026-08-15. The scene runs 5:44, so a
+  // minute is under a fifth of it and well inside the one-third rule — but it
+  // is four times the house default, so it is a decision rather than a
+  // rounding. The first minute is her packing and him arriving, and it ends
+  // before he puts a hand on her, which is the question the rest answers.
+  "luna-josh-break": 60,
 };
 
 /**

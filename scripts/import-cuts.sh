@@ -40,6 +40,14 @@ cd "$(dirname "$0")/.."
 #
 # slug|source path|poster seconds (optional, default 3)
 CUTS=(
+  # The night she leaves — 5:44, and already scored. Note the crossed names:
+  # the folder is josh-luna-break, the cut inside it is luna-josh-break.mp4,
+  # and the slug follows the CUT because that is what Melissa calls it.
+  #
+  # Poster at 25s: the two of them in profile under the lamp, before any of it
+  # has happened. The opening eleven seconds are Josh alone in a hallway, which
+  # on a card reads as a scene about him.
+  "luna-josh-break|stories/josh-luna-break/luna-josh-break.mp4|25"
   "luna-tyson-bar|stories/luna-tyson-bar/luna-tyson-bar.mp4"
   # Josh and Tyson on the tractor — the two men, no Luna. Poster at 20s,
   # past the sunrise establishing shots and onto the pair working.
@@ -47,9 +55,19 @@ CUTS=(
   # The coffee Josh called about, which restarts everything. Identified from
   # the footage plus the story beat; it had no shooting folder of its own.
   "luna-josh-coffee|stories/withAudio/ScreenRecording_07-12-2026 08-15-54_1.mov|85"
-  # SILENT (-91 dB, digital silence). No match found in withAudio/ — the only
-  # unclaimed cuts are portrait or the wrong length. Needs a scored export.
-  "luna-josh-bed|stories/luna-josh-bed/0715.mp4"
+  # THE SCORED EXPORT ARRIVED (Melissa, 2026-08-13), and this line is why the
+  # note above it is gone. The published cut was stories/luna-josh-bed/0715.mp4
+  # at -91 dB — digital silence, not a quiet mix — and nothing in withAudio/
+  # matched it, so the scene has been streaming mute since it went up.
+  #
+  # The replacement is NOT the same picture with music over it. It runs
+  # 151.8s against 86.3s, so sixty-five seconds of edit are new, and the
+  # source folder is different too (luna-josh-room/, not luna-josh-bed/).
+  # Audio measures -29.4 dB mean / -6.6 dB peak — a real scored mix.
+  #
+  # Poster at 6s: the new cut opens on a slow fade up off black, and a grab at
+  # the default 3s lands on a near-empty frame.
+  "luna-josh-bed|stories/luna-josh-room/luna-josh-bed.mov|6"
   # Scored mix: -37.5 dB -> -26.8 dB. Runs 2.8s longer than the silent cut.
   "luna-josh-dinner-house|stories/withAudio/copy_A062089B-FB53-461E-BC18-DD0BD3F26458.MOV"
   # NEAR-SILENT (-51 dB). Its only candidate is portrait (1080x1822) and would

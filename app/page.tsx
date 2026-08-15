@@ -14,7 +14,12 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
 import { canWatch, getMembership } from "@/lib/access/entitlement";
 import { catalog, shelves, type CatalogItem } from "@/lib/content/catalog";
 import { pickHero } from "@/lib/content/hero";
-import { freeEntries, journal, opening } from "@/lib/content/journal";
+import {
+  freeEntries,
+  journal,
+  opening,
+  quoteOfTheDay,
+} from "@/lib/content/journal";
 import { galleries } from "@/lib/content/gallery";
 import { takes } from "@/lib/content/takes";
 import { formatPrice, getTier } from "@/lib/content/membership";
@@ -37,6 +42,10 @@ export default async function Home() {
 
   // Rotates daily. Resolved per request rather than at build time, so the
   // turnover doesn't wait for a deploy.
+  // The journal line on the hinge below the hero. Rotates daily — see
+  // quoteOfTheDay(). Resolved per request, like the hero.
+  const quote = quoteOfTheDay();
+
   const hero = pickHero();
   const heroUnlocked = hero ? await canWatch(hero.video) : false;
 
@@ -83,10 +92,12 @@ export default async function Home() {
             scene and then hands you a sentence out of her diary is making a
             promise about what kind of place this is.
 
-            The line is from `the-carrera`, which is FREE, so the link under it
-            opens the whole entry rather than a wall. It is chosen because it
-            gives away no turn at all and still aches: a woman noting a good
-            day because she expects to need the evidence later. */}
+            THE LINE NOW SHUFFLES (Melissa, 2026-08-15) — it was one fixed
+            sentence for weeks, which meant a returning visitor met the same
+            greeting every time and stopped reading it. quoteOfTheDay() rotates
+            through a hand-picked set daily; every one is from a FREE entry, so
+            the link under it opens the whole page rather than a wall, and none
+            of them gives away a turn. */}
         <section
           aria-labelledby="voice-heading"
           className="mx-auto w-full max-w-3xl px-5 pt-16 sm:px-8 sm:pt-24"
@@ -95,13 +106,12 @@ export default async function Home() {
             From Luna&rsquo;s journal
           </h2>
           <blockquote className="text-balance font-display text-2xl font-light leading-[1.4] text-ivory sm:text-4xl sm:leading-[1.35]">
-            &ldquo;First good day. Writing that down so I can find it
-            later.&rdquo;
+            &ldquo;{quote.line}&rdquo;
           </blockquote>
           <p className="mt-6 text-sm text-stone">
             Luna keeps a journal. She was not writing it for anyone.{" "}
             <Link
-              href="/journal/the-carrera"
+              href={`/journal/${quote.entryId}`}
               className="text-amber underline-offset-4 transition-colors duration-(--duration-quick) hover:underline"
             >
               Read that day
@@ -180,6 +190,98 @@ export default async function Home() {
               ))}
           </Reveal>
         </section>
+
+        {/* ----------------------------------------------------- just added */}
+        {/* DIRECTLY UNDER THE JOURNAL (Melissa, 2026-08-15), moved up from
+            below the membership pitch. The order of the argument is now: her
+            voice, her writing, and then the newest thing to watch — so a
+            returning visitor reaches the new scene in one screen instead of
+            scrolling past the cast, the pitch and the promises to find it.
+
+            The journal still leads, because free pages of her hand remain the
+            strongest thing to hand a stranger. This sits second because it is
+            for the people who came back, and the only thing they cannot
+            already have seen is the newest scene. It disappears after a
+            fortnight, and then the journal simply runs on into the cast.
+
+            THE BUTTON GOES TO /watch RATHER THAN PLAYING HERE. Scenes carry
+            content notes that have to be readable BEFORE playback — the wall
+            scene's disclaimer is the whole reason that system exists — and an
+            inline player on the home page would put footage in front of
+            somebody before the notice they are owed. The gating, the preview
+            swap and the notes all already live correctly one click away. */}
+        {showLatest && latest && (
+          <section
+            aria-labelledby="latest-heading"
+            className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14"
+          >
+            <div className="overflow-hidden rounded-xl border border-hairline bg-charcoal/30 sm:grid sm:grid-cols-[1.1fr_1fr] sm:items-stretch">
+              <Link
+                href={`/watch/${latest.slug}`}
+                className="group relative block aspect-video sm:aspect-auto sm:h-full"
+              >
+                <Image
+                  src={latest.poster}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 100vw, 45vw"
+                  className="object-cover transition-transform duration-(--duration-slow) group-hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-void/70 to-transparent sm:bg-gradient-to-r" />
+                <span className="absolute left-4 top-4 rounded-full bg-amber px-3 py-1 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-void">
+                  New
+                </span>
+              </Link>
+
+              <div className="p-5 sm:p-8">
+                <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                  Just added
+                </p>
+                <h2
+                  id="latest-heading"
+                  className="mt-3 font-display text-2xl font-light text-ivory sm:text-3xl"
+                >
+                  {latest.title}
+                </h2>
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone">
+                  <span className="tabular-nums">
+                    {formatDuration(latest.durationSeconds)}
+                  </span>
+                  <span aria-hidden>·</span>
+                  <span
+                    className={
+                      latest.access === "free" ? "text-stone" : "text-amber"
+                    }
+                  >
+                    {latest.access === "free" ? "Free" : "Members"}
+                  </span>
+                </div>
+                <p className="mt-3 max-w-md leading-relaxed text-stone">
+                  {latest.synopsis}
+                </p>
+
+                <Link
+                  href={`/watch/${latest.slug}`}
+                  className="mt-6 inline-flex min-h-11 items-center gap-2.5 rounded-full bg-ivory px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-white"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 4.5v15l13-7.5z" fill="currentColor" />
+                  </svg>
+                  {latest.access === "free" ? "Watch it" : "Watch the opening"}
+                </Link>
+
+                {/* Says what a non-member actually gets, with the real number
+                    rather than a vague "preview". */}
+                {latest.access !== "free" && latest.preview && !member && (
+                  <p className="mt-3 text-xs leading-relaxed text-stone-dim">
+                    The first {formatDuration(latest.preview.durationSeconds)}{" "}
+                    is open to everyone. The rest is part of the LunaVerse.
+                  </p>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* --------------------------------------------------------- three */}
         {/* "Why should I care" answered before anything is asked for. Three
@@ -363,91 +465,6 @@ export default async function Home() {
                   </div>
                 ))}
               </Reveal>
-            </div>
-          </section>
-        )}
-        {/* ----------------------------------------------------- just added */}
-        {/* ABOVE THE JOURNAL, which used to lead the page on the grounds that
-            the writing is the best hook for a stranger. That still holds for a
-            stranger — but this section is for the people who came back, and
-            the only thing they cannot already have seen is the newest scene.
-            It disappears after a fortnight and the journal leads again.
-
-            THE BUTTON GOES TO /watch RATHER THAN PLAYING HERE. Scenes carry
-            content notes that have to be readable BEFORE playback — the wall
-            scene's disclaimer is the whole reason that system exists — and an
-            inline player on the home page would put footage in front of
-            somebody before the notice they are owed. The gating, the preview
-            swap and the notes all already live correctly one click away. */}
-        {showLatest && latest && (
-          <section
-            aria-labelledby="latest-heading"
-            className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14"
-          >
-            <div className="overflow-hidden rounded-xl border border-hairline bg-charcoal/30 sm:grid sm:grid-cols-[1.1fr_1fr] sm:items-stretch">
-              <Link
-                href={`/watch/${latest.slug}`}
-                className="group relative block aspect-video sm:aspect-auto sm:h-full"
-              >
-                <Image
-                  src={latest.poster}
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 100vw, 45vw"
-                  className="object-cover transition-transform duration-(--duration-slow) group-hover:scale-[1.02]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-void/70 to-transparent sm:bg-gradient-to-r" />
-                <span className="absolute left-4 top-4 rounded-full bg-amber px-3 py-1 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-void">
-                  New
-                </span>
-              </Link>
-
-              <div className="p-5 sm:p-8">
-                <p className="text-xs uppercase tracking-[0.2em] text-amber">
-                  Just added
-                </p>
-                <h2
-                  id="latest-heading"
-                  className="mt-3 font-display text-2xl font-light text-ivory sm:text-3xl"
-                >
-                  {latest.title}
-                </h2>
-                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone">
-                  <span className="tabular-nums">
-                    {formatDuration(latest.durationSeconds)}
-                  </span>
-                  <span aria-hidden>·</span>
-                  <span
-                    className={
-                      latest.access === "free" ? "text-stone" : "text-amber"
-                    }
-                  >
-                    {latest.access === "free" ? "Free" : "Members"}
-                  </span>
-                </div>
-                <p className="mt-3 max-w-md leading-relaxed text-stone">
-                  {latest.synopsis}
-                </p>
-
-                <Link
-                  href={`/watch/${latest.slug}`}
-                  className="mt-6 inline-flex min-h-11 items-center gap-2.5 rounded-full bg-ivory px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-white"
-                >
-                  <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M7 4.5v15l13-7.5z" fill="currentColor" />
-                  </svg>
-                  {latest.access === "free" ? "Watch it" : "Watch the opening"}
-                </Link>
-
-                {/* Says what a non-member actually gets, with the real number
-                    rather than a vague "preview". */}
-                {latest.access !== "free" && latest.preview && !member && (
-                  <p className="mt-3 text-xs leading-relaxed text-stone-dim">
-                    The first {formatDuration(latest.preview.durationSeconds)}{" "}
-                    is open to everyone. The rest is part of the LunaVerse.
-                  </p>
-                )}
-              </div>
             </div>
           </section>
         )}

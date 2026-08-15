@@ -145,7 +145,119 @@ export const journal: JournalEntry[] = [
       "I want to remember it exactly. In case I need it.",
     ],
   },
+  /*
+    THE REASON, written months before she acts on it. Melissa's canon
+    (2026-08-15): Josh loves her almost obsessively AND is obsessed with work,
+    believes work ethic is the thing that matters, and cannot see that those
+    two facts collide. She comes second and she notices — and that, not a
+    fight, is eventually what makes her go.
+  */
+  {
+    id: "second",
+    dateline: "He said he'd be an hour",
+    place: "farmhouse",
+    about: ["josh"],
+    access: "premium",
+    mature: false,
+    body: [
+      "He said he'd be an hour. That was at two. It is ten past nine.",
+      "I am not writing this down because he was late. He has been late for ten years. I married the lateness. It is genuinely fine.",
+      "I am writing it down because of what I did with the six hours. I cooked. I put it in the oven on low. I took it out. I put a plate in the microwave. I changed twice. At one point — and I am putting this in because it is true — I hoovered a room that was already clean.",
+      "Six hours of being ready for a man who was not coming.",
+      "Here is the part I keep circling and cannot land on. He does love me. I am not one of those women who is confused about that. He loves me in a way that is almost too much for the room, he is obsessed with me, he will tell anybody who stands still long enough.",
+      "But the work gets him at six in the morning. It gets the good hours and it gets the version of him that is awake. I get whatever is left at nine at night, and he genuinely cannot see that those are different things.",
+      "If I said it out loud he would say the work IS for me. For us. And he would mean it, which is the problem.",
+      "That is what makes it impossible. There is nobody to be angry at. He is not choosing something over me. He has just never had to choose, because it has never once occurred to him that a choice is being made.",
+      "I have stopped saying it. That should frighten me more than it does.",
+    ],
+  },
+  /*
+    THREE MORE FROM THE TEN YEARS (2026-08-15). Melissa's canon: Josh is
+    charismatic, sociable, funny, universally liked in public and a different
+    man once the door shuts — and Luna is the only person who has seen every
+    piece of him. He is impatient, physical, wants things now. She spends the
+    marriage making everybody happy and putting herself last.
+  */
+  {
+    id: "everybodys-josh",
+    dateline: "Home from the Harknesses'",
+    place: "farmhouse",
+    about: ["josh"],
+    access: "premium",
+    mature: false,
+    body: [
+      "He was wonderful tonight. I want to start there because it is true and because I am about to write the rest of it.",
+      "He had that whole table. The story about the truck and the fence — he has told it forty times and he still lands it, and he waits for the laugh he knows is coming and he is never once wrong about where it is. Cathy had tears on her face. Somebody's husband put a hand on his shoulder on the way out.",
+      "In the car on the way home he said eleven words to me. I counted, which tells you something about me and nothing good.",
+      "And this is the thing nobody would believe. If I said any of this out loud to any person who was at that table tonight, they would think I was the difficult one. They would be kind about it and they would think it.",
+      "Because they have met that man. Everyone has met that man. He is genuinely, actually him — that is not a performance, that is really Josh, that is the man I fell in love with and he is in there.",
+      "It is just that he spends all of him out there. And what comes home is a man who has been generous all evening and has nothing left over, and I am the person he does not have to be charming for.",
+      "I used to think that was intimacy. Being the one he could switch off around. I have started to think it might just be being last in the queue.",
+    ],
+  },
+  {
+    id: "last-on-my-own-list",
+    dateline: "Sunday, everything done",
+    place: "farmhouse",
+    about: ["luna"],
+    access: "premium",
+    mature: false,
+    body: [
+      "Fed everybody. Rang his mother because he was going to forget. Moved the appointment I had made for myself so I could take the truck in for him.",
+      "Sat down at nine and could not think of one thing I wanted to do.",
+      "That is the bit that got me. Not that there was no time. There was an hour, and I sat in it, and I genuinely could not produce an answer to what do you want.",
+      "I am very good at what does everybody else want. I could do that one in my sleep. I think I have been doing it in my sleep.",
+    ],
+  },
+  {
+    id: "he-wants-it-now",
+    dateline: "The morning of the delivery",
+    place: "farmhouse",
+    about: ["josh"],
+    access: "premium",
+    mature: false,
+    body: [
+      "There is no such thing as later with him. There is now, or there is a bad hour.",
+      "The pallet came at seven and it was wrong, and he had it on the phone before I had got the coffee on. Not shouting. He does not really shout on the phone — that is for the house. Just that flat, fast, immovable thing where the person on the other end can hear that this is going to be sorted out today whether they had planned to be part of that or not.",
+      "And it works. That is what I have to keep being honest about in here. It works, it has always worked, he has built a whole life out of it, and half of what I have I have because he does not know how to wait.",
+      "It is only ever a problem when it is pointed at a person.",
+      "He wanted an answer from me about the weekend at ten past seven this morning, in a kitchen, before either of us had eaten, because he had decided at that moment that he wanted to know. And when I said let me think, I watched his face do the thing it does when a delivery is late.",
+      "I said yes so the morning could carry on. I would like to be the sort of woman who does not do that. I have been meaning to be her for about six years.",
+    ],
+  },
   /* ---------------------------------------------------- the six months ---- */
+  /*
+    THE NIGHT ITSELF, which the six months had no first page for. `the-last-box`
+    opened this section and it is the AFTERMATH — boxes, a truck, the boring
+    part. What was missing was the hinge: the afternoon she packed, the man in
+    the doorway, and the drive.
+
+    Written to Melissa's account of 2026-08-15 (recorded in full above
+    luna-josh-break in lib/content/videos.ts). Premium, so the opening line is
+    the whole shop window — JournalCard shows the real first sentence and then
+    the wall, which is why the first paragraph is built to survive being cut at
+    about 130 characters and still land.
+  */
+  {
+    id: "the-night-i-left",
+    dateline: "The afternoon I packed, and after",
+    place: "lakehouse",
+    about: ["josh", "tyson"],
+    sceneSlug: "luna-josh-break",
+    access: "premium",
+    mature: false,
+    notes: ["control"],
+    body: [
+      "I packed the bags at four in the afternoon with the radio on, like a woman doing something ordinary, and I have never been more frightened in my life.",
+      "I called Tyson before I did it. Not to be talked out of it. To have one person know, so it would already be true by the time Josh got home and started making it not true.",
+      "He said he messed up. He does say it — he is always so ready to say it. He said it standing between me and the door, and the terrible part is that I believe him. I believe him every single time. It has just stopped meaning anything, because believing him and him changing turned out to be two different things and I have spent ten years mistaking one for the other.",
+      "That isn't fair. He has changed. He has got worse at noticing and better at apologising, and that is a change.",
+      "I didn't go because I stopped loving him. I want that written down somewhere I can find it later, because in six months I will have tidied this into a cleaner story than it was. I went because I got tired of waiting to be chosen by a man who was already in the room.",
+      "So I drove to the lake. Of course I did. Atlanta is too far to run to in one night, and this is the only place that is mine — Mom and Dad's really, and everybody's, but mine.",
+      "I got here after dark and I have not turned on more than the one lamp. Every room I have walked through tonight has people in it who aren't here. Dad carrying me down to the dock. Mom laughing so hard at cards she had to put them face down on the table. Tyson at nineteen. Josh at twenty-eight, soaking, lifting me out of the water like I weighed nothing at all.",
+      "Nothing bad has ever happened in this house. That is the thing I cannot get past. I have brought the bad thing here myself, and it is in the house now too, and by tomorrow it will be one of the things these rooms remember.",
+    ],
+  },
   {
     id: "the-last-box",
     dateline: "The day the last box went",
@@ -351,6 +463,134 @@ export const journal: JournalEntry[] = [
       "And here is the part I am only putting down because it is nearly four and nobody is ever going to read this.",
       "For about a minute, somewhere in the middle of that song, I was not thinking about Josh at all. Not managing not to. Not deciding not to. Just — not.",
       "I don't know what to do with that yet. It was easier when the problem was one man.",
+    ],
+  },
+  /*
+    FOUR ENTRIES ADDED 2026-08-15 from Melissa's account of who Luna actually
+    is, none of which the journal had anywhere to say:
+
+      why-i-write-this-down  the racing head at night, and the page as the only
+                             thing that makes it go one thought at a time
+      he-found-me            the bourbon, and Tyson turning up uncalled
+      nowhere-to-put-it      overwhelm that will not convert into words and
+                             comes out of her physically instead
+      two-kinds-of-quiet     Tyson goes quiet and she waits; Josh goes quiet and
+                             she works. The same behaviour, and not the same
+                             thing at all.
+
+    NOTE FOR MELISSA: `he-found-me` is about drinking to cope. There is no
+    content note for that in lib/content/content-notes.ts and I have not
+    invented one — the vocabulary in that file is yours, and every note in it
+    was added on your say-so. If you want one, it is a two-line addition and
+    this entry is where it goes first.
+  */
+  {
+    id: "why-i-write-this-down",
+    dateline: "Half past two, again",
+    place: "farmhouse",
+    about: ["luna"],
+    access: "premium",
+    mature: false,
+    body: [
+      "Half past two. It is always half past two.",
+      "I do not write this because I am a writer. I write it because if I do not put it somewhere it stays in my head and goes round, and by four it has picked up speed and stopped being about the thing it started as.",
+      "On paper it has to be one sentence at a time. It has to go in order. That is the entire trick — my head will not do one at a time, and a page makes it.",
+      "Half the time I do not know what I think until I have watched myself write it. Tonight I found out I was angry about something I would have sworn I was fine about.",
+      "So. Useful book.",
+    ],
+  },
+  {
+    id: "he-found-me",
+    dateline: "I did not call him",
+    place: "bar",
+    about: ["luna", "tyson"],
+    access: "premium",
+    mature: false,
+    body: [
+      "I did not call him. I want that at the top of this before I write the rest, because it matters to me and it will not matter to him at all.",
+      "Bad day. Not a specific bad day — one of the ones where it is all just sitting on my chest and I cannot get out from under it. I got in the car at nine and drove to the one place I always go.",
+      "Three bourbons in and I was doing fine. That is the sentence I would have used if anybody had asked. Doing fine.",
+      "He came in at eleven. He did not say how he knew. He never says how he knew. He sat down on the stool next to me and ordered a soda water like it was a Tuesday and he had always been coming.",
+      "He did not ask what was wrong. He did not say one word about the glass. He asked whether I had eaten, which I had not, so we ate.",
+      "Around one he said: next time call me first and we will go together. Not do not come. Not you should not be here. Call me first and we will go together.",
+      "I have been told off about this by people who love me. That was not being told off. I do not know what that was, and I have been lying here for two hours trying to find the name for it.",
+    ],
+  },
+  {
+    id: "nowhere-to-put-it",
+    dateline: "After I broke the blue bowl",
+    place: "farmhouse",
+    about: ["luna"],
+    access: "premium",
+    mature: false,
+    body: [
+      "I broke the blue bowl. On purpose. I am writing that down honestly instead of the version where it slipped, because the version where it slipped is the one I will have by morning.",
+      "Here is the thing I cannot explain to anybody. It builds. All day, small things, not one of them worth mentioning on its own — and I keep saying it is fine, because it IS fine, each one is fine — and by six there is so much of it in me that I can feel it in my hands.",
+      "And it has to go somewhere. It will not go as words. I have tried, for years. It comes out of me physically or it does not come out at all, and then it just sits there and gets heavier.",
+      "Normal people get annoyed and then stop being annoyed. I have watched them do it. I do not understand the mechanism.",
+      "So: a bowl. Twelve dollars. And I felt better, and then I felt so ashamed of feeling better that I sat down on the kitchen floor for twenty minutes.",
+      "I am going to sweep it up before he is home and I am not going to mention it, which I suspect is the part I should actually be worried about.",
+    ],
+  },
+  {
+    id: "two-kinds-of-quiet",
+    dateline: "Working something out about both of them",
+    place: "lakehouse",
+    about: ["josh", "tyson"],
+    access: "premium",
+    mature: false,
+    body: [
+      "Worked something out tonight and I want it written down before I talk myself back out of it.",
+      "They both go quiet. I have spent my whole life around two men who go quiet and I always assumed it was the same thing. It is not. It is not remotely.",
+      "When Tyson goes quiet, nothing is happening to me. He takes it somewhere and sits with it and it burns down on its own time, and then he comes back and he is the same man he was. The military did that to him, or it was always in there and the military gave it a shape. Either way I have never had to do anything about it except wait, and I have never minded waiting, because I have always known he was coming back.",
+      "When Josh goes quiet it is weather. It is pressure, and the whole house knows. I can tell by the way he puts his keys down. And I start moving around it — softer, faster, doing more, saying less — so that by the time it breaks I have usually already spent the day trying to stop it.",
+      "One of them goes quiet and I am alone for a while. The other goes quiet and I am working.",
+      "I have never said that to anybody. I am not sure I could say it out loud without it sounding like a complaint about a man who has never once raised his hand to me.",
+    ],
+  },
+  /*
+    TWO HEAVIER ONES (2026-08-15), and the second is the heaviest thing in this
+    file. Melissa: Luna is broken and trying to fix herself, gets overwhelmed
+    far past what a normal person does, and has had a breakdown. `the-bad-one`
+    is that night. It carries the `panic` note, which already exists for the
+    truck drive and is the right vocabulary for this — it names what is in the
+    piece and lets an adult decide.
+  */
+  {
+    id: "why-not-the-bear",
+    dateline: "Two in the morning, being honest for once",
+    place: "lakehouse",
+    about: ["tyson", "josh"],
+    access: "premium",
+    mature: false,
+    body: [
+      "Nobody has ever asked me this so I am going to ask myself it and then answer it properly, because I am tired and there is nobody here.",
+      "Why not Tyson. Twenty years. He has never once let me down, not one time, not in a way I could point at. He is the calmest thing in any room he is in. When everything went wrong the first person I called was him and the first person I called the second time was him.",
+      "And I have never looked at him. Not once. Not in twenty years.",
+      "He was my big bear. That is genuinely what I called him, out loud, for years — and you do not think about your bear like that, that is the whole point of a bear. He is the thing you hold on to when the room is bad.",
+      "Josh came at me like weather. Sideways, fast, no warning, and I was twenty-eight and I had never had anybody look at me like that in my life. Not fondly. Not kindly. Like something he had already decided about.",
+      "I want to write down that I picked wrong and I cannot make myself write it, because it would not be true. I did not pick badly. I picked the one that made my heart go, and my heart has terrible judgement and I knew that at the time.",
+      "Here is the honest answer. Safe never felt like being chosen. It felt like being kept. And I was twenty-eight and I wanted to be chosen so badly I would have taken it in almost any form.",
+      "I do not know what to do with the fact that I am writing this in his lake house, on a mattress he made up for me, having eaten food he brought.",
+    ],
+  },
+  {
+    id: "the-bad-one",
+    dateline: "Wrote this the next day. Could not have written it that night.",
+    place: "lakehouse",
+    about: ["luna"],
+    access: "premium",
+    mature: false,
+    notes: ["panic"],
+    body: [
+      "I am writing this down because if I do not write it down I will do the thing where I decide it was not that bad.",
+      "It was that bad.",
+      "It started over nothing. It always starts over nothing — that is the tell, and I know the tell, and knowing it has never once stopped it. Something small went wrong at about four and by six I could not get a full breath and by eight I was on the bathroom floor with the light off.",
+      "Not crying. Past crying. That flat white place where you are not sad any more, you are just a body doing something on its own, and some part of you is standing in the corner watching it happen and taking notes.",
+      "I could not tell you how long. Hours. I know it got dark and I know at some point it was not dark any more.",
+      "The worst of it is not the night. The worst of it is the next morning, when you get up and put a wash on and the whole thing is just gone, filed, and you are a normal woman making toast — and you understand that it is going to come back, and that there will be no warning, and that you will be exactly as unable to stop it then as you were this time.",
+      "I did not call anybody. There was a whole hour where I nearly called Tyson and did not, because what do you say. Come here, nothing has happened.",
+      "I am putting it in the book because the book is the only place it exists. Nobody in my life knows this about me. Ten years and Josh has never seen one. I have got extraordinarily good at scheduling them for when I am alone, which is not a thing a well person can do and I am aware of that.",
     ],
   },
   {
@@ -1277,6 +1517,55 @@ export function entriesAbout(person: PersonId): JournalEntry[] {
 /** Entries sitting beside a scene, for cross-linking from /watch. */
 export function entriesForScene(slug: string): JournalEntry[] {
   return journal.filter((e) => e.sceneSlug === slug);
+}
+
+/**
+ * The lines the home page can quote, and where each one comes from.
+ *
+ * HAND-PICKED, not derived. `opening()` would give the first sentence of an
+ * entry, and the first sentence is rarely the quotable one — the line that has
+ * been on the home page for weeks is the fourth paragraph of `the-carrera`.
+ *
+ * Two rules, both load-bearing:
+ *   FREE ENTRIES ONLY. The link under the quote opens the entry, and sending
+ *   somebody from a beautiful sentence straight into a paywall is the bait
+ *   MONETIZATION.md rules out.
+ *   NO TURNS. Each of these aches without giving away a single event. A woman
+ *   noting a good day because she expects to need the evidence later tells you
+ *   everything about her and nothing about the plot.
+ */
+export const pullQuotes: { entryId: string; line: string }[] = [
+  {
+    entryId: "the-carrera",
+    line: "First good day. Writing that down so I can find it later.",
+  },
+  {
+    entryId: "the-last-box",
+    line: "I keep waiting to be angry. What I am is tired, and underneath the tired is something I'm not writing down yet.",
+  },
+  {
+    entryId: "he-called",
+    line: "Six months of nothing and then his name on my phone at seven in the morning like no time had passed at all.",
+  },
+  {
+    entryId: "coffee",
+    line: "I hate that he can still do that, and I hate more that he knows he can.",
+  },
+];
+
+/**
+ * Today's quote.
+ *
+ * ROTATES BY THE DAY rather than per request, which is the deliberate reading
+ * of "shuffle". A line that changes every time the page is drawn changes while
+ * somebody is still reading it — they click into the journal, come back, and
+ * the sentence that made them click is gone. A day is long enough to read a
+ * sentence and short enough that a regular visitor never sees the same one
+ * twice in a row.
+ */
+export function quoteOfTheDay(): { entryId: string; line: string } {
+  const day = Math.floor(Date.now() / 86_400_000);
+  return pullQuotes[day % pullQuotes.length];
 }
 
 /** The entries free to read, in story order — the journal's shop window. */

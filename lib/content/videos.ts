@@ -382,13 +382,77 @@ export const videos: Video[] = [
     about: ["luna", "josh"],
   },
   {
+    /*
+      THE NIGHT SHE LEAVES. Melissa's account, 2026-08-15, recorded here
+      because almost none of it is stated on screen and the tagging below is
+      only defensible if you know it:
+
+        Luna has finally found the courage to go. She packs two bags meaning to
+        drive to the lakehouse, and she called TYSON first — she knew Josh
+        would try to stop her, which is why Tyson turns up near the end, having
+        driven the whole way, arriving while Josh is trying to get her back out
+        of the car. She is deeply conflicted the entire time, because she is
+        still in love with Josh. He is not being there for her in the way she
+        needs and she is tired of waiting. He keeps saying he messed up; she
+        does not give him much room to apologise, because it is the same
+        apology as every other time. She goes anyway.
+
+      The last third is the lakehouse, in the dark, alone — she walks through
+      it and the warm material that plays over that is MEMORY, not the present.
+      Anything built out of this scene has to keep that straight: those images
+      are what she has lost, not what she has arrived at.
+
+      This is before the six-month split, so it is the hinge the whole story
+      turns on. Melissa is considering it as the opening of the pilot; that is
+      NOT public and must not appear in any copy.
+    */
+    slug: "luna-josh-break",
+    title: "Six Months",
+    // PLACEHOLDER title — hers to replace. It names what this night begins
+    // rather than what happens in it, which keeps the card from spoiling the
+    // one thing the scene is about.
+    synopsis:
+      "She packed two bags and told one person she was going. He gets between her and the door.",
+    file: "luna-josh-break.proxy.mp4",
+    poster: "/posters/luna-josh-break.jpg",
+    durationSeconds: 344,
+    addedOn: "2026-08-15",
+    access: "premium",
+    mature: true,
+    preview: {
+      file: "luna-josh-break-preview.proxy.mp4",
+      // A FULL MINUTE, against the 15s house default — Melissa's call for this
+      // scene specifically. Set in scripts/make-previews.mjs OVERRIDES.
+      durationSeconds: 60,
+      hookNote:
+        "From the top. The first minute is the packing and his arrival; it ends before he touches her, which is the question the rest of it answers.",
+    },
+    // `control`, and deliberately not `violence`. He holds her face, blocks the
+    // door and tries to get her out of the car — he never strikes her and never
+    // takes her by the throat. Checked frame by frame across the confrontation
+    // rather than assumed from the shape of the scene: labelling this assault
+    // would be as wrong as labelling it nothing.
+    notes: ["control"],
+    feelings: ["hurt", "distance"],
+    // The confrontation and the car are here; the last third is the lakehouse.
+    // One field, so it names where the scene HAPPENS rather than where it ends.
+    place: "farmhouse",
+    // Tyson is included because he drives the length of the story to get here,
+    // which is the whole reason the scene has a third act — even though he is
+    // on screen for well under a minute of it.
+    about: ["luna", "josh", "tyson"],
+  },
+  {
     slug: "luna-josh-bed",
     title: "Sunday",
     synopsis:
       "A morning that neither of them is in any hurry to end.",
     file: "luna-josh-bed.proxy.mp4",
     poster: "/posters/luna-josh-bed.jpg",
-    durationSeconds: 86,
+    // 86 -> 152 on 2026-08-13, when the scored cut replaced the silent one.
+    // Not a re-encode of the same picture: the new edit runs sixty-five
+    // seconds longer. See the note in scripts/import-cuts.sh.
+    durationSeconds: 152,
     access: "premium",
     mature: true,
     preview: {

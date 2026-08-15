@@ -54,10 +54,30 @@ export async function createCheckoutSession(input: {
     );
   }
 
+  // Reuse a session this person already has open, rather than minting another.
+  //
+  // /membership/start is a GET, and a GET can be fetched by things that are
+  // not a decision to buy: a link prefetch, a speculative load, a double tap,
+  // a back button. Each one used to produce its own Checkout Session. That
+  // never double-charged anybody — only one session can be paid — but it left
+  // orphaned sessions behind and inflated the abandonment count, so the one
+  // number that measures this page could not be trusted.
+  //
+  // The link no longer prefetches (components/membership/TierCard.tsx), but
+  // that fixes one caller rather than the route. This makes the route itself
+  // safe to call twice, which is the property a GET actually needs to have.
+  const open = await openSessionFor(input.userId, input.tier);
+  if (open) return open;
+
   const session = await stripe().checkout.sessions.create({
     mode: "subscription",
     line_items: [{ price, quantity: 1 }],
     client_reference_id: input.userId,
+    // Also on the SESSION, not only on subscription_data below. The
+    // subscription copy is what every later webhook carries; this copy is what
+    // openSessionFor() matches on, and what makes an abandoned session on
+    // /admin say which tier the person was looking at when they stopped.
+    metadata: { userId: input.userId, tier: input.tier },
     ...(input.existingCustomerId
       ? { customer: input.existingCustomerId }
       : { customer_email: input.email }),
@@ -79,6 +99,49 @@ export async function createCheckoutSession(input: {
 
   if (!session.url) throw new Error("Stripe returned no checkout URL");
   return session.url;
+}
+
+/**
+ * A Checkout Session this user already has open for this tier, if there is one.
+ *
+ * Matched on `client_reference_id` — the Clerk user id, which the session is
+ * stamped with at creation — plus the tier carried in subscription metadata,
+ * so switching from one tier to another still gets its own session rather than
+ * silently reusing the wrong plan's.
+ *
+ * Only `status: "open"` sessions are candidates. Stripe expires them after
+ * roughly a day and a completed one is not reusable, so this can never hand
+ * somebody a session that has already been paid.
+ *
+ * Returns undefined on any failure rather than throwing: this is an
+ * optimisation on the way to checkout, and a Stripe hiccup here should cost a
+ * duplicate session, not the sale.
+ */
+async function openSessionFor(
+  userId: string,
+  tier: TierId,
+): Promise<string | undefined> {
+  try {
+    const sessions = await stripe().checkout.sessions.list({
+      status: "open",
+      limit: 100,
+    });
+    const match = sessions.data.find(
+      (s) =>
+        s.client_reference_id === userId &&
+        // Must be an EXACT tier match, never a fallback. An earlier draft
+        // treated "no tier on the session" as a match, which would have handed
+        // somebody clicking Patron a session for Vault the moment a second
+        // tier went on sale. Sessions created before this line existed carry
+        // no tier and are correctly ignored.
+        s.metadata?.tier === tier &&
+        Boolean(s.url),
+    );
+    return match?.url ?? undefined;
+  } catch (error) {
+    console.error("openSessionFor: could not list checkout sessions", error);
+    return undefined;
+  }
 }
 
 /**

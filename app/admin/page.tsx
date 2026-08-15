@@ -4,6 +4,11 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
+import {
+  abandonedCheckouts,
+  revenueSummary,
+  formatCents,
+} from "@/lib/billing/revenue";
 import { membershipSummary } from "@/lib/db/memberships";
 import { allPostsForModeration, posterStats } from "@/lib/db/overheard";
 import { recentHelpMessages } from "@/lib/db/help";
@@ -48,12 +53,15 @@ export default async function AdminPage() {
       posterStats(FREE_POST_ALLOWANCE),
       freeAccountCount(),
     ]);
-  const [help, survey, sceneComments, commentCounts] = await Promise.all([
-    recentHelpMessages(20),
-    surveyResults(25),
-    recentSceneComments(30),
-    commentCountsByScene(),
-  ]);
+  const [help, survey, sceneComments, commentCounts, revenue, abandoned] =
+    await Promise.all([
+      recentHelpMessages(20),
+      surveyResults(25),
+      recentSceneComments(30),
+      commentCountsByScene(),
+      revenueSummary(),
+      abandonedCheckouts(),
+    ]);
   const unreadComments = sceneComments.filter((c) => !c.handled).length;
 
   // The two numbers Melissa actually wants off this page, pulled out of the
@@ -75,10 +83,12 @@ export default async function AdminPage() {
   const seriesPct = share(survey.format, ["series"]);
   const openHelp = help.filter((h) => !h.handled);
 
-  const paying = members
+  // Head COUNT comes from the local table — it is the access record and it is
+  // one query. Head count is all it can honestly answer: the table stores tier
+  // and status and no amount, so the money below comes from Stripe instead.
+  const withAccess = members
     .filter((m) => ["active", "trialing", "past_due"].includes(m.status))
     .reduce((n, m) => n + m.n, 0);
-  const mrr = paying * 8;
 
   const runway = threadRunway(now);
 
@@ -140,12 +150,125 @@ export default async function AdminPage() {
           </p>
         </header>
 
+        {/* --------------------------------------------------------- funnel */}
+        {/*
+          THE WHOLE POINT OF THIS PANEL is that Clerk and Stripe count
+          different things and neither one answers "how is this going".
+          Clerk holds accounts, Stripe holds subscriptions, and reading either
+          alone gave a number that looked like customers and was not: six
+          accounts against one real payer. Every step below is on one line, in
+          the order a person actually moves through it, so there is nothing
+          left to cross-reference.
+        */}
+        <Section title="How it's going">
+          <div className="flex flex-wrap gap-8">
+            <Stat
+              label="Accounts"
+              value={signups === null ? "—" : String(signups)}
+            />
+            <Stat
+              label="Reached checkout"
+              value={
+                revenue ? String(revenue.members + abandoned.length) : "—"
+              }
+            />
+            <Stat
+              label="Paying"
+              value={revenue ? String(revenue.paying) : "—"}
+            />
+            <Stat
+              label="MRR"
+              value={revenue ? formatCents(revenue.mrrCents) : "—"}
+            />
+          </div>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-stone">
+            An account is free and costs nothing to make, so &ldquo;accounts&rdquo;
+            will always be the biggest number here and is not a measure of
+            anything on its own. The step that matters is the one from
+            checkout to paying.
+          </p>
+
+          {abandoned.length > 0 && (
+            <>
+              <p className="mt-6 text-xs uppercase tracking-[0.14em] text-stone-dim">
+                Reached the payment page and stopped
+              </p>
+              <ul className="mt-3 divide-y divide-hairline border-t border-hairline">
+                {abandoned.map((person) => (
+                  <li
+                    key={person.email ?? person.at.toISOString()}
+                    className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3 text-sm"
+                  >
+                    <span className="text-ivory">
+                      {person.email ?? "no email recorded"}
+                    </span>
+                    <span className="text-xs text-stone-dim">
+                      {person.at.toLocaleString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit",
+                      })}
+                      {person.stillOpen && (
+                        <span className="ml-2 text-amber-soft">
+                          still payable
+                        </span>
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-xs leading-relaxed text-stone-dim">
+                Read from Stripe, not Clerk — a Checkout Session keeps the
+                email whether or not the account still exists, so deleting
+                someone from Clerk does not erase the fact that they nearly
+                bought. &ldquo;Still payable&rdquo; means Stripe has not expired
+                that session yet and it could turn into a sale on its own.
+              </p>
+            </>
+          )}
+        </Section>
+
         {/* ---------------------------------------------------------- money */}
         <Section title="Members">
           <div className="flex flex-wrap gap-8">
-            <Stat label="Paying members" value={String(paying)} />
-            <Stat label="MRR" value={`$${mrr}`} />
+            <Stat label="With access" value={String(withAccess)} />
+            <Stat
+              label="Paying"
+              value={revenue ? String(revenue.paying) : "—"}
+            />
+            <Stat
+              label="MRR"
+              value={revenue ? formatCents(revenue.mrrCents) : "—"}
+            />
+            {/* Only shown when there is something to show: a zero "Comped" on a
+                dashboard with no comps is noise. */}
+            {revenue && revenue.comped > 0 && (
+              <Stat label="Comped" value={String(revenue.comped)} />
+            )}
+            {revenue && revenue.trialing > 0 && (
+              <Stat label="On trial" value={String(revenue.trialing)} />
+            )}
+            {revenue && revenue.pastDue > 0 && (
+              <Stat label="Card failing" value={String(revenue.pastDue)} warn />
+            )}
           </div>
+
+          {/* The gap between the headline number and list price, spelled out.
+              This line is the whole reason the section was rewritten: an $8
+              MRR against two members reads like a bug until it says why. */}
+          {revenue &&
+            (revenue.comped > 0 || revenue.discounted > 0) && (
+              <p className="mt-4 text-sm text-stone">
+                {formatCents(revenue.grossCents)} at list price;{" "}
+                {formatCents(revenue.mrrCents)} actually billed.{" "}
+                {revenue.comped > 0 &&
+                  `${revenue.comped} ${revenue.comped === 1 ? "membership is" : "memberships are"} on a 100% coupon and ${revenue.comped === 1 ? "pays" : "pay"} nothing. `}
+                {revenue.discounted > 0 &&
+                  `${revenue.discounted} ${revenue.discounted === 1 ? "is" : "are"} discounted but still paying.`}
+              </p>
+            )}
+
           {members.length === 0 ? (
             <p className="mt-4 text-sm text-stone-dim">
               No membership rows yet.
@@ -161,9 +284,11 @@ export default async function AdminPage() {
             </ul>
           )}
           <p className="mt-4 text-xs text-stone-dim">
-            Stripe is the source of truth; this table is the webhook&rsquo;s
-            projection of it. A number that looks wrong here means the webhook,
-            not the billing.
+            The money is read live from Stripe, net of coupons, with annual
+            plans divided down to a month and trials counted as nothing until
+            they convert. The tier list above it is the webhook&rsquo;s
+            projection, so if the two disagree it is the webhook that is behind,
+            not the billing. A dash means Stripe could not be reached.
           </p>
         </Section>
 

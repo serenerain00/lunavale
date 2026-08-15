@@ -106,7 +106,18 @@ export function TierCard({ tier, held }: TierCardProps) {
           // and checkout as a single continuous path, so a new visitor never
           // lands back here to click again. The tier is validated server-side
           // against the real list, so a hand-edited href can't invent a plan.
+          //
+          // prefetch={false} IS LOAD-BEARING, not a performance tweak. Next
+          // prefetches a Link on hover, and the href is a GET route handler
+          // that CREATES A STRIPE CHECKOUT SESSION — so a prefetch runs the
+          // handler and mints a real session for somebody who has only moved
+          // their mouse. Stripe's own record shows the fingerprint: sessions
+          // created a second apart, hover then click, for every visitor who
+          // reached this button. Nobody was double-charged (only one session
+          // can be paid) but the abandonment figures were roughly doubled,
+          // which is exactly the number this page is judged on.
           <Link
+            prefetch={false}
             href={`/membership/start?tier=${tier.id}`}
             className={`block rounded-full px-5 py-3 text-center text-sm font-medium transition-colors duration-(--duration-quick) ${
               tier.featured

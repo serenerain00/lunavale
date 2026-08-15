@@ -204,14 +204,21 @@ export const BENEFITS: Benefit[] = [
   // 2026-07-29: there is no release-scheduling mechanism anywhere in the
   // codebase, so there was no sense in which anything landed for members
   // first. Put it back when a scene can actually hold a members-only window.
-  {
-    id: "open-world",
-    label: "Walk the locations",
-    detail:
-      "The farmhouse and every public location, explorable room by room.",
-    from: "free",
-    group: "The world",
-  },
+  // "Walk the locations" was here — the farmhouse and every public location,
+  // explorable room by room, offered free. Pulled 2026-08-13 on Melissa's
+  // instruction: the free tier is being narrowed to what she actually promotes
+  // on Instagram, which is trailers and the story overview.
+  //
+  // DELETED rather than moved to `vault`, and the distinction matters. The
+  // world is still genuinely walkable by anyone — lib/content/world.ts is full
+  // of `access: "free"` objects and nothing in WorldExperience gates the tour —
+  // so a LunaVerse row saying "walk the locations" would be charging for
+  // something a visitor already gets. Stopping the advertisement is honest;
+  // claiming it is locked when it is not would be the same lie this table has
+  // had to remove three times already, only pointed the other way.
+  //
+  // The members-only half of the world is already covered by "Locked rooms"
+  // below, which is true and stays.
   {
     id: "locked-rooms",
     label: "Locked rooms",
@@ -252,23 +259,25 @@ export const BENEFITS: Benefit[] = [
   // table has had to stop promising, and the rule is the same each time: a
   // benefits list is a contract, and a row for a room nobody can enter is a
   // lie you are charging for. Put it back with the wall.
-  {
-    id: "bts",
-    label: "Selected behind the scenes",
-    detail: "How a few of the public scenes came together.",
-    from: "free",
-    group: "Behind it",
-  },
+  // "Selected behind the scenes" was here — "How a few of the public scenes
+  // came together", free. Pulled 2026-08-13 with the same instruction, and it
+  // should have gone sooner on its own merits: grep the codebase for this
+  // benefit's id and the ONLY hit was this row. There is no behind-the-scenes
+  // content anywhere in the product, free or otherwise. It was promising
+  // something that has never existed.
+  //
+  // "Between Takes" below is the real behind-it offer, and it is members-only.
   {
     // Replaces the "Creator commentary" line, which promised Melissa talking
     // through the choices scene by scene. That does not exist and was never
-    // made. This is what is actually on the site today: 22 members-only notes
-    // in lib/content/between-takes.ts, on the character pages, with 9 more
-    // open so a visitor can see the register before paying.
+    // made. This is what is actually on the site today: 38 notes in
+    // lib/content/between-takes.ts, 13 of them open so a visitor can see the
+    // register before paying, the rest members-only. They now have a book of
+    // their own at /between-takes as well as sitting on the character pages.
     id: "between-takes",
     label: "Between Takes",
     detail:
-      "The cast's notebook from set — why a beat was played the way it was, and what was happening off camera.",
+      "The notebook that lives on the table at the edge of set — why a beat was played that way, and the notes the three of them leave each other. Still being written.",
     from: "vault",
     group: "Behind it",
   },

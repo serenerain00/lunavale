@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { BenefitTable } from "@/components/membership/BenefitTable";
 import { Questions } from "@/components/membership/Questions";
@@ -7,23 +6,19 @@ import { TierCard } from "@/components/membership/TierCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
-import { catalog } from "@/lib/content/catalog";
 import { journal } from "@/lib/content/journal";
 import { TIERS } from "@/lib/content/membership";
+import { pageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Membership",
   description:
     "Membership opens the locked rooms of Luna's world — the full scene library, the mature cuts, the journals, and how it all gets made. Cancel any time.",
-  alternates: { canonical: "/membership" },
-};
+  path: "/membership",
+});
 
 export default async function MembershipPage() {
   const { tier, active } = await getMembership();
-
-  // Real frames from the real catalog rather than invented marketing art: the
-  // promise on this page and the thing being sold are the same material.
-  const proof = catalog.slice(0, 4);
 
   // Counted, never typed. The pitch below is built out of these, so it cannot
   // still be claiming thirty-nine entries the week after the fortieth goes up.
@@ -69,31 +64,27 @@ export default async function MembershipPage() {
             lands.
           </p>
 
-          {/* Proof, before the price. Four real frames from the catalog. */}
-          <Reveal className="mt-10 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
-            {proof.map((item) => (
-              <div
-                key={item.id}
-                data-reveal-item
-                className="relative aspect-[3/4] overflow-hidden rounded-lg ring-1 ring-hairline"
-              >
-                <Image
-                  src={item.poster}
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 50vw, 25vw"
-                  className="object-cover brightness-90"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-void/80 to-transparent" />
-              </div>
-            ))}
-          </Reveal>
         </section>
 
         {/* ---------------------------------------------------------- tiers */}
+        {/*
+          THE PRICE IS THE FIRST THING NOW (Melissa, 2026-08-13). This slot used
+          to hold four poster frames from the catalog — "proof, before the
+          price". The reasoning was sound and the result was not: somebody who
+          has just pressed a button saying "Read on" has already decided they
+          are interested, and answering that with four more pictures makes them
+          scroll past a screenful of what they have just been looking at to
+          reach the one thing they came for. They have SEEN the images; that is
+          why they clicked. What they cannot see anywhere else is what it costs
+          and what it opens.
+
+          The frames are not missed: the catalog itself is one tap away, the
+          comparison table further down does the detailed version of the same
+          job, and the headline above still carries the emotional argument.
+        */}
         <section
           aria-labelledby="tiers-heading"
-          className="mx-auto w-full max-w-6xl scroll-mt-24 px-5 pt-16 sm:px-8 sm:pt-24"
+          className="mx-auto w-full max-w-6xl scroll-mt-24 px-5 pt-10 sm:px-8 sm:pt-12"
           id="tiers"
         >
           <h2 id="tiers-heading" className="sr-only">
@@ -111,8 +102,22 @@ export default async function MembershipPage() {
                 : "max-w-4xl md:grid-cols-2"
             }`}
           >
+            {/*
+              ON A PHONE THE PAID TIER GOES FIRST. The tiers are listed free →
+              paid, which is the right reading order when they sit side by side
+              and you can take in the whole row at once. Stacked in one column
+              it stops being a comparison and becomes a sequence, and the first
+              thing somebody who just pressed "Read on" meets is the free tier
+              they already have. `order-first` flips that below md only; the
+              desktop row keeps its original left-to-right order.
+            */}
             {TIERS.map((t) => (
-              <TierCard key={t.id} tier={t} held={tier} />
+              <div
+                key={t.id}
+                className={`h-full ${t.featured ? "order-first md:order-none" : ""}`}
+              >
+                <TierCard tier={t} held={tier} />
+              </div>
             ))}
           </Reveal>
 

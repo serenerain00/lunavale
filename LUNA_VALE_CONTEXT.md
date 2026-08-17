@@ -69,8 +69,8 @@ work for him on the farm**, which made it practical.
 > farm every day, and why Luna's mother and sister are two thousand miles from
 > everything that happens to her.
 
-*(Mexico stays what it already was — a flashback to a trip, not a place anyone
-lives.)*
+*(Mexico is a trip, not a place anyone lives — seven days during the
+reconciliation. See "Mexico — seven days" below.)*
 
 ### Who owns what
 *(Canon set by Melissa, 2026-08-03. Load-bearing — it decides who leaves.)*
@@ -435,10 +435,16 @@ front of her, with the only information anybody gives her.
 It also puts Rick a step ahead of his son in a scene where Josh has come
 looking for help, which is the joke of that scene and the reason it lands.
 
-### Mexico — the flashback
-*(Canon set by Melissa, 2026-07-29.)*
+### Mexico — seven days
+*(Canon set by Melissa, 2026-07-29. **MOVED IN TIME by Melissa, 2026-08-17** —
+see the correction below, which changes what this material is for.)*
 
-**Five years into the ten**, Josh took Luna to **Mexico**. He booked it himself.
+Josh took Luna to **Mexico** for **seven days**. He booked it himself.
+
+**It happens AFTER they get back together.** It was originally five years into
+the ten, a flashback sitting before everything else; it is now a trip he takes
+her on during the reconciliation, having spent the six months apart missing her
+and working some things out about himself.
 
 The trip was **good** — properly good. Whatever they had been carrying, they
 put down at the airport and neither of them picked it back up while they were
@@ -446,13 +452,32 @@ there. They got close again. It was romantic. **He treated her the way she
 wanted to be treated**, which is to say the way he had at the start, and it
 **reminded her exactly why she fell in love with him.**
 
-She came home feeling like it had been a **reset**.
+**What Luna responds to in Josh is his passion**, and Mexico is where she gets
+all of it at once: how he touches her, how he kisses her, how he talks to her
+and then actually listens. **He is enormously attentive to her body** and she
+has never been with anyone so invested in her. It is the man she fell in love
+with ten years ago, entire. She still cannot work out how that got lost — and
+in Mexico she finds it again. She is **in love with this man**. At least this
+version of him, which is the qualifier she puts on it herself.
 
-It is the warmest material in the story and it is a **flashback** — it sits
-five years before everything else. That is what makes it useful: it is the
-evidence that the man Josh becomes is not the only man he is, and that when
-Luna gives him another chance she is not being stupid. She has seen this
-version of him. She is trying to get back to Mexico.
+#### What moving it changed
+As a flashback, Mexico was the **evidence Luna had before she decided** — she
+had seen this version of him once, so giving him another chance was not stupid,
+and she was trying to get back to Mexico.
+
+It cannot do that job any more, because she has already chosen him by the time
+the plane lands. It does something sharper instead:
+
+- It is the **proof arriving after the bet**, not before it.
+- It is the **best week of her life happening inside the reconciliation** —
+  which means the reconciliation genuinely worked, for a while, and she has it
+  in her own handwriting.
+- It **raises the fall**. She lands home from the top of the arc straight into
+  him falling asleep in the chair before she has finished telling him about her
+  day. Nothing she is later accused of imagining is imagined.
+
+Anything written about Mexico must not describe it as a flashback, or say she
+is "trying to get back to" it. She got there.
 
 ---
 

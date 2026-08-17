@@ -362,18 +362,25 @@ export const galleries: StillGallery[] = [
 
   /* ---------------------------------------------------------------- Mexico */
   {
-    // The flashback. Five years into the ten, and the warmest material in the
-    // story — see LUNA_VALE_CONTEXT.md.
+    // Seven days, and the warmest material in the story — see
+    // LUNA_VALE_CONTEXT.md.
+    //
+    // NOT A FLASHBACK any more (Melissa, 2026-08-17). This used to be five
+    // years into the ten, and the description said Luna was "trying to get
+    // back to" this week — which was true when the trip predated the breakup
+    // and is now backwards. She is already back with him when the plane lands.
+    // The week is not what she is reaching for; it is what she got, and what
+    // everything after it gets measured against.
     //
     // Gated, but with the first two stills open. That is the shop window
     // Melissa asked for: roughly 10% of the set, real frames rather than a
     // locked wall, and the page states plainly how many more there are.
     id: "josh-luna-beach",
     title: "Mexico",
-    subtitle: "Luna & Josh, five years in",
+    subtitle: "Luna & Josh, seven days",
     description: [
-      "He booked it himself and told her on a Tuesday like it was nothing. Six days, and whatever they had been carrying they put down at the airport and neither of them went back for it.",
-      "This is the week she is trying to get back to. It is the evidence that the man he becomes is not the only man he is — which is exactly what makes everything after it cost so much.",
+      "He booked it himself and told her on a Tuesday like it was nothing. Seven days, weeks after she took him back, and whatever they had been carrying they put down at the airport and neither of them went back for it.",
+      "This is the best week of her life and she knows it while it is happening. It is the proof that the man he becomes is not the only man he is — which is exactly what makes everything after it cost so much.",
     ],
     count: 15,
     gated: true,

@@ -36,8 +36,13 @@
  * previous/next links both read from that order. Insert new entries in place
  * rather than appending.
  *
- * ACCESS: FIVE entries are open and the other forty-nine are not (Melissa,
+ * ACCESS: FIVE entries are open and every other one is not (Melissa,
  * 2026-08-10, cutting the free set down from fourteen).
+ *
+ * The five is the number that matters and it is fixed; the locked count is
+ * not, and is deliberately not written down here. It said "forty-nine" for
+ * long enough to be wrong by thirteen, because every entry added since went
+ * in without anyone thinking to re-count.
  *
  * The five are chosen as an ARC rather than as a sample, because five is too
  * few to be representative and just enough to be a story:
@@ -51,13 +56,18 @@
  *
  * It stops exactly where it starts to get complicated, which is the point: a
  * stranger can read all five, understand the situation completely, and be left
- * with the one question the other forty-nine answer.
+ * with the one question all the locked ones answer.
  *
- * WHAT CAME OUT, and what it cost: both Mexico entries (the strongest writing
+ * WHAT CAME OUT, and what it cost: the Mexico entries (the strongest writing
  * in the free set, now a members' reward), her mother's call, Avery's, the day
- * at work, Josh's father, and the quiet ones. The Mexico pair in particular
- * used to do real work — a visitor read them, liked Josh, and cared more about
- * everything locked. That argument was sound and it lost to a smaller number.
+ * at work, Josh's father, and the quiet ones. Mexico in particular used to do
+ * real work — a visitor read it, liked Josh, and cared more about everything
+ * locked. That argument was sound and it lost to a smaller number.
+ *
+ * There are THREE Mexico entries as of 2026-08-17, not two, and they are no
+ * longer a flashback at the top of the file — see the block above
+ * `the-part-i-forgot`. Nothing about the free five changed; they were already
+ * out of it.
  *
  * Everything with a turn in it — the growing feelings, the lie, the night — is
  * behind the LunaVerse, because that is the story and the story is the product.
@@ -102,49 +112,6 @@ export interface JournalEntry {
 }
 
 export const journal: JournalEntry[] = [
-  /* ------------------------------------------------- five years in: Mexico ---
-   * A FLASHBACK, and the only material in the journal that predates the
-   * breakup — which is why it sits at the top rather than in sequence. The
-   * journal now opens on the best week she ever had with him and then goes
-   * straight to the last box going out the door.
-   *
-   * Both are FREE, per Melissa. They are the strongest free pages in the
-   * product: a visitor reads them, likes Josh, and is then far more invested in
-   * what the locked entries are about. Nothing is withheld here because nothing
-   * needs to be — the whole point is that this week was good.
-   */
-  {
-    id: "mexico-on-the-way",
-    dateline: "Five years in — somewhere over the water",
-    place: "mexico",
-    about: ["luna", "josh"],
-    access: "premium",
-    mature: false,
-    body: [
-      "He booked this himself. Not me — him. He booked it, paid for it, and told me on a Tuesday like it was nothing, and I have been turning that over since the taxi and I cannot get it to sit still.",
-      "Because here is the part I would not say out loud to anybody: I don't know what we're going to be like when we get there. The last few months I have been talking to the back of his head. The shop takes him at six. I have got very good at having whole conversations with a man who is already thinking about a delivery.",
-      "And a week away is an expensive way to find out whether two people still like each other. That is the fear. Not that we'll fight — we don't really fight. That we'll get there and it will be the same two people in a nicer room, and I will have to look straight at it with nothing to do all day but look.",
-      "I am writing this down on the plane so that if it goes well I have to sit here afterwards and admit I was wrong. Which I would like to be. I would very much like to be wrong about this.",
-    ],
-  },
-  {
-    id: "mexico-the-last-night",
-    dateline: "Five years in — the last night, and I don't want to go home",
-    place: "mexico",
-    about: ["luna", "josh"],
-    sceneSlug: "luna-josh-beach",
-    access: "premium",
-    mature: false,
-    body: [
-      "I was wrong. Writing that first, because I said I would.",
-      "He put his phone in the safe on the first morning and never mentioned it once. Not as a gesture, not as a thing I was supposed to notice — he just put it away and left it there for six days. I noticed on the third day and did not say anything either.",
-      "Whatever we were carrying, we put it down at the airport and neither of us went back for it. I keep waiting for the sentence where one of us picks it up again and it hasn't come.",
-      "And he looked at me. That is all it is, in the end. He looked at me and he waited for the ends of my sentences and he laughed at the thing I said about the man with the pelican, and today he took me down to the water and we stayed in it until the light went, and there was nothing else he was doing, nowhere else he was.",
-      "This is the man I met. He was in there the whole time. I don't think he went anywhere — I think we just stopped making room for him.",
-      "So: a reset. That is what this week has been. We go back Thursday and I am taking this with me.",
-      "I want to remember it exactly. In case I need it.",
-    ],
-  },
   /*
     THE REASON, written months before she acts on it. Melissa's canon
     (2026-08-15): Josh loves her almost obsessively AND is obsessed with work,
@@ -1031,6 +998,108 @@ export const journal: JournalEntry[] = [
       "Three sentences. I have taken them apart four times sitting in this truck and they do not add up to anything. Not here — where, then. Complicated by what. I'll talk to you — when.",
       "And the worst of it is I said okay. I stood there in the dark behind a barn and let a man I have known since I was nineteen hand me nothing, and I said okay, and I went and found Josh and rode the ferris wheel.",
       "He is not going to talk to me. I knew it while he was saying it. I don't know how I knew and I am writing it down here so that when he doesn't, I have proof I wasn't surprised.",
+    ],
+  },
+  /* -------------------------------------------------- seven days: Mexico ---
+   * THE TRIP MOVED (Melissa, 2026-08-17), and it moved the whole meaning of
+   * it. Mexico used to be a flashback to five years into the ten, sitting at
+   * the top of this file out of sequence. It is now SEVEN DAYS, and it happens
+   * AFTER they get back together — Josh books it, having spent six months
+   * missing her and working some things out about himself.
+   *
+   * WHY THAT IS NOT A COSMETIC CHANGE. As a flashback, Mexico was the evidence
+   * Luna had in her pocket when she decided to give him another chance: she
+   * had seen this version of him once, so taking him back was not stupid. Run
+   * afterwards, it cannot do that job — she has already chosen him by the time
+   * the plane lands. It does something better and worse instead. It is the
+   * proof arriving AFTER the bet, the best week of her life happening inside
+   * the reconciliation, and it is what makes the next entry cost what it
+   * costs. LUNA_VALE_CONTEXT.md carries the same correction.
+   *
+   * PLACED HERE, immediately before `the-part-i-forgot`, so the trip runs
+   * roughly weeks two and three and they land home into "Three weeks in" —
+   * him asleep in the chair before she has finished telling him about her day.
+   * Mexico is the top of the arc and the drop starts on the page after it.
+   * If Melissa wants it earlier or later, moving this block is the whole job.
+   */
+  {
+    id: "mexico-on-the-way",
+    dateline: "Seven days away — somewhere over the water",
+    place: "mexico",
+    about: ["luna", "josh"],
+    access: "premium",
+    mature: false,
+    body: [
+      "He booked this himself. Not me — him. He booked it, paid for it, and told me on a Tuesday like it was nothing, and I have been turning that over since the taxi and I cannot get it to sit still.",
+      "Because here is the part I would not say out loud to anybody, least of all to him: I have been waiting for the other thing to come back. Weeks of him being exactly who he says he is, and I have spent most of them standing slightly to one side of it, checking.",
+      "That is not fair to him. I know it is not fair to him. It is also the only way I currently know how to be, because you do not get handed back the man you lost and simply take him.",
+      "And a week away is an expensive way to find out whether two people still like each other. That is the fear. Not that we'll fight — we don't really fight. That we'll get there and it will be the same two people in a nicer room, and I will have to look straight at it with nothing to do all day but look.",
+      "I am writing this down on the plane so that if it goes well I have to sit here afterwards and admit I was wrong. Which I would like to be. I would very much like to be wrong about this.",
+    ],
+  },
+  {
+    /*
+      THE PRIVATE ONE. Melissa's brief, 2026-08-17: there was nothing in the
+      journal about what Josh is actually like behind a closed door, and there
+      needed to be — because Luna's attraction to him is not a mystery, it is
+      specific, and the story keeps asking the reader to believe she would take
+      this man back twice.
+
+      What it has to carry: how attentive he is to her body, that he talks and
+      listens, that this is the man she fell in love with ten years ago, that
+      she cannot work out how it got lost, and that she is in love with him —
+      "at least this version", which is the last line and the whole hinge.
+
+      MATURE, and it is the most explicit page in the journal by some way. It
+      carries no content note: `mature` already means sex on this site, and the
+      notes vocabulary is reserved for the things a reader might need warning
+      about rather than for two people who both want to be there. Nothing here
+      is coercive and nothing here is a note's business.
+
+      DRAFT PROSE, unlike `asking-for-less` — this is written to the brief
+      above, not delivered by her. Replace it.
+    */
+    id: "mexico-the-fourth-night",
+    dateline: "The fourth night, and I am writing this one down properly",
+    place: "mexico",
+    about: ["luna", "josh"],
+    access: "premium",
+    mature: true,
+    body: [
+      "I am going to write this one down properly and then be embarrassed about it for the rest of my life, and I have decided I don't care. This book is mine. Nobody is ever reading it.",
+      "Four days in and I have stopped being able to pretend I'm watching any of this from a sensible distance. So. In the order it actually happens.",
+      "He doesn't start where men start. That's the first thing, and I had genuinely forgotten it — not forgotten; I had filed it under things I'd made bigger in my head across ten years. I hadn't. He comes in and he takes his time about the door and the lamp and my hair, and by the time he's anywhere near me I have already been handed twenty minutes of a man deciding that nothing else on this earth is happening tonight.",
+      "He puts his mouth on parts of me nobody has ever bothered with. A shoulder. The inside of an elbow. He'll spend a quarter of an hour at the back of my neck like there is nowhere either of us has to be, and on the first night here I laughed, and he stopped and looked up and asked what — and I couldn't tell him it was because I'd forgotten anyone did that.",
+      "He knows my body better than I do and he has never once been smug about it. He knows what the backs of my knees do. He knows I go quiet before I go loud, and he doesn't take the quiet for a no, because he knows the difference, because he learned it at twenty-eight and never stopped paying attention.",
+      "And he talks. God, he talks. Not a performance — he just says the thing he's thinking about me while he's thinking it, in the same flat calm voice he uses for tractor parts, and it takes me apart every single time and he knows that too.",
+      "And then he asks. That's the part I couldn't explain to anybody. He'll stop in the middle of it and ask me something and actually wait for the answer, and I tell him, and he does it. No negotiation. No wounded silence, nothing to manage afterwards. I have been with men who took a request as a review.",
+      "He keeps the light on. He always has. Not to be watched — to see me. Ten years of that and I have only this week stopped reaching for the switch.",
+      "I have never been with anybody this invested in me. I want that sentence left exactly as blunt as it is. Not this attracted to me. Invested. Like I am the thing he came here to do.",
+      "It's the same thing he has always had. He does everything like that. It is why I fell in love with him watching him rebuild an engine he couldn't afford to break, and it is what I have been quietly starving for, and I did not know how badly until this week.",
+      "What I can't work out — what I have been lying here at two in the morning not working out — is where it went. Nobody took it. There wasn't a year it stopped. It just got given away to other things, one small allocation at a time, until I was the last item on a list he never got to the end of.",
+      "And it's all still here. Every bit of it. It got on the plane with us and it has been in this room all week.",
+      "So: I'm in love with him. Not the memory of him. This one — the one through there getting ice, who has spent four days looking at me like I'm the reason he came.",
+      "At least this version. I've written that and I'm leaving it in, because it's two in the morning and this book gets the true thing. I don't know yet whether this is who he is or who he can be for seven days.",
+      "I know which one I'm about to bet on.",
+    ],
+  },
+  {
+    id: "mexico-the-last-night",
+    dateline: "Seven days away — the last night, and I don't want to go home",
+    place: "mexico",
+    about: ["luna", "josh"],
+    sceneSlug: "luna-josh-beach",
+    access: "premium",
+    mature: false,
+    body: [
+      "I was wrong. Writing that first, because I said I would.",
+      "He put his phone in the safe on the first morning and never mentioned it once. Not as a gesture, not as a thing I was supposed to notice — he just put it away and left it there for six days. I noticed on the third day and did not say anything either.",
+      "Whatever we were carrying, we put it down at the airport and neither of us went back for it. I keep waiting for the sentence where one of us picks it up again and it hasn't come.",
+      "And he looked at me. That is all it is, in the end. He looked at me and he waited for the ends of my sentences and he laughed at the thing I said about the man with the pelican, and today he took me down to the water and we stayed in it until the light went, and there was nothing else he was doing, nowhere else he was.",
+      "This is the man I met. He was in there the whole time. I don't think he went anywhere — I think we just stopped making room for him.",
+      "So this is what it is supposed to be. I have it now in my own handwriting, which means it is not something I invented when I was twenty-eight and have been comparing him to unfairly ever since.",
+      "We go back Thursday and I am taking this with me.",
+      "I want to remember it exactly. In case I need it.",
     ],
   },
   {

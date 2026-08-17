@@ -157,13 +157,13 @@ export const places = [
     blurb: "Lights strung over a field, and nowhere to have a private word.",
   },
   {
-    // Not part of the present-day world — the Mexico trip is a flashback to five
-    // years into the relationship. Filed as its own place so the two journal
-    // entries and the beach material sit somewhere true rather than being
-    // squeezed into "the lake".
+    // Seven days, and NOT a flashback any more (Melissa, 2026-08-17): Josh
+    // books the trip after they get back together. Filed as its own place so
+    // the three journal entries and the beach material sit somewhere true
+    // rather than being squeezed into "the lake".
     id: "mexico",
     label: "Mexico",
-    blurb: "Five years in, and a week that felt like a reset.",
+    blurb: "Seven days, and the best of him, all at once.",
   },
   {
     // Rick's room. Likely to become one room of a larger "Rick's house" once

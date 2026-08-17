@@ -796,7 +796,7 @@ export const videos: Video[] = [
     slug: "luna-josh-beach",
     title: "The Beach",
     synopsis:
-      "Mexico, five years in. A whole evening on the sand and in the water — the week that reminded her why.",
+      "Mexico, weeks after she took him back. A whole evening on the sand and in the water — the week that reminded her why.",
     file: "luna-josh-beach.proxy.mp4",
     poster: "/posters/luna-josh-beach.jpg",
     // 284 -> 285 on 2026-08-17, when the scored cut replaced the one that had

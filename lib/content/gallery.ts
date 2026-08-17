@@ -124,6 +124,90 @@ export const galleries: StillGallery[] = [
     // of the car. Controlling, not violent.
     notes: ["control"],
   },
+  /* ------------------------------------------------ the morning after that */
+  {
+    /*
+      THE MORNING AFTER the set above — she wakes at the lakehouse for the
+      first time without him. Eight frames, and they are ordered as the scene
+      is: two in the present, five in the memory, and one of her alone at the
+      end of it.
+
+      ORDER IS CURATED, NOT CHRONOLOGICAL. The sources are macOS screenshots
+      and their timestamps run 11:09pm to 1:23am in the order Melissa made
+      them, which is not the order they read in. They were renamed 01–08 while
+      staging into stills-src/ so the wall tells the story rather than the
+      production. The one that matters most is 08: it is the LAST frame here
+      and the second-to-last one made — her sitting up alone in the bed after
+      he has gone, which is the sentence the whole set is built around.
+
+      Every `journal` excerpt below is verbatim from `asking-for-less`, which
+      is Melissa's own writing. Nothing here is captioned in an invented voice.
+
+      GATED, with the house's two open frames — and worth knowing that this is
+      the only gated gallery attached to a FREE scene. Everything in these
+      images can be watched by anybody, in motion, for nothing. What is behind
+      the wall is not the moment but the frames: 3220px stills against a 720p
+      stream. Defensible, and stated here so nobody has to reverse-engineer
+      whether it was deliberate. Flip `gated` and `access` if it reads wrong.
+
+      The two open ones are 01 and 02 — both the present tense, her alone.
+      Josh appears for the first time at 03, behind the wall, which is also
+      how the scene is built.
+    */
+    id: "five-more-minutes",
+    title: "Five More Minutes",
+    subtitle: "The first morning without him",
+    description: [
+      "Eight frames from Luna's first morning at the lakehouse alone. She wakes, and the other side of the bed is the first thing she notices.",
+      "What follows is not where she is. It is the farmhouse, and the mornings she used to spend trying to keep Josh in bed a little longer — nothing important, nothing either of them needed to be anywhere for. He would kiss her back like he wanted the same thing. The set ends where those mornings always ended, which is the point she is only now able to see.",
+    ],
+    count: 8,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/five-more-minutes/cover.jpg",
+    feelings: ["distance", "grief"],
+    // The lakehouse, where she wakes up. The middle five frames are the
+    // farmhouse, but a set is filed where it happens, not where it remembers —
+    // same call as the scene.
+    place: "lakehouse",
+    about: ["luna", "josh"],
+    sceneSlug: "luna-josh-bed-flashback",
+    journalEntryId: "asking-for-less",
+    stills: [
+      {
+        journal: {
+          entryId: "asking-for-less",
+          excerpt:
+            "I used to think missing someone meant they had to be gone.",
+        },
+      },
+      {},
+      {
+        journal: {
+          entryId: "asking-for-less",
+          excerpt:
+            "I remember mornings when I would try to keep him in bed. Nothing important. I just wanted him close. Five more minutes. A few kisses.",
+        },
+      },
+      {},
+      {},
+      {},
+      {
+        journal: {
+          entryId: "asking-for-less",
+          excerpt: "He'd kiss me back like he wanted the same thing.",
+        },
+      },
+      {
+        journal: {
+          entryId: "asking-for-less",
+          excerpt: "And then he'd leave anyway.",
+        },
+      },
+    ],
+    access: "premium",
+    mature: true,
+  },
   /* --------------------------------------------------------------- the bar */
   {
     id: "the-bar",

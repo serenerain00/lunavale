@@ -464,6 +464,65 @@ export const videos: Video[] = [
     about: ["luna", "josh"],
   },
   {
+    // Delivered 2026-08-17, and NOT a second cut of Sunday above despite
+    // sharing a bed and a folder name — Melissa's call. The scene is built in
+    // two tenses: she is awake in the present, in colour, and the middle of it
+    // is Josh, graded sepia. The memory is the flashback; the scene is her
+    // having it.
+    //
+    // WHICH TENSE IS WHEN, because everything below depends on it and the
+    // footage alone will not tell you (Melissa, 2026-08-17): the present is
+    // her FIRST MORNING AT THE LAKEHOUSE WITHOUT HIM — she wakes and notices
+    // he is not there — so it sits immediately after luna-josh-break. The
+    // memory is from before it. Her account of the same morning is the
+    // `asking-for-less` journal entry, which is filed in exactly that slot.
+    //
+    // FREE, also her call, and the content supports it — checked end to end at
+    // four-second intervals rather than sampled. Nobody undresses; the whole
+    // flashback is a tank top and a white t-shirt. `mature` for the intimacy
+    // and what she is wearing, and nothing beyond that.
+    //
+    // Free means no `preview` block: previews exist to sell a scene somebody
+    // cannot watch, and this one plays for anyone.
+    //
+    // Source, trim and poster choice are recorded in scripts/import-cuts.sh.
+    slug: "luna-josh-bed-flashback",
+    // APPROVED title (Melissa, 2026-08-17), and not a placeholder like most of
+    // the titles in this file — it is lifted from her own journal entry for
+    // this morning, `asking-for-less`: "Five more minutes. A few kisses."
+    //
+    // It is what she used to ask him for, so on a card it reads as a small
+    // tender thing, and the scene is about what asking for it did to her. The
+    // synopsis below is still a first pass.
+    title: "Five More Minutes",
+    synopsis:
+      "Her first morning at the lake, waking up alone. What comes back are the mornings she used to try to keep him in bed.",
+    file: "luna-josh-bed-flashback.proxy.mp4",
+    poster: "/posters/luna-josh-bed-flashback.jpg",
+    durationSeconds: 130,
+    addedOn: "2026-08-17",
+    access: "free",
+    mature: true,
+    // One tag per tense, and the tenses are on opposite sides of the break:
+    //
+    //   grief     the present. First morning at the lake, the bed empty on his
+    //             side, which is the thing she wakes up and notices.
+    //   distance  the memory. NOT `desire`, which is what the kissing looks
+    //             like and is not what the scene is doing with it — her own
+    //             account of these mornings opens "sometimes I missed him
+    //             while he was still lying next to me". Two people in the same
+    //             room, further apart than they'll admit, is the definition of
+    //             the tag, and it is what the flashback is FOR.
+    feelings: ["distance", "grief"],
+    // The LAKEHOUSE, and not the farmhouse it was first filed under. The
+    // present tense is her first morning there after the night she left, so
+    // this is the same house as `the-night-i-left` and `the-last-box` — the
+    // flashback is the only part set in the farmhouse bed, and `place` names
+    // where a scene happens rather than where it remembers.
+    place: "lakehouse",
+    about: ["luna", "josh"],
+  },
+  {
     // A 90s PUBLIC WINDOW ON AN EXPLICIT SCENE — Melissa, 2026-08-12: "The
     // First Night should have the first 1:30 free to watch. its safe". This is
     // the only explicit scene on the site with a public preview, so the reason

@@ -258,6 +258,53 @@ export const journal: JournalEntry[] = [
       "Nothing bad has ever happened in this house. That is the thing I cannot get past. I have brought the bad thing here myself, and it is in the house now too, and by tomorrow it will be one of the things these rooms remember.",
     ],
   },
+  /*
+    THE FIRST MORNING, and it goes here because `the-night-i-left` ends with
+    her arriving after dark and this is what she wakes up to.
+
+    MELISSA'S OWN WORDS, delivered 2026-08-17 — the body below is verbatim and
+    is NOT draft prose like the entries around it. The banner at the top of
+    this file says to treat every `body` as a first pass to be replaced; this
+    one is the replacement. Only the apostrophes were touched, to match the
+    straight quotes used everywhere else in the file. Do not rewrite it.
+
+    Pairs with luna-josh-bed-flashback, which is the same morning: she wakes,
+    finds his side empty, and goes back to the mornings this entry is about.
+    The entry is what makes the scene legible — nothing in the footage says
+    which bed is the present one or that anybody has left.
+
+    PREMIUM, against a FREE scene, which is the only pairing like it on the
+    site and is deliberate. The free journal set is five entries chosen as an
+    arc (see the top of this file) and adding a sixth would undo that decision
+    for one entry's sake. A visitor watches the whole scene for nothing and
+    then meets the wall at her account of it — which is the membership pitch
+    working the way it is supposed to, on the strength of the writing.
+  */
+  {
+    id: "asking-for-less",
+    dateline: "First morning here, on my own",
+    place: "lakehouse",
+    about: ["josh"],
+    sceneSlug: "luna-josh-bed-flashback",
+    access: "premium",
+    mature: false,
+    body: [
+      "I used to think missing someone meant they had to be gone.",
+      "Josh taught me that isn't true.",
+      "Sometimes I missed him while he was still lying next to me.",
+      "I remember mornings when I would try to keep him in bed. Nothing important. I just wanted him close. Five more minutes. A few kisses. A morning where nothing needed either of us.",
+      "He'd kiss me back like he wanted the same thing.",
+      "And then he'd leave anyway.",
+      "I don't think I understood what those moments were doing to me at the time. Each one seemed too small to be upset about. He had work. He had responsibilities. There was always a perfectly reasonable explanation.",
+      "So I never really blamed him.",
+      "I just started asking for less.",
+      "That's the part I see now.",
+      "Somewhere along the way, I stopped expecting to come first because it hurt less than noticing when I didn't.",
+      "And God, I miss him.",
+      "I miss those mornings.",
+      "But I don't miss wondering how long I had before something else needed him more than I did.",
+    ],
+  },
   {
     id: "the-last-box",
     dateline: "The day the last box went",

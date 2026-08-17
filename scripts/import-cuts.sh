@@ -93,6 +93,40 @@ CUTS=(
   # the scene as a woman sleeping, and anything past ~32s is the flashback and
   # would put Josh on a card that is about her being without him.
   "luna-josh-bed-flashback|stories/luna-flashback-bed/luna-josh-bed-flashback-music.mov|24|129.7"
+  # Mexico. SCORED CUT, swapped in 2026-08-17, and the first entry here for a
+  # scene that was ALREADY LIVE — the beach has been published since July off a
+  # source that predates this manifest.
+  #
+  # The one it replaces was not silent, which is worth stating because every
+  # other swap in this file was: the published proxy measured -28.2 dB, a
+  # normal level. The new master is -16.1 dB mean / -2.5 dB peak, the loudest
+  # mix in the library. So this is a louder, fuller mix over a scene that
+  # already had sound, not a rescue of a mute one.
+  #
+  # NOT just the old picture with music laid over it. Sampled against the
+  # published proxy at matching timestamps: some beats line up frame for frame
+  # and others do not sit in the same place at all, so the edit moved too.
+  #
+  # THE PICTURE COST MORE HERE THAN ANYWHERE ELSE IN THIS FILE. The cut being
+  # replaced came from stories/josh-luna-beach/luna-josh-beach.mp4, which is
+  # 1920x1080 and true 16:9 — the best source any scene had. The scored master
+  # is 1320x804 (1.64), so the beach now pillarboxes slightly in the player
+  # like the wall and the Casey bar do, and its proxy is built from an 804-line
+  # source rather than a 1080-line one. Melissa's call, 2026-08-17, asked for
+  # directly. Worth an export at 16:9 whenever she is back in the timeline —
+  # the old master is still in the folder and this is reversible by pointing
+  # this line back at it.
+  #
+  # Trimmed at 285.0s. The delivered file runs 292.4s and the last 7.3s are
+  # black (blackdetect) — which is nearly the whole of the "8 seconds longer
+  # than the old cut" difference, so the picture is about the same length.
+  #
+  # Poster at 77s: the surf kiss. Chosen to reproduce the beat of the poster
+  # this replaces, which was hand-picked rather than grabbed at the default
+  # 3s, so the card does not change out from under a scene people have already
+  # seen. Frames a few seconds later are stronger and barer, and this one sits
+  # at a permanent ungated URL, so it takes the earlier one.
+  "luna-josh-beach|stories/luna-josh-mexico/luna-josh-mexico-music.mov|77|285.0"
   # Scored mix: -37.5 dB -> -26.8 dB. Runs 2.8s longer than the silent cut.
   "luna-josh-dinner-house|stories/withAudio/copy_A062089B-FB53-461E-BC18-DD0BD3F26458.MOV"
   # NEAR-SILENT (-51 dB). Its only candidate is portrait (1080x1822) and would

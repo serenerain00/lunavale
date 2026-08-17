@@ -799,7 +799,12 @@ export const videos: Video[] = [
       "Mexico, five years in. A whole evening on the sand and in the water — the week that reminded her why.",
     file: "luna-josh-beach.proxy.mp4",
     poster: "/posters/luna-josh-beach.jpg",
-    durationSeconds: 284,
+    // 284 -> 285 on 2026-08-17, when the scored cut replaced the one that had
+    // been up since July. Nearly the same runtime, but not the same file: the
+    // mix is louder (-28.2 dB -> -16.1 dB) and the edit moved in places. See
+    // the note in scripts/import-cuts.sh, including what the swap cost in
+    // picture.
+    durationSeconds: 285,
     access: "premium",
     mature: true,
     preview: {

@@ -8,7 +8,37 @@
  * stays in lib/db.
  */
 
-/** Posts a non-member may leave before the LunaVerse is required. */
+/**
+ * HISTORICAL. Posts a non-member could leave before the LunaVerse was
+ * required, back when the room was free to read.
+ *
+ * Overheard went members-only on 2026-08-03 and the allowance no longer gates
+ * anything — app/overheard/actions.ts checks membership and nothing else. It
+ * survives because the rows it produced are still in the database and
+ * app/admin still reports against it ("how far each free account got"), which
+ * is a question about the past and stays answerable.
+ *
+ * If you are looking for the rule that decides who may post, it is not this.
+ */
+/**
+ * ARCHIVED — Melissa, 2026-08-10. "lets archive the convo wall for now".
+ *
+ * Set false to bring it back; that is the whole switch. Everything else is
+ * intact: the cast thread below, the database table and its rows, the
+ * moderation page, the admin panel. Nothing has been deleted and nothing
+ * needs rebuilding.
+ *
+ * WHY IT WENT. The wall was made members-only on 3 August, and in the week
+ * that followed it took ZERO posts — because it had one member, who is
+ * Melissa. A conversation wall with nobody on it is worse than no wall: it is
+ * a room the site keeps pointing at, and every visitor who follows the sign
+ * finds it empty and learns something true about how many people are here.
+ *
+ * When it comes back it should come back with posting open to free accounts,
+ * so it can fill before it is sold.
+ */
+export const OVERHEARD_ARCHIVED = true;
+
 export const FREE_POST_ALLOWANCE = 3;
 
 /** Longest a single post may be — enough to say something, short enough to read. */
@@ -34,7 +64,7 @@ export const MAX_POST_LENGTH = 900;
  * the visitor posts underneath carry on as normal. Extend by appending; `day`
  * is days after THREAD_START, so nothing already published shifts.
  *
- * DRAFT COPY in their voices, per LUNA_VAULT_CONTEXT.md: Luna interior and
+ * DRAFT COPY in their voices, per LUNA_VALE_CONTEXT.md: Luna interior and
  * self-revising, Tyson almost nothing but it lands, Josh charming and certain
  * he isn't the villain, Rick unkind in a way that is also accurate.
  */

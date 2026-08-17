@@ -13,6 +13,8 @@ export interface NavItem {
 interface MobileNavProps {
   items: NavItem[];
   signedIn: boolean;
+  /** The signed-in address, so a wrong-account session is visible. May be null. */
+  email: string | null;
   showSignIn: boolean;
 }
 
@@ -24,7 +26,12 @@ interface MobileNavProps {
  * site was unreachable and there was no way to sign out at all. A menu holds
  * however many links there turn out to be, which the old approach could not.
  */
-export function MobileNav({ items, signedIn, showSignIn }: MobileNavProps) {
+export function MobileNav({
+  items,
+  signedIn,
+  email,
+  showSignIn,
+}: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const panelRef = useRef<HTMLDivElement>(null);
@@ -99,18 +106,44 @@ export function MobileNav({ items, signedIn, showSignIn }: MobileNavProps) {
               </ul>
             </nav>
 
+            {/*
+              Sign-in is the only way a returning member gets back to what they
+              have paid for, and on a phone this menu is the ONLY place it
+              appears — the header's sign-in link is `hidden md:inline`, and the
+              one prominent button up there says "Read on" and goes to
+              /membership. So it gets a real target and the same weight as the
+              nav above it. It used to be small muted text at the bottom of the
+              panel, which read as a caption rather than the door.
+            */}
             <div className="mt-5 border-t border-hairline pt-5">
               {signedIn ? (
-                <SignOut className="text-sm text-stone transition-colors hover:text-amber" />
+                <>
+                  {/* Which account. On a phone this is the only place it can
+                      be said, and it is the phone where signing in with the
+                      wrong one is easiest — the Google button is one tap and
+                      picks whichever account the device is already holding. */}
+                  {email && (
+                    <p className="mb-2 break-all text-xs text-stone-dim">
+                      Signed in as{" "}
+                      <span className="text-stone">{email}</span>
+                    </p>
+                  )}
+                  <SignOut className="text-sm text-stone transition-colors hover:text-amber" />
+                </>
               ) : showSignIn ? (
                 <Link
                   href="/sign-in"
                   onClick={() => setOpen(false)}
-                  className="text-sm text-stone transition-colors hover:text-amber"
+                  className="flex min-h-11 items-center rounded-full border border-hairline px-4 text-base text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
                 >
                   Sign in
                 </Link>
               ) : null}
+              {!signedIn && showSignIn && (
+                <p className="mt-2.5 text-xs text-stone-dim">
+                  Already a member? This is the way back in.
+                </p>
+              )}
             </div>
           </div>
         </>

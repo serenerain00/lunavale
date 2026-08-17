@@ -143,3 +143,92 @@ CREATE TABLE IF NOT EXISTS help_messages (
 
 CREATE INDEX IF NOT EXISTS help_messages_open_idx
   ON help_messages (created_at DESC) WHERE handled = false;
+
+-- ---------------------------------------------------------------------------
+-- Survey — what people think of it, and what they want it to be.
+--
+-- Open to everyone, account or not (see lib/content/survey.ts): the audience
+-- worth measuring is the one that has watched a fragment on Instagram and has
+-- an opinion and no reason to sign up.
+--
+-- COLUMNS RATHER THAN A JSON BLOB. Every question here is one Melissa wants to
+-- count — how many said series, how many said day one — and counting is what
+-- SQL is for. A JSONB blob would make adding a question free and every single
+-- read afterwards a chore. Adding a question later is a migration, and that is
+-- the right trade for six questions that are not going to churn.
+--
+-- Answers are stored as the OPTION IDS from lib/content/survey.ts, never the
+-- labels, so the wording can be rewritten without orphaning what people said.
+CREATE TABLE IF NOT EXISTS survey_responses (
+  id              BIGSERIAL PRIMARY KEY,
+
+  -- The three required ones.
+  enjoyment       TEXT        NOT NULL,
+  format          TEXT        NOT NULL,
+  would_watch     TEXT        NOT NULL,
+
+  -- Optional. A scene slug from lib/content/videos.ts; null if nothing has
+  -- stayed with them yet, which is itself worth knowing.
+  favourite_scene TEXT,
+  -- Multi-select, so an array. Empty rather than null when they picked none.
+  wants           TEXT[]      NOT NULL DEFAULT '{}',
+  comment         TEXT,
+
+  -- Clerk user id when they were signed in, so a member's answer can be read
+  -- next to their membership. Null for everybody else, which will be most.
+  user_id         TEXT,
+
+  -- One answer per browser. NOT security — a private window defeats it, and it
+  -- is meant to: this stops an honest person answering twice by accident, not
+  -- a determined person voting a hundred times. If that ever starts happening
+  -- the fix is a real one, not a longer cookie.
+  client_token    TEXT        NOT NULL UNIQUE,
+
+  created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS survey_responses_recent_idx
+  ON survey_responses (created_at DESC);
+
+-- ---------------------------------------------------------------------------
+-- Scene comments — what somebody thought, said at the moment they finished it.
+--
+-- NOT A PUBLIC COMMENT THREAD, and the form says so in as many words. These go
+-- to Melissa and appear on /admin, nowhere else.
+--
+-- That is a deliberate choice rather than a half-built feature. A public
+-- thread under intimate footage on a site run by one person is a moderation
+-- job that arrives whether or not anybody has time for it, and the first
+-- abusive post is live until she happens to look. Private feedback gets her
+-- the thing she asked for — what people think, per scene — with none of that,
+-- and going public later is additive: this table already holds the text.
+--
+-- No account required, same reasoning as help_messages: the people most worth
+-- hearing from here are the ones who arrived from Instagram and have no login.
+CREATE TABLE IF NOT EXISTS scene_comments (
+  id           BIGSERIAL PRIMARY KEY,
+
+  -- Slug from lib/content/videos.ts. Not a foreign key — the catalog lives in
+  -- TypeScript, and a comment should survive a scene being renamed or pulled
+  -- rather than vanishing with it.
+  scene_slug   TEXT        NOT NULL,
+
+  body         TEXT        NOT NULL,
+
+  -- Clerk user id when they happened to be signed in. Usually null.
+  user_id      TEXT,
+  -- Whether they could watch the whole thing or only the public preview, at
+  -- the moment they wrote it. "This ended too soon" from someone who saw sixty
+  -- seconds means something different from the same words after 3:25.
+  was_member   BOOLEAN     NOT NULL DEFAULT false,
+
+  -- Melissa marks it read rather than deleting it, same as Overheard and help.
+  handled      BOOLEAN     NOT NULL DEFAULT false,
+
+  created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS scene_comments_recent_idx
+  ON scene_comments (created_at DESC);
+CREATE INDEX IF NOT EXISTS scene_comments_scene_idx
+  ON scene_comments (scene_slug, created_at DESC);

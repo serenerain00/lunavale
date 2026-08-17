@@ -1,12 +1,15 @@
 /**
- * Overheard storage — the public wall.
+ * Overheard storage — the members' wall.
  *
- * Reading is open. Posting needs a free account, and a non-member gets
- * FREE_POST_ALLOWANCE posts before the LunaVerse is required to keep talking.
+ * Reading and posting both require the LunaVerse (2026-08-03). It was a public
+ * wall with a three-post allowance for anyone with a free account; the rows
+ * from that period are still here, and `postCountForUser` still serves
+ * app/admin's report on them.
  *
- * The allowance is counted per Clerk user, not per browser: a cookie counter is
- * defeated by a private window, and tying it to a person also means every
- * poster has an email address attached.
+ * Posts are keyed to a Clerk user rather than a browser, which was originally
+ * about making the allowance survive a private window. It still matters for a
+ * different reason: every poster has a real identity and an email behind their
+ * name on the wall.
  *
  * Guarded on DATABASE_URL like lib/db/memberships.ts — with no database the
  * wall reads as empty and posting reports itself unavailable, rather than

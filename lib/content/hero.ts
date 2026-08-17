@@ -18,22 +18,47 @@
 import { getVideo, type Video } from "@/lib/content/videos";
 
 /**
- * The rotation, in order. Sequenced so consecutive days look different:
- * warm night interior, warm day interior, cool night exterior, green day
- * exterior. A visitor who comes back tomorrow should not think the page is
- * broken, or that it never changes.
+ * The pool the hero is drawn from.
+ *
+ * FREE SCENES, OR PREMIUM ONES WITH A PUBLIC PREVIEW, and `heroes()` enforces
+ * it rather than trusting this list.
+ *
+ * The rule started out as free-only (Melissa, 2026-08-05). The rotation had
+ * been luna-tyson-bar, luna-josh-kitchen-kiss and ty-luna-farm-road — all
+ * three PREMIUM — so the front page led with footage a visitor could not
+ * watch, under a play button that opened a locked door. That is the worst
+ * possible first impression on a page whose whole job is to make somebody
+ * want in.
+ *
+ * What changed on 2026-08-06 is that premium scenes got real previews. The
+ * objection was never "premium" — it was the locked door, and a scene with a
+ * preview does not have one: the play button lands on a page that plays a
+ * genuine minute of the scene. So the test is now the door rather than the
+ * price, which is why it reads `!video.preview` and not `access !== "free"`.
+ * A premium scene with NO preview is still excluded, and still would be.
+ *
+ * Loops are built by scripts/make-hero-loop.sh, which crops every one to
+ * exactly 1280x720, so "widescreen" is guaranteed by construction and not by
+ * anyone remembering. Adding a hero is: add a line there, run it, add the slug
+ * here.
  *
  * Every slug must exist in lib/content/videos.ts and have a matching pair of
- * files under public/hero/. `heroesWithScene()` drops any that don't, so a
- * half-finished addition degrades to a shorter rotation rather than a broken
- * page or a 404 background.
+ * files under public/hero/. `heroes()` drops any that don't, so a half-finished
+ * addition degrades to a shorter pool rather than a broken page.
  */
 export const HERO_SLUGS: string[] = [
-  "luna-tyson-bar",
-  "luna-josh-kitchen-kiss",
-  // "ty-luna-lake-fight" sat here — pulled 2026-07-27 while the scene is
-  // recut. Re-add once the new cut has a loop under public/hero/.
-  "ty-luna-farm-road",
+  "interview",
+  "luna-josh-fair",
+  "luna-josh-coffee",
+  "luna-cathy-phone",
+  "luna-tyson-dance",
+  "luna-avery-ipad",
+  "josh-tyson-barn",
+  "josh-luna-bolt",
+  // The first members-only scene in the rotation (Melissa, 2026-08-09: "I just
+  // want people to have a sneak peek"). Allowed by the preview rule above —
+  // its play button opens a page that plays the first minute for anybody.
+  "luna-tyson-casey-bar",
 ];
 
 export interface Hero {
@@ -54,76 +79,62 @@ export interface Hero {
 }
 
 /**
- * When set, this slug is shown as the hero always, overriding the daily
- * rotation — used to feature one piece (the cast interview). Its loop and
- * poster live at /hero/<slug>.{mp4,jpg} like any hero, and its `video` is the
- * full thing (played inline). Set to null to return to the daily rotation.
+ * The interview used to be PINNED here, overriding the rotation entirely — so
+ * the front page showed the same thing to everybody, every day. It is now just
+ * one of the pool, and still plays inline when it comes up (see `playInline`).
  */
-const PINNED_HERO_SLUG: string | null = "interview";
+const PLAY_INLINE_SLUGS = new Set(["interview"]);
 
-/** One full turn of the rotation. */
-export const HERO_ROTATION_MS = 24 * 60 * 60 * 1000;
+/* The daily-rotation clock lived here: HERO_ROTATION_MS and a 7-hour offset
+ * that moved the changeover to overnight in the US so a full local day showed
+ * one hero. Removed 2026-08-05 with the rotation itself — the hero is shuffled
+ * per request now, so there is no changeover to schedule and nothing to keep
+ * two servers agreeing about. `msUntilNextHero` went with it; nothing imported
+ * it. */
 
 /**
- * Shift the changeover off midnight UTC to overnight in the US, the primary
- * audience. 00:00 UTC is 8pm Eastern / 5pm Pacific — mid-evening, so the new
- * hero appears while people are still up and the change reads as "same as I saw
- * earlier." Offsetting 7 hours moves the flip to 07:00 UTC (3am Eastern /
- * midnight Pacific), overnight on both coasts, so a full local day shows one
- * hero and it turns over while nobody's watching.
+ * The pool, with each slug resolved to its scene.
+ *
+ * DROPS ANYTHING THAT ISN'T FREE. This is the guarantee, not the list above: a
+ * premium slug added to HERO_SLUGS by mistake silently does nothing instead of
+ * putting a locked scene on the front page. Unknown slugs are dropped the same
+ * way.
  */
-const ROTATION_OFFSET_MS = 7 * 60 * 60 * 1000;
-
-/** The rotation, with each slug resolved to its scene. Unknown slugs dropped. */
 export function heroes(): Hero[] {
   return HERO_SLUGS.flatMap((slug) => {
     const video = getVideo(slug);
     if (!video) return [];
+    // The door, not the price — see the note on HERO_SLUGS.
+    if (video.access !== "free" && !video.preview) return [];
     return [
       {
         slug,
         video,
         loop: `/hero/${slug}.mp4`,
         poster: `/hero/${slug}.jpg`,
+        ...(PLAY_INLINE_SLUGS.has(slug) ? { playInline: true } : {}),
       },
     ];
   });
 }
 
 /**
- * Today's hero.
+ * The hero for this request — picked at random from the pool.
  *
- * Deterministic from the clock rather than random: the same request has to
- * produce the same hero on every server that handles it, or a visitor
- * refreshing would shuffle the page under themselves and any cached HTML would
- * disagree with the next render. Whole days since the epoch, offset to the US
- * overnight (see ROTATION_OFFSET_MS), modulo the number of heroes — so adding a
- * fifth hero simply makes the cycle five days long.
+ * SHUFFLED, per Melissa (2026-08-05). This replaced a clock-derived daily
+ * rotation, and the trade it makes is worth writing down because the old
+ * comment argued the other side: a refresh now changes the hero. That was
+ * previously treated as a bug ("shuffling the page under themselves"); it is
+ * now the feature. Somebody landing from Instagram twice should see two
+ * different scenes, because the point of the front page is to suggest there is
+ * a lot in here.
+ *
+ * Random is only safe because this page is server-rendered per request. Do not
+ * move the pick into a client component — the server would render one hero and
+ * the client would hydrate a different one.
  */
-export function heroForTime(now: number = Date.now()): Hero | undefined {
-  // A pinned hero overrides the rotation. Its video is played inline.
-  if (PINNED_HERO_SLUG) {
-    const video = getVideo(PINNED_HERO_SLUG);
-    if (video) {
-      return {
-        slug: PINNED_HERO_SLUG,
-        video,
-        loop: `/hero/${PINNED_HERO_SLUG}.mp4`,
-        poster: `/hero/${PINNED_HERO_SLUG}.jpg`,
-        playInline: true,
-      };
-    }
-  }
-
+export function pickHero(): Hero | undefined {
   const all = heroes();
   if (all.length === 0) return undefined;
-  const day = Math.floor((now - ROTATION_OFFSET_MS) / HERO_ROTATION_MS);
-  return all[day % all.length];
-}
-
-/** Milliseconds until the next rotation — used to bound page caching. */
-export function msUntilNextHero(now: number = Date.now()): number {
-  return (
-    HERO_ROTATION_MS - ((now - ROTATION_OFFSET_MS) % HERO_ROTATION_MS)
-  );
+  return all[Math.floor(Math.random() * all.length)];
 }

@@ -103,6 +103,15 @@ const SIGNATURES: Record<PersonId, string> = {
   tyson: "— T",
   josh: "— J",
   rick: "— R",
+  cathy: "— C",
+  avery: "— A",
+  // Cathy already has "— C", so Cole cannot. Initials are not unique across a
+  // growing cast and this record is the place that notices.
+  cole: "— Cole",
+  // Same collision, one letter along: Cathy has "— C" and Cole has "— Cole",
+  // so Casey gets her name too. She has no notes yet — this exists so the
+  // record stays total, which is the whole point of it.
+  casey: "— Casey",
 };
 
 function signature(note: SetNote): string {

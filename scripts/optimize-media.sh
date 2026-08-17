@@ -12,7 +12,8 @@
 #   scripts/optimize-media.sh cover   <event-id> NN  # make gallery card cover from still NN
 #   scripts/optimize-media.sh poster  <slug>         # frame from stories/<slug>.mp4 -> public/posters
 #   scripts/optimize-media.sh video   <slug>         # stories/<slug>.mp4 -> <slug>.proxy.mp4
-#   scripts/optimize-media.sh import  <slug> <src> [at] # cut -> proxy + poster ([at]=poster seconds)
+#   scripts/optimize-media.sh import  <slug> <src> [at] [end] # cut -> proxy + poster
+#                                                     # [at]=poster seconds, [end]=trim trailing black
 #   scripts/optimize-media.sh vertical <slug> <src> [at] # same, for 9:16 portrait cuts
 #   scripts/optimize-media.sh proxy-only <slug> <src> # proxy, NO poster (members' cut)
 #
@@ -159,16 +160,23 @@ case "$cmd" in
     # Everything downstream keys off <slug>, so the proxy lands in stories/
     # root under the standard name and no route or content field needs to know
     # the cut came from a subfolder.
-    slug="${1:?usage: optimize-media.sh import <slug> <source> [poster-seconds]}"
-    src="${2:?usage: optimize-media.sh import <slug> <source> [poster-seconds]}"
+    slug="${1:?usage: optimize-media.sh import <slug> <source> [poster-seconds] [end-seconds]}"
+    src="${2:?usage: optimize-media.sh import <slug> <source> [poster-seconds] [end-seconds]}"
     # A few seconds in clears any fade-up, but some cuts open on a flash-
     # forward or a cutaway that misrepresents the scene on a card. Override
     # per scene rather than shipping a poster that promises the wrong thing.
     at="${3:-3}"
+    # Where the PICTURE ends, when the delivered file runs on past it. Timeline
+    # exports arrive with seconds of trailing black often enough to be worth a
+    # switch: left in, it pads durationSeconds with time nobody is watching and
+    # leaves the player sitting on an empty frame at the end of the scene.
+    # Measure it with `ffmpeg -vf blackdetect` rather than by eye, and record
+    # the number in scripts/import-cuts.sh so the trim is reviewable.
+    end="${4:-}"
     [ -f "$src" ] || die "no source at $src"
 
     out="stories/$slug.proxy.mp4"
-    ffmpeg -y -loglevel error -i "$src" \
+    ffmpeg -y -loglevel error -i "$src" ${end:+-t "$end"} \
       -vf "scale=-2:$PROXY_HEIGHT" \
       -c:v libx264 -preset medium -crf "$PROXY_CRF" -pix_fmt yuv420p \
       -c:a aac -b:a 128k -movflags +faststart \
@@ -178,7 +186,10 @@ case "$cmd" in
       -vf "scale=$CARD_WIDTH:$CARD_HEIGHT:force_original_aspect_ratio=increase,crop=$CARD_WIDTH:$CARD_HEIGHT" \
       -q:v "$STILL_Q" "public/posters/$slug.jpg"
 
-    dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src")
+    # Report the runtime of what was WRITTEN, not of the source — the whole
+    # point of `end` is that those two differ, and durationSeconds is copied
+    # from this line into lib/content/videos.ts.
+    dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$out")
     printf '%-34s proxy %-6s poster %-6s durationSeconds: %.0f\n' \
       "$slug" "$(du -h "$out" | cut -f1)" \
       "$(du -h "public/posters/$slug.jpg" | cut -f1)" "$dur"
@@ -236,7 +247,7 @@ case "$cmd" in
     ;;
 
   *)
-    sed -n '3,18p' "$0"
+    sed -n '3,20p' "$0"
     exit 1
     ;;
 esac

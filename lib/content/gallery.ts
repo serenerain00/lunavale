@@ -91,6 +91,39 @@ export interface StillGallery {
 }
 
 export const galleries: StillGallery[] = [
+  /* ------------------------------------------------------ the night she left */
+  {
+    id: "luna-josh-break",
+    title: "Six Months",
+    subtitle: "The night she left",
+    description: [
+      "Sixty-nine frames from the night Luna finally goes. She packs two bags meaning to drive to the lakehouse, and she calls Tyson before she does it — she already knows Josh will try to stop her.",
+      "Most of what is here is the lakehouse, and that is the ache of it. The lakehouse has never held a bad memory for her. It is her family's: her mother and father, summers, a house that was always loud and always full and always laughing. Tyson has been in it for twenty years. Josh has been in it since she was twenty-eight. She is arriving now for the first time because something went wrong, and every warm room she walks through is one she is remembering rather than living in.",
+    ],
+    count: 69,
+    gated: true,
+    // Two open frames, the house rule for a gated set. They are the shop
+    // window and the only images here that sit at a public URL.
+    freePreviewCount: 2,
+    cover: "/gallery/luna-josh-break/cover.jpg",
+    feelings: ["hurt", "distance"],
+    // The lakehouse, not the farmhouse — the scene STARTS at the farmhouse but
+    // the overwhelming majority of these frames are the lake, which is where
+    // somebody browsing by place would expect to find them.
+    place: "lakehouse",
+    about: ["luna", "josh", "tyson"],
+    sceneSlug: "luna-josh-break",
+    journalEntryId: "the-night-i-left",
+    // `stills` is deliberately omitted for now: it carries per-frame captions
+    // and journal pull-quotes, and inventing sixty-nine of those would be
+    // writing over the top of Melissa's own material. The wall works without
+    // it; captions can be added a frame at a time.
+    access: "premium",
+    mature: true,
+    // Same call as the scene: he blocks her leaving and tries to get her out
+    // of the car. Controlling, not violent.
+    notes: ["control"],
+  },
   /* --------------------------------------------------------------- the bar */
   {
     id: "the-bar",
@@ -129,6 +162,69 @@ export const galleries: StillGallery[] = [
     ],
     access: "premium",
     mature: false,
+  },
+
+  /* ------------------------------------------------------------ gingerale */
+  {
+    // The stills from the funny one. Ordered by capture time, not filename —
+    // the screenshots are named "… at 11.21 AM" and "… at 12.18 PM", which
+    // sort backwards alphabetically and would have run the morning in reverse.
+    //
+    // GATED, even though the SCENE is free. Those are different products: the
+    // forty-seven seconds are the thing that travels and the stills are part
+    // of what a membership is. Two are open, which is the newer pattern, and
+    // this direction is the safe one — a gated set can be opened later, and
+    // "what is free today stays free" means the reverse is not true.
+    id: "gingerale",
+    title: "Ginger Ale",
+    subtitle: "Luna & Tyson",
+    description: [
+      "The morning after, in her kitchen, over a can of Canada Dry — twenty years of friendship doing the only thing it does easily.",
+      "It is the lightest set here, and it is the one that explains why the rest of it costs her so much.",
+    ],
+    count: 11,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/gingerale/cover.jpg",
+    feelings: ["trust", "desire"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-tyson-gingerale",
+    access: "premium",
+    mature: false,
+  },
+
+  /* --------------------------------------------------------------- casey's */
+  {
+    // The same bar as `the-bar`, a different night and a third person in it.
+    // Kept as its own set rather than folded into that one: the-bar is the two
+    // of them alone saying things sideways, and this is what that looks like
+    // when somebody else is standing there.
+    //
+    // ORDERED BY CAPTURE TIME, not filename — the source screenshots are named
+    // "… at 4.13.41 PM" and "… at 11.40.47 PM", which sort backwards
+    // alphabetically and would have run the night in reverse.
+    //
+    // No captions yet. The ones on the-bar are Melissa's voice and the wrong
+    // thing to invent — the set reads fine without them and they can be added
+    // per still whenever she wants.
+    id: "casey-bar",
+    title: "Your Date",
+    subtitle: "Luna, Tyson & Casey",
+    description: [
+      "The same bar, and the first night Luna has walked into it and found somebody else already standing where she stands.",
+      "Casey is a friend from the track. That is the whole of what anybody says out loud, and Luna spends the night deciding whether to believe it — which is not really a question about Casey.",
+    ],
+    count: 31,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/casey-bar/cover.jpg",
+    feelings: ["hurt", "distance"],
+    place: "bar",
+    about: ["luna", "tyson", "casey"],
+    sceneSlug: "luna-tyson-casey-bar",
+    access: "premium",
+    mature: true,
   },
 
   /* -------------------------------------------------------------- the park */
@@ -183,7 +279,7 @@ export const galleries: StillGallery[] = [
   /* ---------------------------------------------------------------- Mexico */
   {
     // The flashback. Five years into the ten, and the warmest material in the
-    // story — see LUNA_VAULT_CONTEXT.md.
+    // story — see LUNA_VALE_CONTEXT.md.
     //
     // Gated, but with the first two stills open. That is the shop window
     // Melissa asked for: roughly 10% of the set, real frames rather than a
@@ -330,6 +426,57 @@ export const galleries: StillGallery[] = [
       { caption: "An hour, and then back to it." },
     ],
     access: "free",
+    mature: false,
+  },
+
+  /* -------------------------------------------------------- the phone call */
+  {
+    // Frames from "Long Distance". The scene itself is free — this is the
+    // model working as intended: the scene brings people in, the stills are
+    // one of the things they get for paying.
+    //
+    // ORDER IS DELIBERATE and not the order the frames were captured in.
+    // 01 is Cathy and 02 is Luna picking up, so the two open previews are one
+    // of each — a visitor sees both ends of the call and neither of them
+    // alone. The set then runs the conversation and finishes on the wide from
+    // behind, which is where she stops taking part.
+    //
+    // Cover is Cathy rather than still 01 by coincidence: she is new, and it
+    // keeps the gallery card from being the same frame as the scene's poster.
+    id: "the-phone-call",
+    title: "The Phone Call",
+    subtitle: "Luna and her mother",
+    description: [
+      "A week after she moved out, and nine days of watching her mother's name come up and putting the phone face down. This is the one she finally answers.",
+      "Two rooms two thousand miles apart, and the distance is in the frames before either of them says anything about it: Cathy surrounded by photographs of all of them, Luna with an entire lake behind her and nobody in the house.",
+    ],
+    count: 8,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/the-phone-call/cover.jpg",
+    feelings: ["grief", "distance"],
+    place: "lakehouse",
+    about: ["luna", "cathy", "josh"],
+    sceneSlug: "luna-cathy-phone",
+    journalEntryId: "my-mother-called",
+    stills: [
+      { caption: "Atlanta. A lamp on, and a shelf of photographs of everybody she can't reach." },
+      { caption: "Nine days of letting it ring." },
+      {},
+      {},
+      {
+        caption: "She has known him ten years and never once from inside the room.",
+        journal: {
+          entryId: "my-mother-called",
+          excerpt:
+            "She isn't wrong about what she heard. He does sound like that. He is hurting. Both of those are true and neither of them is the thing.",
+        },
+      },
+      {},
+      {},
+      { caption: "Thirty seconds of her mother talking, and she is already at the glass." },
+    ],
+    access: "premium",
     mature: false,
   },
 

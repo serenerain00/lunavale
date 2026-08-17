@@ -22,20 +22,45 @@ interface SiteHeaderProps {
  * already resolved it and a second lookup would be waste.
  */
 export async function SiteHeader({ member }: SiteHeaderProps) {
-  const signedIn = await isSignedIn();
+  const { signedIn, email } = await session();
 
+  // Order and membership set by Melissa, 2026-08-10.
   const items: NavItem[] = [
-    // The explorable world is the signature experience, so it leads.
-    { href: "/world", label: "World" },
-    { href: "/browse", label: "Browse" },
-    { href: "/clips", label: "Clips" },
-    { href: "/characters", label: "Cast" },
+    // First, and deliberately so. Most arrivals come off a thirty-second clip
+    // with no idea who these people are, and the rest of this bar assumes they
+    // already know — "Browse" and "Cast" are only useful once you care.
+    { href: "/about", label: "What this is" },
+    // Then her writing, ahead of the video. Free journal pages are the
+    // strongest thing a stranger can be handed, which is why the home page
+    // leads with them too.
     { href: "/journal", label: "Journal" },
-    { href: "/overheard", label: "Overheard" },
-    { href: "/help", label: "Help" },
-    // Members already bought this; showing them the pitch is the kind of
-    // nagging the monetization rules exist to prevent. They get Account.
-    ...(member ? [] : [{ href: "/membership", label: "Membership" }]),
+    { href: "/browse", label: "Browse" },
+    { href: "/characters", label: "Cast" },
+    // NOT NAMED in the reorder and kept rather than assumed away — she asked
+    // for World and Membership to go and said nothing about these two, and
+    // dropping a whole section on inference is not a thing to do quietly.
+    { href: "/clips", label: "Clips" },
+    // ADDED 2026-08-13 with the notebook itself. Not part of the 08-10 reorder
+    // above — a destination with no link in the bar is a destination nobody
+    // finds, which is the exact failure the mobile sign-in link had this
+    // morning. Sits after Clips because it is behind-the-scenes material and
+    // the four above it are the story.
+    { href: "/between-takes", label: "Between Takes" },
+    // Overheard is archived (lib/content/overheard.ts). The link goes with it —
+    // a nav item pointing at a 404 is worse than a missing nav item.
+    // HELP IS MEMBERS-ONLY IN THE NAV now, her call.
+    //
+    // Worth knowing what it trades: /help exists because "someone who cannot
+    // sign in is exactly the person most likely to need help", and that person
+    // no longer has a link to it. The PAGE is still there and still open to
+    // everyone — this hides the signpost, not the door — so anybody who has
+    // the URL, or reaches it from a footer link or an email, still gets
+    // through. If support requests from non-members dry up entirely, this is
+    // why.
+    ...(member ? [{ href: "/help", label: "Help" }] : []),
+    // MEMBERSHIP IS GONE from the nav: the "Become a member" button on the
+    // right of this same bar already goes to /membership, so the old entry was
+    // the same destination twice, four links apart.
   ];
 
   return (
@@ -49,6 +74,7 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
           <MobileNav
             items={items}
             signedIn={signedIn}
+            email={email}
             showSignIn={authConfigured()}
           />
 
@@ -56,7 +82,7 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
             href="/"
             className="whitespace-nowrap font-display text-base font-medium tracking-wide text-ivory sm:text-lg"
           >
-            Luna Vault
+            Luna Vale
           </Link>
 
           {/* The inline nav, from md up. Below that, the menu carries it. */}
@@ -76,7 +102,17 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
         <div className="flex items-center gap-3">
           {authConfigured() &&
             (signedIn ? (
-              <span className="hidden md:inline">
+              <span className="hidden items-baseline gap-3 md:inline-flex">
+                {email && (
+                  // max-w + truncate: a long address must not push the account
+                  // button off a narrow desktop window.
+                  <span
+                    className="max-w-[16ch] truncate text-xs text-stone-dim"
+                    title={email}
+                  >
+                    {email}
+                  </span>
+                )}
                 <SignOut />
               </span>
             ) : (
@@ -99,9 +135,13 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
               "Account"
             ) : (
               <>
-                {/* The full label needs room a phone doesn't have. */}
-                <span className="sm:hidden">Join</span>
-                <span className="hidden sm:inline">Become a member</span>
+                {/* The full label needs room a phone doesn't have.
+                    "Become a member" named the transaction; this names what
+                    they get, which is the whole point of the 2026-08-10
+                    strategy rewrite. Kept short because it is a bar button —
+                    the long-form version of the argument is on /membership. */}
+                <span className="sm:hidden">Read on</span>
+                <span className="hidden sm:inline">Keep reading her</span>
               </>
             )}
           </Link>
@@ -112,11 +152,36 @@ export async function SiteHeader({ member }: SiteHeaderProps) {
 }
 
 /**
- * Whether Clerk has a session. Returns false when Clerk isn't configured, so
- * an unkeyed deploy renders the signed-out header rather than throwing.
+ * Who is signed in, if anyone.
+ *
+ * The EMAIL is the part that earns its keep. Until 2026-08-13 the header knew
+ * only yes-or-no, and showed "Sign out" and nothing else — so a person with
+ * more than one account had no way to tell which one they were in. That is not
+ * a hypothetical: it cost Melissa a day of believing mobile sign-in was broken,
+ * when what was actually happening was that "Continue with Google" on her phone
+ * signed her into a second account of her own that held no membership. Every
+ * door was correctly locked against an account that had bought nothing, and the
+ * UI had no way to say so.
+ *
+ * Returns signed-out when Clerk isn't configured, so an unkeyed deploy renders
+ * the signed-out header rather than throwing.
  */
-async function isSignedIn(): Promise<boolean> {
-  if (!authConfigured()) return false;
-  const { auth } = await import("@clerk/nextjs/server");
-  return Boolean((await auth()).userId);
+async function session(): Promise<{ signedIn: boolean; email: string | null }> {
+  if (!authConfigured()) return { signedIn: false, email: null };
+
+  const { auth, currentUser } = await import("@clerk/nextjs/server");
+  const { userId } = await auth();
+  if (!userId) return { signedIn: false, email: null };
+
+  // A failure here must not take the header — and therefore every page — down
+  // over a decoration. Signed-in with no address still renders correctly.
+  try {
+    const user = await currentUser();
+    return {
+      signedIn: true,
+      email: user?.primaryEmailAddress?.emailAddress ?? null,
+    };
+  } catch {
+    return { signedIn: true, email: null };
+  }
 }

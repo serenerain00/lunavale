@@ -16,9 +16,20 @@ interface VideoPlayerProps {
   slug: string;
   poster: string;
   title: string;
+  /**
+   * Fired when playback reaches the end. The panel it opens lives BELOW the
+   * player rather than over the last frame, which is why this is a callback
+   * to a parent instead of state held in here.
+   */
+  onEnded?: () => void;
 }
 
-export function VideoPlayer({ slug, poster, title }: VideoPlayerProps) {
+export function VideoPlayer({
+  slug,
+  poster,
+  title,
+  onEnded,
+}: VideoPlayerProps) {
   const [failed, setFailed] = useState(false);
   // Changing the key remounts the element, which is the only reliable way to
   // make a <video> re-attempt a source it has already given up on.
@@ -64,6 +75,7 @@ export function VideoPlayer({ slug, poster, title }: VideoPlayerProps) {
       poster={poster}
       aria-label={title}
       onError={() => setFailed(true)}
+      onEnded={onEnded}
     >
       <source src={`/api/stream/${slug}`} type="video/mp4" />
       Your browser does not support the video tag.

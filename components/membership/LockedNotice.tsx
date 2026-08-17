@@ -37,9 +37,15 @@ export function LockedNotice({ cover, subject }: LockedNoticeProps) {
           <LockGlyph />
           Members only
         </span>
+        {/* The space after {subject} is written as an explicit {" "} because a
+            plain one does not survive the build: JSX strips whitespace at the
+            boundary between an expression and the text that follows it, and
+            this rendered as "This set of stillsis part of the LunaVerse" on
+            the live site. Invisible in the source, so it stays explicit. */}
         <p className="max-w-md text-balance leading-relaxed text-ivory">
-          {subject} is part of the LunaVerse — the membership — along with the
-          full scene library, the locked rooms, and Luna&rsquo;s journals.
+          {subject}{" "}
+          is part of the LunaVerse — the membership — along with the full scene
+          library, the locked rooms, and Luna&rsquo;s journals.
         </p>
         <Link
           href="/membership"

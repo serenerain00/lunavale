@@ -62,8 +62,10 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
             about there being nothing left to pay. */}
         {params.started === "1" && active && (
           <Banner tone="good">
-            Your {current.name} membership is active. Everything below is open
-            to you now.
+            {/* Explicit space — a plain one is stripped where the text after
+                an expression wraps. See LockedNotice. */}
+            Your {current.name}{" "}
+            membership is active. Everything below is open to you now.
           </Banner>
         )}
         {params.ended === "1" && !active && (

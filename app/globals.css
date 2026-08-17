@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
-  Luna Vault design tokens.
+  Luna Vale design tokens.
   Palette per docs/ui/DESIGN_SYSTEM.md: near-black, warm charcoal, soft ivory,
   muted stone, a single controlled warm-metallic accent. No neon, no glass.
   Motion tokens mirror docs/interaction/GSAP_SYSTEM.md so CSS and GSAP agree.

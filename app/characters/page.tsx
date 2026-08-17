@@ -10,13 +10,14 @@ import {
   lockedCountFor,
   type Character,
 } from "@/lib/content/characters";
+import { pageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "The Three of Them",
   description:
     "Luna, Tyson and Josh — every scene, still, clip and page filed under each of them, plus the notes they kept on set.",
-  alternates: { canonical: "/characters" },
-};
+  path: "/characters",
+});
 
 export default async function CharactersIndexPage() {
   const { active: member } = await getMembership();

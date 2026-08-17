@@ -119,6 +119,44 @@ export const places = [
     environmentSlug: "downtown",
   },
   {
+    // Her own place in Denver — confirmed by Melissa 2026-08-04. Not new
+    // material so much as a location that was always here and never named: the
+    // "The Apartment" clip has been filed under nothing since it landed and is
+    // plainly the same room.
+    //
+    // Distinct from `downtown`, which is the restaurant and the drive. This is
+    // where she is when the day is over.
+    //
+    // WHAT IS OUTSIDE THE WINDOW IS DELIBERATELY UNSTATED here and in the copy
+    // on the scene. It reads as a lit skyline; Melissa has said she may play it
+    // as her porch instead, and neither the blurb nor the synopsis commits to
+    // either, so that stays her call rather than something the site has already
+    // decided for her.
+    id: "apartment",
+    label: "The Apartment",
+    blurb: "Her own place in Denver, and the hours nobody else sees.",
+  },
+  {
+    // Cole's bar, confirmed his 2026-08-04 — his surname is Burnett and the
+    // sign is on screen. Kept separate from `bar` rather than folded into it:
+    // they are visibly different rooms, and more to the point they do
+    // different jobs. `bar` is where Tyson takes Luna; this is where he goes
+    // when the thing he needs to say is about her.
+    id: "burnetts",
+    label: "Burnett's",
+    blurb: "Cole's place. Where Tyson says the things he can't say to Luna.",
+  },
+  {
+    // No `environmentSlug` — the fair is a night, not a room, and it is the
+    // one place in the world that will not be there next week. Filed as a
+    // place because the scene has to live somewhere true, and folding an
+    // autumn fair into "downtown" would lose the only thing about it that
+    // matters: everybody they know is in one field at the same time.
+    id: "fair",
+    label: "The Fair",
+    blurb: "Lights strung over a field, and nowhere to have a private word.",
+  },
+  {
     // Not part of the present-day world — the Mexico trip is a flashback to five
     // years into the relationship. Filed as its own place so the two journal
     // entries and the beach material sit somewhere true rather than being
@@ -165,6 +203,40 @@ export const people = [
     id: "rick",
     label: "Rick",
     blurb: "Josh's father, and most of the reason Josh is the way he is.",
+  },
+  {
+    // Luna's mother, new on 2026-08-03. Registered ahead of her first scene so
+    // it has somewhere to be filed the moment it lands; renders nowhere until
+    // then, and adding her here does NOT put her on /characters (that page has
+    // its own list) or in Overheard's @ picker (MENTIONABLE is separate).
+    //
+    id: "cathy",
+    label: "Cathy",
+    blurb:
+      "Two thousand miles away in Atlanta, defending a man she only half knows.",
+  },
+  {
+    // Luna's younger sister, named 2026-08-04. Ten years between them, both
+    // ends of the same open door. Still in Atlanta with their mother.
+    id: "avery",
+    label: "Avery",
+    blurb: "Ten years younger, and the only one who doesn't have to ask.",
+  },
+  {
+    // Tyson's oldest friend, added 2026-08-04. Ten years a SEAL beside him,
+    // and the only person who knows about the promise to Josh.
+    id: "cole",
+    label: "Cole",
+    blurb: "The one Tyson talks to when the subject is Luna.",
+  },
+  {
+    // A friend of Tyson's from the track, added 2026-08-09 with her first
+    // scene. Filed as a person because Luna spends that scene deciding who
+    // she is — which makes her someone the story is ABOUT, not set dressing,
+    // whatever she turns out to be to Tyson.
+    id: "casey",
+    label: "Casey",
+    blurb: "A friend from the track, which is all anyone has said so far.",
   },
 ] as const satisfies readonly Person[];
 

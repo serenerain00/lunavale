@@ -89,6 +89,12 @@ public/stills/**
 # committed. Mirrors how story video is handled (stories/**/*.mp4 + Blob).
 /stills-private/**
 
+# Poster frames for members-only takes — same model as the private stills
+# above, and there is no public counterpart to commit at all. The generated
+# manifests under lib/content/takes-data/ ARE committed: they are content data,
+# not media. See scripts/import-takes.sh.
+/takes-private/**
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

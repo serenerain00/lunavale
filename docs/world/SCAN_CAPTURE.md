@@ -1,7 +1,7 @@
 # Capturing Farmhouse Rooms (Photogrammetry)
 
 This guide is for capturing the real farmhouse into 3D scans that drop directly
-into the Luna Vault explorable world. Capture quality is the single biggest
+into the Luna Vale explorable world. Capture quality is the single biggest
 factor in how good the final experience looks — a careful scan looks
 photoreal; a rushed one looks melted. Read this before shooting.
 

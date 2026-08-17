@@ -9,6 +9,12 @@
  */
 
 import { clipAccess, clips, getClip } from "@/lib/content/clips";
+import {
+  allTakeSlugs,
+  getTake,
+  takeFile,
+  TAKES_ACCESS,
+} from "@/lib/content/takes";
 import { getVideo, videos, type AccessLevel } from "@/lib/content/videos";
 
 export interface Streamable {
@@ -23,6 +29,12 @@ export interface Streamable {
    * filename to a client.
    */
   premiumFile?: string;
+  /**
+   * The opening of a members-only piece, served to somebody who may NOT watch
+   * it. See Video.preview — the route falls back to this instead of refusing,
+   * so a visitor gets a real minute of the real scene and then the membership.
+   */
+  previewFile?: string;
 }
 
 export function getStreamable(slug: string): Streamable | undefined {
@@ -33,10 +45,17 @@ export function getStreamable(slug: string): Streamable | undefined {
       file: video.file,
       access: video.access,
       premiumFile: video.premium?.file,
+      previewFile: video.preview?.file,
     };
 
   const clip = getClip(slug);
   if (clip) return { slug, file: clip.file, access: clipAccess(clip) };
+
+  // Raw attempts at a scene's beats. Members-only without exception, and the
+  // file is derived from the slug rather than stored — see lib/content/takes.
+  if (getTake(slug)) {
+    return { slug, file: takeFile(slug), access: TAKES_ACCESS };
+  }
 
   return undefined;
 }
@@ -51,7 +70,11 @@ export function getStreamable(slug: string): Streamable | undefined {
 if (process.env.NODE_ENV !== "production") {
   const seen = new Set<string>();
   const clashes: string[] = [];
-  for (const slug of [...videos.map((v) => v.slug), ...clips.map((c) => c.id)]) {
+  for (const slug of [
+    ...videos.map((v) => v.slug),
+    ...clips.map((c) => c.id),
+    ...allTakeSlugs(),
+  ]) {
     if (seen.has(slug)) clashes.push(slug);
     seen.add(slug);
   }

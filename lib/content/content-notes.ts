@@ -20,7 +20,12 @@
  * one line under a title.
  */
 
-export type ContentNoteId = "violence" | "control";
+export type ContentNoteId =
+  | "violence"
+  | "control"
+  | "panic"
+  | "strangling"
+  | "coercion";
 
 export interface ContentNote {
   id: ContentNoteId;
@@ -28,6 +33,18 @@ export interface ContentNote {
   label: string;
   /** One sentence of detail, for the places that have room for it. */
   detail: string;
+  /**
+   * Rendered in the raised treatment rather than the quiet one — see
+   * ContentNotice. For the small number of notes where a reader who has lived
+   * through the thing being depicted needs to see it without hunting for it.
+   *
+   * This is NOT the alarm styling the rules above rule out. It is the same
+   * amber panel an explicit cut already uses to say so, and it still describes
+   * rather than warns, still has nothing to dismiss, and still lets an adult
+   * read one line and decide. What it does not do is sit in a hairline box the
+   * same weight as "contains a panic attack".
+   */
+  severe?: boolean;
 }
 
 export const CONTENT_NOTES: Record<ContentNoteId, ContentNote> = {
@@ -42,10 +59,45 @@ export const CONTENT_NOTES: Record<ContentNoteId, ContentNote> = {
     detail:
       "This scene includes possessive, controlling or coercive behaviour in a relationship.",
   },
+  // Added 2026-08-05 for the farmhouse confrontation. Both are SEVERE, and
+  // both are deliberately specific: "physical violence" is true of that scene
+  // and tells somebody almost nothing about what is in it. A person who has
+  // been strangled by a partner is owed the actual word, before playback, not
+  // a category that could equally mean a punch thrown in a barn.
+  strangling: {
+    id: "strangling",
+    label: "strangulation",
+    detail:
+      "One character puts a hand around another's throat and holds them against a wall.",
+    severe: true,
+  },
+  coercion: {
+    id: "coercion",
+    label: "sexual coercion",
+    detail:
+      "This scene includes sexual contact that one character does not want and does not consent to.",
+    severe: true,
+  },
+  // Added for the truck drive, which is two unbroken minutes of one. Neither
+  // of the notes above fits it — nothing is done to her on screen and nobody
+  // else is in the frame — and "mature" would tell a viewer to brace for the
+  // wrong thing entirely. Same rule as the rest of this file: it states what
+  // is in the piece, at length, and lets an adult decide.
+  panic: {
+    id: "panic",
+    label: "a panic attack",
+    detail:
+      "This scene shows a character having a prolonged panic attack, in real time.",
+  },
 };
 
 export function getContentNotes(ids: readonly ContentNoteId[] = []): ContentNote[] {
   return ids.map((id) => CONTENT_NOTES[id]).filter(Boolean);
+}
+
+/** True when any of these warrants the raised treatment. See `severe`. */
+export function hasSevereNote(ids: readonly ContentNoteId[] = []): boolean {
+  return getContentNotes(ids).some((n) => n.severe);
 }
 
 /** "physical violence" / "physical violence and controlling behaviour". */

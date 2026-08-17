@@ -4,9 +4,18 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
+import {
+  abandonedCheckouts,
+  revenueSummary,
+  formatCents,
+} from "@/lib/billing/revenue";
 import { membershipSummary } from "@/lib/db/memberships";
 import { allPostsForModeration, posterStats } from "@/lib/db/overheard";
 import { recentHelpMessages } from "@/lib/db/help";
+import { surveyResults, type Tally } from "@/lib/db/survey";
+import { commentCountsByScene, recentSceneComments } from "@/lib/db/comments";
+import { getVideo } from "@/lib/content/videos";
+import { labelFor } from "@/lib/content/survey";
 import { threadRunway, FREE_POST_ALLOWANCE } from "@/lib/content/overheard";
 import { videos } from "@/lib/content/videos";
 import { clips, clipAccess } from "@/lib/content/clips";
@@ -44,13 +53,42 @@ export default async function AdminPage() {
       posterStats(FREE_POST_ALLOWANCE),
       freeAccountCount(),
     ]);
-  const help = await recentHelpMessages(20);
+  const [help, survey, sceneComments, commentCounts, revenue, abandoned] =
+    await Promise.all([
+      recentHelpMessages(20),
+      surveyResults(25),
+      recentSceneComments(30),
+      commentCountsByScene(),
+      revenueSummary(),
+      abandonedCheckouts(),
+    ]);
+  const unreadComments = sceneComments.filter((c) => !c.handled).length;
+
+  // The two numbers Melissa actually wants off this page, pulled out of the
+  // tallies so they can sit at the top as headline stats. "Would watch" counts
+  // day-one and probably together — "if someone I trusted told me to" is a
+  // real answer but it is not a yes, and rolling it in would flatter the
+  // number on the strength of the softest option on the list.
+  const share = (rows: Tally[], ids: string[]) =>
+    survey.total === 0
+      ? 0
+      : Math.round(
+          (rows
+            .filter((r) => ids.includes(r.optionId))
+            .reduce((n, r) => n + r.count, 0) /
+            survey.total) *
+            100,
+        );
+  const wouldWatchPct = share(survey.wouldWatch, ["day-one", "probably"]);
+  const seriesPct = share(survey.format, ["series"]);
   const openHelp = help.filter((h) => !h.handled);
 
-  const paying = members
+  // Head COUNT comes from the local table — it is the access record and it is
+  // one query. Head count is all it can honestly answer: the table stores tier
+  // and status and no amount, so the money below comes from Stripe instead.
+  const withAccess = members
     .filter((m) => ["active", "trialing", "past_due"].includes(m.status))
     .reduce((n, m) => n + m.n, 0);
-  const mrr = paying * 8;
 
   const runway = threadRunway(now);
 
@@ -112,12 +150,125 @@ export default async function AdminPage() {
           </p>
         </header>
 
+        {/* --------------------------------------------------------- funnel */}
+        {/*
+          THE WHOLE POINT OF THIS PANEL is that Clerk and Stripe count
+          different things and neither one answers "how is this going".
+          Clerk holds accounts, Stripe holds subscriptions, and reading either
+          alone gave a number that looked like customers and was not: six
+          accounts against one real payer. Every step below is on one line, in
+          the order a person actually moves through it, so there is nothing
+          left to cross-reference.
+        */}
+        <Section title="How it's going">
+          <div className="flex flex-wrap gap-8">
+            <Stat
+              label="Accounts"
+              value={signups === null ? "—" : String(signups)}
+            />
+            <Stat
+              label="Reached checkout"
+              value={
+                revenue ? String(revenue.members + abandoned.length) : "—"
+              }
+            />
+            <Stat
+              label="Paying"
+              value={revenue ? String(revenue.paying) : "—"}
+            />
+            <Stat
+              label="MRR"
+              value={revenue ? formatCents(revenue.mrrCents) : "—"}
+            />
+          </div>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-stone">
+            An account is free and costs nothing to make, so &ldquo;accounts&rdquo;
+            will always be the biggest number here and is not a measure of
+            anything on its own. The step that matters is the one from
+            checkout to paying.
+          </p>
+
+          {abandoned.length > 0 && (
+            <>
+              <p className="mt-6 text-xs uppercase tracking-[0.14em] text-stone-dim">
+                Reached the payment page and stopped
+              </p>
+              <ul className="mt-3 divide-y divide-hairline border-t border-hairline">
+                {abandoned.map((person) => (
+                  <li
+                    key={person.email ?? person.at.toISOString()}
+                    className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3 text-sm"
+                  >
+                    <span className="text-ivory">
+                      {person.email ?? "no email recorded"}
+                    </span>
+                    <span className="text-xs text-stone-dim">
+                      {person.at.toLocaleString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit",
+                      })}
+                      {person.stillOpen && (
+                        <span className="ml-2 text-amber-soft">
+                          still payable
+                        </span>
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-xs leading-relaxed text-stone-dim">
+                Read from Stripe, not Clerk — a Checkout Session keeps the
+                email whether or not the account still exists, so deleting
+                someone from Clerk does not erase the fact that they nearly
+                bought. &ldquo;Still payable&rdquo; means Stripe has not expired
+                that session yet and it could turn into a sale on its own.
+              </p>
+            </>
+          )}
+        </Section>
+
         {/* ---------------------------------------------------------- money */}
         <Section title="Members">
           <div className="flex flex-wrap gap-8">
-            <Stat label="Paying members" value={String(paying)} />
-            <Stat label="MRR" value={`$${mrr}`} />
+            <Stat label="With access" value={String(withAccess)} />
+            <Stat
+              label="Paying"
+              value={revenue ? String(revenue.paying) : "—"}
+            />
+            <Stat
+              label="MRR"
+              value={revenue ? formatCents(revenue.mrrCents) : "—"}
+            />
+            {/* Only shown when there is something to show: a zero "Comped" on a
+                dashboard with no comps is noise. */}
+            {revenue && revenue.comped > 0 && (
+              <Stat label="Comped" value={String(revenue.comped)} />
+            )}
+            {revenue && revenue.trialing > 0 && (
+              <Stat label="On trial" value={String(revenue.trialing)} />
+            )}
+            {revenue && revenue.pastDue > 0 && (
+              <Stat label="Card failing" value={String(revenue.pastDue)} warn />
+            )}
           </div>
+
+          {/* The gap between the headline number and list price, spelled out.
+              This line is the whole reason the section was rewritten: an $8
+              MRR against two members reads like a bug until it says why. */}
+          {revenue &&
+            (revenue.comped > 0 || revenue.discounted > 0) && (
+              <p className="mt-4 text-sm text-stone">
+                {formatCents(revenue.grossCents)} at list price;{" "}
+                {formatCents(revenue.mrrCents)} actually billed.{" "}
+                {revenue.comped > 0 &&
+                  `${revenue.comped} ${revenue.comped === 1 ? "membership is" : "memberships are"} on a 100% coupon and ${revenue.comped === 1 ? "pays" : "pay"} nothing. `}
+                {revenue.discounted > 0 &&
+                  `${revenue.discounted} ${revenue.discounted === 1 ? "is" : "are"} discounted but still paying.`}
+              </p>
+            )}
+
           {members.length === 0 ? (
             <p className="mt-4 text-sm text-stone-dim">
               No membership rows yet.
@@ -133,24 +284,27 @@ export default async function AdminPage() {
             </ul>
           )}
           <p className="mt-4 text-xs text-stone-dim">
-            Stripe is the source of truth; this table is the webhook&rsquo;s
-            projection of it. A number that looks wrong here means the webhook,
-            not the billing.
+            The money is read live from Stripe, net of coupons, with annual
+            plans divided down to a month and trials counted as nothing until
+            they convert. The tier list above it is the webhook&rsquo;s
+            projection, so if the two disagree it is the webhook that is behind,
+            not the billing. A dash means Stripe could not be reached.
           </p>
         </Section>
 
         {/* ------------------------------------------------------- the room */}
-        <Section
-          title="Overheard"
-          action={{ href: "/account/overheard", label: "Moderate" }}
-        >
+        {/* ARCHIVED 2026-08-10 — the moderation link is gone with it, since
+            that page 404s now. The numbers stay: they are the record of what
+            the room did while it was open, which is the evidence behind
+            archiving it. */}
+        <Section title="Overheard (archived)">
           <div className="flex flex-wrap gap-8">
             <Stat
-              label="Free accounts"
+              label="Accounts"
               value={signups === null ? "—" : String(signups)}
             />
             <Stat label="Have posted" value={String(posters.posters)} />
-            <Stat label="Used all three" value={String(posters.spent)} />
+            <Stat label="Spent the old three" value={String(posters.spent)} />
             <Stat label="Posts" value={String(posts.length)} />
             <Stat label="Showing" value={String(visible.length)} />
             <Stat
@@ -160,9 +314,20 @@ export default async function AdminPage() {
             />
           </div>
           <p className="mt-4 text-xs text-stone-dim">
-            Every account is an email address you own, which is the point of
-            making people sign up to post. &ldquo;Used all three&rdquo; is the
-            number of people the LunaVerse is the next step for.
+            &ldquo;Accounts&rdquo; is every login Clerk holds, members
+            included — it is not a count of people who have not paid.{" "}
+            <strong className="font-normal text-stone">
+              Both of the next two numbers are history now.
+            </strong>{" "}
+            Overheard went members-only on 3 August, so nobody signs up in
+            order to post any more and nobody else will ever spend the old
+            three-post allowance. They describe the people who came through
+            while the wall was public.
+          </p>
+          <p className="mt-2 text-xs text-stone-dim">
+            Which also means new email addresses now only arrive with a
+            payment. There is no longer a step where somebody interested but
+            undecided hands you one.
           </p>
           <p className="mt-2 text-xs text-stone-dim">
             Scripted cast messages run to{" "}
@@ -191,6 +356,159 @@ export default async function AdminPage() {
                 </li>
               ))}
             </ul>
+          )}
+        </Section>
+
+        {/* ------------------------------------------------ scene comments */}
+        <Section title="What they said about the scenes">
+          {sceneComments.length === 0 ? (
+            <p className="mt-1 text-sm text-stone-dim">
+              Nothing yet. The box appears under a scene once somebody has
+              watched it to the end.
+            </p>
+          ) : (
+            <>
+              <div className="flex flex-wrap gap-8">
+                <Stat label="Comments" value={String(sceneComments.length)} />
+                <Stat
+                  label="Unread"
+                  value={String(unreadComments)}
+                  warn={unreadComments > 0}
+                />
+                <Stat
+                  label="Scenes talked about"
+                  value={String(commentCounts.length)}
+                />
+              </div>
+
+              {commentCounts.length > 1 && (
+                <p className="mt-4 text-xs leading-relaxed text-stone-dim">
+                  Most written about:{" "}
+                  {commentCounts.slice(0, 5).map((c, i) => (
+                    <span key={c.sceneSlug}>
+                      {i > 0 && " · "}
+                      <span className="text-stone">
+                        {getVideo(c.sceneSlug)?.title ?? c.sceneSlug}
+                      </span>{" "}
+                      {c.count}
+                    </span>
+                  ))}
+                </p>
+              )}
+
+              <ul className="mt-5 divide-y divide-hairline">
+                {sceneComments.map((c) => (
+                  <li
+                    key={c.id}
+                    className={`py-4 ${c.handled ? "opacity-45" : ""}`}
+                  >
+                    <p className="flex flex-wrap items-baseline gap-x-2 text-sm">
+                      <Link
+                        href={`/watch/${c.sceneSlug}`}
+                        className="font-semibold text-ivory underline decoration-hairline underline-offset-4"
+                      >
+                        {getVideo(c.sceneSlug)?.title ?? c.sceneSlug}
+                      </Link>
+                      <span className="text-xs text-stone-dim">
+                        {c.createdAt.toLocaleString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "2-digit",
+                        })}
+                      </span>
+                      {/* Whether they had seen the whole thing when they
+                          wrote it — it changes what the words mean. */}
+                      <span className="text-[0.6875rem] uppercase tracking-wide text-stone-dim">
+                        {c.wasMember ? "saw all of it" : "preview only"}
+                      </span>
+                    </p>
+                    <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-stone">
+                      {c.body}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </Section>
+
+        {/* --------------------------------------------------------- survey */}
+        <Section title="Survey">
+          {survey.total === 0 ? (
+            <p className="mt-1 text-sm text-stone-dim">
+              No answers yet. The form is at{" "}
+              <Link
+                href="/survey"
+                className="text-amber underline decoration-hairline underline-offset-4"
+              >
+                /survey
+              </Link>
+              .
+            </p>
+          ) : (
+            <>
+              <div className="flex flex-wrap gap-8">
+                <Stat label="Responses" value={String(survey.total)} />
+                <Stat
+                  label="Would watch it"
+                  value={`${wouldWatchPct}%`}
+                  warn={wouldWatchPct < 50}
+                />
+                <Stat label="Want a series" value={`${seriesPct}%`} />
+              </div>
+              <div className="mt-6 grid gap-8 sm:grid-cols-2">
+                <Tallies
+                  heading="How they're finding it"
+                  questionId="enjoyment"
+                  rows={survey.enjoyment}
+                  total={survey.total}
+                />
+                <Tallies
+                  heading="Series or film"
+                  questionId="format"
+                  rows={survey.format}
+                  total={survey.total}
+                />
+                <Tallies
+                  heading="Would you watch it on a platform"
+                  questionId="would_watch"
+                  rows={survey.wouldWatch}
+                  total={survey.total}
+                />
+                <Tallies
+                  heading="Want more of"
+                  questionId="wants"
+                  rows={survey.wants}
+                  total={survey.total}
+                />
+                <Tallies
+                  heading="Stayed with them"
+                  questionId="favourite_scene"
+                  rows={survey.favouriteScene}
+                  total={survey.total}
+                />
+              </div>
+              {survey.comments.length > 0 && (
+                <ul className="mt-8 divide-y divide-hairline border-t border-hairline">
+                  {survey.comments.map((c, i) => (
+                    <li key={i} className="py-4">
+                      <p className="whitespace-pre-line text-sm leading-relaxed text-stone">
+                        {c.comment}
+                      </p>
+                      <p className="mt-1.5 text-xs text-stone-dim">
+                        {c.createdAt.toLocaleString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "2-digit",
+                        })}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
           )}
         </Section>
 
@@ -349,6 +667,58 @@ function Stat({
       <p className="mt-1 text-xs uppercase tracking-[0.1em] text-stone-dim">
         {label}
       </p>
+    </div>
+  );
+}
+
+/**
+ * One question's answers, as counts and bars.
+ *
+ * Percentages are of RESPONDENTS, not of answers, which is why "want more of"
+ * can add up to well over a hundred — it is a multi-select, and "62% of people
+ * want more Luna and Tyson" is the sentence Melissa needs, not "Luna and Tyson
+ * was 24% of all boxes ticked".
+ */
+function Tallies({
+  heading,
+  questionId,
+  rows,
+  total,
+}: {
+  heading: string;
+  questionId: string;
+  rows: Tally[];
+  total: number;
+}) {
+  if (rows.length === 0) return null;
+  return (
+    <div>
+      <p className="text-xs uppercase tracking-[0.1em] text-stone-dim">
+        {heading}
+      </p>
+      <ul className="mt-3 space-y-2">
+        {rows.map((r) => {
+          const pct = total === 0 ? 0 : Math.round((r.count / total) * 100);
+          return (
+            <li key={r.optionId}>
+              <div className="flex items-baseline justify-between gap-3 text-sm">
+                <span className="text-ivory">
+                  {labelFor(questionId, r.optionId)}
+                </span>
+                <span className="shrink-0 tabular-nums text-stone-dim">
+                  {r.count} · {pct}%
+                </span>
+              </div>
+              <div className="mt-1 h-1 w-full rounded-full bg-hairline">
+                <div
+                  className="h-1 rounded-full bg-amber"
+                  style={{ width: `${pct}%` }}
+                />
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

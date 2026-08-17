@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { BenefitTable } from "@/components/membership/BenefitTable";
 import { Questions } from "@/components/membership/Questions";
@@ -7,22 +6,24 @@ import { TierCard } from "@/components/membership/TierCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
-import { catalog } from "@/lib/content/catalog";
+import { journal } from "@/lib/content/journal";
 import { TIERS } from "@/lib/content/membership";
+import { pageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Membership",
   description:
     "Membership opens the locked rooms of Luna's world — the full scene library, the mature cuts, the journals, and how it all gets made. Cancel any time.",
-  alternates: { canonical: "/membership" },
-};
+  path: "/membership",
+});
 
 export default async function MembershipPage() {
   const { tier, active } = await getMembership();
 
-  // Real frames from the real catalog rather than invented marketing art: the
-  // promise on this page and the thing being sold are the same material.
-  const proof = catalog.slice(0, 4);
+  // Counted, never typed. The pitch below is built out of these, so it cannot
+  // still be claiming thirty-nine entries the week after the fortieth goes up.
+  const lockedEntries = journal.filter((e) => e.access === "premium").length;
+  const openEntries = journal.length - lockedEntries;
 
   return (
     <>
@@ -34,41 +35,56 @@ export default async function MembershipPage() {
           <p className="text-xs uppercase tracking-[0.2em] text-amber">
             Membership
           </p>
+          {/* WHY THIS COPY CHANGED (2026-08-10). The old headline — "You've
+              seen the rooms you're allowed into" — is good writing that only
+              works on somebody who has ALREADY walked past a locked door. Most
+              people land here cold, from a link, having seen nothing, and to
+              them it is a sentence about a building.
+
+              What follows it was a FEATURE LIST: library, cuts, journals,
+              locked doors. Nobody subscribes to one show for its feature list.
+              They subscribe because they are in the middle of something and
+              cannot leave it there.
+
+              So the page now leads with the ONE unresolved thing — she is in
+              it right now, and she wrote it all down — and prices the ask
+              against a number, not a bundle. */}
           <h1 className="mt-4 max-w-3xl font-display text-3xl font-light leading-[1.12] text-ivory sm:text-5xl">
-            You&rsquo;ve seen the rooms you&rsquo;re allowed into.
+            She wrote all of it down. You&rsquo;ve read {openEntries} pages.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-stone">
-            Membership opens the rest of the house — the full scene library, the
-            cuts that never go public, Luna&rsquo;s journals, and the locked
-            doors you&rsquo;ve already walked past. It also pays for the next
-            scenes to get made.
+            The other {lockedEntries} are the ones she never meant anybody to
+            see — what she actually thinks about Josh, what she has worked out
+            about Tyson, and the nights she only ever told this book about. They
+            come with the scenes they were written after.
+          </p>
+          <p className="mt-4 max-w-2xl leading-relaxed text-stone-dim">
+            This is happening now. It is being filmed while you read this, it
+            is not finished, and nobody — including her — knows yet how it
+            lands.
           </p>
 
-          {/* Proof, before the price. Four real frames from the catalog. */}
-          <Reveal className="mt-10 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
-            {proof.map((item) => (
-              <div
-                key={item.id}
-                data-reveal-item
-                className="relative aspect-[3/4] overflow-hidden rounded-lg ring-1 ring-hairline"
-              >
-                <Image
-                  src={item.poster}
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 50vw, 25vw"
-                  className="object-cover brightness-90"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-void/80 to-transparent" />
-              </div>
-            ))}
-          </Reveal>
         </section>
 
         {/* ---------------------------------------------------------- tiers */}
+        {/*
+          THE PRICE IS THE FIRST THING NOW (Melissa, 2026-08-13). This slot used
+          to hold four poster frames from the catalog — "proof, before the
+          price". The reasoning was sound and the result was not: somebody who
+          has just pressed a button saying "Read on" has already decided they
+          are interested, and answering that with four more pictures makes them
+          scroll past a screenful of what they have just been looking at to
+          reach the one thing they came for. They have SEEN the images; that is
+          why they clicked. What they cannot see anywhere else is what it costs
+          and what it opens.
+
+          The frames are not missed: the catalog itself is one tap away, the
+          comparison table further down does the detailed version of the same
+          job, and the headline above still carries the emotional argument.
+        */}
         <section
           aria-labelledby="tiers-heading"
-          className="mx-auto w-full max-w-6xl scroll-mt-24 px-5 pt-16 sm:px-8 sm:pt-24"
+          className="mx-auto w-full max-w-6xl scroll-mt-24 px-5 pt-10 sm:px-8 sm:pt-12"
           id="tiers"
         >
           <h2 id="tiers-heading" className="sr-only">
@@ -86,8 +102,22 @@ export default async function MembershipPage() {
                 : "max-w-4xl md:grid-cols-2"
             }`}
           >
+            {/*
+              ON A PHONE THE PAID TIER GOES FIRST. The tiers are listed free →
+              paid, which is the right reading order when they sit side by side
+              and you can take in the whole row at once. Stacked in one column
+              it stops being a comparison and becomes a sequence, and the first
+              thing somebody who just pressed "Read on" meets is the free tier
+              they already have. `order-first` flips that below md only; the
+              desktop row keeps its original left-to-right order.
+            */}
             {TIERS.map((t) => (
-              <TierCard key={t.id} tier={t} held={tier} />
+              <div
+                key={t.id}
+                className={`h-full ${t.featured ? "order-first md:order-none" : ""}`}
+              >
+                <TierCard tier={t} held={tier} />
+              </div>
             ))}
           </Reveal>
 
@@ -99,6 +129,41 @@ export default async function MembershipPage() {
         </section>
 
         {/* --------------------------------------------------------- trust */}
+        {/* --------------------------------------------------- where it goes */}
+        {/* Placed directly after the price, because that is the moment the
+            question occurs to somebody. Stated as a mechanism rather than an
+            appeal: no "help us", no thermometer, no talk of the project being
+            in danger. MONETIZATION.md rules out manufactured urgency, and a
+            story about a woman being pressured is a poor place to start
+            pressuring the audience. */}
+        <section
+          aria-labelledby="funds-heading"
+          className="mx-auto w-full max-w-6xl px-5 pt-20 sm:px-8 sm:pt-28"
+        >
+          <h2
+            id="funds-heading"
+            className="font-display text-2xl font-medium text-ivory sm:text-3xl"
+          >
+            Where the money goes
+          </h2>
+          <div className="mt-3 max-w-2xl space-y-3 leading-relaxed text-stone">
+            <p>
+              There is no studio behind this. It is made independently, on a
+              small budget, by a very small number of people — so a membership
+              is not a subscription to a back catalogue that already exists.
+            </p>
+            <p>
+              It is what pays for the next one to get made: the shoot, the cut,
+              the score, the stills, the hours. Scene by scene, that is the
+              whole mechanism, and there isn&rsquo;t another one.
+            </p>
+            <p className="text-ivory">
+              If you have watched this far and want more of it, that is how
+              more of it happens.
+            </p>
+          </div>
+        </section>
+
         <section
           aria-labelledby="trust-heading"
           className="mx-auto w-full max-w-6xl px-5 pt-20 sm:px-8 sm:pt-28"

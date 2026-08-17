@@ -4,22 +4,19 @@ import { PostForm } from "@/components/overheard/PostForm";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
+import { notFound } from "next/navigation";
 import {
   CAST_TINTS,
-  FREE_POST_ALLOWANCE,
+  OVERHEARD_ARCHIVED,
   landedMessages,
   resolveMention,
 } from "@/lib/content/overheard";
-import {
-  postCountForUser,
-  recentPosts,
-  type OverheardPost,
-} from "@/lib/db/overheard";
+import { recentPosts, type OverheardPost } from "@/lib/db/overheard";
 
 export const metadata: Metadata = {
   title: "Overheard",
   description:
-    "A running thread with Luna, Tyson, Josh and Rick — and anyone else who's watched it. Read free; post three times before the LunaVerse.",
+    "A running thread with Luna, Tyson, Josh and Rick — and everyone else in the LunaVerse. Part of the membership.",
   alternates: { canonical: "/overheard" },
 };
 
@@ -44,16 +41,20 @@ interface PageProps {
 }
 
 export default async function OverheardPage({ searchParams }: PageProps) {
+  // Archived — see OVERHEARD_ARCHIVED. notFound() rather than a "gone" page:
+  // there is nothing to read here while it is off, and a page explaining that
+  // the wall is closed is still a page about an empty wall.
+  if (OVERHEARD_ARCHIVED) notFound();
+
   const [{ active: member }, signedIn, isOwnerViewer] = await Promise.all([
     getMembership(),
     isSignedIn(),
     viewerIsOwner(),
   ]);
-  const [posts, used, params] = await Promise.all([
-    recentPosts(),
-    currentUserPostCount(),
-    searchParams,
-  ]);
+  // No post-count query any more: nobody has a quota to be measured against
+  // since the room went members-only, so that was a database round trip on
+  // every page load to compute a number nothing rendered.
+  const [posts, params] = await Promise.all([recentPosts(), searchParams]);
 
   // The cast's messages and everyone else's, merged into one transcript in the
   // order they landed. Two sources, one thread — which is the point: a
@@ -102,52 +103,147 @@ export default async function OverheardPage({ searchParams }: PageProps) {
             A thread with the four of them.
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
-            Luna, Tyson, Josh and Rick talk here most days. So does anyone else
-            who&rsquo;s watched it — say what you made of it, say what you think
+            Luna, Tyson, Josh and Rick talk here most days. So does everyone
+            else in the LunaVerse — say what you made of it, say what you think
             happens next, or put something straight to one of them.
           </p>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-stone-dim">
-            Anyone can read it. Posting takes a free account and comes with{" "}
-            {FREE_POST_ALLOWANCE}{" "}posts. After that you keep reading for free,
-            and staying in the conversation is part of{" "}
-            <Link
-              href="/membership"
-              className="text-amber underline decoration-hairline underline-offset-4 hover:decoration-amber"
-            >
-              the LunaVerse
-            </Link>{" "}
-            — the $8/month membership. Your name shows on what you write.
+            {member ? (
+              <>Your name shows on what you write.</>
+            ) : (
+              <>
+                The room is part of{" "}
+                <Link
+                  href="/membership"
+                  className="text-amber underline decoration-hairline underline-offset-4 hover:decoration-amber"
+                >
+                  the LunaVerse
+                </Link>{" "}
+                — the $8/month membership. Reading it and writing in it are the
+                same door.
+              </>
+            )}
           </p>
         </header>
 
-        {/* The transcript, oldest first, so the newest sits nearest the box. */}
-        <section aria-label="Messages" className="mt-6">
-          {lines.map((line, i) => (
-            <div key={line.key}>
-              {startsNewDay(lines, i) && <DayDivider at={line.at} />}
-              <Message
-                line={line}
-                answering={line.replyTo ? byKey.get(line.replyTo) : undefined}
+        {/* The room is members-only, reading included. Neither the transcript
+            nor the box is rendered for anybody else — and nothing here is the
+            boundary: the refusal that counts is in actions.ts, on the server,
+            per CLAUDE.md. */}
+        {member ? (
+          <>
+            {/* The transcript, oldest first, so the newest sits nearest the box. */}
+            <section aria-label="Messages" className="mt-6">
+              {lines.map((line, i) => (
+                <div key={line.key}>
+                  {startsNewDay(lines, i) && <DayDivider at={line.at} />}
+                  <Message
+                    line={line}
+                    answering={
+                      line.replyTo ? byKey.get(line.replyTo) : undefined
+                    }
+                  />
+                </div>
+              ))}
+            </section>
+
+            {/* At the bottom, where a chat's box belongs — you read down to
+                the newest thing and then answer it. */}
+            <div className="mt-8">
+              <PostForm
+                signedIn={signedIn}
+                replyingTo={replyingTo}
+                canPostAsCast={isOwnerViewer}
               />
             </div>
-          ))}
-        </section>
-
-        {/* At the bottom, where a chat's box belongs — you read down to the
-            newest thing and then answer it. */}
-        <div className="mt-8">
-          <PostForm
-            signedIn={signedIn}
-            member={member}
-            used={used}
-            allowance={FREE_POST_ALLOWANCE}
-            replyingTo={replyingTo}
-            canPostAsCast={isOwnerViewer}
+          </>
+        ) : (
+          <RoomLocked
+            messageCount={lines.length}
+            postCount={posts.length}
+            lastAt={lines.at(-1)?.at}
           />
-        </div>
+        )}
       </main>
     </>
   );
+}
+
+/**
+ * The closed door.
+ *
+ * It states the size of the room and when somebody last said something, and
+ * shows not one line of it. That split is deliberate on two counts. A visitor
+ * should be able to tell whether there is anything in there worth paying for —
+ * "quiet since March" and "someone posted an hour ago" are different products,
+ * and only one of them is worth £8 — so the numbers are real and are not
+ * rounded up.
+ *
+ * But no message is quoted, not even a teaser. Everything in the transcript
+ * was written by somebody with an account, into what is now a members' room,
+ * and lifting a line of it onto a public page to sell subscriptions would be
+ * using people's words as advertising they never agreed to. The cast's lines
+ * are Melissa's to publish and could honestly be shown; mixing them into a
+ * shop window with real posts is how that line gets blurred, so the wall is
+ * simply closed.
+ *
+ * Per docs/monetization/MONETIZATION.md: one statement, one link, no nag.
+ */
+function RoomLocked({
+  messageCount,
+  postCount,
+  lastAt,
+}: {
+  messageCount: number;
+  postCount: number;
+  lastAt?: Date;
+}) {
+  return (
+    <section
+      aria-label="Members only"
+      className="mt-6 rounded-xl border border-hairline bg-charcoal/40 px-5 py-8 text-center sm:px-8 sm:py-10"
+    >
+      <span className="inline-flex items-center gap-2 rounded-full bg-void/70 px-3.5 py-1.5 text-sm text-amber-soft">
+        Members only
+      </span>
+
+      <p className="mx-auto mt-4 max-w-md text-balance leading-relaxed text-ivory">
+        The room is open to the LunaVerse.{" "}
+        {messageCount > 0 && (
+          <>
+            There {messageCount === 1 ? "is" : "are"} {messageCount}{" "}
+            {messageCount === 1 ? "message" : "messages"} in it
+            {postCount > 0 && (
+              <>
+                , {postCount} of them from people who have watched it
+              </>
+            )}
+            {lastAt && <>, and the last one landed {relative(lastAt)}</>}.
+          </>
+        )}
+      </p>
+
+      <Link
+        href="/membership"
+        className="mt-6 inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+      >
+        See what membership opens
+      </Link>
+    </section>
+  );
+}
+
+/** "an hour ago", "yesterday" — vague on purpose, it is only a liveness signal. */
+function relative(at: Date): string {
+  const mins = Math.max(0, Math.round((Date.now() - at.getTime()) / 60000));
+  if (mins < 60) return "in the last hour";
+  const hours = Math.round(mins / 60);
+  if (hours < 24) return `${hours} ${hours === 1 ? "hour" : "hours"} ago`;
+  const days = Math.round(hours / 24);
+  if (days === 1) return "yesterday";
+  if (days < 30) return `${days} days ago`;
+  const months = Math.round(days / 30);
+  return `${months} ${months === 1 ? "month" : "months"} ago`;
 }
 
 /** True when this line is the first of its calendar day. */
@@ -303,10 +399,9 @@ async function isSignedIn(): Promise<boolean> {
   return Boolean((await auth()).userId);
 }
 
-/** Posts this viewer has used. Zero when signed out — the form handles that. */
-async function currentUserPostCount(): Promise<number> {
-  if (!authConfigured()) return 0;
-  const { auth } = await import("@clerk/nextjs/server");
-  const { userId } = await auth();
-  return userId ? postCountForUser(userId) : 0;
-}
+/* `currentUserPostCount` lived here, counting a viewer's posts against the
+ * three-post allowance. Removed 2026-08-03 with the allowance itself — see
+ * FREE_POST_ALLOWANCE in lib/content/overheard.ts for why the constant stays
+ * even though nothing gates on it. lib/db/overheard.ts still exports
+ * `postCountForUser`; app/admin uses it to report on the accounts that were
+ * subject to the old rule. */

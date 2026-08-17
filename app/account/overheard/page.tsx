@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { OVERHEARD_ARCHIVED } from "@/lib/content/overheard";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
@@ -26,6 +27,8 @@ export const dynamic = "force-dynamic";
  * unlimited allowance.
  */
 export default async function ModeratePage() {
+  if (OVERHEARD_ARCHIVED) notFound();
+
   if (!authConfigured() || !(await isOwner())) notFound();
 
   const [{ active: member }, posts] = await Promise.all([

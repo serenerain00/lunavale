@@ -26,6 +26,14 @@ stills
 stills-src
 public/stills
 
+# Poster frames for the members-only takes. Same private-Blob model again —
+# and the reason is sharper here than anywhere else: these are frames from
+# every FAILED attempt at a shot. Shipped to /public they would be permanent,
+# ungated URLs for exactly the material the membership sells, and the most
+# openly-AI imagery in the product. The take video itself is under stories/,
+# already excluded above. See scripts/import-takes.sh.
+takes-private
+
 # Large room-capture binaries, hosted out of band.
 public/scans
 public/panos

@@ -49,6 +49,20 @@ export function stillBlobPathFor(
   return `stills/${gallery}/${stillFileName(n, size)}`;
 }
 
+/**
+ * Poster frame for a take. Takes follow the same private model as members-only
+ * stills: on disk under `takes-private/<scene>/`, in PRIVATE Blob under
+ * `takes/<scene>/`, and reachable only through the gated /api/take route.
+ *
+ * A take's frame is exactly as members-only as the take. Putting these in
+ * /public would publish a still from every failed attempt at a permanent URL,
+ * which is both the thing the membership sells and the most openly-AI imagery
+ * in the product. See scripts/import-takes.sh.
+ */
+export function takePosterBlobPathFor(scene: string, slug: string): string {
+  return `takes/${scene}/${slug}.jpg`;
+}
+
 export function blobConfigured(): boolean {
   return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 }

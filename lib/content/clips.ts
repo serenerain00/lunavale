@@ -74,9 +74,14 @@ export const clips: Clip[] = [
     id: "run-at-the-lake",
     title: "Run",
     caption: "Six miles, headphones in, nobody to talk to. Her favourite hour.",
+    // Trimmed 2026-08-10 at 100.5s, from 103.7. What came off was 1.0s of
+    // black and 1.8s of screen-recorded editing-app UI that had ridden along
+    // on the export. Her end card is untouched, and the audio had already
+    // faded to digital silence by 100.6 — so the cut needed no fade and the
+    // trim is a stream copy, with no re-encode and no quality lost.
     file: "run-at-the-lake.proxy.mp4",
     poster: "/posters/run-at-the-lake.jpg",
-    durationSeconds: 104,
+    durationSeconds: 101,
     about: ["luna"],
     // The one clip in the set that isn't intimate. Flagging a woman going for
     // a run as mature would drain the label of the meaning it needs to carry

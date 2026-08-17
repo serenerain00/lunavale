@@ -42,33 +42,36 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-08-03:
+As built, 2026-08-17:
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 8 | 62 | 40 |
-| Tyson | 9 | 53 | 42 |
-| Josh | 11 | 49 | 30 |
-| Rick | 1 | 2 | 1 |
+| Luna | 12 | 98 | 73 |
+| Tyson | 12 | 74 | 61 |
+| Josh | 14 | 76 | 59 |
+| Rick | 1 | 4 | 2 |
+| Cathy | 0 | 5 | 4 |
+| Avery | 0 | 3 | 2 |
 
-**Josh is still the thinnest of the three leads** and is the one who benefits
-most from more. He is the hardest character to hold an audience's sympathy for,
-the whole story depends on him being genuinely likeable before he turns, and he
-has the fewest pieces making that case.
+**Josh is no longer the thinnest.** The notebook rewrite and the new scenes
+changed the picture: he now has the most notes of anyone and sits second on
+total pieces. The sympathy problem he was thin on is well covered.
 
-**Rick is the thinnest full stop** — two pieces, one of them his intro. He is
-the explanation for Josh, so every piece he gets pays out twice. The constraint
-is that he appears in exactly one scene, and both notes on it are written, so
-the next Rick piece has to be place-only or a `characters.ts` revision.
+**The thin ones now are Rick, Cathy and Avery.** Rick has one note against four
+pieces; Cathy and Avery have none at all. Rick is still the explanation for
+Josh, so every piece he gets pays out twice — and he is no longer boxed in, because
+`josh-rick-lake` is a second scene he appears in with no note on it.
 
 Standing backlog, roughly prioritised:
 
-- ~~Josh notes on the scenes he is in that have none yet~~ — done 2026-08-03;
-  every scene Josh is in now carries a note
-- A second Rick piece; no scene left to hang it on, so place-only or an intro
-  revision
-- `luna-tyson-dance` has no note from either of them — the only scene left with
-  none, and it is free, so a note on it is a shop window rather than a spoiler
+- A Rick note on `josh-rick-lake` — his second scene, and the constraint that
+  previously blocked him (one scene, both notes written) is gone
+- First notes for Cathy and Avery, who have none
+- Josh scenes added since the rewrite that carry no note: `luna-josh-break`,
+  `luna-josh-bed-flashback`, `luna-josh-first-night`, `josh-luna-wall`,
+  `luna-josh-fair`
+- `luna-tyson-dance` still has no note from either of them — it is free, so a
+  note on it is a shop window rather than a spoiler
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none
 - Notes on the clips; only `run-at-the-lake` has one
@@ -83,4 +86,4 @@ not a changelog.
 | Week of | What shipped | Who |
 | --- | --- | --- |
 | 2026-07-28 | Character hubs built; 24 Between Takes notes (8 each), 7 free | all three |
-| 2026-08-03 | Between Takes: "He doesn't know yet" — Mexico, `luna-josh-beach` | Josh |
+| 2026-08-03 | Between Takes: "I don't know yet" — Mexico, `luna-josh-beach` | Josh |

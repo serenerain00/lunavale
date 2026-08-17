@@ -17,6 +17,7 @@
  * is the one thing docs/monetization/MONETIZATION.md rules out outright.
  */
 
+import { cache } from "react";
 import { cookies } from "next/headers";
 import {
   getTier,
@@ -52,8 +53,18 @@ export interface Membership {
  * asks Clerk who this is and the database what they bought; until then it
  * falls back to the preview cookie, so a half-configured deploy keeps working
  * instead of locking everybody out of a live site.
+ *
+ * MEMOISED PER REQUEST with React `cache()`, which is a real cost fix rather
+ * than tidiness. Pages routinely ask this question more than once while
+ * rendering — `Promise.all([canWatch(video), isMember()])` is the standard
+ * shape, and every gated page uses it — and each call was reaching Neon for
+ * the same row. Two database round trips, per page, to answer one question.
+ *
+ * The cache lasts exactly one request, so nothing about the security model
+ * changes: entitlement is still resolved server-side, still per visitor, and
+ * a membership bought mid-session is still picked up on the next navigation.
  */
-async function readTier(): Promise<TierId> {
+const readTier = cache(async function readTier(): Promise<TierId> {
   // Checked first so the member experience stays reviewable even once real
   // billing is live. Does nothing in production without PREVIEW_SECRET.
   const previewing = await previewTier();
@@ -82,7 +93,7 @@ async function readTier(): Promise<TierId> {
   if (raw === "1") return PREMIUM_TIER;
 
   return getTier(raw)?.id ?? "free";
-}
+});
 
 export async function getMembership(): Promise<Membership> {
   const [tier, previewing] = await Promise.all([readTier(), previewTier()]);

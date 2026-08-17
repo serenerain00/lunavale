@@ -38,8 +38,17 @@ cd "$(dirname "$0")/.."
 # Those keep their existing, higher-resolution sources — re-pointing them at a
 # screen recording would cost picture quality and gain nothing.
 #
-# slug|source path|poster seconds (optional, default 3)
+# slug|source path|poster seconds (optional, default 3)|end seconds (optional,
+#                                    trims trailing black; default = whole file)
 CUTS=(
+  # The night she leaves — 5:44, and already scored. Note the crossed names:
+  # the folder is josh-luna-break, the cut inside it is luna-josh-break.mp4,
+  # and the slug follows the CUT because that is what Melissa calls it.
+  #
+  # Poster at 25s: the two of them in profile under the lamp, before any of it
+  # has happened. The opening eleven seconds are Josh alone in a hallway, which
+  # on a card reads as a scene about him.
+  "luna-josh-break|stories/josh-luna-break/luna-josh-break.mp4|25"
   "luna-tyson-bar|stories/luna-tyson-bar/luna-tyson-bar.mp4"
   # Josh and Tyson on the tractor — the two men, no Luna. Poster at 20s,
   # past the sunrise establishing shots and onto the pair working.
@@ -47,9 +56,43 @@ CUTS=(
   # The coffee Josh called about, which restarts everything. Identified from
   # the footage plus the story beat; it had no shooting folder of its own.
   "luna-josh-coffee|stories/withAudio/ScreenRecording_07-12-2026 08-15-54_1.mov|85"
-  # SILENT (-91 dB, digital silence). No match found in withAudio/ — the only
-  # unclaimed cuts are portrait or the wrong length. Needs a scored export.
-  "luna-josh-bed|stories/luna-josh-bed/0715.mp4"
+  # THE SCORED EXPORT ARRIVED (Melissa, 2026-08-13), and this line is why the
+  # note above it is gone. The published cut was stories/luna-josh-bed/0715.mp4
+  # at -91 dB — digital silence, not a quiet mix — and nothing in withAudio/
+  # matched it, so the scene has been streaming mute since it went up.
+  #
+  # The replacement is NOT the same picture with music over it. It runs
+  # 151.8s against 86.3s, so sixty-five seconds of edit are new, and the
+  # source folder is different too (luna-josh-room/, not luna-josh-bed/).
+  # Audio measures -29.4 dB mean / -6.6 dB peak — a real scored mix.
+  #
+  # Poster at 6s: the new cut opens on a slow fade up off black, and a grab at
+  # the default 3s lands on a near-empty frame.
+  "luna-josh-bed|stories/luna-josh-room/luna-josh-bed.mov|6"
+  # Her lying awake, and the night she goes back to. A DIFFERENT SCENE from
+  # luna-josh-bed above, despite the folder name pointing at the same bed —
+  # this one is framed in the present, in colour, with the memory of Josh
+  # graded sepia in the middle of it. Slug says flashback for that reason.
+  #
+  # Two masters were delivered (Melissa, 2026-08-17). Taking the .mov:
+  #   luna-josh-bed-flashback-music.mov  133.5s  1316x802   -26.3 dB  SCORED
+  #   luna-flashback-bed.mp4             127.5s  1920x1080  -39.9 dB  silent
+  # The mp4 is the sharper file and the wrong one — near-silent, and six
+  # seconds shorter, so it is a different edit rather than the same picture
+  # waiting for a soundtrack. Same call as every other scored mix here: the
+  # music is the scene, the pixels are the trade.
+  #
+  # 1316x802 is 1.64, so it pillarboxes slightly in the 16:9 player — between
+  # the wall's 1.61 and luna-tyson-casey-bar's 1.55, both of which already do.
+  #
+  # Trimmed at 129.7s: delivered with 3.7s of black on the end (blackdetect,
+  # not eyeballed), the same way the Casey cut arrived.
+  #
+  # Poster at 24s: the last of the present-day colour before the memory takes
+  # over — her awake on the pillow. The default 3s is her asleep, which sells
+  # the scene as a woman sleeping, and anything past ~32s is the flashback and
+  # would put Josh on a card that is about her being without him.
+  "luna-josh-bed-flashback|stories/luna-flashback-bed/luna-josh-bed-flashback-music.mov|24|129.7"
   # Scored mix: -37.5 dB -> -26.8 dB. Runs 2.8s longer than the silent cut.
   "luna-josh-dinner-house|stories/withAudio/copy_A062089B-FB53-461E-BC18-DD0BD3F26458.MOV"
   # NEAR-SILENT (-51 dB). Its only candidate is portrait (1080x1822) and would
@@ -97,9 +140,11 @@ wanted() {
 }
 
 for entry in "${CUTS[@]}"; do
-  IFS='|' read -r slug src at <<<"$entry"
+  IFS='|' read -r slug src at end <<<"$entry"
   wanted "$slug" || continue
-  ./scripts/optimize-media.sh import "$slug" "$src" ${at:+"$at"}
+  # `end` needs `at` present to reach the right argument slot, so a line that
+  # trims but takes the default poster frame still has to spell the 3 out.
+  ./scripts/optimize-media.sh import "$slug" "$src" ${at:+"$at"} ${end:+"$end"}
 done
 
 # Proxy only, deliberately no poster — see the note on EXPLICIT_CUTS.

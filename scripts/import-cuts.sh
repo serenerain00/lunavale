@@ -40,6 +40,9 @@ cd "$(dirname "$0")/.."
 #
 # slug|source path|poster seconds (optional, default 3)|end seconds (optional,
 #                                    trims trailing black; default = whole file)
+#      |fade seconds (optional; fade to black with the sound on the same curve,
+#                     applied to the proxy only. Default = no fade, cut ends
+#                     on its last frame.)
 CUTS=(
   # The night she leaves — 5:44, and already scored. Note the crossed names:
   # the folder is josh-luna-break, the cut inside it is luna-josh-break.mp4,
@@ -126,7 +129,17 @@ CUTS=(
   # 3s, so the card does not change out from under a scene people have already
   # seen. Frames a few seconds later are stronger and barer, and this one sits
   # at a permanent ungated URL, so it takes the earlier one.
-  "luna-josh-beach|stories/luna-josh-mexico/luna-josh-mexico-music.mov|77|285.0"
+  #
+  # FADE, 3s, added 2026-08-17 at Melissa's request and the first use of the
+  # field. The scored master stops dead on a held frame with the music still
+  # running, which reads as the file ending rather than the scene ending. Three
+  # seconds is long enough to feel like a decision and short enough not to eat
+  # the last beat: the picture goes at 282.0s, on the two of them in the water,
+  # and the music goes down with it.
+  #
+  # The MASTER is untouched. This lives on the derived copy, so clearing the
+  # field and re-running puts the hard ending back.
+  "luna-josh-beach|stories/luna-josh-mexico/luna-josh-mexico-music.mov|77|285.0|3"
   # Scored mix: -37.5 dB -> -26.8 dB. Runs 2.8s longer than the silent cut.
   "luna-josh-dinner-house|stories/withAudio/copy_A062089B-FB53-461E-BC18-DD0BD3F26458.MOV"
   # NEAR-SILENT (-51 dB). Its only candidate is portrait (1080x1822) and would
@@ -174,11 +187,13 @@ wanted() {
 }
 
 for entry in "${CUTS[@]}"; do
-  IFS='|' read -r slug src at end <<<"$entry"
+  IFS='|' read -r slug src at end fade <<<"$entry"
   wanted "$slug" || continue
-  # `end` needs `at` present to reach the right argument slot, so a line that
-  # trims but takes the default poster frame still has to spell the 3 out.
-  ./scripts/optimize-media.sh import "$slug" "$src" ${at:+"$at"} ${end:+"$end"}
+  # All four optional slots are always passed, with "-" standing in for the
+  # ones this line does not set. Otherwise an omitted `at` would slide `end`
+  # into the poster argument and quietly grab the poster from the wrong frame.
+  ./scripts/optimize-media.sh import "$slug" "$src" \
+    "${at:--}" "${end:--}" "${fade:--}"
 done
 
 # Proxy only, deliberately no poster — see the note on EXPLICIT_CUTS.

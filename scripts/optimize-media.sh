@@ -12,8 +12,9 @@
 #   scripts/optimize-media.sh cover   <event-id> NN  # make gallery card cover from still NN
 #   scripts/optimize-media.sh poster  <slug>         # frame from stories/<slug>.mp4 -> public/posters
 #   scripts/optimize-media.sh video   <slug>         # stories/<slug>.mp4 -> <slug>.proxy.mp4
-#   scripts/optimize-media.sh import  <slug> <src> [at] [end] # cut -> proxy + poster
-#                                                     # [at]=poster seconds, [end]=trim trailing black
+#   scripts/optimize-media.sh import  <slug> <src> [at] [end] [fade] # cut -> proxy + poster
+#                                                     # [at]=poster seconds, [end]=trim trailing black,
+#                                                     # [fade]=seconds of fade to black + sound. "-" = default
 #   scripts/optimize-media.sh vertical <slug> <src> [at] # same, for 9:16 portrait cuts
 #   scripts/optimize-media.sh proxy-only <slug> <src> # proxy, NO poster (members' cut)
 #
@@ -38,6 +39,11 @@ PROXY_CRF=23          # x264 quality; lower = larger file
 
 die() { echo "error: $*" >&2; exit 1; }
 need_ffmpeg() { command -v ffmpeg >/dev/null || die "ffmpeg not found (brew install ffmpeg)"; }
+
+# Optional positional arguments are passed as "-" when a caller wants the
+# default but needs to fill the slot so a LATER argument lands in the right
+# place. Returns $2 (the default) for "-" or empty, and $1 otherwise.
+unset_dash() { if [ -z "$1" ] || [ "$1" = "-" ]; then printf '%s' "$2"; else printf '%s' "$1"; fi; }
 
 cmd="${1:-}"; shift || true
 need_ffmpeg
@@ -160,24 +166,46 @@ case "$cmd" in
     # Everything downstream keys off <slug>, so the proxy lands in stories/
     # root under the standard name and no route or content field needs to know
     # the cut came from a subfolder.
-    slug="${1:?usage: optimize-media.sh import <slug> <source> [poster-seconds] [end-seconds]}"
-    src="${2:?usage: optimize-media.sh import <slug> <source> [poster-seconds] [end-seconds]}"
-    # A few seconds in clears any fade-up, but some cuts open on a flash-
-    # forward or a cutaway that misrepresents the scene on a card. Override
-    # per scene rather than shipping a poster that promises the wrong thing.
-    at="${3:-3}"
+    slug="${1:?usage: optimize-media.sh import <slug> <source> [at] [end] [fade]}"
+    src="${2:?usage: optimize-media.sh import <slug> <source> [at] [end] [fade]}"
+    # Every optional argument below accepts "-" for "not set", so a later one
+    # can be given without inventing a value for an earlier one. import-cuts.sh
+    # always passes all four.
+    at="$(unset_dash "${3:-}" 3)"
     # Where the PICTURE ends, when the delivered file runs on past it. Timeline
     # exports arrive with seconds of trailing black often enough to be worth a
     # switch: left in, it pads durationSeconds with time nobody is watching and
     # leaves the player sitting on an empty frame at the end of the scene.
     # Measure it with `ffmpeg -vf blackdetect` rather than by eye, and record
     # the number in scripts/import-cuts.sh so the trim is reviewable.
-    end="${4:-}"
+    end="$(unset_dash "${4:-}" "")"
+    # Seconds of fade to black, with the sound going down on the same curve.
+    #
+    # Applied to the DERIVED copy, never to the master — the master stays the
+    # thing Melissa exported, and this is reversible by clearing the field and
+    # re-running. It belongs here rather than in the timeline because it is a
+    # property of how the scene ENDS on the site: several cuts stop dead on a
+    # held frame, which reads as the file running out rather than the scene
+    # finishing.
+    fade="$(unset_dash "${5:-}" "")"
     [ -f "$src" ] || die "no source at $src"
+
+    vf="scale=-2:$PROXY_HEIGHT"
+    af=""
+    if [ -n "$fade" ]; then
+      # Fade from (runtime - fade) so it lands exactly on the last frame. Uses
+      # `end` when the cut is trimmed, and the source duration when it is not.
+      total="${end:-$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src")}"
+      st=$(awk -v t="$total" -v f="$fade" 'BEGIN { printf "%.3f", t - f }')
+      awk -v s="$st" 'BEGIN { exit (s > 0) ? 0 : 1 }' \
+        || die "fade of ${fade}s is longer than the ${total}s cut"
+      vf="$vf,fade=t=out:st=$st:d=$fade"
+      af="afade=t=out:st=$st:d=$fade"
+    fi
 
     out="stories/$slug.proxy.mp4"
     ffmpeg -y -loglevel error -i "$src" ${end:+-t "$end"} \
-      -vf "scale=-2:$PROXY_HEIGHT" \
+      -vf "$vf" ${af:+-af "$af"} \
       -c:v libx264 -preset medium -crf "$PROXY_CRF" -pix_fmt yuv420p \
       -c:a aac -b:a 128k -movflags +faststart \
       "$out"
@@ -247,7 +275,7 @@ case "$cmd" in
     ;;
 
   *)
-    sed -n '3,20p' "$0"
+    sed -n '3,21p' "$0"
     exit 1
     ;;
 esac

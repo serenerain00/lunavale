@@ -435,6 +435,36 @@ front of her, with the only information anybody gives her.
 It also puts Rick a step ahead of his son in a scene where Josh has come
 looking for help, which is the joke of that scene and the reason it lands.
 
+### Luna's panic attacks
+*(Canon set by Melissa, 2026-08-19.)*
+
+**Luna is prone to panic attacks.** This is not an event that happens to her
+once; it is a standing fact about her, and it predates both men.
+
+**Both of them know.**
+
+- **Tyson has known for twenty years** — since she was about twenty-three. It
+  has never needed to be a conversation. He does not ask whether she is all
+  right, because he can see whether she is all right.
+- **Josh has known for ten.** He is not blind and she is not as good at hiding
+  it as she tells herself.
+
+**The asymmetry is the story, not the secrecy.** She does not call Josh. She
+never has. It is not that he would refuse to come — somewhere very early she
+decided this was a thing she did not hand him, and she cannot remember
+deciding it. When she calls anyone, she calls Tyson.
+
+Anything written about this must NOT play it as a secret she is keeping from
+everybody. That version was written once, in `the-bad-one`, and corrected —
+see the note above that entry in `lib/content/journal.ts`. The material to
+mine is who she reaches for, and what it costs the man who is never reached
+for.
+
+Depicted in `luna-truck-breakdown` ("Breathe") and written in `the-bad-one`,
+`the-six-months` and `on-paper`.
+
+---
+
 ### Mexico — seven days
 *(Canon set by Melissa, 2026-07-29. **MOVED IN TIME by Melissa, 2026-08-17** —
 see the correction below, which changes what this material is for.)*

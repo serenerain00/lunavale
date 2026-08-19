@@ -569,6 +569,18 @@ export const journal: JournalEntry[] = [
     is that night. It carries the `panic` note, which already exists for the
     truck drive and is the right vocabulary for this — it names what is in the
     piece and lets an adult decide.
+
+    CORRECTED 2026-08-19. `the-bad-one` used to say "nobody in my life knows
+    this about me. Ten years and Josh has never seen one." That was wrong, and
+    it had been live. Melissa's canon: Luna is PRONE to panic attacks and BOTH
+    MEN KNOW — Tyson for twenty years, Josh for ten. What is true is the
+    asymmetry, not the secret: she does not call Josh, and never has.
+
+    The paragraph was rewritten rather than deleted, because the entry needs
+    what it was reaching for. It now lands on the real point — knowing is not
+    the thing, being the one who gets rung is — which is sharper than the
+    version where she is simply hiding, and it is what `the-six-months` further
+    down picks up.
   */
   {
     id: "why-not-the-bear",
@@ -604,7 +616,9 @@ export const journal: JournalEntry[] = [
       "I could not tell you how long. Hours. I know it got dark and I know at some point it was not dark any more.",
       "The worst of it is not the night. The worst of it is the next morning, when you get up and put a wash on and the whole thing is just gone, filed, and you are a normal woman making toast — and you understand that it is going to come back, and that there will be no warning, and that you will be exactly as unable to stop it then as you were this time.",
       "I did not call anybody. There was a whole hour where I nearly called Tyson and did not, because what do you say. Come here, nothing has happened.",
-      "I am putting it in the book because the book is the only place it exists. Nobody in my life knows this about me. Ten years and Josh has never seen one. I have got extraordinarily good at scheduling them for when I am alone, which is not a thing a well person can do and I am aware of that.",
+      "It is not that nobody knows. They both know. Tyson has known since I was about twenty-three, which is longer than Josh has known me at all. And Josh has known for ten years — he is not blind and I am not as good at hiding as I tell myself I am.",
+      "Knowing is not the thing, though. The thing is who you ring. In ten years Josh has never once been the person I rang, and it is not because he would not have come. Somewhere very early on I decided this was a thing I did not hand him, and I cannot now remember deciding it.",
+      "I am putting it in the book because the book is where I do this honestly. I have got extraordinarily good at having them on my own, which is not a skill a well person develops, and I am aware of that.",
     ],
   },
   {
@@ -1159,17 +1173,22 @@ export const journal: JournalEntry[] = [
     he actually did; and then `distance` shows him withdrawing, which costs
     more having just been told what is being withdrawn.
 
-    CANON CARE — this is the one thing that could have gone wrong. `the-bad-one`
-    is her account of a panic attack DURING these six months and it says plainly
-    that nobody in her life knew, that Josh had never seen one in ten years, and
-    that she nearly rang Tyson that night and did not. So this entry cannot have
-    him talking her through them all along; that would contradict a page already
-    published.
+    CANON, corrected by Melissa 2026-08-19 after a first pass got it wrong:
+    LUNA IS PRONE TO PANIC ATTACKS AND BOTH MEN KNOW. Tyson has known for
+    twenty years. Josh has known for ten. What is true is not that she hides
+    them — it is that she does not call Josh, and never has.
 
-    It is written the only way that holds: she never told him, and he worked it
-    out anyway, later in the six months, by noticing. Which is both consistent
-    and more like him. The entry calls back to `the-bad-one` in her own words so
-    the join is visible rather than papered over, and it leaves room for
+    The first draft of this entry had Tyson discovering it during the six
+    months by noticing, which was invented to protect a line in `the-bad-one`
+    ("nobody in my life knows this about me. Ten years and Josh has never seen
+    one"). That line was itself wrong, and it has been rewritten rather than
+    written around — see the note above `the-bad-one`. Inventing a secret to
+    keep a mistaken sentence standing is how a story quietly acquires canon
+    nobody chose.
+
+    So this entry is about what he DOES with knowing, not about him finding
+    out, and it sets the asymmetry beside it: Josh knows and is never the one
+    called. That is the thing she is actually circling. It leaves room for
     luna-truck-breakdown ("Breathe"), which comes later and is the night she
     finally drives to him.
 
@@ -1191,7 +1210,8 @@ export const journal: JournalEntry[] = [
       "We talked more in six months than most people manage in a marriage. Not about him — he does not do that. About everything else, and about me, endlessly, at hours no reasonable adult is awake. I would go round the same three sentences four times in a night and he never once said you have already told me this.",
       "And we fought. He does not raise his voice, which is genuinely infuriating, because it means I am always the only person in the room shouting. He would say the true thing instead of the kind one, and I would take it as an attack because that was easier than taking it as information, and then I would say something built to land. It landed every time. He would sit there and let it.",
       "I was not easy. I want that in my own handwriting. I turned down help for a fortnight out of pure pride and then rang him at one in the morning, and he came, and he has never once made me apologise for the fortnight.",
-      "I wrote in this book that nobody in my life knew about the bad nights. Ten years and Josh had never seen one. That stopped being true somewhere in the middle of those six months and I did not tell him — he worked it out, the way he works everything out, by paying attention when nobody has asked him to.",
+      "He has known about the bad nights since I was about twenty-three. There was never a conversation about it and there has never needed to be one. He does not ask me if I am all right — he can see whether I am all right — and in twenty years he has not once said the word attack to my face.",
+      "Josh knows too. Ten years, of course he knows. But knowing and being the one who gets called are two different jobs and I have only ever given him the first, and it has taken me until this week to notice that I never once tried him with the second.",
       "He never told me to calm down. Not once, not ever, and if you have had one you will know exactly what that is worth. He got down on the floor with me and put my hand flat on his chest so I had something to copy, and then he talked about nothing whatsoever — the boat, a gearbox, a dog he had when he was nine — in that flat voice, until my breathing gave up arguing and went along with his.",
       "Twenty minutes, some nights. Over an hour, once. He never looked at his watch and he has never mentioned it since, to me or to anybody, and I would know.",
       "That is a thing a person learns somewhere. I have never asked him where.",

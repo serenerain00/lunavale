@@ -1253,6 +1253,48 @@ export const videos: Video[] = [
   // new cut lands, then restore the world object and hero slug that went with
   // it (lib/content/world.ts "the-shore", lib/content/hero.ts).
   {
+    // The garage, 2026-08-19, and the first scene set in that room — the
+    // `the-garage` gallery has been waiting since 2026-08-05 with no scene to
+    // point at. Both now cross-link.
+    //
+    // NO MUSIC. Melissa said so on delivery and the file agrees: -35.1 dB,
+    // which is where a dialogue-only mix sits. This matters because the house
+    // assumption runs the other way — most scenes here are music-forward with
+    // the dialogue deliberately under it, and somebody comparing levels later
+    // could easily read this one as a broken export and go hunting for a
+    // scored version that does not exist. It is two people talking. The words
+    // are the scene.
+    //
+    // 7:36, of which the first 2:15 is public. See the note in
+    // scripts/make-previews.mjs for why that number is safe: the scene turns
+    // at about 2:55 and the window stops forty seconds short of it.
+    slug: "ty-luna-garage",
+    // PLACEHOLDER title and synopsis — hers to replace.
+    title: "The Garage",
+    synopsis:
+      "She came to have it out with him. He keeps his hands on the bike and answers about half of it.",
+    file: "ty-luna-garage.proxy.mp4",
+    poster: "/posters/ty-luna-garage.jpg",
+    durationSeconds: 456,
+    addedOn: "2026-08-19",
+    access: "premium",
+    mature: true,
+    preview: {
+      file: "ty-luna-garage-preview.proxy.mp4",
+      // 2:15 — the longest public window on the site. Melissa's call.
+      durationSeconds: 135,
+      hookNote:
+        "From the top. The whole argument up to the point where it stops being an argument, and it ends there.",
+    },
+    // `distance` and `desire` — the two of them in one room refusing to say
+    // the thing, and then not managing to keep refusing. FIRST DRAFT, like the
+    // title: where this sits against the rest of the Tyson material is not
+    // established and it changes which tags are right.
+    feelings: ["distance", "desire"],
+    place: "garage",
+    about: ["luna", "tyson"],
+  },
+  {
     // PLACEHOLDER placement: a road on the farm, filed under the farmhouse
     // because the property is the location. Give it its own place if the road
     // matters to the story.

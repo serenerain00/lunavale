@@ -106,6 +106,23 @@ const OVERRIDES = {
   // rounding. The first minute is her packing and him arriving, and it ends
   // before he puts a hand on her, which is the question the rest answers.
   "luna-josh-break": 60,
+
+  // 2:15, Melissa's call on release, 2026-08-19: "release the first 2min and
+  // 15seconds". The longest public window on the site by some way, and the
+  // reasoning holds up on the footage rather than only on her say-so.
+  //
+  // The scene is 7:36 and it is two people arguing in a garage until it turns.
+  // Sampled at five-second steps, the turn is at about 2:55 — he puts a hand
+  // to her face and they are kissing by 3:05. 2:15 stops FORTY SECONDS short
+  // of it, which is a wider margin than luna-josh-first-night's ten.
+  //
+  // It also does not cut anybody off mid-word: silencedetect puts a ~6s gap in
+  // the dialogue from about 2:12 to 2:19, so the window ends in a pause.
+  //
+  // Under a third of the runtime, so it needs no exception to the fraction
+  // rule — it is only an override because the house default of fifteen seconds
+  // would end while they are still saying hello.
+  "ty-luna-garage": 135,
 };
 
 /**

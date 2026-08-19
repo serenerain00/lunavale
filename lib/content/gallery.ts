@@ -586,6 +586,10 @@ export const galleries: StillGallery[] = [
     feelings: ["distance", "desire"],
     place: "garage",
     about: ["tyson", "luna"],
+    // Linked 2026-08-19, when the room finally got a scene. These four stills
+    // predate it by a fortnight and still 04's caption — "she turns up and he
+    // keeps working" — turns out to describe the scene's opening exactly.
+    sceneSlug: "ty-luna-garage",
     stills: [
       {
         caption:

@@ -1148,6 +1148,59 @@ export const journal: JournalEntry[] = [
       "So which one am I? The woman who goes towards the drop, or the woman who is loyal to the person who has never let her fall? Because I have been both my whole life and I have never had to pick before.",
     ],
   },
+  /*
+    WHAT HE WAS, written to Melissa's brief of 2026-08-19: Luna on her and
+    Tyson through the six months — the talking, the arguments, the panic
+    attacks, his patience, her stubbornness — set down NOW, while she is back
+    with Josh and Tyson has started going quiet without being gone.
+
+    PLACED HERE ON PURPOSE, between `two-kinds` and `distance`. `two-kinds`
+    ends on her asking which woman she is; this answers it by remembering what
+    he actually did; and then `distance` shows him withdrawing, which costs
+    more having just been told what is being withdrawn.
+
+    CANON CARE — this is the one thing that could have gone wrong. `the-bad-one`
+    is her account of a panic attack DURING these six months and it says plainly
+    that nobody in her life knew, that Josh had never seen one in ten years, and
+    that she nearly rang Tyson that night and did not. So this entry cannot have
+    him talking her through them all along; that would contradict a page already
+    published.
+
+    It is written the only way that holds: she never told him, and he worked it
+    out anyway, later in the six months, by noticing. Which is both consistent
+    and more like him. The entry calls back to `the-bad-one` in her own words so
+    the join is visible rather than papered over, and it leaves room for
+    luna-truck-breakdown ("Breathe"), which comes later and is the night she
+    finally drives to him.
+
+    DRAFT PROSE, written to the brief — not delivered by her, unlike
+    `asking-for-less`. Replace it.
+  */
+  {
+    id: "the-six-months",
+    dateline: "Before I forget what it was actually like",
+    place: "farmhouse",
+    about: ["luna", "tyson"],
+    sceneSlug: "ty-luna-six-months",
+    access: "premium",
+    mature: false,
+    notes: ["panic"],
+    body: [
+      "Tyson is going. Not gone — going. He still comes when I ask, he still answers on the second ring, he still does the thing he came up to do. But there was a version of him who stayed for another coffee afterwards, and that one has not been in this kitchen in a month.",
+      "So I am going to write down what those six months were actually like while I can still do it accurately. I know what I am. Give me a year and I will have tidied the whole thing into something smaller and easier to carry.",
+      "We talked more in six months than most people manage in a marriage. Not about him — he does not do that. About everything else, and about me, endlessly, at hours no reasonable adult is awake. I would go round the same three sentences four times in a night and he never once said you have already told me this.",
+      "And we fought. He does not raise his voice, which is genuinely infuriating, because it means I am always the only person in the room shouting. He would say the true thing instead of the kind one, and I would take it as an attack because that was easier than taking it as information, and then I would say something built to land. It landed every time. He would sit there and let it.",
+      "I was not easy. I want that in my own handwriting. I turned down help for a fortnight out of pure pride and then rang him at one in the morning, and he came, and he has never once made me apologise for the fortnight.",
+      "I wrote in this book that nobody in my life knew about the bad nights. Ten years and Josh had never seen one. That stopped being true somewhere in the middle of those six months and I did not tell him — he worked it out, the way he works everything out, by paying attention when nobody has asked him to.",
+      "He never told me to calm down. Not once, not ever, and if you have had one you will know exactly what that is worth. He got down on the floor with me and put my hand flat on his chest so I had something to copy, and then he talked about nothing whatsoever — the boat, a gearbox, a dog he had when he was nine — in that flat voice, until my breathing gave up arguing and went along with his.",
+      "Twenty minutes, some nights. Over an hour, once. He never looked at his watch and he has never mentioned it since, to me or to anybody, and I would know.",
+      "That is a thing a person learns somewhere. I have never asked him where.",
+      "And here is what I could not see at the time, because you do not stop to study the man holding you up while you are going under. He did every bit of it as somebody who was not allowed to want anything. Six months of keeping me alive, and he never once put his thumb on the scale.",
+      "Now I am back with Josh, and Tyson has gone quiet, and I have spent three weeks presenting those to myself as two unrelated facts.",
+      "They are not two unrelated facts. I have known it since about the second week and I have been carefully not knowing it, and I am writing it down so that I cannot go on not knowing it.",
+      "I do not know what you are meant to do with a debt like that. I know what I have been doing with it, which is nothing.",
+    ],
+  },
   {
     id: "distance",
     dateline: "Walking back up the road",

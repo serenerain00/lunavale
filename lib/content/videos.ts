@@ -1253,6 +1253,48 @@ export const videos: Video[] = [
   // new cut lands, then restore the world object and hero slug that went with
   // it (lib/content/world.ts "the-shore", lib/content/hero.ts).
   {
+    // A MONTAGE, not a scene, and the only one in this file. Six minutes of
+    // Luna and Tyson across the whole stretch she was without Josh, scored.
+    // Melissa, 2026-08-19.
+    //
+    // It is filed as a video rather than a clip because clips.ts is 9:16 and
+    // this is landscape; nothing else about it wants a new content type.
+    //
+    // PLACE is the lakehouse because that is where she lived those six months
+    // and where most of this happens — but the montage also visits the bar,
+    // the city and a snowbank, and `place` is one field. It names where the
+    // material belongs, not everywhere the camera went.
+    //
+    // NOTES: `panic`. The note's wording ("a prolonged panic attack, in real
+    // time") was written for luna-truck-breakdown and is stronger than what is
+    // here — this is a montage, so the bad nights are seconds at a time rather
+    // than sustained. Tagged anyway: it IS depicted, and somebody who needs to
+    // know that should not have to find out by watching. Over-stating it is
+    // the safe direction to be wrong in.
+    slug: "ty-luna-six-months",
+    title: "The Six Months",
+    // PLACEHOLDER synopsis — hers to replace.
+    synopsis:
+      "The six months she spent without Josh, and the man who got her through them. The talking, the fighting, and the nights she couldn't breathe.",
+    file: "ty-luna-six-months.proxy.mp4",
+    poster: "/posters/ty-luna-six-months.jpg",
+    durationSeconds: 353,
+    addedOn: "2026-08-19",
+    access: "premium",
+    mature: true,
+    preview: {
+      file: "ty-luna-six-months-preview.proxy.mp4",
+      durationSeconds: 15,
+    },
+    notes: ["panic"],
+    // The same three the firepit gallery carries for these two, and for the
+    // same reason: what they gave each other, what neither will say, and the
+    // fact that somewhere in here it stopped being only friendship.
+    feelings: ["trust", "desire", "distance"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+  },
+  {
     // The garage, 2026-08-19, and the first scene set in that room — the
     // `the-garage` gallery has been waiting since 2026-08-05 with no scene to
     // point at. Both now cross-link.

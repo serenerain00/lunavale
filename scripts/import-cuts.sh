@@ -165,6 +165,33 @@ CUTS=(
   # that makes it look like a solo scene. This is a two-hander and the card
   # says so.
   "ty-luna-garage|stories/luna-ty-garage/ty-luna-garage.mp4|88|456.3|3"
+  # THE SIX MONTHS — a montage, not a scene, and the only entry in this file
+  # that is one. It is Luna and Tyson across the whole stretch she was without
+  # Josh: the talking, the arguments, the nights she could not breathe, and him
+  # there for all of it. Cut and scored by Melissa (2026-08-19).
+  #
+  # Has music, and plenty of it: -16.8 dB mean / -1.3 dB peak, the second
+  # loudest mix in the library after the beach.
+  #
+  # 1824x1080 (1.69), so it pillarboxes slightly like the wall and the beach.
+  #
+  # Trimmed at 352.9s — 11.5s of black on the end, and the picture does NOT
+  # fade into it: checked frame by frame at 348/350/351/352, it is at full
+  # brightness and then gone, with the music still at -17.8 dB. So it stopped
+  # rather than ended.
+  #
+  # FADE 3s, the same as the beach and the garage. Applied without being asked
+  # this time, because the two before it were asked for and a montage that cuts
+  # dead mid-smile is the case the field was added for. One edit to remove.
+  # Unlike the garage, the audio fade does real work here — there is a full
+  # music mix running right up to the cut.
+  #
+  # Poster at 300s: the two of them at the bar, facing each other, her talking
+  # and him listening. Deliberately NOT one of the bed frames, which are warm
+  # and would put these two in a bed on a public card — they never got there,
+  # and the card should not say otherwise. Also not the snow sign, which reads
+  # as a couple's photograph for the same reason.
+  "ty-luna-six-months|stories/mashup/luna-ty-mashup-compressed-full.MOV|300|352.9|3"
   # Scored mix: -37.5 dB -> -26.8 dB. Runs 2.8s longer than the silent cut.
   "luna-josh-dinner-house|stories/withAudio/copy_A062089B-FB53-461E-BC18-DD0BD3F26458.MOV"
   # NEAR-SILENT (-51 dB). Its only candidate is portrait (1080x1822) and would

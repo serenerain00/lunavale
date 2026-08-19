@@ -153,12 +153,18 @@ CUTS=(
   # black — by far the longest tail yet, and it would have put nearly a minute
   # of nothing on the end of durationSeconds.
   #
+  # FADE, 3s, Melissa 2026-08-19: keep the trim, but do not let it stop dead.
+  # The 49.5s of delivered black was the export padding rather than an ending,
+  # so cutting it left the scene ending on a hard frame; this puts a real one
+  # back at 453.3s. Same 3s as the beach, so the two scenes that fade do it
+  # identically rather than each having its own house style.
+  #
   # Poster at 88s: the two of them facing each other mid-argument. Earlier
   # frames are Tyson bent over the bike with Luna soft behind him, which sells
   # a scene about a man doing a job, and 47s is a good portrait of her alone
   # that makes it look like a solo scene. This is a two-hander and the card
   # says so.
-  "ty-luna-garage|stories/luna-ty-garage/ty-luna-garage.mp4|88|456.3"
+  "ty-luna-garage|stories/luna-ty-garage/ty-luna-garage.mp4|88|456.3|3"
   # Scored mix: -37.5 dB -> -26.8 dB. Runs 2.8s longer than the silent cut.
   "luna-josh-dinner-house|stories/withAudio/copy_A062089B-FB53-461E-BC18-DD0BD3F26458.MOV"
   # NEAR-SILENT (-51 dB). Its only candidate is portrait (1080x1822) and would

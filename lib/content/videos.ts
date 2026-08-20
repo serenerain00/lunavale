@@ -1270,6 +1270,14 @@ export const videos: Video[] = [
     //
     // ABOUT is luna and tyson. Josh causes the entire scene and is never in
     // it — he is a phone call that has already ended by the first frame.
+    //
+    // WHAT THE SCENE IS, so nobody mis-cuts it later: this is where TYSON
+    // FINDS OUT. He knew the small ones from when they were young; he did not
+    // know they had come back or what they had become, because she spent two
+    // years making sure of that. She gets no warning tonight, so there is no
+    // time to go and have it privately, and he walks into the real thing with
+    // nothing prepared. He is working off a twenty-year-old memory, not a
+    // routine. See LUNA_VALE_CONTEXT.md and the note above `i-picked-up`.
     slug: "luna-ty-panic-attack",
     // PLACEHOLDER title and synopsis — hers to replace.
     title: "The Bathroom Floor",

@@ -441,18 +441,33 @@ looking for help, which is the joke of that scene and the reason it lands.
 **Luna is prone to panic attacks.** This is not an event that happens to her
 once; it is a standing fact about her, and it predates both men.
 
-**Both of them know.**
+**They got much worse.** When she was young they were **small** — she would go
+quiet and strange and it would pass. The Josh years made them worse and the
+breakup made them worse again. They are now the thing described in
+`luna-truck-breakdown` and `the-bad-one`.
 
-- **Tyson has known for twenty years** — since she was about twenty-three. It
-  has never needed to be a conversation. He does not ask whether she is all
-  right, because he can see whether she is all right.
-- **Josh has known for ten.** He is not blind and she is not as good at hiding
-  it as she tells herself.
+**KEEP TWO FACTS APART.** They are easy to collapse into one and the story
+breaks if they are:
 
-**The asymmetry is the story, not the secrecy.** She does not call Josh. She
-never has. It is not that he would refuse to come — somewhere very early she
-decided this was a thing she did not hand him, and she cannot remember
-deciding it. When she calls anyone, she calls Tyson.
+1. **Who knows she is prone.** Both men. **Tyson** knew the small ones from
+   when they were young — it was never a conversation and never had a name.
+   **Josh** has known for ten years; he is not blind.
+2. **Who has ever been in the room.** Only Tyson, and only since the breakup.
+   **For the last two years she has had them privately** — she got extremely
+   good at having them alone in a bathroom while somebody else watched
+   television in the next room. Tyson did **not** know they had come back or
+   what they had turned into. **He finds out at week two, on the bathroom
+   floor** (`i-picked-up` / `luna-ty-panic-attack`), because she gets no
+   warning and has no time to go and have it somewhere else.
+
+**And she does not call Josh.** She never has, in ten years, and it is not
+because he would refuse to come. Somewhere very early she decided this was a
+thing she did not hand him and she cannot remember deciding it. Whether that
+was a kindness she did him or a verdict she passed on him is a question she
+has not let herself answer.
+
+So: Tyson is **improvising off a twenty-year-old memory** in that bathroom, not
+running a routine. Do not write him as practised at it.
 
 Anything written about this must NOT play it as a secret she is keeping from
 everybody. That version was written once, in `the-bad-one`, and corrected —

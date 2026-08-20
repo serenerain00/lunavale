@@ -440,11 +440,19 @@ export const journal: JournalEntry[] = [
     and does not. Nothing in either entry points at the other; the distance
     between them is the whole story of what those six months did to her.
 
-    Written against the corrected canon (see the note above `the-bad-one`):
-    Tyson has known since she was twenty-three, so there is no explaining and
-    no discovery in this — he just knows what is happening and what to do. The
-    last beat is Josh's half of it, which is the thing she is really writing
-    about and does not say until the end.
+    THIS IS WHERE TYSON FINDS OUT, and that is the scene (Melissa, 2026-08-20).
+    He knew the small ones from when they were young. He did not know they had
+    come back, or what they had grown into — she spent two years making sure
+    nobody did. Tonight she gets no warning, so there is no time to go and have
+    it somewhere else, and he walks into the real thing with nothing prepared.
+
+    So he is improvising off a twenty-year-old memory, not following a routine.
+    Anything written about this must not have him practised at it. The counting
+    is the one thing he brings from back then, and she notices her body
+    recognise it before she does.
+
+    The last beat is Josh's half, which is what she is really writing about and
+    does not say until the end.
 
     DRAFT PROSE, written to the brief. Replace it.
   */
@@ -467,8 +475,9 @@ export const journal: JournalEntry[] = [
       "It came faster than any of them ever have. There is normally a runway. A whole afternoon of it stacking up where I can at least see the shape of the thing coming and clear the decks and make sure I am on my own for it. This went from a phone call to no air in about ninety seconds.",
       "Tyson was in the front room with the game on. I called him.",
       "That is the part I keep going back over, because I did not think about it. There is no moment in it where I chose — I have looked for one. I said his name and then he was in the doorway.",
-      "He did not ask what had happened. He never does, not while it is going on; he asks afterwards, if I want to, and he does not mind when I don't. He sat down on the tile with his back against the bath and he did not put a hand on me until I reached for him, which I did not know I was going to do until it was done.",
-      "He counted. Out loud, slowly, and wrong on purpose — he skipped six, and I noticed, and noticing is not a thing you can do and panic at the same time. I am fairly sure that is the entire trick. I am fairly sure he has known it for twenty years.",
+      "He used to know about these. The small ones, when we were young — I would go strange and quiet and he would walk me outside and that would be the end of it, and neither of us ever gave the thing a name. What he does not know is what they have turned into. Nobody knows that. I have spent two years getting it down to something I do privately in a bathroom while somebody else watches television in another room, and I have got very good at it, and tonight I did not get the twenty minutes of warning I need in order to be good at it somewhere else.",
+      "So he had not seen one since we were about twenty-three, and he walked into that and did not ask a single question. He sat down on the tile with his back against the bath and he did not put a hand on me until I reached for him, which I did not know I was going to do until it was done. If it frightened him he did not let me see it, which with him is the same service.",
+      "He counted. Out loud, slowly, and wrong on purpose — he skipped six, and I noticed, and noticing is not a thing you can do and panic at the same time. I am fairly sure that is the entire trick, and I am fairly sure he did it to me in a car park when we were nineteen, because my body remembered it before I did.",
       "I asked him not to leave until it was finished. I said it out loud, in a plain sentence, with no joke in it. I could not tell you the last time I did that with anybody.",
       "It took about forty minutes. Afterwards he made tea I did not drink and put the game back on and did not say one word about Josh, and I sat at the other end of that sofa feeling like a person again.",
       "Here is the thing I do not want to write down and am going to anyway. I have been having these since I was twenty-three. There is exactly one person alive who has ever been in the room for the start of one, and he is not the man I lived with for ten years.",
@@ -668,7 +677,7 @@ export const journal: JournalEntry[] = [
       "I could not tell you how long. Hours. I know it got dark and I know at some point it was not dark any more.",
       "The worst of it is not the night. The worst of it is the next morning, when you get up and put a wash on and the whole thing is just gone, filed, and you are a normal woman making toast — and you understand that it is going to come back, and that there will be no warning, and that you will be exactly as unable to stop it then as you were this time.",
       "I did not call anybody. There was a whole hour where I nearly called Tyson and did not, because what do you say. Come here, nothing has happened.",
-      "It is not that nobody knows. They both know. Tyson has known since I was about twenty-three, which is longer than Josh has known me at all. And Josh has known for ten years — he is not blind and I am not as good at hiding as I tell myself I am.",
+      "It is not that nobody knows. Tyson knows now. He found out on a bathroom floor in this house in the first fortnight, and he has been careful with me ever since in a way I can feel from the other side of a room. And Josh knows I am like this — ten years, he is not blind. What neither of them has is the number, or what the last two years of them actually looked like, and I have gone to some trouble about that.",
       "Knowing is not the thing, though. The thing is who you ring. In ten years Josh has never once been the person I rang, and it is not because he would not have come. Somewhere very early on I decided this was a thing I did not hand him, and I cannot now remember deciding it.",
       "I am putting it in the book because the book is where I do this honestly. I have got extraordinarily good at having them on my own, which is not a skill a well person develops, and I am aware of that.",
     ],
@@ -1225,10 +1234,16 @@ export const journal: JournalEntry[] = [
     he actually did; and then `distance` shows him withdrawing, which costs
     more having just been told what is being withdrawn.
 
-    CANON, corrected by Melissa 2026-08-19 after a first pass got it wrong:
-    LUNA IS PRONE TO PANIC ATTACKS AND BOTH MEN KNOW. Tyson has known for
-    twenty years. Josh has known for ten. What is true is not that she hides
-    them — it is that she does not call Josh, and never has.
+    CANON, and it took two passes to land (Melissa, 2026-08-19 and 08-20).
+    LUNA IS PRONE TO PANIC ATTACKS. She had SMALL ones when she was young and
+    Tyson knew about those. They got much worse across the Josh years and
+    worse again with the breakup, and for the last two years she has had them
+    PRIVATELY — Tyson did not know they had come back, and Josh knows she is
+    like this without having seen what they became.
+
+    So there are two separate facts and they are easy to collapse into one:
+    who knows she is prone (both men), and who has ever been in the room
+    (Tyson, once, on the bathroom floor at week two — `i-picked-up`).
 
     The first draft of this entry had Tyson discovering it during the six
     months by noticing, which was invented to protect a line in `the-bad-one`
@@ -1262,8 +1277,9 @@ export const journal: JournalEntry[] = [
       "We talked more in six months than most people manage in a marriage. Not about him — he does not do that. About everything else, and about me, endlessly, at hours no reasonable adult is awake. I would go round the same three sentences four times in a night and he never once said you have already told me this.",
       "And we fought. He does not raise his voice, which is genuinely infuriating, because it means I am always the only person in the room shouting. He would say the true thing instead of the kind one, and I would take it as an attack because that was easier than taking it as information, and then I would say something built to land. It landed every time. He would sit there and let it.",
       "I was not easy. I want that in my own handwriting. I turned down help for a fortnight out of pure pride and then rang him at one in the morning, and he came, and he has never once made me apologise for the fortnight.",
-      "He has known about the bad nights since I was about twenty-three. There was never a conversation about it and there has never needed to be one. He does not ask me if I am all right — he can see whether I am all right — and in twenty years he has not once said the word attack to my face.",
-      "Josh knows too. Ten years, of course he knows. But knowing and being the one who gets called are two different jobs and I have only ever given him the first, and it has taken me until this week to notice that I never once tried him with the second.",
+      "He knew about the small ones from when we were young, in the vague way you know a thing about a friend. He did not know what they had become — I made sure of that for two years and I made sure of it well — and he found out in the first fortnight, on a bathroom floor, with no warning and no version of it I had prepared. He has never once let me feel caught.",
+      "After that he simply took it on. No conversation, no plan, nothing said out loud that either of us would have to acknowledge in daylight. He does not ask whether I am all right; he can see whether I am all right, and he has not said the word attack to my face once in six months.",
+      "Josh knows I am like this. Ten years, of course he does. What he does not know is what the last two of them looked like, because I arranged for him not to, and I have never let myself write down whether that was a kindness I did him or a verdict I passed on him.",
       "He never told me to calm down. Not once, not ever, and if you have had one you will know exactly what that is worth. He got down on the floor with me and put my hand flat on his chest so I had something to copy, and then he talked about nothing whatsoever — the boat, a gearbox, a dog he had when he was nine — in that flat voice, until my breathing gave up arguing and went along with his.",
       "Twenty minutes, some nights. Over an hour, once. He never looked at his watch and he has never mentioned it since, to me or to anybody, and I would know.",
       "That is a thing a person learns somewhere. I have never asked him where.",

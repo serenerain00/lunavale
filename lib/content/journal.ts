@@ -95,6 +95,17 @@ export interface JournalEntry {
   where?: string;
   /** Who the entry is about. */
   about: PersonId[];
+  /**
+   * The day this page went up, ISO `YYYY-MM-DD`. Mirrors `Video.addedOn` and
+   * exists for the same reason: the home page shows the release rhythm, and a
+   * journal entry is a release. Without this the cadence looks half as busy as
+   * it is, because only the scenes could be dated.
+   *
+   * Only set where the date is KNOWN. Most of this file predates the field and
+   * is deliberately left undated rather than back-filled by guesswork — an
+   * undated entry is treated as older than every dated one, which is true.
+   */
+  addedOn?: string;
   /** The scene this sits beside, when it's the same day. */
   sceneSlug?: string;
   /**
@@ -249,6 +260,7 @@ export const journal: JournalEntry[] = [
   */
   {
     id: "asking-for-less",
+    addedOn: "2026-08-17",
     dateline: "First morning here, on my own",
     place: "lakehouse",
     about: ["josh"],
@@ -458,6 +470,7 @@ export const journal: JournalEntry[] = [
   */
   {
     id: "i-picked-up",
+    addedOn: "2026-08-20",
     dateline: "Two weeks, and I should not have answered",
     place: "lakehouse",
     where: "The bathroom",
@@ -1135,6 +1148,7 @@ export const journal: JournalEntry[] = [
       above, not delivered by her. Replace it.
     */
     id: "mexico-the-fourth-night",
+    addedOn: "2026-08-17",
     dateline: "The fourth night, and I am writing this one down properly",
     place: "mexico",
     about: ["luna", "josh"],
@@ -1264,6 +1278,7 @@ export const journal: JournalEntry[] = [
   */
   {
     id: "the-six-months",
+    addedOn: "2026-08-19",
     dateline: "Before I forget what it was actually like",
     place: "farmhouse",
     about: ["luna", "tyson"],

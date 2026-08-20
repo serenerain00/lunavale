@@ -15,12 +15,18 @@ import { canWatch, getMembership } from "@/lib/access/entitlement";
 import { catalog, shelves, type CatalogItem } from "@/lib/content/catalog";
 import { pickHero } from "@/lib/content/hero";
 import {
+  entriesForScene,
   freeEntries,
   journal,
   opening,
   quoteOfTheDay,
 } from "@/lib/content/journal";
 import { galleries } from "@/lib/content/gallery";
+import {
+  cadenceNote,
+  formatReleaseDate,
+  recentReleases,
+} from "@/lib/content/releases";
 import { takes } from "@/lib/content/takes";
 import { formatPrice, getTier } from "@/lib/content/membership";
 import {
@@ -54,6 +60,17 @@ export default async function Home() {
   // than keeping a "New" label on something that is not.
   const latest = latestScene();
   const showLatest = latest && isRecent(latest);
+  // Her account of the same day, when there is one. The pairing is the single
+  // most persuasive thing on the site — a scene and the page she wrote about
+  // it — and until now the home page dropped it and made you find the journal
+  // on your own.
+  const latestEntry = latest ? entriesForScene(latest.slug)[0] : undefined;
+
+  // THE RHYTHM. Derived from what is actually published; see
+  // lib/content/releases.ts for why this is not a hand-kept list and why there
+  // is no forward-looking schedule anywhere in it.
+  const drops = recentReleases(7);
+  const cadence = cadenceNote();
 
   // Nobody who has already answered gets asked again. Read server-side rather
   // than from document.cookie, so the band is simply absent from the HTML for
@@ -278,8 +295,103 @@ export default async function Home() {
                     is open to everyone. The rest is part of the LunaVerse.
                   </p>
                 )}
+
+                {/* THE PAIR. A scene and the page she wrote about the same day
+                    is the thing this site has that a video library does not,
+                    and the home page used to make you go and find the second
+                    half yourself. Rendered only when the entry exists — most
+                    scenes have no journal page and a dead link would be worse
+                    than no link. */}
+                {latestEntry && (
+                  <p className="mt-5 border-t border-hairline pt-4 text-sm leading-relaxed text-stone">
+                    She wrote about the same day.{" "}
+                    <Link
+                      href={`/journal/${latestEntry.id}`}
+                      className="text-ivory underline decoration-hairline underline-offset-4 transition-colors duration-(--duration-quick) hover:decoration-ivory"
+                    >
+                      {latestEntry.dateline}
+                    </Link>
+                  </p>
+                )}
               </div>
             </div>
+          </section>
+        )}
+
+        {/* -------------------------------------------------------- lately */}
+        {/* THE RHYTHM, and the reason this section exists at all.
+            
+            The page could already say "here is the newest thing". It could not
+            say "things keep arriving", and those are different promises: a
+            finished object is bought once, a rhythm is what a monthly
+            subscription is actually for. The work was already being done — a
+            scene or a journal page every couple of days through August — and
+            none of it was visible anywhere a visitor would look.
+
+            EVERYTHING HERE IS DERIVED (lib/content/releases.ts). Nothing is
+            hand-listed, so it cannot drift from what is really published, and
+            it goes quiet on its own if the pace does. That last part is the
+            point: a cadence claim that keeps rendering after the cadence stops
+            is the one lie on this page anybody could catch.
+
+            AND THERE IS NO SCHEDULE. No "next drop Friday", no countdown, no
+            calendar. The site has no release calendar it can keep, and
+            CLAUDE.md's rule against promising what we lack bites hardest on a
+            promise about next week. Past tense only. */}
+        {drops.length >= 4 && (
+          <section
+            aria-labelledby="lately-heading"
+            className="mx-auto w-full max-w-4xl px-5 pt-16 sm:px-8 sm:pt-24"
+          >
+            <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+              <h2
+                id="lately-heading"
+                className="font-display text-2xl font-light text-ivory sm:text-3xl"
+              >
+                Lately
+              </h2>
+              {cadence && (
+                <p className="text-xs uppercase tracking-[0.16em] text-amber">
+                  {cadence}
+                </p>
+              )}
+            </div>
+
+            <ol className="mt-6 border-t border-hairline">
+              {drops.map((drop) => (
+                <li key={`${drop.kind}-${drop.href}`}>
+                  <Link
+                    href={drop.href}
+                    className="group flex min-h-14 items-center gap-4 border-b border-hairline py-3 transition-colors duration-(--duration-quick) hover:bg-charcoal/30 sm:gap-6"
+                  >
+                    <time
+                      dateTime={drop.date}
+                      className="w-14 shrink-0 text-xs tabular-nums text-stone-dim sm:w-16"
+                    >
+                      {formatReleaseDate(drop.date)}
+                    </time>
+                    <span className="w-16 shrink-0 text-[0.7rem] uppercase tracking-[0.14em] text-stone-dim sm:w-20">
+                      {drop.kind === "scene" ? "Scene" : "Journal"}
+                    </span>
+                    <span className="min-w-0 flex-1 truncate text-sm text-ivory transition-colors duration-(--duration-quick) group-hover:text-white">
+                      {drop.title}
+                    </span>
+                    {drop.durationSeconds !== undefined && (
+                      <span className="hidden shrink-0 text-xs tabular-nums text-stone-dim sm:block">
+                        {formatDuration(drop.durationSeconds)}
+                      </span>
+                    )}
+                    <span
+                      className={`shrink-0 text-[0.7rem] uppercase tracking-[0.12em] ${
+                        drop.access === "free" ? "text-stone-dim" : "text-amber"
+                      }`}
+                    >
+                      {drop.access === "free" ? "Free" : "Members"}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
           </section>
         )}
 

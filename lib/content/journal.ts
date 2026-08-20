@@ -423,6 +423,58 @@ export const journal: JournalEntry[] = [
       "He didn't mention Josh. He won't, unless I do. That is the entire arrangement and I don't know how he learned it, because nobody taught either of us anything useful about this.",
     ],
   },
+  /*
+    THE NIGHT SHE ANSWERED. Melissa, 2026-08-20: two weeks after she leaves,
+    Luna has been dodging Josh's calls; he will not stop; she picks up and the
+    argument triggers a panic attack. Tyson is in the house and she calls him
+    into the bathroom to sit with her through it.
+
+    PLACED AFTER `tyson-shows-up`, which is the other week-two entry and
+    establishes him turning up with groceries and not asking how she is. This
+    is the same fortnight and the first time she asks him for something out
+    loud.
+
+    IT IS THE FRONT END OF AN ARC, and the arc is the reason it earns its
+    place. Here, two weeks in, she calls for him without deciding to. Months
+    later in `the-bad-one` she is on a bathroom floor again, nearly rings him,
+    and does not. Nothing in either entry points at the other; the distance
+    between them is the whole story of what those six months did to her.
+
+    Written against the corrected canon (see the note above `the-bad-one`):
+    Tyson has known since she was twenty-three, so there is no explaining and
+    no discovery in this — he just knows what is happening and what to do. The
+    last beat is Josh's half of it, which is the thing she is really writing
+    about and does not say until the end.
+
+    DRAFT PROSE, written to the brief. Replace it.
+  */
+  {
+    id: "i-picked-up",
+    dateline: "Two weeks, and I should not have answered",
+    place: "lakehouse",
+    where: "The bathroom",
+    about: ["luna", "tyson", "josh"],
+    sceneSlug: "luna-ty-panic-attack",
+    access: "premium",
+    mature: false,
+    notes: ["panic"],
+    body: [
+      "He rang nine times. I counted them afterwards, which tells you most of what you need to know about the kind of evening it became.",
+      "I had not answered anything in eleven days. Not as a strategy — I did not have one then and I do not have one now. I knew that the second I heard his voice I would start negotiating with myself, and I was not steady enough to be in a room with that.",
+      "On the ninth one I answered. I have tried to write down why and I cannot give a reason that would stand up in front of anybody. It was not hope and it was not weakness. The phone kept going, and I am a person, and there is a limit to how long you can sit in a quiet house listening to a thing ring.",
+      "I am not going to put down what was said. Some of it was mine and mine was not better. The short version is that he is sorry, and he is always sorry, and somewhere in the middle of being sorry he told me what I had done to him — and the thing about Josh is that he can say the cruellest sentence of his life in exactly the voice he uses to ask what time I'll be home.",
+      "And then I was on the bathroom floor and I do not properly remember the part in between.",
+      "It came faster than any of them ever have. There is normally a runway. A whole afternoon of it stacking up where I can at least see the shape of the thing coming and clear the decks and make sure I am on my own for it. This went from a phone call to no air in about ninety seconds.",
+      "Tyson was in the front room with the game on. I called him.",
+      "That is the part I keep going back over, because I did not think about it. There is no moment in it where I chose — I have looked for one. I said his name and then he was in the doorway.",
+      "He did not ask what had happened. He never does, not while it is going on; he asks afterwards, if I want to, and he does not mind when I don't. He sat down on the tile with his back against the bath and he did not put a hand on me until I reached for him, which I did not know I was going to do until it was done.",
+      "He counted. Out loud, slowly, and wrong on purpose — he skipped six, and I noticed, and noticing is not a thing you can do and panic at the same time. I am fairly sure that is the entire trick. I am fairly sure he has known it for twenty years.",
+      "I asked him not to leave until it was finished. I said it out loud, in a plain sentence, with no joke in it. I could not tell you the last time I did that with anybody.",
+      "It took about forty minutes. Afterwards he made tea I did not drink and put the game back on and did not say one word about Josh, and I sat at the other end of that sofa feeling like a person again.",
+      "Here is the thing I do not want to write down and am going to anyway. I have been having these since I was twenty-three. There is exactly one person alive who has ever been in the room for the start of one, and he is not the man I lived with for ten years.",
+      "I have read that back twice and I am leaving it in.",
+    ],
+  },
   {
     id: "the-carrera",
     dateline: "Sunday, and he had the car out",

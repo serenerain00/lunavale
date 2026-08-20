@@ -123,6 +123,24 @@ const OVERRIDES = {
   // rule — it is only an override because the house default of fifteen seconds
   // would end while they are still saying hello.
   "ty-luna-garage": 135,
+
+  // 30s, Melissa's call on release, 2026-08-20: "this you can show 30sec
+  // preview". A sixth of the 2:57 runtime, so well inside the fraction rule.
+  //
+  // It is the opening, and this is the rare scene where the opening IS the
+  // hook rather than a beginning that makes somebody feel finished. Checked at
+  // two-second steps across the whole window: she is alone in the bathroom in
+  // a camisole coming apart, there are cutaways to Tyson on the sofa with the
+  // game on, and it ends as he gets up and comes in. Nothing explicit, no
+  // nudity. The question it stops on is whether he reaches her, which is the
+  // one thing the rest of the scene is.
+  //
+  // THE `panic` NOTE MATTERS MORE HERE THAN ANYWHERE. A preview is served with
+  // no account and no age check, and thirty seconds of this is thirty seconds
+  // of a panic attack. Same reasoning already written down for
+  // luna-truck-breakdown's public cut: the note has to be readable before the
+  // thing it describes plays, not only for members.
+  "luna-ty-panic-attack": 30,
 };
 
 /**

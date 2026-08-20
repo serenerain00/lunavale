@@ -1253,6 +1253,49 @@ export const videos: Video[] = [
   // new cut lands, then restore the world object and hero slug that went with
   // it (lib/content/world.ts "the-shore", lib/content/hero.ts).
   {
+    // THE BATHROOM, 2026-08-20. Two weeks after she leaves. She has been
+    // dodging Josh's calls; he will not stop; she picks up and the argument
+    // takes her apart. Tyson is in the house, and she calls him in to sit with
+    // her through it.
+    //
+    // NOT `mature`. She is in a camisole for all of it and nothing sexual
+    // happens — the thing a person needs telling about here is the panic
+    // attack, and that has its own note. Flagging it mature as well would
+    // blur what the label means everywhere else on the site, and would suggest
+    // to somebody scanning the card that this is a scene about two people in a
+    // bathroom rather than a scene about somebody who cannot breathe.
+    //
+    // 30s PUBLIC WINDOW, her call. See scripts/make-previews.mjs for the
+    // frame-by-frame check of what is in it.
+    //
+    // ABOUT is luna and tyson. Josh causes the entire scene and is never in
+    // it — he is a phone call that has already ended by the first frame.
+    slug: "luna-ty-panic-attack",
+    // PLACEHOLDER title and synopsis — hers to replace.
+    title: "The Bathroom Floor",
+    synopsis:
+      "She finally answers the phone, and it takes her apart. He is in the next room, and she calls him in.",
+    file: "luna-ty-panic-attack.proxy.mp4",
+    poster: "/posters/luna-ty-panic-attack.jpg",
+    durationSeconds: 177,
+    addedOn: "2026-08-20",
+    access: "premium",
+    mature: false,
+    notes: ["panic"],
+    preview: {
+      file: "luna-ty-panic-attack-preview.proxy.mp4",
+      durationSeconds: 30,
+      hookNote:
+        "From the top — the call has landed and she is coming apart, cut against him on the sofa with the game on. It ends as he gets up.",
+    },
+    // `hurt` for what the call does to her, `trust` for what she does about
+    // it — which is ask for help, out loud, from him. She does not do that
+    // again for months (see `the-bad-one`).
+    feelings: ["hurt", "trust"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+  },
+  {
     // A MONTAGE, not a scene, and the only one in this file. Six minutes of
     // Luna and Tyson across the whole stretch she was without Josh, scored.
     // Melissa, 2026-08-19.

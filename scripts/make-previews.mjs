@@ -127,13 +127,20 @@ const OVERRIDES = {
   // 30s, Melissa's call on release, 2026-08-20: "this you can show 30sec
   // preview". A sixth of the 2:57 runtime, so well inside the fraction rule.
   //
-  // It is the opening, and this is the rare scene where the opening IS the
-  // hook rather than a beginning that makes somebody feel finished. Checked at
-  // two-second steps across the whole window: she is alone in the bathroom in
-  // a camisole coming apart, there are cutaways to Tyson on the sofa with the
-  // game on, and it ends as he gets up and comes in. Nothing explicit, no
-  // nudity. The question it stops on is whether he reaches her, which is the
-  // one thing the rest of the scene is.
+  // MOVED OFF THE OPENING on 2026-08-20, when the full cut replaced the one
+  // that started mid-attack. The scene now opens on about four quiet minutes
+  // of her moving around the bedroom before the phone goes, so a window at
+  // 0:00 spent its entire thirty seconds on a woman hanging up clothes and
+  // ended before anything happened — checked at two-second steps, the phone is
+  // still silent at 0:33.
+  //
+  // hookStart 44 instead: she notices the phone at about 0:48, answers at
+  // 0:52, and by 0:54 it has already turned. The window ends at 1:14 with her
+  // on her feet, still arguing, and the rest of the scene is what that call
+  // does to her.
+  //
+  // Content in the window: a camisole, a phone, and someone shouting and
+  // crying. No nudity, nothing explicit.
   //
   // THE `panic` NOTE MATTERS MORE HERE THAN ANYWHERE. A preview is served with
   // no account and no age check, and thirty seconds of this is thirty seconds

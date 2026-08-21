@@ -199,20 +199,28 @@ CUTS=(
   # NO MUSIC — -29.4 dB, dialogue and breathing, and that is the delivery. Do
   # not go looking for a scored version.
   #
-  # Trimmed at 177.0s: only 0.9s of black on the end this time, and the picture
-  # does not fade into it — full brightness at 176.5 and then gone.
+  # THE FULL CUT, swapped in 2026-08-20. The first version published here was
+  # luna-ty-panicattackbathroom.mp4 and it opened with her already coming
+  # apart. This one runs 6:31 against 2:57 and puts the CALL in front of it:
+  # about three and a half minutes of the bedroom, the phone going, her
+  # answering, and the argument — which is the thing that causes everything the
+  # old cut opened in the middle of.
   #
-  # FADE 3s. This one ends on the two of them gone quiet, which is the single
-  # place in the library where a hard cut would do the most damage: the whole
-  # scene is a woman coming down off something, and stopping dead undoes the
-  # coming down.
+  # The published cut is exactly the tail of this one. Verified rather than
+  # assumed: old t=12 and new t=226.4 are the same frame, so the offset is
+  # 214.4s and nothing in the back half was re-edited. That is why the poster
+  # time below is the old 168 plus that offset.
   #
-  # Poster at 168s: her face and his, both calm, his hand at her cheek. NOT one
-  # of the frames of her mid-attack. Those are the honest centre of the scene
-  # and they are also a woman at the worst moment of her month, and a poster
-  # sits at a permanent ungated URL where anybody can meet it out of context.
-  # The card says she was got through it, which is what the scene is about.
-  "luna-ty-panic-attack|stories/luna-ty-panic-attack/luna-ty-panicattackbathroom.mp4|168|177.0|3"
+  # Trimmed at 390.4s: 0.9s of black, and the picture does not fade into it.
+  #
+  # FADE 3s, unchanged and for the same reason — the scene ends on the two of
+  # them gone quiet, and a hard cut undoes the coming-down.
+  #
+  # Poster at 382.4s: the same frame the card has always used, her face and his,
+  # both calm. NOT one of the frames of her mid-attack — those are the honest
+  # centre of the scene and also a woman at the worst moment of her month, and
+  # a poster sits at a permanent ungated URL where anybody can meet it cold.
+  "luna-ty-panic-attack|stories/luna-ty-panic-attack/luna-panicAttack-full.mp4|382.4|390.4|3"
   # Scored mix: -37.5 dB -> -26.8 dB. Runs 2.8s longer than the silent cut.
   "luna-josh-dinner-house|stories/withAudio/copy_A062089B-FB53-461E-BC18-DD0BD3F26458.MOV"
   # NEAR-SILENT (-51 dB). Its only candidate is portrait (1080x1822) and would

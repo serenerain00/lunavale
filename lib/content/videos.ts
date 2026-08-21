@@ -1265,8 +1265,8 @@ export const videos: Video[] = [
     // to somebody scanning the card that this is a scene about two people in a
     // bathroom rather than a scene about somebody who cannot breathe.
     //
-    // 30s PUBLIC WINDOW, her call. See scripts/make-previews.mjs for the
-    // frame-by-frame check of what is in it.
+    // 30s PUBLIC WINDOW, her call — but no longer from the top. See
+    // scripts/make-previews.mjs for what moved and why.
     //
     // ABOUT is luna and tyson. Josh causes the entire scene and is never in
     // it — he is a phone call that has already ended by the first frame.
@@ -1285,7 +1285,12 @@ export const videos: Video[] = [
       "She finally answers the phone, and it takes her apart. He is in the next room, and she calls him in.",
     file: "luna-ty-panic-attack.proxy.mp4",
     poster: "/posters/luna-ty-panic-attack.jpg",
-    durationSeconds: 177,
+    // 177 -> 390 on 2026-08-20, when the full cut replaced the one that
+    // opened mid-attack. Not a re-encode: three and a half minutes of the
+    // bedroom and the phone call now run in front of it. The old cut is
+    // exactly the tail of this one — verified frame-identical at the 214.4s
+    // offset — so nothing already written about the back half is stale.
+    durationSeconds: 390,
     addedOn: "2026-08-20",
     access: "premium",
     mature: false,
@@ -1293,8 +1298,12 @@ export const videos: Video[] = [
     preview: {
       file: "luna-ty-panic-attack-preview.proxy.mp4",
       durationSeconds: 30,
+      // NOT from the top any more. The full cut opens on four quiet minutes of
+      // her moving around the bedroom, so a window at 0:00 would run out
+      // before the phone even rings and show a stranger nothing at all.
+      hookStart: 44,
       hookNote:
-        "From the top — the call has landed and she is coming apart, cut against him on the sofa with the game on. It ends as he gets up.",
+        "She sees the phone, she answers it, and the argument is well under way when it stops. It ends while she is still standing up and still arguing — the whole rest of the scene is what that call does to her.",
     },
     // `hurt` for what the call does to her, `trust` for what she does about
     // it — which is ask for help, out loud, from him. She does not do that

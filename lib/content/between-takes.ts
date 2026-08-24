@@ -38,7 +38,7 @@
  * they now end on the generous reading, which is both truer to these people and
  * a great deal better to read.
  *
- * ACCESS: 5 of the 32 pages are open, deliberately few. They are the funny ones
+ * ACCESS: 5 of the 33 pages are open, deliberately few. They are the funny ones
  * and the ones that give away a technique rather than a turn — enough for a
  * visitor to know exactly what the rest of the notebook is, which is the whole
  * job of a shop window. Everything that explains a scene the visitor cannot
@@ -528,6 +528,22 @@ export const notes: SetNote[] = [
       "Then, right at the end, I get up. Once, and I am the only one who does. That is the architecture of the whole thing: you spend the scene establishing that neither man moves, so the one who finally moves owns everything after it.",
       "It buys exactly one line. “You think you’re handling it? You’re not.” I am talking about Luna and I will not say her name, and that is the closest I come in the entire film to admitting I thought she was worth something.",
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work in that room than I am.",
+    ],
+  },
+  {
+    id: "rick-i-already-knew",
+    author: "rick",
+    kind: "insight",
+    heading: "I already knew",
+    dateline: "Day 20 · the lake",
+    sceneSlug: "josh-rick-lake",
+    place: "lake",
+    access: "premium",
+    body: [
+      "Two days after the study, and this time we are outdoors with a line in the water. Melissa's only staging note before we rolled was that I should be genuinely fishing — actually minding the water, actually working the line — and that Josh should have nothing in his hands at all.",
+      "The study was my room. The lake is the far edge of his own farm, so this one is his, and the useful thing is that it changes nothing. He has come out here to ask me how to fix it, and before he opens his mouth I have already talked to her mother and I know where Luna has been sleeping. He arrives with a question I answered days ago.",
+      "The line I keep coming back to is: good, now you know how she felt. I mean it kindly. That is the trouble with me — I have never once managed to get a kind thing into a shape my son can pick up and use, and this is as close as I come in the whole film. The truest thing I have to give him, and it arrives as a verdict.",
+      "Watch where I am looking when I say it. Not at him. In the study I had nothing to hold the room with except my face and the pause before I answered; out here I have a rod, and I put my eyes on the water rather than on the one person in the frame who needs them.",
     ],
   },
 

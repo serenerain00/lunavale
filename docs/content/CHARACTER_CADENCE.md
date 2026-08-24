@@ -42,22 +42,36 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-07-28:
+Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
+2026-08-24. The 2026-07-28 row is kept beneath so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 8 | 44 | 23 |
-| Tyson | 8 | 44 | 33 |
-| Josh | 8 | 35 | 21 |
+| Luna | 12 | 105 | 80 |
+| Tyson | 12 | 79 | 66 |
+| Josh | 13 | 78 | 61 |
+| Rick | 2 | 5 | 3 |
 
-**Josh is the thinnest** and is the one who benefits most from more. He is the
-hardest character to hold an audience's sympathy for, the whole story depends
-on him being genuinely likeable before he turns, and he has the fewest pieces
-making that case.
+*As built, 2026-07-28: Luna 8 / 44 / 23 · Tyson 8 / 44 / 33 · Josh 8 / 35 / 21.
+Rick was not on the table at all.*
+
+**Josh is still the thinnest of the three leads.** The note counts have almost
+evened out, but he is bottom on total pieces, and he is the one who benefits
+most from more: he is the hardest character to hold an audience's sympathy for,
+the whole story depends on him being genuinely likeable before he turns, and he
+has the fewest pieces making that case.
+
+**Rick is the real hole.** Five pieces against Josh's seventy-eight, and he is
+the entire explanation for Josh. Every note written for Rick is doing double
+duty on the character the story most needs an audience to like first, which
+makes him the cheapest way to feed Josh as well.
 
 Standing backlog, roughly prioritised:
 
 - Josh notes on the scenes he is in that have none yet
+- More Rick — he has two notes, both on the two father-and-son scenes. A third
+  has to come from somewhere other than a scene he is in: the brewery, the
+  liquor, what he made of Luna across ten years
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none
 - Notes on the clips; only `run-at-the-lake` has one
@@ -72,3 +86,4 @@ not a changelog.
 | Week of | What shipped | Who |
 | --- | --- | --- |
 | 2026-07-28 | Character hubs built; 24 Between Takes notes (8 each), 7 free | all three |
+| 2026-08-24 | Between Takes note "I already knew" on `josh-rick-lake`, premium; counts table re-read off the app | Rick |

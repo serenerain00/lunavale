@@ -512,6 +512,22 @@ export const notes: SetNote[] = [
       "That is the cruel part, and we played it completely straight. The thing she wanted from me for ten years is the exact thing that is about to be turned on her. I am finally paying attention. It is the worst news of her life.",
     ],
   },
+  {
+    id: "josh-asking-it-straight",
+    author: "josh",
+    kind: "craft",
+    heading: "Asking it straight",
+    dateline: "Day 22 · the fall fair",
+    sceneSlug: "luna-josh-fair",
+    place: "fair",
+    access: "premium",
+    body: [
+      "This one is not mine, and I had to make my peace with that on the day. It belongs to Luna and to Tyson. My whole part in it is to hand her one question and then stand in a field for two minutes while she goes and tries to get an answer out of somebody else.",
+      "The question is whether she knew he would be here. Melissa wanted it played as flat as it reads — not loaded, not testing her, a man at a fair who has spotted Tyson across the way and is mildly curious. I asked twice for something to put underneath it. No both times.",
+      "She was right, and the reason is arithmetic rather than acting. I get to say it once. Put one degree of suspicion in it and the audience hears the whole second half coming, long before it should. It is not there yet — and that is not restraint on my part, because at the fair there is genuinely nothing in me to keep out of it.",
+      "The part I would point at is after. She walks off to him, and I let her, and I stay where I am, and I am fine. Properly fine, hands in pockets, watching a woman I live with go and talk to a man I work with. It is the last time in the film that is true of me. Watch those two minutes knowing that and they stop being comfortable at all.",
+    ],
+  },
 
   /* ------------------------------------------------------------------ Rick */
   {
@@ -528,22 +544,6 @@ export const notes: SetNote[] = [
       "Then, right at the end, I get up. Once, and I am the only one who does. That is the architecture of the whole thing: you spend the scene establishing that neither man moves, so the one who finally moves owns everything after it.",
       "It buys exactly one line. “You think you’re handling it? You’re not.” I am talking about Luna and I will not say her name, and that is the closest I come in the entire film to admitting I thought she was worth something.",
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work in that room than I am.",
-    ],
-  },
-  {
-    id: "rick-i-already-knew",
-    author: "rick",
-    kind: "insight",
-    heading: "I already knew",
-    dateline: "Day 20 · the lake",
-    sceneSlug: "josh-rick-lake",
-    place: "lake",
-    access: "premium",
-    body: [
-      "Two days after the study, and this time we are outdoors with a line in the water. Melissa's only staging note before we rolled was that I should be genuinely fishing — actually minding the water, actually working the line — and that Josh should have nothing in his hands at all.",
-      "The study was my room. The lake is the far edge of his own farm, so this one is his, and the useful thing is that it changes nothing. He has come out here to ask me how to fix it, and before he opens his mouth I have already talked to her mother and I know where Luna has been sleeping. He arrives with a question I answered days ago.",
-      "The line I keep coming back to is: good, now you know how she felt. I mean it kindly. That is the trouble with me — I have never once managed to get a kind thing into a shape my son can pick up and use, and this is as close as I come in the whole film. The truest thing I have to give him, and it arrives as a verdict.",
-      "Watch where I am looking when I say it. Not at him. In the study I had nothing to hold the room with except my face and the pause before I answered; out here I have a rod, and I put my eyes on the water rather than on the one person in the frame who needs them.",
     ],
   },
 

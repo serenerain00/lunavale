@@ -1461,6 +1461,62 @@ export const videos: Video[] = [
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+  {
+    // THE CAR PARK, 2026-08-26, and the second half of a night already on the
+    // site. "Your Date" (luna-tyson-casey-bar) ends with her handing him a
+    // version of the evening and leaving before he can correct it. Tyson and
+    // Casey go. LUNA STAYS, and drinks bourbon on her own for another couple
+    // of hours. This is what is outside when she finally comes out.
+    //
+    // COLE IS THE REASON TYSON IS THERE, AND IS NEVER ON CAMERA. He watches
+    // her all night, and when she leaves he rings Tyson: she has been
+    // drinking, she has just gone, she is going to try to drive. So `about` is
+    // luna and tyson — the same call as luna-ty-panic-attack, where Josh
+    // causes the whole scene from the other end of a phone and is not in it.
+    //
+    // WHERE THEY ARE, in the story rather than on the map: a month or two back
+    // with Josh (Melissa is not certain which, and it is written down that way
+    // rather than picked). Long enough that she and Josh have started fighting
+    // over small things, and long enough that the friendship has gone quiet —
+    // he has been distant since she went back, he will not say why, and she
+    // does not know that the reason is that he is in love with her. She is
+    // confrontational, broken and confused, on bourbon, doing the best she can
+    // and doing it badly.
+    //
+    // PLACE `bar`, matching the scene it continues, because it is that night's
+    // car park. Worth a look though: Cole being behind the bar all evening
+    // points at `burnetts` rather than `bar`, which would move BOTH scenes and
+    // is Melissa's call, not a thing to settle in a card.
+    //
+    // NO CONTENT NOTE. The notes exist for harm — violence, control, panic —
+    // and nothing here is any of those: she is very drunk and she cries, and
+    // he holds her up. Adding a note would tell somebody scanning the card
+    // that this is a scene about something being done to her, and it is the
+    // opposite: it is the one place this month somebody turns up.
+    slug: "luna-ty-bar-drunk",
+    // PLACEHOLDER title and synopsis — hers to replace. "Last Call" for both
+    // meanings: the bar shutting, and the call Cole made.
+    title: "Last Call",
+    synopsis:
+      "Two hours after he left with somebody else, she comes out of the bar to find him standing in the car park. She has no idea who told him.",
+    file: "luna-ty-bar-drunk.proxy.mp4",
+    poster: "/posters/luna-ty-bar-drunk.jpg",
+    durationSeconds: 194,
+    addedOn: "2026-08-26",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "luna-ty-bar-drunk-preview.proxy.mp4",
+      durationSeconds: 15,
+      hookNote:
+        "the opening, for now — she comes out to a car park she expected to be empty. A better window can be picked once the dialogue is transcribed (scripts/find-hooks.mjs).",
+    },
+    // The same pair as the scene it follows, on purpose: it is the same fight
+    // two hours later, and it is still about what he did not tell her.
+    feelings: ["hurt", "distance"],
+    place: "bar",
+    about: ["luna", "tyson"],
+  },
 ];
 
 /**

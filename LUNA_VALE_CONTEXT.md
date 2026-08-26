@@ -681,6 +681,66 @@ rather than the other way round, and the first time she is the one behaving
 badly in a room. She does not get to be the wronged party in this one, and the
 scene does not offer her the excuse.
 
+### The car park — the other half of the Casey night
+*(Canon set by Melissa, 2026-08-26. CUT AND PUBLISHED as **"Last Call"**
+(`luna-ty-bar-drunk`), 3:14, **members-only**, first fifteen seconds open.
+Journal page `who-called-him`. No score; traffic and the two of them.)*
+
+**This is what happens after "Your Date" ends**, about two hours later, in the
+car park outside the same bar.
+
+Tyson and Casey leave. **Luna stays**, and keeps drinking bourbon on her own
+until closing — she was already several in when Casey walked in, and there is
+another couple of hours on top of it. *(There are takes of her coming apart
+alone at the bar during this stretch; one of them has done well posted on its
+own, and a longer version of that material is worth cutting.)*
+
+**COLE WATCHES HER ALL NIGHT AND IS NEVER ON SCREEN.** It is his bar and he is
+behind it, and when she finally walks out **he rings Tyson**: she has been
+drinking, she has just left, she is going to try to drive, come and get her.
+Tyson leaves wherever he had gone with Casey and comes.
+
+> **She does not know that call happened**, and the audience is never shown it.
+> The whole scene is a man appearing in a car park out of nowhere, which is
+> exactly what it is to her. Do not put Cole on camera to explain it.
+
+**She had her keys in her hand.** The call was not an overreaction.
+
+**Then it unravels in the car park.** She is confrontational — bourbon, and a
+month of things she has not said — and she is broken and confused with it, and
+she handles it badly. She knows the friendship is not what it was. **Tyson has
+been distant since she went back to Josh**, and will not say why, and she does
+not know that the reason is that he is in love with her. **Avoidance on both
+sides.** She goes at the one person who will stand there and take it.
+
+She comes apart, he holds her up, it comes down, and it ends with **the two of
+them in his truck and him driving**.
+
+#### Where this sits
+**A month back with Josh — possibly two.** *(Melissa is not certain, and this
+is deliberately left uncertain rather than picked.)* Long enough that **she and
+Josh have started fighting over small things** — the night begins with one of
+those, which is why she is in the bar at all — and long enough that the
+friendship has gone quiet. She is losing her best friend at the same time as
+the thing she went back to is going wrong.
+
+#### What comes next — SCENE IN PROGRESS
+Tyson sets off to take her home and **she tells him to take her to the
+lakehouse, not the farmhouse.** Melissa is writing that scene now, and it
+continues from there.
+
+That destination is **deliberately not in the journal page**: `who-called-him`
+stops at the truck, so the unmade scene keeps its own turn.
+
+#### Two loose ends this creates in already-published pages
+Neither is fixed, because each is a story decision rather than a tidy-up:
+
+- **`your-date`** is headed *"Home from the bar again"* and reads as written
+  after getting herself home. She did not get herself home.
+- **`i-apologised`** has her driving over to Tyson the next day, but **her truck
+  spent the night in that car park.** How it got back to her is a beat somebody
+  has to decide on.
+
 ### The wall — Josh at the farmhouse
 *(Canon set by Melissa, 2026-08-05. CUT AND PUBLISHED as **"The Way You Looked
 at Him"** (`josh-luna-wall`), 6:07, **members-only**.)*

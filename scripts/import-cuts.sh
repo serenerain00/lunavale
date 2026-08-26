@@ -257,6 +257,41 @@ CUTS=(
   # better — her face, after — and they are also the ending, which a card
   # should not give away before anybody has pressed play.
   "luna-josh-truck-leaving|stories/luna-josh-truck-leaving/luna-josh-truck-leaving.mp4|28||2"
+  # THE CAR PARK, and it is the second half of a night the site already has.
+  # Melissa, 2026-08-26.
+  #
+  # IT PICKS UP FROM "Your Date" (luna-tyson-casey-bar) with about two hours in
+  # between. That scene ends on "I'll let you get back to your date"; Tyson and
+  # Casey leave, LUNA STAYS, and she keeps drinking bourbon on her own until
+  # closing. This is what is waiting outside when she finally walks out.
+  #
+  # COLE IS THE MECHANISM AND IS NEVER ON CAMERA. He watches her all night, and
+  # when she leaves he rings Tyson — she has been drinking, she has just gone,
+  # she is going to try to drive. That call is why Tyson is standing in a car
+  # park instead of wherever he went with Casey, and none of it is on screen.
+  # Do not "fix" that in a recut: the whole scene is a man arriving out of
+  # nowhere, which is what it looks like to her too.
+  #
+  # NO MUSIC in this cut — -30.0 dB mean / -4.6 dB peak, traffic and the two of
+  # them. The Casey scene it follows is also unscored, so the pair are
+  # consistent; if a score is made for one it should be made for both.
+  #
+  # Trimmed at 194.0s: the delivered file runs 195.9s and the last 1.9s are
+  # black. There is also a deliberate 0.2s dip to black at 5.6s inside the
+  # picture — that one is an edit, not padding, and stays.
+  #
+  # FADE 3s, the house number, and it fits here where it did not on the
+  # driveway: the last shot is eight seconds of the two of them in the cab, so
+  # three seconds of fade has room to be an ending rather than eating the beat.
+  # The picture is at full brightness right up to the cut, so without this it
+  # stops rather than ends.
+  #
+  # Poster at 170s: the two of them against the truck once she has come down,
+  # both faces, her nearly smiling. NOT one of the frames of her sobbing in his
+  # arms — those are the middle of the scene and they are also a woman at the
+  # worst hour of her month, and a poster sits at a permanent ungated URL. Also
+  # NOT the cab, which is the last beat and the thing the next scene turns on.
+  "luna-ty-bar-drunk|stories/luna-ty-bar-drunk/luna-ty-bar-drunk.mp4|170|194.0|3"
   # Scored mix: -37.5 dB -> -26.8 dB. Runs 2.8s longer than the silent cut.
   "luna-josh-dinner-house|stories/withAudio/copy_A062089B-FB53-461E-BC18-DD0BD3F26458.MOV"
   # NEAR-SILENT (-51 dB). Its only candidate is portrait (1080x1822) and would

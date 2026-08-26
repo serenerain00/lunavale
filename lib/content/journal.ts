@@ -1476,6 +1476,59 @@ export const journal: JournalEntry[] = [
       "I'll apologise tomorrow. I'll do it badly.",
     ],
   },
+  /* ------------------------------------------------------- the car park ---
+   * THE SAME NIGHT, TWO HOURS LATER, and it is new canon (Melissa,
+   * 2026-08-26) rather than an inference. What happens after `your-date`:
+   * Tyson and Casey leave, LUNA STAYS, and she drinks bourbon on her own until
+   * closing. Cole watches her the whole time — he is never on camera, in this
+   * entry or in the scene — and when she walks out he rings Tyson to say she
+   * has been drinking and is about to drive. That call is the only reason
+   * Tyson is standing in a car park, and she does not know it happened.
+   *
+   * WRITTEN THE NEXT DAY, not that night, and the two reasons are worth
+   * keeping. She was in no state to write anything, and a page that admits
+   * most of the night is missing is truer than a lucid one. And the night ends
+   * with Tyson driving her somewhere — she asks for the lakehouse rather than
+   * the farm — which is a SCENE MELISSA IS STILL WRITING. So this entry stops
+   * at the truck and never says where he took her.
+   *
+   * TWO WRINKLES THIS CREATES IN WHAT IS ALREADY PUBLISHED, both left alone on
+   * purpose because each is a story decision with a scene attached:
+   *
+   *   `your-date` is headed "Home from the bar again" and reads as written
+   *   after getting herself home. She did not get herself home.
+   *
+   *   `i-apologised` has her driving over the next day — but her truck spent
+   *   the night in that car park, and how it got back to her is a beat
+   *   somebody has to decide on rather than a detail to paper over here.
+   *
+   * Melissa's call, both of them. Flagged, not fixed.
+   */
+  {
+    id: "who-called-him",
+    addedOn: "2026-08-26",
+    dateline: "The next day, and most of it is missing",
+    place: "bar",
+    about: ["tyson"],
+    sceneSlug: "luna-ty-bar-drunk",
+    access: "premium",
+    mature: false,
+    body: [
+      "I don't know who called him. I have been awake since six working out who called him, which tells you exactly which part of last night I am able to look at.",
+      "Because he did not decide to come. He left. He left with her, and I watched him do it, and then I ordered another one to prove a point to a room that was not paying attention.",
+      "So somebody in that bar watched me for two hours and picked up a phone. And the humiliating part is not that they did it. It is that they were right to.",
+      "I had my keys in my hand. I want that written down while I still have the nerve, because by Thursday I will have it filed under a bad night. I had my keys in my hand and I was going to drive.",
+      "And then he was just there. Standing in the car park like he had been there the whole time.",
+      "What I did next is what I have been doing for a month, which is to take the one person who has never let me down and point myself at him, because he is the only one who will stand still for it.",
+      "I asked him what he was even doing there. I meant: why are you not here any more.",
+      "He has gone quiet since I went back to Josh. Not cold. Quiet. He answers, he turns up, he does the thing you asked him to do. And there is a door in him that used to be open and is not now, and I do not know when it shut, and I cannot ask, because asking it out loud would mean saying why I mind.",
+      "I don't remember the middle of it. I remember being held up, which is not the same as being held, and I remember knowing the difference at the time and saying so, which I imagine was a delight for him.",
+      "I have been in that car park at the end of a night before. Laughing, both of us, twenty years of it. I have never had to be collected from it.",
+      "And nobody made me. That is the bit I keep walking up to. I picked the fight with Josh, I picked the bar, I picked the second half of that bottle, and then I stood in a car park and was furious with the one man who came.",
+      "He didn't ask me anything. He just drove.",
+      "I keep coming back to that, and I still can't tell whether it was kindness or whether he has simply stopped asking.",
+    ],
+  },
   /* ------------------------------------------------ the apology, next day ---
    * PREMIUM, and the other half of `your-date` — she ends that entry saying
    * she will apologise tomorrow and do it badly, and an unkept promise in a

@@ -784,8 +784,10 @@ enough. In this situation it stops being a game.
   of that decade, with nothing being repaired and nothing yet being feared.
   He goes; **she stays standing in the drive after the truck has gone**, and
   the look on her face is the only thing in it that points forward. Published
-  free as **"Three Days"** (`luna-josh-truck-leaving`), 1:33. *No journal
-  entry yet.*
+  free as **"Three Days"** (`luna-josh-truck-leaving`), 1:33, with the
+  journal page `four-minutes` beside it: four minutes of him entirely
+  present, and her working out in the drive that she got them **because he
+  was leaving**. Same canon as `second` from the other side.
 - **Coffee shop:** Josh grazes Luna's **lower lip** mid-sentence — it breaks
   down all her defenses. He touches her, gets close, makes her laugh, is the
   man she first fell for. He asks her to dinner; she says yes though she meant

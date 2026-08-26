@@ -203,6 +203,53 @@ export const journal: JournalEntry[] = [
       "I said yes so the morning could carry on. I would like to be the sort of woman who does not do that. I have been meaning to be her for about six years.",
     ],
   },
+  /*
+    THE DRIVEWAY, 2026-08-25, and the last page from inside the ten years.
+    Sits beside `luna-josh-truck-leaving` — Josh going away for three days,
+    the long goodbye at the truck, and her still standing in the drive after.
+
+    IT IS THE SAME CANON AS `second` COMING FROM THE OTHER SIDE. That entry is
+    six hours of being ready for a man who was not coming. This one is four
+    minutes of him being entirely, undividedly there — and her working out on
+    the spot that she got them because he was leaving. Nothing is wrong with
+    the morning, which is the point: the scene is warm the whole way through
+    and so is she, and the only thing in either of them that points forward is
+    what her face does once the truck is out of the drive.
+
+    THE RELIEF PARAGRAPH IS THE ENTRY. Everything else here she could say to
+    him; that one she could not, and it is the first sign in this file of a
+    woman who has started to want the house to herself. `the-night-i-left` is
+    the same thought with nine months on it.
+
+    PREMIUM, against a free scene. Same pairing as `asking-for-less` and for
+    the same reason — the open five are an arc, not a sample, and a sixth
+    would undo that decision (see the top of this file).
+
+    DRAFT PROSE, like everything else here that is not marked otherwise.
+  */
+  {
+    id: "four-minutes",
+    addedOn: "2026-08-25",
+    dateline: "Three days, he said",
+    place: "farmhouse",
+    where: "The drive",
+    about: ["josh"],
+    sceneSlug: "luna-josh-truck-leaving",
+    access: "premium",
+    mature: false,
+    body: [
+      "He kissed me goodbye for four minutes in the drive this morning and I have spent the whole day working out why it made me sad.",
+      "Three days. He told me twice, which he only ever does when some part of him thinks I might mind.",
+      "And he was there. That is what I want to get down properly before it goes soft on me. For four minutes there was no phone in it and no clock in it and nothing behind his eyes that was already in the truck. He had my face in both hands like we were nineteen. He is not performing when he does that. That is really him — that is all of him, pointed at one person, and there is not a woman alive who would walk away from it.",
+      "Then the dust went down and I was standing in the drive on my own, and the thought arrived before I could stop it being unkind.",
+      "That was the most of him I have had in about three weeks. And I got it because he was going.",
+      "I don't think he knows that's the arrangement. I am fairly sure I didn't either until I was standing there in it.",
+      "Here is the part I would not say out loud. Under all of that, somewhere I am not proud of, I was relieved. Three days of the house being only mine. Nobody needing the day to go a particular way. I can eat standing up at the sink and go to bed at nine and not be waiting for a truck.",
+      "That is not the same as wanting him gone. I want that on the page in my own handwriting, because I know exactly what it will look like if I ever read this back.",
+      "He'll ring tonight from wherever he stops and he will be lovely on the phone, and I will be glad, and all of that will be true.",
+      "I just wish I didn't already know that the best four minutes of my week happened in a driveway with the engine running.",
+    ],
+  },
   /* ---------------------------------------------------- the six months ---- */
   /*
     THE NIGHT ITSELF, which the six months had no first page for. `the-last-box`

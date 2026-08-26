@@ -1468,11 +1468,19 @@ export const videos: Video[] = [
     // Casey go. LUNA STAYS, and drinks bourbon on her own for another couple
     // of hours. This is what is outside when she finally comes out.
     //
-    // COLE IS THE REASON TYSON IS THERE, AND IS NEVER ON CAMERA. He watches
-    // her all night, and when she leaves he rings Tyson: she has been
-    // drinking, she has just gone, she is going to try to drive. So `about` is
-    // luna and tyson — the same call as luna-ty-panic-attack, where Josh
-    // causes the whole scene from the other end of a phone and is not in it.
+    // COLE IS THE REASON TYSON IS THERE, AND IS NEVER ON CAMERA. It is his
+    // bar, he watches her all night, and when she leaves he rings Tyson: she
+    // has been drinking, she has just gone, she is going to try to drive. So
+    // `about` is luna and tyson — the same call as luna-ty-panic-attack, where
+    // Josh causes the whole scene from the other end of a phone and is not in
+    // it.
+    //
+    // SHE KNOWS WHO CALLED (Melissa, 2026-08-26). Cole owns the place, she has
+    // met him for years, and she knows he and Tyson were SEALs together. So
+    // the scene is NOT a mystery about who told him — the synopsis said it was
+    // for about an hour and that was wrong. What she does not know is the far
+    // worse thing, which is that Cole rang Tyson rather than the man she lives
+    // with and did not have to think about it. That is the journal page.
     //
     // WHERE THEY ARE, in the story rather than on the map: a month or two back
     // with Josh (Melissa is not certain which, and it is written down that way
@@ -1483,10 +1491,19 @@ export const videos: Video[] = [
     // confrontational, broken and confused, on bourbon, doing the best she can
     // and doing it badly.
     //
-    // PLACE `bar`, matching the scene it continues, because it is that night's
-    // car park. Worth a look though: Cole being behind the bar all evening
-    // points at `burnetts` rather than `bar`, which would move BOTH scenes and
-    // is Melissa's call, not a thing to settle in a card.
+    // PLACE `bar`, matching the scene it continues — and it is now probably
+    // WRONG, for both of them.
+    //
+    // Cole owns Burnett's (LUNA_VALE_CONTEXT.md), Cole was behind the bar all
+    // night, and Melissa confirmed on 2026-08-26 that Luna knows he owns the
+    // place. That puts this night at `burnetts` rather than `bar`, and takes
+    // luna-tyson-casey-bar with it, since they are the same evening.
+    //
+    // NOT CHANGED HERE. It moves a scene that has been live since 2026-08-09,
+    // and the canon note on `burnetts` says in as many words that it is NOT
+    // the bar Tyson takes Luna dancing to — so re-filing this pair has a
+    // knock-on into what that distinction is for. Melissa's call. One line
+    // each when she makes it.
     //
     // NO CONTENT NOTE. The notes exist for harm — violence, control, panic —
     // and nothing here is any of those: she is very drunk and she cries, and
@@ -1498,7 +1515,7 @@ export const videos: Video[] = [
     // meanings: the bar shutting, and the call Cole made.
     title: "Last Call",
     synopsis:
-      "Two hours after he left with somebody else, she comes out of the bar to find him standing in the car park. She has no idea who told him.",
+      "Two hours after he left with somebody else, she comes out of the bar to find him standing in the car park. Nobody had to tell her who called him.",
     file: "luna-ty-bar-drunk.proxy.mp4",
     poster: "/posters/luna-ty-bar-drunk.jpg",
     durationSeconds: 194,

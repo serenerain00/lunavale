@@ -1480,17 +1480,36 @@ export const journal: JournalEntry[] = [
    * THE SAME NIGHT, TWO HOURS LATER, and it is new canon (Melissa,
    * 2026-08-26) rather than an inference. What happens after `your-date`:
    * Tyson and Casey leave, LUNA STAYS, and she drinks bourbon on her own until
-   * closing. Cole watches her the whole time — he is never on camera, in this
-   * entry or in the scene — and when she walks out he rings Tyson to say she
-   * has been drinking and is about to drive. That call is the only reason
-   * Tyson is standing in a car park, and she does not know it happened.
+   * closing. Cole watches her the whole time and rings Tyson when she walks
+   * out, because she is about to drive. Cole is never on camera, here or in
+   * the scene.
    *
-   * WRITTEN THE NEXT DAY, not that night, and the two reasons are worth
-   * keeping. She was in no state to write anything, and a page that admits
-   * most of the night is missing is truer than a lucid one. And the night ends
-   * with Tyson driving her somewhere — she asks for the lakehouse rather than
-   * the farm — which is a SCENE MELISSA IS STILL WRITING. So this entry stops
-   * at the truck and never says where he took her.
+   * SHE KNOWS IT WAS COLE (Melissa, 2026-08-26, correcting the first draft of
+   * this entry, which was built on her not knowing). It is his bar, she has
+   * met him at birthdays and barbecues for years, and she knows he and Tyson
+   * were SEALs together — all of which was already in the character canon and
+   * none of which the entry was using.
+   *
+   * That is a better page. A mystery about who made the call is a small thing
+   * and she would have solved it before breakfast anyway; knowing exactly who
+   * did it, and being unable to be angry with him because he was right, is the
+   * thing that actually keeps somebody awake.
+   *
+   * WHAT IT UNLOCKED — the line the entry is built on now. Cole rang TYSON. He
+   * did not ring the man she lives with. She notices, and she cannot say it to
+   * anybody, and it is the first time somebody else's instinct has told her
+   * what she and Tyson look like from outside.
+   *
+   * AND IT RHYMES WITH THE FIRST HALF OF THE NIGHT. `your-date` is her finding
+   * out there is a woman she had never heard of. This is her working out that
+   * Cole has the ten years Tyson was away serving — a version of him she does
+   * not have and never will. Twice in one night, the same wound.
+   *
+   * WRITTEN THE NEXT DAY, not that night. She was in no state, and a page that
+   * admits most of the night is missing is truer than a lucid one. It also
+   * stops at the truck and never says where he took her, because the drive —
+   * she asks for the lakehouse, not the farm — is A SCENE MELISSA IS STILL
+   * WRITING and it should keep its own turn.
    *
    * TWO WRINKLES THIS CREATES IN WHAT IS ALREADY PUBLISHED, both left alone on
    * purpose because each is a story decision with a scene attached:
@@ -1505,26 +1524,27 @@ export const journal: JournalEntry[] = [
    * Melissa's call, both of them. Flagged, not fixed.
    */
   {
-    id: "who-called-him",
+    id: "cole-rang-him",
     addedOn: "2026-08-26",
     dateline: "The next day, and most of it is missing",
     place: "bar",
-    about: ["tyson"],
+    about: ["tyson", "cole"],
     sceneSlug: "luna-ty-bar-drunk",
     access: "premium",
     mature: false,
     body: [
-      "I don't know who called him. I have been awake since six working out who called him, which tells you exactly which part of last night I am able to look at.",
-      "Because he did not decide to come. He left. He left with her, and I watched him do it, and then I ordered another one to prove a point to a room that was not paying attention.",
-      "So somebody in that bar watched me for two hours and picked up a phone. And the humiliating part is not that they did it. It is that they were right to.",
-      "I had my keys in my hand. I want that written down while I still have the nerve, because by Thursday I will have it filed under a bad night. I had my keys in my hand and I was going to drive.",
-      "And then he was just there. Standing in the car park like he had been there the whole time.",
-      "What I did next is what I have been doing for a month, which is to take the one person who has never let me down and point myself at him, because he is the only one who will stand still for it.",
-      "I asked him what he was even doing there. I meant: why are you not here any more.",
-      "He has gone quiet since I went back to Josh. Not cold. Quiet. He answers, he turns up, he does the thing you asked him to do. And there is a door in him that used to be open and is not now, and I do not know when it shut, and I cannot ask, because asking it out loud would mean saying why I mind.",
-      "I don't remember the middle of it. I remember being held up, which is not the same as being held, and I remember knowing the difference at the time and saying so, which I imagine was a delight for him.",
-      "I have been in that car park at the end of a night before. Laughing, both of us, twenty years of it. I have never had to be collected from it.",
-      "And nobody made me. That is the bit I keep walking up to. I picked the fight with Josh, I picked the bar, I picked the second half of that bottle, and then I stood in a car park and was furious with the one man who came.",
+      "It was Cole who rang him. Of course it was Cole. It is his bar and he was standing behind it all night, and I have spent this morning trying to work up some feeling about that and getting absolutely nowhere.",
+      "Because he was right. I had my keys in my hand. I want that written down while I still have the nerve for it, because by Thursday I will have this filed under a bad night and moved on.",
+      "But he didn't come out and take them off me himself. He picked up a phone.",
+      "And here is the thing I have been turning over since about six o'clock this morning, and cannot put down, and am not going to be able to say out loud to a single person alive.",
+      "He rang Tyson. He did not ring my partner.",
+      "A man watches a woman drink on her own for four hours, decides she should not be driving, and reaches for the phone — and the name he goes to is not the one she lives with. He didn't even think about it. That is what I keep arriving at. It was not a decision he had to make.",
+      "So that is what we look like from the outside. Somebody who has known us both for years, with no stake in it and no reason to be clever, worked out who to ring in about a second and a half.",
+      "And he has ten years of Tyson that I don't have. The ten years he was away — the ones where I got a phone call when he could manage one and no address to write to. Cole was there for all of that. He knows a whole man I have never met.",
+      "Twice in one night. First a woman I had never heard of, then a man who knows the version of him I missed. I have spent twenty years being the person who knows everything about him and it turns out I know the part he is willing to leave lying around.",
+      "I don't remember the middle of the car park. I remember being held up, which is not the same as being held, and I remember knowing the difference at the time and saying it out loud, which I imagine was a joy for him.",
+      "I have been in that car park at the end of a night before. Laughing, both of us. I have never had to be collected from it.",
+      "And nobody made me. That is where I keep landing. I picked the fight with Josh, I picked the bar, I picked the second half of that bottle, and then I stood in a car park being furious with the only man who came.",
       "He didn't ask me anything. He just drove.",
       "I keep coming back to that, and I still can't tell whether it was kindness or whether he has simply stopped asking.",
     ],

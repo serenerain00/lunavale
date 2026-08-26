@@ -700,9 +700,26 @@ behind it, and when she finally walks out **he rings Tyson**: she has been
 drinking, she has just left, she is going to try to drive, come and get her.
 Tyson leaves wherever he had gone with Casey and comes.
 
-> **She does not know that call happened**, and the audience is never shown it.
-> The whole scene is a man appearing in a car park out of nowhere, which is
-> exactly what it is to her. Do not put Cole on camera to explain it.
+> **He stays off camera and the call is never shown.** On screen it is a man
+> appearing in a car park out of nowhere. Do not put Cole in the scene to
+> explain it — the explanation belongs in her journal, the next day.
+
+**SHE KNOWS IT WAS COLE** *(2026-08-26)*. He owns the place, she has known him
+for years — birthdays, barbecues — and she knows he and Tyson **were SEALs
+together**. There is no mystery about who made the call and she does not spend
+a page wondering.
+
+**The thing she cannot get past is who he rang.** Cole reached for the phone,
+and the name he went to was **Tyson, not Josh** — the man she lives with — and
+he did not have to think about it. Somebody with no stake in it and no reason
+to be clever worked out in a second and a half what she and Tyson look like
+from outside. She notices, and she can say it to nobody.
+
+**And Cole has the ten years she does not have.** Luna has known Tyson twenty
+years to Cole's dozen, but Cole was *there for the service* — the decade Tyson
+came and went, when she got a phone call when he could manage one. It rhymes
+with the first half of the night exactly: Casey is a woman she had never heard
+of, Cole is a version of Tyson she never met.
 
 **She had her keys in her hand.** The call was not an overreaction.
 
@@ -732,14 +749,25 @@ continues from there.
 That destination is **deliberately not in the journal page**: `who-called-him`
 stops at the truck, so the unmade scene keeps its own turn.
 
-#### Two loose ends this creates in already-published pages
-Neither is fixed, because each is a story decision rather than a tidy-up:
+#### Which bar is this? — OPEN QUESTION
+Cole owns **Burnett's**, Cole is behind the bar all night, and Luna knows he
+owns it. That puts this night — **and "Your Date" with it, since they are one
+evening** — at `burnetts` rather than `bar`.
+
+Both scenes are still filed under `bar` and have not been moved. Re-filing them
+has a knock-on: the note on Cole above says Burnett's is explicitly **NOT** the
+bar Tyson takes Luna dancing to, and that distinction was doing work. Melissa's
+call. It is one line per scene when she makes it.
+
+#### Three loose ends this creates in already-published pages
+None is fixed, because each is a story decision rather than a tidy-up:
 
 - **`your-date`** is headed *"Home from the bar again"* and reads as written
   after getting herself home. She did not get herself home.
 - **`i-apologised`** has her driving over to Tyson the next day, but **her truck
   spent the night in that car park.** How it got back to her is a beat somebody
   has to decide on.
+- **The place tag on both bar scenes**, above.
 
 ### The wall — Josh at the farmhouse
 *(Canon set by Melissa, 2026-08-05. CUT AND PUBLISHED as **"The Way You Looked

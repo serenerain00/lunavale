@@ -21,12 +21,10 @@ import {
   opening,
   quoteOfTheDay,
 } from "@/lib/content/journal";
+import { getCharacter } from "@/lib/content/characters";
 import { galleries } from "@/lib/content/gallery";
-import {
-  cadenceNote,
-  formatReleaseDate,
-  recentReleases,
-} from "@/lib/content/releases";
+import { cadenceNote, recentReleases } from "@/lib/content/releases";
+import { LatelyRail } from "@/components/home/LatelyRail";
 import { takes } from "@/lib/content/takes";
 import { formatPrice, getTier } from "@/lib/content/membership";
 import {
@@ -69,7 +67,7 @@ export default async function Home() {
   // THE RHYTHM. Derived from what is actually published; see
   // lib/content/releases.ts for why this is not a hand-kept list and why there
   // is no forward-looking schedule anywhere in it.
-  const drops = recentReleases(7);
+  const drops = recentReleases(12);
   const cadence = cadenceNote();
 
   // Nobody who has already answered gets asked again. Read server-side rather
@@ -357,50 +355,43 @@ export default async function Home() {
               )}
             </div>
 
-            <ol className="mt-6 border-t border-hairline">
-              {drops.map((drop) => (
-                <li key={`${drop.kind}-${drop.href}`}>
-                  <Link
-                    href={drop.href}
-                    className="group flex min-h-14 items-center gap-4 border-b border-hairline py-3 transition-colors duration-(--duration-quick) hover:bg-charcoal/30 sm:gap-6"
-                  >
-                    <time
-                      dateTime={drop.date}
-                      className="w-14 shrink-0 text-xs tabular-nums text-stone-dim sm:w-16"
-                    >
-                      {formatReleaseDate(drop.date)}
-                    </time>
-                    <span className="w-16 shrink-0 text-[0.7rem] uppercase tracking-[0.14em] text-stone-dim sm:w-20">
-                      {drop.kind === "scene" ? "Scene" : "Journal"}
-                    </span>
-                    <span className="min-w-0 flex-1 truncate text-sm text-ivory transition-colors duration-(--duration-quick) group-hover:text-white">
-                      {drop.title}
-                    </span>
-                    {drop.durationSeconds !== undefined && (
-                      <span className="hidden shrink-0 text-xs tabular-nums text-stone-dim sm:block">
-                        {formatDuration(drop.durationSeconds)}
-                      </span>
-                    )}
-                    <span
-                      className={`shrink-0 text-[0.7rem] uppercase tracking-[0.12em] ${
-                        drop.access === "free" ? "text-stone-dim" : "text-amber"
-                      }`}
-                    >
-                      {drop.access === "free" ? "Free" : "Members"}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ol>
+            {/* THE RAIL, not a table (Melissa, 2026-08-25). The list this
+                replaced was five columns of small text on a page whose entire
+                argument is that this is a film — accurate, and reading like a
+                changelog. A card leads with the picture and opens to the rest.
+
+                Reusing components/browse/Rail so the catalog's carousel
+                behaviour — peeking card, edge scrims, arrows that vanish at
+                the ends, drag, keyboard paging, reduced motion — is the same
+                gesture here as everywhere else rather than a second one. */}
+            <div className="mt-6">
+              <LatelyRail drops={drops} label="Lately" />
+            </div>
           </section>
         )}
 
         {/* --------------------------------------------------------- three */}
         {/* "Why should I care" answered before anything is asked for. Three
-            people, one sentence each, no images: a stranger cannot care about
-            a cast list, but they can hold three facts. It sits ABOVE the
-            membership section on purpose — the pitch is meaningless until
-            somebody knows who is in the room. */}
+            people, one sentence each: a stranger cannot care about a cast
+            list, but they can hold three facts. It sits ABOVE the membership
+            section on purpose — the pitch is meaningless until somebody knows
+            who is in the room.
+
+            NOW WITH FACES (Melissa, 2026-08-25). This ran as three headings
+            and three paragraphs, on the old argument that a name plus a fact
+            travels further than a photograph of a stranger. It does not, on
+            this page: the section sat between a carousel and a wall of
+            numbers as the only text-only block on the page, and it read as
+            the small print of a story rather than the cast of one.
+
+            The sentences are UNCHANGED and still do the work — they are
+            written for this section and are sharper than the taglines on
+            /characters. The portrait carries the weight and the line stays
+            beneath it, small.
+
+            THE IMAGE PATHS COME FROM lib/content/characters.ts rather than
+            being typed here, so there is one place a portrait is named and
+            this page cannot drift from the character hub it links into. */}
         <section
           aria-labelledby="three-heading"
           className="mx-auto w-full max-w-4xl px-5 pt-16 sm:px-8 sm:pt-24"
@@ -411,29 +402,49 @@ export default async function Home() {
           >
             It&rsquo;s about three people.
           </h2>
-          <dl className="mt-8 grid gap-7 sm:grid-cols-3 sm:gap-8">
+          <ul className="mt-8 grid grid-cols-3 gap-3 sm:gap-6">
             {[
               {
-                name: "Luna",
+                id: "luna",
                 line: "Ten years with Josh, six months apart, and she went back knowing exactly what she was going back to.",
               },
               {
-                name: "Josh",
+                id: "josh",
                 line: "Charming, commanding, and the thrill she can no longer quite separate from fear.",
               },
               {
-                name: "Tyson",
+                id: "tyson",
                 line: "Her best friend of twenty years, who kept her alive through those six months and will not say the thing.",
               },
-            ].map((p) => (
-              <div key={p.name}>
-                <dt className="font-display text-lg text-amber">{p.name}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-stone">
-                  {p.line}
-                </dd>
-              </div>
-            ))}
-          </dl>
+            ].map((p) => {
+              const character = getCharacter(p.id)!;
+              return (
+                <li key={p.id}>
+                  <Link
+                    href={`/characters/${character.id}`}
+                    className="group block"
+                  >
+                    <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-charcoal ring-1 ring-hairline">
+                      <Image
+                        src={character.portrait}
+                        alt=""
+                        fill
+                        sizes="(max-width: 640px) 31vw, 280px"
+                        className="object-cover brightness-90 transition-transform duration-(--duration-cinematic) ease-(--ease-cinematic) group-hover:scale-[1.04] group-hover:brightness-100"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void via-void/20 to-transparent" />
+                      <h3 className="absolute inset-x-0 bottom-0 p-3 font-display text-xl font-light leading-none text-ivory sm:p-5 sm:text-3xl">
+                        {character.name}
+                      </h3>
+                    </div>
+                    <p className="mt-3 text-xs leading-relaxed text-stone sm:text-sm">
+                      {p.line}
+                    </p>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
           <p className="mt-8 max-w-2xl leading-relaxed text-stone">
             Nobody in it is lying to anybody except themselves, which is the
             part that takes a while to hurt.{" "}

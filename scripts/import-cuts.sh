@@ -221,6 +221,42 @@ CUTS=(
   # centre of the scene and also a woman at the worst moment of her month, and
   # a poster sits at a permanent ungated URL where anybody can meet it cold.
   "luna-ty-panic-attack|stories/luna-ty-panic-attack/luna-panicAttack-full.mp4|382.4|390.4|3"
+  # THE DRIVEWAY. Josh is going away for three days, and it takes them the
+  # length of the scene to let go of each other. Melissa, 2026-08-25.
+  #
+  # BEFORE THE BREAKUP — her placement, handed over with the footage. Inside
+  # the ten years, so nothing between them is guarded yet.
+  #
+  # THIS IS THE UNSCORED CUT, AND IT IS TEMPORARY. -31.8 dB mean / -6.5 dB
+  # peak, and the spectrogram is broadband with no sustained bands anywhere in
+  # it: wind, the truck, and the two of them. Unlike the garage and the
+  # bathroom, that is NOT the delivery — Melissa is exporting the mix with the
+  # music and will upload it (2026-08-25, "I'll upload the one with music
+  # later").
+  #
+  # WHEN IT LANDS: point the source below at the scored file and re-run this
+  # slug, the same swap already done for luna-josh-bed, the beach and the
+  # flashback. Re-check `durationSeconds` in lib/content/videos.ts against what
+  # the import prints — a rescored export is usually a slightly different edit,
+  # not the same picture with sound on it — and re-check the poster second and
+  # the fade, which are both timed against THIS cut. Standing house rule: the
+  # scored mix wins, even when it costs resolution or shape.
+  #
+  # NO TRAILING BLACK — blackdetect at pic_th=0.95 across the whole file, not
+  # just the tail, finds none. So no `end` on this line, and it is the first
+  # entry here to fade without trimming first.
+  #
+  # FADE 2s, the one line in this file that is not the house 3s. The last shot
+  # is her alone in the drive once the truck is out of it, and it runs about
+  # four seconds; a three-second fade would sit over nearly all of it and take
+  # away the thing the scene ends on. Two seconds leaves her the look and still
+  # takes the engine down rather than cutting it dead.
+  #
+  # Poster at 28s: the two of them holding on to each other beside the truck,
+  # the porch and the whole of the light behind them. The frames after 88s are
+  # better — her face, after — and they are also the ending, which a card
+  # should not give away before anybody has pressed play.
+  "luna-josh-truck-leaving|stories/luna-josh-truck-leaving/luna-josh-truck-leaving.mp4|28||2"
   # Scored mix: -37.5 dB -> -26.8 dB. Runs 2.8s longer than the silent cut.
   "luna-josh-dinner-house|stories/withAudio/copy_A062089B-FB53-461E-BC18-DD0BD3F26458.MOV"
   # NEAR-SILENT (-51 dB). Its only candidate is portrait (1080x1822) and would

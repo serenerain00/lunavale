@@ -1417,6 +1417,50 @@ export const videos: Video[] = [
     place: "farmhouse",
     about: ["luna", "tyson"],
   },
+  {
+    // THE DRIVEWAY, 2026-08-25. Josh is going away for three days, and it
+    // takes them the whole of the scene to let go of each other: a long
+    // goodbye at the truck in the last of the light, him gone, and her still
+    // standing in the drive after it.
+    //
+    // BEFORE THE BREAKUP — Melissa's placement, handed over with the footage.
+    // Inside the ten years, so this is not the coffee shop and not the try
+    // again; it is the ordinary version of the two of them, which the library
+    // is otherwise thin on. Everywhere else Josh is either charming her back
+    // or at the wall. Here he is just a man leaving for work, and how easy she
+    // is with him is the measure of everything that comes after.
+    //
+    // FREE, and no preview. It runs 1:33, and the scenes around that length
+    // are already free — josh-luna-bolt at 0:57, luna-cathy-phone at 1:32,
+    // luna-tyson-gingerale at 0:47. A membership pitch cut out of ninety
+    // seconds would have to take a third of the scene and would sell nothing.
+    //
+    // NOT `mature`. Two clothed people kissing goodbye in a driveway.
+    //
+    // THE MIX IS TEMPORARY. This is the unscored cut; Melissa is uploading the
+    // one with the music (2026-08-25). See scripts/import-cuts.sh for what to
+    // re-check when it lands — `durationSeconds` here is the first thing.
+    slug: "luna-josh-truck-leaving",
+    // PLACEHOLDER title and synopsis — hers to replace.
+    title: "Three Days",
+    synopsis:
+      "Josh is going away for three days. Neither of them hurries the goodbye at the truck — and when it has gone, she is still standing in the drive.",
+    file: "luna-josh-truck-leaving.proxy.mp4",
+    poster: "/posters/luna-josh-truck-leaving.jpg",
+    durationSeconds: 93,
+    addedOn: "2026-08-25",
+    access: "free",
+    mature: false,
+    // `trust` and `desire`, the same pair as the other two scenes from inside
+    // the ten years (luna-josh-first-morning, josh-luna-bolt) — this belongs
+    // with them. Deliberately NOT `distance`: the last shot leaves a shadow on
+    // her face, but the scene is not two people who are further apart than
+    // they will admit, and filing it that way would read the ending back over
+    // the ninety seconds that earn it.
+    feelings: ["trust", "desire"],
+    place: "farmhouse",
+    about: ["luna", "josh"],
+  },
 ];
 
 /**

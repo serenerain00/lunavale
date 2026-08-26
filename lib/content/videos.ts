@@ -1510,15 +1510,37 @@ export const videos: Video[] = [
     // he holds her up. Adding a note would tell somebody scanning the card
     // that this is a scene about something being done to her, and it is the
     // opposite: it is the one place this month somebody turns up.
+    //
+    // EXTENDED CUT, swapped in the same evening it first went up. 3:14 -> 5:02,
+    // and it is purely an extension: frames at 20s, 100s and 180s are
+    // identical to the cut it replaces, so the first 194 seconds are untouched
+    // and 108 are new on the end.
+    //
+    // THE NEW MINUTES CHANGE WHAT THE SCENE IS. It was "he collects her". Now
+    // the drive keeps going, they arrive somewhere, there is a long argument
+    // on a sofa, and the last ninety seconds are the two of them standing
+    // inches apart with his hand at her face. It stops on whether that goes
+    // anywhere, which is the most loaded frame either of them has been given.
+    //
+    // WHERE THEY GO IS UNIDENTIFIED HERE ON PURPOSE. It is plainly a city
+    // apartment — sofa, kitchen island, a lit skyline through the window — and
+    // it is plainly NOT the lakehouse Melissa described when she gave the
+    // backstory. It could be Luna's own place (`apartment`) or his. Naming it
+    // sets canon about where Tyson lives, so the synopsis says "somewhere" and
+    // the place tag is unchanged until she says.
+    //
+    // STILL NOT `mature`. Both clothed throughout and nothing happens; the
+    // scene ends on the question rather than the answer. `mature` means there
+    // is sex in it, and putting the label on a near-miss would spend it.
     slug: "luna-ty-bar-drunk",
     // PLACEHOLDER title and synopsis — hers to replace. "Last Call" for both
     // meanings: the bar shutting, and the call Cole made.
     title: "Last Call",
     synopsis:
-      "Two hours after he left with somebody else, she comes out of the bar to find him standing in the car park. Nobody had to tell her who called him.",
+      "Two hours after he left with somebody else, she comes out of the bar to find him standing in the car park. Nobody had to tell her who called him — and the night does not end there.",
     file: "luna-ty-bar-drunk.proxy.mp4",
     poster: "/posters/luna-ty-bar-drunk.jpg",
-    durationSeconds: 194,
+    durationSeconds: 302,
     addedOn: "2026-08-26",
     access: "premium",
     mature: false,
@@ -1528,9 +1550,13 @@ export const videos: Video[] = [
       hookNote:
         "the opening, for now — she comes out to a car park she expected to be empty. A better window can be picked once the dialogue is transcribed (scripts/find-hooks.mjs).",
     },
-    // The same pair as the scene it follows, on purpose: it is the same fight
-    // two hours later, and it is still about what he did not tell her.
-    feelings: ["hurt", "distance"],
+    // `hurt` and `distance` are the pair it shares with the scene it follows —
+    // same fight, two hours later, still about what he did not tell her.
+    //
+    // `desire` ADDED WITH THE EXTENDED CUT, and it is not decoration: the last
+    // ninety seconds are the two of them inches apart with nothing in the way,
+    // and a scene that ends there is not filed honestly under hurt alone.
+    feelings: ["hurt", "distance", "desire"],
     place: "bar",
     about: ["luna", "tyson"],
   },

@@ -1506,10 +1506,20 @@ export const journal: JournalEntry[] = [
    * not have and never will. Twice in one night, the same wound.
    *
    * WRITTEN THE NEXT DAY, not that night. She was in no state, and a page that
-   * admits most of the night is missing is truer than a lucid one. It also
-   * stops at the truck and never says where he took her, because the drive —
-   * she asks for the lakehouse, not the farm — is A SCENE MELISSA IS STILL
-   * WRITING and it should keep its own turn.
+   * admits most of the night is missing is truer than a lucid one.
+   *
+   * IT STOPS AT THE TRUCK, and as of the extended cut (2026-08-26, same
+   * evening) that is no longer the end of the night. The scene now carries on
+   * past the drive: they arrive somewhere, there is an argument on a sofa, and
+   * it ends with the two of them inches apart. This page ends on "He didn't
+   * ask me anything. He just drove."
+   *
+   * LEFT THAT WAY ON PURPOSE, and it needs to stay a decision rather than
+   * become an oversight. A woman who writes down the whole humiliation in
+   * detail and stops dead at the hour that actually frightened her is exactly
+   * this character — she refuses the page for the wall, too. But Melissa
+   * should decide whether the entry acknowledges the gap or pretends there
+   * isn't one, because those are different women.
    *
    * TWO WRINKLES THIS CREATES IN WHAT IS ALREADY PUBLISHED, both left alone on
    * purpose because each is a story decision with a scene attached:

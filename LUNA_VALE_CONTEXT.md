@@ -683,8 +683,9 @@ scene does not offer her the excuse.
 
 ### The car park — the other half of the Casey night
 *(Canon set by Melissa, 2026-08-26. CUT AND PUBLISHED as **"Last Call"**
-(`luna-ty-bar-drunk`), 3:14, **members-only**, first fifteen seconds open.
-Journal page `who-called-him`. No score; traffic and the two of them.)*
+(`luna-ty-bar-drunk`), **5:02** after the extended cut landed the same evening,
+**members-only**, first fifteen seconds open. Journal page `cole-rang-him`. No
+score; traffic and the two of them.)*
 
 **This is what happens after "Your Date" ends**, about two hours later, in the
 car park outside the same bar.
@@ -741,13 +742,32 @@ those, which is why she is in the bar at all — and long enough that the
 friendship has gone quiet. She is losing her best friend at the same time as
 the thing she went back to is going wrong.
 
-#### What comes next — SCENE IN PROGRESS
-Tyson sets off to take her home and **she tells him to take her to the
-lakehouse, not the farmhouse.** Melissa is writing that scene now, and it
-continues from there.
+#### What comes next — NOW PART OF THE SAME CUT
+Melissa described this as a separate scene she was writing: Tyson sets off to
+take her home and **Luna tells him to take her to the lakehouse, not the
+farmhouse.** The **extended cut delivered the same evening contains it**, or
+something very like it — the scene no longer stops at the truck.
 
-That destination is **deliberately not in the journal page**: `who-called-him`
-stops at the truck, so the unmade scene keeps its own turn.
+What the extra 108 seconds actually show: the drive continues, they arrive
+somewhere, there is **a long argument on a sofa**, and the last ninety seconds
+are **the two of them standing inches apart, his hand at her face**. It ends on
+whether that goes anywhere. It does not answer.
+
+> **WHERE THEY GO IS OPEN.** It is plainly a **city apartment** — sofa, kitchen
+> island, a lit skyline through the window — and it is plainly **not the
+> lakehouse**. It could be Luna's own place (`apartment`) or Tyson's, and
+> naming it sets canon about where Tyson lives, so nothing has named it. The
+> scene's `place` tag is untouched until Melissa says. **If she asked for the
+> lakehouse and he took her somewhere else, that is a story beat and a large
+> one** — worth confirming rather than assuming a continuity slip.
+
+**THE JOURNAL PAGE STILL STOPS AT THE TRUCK.** `cole-rang-him` ends on "He
+didn't ask me anything. He just drove", which was the end of the night when it
+was written and is now the middle of it. Left alone deliberately: a woman who
+writes down the entire humiliation and stops exactly where it gets dangerous is
+completely in character — she refuses the page for the wall too — but that has
+to be **a decision rather than an oversight.** Melissa's call whether the entry
+acknowledges the hour it leaves out.
 
 #### Which bar is this? — OPEN QUESTION
 Cole owns **Burnett's**, Cole is behind the bar all night, and Luna knows he

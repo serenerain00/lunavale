@@ -276,22 +276,35 @@ CUTS=(
   # them. The Casey scene it follows is also unscored, so the pair are
   # consistent; if a score is made for one it should be made for both.
   #
-  # Trimmed at 194.0s: the delivered file runs 195.9s and the last 1.9s are
-  # black. There is also a deliberate 0.2s dip to black at 5.6s inside the
-  # picture — that one is an edit, not padding, and stays.
+  # EXTENDED CUT, swapped in 2026-08-26 the same evening the first one went up.
+  # Same filename, so this line does not change — only the numbers do. The
+  # picture goes from 3:14 to 5:02.
   #
-  # FADE 3s, the house number, and it fits here where it did not on the
-  # driveway: the last shot is eight seconds of the two of them in the cab, so
-  # three seconds of fade has room to be an ending rather than eating the beat.
-  # The picture is at full brightness right up to the cut, so without this it
-  # stops rather than ends.
+  # IT IS PURELY AN EXTENSION, verified rather than assumed: frames at t=20,
+  # 100 and 180 are identical to the cut it replaces, and the 0.2s dip to black
+  # at 5.6s is in both. So the first 194s are untouched and 108s are new on the
+  # end. That is why the poster time below is unchanged — the card does not
+  # move under a scene people have already seen.
   #
-  # Poster at 170s: the two of them against the truck once she has come down,
-  # both faces, her nearly smiling. NOT one of the frames of her sobbing in his
-  # arms — those are the middle of the scene and they are also a woman at the
-  # worst hour of her month, and a poster sits at a permanent ungated URL. Also
-  # NOT the cab, which is the last beat and the thing the next scene turns on.
-  "luna-ty-bar-drunk|stories/luna-ty-bar-drunk/luna-ty-bar-drunk.mp4|170|194.0|3"
+  # WHAT THE NEW MINUTES ARE: the drive keeps going, they arrive somewhere, and
+  # the last ninety seconds are the two of them alone in a room. See the note
+  # in lib/content/videos.ts — the room is not the lakehouse Melissa described
+  # and identifying it is her call, not a guess to make in a manifest.
+  #
+  # Trimmed at 302.4s. The delivered file runs 398.8s and the last 96.3s are
+  # black AND silent (-91 dB, digital silence) — export padding, and by far the
+  # longest tail in this file. The 0.2s dip at 5.6s is an edit and stays.
+  #
+  # FADE 3s, unchanged. The picture is at full brightness at 301 and gone at
+  # 302.4, so it still stops rather than ends, and the new last shot is a held
+  # close two-hander that a hard cut would wreck.
+  #
+  # Poster at 170s, UNCHANGED and now a third of the way in rather than near
+  # the end: the two of them against the truck once she has come down, both
+  # faces. Still not one of the frames of her sobbing, and still not the cab.
+  # Nothing in the new material is a better card and one of them would give
+  # away an ending that is the whole point of the extension.
+  "luna-ty-bar-drunk|stories/luna-ty-bar-drunk/luna-ty-bar-drunk.mp4|170|302.4|3"
   # Scored mix: -37.5 dB -> -26.8 dB. Runs 2.8s longer than the silent cut.
   "luna-josh-dinner-house|stories/withAudio/copy_A062089B-FB53-461E-BC18-DD0BD3F26458.MOV"
   # NEAR-SILENT (-51 dB). Its only candidate is portrait (1080x1822) and would

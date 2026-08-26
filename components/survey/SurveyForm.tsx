@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import Link from "next/link";
 import { submitSurvey, type SurveyResult } from "@/app/survey/actions";
+import { FollowForm } from "@/components/follow/FollowForm";
 import {
   MAX_COMMENT,
   questions,
@@ -70,6 +71,27 @@ export function SurveyForm({
           size, a few dozen people saying the same thing is the difference
           between a scene getting made and not.
         </p>
+
+        {/* THE ADDRESS IS ASKED FOR HERE, and this is the best moment on the
+            site to ask. Somebody who has just said what they think of it, and
+            whether they would watch it on a platform, has an actual stake in
+            what happens next — and the honest answer to "what happens next" is
+            that it takes months and they will not be here to see it unless
+            somebody tells them.
+
+            AFTER the thank-you, never before: the survey is not a toll gate
+            with an email behind it, and making the address feel like the price
+            of being heard would poison both. */}
+        <div className="mt-6 border-t border-hairline pt-6">
+          <FollowForm
+            source="survey"
+            compact
+            label="Want to know what happens to it?"
+            note="An email when a new scene or a page of her journal goes up. Nothing else, and you can stop any time."
+            done="You're on the list. You'll hear when the next one lands."
+          />
+        </div>
+
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/browse"

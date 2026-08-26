@@ -14,6 +14,11 @@ import { allPostsForModeration, posterStats } from "@/lib/db/overheard";
 import { recentHelpMessages } from "@/lib/db/help";
 import { surveyResults, type Tally } from "@/lib/db/survey";
 import { commentCountsByScene, recentSceneComments } from "@/lib/db/comments";
+import {
+  followerCount,
+  followerSources,
+  recentFollowers,
+} from "@/lib/db/followers";
 import { getVideo } from "@/lib/content/videos";
 import { labelFor } from "@/lib/content/survey";
 import { threadRunway, FREE_POST_ALLOWANCE } from "@/lib/content/overheard";
@@ -62,6 +67,11 @@ export default async function AdminPage() {
       revenueSummary(),
       abandonedCheckouts(),
     ]);
+  const [listSize, listSources, list] = await Promise.all([
+    followerCount(),
+    followerSources(),
+    recentFollowers(200),
+  ]);
   const unreadComments = sceneComments.filter((c) => !c.handled).length;
 
   // The two numbers Melissa actually wants off this page, pulled out of the
@@ -434,6 +444,85 @@ export default async function AdminPage() {
         </Section>
 
         {/* --------------------------------------------------------- survey */}
+        {/* THE LIST, and the number worth watching weekly.
+
+            It sits above the survey because at this size it is the more useful
+            of the two: the survey says what people think, and this says who can
+            be told when there is something new. One of those compounds.
+
+            ADDRESSES ARE SHOWN IN FULL AND IN ONE BLOCK, on purpose. This page
+            is owner-only, and the job it has to support is "paste them into
+            the mail provider and write to them" — a paginated table with a
+            copy button per row would be a worse tool for the only task anybody
+            does here. */}
+        <Section title="The list">
+          {listSize === 0 ? (
+            <p className="mt-1 text-sm text-stone-dim">
+              Nobody on it yet. The ask appears at the end of the survey and
+              under a scene once it has finished playing.
+            </p>
+          ) : (
+            <>
+              <div className="flex flex-wrap gap-8">
+                <Stat label="On the list" value={String(listSize)} />
+                {listSources.map((row) => (
+                  <Stat
+                    key={row.source}
+                    label={
+                      row.source === "survey"
+                        ? "From the survey"
+                        : row.source === "scene"
+                          ? "After a scene"
+                          : row.source
+                    }
+                    value={String(row.count)}
+                  />
+                ))}
+              </div>
+
+              <p className="mt-6 text-sm text-stone">
+                Every address, newest first. Nothing is ever sent from this
+                site — write to them from your mail provider, and only when
+                there is something to say.
+              </p>
+              <textarea
+                readOnly
+                rows={6}
+                aria-label="Every address, comma separated"
+                value={list.map((f) => f.email).join(", ")}
+                className="mt-3 w-full resize-y rounded-lg border border-hairline bg-void px-4 py-3 font-mono text-xs leading-relaxed text-ivory focus:border-amber focus:outline-none"
+              />
+
+              <ul className="mt-6 space-y-1.5">
+                {list.slice(0, 30).map((f) => (
+                  <li
+                    key={f.email}
+                    className="flex flex-wrap items-baseline gap-x-3 text-sm"
+                  >
+                    <span className="text-ivory">{f.email}</span>
+                    <span className="text-xs text-stone-dim">
+                      {f.source.startsWith("scene:")
+                        ? getVideo(f.source.slice(6))?.title ?? f.source
+                        : f.source}
+                      {" · "}
+                      {f.createdAt.toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                      })}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              {list.length > 30 && (
+                <p className="mt-3 text-xs text-stone-dim">
+                  Showing the newest 30 of {list.length}. All of them are in the
+                  box above.
+                </p>
+              )}
+            </>
+          )}
+        </Section>
+
         <Section title="Survey">
           {survey.total === 0 ? (
             <p className="mt-1 text-sm text-stone-dim">

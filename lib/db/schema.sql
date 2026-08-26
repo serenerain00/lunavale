@@ -232,3 +232,54 @@ CREATE INDEX IF NOT EXISTS scene_comments_recent_idx
   ON scene_comments (created_at DESC);
 CREATE INDEX IF NOT EXISTS scene_comments_scene_idx
   ON scene_comments (scene_slug, created_at DESC);
+
+-- ---------------------------------------------------------------------------
+-- Followers — the list.
+--
+-- WHY THIS EXISTS. Until this table, somebody could watch a scene, read a page
+-- of the journal, answer the survey saying they were hooked and would watch it
+-- on a platform — and then leave, and there was no way to ever reach them
+-- again. Everything else on this site is rented: an algorithm decides who sees
+-- a clip, and a platform decides whether the account still exists tomorrow. An
+-- address is the only audience nobody can take away.
+--
+-- It is also the honest middle step. Most people who like this are not going
+-- to spend eight dollars on the first visit, and the choice was never "member
+-- or nothing" — it was "member or gone". This is the third option.
+--
+-- SINGLE OPT-IN, DELIBERATELY. A confirmation loop is the right call for a
+-- list that mails strangers daily; this one mails when something goes up, from
+-- a person whose work they just watched, and a confirm step at this size loses
+-- a third of the addresses to spam folders to prevent a problem nobody has.
+-- Revisit if the list ever gets big enough for deliverability to bite.
+--
+-- NOTHING IS SENT FROM HERE AUTOMATICALLY. The table is a list, not a mailer.
+-- Melissa writes to it when she has something to say, which is the only way it
+-- keeps meaning anything.
+CREATE TABLE IF NOT EXISTS followers (
+  id             BIGSERIAL PRIMARY KEY,
+
+  -- Lower-cased and trimmed before it gets here, so "Me@X.com " and "me@x.com"
+  -- are one person. UNIQUE, and inserts are ON CONFLICT DO NOTHING: somebody
+  -- who signs up twice is somebody who forgot, not an error to show them.
+  email          TEXT        NOT NULL UNIQUE,
+
+  -- Where they were standing when they gave it: "survey", or "scene:<slug>".
+  -- The point is to learn which moments earn an address, so that the next one
+  -- can be put somewhere that works rather than somewhere that seemed likely.
+  source         TEXT        NOT NULL,
+
+  -- Clerk user id when they happened to be signed in. Usually null — the
+  -- people worth collecting here are precisely the ones without an account.
+  user_id        TEXT,
+
+  -- Set when they ask to come off. The row stays: deleting it means the next
+  -- import silently adds them back, and a list that re-subscribes people who
+  -- left is the one unforgivable thing you can do with an address.
+  unsubscribed_at TIMESTAMPTZ,
+
+  created_at     TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS followers_recent_idx
+  ON followers (created_at DESC) WHERE unsubscribed_at IS NULL;

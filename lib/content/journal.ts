@@ -1514,12 +1514,17 @@ export const journal: JournalEntry[] = [
    * it ends with the two of them inches apart. This page ends on "He didn't
    * ask me anything. He just drove."
    *
-   * LEFT THAT WAY ON PURPOSE, and it needs to stay a decision rather than
-   * become an oversight. A woman who writes down the whole humiliation in
-   * detail and stops dead at the hour that actually frightened her is exactly
-   * this character — she refuses the page for the wall, too. But Melissa
-   * should decide whether the entry acknowledges the gap or pretends there
-   * isn't one, because those are different women.
+   * IT STAYS THAT WAY — Melissa's decision, 2026-08-26, asked and answered.
+   * The entry does NOT acknowledge the hour it leaves out. Do not add a line
+   * gesturing at it in a later pass, and do not "complete" this page when the
+   * fuller cut of the night lands.
+   *
+   * What that makes it: a woman who writes down the entire humiliation in
+   * detail — the keys in her hand, being held up, being collected — and stops
+   * dead at the one part that actually frightened her. She does the same with
+   * the wall, where she refuses the page altogether. The omission is the
+   * characterisation, and a page that admitted the gap would be a different
+   * woman doing a braver thing.
    *
    * TWO WRINKLES THIS CREATES IN WHAT IS ALREADY PUBLISHED, both left alone on
    * purpose because each is a story decision with a scene attached:

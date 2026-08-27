@@ -761,13 +761,17 @@ whether that goes anywhere. It does not answer.
 > lakehouse and he took her somewhere else, that is a story beat and a large
 > one** — worth confirming rather than assuming a continuity slip.
 
-**THE JOURNAL PAGE STILL STOPS AT THE TRUCK.** `cole-rang-him` ends on "He
-didn't ask me anything. He just drove", which was the end of the night when it
-was written and is now the middle of it. Left alone deliberately: a woman who
-writes down the entire humiliation and stops exactly where it gets dangerous is
-completely in character — she refuses the page for the wall too — but that has
-to be **a decision rather than an oversight.** Melissa's call whether the entry
-acknowledges the hour it leaves out.
+**THE JOURNAL PAGE STOPS AT THE TRUCK, AND STAYS THERE** *(Melissa, decided
+2026-08-26)*. `cole-rang-him` ends on "He didn't ask me anything. He just
+drove" — the end of the night when it was written, the middle of it now. **The
+entry does not acknowledge the hour it leaves out, and should not be made to.**
+
+That omission is the characterisation. She writes down the whole humiliation in
+detail — the keys in her hand, being held up, being collected by the one man
+who came — and stops dead at the only part that actually frightened her. She
+does the same with the wall, where she refuses the page altogether.
+
+Do not "complete" this entry when the fuller cut of the night lands.
 
 #### Which bar is this? — OPEN QUESTION
 Cole owns **Burnett's**, Cole is behind the bar all night, and Luna knows he

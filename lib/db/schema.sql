@@ -283,3 +283,52 @@ CREATE TABLE IF NOT EXISTS followers (
 
 CREATE INDEX IF NOT EXISTS followers_recent_idx
   ON followers (created_at DESC) WHERE unsubscribed_at IS NULL;
+
+-- ---------------------------------------------------------------------------
+-- Pending memberships — paid for, not yet attached to an account.
+--
+-- WHY THIS EXISTS. Until 2026-08-27 you had to make a Clerk account and verify
+-- an email BEFORE you could see a price field. Three screens stood between
+-- deciding to buy and being able to, and people were leaving in that gap.
+-- Checkout now runs first and the account is made afterwards, which means
+-- there is a window — usually seconds, occasionally forever — where a payment
+-- exists and no user id does. This is where it waits.
+--
+-- KEYED ON EMAIL, because at the moment the webhook fires that is the only
+-- identifier in existence. Stripe collected it on the card form; Clerk has
+-- never heard of this person.
+--
+-- IT GRANTS NOTHING. A row here opens no scene and no journal page. Access is
+-- resolved by lib/access/entitlement.ts from a Clerk user id against the
+-- `memberships` table, and that is unchanged. This row only becomes access
+-- when a signed-in user whose VERIFIED primary email matches claims it — see
+-- claimPendingFor(). Payment first is not access first.
+--
+-- IT IS ALSO THE SAFETY NET. Somebody who pays and closes the tab has this row
+-- waiting; whenever they sign up or sign in with that address, that day or a
+-- month later, /account claims it. There is no way to pay and end up with
+-- nothing, which is the one outcome this design could otherwise produce.
+CREATE TABLE IF NOT EXISTS pending_memberships (
+  -- Lower-cased. One waiting membership per address; a second payment on the
+  -- same email overwrites rather than duplicating.
+  email                  TEXT PRIMARY KEY,
+
+  tier                   TEXT        NOT NULL,
+  stripe_customer_id     TEXT        NOT NULL,
+  stripe_subscription_id TEXT,
+  status                 TEXT        NOT NULL,
+  current_period_end     TIMESTAMPTZ,
+
+  -- Set when it is turned into a real membership. The row is kept rather than
+  -- deleted: it is the record of how somebody arrived, and re-claiming an
+  -- already-claimed row has to be a no-op rather than a second grant.
+  claimed_at             TIMESTAMPTZ,
+  claimed_by             TEXT,
+
+  created_at             TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at             TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- The claim path looks up unclaimed rows by email.
+CREATE INDEX IF NOT EXISTS pending_memberships_unclaimed_idx
+  ON pending_memberships (email) WHERE claimed_at IS NULL;

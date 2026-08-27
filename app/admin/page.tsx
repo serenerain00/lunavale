@@ -9,7 +9,7 @@ import {
   revenueSummary,
   formatCents,
 } from "@/lib/billing/revenue";
-import { membershipSummary } from "@/lib/db/memberships";
+import { membershipSummary, unclaimedPending } from "@/lib/db/memberships";
 import { allPostsForModeration, posterStats } from "@/lib/db/overheard";
 import { recentHelpMessages } from "@/lib/db/help";
 import { surveyResults, type Tally } from "@/lib/db/survey";
@@ -67,10 +67,11 @@ export default async function AdminPage() {
       revenueSummary(),
       abandonedCheckouts(),
     ]);
-  const [listSize, listSources, list] = await Promise.all([
+  const [listSize, listSources, list, pending] = await Promise.all([
     followerCount(),
     followerSources(),
     recentFollowers(200),
+    unclaimedPending(),
   ]);
   const unreadComments = sceneComments.filter((c) => !c.handled).length;
 
@@ -447,6 +448,45 @@ export default async function AdminPage() {
         </Section>
 
         {/* --------------------------------------------------------- survey */}
+        {/* PAID, NO ACCOUNT YET — the one queue that needs a person.
+
+            Since 2026-08-27 checkout runs before sign-up, so there is a window
+            where somebody has paid and has no account. Almost always it lasts
+            seconds and closes itself; a row that sits here for a day means
+            somebody paid and walked off before making one.
+
+            Nothing is broken when that happens — the membership is held
+            against the email and attaches itself the moment they ever sign in
+            with it — but they cannot watch anything until they do, and they
+            paid. That is worth an email from Melissa rather than a wait. */}
+        {pending.length > 0 && (
+          <Section title="Paid, no account yet">
+            <p className="mt-1 text-sm text-stone">
+              These people have paid and have not made an account, so they
+              cannot open anything yet. It attaches itself the moment they sign
+              in with the same address — but if one has been sitting here for a
+              day, write to them.
+            </p>
+            <ul className="mt-5 space-y-1.5">
+              {pending.map((p) => (
+                <li
+                  key={p.email}
+                  className="flex flex-wrap items-baseline gap-x-3 text-sm"
+                >
+                  <span className="text-ivory">{p.email}</span>
+                  <span className="text-xs text-stone-dim">
+                    {p.tier} ·{" "}
+                    {p.createdAt.toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
+
         {/* THE LIST, and the number worth watching weekly.
 
             It sits above the survey because at this size it is the more useful

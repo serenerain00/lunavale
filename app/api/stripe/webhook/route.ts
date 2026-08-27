@@ -27,6 +27,7 @@ import {
   eventHandled,
   markEventHandled,
   recordMembership,
+  recordPendingMembership,
 } from "@/lib/db/memberships";
 
 export const runtime = "nodejs";
@@ -104,12 +105,6 @@ async function applyEvent(event: Stripe.Event): Promise<void> {
   // somebody back access they had cancelled.
   const subscription = await stripe().subscriptions.retrieve(subscriptionId);
   const userId = userIdFor(subscription, event);
-  if (!userId) {
-    console.error(
-      `stripe webhook: no userId on subscription ${subscriptionId} — cannot attribute`,
-    );
-    return;
-  }
 
   const priceId = subscription.items.data[0]?.price.id;
   const tier =
@@ -122,17 +117,81 @@ async function applyEvent(event: Stripe.Event): Promise<void> {
     return;
   }
 
+  const stripeCustomerId =
+    typeof subscription.customer === "string"
+      ? subscription.customer
+      : subscription.customer.id;
+
+  // THE ORDINARY PATH FOR A NEW BUYER SINCE 2026-08-27: paid, no account yet.
+  // Checkout runs before sign-up now (app/membership/start/route.ts), so a
+  // brand-new member has no Clerk id at the moment this fires. Park it against
+  // the email Stripe collected and let /welcome or /account claim it.
+  //
+  // This is NOT a failure branch and must not be treated as one. The old code
+  // logged "cannot attribute" and dropped the event on the floor, which would
+  // now discard every first-time purchase on the site.
+  if (!userId) {
+    const email = await emailForSubscription(subscription, event);
+    if (!email) {
+      // Genuinely unattributable: no id and no address. Stripe always collects
+      // an email at checkout, so this means something is wrong rather than
+      // something is new — leave it loud.
+      console.error(
+        `stripe webhook: subscription ${subscriptionId} has neither a userId nor an email — cannot attribute`,
+      );
+      return;
+    }
+    await recordPendingMembership({
+      email,
+      tier,
+      status: subscription.status,
+      stripeCustomerId,
+      stripeSubscriptionId: subscription.id,
+      currentPeriodEnd: periodEnd(subscription),
+    });
+    return;
+  }
+
   await recordMembership({
     userId,
     tier,
     status: subscription.status,
-    stripeCustomerId:
-      typeof subscription.customer === "string"
-        ? subscription.customer
-        : subscription.customer.id,
+    stripeCustomerId,
     stripeSubscriptionId: subscription.id,
     currentPeriodEnd: periodEnd(subscription),
   });
+}
+
+/**
+ * The address that paid, for a subscription with no Clerk id on it.
+ *
+ * Tried in order of reliability: what the visitor actually typed on the card
+ * form, then the session's pre-filled address, then the Customer object. The
+ * Customer is the fallback rather than the source because a returning buyer
+ * can have an older address on it than the one they just used.
+ */
+async function emailForSubscription(
+  subscription: Stripe.Subscription,
+  event: Stripe.Event,
+): Promise<string | undefined> {
+  if (event.type === "checkout.session.completed") {
+    const session = event.data.object as Stripe.Checkout.Session;
+    const fromSession =
+      session.customer_details?.email ?? session.customer_email ?? undefined;
+    if (fromSession) return fromSession;
+  }
+
+  try {
+    const customer = await stripe().customers.retrieve(
+      typeof subscription.customer === "string"
+        ? subscription.customer
+        : subscription.customer.id,
+    );
+    if (!customer.deleted && customer.email) return customer.email;
+  } catch (error) {
+    console.error("stripe webhook: could not read customer email", error);
+  }
+  return undefined;
 }
 
 function subscriptionIdFromSession(

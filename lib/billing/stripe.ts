@@ -10,7 +10,12 @@
 
 import "server-only";
 import Stripe from "stripe";
-import { priceIdFor, siteUrl, stripeConfigured } from "@/lib/billing/provider";
+import {
+  priceIdFor,
+  siteUrl,
+  stripeConfigured,
+  type BillingInterval,
+} from "@/lib/billing/provider";
 import type { TierId } from "@/lib/content/membership";
 
 let client: Stripe | undefined;
@@ -41,13 +46,23 @@ export function stripe(): Stripe {
  */
 export async function createCheckoutSession(input: {
   tier: TierId;
-  userId: string;
+  /**
+   * Clerk user id, when there is one.
+   *
+   * NULL IS THE NEW NORMAL PATH. Checkout no longer waits for an account —
+   * see app/membership/start/route.ts. A session with no user id is matched
+   * back to a person by the email Stripe collects, and the webhook parks it in
+   * `pending_memberships` until they make an account.
+   */
+  userId: string | null;
+  interval?: BillingInterval;
   email?: string;
   existingCustomerId?: string;
 }): Promise<string> {
   if (!stripeConfigured()) throw new Error("Stripe is not configured");
 
-  const price = priceIdFor(input.tier);
+  const interval: BillingInterval = input.interval ?? "month";
+  const price = priceIdFor(input.tier, interval);
   if (!price) {
     throw new Error(
       `No Stripe price configured for "${input.tier}" — set STRIPE_PRICE_${input.tier.toUpperCase()}`,
@@ -66,27 +81,43 @@ export async function createCheckoutSession(input: {
   // The link no longer prefetches (components/membership/TierCard.tsx), but
   // that fixes one caller rather than the route. This makes the route itself
   // safe to call twice, which is the property a GET actually needs to have.
-  const open = await openSessionFor(input.userId, input.tier);
-  if (open) return open;
+  // Only for a signed-in buyer: the match is on the Clerk id, and a signed-out
+  // one does not have it yet. Two anonymous clicks make two sessions, which is
+  // the correct trade — reusing across anonymous visitors would be far worse.
+  //
+  // Keyed on the interval too. Without it, somebody who clicked monthly and
+  // came back for yearly would be handed their old monthly session and be
+  // charged $8 for the plan they just chose to leave.
+  if (input.userId) {
+    const open = await openSessionFor(input.userId, input.tier, interval);
+    if (open) return open;
+  }
 
   const session = await stripe().checkout.sessions.create({
     mode: "subscription",
     line_items: [{ price, quantity: 1 }],
-    client_reference_id: input.userId,
+    ...(input.userId ? { client_reference_id: input.userId } : {}),
     // Also on the SESSION, not only on subscription_data below. The
     // subscription copy is what every later webhook carries; this copy is what
     // openSessionFor() matches on, and what makes an abandoned session on
     // /admin say which tier the person was looking at when they stopped.
-    metadata: { userId: input.userId, tier: input.tier },
+    metadata: { userId: input.userId ?? "", tier: input.tier, interval },
     ...(input.existingCustomerId
       ? { customer: input.existingCustomerId }
-      : { customer_email: input.email }),
+      : input.email
+        ? { customer_email: input.email }
+        : {}),
     subscription_data: {
-      metadata: { userId: input.userId, tier: input.tier },
+      metadata: { userId: input.userId ?? "", tier: input.tier, interval },
     },
     // Stripe's own cancellation flow, so "cancel any time" is true at the
     // source rather than something we have to implement and remember to keep.
-    success_url: `${siteUrl()}/account?started=1`,
+    // A signed-in buyer already has somewhere to land. A signed-out one has
+    // paid and has no account yet, so they go to /welcome, which turns the
+    // email Stripe just collected into an account in one step.
+    success_url: input.userId
+      ? `${siteUrl()}/account?started=1`
+      : `${siteUrl()}/welcome?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${siteUrl()}/membership`,
     allow_promotion_codes: true,
     // Don't demand a card when nothing is owed. Stripe's default for
@@ -120,6 +151,7 @@ export async function createCheckoutSession(input: {
 async function openSessionFor(
   userId: string,
   tier: TierId,
+  interval: BillingInterval,
 ): Promise<string | undefined> {
   try {
     const sessions = await stripe().checkout.sessions.list({
@@ -135,6 +167,10 @@ async function openSessionFor(
         // tier went on sale. Sessions created before this line existed carry
         // no tier and are correctly ignored.
         s.metadata?.tier === tier &&
+        // Same reasoning as the tier, one level down. A session made before
+        // yearly existed carries no interval; treating that as monthly is
+        // correct, because monthly is the only thing it could have been.
+        (s.metadata?.interval ?? "month") === interval &&
         Boolean(s.url),
     );
     return match?.url ?? undefined;

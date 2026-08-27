@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { yearlyAvailable } from "@/lib/billing/provider";
 import Link from "next/link";
 import { BenefitTable } from "@/components/membership/BenefitTable";
 import { Questions } from "@/components/membership/Questions";
@@ -116,7 +117,11 @@ export default async function MembershipPage() {
                 key={t.id}
                 className={`h-full ${t.featured ? "order-first md:order-none" : ""}`}
               >
-                <TierCard tier={t} held={tier} />
+                <TierCard
+                  tier={t}
+                  held={tier}
+                  yearlyOffered={yearlyAvailable(t.id)}
+                />
               </div>
             ))}
           </Reveal>

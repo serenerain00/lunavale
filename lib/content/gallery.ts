@@ -292,6 +292,21 @@ export const galleries: StillGallery[] = [
     // No captions yet. The ones on the-bar are Melissa's voice and the wrong
     // thing to invent — the set reads fine without them and they can be added
     // per still whenever she wants.
+    //
+    // SIX STILLS PULLED, 2026-08-27, and the count went 31 -> 25. Six frames
+    // showed a LONG-HAIRED woman standing in for Casey. Casey has short hair —
+    // the undercut, the tank top, the tattoos — so those six were a wrong
+    // render rather than a character, and Melissa's instruction is that the
+    // long-haired woman appears nowhere on the site.
+    //
+    // Old numbers 02, 05, 07, 08, 13, 14. The clearest of them is old 14, the
+    // two women side by side at the bar, which is what settles that they are
+    // not the same person. The frames are kept, not deleted, in
+    // stills-src/_pulled/casey-bar-long-hair/ with a note.
+    //
+    // THE SET RENUMBERED. Everything after a pulled frame shifted down, so the
+    // free previews and the cover are different images than they were, and the
+    // remote copies had to be overwritten rather than size-skipped.
     id: "casey-bar",
     title: "Your Date",
     subtitle: "Luna, Tyson & Casey",
@@ -299,7 +314,7 @@ export const galleries: StillGallery[] = [
       "The same bar, and the first night Luna has walked into it and found somebody else already standing where she stands.",
       "Casey is a friend from the track. That is the whole of what anybody says out loud, and Luna spends the night deciding whether to believe it — which is not really a question about Casey.",
     ],
-    count: 31,
+    count: 25,
     gated: true,
     freePreviewCount: 2,
     cover: "/gallery/casey-bar/cover.jpg",

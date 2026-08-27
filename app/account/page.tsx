@@ -26,6 +26,18 @@ interface AccountPageProps {
 }
 
 export default async function AccountPage({ searchParams }: AccountPageProps) {
+  // THE SAFETY NET FOR PAY-FIRST CHECKOUT, and it runs before anything is
+  // read. Since 2026-08-27 somebody can pay before they have an account
+  // (app/membership/start/route.ts), which leaves the membership parked
+  // against their email. /membership/claim picks it up for anyone who follows
+  // the path; this catches everybody else — the person who closed the tab on
+  // /welcome, or paid on a phone and signed in a week later on a laptop.
+  //
+  // Costs one indexed read for a member who has nothing waiting, and it has to
+  // happen before getMembership() or the page would render their old state and
+  // tell a new member they are a visitor.
+  await claimAnythingWaiting();
+
   const [{ tier, active, preview }, params] = await Promise.all([
     getMembership(),
     searchParams,
@@ -254,6 +266,41 @@ function Banner({
 }
 
 /** The signed-in viewer's billing record, or null. */
+/**
+ * Attach a membership that was paid for before this account existed.
+ *
+ * Verified addresses only — that check is the entire security boundary of the
+ * pay-first flow and it lives in the route and in claimPendingFor(); this is
+ * simply the other place it is called from. Silent by design: for almost
+ * everybody there is nothing waiting, and a person who does get one sees it as
+ * the page already reporting them as a member.
+ */
+async function claimAnythingWaiting(): Promise<void> {
+  if (!billingLive()) return;
+  try {
+    const { auth, currentUser } = await import("@clerk/nextjs/server");
+    const { userId } = await auth();
+    if (!userId) return;
+
+    const existing = await membershipForUser(userId);
+    if (existing) return; // already attached — nothing to look for
+
+    const user = await currentUser();
+    const verified = (user?.emailAddresses ?? [])
+      .filter((e) => e.verification?.status === "verified")
+      .map((e) => e.emailAddress);
+
+    const { claimPendingFor } = await import("@/lib/db/memberships");
+    for (const email of verified) {
+      if (await claimPendingFor(userId, email)) return;
+    }
+  } catch (error) {
+    // Never break the account page over this. The claim is also attempted at
+    // /membership/claim and again on the next visit here.
+    console.error("account: claim check failed", error);
+  }
+}
+
 async function currentRecord() {
   if (!authConfigured()) return null;
   const { auth } = await import("@clerk/nextjs/server");

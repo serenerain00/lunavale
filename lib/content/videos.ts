@@ -353,7 +353,7 @@ export const videos: Video[] = [
     slug: "luna-tyson-bathroom",
     title: "Groceries",
     synopsis:
-      "Tyson lets himself in with shopping she didn't ask for. She's on her phone, and she doesn't put it down.",
+      "Tyson lets himself in with groceries she didn't ask for. She's on her phone, and she doesn't put it down.",
     file: "luna-tyson-bathroom.proxy.mp4",
     poster: "/posters/luna-tyson-bathroom.jpg",
     durationSeconds: 76,
@@ -876,7 +876,7 @@ export const videos: Video[] = [
     slug: "luna-avery-ipad",
     title: "Little Sister",
     synopsis:
-      "Their mother has already made her calls. Avery rings from Atlanta knowing the answer, and for the first time in a week Luna laughs.",
+      "Their mother has already made her calls. Avery calls from Atlanta knowing the answer, and for the first time in a week Luna laughs.",
     file: "luna-avery-ipad.proxy.mp4",
     poster: "/posters/luna-avery-ipad.jpg",
     durationSeconds: 95,
@@ -1537,7 +1537,7 @@ export const videos: Video[] = [
     // meanings: the bar shutting, and the call Cole made.
     title: "Last Call",
     synopsis:
-      "Two hours after he left with somebody else, she comes out of the bar to find him standing in the car park. Nobody had to tell her who called him — and the night does not end there.",
+      "Two hours after he left with somebody else, she comes out of the bar to find him standing in the parking lot. Nobody had to tell her who called him — and the night does not end there.",
     file: "luna-ty-bar-drunk.proxy.mp4",
     poster: "/posters/luna-ty-bar-drunk.jpg",
     durationSeconds: 302,
@@ -1548,7 +1548,7 @@ export const videos: Video[] = [
       file: "luna-ty-bar-drunk-preview.proxy.mp4",
       durationSeconds: 15,
       hookNote:
-        "the opening, for now — she comes out to a car park she expected to be empty. A better window can be picked once the dialogue is transcribed (scripts/find-hooks.mjs).",
+        "the opening, for now — she comes out to a parking lot she expected to be empty. A better window can be picked once the dialogue is transcribed (scripts/find-hooks.mjs).",
     },
     // `hurt` and `distance` are the pair it shares with the scene it follows —
     // same fight, two hours later, still about what he did not tell her.

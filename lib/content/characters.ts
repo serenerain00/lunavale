@@ -206,9 +206,9 @@ export const characters: Character[] = [
       "Two thousand miles away, defending a man she has only ever met with the door open.",
     portrait: "/characters/cathy.jpg",
     intro: [
-      "Sixty-five, divorced, and in Atlanta — which is the problem. Her daughter is in Colorado, alone in a lakehouse in the dark, and the only thing Cathy can actually do about that is ring her.",
+      "Sixty-five, divorced, and in Atlanta — which is the problem. Her daughter is in Colorado, alone in a lakehouse in the dark, and the only thing Cathy can actually do about that is call her.",
       "She is a good mother and she is a pushy one, and those are not in tension. She calls until you answer. She asks the question again. Luna needs a breath before she picks up, the way most daughters do, and there is nothing underneath it — no damage, no old wound, a childhood that was genuinely fine.",
-      "What there is, is a gap. She has known Josh for ten years and never once from inside the room, so when he rings her sounding wrecked she believes him, because he is not lying. She is holding one half of it and asking her daughter to be kinder about the half she can see.",
+      "What there is, is a gap. She has known Josh for ten years and never once from inside the room, so when he calls her sounding wrecked she believes him, because he is not lying. She is holding one half of it and asking her daughter to be kinder about the half she can see.",
     ],
     facts: [
       { label: "Age", value: "65" },
@@ -248,7 +248,7 @@ export const characters: Character[] = [
     intro: [
       "Twenty-eight, ten years behind Luna, and close to her for every one of them. Luna wanted a baby sister before there was one, and got her — and until Luna left for Colorado she was the person Avery took everything to first. Less big sister than best friend, and it shows in how alike they are, down to the face.",
       "She is still in Atlanta, where their mother is, three years into a psychiatry residency and on the hours that come with it. So she does not call often. Usually there is a family matter, or their mother has worn her down into it — and Luna is no good at saying anything real down a phone line anyway.",
-      "Which is why the call works when it works. Cathy rings to find out how her daughter is. Avery already knows, because their mother told her and because she would have known regardless. So she doesn't ask. She talks about nothing in particular until Luna is laughing, and then she waits, and lets her get to it herself.",
+      "Which is why the call works when it works. Cathy calls to find out how her daughter is. Avery already knows, because their mother told her and because she would have known regardless. So she doesn't ask. She talks about nothing in particular until Luna is laughing, and then she waits, and lets her get to it herself.",
     ],
     facts: [
       { label: "Age", value: "28" },
@@ -259,7 +259,7 @@ export const characters: Character[] = [
     ],
     details: [
       "Has never once asked Luna how she is",
-      "Third-year psychiatry resident, which is most of why she doesn't ring",
+      "Third-year psychiatry resident, which is most of why she doesn't call",
       "Opened with eleven minutes about a man at her work who microwaves fish",
       "Says okay rather than advice",
       "Has known Tyson as long as she has been alive, and calls him a brother",

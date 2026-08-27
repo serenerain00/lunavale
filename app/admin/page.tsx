@@ -335,9 +335,12 @@ export default async function AdminPage() {
             while the wall was public.
           </p>
           <p className="mt-2 text-xs text-stone-dim">
-            Which also means new email addresses now only arrive with a
-            payment. There is no longer a step where somebody interested but
-            undecided hands you one.
+            That used to mean an address only ever arrived with a payment.{" "}
+            <strong className="font-normal text-stone">
+              Not any more — the list below is that step.
+            </strong>{" "}
+            Somebody interested but undecided can now hand you an address at
+            the end of the survey or under a scene they just finished.
           </p>
           <p className="mt-2 text-xs text-stone-dim">
             Scripted cast messages run to{" "}

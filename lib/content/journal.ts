@@ -771,6 +771,37 @@ export const journal: JournalEntry[] = [
       "But it isn't gratitude. I know what gratitude feels like. This is not that.",
     ],
   },
+  /*
+    PLACED HERE ON PURPOSE, and it is the whole reason the scene reads the way
+    it does. `not-just-a-friend` is her admitting she had to look away from
+    him. This is the next thing that happens, and it is the same feeling
+    arriving in a form she cannot pass off as an observation: he goes out
+    without saying where, and she asks.
+
+    The placement is a reading rather than Melissa's ruling — see the note on
+    the scene in lib/content/videos.ts and the section in
+    LUNA_VALE_CONTEXT.md. If it moves, it moves as one block with the scene.
+  */
+  {
+    id: "who-is-she",
+    dateline: "He went out, and I said something",
+    place: "lakehouse",
+    where: "The kitchen",
+    about: ["luna", "tyson"],
+    addedOn: "2026-08-28",
+    sceneSlug: "luna-ty-wasntplanningonit",
+    access: "premium",
+    mature: false,
+    body: [
+      "He came through at about four and said he was heading out for a bit. He has said that to me a hundred times in twenty years and I have never once asked him where.",
+      "I asked him where.",
+      "He said out. Not rudely — he said it the way you say a sentence you have decided is finished. And then I heard my own voice ask who she was, and then I had to go on standing in my own kitchen as a woman who had said that out loud.",
+      "He didn't answer it. He asked me who said there was a she, which is not a no. He knows it isn't a no. He knows I know it isn't.",
+      "I said: your face. Which was true, and which also told him I have been reading his face closely enough to do that. I would like that one back.",
+      "Then he said don't wait up, and I said wasn't planning on it, and I said it without looking up, and I have been sitting here since with the pen in my hand not writing anything.",
+      "Here is the part I am not going to say to anybody. It is not that he has somewhere to be. He is thirty-eight and he does not live here and he does not owe me an itinerary. It is that in twenty years he has never not told me, and tonight he didn't, and I noticed. The noticing is mine. It is new. I don't know where to put it.",
+    ],
+  },
   {
     id: "firepit-not-saying",
     dateline: "Late — the first cold night",

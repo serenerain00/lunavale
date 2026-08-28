@@ -278,6 +278,83 @@ export const galleries: StillGallery[] = [
     mature: false,
   },
 
+  /* ------------------------------------------------- the afternoon he went */
+  {
+    // The same island as `gingerale`, and the opposite weather. That set is
+    // the friendship doing the one thing it does easily; this is the first
+    // afternoon it costs her something to be in the room.
+    //
+    // ORDERED BY THE SCENE, NOT BY CAPTURE TIME — which is a departure from
+    // casey-bar, and deliberate. These are thirteen frames spread over two and
+    // a half hours of Melissa working, so capture order is the order she made
+    // them in rather than the order they happen in, and it opens on a close-up
+    // of him and ends in the middle. Run as the scene runs, it reads: she is
+    // writing, he comes through, they talk, she goes back to the book.
+    //
+    // ONE FRAME PULLED as an exact duplicate — the 9.17 and 9.37 screenshots
+    // are the same frame captured twice (SSIM 1.000). Count is 13, not 14.
+    //
+    // STILL 01 IS THE COVER AND IT IS THE BEST IMAGE HERE: her alone at the
+    // island with the book open and the lake in the whole of the window. It is
+    // also the opening shot of the 0:50 assembly that got replaced, so the set
+    // is the only place that frame survives.
+    //
+    // NOT the same image as the scene's poster, on purpose. The poster is the
+    // wide with both of them in it, because a scene card has to say who is in
+    // it; a gallery card can afford to be the quieter one.
+    id: "wasnt-planning-on-it",
+    title: "Wasn't Planning On It",
+    subtitle: "Luna & Tyson",
+    description: [
+      "Thirteen frames from an afternoon at the lakehouse. Luna is writing at the island. Tyson comes through with his keys and says he is going to head out for a bit, and she asks him where — which in twenty years she has never once done.",
+      "Nothing in it is a fight. He answers every question with a question, she says one true thing she would like back, and then she goes on writing without looking up. The set is mostly her face doing arithmetic she has not admitted she is doing.",
+    ],
+    count: 13,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/wasnt-planning-on-it/cover.jpg",
+    feelings: ["desire", "distance"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-ty-wasntplanningonit",
+    journalEntryId: "who-is-she",
+    stills: [
+      {
+        journal: {
+          entryId: "who-is-she",
+          excerpt:
+            "He has said that to me a hundred times in twenty years and I have never once asked him where.",
+        },
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+        journal: {
+          entryId: "who-is-she",
+          excerpt:
+            "He didn't answer it. He asked me who said there was a she, which is not a no.",
+        },
+      },
+      {},
+      {},
+      {
+        journal: {
+          entryId: "who-is-she",
+          excerpt:
+            "I said it without looking up, and I have been sitting here since with the pen in my hand not writing anything.",
+        },
+      },
+    ],
+    access: "premium",
+    mature: false,
+  },
+
   /* --------------------------------------------------------------- casey's */
   {
     // The same bar as `the-bar`, a different night and a third person in it.

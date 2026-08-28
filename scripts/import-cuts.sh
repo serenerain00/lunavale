@@ -305,6 +305,44 @@ CUTS=(
   # Nothing in the new material is a better card and one of them would give
   # away an ending that is the whole point of the extension.
   "luna-ty-bar-drunk|stories/luna-ty-bar-drunk/luna-ty-bar-drunk.mp4|170|302.4|3"
+  # THE KITCHEN. Fifty-three seconds at the lakehouse: he says he is going out,
+  # will not say where, and she asks him who she is. Melissa, 2026-08-28.
+  #
+  # THE SLUG FOLLOWS THE CUT, NOT THE FOLDER — same rule as luna-josh-break at
+  # the top of this file. The shooting folder is stories/luna-ty-outforabit/,
+  # named for his line; the cut inside it is luna-ty-wasntplanningonit.mp4,
+  # named for hers, and hers is the one the scene ends on.
+  #
+  # THIRD DELIVERY IN ONE EVENING, and the only one that survives. Two earlier
+  # files were replaced in place and are gone from disk:
+  #   luna-ty-kitchen-outforabit.mp4  50.3s, dropped in luna-ty-bar-drunk/
+  #   luna-ty-outforabit.mp4          46.6s, stopped after "Your face."
+  # They were three different assemblies rather than three exports of one — no
+  # frame in any of them matched another at any offset. This one is the 46.6s
+  # edit continued: identical up to 30s, then the exchange it was missing.
+  #
+  # NO MUSIC, and no reason to expect one. -40.5 dB mean / -10.1 dB peak, which
+  # is the quietest delivery in this file — a kitchen, a pen, and two people
+  # talking at conversational volume. It is a dialogue mix in a room with
+  # nothing in it, not a scored cut waiting to arrive. Do not go looking in
+  # withAudio/ and do not read the level as a fault.
+  #
+  # Trimmed at 53.4s: 2.0s of black on the end, and the picture does NOT fade
+  # into it — full brightness at 53.4 and gone one frame later.
+  #
+  # FADE 1.5s, and it is the shortest in this file. The house 3s and the
+  # driveway's 2s both assume a last shot with room in it; this one runs
+  # exactly 2.0s (shot change at 51.4). Three seconds would reach back through
+  # the cut into the shot before it, and two would sit over the whole of the
+  # last one. 1.5s leaves half a second of him clean and still takes the room
+  # down rather than stopping dead on a man mid-turn.
+  #
+  # Poster at 3.5s: the wide. Both of them at the island, the lake through the
+  # glass, before either has said anything — and the first card the lakehouse
+  # kitchen has had. The close-ups later are stronger frames and every one of
+  # them is a single face, which sells a two-hander as somebody's solo scene;
+  # the ones at 36s and 48s are also her not looking up, which is the ending.
+  "luna-ty-wasntplanningonit|stories/luna-ty-outforabit/luna-ty-wasntplanningonit.mp4|3.5|53.4|1.5"
   # Scored mix: -37.5 dB -> -26.8 dB. Runs 2.8s longer than the silent cut.
   "luna-josh-dinner-house|stories/withAudio/copy_A062089B-FB53-461E-BC18-DD0BD3F26458.MOV"
   # NEAR-SILENT (-51 dB). Its only candidate is portrait (1080x1822) and would

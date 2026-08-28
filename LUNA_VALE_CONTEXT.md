@@ -602,6 +602,69 @@ This is where **Luna starts seeing Tyson differently.** She is still tied up in
 Josh, so it is not a switch being flipped — it is the beginning of something
 bigger, and **more complicated than Josh alone.**
 
+### The kitchen — "who is she?"
+*(Delivered by Melissa, 2026-08-28. CUT AND PUBLISHED as **"Wasn't Planning On
+It"** (`luna-ty-wasntplanningonit`), **0:53**, **free**. Journal page
+`who-is-she`. No score; a kitchen, a pen, and the two of them.)*
+
+Fifty-three seconds at **the lakehouse**, in daylight. Luna is writing at the
+kitchen island. Tyson comes through and says **he is going to head out for a
+bit.** She asks where. He says **"Out."** She asks **"Who is she?"** He asks
+**"Who said there's a she?"** She says **"Your face."**
+
+Then: **"Don't wait up." — "Wasn't planning on it."** She says her line
+**without looking up from the book**, and the last sixteen seconds are wordless
+— him looking at her, her not looking up, him going.
+
+**HE DOES NOT LIE AND HE DOES NOT ANSWER.** Everything he says back is a
+question. That distinction is the reason the scene is not tagged `lies`: they
+have never lied to each other, it is load-bearing, and spending it on a
+deflection would cost it everywhere else.
+
+**IT IS HER HOUSE AND HE DOES NOT LIVE IN IT**, which is what makes "don't wait
+up" a joke and her answer a cover. Nothing about the exchange is owed. She
+knows that while she is saying it.
+
+#### Where this sits — NEEDS ONE WORD FROM MELISSA
+Filed in **the six months**, immediately after `not-just-a-friend` — the entry
+where she admits she had to look away from him on the deck. This is the same
+feeling arriving in a form she cannot file as an observation.
+
+> **THE THING THAT ARGUES AGAINST IT.** The Casey section below says "Your
+> Date" is **the first time Luna's jealousy is pointed at Tyson**. This is
+> earlier and it is jealousy. The reading that keeps both: here it is a needle
+> she can still pass off as a joke, and there it is the same thing drunk, in
+> public, in front of the woman. **First flicker** against **first time it
+> costs her something.** That is a reading and not a ruling — it is one line in
+> `videos.ts` and one block in `journal.ts` to move if it is wrong.
+
+#### Free, and that is a one-way door
+Published **free with no preview**, on the rule already written into the
+driveway: a membership pitch cut out of under a minute has to take a third of
+the scene and sells nothing. The exact precedent is `luna-tyson-gingerale` —
+0:47, the same two people in the same kitchen, moved to free by Melissa herself
+on 2026-08-11.
+
+**What it gives away is that she is jealous**, which is the turn the six months
+is built on. Smaller than what gingerale spent (Tyson half-dressed in her
+kitchen the morning after, public and permanent), and it cannot be walked back.
+
+#### Three cuts arrived in one evening
+Two were replaced in place and are gone from disk. They were **three different
+assemblies**, not three exports of one — verified by frame comparison, no frame
+in any matching another at any offset:
+
+- `luna-ty-kitchen-outforabit.mp4` — 0:50, dropped in the `luna-ty-bar-drunk/`
+  folder. Opened wide on Luna alone at the island before he was in the room.
+- `luna-ty-outforabit.mp4` — 0:46. Stopped after "Your face." and never got to
+  the last two lines.
+- `luna-ty-wasntplanningonit.mp4` — 0:53. **The keeper.** Identical to the 0:46
+  cut for its first thirty seconds, then the exchange it was missing.
+
+**The shooting folder is still `stories/luna-ty-outforabit/`**, named for his
+line. The slug follows the cut, named for hers, because hers is what the scene
+ends on.
+
 ### The fall fair — week two of trying again
 *(Canon set by Melissa, 2026-08-02.)*
 

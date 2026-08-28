@@ -455,6 +455,22 @@ export const environments: Environment[] = [
               "Left open on the arm of the couch. Members can read what she wrote.",
             access: "premium",
           },
+          {
+            // The mug on the island, and the first hotspot in this room that
+            // opens onto a scene rather than a placeholder. `item: "mug"`
+            // because it is literally what is sitting there on the counter in
+            // the poster frame.
+            id: "the-island",
+            label: "The Kitchen Island",
+            kind: "clip",
+            item: "mug",
+            hint: "He came through",
+            position: [2.4, 0.95, 0.6],
+            videoSlug: "luna-ty-wasntplanningonit",
+            placeholder:
+              "Where she writes in the afternoons, with the lake in the whole of the window. He came through one day and said he was going out, and for the first time in twenty years she asked him where.",
+            access: "free",
+          },
         ],
       },
       {

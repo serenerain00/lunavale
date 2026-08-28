@@ -1560,6 +1560,70 @@ export const videos: Video[] = [
     place: "bar",
     about: ["luna", "tyson"],
   },
+  {
+    // THE KITCHEN, 2026-08-28. Fifty-three seconds at the lakehouse. He says
+    // he is going out, will not say where, and she asks him who she is.
+    //
+    // WHERE IT SITS — MELISSA'S TO CONFIRM, and the synopsis is written so it
+    // does not depend on the answer. It is her house and the two of them are
+    // easy in it, which puts it in the SIX MONTHS, and the journal page is
+    // filed there: straight after `not-just-a-friend`, where she has just
+    // written that she had to look away from him. Then he goes out without
+    // saying where and her first thought is a woman.
+    //
+    // THE ONE THING THAT ARGUES AGAINST IT is written down in
+    // LUNA_VALE_CONTEXT.md: "Your Date" is described there as the FIRST time
+    // Luna's jealousy is pointed at Tyson. This is earlier and it is jealousy.
+    // The reading that keeps both is that this one is a needle she can still
+    // pass off as a joke and that one is her doing it drunk in front of a
+    // third person — first flicker against first time it costs her something.
+    // That is a reading, not a ruling, and it is one line to move if it is
+    // wrong.
+    //
+    // FREE, and no preview — the same call as the driveway and for the reason
+    // written there: a membership pitch cut out of fifty-three seconds has to
+    // take a third of the scene and sells nothing. The exact precedent is
+    // luna-tyson-gingerale, 0:47 and free, which is the same two people in the
+    // same kitchen, and which Melissa moved to free herself on 2026-08-11 on
+    // the argument that short and shareable is how a stranger ever arrives.
+    //
+    // FREE IS A ONE-WAY DOOR HERE — three pages promise what is free stays
+    // free. What it costs is smaller than gingerale cost: that one made Tyson
+    // half-dressed in her kitchen public and permanent, and this is the two of
+    // them clothed and three feet apart. What it does give away is that she is
+    // jealous, which is the turn the six months is built on.
+    //
+    // NOT `mature`. Nothing happens. Nobody touches anybody.
+    //
+    // NOT tagged `lies`, deliberately, and it is the closest call on the
+    // entry. "Who said there's a she?" is a question asked back, not an
+    // answer — he tells her nothing and he does not tell her anything untrue.
+    // They have never lied to each other and that is load-bearing canon; a
+    // tag here would quietly spend it on a deflection.
+    //
+    // `desire` and `distance`. The jealousy is desire with somewhere else to
+    // be, and the whole scene is him keeping a door shut — which is the
+    // promise doing its work, six months before she has any way of knowing.
+    //
+    // THE SLUG FOLLOWS THE CUT AND NOT THE FOLDER. The shooting folder is
+    // stories/luna-ty-outforabit/, named for his line; the file inside it is
+    // luna-ty-wasntplanningonit.mp4, named for hers. Same rule as
+    // luna-josh-break. See scripts/import-cuts.sh for the two earlier
+    // assemblies this one replaced.
+    slug: "luna-ty-wasntplanningonit",
+    title: "Wasn't Planning On It",
+    synopsis:
+      "He says he is heading out and will not say where. She asks who she is — and then does not look up from the book for the rest of it.",
+    file: "luna-ty-wasntplanningonit.proxy.mp4",
+    poster: "/posters/luna-ty-wasntplanningonit.jpg",
+    durationSeconds: 53,
+    addedOn: "2026-08-28",
+    access: "free",
+    mature: false,
+    feelings: ["desire", "distance"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+  },
 ];
 
 /**

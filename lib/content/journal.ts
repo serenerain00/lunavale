@@ -664,10 +664,29 @@ export const journal: JournalEntry[] = [
     present tense cheap; one that opens on an eighteen-year-old misreading
     quiet as arrogance means the thing was built rather than found.
 
-    THE SECOND ENTRY DOES NOT DATE THE SERVICE against her ten years with
-    Josh — deliberately. Whether Tyson was still deploying when she met Josh is
-    a real story question with consequences and Melissa has not settled it, so
-    nothing here counts backwards. See LUNA_VALE_CONTEXT.md.
+    THE SECOND ENTRY NOW DATES THE SERVICE AGAINST JOSH, and that is Melissa's
+    (2026-08-30): Tyson was still serving when Luna met him. The entry shipped
+    the same day refusing to count backwards, because the question was open;
+    it is not open any more, so the entry lands it instead of stepping round
+    it. See LUNA_VALE_CONTEXT.md for what the fact costs him.
+
+    THE FORCE OF IT IS THE NINE MINUTES. Everybody else in her life watched
+    Josh arrive and had opinions. Tyson was told once, on a bad line, and then
+    had to hang up and go back to work — and she cannot now place which call it
+    was, which is the cruellest true detail in the entry and follows from the
+    entry's own logic rather than being imposed on it.
+
+    HIS ANSWER IS FOUR WORDS AND A QUESTION. Do not let anyone rewrite it into
+    a reaction. The man does not react on a nine-minute line; he asks whether
+    the man makes her laugh and says good, and the restraint is the whole
+    characterisation.
+
+    THE COUSIN QUESTION IS ASKED AND NOT ANSWERED. Josh and Tyson are distant
+    cousins, so the name may well have meant something the first time she said
+    it. Whether he knew who she was describing is genuinely open and is flagged
+    in the canon document. Luna wonders; the entry does not decide. If Melissa
+    says he knew, nothing here needs rewriting — the wondering simply becomes
+    dramatic irony, which is what it already is if he did.
 
     IT ALSO SETS UP `cole-rang-him` WITHOUT SPENDING IT. That entry, much later,
     turns on Cole having the decade of Tyson that she does not. Here she writes
@@ -725,6 +744,15 @@ export const journal: JournalEntry[] = [
       "I could not speak. I was so angry I had to hold the phone away from my face, and I could not tell him why, because what exactly was I going to say — you frightened me by doing your job. So I said the noise had stopped and asked about his flight, and he talked about the flight, and that was that.",
       "He has never told me where he was. I have never told him what those weeks were like at my end.",
       "We have both left it there, on purpose, for twenty years. And I have started to think it is the only thing he and I have ever refused each other, which is a strange sentence to write about the person I tell everything to.",
+      "There is one more thing in that decade and I have got this far down the page without writing it, which is its own kind of answer.",
+      "I met Josh in the middle of it.",
+      "He was not here for any of it. Not the meeting, not the first year, not the packing or the drive or the first winter on that farm. Everybody else got to watch it happen — my mother had a settled opinion inside a fortnight, Avery was a teenager and thought he was a film star, the whole of Atlanta had a view. Tyson got a phone call.",
+      "I told him down a bad line from somewhere he was not allowed to name. And I have spent tonight trying to work out which call it was and I cannot place it. That is the part that has kept me sitting here at this counter. It was one of the nine-minute ones. Twenty years of filling those with the dog and the car and somebody's wedding, and I filled one of them with the largest thing that has ever happened to me, and I could not tell you the month.",
+      "He said good. He asked what the man did and whether he made me laugh. I said yes. He said good again, and then the nine minutes were up, and that was the whole of it.",
+      "And I have never once asked him whether he knew the name when I said it. They are cousins. Distant — second, third, nobody in that family can agree — but cousins, and it is not a name you hear twice in a week. There is a version of that phone call where he knew exactly who I had just described to him, and said good anyway, and went back to work.",
+      "I do not know which version it is. I have had ten years to ask and I have not asked.",
+      "By the time he came out for good there was nothing anybody could have said. There was a house. There was a life with my name on the post. And Josh gave him work on the farm, which is a sentence I have written down a hundred times without hearing it, and which I am not going to be able to un-hear now.",
+      "He has been here every single day of the last six months. He was not here at the start of it at all. Tonight those two facts look like the same fact wearing different clothes.",
       "What that decade actually taught me — and I am only seeing it now, sitting up here with time on my hands — is how to hold something for an extremely long while without putting it down. Months at a stretch. No end date. No news. You just carry it and get on with your day and do not let it show, and you get so good at it that people describe you as calm.",
       "I have been calling that a strength my entire adult life. This week I am looking at it and wondering whether it is just the reason I stayed ten years in a house where I was managing something.",
       "He rang last night about a gate latch. Eleven minutes.",

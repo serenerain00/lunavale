@@ -229,19 +229,46 @@ he came and went across that decade; Cathy was there for Luna when he deployed.
 - **The photograph** on a wall in a back garden, and the long deployment where
   the calls stopped and Cathy came over and did the crossword out loud.
 
-#### OPEN QUESTION — was Tyson still serving when Luna met Josh?
-The arithmetic nearly forces a collision and nothing has ever settled it. Luna
-is 38 and has ten years of Josh, so she met him at 28. Tyson is 38 and served
-ten years, ending at some point this document does not fix — Josh helped him
-find contract work on the farm "when he came out".
+#### TYSON WAS STILL SERVING WHEN LUNA MET JOSH — SETTLED
+*(Melissa, 2026-08-30, answering the question this section was raised to ask.)*
 
-If the service overlaps the start of Josh, then **Tyson was away while Luna
-fell in love with the man he would later promise to help win back**, and came
-home to it. That is an enormous beat and it is available for free.
+**He was still in.** The beginning of Luna and Josh happened while Tyson was
+away, and he got all of it down a phone.
 
-`the-years-he-was-gone` deliberately **does not count backwards** and never
-places Josh inside the decade. Nothing on the site commits to either version.
-Melissa's call — and if the answer is yes, that entry is where it goes.
+**THE ARITHMETIC THIS FIXES.** Luna is 38 with ten years of Josh, so she met
+him at 28 — in Atlanta, on business, long distance for a while before she moved
+to Colorado (`characters.ts`). Tyson is 38 and served ten years. His service
+therefore runs across the start of her relationship, and he came out **into a
+relationship that already existed**, some way in. Exactly how far in is not set
+and does not need to be; what is fixed is that he **missed the beginning**.
+
+**WHAT IT COSTS HIM, AND IT IS A LOT:**
+
+- **He learned it in nine minutes.** Every other person in her life watched
+  Josh arrive. Tyson was told, once, on a call from somewhere with no name on
+  the display, and then had to go back to work.
+- **He could not do anything with it.** No advice, no reading of the man, no
+  standing in a kitchen forming an opinion. He heard it and hung up.
+- **He came home to it finished.** Not to a woman he might have said something
+  to — to a household. And then **Josh gave him work on the farm**, which means
+  the man who got her while he was gone is also the man who employed him when
+  he got back.
+- **And years later that same man asks him to help win her back**, and he says
+  yes. THE PROMISE now sits on top of a decade of already having been the one
+  who was not there.
+
+**IT ALSO EXPLAINS THE DISTANCE WITHOUT SOFTENING IT.** Tyson has done this
+before — stood at the edge of Luna's life with something he could not say and
+no way to close the gap. He is not improvising in the present tense; he is
+repeating the worst decade of his life on purpose.
+
+> **STILL OPEN, and worth one line from Melissa when she is ready.** Josh and
+> Tyson are distant cousins, so the name meant something. **Did Tyson know who
+> Josh was the first time Luna said the name down that phone?** The entry
+> `the-years-he-was-gone` puts the question in Luna's mouth — she has never
+> asked him — and does not answer it. Either version is good and they are
+> different stories: he knew and said nothing, or he found out later and had to
+> take that alone as well.
 
 ### Cole Burnett — Tyson's oldest friend
 *(Canon set by Melissa, 2026-08-04. **Tertiary**, but load-bearing: he is the

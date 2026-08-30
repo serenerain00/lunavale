@@ -115,7 +115,14 @@ export const characters: Character[] = [
       { label: "Age", value: "38" },
       { label: "From", value: "Atlanta, Georgia" },
       { label: "Lives", value: "Denver — moved after he retired, for a change of pace" },
-      { label: "Service", value: "Navy SEAL, ten years. Some of it deployed" },
+      // Melissa, 2026-08-30: he was still serving when Luna met Josh. It is
+      // the most load-bearing fact on this card — it means he did not watch
+      // the ten years begin, he was told about them once on a bad line.
+      {
+        label: "Service",
+        value:
+          "Navy SEAL, ten years. Still in when Luna met Josh — he got the beginning of it in a nine-minute phone call",
+      },
       { label: "Work", value: "Several things at once. Contract work on Josh's farm is one of them" },
       { label: "Drives", value: "A black 2020 Porsche Carrera he treats like something on loan" },
       { label: "Family", value: "Josh's distant cousin — second or third, still being decided" },

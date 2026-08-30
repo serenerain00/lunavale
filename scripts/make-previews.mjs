@@ -30,7 +30,7 @@
  * THE HONESTY PROBLEM THAT ARGUMENT WAS PROTECTING IS REAL AND STILL HANDLED:
  * the page under the player states exactly what was shown and what the whole
  * runtime is, so nobody is told they saw the start of anything. What is gone
- * is the pretence that a beginning is the most representative slice — on this
+ * is the pretense that a beginning is the most representative slice — on this
  * material it usually is not.
  *
  * SOURCE IS `file`, NEVER `premium.file`. Where a scene has an explicit cut
@@ -164,7 +164,7 @@ function premiumScenes() {
     const file = block.match(/file: "([^"]+)"/)?.[1];
     const duration = Number(block.match(/durationSeconds: (\d+)/)?.[1]);
     // Where the hook window starts. Absent = the opening, which is the old
-    // behaviour and still right for a scene that opens on its best question.
+    // behavior and still right for a scene that opens on its best question.
     const hookStart = Number(block.match(/hookStart: ([\d.]+)/)?.[1] ?? 0);
     if (slug && access === "premium" && file && duration) {
       out.push({ slug, file, duration, hookStart });

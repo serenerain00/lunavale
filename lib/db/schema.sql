@@ -64,10 +64,10 @@ CREATE TABLE IF NOT EXISTS overheard_posts (
 
   -- Clerk user id. Not a foreign key: Clerk owns the person.
   user_id     TEXT        NOT NULL,
-  -- Denormalised on purpose. A display name is shown next to every post, and
+  -- Denormalized on purpose. A display name is shown next to every post, and
   -- fetching N names from Clerk to render one page would be N round trips.
   -- Snapshotting it means a rename doesn't rewrite history, which for a wall
-  -- of dated remarks is the correct behaviour.
+  -- of dated remarks is the correct behavior.
   author_name TEXT        NOT NULL,
 
   body        TEXT        NOT NULL,

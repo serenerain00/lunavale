@@ -148,7 +148,7 @@ export function isActive(query: CatalogQuery): boolean {
 
 /**
  * Within a facet the selections are OR'd (any of these feelings); across
- * facets they are AND'd (…and in one of these places). That's the behaviour
+ * facets they are AND'd (…and in one of these places). That's the behavior
  * people expect from faceted browsing, and it keeps results from collapsing
  * to zero as soon as a second chip is picked.
  */

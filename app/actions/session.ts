@@ -24,9 +24,9 @@ import { membershipForUser } from "@/lib/db/memberships";
  * End the membership.
  *
  * When billing is live this opens Stripe's billing portal rather than
- * cancelling locally. Two reasons: the portal always reflects the real
+ * canceling locally. Two reasons: the portal always reflects the real
  * subscription state, and it cannot quietly grow a retention flow that argues
- * with somebody trying to leave. Cancelling locally would also be a lie — the
+ * with somebody trying to leave. Canceling locally would also be a lie — the
  * card would keep being charged.
  */
 export async function cancelMembership() {

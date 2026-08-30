@@ -70,7 +70,7 @@ export default async function AboutPage() {
         ))}
 
         {/* The section the whole page is really for. Given a border and its own
-            colour so a skimming reader lands on it — someone who thinks they
+            color so a skimming reader lands on it — someone who thinks they
             are lost stops watching, and this is the paragraph that tells them
             they are not. */}
         <section

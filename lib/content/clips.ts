@@ -73,7 +73,7 @@ export const clips: Clip[] = [
   {
     id: "run-at-the-lake",
     title: "Run",
-    caption: "Six miles, headphones in, nobody to talk to. Her favourite hour.",
+    caption: "Six miles, headphones in, nobody to talk to. Her favorite hour.",
     // Trimmed 2026-08-10 at 100.5s, from 103.7. What came off was 1.0s of
     // black and 1.8s of screen-recorded editing-app UI that had ridden along
     // on the export. Her end card is untouched, and the audio had already

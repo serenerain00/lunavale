@@ -21,7 +21,7 @@ interface NoteCardProps {
  *
  * A locked note shows its heading, its kind and its first line, then stops
  * mid-thought — the same argument JournalCard makes. Seeing that a real,
- * specific note exists is a better case for membership than a grey box, and it
+ * specific note exists is a better case for membership than a gray box, and it
  * is honest about what is withheld: the rest of this note, not its existence.
  */
 export function NoteCard({ note, unlocked }: NoteCardProps) {
@@ -94,7 +94,7 @@ export function NoteCard({ note, unlocked }: NoteCardProps) {
  * Signed the way you'd sign a note you left for someone.
  *
  * A total record rather than a chain of ternaries: the previous version fell
- * through to "J" for anyone it did not recognise, so Rick's notes went out
+ * through to "J" for anyone it did not recognize, so Rick's notes went out
  * signed by Josh. Adding a person to the taxonomy without adding them here is
  * now a type error instead of a wrong initial nobody notices.
  */
@@ -112,6 +112,10 @@ const SIGNATURES: Record<PersonId, string> = {
   // so Casey gets her name too. She has no notes yet — this exists so the
   // record stays total, which is the whole point of it.
   casey: "— Casey",
+  // And a third collision: Tyson has "— T", so Luna's father gets his name.
+  // Added with `tony` to the taxonomy on 2026-08-30; he has no notes and may
+  // never have any. The record has to stay total either way.
+  tony: "— Tony",
 };
 
 function signature(note: SetNote): string {

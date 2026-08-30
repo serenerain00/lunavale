@@ -96,7 +96,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // ---- Preview mode: grant the labelled preview, no charge -----------------
+  // ---- Preview mode: grant the labeled preview, no charge -----------------
   const res = NextResponse.redirect(new URL("/account?started=1", origin));
   res.cookies.set(MEMBER_COOKIE, tier.id, {
     httpOnly: true,

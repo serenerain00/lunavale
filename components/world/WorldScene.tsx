@@ -1152,7 +1152,7 @@ function EspressoMachine({
 /**
  * A painted wall sign, rendered to a canvas because no font is loaded into the
  * scene. Cheap (one 512×128 texture, generated once) and it means the sign
- * actually reads rather than being three suggestive light-coloured bars.
+ * actually reads rather than being three suggestive light-colored bars.
  */
 function useSignTexture(lines: string[]) {
   return useMemo(() => {
@@ -2043,7 +2043,7 @@ function PorchShell({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
         <planeGeometry args={[ROOM.width, 3.8]} />
         <meshStandardMaterial color="#7d7261" roughness={0.9} />
       </mesh>
-      {/* Clapboard lines. Flat colour reads as a backdrop rather than a wall. */}
+      {/* Clapboard lines. Flat color reads as a backdrop rather than a wall. */}
       {Array.from({ length: 14 }).map((_, i) => (
         <mesh key={`cb${i}`} position={[0, 0.15 + i * 0.27, -d + 0.02]}>
           <boxGeometry args={[ROOM.width, 0.015, 0.02]} />
@@ -2051,7 +2051,7 @@ function PorchShell({ wood, stone }: { wood: PBRMaps; stone: PBRMaps }) {
         </mesh>
       ))}
 
-      {/* The front door, off-centre the way a real elevation is. */}
+      {/* The front door, off-center the way a real elevation is. */}
       <group position={[-1.5, 0, -d + 0.06]}>
         <mesh position={[0, 1.05, 0.06]}>
           <boxGeometry args={[1.18, 2.24, 0.05]} />

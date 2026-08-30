@@ -55,7 +55,7 @@ export default async function Home() {
   const heroUnlocked = hero ? await canWatch(hero.video) : false;
 
   // The newest release, shown only while it is genuinely new — see isRecent.
-  // When nothing has gone up in a fortnight the section disappears rather
+  // When nothing has gone up in two weeks the section disappears rather
   // than keeping a "New" label on something that is not.
   const latest = latestScene();
   const showLatest = latest && isRecent(latest);
@@ -272,7 +272,7 @@ export default async function Home() {
                 changelog. A card leads with the picture and opens to the rest.
 
                 Reusing components/browse/Rail so the catalog's carousel
-                behaviour — peeking card, edge scrims, arrows that vanish at
+                behavior — peeking card, edge scrims, arrows that vanish at
                 the ends, drag, keyboard paging, reduced motion — is the same
                 gesture here as everywhere else rather than a second one. */}
             <div className="mt-6">

@@ -586,7 +586,7 @@ export const galleries: StillGallery[] = [
     title: "The Run",
     subtitle: "Luna, alone",
     description: [
-      "Six miles at the far end of the lake, headphones in, nobody to talk to and nobody to be all right for. Her favourite hour of the week and the only one in the story she does not spend managing somebody else.",
+      "Six miles at the far end of the lake, headphones in, nobody to talk to and nobody to be all right for. Her favorite hour of the week and the only one in the story she does not spend managing somebody else.",
       "She is not thinking anything through out here. That is the point of it. Everything she has been carrying is still there when she gets back — she just gets to put it down for an hour first.",
     ],
     count: 10,
@@ -679,7 +679,7 @@ export const galleries: StillGallery[] = [
     place: "garage",
     about: ["tyson", "luna"],
     // Linked 2026-08-19, when the room finally got a scene. These four stills
-    // predate it by a fortnight and still 04's caption — "she turns up and he
+    // predate it by two weeks and still 04's caption — "she turns up and he
     // keeps working" — turns out to describe the scene's opening exactly.
     sceneSlug: "ty-luna-garage",
     stills: [

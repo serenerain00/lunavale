@@ -379,7 +379,7 @@ function withMentions(text: string) {
   });
 }
 
-/** First line of a message, trimmed — enough to recognise it by. */
+/** First line of a message, trimmed — enough to recognize it by. */
 function snippet(body: string[], max = 90): string {
   const first = (body[0] ?? "").trim();
   return first.length > max ? `${first.slice(0, max - 1)}…` : first;

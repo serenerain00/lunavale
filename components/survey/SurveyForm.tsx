@@ -20,7 +20,7 @@ import {
  *
  * NATIVE RADIOS AND CHECKBOXES under the styling, not divs with click
  * handlers: keyboard support, screen readers, form semantics and the browser's
- * own required-field behaviour all come free and all of them are things a
+ * own required-field behavior all come free and all of them are things a
  * bespoke control gets wrong.
  */
 export function SurveyForm({

@@ -82,7 +82,7 @@ export interface Video {
    * This lived only on PremiumCut, which assumes a scene has a tame public
    * edit and an explicit members' one. luna-josh-first-night has no tame edit —
    * past the first ninety seconds it is one thing the rest of the way — so
-   * there was nowhere to say so, and the page would have labelled it "Mature"
+   * there was nowhere to say so, and the page would have labeled it "Mature"
    * like a kiss.
    *
    * `mature` reads as "there is sex in this". This says it is shown.
@@ -127,7 +127,7 @@ export interface Video {
    * begins. Omitted still means the opening, which is right for scenes that
    * open on their own best question.
    *
-   * Only meaningful on `access: "premium"`. Absent means the old behaviour:
+   * Only meaningful on `access: "premium"`. Absent means the old behavior:
    * the scene is locked outright and the stream route refuses it.
    */
   preview?: {
@@ -394,7 +394,7 @@ export const videos: Video[] = [
         of the car. She is deeply conflicted the entire time, because she is
         still in love with Josh. He is not being there for her in the way she
         needs and she is tired of waiting. He keeps saying he messed up; she
-        does not give him much room to apologise, because it is the same
+        does not give him much room to apologize, because it is the same
         apology as every other time. She goes anyway.
 
       The last third is the lakehouse, in the dark, alone — she walks through
@@ -430,8 +430,8 @@ export const videos: Video[] = [
     // `control`, and deliberately not `violence`. He holds her face, blocks the
     // door and tries to get her out of the car — he never strikes her and never
     // takes her by the throat. Checked frame by frame across the confrontation
-    // rather than assumed from the shape of the scene: labelling this assault
-    // would be as wrong as labelling it nothing.
+    // rather than assumed from the shape of the scene: labeling this assault
+    // would be as wrong as labeling it nothing.
     notes: ["control"],
     feelings: ["hurt", "distance"],
     // The confrontation and the car are here; the last third is the lakehouse.
@@ -466,7 +466,7 @@ export const videos: Video[] = [
   {
     // Delivered 2026-08-17, and NOT a second cut of Sunday above despite
     // sharing a bed and a folder name — Melissa's call. The scene is built in
-    // two tenses: she is awake in the present, in colour, and the middle of it
+    // two tenses: she is awake in the present, in color, and the middle of it
     // is Josh, graded sepia. The memory is the flashback; the scene is her
     // having it.
     //
@@ -556,7 +556,7 @@ export const videos: Video[] = [
     // The window is very QUIET — around -49dB across it, because the score sits
     // far down (see the audio note below). Melissa confirmed on 2026-08-12 that
     // the volume is low but the audio is there and that is the mix, so the cut
-    // carries it UNTOUCHED. Do not normalise it to make a preview louder.
+    // carries it UNTOUCHED. Do not normalize it to make a preview louder.
     //
     // It ships LOCKED.
     //
@@ -821,7 +821,7 @@ export const videos: Video[] = [
     // material below.
     //
     // FREE, deliberately. It has no turn in it to give away, it is
-    // licence-clean (dialogue only, no score — checked on the spectrogram,
+    // license-clean (dialogue only, no score — checked on the spectrogram,
     // unlike luna-tyson-dance and luna-josh-fair), and it introduces a whole
     // character. That makes it the best shop-window scene in the library for
     // the /about funnel, which now tells confused arrivals to start at the
@@ -853,7 +853,7 @@ export const videos: Video[] = [
   },
   {
     // Avery's introduction, and the answer to the scene above it. Cathy got
-    // nothing out of Luna and rang her other daughter about it; Avery calls
+    // nothing out of Luna and called her other daughter about it; Avery calls
     // already knowing, which is the entire difference between them.
     //
     // FREE, for the same reason "Long Distance" is: no turn to protect, a new
@@ -899,7 +899,7 @@ export const videos: Video[] = [
     // that. Noting it here because the scene is now public rather than behind a
     // login, so it is a known state, not an oversight.
     //
-    // TO REVERT to a licence-clean cut: re-encode from
+    // TO REVERT to a license-clean cut: re-encode from
     // luna-tyson-dance/luna-tyson-dance.mp4 (1920x1080, dialogue only) with
     //   scripts/optimize-media.sh proxy-only luna-tyson-dance-full <that file>
     // and set durationSeconds to 232.
@@ -1462,14 +1462,14 @@ export const videos: Video[] = [
     about: ["luna", "josh"],
   },
   {
-    // THE CAR PARK, 2026-08-26, and the second half of a night already on the
+    // THE PARKING LOT, 2026-08-26, and the second half of a night already on the
     // site. "Your Date" (luna-tyson-casey-bar) ends with her handing him a
     // version of the evening and leaving before he can correct it. Tyson and
     // Casey go. LUNA STAYS, and drinks bourbon on her own for another couple
     // of hours. This is what is outside when she finally comes out.
     //
     // COLE IS THE REASON TYSON IS THERE, AND IS NEVER ON CAMERA. It is his
-    // bar, he watches her all night, and when she leaves he rings Tyson: she
+    // bar, he watches her all night, and when she leaves he calls Tyson: she
     // has been drinking, she has just gone, she is going to try to drive. So
     // `about` is luna and tyson — the same call as luna-ty-panic-attack, where
     // Josh causes the whole scene from the other end of a phone and is not in
@@ -1479,7 +1479,7 @@ export const videos: Video[] = [
     // met him for years, and she knows he and Tyson were SEALs together. So
     // the scene is NOT a mystery about who told him — the synopsis said it was
     // for about an hour and that was wrong. What she does not know is the far
-    // worse thing, which is that Cole rang Tyson rather than the man she lives
+    // worse thing, which is that Cole called Tyson rather than the man she lives
     // with and did not have to think about it. That is the journal page.
     //
     // WHERE THEY ARE, in the story rather than on the map: a month or two back

@@ -74,7 +74,7 @@ CUTS=(
   "luna-josh-bed|stories/luna-josh-room/luna-josh-bed.mov|6"
   # Her lying awake, and the night she goes back to. A DIFFERENT SCENE from
   # luna-josh-bed above, despite the folder name pointing at the same bed —
-  # this one is framed in the present, in colour, with the memory of Josh
+  # this one is framed in the present, in color, with the memory of Josh
   # graded sepia in the middle of it. Slug says flashback for that reason.
   #
   # Two masters were delivered (Melissa, 2026-08-17). Taking the .mov:
@@ -91,7 +91,7 @@ CUTS=(
   # Trimmed at 129.7s: delivered with 3.7s of black on the end (blackdetect,
   # not eyeballed), the same way the Casey cut arrived.
   #
-  # Poster at 24s: the last of the present-day colour before the memory takes
+  # Poster at 24s: the last of the present-day color before the memory takes
   # over — her awake on the pillow. The default 3s is her asleep, which sells
   # the scene as a woman sleeping, and anything past ~32s is the flashback and
   # would put Josh on a card that is about her being without him.
@@ -218,7 +218,7 @@ CUTS=(
   #
   # Poster at 382.4s: the same frame the card has always used, her face and his,
   # both calm. NOT one of the frames of her mid-attack — those are the honest
-  # centre of the scene and also a woman at the worst moment of her month, and
+  # center of the scene and also a woman at the worst moment of her month, and
   # a poster sits at a permanent ungated URL where anybody can meet it cold.
   "luna-ty-panic-attack|stories/luna-ty-panic-attack/luna-panicAttack-full.mp4|382.4|390.4|3"
   # THE DRIVEWAY. Josh is going away for three days, and it takes them the

@@ -64,7 +64,7 @@ export async function tierForUser(userId: string): Promise<TierId> {
   if (!row) return "free";
   if (!ACTIVE_STATUSES.has(row.status)) {
     // Cancelled, but the period they paid for may not be over yet. The
-    // membership page promises exactly this, so honour it here rather than in
+    // membership page promises exactly this, so honor it here rather than in
     // the UI, where it would be easy to forget.
     const until = row.current_period_end
       ? new Date(row.current_period_end)

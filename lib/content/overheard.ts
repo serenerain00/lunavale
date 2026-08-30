@@ -57,7 +57,7 @@ export const MAX_POST_LENGTH = 900;
  *
  * They are also kept out of `overheard_posts` deliberately. Every row in that
  * table is something a real account actually said; four characters talking is
- * the same openly-labelled fiction as the cast interview, and mixing the two
+ * the same openly-labeled fiction as the cast interview, and mixing the two
  * would make the table a claim it couldn't keep.
  *
  * WHEN IT RUNS OUT the thread simply stops growing — no errors, no blanks, and
@@ -323,7 +323,7 @@ export const MENTIONABLE = [
   { name: "Melissa", hint: "the filmmaker" },
 ] as const;
 
-/** Byline colours for cast replies, keyed by canonical name. */
+/** Byline colors for cast replies, keyed by canonical name. */
 export const CAST_TINTS: Record<string, string> = {
   Luna: "#e0b072",
   Tyson: "#9fb3c8",

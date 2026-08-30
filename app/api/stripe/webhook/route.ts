@@ -8,7 +8,7 @@
  * request.
  *
  * Three properties this handler has to have, all of which Stripe's delivery
- * behaviour will test:
+ * behavior will test:
  *
  *   Verified   — the raw body is checked against STRIPE_WEBHOOK_SECRET before
  *                anything is parsed. Without that, this endpoint is a public
@@ -102,7 +102,7 @@ async function applyEvent(event: Stripe.Event): Promise<void> {
 
   // Always re-read rather than trusting the payload: deliveries arrive out of
   // order, and an old "updated" event overwriting a newer one would hand
-  // somebody back access they had cancelled.
+  // somebody back access they had canceled.
   const subscription = await stripe().subscriptions.retrieve(subscriptionId);
   const userId = userIdFor(subscription, event);
 

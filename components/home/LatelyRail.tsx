@@ -16,7 +16,7 @@
  * TWO KINDS OF CARD, because there are two kinds of thing and pretending
  * otherwise would cost more than it saves. A scene is a poster. A journal page
  * is a sheet of paper in her hand — the same treatment JournalCard uses on the
- * index, so a visitor who has seen one recognises the other. That difference
+ * index, so a visitor who has seen one recognizes the other. That difference
  * does the work the "SCENE / JOURNAL" column used to do, without the column.
  *
  * A CARD IS A REAL LINK FIRST. The click is intercepted to open the detail
@@ -169,7 +169,7 @@ function ReleaseCard({
 
 /**
  * The card face for a journal page: ruled paper and her handwriting, the same
- * sheet JournalCard puts on the index. Deliberately NOT a grey placeholder and
+ * sheet JournalCard puts on the index. Deliberately NOT a gray placeholder and
  * not a borrowed film still — a page you can see the handwriting of and cannot
  * read is a better argument than either, and it is what the thing actually is.
  */

@@ -10,7 +10,7 @@
  * Each Room has an optional `scan` slot. While it's undefined, the room renders
  * as tinted placeholder geometry. Drop a photogrammetry GLB into the slot (see
  * docs/world/SCAN_CAPTURE.md) and the real space replaces the placeholder with
- * no other code changes. Coordinates are scene metres, origin at room centre.
+ * no other code changes. Coordinates are scene meters, origin at room center.
  */
 
 import type { AccessLevel } from "@/lib/content/videos";

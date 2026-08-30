@@ -51,7 +51,7 @@ HEROES=(
   "luna-josh-coffee|stories/luna-josh-coffee.proxy.mp4|20|40"
   # The lake through the glass — the only hero with real daylight distance in it.
   "luna-cathy-phone|stories/luna-cathy-phone.proxy.mp4|4|35"
-  # Bodies moving, coloured light, a crowd. Reads as a film from across a room.
+  # Bodies moving, colored light, a crowd. Reads as a film from across a room.
   "luna-tyson-dance|stories/luna-tyson-dance-full.proxy.mp4|30|40"
   # Night interior, lamplight, one figure. Quiet counterweight to the dance.
   "luna-avery-ipad|stories/luna-avery-ipad.proxy.mp4|4|35"

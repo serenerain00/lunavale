@@ -108,7 +108,7 @@ export const TIERS: Tier[] = ALL_TIERS.filter((t) => t.available);
 
 /**
  * Resolves against ALL tiers, including retired ones: a member holding a tier
- * that has since been withdrawn must still be recognised, not silently
+ * that has since been withdrawn must still be recognized, not silently
  * downgraded to a visitor.
  */
 export function getTier(id: string): Tier | undefined {
@@ -370,7 +370,7 @@ export const QUESTIONS: Question[] = [
   },
   {
     q: "Is the mature material separate?",
-    a: "It is always labelled before you open it, and it is never the only way to follow the story. You can watch the whole arc without it.",
+    a: "It is always labeled before you open it, and it is never the only way to follow the story. You can watch the whole arc without it.",
   },
   {
     q: "Where does the money go?",

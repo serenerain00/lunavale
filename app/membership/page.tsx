@@ -155,7 +155,7 @@ export default async function MembershipPage() {
             <p>
               There is no studio behind this. It is made independently, on a
               small budget, by a very small number of people — so a membership
-              is not a subscription to a back catalogue that already exists.
+              is not a subscription to a back catalog that already exists.
             </p>
             <p>
               It is what pays for the next one to get made: the shoot, the cut,

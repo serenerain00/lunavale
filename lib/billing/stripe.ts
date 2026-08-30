@@ -28,7 +28,7 @@ export function stripe(): Stripe {
   client ??= new Stripe(key, {
     // Pin the wire version explicitly. stripe-node already defaults to the
     // version its types are generated against, so this doesn't change today's
-    // behaviour — it makes a future SDK upgrade a deliberate decision rather
+    // behavior — it makes a future SDK upgrade a deliberate decision rather
     // than a silent change to what the API receives.
     apiVersion: "2026-06-24.dahlia",
   });
@@ -145,7 +145,7 @@ export async function createCheckoutSession(input: {
  * somebody a session that has already been paid.
  *
  * Returns undefined on any failure rather than throwing: this is an
- * optimisation on the way to checkout, and a Stripe hiccup here should cost a
+ * optimization on the way to checkout, and a Stripe hiccup here should cost a
  * duplicate session, not the sale.
  */
 async function openSessionFor(
@@ -181,7 +181,7 @@ async function openSessionFor(
 }
 
 /**
- * The billing portal — where cancelling actually happens.
+ * The billing portal — where canceling actually happens.
  *
  * Handing this to Stripe rather than building our own cancel button is the
  * honest choice: it always reflects the real subscription state, it can't

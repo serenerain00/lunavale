@@ -125,6 +125,11 @@ he is a fourth lead.
 her income** *(2026-08-05)*, and it is the only thing in the story that is
 entirely her own: not Josh's farm, not a job he found her, and it travels.
 
+**SHE HAS MODELLED SINCE SHE WAS EIGHTEEN** *(Melissa, 2026-08-30)* — twenty
+years of it, the same twenty she has known Tyson. It is not a thing she took up
+after Josh; it is the longest-running fact about her, older than either man,
+and it is where the friendships below come from.
+
 The story is her interior life. She has a **streak**: she likes danger (that's
 Josh) but she is loyal (that's Tyson). Through the story she is conflicted,
 tormented, sad, angry, lost, "not found yet," confused — living day by day,
@@ -137,6 +142,37 @@ Her attraction to each man is real and different:
 - **With Josh:** a thrill. Unpredictable, aggressive *in all the right ways*.
   She likes the danger and is also scared of it — and can no longer fully
   separate the thrill from the fear.
+
+#### Her friends — WHO IS LEFT
+*(Canon set by Melissa, 2026-08-30. Fills the hole the story had at its centre:
+until now Luna appeared to know four people.)*
+
+**COLLEGE DWINDLED.** The friendships from that stretch **thinned out and
+mostly went**, which is the ordinary way it happens and does not need a
+falling-out to explain it. She was in Atlanta, she moved two thousand miles to
+Colorado at 28 for a man, and distance did the rest.
+
+**WHAT SURVIVED IS THE WORK.** A few women she has known **since she started
+modelling at eighteen** — twenty years of the same rooms, the same call times,
+the same waiting around. **They are to be introduced later**; nobody is named
+yet and nobody should be.
+
+**WHY IT MATTERS MORE THAN A CAST LIST:**
+
+- **It explains the isolation the whole story runs on.** Luna is not a woman
+  with nobody. She is a woman whose remaining people are all somewhere else,
+  reachable only by phone — her mother, her sister, and these women. In
+  Colorado she has Josh and she has Tyson, and that is the entire list, which
+  is why losing one of them is not survivable in the ordinary way.
+- **They are the one group with no stake.** Her mother defends Josh. Avery is
+  her sister. Tyson is the subject. These women know both men only as stories,
+  which makes them the only people who could tell her the truth — and she has
+  not asked them.
+- **They have been saying it for years.** Written into `the-girls`: at least
+  one of them made the joke about Tyson a long time ago, in front of everybody,
+  and Luna laughed it off. **They saw it before she did.** That is Melissa's
+  when she introduces them, and the journal treats it as a memory rather than a
+  scene.
 
 ### Josh — her partner of ten years
 Together with Luna **10 years**, then **separated for 6 months**. By the end
@@ -270,6 +306,43 @@ repeating the worst decade of his life on purpose.
 > different stories: he knew and said nothing, or he found out later and had to
 > take that alone as well.
 
+#### AND JOSH IS THE ONE WHO GOT HER THROUGH IT
+*(Canon set by Melissa, 2026-08-30, and it is the other half of the fact
+above.)*
+
+**Josh stole her heart while Tyson was deployed, and he did it by being the
+person who held her together while she was frightened for Tyson.**
+
+That is not a coincidence in the timeline. It is the mechanism. Luna at 28 is
+waiting on a phone that rings from places with no name, months at a stretch,
+not allowed to ask anything — and a man arrives who is present, certain, and
+completely unafraid of how much she is carrying. **Josh is at his absolute best
+in exactly the conditions that decade created**, and he was not performing it.
+He was genuinely good to her, and she was genuinely rescued.
+
+**WHAT THIS DOES TO THE WHOLE STORY:**
+
+- **It makes the six months a mirror, and nobody in it knows.** Tyson gets her
+  through losing Josh. Years earlier, **Josh got her through nearly losing
+  Tyson.** Each man's claim on her was built in the other's absence, and she is
+  the only person alive holding both halves.
+- **It stops Josh being a mistake she can simply correct.** He is not a wrong
+  turn she took while distracted; he is the man who was there for the worst
+  year of her life. Whatever he becomes later, that debt is real and she cannot
+  write it off, and any version of this story where she can is a worse one.
+- **It is the cruellest possible answer to "why did she stay".** She stayed
+  because he earned it once, properly, and she has been paying that back for
+  ten years.
+- **And Tyson has never known.** She has never told him that the man he came
+  home to is the man who covered for him. It is written in `the-worst-year` as
+  something she cannot say, because she does not know which part of it would
+  land worse.
+
+**OPEN, and not invented anywhere:** whether **Josh knew** he was competing.
+Whether he understood what Tyson was to her at the time, or simply met a
+frightened woman and was kind to her. Both are available. The second is more
+frightening, because it means nobody did anything wrong.
+
 ### Cole Burnett — Tyson's oldest friend
 *(Canon set by Melissa, 2026-08-04. **Tertiary**, but load-bearing: he is the
 only person Tyson can say any of this to.)*
@@ -319,9 +392,17 @@ first of the "others" that section anticipated.)*
 
 **65.** Lives in **Atlanta, Georgia**, which matters more than a biographical
 detail normally would: Luna is in **Colorado**, so Cathy is two thousand miles
-from a daughter she is frightened for and can do nothing but phone. She is
-**divorced**, and has **two daughters** — Luna, and **Avery**, ten years younger — see
-her own section below. The family all know each other.
+from a daughter she is frightened for and can do nothing but phone. She has
+**two daughters** — Luna, and **Avery**, ten years younger — see her own section
+below. The family all know each other.
+
+> **CORRECTION, 2026-08-30. SHE IS NOT DIVORCED.** This document said she was
+> from 2026-08-03 until Melissa corrected it, and the site said it too —
+> `characters.ts` opened her card with "Sixty-five, divorced, and in Atlanta".
+> Both are fixed. **She has been married to Antonio for forty years and they
+> are still in love**, which is not a small edit: it changes what Luna grew up
+> inside, what she is measuring Josh against, and why she cannot tell her
+> mother the truth. See Antonio's section immediately below.
 
 She is a **caring, loving, well-meaning mother**, and right now a **worried
 one**. What she is picturing is Luna **alone at the lakehouse, in the dark, in
@@ -378,6 +459,45 @@ anything about it.
 
 *That Luna is at the lakehouse is the point, not set dressing: she has been
 there about a week, because it is where she went.*
+
+### Antonio — "Tony" — Luna's father
+*(Canon set by Melissa, 2026-08-30. **Tertiary**, and he replaces a divorce
+this document had invented nothing on top of, thankfully.)*
+
+**Mediterranean.** He and Cathy **met in Italy years ago and fell in love
+there**, and they have been **married forty years**. Cathy is 65, so she
+married at about 25; Luna arrived when she was 27, Avery ten years after that.
+
+**They are still in love.** Not fond, not companionable — in love, visibly,
+after forty years, and everybody who has ever been in their kitchen knows it.
+
+**THIS IS THE MOST USEFUL TERTIARY FACT IN THE DOCUMENT** and it is worth
+saying why, because on its face it is only a nice detail about somebody's
+parents.
+
+- **Luna grew up inside a marriage that worked.** She is not a woman guessing
+  at what love looks like or repeating something broken. She has a working
+  model, in high resolution, running in the next room for her entire
+  childhood — and she has spent ten years failing to match it and knowing
+  precisely how far off she is.
+- **It is why she stayed.** Forty years is a long time to be shown that the
+  good version exists and that people get there by not leaving.
+- **It sharpens Cathy.** Her mother is not being obtuse about Josh; she has
+  been loved easily for forty years and **has no working picture of what it is
+  to be managed by somebody who loves you.** When Luna does not tell her the
+  truth, that is why. It is not distrust — it is that the sentence would have
+  to be built from scratch.
+- **And it gives Luna her face.** She and Avery look alike and both take after
+  him; the Mediterranean is his.
+
+**Not yet established, and nobody should invent it:** what Tony does or did for
+a living, whether he and Cathy still travel, what he makes of Josh, and whether
+he has ever said anything to Luna about any of this. He has been on the site
+since 2026-08-30 only in her journal and on Cathy's card.
+
+**Registered as `tony` in the taxonomy** so her entries can be filed under him.
+He is NOT on /characters — that page has its own list and he has not earned a
+profile yet.
 
 ### Avery Vale — Luna's younger sister
 *(Canon set by Melissa, 2026-08-04, expanded 2026-08-05. **Tertiary.**)*

@@ -18,6 +18,7 @@ import {
   entriesForScene,
   freeEntries,
   journal,
+  latestEntries,
   opening,
   quoteOfTheDay,
 } from "@/lib/content/journal";
@@ -63,6 +64,12 @@ export default async function Home() {
   // it — and until now the home page dropped it and made you find the journal
   // on your own.
   const latestEntry = latest ? entriesForScene(latest.slug)[0] : undefined;
+
+  // THE NEWEST PAGES OF THE JOURNAL, members-only, shown to everybody.
+  // Release order rather than story order — see latestEntries(). Empty until
+  // something dated and gated exists, in which case the section does not
+  // render at all rather than standing there with a heading and no pages.
+  const newestPages = latestEntries(3);
 
   // THE RHYTHM. Derived from what is actually published; see
   // lib/content/releases.ts for why this is not a hand-kept list and why there
@@ -528,6 +535,105 @@ export default async function Home() {
               ))}
           </Reveal>
         </section>
+
+        {/* ------------------------------------------------- the newest pages */}
+        {/* THE NEW ENTRIES, LOCKED, directly under the free ones. Melissa,
+            2026-08-30: the journal is the book people keep asking her for and
+            are not going to get any other way, so the newest pages should be
+            visible on the home page and should require joining to read.
+
+            IT SITS UNDER THE FREE ROW ON PURPOSE. A visitor has just been
+            handed three whole entries; the argument this row makes is "and
+            there are new ones every week" rather than "here is a wall". Order
+            matters — the same row above the free one would read as a toll gate
+            before anybody has been given anything.
+
+            THE CARD IS THE SAME PAPER as the free row, deliberately. The only
+            differences are the badge and the page falling away into the dark
+            at the bottom, which is the same gesture the locked entry page
+            makes. A visitor learns one object here and meets it again when
+            they click.
+
+            THE OPENING LINE IS REAL AND IS GIVEN AWAY. Same call as
+            LockedEntry in app/journal/[id]/page.tsx: enough of her handwriting
+            to make its own case, and the honest version of a teaser — this is
+            genuinely the first sentence of the page, not copy written to sell
+            it.
+
+            NO COUNTDOWN, NO SCARCITY. The pressure is that there is a great
+            deal of her in here and it keeps arriving, which is true and stays
+            true. MONETIZATION.md rules out the other kind. */}
+        {newestPages.length > 0 && (
+          <section
+            aria-labelledby="newest-pages-heading"
+            className="mx-auto w-full max-w-6xl px-5 pt-12 sm:px-8 sm:pt-16"
+          >
+            <div className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+              <div className="min-w-0">
+                <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                  Just written
+                </p>
+                <h2
+                  id="newest-pages-heading"
+                  className="mt-2 font-display text-2xl font-medium text-ivory sm:text-3xl"
+                >
+                  The newest pages
+                </h2>
+                <p className="mt-2 max-w-lg leading-relaxed text-stone">
+                  {member
+                    ? "The latest of her handwriting, yours as part of the LunaVerse."
+                    : "The long ones — twenty years of her and Tyson, and what she only writes down at three in the morning. These are inside the LunaVerse."}
+                </p>
+              </div>
+              <Link
+                href={member ? "/journal" : "/membership"}
+                className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+              >
+                {member ? "The whole journal" : "Join to read them"}
+              </Link>
+            </div>
+
+            <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+              {newestPages.map((entry) => (
+                <Link
+                  key={entry.id}
+                  href={`/journal/${entry.id}`}
+                  data-reveal-item
+                  className="group relative block overflow-hidden rounded-sm bg-paper shadow-[0_12px_34px_-12px_rgba(0,0,0,0.85)] transition-transform duration-(--duration-standard) ease-(--ease-standard) hover:-translate-y-1 focus-visible:-translate-y-1"
+                >
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        "repeating-linear-gradient(to bottom, transparent 0 21px, rgba(47,58,74,0.11) 21px 22px)",
+                      backgroundPosition: "0 3.5rem",
+                    }}
+                  />
+                  <div className="relative p-5 pb-10">
+                    <p className="font-hand text-xl leading-tight text-ink-soft">
+                      {entry.dateline}
+                    </p>
+                    <p className="font-hand mt-3 line-clamp-5 text-xl leading-[1.4rem] text-ink">
+                      {opening(entry, 190)}
+                    </p>
+                  </div>
+                  {/* The page falling away into the dark, not a cropped card —
+                      the same gesture the locked entry page makes. */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-void via-void/85 to-transparent"
+                  />
+                  <span className="absolute inset-x-0 bottom-0 flex justify-center p-4">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-void/70 px-3 py-1 text-xs text-amber-soft backdrop-blur-sm">
+                      {member ? "Yours to read" : "Members only"}
+                    </span>
+                  </span>
+                </Link>
+              ))}
+            </Reveal>
+          </section>
+        )}
 
         {/* -------------------------------------------------- in the lunaverse */}
         {/* THE MEMBERS' RAIL, immediately before the ask — real locked frames

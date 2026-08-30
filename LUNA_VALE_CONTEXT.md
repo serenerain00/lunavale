@@ -203,6 +203,46 @@ When Josh comes back, Tyson **starts putting distance** between himself and
 Luna — because distance is the only way he can keep hiding that he's in love
 with her.
 
+#### The twenty years — DRAFTED 2026-08-30, AND PARTLY INVENTED
+*(Two long journal entries, `twenty-years-ago` and `the-years-he-was-gone`.
+Flagged here because they are the first pages on the site that assert anything
+about how Luna and Tyson began, and Melissa has never said.)*
+
+The journal has claimed "twenty years" on nearly every page and never once
+shown a reader what those years were made of, which is the single largest hole
+a member reading front-to-back would fall into. Two entries now fill it.
+
+**Drawn from canon and safe:** both from Atlanta; twenty years; Cathy made the
+two of them lunches as teenagers and loves him like a son; Avery has known him
+almost her whole life and he treats her as a little sister; ten years a SEAL;
+he came and went across that decade; Cathy was there for Luna when he deployed.
+
+**INVENTED, and thin on purpose so it is cheap to replace:**
+
+- **How they met.** He is standing in Cathy's kitchen, already an hour in,
+  before anybody introduces him.
+- **Luna does not like him at first**, and reads his quiet as arrogance. This is
+  the one real choice in the entry: a twenty-year friendship that opens on love
+  at first sight makes the present tense cheap.
+- **The night it turned** — somebody says something cruel to her at a party, he
+  makes no speech and simply takes her out of the room.
+- **The photograph** on a wall in a back garden, and the long deployment where
+  the calls stopped and Cathy came over and did the crossword out loud.
+
+#### OPEN QUESTION — was Tyson still serving when Luna met Josh?
+The arithmetic nearly forces a collision and nothing has ever settled it. Luna
+is 38 and has ten years of Josh, so she met him at 28. Tyson is 38 and served
+ten years, ending at some point this document does not fix — Josh helped him
+find contract work on the farm "when he came out".
+
+If the service overlaps the start of Josh, then **Tyson was away while Luna
+fell in love with the man he would later promise to help win back**, and came
+home to it. That is an enormous beat and it is available for free.
+
+`the-years-he-was-gone` deliberately **does not count backwards** and never
+places Josh inside the decade. Nothing on the site commits to either version.
+Melissa's call — and if the answer is yes, that entry is where it goes.
+
 ### Cole Burnett — Tyson's oldest friend
 *(Canon set by Melissa, 2026-08-04. **Tertiary**, but load-bearing: he is the
 only person Tyson can say any of this to.)*

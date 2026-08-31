@@ -42,22 +42,33 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-07-28:
+Counts are read off `countFor()` / `lockedCountFor()` in
+`lib/content/characters.ts`; re-read them rather than trusting the table, which
+drifts the moment anything ships. As of 2026-08-31:
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 8 | 44 | 23 |
-| Tyson | 8 | 44 | 33 |
-| Josh | 8 | 35 | 21 |
+| Luna | 12 | 105 | 80 |
+| Tyson | 12 | 79 | 66 |
+| Josh | 13 | 78 | 61 |
+| Rick | 2 | 5 | 3 |
 
-**Josh is the thinnest** and is the one who benefits most from more. He is the
-hardest character to hold an audience's sympathy for, the whole story depends
-on him being genuinely likeable before he turns, and he has the fewest pieces
-making that case.
+*(The 2026-07-28 snapshot this table replaced read Luna 8/44/23, Tyson 8/44/33,
+Josh 8/35/21, and had no Rick row.)*
+
+**Josh is still the thinnest of the three leads** and is the one who benefits
+most from more. He is the hardest character to hold an audience's sympathy for,
+the whole story depends on him being genuinely likeable before he turns, and he
+has the fewest pieces making that case.
+
+**Rick is thinner than all of them by an order of magnitude** — five pieces,
+two of them notes — and he is the explanation for Josh, so material about him
+does double duty. He has a hub; it is nearly empty.
 
 Standing backlog, roughly prioritised:
 
 - Josh notes on the scenes he is in that have none yet
+- Rick notes — he has a hub with two notes on it and two scenes to write beside
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none
 - Notes on the clips; only `run-at-the-lake` has one
@@ -72,3 +83,4 @@ not a changelog.
 | Week of | What shipped | Who |
 | --- | --- | --- |
 | 2026-07-28 | Character hubs built; 24 Between Takes notes (8 each), 7 free | all three |
+| 2026-08-31 | Between Takes note — "I already knew", Rick on `josh-rick-lake` | Rick |

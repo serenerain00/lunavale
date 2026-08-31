@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { CatalogCard } from "@/components/browse/CatalogCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { isMember } from "@/lib/access/entitlement";
 import { catalog } from "@/lib/content/catalog";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -14,12 +13,11 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default async function StillsIndexPage() {
-  const member = await isMember();
   const galleryItems = catalog.filter((item) => item.kind === "gallery");
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-8 pt-12 sm:pt-16">
@@ -39,7 +37,7 @@ export default async function StillsIndexPage() {
         ) : (
           <Reveal className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {galleryItems.map((item) => (
-              <CatalogCard key={item.id} item={item} unlocked={member} />
+              <CatalogCard key={item.id} item={item} />
             ))}
           </Reveal>
         )}

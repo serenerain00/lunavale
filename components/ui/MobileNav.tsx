@@ -4,17 +4,18 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SignOut } from "@/components/ui/SignOut";
+import { useViewer } from "@/components/access/Viewer";
 
 export interface NavItem {
   href: string;
   label: string;
+  /** Hidden from anyone who is not a member. Resolved on the client — the
+      list is built during a static render, where membership is unknown. */
+  memberOnly?: boolean;
 }
 
 interface MobileNavProps {
   items: NavItem[];
-  signedIn: boolean;
-  /** The signed-in address, so a wrong-account session is visible. May be null. */
-  email: string | null;
   showSignIn: boolean;
 }
 
@@ -26,12 +27,15 @@ interface MobileNavProps {
  * site was unreachable and there was no way to sign out at all. A menu holds
  * however many links there turn out to be, which the old approach could not.
  */
-export function MobileNav({
-  items,
-  signedIn,
-  email,
-  showSignIn,
-}: MobileNavProps) {
+export function MobileNav({ items, showSignIn }: MobileNavProps) {
+  // Who is reading. Null until /api/me answers, which is why every check below
+  // is written so that "unknown" behaves exactly like "signed-out stranger" —
+  // it matches the cached HTML and it fails closed.
+  const viewer = useViewer();
+  const signedIn = Boolean(viewer?.signedIn);
+  const email = viewer?.email ?? null;
+  const visible = items.filter((item) => !item.memberOnly || viewer?.member);
+
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const panelRef = useRef<HTMLDivElement>(null);
@@ -81,7 +85,7 @@ export function MobileNav({
           >
             <nav aria-label="Site">
               <ul className="divide-y divide-hairline">
-                {items.map((item) => {
+                {visible.map((item) => {
                   const active =
                     pathname === item.href ||
                     pathname.startsWith(`${item.href}/`);

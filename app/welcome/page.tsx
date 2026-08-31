@@ -54,7 +54,7 @@ export default async function WelcomePage({
 
   return (
     <>
-      <SiteHeader member={false} />
+      <SiteHeader />
       <main className="mx-auto w-full max-w-xl flex-1 px-5 pb-24 pt-16 sm:px-8 sm:pt-24">
         {paid ? (
           <>

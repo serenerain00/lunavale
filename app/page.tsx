@@ -11,7 +11,11 @@ import { InterviewHero } from "@/components/home/InterviewHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { SurveyDrawer } from "@/components/survey/SurveyDrawer";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { canWatch, getMembership } from "@/lib/access/entitlement";
+import {
+  Guest,
+  Member,
+  UnlessAnswered,
+} from "@/components/access/Viewer";
 import { catalog, shelves, type CatalogItem } from "@/lib/content/catalog";
 import { pickHero } from "@/lib/content/hero";
 import {
@@ -34,13 +38,31 @@ import {
   latestScene,
   videos as videosAll,
 } from "@/lib/content/videos";
-import { ANSWERED_COOKIE, sceneOptions } from "@/lib/content/survey";
-import { hasAnswered } from "@/lib/db/survey";
-import { cookies } from "next/headers";
+import { sceneOptions } from "@/lib/content/survey";
+
+/**
+ * STATIC, REVALIDATED HOURLY (2026-08-31).
+ *
+ * This page used to read the membership cookie and the survey cookie during
+ * render. That made it dynamic: `no-store`, never cached by the CDN, and a
+ * serverless function invocation for every one of the ~25 requests a second it
+ * was receiving — almost all of them crawlers, at a point when the site had two
+ * members. August's Vercel bill was $420, and roughly $118 of it was this page
+ * being rendered for people who do not exist.
+ *
+ * Nothing per-viewer is read here any more. The half-dozen labels that differ
+ * for a member are <Member> / <Guest> pairs resolved on the client after the
+ * cached HTML has arrived — see components/access/Viewer.tsx, which also has
+ * the standing rule: nothing premium may be passed as children to <Member>.
+ * Every real gate is untouched and still server-side.
+ *
+ * An hour, not a day, because quoteOfTheDay() and pickHero() rotate daily and
+ * an hour is close enough to midnight for both while costing essentially
+ * nothing — ISR reads were $0.00 across the whole of August.
+ */
+export const revalidate = 3600;
 
 export default async function Home() {
-  const { active: member } = await getMembership();
-
   const free = catalog.filter((item) => item.access === "free");
   const premium = catalog.filter((item) => item.access === "premium");
   const vault = getTier("vault")!;
@@ -52,7 +74,6 @@ export default async function Home() {
   const quote = quoteOfTheDay();
 
   const hero = pickHero();
-  const heroUnlocked = hero ? await canWatch(hero.video) : false;
 
   // The newest release, shown only while it is genuinely new — see isRecent.
   // When nothing has gone up in two weeks the section disappears rather
@@ -91,19 +112,16 @@ export default async function Home() {
     0,
   );
 
-  const jar = await cookies();
-  const surveyAnswered = await hasAnswered(jar.get(ANSWERED_COOKIE)?.value ?? "");
-
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="flex-1 pb-24">
         {hero &&
           (hero.playInline ? (
-            <InterviewHero hero={hero} member={member} />
+            <InterviewHero hero={hero} />
           ) : (
-            <Hero hero={hero} member={member} unlocked={heroUnlocked} />
+            <Hero hero={hero} />
           ))}
 
 
@@ -129,11 +147,11 @@ export default async function Home() {
 
             Absent entirely once they have answered — no second ask, no
             dismissible banner that comes back. */}
-        {!surveyAnswered && (
+        <UnlessAnswered>
           <section className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14">
             <SurveyDrawer scenes={sceneOptions()} />
           </section>
-        )}
+        </UnlessAnswered>
 
         {/* -------------------------------------------------------- just added */}
         {/* THE NEWEST SCENE, big, and the first thing to watch. Under the
@@ -202,11 +220,13 @@ export default async function Home() {
 
                 {/* Says what a non-member actually gets, with the real number
                     rather than a vague "preview". */}
-                {latest.access !== "free" && latest.preview && !member && (
-                  <p className="mt-3 text-xs leading-relaxed text-stone-dim">
-                    The first {formatDuration(latest.preview.durationSeconds)}{" "}
-                    is open to everyone. The rest is part of the LunaVerse.
-                  </p>
+                {latest.access !== "free" && latest.preview && (
+                  <Guest>
+                    <p className="mt-3 text-xs leading-relaxed text-stone-dim">
+                      The first {formatDuration(latest.preview.durationSeconds)}{" "}
+                      is open to everyone. The rest is part of the LunaVerse.
+                    </p>
+                  </Guest>
                 )}
 
                 {/* THE PAIR. A scene and the page she wrote about the same day
@@ -298,7 +318,6 @@ export default async function Home() {
               href="/browse"
               hrefLabel="All scenes"
               items={free}
-              member={member}
             />
           )}
         </div>
@@ -580,17 +599,33 @@ export default async function Home() {
                   The newest pages
                 </h2>
                 <p className="mt-2 max-w-lg leading-relaxed text-stone">
-                  {member
-                    ? "The latest of her handwriting, yours as part of the LunaVerse."
-                    : "The long ones — twenty years of her and Tyson, and what she only writes down at three in the morning. These are inside the LunaVerse."}
+                  <Member>
+                    The latest of her handwriting, yours as part of the
+                    LunaVerse.
+                  </Member>
+                  <Guest>
+                    The long ones — twenty years of her and Tyson, and what she
+                    only writes down at three in the morning. These are inside
+                    the LunaVerse.
+                  </Guest>
                 </p>
               </div>
-              <Link
-                href={member ? "/journal" : "/membership"}
-                className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
-              >
-                {member ? "The whole journal" : "Join to read them"}
-              </Link>
+              <Member>
+                <Link
+                  href="/journal"
+                  className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+                >
+                  The whole journal
+                </Link>
+              </Member>
+              <Guest>
+                <Link
+                  href="/membership"
+                  className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+                >
+                  Join to read them
+                </Link>
+              </Guest>
             </div>
 
             <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-3">
@@ -626,7 +661,8 @@ export default async function Home() {
                   />
                   <span className="absolute inset-x-0 bottom-0 flex justify-center p-4">
                     <span className="inline-flex items-center gap-2 rounded-full bg-void/70 px-3 py-1 text-xs text-amber-soft backdrop-blur-sm">
-                      {member ? "Yours to read" : "Members only"}
+                      <Member>Yours to read</Member>
+                      <Guest>Members only</Guest>
                     </span>
                   </span>
                 </Link>
@@ -644,15 +680,13 @@ export default async function Home() {
           {premium.length > 0 && (
             <Row
               heading="In the LunaVerse"
-              blurb={
-                member
-                  ? "Yours, as part of your membership."
-                  : "Members see these in full — and the locked rooms they came from."
-              }
-              href={member ? "/browse" : "/membership"}
-              hrefLabel={member ? "All scenes" : "What membership opens"}
+              blurb="Members see these in full — and the locked rooms they came from."
+              href="/membership"
+              hrefLabel="What membership opens"
+              memberBlurb="Yours, as part of your membership."
+              memberHref="/browse"
+              memberHrefLabel="All scenes"
               items={premium}
-              member={member}
             />
           )}
         </div>
@@ -718,7 +752,7 @@ export default async function Home() {
             the middle of it — by here a visitor has watched a scene, seen the
             rhythm, met the three of them, read a page of the journal and been
             shown the size of what is locked. */}
-        {!member && (
+        <Guest>
           <section
             aria-labelledby="join-heading"
             className="relative mt-6 overflow-hidden border-y border-hairline sm:mt-10"
@@ -796,27 +830,39 @@ export default async function Home() {
               </Reveal>
             </div>
           </section>
-        )}
+        </Guest>
       </main>
     </>
   );
 }
 
-/** One landing-page rail. Same slider the catalog uses, so it behaves the same. */
+/**
+ * One landing-page rail. Same slider the catalog uses, so it behaves the same.
+ *
+ * The member variants are optional and only the members' rail supplies them:
+ * "what membership opens" is the wrong heading for somebody who already has
+ * it. Both wordings render into the cached HTML and the client shows one —
+ * the rail's CARDS are identical either way, which is why this is a swap of
+ * two short strings rather than of the whole section.
+ */
 function Row({
   heading,
   blurb,
   href,
   hrefLabel,
+  memberBlurb,
+  memberHref,
+  memberHrefLabel,
   items,
-  member,
 }: {
   heading: string;
   blurb: string;
   href: string;
   hrefLabel: string;
+  memberBlurb?: string;
+  memberHref?: string;
+  memberHrefLabel?: string;
   items: CatalogItem[];
-  member: boolean;
 }) {
   const headingId = `row-${heading.toLowerCase().replace(/\s+/g, "-")}`;
 
@@ -831,26 +877,41 @@ function Row({
             {heading}
           </h2>
           <p className="mt-1.5 max-w-md text-sm leading-relaxed text-stone">
-            {blurb}
+            {memberBlurb ? (
+              <>
+                <Member>{memberBlurb}</Member>
+                <Guest>{blurb}</Guest>
+              </>
+            ) : (
+              blurb
+            )}
           </p>
         </div>
-        <Link
-          href={href}
-          className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
-        >
-          {hrefLabel}
-        </Link>
+        {memberHref && memberHrefLabel ? (
+          <>
+            <Member>
+              <Link href={memberHref} className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber">
+                {memberHrefLabel}
+              </Link>
+            </Member>
+            <Guest>
+              <Link href={href} className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber">
+                {hrefLabel}
+              </Link>
+            </Guest>
+          </>
+        ) : (
+          <Link href={href} className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber">
+            {hrefLabel}
+          </Link>
+        )}
       </div>
 
       <Reveal>
         <Rail label={heading}>
           {items.map((item) => (
             <RailItem key={item.id}>
-              <CatalogCard
-                item={item}
-                unlocked={member}
-                sizes={RAIL_ITEM_SIZES}
-              />
+              <CatalogCard item={item} sizes={RAIL_ITEM_SIZES} />
             </RailItem>
           ))}
         </Rail>

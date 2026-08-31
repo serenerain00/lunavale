@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
 import {
   abandonedCheckouts,
@@ -50,9 +49,8 @@ export default async function AdminPage() {
   if (!authConfigured() || !(await isOwner())) notFound();
 
   const now = new Date();
-  const [{ active: member }, members, posts, posters, signups] =
+  const [members, posts, posters, signups] =
     await Promise.all([
-      getMembership(),
       membershipSummary(),
       allPostsForModeration(20),
       posterStats(FREE_POST_ALLOWANCE),
@@ -141,7 +139,7 @@ export default async function AdminPage() {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-4xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-10 pt-12 sm:pt-16">

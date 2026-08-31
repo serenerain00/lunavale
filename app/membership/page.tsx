@@ -19,7 +19,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default async function MembershipPage() {
-  const { tier, active } = await getMembership();
+  const { tier } = await getMembership();
 
   // Counted, never typed. The pitch below is built out of these, so it cannot
   // still be claiming thirty-nine entries the week after the fortieth goes up.
@@ -28,7 +28,7 @@ export default async function MembershipPage() {
 
   return (
     <>
-      <SiteHeader member={active} />
+      <SiteHeader />
 
       <main className="flex-1 pb-24">
         {/* ---------------------------------------------------------- pitch */}

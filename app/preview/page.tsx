@@ -38,7 +38,7 @@ export default async function PreviewPage({ searchParams }: PreviewPageProps) {
 
   return (
     <>
-      <SiteHeader member={active} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-2xl flex-1 px-5 pb-24 pt-12 sm:px-8 sm:pt-16">
         <p className="text-xs uppercase tracking-[0.2em] text-amber">

@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Guest } from "@/components/access/Viewer";
 import type { CatalogItem } from "@/lib/content/catalog";
 
 interface CatalogCardProps {
   item: CatalogItem;
-  /** Whether the current viewer is entitled to open it (drives the lock state). */
-  unlocked: boolean;
   /** Sizes hint for the responsive image; set by the layout using the card. */
   sizes?: string;
 }
@@ -14,13 +13,25 @@ interface CatalogCardProps {
  * One browsable thing — a scene or a still gallery. Kind-agnostic on purpose:
  * the catalog projects every content type into `CatalogItem`, so new kinds
  * inherit this card for free.
+ *
+ * NO LONGER TAKES `unlocked` (2026-08-31). It used to, and every page that
+ * rendered a rail therefore had to resolve membership during its own render —
+ * which made those pages dynamic and uncacheable, for a lock badge. A free
+ * item is unlocked for everybody and that is knowable at build time; a premium
+ * item is locked for everybody except a member, and THAT is now decided on the
+ * client after the cached HTML has already arrived.
+ *
+ * The badge is a signpost, not a lock. Whether the bytes actually arrive is
+ * decided by /api/stream and /api/still, server-side, and is untouched by any
+ * of this.
  */
 export function CatalogCard({
   item,
-  unlocked,
   sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
 }: CatalogCardProps) {
-  const locked = item.access === "premium" && !unlocked;
+  // Free items are open to everyone, always — no client resolution needed and
+  // no flash of a lock on the thing the site most wants strangers to open.
+  const premium = item.access === "premium";
 
   return (
     <Link
@@ -35,7 +46,13 @@ export function CatalogCard({
           fill
           sizes={sizes}
           className={`object-cover transition-transform duration-(--duration-cinematic) ease-(--ease-cinematic) group-hover:scale-[1.04] ${
-            locked ? "brightness-[0.55]" : "brightness-90 group-hover:brightness-100"
+            premium
+              // Dimmed for a stranger, lit for a member. Keyed off the
+              // data-member attribute ViewerProvider puts on <html>, because
+              // a CSS-only swap needs no client component wrapped around an
+              // <Image> and works on every card at once.
+              ? "brightness-[0.55] [html[data-member]_&]:brightness-90 [html[data-member]_&]:group-hover:brightness-100"
+              : "brightness-90 group-hover:brightness-100"
           }`}
         />
         {/* Bottom scrim for legible overlay text */}
@@ -43,16 +60,21 @@ export function CatalogCard({
 
         {/* Access + maturity badges */}
         <div className="absolute left-3 top-3 flex flex-wrap gap-2">
-          {locked ? (
-            <span className="inline-flex items-center gap-1 rounded-full bg-void/70 px-2.5 py-1 text-xs font-medium text-amber-soft backdrop-blur-sm">
-              <LockGlyph />
-              Members
-            </span>
-          ) : item.access === "free" ? (
+          {premium ? (
+            // Both variants ship in the cached HTML; the client shows one.
+            // Unknown counts as guest, so an unresolved card reads "Members"
+            // rather than briefly promising access it cannot confirm.
+            <Guest>
+              <span className="inline-flex items-center gap-1 rounded-full bg-void/70 px-2.5 py-1 text-xs font-medium text-amber-soft backdrop-blur-sm">
+                <LockGlyph />
+                Members
+              </span>
+            </Guest>
+          ) : (
             <span className="rounded-full bg-void/70 px-2.5 py-1 text-xs font-medium text-stone backdrop-blur-sm">
               Free
             </span>
-          ) : null}
+          )}
           {item.kind === "gallery" && (
             <span className="rounded-full bg-void/70 px-2.5 py-1 text-xs font-medium text-stone backdrop-blur-sm">
               Stills

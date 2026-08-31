@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { OVERHEARD_ARCHIVED } from "@/lib/content/overheard";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
 import { allPostsForModeration } from "@/lib/db/overheard";
 import { toggleHidden } from "./actions";
@@ -31,16 +30,13 @@ export default async function ModeratePage() {
 
   if (!authConfigured() || !(await isOwner())) notFound();
 
-  const [{ active: member }, posts] = await Promise.all([
-    getMembership(),
-    allPostsForModeration(),
-  ]);
+  const posts = await allPostsForModeration();
 
   const visible = posts.filter((p) => !p.hidden).length;
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-8 pt-12 sm:pt-16">

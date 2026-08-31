@@ -77,7 +77,7 @@ export default async function WatchPage({ params }: WatchPageProps) {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-5xl flex-1 px-5 pb-24 sm:px-8">
         <nav className="py-5 text-sm">

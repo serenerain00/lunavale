@@ -48,7 +48,7 @@ export default async function AboutPage() {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-4 pt-12 sm:pt-16">

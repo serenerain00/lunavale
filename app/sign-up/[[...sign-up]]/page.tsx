@@ -44,7 +44,7 @@ export default async function SignUpPage({
 
   return (
     <>
-      <SiteHeader member={false} />
+      <SiteHeader />
       <main className="flex flex-1 flex-col items-center px-5 pb-24 pt-16 sm:px-8">
         <h1 className="mb-2 text-center font-display text-3xl font-light text-ivory">
           {paid

@@ -17,15 +17,15 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Guest } from "@/components/access/Viewer";
 import { AmbientVideo } from "@/components/home/AmbientVideo";
 import type { Hero as HeroContent } from "@/lib/content/hero";
 
 interface InterviewHeroProps {
   hero: HeroContent;
-  member: boolean;
 }
 
-export function InterviewHero({ hero, member }: InterviewHeroProps) {
+export function InterviewHero({ hero }: InterviewHeroProps) {
   const { video } = hero;
   const [playing, setPlaying] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -153,14 +153,14 @@ export function InterviewHero({ hero, member }: InterviewHeroProps) {
           >
             Step into the farmhouse
           </Link>
-          {!member && (
+          <Guest>
             <Link
               href="/membership"
               className="hidden min-h-12 items-center rounded-full border border-amber/50 px-6 text-sm text-amber-soft transition-colors duration-(--duration-quick) hover:bg-amber hover:text-void sm:inline-flex sm:px-7"
             >
               Membership
             </Link>
-          )}
+          </Guest>
         </div>
       </div>
     </section>

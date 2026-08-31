@@ -92,7 +92,7 @@ export default async function OverheardPage({ searchParams }: PageProps) {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-6 pt-12 sm:pt-16">

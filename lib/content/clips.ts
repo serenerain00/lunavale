@@ -193,6 +193,36 @@ export const clips: Clip[] = [
     about: ["luna"],
     mature: true,
   },
+  {
+    // THE ONLY PLACE ON THE SITE SHE LOOKS LIKE THIS WITH JOSH, and that is
+    // the entire reason to publish it. Melissa, 2026-09-01: she was helping
+    // him out on the farm, it starts to pour on the way back, "their edges
+    // soften on the way back... she does smile with Josh."
+    //
+    // Everything else in the Josh material is the charming-then-controlling
+    // arc, and a reader who has only met him through the journal has no
+    // working picture of why she stayed for ten years. Three minutes of the
+    // two of them soaked and laughing on a farm road answers that without
+    // arguing about it — and it makes the rest of the arc land harder, because
+    // you cannot lose something you were never shown.
+    //
+    // Trimmed at 186.4s from a 193.0s export: blackdetect puts 6.6s of black
+    // on the end. That needed a new `end` argument on optimize-media.sh's
+    // `vertical` branch, which had never had one.
+    id: "luna-josh-rain",
+    title: "Caught Out",
+    caption:
+      "Helping him on the farm, and the sky opens on the way back. Neither of them runs for cover.",
+    file: "luna-josh-rain.proxy.mp4",
+    poster: "/posters/luna-josh-rain.jpg",
+    durationSeconds: 186,
+    about: ["luna", "josh"],
+    // Kissing in the rain, both fully dressed the whole way through, nothing
+    // shown. `mature` on this set means intimate rather than graphic, and this
+    // is a couple soaked on a farm road — closer to `run-at-the-lake` than to
+    // the six below it. Melissa's to overrule.
+    mature: false,
+  },
 ];
 
 export function getClip(id: string): Clip | undefined {

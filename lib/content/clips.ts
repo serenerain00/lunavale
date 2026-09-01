@@ -38,6 +38,17 @@ export interface Clip {
   /** Portrait poster under /public. */
   poster: string;
   durationSeconds: number;
+  /**
+   * The day this clip went up, ISO `YYYY-MM-DD`. THE INDEX IS SORTED BY IT,
+   * newest first (Melissa, 2026-09-01: "keep the latest at the top. so the
+   * latest should show first").
+   *
+   * Only set on clips published since the field existed. An undated clip is
+   * treated as older than every dated one, which is true, and they hold their
+   * authored order among themselves — so nothing had to be back-filled by
+   * guesswork. Same rule and same reasoning as `Video.addedOn`.
+   */
+  addedOn?: string;
   /** Who's in it. */
   about: PersonId[];
   mature: boolean;
@@ -69,7 +80,7 @@ export function clipAccess(clip: Clip): AccessLevel {
   return clip.access ?? "free";
 }
 
-export const clips: Clip[] = [
+const authored: Clip[] = [
   {
     id: "run-at-the-lake",
     title: "Run",
@@ -216,6 +227,7 @@ export const clips: Clip[] = [
     file: "luna-josh-rain.proxy.mp4",
     poster: "/posters/luna-josh-rain.jpg",
     durationSeconds: 186,
+    addedOn: "2026-09-01",
     about: ["luna", "josh"],
     // Kissing in the rain, both fully dressed the whole way through, nothing
     // shown. `mature` on this set means intimate rather than graphic, and this
@@ -224,6 +236,26 @@ export const clips: Clip[] = [
     mature: false,
   },
 ];
+
+/**
+ * The clips, NEWEST FIRST.
+ *
+ * Sorted here rather than in the page, because array order is not only what the
+ * index renders — clipNeighbours() reads it for the prev/next controls in the
+ * player. Sorting in one place and leaving the other alone would have the
+ * arrows walking a different sequence from the grid the visitor just came from.
+ *
+ * The sort is stable, so undated clips keep the order they are written in above
+ * and sit below every dated one. That means adding a clip does NOT require
+ * putting it in the right place by hand: give it an `addedOn` and it lands on
+ * top by itself.
+ */
+export const clips: Clip[] = [...authored].sort((a, b) => {
+  if (a.addedOn && b.addedOn) return b.addedOn.localeCompare(a.addedOn);
+  if (a.addedOn) return -1;
+  if (b.addedOn) return 1;
+  return 0;
+});
 
 export function getClip(id: string): Clip | undefined {
   return clips.find((c) => c.id === id);

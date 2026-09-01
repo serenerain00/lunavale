@@ -257,6 +257,42 @@ export const clips: Clip[] = [...authored].sort((a, b) => {
   return 0;
 });
 
+/**
+ * How long a new clip is featured on the home page. Melissa, 2026-09-01:
+ * "feature it on the home page for 7 days too."
+ *
+ * Seven rather than the fourteen `isRecent` gives a scene, and deliberately: a
+ * scene is the product and a clip is an advert for it, so the clip's turn on
+ * the front page should be the shorter one. It also means the section is
+ * genuinely intermittent, which is what stops it reading as furniture.
+ */
+const FEATURE_DAYS = 7;
+
+/** True while a clip is inside its window on the home page. */
+export function isFeatured(clip: Clip, now: Date = new Date()): boolean {
+  if (!clip.addedOn) return false;
+  const days = (now.getTime() - new Date(clip.addedOn).getTime()) / 86_400_000;
+  return days <= FEATURE_DAYS;
+}
+
+/**
+ * The clip to feature, or undefined when there isn't one.
+ *
+ * SELF-EXPIRING BY DESIGN. Nothing has to be remembered or taken down: the
+ * section renders while the newest clip is inside its seven days and vanishes
+ * on its own afterwards. The home page is statically rendered with a one-hour
+ * revalidate, so the disappearance lands within an hour of the deadline rather
+ * than waiting for a deploy.
+ *
+ * Undated clips can never be featured, which is correct — they predate the
+ * field and are not new.
+ */
+export function featuredClip(now: Date = new Date()): Clip | undefined {
+  // clips is already newest-first, so the first dated one is the newest.
+  const newest = clips.find((c) => c.addedOn);
+  return newest && isFeatured(newest, now) ? newest : undefined;
+}
+
 export function getClip(id: string): Clip | undefined {
   return clips.find((c) => c.id === id);
 }

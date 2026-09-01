@@ -30,6 +30,7 @@ import { getCharacter } from "@/lib/content/characters";
 import { galleries } from "@/lib/content/gallery";
 import { cadenceNote, recentReleases } from "@/lib/content/releases";
 import { LatelyRail } from "@/components/home/LatelyRail";
+import { featuredClip } from "@/lib/content/clips";
 import { takes } from "@/lib/content/takes";
 import { formatPrice, getTier } from "@/lib/content/membership";
 import {
@@ -85,6 +86,12 @@ export default async function Home() {
   // it — and until now the home page dropped it and made you find the journal
   // on your own.
   const latestEntry = latest ? entriesForScene(latest.slug)[0] : undefined;
+
+  // THE NEW CLIP, for seven days and then not. Self-expiring — see
+  // featuredClip() in lib/content/clips.ts. Resolved per render like the hero
+  // and the quote, so the section goes away on its own an hour after the
+  // window closes rather than waiting for somebody to remember to remove it.
+  const featured = featuredClip();
 
   // THE NEWEST PAGES OF THE JOURNAL, members-only, shown to everybody.
   // Release order rather than story order — see latestEntries(). Empty until
@@ -246,6 +253,93 @@ export default async function Home() {
                     </Link>
                   </p>
                 )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ---------------------------------------------------- featured clip */}
+        {/* A NEW CLIP, FOR SEVEN DAYS. Melissa, 2026-09-01. It sits directly
+            under "Just added" because the two make one argument in order: here
+            is the new scene, and here is a minute of these people that costs
+            nothing to watch. The clip is the cheaper thing to say yes to and it
+            is doing the work of an advert, which is why its window is seven
+            days against the scene's fourteen.
+
+            PORTRAIT, AND THE LAYOUT ADMITS IT. Everything else on this page is
+            16:9. Rather than crop a 9:16 clip into a shape it was not made for,
+            the poster keeps its aspect and the text sits beside it — the same
+            two-column arrangement as the card above, mirrored.
+
+            It renders only while featuredClip() returns something, so there is
+            no empty state to design and nothing to take down by hand. */}
+        {featured && (
+          <section
+            aria-labelledby="featured-clip-heading"
+            className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14"
+          >
+            {/* The poster is CONSTRAINED rather than allowed to fill its
+                column. A 9:16 image given half of a max-w-6xl row is about a
+                thousand pixels tall — it swamped the page and left the copy
+                stranded in white space. Capped at 15rem wide and centred on
+                phones, it lands at roughly 240x427, which is a card rather than
+                a billboard. `items-center` then floats the text against it
+                instead of stretching to match. */}
+            <div className="overflow-hidden rounded-xl border border-hairline bg-charcoal/30 p-4 sm:grid sm:grid-cols-[minmax(0,15rem)_1fr] sm:items-center sm:gap-2 sm:p-5">
+              <Link
+                href={`/clips/${featured.id}`}
+                className="group relative mx-auto block aspect-[9/16] w-full max-w-[15rem] overflow-hidden rounded-lg sm:mx-0 sm:max-w-none"
+              >
+                <Image
+                  src={featured.poster}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 100vw, 30vw"
+                  className="object-cover transition-transform duration-(--duration-slow) group-hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-void/70 to-transparent sm:bg-gradient-to-r" />
+                <span className="absolute left-4 top-4 rounded-full bg-amber px-3 py-1 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-void">
+                  New clip
+                </span>
+              </Link>
+
+              <div className="flex flex-col justify-center pt-5 sm:p-8 sm:pt-8">
+                <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                  Free to watch
+                </p>
+                <h2
+                  id="featured-clip-heading"
+                  className="mt-3 font-display text-2xl font-light text-ivory sm:text-3xl"
+                >
+                  {featured.title}
+                </h2>
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone">
+                  <span className="tabular-nums">
+                    {formatDuration(featured.durationSeconds)}
+                  </span>
+                  <span aria-hidden>·</span>
+                  <span className="text-stone">Vertical</span>
+                </div>
+                <p className="mt-4 max-w-md leading-relaxed text-stone">
+                  {featured.caption}
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href={`/clips/${featured.id}`}
+                    className="inline-flex min-h-11 items-center gap-2.5 rounded-full bg-ivory px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-white"
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M7 4.5v15l13-7.5z" fill="currentColor" />
+                    </svg>
+                    Watch it
+                  </Link>
+                  <Link
+                    href="/clips"
+                    className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+                  >
+                    All clips
+                  </Link>
+                </div>
               </div>
             </div>
           </section>

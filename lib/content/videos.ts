@@ -1625,12 +1625,17 @@ export const videos: Video[] = [
     about: ["luna", "tyson"],
   },
   {
-    // The shooting folder holds two exports of the same edit and they are NOT
-    // interchangeable: luna-ty-shop-kiss.mp4 is 1776x1080 with no score, and
-    // luna-ty-shop-kiss-music.mov is 1320x852 WITH it. The scored one is the
-    // cut (Melissa, 2026-08-31), and the resolution difference costs nothing —
-    // every proxy on this site ships at 720p, so 1320 wide downscales with
-    // pixels to spare. Do not "upgrade" this to the larger file; it is silent.
+    // THE SHOOTING FOLDER HOLDS TWO EXPORTS AND THEY ARE NOT INTERCHANGEABLE.
+    // Both are now .mp4, which is a trap, so check the audio and not the name:
+    //
+    //   luna-ty-shop-kiss.mp4        1776x1080, NO score  (-36dB @120s)
+    //   luna-ty-shop-kiss-music.mp4  1664x1080, the score (-28.5dB @120s)
+    //
+    // The scored one is the cut. Melissa replaced it on 2026-09-01 with the
+    // audio sync corrected; the version it replaced was a 1320x852 HEVC .mov,
+    // which no longer exists. The new one is better on every axis. Do not
+    // "upgrade" this to the larger file — that is the silent one, and the
+    // filenames no longer tell you apart on extension alone.
     slug: "luna-ty-shop-kiss",
     // PLACEHOLDER title and synopsis — hers to replace. "The Part" for both
     // meanings: the thing Josh sent her for, and the one Tyson will not take.
@@ -1639,9 +1644,9 @@ export const videos: Video[] = [
       "Josh needs a part and Tyson is not at the farm, so she drives to the shop. He has been letting her know he is angry for weeks without once saying what about — and she has not let him forget the window he did not take. Neither of them says it out loud.",
     file: "luna-ty-shop-kiss.proxy.mp4",
     poster: "/posters/luna-ty-shop-kiss.jpg",
-    // 263, not 264: the picture ends at 262.84 and the export runs on into
-    // ~1.7s of black. Measured with blackdetect, trimmed on import.
-    durationSeconds: 263,
+    // 264: the picture ends at 263.73 and the export runs on into ~2.6s of
+    // black. Measured with blackdetect, trimmed on import at 263.7.
+    durationSeconds: 264,
     // Cut and registered on 08-31; goes live 09-01, and this field is
     // documented as the day it went up rather than the day it was made.
     addedOn: "2026-09-01",
@@ -1652,11 +1657,12 @@ export const videos: Video[] = [
     mature: false,
     preview: {
       file: "luna-ty-shop-kiss-preview.proxy.mp4",
-      // 87, not the 90 asked for: the one-third fraction rule in
-      // make-previews.mjs caps an override and 90 of 263 is 34%. This is the
-      // real runtime of the real file, which is what the page states.
-      durationSeconds: 87,
-      // 1:30–2:57 — see the OVERRIDES note in scripts/make-previews.mjs for
+      // 88, not the 90 asked for: the one-third fraction rule in
+      // make-previews.mjs caps an override and 90 of 264 is 34%. This is the
+      // real runtime of the real file, which is what the page states. It was
+      // 87 against the previous export, which ran a second shorter.
+      durationSeconds: 88,
+      // 1:30–2:58 — see the OVERRIDES note in scripts/make-previews.mjs for
       // why the window sits here and what it stops short of.
       hookStart: 90,
       hookNote:

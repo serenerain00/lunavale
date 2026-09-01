@@ -152,28 +152,31 @@ const OVERRIDES = {
   // 90s, Melissa's call on release, 2026-08-31: "let folks preview the middle
   // of the video, 90 seconds". Second only to ty-luna-garage's 2:15.
   //
-  // THE MIDDLE, LITERALLY. The scene runs 4:23 and the window is 1:30–3:00,
-  // centred on 2:15 — the true midpoint is 2:11. That is the instruction taken
-  // at its word, and it also happens to be the right ninety seconds: sampled
-  // at four-second steps, 0:00–0:45 is Tyson alone in the shop and on the
-  // phone, and the arrival and the standing-around are over by about 1:30.
-  // The window opens exactly where the distance starts to collapse.
+  // THE MIDDLE, LITERALLY. The scene runs 4:24 and the window is 1:30–2:58,
+  // centred on 2:14 against a true midpoint of 2:12. That is the instruction
+  // taken at its word, and it is also the right ninety seconds: 0:00–0:45 is
+  // Tyson alone in the shop and on the phone, and the arrival and the
+  // standing-around are over by about 1:30. The window opens exactly where the
+  // distance starts to collapse.
   //
-  // IT STOPS TWELVE SECONDS SHORT OF THE TURN. He is still being handled at
-  // 3:08 — her laughing, his hand at her chin — and he leans in at about 3:12,
-  // with the near-kiss sustained from 3:20 and the kiss itself around 3:45.
-  // Ending at 3:00 is a wider margin than luna-josh-first-night's ten seconds,
-  // narrower than ty-luna-garage's forty. The thing the scene is FOR — that
-  // she is the one who closes it, and what she means by doing it small — is
-  // entirely outside the window.
+  // IT STOPS FOURTEEN SECONDS SHORT OF THE TURN. He is still being handled at
+  // 3:04 — her laughing, his fingers at her chin — and he leans in at about
+  // 3:12, with the near-kiss sustained from 3:20. Wider margin than
+  // luna-josh-first-night's ten, narrower than ty-luna-garage's forty. The
+  // thing the scene is FOR — that she is the one who closes it, and what she
+  // means by doing it small — is entirely outside the window.
   //
-  // IT COMES OUT AT 87s, NOT 90, AND THAT IS THE FRACTION RULE WORKING. 90 of
-  // 263 is 34%, over the one-third ceiling, and the ceiling is a hard cap on
+  // IT COMES OUT AT 88s, NOT 90, AND THAT IS THE FRACTION RULE WORKING. 90 of
+  // 264 is 34%, over the one-third ceiling, and the ceiling is a hard cap on
   // overrides by design — see the Math.min below, and note that every other
   // entry in this table is careful to sit under it. So the request is honoured
-  // to within three seconds and the guardrail is left standing. If Melissa
-  // wants a literal 90, that is a decision to raise the cap for this scene,
-  // not something to slip past it.
+  // to within two seconds and the guardrail is left standing. If Melissa wants
+  // a literal 90, that is a decision to raise the cap for this scene, not
+  // something to slip past it.
+  //
+  // (It was 87 until 2026-09-01, when the master was replaced with a
+  // sync-corrected export running a second longer. The window and the turn
+  // both re-checked against the new file rather than assumed.)
   //
   // Content in the window: he is shirtless, as he is for the whole scene, and
   // she is in a tank top. It is faces and hands. Nothing explicit, no nudity.

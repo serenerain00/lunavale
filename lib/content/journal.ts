@@ -2062,6 +2062,68 @@ export const journal: JournalEntry[] = [
     ],
   },
 
+  /*
+    THE LAST PAGE BEFORE IT TURNS, and it is placed here rather than anywhere
+    else for a reason worth writing down: the three entries above it build the
+    exact state this one needs and no other stretch of the book does.
+    `out-at-the-lake` is the window — "we had both come to say it, neither of us
+    did". `last-call` is him showing her without saying it. `reading-it-back` is
+    her concluding he cannot make himself say it in a sentence she could quote.
+    Then this, where she stops waiting for the sentence and does something
+    small instead. After it, the section marker below, and the turn.
+
+    FROM MELISSA (2026-09-01), with the scene: Luna is a few weeks back with
+    Josh and goes to collect a part for him, which means going to the shop
+    because Tyson is not at the farm that day. He has been showing more and
+    more aggravation and has never once said why. She gave him a window, he did
+    not take it, and she is not letting him forget it. The kiss at the end is
+    light and closed and deliberate — "I know what we both want, but this is
+    what I'm going to do right now because you won't."
+
+    WHAT IS INVENTED HERE and is hers to cut: the part being a coupling for the
+    baler, the eleven-mile drive, the radio, and the detail that he was already
+    on the phone and already angry when she pulled in — which the scene shows
+    from his side and she would not necessarily know. Everything else is the
+    footage.
+
+    DRAFT PROSE, written to the brief. Replace it.
+  */
+  {
+    id: "the-small-version",
+    addedOn: "2026-09-01",
+    dateline: "The shop, and the part is still sitting in the truck",
+    place: "garage",
+    where: "His shop",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-ty-shop-kiss",
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh needed a coupling for the baler and Tyson was not at the farm today, so it had to be the shop. That is the whole of the reason, and I am putting it on the first line because I want to see it written down in the same handwriting as everything that comes after it.",
+      "It could have waited until tomorrow. He'd have brought it up himself Thursday. I want that on the first line too.",
+      "Eleven miles. I had the radio on and I could not have told you one song that played.",
+      "The shop is dark even at two in the afternoon — one strip light at the back, everything else shadow and steel, and it smells like every good memory I have from before I was twenty-five. He had the roller door half down. He knew it was my truck. He knows the sound of my truck from the road.",
+      "He did not look up.",
+      "That is not new. He has been doing it for weeks. Short answers, back turned, busy hands, and a temper on him that he keeps just underneath where anybody could point at it and call it a temper. If you asked him he would say he was fine and he would not even be lying, exactly, because he has decided that whatever this is does not count as a thing that is happening.",
+      "I have been letting him have it. That is the part I would like the record to show. I have been standing in the middle of it saying nothing, week after week, and letting him be angry at me for something I did not do.",
+      "Because I gave him the window. On the dock, in the rain, out far enough that nobody could hear us, and we both knew what we had come out there for. He said nothing. I said nothing back, which I am counting as the same thing, but I was the one who went out to the end of a dock in weather, and he was the one who talked about the boat.",
+      "So I have not been letting him forget it. Not out loud. I have just stopped filling his silences for him. Twenty years of me carrying both ends of every conversation and I have set my end down, and it turns out that when I do that, nothing happens at all.",
+      "And then today it went, and it went in about four seconds, and I could not tell you which one of us dropped it.",
+      "He said something. It wasn't anything — it was about the coupling, or about Josh, or about the state of my tires, and it had that flat delivery he uses when he is being funny and will not admit to it. And I laughed. Properly, from somewhere under my ribs, the way I have not laughed since some time in the spring.",
+      "Then we were doing it. The old thing. Two people who have been finishing each other's sentences since we were eighteen, standing in a workshop, being quick at each other. He got his hand up near my face making some point he did not need his hand for, and I let him, and neither of us stepped back, and somewhere in there it stopped being funny and neither of us noticed in time to stop it.",
+      "Familiar and completely unfamiliar at once. That is the only honest way I can put it. Every single thing about it was twenty years old and I had never once been in it before.",
+      "And he was going to stand there. I could see it. He was going to hold it exactly where it was until I got bored or got frightened or picked up the part and left, because that is what he has been doing since the dock, and he would have called it decency, and it would have cost him everything he has and I would never have been told.",
+      "So I kissed him.",
+      "Small. Closed. About a second and a half of it, the kind you could do at a funeral. I have kissed men harder than that by accident.",
+      "I want to be exact about what I meant by it, because I meant something specific and I meant him to get it, and I think he did. It was not I want you, although. It was not let's. It was: I know. I know what this is, I have known for weeks, you have known longer. And you are not going to say it, so here is the smallest possible piece of the truth, delivered by me, in the middle of the afternoon, in your shop. Because you won't.",
+      "He did not move. Not away — he did not move at all, which is different, and which I will be thinking about tonight.",
+      "Then I picked up the coupling and got in the truck and drove eleven miles back to my husband's farm with it on the passenger seat.",
+      "Nothing happened. I have written four hundred words about nothing happening.",
+      "That is not true and I am not going to leave it standing. Here is the true version: I have spent three months telling myself I am waiting to see what he does. I am not waiting. Waiting is what you call it when you have not moved. I moved today, in a shop, in front of nobody, and I chose the smallest version of it I could find so that I could come home and write it down like this and still recognize the handwriting.",
+      "The part is still in the truck. I could not make myself carry it into the house.",
+    ],
+  },
+
   /* ---------------------------------------------------------- it turns ---- */
   {
     id: "he-asked-about-tyson",

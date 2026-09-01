@@ -1624,6 +1624,52 @@ export const videos: Video[] = [
     place: "lakehouse",
     about: ["luna", "tyson"],
   },
+  {
+    // The shooting folder holds two exports of the same edit and they are NOT
+    // interchangeable: luna-ty-shop-kiss.mp4 is 1776x1080 with no score, and
+    // luna-ty-shop-kiss-music.mov is 1320x852 WITH it. The scored one is the
+    // cut (Melissa, 2026-08-31), and the resolution difference costs nothing —
+    // every proxy on this site ships at 720p, so 1320 wide downscales with
+    // pixels to spare. Do not "upgrade" this to the larger file; it is silent.
+    slug: "luna-ty-shop-kiss",
+    // PLACEHOLDER title and synopsis — hers to replace. "The Part" for both
+    // meanings: the thing Josh sent her for, and the one Tyson will not take.
+    title: "The Part",
+    synopsis:
+      "Josh needs a part and Tyson is not at the farm, so she drives to the shop. He has been letting her know he is angry for weeks without once saying what about — and she has not let him forget the window he did not take. Neither of them says it out loud.",
+    file: "luna-ty-shop-kiss.proxy.mp4",
+    poster: "/posters/luna-ty-shop-kiss.jpg",
+    // 263, not 264: the picture ends at 262.84 and the export runs on into
+    // ~1.7s of black. Measured with blackdetect, trimmed on import.
+    durationSeconds: 263,
+    // Cut and registered on 08-31; goes live 09-01, and this field is
+    // documented as the day it went up rather than the day it was made.
+    addedOn: "2026-09-01",
+    access: "premium",
+    // A kiss, closed and brief, and he has his shirt off for the whole scene.
+    // Nothing is shown. `mature` reads as "there is sex in this" (see the
+    // field), and there is not — so false, and it is Melissa's to overrule.
+    mature: false,
+    preview: {
+      file: "luna-ty-shop-kiss-preview.proxy.mp4",
+      // 87, not the 90 asked for: the one-third fraction rule in
+      // make-previews.mjs caps an override and 90 of 263 is 34%. This is the
+      // real runtime of the real file, which is what the page states.
+      durationSeconds: 87,
+      // 1:30–2:57 — see the OVERRIDES note in scripts/make-previews.mjs for
+      // why the window sits here and what it stops short of.
+      hookStart: 90,
+      hookNote:
+        "The middle ninety seconds, Melissa's call. It is the stretch where the distance collapses and the old rhythm comes back — and it ends fifteen seconds before he leans in.",
+    },
+    // The same pair as ty-luna-garage, and for the same reason: two people in
+    // a workshop refusing to say the thing. `hurt` was considered and left
+    // off — his aggravation is the surface, not the subject, and she is not
+    // wounded here. She is waiting, which is `distance`.
+    feelings: ["desire", "distance"],
+    place: "garage",
+    about: ["luna", "tyson"],
+  },
 ];
 
 /**

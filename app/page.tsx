@@ -31,6 +31,7 @@ import { galleries } from "@/lib/content/gallery";
 import { cadenceNote, recentReleases } from "@/lib/content/releases";
 import { LatelyRail } from "@/components/home/LatelyRail";
 import { featuredClip } from "@/lib/content/clips";
+import { resolveWhoSheIs } from "@/lib/content/who-she-is";
 import { takes } from "@/lib/content/takes";
 import { formatPrice, getTier } from "@/lib/content/membership";
 import {
@@ -92,6 +93,12 @@ export default async function Home() {
   // and the quote, so the section goes away on its own an hour after the
   // window closes rather than waiting for somebody to remember to remove it.
   const featured = featuredClip();
+
+  // HER, IN HER OWN HANDWRITING — see lib/content/who-she-is.ts for why these
+  // five and in this order. Resolved from the journal so the quotes cannot
+  // drift from the entries they came out of.
+  const sheLines = resolveWhoSheIs();
+  const luna = getCharacter("luna")!;
 
   // THE NEWEST PAGES OF THE JOURNAL, members-only, shown to everybody.
   // Release order rather than story order — see latestEntries(). Empty until
@@ -415,6 +422,117 @@ export default async function Home() {
             />
           )}
         </div>
+
+        {/* --------------------------------------------------------- who she is */}
+        {/* MEET LUNA, before the page explains the situation she is in.
+            Melissa, 2026-09-01: people arrive not knowing what this is, and
+            they need to connect with HER — she is the one with more than
+            enough layers to go around.
+
+            IT SITS DIRECTLY ABOVE "It's about three people" and that order is
+            the argument. This is who she is; that is what is happening to her.
+            Reversed, a stranger meets a love triangle before they meet a
+            person, and a triangle is a plot rather than a reason to care.
+
+            EVERY WORD BELOW IS HERS. Nothing here describes her — describing
+            her would ask a stranger to take our word for it, and would produce
+            the same four adjectives every other story uses. The reasoning
+            behind the five lines, and the psychology they are chosen against,
+            is written up in lib/content/who-she-is.ts rather than here.
+
+            The closing line is the point of the whole section: she is not
+            likeable because she is good, she is likeable because she does not
+            let herself off. */}
+        {sheLines.length >= 3 && (
+          <section
+            aria-labelledby="who-she-is-heading"
+            className="mx-auto w-full max-w-4xl px-5 pt-16 sm:px-8 sm:pt-24"
+          >
+            <p className="text-xs uppercase tracking-[0.2em] text-amber">
+              Who it&rsquo;s about
+            </p>
+            <h2
+              id="who-she-is-heading"
+              className="mt-3 max-w-2xl font-display text-2xl font-light leading-snug text-ivory sm:text-3xl"
+            >
+              The story is her interior life.
+            </h2>
+            <p className="mt-3 max-w-xl leading-relaxed text-stone">
+              Everything else — the farmhouse, the lake, both men — is weather
+              moving across it.
+            </p>
+
+            <div className="mt-10 gap-10 sm:grid sm:grid-cols-[13rem_1fr] sm:items-start">
+              {/* Her face, once, and small. The quotes are the content; a
+                  full-bleed portrait would make this a poster about a woman
+                  rather than five things she said. */}
+              {/* Path and role come from lib/content/characters.ts, not typed
+                  here — same rule as the three-people section below, so a
+                  portrait is named in one place and these cannot drift apart.
+
+                  object-[68%] pushes the crop toward her: the still has the
+                  Luna Vale title card behind her left shoulder, and centred it
+                  reads as a logo somebody happens to be standing in front of. */}
+              <div className="mx-auto w-40 shrink-0 sm:mx-0 sm:w-full">
+                <Link
+                  href="/characters/luna"
+                  className="group relative block aspect-[3/4] overflow-hidden rounded-lg ring-1 ring-hairline"
+                >
+                  <Image
+                    src={luna.portrait}
+                    alt={luna.name}
+                    fill
+                    sizes="(max-width: 640px) 10rem, 13rem"
+                    className="object-cover object-[68%_center] brightness-90 transition-all duration-(--duration-cinematic) group-hover:scale-[1.03] group-hover:brightness-100"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/60 via-transparent to-transparent" />
+                </Link>
+                <p className="mt-3 font-display text-xl text-ivory">{luna.name}</p>
+                <p className="mt-0.5 text-sm leading-relaxed text-stone-dim">
+                  {luna.role}
+                </p>
+              </div>
+
+              {/* FIVE THINGS SHE WROTE ABOUT HERSELF. Each links to the page it
+                  came off, so a line that lands can be followed immediately —
+                  two of the five open without an account. */}
+              <ul className="mt-8 space-y-6 sm:mt-0 sm:space-y-7">
+                {sheLines.map((line) => (
+                  <li key={`${line.entryId}-${line.text.slice(0, 12)}`}>
+                    <Link
+                      href={`/journal/${line.entryId}`}
+                      className="group block border-l border-hairline pl-5 transition-colors duration-(--duration-quick) hover:border-amber"
+                    >
+                      <p className="font-display text-lg font-light leading-relaxed text-ivory sm:text-xl">
+                        {line.text}
+                      </p>
+                      <p className="mt-1.5 text-xs text-stone-dim transition-colors duration-(--duration-quick) group-hover:text-amber">
+                        {line.dateline}
+                      </p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* THE CLOSE. It names the trait that makes the five above add up
+                to somebody worth following, and it is literally true — she
+                writes "I have read that back and I am leaving it in" more than
+                once in the journal. */}
+            <div className="mt-10 border-t border-hairline pt-6 sm:mt-12">
+              <p className="max-w-xl leading-relaxed text-stone">
+                She writes all of it down, reads it back, and leaves the worst
+                of it in.
+              </p>
+              <Link
+                href="/journal"
+                className="mt-4 inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+              >
+                Read her journal
+              </Link>
+            </div>
+          </section>
+        )}
 
         {/* ------------------------------------------------------------- three */}
         {/* WHO IT HAPPENS TO, once they have seen it happen. "Why should I

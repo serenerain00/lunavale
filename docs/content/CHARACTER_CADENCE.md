@@ -43,38 +43,51 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-2026-08-24. The 2026-07-28 row is kept beneath so the drift is visible.
+re-run 2026-09-01 against `main` at f29b524. The 2026-07-28 row is kept beneath
+so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 105 | 80 |
-| Tyson | 12 | 79 | 66 |
-| Josh | 14 | 79 | 62 |
+| Luna | 12 | 126 | 97 |
+| Tyson | 12 | 94 | 79 |
+| Josh | 14 | 86 | 66 |
 | Rick | 1 | 4 | 2 |
 
 *As built, 2026-07-28: Luna 8 / 44 / 23 · Tyson 8 / 44 / 33 · Josh 8 / 35 / 21.
 Rick was not on the table at all. Figures above include this week's note.*
 
-**Josh is level on volume and still needs the most.** He is even with Tyson on
-total pieces now, but volume was never the real measure for him: he is the
+> These numbers move fast. They were 105 / 79 / 79 / 4 a week earlier; the
+> journal entries, clips and scenes that landed on `main` in late August added
+> about forty pieces. Re-run the two functions rather than trusting the table.
+
+**Josh is the thinnest of the three leads again.** He has the most *notes* of
+anyone, but he is bottom on total pieces — the late-August content went mostly
+to Luna and Tyson. Volume was never the real measure for him anyway: he is the
 hardest character to hold an audience's sympathy for, and the whole story
 depends on him being genuinely likeable before he turns. What to watch is how
-much of his material makes that case, not how much of it there is.
+much of his material makes that case.
 
-**Rick is the real hole.** Four pieces against Josh's seventy-nine, and he is
+**Rick is the real hole.** Four pieces against Josh's eighty-six, and he is
 the entire explanation for Josh. Every note written for Rick is doing double
 duty on the character the story most needs an audience to like first, which
 makes him the cheapest way to feed Josh as well — but he is boxed in at one
 note per scene, and both his scenes are covered once the open PRs land.
 
-> **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25.
-> The counts above and the backlog below describe `main`, and `main` is behind:
-> the drops for 2026-08-03, 08-10 and 08-17 are all still open and unmerged
-> (#1, #2, #3). A weekly run clones the repo fresh, so it cannot see them, and
-> three consecutive weeks independently picked the same obvious gap and wrote
-> the same note — a Rick note on `josh-rick-lake` (#2, #3, and this week's #4
-> before it was rewritten). Whatever this file says is uncovered, check it
-> against the open PRs first.
+> **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
+> updated 2026-09-01. The counts above and the backlog below describe `main`,
+> and `main` is behind: the drops for 2026-08-03, 08-10, 08-17 and 08-31 are
+> all still open and unmerged (#1, #2, #3, #5), as is this one (#4). A weekly
+> run clones the repo fresh, so it cannot see any of them — and **four**
+> separate weeks have now independently picked the same obvious gap and written
+> the same note, a Rick `insight` note on `josh-rick-lake`: #2, #3, #5, and #4
+> before it was rewritten. #5 even reuses the id `rick-i-already-knew`.
+> Whatever this file says is uncovered, check it against the open PRs first.
+>
+> **This paragraph cannot fix that on its own, and it has already failed once.**
+> It has only ever existed on #4's branch, never on `main`, so the 08-31 run
+> could not read it and duplicated anyway. It becomes effective the moment
+> anything carrying it lands on `main`. Until then the only reliable control is
+> the weekly routine's own stored prompt, which is the maintainer's to change.
 
 Standing backlog, roughly prioritised:
 

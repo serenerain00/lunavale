@@ -88,9 +88,13 @@ export function SiteHeader() {
         <div className="flex items-center gap-3 sm:gap-6">
           <MobileNav items={items} showSignIn={authConfigured()} />
 
+          {/* -my-2/py-2 grows the tap target to 44px without moving the
+              wordmark a pixel. It measured exactly 24px tall, which is the
+              floor WCAG 2.5.8 allows and well under the 44 Apple asks for —
+              and it is the control every visitor reaches for to get home. */}
           <Link
             href="/"
-            className="whitespace-nowrap font-display text-base font-medium tracking-wide text-ivory sm:text-lg"
+            className="-my-2 whitespace-nowrap py-2 font-display text-base font-medium tracking-wide text-ivory sm:text-lg"
           >
             Luna Vale
           </Link>
@@ -145,7 +149,7 @@ export function SiteHeader() {
           <Member>
             <Link
               href="/account"
-              className="inline-flex min-h-9 items-center whitespace-nowrap rounded-full border border-hairline px-3.5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber sm:px-4"
+              className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full border border-hairline px-3.5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber sm:px-4"
             >
               Account
             </Link>
@@ -153,7 +157,7 @@ export function SiteHeader() {
           <Guest>
             <Link
               href="/membership"
-              className="inline-flex min-h-9 items-center whitespace-nowrap rounded-full bg-amber px-3.5 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft sm:px-4"
+              className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full bg-amber px-3.5 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft sm:px-4"
             >
               {/* The full label needs room a phone doesn't have.
                   "Become a member" named the transaction; this names what

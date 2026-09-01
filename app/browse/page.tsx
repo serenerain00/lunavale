@@ -95,7 +95,7 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
               {focusedPlace?.environmentSlug && (
                 <Link
                   href={`/world/${focusedPlace.environmentSlug}`}
-                  className="rounded-full border border-hairline px-5 py-2 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+                  className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 py-2 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber sm:min-h-0"
                 >
                   Step inside {focusedPlace.label} →
                 </Link>

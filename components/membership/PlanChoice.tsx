@@ -80,7 +80,7 @@ export function PlanChoice({
               type="button"
               onClick={() => setInterval(option)}
               aria-pressed={interval === option}
-              className={`min-h-9 rounded-full px-4 text-xs transition-colors duration-(--duration-quick) ${
+              className={`min-h-11 rounded-full px-4 text-xs transition-colors sm:min-h-9 duration-(--duration-quick) ${
                 interval === option
                   ? "bg-amber text-void"
                   : "text-stone hover:text-ivory"

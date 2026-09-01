@@ -112,7 +112,7 @@ export default async function ClipPage({ params }: ClipPageProps) {
             {previous ? (
               <Link
                 href={`/clips/${previous.id}`}
-                className="max-w-[45%] text-left text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
+                className="min-h-11 max-w-[45%] text-left text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
               >
                 <span className="block text-xs text-stone-dim">Previous</span>
                 {previous.title}
@@ -123,7 +123,7 @@ export default async function ClipPage({ params }: ClipPageProps) {
             {next && (
               <Link
                 href={`/clips/${next.id}`}
-                className="max-w-[45%] text-right text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
+                className="min-h-11 max-w-[45%] text-right text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
               >
                 <span className="block text-xs text-stone-dim">Next</span>
                 {next.title}

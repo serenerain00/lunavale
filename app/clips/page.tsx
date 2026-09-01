@@ -74,12 +74,12 @@ export default async function ClipsPage() {
 
                   <div className="absolute left-2.5 top-2.5 flex flex-wrap gap-1.5">
                     {locked ? (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-void/70 px-2 py-0.5 text-[0.65rem] font-medium text-amber-soft backdrop-blur-sm">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-void/70 px-2 py-0.5 text-[0.72rem] font-medium text-amber-soft backdrop-blur-sm">
                         <LockGlyph />
                         Members
                       </span>
                     ) : (
-                      <span className="rounded-full bg-void/70 px-2 py-0.5 text-[0.65rem] font-medium text-stone backdrop-blur-sm">
+                      <span className="rounded-full bg-void/70 px-2 py-0.5 text-[0.72rem] font-medium text-stone backdrop-blur-sm">
                         Free
                       </span>
                     )}
@@ -90,7 +90,7 @@ export default async function ClipsPage() {
                     />
                   </div>
 
-                  <span className="absolute bottom-2.5 right-2.5 rounded bg-void/70 px-1.5 py-0.5 text-[0.65rem] tabular-nums text-stone backdrop-blur-sm">
+                  <span className="absolute bottom-2.5 right-2.5 rounded bg-void/70 px-1.5 py-0.5 text-[0.72rem] tabular-nums text-stone backdrop-blur-sm">
                     {formatDuration(clip.durationSeconds)}
                   </span>
 

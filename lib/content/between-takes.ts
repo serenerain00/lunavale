@@ -38,7 +38,7 @@
  * they now end on the generous reading, which is both truer to these people and
  * a great deal better to read.
  *
- * ACCESS: 5 of the 32 pages are open, deliberately few. They are the funny ones
+ * ACCESS: 5 of the 33 pages are open, deliberately few. They are the funny ones
  * and the ones that give away a technique rather than a turn — enough for a
  * visitor to know exactly what the rest of the notebook is, which is the whole
  * job of a shop window. Everything that explains a scene the visitor cannot
@@ -510,6 +510,22 @@ export const notes: SetNote[] = [
     body: [
       "The suspicion arrives before any evidence does, and it does not arrive as anger. It arrives as attention. I start noticing her — the calendar, the phone, how long the drive back took — after years of not noticing much of anything.",
       "That is the cruel part, and we played it completely straight. The thing she wanted from me for ten years is the exact thing that is about to be turned on her. I am finally paying attention. It is the worst news of her life.",
+    ],
+  },
+  {
+    id: "josh-asking-it-straight",
+    author: "josh",
+    kind: "craft",
+    heading: "Asking it straight",
+    dateline: "Day 22 · the fall fair",
+    sceneSlug: "luna-josh-fair",
+    place: "fair",
+    access: "premium",
+    body: [
+      "This one is not mine, and I had to make my peace with that on the day. It belongs to Luna and to Tyson. My whole part in it is to hand her one question and then stand in a field for two minutes while she goes and tries to get an answer out of somebody else.",
+      "The question is whether she knew he would be here. Melissa wanted it played as flat as it reads — not loaded, not testing her, a man at a fair who has spotted Tyson across the way and is mildly curious. I asked twice for something to put underneath it. No both times.",
+      "She was right, and the reason is arithmetic rather than acting. I get to say it once. Put one degree of suspicion in it and the audience hears the whole second half coming, long before it should. It is not there yet — and that is not restraint on my part, because at the fair there is genuinely nothing in me to keep out of it.",
+      "The part I would point at is after. She walks off to him, and I let her, and I stay where I am, and I am fine. Properly fine, hands in pockets, watching a woman I live with go and talk to a man I work with. It is the last time in the film that is true of me. Watch those two minutes knowing that and they stop being comfortable at all.",
     ],
   },
 

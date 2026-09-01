@@ -94,7 +94,7 @@ export const questions: SurveyQuestion[] = [
     prompt: "How are you finding it so far?",
     kind: "single",
     required: true,
-    // Four options and no middle. A five-point scale with a neutral centre
+    // Four options and no middle. A five-point scale with a neutral center
     // collects a pile of shrugs from people who did not want to be rude, and
     // "it's fine" tells her nothing she can use.
     options: [

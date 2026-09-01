@@ -149,8 +149,8 @@ export const places = [
   {
     // No `environmentSlug` — the fair is a night, not a room, and it is the
     // one place in the world that will not be there next week. Filed as a
-    // place because the scene has to live somewhere true, and folding an
-    // autumn fair into "downtown" would lose the only thing about it that
+    // place because the scene has to live somewhere true, and folding a
+    // fall fair into "downtown" would lose the only thing about it that
     // matters: everybody they know is in one field at the same time.
     id: "fair",
     label: "The Fair",
@@ -214,6 +214,18 @@ export const people = [
     label: "Cathy",
     blurb:
       "Two thousand miles away in Atlanta, defending a man she only half knows.",
+  },
+  {
+    // Luna's father, named 2026-08-30 — Antonio, Tony. Mediterranean; he and
+    // Cathy met in Italy and have been married forty years. Registered here so
+    // her entries about him can be filed; renders nowhere until there is
+    // content, and this does NOT put him on /characters.
+    //
+    // NOTE this replaces the divorce. Cathy was written as divorced from
+    // 2026-08-03 until Melissa corrected it — see LUNA_VALE_CONTEXT.md.
+    id: "tony",
+    label: "Tony",
+    blurb: "Her father. Forty years married to Cathy, and still ridiculous about her.",
   },
   {
     // Luna's younger sister, named 2026-08-04. Ten years between them, both

@@ -11,22 +11,28 @@ import { InterviewHero } from "@/components/home/InterviewHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { SurveyDrawer } from "@/components/survey/SurveyDrawer";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { canWatch, getMembership } from "@/lib/access/entitlement";
+import {
+  Guest,
+  Member,
+  UnlessAnswered,
+} from "@/components/access/Viewer";
 import { catalog, shelves, type CatalogItem } from "@/lib/content/catalog";
 import { pickHero } from "@/lib/content/hero";
 import {
   entriesForScene,
   freeEntries,
   journal,
+  latestEntries,
   opening,
   quoteOfTheDay,
 } from "@/lib/content/journal";
+import { getCharacter } from "@/lib/content/characters";
 import { galleries } from "@/lib/content/gallery";
-import {
-  cadenceNote,
-  formatReleaseDate,
-  recentReleases,
-} from "@/lib/content/releases";
+import { cadenceNote, recentReleases } from "@/lib/content/releases";
+import { LatelyRail } from "@/components/home/LatelyRail";
+import { featuredClip } from "@/lib/content/clips";
+import { resolveWhoSheIs } from "@/lib/content/who-she-is";
+import { twentyQuestions } from "@/lib/content/twenty-questions";
 import { takes } from "@/lib/content/takes";
 import { formatPrice, getTier } from "@/lib/content/membership";
 import {
@@ -35,13 +41,31 @@ import {
   latestScene,
   videos as videosAll,
 } from "@/lib/content/videos";
-import { ANSWERED_COOKIE, sceneOptions } from "@/lib/content/survey";
-import { hasAnswered } from "@/lib/db/survey";
-import { cookies } from "next/headers";
+import { sceneOptions } from "@/lib/content/survey";
+
+/**
+ * STATIC, REVALIDATED HOURLY (2026-08-31).
+ *
+ * This page used to read the membership cookie and the survey cookie during
+ * render. That made it dynamic: `no-store`, never cached by the CDN, and a
+ * serverless function invocation for every one of the ~25 requests a second it
+ * was receiving — almost all of them crawlers, at a point when the site had two
+ * members. August's Vercel bill was $420, and roughly $118 of it was this page
+ * being rendered for people who do not exist.
+ *
+ * Nothing per-viewer is read here any more. The half-dozen labels that differ
+ * for a member are <Member> / <Guest> pairs resolved on the client after the
+ * cached HTML has arrived — see components/access/Viewer.tsx, which also has
+ * the standing rule: nothing premium may be passed as children to <Member>.
+ * Every real gate is untouched and still server-side.
+ *
+ * An hour, not a day, because quoteOfTheDay() and pickHero() rotate daily and
+ * an hour is close enough to midnight for both while costing essentially
+ * nothing — ISR reads were $0.00 across the whole of August.
+ */
+export const revalidate = 3600;
 
 export default async function Home() {
-  const { active: member } = await getMembership();
-
   const free = catalog.filter((item) => item.access === "free");
   const premium = catalog.filter((item) => item.access === "premium");
   const vault = getTier("vault")!;
@@ -53,10 +77,9 @@ export default async function Home() {
   const quote = quoteOfTheDay();
 
   const hero = pickHero();
-  const heroUnlocked = hero ? await canWatch(hero.video) : false;
 
   // The newest release, shown only while it is genuinely new — see isRecent.
-  // When nothing has gone up in a fortnight the section disappears rather
+  // When nothing has gone up in two weeks the section disappears rather
   // than keeping a "New" label on something that is not.
   const latest = latestScene();
   const showLatest = latest && isRecent(latest);
@@ -66,10 +89,28 @@ export default async function Home() {
   // on your own.
   const latestEntry = latest ? entriesForScene(latest.slug)[0] : undefined;
 
+  // THE NEW CLIP, for seven days and then not. Self-expiring — see
+  // featuredClip() in lib/content/clips.ts. Resolved per render like the hero
+  // and the quote, so the section goes away on its own an hour after the
+  // window closes rather than waiting for somebody to remember to remove it.
+  const featured = featuredClip();
+
+  // HER, IN HER OWN HANDWRITING — see lib/content/who-she-is.ts for why these
+  // five and in this order. Resolved from the journal so the quotes cannot
+  // drift from the entries they came out of.
+  const sheLines = resolveWhoSheIs();
+  const luna = getCharacter("luna")!;
+
+  // THE NEWEST PAGES OF THE JOURNAL, members-only, shown to everybody.
+  // Release order rather than story order — see latestEntries(). Empty until
+  // something dated and gated exists, in which case the section does not
+  // render at all rather than standing there with a heading and no pages.
+  const newestPages = latestEntries(3);
+
   // THE RHYTHM. Derived from what is actually published; see
   // lib/content/releases.ts for why this is not a hand-kept list and why there
   // is no forward-looking schedule anywhere in it.
-  const drops = recentReleases(7);
+  const drops = recentReleases(12);
   const cadence = cadenceNote();
 
   // Nobody who has already answered gets asked again. Read server-side rather
@@ -86,35 +127,610 @@ export default async function Home() {
     0,
   );
 
-  const jar = await cookies();
-  const surveyAnswered = await hasAnswered(jar.get(ANSWERED_COOKIE)?.value ?? "");
-
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="flex-1 pb-24">
         {hero &&
           (hero.playInline ? (
-            <InterviewHero hero={hero} member={member} />
+            <InterviewHero hero={hero} />
           ) : (
-            <Hero hero={hero} member={member} unlocked={heroUnlocked} />
+            <Hero hero={hero} />
           ))}
 
 
-        {/* ----------------------------------------------------- her voice */}
-        {/* THE SECOND THING ANYBODY SEES, and the hinge of the whole page.
-            Above it is a film; from here down it is somebody's private life.
-            One line, no card, no button — a page that has just shown you a
-            scene and then hands you a sentence out of her diary is making a
-            promise about what kind of place this is.
+        {/* ------------------------------------------------------------ survey */}
+        {/* THE SECOND THING ON THE PAGE (Melissa, 2026-08-26). It used to sit
+            tenth, under the rails, behind the paywall, and its own comment
+            claimed it was "straight after the newest scene" — which had not
+            been true for some time. Nobody scrolls that far to volunteer an
+            opinion.
 
-            THE LINE NOW SHUFFLES (Melissa, 2026-08-15) — it was one fixed
-            sentence for weeks, which meant a returning visitor met the same
-            greeting every time and stopped reading it. quoteOfTheDay() rotates
-            through a hand-picked set daily; every one is from a FREE entry, so
-            the link under it opens the whole page rather than a wall, and none
-            of them gives away a turn. */}
+            The band is a door, not a form: the questions arrive in a panel
+            that slides over the page, so answering costs nobody the page they
+            came for. There is also a tab pinned to the edge of the screen
+            (SurveyEdgeTab) that opens the same panel from anywhere further
+            down, for the visitor who decides they have something to say only
+            after they have watched something.
+
+            ASKED BEFORE THEY HAVE SEEN ANYTHING, deliberately and with a cost.
+            "Should this be a series?" is a better question after two scenes
+            than before them, and it is Melissa's call that being asked at all
+            beats being asked well and unread. The edge tab is the hedge: it
+            follows them down the page and is still there once they have.
+
+            Absent entirely once they have answered — no second ask, no
+            dismissible banner that comes back. */}
+        <UnlessAnswered>
+          <section className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14">
+            <SurveyDrawer scenes={sceneOptions()} />
+          </section>
+        </UnlessAnswered>
+
+        {/* -------------------------------------------------------- just added */}
+        {/* THE NEWEST SCENE, big, and the first thing to watch. Under the
+            hero and the ask, and above everything else, because "there is a
+            new one and here it is" is the only claim on this page that is
+            both true every week and interesting to a stranger. */}
+        {showLatest && latest && (
+          <section
+            aria-labelledby="latest-heading"
+            className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14"
+          >
+            <div className="overflow-hidden rounded-xl border border-hairline bg-charcoal/30 sm:grid sm:grid-cols-[1.1fr_1fr] sm:items-stretch">
+              <Link
+                href={`/watch/${latest.slug}`}
+                className="group relative block aspect-video sm:aspect-auto sm:h-full"
+              >
+                <Image
+                  src={latest.poster}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 100vw, 45vw"
+                  className="object-cover transition-transform duration-(--duration-slow) group-hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-void/70 to-transparent sm:bg-gradient-to-r" />
+                <span className="absolute left-4 top-4 rounded-full bg-amber px-3 py-1 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-void">
+                  New
+                </span>
+              </Link>
+
+              <div className="p-5 sm:p-8">
+                <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                  Just added
+                </p>
+                <h2
+                  id="latest-heading"
+                  className="mt-3 font-display text-2xl font-light text-ivory sm:text-3xl"
+                >
+                  {latest.title}
+                </h2>
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone">
+                  <span className="tabular-nums">
+                    {formatDuration(latest.durationSeconds)}
+                  </span>
+                  <span aria-hidden>·</span>
+                  <span
+                    className={
+                      latest.access === "free" ? "text-stone" : "text-amber"
+                    }
+                  >
+                    {latest.access === "free" ? "Free" : "Members"}
+                  </span>
+                </div>
+                <p className="mt-3 max-w-md leading-relaxed text-stone">
+                  {latest.synopsis}
+                </p>
+
+                <Link
+                  href={`/watch/${latest.slug}`}
+                  className="mt-6 inline-flex min-h-11 items-center gap-2.5 rounded-full bg-ivory px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-white"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 4.5v15l13-7.5z" fill="currentColor" />
+                  </svg>
+                  {latest.access === "free" ? "Watch it" : "Watch the opening"}
+                </Link>
+
+                {/* Says what a non-member actually gets, with the real number
+                    rather than a vague "preview". */}
+                {latest.access !== "free" && latest.preview && (
+                  <Guest>
+                    <p className="mt-3 text-xs leading-relaxed text-stone-dim">
+                      The first {formatDuration(latest.preview.durationSeconds)}{" "}
+                      is open to everyone. The rest is part of the LunaVerse.
+                    </p>
+                  </Guest>
+                )}
+
+                {/* THE PAIR. A scene and the page she wrote about the same day
+                    is the thing this site has that a video library does not,
+                    and the home page used to make you go and find the second
+                    half yourself. Rendered only when the entry exists — most
+                    scenes have no journal page and a dead link would be worse
+                    than no link. */}
+                {latestEntry && (
+                  <p className="mt-5 border-t border-hairline pt-4 text-sm leading-relaxed text-stone">
+                    She wrote about the same day.{" "}
+                    <Link
+                      href={`/journal/${latestEntry.id}`}
+                      className="text-ivory underline decoration-hairline underline-offset-4 transition-colors duration-(--duration-quick) hover:decoration-ivory"
+                    >
+                      {latestEntry.dateline}
+                    </Link>
+                  </p>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ---------------------------------------------------- featured clip */}
+        {/* A NEW CLIP, FOR SEVEN DAYS. Melissa, 2026-09-01. It sits directly
+            under "Just added" because the two make one argument in order: here
+            is the new scene, and here is a minute of these people that costs
+            nothing to watch. The clip is the cheaper thing to say yes to and it
+            is doing the work of an advert, which is why its window is seven
+            days against the scene's fourteen.
+
+            PORTRAIT, AND THE LAYOUT ADMITS IT. Everything else on this page is
+            16:9. Rather than crop a 9:16 clip into a shape it was not made for,
+            the poster keeps its aspect and the text sits beside it — the same
+            two-column arrangement as the card above, mirrored.
+
+            It renders only while featuredClip() returns something, so there is
+            no empty state to design and nothing to take down by hand. */}
+        {featured && (
+          <section
+            aria-labelledby="featured-clip-heading"
+            className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14"
+          >
+            {/* The poster is CONSTRAINED rather than allowed to fill its
+                column. A 9:16 image given half of a max-w-6xl row is about a
+                thousand pixels tall — it swamped the page and left the copy
+                stranded in white space. Capped at 15rem wide and centred on
+                phones, it lands at roughly 240x427, which is a card rather than
+                a billboard. `items-center` then floats the text against it
+                instead of stretching to match. */}
+            <div className="overflow-hidden rounded-xl border border-hairline bg-charcoal/30 p-4 sm:grid sm:grid-cols-[minmax(0,15rem)_1fr] sm:items-center sm:gap-2 sm:p-5">
+              <Link
+                href={`/clips/${featured.id}`}
+                className="group relative mx-auto block aspect-[9/16] w-full max-w-[15rem] overflow-hidden rounded-lg sm:mx-0 sm:max-w-none"
+              >
+                <Image
+                  src={featured.poster}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 100vw, 30vw"
+                  className="object-cover transition-transform duration-(--duration-slow) group-hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-void/70 to-transparent sm:bg-gradient-to-r" />
+                <span className="absolute left-4 top-4 rounded-full bg-amber px-3 py-1 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-void">
+                  New clip
+                </span>
+              </Link>
+
+              <div className="flex flex-col justify-center pt-5 sm:p-8 sm:pt-8">
+                <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                  Free to watch
+                </p>
+                <h2
+                  id="featured-clip-heading"
+                  className="mt-3 font-display text-2xl font-light text-ivory sm:text-3xl"
+                >
+                  {featured.title}
+                </h2>
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone">
+                  <span className="tabular-nums">
+                    {formatDuration(featured.durationSeconds)}
+                  </span>
+                  <span aria-hidden>·</span>
+                  <span className="text-stone">Vertical</span>
+                </div>
+                <p className="mt-4 max-w-md leading-relaxed text-stone">
+                  {featured.caption}
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href={`/clips/${featured.id}`}
+                    className="inline-flex min-h-11 items-center gap-2.5 rounded-full bg-ivory px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-white"
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M7 4.5v15l13-7.5z" fill="currentColor" />
+                    </svg>
+                    Watch it
+                  </Link>
+                  <Link
+                    href="/clips"
+                    className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+                  >
+                    All clips
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ------------------------------------------------------------ lately */}
+        {/* AND IT KEEPS HAPPENING. The card above says a new thing arrived;
+            this row says they keep arriving, and those are different promises
+            — a finished object is bought once, a rhythm is what a monthly
+            subscription is actually for.
+
+            EVERYTHING HERE IS DERIVED (lib/content/releases.ts). Nothing is
+            hand-listed, so it cannot drift from what is really published, and
+            it goes quiet on its own if the pace does. That last part is the
+            point: a cadence claim that keeps rendering after the cadence stops
+            is the one lie on this page anybody could catch.
+
+            AND THERE IS NO SCHEDULE. No "next drop Friday", no countdown, no
+            calendar. The site has no release calendar it can keep, and
+            CLAUDE.md's rule against promising what we lack bites hardest on a
+            promise about next week. Past tense only. */}
+        {drops.length >= 4 && (
+          <section
+            aria-labelledby="lately-heading"
+            className="mx-auto w-full max-w-4xl px-5 pt-16 sm:px-8 sm:pt-24"
+          >
+            <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+              <h2
+                id="lately-heading"
+                className="font-display text-2xl font-light text-ivory sm:text-3xl"
+              >
+                Lately
+              </h2>
+              {cadence && (
+                <p className="text-xs uppercase tracking-[0.16em] text-amber">
+                  {cadence}
+                </p>
+              )}
+            </div>
+
+            {/* THE RAIL, not a table (Melissa, 2026-08-25). The list this
+                replaced was five columns of small text on a page whose entire
+                argument is that this is a film — accurate, and reading like a
+                changelog. A card leads with the picture and opens to the rest.
+
+                Reusing components/browse/Rail so the catalog's carousel
+                behavior — peeking card, edge scrims, arrows that vanish at
+                the ends, drag, keyboard paging, reduced motion — is the same
+                gesture here as everywhere else rather than a second one. */}
+            <div className="mt-6">
+              <LatelyRail drops={drops} label="Lately" />
+            </div>
+          </section>
+        )}
+
+        {/* ------------------------------------------------------- free scenes */}
+        {/* THE FREE RAIL, and it now sits ABOVE the membership section rather
+            than below it (2026-08-26). The old order asked for money and then
+            showed what was free, which is the wrong way round in both
+            directions: it prices the ask before the evidence, and it buries
+            the scenes anybody can watch under the one section they cannot.
+
+            The streaming grammar everyone already reads: a row of frames to
+            pick from. */}
+        <div className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14">
+          {free.length > 0 && (
+            <Row
+              heading="Start here"
+              blurb="Open to everyone, in full. No account needed."
+              href="/browse"
+              hrefLabel="All scenes"
+              items={free}
+            />
+          )}
+        </div>
+
+        {/* ------------------------------------------------------ the interview */}
+        {/* THE ARTICLE, and it sits directly above the quotes section on
+            purpose. Melissa, 2026-09-01.
+
+            The two are the same argument at two speeds. This one is a
+            headline and a face — four seconds, and a stranger scrolling can
+            take the whole offer in without reading a word. The quotes below
+            are the slow version for somebody who stopped.
+
+            SO THE ORDER IS SCAN, THEN READ. Reversed, the first thing a
+            skimmer meets is five paragraphs of a woman they have not been
+            introduced to, and skimmers do not stop for that.
+
+            The count comes from the array rather than the copy, so the
+            headline cannot end up promising twenty questions of a
+            nineteen-question article. */}
+        <section
+          aria-labelledby="interview-heading"
+          className="mx-auto w-full max-w-6xl px-5 pt-16 sm:px-8 sm:pt-24"
+        >
+          <Link
+            href="/twenty-questions"
+            className="group block overflow-hidden rounded-xl border border-hairline bg-charcoal/30 p-4 transition-colors duration-(--duration-quick) hover:border-amber/40 sm:grid sm:grid-cols-[minmax(0,13rem)_1fr] sm:items-center sm:gap-6 sm:p-5"
+          >
+            <div className="relative mx-auto aspect-[3/4] w-40 overflow-hidden rounded-lg sm:mx-0 sm:w-full">
+              <Image
+                src={luna.portrait}
+                alt=""
+                fill
+                sizes="(max-width: 640px) 10rem, 13rem"
+                className="object-cover object-[68%_center] brightness-90 transition-all duration-(--duration-cinematic) group-hover:scale-[1.03] group-hover:brightness-100"
+              />
+            </div>
+
+            <div className="pt-5 sm:pt-0">
+              <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                Reader Q&amp;A
+              </p>
+              <h2
+                id="interview-heading"
+                className="mt-3 max-w-xl font-display text-2xl font-light leading-snug text-ivory sm:text-3xl"
+              >
+                We asked Luna {twentyQuestions.length} questions. She answered{" "}
+                {twentyQuestions.length - 1}.
+              </h2>
+              <p className="mt-3 max-w-lg leading-relaxed text-stone">
+                Her family, her mornings, both men, and the one about Tyson she
+                started to answer and then took back out.
+              </p>
+              <span className="mt-5 inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) group-hover:border-amber group-hover:text-amber">
+                Read the interview
+              </span>
+            </div>
+          </Link>
+        </section>
+
+        {/* --------------------------------------------------------- who she is */}
+        {/* MEET LUNA, before the page explains the situation she is in.
+            Melissa, 2026-09-01: people arrive not knowing what this is, and
+            they need to connect with HER — she is the one with more than
+            enough layers to go around.
+
+            IT SITS DIRECTLY ABOVE "It's about three people" and that order is
+            the argument. This is who she is; that is what is happening to her.
+            Reversed, a stranger meets a love triangle before they meet a
+            person, and a triangle is a plot rather than a reason to care.
+
+            EVERY WORD BELOW IS HERS. Nothing here describes her — describing
+            her would ask a stranger to take our word for it, and would produce
+            the same four adjectives every other story uses. The reasoning
+            behind the five lines, and the psychology they are chosen against,
+            is written up in lib/content/who-she-is.ts rather than here.
+
+            The closing line is the point of the whole section: she is not
+            likeable because she is good, she is likeable because she does not
+            let herself off. */}
+        {sheLines.length >= 3 && (
+          <section
+            aria-labelledby="who-she-is-heading"
+            className="mx-auto w-full max-w-4xl px-5 pt-16 sm:px-8 sm:pt-24"
+          >
+            <p className="text-xs uppercase tracking-[0.2em] text-amber">
+              Who it&rsquo;s about
+            </p>
+            <h2
+              id="who-she-is-heading"
+              className="mt-3 max-w-2xl font-display text-2xl font-light leading-snug text-ivory sm:text-3xl"
+            >
+              The story is her interior life.
+            </h2>
+            <p className="mt-3 max-w-xl leading-relaxed text-stone">
+              Everything else — the farmhouse, the lake, both men — is weather
+              moving across it.
+            </p>
+
+            <div className="mt-10 gap-10 sm:grid sm:grid-cols-[13rem_1fr] sm:items-start">
+              {/* Her face, once, and small. The quotes are the content; a
+                  full-bleed portrait would make this a poster about a woman
+                  rather than five things she said. */}
+              {/* Path and role come from lib/content/characters.ts, not typed
+                  here — same rule as the three-people section below, so a
+                  portrait is named in one place and these cannot drift apart.
+
+                  object-[68%] pushes the crop toward her: the still has the
+                  Luna Vale title card behind her left shoulder, and centred it
+                  reads as a logo somebody happens to be standing in front of. */}
+              <div className="mx-auto w-40 shrink-0 sm:mx-0 sm:w-full">
+                <Link
+                  href="/characters/luna"
+                  className="group relative block aspect-[3/4] overflow-hidden rounded-lg ring-1 ring-hairline"
+                >
+                  <Image
+                    src={luna.portrait}
+                    alt={luna.name}
+                    fill
+                    sizes="(max-width: 640px) 10rem, 13rem"
+                    className="object-cover object-[68%_center] brightness-90 transition-all duration-(--duration-cinematic) group-hover:scale-[1.03] group-hover:brightness-100"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/60 via-transparent to-transparent" />
+                </Link>
+                <p className="mt-3 font-display text-xl text-ivory">{luna.name}</p>
+                <p className="mt-0.5 text-sm leading-relaxed text-stone-dim">
+                  {luna.role}
+                </p>
+              </div>
+
+              {/* FIVE THINGS SHE WROTE ABOUT HERSELF. Each links to the page it
+                  came off, so a line that lands can be followed immediately —
+                  two of the five open without an account. */}
+              <ul className="mt-8 space-y-6 sm:mt-0 sm:space-y-7">
+                {sheLines.map((line) => (
+                  <li key={`${line.entryId}-${line.text.slice(0, 12)}`}>
+                    <Link
+                      href={`/journal/${line.entryId}`}
+                      className="group block border-l border-hairline pl-5 transition-colors duration-(--duration-quick) hover:border-amber"
+                    >
+                      <p className="font-display text-lg font-light leading-relaxed text-ivory sm:text-xl">
+                        {line.text}
+                      </p>
+                      <p className="mt-1.5 text-xs text-stone-dim transition-colors duration-(--duration-quick) group-hover:text-amber">
+                        {line.dateline}
+                      </p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* THE CLOSE. It names the trait that makes the five above add up
+                to somebody worth following, and it is literally true — she
+                writes "I have read that back and I am leaving it in" more than
+                once in the journal. */}
+            <div className="mt-10 border-t border-hairline pt-6 sm:mt-12">
+              <p className="max-w-xl leading-relaxed text-stone">
+                She writes all of it down, reads it back, and leaves the worst
+                of it in.
+              </p>
+              <Link
+                href="/journal"
+                className="mt-4 inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+              >
+                Read her journal
+              </Link>
+            </div>
+          </section>
+        )}
+
+        {/* ------------------------------------------------------------- three */}
+        {/* WHO IT HAPPENS TO, once they have seen it happen. "Why should I
+            care" answered before anything is asked for — a stranger cannot
+            care about a cast list, but they can hold three faces and three
+            facts.
+
+            THE IMAGE PATHS COME FROM lib/content/characters.ts rather than
+            being typed here, so there is one place a portrait is named and
+            this page cannot drift from the character hub it links into. */}
+        <section
+          aria-labelledby="three-heading"
+          className="mx-auto w-full max-w-4xl px-5 pt-16 sm:px-8 sm:pt-24"
+        >
+          <h2
+            id="three-heading"
+            className="font-display text-2xl font-light text-ivory sm:text-3xl"
+          >
+            It&rsquo;s about three people.
+          </h2>
+          <ul className="mt-8 grid grid-cols-3 gap-3 sm:gap-6">
+            {[
+              {
+                id: "luna",
+                line: "Ten years with Josh, six months apart, and she went back knowing exactly what she was going back to.",
+              },
+              {
+                id: "josh",
+                line: "Charming, commanding, and the thrill she can no longer quite separate from fear.",
+              },
+              {
+                id: "tyson",
+                line: "Her best friend of twenty years, who kept her alive through those six months and will not say the thing.",
+              },
+            ].map((p) => {
+              const character = getCharacter(p.id)!;
+              return (
+                <li key={p.id}>
+                  <Link
+                    href={`/characters/${character.id}`}
+                    className="group block"
+                  >
+                    <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-charcoal ring-1 ring-hairline">
+                      <Image
+                        src={character.portrait}
+                        alt=""
+                        fill
+                        sizes="(max-width: 640px) 31vw, 280px"
+                        className="object-cover brightness-90 transition-transform duration-(--duration-cinematic) ease-(--ease-cinematic) group-hover:scale-[1.04] group-hover:brightness-100"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void via-void/20 to-transparent" />
+                      <h3 className="absolute inset-x-0 bottom-0 p-3 font-display text-xl font-light leading-none text-ivory sm:p-5 sm:text-3xl">
+                        {character.name}
+                      </h3>
+                    </div>
+                    <p className="mt-3 text-xs leading-relaxed text-stone sm:text-sm">
+                      {p.line}
+                    </p>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="mt-8 max-w-2xl leading-relaxed text-stone">
+            Nobody in it is lying to anybody except themselves, which is the
+            part that takes a while to hurt.{" "}
+            <Link
+              href="/about"
+              className="text-amber underline-offset-4 transition-colors duration-(--duration-quick) hover:underline"
+            >
+              The whole premise, in ninety seconds
+            </Link>
+          </p>
+        </section>
+
+        {/* ------------------------------------------------------------- moods */}
+        <section
+          aria-labelledby="feeling-heading"
+          className="mx-auto w-full max-w-6xl px-5 pt-16 sm:px-8 sm:pt-20"
+        >
+          <h2
+            id="feeling-heading"
+            className="font-display text-2xl font-medium text-ivory sm:text-3xl"
+          >
+            Or start from how it felt
+          </h2>
+          <p className="mt-2 max-w-lg leading-relaxed text-stone">
+            Luna&rsquo;s world is filed by emotional context as much as by
+            place. Pick the one you&rsquo;re in.
+          </p>
+
+          <Reveal className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+            {shelves().map((shelf) => (
+              <Link
+                key={shelf.feelingId}
+                href={`/browse?feeling=${shelf.feelingId}`}
+                data-reveal-item
+                className="group relative flex aspect-[3/4] items-end overflow-hidden rounded-lg ring-1 ring-hairline"
+              >
+                <Image
+                  src={shelf.items[0].poster}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                  className="object-cover brightness-75 transition-[transform,filter] duration-(--duration-cinematic) ease-(--ease-cinematic) group-hover:scale-105 group-hover:brightness-100"
+                />
+                {/* Scrim only where the label sits — the top two-thirds of the
+                    frame stays as bright as the footage allows. */}
+                <div className="absolute inset-0 bg-gradient-to-t from-void via-void/25 via-45% to-transparent" />
+                <span className="relative p-3 font-display text-lg text-ivory">
+                  {shelf.label}
+                  <span className="block text-xs tabular-nums text-stone">
+                    {shelf.items.length}
+                  </span>
+                </span>
+              </Link>
+            ))}
+          </Reveal>
+        </section>
+
+        {/* --------------------------------------------------------- her voice */}
+        {/* HER VOICE, and the hinge of the page. Above it is a film; from
+            here down it is somebody's private life. One line, no card, no
+            button — a page that has just shown you scenes and then hands you a
+            sentence out of her diary is making a promise about what kind of
+            place this is.
+
+            IT USED TO BE THE SECOND THING ANYBODY SAW and it is now the
+            eighth (2026-08-26). The old argument was that the writing is the
+            hook; the problem was that a visitor who came to watch something
+            met two blocks of prose before a single playable scene. It works
+            better as the turn than as the opening — by here they have watched
+            something and the diary is a door further in rather than a wall in
+            front of the door.
+
+            THE LINE SHUFFLES (Melissa, 2026-08-15) — it was one fixed sentence
+            for weeks, which meant a returning visitor met the same greeting
+            every time and stopped reading it. quoteOfTheDay() rotates through
+            a hand-picked set daily; every one is from a FREE entry, so the
+            link under it opens the whole page rather than a wall, and none of
+            them gives away a turn. */}
         <section
           aria-labelledby="voice-heading"
           className="mx-auto w-full max-w-3xl px-5 pt-16 sm:px-8 sm:pt-24"
@@ -136,10 +752,10 @@ export default async function Home() {
           </p>
         </section>
 
-        {/* -------------------------------------------------------- journal */}
-        {/* Leads the page, right under the hero: the writing is the hook,
-            and free pages of Luna's hand are the strongest way to draw a
-            stranger in — before the video rails. */}
+        {/* ----------------------------------------------------------- journal */}
+        {/* And the pages themselves, straight under the line that came out of
+            one of them. Free entries of Luna's hand are the strongest thing on
+            this site that is not a scene. */}
         <section
           aria-labelledby="journal-heading"
           className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14"
@@ -208,249 +824,147 @@ export default async function Home() {
           </Reveal>
         </section>
 
-        {/* ----------------------------------------------------- just added */}
-        {/* DIRECTLY UNDER THE JOURNAL (Melissa, 2026-08-15), moved up from
-            below the membership pitch. The order of the argument is now: her
-            voice, her writing, and then the newest thing to watch — so a
-            returning visitor reaches the new scene in one screen instead of
-            scrolling past the cast, the pitch and the promises to find it.
+        {/* ------------------------------------------------- the newest pages */}
+        {/* THE NEW ENTRIES, LOCKED, directly under the free ones. Melissa,
+            2026-08-30: the journal is the book people keep asking her for and
+            are not going to get any other way, so the newest pages should be
+            visible on the home page and should require joining to read.
 
-            The journal still leads, because free pages of her hand remain the
-            strongest thing to hand a stranger. This sits second because it is
-            for the people who came back, and the only thing they cannot
-            already have seen is the newest scene. It disappears after a
-            fortnight, and then the journal simply runs on into the cast.
+            IT SITS UNDER THE FREE ROW ON PURPOSE. A visitor has just been
+            handed three whole entries; the argument this row makes is "and
+            there are new ones every week" rather than "here is a wall". Order
+            matters — the same row above the free one would read as a toll gate
+            before anybody has been given anything.
 
-            THE BUTTON GOES TO /watch RATHER THAN PLAYING HERE. Scenes carry
-            content notes that have to be readable BEFORE playback — the wall
-            scene's disclaimer is the whole reason that system exists — and an
-            inline player on the home page would put footage in front of
-            somebody before the notice they are owed. The gating, the preview
-            swap and the notes all already live correctly one click away. */}
-        {showLatest && latest && (
+            THE CARD IS THE SAME PAPER as the free row, deliberately. The only
+            differences are the badge and the page falling away into the dark
+            at the bottom, which is the same gesture the locked entry page
+            makes. A visitor learns one object here and meets it again when
+            they click.
+
+            THE OPENING LINE IS REAL AND IS GIVEN AWAY. Same call as
+            LockedEntry in app/journal/[id]/page.tsx: enough of her handwriting
+            to make its own case, and the honest version of a teaser — this is
+            genuinely the first sentence of the page, not copy written to sell
+            it.
+
+            NO COUNTDOWN, NO SCARCITY. The pressure is that there is a great
+            deal of her in here and it keeps arriving, which is true and stays
+            true. MONETIZATION.md rules out the other kind. */}
+        {newestPages.length > 0 && (
           <section
-            aria-labelledby="latest-heading"
-            className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14"
+            aria-labelledby="newest-pages-heading"
+            className="mx-auto w-full max-w-6xl px-5 pt-12 sm:px-8 sm:pt-16"
           >
-            <div className="overflow-hidden rounded-xl border border-hairline bg-charcoal/30 sm:grid sm:grid-cols-[1.1fr_1fr] sm:items-stretch">
-              <Link
-                href={`/watch/${latest.slug}`}
-                className="group relative block aspect-video sm:aspect-auto sm:h-full"
-              >
-                <Image
-                  src={latest.poster}
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 100vw, 45vw"
-                  className="object-cover transition-transform duration-(--duration-slow) group-hover:scale-[1.02]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-void/70 to-transparent sm:bg-gradient-to-r" />
-                <span className="absolute left-4 top-4 rounded-full bg-amber px-3 py-1 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-void">
-                  New
-                </span>
-              </Link>
-
-              <div className="p-5 sm:p-8">
+            <div className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+              <div className="min-w-0">
                 <p className="text-xs uppercase tracking-[0.2em] text-amber">
-                  Just added
+                  Just written
                 </p>
                 <h2
-                  id="latest-heading"
-                  className="mt-3 font-display text-2xl font-light text-ivory sm:text-3xl"
+                  id="newest-pages-heading"
+                  className="mt-2 font-display text-2xl font-medium text-ivory sm:text-3xl"
                 >
-                  {latest.title}
+                  The newest pages
                 </h2>
-                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone">
-                  <span className="tabular-nums">
-                    {formatDuration(latest.durationSeconds)}
-                  </span>
-                  <span aria-hidden>·</span>
-                  <span
-                    className={
-                      latest.access === "free" ? "text-stone" : "text-amber"
-                    }
-                  >
-                    {latest.access === "free" ? "Free" : "Members"}
-                  </span>
-                </div>
-                <p className="mt-3 max-w-md leading-relaxed text-stone">
-                  {latest.synopsis}
+                <p className="mt-2 max-w-lg leading-relaxed text-stone">
+                  <Member>
+                    The latest of her handwriting, yours as part of the
+                    LunaVerse.
+                  </Member>
+                  <Guest>
+                    The long ones — twenty years of her and Tyson, and what she
+                    only writes down at three in the morning. These are inside
+                    the LunaVerse.
+                  </Guest>
                 </p>
-
+              </div>
+              <Member>
                 <Link
-                  href={`/watch/${latest.slug}`}
-                  className="mt-6 inline-flex min-h-11 items-center gap-2.5 rounded-full bg-ivory px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-white"
+                  href="/journal"
+                  className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
                 >
-                  <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M7 4.5v15l13-7.5z" fill="currentColor" />
-                  </svg>
-                  {latest.access === "free" ? "Watch it" : "Watch the opening"}
+                  The whole journal
                 </Link>
-
-                {/* Says what a non-member actually gets, with the real number
-                    rather than a vague "preview". */}
-                {latest.access !== "free" && latest.preview && !member && (
-                  <p className="mt-3 text-xs leading-relaxed text-stone-dim">
-                    The first {formatDuration(latest.preview.durationSeconds)}{" "}
-                    is open to everyone. The rest is part of the LunaVerse.
-                  </p>
-                )}
-
-                {/* THE PAIR. A scene and the page she wrote about the same day
-                    is the thing this site has that a video library does not,
-                    and the home page used to make you go and find the second
-                    half yourself. Rendered only when the entry exists — most
-                    scenes have no journal page and a dead link would be worse
-                    than no link. */}
-                {latestEntry && (
-                  <p className="mt-5 border-t border-hairline pt-4 text-sm leading-relaxed text-stone">
-                    She wrote about the same day.{" "}
-                    <Link
-                      href={`/journal/${latestEntry.id}`}
-                      className="text-ivory underline decoration-hairline underline-offset-4 transition-colors duration-(--duration-quick) hover:decoration-ivory"
-                    >
-                      {latestEntry.dateline}
-                    </Link>
-                  </p>
-                )}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* -------------------------------------------------------- lately */}
-        {/* THE RHYTHM, and the reason this section exists at all.
-            
-            The page could already say "here is the newest thing". It could not
-            say "things keep arriving", and those are different promises: a
-            finished object is bought once, a rhythm is what a monthly
-            subscription is actually for. The work was already being done — a
-            scene or a journal page every couple of days through August — and
-            none of it was visible anywhere a visitor would look.
-
-            EVERYTHING HERE IS DERIVED (lib/content/releases.ts). Nothing is
-            hand-listed, so it cannot drift from what is really published, and
-            it goes quiet on its own if the pace does. That last part is the
-            point: a cadence claim that keeps rendering after the cadence stops
-            is the one lie on this page anybody could catch.
-
-            AND THERE IS NO SCHEDULE. No "next drop Friday", no countdown, no
-            calendar. The site has no release calendar it can keep, and
-            CLAUDE.md's rule against promising what we lack bites hardest on a
-            promise about next week. Past tense only. */}
-        {drops.length >= 4 && (
-          <section
-            aria-labelledby="lately-heading"
-            className="mx-auto w-full max-w-4xl px-5 pt-16 sm:px-8 sm:pt-24"
-          >
-            <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-              <h2
-                id="lately-heading"
-                className="font-display text-2xl font-light text-ivory sm:text-3xl"
-              >
-                Lately
-              </h2>
-              {cadence && (
-                <p className="text-xs uppercase tracking-[0.16em] text-amber">
-                  {cadence}
-                </p>
-              )}
+              </Member>
+              <Guest>
+                <Link
+                  href="/membership"
+                  className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+                >
+                  Join to read them
+                </Link>
+              </Guest>
             </div>
 
-            <ol className="mt-6 border-t border-hairline">
-              {drops.map((drop) => (
-                <li key={`${drop.kind}-${drop.href}`}>
-                  <Link
-                    href={drop.href}
-                    className="group flex min-h-14 items-center gap-4 border-b border-hairline py-3 transition-colors duration-(--duration-quick) hover:bg-charcoal/30 sm:gap-6"
-                  >
-                    <time
-                      dateTime={drop.date}
-                      className="w-14 shrink-0 text-xs tabular-nums text-stone-dim sm:w-16"
-                    >
-                      {formatReleaseDate(drop.date)}
-                    </time>
-                    <span className="w-16 shrink-0 text-[0.7rem] uppercase tracking-[0.14em] text-stone-dim sm:w-20">
-                      {drop.kind === "scene" ? "Scene" : "Journal"}
+            <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+              {newestPages.map((entry) => (
+                <Link
+                  key={entry.id}
+                  href={`/journal/${entry.id}`}
+                  data-reveal-item
+                  className="group relative block overflow-hidden rounded-sm bg-paper shadow-[0_12px_34px_-12px_rgba(0,0,0,0.85)] transition-transform duration-(--duration-standard) ease-(--ease-standard) hover:-translate-y-1 focus-visible:-translate-y-1"
+                >
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        "repeating-linear-gradient(to bottom, transparent 0 21px, rgba(47,58,74,0.11) 21px 22px)",
+                      backgroundPosition: "0 3.5rem",
+                    }}
+                  />
+                  <div className="relative p-5 pb-10">
+                    <p className="font-hand text-xl leading-tight text-ink-soft">
+                      {entry.dateline}
+                    </p>
+                    <p className="font-hand mt-3 line-clamp-5 text-xl leading-[1.4rem] text-ink">
+                      {opening(entry, 190)}
+                    </p>
+                  </div>
+                  {/* The page falling away into the dark, not a cropped card —
+                      the same gesture the locked entry page makes. */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-void via-void/85 to-transparent"
+                  />
+                  <span className="absolute inset-x-0 bottom-0 flex justify-center p-4">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-void/70 px-3 py-1 text-xs text-amber-soft backdrop-blur-sm">
+                      <Member>Yours to read</Member>
+                      <Guest>Members only</Guest>
                     </span>
-                    <span className="min-w-0 flex-1 truncate text-sm text-ivory transition-colors duration-(--duration-quick) group-hover:text-white">
-                      {drop.title}
-                    </span>
-                    {drop.durationSeconds !== undefined && (
-                      <span className="hidden shrink-0 text-xs tabular-nums text-stone-dim sm:block">
-                        {formatDuration(drop.durationSeconds)}
-                      </span>
-                    )}
-                    <span
-                      className={`shrink-0 text-[0.7rem] uppercase tracking-[0.12em] ${
-                        drop.access === "free" ? "text-stone-dim" : "text-amber"
-                      }`}
-                    >
-                      {drop.access === "free" ? "Free" : "Members"}
-                    </span>
-                  </Link>
-                </li>
+                  </span>
+                </Link>
               ))}
-            </ol>
+            </Reveal>
           </section>
         )}
 
-        {/* --------------------------------------------------------- three */}
-        {/* "Why should I care" answered before anything is asked for. Three
-            people, one sentence each, no images: a stranger cannot care about
-            a cast list, but they can hold three facts. It sits ABOVE the
-            membership section on purpose — the pitch is meaningless until
-            somebody knows who is in the room. */}
-        <section
-          aria-labelledby="three-heading"
-          className="mx-auto w-full max-w-4xl px-5 pt-16 sm:px-8 sm:pt-24"
-        >
-          <h2
-            id="three-heading"
-            className="font-display text-2xl font-light text-ivory sm:text-3xl"
-          >
-            It&rsquo;s about three people.
-          </h2>
-          <dl className="mt-8 grid gap-7 sm:grid-cols-3 sm:gap-8">
-            {[
-              {
-                name: "Luna",
-                line: "Ten years with Josh, six months apart, and she went back knowing exactly what she was going back to.",
-              },
-              {
-                name: "Josh",
-                line: "Charming, commanding, and the thrill she can no longer quite separate from fear.",
-              },
-              {
-                name: "Tyson",
-                line: "Her best friend of twenty years, who kept her alive through those six months and will not say the thing.",
-              },
-            ].map((p) => (
-              <div key={p.name}>
-                <dt className="font-display text-lg text-amber">{p.name}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-stone">
-                  {p.line}
-                </dd>
-              </div>
-            ))}
-          </dl>
-          <p className="mt-8 max-w-2xl leading-relaxed text-stone">
-            Nobody in it is lying to anybody except themselves, which is the
-            part that takes a while to hurt.{" "}
-            <Link
-              href="/about"
-              className="text-amber underline-offset-4 transition-colors duration-(--duration-quick) hover:underline"
-            >
-              The whole premise, in ninety seconds
-            </Link>
-          </p>
-        </section>
+        {/* -------------------------------------------------- in the lunaverse */}
+        {/* THE MEMBERS' RAIL, immediately before the ask — real locked frames
+            in the same grammar as the free row above, so what membership opens
+            is a shelf a visitor has already learned to read rather than a
+            list of promises. */}
+        <div className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14">
+          {premium.length > 0 && (
+            <Row
+              heading="In the LunaVerse"
+              blurb="Members see these in full — and the locked rooms they came from."
+              href="/membership"
+              hrefLabel="What membership opens"
+              memberBlurb="Yours, as part of your membership."
+              memberHref="/browse"
+              memberHrefLabel="All scenes"
+              items={premium}
+            />
+          )}
+        </div>
 
-
-        {/* --------------------------------------------------------- depth */}
-        {/* WHAT IS ACTUALLY BEHIND THE DOOR, counted. Every number here is
-            read from the content modules rather than typed, so it cannot drift
-            into a lie the week after somebody publishes something.
+        {/* ------------------------------------------------------------- depth */}
+        {/* WHAT IS ACTUALLY BEHIND THE DOOR, counted, and directly under the
+            shelf it counts. Every number here is read from the content modules
+            rather than typed, so it cannot drift into a lie the week after
+            somebody publishes something.
 
             Countable depth rather than urgency: no timer, no "only today", no
             invented scarcity — the argument is simply that there is a great
@@ -500,8 +1014,14 @@ export default async function Home() {
           </dl>
         </section>
 
-        {/* ----------------------------------------------------- membership */}
-        {!member && (
+        {/* -------------------------------------------------------- membership */}
+        {/* THE ASK, LAST (2026-08-26). It used to sit in the middle of the
+            page, above the free rail and above half the evidence for it. A
+            price is easiest to say yes to at the end of the argument, not in
+            the middle of it — by here a visitor has watched a scene, seen the
+            rhythm, met the three of them, read a page of the journal and been
+            shown the size of what is locked. */}
+        <Guest>
           <section
             aria-labelledby="join-heading"
             className="relative mt-6 overflow-hidden border-y border-hairline sm:mt-10"
@@ -579,112 +1099,39 @@ export default async function Home() {
               </Reveal>
             </div>
           </section>
-        )}
-
-        {/* Then the scene rails — the streaming grammar everyone already
-            reads: rows of frames to pick from. */}
-        <div className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14">
-          {free.length > 0 && (
-            <Row
-              heading="Start here"
-              blurb="Open to everyone, in full. No account needed."
-              href="/browse"
-              hrefLabel="All scenes"
-              items={free}
-              member={member}
-            />
-          )}
-
-          {premium.length > 0 && (
-            <Row
-              heading="In the LunaVerse"
-              blurb={
-                member
-                  ? "Yours, as part of your membership."
-                  : "Members see these in full — and the locked rooms they came from."
-              }
-              href={member ? "/browse" : "/membership"}
-              hrefLabel={member ? "All scenes" : "What membership opens"}
-              items={premium}
-              member={member}
-            />
-          )}
-        </div>
-
-        {/* --------------------------------------------------------- survey */}
-        {/* Straight after the newest scene, which is the point at which
-            somebody has just been shown the thing they might have an opinion
-            about — and well above the rails, since anything below those is a
-            link nobody scrolls to. Absent entirely once they have answered. */}
-        {!surveyAnswered && (
-          <section className="mx-auto w-full max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14">
-            <SurveyDrawer scenes={sceneOptions()} />
-          </section>
-        )}
-        {/* --------------------------------------------------------- moods */}
-        <section
-          aria-labelledby="feeling-heading"
-          className="mx-auto w-full max-w-6xl px-5 pt-16 sm:px-8 sm:pt-20"
-        >
-          <h2
-            id="feeling-heading"
-            className="font-display text-2xl font-medium text-ivory sm:text-3xl"
-          >
-            Or start from how it felt
-          </h2>
-          <p className="mt-2 max-w-lg leading-relaxed text-stone">
-            Luna&rsquo;s world is filed by emotional context as much as by
-            place. Pick the one you&rsquo;re in.
-          </p>
-
-          <Reveal className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {shelves().map((shelf) => (
-              <Link
-                key={shelf.feelingId}
-                href={`/browse?feeling=${shelf.feelingId}`}
-                data-reveal-item
-                className="group relative flex aspect-[3/4] items-end overflow-hidden rounded-lg ring-1 ring-hairline"
-              >
-                <Image
-                  src={shelf.items[0].poster}
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
-                  className="object-cover brightness-75 transition-[transform,filter] duration-(--duration-cinematic) ease-(--ease-cinematic) group-hover:scale-105 group-hover:brightness-100"
-                />
-                {/* Scrim only where the label sits — the top two-thirds of the
-                    frame stays as bright as the footage allows. */}
-                <div className="absolute inset-0 bg-gradient-to-t from-void via-void/25 via-45% to-transparent" />
-                <span className="relative p-3 font-display text-lg text-ivory">
-                  {shelf.label}
-                  <span className="block text-xs tabular-nums text-stone">
-                    {shelf.items.length}
-                  </span>
-                </span>
-              </Link>
-            ))}
-          </Reveal>
-        </section>
+        </Guest>
       </main>
     </>
   );
 }
 
-/** One landing-page rail. Same slider the catalog uses, so it behaves the same. */
+/**
+ * One landing-page rail. Same slider the catalog uses, so it behaves the same.
+ *
+ * The member variants are optional and only the members' rail supplies them:
+ * "what membership opens" is the wrong heading for somebody who already has
+ * it. Both wordings render into the cached HTML and the client shows one —
+ * the rail's CARDS are identical either way, which is why this is a swap of
+ * two short strings rather than of the whole section.
+ */
 function Row({
   heading,
   blurb,
   href,
   hrefLabel,
+  memberBlurb,
+  memberHref,
+  memberHrefLabel,
   items,
-  member,
 }: {
   heading: string;
   blurb: string;
   href: string;
   hrefLabel: string;
+  memberBlurb?: string;
+  memberHref?: string;
+  memberHrefLabel?: string;
   items: CatalogItem[];
-  member: boolean;
 }) {
   const headingId = `row-${heading.toLowerCase().replace(/\s+/g, "-")}`;
 
@@ -699,26 +1146,41 @@ function Row({
             {heading}
           </h2>
           <p className="mt-1.5 max-w-md text-sm leading-relaxed text-stone">
-            {blurb}
+            {memberBlurb ? (
+              <>
+                <Member>{memberBlurb}</Member>
+                <Guest>{blurb}</Guest>
+              </>
+            ) : (
+              blurb
+            )}
           </p>
         </div>
-        <Link
-          href={href}
-          className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
-        >
-          {hrefLabel}
-        </Link>
+        {memberHref && memberHrefLabel ? (
+          <>
+            <Member>
+              <Link href={memberHref} className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber">
+                {memberHrefLabel}
+              </Link>
+            </Member>
+            <Guest>
+              <Link href={href} className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber">
+                {hrefLabel}
+              </Link>
+            </Guest>
+          </>
+        ) : (
+          <Link href={href} className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber">
+            {hrefLabel}
+          </Link>
+        )}
       </div>
 
       <Reveal>
         <Rail label={heading}>
           {items.map((item) => (
             <RailItem key={item.id}>
-              <CatalogCard
-                item={item}
-                unlocked={member}
-                sizes={RAIL_ITEM_SIZES}
-              />
+              <CatalogCard item={item} sizes={RAIL_ITEM_SIZES} />
             </RailItem>
           ))}
         </Rail>

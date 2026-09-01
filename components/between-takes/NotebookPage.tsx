@@ -28,7 +28,7 @@ interface NotebookPageProps {
  * point is that the hands are different and that they answer each other, so
  * the page has to be able to hold more than one person at once. A card cannot.
  *
- * THREE HANDS. Each writer gets an ink colour and a slight rotation, held in
+ * THREE HANDS. Each writer gets an ink color and a slight rotation, held in
  * HANDS below. It is the only thing distinguishing them once the writing
  * starts, so it is data rather than a per-note style — one place to change, and
  * no page can accidentally give Josh Tyson's pen.
@@ -37,7 +37,7 @@ interface NotebookPageProps {
  * never for body text at length. That is the same line the journal draws
  * (components/journal/JournalPaper.tsx) and for the same reason: a page of
  * handwriting is genuinely hard work for a lot of people, and an entry nobody
- * can read is not atmosphere, it is a locked door. Ink colour is never the only
+ * can read is not atmosphere, it is a locked door. Ink color is never the only
  * signal either — every hand is also named in text.
  */
 
@@ -267,7 +267,7 @@ function Reply({ note, unlocked }: { note: SetNote; unlocked: boolean }) {
  * Says what is behind it and offers the door, once. MONETIZATION.md forbids
  * nagging, and the note has already shown its first paragraph — the visitor can
  * see there is a real, specific thing here, which is a better argument than a
- * grey box and more honest about what is withheld.
+ * gray box and more honest about what is withheld.
  */
 function LockedTail({ id, small = false }: { id: string; small?: boolean }) {
   return (

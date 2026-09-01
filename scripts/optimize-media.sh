@@ -15,7 +15,7 @@
 #   scripts/optimize-media.sh import  <slug> <src> [at] [end] [fade] # cut -> proxy + poster
 #                                                     # [at]=poster seconds, [end]=trim trailing black,
 #                                                     # [fade]=seconds of fade to black + sound. "-" = default
-#   scripts/optimize-media.sh vertical <slug> <src> [at] # same, for 9:16 portrait cuts
+#   scripts/optimize-media.sh vertical <slug> <src> [at] [end] # same, for 9:16 portrait cuts
 #   scripts/optimize-media.sh proxy-only <slug> <src> # proxy, NO poster (members' cut)
 #
 # Requires ffmpeg (brew install ffmpeg).
@@ -251,13 +251,20 @@ case "$cmd" in
     # Portrait cuts (the Instagram ones). Same idea as `import`, but sized by
     # WIDTH — scaling a 9:16 clip to 720 tall would leave it 405 wide, which is
     # smaller than the phone it was made for.
-    slug="${1:?usage: optimize-media.sh vertical <slug> <source> [poster-seconds]}"
-    src="${2:?usage: optimize-media.sh vertical <slug> <source> [poster-seconds]}"
-    at="${3:-3}"
+    slug="${1:?usage: optimize-media.sh vertical <slug> <source> [poster-seconds] [end]}"
+    src="${2:?usage: optimize-media.sh vertical <slug> <source> [poster-seconds] [end]}"
+    at="$(unset_dash "${3:-}" 3)"
+    # Where the PICTURE ends, same switch and same reasoning as `import` above.
+    # ADDED 2026-09-01: this branch did not have one, and luna-josh-rain arrived
+    # with 6.6s of trailing black (186.4 of a 193.0s export). Without it the
+    # only options were to ship the dead time or to hand-roll an encode beside
+    # the script, and a portrait export is no less likely to have black on the
+    # end than a landscape one. Measure it with `ffmpeg -vf blackdetect`.
+    end="$(unset_dash "${4:-}" "")"
     [ -f "$src" ] || die "no source at $src"
 
     out="stories/$slug.proxy.mp4"
-    ffmpeg -y -loglevel error -i "$src" \
+    ffmpeg -y -loglevel error -i "$src" ${end:+-t "$end"} \
       -vf "scale=$VERTICAL_WIDTH:-2" \
       -c:v libx264 -preset medium -crf "$PROXY_CRF" -pix_fmt yuv420p \
       -c:a aac -b:a 128k -movflags +faststart \
@@ -268,7 +275,10 @@ case "$cmd" in
       -vf "scale=$VERTICAL_WIDTH:$VERTICAL_HEIGHT:force_original_aspect_ratio=increase,crop=$VERTICAL_WIDTH:$VERTICAL_HEIGHT" \
       -q:v "$STILL_Q" "public/posters/$slug.jpg"
 
-    dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src")
+    # Report the PROXY's duration, not the source's. Trimmed exports made this
+    # lie: luna-josh-rain printed 193 while the file it had just written was
+    # 186.4, and that number is copied straight into clips.ts.
+    dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$out")
     printf '%-26s proxy %-6s poster %-6s durationSeconds: %.0f\n' \
       "$slug" "$(du -h "$out" | cut -f1)" \
       "$(du -h "public/posters/$slug.jpg" | cut -f1)" "$dur"

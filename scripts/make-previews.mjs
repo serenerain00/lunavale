@@ -30,7 +30,7 @@
  * THE HONESTY PROBLEM THAT ARGUMENT WAS PROTECTING IS REAL AND STILL HANDLED:
  * the page under the player states exactly what was shown and what the whole
  * runtime is, so nobody is told they saw the start of anything. What is gone
- * is the pretence that a beginning is the most representative slice — on this
+ * is the pretense that a beginning is the most representative slice — on this
  * material it usually is not.
  *
  * SOURCE IS `file`, NEVER `premium.file`. Where a scene has an explicit cut
@@ -148,6 +148,59 @@ const OVERRIDES = {
   // luna-truck-breakdown's public cut: the note has to be readable before the
   // thing it describes plays, not only for members.
   "luna-ty-panic-attack": 30,
+
+  // 90s, Melissa's call on release, 2026-08-31: "let folks preview the middle
+  // of the video, 90 seconds". Second only to ty-luna-garage's 2:15.
+  //
+  // THE MIDDLE, LITERALLY. The scene runs 4:24 and the window is 1:30–2:58,
+  // centred on 2:14 against a true midpoint of 2:12. That is the instruction
+  // taken at its word, and it is also the right ninety seconds: 0:00–0:45 is
+  // Tyson alone in the shop and on the phone, and the arrival and the
+  // standing-around are over by about 1:30. The window opens exactly where the
+  // distance starts to collapse.
+  //
+  // IT STOPS FOURTEEN SECONDS SHORT OF THE TURN. He is still being handled at
+  // 3:04 — her laughing, his fingers at her chin — and he leans in at about
+  // 3:12, with the near-kiss sustained from 3:20. Wider margin than
+  // luna-josh-first-night's ten, narrower than ty-luna-garage's forty. The
+  // thing the scene is FOR — that she is the one who closes it, and what she
+  // means by doing it small — is entirely outside the window.
+  //
+  // IT COMES OUT AT 88s, NOT 90, AND THAT IS THE FRACTION RULE WORKING. 90 of
+  // 264 is 34%, over the one-third ceiling, and the ceiling is a hard cap on
+  // overrides by design — see the Math.min below, and note that every other
+  // entry in this table is careful to sit under it. So the request is honoured
+  // to within two seconds and the guardrail is left standing. If Melissa wants
+  // a literal 90, that is a decision to raise the cap for this scene, not
+  // something to slip past it.
+  //
+  // (It was 87 until 2026-09-01, when the master was replaced with a
+  // sync-corrected export running a second longer. The window and the turn
+  // both re-checked against the new file rather than assumed.)
+  //
+  // Content in the window: he is shirtless, as he is for the whole scene, and
+  // she is in a tank top. It is faces and hands. Nothing explicit, no nudity.
+  "luna-ty-shop-kiss": 90,
+
+  // 30s, Melissa's call on release, 2026-09-01: "this is only going to show
+  // the first 30sec". A quarter of the 1:53 runtime, so well inside the
+  // fraction rule and no argument with the cap.
+  //
+  // THE OPENING, against this file's usual hookStart rule, and for the same
+  // reason luna-josh-first-night takes it: here the opening IS the hook. He
+  // spends the first ten seconds walking away from her across the deck, and
+  // the situation — a man finding somewhere else to be in his own friend's
+  // house — is stated before anybody says a word.
+  //
+  // WHAT IT STOPS SHORT OF, sampled at three-second steps: he does not raise
+  // his voice until about 1:12, and the thing the scene exists for — the first
+  // time he names Josh as the reason he cannot talk to her — is later still.
+  // Thirty seconds ends forty-two seconds before the shouting and well before
+  // the reason, which is the part worth paying for.
+  //
+  // Content in the window: two people in a living room, fully dressed, one of
+  // them leaving the room. Nothing to flag.
+  "luna-ty-lakehouse-confrontation": 30,
 };
 
 /**
@@ -164,7 +217,7 @@ function premiumScenes() {
     const file = block.match(/file: "([^"]+)"/)?.[1];
     const duration = Number(block.match(/durationSeconds: (\d+)/)?.[1]);
     // Where the hook window starts. Absent = the opening, which is the old
-    // behaviour and still right for a scene that opens on its best question.
+    // behavior and still right for a scene that opens on its best question.
     const hookStart = Number(block.match(/hookStart: ([\d.]+)/)?.[1] ?? 0);
     if (slug && access === "premium" && file && duration) {
       out.push({ slug, file, duration, hookStart });

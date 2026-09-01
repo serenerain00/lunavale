@@ -55,9 +55,9 @@ export const CONTENT_NOTES: Record<ContentNoteId, ContentNote> = {
   },
   control: {
     id: "control",
-    label: "controlling behaviour",
+    label: "controlling behavior",
     detail:
-      "This scene includes possessive, controlling or coercive behaviour in a relationship.",
+      "This scene includes possessive, controlling or coercive behavior in a relationship.",
   },
   // Added 2026-08-05 for the farmhouse confrontation. Both are SEVERE, and
   // both are deliberately specific: "physical violence" is true of that scene
@@ -100,7 +100,7 @@ export function hasSevereNote(ids: readonly ContentNoteId[] = []): boolean {
   return getContentNotes(ids).some((n) => n.severe);
 }
 
-/** "physical violence" / "physical violence and controlling behaviour". */
+/** "physical violence" / "physical violence and controlling behavior". */
 export function joinNoteLabels(ids: readonly ContentNoteId[] = []): string {
   const labels = getContentNotes(ids).map((n) => n.label);
   if (labels.length === 0) return "";

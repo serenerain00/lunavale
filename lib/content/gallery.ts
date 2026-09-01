@@ -278,6 +278,83 @@ export const galleries: StillGallery[] = [
     mature: false,
   },
 
+  /* ------------------------------------------------- the afternoon he went */
+  {
+    // The same island as `gingerale`, and the opposite weather. That set is
+    // the friendship doing the one thing it does easily; this is the first
+    // afternoon it costs her something to be in the room.
+    //
+    // ORDERED BY THE SCENE, NOT BY CAPTURE TIME — which is a departure from
+    // casey-bar, and deliberate. These are thirteen frames spread over two and
+    // a half hours of Melissa working, so capture order is the order she made
+    // them in rather than the order they happen in, and it opens on a close-up
+    // of him and ends in the middle. Run as the scene runs, it reads: she is
+    // writing, he comes through, they talk, she goes back to the book.
+    //
+    // ONE FRAME PULLED as an exact duplicate — the 9.17 and 9.37 screenshots
+    // are the same frame captured twice (SSIM 1.000). Count is 13, not 14.
+    //
+    // STILL 01 IS THE COVER AND IT IS THE BEST IMAGE HERE: her alone at the
+    // island with the book open and the lake in the whole of the window. It is
+    // also the opening shot of the 0:50 assembly that got replaced, so the set
+    // is the only place that frame survives.
+    //
+    // NOT the same image as the scene's poster, on purpose. The poster is the
+    // wide with both of them in it, because a scene card has to say who is in
+    // it; a gallery card can afford to be the quieter one.
+    id: "wasnt-planning-on-it",
+    title: "Wasn't Planning On It",
+    subtitle: "Luna & Tyson",
+    description: [
+      "Thirteen frames from an afternoon at the lakehouse. Luna is writing at the island. Tyson comes through with his keys and says he is going to head out for a bit, and she asks him where — which in twenty years she has never once done.",
+      "Nothing in it is a fight. He answers every question with a question, she says one true thing she would like back, and then she goes on writing without looking up. The set is mostly her face doing arithmetic she has not admitted she is doing.",
+    ],
+    count: 13,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/wasnt-planning-on-it/cover.jpg",
+    feelings: ["desire", "distance"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-ty-wasntplanningonit",
+    journalEntryId: "who-is-she",
+    stills: [
+      {
+        journal: {
+          entryId: "who-is-she",
+          excerpt:
+            "He has said that to me a hundred times in twenty years and I have never once asked him where.",
+        },
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+        journal: {
+          entryId: "who-is-she",
+          excerpt:
+            "He didn't answer it. He asked me who said there was a she, which is not a no.",
+        },
+      },
+      {},
+      {},
+      {
+        journal: {
+          entryId: "who-is-she",
+          excerpt:
+            "I said it without looking up, and I have been sitting here since with the pen in my hand not writing anything.",
+        },
+      },
+    ],
+    access: "premium",
+    mature: false,
+  },
+
   /* --------------------------------------------------------------- casey's */
   {
     // The same bar as `the-bar`, a different night and a third person in it.
@@ -292,6 +369,21 @@ export const galleries: StillGallery[] = [
     // No captions yet. The ones on the-bar are Melissa's voice and the wrong
     // thing to invent — the set reads fine without them and they can be added
     // per still whenever she wants.
+    //
+    // SIX STILLS PULLED, 2026-08-27, and the count went 31 -> 25. Six frames
+    // showed a LONG-HAIRED woman standing in for Casey. Casey has short hair —
+    // the undercut, the tank top, the tattoos — so those six were a wrong
+    // render rather than a character, and Melissa's instruction is that the
+    // long-haired woman appears nowhere on the site.
+    //
+    // Old numbers 02, 05, 07, 08, 13, 14. The clearest of them is old 14, the
+    // two women side by side at the bar, which is what settles that they are
+    // not the same person. The frames are kept, not deleted, in
+    // stills-src/_pulled/casey-bar-long-hair/ with a note.
+    //
+    // THE SET RENUMBERED. Everything after a pulled frame shifted down, so the
+    // free previews and the cover are different images than they were, and the
+    // remote copies had to be overwritten rather than size-skipped.
     id: "casey-bar",
     title: "Your Date",
     subtitle: "Luna, Tyson & Casey",
@@ -299,7 +391,7 @@ export const galleries: StillGallery[] = [
       "The same bar, and the first night Luna has walked into it and found somebody else already standing where she stands.",
       "Casey is a friend from the track. That is the whole of what anybody says out loud, and Luna spends the night deciding whether to believe it — which is not really a question about Casey.",
     ],
-    count: 31,
+    count: 25,
     gated: true,
     freePreviewCount: 2,
     cover: "/gallery/casey-bar/cover.jpg",
@@ -494,7 +586,7 @@ export const galleries: StillGallery[] = [
     title: "The Run",
     subtitle: "Luna, alone",
     description: [
-      "Six miles at the far end of the lake, headphones in, nobody to talk to and nobody to be all right for. Her favourite hour of the week and the only one in the story she does not spend managing somebody else.",
+      "Six miles at the far end of the lake, headphones in, nobody to talk to and nobody to be all right for. Her favorite hour of the week and the only one in the story she does not spend managing somebody else.",
       "She is not thinking anything through out here. That is the point of it. Everything she has been carrying is still there when she gets back — she just gets to put it down for an hour first.",
     ],
     count: 10,
@@ -587,7 +679,7 @@ export const galleries: StillGallery[] = [
     place: "garage",
     about: ["tyson", "luna"],
     // Linked 2026-08-19, when the room finally got a scene. These four stills
-    // predate it by a fortnight and still 04's caption — "she turns up and he
+    // predate it by two weeks and still 04's caption — "she turns up and he
     // keeps working" — turns out to describe the scene's opening exactly.
     sceneSlug: "ty-luna-garage",
     stills: [

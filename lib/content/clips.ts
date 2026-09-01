@@ -38,6 +38,17 @@ export interface Clip {
   /** Portrait poster under /public. */
   poster: string;
   durationSeconds: number;
+  /**
+   * The day this clip went up, ISO `YYYY-MM-DD`. THE INDEX IS SORTED BY IT,
+   * newest first (Melissa, 2026-09-01: "keep the latest at the top. so the
+   * latest should show first").
+   *
+   * Only set on clips published since the field existed. An undated clip is
+   * treated as older than every dated one, which is true, and they hold their
+   * authored order among themselves — so nothing had to be back-filled by
+   * guesswork. Same rule and same reasoning as `Video.addedOn`.
+   */
+  addedOn?: string;
   /** Who's in it. */
   about: PersonId[];
   mature: boolean;
@@ -69,11 +80,11 @@ export function clipAccess(clip: Clip): AccessLevel {
   return clip.access ?? "free";
 }
 
-export const clips: Clip[] = [
+const authored: Clip[] = [
   {
     id: "run-at-the-lake",
     title: "Run",
-    caption: "Six miles, headphones in, nobody to talk to. Her favourite hour.",
+    caption: "Six miles, headphones in, nobody to talk to. Her favorite hour.",
     // Trimmed 2026-08-10 at 100.5s, from 103.7. What came off was 1.0s of
     // black and 1.8s of screen-recorded editing-app UI that had ridden along
     // on the export. Her end card is untouched, and the audio had already
@@ -193,7 +204,94 @@ export const clips: Clip[] = [
     about: ["luna"],
     mature: true,
   },
+  {
+    // THE ONLY PLACE ON THE SITE SHE LOOKS LIKE THIS WITH JOSH, and that is
+    // the entire reason to publish it. Melissa, 2026-09-01: she was helping
+    // him out on the farm, it starts to pour on the way back, "their edges
+    // soften on the way back... she does smile with Josh."
+    //
+    // Everything else in the Josh material is the charming-then-controlling
+    // arc, and a reader who has only met him through the journal has no
+    // working picture of why she stayed for ten years. Three minutes of the
+    // two of them soaked and laughing on a farm road answers that without
+    // arguing about it — and it makes the rest of the arc land harder, because
+    // you cannot lose something you were never shown.
+    //
+    // Trimmed at 186.4s from a 193.0s export: blackdetect puts 6.6s of black
+    // on the end. That needed a new `end` argument on optimize-media.sh's
+    // `vertical` branch, which had never had one.
+    id: "luna-josh-rain",
+    title: "Caught Out",
+    caption:
+      "Helping him on the farm, and the sky opens on the way back. Neither of them runs for cover.",
+    file: "luna-josh-rain.proxy.mp4",
+    poster: "/posters/luna-josh-rain.jpg",
+    durationSeconds: 186,
+    addedOn: "2026-09-01",
+    about: ["luna", "josh"],
+    // Kissing in the rain, both fully dressed the whole way through, nothing
+    // shown. `mature` on this set means intimate rather than graphic, and this
+    // is a couple soaked on a farm road — closer to `run-at-the-lake` than to
+    // the six below it. Melissa's to overrule.
+    mature: false,
+  },
 ];
+
+/**
+ * The clips, NEWEST FIRST.
+ *
+ * Sorted here rather than in the page, because array order is not only what the
+ * index renders — clipNeighbours() reads it for the prev/next controls in the
+ * player. Sorting in one place and leaving the other alone would have the
+ * arrows walking a different sequence from the grid the visitor just came from.
+ *
+ * The sort is stable, so undated clips keep the order they are written in above
+ * and sit below every dated one. That means adding a clip does NOT require
+ * putting it in the right place by hand: give it an `addedOn` and it lands on
+ * top by itself.
+ */
+export const clips: Clip[] = [...authored].sort((a, b) => {
+  if (a.addedOn && b.addedOn) return b.addedOn.localeCompare(a.addedOn);
+  if (a.addedOn) return -1;
+  if (b.addedOn) return 1;
+  return 0;
+});
+
+/**
+ * How long a new clip is featured on the home page. Melissa, 2026-09-01:
+ * "feature it on the home page for 7 days too."
+ *
+ * Seven rather than the fourteen `isRecent` gives a scene, and deliberately: a
+ * scene is the product and a clip is an advert for it, so the clip's turn on
+ * the front page should be the shorter one. It also means the section is
+ * genuinely intermittent, which is what stops it reading as furniture.
+ */
+const FEATURE_DAYS = 7;
+
+/** True while a clip is inside its window on the home page. */
+export function isFeatured(clip: Clip, now: Date = new Date()): boolean {
+  if (!clip.addedOn) return false;
+  const days = (now.getTime() - new Date(clip.addedOn).getTime()) / 86_400_000;
+  return days <= FEATURE_DAYS;
+}
+
+/**
+ * The clip to feature, or undefined when there isn't one.
+ *
+ * SELF-EXPIRING BY DESIGN. Nothing has to be remembered or taken down: the
+ * section renders while the newest clip is inside its seven days and vanishes
+ * on its own afterwards. The home page is statically rendered with a one-hour
+ * revalidate, so the disappearance lands within an hour of the deadline rather
+ * than waiting for a deploy.
+ *
+ * Undated clips can never be featured, which is correct — they predate the
+ * field and are not new.
+ */
+export function featuredClip(now: Date = new Date()): Clip | undefined {
+  // clips is already newest-first, so the first dated one is the newest.
+  const newest = clips.find((c) => c.addedOn);
+  return newest && isFeatured(newest, now) ? newest : undefined;
+}
 
 export function getClip(id: string): Clip | undefined {
   return clips.find((c) => c.id === id);

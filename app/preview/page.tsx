@@ -30,7 +30,7 @@ export default async function PreviewPage({ searchParams }: PreviewPageProps) {
   if (!previewAllowed()) notFound();
 
   const { key } = await searchParams;
-  const authorised = previewKeyValid(key);
+  const authorized = previewKeyValid(key);
   const [{ tier, active }, previewing] = await Promise.all([
     getMembership(),
     previewTier(),
@@ -38,7 +38,7 @@ export default async function PreviewPage({ searchParams }: PreviewPageProps) {
 
   return (
     <>
-      <SiteHeader member={active} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-2xl flex-1 px-5 pb-24 pt-12 sm:px-8 sm:pt-16">
         <p className="text-xs uppercase tracking-[0.2em] text-amber">
@@ -53,7 +53,7 @@ export default async function PreviewPage({ searchParams }: PreviewPageProps) {
           shows membership state will keep saying so.
         </p>
 
-        {!authorised ? (
+        {!authorized ? (
           <div className="mt-8 rounded-xl border border-hairline bg-charcoal/50 p-6">
             <h2 className="font-display text-lg text-ivory">Key required</h2>
             <p className="mt-2 text-sm leading-relaxed text-stone">

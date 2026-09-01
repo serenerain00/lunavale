@@ -90,7 +90,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="flex-1 pb-24">
         {/* ------------------------------------------------------ the person */}
@@ -214,7 +214,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
             >
               <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {scenes.map((item) => (
-                  <CatalogCard key={item.id} item={item} unlocked={member} />
+                  <CatalogCard key={item.id} item={item} />
                 ))}
               </Reveal>
             </Section>
@@ -230,7 +230,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
             >
               <Reveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {galleries.map((item) => (
-                  <CatalogCard key={item.id} item={item} unlocked={member} />
+                  <CatalogCard key={item.id} item={item} />
                 ))}
               </Reveal>
             </Section>

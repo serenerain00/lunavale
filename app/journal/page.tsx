@@ -64,7 +64,7 @@ export default async function JournalIndexPage({
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-8 pt-12 sm:pt-16">
@@ -224,7 +224,7 @@ function FacetRow<Id extends string>({
                 aria-label={
                   on ? `Remove filter: ${option.label}` : `Filter by ${option.label}`
                 }
-                className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-3.5 py-2 text-sm transition-colors duration-(--duration-quick) sm:py-1.5 ${
+                className={`inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap rounded-full border px-3.5 py-2 text-sm transition-colors duration-(--duration-quick) sm:min-h-0 sm:py-1.5 ${
                   on
                     ? "border-amber bg-amber/15 text-amber-soft"
                     : "border-hairline text-stone hover:border-amber hover:text-amber"

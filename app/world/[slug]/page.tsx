@@ -39,7 +39,7 @@ export default async function EnvironmentPage({
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
       <div className="relative flex-1">
         <WorldExperience
           environment={environment}

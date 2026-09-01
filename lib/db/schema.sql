@@ -64,10 +64,10 @@ CREATE TABLE IF NOT EXISTS overheard_posts (
 
   -- Clerk user id. Not a foreign key: Clerk owns the person.
   user_id     TEXT        NOT NULL,
-  -- Denormalised on purpose. A display name is shown next to every post, and
+  -- Denormalized on purpose. A display name is shown next to every post, and
   -- fetching N names from Clerk to render one page would be N round trips.
   -- Snapshotting it means a rename doesn't rewrite history, which for a wall
-  -- of dated remarks is the correct behaviour.
+  -- of dated remarks is the correct behavior.
   author_name TEXT        NOT NULL,
 
   body        TEXT        NOT NULL,
@@ -232,3 +232,103 @@ CREATE INDEX IF NOT EXISTS scene_comments_recent_idx
   ON scene_comments (created_at DESC);
 CREATE INDEX IF NOT EXISTS scene_comments_scene_idx
   ON scene_comments (scene_slug, created_at DESC);
+
+-- ---------------------------------------------------------------------------
+-- Followers — the list.
+--
+-- WHY THIS EXISTS. Until this table, somebody could watch a scene, read a page
+-- of the journal, answer the survey saying they were hooked and would watch it
+-- on a platform — and then leave, and there was no way to ever reach them
+-- again. Everything else on this site is rented: an algorithm decides who sees
+-- a clip, and a platform decides whether the account still exists tomorrow. An
+-- address is the only audience nobody can take away.
+--
+-- It is also the honest middle step. Most people who like this are not going
+-- to spend eight dollars on the first visit, and the choice was never "member
+-- or nothing" — it was "member or gone". This is the third option.
+--
+-- SINGLE OPT-IN, DELIBERATELY. A confirmation loop is the right call for a
+-- list that mails strangers daily; this one mails when something goes up, from
+-- a person whose work they just watched, and a confirm step at this size loses
+-- a third of the addresses to spam folders to prevent a problem nobody has.
+-- Revisit if the list ever gets big enough for deliverability to bite.
+--
+-- NOTHING IS SENT FROM HERE AUTOMATICALLY. The table is a list, not a mailer.
+-- Melissa writes to it when she has something to say, which is the only way it
+-- keeps meaning anything.
+CREATE TABLE IF NOT EXISTS followers (
+  id             BIGSERIAL PRIMARY KEY,
+
+  -- Lower-cased and trimmed before it gets here, so "Me@X.com " and "me@x.com"
+  -- are one person. UNIQUE, and inserts are ON CONFLICT DO NOTHING: somebody
+  -- who signs up twice is somebody who forgot, not an error to show them.
+  email          TEXT        NOT NULL UNIQUE,
+
+  -- Where they were standing when they gave it: "survey", or "scene:<slug>".
+  -- The point is to learn which moments earn an address, so that the next one
+  -- can be put somewhere that works rather than somewhere that seemed likely.
+  source         TEXT        NOT NULL,
+
+  -- Clerk user id when they happened to be signed in. Usually null — the
+  -- people worth collecting here are precisely the ones without an account.
+  user_id        TEXT,
+
+  -- Set when they ask to come off. The row stays: deleting it means the next
+  -- import silently adds them back, and a list that re-subscribes people who
+  -- left is the one unforgivable thing you can do with an address.
+  unsubscribed_at TIMESTAMPTZ,
+
+  created_at     TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS followers_recent_idx
+  ON followers (created_at DESC) WHERE unsubscribed_at IS NULL;
+
+-- ---------------------------------------------------------------------------
+-- Pending memberships — paid for, not yet attached to an account.
+--
+-- WHY THIS EXISTS. Until 2026-08-27 you had to make a Clerk account and verify
+-- an email BEFORE you could see a price field. Three screens stood between
+-- deciding to buy and being able to, and people were leaving in that gap.
+-- Checkout now runs first and the account is made afterwards, which means
+-- there is a window — usually seconds, occasionally forever — where a payment
+-- exists and no user id does. This is where it waits.
+--
+-- KEYED ON EMAIL, because at the moment the webhook fires that is the only
+-- identifier in existence. Stripe collected it on the card form; Clerk has
+-- never heard of this person.
+--
+-- IT GRANTS NOTHING. A row here opens no scene and no journal page. Access is
+-- resolved by lib/access/entitlement.ts from a Clerk user id against the
+-- `memberships` table, and that is unchanged. This row only becomes access
+-- when a signed-in user whose VERIFIED primary email matches claims it — see
+-- claimPendingFor(). Payment first is not access first.
+--
+-- IT IS ALSO THE SAFETY NET. Somebody who pays and closes the tab has this row
+-- waiting; whenever they sign up or sign in with that address, that day or a
+-- month later, /account claims it. There is no way to pay and end up with
+-- nothing, which is the one outcome this design could otherwise produce.
+CREATE TABLE IF NOT EXISTS pending_memberships (
+  -- Lower-cased. One waiting membership per address; a second payment on the
+  -- same email overwrites rather than duplicating.
+  email                  TEXT PRIMARY KEY,
+
+  tier                   TEXT        NOT NULL,
+  stripe_customer_id     TEXT        NOT NULL,
+  stripe_subscription_id TEXT,
+  status                 TEXT        NOT NULL,
+  current_period_end     TIMESTAMPTZ,
+
+  -- Set when it is turned into a real membership. The row is kept rather than
+  -- deleted: it is the record of how somebody arrived, and re-claiming an
+  -- already-claimed row has to be a no-op rather than a second grant.
+  claimed_at             TIMESTAMPTZ,
+  claimed_by             TEXT,
+
+  created_at             TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at             TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- The claim path looks up unclaimed rows by email.
+CREATE INDEX IF NOT EXISTS pending_memberships_unclaimed_idx
+  ON pending_memberships (email) WHERE claimed_at IS NULL;

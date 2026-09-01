@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { yearlyAvailable } from "@/lib/billing/provider";
 import Link from "next/link";
 import { BenefitTable } from "@/components/membership/BenefitTable";
 import { Questions } from "@/components/membership/Questions";
@@ -18,7 +19,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default async function MembershipPage() {
-  const { tier, active } = await getMembership();
+  const { tier } = await getMembership();
 
   // Counted, never typed. The pitch below is built out of these, so it cannot
   // still be claiming thirty-nine entries the week after the fortieth goes up.
@@ -27,7 +28,7 @@ export default async function MembershipPage() {
 
   return (
     <>
-      <SiteHeader member={active} />
+      <SiteHeader />
 
       <main className="flex-1 pb-24">
         {/* ---------------------------------------------------------- pitch */}
@@ -116,7 +117,11 @@ export default async function MembershipPage() {
                 key={t.id}
                 className={`h-full ${t.featured ? "order-first md:order-none" : ""}`}
               >
-                <TierCard tier={t} held={tier} />
+                <TierCard
+                  tier={t}
+                  held={tier}
+                  yearlyOffered={yearlyAvailable(t.id)}
+                />
               </div>
             ))}
           </Reveal>
@@ -150,7 +155,7 @@ export default async function MembershipPage() {
             <p>
               There is no studio behind this. It is made independently, on a
               small budget, by a very small number of people — so a membership
-              is not a subscription to a back catalogue that already exists.
+              is not a subscription to a back catalog that already exists.
             </p>
             <p>
               It is what pays for the next one to get made: the shoot, the cut,

@@ -92,7 +92,7 @@ export default async function OverheardPage({ searchParams }: PageProps) {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-6 pt-12 sm:pt-16">
@@ -379,7 +379,7 @@ function withMentions(text: string) {
   });
 }
 
-/** First line of a message, trimmed — enough to recognise it by. */
+/** First line of a message, trimmed — enough to recognize it by. */
 function snippet(body: string[], max = 90): string {
   const first = (body[0] ?? "").trim();
   return first.length > max ? `${first.slice(0, max - 1)}…` : first;

@@ -125,6 +125,11 @@ he is a fourth lead.
 her income** *(2026-08-05)*, and it is the only thing in the story that is
 entirely her own: not Josh's farm, not a job he found her, and it travels.
 
+**SHE HAS MODELLED SINCE SHE WAS EIGHTEEN** *(Melissa, 2026-08-30)* — twenty
+years of it, the same twenty she has known Tyson. It is not a thing she took up
+after Josh; it is the longest-running fact about her, older than either man,
+and it is where the friendships below come from.
+
 The story is her interior life. She has a **streak**: she likes danger (that's
 Josh) but she is loyal (that's Tyson). Through the story she is conflicted,
 tormented, sad, angry, lost, "not found yet," confused — living day by day,
@@ -137,6 +142,37 @@ Her attraction to each man is real and different:
 - **With Josh:** a thrill. Unpredictable, aggressive *in all the right ways*.
   She likes the danger and is also scared of it — and can no longer fully
   separate the thrill from the fear.
+
+#### Her friends — WHO IS LEFT
+*(Canon set by Melissa, 2026-08-30. Fills the hole the story had at its centre:
+until now Luna appeared to know four people.)*
+
+**COLLEGE DWINDLED.** The friendships from that stretch **thinned out and
+mostly went**, which is the ordinary way it happens and does not need a
+falling-out to explain it. She was in Atlanta, she moved two thousand miles to
+Colorado at 28 for a man, and distance did the rest.
+
+**WHAT SURVIVED IS THE WORK.** A few women she has known **since she started
+modelling at eighteen** — twenty years of the same rooms, the same call times,
+the same waiting around. **They are to be introduced later**; nobody is named
+yet and nobody should be.
+
+**WHY IT MATTERS MORE THAN A CAST LIST:**
+
+- **It explains the isolation the whole story runs on.** Luna is not a woman
+  with nobody. She is a woman whose remaining people are all somewhere else,
+  reachable only by phone — her mother, her sister, and these women. In
+  Colorado she has Josh and she has Tyson, and that is the entire list, which
+  is why losing one of them is not survivable in the ordinary way.
+- **They are the one group with no stake.** Her mother defends Josh. Avery is
+  her sister. Tyson is the subject. These women know both men only as stories,
+  which makes them the only people who could tell her the truth — and she has
+  not asked them.
+- **They have been saying it for years.** Written into `the-girls`: at least
+  one of them made the joke about Tyson a long time ago, in front of everybody,
+  and Luna laughed it off. **They saw it before she did.** That is Melissa's
+  when she introduces them, and the journal treats it as a memory rather than a
+  scene.
 
 ### Josh — her partner of ten years
 Together with Luna **10 years**, then **separated for 6 months**. By the end
@@ -203,6 +239,110 @@ When Josh comes back, Tyson **starts putting distance** between himself and
 Luna — because distance is the only way he can keep hiding that he's in love
 with her.
 
+#### The twenty years — DRAFTED 2026-08-30, AND PARTLY INVENTED
+*(Two long journal entries, `twenty-years-ago` and `the-years-he-was-gone`.
+Flagged here because they are the first pages on the site that assert anything
+about how Luna and Tyson began, and Melissa has never said.)*
+
+The journal has claimed "twenty years" on nearly every page and never once
+shown a reader what those years were made of, which is the single largest hole
+a member reading front-to-back would fall into. Two entries now fill it.
+
+**Drawn from canon and safe:** both from Atlanta; twenty years; Cathy made the
+two of them lunches as teenagers and loves him like a son; Avery has known him
+almost her whole life and he treats her as a little sister; ten years a SEAL;
+he came and went across that decade; Cathy was there for Luna when he deployed.
+
+**INVENTED, and thin on purpose so it is cheap to replace:**
+
+- **How they met.** He is standing in Cathy's kitchen, already an hour in,
+  before anybody introduces him.
+- **Luna does not like him at first**, and reads his quiet as arrogance. This is
+  the one real choice in the entry: a twenty-year friendship that opens on love
+  at first sight makes the present tense cheap.
+- **The night it turned** — somebody says something cruel to her at a party, he
+  makes no speech and simply takes her out of the room.
+- **The photograph** on a wall in a back garden, and the long deployment where
+  the calls stopped and Cathy came over and did the crossword out loud.
+
+#### TYSON WAS STILL SERVING WHEN LUNA MET JOSH — SETTLED
+*(Melissa, 2026-08-30, answering the question this section was raised to ask.)*
+
+**He was still in.** The beginning of Luna and Josh happened while Tyson was
+away, and he got all of it down a phone.
+
+**THE ARITHMETIC THIS FIXES.** Luna is 38 with ten years of Josh, so she met
+him at 28 — in Atlanta, on business, long distance for a while before she moved
+to Colorado (`characters.ts`). Tyson is 38 and served ten years. His service
+therefore runs across the start of her relationship, and he came out **into a
+relationship that already existed**, some way in. Exactly how far in is not set
+and does not need to be; what is fixed is that he **missed the beginning**.
+
+**WHAT IT COSTS HIM, AND IT IS A LOT:**
+
+- **He learned it in nine minutes.** Every other person in her life watched
+  Josh arrive. Tyson was told, once, on a call from somewhere with no name on
+  the display, and then had to go back to work.
+- **He could not do anything with it.** No advice, no reading of the man, no
+  standing in a kitchen forming an opinion. He heard it and hung up.
+- **He came home to it finished.** Not to a woman he might have said something
+  to — to a household. And then **Josh gave him work on the farm**, which means
+  the man who got her while he was gone is also the man who employed him when
+  he got back.
+- **And years later that same man asks him to help win her back**, and he says
+  yes. THE PROMISE now sits on top of a decade of already having been the one
+  who was not there.
+
+**IT ALSO EXPLAINS THE DISTANCE WITHOUT SOFTENING IT.** Tyson has done this
+before — stood at the edge of Luna's life with something he could not say and
+no way to close the gap. He is not improvising in the present tense; he is
+repeating the worst decade of his life on purpose.
+
+> **STILL OPEN, and worth one line from Melissa when she is ready.** Josh and
+> Tyson are distant cousins, so the name meant something. **Did Tyson know who
+> Josh was the first time Luna said the name down that phone?** The entry
+> `the-years-he-was-gone` puts the question in Luna's mouth — she has never
+> asked him — and does not answer it. Either version is good and they are
+> different stories: he knew and said nothing, or he found out later and had to
+> take that alone as well.
+
+#### AND JOSH IS THE ONE WHO GOT HER THROUGH IT
+*(Canon set by Melissa, 2026-08-30, and it is the other half of the fact
+above.)*
+
+**Josh stole her heart while Tyson was deployed, and he did it by being the
+person who held her together while she was frightened for Tyson.**
+
+That is not a coincidence in the timeline. It is the mechanism. Luna at 28 is
+waiting on a phone that rings from places with no name, months at a stretch,
+not allowed to ask anything — and a man arrives who is present, certain, and
+completely unafraid of how much she is carrying. **Josh is at his absolute best
+in exactly the conditions that decade created**, and he was not performing it.
+He was genuinely good to her, and she was genuinely rescued.
+
+**WHAT THIS DOES TO THE WHOLE STORY:**
+
+- **It makes the six months a mirror, and nobody in it knows.** Tyson gets her
+  through losing Josh. Years earlier, **Josh got her through nearly losing
+  Tyson.** Each man's claim on her was built in the other's absence, and she is
+  the only person alive holding both halves.
+- **It stops Josh being a mistake she can simply correct.** He is not a wrong
+  turn she took while distracted; he is the man who was there for the worst
+  year of her life. Whatever he becomes later, that debt is real and she cannot
+  write it off, and any version of this story where she can is a worse one.
+- **It is the cruellest possible answer to "why did she stay".** She stayed
+  because he earned it once, properly, and she has been paying that back for
+  ten years.
+- **And Tyson has never known.** She has never told him that the man he came
+  home to is the man who covered for him. It is written in `the-worst-year` as
+  something she cannot say, because she does not know which part of it would
+  land worse.
+
+**OPEN, and not invented anywhere:** whether **Josh knew** he was competing.
+Whether he understood what Tyson was to her at the time, or simply met a
+frightened woman and was kind to her. Both are available. The second is more
+frightening, because it means nobody did anything wrong.
+
 ### Cole Burnett — Tyson's oldest friend
 *(Canon set by Melissa, 2026-08-04. **Tertiary**, but load-bearing: he is the
 only person Tyson can say any of this to.)*
@@ -252,9 +392,17 @@ first of the "others" that section anticipated.)*
 
 **65.** Lives in **Atlanta, Georgia**, which matters more than a biographical
 detail normally would: Luna is in **Colorado**, so Cathy is two thousand miles
-from a daughter she is frightened for and can do nothing but phone. She is
-**divorced**, and has **two daughters** — Luna, and **Avery**, ten years younger — see
-her own section below. The family all know each other.
+from a daughter she is frightened for and can do nothing but phone. She has
+**two daughters** — Luna, and **Avery**, ten years younger — see her own section
+below. The family all know each other.
+
+> **CORRECTION, 2026-08-30. SHE IS NOT DIVORCED.** This document said she was
+> from 2026-08-03 until Melissa corrected it, and the site said it too —
+> `characters.ts` opened her card with "Sixty-five, divorced, and in Atlanta".
+> Both are fixed. **She has been married to Antonio for forty years and they
+> are still in love**, which is not a small edit: it changes what Luna grew up
+> inside, what she is measuring Josh against, and why she cannot tell her
+> mother the truth. See Antonio's section immediately below.
 
 She is a **caring, loving, well-meaning mother**, and right now a **worried
 one**. What she is picturing is Luna **alone at the lakehouse, in the dark, in
@@ -311,6 +459,45 @@ anything about it.
 
 *That Luna is at the lakehouse is the point, not set dressing: she has been
 there about a week, because it is where she went.*
+
+### Antonio — "Tony" — Luna's father
+*(Canon set by Melissa, 2026-08-30. **Tertiary**, and he replaces a divorce
+this document had invented nothing on top of, thankfully.)*
+
+**Mediterranean.** He and Cathy **met in Italy years ago and fell in love
+there**, and they have been **married forty years**. Cathy is 65, so she
+married at about 25; Luna arrived when she was 27, Avery ten years after that.
+
+**They are still in love.** Not fond, not companionable — in love, visibly,
+after forty years, and everybody who has ever been in their kitchen knows it.
+
+**THIS IS THE MOST USEFUL TERTIARY FACT IN THE DOCUMENT** and it is worth
+saying why, because on its face it is only a nice detail about somebody's
+parents.
+
+- **Luna grew up inside a marriage that worked.** She is not a woman guessing
+  at what love looks like or repeating something broken. She has a working
+  model, in high resolution, running in the next room for her entire
+  childhood — and she has spent ten years failing to match it and knowing
+  precisely how far off she is.
+- **It is why she stayed.** Forty years is a long time to be shown that the
+  good version exists and that people get there by not leaving.
+- **It sharpens Cathy.** Her mother is not being obtuse about Josh; she has
+  been loved easily for forty years and **has no working picture of what it is
+  to be managed by somebody who loves you.** When Luna does not tell her the
+  truth, that is why. It is not distrust — it is that the sentence would have
+  to be built from scratch.
+- **And it gives Luna her face.** She and Avery look alike and both take after
+  him; the Mediterranean is his.
+
+**Not yet established, and nobody should invent it:** what Tony does or did for
+a living, whether he and Cathy still travel, what he makes of Josh, and whether
+he has ever said anything to Luna about any of this. He has been on the site
+since 2026-08-30 only in her journal and on Cathy's card.
+
+**Registered as `tony` in the taxonomy** so her entries can be filed under him.
+He is NOT on /characters — that page has its own list and he has not earned a
+profile yet.
 
 ### Avery Vale — Luna's younger sister
 *(Canon set by Melissa, 2026-08-04, expanded 2026-08-05. **Tertiary.**)*
@@ -602,6 +789,69 @@ This is where **Luna starts seeing Tyson differently.** She is still tied up in
 Josh, so it is not a switch being flipped — it is the beginning of something
 bigger, and **more complicated than Josh alone.**
 
+### The kitchen — "who is she?"
+*(Delivered by Melissa, 2026-08-28. CUT AND PUBLISHED as **"Wasn't Planning On
+It"** (`luna-ty-wasntplanningonit`), **0:53**, **free**. Journal page
+`who-is-she`. No score; a kitchen, a pen, and the two of them.)*
+
+Fifty-three seconds at **the lakehouse**, in daylight. Luna is writing at the
+kitchen island. Tyson comes through and says **he is going to head out for a
+bit.** She asks where. He says **"Out."** She asks **"Who is she?"** He asks
+**"Who said there's a she?"** She says **"Your face."**
+
+Then: **"Don't wait up." — "Wasn't planning on it."** She says her line
+**without looking up from the book**, and the last sixteen seconds are wordless
+— him looking at her, her not looking up, him going.
+
+**HE DOES NOT LIE AND HE DOES NOT ANSWER.** Everything he says back is a
+question. That distinction is the reason the scene is not tagged `lies`: they
+have never lied to each other, it is load-bearing, and spending it on a
+deflection would cost it everywhere else.
+
+**IT IS HER HOUSE AND HE DOES NOT LIVE IN IT**, which is what makes "don't wait
+up" a joke and her answer a cover. Nothing about the exchange is owed. She
+knows that while she is saying it.
+
+#### Where this sits — NEEDS ONE WORD FROM MELISSA
+Filed in **the six months**, immediately after `not-just-a-friend` — the entry
+where she admits she had to look away from him on the deck. This is the same
+feeling arriving in a form she cannot file as an observation.
+
+> **THE THING THAT ARGUES AGAINST IT.** The Casey section below says "Your
+> Date" is **the first time Luna's jealousy is pointed at Tyson**. This is
+> earlier and it is jealousy. The reading that keeps both: here it is a needle
+> she can still pass off as a joke, and there it is the same thing drunk, in
+> public, in front of the woman. **First flicker** against **first time it
+> costs her something.** That is a reading and not a ruling — it is one line in
+> `videos.ts` and one block in `journal.ts` to move if it is wrong.
+
+#### Free, and that is a one-way door
+Published **free with no preview**, on the rule already written into the
+driveway: a membership pitch cut out of under a minute has to take a third of
+the scene and sells nothing. The exact precedent is `luna-tyson-gingerale` —
+0:47, the same two people in the same kitchen, moved to free by Melissa herself
+on 2026-08-11.
+
+**What it gives away is that she is jealous**, which is the turn the six months
+is built on. Smaller than what gingerale spent (Tyson half-dressed in her
+kitchen the morning after, public and permanent), and it cannot be walked back.
+
+#### Three cuts arrived in one evening
+Two were replaced in place and are gone from disk. They were **three different
+assemblies**, not three exports of one — verified by frame comparison, no frame
+in any matching another at any offset:
+
+- `luna-ty-kitchen-outforabit.mp4` — 0:50, dropped in the `luna-ty-bar-drunk/`
+  folder. Opened wide on Luna alone at the island before he was in the room.
+- `luna-ty-outforabit.mp4` — 0:46. Stopped after "Your face." and never got to
+  the last two lines.
+- `luna-ty-wasntplanningonit.mp4` — 0:53. **The keeper.** Identical to the 0:46
+  cut for its first thirty seconds, then the exchange it was missing.
+
+**The shooting folder is still `stories/luna-ty-outforabit/`**, named for his
+line. The slug follows the cut, named for hers, because hers is what the scene
+ends on.
+
 ### The fall fair — week two of trying again
 *(Canon set by Melissa, 2026-08-02.)*
 
@@ -680,6 +930,118 @@ and leaving before he can correct it.
 rather than the other way round, and the first time she is the one behaving
 badly in a room. She does not get to be the wronged party in this one, and the
 scene does not offer her the excuse.
+
+### The car park — the other half of the Casey night
+*(Canon set by Melissa, 2026-08-26. CUT AND PUBLISHED as **"Last Call"**
+(`luna-ty-bar-drunk`), **5:02** after the extended cut landed the same evening,
+**members-only**, first fifteen seconds open. Journal page `cole-rang-him`. No
+score; traffic and the two of them.)*
+
+**This is what happens after "Your Date" ends**, about two hours later, in the
+car park outside the same bar.
+
+Tyson and Casey leave. **Luna stays**, and keeps drinking bourbon on her own
+until closing — she was already several in when Casey walked in, and there is
+another couple of hours on top of it. *(There are takes of her coming apart
+alone at the bar during this stretch; one of them has done well posted on its
+own, and a longer version of that material is worth cutting.)*
+
+**COLE WATCHES HER ALL NIGHT AND IS NEVER ON SCREEN.** It is his bar and he is
+behind it, and when she finally walks out **he rings Tyson**: she has been
+drinking, she has just left, she is going to try to drive, come and get her.
+Tyson leaves wherever he had gone with Casey and comes.
+
+> **He stays off camera and the call is never shown.** On screen it is a man
+> appearing in a car park out of nowhere. Do not put Cole in the scene to
+> explain it — the explanation belongs in her journal, the next day.
+
+**SHE KNOWS IT WAS COLE** *(2026-08-26)*. He owns the place, she has known him
+for years — birthdays, barbecues — and she knows he and Tyson **were SEALs
+together**. There is no mystery about who made the call and she does not spend
+a page wondering.
+
+**The thing she cannot get past is who he rang.** Cole reached for the phone,
+and the name he went to was **Tyson, not Josh** — the man she lives with — and
+he did not have to think about it. Somebody with no stake in it and no reason
+to be clever worked out in a second and a half what she and Tyson look like
+from outside. She notices, and she can say it to nobody.
+
+**And Cole has the ten years she does not have.** Luna has known Tyson twenty
+years to Cole's dozen, but Cole was *there for the service* — the decade Tyson
+came and went, when she got a phone call when he could manage one. It rhymes
+with the first half of the night exactly: Casey is a woman she had never heard
+of, Cole is a version of Tyson she never met.
+
+**She had her keys in her hand.** The call was not an overreaction.
+
+**Then it unravels in the car park.** She is confrontational — bourbon, and a
+month of things she has not said — and she is broken and confused with it, and
+she handles it badly. She knows the friendship is not what it was. **Tyson has
+been distant since she went back to Josh**, and will not say why, and she does
+not know that the reason is that he is in love with her. **Avoidance on both
+sides.** She goes at the one person who will stand there and take it.
+
+She comes apart, he holds her up, it comes down, and it ends with **the two of
+them in his truck and him driving**.
+
+#### Where this sits
+**A month back with Josh — possibly two.** *(Melissa is not certain, and this
+is deliberately left uncertain rather than picked.)* Long enough that **she and
+Josh have started fighting over small things** — the night begins with one of
+those, which is why she is in the bar at all — and long enough that the
+friendship has gone quiet. She is losing her best friend at the same time as
+the thing she went back to is going wrong.
+
+#### What comes next — NOW PART OF THE SAME CUT
+Melissa described this as a separate scene she was writing: Tyson sets off to
+take her home and **Luna tells him to take her to the lakehouse, not the
+farmhouse.** The **extended cut delivered the same evening contains it**, or
+something very like it — the scene no longer stops at the truck.
+
+What the extra 108 seconds actually show: the drive continues, they arrive
+somewhere, there is **a long argument on a sofa**, and the last ninety seconds
+are **the two of them standing inches apart, his hand at her face**. It ends on
+whether that goes anywhere. It does not answer.
+
+> **WHERE THEY GO IS OPEN.** It is plainly a **city apartment** — sofa, kitchen
+> island, a lit skyline through the window — and it is plainly **not the
+> lakehouse**. It could be Luna's own place (`apartment`) or Tyson's, and
+> naming it sets canon about where Tyson lives, so nothing has named it. The
+> scene's `place` tag is untouched until Melissa says. **If she asked for the
+> lakehouse and he took her somewhere else, that is a story beat and a large
+> one** — worth confirming rather than assuming a continuity slip.
+
+**THE JOURNAL PAGE STOPS AT THE TRUCK, AND STAYS THERE** *(Melissa, decided
+2026-08-26)*. `cole-rang-him` ends on "He didn't ask me anything. He just
+drove" — the end of the night when it was written, the middle of it now. **The
+entry does not acknowledge the hour it leaves out, and should not be made to.**
+
+That omission is the characterisation. She writes down the whole humiliation in
+detail — the keys in her hand, being held up, being collected by the one man
+who came — and stops dead at the only part that actually frightened her. She
+does the same with the wall, where she refuses the page altogether.
+
+Do not "complete" this entry when the fuller cut of the night lands.
+
+#### Which bar is this? — OPEN QUESTION
+Cole owns **Burnett's**, Cole is behind the bar all night, and Luna knows he
+owns it. That puts this night — **and "Your Date" with it, since they are one
+evening** — at `burnetts` rather than `bar`.
+
+Both scenes are still filed under `bar` and have not been moved. Re-filing them
+has a knock-on: the note on Cole above says Burnett's is explicitly **NOT** the
+bar Tyson takes Luna dancing to, and that distinction was doing work. Melissa's
+call. It is one line per scene when she makes it.
+
+#### Three loose ends this creates in already-published pages
+None is fixed, because each is a story decision rather than a tidy-up:
+
+- **`your-date`** is headed *"Home from the bar again"* and reads as written
+  after getting herself home. She did not get herself home.
+- **`i-apologised`** has her driving over to Tyson the next day, but **her truck
+  spent the night in that car park.** How it got back to her is a beat somebody
+  has to decide on.
+- **The place tag on both bar scenes**, above.
 
 ### The wall — Josh at the farmhouse
 *(Canon set by Melissa, 2026-08-05. CUT AND PUBLISHED as **"The Way You Looked
@@ -776,6 +1138,18 @@ principle that people fill a silence, and fill it faster if you're close
 enough. In this situation it stops being a game.
 
 ### Key beats already written into scenes/journal
+- **The driveway — INSIDE THE TEN YEARS** *(Melissa, 2026-08-25, with the
+  footage.)* **Josh leaves for a three-day trip** and they say goodbye at his
+  truck in the drive, at sunset, and take their time over it. It is **before
+  the breakup** — before she moved out and before the six months — and it is
+  the only scene in the library that shows the two of them in the ordinary run
+  of that decade, with nothing being repaired and nothing yet being feared.
+  He goes; **she stays standing in the drive after the truck has gone**, and
+  the look on her face is the only thing in it that points forward. Published
+  free as **"Three Days"** (`luna-josh-truck-leaving`), 1:33, with the
+  journal page `four-minutes` beside it: four minutes of him entirely
+  present, and her working out in the drive that she got them **because he
+  was leaving**. Same canon as `second` from the other side.
 - **Coffee shop:** Josh grazes Luna's **lower lip** mid-sentence — it breaks
   down all her defenses. He touches her, gets close, makes her laugh, is the
   man she first fell for. He asks her to dinner; she says yes though she meant

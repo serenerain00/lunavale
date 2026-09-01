@@ -152,7 +152,7 @@ export const notes: SetNote[] = [
     place: "lakehouse",
     access: "free",
     body: [
-      "Tyson putting the shopping away in all the wrong cupboards is real. We did that scene fourteen times and he put something somewhere new every single take, just to see whether I would look up.",
+      "Tyson putting the groceries away in all the wrong cupboards is real. We did that scene fourteen times and he put something somewhere new every single take, just to see whether I would look up.",
       "By take nine there were canned tomatoes in with the towels. I did not look up. Twenty years of knowing someone is a hard thing to fake, and it got a lot easier with him quietly trying to break me the entire time.",
     ],
   },
@@ -278,7 +278,7 @@ export const notes: SetNote[] = [
     place: "lakehouse",
     access: "premium",
     body: [
-      "Luna will tell you I moved the shopping around to make her laugh. That is partly true. The other part is that I could not remember where any of it actually went and decided to commit.",
+      "Luna will tell you I moved the groceries around to make her laugh. That is partly true. The other part is that I could not remember where any of it actually went and decided to commit.",
       "By take nine I had put canned tomatoes in with the towels and she still did not look up. Twenty years and she has never once given me that one. I admire it more than I let on.",
     ],
   },

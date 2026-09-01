@@ -12,7 +12,7 @@ interface LockedNoticeProps {
  * The conversion moment: a member-only scene or gallery, seen but not opened.
  *
  * It shows the real frame, dimmed — the point is that the visitor can tell
- * what they are missing rather than being handed a grey box. What it does not
+ * what they are missing rather than being handed a gray box. What it does not
  * do is nag: one line, one link out to the pitch, no countdown, no second
  * modal. Per docs/monetization/MONETIZATION.md, a locked door is allowed to be
  * a locked door; it isn't allowed to be a sales pitch that follows you around.

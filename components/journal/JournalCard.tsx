@@ -11,7 +11,7 @@ interface JournalCardProps {
  *
  * Deliberately shows the real opening line even when the entry is locked. A
  * journal you can see the handwriting of but not read is a far better argument
- * for membership than a grey rectangle, and it is honest about what is being
+ * for membership than a gray rectangle, and it is honest about what is being
  * withheld — the rest of the page, not the fact that a page exists.
  */
 export function JournalCard({ entry, unlocked }: JournalCardProps) {

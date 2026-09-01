@@ -24,6 +24,21 @@ import type { SurveyOption } from "@/lib/content/survey";
  * MOTION is a transform and an opacity fade, and it is dropped entirely under
  * prefers-reduced-motion — the panel still opens, it simply arrives. Nothing
  * here animates layout.
+ *
+ * THE EDGE TAB (2026-08-26). The band now sits second on the page, directly
+ * under the hero, which is prominent and also means it is gone by the time
+ * anybody has watched anything — and "should this be a series?" is a better
+ * question after two scenes than before them. So a tab follows them down: it
+ * appears the moment the band scrolls out of view and opens the same panel.
+ *
+ * It is the handle for a drawer that already slides in from the right, so it
+ * is pinned to the right edge and reads as the thing you pull. On a phone that
+ * edge is thumb territory and a vertical tab is a sliver, so below `sm` it
+ * becomes a pill in the bottom-right corner instead.
+ *
+ * FOCUS GOES BACK TO WHICHEVER CONTROL OPENED IT — the band's button or the
+ * tab. Returning it to the band after the tab was used would fling a keyboard
+ * user back up the page to a button they cannot see.
  */
 export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
   const [open, setOpen] = useState(false);
@@ -32,6 +47,28 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
   const [shown, setShown] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const openerRef = useRef<HTMLButtonElement>(null);
+  const tabRef = useRef<HTMLButtonElement>(null);
+  // Whichever of the two buttons was actually pressed, so focus goes back to
+  // the one the visitor can see.
+  const lastOpener = useRef<HTMLButtonElement | null>(null);
+  const bandRef = useRef<HTMLDivElement>(null);
+  // Starts true so the tab is never painted over the band on first render —
+  // before the observer has reported, "the band is on screen" is the safe
+  // assumption, since the band is the second thing on the page.
+  const [bandVisible, setBandVisible] = useState(true);
+
+  useEffect(() => {
+    const band = bandRef.current;
+    if (!band) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setBandVisible(entry.isIntersecting),
+      // A sliver still counts as visible: a band half off the top of the
+      // screen does not need a second copy of itself in the corner.
+      { threshold: 0 },
+    );
+    observer.observe(band);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -39,7 +76,7 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
     // Captured now rather than read in the cleanup: by the time cleanup runs
     // the ref may point somewhere else, and the button we want focus returned
     // to is the one that was pressed to open this.
-    const opener = openerRef.current;
+    const opener = lastOpener.current ?? openerRef.current;
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
@@ -64,7 +101,10 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
 
   return (
     <>
-      <div className="rounded-xl border border-amber/25 bg-amber/[0.04] p-6 sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-8">
+      <div
+        ref={bandRef}
+        className="rounded-xl border border-amber/25 bg-amber/[0.04] p-6 sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-8"
+      >
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-amber">
             Three questions
@@ -81,7 +121,10 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
         <button
           ref={openerRef}
           type="button"
-          onClick={() => setOpen(true)}
+          onClick={() => {
+            lastOpener.current = openerRef.current;
+            setOpen(true);
+          }}
           aria-expanded={open}
           aria-haspopup="dialog"
           className="mt-5 inline-flex min-h-11 shrink-0 items-center rounded-full bg-amber px-7 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft sm:mt-0"
@@ -89,6 +132,32 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
           Answer them
         </button>
       </div>
+
+      {/* THE TAB. Rendered always and hidden with opacity rather than
+          unmounted, so it fades rather than blinking into existence on every
+          scroll past the band. `pointer-events-none` while hidden keeps it
+          from swallowing clicks on whatever is underneath it, and
+          `aria-hidden` with tabIndex -1 keeps it out of the tab order and off
+          screen readers while it is not really there. */}
+      <button
+        ref={tabRef}
+        type="button"
+        onClick={() => {
+          lastOpener.current = tabRef.current;
+          setOpen(true);
+        }}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        aria-hidden={bandVisible || open}
+        tabIndex={bandVisible || open ? -1 : undefined}
+        className={`fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-30 inline-flex min-h-11 max-w-[calc(100vw-2rem)] items-center rounded-full bg-amber px-5 text-sm font-medium text-void shadow-lg shadow-void/50 transition-[opacity,transform] duration-(--duration-standard) ease-(--ease-standard) hover:bg-amber-soft motion-reduce:transition-none sm:bottom-auto sm:right-0 sm:top-1/2 sm:-translate-y-1/2 sm:rounded-l-lg sm:rounded-r-none sm:px-2.5 sm:py-5 sm:[writing-mode:vertical-rl] ${
+          bandVisible || open
+            ? "pointer-events-none translate-x-4 opacity-0"
+            : "translate-x-0 opacity-100"
+        }`}
+      >
+        Three questions
+      </button>
 
       {open && (
         <>

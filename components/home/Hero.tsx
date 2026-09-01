@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Guest } from "@/components/access/Viewer";
 import { AmbientVideo } from "@/components/home/AmbientVideo";
 import { RatingBadge } from "@/components/ui/RatingBadge";
 import type { Hero as HeroContent } from "@/lib/content/hero";
@@ -8,10 +9,6 @@ import { formatDuration } from "@/lib/content/videos";
 
 interface HeroProps {
   hero: HeroContent;
-  /** Whether the viewer already has a membership. */
-  member: boolean;
-  /** Whether this viewer may actually watch the hero's scene. */
-  unlocked: boolean;
 }
 
 /**
@@ -38,8 +35,16 @@ interface HeroProps {
  * chrome can't crop the buttons off the bottom, and floored in `rem` so the
  * composition doesn't collapse on a short laptop window.
  */
-export function Hero({ hero, member, unlocked }: HeroProps) {
+export function Hero({ hero }: HeroProps) {
   const { video } = hero;
+  // WHO MAY WATCH IS NO LONGER ASKED HERE (2026-08-31). It used to arrive as
+  // an `unlocked` prop the home page resolved with canWatch(), which made the
+  // home page dynamic and therefore uncacheable — see components/access/Viewer.tsx.
+  //
+  // A free hero is open to everyone and that is knowable without asking. A
+  // premium one is open only to a member, and the two variants below are both
+  // in the cached HTML with the client choosing between them.
+  const free = video.access === "free";
   // Not every place has a walkable environment yet (the fair, Burnett's), so
   // the second button falls back to the world index rather than 404ing.
   const place = getPlace(video.place);
@@ -93,9 +98,15 @@ export function Hero({ hero, member, unlocked }: HeroProps) {
         <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-stone">
           <span className="tabular-nums">{formatDuration(video.durationSeconds)}</span>
           <span aria-hidden>·</span>
-          <span className={unlocked ? "text-stone" : "text-amber"}>
-            {video.access === "free" ? "Free" : "Members"}
-          </span>
+          {free ? (
+            <span className="text-stone">Free</span>
+          ) : (
+            // Amber for a stranger (this is the ask), plain for a member who
+            // already has it. data-member is set on <html> by ViewerProvider.
+            <span className="text-amber [html[data-member]_&]:text-stone">
+              Members
+            </span>
+          )}
           {video.mature && (
             <>
               <span aria-hidden>·</span>
@@ -115,7 +126,7 @@ export function Hero({ hero, member, unlocked }: HeroProps) {
           >
             {/* A locked hero says so on the button rather than promising
                 playback and delivering a paywall on the next screen. */}
-            {unlocked ? <PlayGlyph /> : <LockGlyph />}
+            {free ? <PlayGlyph /> : <PlayIfMember />}
             Play
           </Link>
           <Link
@@ -127,17 +138,34 @@ export function Hero({ hero, member, unlocked }: HeroProps) {
           </Link>
           {/* Hidden on phones: three stacked full-width buttons push the fold
               past the hero, and the header already carries a pinned Join. */}
-          {!member && (
+          <Guest>
             <Link
               href="/membership"
               className="hidden min-h-12 items-center rounded-full border border-amber/50 px-6 text-sm text-amber-soft transition-colors duration-(--duration-quick) hover:bg-amber hover:text-void sm:inline-flex sm:px-7"
             >
               Membership
             </Link>
-          )}
+          </Guest>
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * Padlock for a stranger, play triangle for a member — swapped in CSS so this
+ * stays inside a server component. Both glyphs ship; one is displayed.
+ */
+function PlayIfMember() {
+  return (
+    <>
+      <span className="contents [html[data-member]_&]:hidden">
+        <LockGlyph />
+      </span>
+      <span className="hidden [html[data-member]_&]:contents">
+        <PlayGlyph />
+      </span>
+    </>
   );
 }
 

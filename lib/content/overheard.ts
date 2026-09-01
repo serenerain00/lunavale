@@ -57,7 +57,7 @@ export const MAX_POST_LENGTH = 900;
  *
  * They are also kept out of `overheard_posts` deliberately. Every row in that
  * table is something a real account actually said; four characters talking is
- * the same openly-labelled fiction as the cast interview, and mixing the two
+ * the same openly-labeled fiction as the cast interview, and mixing the two
  * would make the table a claim it couldn't keep.
  *
  * WHEN IT RUNS OUT the thread simply stops growing — no errors, no blanks, and
@@ -238,7 +238,7 @@ export const CAST_THREAD: CastMessage[] = [
 
   /* --------------------------------------------------------------- day 23 */
   { id: "d23-1", day: 23, at: "13:10", author: JOSH, addressedTo: null, body: ["Genuinely enjoying this. Nobody warned me you'd all be funny."] },
-  { id: "d23-2", day: 23, at: "13:44", author: RICK, addressedTo: null, body: ["@Josh Give it a fortnight."] },
+  { id: "d23-2", day: 23, at: "13:44", author: RICK, addressedTo: null, body: ["@Josh Give it two weeks."] },
 
   /* --------------------------------------------------------------- day 24 */
   { id: "d24-1", day: 24, at: "22:40", author: LUNA, addressedTo: null, body: ["Can't sleep. Not a bad thing this time — just awake. Anybody else up?"] },
@@ -323,7 +323,7 @@ export const MENTIONABLE = [
   { name: "Melissa", hint: "the filmmaker" },
 ] as const;
 
-/** Byline colours for cast replies, keyed by canonical name. */
+/** Byline colors for cast replies, keyed by canonical name. */
 export const CAST_TINTS: Record<string, string> = {
   Luna: "#e0b072",
   Tyson: "#9fb3c8",

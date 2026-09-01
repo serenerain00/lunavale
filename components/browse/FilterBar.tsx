@@ -97,7 +97,7 @@ function FacetRow({
                 <span
                   aria-disabled="true"
                   title="Nothing in the catalog matches this combination yet"
-                  className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-full border border-hairline px-3.5 py-2 text-sm text-stone-dim opacity-60 sm:py-1.5"
+                  className="inline-flex min-h-11 cursor-not-allowed items-center gap-1.5 rounded-full border border-hairline px-3.5 py-2 text-sm text-stone-dim opacity-60 sm:min-h-0 sm:py-1.5"
                 >
                   {option.label}
                 </span>
@@ -111,7 +111,7 @@ function FacetRow({
                       ? `Remove filter: ${option.label}`
                       : `Filter by ${option.label}`
                   }
-                  className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-3.5 py-2 text-sm transition-colors duration-(--duration-quick) sm:py-1.5 ${
+                  className={`inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap rounded-full border px-3.5 py-2 text-sm transition-colors duration-(--duration-quick) sm:min-h-0 sm:py-1.5 ${
                     active
                       ? "border-amber bg-amber/15 text-amber-soft"
                       : "border-hairline text-stone hover:border-amber hover:text-amber"

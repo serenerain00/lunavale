@@ -36,16 +36,19 @@
  * previous/next links both read from that order. Insert new entries in place
  * rather than appending.
  *
- * ACCESS: FIVE entries are open and every other one is not (Melissa,
- * 2026-08-10, cutting the free set down from fourteen).
+ * ACCESS: SIX entries are open and every other one is not (Melissa,
+ * 2026-08-10, cutting the free set down from fourteen; `he-shouted` added to
+ * it 2026-09-01).
  *
- * The five is the number that matters and it is fixed; the locked count is
- * not, and is deliberately not written down here. It said "forty-nine" for
- * long enough to be wrong by thirteen, because every entry added since went
+ * The open count is the number that matters and it is deliberate; the locked
+ * count is not, and is deliberately not written down here. It said "forty-nine"
+ * for long enough to be wrong by thirteen, because every entry added since went
  * in without anyone thinking to re-count.
  *
- * The five are chosen as an ARC rather than as a sample, because five is too
- * few to be representative and just enough to be a story:
+ * THE FIRST FIVE ARE AN ARC and the sixth is not part of it — it is a second
+ * door into the same house, and mixing them up would wreck both. The arc is
+ * chosen as an arc rather than as a sample, because five is too few to be
+ * representative and just enough to be a story:
  *
  *   the-last-box    ten years ending, and her carrying it out herself
  *   tyson-shows-up  who Tyson is, before anybody has a reason to wonder
@@ -57,6 +60,19 @@
  * It stops exactly where it starts to get complicated, which is the point: a
  * stranger can read all five, understand the situation completely, and be left
  * with the one question all the locked ones answer.
+ *
+ * THE SIXTH WORKS ON THE OPPOSITE PRINCIPLE and is the reason it is listed
+ * apart:
+ *
+ *   he-shouted      the loudest thing that has ever happened between them,
+ *                   handed to a stranger with no idea how they got there
+ *
+ * The arc sells by being complete. This sells by being a fragment — somebody
+ * who lands on it cold gets a man who has not raised his voice in twenty years
+ * doing it in a living room, and the name he says while he does. The scene it
+ * pairs with is members-only, so the free page is her account of it and the
+ * paid one is the thing itself. If the free set ever grows again, keep the two
+ * kinds separate: five that explain, and however many that provoke.
  *
  * WHAT CAME OUT, and what it cost: the Mexico entries (the strongest writing
  * in the free set, now a members' reward), her mother's call, Avery's, the day
@@ -140,7 +156,7 @@ export const journal: JournalEntry[] = [
     body: [
       "He said he'd be an hour. That was at two. It is ten past nine.",
       "I am not writing this down because he was late. He has been late for ten years. I married the lateness. It is genuinely fine.",
-      "I am writing it down because of what I did with the six hours. I cooked. I put it in the oven on low. I took it out. I put a plate in the microwave. I changed twice. At one point — and I am putting this in because it is true — I hoovered a room that was already clean.",
+      "I am writing it down because of what I did with the six hours. I cooked. I put it in the oven on low. I took it out. I put a plate in the microwave. I changed twice. At one point — and I am putting this in because it is true — I vacuumed a room that was already clean.",
       "Six hours of being ready for a man who was not coming.",
       "Here is the part I keep circling and cannot land on. He does love me. I am not one of those women who is confused about that. He loves me in a way that is almost too much for the room, he is obsessed with me, he will tell anybody who stands still long enough.",
       "But the work gets him at six in the morning. It gets the good hours and it gets the version of him that is awake. I get whatever is left at nine at night, and he genuinely cannot see that those are different things.",
@@ -170,7 +186,65 @@ export const journal: JournalEntry[] = [
       "And this is the thing nobody would believe. If I said any of this out loud to any person who was at that table tonight, they would think I was the difficult one. They would be kind about it and they would think it.",
       "Because they have met that man. Everyone has met that man. He is genuinely, actually him — that is not a performance, that is really Josh, that is the man I fell in love with and he is in there.",
       "It is just that he spends all of him out there. And what comes home is a man who has been generous all evening and has nothing left over, and I am the person he does not have to be charming for.",
-      "I used to think that was intimacy. Being the one he could switch off around. I have started to think it might just be being last in the queue.",
+      "I used to think that was intimacy. Being the one he could switch off around. I have started to think it might just be being last in line.",
+    ],
+  },
+  /*
+    HER PARENTS. Added 2026-08-30 from Melissa's canon the same day: Cathy and
+    Antonio met in Italy, fell in love there, have been married forty years and
+    still are. Tony is Mediterranean and Luna and Avery take after him.
+
+    IT CORRECTS A PUBLISHED FACT. Cathy was written as divorced from 2026-08-03
+    until this, here and on her character card. Both are fixed; the correction
+    is recorded in LUNA_VALE_CONTEXT.md rather than quietly made.
+
+    PLACED IMMEDIATELY AFTER `everybodys-josh`, which is Josh being wonderful
+    at somebody else's table and saying eleven words in the car home. Following
+    it with a marriage that works is the sharpest use the fact has, and it is
+    where a woman who has just written that entry would go.
+
+    THE POINT IS NOT THAT HER PARENTS ARE LOVELY. It is that Luna has a working
+    model of love running in high resolution in her memory, which means she is
+    not guessing, has never been guessing, and can measure the distance to the
+    inch. That is why she stayed — forty years is a long demonstration that the
+    good version exists and that people get to it by not leaving — and it is
+    why she cannot tell her mother, which `never-had-to-fight-for-it` picks up
+    later.
+
+    THE LAST LINE IS THE ENTRY. Her father asks to speak to Josh and she says
+    he is out. He is not out. It is the first lie in the book and it is told to
+    the two people who would never check.
+
+    DRAFT PROSE, and the Italy details — the Tuesday, the shoulder, the boat —
+    are invented. Melissa gave the shape: Italy, years ago, forty years, still
+    in love. Replace freely.
+  */
+  {
+    id: "the-italy-story",
+    addedOn: "2026-08-30",
+    dateline: "They called from the kitchen, both of them on the one phone",
+    place: "farmhouse",
+    about: ["luna", "cathy", "tony"],
+    access: "premium",
+    mature: false,
+    body: [
+      "My parents called tonight, both of them leaning into the one phone the way they have done my whole life, and afterwards I went and sat in the truck in the dark for twenty minutes and I would rather not examine why.",
+      "They are fine. That is the whole content of the call. They are completely, unremarkably fine.",
+      "My mother told the Italy story again. She tells it about four times a year and she has never once told it the same way, and my father corrects the same detail every single time and she has never once conceded it. She says it was a Tuesday. He says Thursday. Forty years of that.",
+      "I am going to put it down properly, because it is the only story in this family and one day somebody will want it in writing.",
+      "She was twenty-five and she had gone with a friend, and the friend got sick on the second day, so my mother spent a week in a town where she knew nobody and could not order lunch. My father worked on the water. He had about nine words of English and he used all nine of them on her within the first hour and then, having run out, simply kept standing there.",
+      "That is the part she always lands on. He ran out of language and he did not leave. He just stayed, and pointed at things, and she says by about the Thursday — Tuesday — she had stopped needing him to say anything at all.",
+      "Forty years. Two children. Two thousand miles of me. And he still cannot walk past her chair without putting a hand on her shoulder. He does not look at her while he does it. He is usually talking to somebody else. It has been going on so long that none of us see it any more, which is how I know it is real.",
+      "Here is what nobody understands about me, and I have never been able to say it out loud without sounding like a woman making excuses.",
+      "I am not guessing. I did not grow up watching something broken and then go out into the world hoping. I had it in front of me every day for eighteen years in high definition, and I know precisely what it looks like, and I can measure how far off I am to the inch.",
+      "I was about twenty-six before somebody told me that their parents did not really speak at dinner, and I did not understand the sentence. I thought they meant that week.",
+      "So when people say I stayed too long, they think I was frightened or stupid or worn down. Some of that. But underneath it is something else entirely: I have seen the good version, and I know for a fact that people get to it by staying, because two people got to it by staying and one of them still touches the other's shoulder in a kitchen in Atlanta.",
+      "I want to be fair to Josh on this page because he is not here to be. He has done things for me my father would not understand the point of. He built me a whole room once. He has never in ten years walked past my chair.",
+      "And then my father asked to speak to him.",
+      "I said he was out.",
+      "He was not out. He was forty feet away in the living room with the television on and he had been there since six, and I stood in my own kitchen and said he was out to the one man in the world who has never lied to my mother about anything, including the Tuesday.",
+      "I do not know why I did it. I have been out in that truck trying to work it out and the closest I can get is that I did not want my father's voice being pleasant to him tonight, and I do not like that answer at all.",
+      "So that is the first one. Written down, dated, mine.",
     ],
   },
   {
@@ -181,10 +255,76 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "Fed everybody. Rang his mother because he was going to forget. Moved the appointment I had made for myself so I could take the truck in for him.",
+      "Fed everybody. Called his mother because he was going to forget. Moved the appointment I had made for myself so I could take the truck in for him.",
       "Sat down at nine and could not think of one thing I wanted to do.",
       "That is the bit that got me. Not that there was no time. There was an hour, and I sat in it, and I genuinely could not produce an answer to what do you want.",
       "I am very good at what does everybody else want. I could do that one in my sleep. I think I have been doing it in my sleep.",
+    ],
+  },
+  /*
+    THE SYSTEM. Added 2026-08-30, one of five long entries written to fill the
+    gaps a reader would notice if they read this book front to back — which is
+    now the thing the membership is actually sold on.
+
+    IT IS THE TWO PRIVATE YEARS, from inside them. The canon (panic attacks,
+    LUNA_VALE_CONTEXT.md) has said since 2026-08-19 that she spent about two
+    years getting extremely good at having these alone in a bathroom while
+    somebody else watched television in the next room. Every entry that touches
+    it — `the-bad-one`, `i-picked-up` — is written AFTER she has left, looking
+    back at it. Nothing was written from inside the arrangement, and the
+    arrangement is the most revealing thing about her in the book.
+
+    PLACED INSIDE THE TEN YEARS on purpose, straight after
+    `last-on-my-own-list`, which ends on her doing everybody else's wanting in
+    her sleep. This is the other thing she does in the dark, and putting it
+    here means a reader meets it before she has left him rather than as
+    aftermath.
+
+    THE SHOPPING LIST IS THE HOOK and it is the one invented object here: a
+    page in the back of this book where she keeps the count disguised. It is
+    the kind of detail that only exists in a journal and it gives every later
+    entry a thing to be haunted by. If Melissa wants it gone it is one
+    paragraph.
+
+    CONSISTENT WITH `i-picked-up` rather than merely near it: Tyson has not
+    seen one since they were about twenty-three, both entries say so, and this
+    one supplies the reason — she arranged it, and the arranging took work.
+
+    NOT tagged `violence` or `control`. Nobody does anything to her in this
+    entry. `panic`, and that is all it is.
+
+    DRAFT PROSE, written to Melissa's canon but not by her. Replace it.
+  */
+  {
+    id: "the-system",
+    addedOn: "2026-08-30",
+    dateline: "Nobody is ever going to read this, so: the arrangements",
+    place: "farmhouse",
+    where: "The bathroom at the end of the hall",
+    about: ["luna", "josh"],
+    access: "premium",
+    mature: false,
+    notes: ["panic"],
+    body: [
+      "I have a system. I have never described it to anybody, and I already know that writing it down is going to make it look like exactly what it is.",
+      "Most of the time there is a runway. That is the part people would not guess. It is not a bolt out of a clear sky — there is usually a whole afternoon of it stacking up somewhere behind my ribs, where I can feel the shape of the thing coming without being able to stop one inch of it. Four hours, sometimes five. Enough to make arrangements.",
+      "So I make arrangements.",
+      "It is the bathroom at the end of the hall and not the one off our room, because the extractor fan in that one is loud enough to sit under. I run the water as well. Not for the noise exactly — for the fact that running water is a reason to be in a room.",
+      "There is a second towel folded on the floor by the bath that he has never once asked about, and the answer is that the tile gets very cold when you are down on it for an hour and I got tired of shaking from two things at once.",
+      "I time it against the television. I know the length of every show he watches. I know the ad breaks. I can tell you exactly how long I have got and I have never been wrong by more than a few minutes, and I would like to be able to say I am not proud of that.",
+      "And I do not lock the door. That took me a long time to arrive at and it is the cleverest thing in the whole system. A locked door is a question. An unlocked door and the water running is a woman doing her face.",
+      "Then it finishes, because they do finish, and I come out and I am absolutely fine. I have got the voice down to nothing. I can walk into that living room forty minutes after being on a floor unable to breathe and ask him whether he wants the last of the coffee, and he will say no thanks, and that will be the whole of it.",
+      "Two years of that.",
+      "They were small when I was young. I would go quiet and strange and go outside and it would pass and nobody gave the thing a name. Then the last few years happened and they stopped being small, and the odd part is that as they got worse I got better — better at hiding them, I mean, which is not the direction a person is supposed to improve in.",
+      "I have the count. It is in the back of this book on a page that looks like a shopping list, because I wanted to know the number and I did not want to be a woman with a page of tally marks in her house.",
+      "Now the part I have been circling for three pages.",
+      "He is not blind. Ten years — he knows I am like this, in the general way that you know a thing about somebody. What he does not have is the number, or the towel, or the water, or any idea that the woman asking about the coffee had been on the floor since half past six.",
+      "And I have never once called him in. Not in ten years. Not one time.",
+      "I have tried to get underneath that and I cannot. It is not that he would refuse to come — he would come, he would be up those stairs before I finished the sentence, and he would be kind, and then within about a minute it would become a thing to be solved, because that is what he does with anything you put in front of him. He does not sit with a problem. He gets it in a headlock.",
+      "But I do not think that is really it either. Somewhere very early on, long before he had done anything, I decided this was a thing I did not hand him. I cannot remember making the decision. I have gone looking for it and it is not there, and I have started to wonder whether I passed a verdict on him about nine years ago and have been quietly enforcing it ever since without ever telling him it happened.",
+      "Tyson knew about the small ones. Years ago. He would walk me outside and neither of us ever called it anything. He has not seen one since we were about twenty-three, and I want it on the page that this is not an accident — I have arranged that too, and arranging it took effort, and there have been at least three occasions where the effort was considerable.",
+      "So there is a version of me that is extremely good at something nobody alive knows I can do.",
+      "I have read that back and I am leaving it in, and then I am going to go and put the kettle on and be perfectly all right.",
     ],
   },
   {
@@ -201,6 +341,104 @@ export const journal: JournalEntry[] = [
       "It is only ever a problem when it is pointed at a person.",
       "He wanted an answer from me about the weekend at ten past seven this morning, in a kitchen, before either of us had eaten, because he had decided at that moment that he wanted to know. And when I said let me think, I watched his face do the thing it does when a delivery is late.",
       "I said yes so the morning could carry on. I would like to be the sort of woman who does not do that. I have been meaning to be her for about six years.",
+    ],
+  },
+  /*
+    THE FRIENDS WHO WENT. Added 2026-08-30 from Melissa's canon: the college
+    friendships dwindled, and what survived is a few women from modeling.
+    This is the dwindling, written from inside the ten years while it is still
+    happening rather than as regret afterwards.
+
+    IT FIXES THE HOLE AT THE CENTER OF THE STORY. Until today Luna appeared to
+    know four people. The isolation the whole plot runs on — losing Tyson is
+    not survivable in the ordinary way — was being asserted rather than earned.
+    This earns it, and the line that does the work is the single point of
+    failure near the end.
+
+    NOBODY IS NAMED. The women who survived are Melissa's to introduce; the
+    ones who did not are not characters and should not become any. Everybody
+    here is a description.
+
+    SHE DOES NOT HAND IT TO JOSH, and that is the entry's spine. It would be
+    very easy and it would be a lie: some of it was him, most of it was her,
+    and she says so. A version where he isolated her is a worse story and is
+    not what Melissa described.
+
+    DRAFT PROSE. The specifics — the eleven names, the wedding, the drafts
+    folder — are invented. Replace freely.
+  */
+  {
+    id: "who-i-stopped-calling",
+    addedOn: "2026-08-30",
+    dateline: "Went through the phone, which turned out to be a bad idea",
+    place: "farmhouse",
+    about: ["luna"],
+    access: "premium",
+    mature: false,
+    body: [
+      "There are eleven people in this phone I would once have called at three in the morning without thinking about it, and I have not spoken to nine of them in over a year.",
+      "I went through it alphabetically tonight for no reason at all and it turned into an excavation.",
+      "College first. There were four of us and we were insufferable and I would give a great deal to be insufferable in that particular way again for one evening. We had an apartment with a broken window that we covered with a poster for two years. One of them is a lawyer now. One of them has three children I have seen only as photographs on a screen, and I could not tell you their names without checking.",
+      "Nobody fell out. That is the thing I need to be accurate about. There was no event. Nothing happened that I could point at and say there, that is where it went.",
+      "It went like this instead, and I have reconstructed it tonight in order, which was not enjoyable.",
+      "First I stopped being the one who suggested. Then I stopped replying the same day. Then it was a week, and then a week became normal, and then I became a person who is bad at replying — which people accept, by the way. They accept it completely. They say oh she's terrible at her phone, fondly, and then eventually they stop putting your name in the message.",
+      "Two thousand miles did some of it. Two hours' time difference did some. A man who does not like plans that were not his idea did some, and I am going to leave that sentence exactly there and not build anything on top of it, because it would be extremely convenient to hand the whole thing to Josh and it would not be true.",
+      "Most of it was me. I want that on the page in my own handwriting.",
+      "I did not go to a wedding. That is the one I keep coming back to. She asked me eight months out and I said yes and I meant it, and then it got close and there was a thing here that felt enormous at the time and that I genuinely, tonight, cannot remember one detail of, and I called her and made a sound of regret down the phone. She was lovely about it. She has never asked me for anything since.",
+      "And one of them kept trying. For years. Long after it was reasonable. She would send me a photograph of nothing, a dog on a street, no message with it, and I would look at it and smile and put the phone face down and not answer, and she did that for I think four years before she stopped.",
+      "I moved for him. People say that like it is one decision. It is one decision and then about four hundred small ones, and every single one of the four hundred is defensible on its own, and I made all of them, and here is the total.",
+      "There is nobody in this state I could ring at three in the morning except one man.",
+      "That is not a friendship. That is a single point of failure, and I have built it deliberately over ten years without once noticing I was building it.",
+      "I have four women left and they are all from work and they are all somewhere else, and I will write about them another night because tonight is not the night for the good half.",
+      "I started a message to the one with the dog photographs. Three lines. I have read it about nine times.",
+      "It is still sitting in there.",
+    ],
+  },
+  /*
+    THE DRIVEWAY, 2026-08-25, and the last page from inside the ten years.
+    Sits beside `luna-josh-truck-leaving` — Josh going away for three days,
+    the long goodbye at the truck, and her still standing in the drive after.
+
+    IT IS THE SAME CANON AS `second` COMING FROM THE OTHER SIDE. That entry is
+    six hours of being ready for a man who was not coming. This one is four
+    minutes of him being entirely, undividedly there — and her working out on
+    the spot that she got them because he was leaving. Nothing is wrong with
+    the morning, which is the point: the scene is warm the whole way through
+    and so is she, and the only thing in either of them that points forward is
+    what her face does once the truck is out of the drive.
+
+    THE RELIEF PARAGRAPH IS THE ENTRY. Everything else here she could say to
+    him; that one she could not, and it is the first sign in this file of a
+    woman who has started to want the house to herself. `the-night-i-left` is
+    the same thought with nine months on it.
+
+    PREMIUM, against a free scene. Same pairing as `asking-for-less` and for
+    the same reason — the open five are an arc, not a sample, and a sixth
+    would undo that decision (see the top of this file).
+
+    DRAFT PROSE, like everything else here that is not marked otherwise.
+  */
+  {
+    id: "four-minutes",
+    addedOn: "2026-08-25",
+    dateline: "Three days, he said",
+    place: "farmhouse",
+    where: "The drive",
+    about: ["josh"],
+    sceneSlug: "luna-josh-truck-leaving",
+    access: "premium",
+    mature: false,
+    body: [
+      "He kissed me goodbye for four minutes in the drive this morning and I have spent the whole day working out why it made me sad.",
+      "Three days. He told me twice, which he only ever does when some part of him thinks I might mind.",
+      "And he was there. That is what I want to get down properly before it goes soft on me. For four minutes there was no phone in it and no clock in it and nothing behind his eyes that was already in the truck. He had my face in both hands like we were nineteen. He is not performing when he does that. That is really him — that is all of him, pointed at one person, and there is not a woman alive who would walk away from it.",
+      "Then the dust went down and I was standing in the drive on my own, and the thought arrived before I could stop it being unkind.",
+      "That was the most of him I have had in about three weeks. And I got it because he was going.",
+      "I don't think he knows that's the arrangement. I am fairly sure I didn't either until I was standing there in it.",
+      "Here is the part I would not say out loud. Under all of that, somewhere I am not proud of, I was relieved. Three days of the house being only mine. Nobody needing the day to go a particular way. I can eat standing up at the sink and go to bed at nine and not be waiting for a truck.",
+      "That is not the same as wanting him gone. I want that on the page in my own handwriting, because I know exactly what it will look like if I ever read this back.",
+      "He'll call tonight from wherever he stops and he will be lovely on the phone, and I will be glad, and all of that will be true.",
+      "I just wish I didn't already know that the best four minutes of my week happened in a driveway with the engine running.",
     ],
   },
   /* ---------------------------------------------------- the six months ---- */
@@ -229,7 +467,7 @@ export const journal: JournalEntry[] = [
       "I packed the bags at four in the afternoon with the radio on, like a woman doing something ordinary, and I have never been more frightened in my life.",
       "I called Tyson before I did it. Not to be talked out of it. To have one person know, so it would already be true by the time Josh got home and started making it not true.",
       "He said he messed up. He does say it — he is always so ready to say it. He said it standing between me and the door, and the terrible part is that I believe him. I believe him every single time. It has just stopped meaning anything, because believing him and him changing turned out to be two different things and I have spent ten years mistaking one for the other.",
-      "That isn't fair. He has changed. He has got worse at noticing and better at apologising, and that is a change.",
+      "That isn't fair. He has changed. He has got worse at noticing and better at apologizing, and that is a change.",
       "I didn't go because I stopped loving him. I want that written down somewhere I can find it later, because in six months I will have tidied this into a cleaner story than it was. I went because I got tired of waiting to be chosen by a man who was already in the room.",
       "So I drove to the lake. Of course I did. Atlanta is too far to run to in one night, and this is the only place that is mine — Mom and Dad's really, and everybody's, but mine.",
       "I got here after dark and I have not turned on more than the one lamp. Every room I have walked through tonight has people in it who aren't here. Dad carrying me down to the dock. Mom laughing so hard at cards she had to put them face down on the table. Tyson at nineteen. Josh at twenty-eight, soaking, lifting me out of the water like I weighed nothing at all.",
@@ -317,11 +555,69 @@ export const journal: JournalEntry[] = [
     mature: false,
     body: [
       "Up at five, in the chair by six, and a woman I have never met spent forty minutes on my face while I thought about nothing at all. Best I have felt in three weeks.",
-      "People assume this job is about being looked at. It isn't, not from the inside. From the inside it is a room full of people solving a problem, and for eight hours the problem is not me — it's that the light is wrong, the wall is the wrong grey, the jacket does something stupid at the shoulder. I am the least complicated thing in the room. I get to stand still and be handled and nobody wants anything from me except my chin two inches left.",
+      "People assume this job is about being looked at. It isn't, not from the inside. From the inside it is a room full of people solving a problem, and for eight hours the problem is not me — it's that the light is wrong, the wall is the wrong gray, the jacket does something stupid at the shoulder. I am the least complicated thing in the room. I get to stand still and be handled and nobody wants anything from me except my chin two inches left.",
       "And it is mine. That is the part I would not say at a dinner table without sounding like I was making a point. The farm is his. The shop is his. This is the one thing nobody found for me and nobody has a view on, and it travels, which means there is always somewhere I am expected that has nothing to do with anybody else's day.",
       "I don't think he has ever had to understand that. Everything he has, he built or was handed, and either way it has his name on it.",
-      "Eight hours of being good at something, and a cheque with my name on it, and I drove back with the window down.",
+      "Eight hours of being good at something, and a check with my name on it, and I drove back with the window down.",
       "Writing it here because I want to be able to find it later: today I remembered I am a person who is good at something.",
+    ],
+  },
+  /*
+    THE GIRLS. Added 2026-08-30 from Melissa's canon: Luna has modeled since
+    she was eighteen, and the friendships that survived are a few women from
+    that work who she has known the whole twenty years. They are to be
+    introduced later.
+
+    PLACED STRAIGHT AFTER `the-work`, which is the shoot-day entry and the only
+    other page in the book about her job. That entry is her remembering she is
+    good at something; this is who else is in the room while she is.
+
+    NOBODY IS NAMED, ON PURPOSE, and the entry is built so names can be dropped
+    in later without a rewrite — every woman here is a description. A diary
+    would use names, so this is the one place the entry is doing something
+    slightly artificial, and it is the right trade: naming them now would set
+    canon Melissa has said is hers.
+
+    IT IS THE WARM ONE. Four of the five pages added this week are heavy, and a
+    book that is only heavy stops being believed. This one is funny for most of
+    its length and then is not.
+
+    THE MEMORY IS THE POINT AND IT IS CANON: one of them made the joke about
+    Tyson years ago, in front of everybody, and Luna laughed it off. They saw it
+    before she did. Written as a memory rather than a scene so Melissa keeps
+    the scene.
+
+    "EIGHTEEN OF US STARTED, FOUR ARE STILL WORKING" is invented and is the
+    line that makes the job real rather than glamorous. Keep or cut.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "the-girls",
+    addedOn: "2026-08-30",
+    dateline: "A job, and the same four women in the same corridor",
+    place: "downtown",
+    about: ["luna", "tyson"],
+    access: "premium",
+    mature: false,
+    body: [
+      "There are four women who have known me longer than either of the men in this book, and I have not written one word about any of them in the whole of it, which I noticed today and have been embarrassed about since.",
+      "We started at eighteen. The same rooms for twenty years — different cities, same room. The same corridor, the same bad coffee, the same three hours of standing about in a coat that belongs to someone else.",
+      "One of them has been married three times and would like everyone to know she is not finished. One of them does the crossword and will not be spoken to during it. One of them has not eaten a carbohydrate since the Bush administration and is the funniest person I have ever met in my life. And one of them I have shared a hotel room with in four countries and could not tell you her middle name.",
+      "That is the thing about this friendship that nobody outside it understands. It is not confessional. We have never once sat down and had a conversation about anything. And they know more about me than my mother does, because they have watched me at five in the morning for twenty years, which turns out to be a better instrument than any question.",
+      "Eighteen of us started together. Four of us are still working.",
+      "Nobody talks about the other fourteen. They went into other things, sensible things, and some of them got out at the right moment and some of them were got out of, and the ones of us still standing in corridors at thirty-eight do not discuss the arithmetic. We just turn up. We have been turning up for twenty years.",
+      "And today there was a stretch of about forty minutes where the light was wrong and there was nothing for any of us to do, and the four of us sat on those flight cases and laughed until I had to be re-done, and I had not laughed like that since — I was going to write a date and I cannot produce one.",
+      "Here is the part I actually came in here to write.",
+      "Years ago, on a job, Tyson came to collect me. He had said he would be outside at seven. He was outside at four, and he did not tell me he was outside at four, and I only found out because one of them went out to smoke and came back and said your friend has been sitting in a truck across the road for three hours.",
+      "And then, in front of everybody, she said: does he know?",
+      "I said know what.",
+      "And she looked at me for a second longer than anybody needs to look at anybody, and then she picked her coffee back up and started talking about somebody's shoes, and that was the end of it, and it was about fifteen years ago.",
+      "I have not thought about that once since the day it happened. I thought about it for the entire drive back tonight and I am still thinking about it now.",
+      "They knew. That is what I am sitting here with. Four women who have watched me at five in the morning for twenty years worked it out about fifteen years ago and had the grace to only mention it once.",
+      "One of them sent me a photograph tonight from a job we did about fifteen years ago, no message, the way she does. All four of us on a wall somewhere, all of us young and cold and pleased with ourselves.",
+      "There is a truck in the corner of it. Out of focus, half out of frame.",
+      "I have looked at that photograph about forty times and I have not written back yet, and the honest reason is that any one of those four would tell me the truth if I asked her, and I already know that I am not going to ask.",
     ],
   },
   {
@@ -349,7 +645,7 @@ export const journal: JournalEntry[] = [
     mature: false,
     body: [
       "Nine days of watching her name come up and putting the phone face down. Today I picked up, and the first thing out of her was pick up the phone when I call, which is fair, and which I let her have.",
-      "She is two thousand miles away with a lamp on and a shelf full of photographs of all of us, and she cannot see any of this, and she is doing the only thing she can do about it, which is ring me.",
+      "She is two thousand miles away with a lamp on and a shelf full of photographs of all of us, and she cannot see any of this, and she is doing the only thing she can do about it, which is call me.",
       "Then she told me Josh has been calling her. That he doesn't sound like himself. That he's hurting.",
       "I walked to the window while she said it. I want to write that down honestly: I didn't argue, I didn't correct her, I just turned around and looked at the water and let her talk, and she talked for a long time.",
       "Because what am I supposed to say. She has known him ten years and she has never once been in a room with him when the door was shut. She isn't wrong about what she heard. He does sound like that. He is hurting. Both of those are true and neither of them is the thing.",
@@ -361,7 +657,7 @@ export const journal: JournalEntry[] = [
   /* -------------------------------------------- what her mother was told ---
    * PREMIUM, and the turn the free entry beside it cannot carry: Josh got to
    * Cathy first. Canon (2026-08-03) is explicit that she has known him ten
-   * years and never once from inside the room, so when he rings her sounding
+   * years and never once from inside the room, so when he calls her sounding
    * wrecked she believes him — "and she is not wrong about what she heard".
    * That last part is the whole entry. He is not performing.
    *
@@ -371,7 +667,7 @@ export const journal: JournalEntry[] = [
    */
   {
     id: "my-mother-likes-him",
-    dateline: "After she rang off, and I have worked something out",
+    dateline: "After she hung up, and I have worked something out",
     place: "lakehouse",
     about: ["luna", "cathy", "josh"],
     sceneSlug: "luna-cathy-phone",
@@ -380,16 +676,71 @@ export const journal: JournalEntry[] = [
     body: [
       "She defended him. My mother, who has been in a room with that man perhaps eleven times in ten years, defended him to me, down the phone, in my own kitchen.",
       "It took me until this evening to work out why, and the answer is that he got there first.",
-      "He rang her. Of course he rang her. Before I had said one word to anybody he had already been the man on the phone who could not get through a sentence, and she heard that, and here is the part I cannot get around: she was not wrong about what she heard. He wasn't performing. He was wrecked. He is entirely capable of being genuinely wrecked about a thing he chose to do.",
+      "He called her. Of course he called her. Before I had said one word to anybody he had already been the man on the phone who could not get through a sentence, and she heard that, and here is the part I cannot get around: she was not wrong about what she heard. He wasn't performing. He was wrecked. He is entirely capable of being genuinely wrecked about a thing he chose to do.",
       "So there is now a version of this in Atlanta that I did not write and cannot correct without sounding like a woman keeping score.",
       "And if I gave her the rest of it she would not sleep. She is sixty-five and two thousand miles away and there is nothing she could do with it except carry it around, so what I would actually be doing is handing my mother a weight to hold on my behalf and calling it honesty.",
-      "So I said I'm fine. She said okay in the voice that means she knows I'm not. Then we did her neighbour's roof for twenty minutes and both of us were glad of the roof.",
+      "So I said I'm fine. She said okay in the voice that means she knows I'm not. Then we did her neighbor's roof for twenty minutes and both of us were glad of the roof.",
       "I am not angry with her. I want that on the page. She is being kind to somebody with the only information anybody gave her.",
+    ],
+  },
+  /*
+    WHY SHE CANNOT TELL HER MOTHER — the real reason, three days after
+    `my-mother-likes-him` gave the presentable one. Added 2026-08-30.
+
+    THAT ENTRY SAYS she withholds because Cathy is sixty-five and two thousand
+    miles away and could only carry it. True, and not the reason. This is the
+    reason, and it only became available on 2026-08-30 when Melissa established
+    that Cathy and Tony have been married forty years and are still in love:
+    to describe Josh, Luna would have to describe a kind of love her mother has
+    never been inside. There is no shared vocabulary to do it in.
+
+    PLACED DIRECTLY AFTER `my-mother-likes-him` so the two read as one thought
+    finishing. It pairs across the book with `the-italy-story`, which is inside
+    the ten years and is where the marriage itself is written.
+
+    IT IS FAIR TO CATHY AND FAIR TO THE MARRIAGE. The parents had bad years and
+    Luna says so; what they never had is a woman working out in a kitchen which
+    version of him came home. The distinction is the entry.
+
+    THE SHAMEFUL THOUGHT IS THE POINT OF IT. She admits that for four seconds
+    she wanted her mother's marriage to have been harder so that her mother
+    would understand. Nobody writes that down. That is exactly why this book
+    is worth paying for, and it must not be softened.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "never-had-to-fight-for-it",
+    addedOn: "2026-08-30",
+    dateline: "Three days later, and still on my mother",
+    place: "lakehouse",
+    about: ["luna", "cathy", "tony"],
+    access: "premium",
+    mature: false,
+    body: [
+      "I have worked out the real reason I cannot tell my mother the truth and it is not the one I gave myself on Tuesday.",
+      "Tuesday's reason was that she is sixty-five, two thousand miles away, and there is nothing she could do with it except carry it. That is all true and I stand by it and it is not why.",
+      "This is why. To explain Josh to my mother I would have to describe a kind of love she has never once been inside, and there is no vocabulary in that house for it, because she has been loved easily for forty years by a man who is simply glad she is in the room.",
+      "I want to be careful and fair here because it would be cheap not to be. They have had bad years. She has told me about the bad years — there was no money for a long time, there was a stretch in the eighties I only know the outline of, there was something about his mother that took about six years to finish. She has never pretended it was a photograph.",
+      "But not one of those years had my mother standing in a kitchen at half past five working out which version of him was going to come through the door.",
+      "That is the whole distance between us and it cannot be crossed with information.",
+      "If I said he is not always kind, she would hear a bad week. If I said he does not let a thing go, she would hear a man who cares. And if I said the sentence I actually mean — the flat one, the one with no softening on either end — she would not hear the man she thinks I live with at all. She would hear a stranger, because the man she has met perhaps eleven times is charming and hurt and calls her on a Sunday.",
+      "So I would not be telling her about my relationship. I would be asking a woman of sixty-five to rebuild her entire understanding of what men are, starting on a phone call, at a distance, about her own daughter.",
+      "And here is the part that only this book gets.",
+      "On Tuesday, for about four seconds, I wanted her marriage to have been harder. I wanted there to have been a year in it bad enough that she would know what I was talking about without me having to build it from nothing.",
+      "I am writing that down because I am not going to be a woman who has thoughts like that and does not have to look at them.",
+      "It passed. What is underneath it is not envy exactly. It is that being understood would cost her something I am not willing to charge her, and so the price of her forty good years is that I am on my own with this, and that is nobody's fault and there is no version where it is different.",
+      "She is also pushy, and I have been unkind about that in here before, and I have worked out tonight that it comes from the same place. She has never had to be careful with anybody. Forty years of a man who is glad to see her. It has genuinely never occurred to her that a question might cost.",
+      "And I should write down what she gave me, since I have spent three pages on what she cannot do.",
+      "She showed me the good version every single day for eighteen years. Which means I have never once been able to tell myself that this is just what it is like. I knew. From the beginning, with Josh, some part of me was holding it up against a kitchen in Atlanta and finding it short, and I stayed anyway, and I did that with my eyes open.",
+      "That is her gift and it is also the reason ten years took ten years.",
+      "One day I am going to have to tell her.",
+      "And the thing I am actually frightened of is not that she will not believe me. She will believe me. She will believe me immediately, in the first sentence, and then I will have to sit on a phone two thousand miles away and listen to forty years of my mother being right about people come apart in real time.",
     ],
   },
   {
     /* Avery's first appearance, a night or two after the call with their
-     * mother — Cathy got nothing out of Luna and rang her other daughter
+     * mother — Cathy got nothing out of Luna and called her other daughter
      * about it.
      *
      * THE DEVICE IS IN THE FOOTAGE, not invented: the scene opens on Luna
@@ -412,7 +763,7 @@ export const journal: JournalEntry[] = [
     mature: false,
     body: [
       "I was three lines into feeling sorry for myself when the iPad went off, and it was my sister, and I have left those three lines in because they were true at the time.",
-      "Mom got nothing out of me on Tuesday, so obviously she rang Avery. That is how it works in our family — she cannot fix it, so she deploys the one person I have never once been able to lie to.",
+      "Mom got nothing out of me on Tuesday, so obviously she called Avery. That is how it works in our family — she cannot fix it, so she deploys the one person I have never once been able to lie to.",
       "And Avery didn't ask how I was. She has never asked me that in her life. She said hi and then talked for eleven minutes about a man at her work who microwaves fish, and by the end of it I was laughing so hard I had to put the pen down.",
       "Ten years between us. When she was born I was already old enough to hold her properly, and for a long time she was a small person I was responsible for. I don't know exactly when that turned around. Tonight it was very obviously the other way up and neither of us said anything about it.",
       "She let me get to it myself. Somewhere around minute forty I said the thing out loud — that I don't know what I'm doing — and she didn't flinch and she didn't advise me. She said okay. Tell me the rest.",
@@ -443,12 +794,12 @@ export const journal: JournalEntry[] = [
 
     PLACED AFTER `tyson-shows-up`, which is the other week-two entry and
     establishes him turning up with groceries and not asking how she is. This
-    is the same fortnight and the first time she asks him for something out
+    is the same two weeks and the first time she asks him for something out
     loud.
 
     IT IS THE FRONT END OF AN ARC, and the arc is the reason it earns its
     place. Here, two weeks in, she calls for him without deciding to. Months
-    later in `the-bad-one` she is on a bathroom floor again, nearly rings him,
+    later in `the-bad-one` she is on a bathroom floor again, nearly calls him,
     and does not. Nothing in either entry points at the other; the distance
     between them is the whole story of what those six months did to her.
 
@@ -459,9 +810,9 @@ export const journal: JournalEntry[] = [
     it somewhere else, and he walks into the real thing with nothing prepared.
 
     So he is improvising off a twenty-year-old memory, not following a routine.
-    Anything written about this must not have him practised at it. The counting
+    Anything written about this must not have him practiced at it. The counting
     is the one thing he brings from back then, and she notices her body
-    recognise it before she does.
+    recognize it before she does.
 
     The last beat is Josh's half, which is what she is really writing about and
     does not say until the end.
@@ -480,17 +831,17 @@ export const journal: JournalEntry[] = [
     mature: false,
     notes: ["panic"],
     body: [
-      "He rang nine times. I counted them afterwards, which tells you most of what you need to know about the kind of evening it became.",
+      "He called nine times. I counted them afterwards, which tells you most of what you need to know about the kind of evening it became.",
       "I had not answered anything in eleven days. Not as a strategy — I did not have one then and I do not have one now. I knew that the second I heard his voice I would start negotiating with myself, and I was not steady enough to be in a room with that.",
       "On the ninth one I answered. I have tried to write down why and I cannot give a reason that would stand up in front of anybody. It was not hope and it was not weakness. The phone kept going, and I am a person, and there is a limit to how long you can sit in a quiet house listening to a thing ring.",
-      "I am not going to put down what was said. Some of it was mine and mine was not better. The short version is that he is sorry, and he is always sorry, and somewhere in the middle of being sorry he told me what I had done to him — and the thing about Josh is that he can say the cruellest sentence of his life in exactly the voice he uses to ask what time I'll be home.",
+      "I am not going to put down what was said. Some of it was mine and mine was not better. The short version is that he is sorry, and he is always sorry, and somewhere in the middle of being sorry he told me what I had done to him — and the thing about Josh is that he can say the cruelest sentence of his life in exactly the voice he uses to ask what time I'll be home.",
       "And then I was on the bathroom floor and I do not properly remember the part in between.",
       "It came faster than any of them ever have. There is normally a runway. A whole afternoon of it stacking up where I can at least see the shape of the thing coming and clear the decks and make sure I am on my own for it. This went from a phone call to no air in about ninety seconds.",
-      "Tyson was in the front room with the game on. I called him.",
+      "Tyson was in the living room with the game on. I called him.",
       "That is the part I keep going back over, because I did not think about it. There is no moment in it where I chose — I have looked for one. I said his name and then he was in the doorway.",
       "He used to know about these. The small ones, when we were young — I would go strange and quiet and he would walk me outside and that would be the end of it, and neither of us ever gave the thing a name. What he does not know is what they have turned into. Nobody knows that. I have spent two years getting it down to something I do privately in a bathroom while somebody else watches television in another room, and I have got very good at it, and tonight I did not get the twenty minutes of warning I need in order to be good at it somewhere else.",
       "So he had not seen one since we were about twenty-three, and he walked into that and did not ask a single question. He sat down on the tile with his back against the bath and he did not put a hand on me until I reached for him, which I did not know I was going to do until it was done. If it frightened him he did not let me see it, which with him is the same service.",
-      "He counted. Out loud, slowly, and wrong on purpose — he skipped six, and I noticed, and noticing is not a thing you can do and panic at the same time. I am fairly sure that is the entire trick, and I am fairly sure he did it to me in a car park when we were nineteen, because my body remembered it before I did.",
+      "He counted. Out loud, slowly, and wrong on purpose — he skipped six, and I noticed, and noticing is not a thing you can do and panic at the same time. I am fairly sure that is the entire trick, and I am fairly sure he did it to me in a parking lot when we were nineteen, because my body remembered it before I did.",
       "I asked him not to leave until it was finished. I said it out loud, in a plain sentence, with no joke in it. I could not tell you the last time I did that with anybody.",
       "It took about forty minutes. Afterwards he made tea I did not drink and put the game back on and did not say one word about Josh, and I sat at the other end of that sofa feeling like a person again.",
       "Here is the thing I do not want to write down and am going to anyway. I have been having these since I was twenty-three. There is exactly one person alive who has ever been in the room for the start of one, and he is not the man I lived with for ten years.",
@@ -519,10 +870,204 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "Diner at the bottom of the hill, same booth, and he ordered for both of us wrong on purpose, which is a thing we have been doing to each other since we were twenty-two and which has never once been funny to anybody else.",
+      "Dinner at the bottom of the hill, same booth, and he ordered for both of us wrong on purpose, which is a thing we have been doing to each other since we were twenty-two and which has never once been funny to anybody else.",
       "That's the part I couldn't explain to Josh in ten years. It isn't the big things. It's that there is an entire language in this world that only two people speak, and I am one of them.",
       "He asked if I wanted to go up to the mountain when the snow comes. I said only if he stops pretending he isn't slowing down for me. He said he doesn't slow down for me. He slows down for the car.",
       "Twenty years. I have never had to be anybody in front of him.",
+    ],
+  },
+  /*
+    THE TWO BACKSTORY ENTRIES. Added 2026-08-30, and they are here because the
+    book asserts "twenty years" on nearly every page and has never once shown
+    a reader what those twenty years were made of.
+
+    Placed together, straight after `the-things-only-we-do` — which ends on
+    "twenty years, I have never had to be anybody in front of him" and is
+    therefore the exact page a woman goes looking through a box after.
+
+    ONE: how he arrived. TWO: the decade he was away.
+
+    THE MEETING IS INVENTED and it is the only place in this file where a fact
+    about their history is asserted rather than drawn from canon. Melissa has
+    never said how they met. What IS canon and is used here: both from Atlanta,
+    twenty years, Cathy made them lunches as teenagers, Cathy loves him like a
+    son, Avery has known him almost her whole life and he thinks of her as a
+    little sister, ten years a SEAL, came and went for a decade, and Cathy was
+    there for Luna when he deployed. The kitchen, the party and the photograph
+    are mine. Written thin on purpose so replacing them costs one paragraph
+    each.
+
+    SHE DOES NOT LIKE HIM AT FIRST, which is the one real choice in the first
+    entry. A twenty-year friendship that opens on love at first sight makes the
+    present tense cheap; one that opens on an eighteen-year-old misreading
+    quiet as arrogance means the thing was built rather than found.
+
+    THE SECOND ENTRY NOW DATES THE SERVICE AGAINST JOSH, and that is Melissa's
+    (2026-08-30): Tyson was still serving when Luna met him. The entry shipped
+    the same day refusing to count backwards, because the question was open;
+    it is not open any more, so the entry lands it instead of stepping round
+    it. See LUNA_VALE_CONTEXT.md for what the fact costs him.
+
+    THE FORCE OF IT IS THE NINE MINUTES. Everybody else in her life watched
+    Josh arrive and had opinions. Tyson was told once, on a bad line, and then
+    had to hang up and go back to work — and she cannot now place which call it
+    was, which is the cruellest true detail in the entry and follows from the
+    entry's own logic rather than being imposed on it.
+
+    HIS ANSWER IS FOUR WORDS AND A QUESTION. Do not let anyone rewrite it into
+    a reaction. The man does not react on a nine-minute line; he asks whether
+    the man makes her laugh and says good, and the restraint is the whole
+    characterization.
+
+    THE COUSIN QUESTION IS ASKED AND NOT ANSWERED. Josh and Tyson are distant
+    cousins, so the name may well have meant something the first time she said
+    it. Whether he knew who she was describing is genuinely open and is flagged
+    in the canon document. Luna wonders; the entry does not decide. If Melissa
+    says he knew, nothing here needs rewriting — the wondering simply becomes
+    dramatic irony, which is what it already is if he did.
+
+    IT ALSO SETS UP `cole-rang-him` WITHOUT SPENDING IT. That entry, much later,
+    turns on Cole having the decade of Tyson that she does not. Here she writes
+    the same decade from her side and never reaches that thought, because she
+    has not met the person who would give it to her yet. A reader who arrives at
+    the parking lot having read this one arrives with the wound already open.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "twenty-years-ago",
+    addedOn: "2026-08-30",
+    dateline: "Went into the box looking for something else",
+    place: "lakehouse",
+    about: ["luna", "tyson", "cathy", "avery"],
+    access: "premium",
+    mature: false,
+    body: [
+      "There is a photograph in one of the boxes I brought up here of a boy I did not like.",
+      "Eighteen. Somebody's backyard in Atlanta, the summer, four of us on a wall, and he is at the end of the row not looking at the camera. I have carried that photograph through six addresses without once deciding to.",
+      "I did not like him. I want that written down because everybody who meets us now assumes it was instant, and it was the opposite of instant, and the difference matters to me.",
+      "He turned up in my mother's kitchen and had been standing in it for about an hour before anybody thought to introduce him. That was the first thing. He did not announce himself and he did not fill the room and he did not do any of the things an eighteen-year-old boy does in a house full of people, and I was eighteen too and I read all of that as arrogance. I thought: who does he think he is, being that quiet.",
+      "It took me most of a year to understand that he was not being anything. That is simply the setting he comes in.",
+      "My mother worked it out in about four days. She started making two lunches. Two bags on the counter, no discussion, and he never once said thank you for it in the voice you use as a guest — he said it the way you say it to your own mother, which is to say barely, and correctly. She has loved him like a son ever since and she has never made any secret of it.",
+      "Avery was eight. He learned the entire rules of some game she had invented that nobody else could follow, and played it properly, for hours, with a completely straight face. She is twenty-eight now and a doctor and she still calls him when her car makes a noise.",
+      "So he did not arrive as my friend. He arrived and the whole house absorbed him, and I was the last one in.",
+      "The night it changed I have never told him about. There was a party and somebody said something to me that was meant to be a joke and was not, and the room did the thing where everybody laughs about a quarter of a second too late. He did not defend me. He did not say one word to the person. He just stood up and said we're going, and we went, and he drove me home and talked about a car the entire way and never mentioned it again, not that night and not in twenty years.",
+      "I have thought about that a lot. A different man makes a speech and I get to feel rescued and he gets to be the one who rescued me. He took the whole thing out of the room and gave me nothing to be grateful for.",
+      "And then it was just years. That is the honest answer to how this happened and it is a terrible story: nothing happened. Twenty years of nothing happening. Dinners. Hospital parking lots. Two funerals. The stretch where I could not afford my own rent and he needed a spare room, which is a lie he told with a completely flat face and which we have never once discussed.",
+      "Here is the thing I keep arriving at this week and cannot put down.",
+      "There is no first impression of me stored anywhere in that man. Everybody else met a version. Josh met a woman of twenty-eight who had already worked out what she was doing with her face. Tyson has the whole tape — eighteen, and every year since, including the years I would not show anybody.",
+      "I have never had to explain myself to him. Not once. And I have spent ten years explaining myself to somebody else and calling it conversation.",
+      "I put the photograph back in the box.",
+      "Then I got it out again and it is on the shelf now, and I am not going to sit here at midnight working out why.",
+    ],
+  },
+  {
+    id: "the-years-he-was-gone",
+    addedOn: "2026-08-30",
+    dateline: "The decade I don't talk about, and neither does he",
+    place: "lakehouse",
+    about: ["luna", "tyson", "cathy"],
+    access: "premium",
+    mature: false,
+    body: [
+      "For about ten years, the way I knew he was alive was that the phone rang.",
+      "That is not a figure of speech and I am not being dramatic. There was no other channel. It rang at four in the afternoon or it rang at two in the morning, and it rang from places with no name on the display, and it was nine minutes or it was forty seconds and you never got to know which one you were in until it ended.",
+      "You learn very fast what you cannot ask. Where. When. For how long. How bad. You learn it in about two calls, because the first time you ask, there is a pause of exactly the wrong length and then he changes the subject so gently that you feel like the one who did something.",
+      "So I got extremely good at talking about nothing at speed. That is a skill I built in those years and I have used it every day since without noticing. Nine minutes is not enough for a real question, and a real question spends the whole nine minutes, so you fill it with the dog and the car and somebody's wedding, and you hang up having said nothing at all, and it is the best nine minutes of your month.",
+      "And then the gaps. Weeks of nothing was normal. Months of nothing happened more than once.",
+      "There was one that went long. I am not going to put a number on it because I deliberately stopped counting somewhere in the middle — counting made it a thing with a size, and I could manage it better as weather.",
+      "My mother sat with me through that one. She never once said he'll be fine, which I have always been grateful for, because she did not know that and neither did I. She came over and did the crossword out loud, badly, for about three weeks. I have never told her that I know exactly what she was doing.",
+      "What I did with the worst of it was clean. The whole house, twice, including the parts of it nobody sees. There is a version of me in those years who has scrubbed the underside of a sink at one in the morning rather than sit still, and I recognize her, because I have caught myself doing something very similar in this house in the last two months.",
+      "When that one ended he called from an airport. Cheerful. He wanted to know whether I had ever got the noise in the Honda looked at.",
+      "I could not speak. I was so angry I had to hold the phone away from my face, and I could not tell him why, because what exactly was I going to say — you frightened me by doing your job. So I said the noise had stopped and asked about his flight, and he talked about the flight, and that was that.",
+      "He has never told me where he was. I have never told him what those weeks were like at my end.",
+      "We have both left it there, on purpose, for twenty years. And I have started to think it is the only thing he and I have ever refused each other, which is a strange sentence to write about the person I tell everything to.",
+      "There is one more thing in that decade and I have got this far down the page without writing it, which is its own kind of answer.",
+      "I met Josh in the middle of it.",
+      "He was not here for any of it. Not the meeting, not the first year, not the packing or the drive or the first winter on that farm. Everybody else got to watch it happen — my mother had a settled opinion inside two weeks, Avery was a teenager and thought he was a film star, the whole of Atlanta had a view. Tyson got a phone call.",
+      "I told him down a bad line from somewhere he was not allowed to name. And I have spent tonight trying to work out which call it was and I cannot place it. That is the part that has kept me sitting here at this counter. It was one of the nine-minute ones. Twenty years of filling those with the dog and the car and somebody's wedding, and I filled one of them with the largest thing that has ever happened to me, and I could not tell you the month.",
+      "He said good. He asked what the man did and whether he made me laugh. I said yes. He said good again, and then the nine minutes were up, and that was the whole of it.",
+      "And I have never once asked him whether he knew the name when I said it. They are cousins. Distant — second, third, nobody in that family can agree — but cousins, and it is not a name you hear twice in a week. There is a version of that phone call where he knew exactly who I had just described to him, and said good anyway, and went back to work.",
+      "I do not know which version it is. I have had ten years to ask and I have not asked.",
+      "By the time he came out for good there was nothing anybody could have said. There was a house. There was a life with my name on the mail. And Josh gave him work on the farm, which is a sentence I have written down a hundred times without hearing it, and which I am not going to be able to un-hear now.",
+      "He has been here every single day of the last six months. He was not here at the start of it at all. Tonight those two facts look like the same fact wearing different clothes.",
+      "What that decade actually taught me — and I am only seeing it now, sitting up here with time on my hands — is how to hold something for an extremely long while without putting it down. Months at a stretch. No end date. No news. You just carry it and get on with your day and do not let it show, and you get so good at it that people describe you as calm.",
+      "I have been calling that a strength my entire adult life. This week I am looking at it and wondering whether it is just the reason I stayed ten years in a house where I was managing something.",
+      "He called last night about a gate latch. Eleven minutes.",
+      "I have been sitting here since working out why an eleven-minute conversation about a gate latch made me put my head in my hands at the kitchen counter, and I think the answer is that for ten years eleven minutes was everything I got, and there has never once been a night in my life when I could take it for granted that the phone would ring again.",
+    ],
+  },
+  /*
+    THE OTHER HALF OF THE DECADE. Melissa, 2026-08-30: Josh stole her heart
+    while Tyson was deployed, and he did it by being the person who held her
+    together while she was frightened for Tyson.
+
+    PLACED IMMEDIATELY AFTER `the-years-he-was-gone` and written as the page
+    she sat down to add the next night — "the part I left out." That adjacency
+    is the entry. The previous page ends on the phone; this one is about who
+    was standing next to her while she waited for it.
+
+    IT IS THE MECHANISM, NOT A COINCIDENCE. Josh is at his absolute best in
+    exactly the conditions that decade created — present, certain, unafraid of
+    how much she is carrying — and he was not performing it. That is what makes
+    him impossible to simply correct later: he is not a wrong turn she took
+    while distracted, he is the man who was there for the worst year of her
+    life, and the debt is real.
+
+    IT MAKES THE SIX MONTHS A MIRROR AND NOBODY IN IT KNOWS. Tyson gets her
+    through losing Josh. Years earlier Josh got her through nearly losing
+    Tyson. Each man's claim was built in the other's absence and she is the
+    only person alive holding both halves.
+
+    TWO THINGS SHE HAS NEVER SAID, and they are the end of the entry. Tyson
+    does not know that Josh covered his shift. And JOSH DOES NOT KNOW HE DID
+    IT — he thinks he charmed her at a work dinner. The second is worse and she
+    says so.
+
+    IT DOES NOT USE THE WEATHER LINE, on purpose. `why-not-the-bear`, four
+    entries later, says "Josh came at me like weather. Sideways, fast, no
+    warning." This entry gets to it first and calls that the easier version.
+    A reader who meets them in order catches her taking the easier one four
+    pages after refusing it, which is better than either page alone. Do not
+    "fix" the tension.
+
+    OPEN AND NOT INVENTED HERE: whether Josh knew he was competing. See
+    LUNA_VALE_CONTEXT.md. The entry is written so either answer still fits.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "the-worst-year",
+    addedOn: "2026-08-30",
+    dateline: "The part I left out last night",
+    place: "lakehouse",
+    about: ["luna", "josh", "tyson"],
+    access: "premium",
+    mature: false,
+    body: [
+      "I wrote nine pages last night about the decade he was away and left out the one thing in it that would explain my entire life.",
+      "I met Josh in the middle of the worst of it. I did put that down. What I did not put down is what he actually did, and I have been awake since about five thinking about why I stopped there.",
+      "The long silence was still going. That is the part that has to be in the right order or none of it makes sense. I was twenty-eight, I had not heard anything in longer than I was letting myself count, I was cleaning a house at one in the morning that was already clean, and I was doing all of it with a face on because there is no acceptable way to fall apart about a man who is not your husband.",
+      "And then there was Josh.",
+      "It would be easier to write him as weather. Sideways, fast, no warning, a man who arrives like something happening to you — and there is a version of that which is true about how it felt.",
+      "It is not true about what he did.",
+      "What he did was ask me the man's name.",
+      "And then he let me talk about Tyson. For hours. Across a table, in a restaurant, on the phone at midnight, for months — another man, sitting there, asking follow-up questions about somebody I was frightened for. He never once made me feel ridiculous for it. He never once said I am sure he's fine. He would just say: any news. Every day, for months. Any news.",
+      "He flew in on a Thursday and did not fly back out on the Sunday and never made a thing of it. I found out afterwards what it cost him to do that.",
+      "I need to be very clear with myself here because it would be much easier not to be.",
+      "He was not calculating. He was not waiting me out. He was a man who is extremely good in a crisis being extremely good in a crisis, for months, and asking me for absolutely nothing while he did it. Whatever he became later, that happened, and it happened for real, and I have spent a lot of this book being fair to Tyson and I am going to be fair to Josh for one page.",
+      "And by the time the phone finally rang from an airport, I was already his.",
+      "Not because I chose. I want that written down properly. Nobody chooses at the end of four months like that. A person who holds you up while you are that frightened does not become your boyfriend, he becomes the floor, and you do not decide about a floor.",
+      "So Tyson came home to it.",
+      "I wrote nine pages last night about what the nine minutes were like at my end and I did not write one line about the other end of it, which is that he finished the worst deployment of his life, got on a plane, came back, and I was somebody's.",
+      "And it was worse than that, and I have never once let myself put the sentence together until tonight.",
+      "He lost me to the man who was covering his shift.",
+      "I have never told Tyson that Josh got me through his deployment. Twenty years. Not once. And I could not tell you which half of it I think would land worse — that I needed somebody that badly, or who it turned out to be.",
+      "But here is the one I actually cannot defend, and it is not about Tyson at all.",
+      "I have never told Josh either.",
+      "He does not know. Ten years, and that man genuinely believes he charmed me at a work dinner in Atlanta. He thinks he won. He has no idea that the best thing he ever did for anybody happened in a series of phone calls he probably could not date, and I have let him not know it for a decade, and I could not tell you why except that saying it out loud would have meant saying the rest of it too.",
+      "There is a version of all three of us where I said one true sentence at twenty-eight.",
+      "I have been sitting with that for an hour and I still cannot decide whether it is a comfort or the worst thing I have ever written in this book.",
     ],
   },
   {
@@ -563,7 +1108,7 @@ export const journal: JournalEntry[] = [
       nowhere-to-put-it      overwhelm that will not convert into words and
                              comes out of her physically instead
       two-kinds-of-quiet     Tyson goes quiet and she waits; Josh goes quiet and
-                             she works. The same behaviour, and not the same
+                             she works. The same behavior, and not the same
                              thing at all.
 
     NOTE FOR MELISSA: `he-found-me` is about drinking to cope. There is no
@@ -652,7 +1197,7 @@ export const journal: JournalEntry[] = [
 
     The paragraph was rewritten rather than deleted, because the entry needs
     what it was reaching for. It now lands on the real point — knowing is not
-    the thing, being the one who gets rung is — which is sharper than the
+    the thing, being the one who gets called is — which is sharper than the
     version where she is simply hiding, and it is what `the-six-months` further
     down picks up.
   */
@@ -669,9 +1214,77 @@ export const journal: JournalEntry[] = [
       "And I have never looked at him. Not once. Not in twenty years.",
       "He was my big bear. That is genuinely what I called him, out loud, for years — and you do not think about your bear like that, that is the whole point of a bear. He is the thing you hold on to when the room is bad.",
       "Josh came at me like weather. Sideways, fast, no warning, and I was twenty-eight and I had never had anybody look at me like that in my life. Not fondly. Not kindly. Like something he had already decided about.",
-      "I want to write down that I picked wrong and I cannot make myself write it, because it would not be true. I did not pick badly. I picked the one that made my heart go, and my heart has terrible judgement and I knew that at the time.",
+      "I want to write down that I picked wrong and I cannot make myself write it, because it would not be true. I did not pick badly. I picked the one that made my heart go, and my heart has terrible judgment and I knew that at the time.",
       "Here is the honest answer. Safe never felt like being chosen. It felt like being kept. And I was twenty-eight and I wanted to be chosen so badly I would have taken it in almost any form.",
-      "I do not know what to do with the fact that I am writing this in his lake house, on a mattress he made up for me, having eaten food he brought.",
+      "I do not know what to do with the fact that I am writing this in this house on my own, on a mattress he made up for me, having eaten food he brought.",
+    ],
+  },
+  /*
+    THE PAGE THAT WENT WAVY. Melissa, 2026-08-30, pointing at the closing line
+    of `counting-the-pages` — "there was one page I could not read… it went
+    wavy and it never dried flat" — and asking for that entry to be heavy.
+
+    SO THE PAGE NOW EXISTS, and it is this one. Until today it was a gesture at
+    something the reader had to invent. Now a member reading front to back
+    meets this, and then arrives at `counting-the-pages` twelve entries later
+    and finds her turning it over without looking.
+
+    IT IS DELIBERATELY SHORT, AND IT IS THE ONE EXCEPTION to the long-entry
+    brief. Every other page added this week runs 700-1,200 words. A page
+    written ON THE FLOOR, DURING, cannot be eight hundred words of composed
+    prose without lying about what it is. The brevity is the weight. Fragments
+    are explicitly allowed by the voice rules in LUNA_VALE_CONTEXT.md and this
+    is what they were allowed for.
+
+    IT PAIRS WITH `the-bad-one`, which follows it immediately and is written
+    the NEXT DAY — "I am writing this down because if I do not write it down I
+    will do the thing where I decide it was not that bad. / It was that bad."
+    This page ends on her predicting exactly that. The two talk to each other
+    across one night and neither refers to the other. Do not add a reference.
+
+    THE TAP IS THE KNIFE. `the-system`, inside the ten years, is the elaborate
+    machinery she built to hide these from Josh — the fan, the timing, the
+    running tap. She is alone in her own house here and she puts the tap on
+    anyway. Nobody is being hidden from any more and she does it regardless.
+
+    THE PAPER IS NEVER MENTIONED IN THE ENTRY. She does not write that she is
+    crying and the page does not describe its own condition — `counting-the-
+    pages` does that, months later, from the outside. Adding it here would
+    wreck both.
+
+    DRAFT PROSE. Replace it — but keep it short.
+  */
+  {
+    id: "the-page",
+    addedOn: "2026-08-30",
+    dateline: "The floor",
+    place: "lakehouse",
+    where: "The bathroom",
+    about: ["luna"],
+    access: "premium",
+    mature: false,
+    notes: ["panic"],
+    body: [
+      "Writing to have something to do with my hands.",
+      "Started about six. It is not six now.",
+      "In. Four. Hold. Out.",
+      "Nobody is here. I put the water on anyway.",
+      "Cannot get a whole one in. Half of one and then it goes.",
+      "This is the bit where",
+      "In. Four.",
+      "I am fine. I am fine. I am",
+      "The tile has a chip in it by the door that I have looked at for eleven weeks and I have never once seen it standing up.",
+      "Phone is on the floor. Face up. Right there.",
+      "Do not.",
+      "Ten years and I never once. So no.",
+      "counting again",
+      "four",
+      "It is not the not breathing. It is the part where you are up in the corner watching a woman on a floor and taking notes and you cannot get back down into her.",
+      "I would like somebody to be in the doorway.",
+      "That is the whole of it and I have written it down now so it has been said.",
+      "Not to anybody. Just said.",
+      "Still here.",
+      "I am going to read this tomorrow and decide it was not that bad.",
     ],
   },
   {
@@ -690,8 +1303,8 @@ export const journal: JournalEntry[] = [
       "I could not tell you how long. Hours. I know it got dark and I know at some point it was not dark any more.",
       "The worst of it is not the night. The worst of it is the next morning, when you get up and put a wash on and the whole thing is just gone, filed, and you are a normal woman making toast — and you understand that it is going to come back, and that there will be no warning, and that you will be exactly as unable to stop it then as you were this time.",
       "I did not call anybody. There was a whole hour where I nearly called Tyson and did not, because what do you say. Come here, nothing has happened.",
-      "It is not that nobody knows. Tyson knows now. He found out on a bathroom floor in this house in the first fortnight, and he has been careful with me ever since in a way I can feel from the other side of a room. And Josh knows I am like this — ten years, he is not blind. What neither of them has is the number, or what the last two years of them actually looked like, and I have gone to some trouble about that.",
-      "Knowing is not the thing, though. The thing is who you ring. In ten years Josh has never once been the person I rang, and it is not because he would not have come. Somewhere very early on I decided this was a thing I did not hand him, and I cannot now remember deciding it.",
+      "It is not that nobody knows. Tyson knows now. He found out on a bathroom floor in this house in the first two weeks, and he has been careful with me ever since in a way I can feel from the other side of a room. And Josh knows I am like this — ten years, he is not blind. What neither of them has is the number, or what the last two years of them actually looked like, and I have gone to some trouble about that.",
+      "Knowing is not the thing, though. The thing is who you call. In ten years Josh has never once been the person I called, and it is not because he would not have come. Somewhere very early on I decided this was a thing I did not hand him, and I cannot now remember deciding it.",
       "I am putting it in the book because the book is where I do this honestly. I have got extraordinarily good at having them on my own, which is not a skill a well person develops, and I am aware of that.",
     ],
   },
@@ -722,6 +1335,99 @@ export const journal: JournalEntry[] = [
       "Twenty years. I have seen this man in every state a person can be in. I have never once had to manage my own face around him.",
       "I want to be careful here, because I know what I'm like at the moment and I don't trust my own readings. It would be very convenient to fall for the person holding me up. That's a story, and I've read it, and it usually ends with the woman having wrecked the one good thing she had.",
       "But it isn't gratitude. I know what gratitude feels like. This is not that.",
+    ],
+  },
+  /*
+    PLACED HERE ON PURPOSE, and it is the whole reason the scene reads the way
+    it does. `not-just-a-friend` is her admitting she had to look away from
+    him. This is the next thing that happens, and it is the same feeling
+    arriving in a form she cannot pass off as an observation: he goes out
+    without saying where, and she asks.
+
+    The placement is a reading rather than Melissa's ruling — see the note on
+    the scene in lib/content/videos.ts and the section in
+    LUNA_VALE_CONTEXT.md. If it moves, it moves as one block with the scene.
+  */
+  {
+    id: "who-is-she",
+    dateline: "He went out, and I said something",
+    place: "lakehouse",
+    where: "The kitchen",
+    about: ["luna", "tyson"],
+    addedOn: "2026-08-28",
+    sceneSlug: "luna-ty-wasntplanningonit",
+    access: "premium",
+    mature: false,
+    body: [
+      "He came through at about four and said he was heading out for a bit. He has said that to me a hundred times in twenty years and I have never once asked him where.",
+      "I asked him where.",
+      "He said out. Not rudely — he said it the way you say a sentence you have decided is finished. And then I heard my own voice ask who she was, and then I had to go on standing in my own kitchen as a woman who had said that out loud.",
+      "He didn't answer it. He asked me who said there was a she, which is not a no. He knows it isn't a no. He knows I know it isn't.",
+      "I said: your face. Which was true, and which also told him I have been reading his face closely enough to do that. I would like that one back.",
+      "Then he said don't wait up, and I said wasn't planning on it, and I said it without looking up, and I have been sitting here since with the pen in my hand not writing anything.",
+      "Here is the part I am not going to say to anybody. It is not that he has somewhere to be. He is thirty-eight and he does not live here and he does not owe me an itinerary. It is that in twenty years he has never not told me, and tonight he didn't, and I noticed. The noticing is mine. It is new. I don't know where to put it.",
+    ],
+  },
+  /*
+    THE BOOK READING ITSELF. Added 2026-08-30, and it is the entry that only
+    this format can produce — she goes back through the journal from the front
+    and finds the pattern she has been writing for months without seeing it.
+
+    PLACED AFTER `who-is-she`, which ends on "the noticing is mine, it is new,
+    I don't know where to put it." A woman who has just written that goes and
+    reads the rest of the book. It is also late enough that there IS a book:
+    twenty-six entries behind her, which is what makes the count land.
+
+    IT QUOTES TWO EARLIER ENTRIES VERBATIM — `month-four` and
+    `the-things-only-we-do` — and both are already above it in story order, so
+    the cross-reference is real rather than decorative. If either line is ever
+    rewritten, rewrite it here too.
+
+    THE COUNT IS THE POINT and the finding is sharper than the number: he is in
+    the entries where NOTHING HAPPENED. She writes about Josh when something
+    goes wrong and about Tyson on ordinary Thursdays, and that asymmetry is the
+    whole argument, made out of the book's own contents rather than asserted.
+
+    IT ALSO DEFENDS THE JOURNAL AGAINST ITSELF, which the book needed
+    somewhere: a diary is overflow, not a life, and a reader who has just gone
+    through twenty-six pages of a woman struggling should be told by her that
+    she is not struggling every hour. That honesty costs nothing and buys the
+    darker entries their credibility.
+
+    ENDS ON THE PAGE SHE COULD NOT READ. Deliberately unnamed. `the-bad-one` is
+    the obvious candidate and the entry does not say so.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "counting-the-pages",
+    addedOn: "2026-08-30",
+    dateline: "Read the whole book tonight, which was a mistake",
+    place: "lakehouse",
+    about: ["luna", "tyson", "josh"],
+    access: "premium",
+    mature: false,
+    body: [
+      "I sat down tonight and read this book from the front. All of it. I have never done that and I am not going to recommend it to anybody.",
+      "The woman in the first forty pages is not somebody I would worry about, and that is the first thing that got me. She sounds fine. She sounds busy. She is describing a good life in the tone you would use for a shopping trip.",
+      "And then you read six of them in a row.",
+      "Every single early entry is about managing something. Not one of them is happy. I do not mean they are sad — they are not sad, that is the trick of it, they are competent. There is an entry in there about moving my own appointment so I could take his truck in and I wrote it down like a person recording the weather.",
+      "I want to be fair to myself for one paragraph, because it is the only paragraph where I am going to be.",
+      "A journal is not a life. You do not come to a book like this on a good Tuesday. You come here when something will not fit anywhere else, so what is in here is the overflow and not the total, and anybody reading this — and nobody is going to read this — would come away thinking I spent ten years crying, which I did not. There were whole years I would take back tomorrow.",
+      "Fine. That is the fair paragraph. Now the rest of it.",
+      "I went through with a pencil and I counted, which is a thing I did not decide to do so much as find myself doing at about eleven o'clock.",
+      "He is in a lot of them. That was not the surprise. The surprise is where he is.",
+      "Josh is in the entries where something has gone wrong. That is the whole shape of it. Something happens, or does not happen, and I come up here and I put it down and I work out how to carry it. He is the reason for the page.",
+      "Tyson is in the ones where nothing happened at all. A Thursday. A dinner. A car that came out of a garage. There is an entire entry in this book about him ordering my dinner wrong on purpose and I wrote four paragraphs about it and I did not think that was strange while I was doing it.",
+      "You do not fill a book with a man because of what he did. You fill it with him because of what it was like to be in the room.",
+      "And then I found this, four months back, in my own handwriting, and I sat and looked at it for a long time: when his truck comes up the drive, something in me lifts before I have decided to let it.",
+      "I wrote that. I wrote it, and I closed the book, and I went to bed, and I got up the next morning and made coffee like a woman who had not written anything.",
+      "There is another one from earlier that I would like entered as evidence as well. There is an entire language in this world that only two people speak, and I am one of them. I wrote that about a dinner order and I meant it about my whole life.",
+      "So here is the question I have been avoiding by being busy. Is this book honest, or have I been quietly writing a character. Because a person who keeps a diary is always slightly performing for the version of herself who will read it back, and I know that, and I have known it since I was nineteen.",
+      "And the answer is that it is honest, and I can prove it, and the proof is that the entries I would have edited out are all still in here. The ugly ones. The one about my mother. The one where I am unkind about a man who had done nothing that day.",
+      "Which means I cannot get out of it on a technicality. It is a true record, and the true record says that for about four months I have been writing a book about somebody and putting a different man's name in the title.",
+      "There was one page I could not read. I know which one it is by how the paper feels — it went wavy and it never dried flat. I turned it over without looking and kept going.",
+      "It is quarter to three. I have read twenty-six entries about a woman who is fine, and I would like to go on record as being extremely not fine, and as having known that since roughly page nine.",
     ],
   },
   {
@@ -879,8 +1585,8 @@ export const journal: JournalEntry[] = [
       "I didn't go home at one in the morning. I want the real version in here, because the version I have been telling myself since is already softer than what happened.",
       "He asked. Not carefully. He has never once asked me carefully, and six months apart hadn't taught him to start.",
       "And I said yes. First night. Six months of silence, one coffee, one dinner, and I said yes before he had finished asking, the way I have said yes to that man since I was twenty-eight.",
-      "Here is the part I'm not proud of and am writing down anyway: I wasn't swept away. I knew exactly what I was doing. There is something in me that goes towards the drop rather than away from it, and it has been in me a long time, and Josh is the only person who has ever looked at it straight and not tried to talk me out of it.",
-      "I lay awake after and thought about Tyson putting the shopping in the wrong cupboards.",
+      "Here is the part I'm not proud of and am writing down anyway: I wasn't swept away. I knew exactly what I was doing. There is something in me that goes toward the drop rather than away from it, and it has been in me a long time, and Josh is the only person who has ever looked at it straight and not tried to talk me out of it.",
+      "I lay awake after and thought about Tyson putting the groceries in the wrong cupboards.",
     ],
   },
   {
@@ -896,12 +1602,12 @@ export const journal: JournalEntry[] = [
      * unable to sleep and waking her, which is the whole reason the scene is
      * called First Night and not something about the dinner.
      *
-     * The other new fact is the ignored call: Tyson rang DURING dinner and she
+     * The other new fact is the ignored call: Tyson called DURING dinner and she
      * turned the phone over. She does not know yet that Josh had already told
      * him that morning — that lands two entries later, in `he-already-knew` —
      * so nothing here can hint that she knows why he was ringing.
      *
-     * Her defence is the six months, not the bathroom: the chances she gave him
+     * Her defense is the six months, not the bathroom: the chances she gave him
      * are `firepit-not-saying` and `not-just-a-friend`, both of which are her
      * leaving a gap he declines to step into. The staring game in the yard has
      * not happened yet.
@@ -919,14 +1625,14 @@ export const journal: JournalEntry[] = [
       "It was still dark. He couldn't sleep — he never can when a day has gone well, which is a thing about that man I had somehow managed to forget entirely — and rather than lie there being awake on his own, he woke me. Anybody else does that at six in the morning and gets an elbow.",
       "And he didn't want anything. That's the bit I keep going back to. He got his face into the back of my neck and said something so stupid that I laughed before I had my eyes properly open, and then he just held on. For a long time. Long enough that I stopped waiting for it to turn into something else.",
       "Then it turned into something else, and I'm not writing that part down like a girl of nineteen. What goes in here is this: six months, and I had to tell him nothing. Not one thing. He remembered the order of it. He remembered things I have never once said out loud to him in my life, because I never had to — he watched, and he kept it, and that is the thing about him nobody outside this house has ever understood.",
-      "Somewhere in the middle of it I was twenty-eight again. Not remembering being twenty-eight — being it. The flat over the shop, no money, laughing at four in the morning about nothing. I have not been that far out of my own head since the last box went out of the door.",
+      "Somewhere in the middle of it I was twenty-eight again. Not remembering being twenty-eight — being it. The apartment over the shop, no money, laughing at four in the morning about nothing. I have not been that far out of my own head since the last box went out of the door.",
       "And last night was good, and I'm putting that down while it's still allowed to be simply true. He was funny. He asked me things and stayed for the answers. He put his hand flat on my back going through the door the way he has always done and I nearly said something about it and didn't.",
-      "Tyson rang while we were eating. I watched his name come up on the table between the water and the bread, and I turned the phone over, and I did not go outside, and I did not ring him back, and then I picked my glass up with the same hand.",
+      "Tyson called while we were eating. I watched his name come up on the table between the water and the bread, and I turned the phone over, and I did not go outside, and I did not call him back, and then I picked my glass up with the same hand.",
       "Nobody made me do that. That one is mine.",
-      "So here is my defence, made at six in the morning to absolutely nobody. I left it open for him for six months. At the firepit, out on the deck, on every one of those nights I put the thing down next to the thing and waited, and he let it go cold every single time. He is the bravest man I have ever met about everything on this earth except this. And I am not going to spend the rest of my life standing in a doorway waiting on one sentence.",
-      "It's a good defence. I have been rehearsing it since about four, which tells me something I would rather not look at this morning.",
+      "So here is my defense, made at six in the morning to absolutely nobody. I left it open for him for six months. At the firepit, out on the deck, on every one of those nights I put the thing down next to the thing and waited, and he let it go cold every single time. He is the bravest man I have ever met about everything on this earth except this. And I am not going to spend the rest of my life standing in a doorway waiting on one sentence.",
+      "It's a good defense. I have been rehearsing it since about four, which tells me something I would rather not look at this morning.",
       "My bag is by the door because I have to drive back to the lake to change for work, which is a sentence I would like somebody to explain to me.",
-      "He's asleep now. He can sleep now, apparently. And I am sat up in the dark with a pen, and the last thing I did before I picked it up was check my phone to see whether Tyson had rung a second time.",
+      "He's asleep now. He can sleep now, apparently. And I am sitting up in the dark with a pen, and the last thing I did before I picked it up was check my phone to see whether Tyson had called a second time.",
       "He hadn't.",
     ],
   },
@@ -970,7 +1676,7 @@ export const journal: JournalEntry[] = [
     body: [
       "I should write down what the staring game actually is, because if anyone ever reads this book they will need it explained, and because I think it stopped being a game this week.",
       "When one of us thinks the other is lying, we go quiet. That's the whole thing. No accusation, no question, nothing you could repeat back to somebody. You just stop talking — and then, instead of giving the other person room, you take it. You come closer. And closer. And you stand there in their space, saying absolutely nothing, until they crack.",
-      "He brought it back from the army. He explained it to me once, years ago, in the way he explains things — flatly, like he was reading a manual he was slightly embarrassed to own. People will fill a silence. If you get close enough, they will fill it faster. You don't have to ask anybody anything.",
+      "He brought it back from the Navy. He explained it to me once, years ago, in the way he explains things — flatly, like he was reading a manual he was slightly embarrassed to own. People will fill a silence. If you get close enough, they will fill it faster. You don't have to ask anybody anything.",
       "We have used it on each other for twenty years over absolutely nothing. Who finished the good coffee. Who put the dent in the tailgate and let his brother take it. I have cracked in under nine seconds and been furious about it for a week.",
       "He did it to me again on Tuesday. Properly, this time — not five seconds in a bathroom. Came up for the gate, and somewhere between the truck and the barn he stopped talking, and then he was just there, close enough that I could see him deciding not to say it, and he waited.",
       "And I didn't crack. Twice now.",
@@ -1084,7 +1790,7 @@ export const journal: JournalEntry[] = [
       "That's when he took my elbow and moved me out of the light, round the side of the barn where nobody was, and I want to be honest about the half-second where I thought he was finally going to say something.",
       "What he said was: not here. It's complicated. I'll talk to you.",
       "Three sentences. I have taken them apart four times sitting in this truck and they do not add up to anything. Not here — where, then. Complicated by what. I'll talk to you — when.",
-      "And the worst of it is I said okay. I stood there in the dark behind a barn and let a man I have known since I was nineteen hand me nothing, and I said okay, and I went and found Josh and rode the ferris wheel.",
+      "And the worst of it is I said okay. I stood there in the dark behind a barn and let a man I have known since I was nineteen hand me nothing, and I said okay, and I went and found Josh and rode the Ferris wheel.",
       "He is not going to talk to me. I knew it while he was saying it. I don't know how I knew and I am writing it down here so that when he doesn't, I have proof I wasn't surprised.",
     ],
   },
@@ -1234,7 +1940,7 @@ export const journal: JournalEntry[] = [
       "With Josh I never know what is coming. He decides and the room changes and I go with it, and there is a part of me that has been chasing that feeling since long before I met him. It is not comfort. It is closer to standing near an edge. I like it. I have always liked it, and I have never entirely trusted that about myself, and there are nights now when the same thing that thrills me is the thing making my heart go before I've worked out why.",
       "With Tyson — and I have thought about this more than I will ever admit to another living person — it would be the opposite of an edge. Twenty years of knowing exactly who somebody is. Being looked after without having to ask, or explain, or perform. Safe. Familiar. Not one thing about it unknown.",
       "And the humiliating part is that I want both. Not one and then the other. Both.",
-      "So which one am I? The woman who goes towards the drop, or the woman who is loyal to the person who has never let her fall? Because I have been both my whole life and I have never had to pick before.",
+      "So which one am I? The woman who goes toward the drop, or the woman who is loyal to the person who has never let her fall? Because I have been both my whole life and I have never had to pick before.",
     ],
   },
   /*
@@ -1291,8 +1997,8 @@ export const journal: JournalEntry[] = [
       "So I am going to write down what those six months were actually like while I can still do it accurately. I know what I am. Give me a year and I will have tidied the whole thing into something smaller and easier to carry.",
       "We talked more in six months than most people manage in a marriage. Not about him — he does not do that. About everything else, and about me, endlessly, at hours no reasonable adult is awake. I would go round the same three sentences four times in a night and he never once said you have already told me this.",
       "And we fought. He does not raise his voice, which is genuinely infuriating, because it means I am always the only person in the room shouting. He would say the true thing instead of the kind one, and I would take it as an attack because that was easier than taking it as information, and then I would say something built to land. It landed every time. He would sit there and let it.",
-      "I was not easy. I want that in my own handwriting. I turned down help for a fortnight out of pure pride and then rang him at one in the morning, and he came, and he has never once made me apologise for the fortnight.",
-      "He knew about the small ones from when we were young, in the vague way you know a thing about a friend. He did not know what they had become — I made sure of that for two years and I made sure of it well — and he found out in the first fortnight, on a bathroom floor, with no warning and no version of it I had prepared. He has never once let me feel caught.",
+      "I was not easy. I want that in my own handwriting. I turned down help for two weeks out of pure pride and then called him at one in the morning, and he came, and he has never once made me apologize for those two weeks.",
+      "He knew about the small ones from when we were young, in the vague way you know a thing about a friend. He did not know what they had become — I made sure of that for two years and I made sure of it well — and he found out in the first two weeks, on a bathroom floor, with no warning and no version of it I had prepared. He has never once let me feel caught.",
       "After that he simply took it on. No conversation, no plan, nothing said out loud that either of us would have to acknowledge in daylight. He does not ask whether I am all right; he can see whether I am all right, and he has not said the word attack to my face once in six months.",
       "Josh knows I am like this. Ten years, of course he does. What he does not know is what the last two of them looked like, because I arranged for him not to, and I have never let myself write down whether that was a kindness I did him or a verdict I passed on him.",
       "He never told me to calm down. Not once, not ever, and if you have had one you will know exactly what that is worth. He got down on the floor with me and put my hand flat on his chest so I had something to copy, and then he talked about nothing whatsoever — the boat, a gearbox, a dog he had when he was nine — in that flat voice, until my breathing gave up arguing and went along with his.",
@@ -1372,6 +2078,132 @@ export const journal: JournalEntry[] = [
     ],
   },
 
+  /*
+    THE LAST PAGE BEFORE IT TURNS, and it is placed here rather than anywhere
+    else for a reason worth writing down: the three entries above it build the
+    exact state this one needs and no other stretch of the book does.
+    `out-at-the-lake` is the window — "we had both come to say it, neither of us
+    did". `last-call` is him showing her without saying it. `reading-it-back` is
+    her concluding he cannot make himself say it in a sentence she could quote.
+    Then this, where she stops waiting for the sentence and does something
+    small instead. After it, the section marker below, and the turn.
+
+    FROM MELISSA (2026-09-01), with the scene: Luna is a few weeks back with
+    Josh and goes to collect a part for him, which means going to the shop
+    because Tyson is not at the farm that day. He has been showing more and
+    more aggravation and has never once said why. She gave him a window, he did
+    not take it, and she is not letting him forget it. The kiss at the end is
+    light and closed and deliberate — "I know what we both want, but this is
+    what I'm going to do right now because you won't."
+
+    WHAT IS INVENTED HERE and is hers to cut: the part being a coupling for the
+    baler, the eleven-mile drive, the radio, and the detail that he was already
+    on the phone and already angry when she pulled in — which the scene shows
+    from his side and she would not necessarily know. Everything else is the
+    footage.
+
+    DRAFT PROSE, written to the brief. Replace it.
+  */
+  {
+    id: "the-small-version",
+    addedOn: "2026-09-01",
+    dateline: "The shop, and the part is still sitting in the truck",
+    place: "garage",
+    where: "His shop",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-ty-shop-kiss",
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh needed a coupling for the baler and Tyson was not at the farm today, so it had to be the shop. That is the whole of the reason, and I am putting it on the first line because I want to see it written down in the same handwriting as everything that comes after it.",
+      "It could have waited until tomorrow. He'd have brought it up himself Thursday. I want that on the first line too.",
+      "Eleven miles. I had the radio on and I could not have told you one song that played.",
+      "The shop is dark even at two in the afternoon — one strip light at the back, everything else shadow and steel, and it smells like every good memory I have from before I was twenty-five. He had the roller door half down. He knew it was my truck. He knows the sound of my truck from the road.",
+      "He did not look up.",
+      "That is not new. He has been doing it for weeks. Short answers, back turned, busy hands, and a temper on him that he keeps just underneath where anybody could point at it and call it a temper. If you asked him he would say he was fine and he would not even be lying, exactly, because he has decided that whatever this is does not count as a thing that is happening.",
+      "I have been letting him have it. That is the part I would like the record to show. I have been standing in the middle of it saying nothing, week after week, and letting him be angry at me for something I did not do.",
+      "Because I gave him the window. On the dock, in the rain, out far enough that nobody could hear us, and we both knew what we had come out there for. He said nothing. I said nothing back, which I am counting as the same thing, but I was the one who went out to the end of a dock in weather, and he was the one who talked about the boat.",
+      "So I have not been letting him forget it. Not out loud. I have just stopped filling his silences for him. Twenty years of me carrying both ends of every conversation and I have set my end down, and it turns out that when I do that, nothing happens at all.",
+      "And then today it went, and it went in about four seconds, and I could not tell you which one of us dropped it.",
+      "He said something. It wasn't anything — it was about the coupling, or about Josh, or about the state of my tires, and it had that flat delivery he uses when he is being funny and will not admit to it. And I laughed. Properly, from somewhere under my ribs, the way I have not laughed since some time in the spring.",
+      "Then we were doing it. The old thing. Two people who have been finishing each other's sentences since we were eighteen, standing in a workshop, being quick at each other. He got his hand up near my face making some point he did not need his hand for, and I let him, and neither of us stepped back, and somewhere in there it stopped being funny and neither of us noticed in time to stop it.",
+      "Familiar and completely unfamiliar at once. That is the only honest way I can put it. Every single thing about it was twenty years old and I had never once been in it before.",
+      "And he was going to stand there. I could see it. He was going to hold it exactly where it was until I got bored or got frightened or picked up the part and left, because that is what he has been doing since the dock, and he would have called it decency, and it would have cost him everything he has and I would never have been told.",
+      "So I kissed him.",
+      "Small. Closed. About a second and a half of it, the kind you could do at a funeral. I have kissed men harder than that by accident.",
+      "I want to be exact about what I meant by it, because I meant something specific and I meant him to get it, and I think he did. It was not I want you, although. It was not let's. It was: I know. I know what this is, I have known for weeks, you have known longer. And you are not going to say it, so here is the smallest possible piece of the truth, delivered by me, in the middle of the afternoon, in your shop. Because you won't.",
+      "He did not move. Not away — he did not move at all, which is different, and which I will be thinking about tonight.",
+      "Then I picked up the coupling and got in the truck and drove eleven miles back to Josh's farm with it on the passenger seat.",
+      "Nothing happened. I have written four hundred words about nothing happening.",
+      "That is not true and I am not going to leave it standing. Here is the true version: I have spent three months telling myself I am waiting to see what he does. I am not waiting. Waiting is what you call it when you have not moved. I moved today, in a shop, in front of nobody, and I chose the smallest version of it I could find so that I could come home and write it down like this and still recognize the handwriting.",
+      "The part is still in the truck. I could not make myself carry it into the house.",
+    ],
+  },
+
+  /*
+    THE SIXTH FREE ENTRY, and the first one added to that set since Melissa cut
+    it to five on 2026-08-10. Her call, 2026-09-01, and the header note above
+    has been updated rather than left saying five.
+
+    It does not extend the arc, it opens a second door. The five run from the
+    marriage ending to her saying yes to coffee and stop before it gets
+    complicated; this one is deep in the complicated part and works on the
+    opposite principle — a stranger reads the loudest thing that has happened
+    to these two and has no idea how they got there. The scene it pairs with is
+    members-only, so the free page is the account and the paid one is the
+    thing itself.
+
+    FROM MELISSA, with the scene: a casual Saturday, Tyson has been avoiding
+    Luna all day (granted, she is wearing Josh's shirt), he cannot handle what
+    he is feeling, she confronts him, and it gets loud. It is THE FIRST TIME HE
+    NAMES JOSH as the reason he cannot talk to her.
+
+    WHY THE SHOUTING IS THE SPINE. `the-six-months` has been on the site since
+    08-19 with "He does not raise his voice, which is genuinely infuriating,
+    because it means I am always the only person in the room shouting." Twenty
+    years of that, and the footage at about 1:12 is him at full volume. The
+    entry is built on that reversal, and it costs nothing to set up because the
+    canon already did it.
+
+    Invented and hers to cut: the woodpile, the two trips to the truck, the
+    grey shirt being the one Josh wore to the fair, and the last line.
+
+    DRAFT PROSE, written to the brief. Replace it.
+  */
+  {
+    id: "he-shouted",
+    addedOn: "2026-09-01",
+    dateline: "Saturday, and he shouted",
+    place: "lakehouse",
+    where: "The main room",
+    about: ["luna", "tyson", "josh"],
+    sceneSlug: "luna-ty-lakehouse-confrontation",
+    access: "free",
+    mature: false,
+    body: [
+      "Tyson has never raised his voice at me. I want to put that first, before any of the rest of it, because otherwise none of the rest of it will read the way it actually happened.",
+      "Twenty years. Every fight we have ever had, and there have been real ones, he has conducted at exactly the volume you would use to ask somebody to pass the salt. It is the single most infuriating thing about him. It means I am always the only person in the room shouting, which means I am always the one who looks like the problem, and he has never once seemed to notice that this is what it does.",
+      "Today he shouted at me.",
+      "It was a Saturday with nothing in it. No plan, no job, nobody coming. The kind of day we have had four hundred of.",
+      "He was avoiding me from about nine in the morning. I do not mean he was quiet — he is always quiet. I mean he physically arranged his entire day so that we were never in the same room. He went out to the truck for something and came back forty minutes later. He did the woodpile, which did not need doing, which he knew, and which I knew, and which he did anyway. He took his coffee out onto the deck in a wind that made it not worth drinking.",
+      "I let it run until about two. I am not proud of the fact that I let it run at all. There was a version of the morning where I said what is going on with you at nine and we had a short difficult conversation and got on with the day, and I did not take it, because some part of me has decided that making him say things is a thing I am not allowed to do.",
+      "Then I stopped letting it run. I went and stood in front of him and I did not move, which with him is the only thing that works, because he will walk around you all day if you leave him a gap.",
+      "I said something small first. He gave me nothing. I said something bigger. He gave me less than nothing — he gave me that flat courteous thing he does, which is worse than being ignored, because being ignored at least admits there are two people present.",
+      "And then I said the true one. I said you have been in a mood with me for weeks and you will not say why, and I am not doing this any more, and you are going to have to actually say something to me.",
+      "And he did. God, he did.",
+      "I am not going to write down all of it. Some of it was not fair and he knew it was not fair while it was coming out of him, and I could see him hear himself. But he was loud, and he was right up close, and twenty years of a man never once raising his voice at me came apart in about four seconds in my own living room.",
+      "It was not frightening. I want to be exact about that, because if anybody ever reads this I do not want it read wrong. It was not frightening. It was like watching a wall move. You do not think a wall is going to hurt you. You think what on earth is holding this house up, then.",
+      "And in the middle of it he said Josh's name.",
+      "That is the part. That is the whole entry, really, and everything above it is furniture. In twenty years he has never once put the man I live with into a sentence like that. He has been scrupulous about it — Josh is a fact, Josh is a name on a list of things Tyson does not comment on. He has taken that man's work and eaten at that man's table and said nothing, for years, on purpose.",
+      "Today he told me that Josh is the reason. Not the reason he is angry. The reason he cannot talk to me.",
+      "I have been asking for that answer since about the spring. Every quiet drive, every time he left before there was a gap big enough for anything to get through. I have wanted the reason so badly that I built a whole personality around not asking for it.",
+      "And then I got it, standing in my own front room, shouted at me by the calmest person I know.",
+      "Here is the thing I noticed afterwards, and I have been sitting with it for four hours. I was wearing Josh's shirt. The grey one, the one he wore to the fair, sleeves down past my hands. I put it on at seven this morning without one single thought in my head about it, the way you put on whatever is nearest, and I wore it all day.",
+      "He had been looking at it since nine.",
+      "I have wanted the reason for months. I am not sure now whether I asked for it or whether I just wore it out of him.",
+    ],
+  },
+
   /* ---------------------------------------------------------- it turns ---- */
   {
     id: "he-asked-about-tyson",
@@ -1426,12 +2258,100 @@ export const journal: JournalEntry[] = [
       "I know what I sounded like. I'm not going to sit here and pretend I don't.",
       "He hasn't done anything. That's where I keep arriving and then walking away from. He hasn't done a single thing wrong. He is allowed a whole life I am not in — he is supposed to have one, he doesn't belong to me, I am not even—",
       "I'm not finishing that sentence.",
-      "I'll apologise tomorrow. I'll do it badly.",
+      "I'll apologize tomorrow. I'll do it badly.",
+    ],
+  },
+  /* ------------------------------------------------------- the parking lot ---
+   * THE SAME NIGHT, TWO HOURS LATER, and it is new canon (Melissa,
+   * 2026-08-26) rather than an inference. What happens after `your-date`:
+   * Tyson and Casey leave, LUNA STAYS, and she drinks bourbon on her own until
+   * closing. Cole watches her the whole time and calls Tyson when she walks
+   * out, because she is about to drive. Cole is never on camera, here or in
+   * the scene.
+   *
+   * SHE KNOWS IT WAS COLE (Melissa, 2026-08-26, correcting the first draft of
+   * this entry, which was built on her not knowing). It is his bar, she has
+   * met him at birthdays and barbecues for years, and she knows he and Tyson
+   * were SEALs together — all of which was already in the character canon and
+   * none of which the entry was using.
+   *
+   * That is a better page. A mystery about who made the call is a small thing
+   * and she would have solved it before breakfast anyway; knowing exactly who
+   * did it, and being unable to be angry with him because he was right, is the
+   * thing that actually keeps somebody awake.
+   *
+   * WHAT IT UNLOCKED — the line the entry is built on now. Cole called TYSON. He
+   * did not ring the man she lives with. She notices, and she cannot say it to
+   * anybody, and it is the first time somebody else's instinct has told her
+   * what she and Tyson look like from outside.
+   *
+   * AND IT RHYMES WITH THE FIRST HALF OF THE NIGHT. `your-date` is her finding
+   * out there is a woman she had never heard of. This is her working out that
+   * Cole has the ten years Tyson was away serving — a version of him she does
+   * not have and never will. Twice in one night, the same wound.
+   *
+   * WRITTEN THE NEXT DAY, not that night. She was in no state, and a page that
+   * admits most of the night is missing is truer than a lucid one.
+   *
+   * IT STOPS AT THE TRUCK, and as of the extended cut (2026-08-26, same
+   * evening) that is no longer the end of the night. The scene now carries on
+   * past the drive: they arrive somewhere, there is an argument on a sofa, and
+   * it ends with the two of them inches apart. This page ends on "He didn't
+   * ask me anything. He just drove."
+   *
+   * IT STAYS THAT WAY — Melissa's decision, 2026-08-26, asked and answered.
+   * The entry does NOT acknowledge the hour it leaves out. Do not add a line
+   * gesturing at it in a later pass, and do not "complete" this page when the
+   * fuller cut of the night lands.
+   *
+   * What that makes it: a woman who writes down the entire humiliation in
+   * detail — the keys in her hand, being held up, being collected — and stops
+   * dead at the one part that actually frightened her. She does the same with
+   * the wall, where she refuses the page altogether. The omission is the
+   * characterization, and a page that admitted the gap would be a different
+   * woman doing a braver thing.
+   *
+   * TWO WRINKLES THIS CREATES IN WHAT IS ALREADY PUBLISHED, both left alone on
+   * purpose because each is a story decision with a scene attached:
+   *
+   *   `your-date` is headed "Home from the bar again" and reads as written
+   *   after getting herself home. She did not get herself home.
+   *
+   *   `i-apologized` has her driving over the next day — but her truck spent
+   *   the night in that parking lot, and how it got back to her is a beat
+   *   somebody has to decide on rather than a detail to paper over here.
+   *
+   * Melissa's call, both of them. Flagged, not fixed.
+   */
+  {
+    id: "cole-rang-him",
+    addedOn: "2026-08-26",
+    dateline: "The next day, and most of it is missing",
+    place: "bar",
+    about: ["tyson", "cole"],
+    sceneSlug: "luna-ty-bar-drunk",
+    access: "premium",
+    mature: false,
+    body: [
+      "It was Cole who called him. Of course it was Cole. It is his bar and he was standing behind it all night, and I have spent this morning trying to work up some feeling about that and getting absolutely nowhere.",
+      "Because he was right. I had my keys in my hand. I want that written down while I still have the nerve for it, because by Thursday I will have this filed under a bad night and moved on.",
+      "But he didn't come out and take them off me himself. He picked up a phone.",
+      "And here is the thing I have been turning over since about six o'clock this morning, and cannot put down, and am not going to be able to say out loud to a single person alive.",
+      "He called Tyson. He did not call my partner.",
+      "A man watches a woman drink on her own for four hours, decides she should not be driving, and reaches for the phone — and the name he goes to is not the one she lives with. He didn't even think about it. That is what I keep arriving at. It was not a decision he had to make.",
+      "So that is what we look like from the outside. Somebody who has known us both for years, with no stake in it and no reason to be clever, worked out who to call in about a second and a half.",
+      "And he has ten years of Tyson that I don't have. The ten years he was away — the ones where I got a phone call when he could manage one and no address to write to. Cole was there for all of that. He knows a whole man I have never met.",
+      "Twice in one night. First a woman I had never heard of, then a man who knows the version of him I missed. I have spent twenty years being the person who knows everything about him and it turns out I know the part he is willing to leave lying around.",
+      "I don't remember the middle of the parking lot. I remember being held up, which is not the same as being held, and I remember knowing the difference at the time and saying it out loud, which I imagine was a joy for him.",
+      "I have been in that parking lot at the end of a night before. Laughing, both of us. I have never had to be collected from it.",
+      "And nobody made me. That is where I keep landing. I picked the fight with Josh, I picked the bar, I picked the second half of that bottle, and then I stood in a parking lot being furious with the only man who came.",
+      "He didn't ask me anything. He just drove.",
+      "I keep coming back to that, and I still can't tell whether it was kindness or whether he has simply stopped asking.",
     ],
   },
   /* ------------------------------------------------ the apology, next day ---
    * PREMIUM, and the other half of `your-date` — she ends that entry saying
-   * she will apologise tomorrow and do it badly, and an unkept promise in a
+   * she will apologize tomorrow and do it badly, and an unkept promise in a
    * diary is a loose end.
    *
    * TYSON SAYS ALMOST NOTHING, deliberately. Anything he explains about Casey
@@ -1439,14 +2359,14 @@ export const journal: JournalEntry[] = [
    * two words is both truer to the man and leaves Melissa's hands free.
    */
   {
-    id: "i-apologised",
+    id: "i-apologized",
     dateline: "Did it badly, as advertised",
     place: "lakehouse",
     about: ["luna", "tyson", "casey"],
     access: "premium",
     mature: false,
     body: [
-      "Apologised. Did it badly, exactly as forecast.",
+      "Apologized. Did it badly, exactly as forecast.",
       "I had the whole thing ready in the truck on the way over. Measured, adult. One sentence about the drinking, one about the tone, and nothing whatsoever about Casey, because Casey was never the point and I had known that since about six in the morning.",
       "What came out was that I was out of order, and that I don't like not knowing who she is.",
       "Which is the true version, and the one I had specifically decided not to say.",
@@ -1493,8 +2413,8 @@ export const journal: JournalEntry[] = [
     mature: false,
     notes: ["control"],
     body: [
-      "Three days of work. Booked eight weeks ago, in the diary he looks at, on a job he called good news at the time and meant it.",
-      "He rang at seven. Then at ten. Then at half eleven, and when I didn't pick up — because I was standing on a mark with three people around me and my phone in another room — he rang the hotel.",
+      "Three days of work. Booked eight weeks ago, on the calendar he looks at, on a job he called good news at the time and meant it.",
+      "He called at seven. Then at ten. Then at eleven thirty, and when I didn't pick up — because I was standing on a mark with three people around me and my phone in another room — he called the hotel.",
       "Not angry. I want that written down, because it is the whole difficulty. Not once angry. Warm. Funny about the traffic. Asking how the shoot went and actually listening to the answer.",
       "And by the third day I had started checking the time before I did anything.",
       "That is the bit I have only just noticed, and I have had to sit down about it. Not that he called. That I have begun arranging my day around the next one, and nobody asked me to, and if I described any single one of those calls out loud it would sound like a man who misses his girlfriend.",
@@ -1655,13 +2575,74 @@ export const journal: JournalEntry[] = [
     mature: false,
     body: [
       "There are four versions of this in circulation and I wrote every one of them.",
-      "Mom gets busy, tired, fine. Avery gets a bit more because she can hear it anyway, but still nothing with a name attached. The women I work with get a funny version, in which Josh is a character and the farm is charming and I am somebody with an interesting life.",
+      "Mom gets busy, tired, fine. Avery gets a bit more because she can hear it anyway, but still nothing with a name attached. The women I work with gets a funny version, in which Josh is a character and the farm is charming and I am somebody with an interesting life.",
       "Tyson gets nearly all of it. Which is its own problem, given the one thing I keep from him is the thing that is about him.",
       "And this book gets the rest, and the book is the only reason I can run the other four without going mad.",
       "I used to think that made me a liar. I have decided it doesn't, quite — everybody edits. What bothers me is how good I have got at it. I can do the fine voice now while thinking about something else entirely, the way you drive a road you know.",
-      "Here's the test, and I already don't like the answer. If all four of them compared notes tonight, would any of them recognise the same woman?",
+      "Here's the test, and I already don't like the answer. If all four of them compared notes tonight, would any of them recognize the same woman?",
       "Mom would say she's tired. Avery would say something is wrong. Work would say she's great, honestly, great. Tyson wouldn't say anything at all.",
       "He'd just get in the truck.",
+    ],
+  },
+  /*
+    THE LENS TURNED ROUND. Added 2026-08-30. Sixty-eight entries in, this book
+    has never once been about what any of it is costing HIM, and a reader
+    notices — she is generous about him constantly and has never audited
+    herself.
+
+    PLACED AFTER `the-version-i-give`, which ends on "he'd just get in the
+    truck." That is the line that indicts her, and this is her picking it up.
+
+    SHE MUST NOT WORK OUT THAT HE HAS COLE, and the entry is built so she
+    cannot. She concludes Tyson has nobody to say any of this to. A member who
+    has watched `tyson-cole-bar` knows he does, knows where he goes, and knows
+    that what he went there for was permission. That gap is the best dramatic
+    irony available in the whole journal and it is free.
+
+    IT ALSO KEEPS OFF MELISSA'S PAGE. LUNA_VALE_CONTEXT.md reserves Luna's
+    entry about Cole and Tyson's friendship for her to write. Nothing here
+    touches it: Luna never names him, and the entry's wrongness is the device.
+
+    "I HAVE NEVER BEEN THE ONE WHO DROVE" is deliberately planted. It is true
+    when she writes it and it stops being true in `the-drive`, thirty pages
+    later, on the worst night of her life. Do not fix the inconsistency — it is
+    not one. It is the answer arriving.
+
+    NO CONTENT NOTE. She is being hard on herself; nobody does anything to her.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "what-it-costs-him",
+    addedOn: "2026-08-30",
+    dateline: "Thinking about him instead of me, for once",
+    place: "farmhouse",
+    about: ["luna", "tyson"],
+    access: "premium",
+    mature: false,
+    body: [
+      "I have written most of a book about what this is doing to me and not one page about what it is doing to him.",
+      "In fairness it is my book. That is what it is for. But I read it back a while ago and the shape of it is a woman at the center of a room describing how the light falls on her, and there is a man standing at the edge of every single page holding something, and I have never once asked what.",
+      "So. Properly, tonight, and no flinching.",
+      "He has been putting distance between us for months. I have written about that four separate times and every one of them is about how it feels at my end — that I am being managed, that I cannot reach him, that there is a field where a friend used to be. Not one of those entries contains the sentence: that must be costing him something.",
+      "Because it is. It has to be. This is a man who has come up that drive every week for twenty years, and he is now making himself not come, on purpose, over and over, and choosing it again every single week. I have to decide once whether to sit here feeling abandoned. He has to decide it constantly.",
+      "And he is not doing it to punish me. I know the difference and I have written that down too, so I have known the whole time and simply not followed it anywhere.",
+      "Here is the part I have been avoiding for about an hour.",
+      "Who does he tell.",
+      "I have this book. I have got four versions of the truth in circulation and a fifth one in here where I can be honest. My mother has the phone. Avery has her whole training, she reads me before I have finished the sentence. Josh has his father, and whatever that is, it is somebody.",
+      "Tyson has me. That is the entire list. Twenty years, and I am the person he tells things to, and the thing he is currently carrying is the one thing he cannot bring to me, which means for the first time since we were eighteen he has nowhere at all to put it.",
+      "I have been sitting here trying to picture him telling somebody and I cannot construct it. He does not have that. He is not built for it and he has never needed it, because he had me.",
+      "So he is doing it alone. Whatever it is. Alone, weekly, for months, while being perfectly pleasant about the gate.",
+      "And what have I been doing.",
+      "I have been taking everything to him. Every bad night. Every phone call from my mother. Two years of my own head. Week two he found me on a bathroom floor and I did not even have to ask, and I have handed that man my entire interior life for twenty years and called it friendship, and I am not certain, tonight, that it has not been closer to a service.",
+      "He would tell me that is nonsense. He would say I would do the same for him and he would not even look up while he said it.",
+      "Would I, though.",
+      "I have gone back through this whole book looking for the night I drove to him. There isn't one. Not once, in twenty years, have I been the one in the truck. He comes. He has always come. And I have built an entire idea of myself as the person he can rely on out of a thing I have never actually been asked to do.",
+      "Eight words in a park. That is what he has managed in six months, and he could not look at me while he said them, and I have spent every page since analyzing what they meant to ME.",
+      "I picked up the phone tonight to ask him straight out. Not the game, not the silence, not standing too close and waiting — just: what is it, tell me, I will take any answer.",
+      "I put it down. Then I picked it up again about twenty minutes later and put it down again, and then I came in here and wrote three pages about being a good person.",
+      "I am going to ask him. I want that on the page so I cannot pretend later that I never meant to.",
+      "Not tonight.",
     ],
   },
   {
@@ -1843,6 +2824,47 @@ export function quoteOfTheDay(): { entryId: string; line: string } {
 /** The entries free to read, in story order — the journal's shop window. */
 export function freeEntries(): JournalEntry[] {
   return journal.filter((e) => e.access === "free");
+}
+
+/**
+ * The most recently PUBLISHED members-only entries, newest first.
+ *
+ * Note the two different orders this file now has to serve. `journal` runs in
+ * STORY order and always will — the index and the previous/next links read
+ * from it, and an entry's neighbors are part of what it means. This reads the
+ * same array in RELEASE order, which is a different thing entirely: a page
+ * added on Sunday can belong on page four of the story.
+ *
+ * DATED ENTRIES ONLY, the same rule as `latestScene()` and releases.ts. Most
+ * of this file predates `addedOn` and is deliberately undated rather than
+ * back-filled from memory, so an undated entry is simply older than everything
+ * here — which is true, and which keeps this list short and real instead of
+ * long and invented.
+ *
+ * PREMIUM ONLY, because of what the home page does with it: the section is an
+ * argument for joining, and putting a free entry in a locked row would be a
+ * lie about the one thing the row exists to say. The free entries have their
+ * own row directly above it.
+ *
+ * TIES BREAK IN STORY ORDER, EARLIEST FIRST, and that is a real decision
+ * rather than a way of making sort deterministic. Five pages went up together
+ * on 2026-08-30; whichever three the home page shows are the three a stranger
+ * meets first. Taking the earliest of them means they arrive in the order a
+ * reader would actually read them, and it means the row leans on the backstory
+ * pages rather than on whatever happens to sit deepest in the arc — which is
+ * both the better pitch and the one that cannot spoil anything.
+ */
+export function latestEntries(limit = 3): JournalEntry[] {
+  return journal
+    .map((entry, index) => ({ entry, index }))
+    .filter(({ entry }) => entry.addedOn && entry.access === "premium")
+    .sort((a, b) =>
+      a.entry.addedOn === b.entry.addedOn
+        ? a.index - b.index
+        : (b.entry.addedOn ?? "").localeCompare(a.entry.addedOn ?? ""),
+    )
+    .slice(0, limit)
+    .map(({ entry }) => entry);
 }
 
 /** The first line, used as a card preview. */

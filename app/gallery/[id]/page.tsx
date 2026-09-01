@@ -5,7 +5,7 @@ import { LockedNotice } from "@/components/membership/LockedNotice";
 import { StillGalleryView, type ViewStill } from "@/components/browse/StillGalleryView";
 import { ContentNotice } from "@/components/ui/ContentNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { canWatch, isMember } from "@/lib/access/entitlement";
+import { canWatch } from "@/lib/access/entitlement";
 import {
   galleries,
   getGallery,
@@ -50,10 +50,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
   const gallery = getGallery(id);
   if (!gallery) notFound();
 
-  const [allowed, member] = await Promise.all([
-    canWatch({ access: gallery.access }),
-    isMember(),
-  ]);
+  const allowed = await canWatch({ access: gallery.access });
   const place = getPlace(gallery.place);
   const scene = gallery.sceneSlug ? getVideo(gallery.sceneSlug) : undefined;
   const entry = gallery.journalEntryId
@@ -104,7 +101,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-24 sm:px-8">
         <nav className="py-5 text-sm">

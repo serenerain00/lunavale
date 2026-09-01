@@ -7,6 +7,7 @@ import {
   type CommentResult,
 } from "@/app/watch/actions";
 import { MAX_COMMENT_BODY } from "@/lib/content/comments";
+import { FollowForm } from "@/components/follow/FollowForm";
 
 /**
  * What appears under a scene once it has finished playing.
@@ -124,6 +125,34 @@ export function AfterWatch({
           </form>
         </>
       )}
+
+      {/* THE ADDRESS, at the other moment worth asking: somebody has just
+          watched the whole thing, or run out of preview wanting more.
+
+          It sits BELOW the comment form and behind a rule, because the comment
+          form promises "no account, no email" and that promise has to stay
+          true. This is plainly a separate, optional thing they can ignore —
+          not a condition attached to being heard.
+
+          Note what is NOT here: no "join to unlock", no discount for an
+          address, nothing that makes the list a cheaper membership. It is the
+          third option for the many people who like this and are not going to
+          pay for it today, and its only offer is being told when there is more
+          (MONETIZATION.md — the conversion moments are the story's, not the
+          interface's). */}
+      <div className="mt-5 border-t border-hairline pt-4">
+        <FollowForm
+          source={`scene:${slug}`}
+          compact
+          label={
+            preview
+              ? "Want to know when the next one goes up?"
+              : "Want to know when there's another?"
+          }
+          note="An email when a new scene or a page of her journal lands. Nothing else, and you can stop any time."
+          done="You're on the list. You'll hear when the next one lands."
+        />
+      </div>
 
       {!surveyAnswered && (
         <p className="mt-5 border-t border-hairline pt-4 text-sm leading-relaxed text-stone">

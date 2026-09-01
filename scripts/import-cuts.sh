@@ -74,7 +74,7 @@ CUTS=(
   "luna-josh-bed|stories/luna-josh-room/luna-josh-bed.mov|6"
   # Her lying awake, and the night she goes back to. A DIFFERENT SCENE from
   # luna-josh-bed above, despite the folder name pointing at the same bed —
-  # this one is framed in the present, in colour, with the memory of Josh
+  # this one is framed in the present, in color, with the memory of Josh
   # graded sepia in the middle of it. Slug says flashback for that reason.
   #
   # Two masters were delivered (Melissa, 2026-08-17). Taking the .mov:
@@ -91,7 +91,7 @@ CUTS=(
   # Trimmed at 129.7s: delivered with 3.7s of black on the end (blackdetect,
   # not eyeballed), the same way the Casey cut arrived.
   #
-  # Poster at 24s: the last of the present-day colour before the memory takes
+  # Poster at 24s: the last of the present-day color before the memory takes
   # over — her awake on the pillow. The default 3s is her asleep, which sells
   # the scene as a woman sleeping, and anything past ~32s is the flashback and
   # would put Josh on a card that is about her being without him.
@@ -218,9 +218,131 @@ CUTS=(
   #
   # Poster at 382.4s: the same frame the card has always used, her face and his,
   # both calm. NOT one of the frames of her mid-attack — those are the honest
-  # centre of the scene and also a woman at the worst moment of her month, and
+  # center of the scene and also a woman at the worst moment of her month, and
   # a poster sits at a permanent ungated URL where anybody can meet it cold.
   "luna-ty-panic-attack|stories/luna-ty-panic-attack/luna-panicAttack-full.mp4|382.4|390.4|3"
+  # THE DRIVEWAY. Josh is going away for three days, and it takes them the
+  # length of the scene to let go of each other. Melissa, 2026-08-25.
+  #
+  # BEFORE THE BREAKUP — her placement, handed over with the footage. Inside
+  # the ten years, so nothing between them is guarded yet.
+  #
+  # THIS IS THE UNSCORED CUT, AND IT IS TEMPORARY. -31.8 dB mean / -6.5 dB
+  # peak, and the spectrogram is broadband with no sustained bands anywhere in
+  # it: wind, the truck, and the two of them. Unlike the garage and the
+  # bathroom, that is NOT the delivery — Melissa is exporting the mix with the
+  # music and will upload it (2026-08-25, "I'll upload the one with music
+  # later").
+  #
+  # WHEN IT LANDS: point the source below at the scored file and re-run this
+  # slug, the same swap already done for luna-josh-bed, the beach and the
+  # flashback. Re-check `durationSeconds` in lib/content/videos.ts against what
+  # the import prints — a rescored export is usually a slightly different edit,
+  # not the same picture with sound on it — and re-check the poster second and
+  # the fade, which are both timed against THIS cut. Standing house rule: the
+  # scored mix wins, even when it costs resolution or shape.
+  #
+  # NO TRAILING BLACK — blackdetect at pic_th=0.95 across the whole file, not
+  # just the tail, finds none. So no `end` on this line, and it is the first
+  # entry here to fade without trimming first.
+  #
+  # FADE 2s, the one line in this file that is not the house 3s. The last shot
+  # is her alone in the drive once the truck is out of it, and it runs about
+  # four seconds; a three-second fade would sit over nearly all of it and take
+  # away the thing the scene ends on. Two seconds leaves her the look and still
+  # takes the engine down rather than cutting it dead.
+  #
+  # Poster at 28s: the two of them holding on to each other beside the truck,
+  # the porch and the whole of the light behind them. The frames after 88s are
+  # better — her face, after — and they are also the ending, which a card
+  # should not give away before anybody has pressed play.
+  "luna-josh-truck-leaving|stories/luna-josh-truck-leaving/luna-josh-truck-leaving.mp4|28||2"
+  # THE CAR PARK, and it is the second half of a night the site already has.
+  # Melissa, 2026-08-26.
+  #
+  # IT PICKS UP FROM "Your Date" (luna-tyson-casey-bar) with about two hours in
+  # between. That scene ends on "I'll let you get back to your date"; Tyson and
+  # Casey leave, LUNA STAYS, and she keeps drinking bourbon on her own until
+  # closing. This is what is waiting outside when she finally walks out.
+  #
+  # COLE IS THE MECHANISM AND IS NEVER ON CAMERA. He watches her all night, and
+  # when she leaves he rings Tyson — she has been drinking, she has just gone,
+  # she is going to try to drive. That call is why Tyson is standing in a car
+  # park instead of wherever he went with Casey, and none of it is on screen.
+  # Do not "fix" that in a recut: the whole scene is a man arriving out of
+  # nowhere, which is what it looks like to her too.
+  #
+  # NO MUSIC in this cut — -30.0 dB mean / -4.6 dB peak, traffic and the two of
+  # them. The Casey scene it follows is also unscored, so the pair are
+  # consistent; if a score is made for one it should be made for both.
+  #
+  # EXTENDED CUT, swapped in 2026-08-26 the same evening the first one went up.
+  # Same filename, so this line does not change — only the numbers do. The
+  # picture goes from 3:14 to 5:02.
+  #
+  # IT IS PURELY AN EXTENSION, verified rather than assumed: frames at t=20,
+  # 100 and 180 are identical to the cut it replaces, and the 0.2s dip to black
+  # at 5.6s is in both. So the first 194s are untouched and 108s are new on the
+  # end. That is why the poster time below is unchanged — the card does not
+  # move under a scene people have already seen.
+  #
+  # WHAT THE NEW MINUTES ARE: the drive keeps going, they arrive somewhere, and
+  # the last ninety seconds are the two of them alone in a room. See the note
+  # in lib/content/videos.ts — the room is not the lakehouse Melissa described
+  # and identifying it is her call, not a guess to make in a manifest.
+  #
+  # Trimmed at 302.4s. The delivered file runs 398.8s and the last 96.3s are
+  # black AND silent (-91 dB, digital silence) — export padding, and by far the
+  # longest tail in this file. The 0.2s dip at 5.6s is an edit and stays.
+  #
+  # FADE 3s, unchanged. The picture is at full brightness at 301 and gone at
+  # 302.4, so it still stops rather than ends, and the new last shot is a held
+  # close two-hander that a hard cut would wreck.
+  #
+  # Poster at 170s, UNCHANGED and now a third of the way in rather than near
+  # the end: the two of them against the truck once she has come down, both
+  # faces. Still not one of the frames of her sobbing, and still not the cab.
+  # Nothing in the new material is a better card and one of them would give
+  # away an ending that is the whole point of the extension.
+  "luna-ty-bar-drunk|stories/luna-ty-bar-drunk/luna-ty-bar-drunk.mp4|170|302.4|3"
+  # THE KITCHEN. Fifty-three seconds at the lakehouse: he says he is going out,
+  # will not say where, and she asks him who she is. Melissa, 2026-08-28.
+  #
+  # THE SLUG FOLLOWS THE CUT, NOT THE FOLDER — same rule as luna-josh-break at
+  # the top of this file. The shooting folder is stories/luna-ty-outforabit/,
+  # named for his line; the cut inside it is luna-ty-wasntplanningonit.mp4,
+  # named for hers, and hers is the one the scene ends on.
+  #
+  # THIRD DELIVERY IN ONE EVENING, and the only one that survives. Two earlier
+  # files were replaced in place and are gone from disk:
+  #   luna-ty-kitchen-outforabit.mp4  50.3s, dropped in luna-ty-bar-drunk/
+  #   luna-ty-outforabit.mp4          46.6s, stopped after "Your face."
+  # They were three different assemblies rather than three exports of one — no
+  # frame in any of them matched another at any offset. This one is the 46.6s
+  # edit continued: identical up to 30s, then the exchange it was missing.
+  #
+  # NO MUSIC, and no reason to expect one. -40.5 dB mean / -10.1 dB peak, which
+  # is the quietest delivery in this file — a kitchen, a pen, and two people
+  # talking at conversational volume. It is a dialogue mix in a room with
+  # nothing in it, not a scored cut waiting to arrive. Do not go looking in
+  # withAudio/ and do not read the level as a fault.
+  #
+  # Trimmed at 53.4s: 2.0s of black on the end, and the picture does NOT fade
+  # into it — full brightness at 53.4 and gone one frame later.
+  #
+  # FADE 1.5s, and it is the shortest in this file. The house 3s and the
+  # driveway's 2s both assume a last shot with room in it; this one runs
+  # exactly 2.0s (shot change at 51.4). Three seconds would reach back through
+  # the cut into the shot before it, and two would sit over the whole of the
+  # last one. 1.5s leaves half a second of him clean and still takes the room
+  # down rather than stopping dead on a man mid-turn.
+  #
+  # Poster at 3.5s: the wide. Both of them at the island, the lake through the
+  # glass, before either has said anything — and the first card the lakehouse
+  # kitchen has had. The close-ups later are stronger frames and every one of
+  # them is a single face, which sells a two-hander as somebody's solo scene;
+  # the ones at 36s and 48s are also her not looking up, which is the ending.
+  "luna-ty-wasntplanningonit|stories/luna-ty-outforabit/luna-ty-wasntplanningonit.mp4|3.5|53.4|1.5"
   # Scored mix: -37.5 dB -> -26.8 dB. Runs 2.8s longer than the silent cut.
   "luna-josh-dinner-house|stories/withAudio/copy_A062089B-FB53-461E-BC18-DD0BD3F26458.MOV"
   # NEAR-SILENT (-51 dB). Its only candidate is portrait (1080x1822) and would

@@ -5,7 +5,7 @@ import { VerticalPlayer } from "@/components/clips/VerticalPlayer";
 import { ContentNotice } from "@/components/ui/ContentNotice";
 import { RatingBadge } from "@/components/ui/RatingBadge";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { canWatch, isMember } from "@/lib/access/entitlement";
+import { canWatch } from "@/lib/access/entitlement";
 import { clipAccess, clipNeighbours, clips, getClip } from "@/lib/content/clips";
 import { getPerson } from "@/lib/content/taxonomy";
 import { formatDuration } from "@/lib/content/videos";
@@ -42,15 +42,12 @@ export default async function ClipPage({ params }: ClipPageProps) {
   const clip = getClip(id);
   if (!clip) notFound();
 
-  const [allowed, member] = await Promise.all([
-    canWatch({ access: clipAccess(clip) }),
-    isMember(),
-  ]);
+  const allowed = await canWatch({ access: clipAccess(clip) });
   const { previous, next } = clipNeighbours(clip.id);
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-24 sm:px-8">
         <nav className="py-5 text-sm">
@@ -115,7 +112,7 @@ export default async function ClipPage({ params }: ClipPageProps) {
             {previous ? (
               <Link
                 href={`/clips/${previous.id}`}
-                className="max-w-[45%] text-left text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
+                className="min-h-11 max-w-[45%] text-left text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
               >
                 <span className="block text-xs text-stone-dim">Previous</span>
                 {previous.title}
@@ -126,7 +123,7 @@ export default async function ClipPage({ params }: ClipPageProps) {
             {next && (
               <Link
                 href={`/clips/${next.id}`}
-                className="max-w-[45%] text-right text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
+                className="min-h-11 max-w-[45%] text-right text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
               >
                 <span className="block text-xs text-stone-dim">Next</span>
                 {next.title}

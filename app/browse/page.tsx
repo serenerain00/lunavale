@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { isMember } from "@/lib/access/entitlement";
 import { CatalogCard } from "@/components/browse/CatalogCard";
 import { FilterBar } from "@/components/browse/FilterBar";
 import {
@@ -47,7 +46,7 @@ export async function generateMetadata({
 }
 
 export default async function BrowsePage({ searchParams }: BrowsePageProps) {
-  const [member, params] = await Promise.all([isMember(), searchParams]);
+  const params = await searchParams;
   const query = parseQuery(params);
   const filtering = isActive(query);
   const results = filterCatalog(query);
@@ -59,7 +58,7 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-8 pt-12 sm:pt-16">
@@ -96,7 +95,7 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
               {focusedPlace?.environmentSlug && (
                 <Link
                   href={`/world/${focusedPlace.environmentSlug}`}
-                  className="rounded-full border border-hairline px-5 py-2 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+                  className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 py-2 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber sm:min-h-0"
                 >
                   Step inside {focusedPlace.label} →
                 </Link>
@@ -108,7 +107,7 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
             ) : (
               <Reveal className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {results.map((item) => (
-                  <CatalogCard key={item.id} item={item} unlocked={member} />
+                  <CatalogCard key={item.id} item={item} />
                 ))}
               </Reveal>
             )}
@@ -121,7 +120,6 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
               <>
                 <StillsRail
                   items={catalog.filter((item) => item.kind === "gallery")}
-                  member={member}
                 />
                 {shelves().map((shelf, index, all) => (
                 <Shelf
@@ -132,7 +130,6 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
                   blurb={shelf.blurb}
                   href={queryHref({ feelings: [shelf.feelingId], places: [] })}
                   items={shelf.items}
-                  member={member}
                 />
                 ))}
               </>
@@ -159,7 +156,6 @@ function Shelf({
   blurb,
   href,
   items,
-  member,
 }: {
   index: number;
   total: number;
@@ -167,7 +163,6 @@ function Shelf({
   blurb: string;
   href: string;
   items: CatalogItem[];
-  member: boolean;
 }) {
   const headingId = `shelf-${heading.toLowerCase()}`;
   // A shelf that already shows everything it has needs no door at the end and
@@ -212,7 +207,6 @@ function Shelf({
             <RailItem key={item.id}>
               <CatalogCard
                 item={item}
-                unlocked={member}
                 sizes={RAIL_ITEM_SIZES}
               />
             </RailItem>
@@ -276,13 +270,7 @@ function ShelfEndCap({
  * across the emotion shelves where a visitor has to already be hunting to find
  * them. Same rail affordances as the shelves, so it reads as part of the set.
  */
-function StillsRail({
-  items,
-  member,
-}: {
-  items: CatalogItem[];
-  member: boolean;
-}) {
+function StillsRail({ items }: { items: CatalogItem[] }) {
   if (items.length === 0) return null;
 
   return (
@@ -318,7 +306,6 @@ function StillsRail({
             <RailItem key={item.id}>
               <CatalogCard
                 item={item}
-                unlocked={member}
                 sizes={RAIL_ITEM_SIZES}
               />
             </RailItem>

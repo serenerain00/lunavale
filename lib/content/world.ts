@@ -10,7 +10,7 @@
  * Each Room has an optional `scan` slot. While it's undefined, the room renders
  * as tinted placeholder geometry. Drop a photogrammetry GLB into the slot (see
  * docs/world/SCAN_CAPTURE.md) and the real space replaces the placeholder with
- * no other code changes. Coordinates are scene metres, origin at room centre.
+ * no other code changes. Coordinates are scene meters, origin at room center.
  */
 
 import type { AccessLevel } from "@/lib/content/videos";
@@ -454,6 +454,22 @@ export const environments: Environment[] = [
             placeholder:
               "Left open on the arm of the couch. Members can read what she wrote.",
             access: "premium",
+          },
+          {
+            // The mug on the island, and the first hotspot in this room that
+            // opens onto a scene rather than a placeholder. `item: "mug"`
+            // because it is literally what is sitting there on the counter in
+            // the poster frame.
+            id: "the-island",
+            label: "The Kitchen Island",
+            kind: "clip",
+            item: "mug",
+            hint: "He came through",
+            position: [2.4, 0.95, 0.6],
+            videoSlug: "luna-ty-wasntplanningonit",
+            placeholder:
+              "Where she writes in the afternoons, with the lake in the whole of the window. He came through one day and said he was going out, and for the first time in twenty years she asked him where.",
+            access: "free",
           },
         ],
       },

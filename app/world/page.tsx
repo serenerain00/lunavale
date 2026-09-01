@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { Reveal } from "@/components/motion/Reveal";
-import { getMembership } from "@/lib/access/entitlement";
 import {
   environments,
   readiness,
@@ -38,11 +37,10 @@ function roomCount(env: Environment): string {
 }
 
 export default async function WorldPage() {
-  const { active: member } = await getMembership();
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="flex-1 pb-24">
         <section className="mx-auto w-full max-w-6xl px-5 pt-12 sm:px-8 sm:pt-16">

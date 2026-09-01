@@ -2,18 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
 import {
   abandonedCheckouts,
   revenueSummary,
   formatCents,
 } from "@/lib/billing/revenue";
-import { membershipSummary } from "@/lib/db/memberships";
+import { membershipSummary, unclaimedPending } from "@/lib/db/memberships";
 import { allPostsForModeration, posterStats } from "@/lib/db/overheard";
 import { recentHelpMessages } from "@/lib/db/help";
 import { surveyResults, type Tally } from "@/lib/db/survey";
 import { commentCountsByScene, recentSceneComments } from "@/lib/db/comments";
+import {
+  followerCount,
+  followerSources,
+  recentFollowers,
+} from "@/lib/db/followers";
 import { getVideo } from "@/lib/content/videos";
 import { labelFor } from "@/lib/content/survey";
 import { threadRunway, FREE_POST_ALLOWANCE } from "@/lib/content/overheard";
@@ -45,9 +49,8 @@ export default async function AdminPage() {
   if (!authConfigured() || !(await isOwner())) notFound();
 
   const now = new Date();
-  const [{ active: member }, members, posts, posters, signups] =
+  const [members, posts, posters, signups] =
     await Promise.all([
-      getMembership(),
       membershipSummary(),
       allPostsForModeration(20),
       posterStats(FREE_POST_ALLOWANCE),
@@ -62,6 +65,12 @@ export default async function AdminPage() {
       revenueSummary(),
       abandonedCheckouts(),
     ]);
+  const [listSize, listSources, list, pending] = await Promise.all([
+    followerCount(),
+    followerSources(),
+    recentFollowers(200),
+    unclaimedPending(),
+  ]);
   const unreadComments = sceneComments.filter((c) => !c.handled).length;
 
   // The two numbers Melissa actually wants off this page, pulled out of the
@@ -130,7 +139,7 @@ export default async function AdminPage() {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-4xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-10 pt-12 sm:pt-16">
@@ -325,9 +334,12 @@ export default async function AdminPage() {
             while the wall was public.
           </p>
           <p className="mt-2 text-xs text-stone-dim">
-            Which also means new email addresses now only arrive with a
-            payment. There is no longer a step where somebody interested but
-            undecided hands you one.
+            That used to mean an address only ever arrived with a payment.{" "}
+            <strong className="font-normal text-stone">
+              Not any more — the list below is that step.
+            </strong>{" "}
+            Somebody interested but undecided can now hand you an address at
+            the end of the survey or under a scene they just finished.
           </p>
           <p className="mt-2 text-xs text-stone-dim">
             Scripted cast messages run to{" "}
@@ -434,6 +446,124 @@ export default async function AdminPage() {
         </Section>
 
         {/* --------------------------------------------------------- survey */}
+        {/* PAID, NO ACCOUNT YET — the one queue that needs a person.
+
+            Since 2026-08-27 checkout runs before sign-up, so there is a window
+            where somebody has paid and has no account. Almost always it lasts
+            seconds and closes itself; a row that sits here for a day means
+            somebody paid and walked off before making one.
+
+            Nothing is broken when that happens — the membership is held
+            against the email and attaches itself the moment they ever sign in
+            with it — but they cannot watch anything until they do, and they
+            paid. That is worth an email from Melissa rather than a wait. */}
+        {pending.length > 0 && (
+          <Section title="Paid, no account yet">
+            <p className="mt-1 text-sm text-stone">
+              These people have paid and have not made an account, so they
+              cannot open anything yet. It attaches itself the moment they sign
+              in with the same address — but if one has been sitting here for a
+              day, write to them.
+            </p>
+            <ul className="mt-5 space-y-1.5">
+              {pending.map((p) => (
+                <li
+                  key={p.email}
+                  className="flex flex-wrap items-baseline gap-x-3 text-sm"
+                >
+                  <span className="text-ivory">{p.email}</span>
+                  <span className="text-xs text-stone-dim">
+                    {p.tier} ·{" "}
+                    {p.createdAt.toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
+
+        {/* THE LIST, and the number worth watching weekly.
+
+            It sits above the survey because at this size it is the more useful
+            of the two: the survey says what people think, and this says who can
+            be told when there is something new. One of those compounds.
+
+            ADDRESSES ARE SHOWN IN FULL AND IN ONE BLOCK, on purpose. This page
+            is owner-only, and the job it has to support is "paste them into
+            the mail provider and write to them" — a paginated table with a
+            copy button per row would be a worse tool for the only task anybody
+            does here. */}
+        <Section title="The list">
+          {listSize === 0 ? (
+            <p className="mt-1 text-sm text-stone-dim">
+              Nobody on it yet. The ask appears at the end of the survey and
+              under a scene once it has finished playing.
+            </p>
+          ) : (
+            <>
+              <div className="flex flex-wrap gap-8">
+                <Stat label="On the list" value={String(listSize)} />
+                {listSources.map((row) => (
+                  <Stat
+                    key={row.source}
+                    label={
+                      row.source === "survey"
+                        ? "From the survey"
+                        : row.source === "scene"
+                          ? "After a scene"
+                          : row.source
+                    }
+                    value={String(row.count)}
+                  />
+                ))}
+              </div>
+
+              <p className="mt-6 text-sm text-stone">
+                Every address, newest first. Nothing is ever sent from this
+                site — write to them from your mail provider, and only when
+                there is something to say.
+              </p>
+              <textarea
+                readOnly
+                rows={6}
+                aria-label="Every address, comma separated"
+                value={list.map((f) => f.email).join(", ")}
+                className="mt-3 w-full resize-y rounded-lg border border-hairline bg-void px-4 py-3 font-mono text-xs leading-relaxed text-ivory focus:border-amber focus:outline-none"
+              />
+
+              <ul className="mt-6 space-y-1.5">
+                {list.slice(0, 30).map((f) => (
+                  <li
+                    key={f.email}
+                    className="flex flex-wrap items-baseline gap-x-3 text-sm"
+                  >
+                    <span className="text-ivory">{f.email}</span>
+                    <span className="text-xs text-stone-dim">
+                      {f.source.startsWith("scene:")
+                        ? getVideo(f.source.slice(6))?.title ?? f.source
+                        : f.source}
+                      {" · "}
+                      {f.createdAt.toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                      })}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              {list.length > 30 && (
+                <p className="mt-3 text-xs text-stone-dim">
+                  Showing the newest 30 of {list.length}. All of them are in the
+                  box above.
+                </p>
+              )}
+            </>
+          )}
+        </Section>
+
         <Section title="Survey">
           {survey.total === 0 ? (
             <p className="mt-1 text-sm text-stone-dim">

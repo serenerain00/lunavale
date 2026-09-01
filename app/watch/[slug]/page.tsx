@@ -77,7 +77,7 @@ export default async function WatchPage({ params }: WatchPageProps) {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-5xl flex-1 px-5 pb-24 sm:px-8">
         <nav className="py-5 text-sm">
@@ -137,13 +137,25 @@ export default async function WatchPage({ params }: WatchPageProps) {
           </div>
         )}
 
-        {/* A visitor gets the opening of the scene and then this. Stated once,
+        {/* A visitor gets a piece of the scene and then this. Stated once,
             under the player, with the real numbers — not a countdown over the
             footage and not a dialog. The player above is genuinely playing the
-            preview file; there is no full version behind it to reach. */}
+            preview file; there is no full version behind it to reach.
+
+            "THE FIRST" ONLY WHEN IT IS. This said "the first N of M" for every
+            preview until 2026-08-31, which stopped being true on 2026-08-10
+            when windows moved off the opening — see the hookStart note in
+            lib/content/videos.ts. Six scenes were affected and nobody had
+            noticed: luna-ty-panic-attack opens its window at 0:44, and
+            luna-ty-shop-kiss at 1:30, and both were telling a visitor they had
+            just watched the start of the scene. That is precisely the claim
+            make-previews.mjs promises this line does not make — "nobody is
+            told they saw the start of anything" — so the wording now follows
+            the data instead of assuming it. */}
         {!allowed && video.preview && (
           <div className="mt-4 rounded-lg border border-amber/25 bg-amber/[0.04] px-4 py-3 text-sm leading-relaxed text-stone">
-            You&rsquo;re watching the first{" "}
+            You&rsquo;re watching{" "}
+            {video.preview.hookStart ? "" : "the first "}
             {formatDuration(video.preview.durationSeconds)} of{" "}
             {formatDuration(video.durationSeconds)}. The rest is part of{" "}
             <Link

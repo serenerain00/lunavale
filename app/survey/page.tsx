@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { SurveyForm } from "@/components/survey/SurveyForm";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { getMembership } from "@/lib/access/entitlement";
 import { ANSWERED_COOKIE, sceneOptions } from "@/lib/content/survey";
 import { hasAnswered } from "@/lib/db/survey";
 
@@ -30,15 +29,12 @@ export const dynamic = "force-dynamic";
  * worse answer from a person being polite.
  */
 export default async function SurveyPage() {
-  const [{ active: member }, jar] = await Promise.all([
-    getMembership(),
-    cookies(),
-  ]);
+  const jar = await cookies();
   const answered = await hasAnswered(jar.get(ANSWERED_COOKIE)?.value ?? "");
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-2 pt-12 sm:pt-16">

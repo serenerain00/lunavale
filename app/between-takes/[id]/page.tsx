@@ -86,7 +86,7 @@ export default async function NotebookPageRoute({
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="flex-1 px-5 pb-24 pt-10 sm:px-8 sm:pt-14">
         <div className="mx-auto w-full max-w-2xl">

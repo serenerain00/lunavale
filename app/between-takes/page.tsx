@@ -48,7 +48,7 @@ export default async function BetweenTakesPage() {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="flex-1 px-5 pb-24 sm:px-8">
         {/* ---------------------------------------------------------- cover */}

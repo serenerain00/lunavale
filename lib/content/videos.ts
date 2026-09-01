@@ -1670,6 +1670,52 @@ export const videos: Video[] = [
     place: "garage",
     about: ["luna", "tyson"],
   },
+  {
+    // THE SLUG FIXES THE FOLDER'S SPELLING. The shooting folder is
+    // stories/luna-ty-lkehouse-confrontation/ and the file inside it matches;
+    // "lkehouse" recurs across the working folders (luna-lkehouse-mom-phone,
+    // ty-luna-lkehouseKiss) so it is a habit rather than a one-off. A slug is
+    // a permanent public URL and does not inherit a typo — same rule as
+    // luna-ty-wasntplanningonit, where the slug follows the cut and not the
+    // folder. optimize-media.sh writes the proxy under the slug, so nothing
+    // downstream ever sees the misspelling.
+    slug: "luna-ty-lakehouse-confrontation",
+    // PLACEHOLDER title and synopsis — hers to replace. "The Shirt" because it
+    // is the detail that starts it and the one neither of them mentions.
+    title: "The Shirt",
+    synopsis:
+      "A Saturday with nothing in it, and he has found somewhere else to be since breakfast. She stops letting him. It gets loud — and the reason he finally gives her has Josh's name in it.",
+    file: "luna-ty-lakehouse-confrontation.proxy.mp4",
+    poster: "/posters/luna-ty-lakehouse-confrontation.jpg",
+    // 113, and no trim: blackdetect finds no trailing black, so the export
+    // stops dead on her face. The 0.8s fade is applied to the proxy on import
+    // rather than in the timeline — see the `fade` note in optimize-media.sh.
+    durationSeconds: 113,
+    addedOn: "2026-09-01",
+    access: "premium",
+    // Two people shouting in a living room. Nothing intimate happens and
+    // nobody takes anything off.
+    mature: false,
+    preview: {
+      file: "luna-ty-lakehouse-confrontation-preview.proxy.mp4",
+      durationSeconds: 30,
+      // NO hookStart — this is the opening, on Melissa's instruction ("this is
+      // only going to show the first 30sec"), and the opening happens to be
+      // right: he is already walking away from her in the first ten seconds,
+      // which is the whole situation stated without a word of it.
+      hookNote:
+        "The first thirty seconds, Melissa's call. He is avoiding her and she is walking into it. Stops forty seconds before he raises his voice and long before he says why.",
+    },
+    // `hurt` and `distance`. `lies` was considered and left off — he is not
+    // lying to her here, he is refusing to speak, which is the whole argument.
+    feelings: ["hurt", "distance"],
+    place: "lakehouse",
+    // ON SCREEN ONLY, though this is the scene where Josh becomes the reason.
+    // `about` drives the cast pages, and putting Josh on a scene he is not in
+    // would file him under footage he never appears in. The journal entry
+    // beside it carries him instead.
+    about: ["luna", "tyson"],
+  },
 ];
 
 /**

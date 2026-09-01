@@ -36,16 +36,19 @@
  * previous/next links both read from that order. Insert new entries in place
  * rather than appending.
  *
- * ACCESS: FIVE entries are open and every other one is not (Melissa,
- * 2026-08-10, cutting the free set down from fourteen).
+ * ACCESS: SIX entries are open and every other one is not (Melissa,
+ * 2026-08-10, cutting the free set down from fourteen; `he-shouted` added to
+ * it 2026-09-01).
  *
- * The five is the number that matters and it is fixed; the locked count is
- * not, and is deliberately not written down here. It said "forty-nine" for
- * long enough to be wrong by thirteen, because every entry added since went
+ * The open count is the number that matters and it is deliberate; the locked
+ * count is not, and is deliberately not written down here. It said "forty-nine"
+ * for long enough to be wrong by thirteen, because every entry added since went
  * in without anyone thinking to re-count.
  *
- * The five are chosen as an ARC rather than as a sample, because five is too
- * few to be representative and just enough to be a story:
+ * THE FIRST FIVE ARE AN ARC and the sixth is not part of it — it is a second
+ * door into the same house, and mixing them up would wreck both. The arc is
+ * chosen as an arc rather than as a sample, because five is too few to be
+ * representative and just enough to be a story:
  *
  *   the-last-box    ten years ending, and her carrying it out herself
  *   tyson-shows-up  who Tyson is, before anybody has a reason to wonder
@@ -57,6 +60,19 @@
  * It stops exactly where it starts to get complicated, which is the point: a
  * stranger can read all five, understand the situation completely, and be left
  * with the one question all the locked ones answer.
+ *
+ * THE SIXTH WORKS ON THE OPPOSITE PRINCIPLE and is the reason it is listed
+ * apart:
+ *
+ *   he-shouted      the loudest thing that has ever happened between them,
+ *                   handed to a stranger with no idea how they got there
+ *
+ * The arc sells by being complete. This sells by being a fragment — somebody
+ * who lands on it cold gets a man who has not raised his voice in twenty years
+ * doing it in a living room, and the name he says while he does. The scene it
+ * pairs with is members-only, so the free page is her account of it and the
+ * paid one is the thing itself. If the free set ever grows again, keep the two
+ * kinds separate: five that explain, and however many that provoke.
  *
  * WHAT CAME OUT, and what it cost: the Mexico entries (the strongest writing
  * in the free set, now a members' reward), her mother's call, Avery's, the day
@@ -2121,6 +2137,70 @@ export const journal: JournalEntry[] = [
       "Nothing happened. I have written four hundred words about nothing happening.",
       "That is not true and I am not going to leave it standing. Here is the true version: I have spent three months telling myself I am waiting to see what he does. I am not waiting. Waiting is what you call it when you have not moved. I moved today, in a shop, in front of nobody, and I chose the smallest version of it I could find so that I could come home and write it down like this and still recognize the handwriting.",
       "The part is still in the truck. I could not make myself carry it into the house.",
+    ],
+  },
+
+  /*
+    THE SIXTH FREE ENTRY, and the first one added to that set since Melissa cut
+    it to five on 2026-08-10. Her call, 2026-09-01, and the header note above
+    has been updated rather than left saying five.
+
+    It does not extend the arc, it opens a second door. The five run from the
+    marriage ending to her saying yes to coffee and stop before it gets
+    complicated; this one is deep in the complicated part and works on the
+    opposite principle — a stranger reads the loudest thing that has happened
+    to these two and has no idea how they got there. The scene it pairs with is
+    members-only, so the free page is the account and the paid one is the
+    thing itself.
+
+    FROM MELISSA, with the scene: a casual Saturday, Tyson has been avoiding
+    Luna all day (granted, she is wearing Josh's shirt), he cannot handle what
+    he is feeling, she confronts him, and it gets loud. It is THE FIRST TIME HE
+    NAMES JOSH as the reason he cannot talk to her.
+
+    WHY THE SHOUTING IS THE SPINE. `the-six-months` has been on the site since
+    08-19 with "He does not raise his voice, which is genuinely infuriating,
+    because it means I am always the only person in the room shouting." Twenty
+    years of that, and the footage at about 1:12 is him at full volume. The
+    entry is built on that reversal, and it costs nothing to set up because the
+    canon already did it.
+
+    Invented and hers to cut: the woodpile, the two trips to the truck, the
+    grey shirt being the one Josh wore to the fair, and the last line.
+
+    DRAFT PROSE, written to the brief. Replace it.
+  */
+  {
+    id: "he-shouted",
+    addedOn: "2026-09-01",
+    dateline: "Saturday, and he shouted",
+    place: "lakehouse",
+    where: "The main room",
+    about: ["luna", "tyson", "josh"],
+    sceneSlug: "luna-ty-lakehouse-confrontation",
+    access: "free",
+    mature: false,
+    body: [
+      "Tyson has never raised his voice at me. I want to put that first, before any of the rest of it, because otherwise none of the rest of it will read the way it actually happened.",
+      "Twenty years. Every fight we have ever had, and there have been real ones, he has conducted at exactly the volume you would use to ask somebody to pass the salt. It is the single most infuriating thing about him. It means I am always the only person in the room shouting, which means I am always the one who looks like the problem, and he has never once seemed to notice that this is what it does.",
+      "Today he shouted at me.",
+      "It was a Saturday with nothing in it. No plan, no job, nobody coming. The kind of day we have had four hundred of.",
+      "He was avoiding me from about nine in the morning. I do not mean he was quiet — he is always quiet. I mean he physically arranged his entire day so that we were never in the same room. He went out to the truck for something and came back forty minutes later. He did the woodpile, which did not need doing, which he knew, and which I knew, and which he did anyway. He took his coffee out onto the deck in a wind that made it not worth drinking.",
+      "I let it run until about two. I am not proud of the fact that I let it run at all. There was a version of the morning where I said what is going on with you at nine and we had a short difficult conversation and got on with the day, and I did not take it, because some part of me has decided that making him say things is a thing I am not allowed to do.",
+      "Then I stopped letting it run. I went and stood in front of him and I did not move, which with him is the only thing that works, because he will walk around you all day if you leave him a gap.",
+      "I said something small first. He gave me nothing. I said something bigger. He gave me less than nothing — he gave me that flat courteous thing he does, which is worse than being ignored, because being ignored at least admits there are two people present.",
+      "And then I said the true one. I said you have been in a mood with me for weeks and you will not say why, and I am not doing this any more, and you are going to have to actually say something to me.",
+      "And he did. God, he did.",
+      "I am not going to write down all of it. Some of it was not fair and he knew it was not fair while it was coming out of him, and I could see him hear himself. But he was loud, and he was right up close, and twenty years of a man never once raising his voice at me came apart in about four seconds in my own living room.",
+      "It was not frightening. I want to be exact about that, because if anybody ever reads this I do not want it read wrong. It was not frightening. It was like watching a wall move. You do not think a wall is going to hurt you. You think what on earth is holding this house up, then.",
+      "And in the middle of it he said Josh's name.",
+      "That is the part. That is the whole entry, really, and everything above it is furniture. In twenty years he has never once put my husband into a sentence like that. He has been scrupulous about it — Josh is a fact, Josh is a name on a list of things Tyson does not comment on. He has taken that man's work and eaten at that man's table and said nothing, for years, on purpose.",
+      "Today he told me that Josh is the reason. Not the reason he is angry. The reason he cannot talk to me.",
+      "I have been asking for that answer since about the spring. Every quiet drive, every time he left before there was a gap big enough for anything to get through. I have wanted the reason so badly that I built a whole personality around not asking for it.",
+      "And then I got it, standing in my own front room, shouted at me by the calmest person I know.",
+      "Here is the thing I noticed afterwards, and I have been sitting with it for four hours. I was wearing Josh's shirt. The grey one, the one he wore to the fair, sleeves down past my hands. I put it on at seven this morning without one single thought in my head about it, the way you put on whatever is nearest, and I wore it all day.",
+      "He had been looking at it since nine.",
+      "I have wanted the reason for months. I am not sure now whether I asked for it or whether I just wore it out of him.",
     ],
   },
 

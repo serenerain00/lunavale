@@ -178,6 +178,26 @@ const OVERRIDES = {
   // Content in the window: he is shirtless, as he is for the whole scene, and
   // she is in a tank top. It is faces and hands. Nothing explicit, no nudity.
   "luna-ty-shop-kiss": 90,
+
+  // 30s, Melissa's call on release, 2026-09-01: "this is only going to show
+  // the first 30sec". A quarter of the 1:53 runtime, so well inside the
+  // fraction rule and no argument with the cap.
+  //
+  // THE OPENING, against this file's usual hookStart rule, and for the same
+  // reason luna-josh-first-night takes it: here the opening IS the hook. He
+  // spends the first ten seconds walking away from her across the deck, and
+  // the situation — a man finding somewhere else to be in his own friend's
+  // house — is stated before anybody says a word.
+  //
+  // WHAT IT STOPS SHORT OF, sampled at three-second steps: he does not raise
+  // his voice until about 1:12, and the thing the scene exists for — the first
+  // time he names Josh as the reason he cannot talk to her — is later still.
+  // Thirty seconds ends forty-two seconds before the shouting and well before
+  // the reason, which is the part worth paying for.
+  //
+  // Content in the window: two people in a living room, fully dressed, one of
+  // them leaving the room. Nothing to flag.
+  "luna-ty-lakehouse-confrontation": 30,
 };
 
 /**

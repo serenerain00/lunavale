@@ -82,6 +82,11 @@ export const characters: Character[] = [
     ],
     facts: [
       { label: "Age", value: "38" },
+      // Melissa, 2026-09-01. She and Josh are BOTH Scorpios and Tyson is a
+      // Libra — which is not decoration: two all-or-nothing people in one
+      // house for ten years, and the third man is the one constitutionally
+      // unable to start the fight that would settle it.
+      { label: "Sign", value: "Scorpio" },
       { label: "From", value: "Atlanta, Georgia" },
       { label: "Lives", value: "Denver, Colorado — the lakehouse" },
       { label: "Work", value: "Models, and has since she was eighteen. Her own income, and the only part of her life that was never Josh's" },
@@ -113,6 +118,10 @@ export const characters: Character[] = [
     ],
     facts: [
       { label: "Age", value: "38" },
+      // Melissa, 2026-09-01, and it is characterisation rather than trivia:
+      // a Libra between two Scorpios. The man who cannot be in a room with an
+      // argument in it is the reason the argument never happens.
+      { label: "Sign", value: "Libra" },
       { label: "From", value: "Atlanta, Georgia" },
       { label: "Lives", value: "Denver — moved after he retired, for a change of pace" },
       // Melissa, 2026-08-30: he was still serving when Luna met Josh. It is
@@ -152,6 +161,9 @@ export const characters: Character[] = [
       "Then he calls. Coffee, then dinner the same night, and it starts again — and once he begins to suspect what Luna and Tyson are to each other, the same intensity that made him magnetic turns into jealousy, then possession, then control.",
     ],
     facts: [
+      // Melissa, 2026-09-01. He and Luna are BOTH Scorpios — ten years of two
+      // people who go all in and never let a thing go.
+      { label: "Sign", value: "Scorpio" },
       { label: "From", value: "Denver, Colorado" },
       { label: "Lives", value: "The farm — where he and Luna spent the ten years" },
       { label: "Work", value: "Owns a shop and a large farm. Work first, always" },

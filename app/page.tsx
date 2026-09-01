@@ -32,6 +32,7 @@ import { cadenceNote, recentReleases } from "@/lib/content/releases";
 import { LatelyRail } from "@/components/home/LatelyRail";
 import { featuredClip } from "@/lib/content/clips";
 import { resolveWhoSheIs } from "@/lib/content/who-she-is";
+import { twentyQuestions } from "@/lib/content/twenty-questions";
 import { takes } from "@/lib/content/takes";
 import { formatPrice, getTier } from "@/lib/content/membership";
 import {
@@ -422,6 +423,62 @@ export default async function Home() {
             />
           )}
         </div>
+
+        {/* ------------------------------------------------------ the interview */}
+        {/* THE ARTICLE, and it sits directly above the quotes section on
+            purpose. Melissa, 2026-09-01.
+
+            The two are the same argument at two speeds. This one is a
+            headline and a face — four seconds, and a stranger scrolling can
+            take the whole offer in without reading a word. The quotes below
+            are the slow version for somebody who stopped.
+
+            SO THE ORDER IS SCAN, THEN READ. Reversed, the first thing a
+            skimmer meets is five paragraphs of a woman they have not been
+            introduced to, and skimmers do not stop for that.
+
+            The count comes from the array rather than the copy, so the
+            headline cannot end up promising twenty questions of a
+            nineteen-question article. */}
+        <section
+          aria-labelledby="interview-heading"
+          className="mx-auto w-full max-w-6xl px-5 pt-16 sm:px-8 sm:pt-24"
+        >
+          <Link
+            href="/twenty-questions"
+            className="group block overflow-hidden rounded-xl border border-hairline bg-charcoal/30 p-4 transition-colors duration-(--duration-quick) hover:border-amber/40 sm:grid sm:grid-cols-[minmax(0,13rem)_1fr] sm:items-center sm:gap-6 sm:p-5"
+          >
+            <div className="relative mx-auto aspect-[3/4] w-40 overflow-hidden rounded-lg sm:mx-0 sm:w-full">
+              <Image
+                src={luna.portrait}
+                alt=""
+                fill
+                sizes="(max-width: 640px) 10rem, 13rem"
+                className="object-cover object-[68%_center] brightness-90 transition-all duration-(--duration-cinematic) group-hover:scale-[1.03] group-hover:brightness-100"
+              />
+            </div>
+
+            <div className="pt-5 sm:pt-0">
+              <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                Reader Q&amp;A
+              </p>
+              <h2
+                id="interview-heading"
+                className="mt-3 max-w-xl font-display text-2xl font-light leading-snug text-ivory sm:text-3xl"
+              >
+                We asked Luna {twentyQuestions.length} questions. She answered{" "}
+                {twentyQuestions.length - 1}.
+              </h2>
+              <p className="mt-3 max-w-lg leading-relaxed text-stone">
+                Her family, her mornings, both men, and the one about Tyson she
+                started to answer and then took back out.
+              </p>
+              <span className="mt-5 inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) group-hover:border-amber group-hover:text-amber">
+                Read the interview
+              </span>
+            </div>
+          </Link>
+        </section>
 
         {/* --------------------------------------------------------- who she is */}
         {/* MEET LUNA, before the page explains the situation she is in.

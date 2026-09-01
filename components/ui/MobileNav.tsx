@@ -56,7 +56,7 @@ export function MobileNav({ items, showSignIn }: MobileNavProps) {
   }, [open]);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -113,7 +113,7 @@ export function MobileNav({ items, showSignIn }: MobileNavProps) {
             {/*
               Sign-in is the only way a returning member gets back to what they
               have paid for, and on a phone this menu is the ONLY place it
-              appears — the header's sign-in link is `hidden md:inline`, and the
+              appears — the header's sign-in link is `hidden lg:inline`, and the
               one prominent button up there says "Read on" and goes to
               /membership. So it gets a real target and the same weight as the
               nav above it. It used to be small muted text at the bottom of the

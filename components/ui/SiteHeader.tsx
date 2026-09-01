@@ -41,6 +41,13 @@ export function SiteHeader() {
     // with no idea who these people are, and the rest of this bar assumes they
     // already know — "Browse" and "Cast" are only useful once you care.
     { href: "/about", label: "What this is" },
+    // ADDED 2026-09-01 with the reader Q&A. Sits second, beside "What this is",
+    // because the two do the same job for a stranger — that page explains the
+    // situation, this one introduces the person it happens to. Labelled
+    // "Interview" rather than "Twenty Questions": the bar already carries six
+    // items at md and a two-word label crowds it, and "Interview" is what
+    // somebody scans for.
+    { href: "/twenty-questions", label: "Interview" },
     // Then her writing, ahead of the video. Free journal pages are the
     // strongest thing a stranger can be handed, which is why the home page
     // leads with them too.
@@ -99,8 +106,17 @@ export function SiteHeader() {
             Luna Vale
           </Link>
 
-          {/* The inline nav, from md up. Below that, the menu carries it. */}
-          <nav aria-label="Site" className="hidden items-baseline gap-5 md:flex">
+          {/* The inline nav, from lg up. Below that, the menu carries it.
+              IT USED TO SWITCH ON AT md AND DID NOT FIT THERE. Measured at
+              exactly 768: the header row was 783px of content in a 768px box
+              with SIX links, before "Interview" was added — already 15px over
+              and quietly squashing the sign-in control on the right. Adding a
+              seventh made it worse rather than causing it.
+              Moving the switch to lg means the bar only goes inline once there
+              is genuinely room, and tablets get the menu, which holds however
+              many links there turn out to be. That is the same argument that
+              built MobileNav in the first place. */}
+          <nav aria-label="Site" className="hidden items-baseline gap-5 lg:flex">
             {items.map((item) => {
               const link = (
                 <Link
@@ -125,7 +141,7 @@ export function SiteHeader() {
           {authConfigured() && (
             <>
               <SignedIn>
-                <span className="hidden items-baseline gap-3 md:inline-flex">
+                <span className="hidden items-baseline gap-3 lg:inline-flex">
                   {/* max-w + truncate lives inside ViewerEmail: a long address
                       must not push the account button off a narrow window. */}
                   <ViewerEmail />
@@ -135,7 +151,7 @@ export function SiteHeader() {
               <SignedOut>
                 <Link
                   href="/sign-in"
-                  className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber md:inline"
+                  className="hidden text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber lg:inline"
                 >
                   Sign in
                 </Link>

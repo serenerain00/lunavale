@@ -156,9 +156,21 @@ export default async function WatchPage({ params }: WatchPageProps) {
         {!allowed && video.preview && (
           <div className="mt-4 rounded-lg border border-amber/25 bg-amber/[0.04] px-4 py-3 text-sm leading-relaxed text-stone">
             You&rsquo;re watching{" "}
-            {video.preview.hookStart ? "" : "the first "}
+            {video.preview.segments || video.preview.hookStart
+              ? ""
+              : "the first "}
             {formatDuration(video.preview.durationSeconds)} of{" "}
-            {formatDuration(video.durationSeconds)}. The rest is part of{" "}
+            {formatDuration(video.durationSeconds)}
+            {/* A SEGMENTED PREVIEW HAS TO SAY SO. This line already refused to
+                claim a mid-scene window was "the first" — the same refusal
+                applies harder to a cut assembled from two places, which is not
+                a continuous thirty seconds of anything. Without this a visitor
+                would reasonably think they had watched half a minute straight
+                and that the scene simply jumps. */}
+            {video.preview.segments
+              ? `, from ${video.preview.segments.length === 2 ? "two" : String(video.preview.segments.length)} places in it`
+              : ""}
+            . The rest is part of{" "}
             <Link
               href="/membership"
               className="text-amber underline-offset-4 transition-colors duration-(--duration-quick) hover:underline"

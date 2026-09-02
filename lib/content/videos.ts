@@ -142,6 +142,29 @@ export interface Video {
      * human to pick from rather than deciding.
      */
     hookStart?: number;
+    /**
+     * A preview assembled from MORE THAN ONE window, as `[start, end]` pairs in
+     * seconds against the scene.
+     *
+     * The default preview is one contiguous window, which is the right shape
+     * for almost everything here: it is a piece of the real scene, it is
+     * obviously not the whole thing, and it cannot misrepresent the edit.
+     *
+     * It stops being right when the scene's own opening is not watchable as a
+     * hook — ty-josh-fight spends its first fifteen seconds on a truck coming
+     * up a road, which is fine in a film and fatal on a social feed. That
+     * scene's preview doubles as its Instagram reel (Melissa, 2026-09-02:
+     * "create a 30sec reel from that video as bait for IG… and then have that
+     * be the preview"), so the cut has to earn a viewer in the first second.
+     *
+     * WHEN THIS IS SET, `hookStart` is meaningless and must be left off — the
+     * preview has several starts. The /watch page reads this field to say so
+     * rather than claiming the visitor watched the first thirty seconds, which
+     * would be false. Both scripts/make-previews.mjs and scripts/make-reel.mjs
+     * cut from here, so the reel on Instagram and the preview on the site are
+     * the same edit by construction rather than by anybody remembering.
+     */
+    segments?: [number, number][];
     /** Why this window, in a few words. Shows up nowhere; it is for Melissa. */
     hookNote?: string;
   };
@@ -1766,12 +1789,24 @@ export const videos: Video[] = [
     preview: {
       file: "ty-josh-fight-preview.proxy.mp4",
       durationSeconds: 30,
-      // NO hookStart — the opening, on Melissa's instruction, and the opening
-      // earns it the way luna-ty-lakehouse-confrontation's does: she drives up
-      // the farm road, gets out, and walks into something already happening,
-      // which is exactly how she comes to it in the scene.
+      // TWO WINDOWS, NOT THE OPENING — changed 2026-09-02 when this preview
+      // became the Instagram reel as well. The opening is 0:00-0:18 of a truck
+      // coming up a road and her at the wheel, which is a good way into a film
+      // and the wrong way into a feed: a reel has about a second and a half to
+      // earn the next one, and a truck does not.
+      //
+      // 0:20.5-0:38.5 opens ON the two of them already walking into each
+      // other, so the first frame is the question. 1:33-1:45 is where she is
+      // in the middle of it with a hand on each of them.
+      //
+      // NO hookStart, deliberately: with segments there are two starts and the
+      // field would be a lie. See the note on `segments` in the interface.
+      segments: [
+        [20.5, 38.5],
+        [93, 105],
+      ],
       hookNote:
-        "The first thirty seconds, Melissa's call. She drives in and walks into something that started without her. It ends as the two of them take hold of each other, and a minute and a half before she is the one on the ground.",
+        "Two windows, cut as the Instagram reel and used as the preview. It opens on the two of them already going at it, and the second piece is her in the middle of it. It ends about a minute before she is struck — the punch, the ground and her face are all outside it, which is the whole point of the bait.",
     },
     // BOTH NOTES, AND THEY CARRY THE PREVIEW TOO. Checked at three-second
     // steps: they square up at about 0:21 and are swinging by 0:28, so the

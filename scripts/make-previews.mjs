@@ -44,7 +44,8 @@
  */
 
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import path from "node:path";
 import process from "node:process";
 
@@ -202,31 +203,47 @@ const OVERRIDES = {
   // them leaving the room. Nothing to flag.
   "luna-ty-lakehouse-confrontation": 30,
 
-  // 30s, Melissa's call on release, 2026-09-02: "its behind membership 30sec
-  // preview for now". A seventh of the 3:25 runtime, so nowhere near the
-  // fraction cap.
-  //
-  // THE OPENING, and the third scene here to take it rather than a hookStart
-  // window. The first eighteen seconds are Luna driving up the farm road and
-  // getting out of the truck, which on any other scene would be exactly the
-  // establishing shot this file exists to skip past. Here it is the hook: she
-  // is arriving at something that started without her, and the audience knows
-  // that before she does.
-  //
-  // WHAT IS IN THE WINDOW, sampled at three-second steps: the drive up, her at
-  // the wheel, her walking toward the barn, and the two men squaring up at
-  // about 0:21 and swinging by 0:28. So this preview CONTAINS VIOLENCE, and it
-  // is served with no account and no age check. The scene's `violence` note is
-  // the thing standing between a stranger and it, which is the same point
-  // already written down for luna-ty-panic-attack.
-  //
-  // WHAT IT STOPS SHORT OF: she is struck at about 2:03 and the last minute is
-  // held on her face while she loses consciousness. Thirty seconds ends a
-  // minute and a half before any of that, and the whole reason the scene
-  // exists — that she takes the punch and never learns what it was over — is
-  // entirely outside the window.
-  "ty-josh-fight": 30,
+  // ty-josh-fight IS NOT HERE, and that is deliberate. Its preview is two
+  // windows rather than one, so the length is not a number in this table —
+  // it is `preview.segments` in lib/content/videos.ts, where the in and out
+  // points and the reasoning live together. A stale 30 sitting here would be
+  // ignored by the segment path and would read like the real setting.
 };
+
+/**
+ * `preview.segments` for one scene block, or null.
+ *
+ * Bracket-matched rather than regexed to a closing "]": the value is an array
+ * OF arrays, and the first "]" in it is the end of the first pair, not the end
+ * of the field. A lazy regex here would silently return half the edit, which
+ * is the kind of bug that ships a fifteen-second preview claiming to be
+ * thirty.
+ */
+function parseSegments(block) {
+  const at = block.indexOf("segments:");
+  if (at === -1) return null;
+  const open = block.indexOf("[", at);
+  if (open === -1) return null;
+
+  let depth = 0;
+  let close = -1;
+  for (let i = open; i < block.length; i += 1) {
+    if (block[i] === "[") depth += 1;
+    else if (block[i] === "]") {
+      depth -= 1;
+      if (depth === 0) {
+        close = i;
+        break;
+      }
+    }
+  }
+  if (close === -1) return null;
+
+  const nums = block.slice(open, close + 1).match(/\d+(?:\.\d+)?/g)?.map(Number) ?? [];
+  const pairs = [];
+  for (let i = 0; i + 1 < nums.length; i += 2) pairs.push([nums[i], nums[i + 1]]);
+  return pairs.length > 0 ? pairs : null;
+}
 
 /**
  * Scraped out of the content module rather than imported, for the same reason
@@ -244,8 +261,9 @@ function premiumScenes() {
     // Where the hook window starts. Absent = the opening, which is the old
     // behavior and still right for a scene that opens on its best question.
     const hookStart = Number(block.match(/hookStart: ([\d.]+)/)?.[1] ?? 0);
+    const segments = parseSegments(block);
     if (slug && access === "premium" && file && duration) {
-      out.push({ slug, file, duration, hookStart });
+      out.push({ slug, file, duration, hookStart, segments });
     }
   }
   return out;
@@ -260,12 +278,103 @@ if (scenes.length === 0) {
   process.exit(1);
 }
 
+/**
+ * Cut a preview that is more than one window, by rendering each piece and
+ * concatenating them.
+ *
+ * Each piece is re-encoded to identical settings first, so the join itself can
+ * be a stream copy and cannot re-compress anything twice.
+ *
+ * The FADES are the whole reason this is not four lines. A hard splice between
+ * two points in a continuous take pops audibly — the room tone and the score
+ * are both mid-phrase — so every piece gets 60ms of audio ramp at each end,
+ * which is short enough to be inaudible as a fade and long enough to kill the
+ * click. The picture is left to cut hard, because a visible dissolve would
+ * make two windows look like one continuous shot, which is a lie about the
+ * edit.
+ *
+ * The 0.25s fade IN on the first piece is the same one the single-window path
+ * uses, and for the same reason: a window that opens mid-scene lands hard.
+ * There is no fade at the END, also as before — these are meant to stop
+ * mid-breath. The hard cut IS the hook.
+ */
+function cutSegments(src, segments, out) {
+  const dir = mkdtempSync(path.join(tmpdir(), "lv-preview-"));
+  try {
+    const parts = segments.map(([from, to], i) => {
+      const part = path.join(dir, `part${i}.mp4`);
+      const dur = to - from;
+      const vf = i === 0 ? "fade=t=in:st=0:d=0.25" : null;
+      const af = [
+        i === 0 ? "afade=t=in:st=0:d=0.25" : "afade=t=in:st=0:d=0.06",
+        `afade=t=out:st=${(dur - 0.06).toFixed(3)}:d=0.06`,
+      ].join(",");
+      execFileSync(
+        "ffmpeg",
+        [
+          "-nostdin", "-y", "-loglevel", "error",
+          "-ss", String(from),
+          "-i", src,
+          "-t", String(dur),
+          ...(vf ? ["-vf", vf] : []),
+          "-af", af,
+          "-c:v", "libx264", "-preset", "medium", "-crf", "23",
+          "-pix_fmt", "yuv420p",
+          "-c:a", "aac", "-b:a", "128k", "-ar", "48000",
+          part,
+        ],
+        { stdio: "inherit" },
+      );
+      return part;
+    });
+
+    const list = path.join(dir, "list.txt");
+    writeFileSync(list, parts.map((f) => `file '${f}'`).join("\n"));
+    execFileSync(
+      "ffmpeg",
+      [
+        "-nostdin", "-y", "-loglevel", "error",
+        "-f", "concat", "-safe", "0", "-i", list,
+        "-c", "copy", "-movflags", "+faststart",
+        out,
+      ],
+      { stdio: "inherit" },
+    );
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
 let cut = 0;
 for (const scene of scenes) {
-  const seconds = Math.min(
-    OVERRIDES[scene.slug] ?? MAX_SECONDS,
-    Math.floor(scene.duration * MAX_FRACTION),
-  );
+  const segments = scene.segments;
+  const segmentSeconds = segments
+    ? segments.reduce((n, [from, to]) => n + (to - from), 0)
+    : 0;
+
+  /*
+    A HAND-MADE EDIT IS NOT CLAMPED, it is checked and complained about.
+
+    The single-window path takes Math.min against the one-third rule, so an
+    over-long override comes out quietly shortened — which is right for a
+    number in the OVERRIDES table and wrong for a list of in and out points.
+    Truncating segments would silently drop the last piece of somebody's cut
+    and still call it a preview. So this warns and proceeds: the cap exists to
+    stop a preview eating the scene, and a person who wrote two windows by hand
+    has already decided.
+  */
+  if (segments && segmentSeconds > scene.duration * MAX_FRACTION) {
+    console.error(
+      `  WARNING ${scene.slug}: segments total ${segmentSeconds.toFixed(1)}s of a ${scene.duration}s scene — over the one-third rule. Cutting it anyway.`,
+    );
+  }
+
+  const seconds = segments
+    ? segmentSeconds
+    : Math.min(
+        OVERRIDES[scene.slug] ?? MAX_SECONDS,
+        Math.floor(scene.duration * MAX_FRACTION),
+      );
   // Clamped so a hookStart that outlived an edit cannot silently produce a
   // preview that runs off the end of the scene into nothing.
   const start = Math.max(0, Math.min(scene.hookStart, Math.max(0, scene.duration - seconds)));
@@ -281,7 +390,11 @@ for (const scene of scenes) {
   const mmss = (n) => `${Math.floor(n / 60)}:${String(Math.round(n) % 60).padStart(2, "0")}`;
   const plan =
     `${scene.slug.padEnd(28)} ${mmss(scene.duration)} -> ${mmss(seconds)}` +
-    (start ? ` from ${mmss(start)}` : " from the top");
+    (segments
+      ? ` in ${segments.length} pieces: ${segments.map(([f, t]) => `${mmss(f)}-${mmss(t)}`).join(" + ")}`
+      : start
+        ? ` from ${mmss(start)}`
+        : " from the top");
 
   if (listOnly) {
     console.log(`  ${plan}`);
@@ -305,22 +418,26 @@ for (const scene of scenes) {
   // The fade IN at the start stays, on the other hand: a window that begins
   // mid-scene lands hard, and a quarter-second up is the difference between
   // arriving somewhere and being dropped there.
-  const fadeIn = start > 0 ? ["-vf", "fade=t=in:st=0:d=0.25", "-af", "afade=t=in:st=0:d=0.25"] : [];
-  execFileSync(
-    "ffmpeg",
-    [
-      "-nostdin", "-y", "-loglevel", "error",
-      "-ss", String(start),
-      "-i", src,
-      "-t", String(seconds),
-      ...fadeIn,
-      "-c:v", "libx264", "-preset", "medium", "-crf", "23",
-      "-pix_fmt", "yuv420p",
-      "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart",
-      out,
-    ],
-    { stdio: "inherit" },
-  );
+  if (segments) {
+    cutSegments(src, segments, out);
+  } else {
+    const fadeIn = start > 0 ? ["-vf", "fade=t=in:st=0:d=0.25", "-af", "afade=t=in:st=0:d=0.25"] : [];
+    execFileSync(
+      "ffmpeg",
+      [
+        "-nostdin", "-y", "-loglevel", "error",
+        "-ss", String(start),
+        "-i", src,
+        "-t", String(seconds),
+        ...fadeIn,
+        "-c:v", "libx264", "-preset", "medium", "-crf", "23",
+        "-pix_fmt", "yuv420p",
+        "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart",
+        out,
+      ],
+      { stdio: "inherit" },
+    );
+  }
   cut += 1;
   console.log(`  ${plan}  -> ${outName}`);
 }

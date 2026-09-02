@@ -2204,6 +2204,94 @@ export const journal: JournalEntry[] = [
     ],
   },
 
+  /*
+    THE FARM FIGHT, her side of it. Pairs with ty-josh-fight.
+
+    PLACED HERE, DIRECTLY AFTER `he-shouted`, AND THAT IS MY INFERENCE RATHER
+    THAN HER INSTRUCTION — same standing as the note on `your-date` below, and
+    moving it is one cut and paste. The argument for this slot: `he-shouted` is
+    the first time in twenty years Tyson puts Josh into a sentence as the
+    reason, and this is the week he stops saying it to her and says it to him.
+    The entry after it is Josh asking, in bed, how often Tyson comes up here —
+    which reads as a consequence from here and as a coincidence from anywhere
+    else.
+
+    FROM MELISSA, with the scene: Josh and Tyson are working the farm, Luna is
+    back with Josh, the two of them are having problems again and Tyson has
+    been hearing about it. Tyson tells Josh to back off making the same
+    mistakes with her — he was the one who picked up the pieces last time, so
+    this is protection. Josh takes it as an accusation. It goes from arguing to
+    hands. Luna arrives, gets between them, and catches a fist Tyson never saw
+    her walk into. She goes down on her head. Both sides of her face are
+    bleeding. Tyson runs for help, Josh stays with her, and the scene ends as
+    she passes out.
+
+    AND SHE NEVER FINDS OUT WHAT IT WAS ABOUT. That is the canon, it is the
+    hardest thing in the brief, and it is what this entry is built on: the
+    subject of the page is not her face, it is that two men who agree on
+    nothing have independently arrived at the same decision about what she is
+    allowed to know.
+
+    WHAT IS INVENTED HERE and is hers to cut: the four days, the kitchen, that
+    she asked them both and what each of them said back ("it was nothing" /
+    "it's handled"), Josh being gentle with her afterwards, and that she cannot
+    remember the punch. That last one is doing real work — she is knocked
+    unconscious on screen, so a blank where the blow should be is the honest
+    shape of it, and it also means the page never has to state whose fist it
+    was. If Melissa's canon is that Luna DOES know it was Tyson, the blank
+    comes out and the entry still stands.
+
+    Nothing medical is invented. No hospital, no diagnosis, no stitches — the
+    footage ends before any of that and guessing at it would be inventing a
+    day the story has not shown.
+
+    The last line deliberately echoes `the-drive` ("there is an entry a few
+    pages back where I wrote that I was not frightened of him, and asked to be
+    held to it"). She keeps this book partly to catch herself later, and that
+    is a habit worth being consistent about.
+
+    NOTES: `violence` and `knocked-out`, the same pair as the scene.
+
+    FOUR DAYS LATER, AND `sceneSlug` SAYS "when it's the same day". Bending it
+    on purpose: she is unconscious when the scene ends, so a page written that
+    night would be the one thing this entry cannot be. The home page label
+    reads "She wrote about the same day", which is still true of a page written
+    later about that day — but it is worth knowing the gap is deliberate rather
+    than an oversight, in case a future entry needs the same licence.
+
+    DRAFT PROSE, written to the brief. Replace it.
+  */
+  {
+    id: "neither-of-them-will-say",
+    addedOn: "2026-09-02",
+    dateline: "Four days, and neither of them will say",
+    place: "farmhouse",
+    where: "The kitchen, sitting down",
+    about: ["luna", "josh", "tyson"],
+    sceneSlug: "ty-josh-fight",
+    access: "premium",
+    mature: false,
+    notes: ["violence", "knocked-out"],
+    body: [
+      "I knew before I had the truck stopped. There was dust up by the barn where there is never dust on a Tuesday, and two shapes too close together.",
+      "I have gone looking for what I thought in the ten seconds between the truck and the yard and there is nothing there. I did not think anything. I got out and I went.",
+      "This is where the page goes blank, and I am going to leave it blank rather than fill it in out of what I have been told since.",
+      "What I have is the sound. Not the hit — the two of them, that low grunting noise men make that is nothing whatsoever like it is in a film. And I have somebody's shoulder. And then I have Josh about four inches from my face saying my name over and over like it was a job somebody had given him.",
+      "Somewhere in between, one of them put me on the ground.",
+      "The left side of my face is the fist. The right side is the yard. I keep coming back to that and I cannot leave it alone — as if I had been having an argument with the ground as well.",
+      "I have Tyson running, too, from down there, at the angle where the world is all legs. Him going away from me at a flat sprint toward the house. I have been told since that he was getting help and I believe it, and I am writing down anyway that for about two seconds I thought he was leaving.",
+      "I have asked them both what it was about.",
+      "Josh said it was nothing. He said it in the voice he keeps for things that are closed, and then he was gentle with me for three days, which is an answer and is not the one I asked for.",
+      "Tyson said, it's handled. Two words. And he could not look at the left side of my face while he said them.",
+      "Twenty years, and that man has never once managed to lie to me. He did not lie this time either. He refused, which is new, and which he has apparently been practising since the spring.",
+      "So here is what I have actually got. Two men who put hands on each other in a working yard in the middle of a Tuesday. Two men who cannot agree on the weather. And between them, without one word of conference that I know of, the exact same decision about what I am allowed to be told.",
+      "That is the part that has had me up at night. Not my face. The agreeing.",
+      "They have been having a conversation about me. Not with me. About me, for long enough and often enough that it got as far as the dirt, and I was not in the room for any of it and I am not going to be shown the minutes.",
+      "I have lived in this house ten years and I have never been a subject before.",
+      "I do not like it. I am putting that down in plain handwriting in case I read this back in six months and find that I have got used to it.",
+    ],
+  },
+
   /* ---------------------------------------------------------- it turns ---- */
   {
     id: "he-asked-about-tyson",

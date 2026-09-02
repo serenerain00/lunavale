@@ -7,6 +7,16 @@ import {
 interface ContentNoticeProps {
   notes?: readonly ContentNoteId[];
   className?: string;
+  /**
+   * What the reader is about to do with the thing underneath — used only by
+   * the severe heading, which is a sentence and therefore needs a verb.
+   *
+   * It defaults to "play" because for a long time every severe note was on a
+   * scene. That stopped being true on 2026-09-02, when `knocked-out` went on
+   * the farm-fight journal entry and a page of handwriting started telling
+   * people "Before you play this".
+   */
+  action?: "play" | "read" | "open";
 }
 
 /**
@@ -21,7 +31,7 @@ interface ContentNoticeProps {
  * TWO WEIGHTS. Most notes get the quiet box. A note marked `severe` — the
  * strangulation and the sexual coercion in the farmhouse scene — raises the
  * whole panel to the amber treatment an explicit cut already uses, and leads
- * with "Before you play this".
+ * with "Before you play this" (or read, or open — see `action`).
  *
  * That is not the alarm styling the content-notes rules rule out, and the
  * distinction is worth being precise about. There is still nothing to click
@@ -33,7 +43,11 @@ interface ContentNoticeProps {
  *
  * Renders nothing when there are no notes, so call sites don't need to guard.
  */
-export function ContentNotice({ notes, className = "" }: ContentNoticeProps) {
+export function ContentNotice({
+  notes,
+  className = "",
+  action = "play",
+}: ContentNoticeProps) {
   const resolved = getContentNotes(notes);
   if (resolved.length === 0) return null;
   const severe = hasSevereNote(notes);
@@ -52,7 +66,7 @@ export function ContentNotice({ notes, className = "" }: ContentNoticeProps) {
           severe ? "text-amber-soft" : "text-stone-dim"
         }`}
       >
-        {severe ? "Before you play this" : "Contains"}
+        {severe ? `Before you ${action} this` : "Contains"}
       </p>
       <ul className="mt-1.5 space-y-1">
         {resolved.map((note) => (

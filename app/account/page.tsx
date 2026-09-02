@@ -206,7 +206,7 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
               href="/membership"
               className="mt-6 inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
             >
-              See what membership opens
+              {getTier("vault")!.cta}
             </Link>
           </section>
         )}

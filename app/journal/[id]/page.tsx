@@ -9,6 +9,7 @@ import { getEntry, journal, opening } from "@/lib/content/journal";
 import { getPerson, getPlace } from "@/lib/content/taxonomy";
 import { getVideo } from "@/lib/content/videos";
 import { pageMetadata } from "@/lib/seo/metadata";
+import { getTier } from "@/lib/content/membership";
 
 interface EntryPageProps {
   params: Promise<{ id: string }>;
@@ -105,7 +106,11 @@ export default async function JournalEntryPage({ params }: EntryPageProps) {
           </h1>
         </header>
 
-        <ContentNotice notes={entry.notes} className="mx-auto mb-6 max-w-2xl" />
+        <ContentNotice
+          notes={entry.notes}
+          action="read"
+          className="mx-auto mb-6 max-w-2xl"
+        />
 
         {allowed ? (
           <JournalPaper entry={entry} tilt={tilt} />
@@ -211,7 +216,7 @@ function LockedEntry({
             href="/membership"
             className="inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
           >
-            See what membership opens
+            {getTier("vault")!.cta}
           </Link>
         </div>
       </div>

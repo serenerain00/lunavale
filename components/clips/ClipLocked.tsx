@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Clip } from "@/lib/content/clips";
+import { getTier } from "@/lib/content/membership";
 
 /**
  * The locked panel for a members-only clip — the portrait counterpart to
@@ -42,7 +43,7 @@ export function ClipLocked({ clip }: { clip: Clip }) {
             href="/membership"
             className="inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
           >
-            See what membership opens
+            {getTier("vault")!.cta}
           </Link>
         </div>
       </div>

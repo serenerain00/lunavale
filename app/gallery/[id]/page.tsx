@@ -150,7 +150,11 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
             ))}
           </div>
 
-          <ContentNotice notes={gallery.notes} className="mt-5 max-w-2xl" />
+          <ContentNotice
+            notes={gallery.notes}
+            action="open"
+            className="mt-5 max-w-2xl"
+          />
 
           <div className="mt-5 flex flex-wrap gap-3">
             {scene && (

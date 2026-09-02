@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/components/ui/SiteHeader";
+import { getTier } from "@/lib/content/membership";
 import { getMembership } from "@/lib/access/entitlement";
 import {
   notebookPages,
@@ -85,7 +86,7 @@ export default async function BetweenTakesPage() {
                   href="/membership"
                   className="inline-flex min-h-11 items-center rounded-full border border-hairline px-6 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
                 >
-                  What membership opens
+                  {getTier("vault")!.cta}
                 </Link>
               )}
             </div>

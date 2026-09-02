@@ -1054,14 +1054,24 @@ export default async function Home() {
                   and memberships are what fund the ones still being shot.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
-                  {/* CTA WORDING, per the strategy rewrite: name the outcome,
-                      not the transaction. "See what it opens" describes a
-                      product; this describes what happens to her. */}
+                  {/* CTA WORDING, changed 2026-09-02 (Melissa's call). It
+                      read "Read the rest of her", per an earlier argument that
+                      a CTA should name the outcome rather than the
+                      transaction. The trouble with it is that a stranger who
+                      has scrolled this whole page cannot tell from those words
+                      that there is a membership on the other side of them: the
+                      one button here that asks for money read like another
+                      link into the journal.
+
+                      The label is read from vault.cta rather than typed, so
+                      this button and the one that actually starts checkout on
+                      /membership cannot drift apart — both say "Join the
+                      LunaVerse" because the tier data says it once. */}
                   <Link
                     href="/membership"
                     className="inline-flex min-h-12 items-center rounded-full bg-amber px-7 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
                   >
-                    Read the rest of her
+                    {vault.cta}
                   </Link>
                   <Link
                     href="/browse"

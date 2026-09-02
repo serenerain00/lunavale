@@ -9,6 +9,7 @@ import { galleryForScene } from "@/lib/content/gallery";
 import { SceneWatch } from "@/components/media/SceneWatch";
 import { JournalCard } from "@/components/journal/JournalCard";
 import { LockedNotice } from "@/components/membership/LockedNotice";
+import { getTier } from "@/lib/content/membership";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContentNotice } from "@/components/ui/ContentNotice";
 import { RatingBadge } from "@/components/ui/RatingBadge";
@@ -213,7 +214,7 @@ export default async function WatchPage({ params }: WatchPageProps) {
                 href="/membership"
                 className="text-amber underline-offset-4 transition-colors hover:underline"
               >
-                What membership opens
+                {getTier("vault")!.cta}
               </Link>
             </p>
           )}

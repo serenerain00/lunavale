@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import { authConfigured } from "@/lib/billing/provider";
+import { getTier } from "@/lib/content/membership";
 import { SignOut } from "@/components/ui/SignOut";
 import {
   Guest,
@@ -175,13 +176,24 @@ export function SiteHeader() {
               href="/membership"
               className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full bg-amber px-3.5 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft sm:px-4"
             >
-              {/* The full label needs room a phone doesn't have.
-                  "Become a member" named the transaction; this names what
-                  they get, which is the whole point of the 2026-08-10
-                  strategy rewrite. Kept short because it is a bar button —
-                  the long-form version of the argument is on /membership. */}
-              <span className="sm:hidden">Read on</span>
-              <span className="hidden sm:inline">Keep reading her</span>
+              {/* THE MOST PROMINENT CTA ON THE SITE — the amber pill in a
+                  sticky bar on every page — and until 2026-09-02 it said "Read
+                  on" / "Keep reading her".
+
+                  Those came out of the 2026-08-10 strategy rewrite, on the
+                  argument that a CTA should name what somebody gets rather
+                  than the transaction. The argument is sound and the labels
+                  still failed at the one job this button has: a stranger could
+                  not tell there was a membership behind them, so the only
+                  control on the page that asks for money read like a link
+                  further into the journal.
+
+                  The long label is the tier's own, so this and the button that
+                  starts checkout cannot drift. The short one is not derived —
+                  it is the same word cut down to fit a 390px bar, and it has
+                  to stay hand-written for that. */}
+              <span className="sm:hidden">Join</span>
+              <span className="hidden sm:inline">{getTier("vault")!.cta}</span>
             </Link>
           </Guest>
         </div>

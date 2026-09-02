@@ -1722,6 +1722,80 @@ export const videos: Video[] = [
     // beside it carries him instead.
     about: ["luna", "tyson"],
   },
+  {
+    // THE FARM FIGHT. The first assembled cut to come out of the farm
+    // material: josh-tyson-farm/ and ty-josh-tractor/ have sat in stories/
+    // since July as raw takes and stills with no edit, and both are listed as
+    // "not imported" at the top of scripts/import-cuts.sh. This is where that
+    // footage finally landed. Source is stories/ty-josh-fight/ty-josh-fight.mp4,
+    // 1936x1080, 205.2s, registered in import-cuts.sh with the poster frame
+    // and the fade.
+    slug: "ty-josh-fight",
+    // PLACEHOLDER title and synopsis — hers to replace. "Between Them" for
+    // both meanings: where she puts herself the moment she sees it, and where
+    // she has been standing since she went back to Josh.
+    title: "Between Them",
+    // WHAT THE FIGHT IS ABOUT IS WITHHELD HERE ON PURPOSE, and that is canon
+    // rather than a tease. Tyson tells Josh to stop making the same mistakes
+    // with her — he was the one who picked up the pieces when they broke up,
+    // so he is protecting her — and Josh takes it as an accusation. Luna
+    // arrives on the end of it and is unconscious before anyone explains
+    // anything, so she never learns the subject. A synopsis that gave it away
+    // would know something the story does not.
+    synopsis:
+      "They have been working the farm together all summer, and Tyson has been hearing how it is going with Josh. What he says to him is meant to protect her. Josh does not take it that way. She drives in on the end of it — and she never does find out what it was about.",
+    file: "ty-josh-fight.proxy.mp4",
+    poster: "/posters/ty-josh-fight.jpg",
+    // 205, and no trim: blackdetect finds no trailing black, so the export
+    // stops dead on her face. The 1.2s fade is applied to the proxy on import
+    // rather than in the timeline — see the `fade` note in optimize-media.sh,
+    // and the line in import-cuts.sh for why this scene gets one at all.
+    durationSeconds: 205,
+    addedOn: "2026-09-02",
+    // PREMIUM WITH A PUBLIC WINDOW, Melissa on release: "its behind membership
+    // 30sec preview for now until i update it bc im gonna show parts on IG."
+    // The "for now" is the part to remember — when the Instagram cut goes out,
+    // this is the entry to revisit, and the argument in
+    // instagram-makes-free-cheap applies: footage already public on IG is
+    // footage the one-way door has already closed on.
+    access: "premium",
+    // Nothing sexual happens and nobody undresses. `mature` reads as "there is
+    // sex in this" (see the field) and would brace a viewer for entirely the
+    // wrong thing — what is actually in this scene is in `notes` below.
+    mature: false,
+    preview: {
+      file: "ty-josh-fight-preview.proxy.mp4",
+      durationSeconds: 30,
+      // NO hookStart — the opening, on Melissa's instruction, and the opening
+      // earns it the way luna-ty-lakehouse-confrontation's does: she drives up
+      // the farm road, gets out, and walks into something already happening,
+      // which is exactly how she comes to it in the scene.
+      hookNote:
+        "The first thirty seconds, Melissa's call. She drives in and walks into something that started without her. It ends as the two of them take hold of each other, and a minute and a half before she is the one on the ground.",
+    },
+    // BOTH NOTES, AND THEY CARRY THE PREVIEW TOO. Checked at three-second
+    // steps: they square up at about 0:21 and are swinging by 0:28, so the
+    // public thirty seconds is not the quiet before the fight — it contains
+    // the start of one. A preview is served with no account and no age check,
+    // which is the same reason luna-ty-panic-attack's note is written down as
+    // mattering more there than anywhere.
+    //
+    // `knocked-out` is outside the window (she is struck at about 2:03) and is
+    // still listed, because the note describes the scene a visitor is deciding
+    // whether to open, not only the slice they are about to see.
+    notes: ["violence", "knocked-out"],
+    // `hurt` for the obvious reason. `trust` because that is the actual
+    // subject: Tyson acting on what he owes her from the last time, Josh
+    // hearing it as an accusation, and neither of them able to say so without
+    // hands. `distance` was considered and left off — this is the opposite of
+    // two people refusing to close a gap.
+    feelings: ["hurt", "trust"],
+    // The farm. There is no `barn` or `farm` place and `farmhouse` is the one
+    // that covers this ground — same tagging as the rest of the farm material.
+    place: "farmhouse",
+    // All three, all on screen, all central. Rare for this library.
+    about: ["luna", "josh", "tyson"],
+  },
 ];
 
 /**

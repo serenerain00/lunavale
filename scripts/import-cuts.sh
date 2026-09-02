@@ -371,6 +371,34 @@ CUTS=(
   # The identical cut also sits at tyson-luna-bed/luna-tyson-bed.mp4 (same
   # 227.346576s, re-export). This folder is the keeper.
   "ty-luna-bed|stories/ty-luna-bed/ty-luna-bed-morning.mp4|6"
+  # THE FARM FIGHT, 2026-09-02. The first assembled edit to come out of the
+  # farm material: josh-tyson-farm/ and ty-josh-tractor/ are both listed at the
+  # top of this file as raw takes and stills with no cut, and this is where
+  # that footage finally landed.
+  #
+  # POSTER AT 24s — the two of them with a fistful of each other's shirt,
+  # outside the barn, the truck she arrived in still in the frame.
+  #
+  # 96s was tried first and rejected: Luna between them with a hand of each on
+  # her is the frame that best states what the scene is ABOUT, but cropped to
+  # 1280x720 for a card it loses the fight and reads as three people in a
+  # clinch. A poster is seen at thumbnail size by someone who has not read the
+  # synopsis, and that one invites exactly the wrong guess.
+  #
+  # 24s also happens to sit INSIDE the free preview window, so the card
+  # promises a frame every visitor can actually go and watch.
+  #
+  # No blood in it either way: her face is cut from about 2:06 on, and a poster
+  # sits at a permanent ungated URL.
+  #
+  # NO `end`. blackdetect finds nothing, so the export stops dead on her face
+  # and there is no run-out to trim.
+  #
+  # 1.2s FADE, and it is the one editorial call in this line. The scene ends on
+  # her losing consciousness, and the cut as exported stops on a held frame,
+  # which reads as the file running out rather than as her going under. Applied
+  # to the proxy, never to the master — clear the field and re-run to undo it.
+  "ty-josh-fight|stories/ty-josh-fight/ty-josh-fight.mp4|24||1.2"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

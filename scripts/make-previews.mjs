@@ -201,6 +201,31 @@ const OVERRIDES = {
   // Content in the window: two people in a living room, fully dressed, one of
   // them leaving the room. Nothing to flag.
   "luna-ty-lakehouse-confrontation": 30,
+
+  // 30s, Melissa's call on release, 2026-09-02: "its behind membership 30sec
+  // preview for now". A seventh of the 3:25 runtime, so nowhere near the
+  // fraction cap.
+  //
+  // THE OPENING, and the third scene here to take it rather than a hookStart
+  // window. The first eighteen seconds are Luna driving up the farm road and
+  // getting out of the truck, which on any other scene would be exactly the
+  // establishing shot this file exists to skip past. Here it is the hook: she
+  // is arriving at something that started without her, and the audience knows
+  // that before she does.
+  //
+  // WHAT IS IN THE WINDOW, sampled at three-second steps: the drive up, her at
+  // the wheel, her walking toward the barn, and the two men squaring up at
+  // about 0:21 and swinging by 0:28. So this preview CONTAINS VIOLENCE, and it
+  // is served with no account and no age check. The scene's `violence` note is
+  // the thing standing between a stranger and it, which is the same point
+  // already written down for luna-ty-panic-attack.
+  //
+  // WHAT IT STOPS SHORT OF: she is struck at about 2:03 and the last minute is
+  // held on her face while she loses consciousness. Thirty seconds ends a
+  // minute and a half before any of that, and the whole reason the scene
+  // exists — that she takes the punch and never learns what it was over — is
+  // entirely outside the window.
+  "ty-josh-fight": 30,
 };
 
 /**

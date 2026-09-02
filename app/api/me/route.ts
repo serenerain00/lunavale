@@ -65,6 +65,44 @@ export async function GET() {
     hasAnswered(jar.get(ANSWERED_COOKIE)?.value ?? ""),
   ]);
 
+  /*
+    TEMPORARY DIAGNOSTIC, added 2026-09-02 and to be removed once the header
+    bug is closed.
+
+    The report: signed in on the apex, Clerk's own /sign-in bounces her back
+    because the BROWSER has a session — and this route still says signedIn
+    false, so the header offers "Sign in" to somebody who is already in.
+
+    Everything cheap has already been ruled out from the outside: the route is
+    healthy and returns valid JSON, the viewer bundle ships and loads, the
+    firewall lets a browser-shaped request through, the production Clerk key is
+    the live instance, and CLERK_SECRET_KEY is a Config (not Sensitive)
+    variable so the middleware has it at build time.
+
+    What is left is a question only a real request can answer: does the session
+    cookie reach this function at all, and does clerkMiddleware resolve it?
+    Those are different failures with different fixes — a cookie that never
+    arrives is a client/scope problem, a cookie that arrives and resolves to no
+    user is a middleware or handshake problem.
+
+    Cookie NAMES and lengths only. No token values, no email, and the user id
+    is cut to eight characters — enough to tell two accounts apart in a log,
+    not enough to be an identifier worth having.
+  */
+  console.log(
+    "api/me diag " +
+      JSON.stringify({
+        clerkCookies: jar
+          .getAll()
+          .filter((c) => c.name.startsWith("__session") || c.name.startsWith("__client"))
+          .map((c) => `${c.name}:${c.value.length}`),
+        signedIn: session.signedIn,
+        member: membership.active,
+        tier: membership.tier,
+        authConfigured: authConfigured(),
+      }),
+  );
+
   const payload: ViewerPayload = {
     member: membership.active,
     tier: membership.tier,

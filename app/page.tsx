@@ -17,6 +17,7 @@ import {
   Member,
   UnlessAnswered,
 } from "@/components/access/Viewer";
+import { BETWEEN_US } from "@/lib/content/between-us";
 import { catalog, shelves, type CatalogItem } from "@/lib/content/catalog";
 import { pickHero } from "@/lib/content/hero";
 import {
@@ -149,6 +150,78 @@ export default async function Home() {
             <Hero hero={hero} />
           ))}
 
+
+        {/* -------------------------------------------------------- between us */}
+        {/* THE FIRST THING UNDER THE HERO, Melissa 2026-09-03: "I want new
+            comers to see that membership doesnt unlock just stills/scenes,
+            theyll have access to episodes as they are released with exclusive
+            first view access before IG."
+
+            It goes ABOVE the survey and above "Just added" because it is the
+            only thing on this page aimed at somebody who has not worked out
+            what the membership is yet, and by the time they reach the ask at
+            the foot of the page they have already decided.
+
+            A BAND, NOT A BILLBOARD. One hairline rule, small caps, two
+            sentences. The tone rule in CLAUDE.md is mature and understated,
+            and the thing being announced does not exist yet — shouting about
+            it would be the exact move the monetization doc rules out. No date
+            and no countdown for the same reason: a date this page cannot
+            guarantee is fake scarcity.
+
+            Copy and the on/off switch live in lib/content/between-us.ts, which
+            also writes down the part no code can enforce — that "before
+            Instagram" is an operational promise somebody has to keep. */}
+        {BETWEEN_US.announced && (
+          <section
+            aria-labelledby="between-us-heading"
+            className="border-b border-hairline"
+          >
+            <div className="mx-auto w-full max-w-6xl px-5 py-8 sm:px-8 sm:py-10 lg:flex lg:items-center lg:justify-between lg:gap-10">
+              <div className="lg:max-w-3xl">
+                <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                  {BETWEEN_US.eyebrow}
+                </p>
+                <h2
+                  id="between-us-heading"
+                  className="mt-2.5 font-display text-2xl font-light text-ivory sm:text-3xl"
+                >
+                  {BETWEEN_US.heading}
+                </h2>
+                {BETWEEN_US.body.map((line) => (
+                  <p
+                    key={line}
+                    className="mt-2.5 max-w-2xl text-sm leading-relaxed text-stone sm:text-base"
+                  >
+                    {line}
+                  </p>
+                ))}
+              </div>
+
+              {/* Both variants ship in the cached HTML and the client shows
+                  one — same rule as everywhere else, and nothing premium is
+                  passed as children to <Member>. */}
+              <div className="mt-5 shrink-0 lg:mt-0">
+                <Guest>
+                  <Link
+                    href="/membership"
+                    className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+                  >
+                    {vault.cta}
+                  </Link>
+                  <p className="mt-2 text-xs text-stone-dim">
+                    {`${BETWEEN_US.memberLine} From ${formatPrice(vault.priceMonthlyCents)} a month.`}
+                  </p>
+                </Guest>
+                <Member>
+                  <p className="max-w-xs text-sm leading-relaxed text-amber-soft">
+                    {BETWEEN_US.memberNote}
+                  </p>
+                </Member>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ------------------------------------------------------------ survey */}
         {/* THE SECOND THING ON THE PAGE (Melissa, 2026-08-26). It used to sit

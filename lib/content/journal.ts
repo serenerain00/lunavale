@@ -738,6 +738,60 @@ export const journal: JournalEntry[] = [
       "And the thing I am actually frightened of is not that she will not believe me. She will believe me. She will believe me immediately, in the first sentence, and then I will have to sit on a phone two thousand miles away and listen to forty years of my mother being right about people come apart in real time.",
     ],
   },
+  /*
+    RICK, FROM HER END. Added 2026-09-03, and it is the first journal page
+    filed to a scene Luna is not in.
+
+    THE SCENE IS "The Lake" (josh-rick-lake), which is free and until now had
+    nothing beside it: Josh goes to his father for a way to fix it, Rick tells
+    him he doesn't — "you fix you" — and lets slip that he has already spoken
+    to CATHY, who told him Luna is staying out at the lakehouse. A visitor
+    watches that and knows something Luna does not.
+
+    So this entry is the same fact arriving at the other end of the wire, days
+    later, third-hand, as one line at the close of a phone call with her
+    mother. She does not know Josh went to him. She does not know what Rick
+    said. She knows the man phoned, and she cannot make it mean nothing.
+
+    NOTHING IS INVENTED ABOUT RICK. Canon and `joshs-father` give the whole
+    characterization used here: never raises his voice, kind to Luna in a way
+    that turns out on inspection not to be a compliment to his son, proud of
+    Josh in a way that has never once landed as pride. The one new thing is
+    that he made a phone call, and the scene establishes that he made it.
+
+    THE LAST LINE IS THE ENTRY, and it is the same move as the first lie in
+    `the-italy-story`: a question she deliberately does not ask, written down
+    so that the not-asking is on the record.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "rick-asked-after-me",
+    addedOn: "2026-09-03",
+    dateline: "She saved it for the end of the call, which is how I knew",
+    place: "lakehouse",
+    about: ["luna", "cathy", "rick", "josh"],
+    sceneSlug: "josh-rick-lake",
+    access: "premium",
+    mature: false,
+    body: [
+      "My mother saved it for the last thirty seconds of the call, in the voice she keeps for things she has decided are not important, which is how I know she had been carrying it the whole hour.",
+      "Rick called her.",
+      "Josh's father rang my mother — a woman he has met perhaps six times in ten years, at weddings and at one funeral, and always across a room — at her house, on an ordinary afternoon, to ask how I was.",
+      "And she told him. Of course she told him. My mother has never in her life been asked a direct question and produced anything other than the answer, and she said it to me like she was reporting the weather: he asked where you were staying, so I said the lakehouse.",
+      "I have been sitting with that for three hours and I cannot get it down to a size I can put away.",
+      "Because think about what that took. He had to find her number. He had to decide to use it. He had to stand in his own house with the phone in his hand knowing exactly how it would look, and do it anyway, and then be pleasant for however long it took to get to the only question he actually rang to ask.",
+      "That man does not move. That is the entire architecture of him. He arrives, he takes the best chair without appearing to choose it, and the room rearranges itself around what he might want next — and he has never once in ten years had to cross a floor to get anything.",
+      "He crossed a floor.",
+      "And not to Josh's people. To mine.",
+      "I know what it is. He will not have got a straight version out of his son, because he will not have asked for one and Josh will not have offered, and so he went round the outside and got it from the only other person in the world who would simply tell him.",
+      "Here is the part I did not expect and do not much like.",
+      "I sat here afterwards with the phone in my lap feeling looked for. Ten years in that family and the man never once telephoned me — he was kind to me at tables, and kindness at a table is a thing he can do without moving — and now I have left and he has gone to some trouble to find out how I am, and the feeling that came up in me was not anger. It was something closer to being wanted by a house I have already walked out of.",
+      "Nobody else from that family has asked. Josh calls, but Josh calls in order to talk. Asking is a different verb and he has never conjugated it.",
+      "I did not ask my mother what she told him about how I sounded.",
+      "I have been not asking it all evening, which is its own answer, and I am writing that down rather than the version where it did not occur to me.",
+    ],
+  },
   {
     /* Avery's first appearance, a night or two after the call with their
      * mother — Cathy got nothing out of Luna and called her other daughter
@@ -1147,6 +1201,55 @@ export const journal: JournalEntry[] = [
       "He did not ask what was wrong. He did not say one word about the glass. He asked whether I had eaten, which I had not, so we ate.",
       "Around one he said: next time call me first and we will go together. Not do not come. Not you should not be here. Call me first and we will go together.",
       "I have been told off about this by people who love me. That was not being told off. I do not know what that was, and I have been lying here for two hours trying to find the name for it.",
+    ],
+  },
+  /*
+    GINGER ALE. Added 2026-09-03, and filed to the free scene of the same name
+    (luna-tyson-gingerale), which had nothing beside it.
+
+    PLACED THE MORNING AFTER `he-found-me` — she does not call him, he turns up
+    at the bar at eleven anyway, they eat, and at one in the morning he says
+    call me first and we will go together. This is what the next day looks
+    like, and it is the only genuinely light page in a forty-page stretch.
+
+    WHY IT MATTERS THAT IT IS LIGHT. The scene is free and forty-seven seconds
+    of two people being funny at each other; a visitor who watches it wants to
+    know what these two are, and the row of locked pages is the answer. So the
+    entry does the thing the footage cannot: it gets to the glass of ice he
+    poured an hour before the argument started, and to what she does with it
+    after he leaves.
+
+    THE LAST TWO LINES ARE THE TURN and they are why this is behind the wall.
+    Everything above them is a good morning. They are a woman noticing that a
+    good morning has started to cost her something.
+
+    Invented and hers to cut: the toast, the ice, and the glass on the side.
+    Everything about the negotiation over the can is the footage.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "ginger-ale",
+    addedOn: "2026-09-03",
+    dateline: "The morning after, and I have been robbed in my own kitchen",
+    place: "lakehouse",
+    where: "The kitchen",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-tyson-gingerale",
+    access: "premium",
+    mature: false,
+    body: [
+      "There was one can of ginger ale in this house and he found it before I did, and he stood in my kitchen drinking it slowly, at me, like a man who has been waiting twenty years for exactly this opportunity to arrive.",
+      "I am not going to write down how I felt this morning. He was there for the part where it became inevitable and he was the one who drove.",
+      "He did not say one word about last night. Not one. He made toast I had not asked for and put it where I could reach it and then went back to the counter and had another sip, and raised his eyebrows very slightly, and I have never wanted to throw anything at anybody so much in my life.",
+      "I said give me the can. He said this is my ginger ale. I said it is my house. He said the ginger ale does not know that.",
+      "Twenty years, and this is the shape of us. He will get up before six and drive forty minutes because of a noise I made on the phone, and then spend the entire following morning refusing to hand over a soft drink.",
+      "He gave it up eventually, obviously. And then I went to the sink and found that he had already poured half of it into a glass, over ice, and left the glass on the side where I would find it — an hour before the argument even started.",
+      "So the whole thing was theatre and he had done the kind part first, quietly, before I was up, and then stood there and let me call him a variety of things for ten minutes.",
+      "That is the entire man in one glass. He will not be caught being kind. He will be kind and then stand perfectly still while you accuse him of the opposite, and he will not correct you, because being thanked would mean having to have a conversation about it.",
+      "I let it run longer than I needed to. He was laughing — properly, the one where he has to look at the floor — and I have not had a morning like that in about two years, and I was not going to be the one who ended it.",
+      "He left at eleven. Fixed the gate on the way out, which nobody asked him to do either.",
+      "I washed the glass and then stood at the sink holding it for a good deal longer than a glass takes, and I would like it noted that I put it away in the cupboard rather than leaving it on the side, because leaving it on the side would have been a thing I had done on purpose.",
     ],
   },
   {
@@ -1715,6 +1818,58 @@ export const journal: JournalEntry[] = [
       "He came in from the field with dirt on him and stood in the doorway not saying anything, and I kept cutting, because if I looked up I'd have had to decide what my face was doing.",
       "Ten years. He still comes across a room like he's asking and has already been answered.",
       "That's the whole entry. I want a record that on an ordinary Tuesday, with nothing happening, it was still like that — because I know what I'm capable of telling myself later.",
+    ],
+  },
+  /*
+    THE BARN. Added 2026-09-03, filed to the free scene josh-tyson-barn — Josh
+    and Tyson at the tractor before the day starts, which is sixty-eight
+    seconds of two men working well together and everything neither of them is
+    saying. Nothing sat beside it until now.
+
+    THE ENTRY IS THE THIRD PERSON AT THE WINDOW. Luna is not in that scene and
+    she is not written into it here; she is in the kitchen with a cold coffee
+    watching it happen from forty yards, which is exactly the position the
+    whole book has her in.
+
+    PLACED IN THE BACK-WITH-JOSH STRETCH, after `the-kitchen` and before
+    `the-bolt`, because it needs Tyson still coming to the farm and Josh still
+    unsuspecting. Later than this and the scene it points at stops being true.
+
+    WHAT IT IS FOR. The book has her costing this out for herself on about
+    nine pages. This is the one where she works out that the bill is not hers —
+    that the two men have a thing between them older than she is in either of
+    their lives, and there is exactly one event in the world that ends it. It
+    also plants the family fact plainly for the first time (they are cousins,
+    and at funerals they stand on the same side), which `the-whole-table` picks
+    up much later.
+
+    Invented and hers to cut: the wrench, the light, the wave.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "the-barn",
+    addedOn: "2026-09-03",
+    dateline: "Watched them from the window for ten minutes",
+    place: "farmhouse",
+    where: "The kitchen window",
+    about: ["luna", "josh", "tyson"],
+    sceneSlug: "josh-tyson-barn",
+    access: "premium",
+    mature: false,
+    body: [
+      "I stood at the kitchen window this morning and watched the two of them at the tractor for ten minutes with the coffee going cold in my hand, and I would like to be honest on this page about what I was doing, which was checking.",
+      "Nothing to check. That is what I found out.",
+      "They barely talk when they work. That is the thing that would surprise anybody who has only met them at a table. Josh is under it saying nothing, and Tyson hands him the wrench before he asks for it, and then stands there holding the light at the angle it needs to be at, and moves it when the angle changes, and neither of them says a single word about the light.",
+      "Josh said something at one point that I could not hear and Tyson laughed — once, the short one, down at the ground. Then they got on with it.",
+      "They are good at it. Whatever else is going on in that yard, those two men work together like they have been doing it since they were boys, which they have.",
+      "And he is Josh's blood. Not close — you have to go up and along a few times to find the place where they join, and nobody in that family can agree on whether it is second or third — but at the funerals they stand on the same side of the room, and in that family that is the whole of what blood means.",
+      "So here is what I understood at that window, and it took a decade and a cold coffee to get to it.",
+      "I have written nine pages in this book about what this would cost me. Not one line about what it would cost them.",
+      "That is two men, a tractor, twenty years, and every winter either side of it. And there is precisely one thing in the world that takes it away from both of them at once, and it was standing at the window in a dressing gown holding a coffee it had stopped drinking.",
+      "Then Josh looked up. Not at Tyson — at the house. He lifted his hand.",
+      "And I lifted mine, and I have been thinking all day about how quickly I did it, and about the fact that I have no idea whether Tyson turned round.",
+      "They will be out there again tomorrow. They will do the same thing, in the same order, and neither of them will say anything, and I keep catching myself wanting one of them to do something so that I do not have to.",
     ],
   },
   {
@@ -2584,6 +2739,57 @@ export const journal: JournalEntry[] = [
       "And because she would tell me to leave. Not cruelly — she'd say it once, in a completely ordinary voice, the way she says everything. And then I would have to live in a world where somebody had said it out loud, and I am not ready for that world, and I would like it noted that I know exactly how that sentence sounds.",
     ],
   },
+  /*
+    THE LIST. Added 2026-09-03, and it only works immediately after
+    `nearly-told-avery` — she has just had it in her mouth and said the fridge
+    is making a noise, and this is the three days afterwards spent working out
+    what she was actually protecting.
+
+    IT INVENTS NO EVENT. Every fact in it is already canon: Josh and Tyson are
+    distant cousins; Cathy made the two of them lunches as teenagers and loves
+    Tyson like a son; Avery has known him almost her whole life and he treats
+    her as a little sister; Cathy was there for Luna when he deployed; Cathy
+    defends Josh. The entry is arithmetic performed on facts the reader already
+    has, which is the only kind of page that can go this late without spending
+    anything.
+
+    IT IS ALSO THE ANSWER TO A QUESTION THE BOOK KEEPS ASKING BADLY. She has
+    priced this as a choice between two men about nine times. It is not one,
+    and she knows it is not one, and this is where she writes down the actual
+    invoice — which is a family, in both directions, and a man who would lose
+    ALL of it rather than half.
+
+    THE LAST LINE IS DELIBERATELY UNKIND TO HER OWN CASE. She does not get to
+    end on love being worth it; she ends on the observation that the people who
+    say so have never had to write the list.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "the-whole-table",
+    addedOn: "2026-09-03",
+    dateline: "Three days on from the fridge, doing the arithmetic",
+    place: "farmhouse",
+    about: ["luna", "tyson", "josh", "cathy", "avery"],
+    access: "premium",
+    mature: false,
+    body: [
+      "I nearly told Avery on Thursday and I have spent since Thursday working out what I was protecting, and it is not me.",
+      "So I am going to write the list. Properly, all of it, and no stopping in the middle where it starts going badly.",
+      "If this becomes a thing that has happened rather than a thing I think about at night, here is who it happens to.",
+      "My mother. She made those two lunches when they were seventeen. She has loved that man like a son for twenty years and she loved him hardest during the decade he was away, and she was the one sitting with me every time a deployment went quiet. She also defends Josh — reflexively, in a way I have written three pages about — so she does not get to keep both of them either. She will not choose out loud. She will simply get quieter with me, over about a year, and be perfectly lovely the entire time.",
+      "Avery. He has known her since she was eight. He thinks of her as a little sister and she has never once had to wonder whether that is real. She would take my side inside of a second, and it would cost her him, and she would never mention that to me, not once, for the rest of my life.",
+      "Rick. Every table that man has ever sat at with both of them in the room.",
+      "Josh. And he does not lose one person. He loses the man who has been at every birthday and every harvest and every funeral he has ever stood at, and he loses him to me, which is the version that means he can never once be in a room with either of us again.",
+      "And Tyson.",
+      "That is the one I have been walking round for three days. He does not lose a woman. He loses the family — both of them, mine and his, at the same time and by the same act. He has been folded into my mother's kitchen for twenty years and into that farm by blood, and there is no arrangement of this, none, in which he keeps either one. Everybody else on this list loses a person. He loses the whole table and then has to go and be alone with it, and he is a man with exactly one person he tells things to, and in that version she is the reason.",
+      "He has worked all of this out. Obviously he has. He did it before I did — probably years before I did — and that is not him being noble about it, that is him having sat down at some point with the same list and reached the bottom of it and then simply gone on fixing my gate.",
+      "That is what the distance has been. It was never about wanting me less. It is a man who has read the invoice.",
+      "So when I write in here that I do not know what I want, I would like the record corrected. I know exactly what I want. I have known for months. What I have been doing is pricing it, and the price is a table with nine people at it that will never be set again.",
+      "Everybody says love is worth it.",
+      "Nobody who says that has ever had to write the list.",
+    ],
+  },
   {
     id: "the-shape-of-it",
     dateline: "Late, and he's still up",
@@ -2731,6 +2937,74 @@ export const journal: JournalEntry[] = [
       "I put it down. Then I picked it up again about twenty minutes later and put it down again, and then I came in here and wrote three pages about being a good person.",
       "I am going to ask him. I want that on the page so I cannot pretend later that I never meant to.",
       "Not tonight.",
+    ],
+  },
+  /*
+    THE ASK, DELIVERED. Added 2026-09-03, and it exists because
+    `what-it-costs-him` ends on "I am going to ask him. I want that on the page
+    so I cannot pretend later that I never meant to. Not tonight." That promise
+    has been sitting there unpaid, and this is the payment.
+
+    IT IS FILED TO ty-luna-garage — 7:36, premium, the longest public window on
+    the site at 2:15, and the preview note reads "the whole argument up to the
+    point where it stops being an argument, and it ends there." Nothing sat
+    beside it until now. She came to have it out with him; he keeps his hands
+    on the bike and answers about half of it.
+
+    SO THE PAGE STOPS WHERE THE FOOTAGE STOPS, and that is the entire
+    construction. A member reads her drive out and her half-answers and then
+    hits the sentence where she refuses to write the rest of it down — and the
+    scene is right there, and the scene does not refuse. It is the reverse of
+    `he-shouted`, where the free page is her account and the paid one is the
+    thing itself; here both are paid and the entry is the door.
+
+    PLACEMENT IS A JUDGMENT CALL AND MELISSA MAY MOVE IT. It sits between
+    `what-it-costs-him` and `what-im-deciding`: she promises to ask, she asks,
+    and then she goes and sits at the firepit on her own to decide. It sharpens
+    `what-im-deciding` without contradicting a line of it — "I am fairly sure
+    he is doing it because he does not trust himself in the same room as me any
+    more" stops being a guess. The alternative home is earlier, before
+    `he-shouted`; it costs the promise-and-payment structure, so it was not
+    chosen.
+
+    IT DOES NOT TOUCH `the-night`. That entry's whole force is "there was no
+    moment" — twenty years and it did not arrive as a decision. Nothing here is
+    a decision. The kiss in `the-small-version` has already happened and has
+    never been mentioned by either of them since, which is stated here and is
+    the thing making the room the temperature it is.
+
+    MATURE, matching the scene. No content note: nothing is done to anybody.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "i-asked-him",
+    addedOn: "2026-09-03",
+    dateline: "Eleven days, and then I drove out there without a reason",
+    place: "garage",
+    where: "His place, the bike up on the stand",
+    about: ["luna", "tyson"],
+    sceneSlug: "ty-luna-garage",
+    access: "premium",
+    mature: true,
+    body: [
+      "Eleven days. I am putting that at the top so that it sits directly under the page where I said I was going to ask him, and I can see the size of the gap in my own handwriting.",
+      "I did not take a reason with me. That was the actual decision — not the driving, the not bringing a part. Every other time in twenty years I have arrived at that man holding something: a coupling, a casserole, a problem. I got in the truck with nothing in it and I knew precisely what I was doing.",
+      "He had the bike up on the stand. He heard the truck and did not come out, and when I got to the door he said my name, once, and then went back to it.",
+      "He answered about half of what I asked him. I want to be fair about that rather than dramatic — it was genuinely about half, and the half he answered he answered straight.",
+      "The other half he did the thing with his hands. He would go and find a socket he did not need. He would wipe something that was already clean. A man who cannot say a thing will keep his hands occupied so that the hands, at least, are accounted for, and I have known him long enough to be able to time it: about four seconds of silence and then he needs a tool.",
+      "I said I lied to you once. Once, about a dinner, months ago, and you have been making me pay for it every week since and I have let you, and I am done letting you.",
+      "He said that is not what this is.",
+      "I said then tell me what it is. I will take any answer. I said that twice, and the second time I said the words any answer slowly, so that he could not later decide he had not been offered it.",
+      "He put the socket down.",
+      "Nobody has mentioned the shop. Not once, not in either direction, not the afternoon it happened and not in any of the weeks since, and by now the not-mentioning is considerably louder than the thing. It was in that garage with us the entire time, standing between the bench and the door, and we both walked round it for an hour like a piece of furniture neither of us bought.",
+      "And then it stopped being an argument.",
+      "I am going to stop the page there. I have written down a great many things in this book that I would not want read aloud, and I know exactly what I am doing by not writing this one, and it is the same thing I did with the sentence, and that bought me a month.",
+      "I will give myself this much. I went out there to be answered and I was answered. Not one word of it was a sentence.",
+      "Nothing is different. I want that written down too, because it is technically true and because I can already feel myself getting ready to use it.",
+      "I drove the eleven miles back with the window down in weather that did not call for it. There was no part on the passenger seat this time. I had not brought one out and I did not bring one back, and when I came in Josh looked up and asked where I had been and I said the store.",
+      "That is not the first lie in this book. There is one on about page four, told to my father, about a man who was forty feet away with the television on.",
+      "It is the first one I did not have to tell.",
     ],
   },
   {

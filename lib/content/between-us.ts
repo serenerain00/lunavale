@@ -50,26 +50,44 @@ export const BETWEEN_US: BetweenUsAnnouncement = {
   eyebrow: "Coming to the LunaVerse",
   heading: "Between Us",
   /*
-    ELABORATED 2026-09-03 on Melissa's instruction, and the last clause of the
-    old second line — "and the membership was never only the stills and the
-    scenes" — came out with it. It was arguing with an objection the reader had
-    not made yet.
+    WHAT IT IS, FROM MELISSA, 2026-09-03 — and it now leads, because it is the
+    only thing on this band a stranger actually needs.
 
-    WHAT THESE LINES DELIBERATELY DO NOT DO IS DESCRIBE THE EPISODES. Nothing
-    in this repository says what Between Us is: not the roadmap, not
-    LUNA_VALE_CONTEXT.md, not the content modules — the only source is
-    Melissa's sentence asking for the band. So the copy elaborates on what can
-    be stated truthfully today, which is how an episode reaches a member and
-    what the membership covers, and says nothing about length, subject, cast or
-    order. Every one of those would be invented, on the front page, about
-    something nobody can watch yet.
+    Her words, lightly set: "Between Us is a cinematic drama series about Luna,
+    Josh and Tyson — three people whose lives have been tangled together for
+    more than two decades. Luna and Josh are trying to find their way back to
+    each other. Tyson is Josh's family, Luna's best friend, and the one person
+    who has always known her a little too well. A story about friendship,
+    loyalty, love, and everything we don't say until it's too late. Three
+    people, twenty years of history, and one question nobody wants answered."
 
-    The moment there is a real description, it belongs in the middle of this
-    array and it will be the best line here. Until then the band is honest and
-    a little thin, which is the right way round.
+    THIS FILE USED TO SAY THE DESCRIPTION DID NOT EXIST — that nothing in the
+    repository could supply one without inventing it, and that the moment there
+    was a real one it would be the best line here. That is now closed. The
+    first three paragraphs below are hers; the two sentences she asked to have
+    added on the same day are the only ones that are not.
+
+    THE ADDED SENTENCES ARE CHECKED AGAINST CANON rather than atmosphere.
+    "Nothing in it breaks in a single night" is a description of the journal:
+    eighty pages of kitchens, trucks and pauses, and then one thing that goes.
+    "Nobody in it is the villain" is the deal the whole product already makes —
+    Josh is free on this site being good at something (josh-luna-bolt,
+    josh-rick-study) precisely so that his turn reads as a man rather than as a
+    plot. Neither line names an event, a date or an outcome, so neither can
+    spoil an episode nobody has seen, and neither can be made wrong by one that
+    is not finished.
+
+    WHAT IS STILL NOT SAID, on purpose: how many episodes, how long they are,
+    what order they run in, and when the first one lands. Those are the exact
+    promises this band cannot keep yet.
   */
   body: [
-    "An episode series, and the first one is coming. Not a scene and not a clip — episodes, released here as each one is finished.",
+    "A cinematic drama series about Luna, Josh and Tyson — three people whose lives have been tangled together for more than twenty years. Luna and Josh are trying to find their way back to each other. Tyson is Josh's family, Luna's best friend, and the one person who has always known her a little too well.",
+    "Friendship, loyalty, love, and everything we don't say until it's too late. Nothing in it breaks in a single night — it comes apart quietly, over years, in kitchens and trucks and the pauses between sentences. Nobody in it is the villain. Nobody comes out of it clean.",
+    "Three people. Twenty years of history. One question nobody wants answered.",
+    // The logistics, kept separate and kept last. Every line below is future
+    // tense with no date in it, for the reason in the header.
+    "The first episode is coming, and the ones after it land here as each one is finished. Not a scene and not a clip — episodes.",
     "Every one is part of the membership. Nothing extra to buy, no season to wait for, and they stay yours to watch again.",
     // "before it goes to Instagram" rather than "exclusive" on its own:
     // exclusive is a word that can mean anything, and the specific version is

@@ -199,10 +199,21 @@ export const BENEFITS: Benefit[] = [
   {
     id: "full-library",
     label: "The full scene library",
-    // True as of 2026-07-29: 12 of the 19 scenes are members-only. Before the
-    // gating pass this line was selling two extra scenes and reading as a lie.
+    // NO NUMBER, Melissa 2026-09-03 ("remove the counts").
+    //
+    // It said "Twelve scenes that never go public", which was true when it was
+    // written on 2026-07-29 and had quietly stopped being true: there are 24
+    // members-only scenes now, so the line was underselling the library by
+    // half. That is the failure mode of a hand-typed count — it does not
+    // announce itself, it just drifts, and on a page asking for money a stale
+    // number is worse than no number whether it is too high or too low.
+    //
+    // The counted version of this argument still exists and is safe, because
+    // it is DERIVED: the "depth" section on the home page reads its figures
+    // straight out of the content modules, so it cannot drift. If a number
+    // belongs anywhere it is there, not typed into a sentence here.
     detail:
-      "Twelve scenes that never go public, including the whole of The Beach.",
+      "The scenes that never go public, including the whole of The Beach.",
     from: "vault",
     group: "Watching",
   },

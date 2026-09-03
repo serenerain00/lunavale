@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path((?!api/).*)",
+      "has": [{ "type": "host", "value": "www.lunavale38.com" }],
+      "destination": "https://lunavale38.com/:path",
+      "permanent": true
+    }
+  ]
+}

@@ -293,6 +293,80 @@ export function featuredClip(now: Date = new Date()): Clip | undefined {
   return newest && isFeatured(newest, now) ? newest : undefined;
 }
 
+/**
+ * The clips the front page may show: free, and not explicit. Newest first.
+ *
+ * A GUARANTEE RATHER THAN A LIST, the same shape as heroes() in
+ * lib/content/hero.ts. The daily rotation below walks whatever is in this
+ * array, so the filter has to live here — the day a gated clip gets added,
+ * nobody should have to remember that the home page picks at random from the
+ * whole library.
+ *
+ * `explicit` is checked as well as access, and not only because the current
+ * explicit clip is also premium. A clip's poster sits at a permanent ungated
+ * URL under /public; an explicit one has no business being the first thing on
+ * the front page even if somebody later marks it free.
+ */
+export function featurableClips(): Clip[] {
+  return clips.filter((c) => clipAccess(c) === "free" && !c.explicit);
+}
+
+/**
+ * The clip on the front page today. Rotates once a day.
+ *
+ * WHY IT ROTATES (Melissa, 2026-09-03: "lets rotate the new clip section on
+ * the homepage daily so its not stagnant"). The section used to show the
+ * newest clip and only the newest clip, for the seven days of its window — so
+ * anybody coming back during that week saw the same card in the same place,
+ * which is the definition of furniture.
+ *
+ * ANCHORED TO THE NEWEST CLIP'S OWN RELEASE DAY, not to the epoch, and that is
+ * the part that makes this safe to do. On the day a clip lands the offset is
+ * zero and the newest clip is what shows; the day after, the next one; and so
+ * on round the pool. A new clip therefore still gets the front page on its
+ * first day without being pinned there, which is what the seven-day window was
+ * really for.
+ *
+ * WHAT IT COSTS, stated plainly: the seven-day feature is now a ONE-day
+ * feature plus a turn in the rotation. That was Melissa's 2026-09-01 decision
+ * and this supersedes it at her instruction — the old FEATURE_DAYS still
+ * governs whether the card is BADGED as new (see isFeatured), so a clip that
+ * comes back around within its week is still labelled new, truthfully.
+ *
+ * THE CHANGEOVER IS OFFSET EIGHT HOURS so the card turns over at about 4am on
+ * the US east coast rather than at 8pm, which is when a plain UTC day boundary
+ * would move it. This file's own history records the same trick on the hero
+ * rotation before that became per-request; the reasoning was good then and has
+ * not changed. The home page revalidates hourly, so the new clip lands within
+ * an hour of the boundary rather than on a deploy.
+ *
+ * Deterministic from the date, deliberately — every CDN copy of the page has
+ * to agree about what day it is. Do not make this random: unlike pickHero()
+ * this section is not re-rendered per request, so a random pick would freeze
+ * for an hour at a time and defeat the point.
+ */
+const ROTATION_OFFSET_MS = 8 * 60 * 60 * 1000;
+
+function rotationDay(at: number): number {
+  return Math.floor((at - ROTATION_OFFSET_MS) / 86_400_000);
+}
+
+export function clipOfTheDay(now: Date = new Date()): Clip | undefined {
+  const pool = featurableClips();
+  if (pool.length === 0) return undefined;
+
+  // The newest dated clip's release day. Undated clips predate `addedOn`, so
+  // if nothing is dated at all the anchor is simply day zero and the rotation
+  // still turns — it just isn't lined up with anything in particular.
+  const anchor = pool.find((c) => c.addedOn)?.addedOn;
+  const anchorDay = anchor
+    ? rotationDay(Date.parse(`${anchor}T00:00:00Z`) + ROTATION_OFFSET_MS)
+    : 0;
+
+  const delta = rotationDay(now.getTime()) - anchorDay;
+  return pool[((delta % pool.length) + pool.length) % pool.length];
+}
+
 export function getClip(id: string): Clip | undefined {
   return clips.find((c) => c.id === id);
 }

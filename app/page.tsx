@@ -30,7 +30,7 @@ import { getCharacter } from "@/lib/content/characters";
 import { galleries } from "@/lib/content/gallery";
 import { cadenceNote, recentReleases } from "@/lib/content/releases";
 import { LatelyRail } from "@/components/home/LatelyRail";
-import { featuredClip } from "@/lib/content/clips";
+import { clipOfTheDay, isFeatured } from "@/lib/content/clips";
 import { resolveWhoSheIs } from "@/lib/content/who-she-is";
 import { twentyQuestions } from "@/lib/content/twenty-questions";
 import { takes } from "@/lib/content/takes";
@@ -89,11 +89,20 @@ export default async function Home() {
   // on your own.
   const latestEntry = latest ? entriesForScene(latest.slug)[0] : undefined;
 
-  // THE NEW CLIP, for seven days and then not. Self-expiring — see
-  // featuredClip() in lib/content/clips.ts. Resolved per render like the hero
-  // and the quote, so the section goes away on its own an hour after the
-  // window closes rather than waiting for somebody to remember to remove it.
-  const featured = featuredClip();
+  // THE CLIP ON THE FRONT TODAY, rotating daily (Melissa, 2026-09-03: "so its
+  // not stagnant"). It used to be the newest clip and only the newest clip for
+  // seven days, which meant a returning visitor met the same card in the same
+  // place all week.
+  //
+  // Resolved per render like the hero and the quote, and deterministic from
+  // the date so every cached copy of this page agrees — see clipOfTheDay().
+  // The rotation is anchored to the newest clip's own release day, so a new
+  // clip still takes the front page on the day it lands.
+  const featured = clipOfTheDay();
+  // Whether TODAY'S clip is genuinely new, which decides the badge. The
+  // seven-day window still means something — it just governs the word rather
+  // than pinning the section.
+  const featuredIsNew = featured ? isFeatured(featured) : false;
 
   // HER, IN HER OWN HANDWRITING — see lib/content/who-she-is.ts for why these
   // five and in this order. Resolved from the journal so the quotes cannot
@@ -234,12 +243,23 @@ export default async function Home() {
                 </Link>
 
                 {/* Says what a non-member actually gets, with the real number
-                    rather than a vague "preview". */}
+                    rather than a vague "preview".
+
+                    AND NOT "THE FIRST" WHEN IT ISN'T. /watch already had this
+                    fix and this copy did not, so on 2026-09-03 the front page
+                    was telling everyone they could watch the first thirty
+                    seconds of ty-josh-fight, whose preview is cut from two
+                    windows in the middle of the scene. Same rule as the line
+                    under the player: state what was actually shown. */}
                 {latest.access !== "free" && latest.preview && (
                   <Guest>
                     <p className="mt-3 text-xs leading-relaxed text-stone-dim">
-                      The first {formatDuration(latest.preview.durationSeconds)}{" "}
-                      is open to everyone. The rest is part of the LunaVerse.
+                      {latest.preview.segments ? "" : "The first "}
+                      {formatDuration(latest.preview.durationSeconds)}{" "}
+                      {latest.preview.segments
+                        ? "of it is open to everyone, from two places in the scene."
+                        : "is open to everyone."}{" "}
+                      The rest is part of the LunaVerse.
                     </p>
                   </Guest>
                 )}
@@ -267,20 +287,28 @@ export default async function Home() {
         )}
 
         {/* ---------------------------------------------------- featured clip */}
-        {/* A NEW CLIP, FOR SEVEN DAYS. Melissa, 2026-09-01. It sits directly
-            under "Just added" because the two make one argument in order: here
-            is the new scene, and here is a minute of these people that costs
-            nothing to watch. The clip is the cheaper thing to say yes to and it
-            is doing the work of an advert, which is why its window is seven
-            days against the scene's fourteen.
+        {/* A CLIP A DAY. It sits directly under "Just added" because the two
+            make one argument in order: here is the new scene, and here is a
+            minute of these people that costs nothing to watch. The clip is the
+            cheaper thing to say yes to and it is doing the work of an advert.
+
+            IT ROTATES NOW (Melissa, 2026-09-03) rather than showing the newest
+            clip for seven days. The trade against the 2026-09-01 reasoning is
+            worth naming: that version was deliberately INTERMITTENT — "the
+            section is genuinely intermittent, which is what stops it reading
+            as furniture" — and this one is permanent, because there is always
+            a clip whose turn it is. What stops it reading as furniture now is
+            that the card is different every morning, which is the opposite
+            answer to the same worry and is the one she asked for.
 
             PORTRAIT, AND THE LAYOUT ADMITS IT. Everything else on this page is
             16:9. Rather than crop a 9:16 clip into a shape it was not made for,
             the poster keeps its aspect and the text sits beside it — the same
             two-column arrangement as the card above, mirrored.
 
-            It renders only while featuredClip() returns something, so there is
-            no empty state to design and nothing to take down by hand. */}
+            It renders whenever there is any free, non-explicit clip at all, so
+            there is still no empty state to design — see featurableClips(),
+            which is what keeps a gated clip from ever landing here. */}
         {featured && (
           <section
             aria-labelledby="featured-clip-heading"
@@ -306,8 +334,14 @@ export default async function Home() {
                   className="object-cover transition-transform duration-(--duration-slow) group-hover:scale-[1.02]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-void/70 to-transparent sm:bg-gradient-to-r" />
+                {/* "New clip" ONLY WHEN IT IS ONE. The badge used to be a
+                    constant because the section only ever showed the newest
+                    clip; now that the card rotates through the library, most
+                    days it is showing something from months ago and calling
+                    that new would be the same lie the "New" badge on a scene
+                    is carefully written to avoid (see isRecent). */}
                 <span className="absolute left-4 top-4 rounded-full bg-amber px-3 py-1 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-void">
-                  New clip
+                  {featuredIsNew ? "New clip" : "Today's clip"}
                 </span>
               </Link>
 

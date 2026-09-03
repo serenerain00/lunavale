@@ -1076,8 +1076,14 @@ export default async function Home() {
                     expression: JSX drops the whitespace either side of an
                     interpolation here, and "$8a month" is not a typo anyone
                     forgives on a page asking for money. */}
+                {/* BETWEEN US LEADS IT, Melissa 2026-09-03 ("i need that on
+                    the home page too"). It is the only forward-looking claim
+                    on this page, so it says "coming" and not "here" — see the
+                    note on the between-us row in lib/content/membership.ts for
+                    why that distinction is load-bearing on a page asking for
+                    money. */}
                 <p className="mt-4 max-w-lg leading-relaxed text-stone">
-                  {`The full scene library, the cuts that never go public, Luna’s journals, and the rooms you’ve already walked past without being able to open. From ${formatPrice(vault.priceMonthlyCents)} a month, cancel any time, and nothing that’s free today ever moves behind it.`}
+                  {`Between Us — the episode series — lands soon, and members get it. So does the full scene library, the cuts that never go public, Luna’s journals, and the rooms you’ve already walked past without being able to open. From ${formatPrice(vault.priceMonthlyCents)} a month, cancel any time, and nothing that’s free today ever moves behind it.`}
                 </p>
                 {/* SUBTLE ON PURPOSE — Melissa asked for it "somewhere
                     subtle", and this is a home page, not a fundraiser. One

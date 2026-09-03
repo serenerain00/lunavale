@@ -172,6 +172,31 @@ export const BENEFITS: Benefit[] = [
     group: "Watching",
   },
   {
+    // FIRST OF THE PAID BENEFITS, Melissa 2026-09-03: "for $8 a month theyll
+    // get exclusive access to Between Us episodes dropping soon. that should
+    // be the first benefit." Array order is what TierCard renders, so being
+    // first here is what puts it at the top of the card.
+    //
+    // IT IS THE ONE FORWARD-LOOKING LINE IN THIS FILE, and that is worth
+    // flagging rather than burying. The rule at the top of BENEFITS is that
+    // every row is a promise the product already keeps — "the moment one of
+    // these is aspirational rather than real, the whole page stops being
+    // trustworthy". This one is about something that does not exist yet.
+    //
+    // So the copy is written so it cannot be misread as available now: it says
+    // the series is coming and that members get it when it lands, not that
+    // there is anything to watch today. That is a real and keepable promise.
+    // What it must not become is a row that quietly reads as current — if
+    // Between Us slips, this line is the first thing to revisit, and the
+    // honest move then is to change the wording rather than leave it standing.
+    id: "between-us",
+    label: "Between Us episodes",
+    detail:
+      "The episode series, coming soon — and members-only when it lands.",
+    from: "vault",
+    group: "Watching",
+  },
+  {
     id: "full-library",
     label: "The full scene library",
     // True as of 2026-07-29: 12 of the 19 scenes are members-only. Before the

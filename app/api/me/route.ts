@@ -89,6 +89,35 @@ export async function GET() {
     is cut to eight characters — enough to tell two accounts apart in a log,
     not enough to be an identifier worth having.
   */
+  // Round two of the same diagnostic. A valid, freshly-minted session JWT for
+  // a real active Clerk session still comes back signedIn:false from this
+  // route, so the problem is not the browser and not the cookie — the server
+  // refuses a good session. These three fields separate the remaining causes:
+  // whether clerkMiddleware() ran at all (it is what auth() depends on and it
+  // is compiled into a different bundle, with its own view of the
+  // environment), what auth() actually returned, and whether it threw.
+  let authProbe: Record<string, unknown> = { ran: false };
+  if (authConfigured()) {
+    try {
+      const { auth } = await import("@clerk/nextjs/server");
+      const a = await auth();
+      authProbe = {
+        ran: true,
+        userId: a.userId ? `${a.userId.slice(0, 10)}…` : null,
+        sessionId: a.sessionId ? `${a.sessionId.slice(0, 10)}…` : null,
+        // Clerk hangs the reason it rejected a token off the auth object in
+        // v6+. This is the field that says "token-expired", "token-invalid",
+        // or that middleware never ran.
+        reason:
+          (a as unknown as { reason?: string }).reason ??
+          (a as unknown as { authStatus?: string }).authStatus ??
+          null,
+      };
+    } catch (err) {
+      authProbe = { ran: true, threw: String(err).slice(0, 200) };
+    }
+  }
+
   console.log(
     "api/me diag " +
       JSON.stringify({
@@ -100,6 +129,11 @@ export async function GET() {
         member: membership.active,
         tier: membership.tier,
         authConfigured: authConfigured(),
+        // Whether the middleware bundle can see the secret. If this is false
+        // while authConfigured() above is true, clerkMiddleware() never ran
+        // and auth() has nothing to read — which would explain every symptom.
+        secretVisibleHere: Boolean(process.env.CLERK_SECRET_KEY),
+        auth: authProbe,
       }),
   );
 

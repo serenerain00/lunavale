@@ -18,6 +18,19 @@ const clerkReady = Boolean(
   process.env.CLERK_SECRET_KEY && process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
 );
 
+/*
+  TEMPORARY, 2026-09-03. `clerkReady` is evaluated when this module loads, in
+  the MIDDLEWARE bundle — which is compiled separately from the server routes
+  and does not necessarily see the same environment. If it is false here while
+  /api/me reports authConfigured() true, then clerkMiddleware() never runs,
+  auth() has no request state to read, and every signed-in visitor is reported
+  signed out. That is the last hypothesis standing and this line is how to
+  confirm it. Logged once per cold start, not per request.
+*/
+console.log(
+  `middleware boot: clerkReady=${clerkReady} secret=${Boolean(process.env.CLERK_SECRET_KEY)} publishable=${Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY)}`,
+);
+
 export default clerkReady ? clerkMiddleware() : () => NextResponse.next();
 
 export const config = {

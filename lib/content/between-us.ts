@@ -49,12 +49,32 @@ export const BETWEEN_US: BetweenUsAnnouncement = {
   announced: true,
   eyebrow: "Coming to the LunaVerse",
   heading: "Between Us",
+  /*
+    ELABORATED 2026-09-03 on Melissa's instruction, and the last clause of the
+    old second line — "and the membership was never only the stills and the
+    scenes" — came out with it. It was arguing with an objection the reader had
+    not made yet.
+
+    WHAT THESE LINES DELIBERATELY DO NOT DO IS DESCRIBE THE EPISODES. Nothing
+    in this repository says what Between Us is: not the roadmap, not
+    LUNA_VALE_CONTEXT.md, not the content modules — the only source is
+    Melissa's sentence asking for the band. So the copy elaborates on what can
+    be stated truthfully today, which is how an episode reaches a member and
+    what the membership covers, and says nothing about length, subject, cast or
+    order. Every one of those would be invented, on the front page, about
+    something nobody can watch yet.
+
+    The moment there is a real description, it belongs in the middle of this
+    array and it will be the best line here. Until then the band is honest and
+    a little thin, which is the right way round.
+  */
   body: [
-    "An episode series, and the first one is coming. Not a scene and not a clip — episodes, released as they are finished.",
+    "An episode series, and the first one is coming. Not a scene and not a clip — episodes, released here as each one is finished.",
+    "Every one is part of the membership. Nothing extra to buy, no season to wait for, and they stay yours to watch again.",
     // "before it goes to Instagram" rather than "exclusive" on its own:
     // exclusive is a word that can mean anything, and the specific version is
     // both more persuasive and easier to be held to.
-    "Members watch each one here first, before it goes to Instagram — and the membership was never only the stills and the scenes.",
+    "Members watch each one here first, before it goes to Instagram.",
   ],
   memberLine: "Included with the LunaVerse.",
   memberNote: "You'll get these first — they land here before anywhere else.",

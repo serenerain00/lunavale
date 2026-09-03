@@ -371,34 +371,52 @@ CUTS=(
   # The identical cut also sits at tyson-luna-bed/luna-tyson-bed.mp4 (same
   # 227.346576s, re-export). This folder is the keeper.
   "ty-luna-bed|stories/ty-luna-bed/ty-luna-bed-morning.mp4|6"
-  # THE FARM FIGHT, 2026-09-02. The first assembled edit to come out of the
-  # farm material: josh-tyson-farm/ and ty-josh-tractor/ are both listed at the
-  # top of this file as raw takes and stills with no cut, and this is where
-  # that footage finally landed.
+  # THE FARM FIGHT. The first assembled cut to come out of the farm material:
+  # josh-tyson-farm/ and ty-josh-tractor/ have sat in stories/ since July as
+  # raw takes and stills with no edit, and both are listed as "not imported" at
+  # the top of this file. This is where that footage finally landed.
   #
-  # POSTER AT 24s — the two of them with a fistful of each other's shirt,
-  # outside the barn, the truck she arrived in still in the frame.
+  # THE SCORED MIX, swapped in 2026-09-03 on Melissa's instruction ("replace
+  # the existing video on the site with the new music version"). It replaces
+  # ty-josh-fight.mp4, which is the dialogue export and is now nothing's
+  # source. Same rule as luna-ty-shop-kiss: the scored one is the cut.
   #
-  # 96s was tried first and rejected: Luna between them with a hand of each on
-  # her is the frame that best states what the scene is ABOUT, but cropped to
-  # 1280x720 for a card it loses the fight and reads as three people in a
-  # clinch. A poster is seen at thumbnail size by someone who has not read the
-  # synopsis, and that one invites exactly the wrong guess.
+  #   ty-josh-fight.mp4          1936x1080 h264 30fps  205.2s  -26.5 dB
+  #   osh-ty-fight-music.mov     1320x758 hevc 60fps   210.5s  -22.4 dB
   #
-  # 24s also happens to sit INSIDE the free preview window, so the card
-  # promises a frame every visitor can actually go and watch.
+  # The filename is the folder's own spelling and is missing the J. Left alone
+  # deliberately — it is the name of a source file on disk, not a slug, and
+  # "lkehouse" recurs across these folders for the same reason. Nothing public
+  # inherits it: optimize-media.sh writes everything under the slug.
   #
-  # No blood in it either way: her face is cut from about 2:06 on, and a poster
-  # sits at a permanent ungated URL.
+  # LOWER RESOLUTION, and taken anyway. 1320x758 against 1936x1080 is a real
+  # loss, but the streaming proxy is 720 tall and the reel is 1080 wide, so
+  # both derive comfortably from it, and the score is the point. Same trade
+  # already recorded for luna-tyson-bathroom. The framing is unchanged — the
+  # new file is very slightly taller (1.741 against 1.793) and is NOT squeezed;
+  # checked against the same frame in both.
   #
-  # NO `end`. blackdetect finds nothing, so the export stops dead on her face
-  # and there is no run-out to trim.
+  # PICTURE RUNS ~1.5-2s BEHIND the old export, so nothing that indexes into
+  # this scene survived the swap unchecked. The poster second and both preview
+  # windows were re-found frame by frame against this file, not shifted by a
+  # constant. See preview.segments in lib/content/videos.ts.
   #
-  # 1.2s FADE, and it is the one editorial call in this line. The scene ends on
-  # her losing consciousness, and the cut as exported stops on a held frame,
-  # which reads as the file running out rather than as her going under. Applied
-  # to the proxy, never to the master — clear the field and re-run to undo it.
-  "ty-josh-fight|stories/ty-josh-fight/ty-josh-fight.mp4|24||1.2"
+  # POSTER AT 26s — the two of them with a fistful of each other's shirt. The
+  # same frame that was at 24s in the dialogue export. It sits inside the free
+  # preview window, so the card promises something anyone can watch, and it
+  # carries no blood: her face is cut from about 2:05 on and a poster sits at a
+  # permanent ungated URL.
+  #
+  # END 206.4, from blackdetect: the export runs on into 4.05s of black.
+  #
+  # AND NO FADE, which is a change from the line this replaces. That one asked
+  # for 1.2s because the dialogue export stopped dead on a held frame. This
+  # master fades itself — luminance falls 62 -> 20 across 204s to 206.3s — so a
+  # second fade would darken an already-darkening shot. The score keeps
+  # resolving under the black past the trim (-25.9 dB at 205s, -36.8 dB by
+  # 208.5s); cutting at 206.4 loses the last of that tail, which is the price
+  # of not leaving the player sitting on four seconds of nothing.
+  "ty-josh-fight|stories/ty-josh-fight/osh-ty-fight-music.mov|26|206.4"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

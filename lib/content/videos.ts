@@ -1750,9 +1750,21 @@ export const videos: Video[] = [
     // material: josh-tyson-farm/ and ty-josh-tractor/ have sat in stories/
     // since July as raw takes and stills with no edit, and both are listed as
     // "not imported" at the top of scripts/import-cuts.sh. This is where that
-    // footage finally landed. Source is stories/ty-josh-fight/ty-josh-fight.mp4,
-    // 1936x1080, 205.2s, registered in import-cuts.sh with the poster frame
-    // and the fade.
+    // footage finally landed.
+    //
+    // THE SCORED MIX AS OF 2026-09-03, Melissa's instruction. The source is
+    // stories/ty-josh-fight/osh-ty-fight-music.mov (the folder's spelling,
+    // missing the J, deliberately not corrected — see import-cuts.sh), and it
+    // replaces the dialogue export ty-josh-fight.mp4 outright. Same rule as
+    // luna-ty-shop-kiss: where there are two mixes, the scored one is the cut.
+    // It runs 4 dB hotter, which is the score and not a fault — the music
+    // sitting over the dialogue is the intent on this material.
+    //
+    // THE PICTURE RUNS 1.5-2s BEHIND the old export, so every number below
+    // that indexes into the scene was re-found against the new file rather
+    // than shifted by a constant: the poster second, both preview windows, and
+    // the runtime. A constant offset would have been wrong — the drift is not
+    // even across the reel.
     slug: "ty-josh-fight",
     // PLACEHOLDER title and synopsis — hers to replace. "Between Them" for
     // both meanings: where she puts herself the moment she sees it, and where
@@ -1769,11 +1781,12 @@ export const videos: Video[] = [
       "They have been working the farm together all summer, and Tyson has been hearing how it is going with Josh. What he says to him is meant to protect her. Josh does not take it that way. She drives in on the end of it — and she never does find out what it was about.",
     file: "ty-josh-fight.proxy.mp4",
     poster: "/posters/ty-josh-fight.jpg",
-    // 205, and no trim: blackdetect finds no trailing black, so the export
-    // stops dead on her face. The 1.2s fade is applied to the proxy on import
-    // rather than in the timeline — see the `fade` note in optimize-media.sh,
-    // and the line in import-cuts.sh for why this scene gets one at all.
-    durationSeconds: 205,
+    // 206, trimmed at 206.4 where blackdetect puts the start of 4.05s of
+    // trailing black. NO FADE is applied on import any more: the dialogue
+    // export stopped dead on a held frame and needed one, and this master
+    // fades itself — luminance falls 62 to 20 across 204s-206.3s. A second
+    // fade would have darkened an already-darkening shot.
+    durationSeconds: 206,
     addedOn: "2026-09-02",
     // PREMIUM WITH A PUBLIC WINDOW, Melissa on release: "its behind membership
     // 30sec preview for now until i update it bc im gonna show parts on IG."
@@ -1795,15 +1808,26 @@ export const videos: Video[] = [
       // and the wrong way into a feed: a reel has about a second and a half to
       // earn the next one, and a truck does not.
       //
-      // 0:20.5-0:38.5 opens ON the two of them already walking into each
-      // other, so the first frame is the question. 1:33-1:45 is where she is
-      // in the middle of it with a hand on each of them.
+      // 0:21-0:39 opens ON the two of them already walking into each other, so
+      // the first frame is the question. 1:36-1:48 is where she is in the
+      // middle of it — she is shouting between them at 1:37, has a hand on
+      // each of them at 1:38, and the window ends on her face.
+      //
+      // RE-FOUND AGAINST THE SCORED MASTER on 2026-09-03, not shifted. The
+      // windows were 20.5-38.5 and 93-105 against the dialogue export; sampled
+      // at one-second steps in the new file, 93 is motion blur and the beat
+      // that was at 96 is now at 98. Moving them by a constant would have
+      // opened the second window on a smear.
+      //
+      // It still stops well short: she is struck at about 2:03 in this master,
+      // so the window ends fifteen seconds before the punch, and the ground
+      // and her face are nowhere in it.
       //
       // NO hookStart, deliberately: with segments there are two starts and the
       // field would be a lie. See the note on `segments` in the interface.
       segments: [
-        [20.5, 38.5],
-        [93, 105],
+        [21, 39],
+        [96, 108],
       ],
       hookNote:
         "Two windows, cut as the Instagram reel and used as the preview. It opens on the two of them already going at it, and the second piece is her in the middle of it. It ends about a minute before she is struck — the punch, the ground and her face are all outside it, which is the whole point of the bait.",

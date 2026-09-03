@@ -208,6 +208,13 @@ try {
         "-i", src,
         "-t", String(dur),
         "-filter_complex", vf,
+        // -af alongside -filter_complex: the complex graph above is video only
+        // and leaves the audio stream to be mapped through, so the simple
+        // audio filter still applies to it. This line was written and then not
+        // passed in the first version of this script, which shipped a reel
+        // with no fade-in and an unsmoothed splice — eslint caught the unused
+        // variable, which is the only reason it was noticed at all.
+        "-af", af,
         "-r", "30",
         "-c:v", "libx264", "-preset", "slow", "-crf", "20",
         "-profile:v", "high", "-level", "4.1",

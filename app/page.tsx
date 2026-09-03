@@ -9,6 +9,7 @@ import {
 import { Hero } from "@/components/home/Hero";
 import { InterviewHero } from "@/components/home/InterviewHero";
 import { Reveal } from "@/components/motion/Reveal";
+import { FollowForm } from "@/components/follow/FollowForm";
 import { SurveyDrawer } from "@/components/survey/SurveyDrawer";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import {
@@ -1141,6 +1142,66 @@ export default async function Home() {
                   </div>
                 ))}
               </Reveal>
+            </div>
+          </section>
+        </Guest>
+
+        {/* ------------------------------------------------------------ follow */}
+        {/* THE SMALLER ASK, AND THE LAST THING ON THE PAGE.
+
+            Three days of Clarity, 2026-09-03: 347 people, 1.47 pages each, 56
+            seconds of attention, 2.5% of them ever coming back — and one email
+            address in the table, total. Almost everybody who has ever been
+            here left with no way for Melissa to reach them again, which makes
+            every visit a one-off no matter how good the page is.
+
+            IT SITS UNDER THE MEMBERSHIP ASK ON PURPOSE, and that is not a
+            demotion. This is the person who read the whole argument and did
+            not click join: they are interested and they are not spending eight
+            dollars today. "Then let me write to you when there is a new one"
+            is the only thing left worth saying to them, and it costs them
+            nothing.
+
+            FollowForm's own rule is "never on arrival, never as a pop-up,
+            never on a timer" — the moment to ask is when somebody has just
+            finished something. The foot of a page they have scrolled the whole
+            way down is that moment; the top of it would not be, which is why
+            this is here and not beside the survey.
+
+            <Guest> because a member is already reachable, and because it keeps
+            the section out of the way of the people who have paid. It resolves
+            on the client like every other viewer swap, so the page stays
+            statically cached. */}
+        <Guest>
+          <section
+            aria-labelledby="follow-heading"
+            className="mx-auto w-full max-w-2xl px-5 pb-4 pt-14 sm:px-8 sm:pt-20"
+          >
+            <div className="rounded-xl border border-hairline bg-charcoal/30 px-5 py-6 sm:px-7 sm:py-7">
+              <h2
+                id="follow-heading"
+                className="font-display text-xl font-light text-ivory sm:text-2xl"
+              >
+                Not today, then.
+              </h2>
+              {/* cadenceNote() returns string | UNDEFINED — it needs four
+                  releases in thirty days before it will claim a rhythm, and
+                  says nothing rather than overstate a quiet month. Interpolated
+                  straight into the sentence it would have rendered the word
+                  "undefined" on the front page the first slow fortnight. */}
+              <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
+                That is genuinely fine.{cadence ? ` ${cadence}.` : ""} Leave an
+                address and I&rsquo;ll tell you when the next one is up — no
+                account, and nothing else in it.
+              </p>
+              <div className="mt-4 max-w-sm">
+                <FollowForm
+                  source="home"
+                  label="Your email"
+                  note="A line from me when something new goes up. Nothing else, and you can stop it in one click."
+                  done="Done — I'll write when the next one lands."
+                />
+              </div>
             </div>
           </section>
         </Guest>

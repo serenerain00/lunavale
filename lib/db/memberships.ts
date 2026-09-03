@@ -32,6 +32,15 @@ export interface MembershipRecord {
   stripeCustomerId: string;
   stripeSubscriptionId: string | null;
   currentPeriodEnd: Date | null;
+  /**
+   * Stripe will stop at `currentPeriodEnd` rather than renew.
+   *
+   * READ THIS FOR WORDING, NEVER FOR ACCESS. `status` stays "active" for the
+   * whole remaining period after somebody cancels, which is correct — they
+   * paid for it. tierForUser() below is the access gate and deliberately does
+   * not look at this field.
+   */
+  cancelAtPeriodEnd: boolean;
 }
 
 /**
@@ -84,23 +93,24 @@ export async function membershipForUser(
 
   const rows = (await sql()`
     SELECT user_id, tier, status, stripe_customer_id,
-           stripe_subscription_id, current_period_end
+           stripe_subscription_id, current_period_end, cancel_at_period_end
     FROM memberships
     WHERE user_id = ${userId}
     LIMIT 1
-  `) as Array<Record<string, string | null>>;
+  `) as Array<Record<string, string | boolean | null>>;
 
   const row = rows[0];
   if (!row) return null;
   return {
-    userId: row.user_id!,
-    tier: (getTier(row.tier!)?.id ?? "free") as TierId,
-    status: row.status!,
-    stripeCustomerId: row.stripe_customer_id!,
-    stripeSubscriptionId: row.stripe_subscription_id,
+    userId: row.user_id as string,
+    tier: (getTier(row.tier as string)?.id ?? "free") as TierId,
+    status: row.status as string,
+    stripeCustomerId: row.stripe_customer_id as string,
+    stripeSubscriptionId: (row.stripe_subscription_id as string | null) ?? null,
     currentPeriodEnd: row.current_period_end
-      ? new Date(row.current_period_end)
+      ? new Date(row.current_period_end as string)
       : null,
+    cancelAtPeriodEnd: row.cancel_at_period_end === true,
   };
 }
 
@@ -112,14 +122,17 @@ export async function recordMembership(input: {
   stripeCustomerId: string;
   stripeSubscriptionId: string | null;
   currentPeriodEnd: Date | null;
+  /** Defaults false so an older caller cannot silently clear a real flag. */
+  cancelAtPeriodEnd?: boolean;
 }): Promise<void> {
   await sql()`
     INSERT INTO memberships (
       user_id, tier, status, stripe_customer_id,
-      stripe_subscription_id, current_period_end, updated_at
+      stripe_subscription_id, current_period_end, cancel_at_period_end, updated_at
     ) VALUES (
       ${input.userId}, ${input.tier}, ${input.status}, ${input.stripeCustomerId},
-      ${input.stripeSubscriptionId}, ${input.currentPeriodEnd?.toISOString() ?? null}, now()
+      ${input.stripeSubscriptionId}, ${input.currentPeriodEnd?.toISOString() ?? null},
+      ${input.cancelAtPeriodEnd ?? false}, now()
     )
     ON CONFLICT (user_id) DO UPDATE SET
       tier                   = EXCLUDED.tier,
@@ -127,6 +140,7 @@ export async function recordMembership(input: {
       stripe_customer_id     = EXCLUDED.stripe_customer_id,
       stripe_subscription_id = EXCLUDED.stripe_subscription_id,
       current_period_end     = EXCLUDED.current_period_end,
+      cancel_at_period_end   = EXCLUDED.cancel_at_period_end,
       updated_at             = now()
   `;
 }
@@ -149,15 +163,17 @@ export async function recordPendingMembership(input: {
   stripeCustomerId: string;
   stripeSubscriptionId: string | null;
   currentPeriodEnd: Date | null;
+  cancelAtPeriodEnd?: boolean;
 }): Promise<void> {
   await sql()`
     INSERT INTO pending_memberships (
       email, tier, status, stripe_customer_id,
-      stripe_subscription_id, current_period_end, updated_at
+      stripe_subscription_id, current_period_end, cancel_at_period_end, updated_at
     ) VALUES (
       ${input.email.toLowerCase()}, ${input.tier}, ${input.status},
       ${input.stripeCustomerId}, ${input.stripeSubscriptionId},
-      ${input.currentPeriodEnd?.toISOString() ?? null}, now()
+      ${input.currentPeriodEnd?.toISOString() ?? null},
+      ${input.cancelAtPeriodEnd ?? false}, now()
     )
     ON CONFLICT (email) DO UPDATE SET
       tier                   = EXCLUDED.tier,
@@ -165,6 +181,7 @@ export async function recordPendingMembership(input: {
       stripe_customer_id     = EXCLUDED.stripe_customer_id,
       stripe_subscription_id = EXCLUDED.stripe_subscription_id,
       current_period_end     = EXCLUDED.current_period_end,
+      cancel_at_period_end   = EXCLUDED.cancel_at_period_end,
       updated_at             = now()
   `;
 }
@@ -193,7 +210,7 @@ export async function claimPendingFor(
 
   const rows = (await sql()`
     SELECT tier, status, stripe_customer_id, stripe_subscription_id,
-           current_period_end
+           current_period_end, cancel_at_period_end
     FROM pending_memberships
     WHERE email = ${verifiedEmail.toLowerCase()} AND claimed_at IS NULL
     LIMIT 1
@@ -203,6 +220,7 @@ export async function claimPendingFor(
     stripe_customer_id: string;
     stripe_subscription_id: string | null;
     current_period_end: string | null;
+    cancel_at_period_end: boolean | null;
   }[];
 
   const row = rows[0];
@@ -217,6 +235,9 @@ export async function claimPendingFor(
     currentPeriodEnd: row.current_period_end
       ? new Date(row.current_period_end)
       : null,
+    // Carried across, so a membership claimed days after purchase does not
+    // forget it was already cancelled on the way in.
+    cancelAtPeriodEnd: row.cancel_at_period_end === true,
   });
 
   // Marked AFTER the membership is written, never before. If the order were

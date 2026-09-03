@@ -105,8 +105,24 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
                   label="Price"
                   value={`${formatPrice(current.priceMonthlyCents)} / month`}
                 />
+                {/* "RENEWS" WAS A LIE TO ANYBODY WHO HAD CANCELLED. This read
+                    `status === "canceled"`, and Stripe does not move a
+                    subscription to that status when somebody switches off
+                    renewal — it stays "active" until the period actually runs
+                    out. So for the entire month after cancelling, the page told
+                    them their membership renews on the very date it ends.
+
+                    cancel_at_period_end is the flag that was missing; it is
+                    recorded from the webhook as of 2026-09-03. Access is
+                    unchanged either way — they keep everything until the date
+                    shown, which is the promise on the membership page and is
+                    enforced in tierForUser(), not here. */}
                 <Field
-                  label={record?.status === "canceled" ? "Access until" : "Renews"}
+                  label={
+                    record?.status === "canceled" || record?.cancelAtPeriodEnd
+                      ? "Access until"
+                      : "Renews"
+                  }
                   value={
                     record?.currentPeriodEnd
                       ? record.currentPeriodEnd.toLocaleDateString("en-US", {

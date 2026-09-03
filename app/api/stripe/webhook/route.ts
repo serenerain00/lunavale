@@ -148,10 +148,24 @@ async function applyEvent(event: Stripe.Event): Promise<void> {
       stripeCustomerId,
       stripeSubscriptionId: subscription.id,
       currentPeriodEnd: periodEnd(subscription),
+      cancelAtPeriodEnd: subscription.cancel_at_period_end === true,
     });
     return;
   }
 
+  /*
+    `cancel_at_period_end` RECORDED FROM 2026-09-03.
+
+    Stripe reports a subscription as "active" for the whole remaining period
+    after somebody switches off renewal, and this table copies status verbatim
+    — so until now a member who had already left looked identical to one who
+    was staying, everywhere: the admin, /account, and any query. It arrives on
+    customer.subscription.updated, which is the event Stripe sends the moment
+    the flag is set, and that event was already being handled and stored.
+
+    It changes nothing about access. tierForUser() reads status and
+    current_period_end, and does not read this.
+  */
   await recordMembership({
     userId,
     tier,
@@ -159,6 +173,7 @@ async function applyEvent(event: Stripe.Event): Promise<void> {
     stripeCustomerId,
     stripeSubscriptionId: subscription.id,
     currentPeriodEnd: periodEnd(subscription),
+    cancelAtPeriodEnd: subscription.cancel_at_period_end === true,
   });
 }
 

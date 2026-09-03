@@ -34,9 +34,36 @@ CREATE TABLE IF NOT EXISTS memberships (
   -- the end of the period you already paid for".
   current_period_end TIMESTAMPTZ,
 
+  -- Whether Stripe will stop at current_period_end instead of renewing.
+  --
+  -- ADDED 2026-09-03, and the gap it closes is worth stating: `status` stays
+  -- "active" for the whole month after somebody turns off auto-renew, because
+  -- that is what Stripe reports and this table copies Stripe verbatim. So
+  -- there was no way — in the admin, in /account, or in a query — to tell a
+  -- member who is staying from one who has already left. Two of the first five
+  -- memberships appear to have switched renewal off within hours of paying,
+  -- and nothing here could see it.
+  --
+  -- IT MUST NEVER GATE ACCESS. Somebody who cancels keeps everything until the
+  -- period they paid for runs out; that is the promise on the membership page
+  -- and it is enforced in tierForUser(), which reads status and
+  -- current_period_end and deliberately does not read this. This column is for
+  -- knowing, and for wording — nothing else.
+  cancel_at_period_end BOOLEAN NOT NULL DEFAULT FALSE,
+
   created_at         TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at         TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- CREATE TABLE IF NOT EXISTS above does nothing to a table that already
+-- exists, so a column added after the fact needs its own line. Both are
+-- idempotent and this file stays re-runnable end to end.
+--
+-- Additive, NOT NULL with a default, and therefore metadata-only on any
+-- Postgres since 11: no table rewrite, no lock worth the name, and every
+-- existing row reads FALSE. Nobody's access changes.
+ALTER TABLE memberships
+  ADD COLUMN IF NOT EXISTS cancel_at_period_end BOOLEAN NOT NULL DEFAULT FALSE;
 
 -- The webhook arrives knowing the Stripe customer, not the Clerk user.
 CREATE INDEX IF NOT EXISTS memberships_stripe_customer_idx
@@ -328,6 +355,13 @@ CREATE TABLE IF NOT EXISTS pending_memberships (
   created_at             TIMESTAMPTZ NOT NULL DEFAULT now(),
   updated_at             TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- The parked half of the pay-first flow needs the same flag, so that a
+-- membership claimed days after purchase does not forget it was already
+-- cancelled on the way in.
+ALTER TABLE pending_memberships
+  ADD COLUMN IF NOT EXISTS cancel_at_period_end BOOLEAN NOT NULL DEFAULT FALSE;
+
 
 -- The claim path looks up unclaimed rows by email.
 CREATE INDEX IF NOT EXISTS pending_memberships_unclaimed_idx

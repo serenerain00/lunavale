@@ -118,13 +118,42 @@ export async function GET() {
     }
   }
 
+  /*
+    ROUND THREE, 2026-09-04, and it exists because round two's output could not
+    settle the question it was built to settle. A real signed-in browser sent:
+
+      clerkCookies: ["__client_uat:1", "__client_uat_L-ekVNyD:1"]
+
+    which says two things and hides the one that matters. It says there is NO
+    __session cookie — so auth() is not refusing a token, it is being handed
+    none, and every "the server rejects a good session" theory is dead. And it
+    says the __client_uat values are one character long, which is either "0"
+    (Clerk's flag for nobody is signed in, and then the server is simply right)
+    or a truncated something else. Logging lengths instead of values was the
+    right instinct for a token and the wrong one for a flag.
+
+    So: the uat VALUES, which are a Unix timestamp or 0 and are readable in
+    devtools by anyone anyway, and the full list of cookie NAMES, which is how
+    a session cookie under a name nobody expected would show up. Still no token
+    values, still no email, still the user id cut to ten characters.
+
+    REMOVE THIS, and the block below it, once the sign-in header is settled.
+    It runs on every viewer request and Observability is billed per event.
+  */
   console.log(
     "api/me diag " +
       JSON.stringify({
         clerkCookies: jar
           .getAll()
           .filter((c) => c.name.startsWith("__session") || c.name.startsWith("__client"))
-          .map((c) => `${c.name}:${c.value.length}`),
+          .map((c) =>
+            c.name.startsWith("__client_uat")
+              ? `${c.name}=${c.value}`
+              : `${c.name}:${c.value.length}`,
+          ),
+        // Names only. A session arriving under an unexpected name is exactly
+        // the kind of thing the filter above would hide.
+        allCookies: jar.getAll().map((c) => c.name),
         signedIn: session.signedIn,
         member: membership.active,
         tier: membership.tier,

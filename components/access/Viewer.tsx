@@ -33,8 +33,10 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -73,6 +75,27 @@ export function clearViewerHint(): void {
 const ViewerContext = createContext<ViewerPayload | null>(null);
 
 /**
+ * Ask the question again.
+ *
+ * Separate context from the payload so that a component which only wants to
+ * TRIGGER a re-read does not re-render every time the answer changes. The
+ * default is a no-op, so calling this outside the provider is harmless.
+ */
+const ViewerRefreshContext = createContext<() => void>(() => {});
+
+/**
+ * The escape hatch for anything that changes who the viewer is.
+ *
+ * The provider asks /api/me once per document (see the note on its effect).
+ * Anything that makes that answer stale WITHOUT a page load has to say so, and
+ * this is how. Today there is one caller — ClerkViewerSync, which watches
+ * Clerk's client-side session and re-asks when the signed-in identity changes.
+ */
+export function useViewerRefresh(): () => void {
+  return useContext(ViewerRefreshContext);
+}
+
+/**
  * The membership question, or null while it is still being asked.
  *
  * Callers that need to distinguish "not a member" from "not known yet" — a
@@ -91,6 +114,43 @@ export function useViewerResolved(): boolean {
 export function ViewerProvider({ children }: { children: ReactNode }) {
   const [viewer, setViewer] = useState<ViewerPayload | null>(null);
 
+  // Set while a fetch is in the air, so the mount effect and a refresh
+  // triggered on the same tick cannot both ask.
+  const inFlight = useRef(false);
+  const mounted = useRef(true);
+
+  /**
+   * Ask /api/me and publish the answer.
+   *
+   * Stable identity (no deps) so ClerkViewerSync can hold it in an effect
+   * without re-running that effect on every payload change.
+   */
+  const refresh = useCallback(async () => {
+    if (inFlight.current) return;
+    inFlight.current = true;
+    try {
+      // `same-origin` credentials so the session cookie rides along; without
+      // it this would report every member as signed out.
+      const res = await fetch("/api/me", { credentials: "same-origin" });
+      if (!res.ok || !mounted.current) return;
+      const data = (await res.json()) as ViewerPayload;
+      if (!mounted.current) return;
+
+      setViewer(data);
+      try {
+        window.localStorage.setItem(HINT_KEY, JSON.stringify(data));
+      } catch {
+        // Storage unavailable; the swap still happened, it just won't be
+        // instant next time.
+      }
+    } catch {
+      // Offline, or the route is down. Staying on the guest view is the
+      // correct failure: it under-promises rather than over-promising.
+    } finally {
+      inFlight.current = false;
+    }
+  }, []);
+
   /*
     ASKED ONCE PER DOCUMENT, which is the point and also the sharp edge.
 
@@ -100,15 +160,22 @@ export function ViewerProvider({ children }: { children: ReactNode }) {
     on every route change would put the cost back in a different pocket.
 
     The consequence is that anything which CHANGES who the viewer is has to say
-    so, because nothing here will notice on its own. There is exactly one such
-    thing today and it is signing out: see components/ui/SignOut.tsx, which
-    clears the hint and then leaves via a full document load rather than a
-    router push. If a second one ever appears — signing IN without a page load,
-    an in-page upgrade — it needs the same treatment, or it will look like it
-    did not work.
+    so, because nothing here will notice on its own. Both of them now do:
+
+      SIGNING OUT — components/ui/SignOut.tsx clears the hint and leaves via a
+      full document load rather than a router push.
+
+      SIGNING IN — ClerkViewerSync watches Clerk's client-side session and
+      calls useViewerRefresh() when the identity changes. Clerk's <SignIn>
+      finishes with a router navigation, so without it a person who has just
+      signed in keeps the header they had while signed out: "Sign in" on the
+      right and the join button beside it, for the whole rest of the visit.
+
+    Anything else that changes the answer in place — an in-page upgrade, say —
+    needs the same treatment or it will look like it did not work.
   */
   useEffect(() => {
-    let cancelled = false;
+    mounted.current = true;
 
     /*
       Two renders on purpose, and in this order:
@@ -122,43 +189,25 @@ export function ViewerProvider({ children }: { children: ReactNode }) {
       after hydration, is what keeps the cached HTML and the first paint
       identical for everybody.
     */
-    async function resolve() {
+    async function seedThenResolve() {
       try {
         // Safari in private mode throws on localStorage rather than returning
         // null, so this cannot be an `if (cached)` on a bare read.
         const cached = window.localStorage.getItem(HINT_KEY);
-        if (cached && !cancelled) setViewer(JSON.parse(cached) as ViewerPayload);
+        if (cached) setViewer(JSON.parse(cached) as ViewerPayload);
       } catch {
         // No hint available. The fetch below is the real answer anyway.
       }
 
-      try {
-        // `same-origin` credentials so the session cookie rides along; without
-        // it this would report every member as signed out.
-        const res = await fetch("/api/me", { credentials: "same-origin" });
-        if (!res.ok || cancelled) return;
-        const data = (await res.json()) as ViewerPayload;
-        if (cancelled) return;
-
-        setViewer(data);
-        try {
-          window.localStorage.setItem(HINT_KEY, JSON.stringify(data));
-        } catch {
-          // Storage unavailable; the swap still happened, it just won't be
-          // instant next time.
-        }
-      } catch {
-        // Offline, or the route is down. Staying on the guest view is the
-        // correct failure: it under-promises rather than over-promising.
-      }
+      await refresh();
     }
 
-    void resolve();
+    void seedThenResolve();
 
     return () => {
-      cancelled = true;
+      mounted.current = false;
     };
-  }, []);
+  }, [refresh]);
 
   /*
     A `data-member` attribute on <html> so styling can respond without a client
@@ -177,7 +226,9 @@ export function ViewerProvider({ children }: { children: ReactNode }) {
   }, [viewer?.member]);
 
   return (
-    <ViewerContext.Provider value={viewer}>{children}</ViewerContext.Provider>
+    <ViewerRefreshContext.Provider value={refresh}>
+      <ViewerContext.Provider value={viewer}>{children}</ViewerContext.Provider>
+    </ViewerRefreshContext.Provider>
   );
 }
 

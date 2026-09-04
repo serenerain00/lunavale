@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ViewerProvider } from "@/components/access/Viewer";
+import { ClerkViewerSync } from "@/components/access/ClerkViewerSync";
 import { authConfigured } from "@/lib/billing/provider";
 import { Caveat, Fraunces, Inter } from "next/font/google";
 import "./globals.css";
@@ -102,7 +103,16 @@ export default function RootLayout({
           This provider decides what buttons SAY. It never decides what anyone
           RECEIVES; that stays server-side in /api/stream and canWatch().
         */}
-        <ViewerProvider>{children}</ViewerProvider>
+        <ViewerProvider>
+          {/*
+            Inside the provider so it can refresh it, and rendered only where
+            Clerk exists so useAuth() has a ClerkProvider above it. Without
+            this, signing in leaves the header saying "Sign in" until the
+            visitor reloads by hand — see the component for the whole story.
+          */}
+          {authConfigured() && <ClerkViewerSync />}
+          {children}
+        </ViewerProvider>
 
         {/*
           Microsoft Clarity — traffic + session analytics. Production only, so

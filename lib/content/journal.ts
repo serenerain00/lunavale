@@ -19,7 +19,7 @@
  *   again. She doesn't yet know it is about to get worse.
  *
  *   Tyson: her best friend of twenty years. Ex-military. Helps Josh on the
- *   farm, friend of the family, Josh's distant cousin. Snowboarding,
+ *   farm, friend of the family, Josh's second cousin. Snowboarding,
  *   motorcycles, track days, a black 2020 Carrera he treats like a child.
  *   Through the six months he kept her head above water, and somewhere in
  *   there it stopped being only that — on both sides. Neither will say it.
@@ -1863,7 +1863,7 @@ export const journal: JournalEntry[] = [
       "They barely talk when they work. That is the thing that would surprise anybody who has only met them at a table. Josh is under it saying nothing, and Tyson hands him the wrench before he asks for it, and then stands there holding the light at the angle it needs to be at, and moves it when the angle changes, and neither of them says a single word about the light.",
       "Josh said something at one point that I could not hear and Tyson laughed — once, the short one, down at the ground. Then they got on with it.",
       "They are good at it. Whatever else is going on in that yard, those two men work together like they have been doing it since they were boys, which they have.",
-      "And he is Josh's blood. Not close — you have to go up and along a few times to find the place where they join, and nobody in that family can agree on whether it is second or third — but at the funerals they stand on the same side of the room, and in that family that is the whole of what blood means.",
+      "And he is Josh's blood. Second cousins — far enough out that most families would have let it go by now, and at the funerals they still stand on the same side of the room, which in that family is the whole of what blood means.",
       "So here is what I understood at that window, and it took a decade and a cold coffee to get to it.",
       "I have written nine pages in this book about what this would cost me. Not one line about what it would cost them.",
       "That is two men, a tractor, twenty years, and every winter either side of it. And there is precisely one thing in the world that takes it away from both of them at once, and it was standing at the window in a dressing gown holding a coffee it had stopped drinking.",
@@ -2746,7 +2746,7 @@ export const journal: JournalEntry[] = [
     what she was actually protecting.
 
     IT INVENTS NO EVENT. Every fact in it is already canon: Josh and Tyson are
-    distant cousins; Cathy made the two of them lunches as teenagers and loves
+    second cousins; Cathy made the two of them lunches as teenagers and loves
     Tyson like a son; Avery has known him almost her whole life and he treats
     her as a little sister; Cathy was there for Luna when he deployed; Cathy
     defends Josh. The entry is arithmetic performed on facts the reader already

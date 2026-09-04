@@ -212,10 +212,31 @@ Avery. He has known the family for twenty years, **thinks of Avery as a little
 sister**, and is **protective of the whole Vale family**, not only Luna. He
 came and went for a decade while he was serving; some of that was deployment.
 
-**Cousins, and it shows** *(2026-08-03).* Josh and Tyson are **distant
-cousins — second or third, Melissa is deciding which** — and they are meant to
-**share some features**, which is worth landing on screen rather than only in
-the family tree.
+**Cousins, and it shows** *(2026-08-03; settled 2026-09-04).* Josh and Tyson
+are **second cousins** — decided, closed, not open to interpretation — and they
+are meant to **share some features**, which is worth landing on screen rather
+than only in the family tree.
+
+> **NO UNDECIDED FACTS ON THE SITE** *(Melissa, 2026-09-04, and it generalizes
+> past this one line).* Tyson's character card read "second or third, still
+> being decided", which is a production note wearing a character fact's
+> clothes. **These people are drawn from real ones.** A visitor meets them
+> once; being told that their family tree is still being worked out makes them
+> a draft rather than a person, and no amount of good prose around it recovers
+> that.
+>
+> The rule, for anything rendered anywhere on the site: **a fact is either
+> stated plainly or it is not on the page.** Not "probably", not "we're
+> deciding", not "second or third". If a detail genuinely is not settled yet,
+> the answer is to leave it out and ask — this document is where the open
+> questions live, and it is not published.
+>
+> Two things this rule does NOT cover, both deliberate and both staying:
+> Luna's own uncertainty inside the journal (a woman who does not know what
+> she wants is the story), and the production copy on `/about` that says the
+> next scene is not fixed and members are in that conversation — that is an
+> invitation, and it is about what gets shot, never about who these people
+> are.
 
 **After the military** he came out with a **discipline that does not waver**,
 and he makes his living **several different ways** rather than one — the

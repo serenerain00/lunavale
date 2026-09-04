@@ -854,7 +854,7 @@ export const environments: Environment[] = [
         id: "the-barn",
         name: "The Barn",
         description:
-          "Josh and Tyson at the tractor before the day starts. Family, co-workers, distant cousins — and the thing between them nobody names.",
+          "Josh and Tyson at the tractor before the day starts. Family, co-workers, second cousins — and the thing between them nobody names.",
         spawn: [0, 1.6, 3.5],
         dressing: "barn",
         galleryId: "josh-luna-bolt",

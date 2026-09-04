@@ -50,6 +50,26 @@ import type { ViewerPayload } from "@/app/api/me/route";
  */
 const HINT_KEY = "lv_viewer_hint";
 
+/**
+ * Forget the hint, and drop the member styling with it.
+ *
+ * CALLED ON SIGN-OUT, and it is not a nicety. The hint is seeded into state
+ * before /api/me is asked, so a stale one is what a signed-out person sees
+ * first: their own address, "Sign out", and an "Account" button. Clerk clears
+ * its cookies on the way out and has no idea this key exists.
+ *
+ * Safe to call anywhere — a browser that throws on localStorage (Safari in
+ * private mode) is a browser that had no hint to clear.
+ */
+export function clearViewerHint(): void {
+  try {
+    window.localStorage.removeItem(HINT_KEY);
+  } catch {
+    // Storage unavailable, so there is nothing stored to forget.
+  }
+  document.documentElement.removeAttribute("data-member");
+}
+
 const ViewerContext = createContext<ViewerPayload | null>(null);
 
 /**
@@ -71,6 +91,22 @@ export function useViewerResolved(): boolean {
 export function ViewerProvider({ children }: { children: ReactNode }) {
   const [viewer, setViewer] = useState<ViewerPayload | null>(null);
 
+  /*
+    ASKED ONCE PER DOCUMENT, which is the point and also the sharp edge.
+
+    This provider sits in the root layout, so a client-side navigation does not
+    remount it and this effect does not run again. That is deliberate — the
+    architecture exists to stop paying for a per-request answer, and refetching
+    on every route change would put the cost back in a different pocket.
+
+    The consequence is that anything which CHANGES who the viewer is has to say
+    so, because nothing here will notice on its own. There is exactly one such
+    thing today and it is signing out: see components/ui/SignOut.tsx, which
+    clears the hint and then leaves via a full document load rather than a
+    router push. If a second one ever appears — signing IN without a page load,
+    an in-page upgrade — it needs the same treatment, or it will look like it
+    did not work.
+  */
   useEffect(() => {
     let cancelled = false;
 

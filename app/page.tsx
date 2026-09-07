@@ -169,9 +169,11 @@ export default async function Home() {
             and no countdown for the same reason: a date this page cannot
             guarantee is fake scarcity.
 
-            Copy and the on/off switch live in lib/content/between-us.ts, which
-            also writes down the part no code can enforce — that "before
-            Instagram" is an operational promise somebody has to keep. */}
+            Copy and the on/off switch live in lib/content/between-us.ts,
+            which also carries the reasoning: the band used to promise members
+            got each episode BEFORE Instagram, and now says Instagram cannot
+            carry an episode at all. A fact nobody can post their way out of,
+            in place of an ordering promise somebody had to keep. */}
         {BETWEEN_US.announced && (
           <section
             aria-labelledby="between-us-heading"

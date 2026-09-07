@@ -17,12 +17,21 @@
  *
  *   1. Members get the episodes. Straightforward — it is the same gate every
  *      other premium thing already uses.
- *   2. Members get them BEFORE Instagram. This one is an operational
- *      commitment, not a feature: it means no episode may be posted to
- *      Instagram until it has been live here first. Nothing in the code can
- *      enforce that. If the order ever slips, this line is the thing that
- *      turned a membership into a grievance, so it is written down here as a
- *      promise somebody has to keep rather than buried in a sentence.
+ *   2. This is the only place they can be watched.
+ *
+ * THE SECOND ONE CHANGED ON 2026-09-07 AND GOT STRONGER BY GETTING SMALLER.
+ * It used to read "before it goes to Instagram", which was an operational
+ * commitment rather than a feature: no episode could be posted to Instagram
+ * until it had been live here first, nothing in the code could enforce that,
+ * and one out-of-order post would have turned a membership into a grievance.
+ *
+ * Melissa, 2026-09-07: Instagram does not allow full episodes. So the ordering
+ * promise was never the real point — an episode cannot go there at all. What
+ * replaces it is a platform fact rather than a promise, and the difference is
+ * the whole reason to prefer it: nobody can break it by posting in the wrong
+ * order, and it says something considerably better than "first", which is that
+ * there is no second place. Instagram stays what it always was for this
+ * project — clips, trailers and fragments, which is what sends people here.
  *
  * NOTHING HERE SAYS ANYTHING IS AVAILABLE. There is no episode yet. Every line
  * is future tense, there is no date, and there is no countdown — a date this
@@ -89,11 +98,12 @@ export const BETWEEN_US: BetweenUsAnnouncement = {
     // tense with no date in it, for the reason in the header.
     "The first episode is coming, and the ones after it land here as each one is finished. Not a scene and not a clip — episodes.",
     "Every one is part of the membership. Nothing extra to buy, no season to wait for, and they stay yours to watch again.",
-    // "before it goes to Instagram" rather than "exclusive" on its own:
-    // exclusive is a word that can mean anything, and the specific version is
-    // both more persuasive and easier to be held to.
-    "Members watch each one here first, before it goes to Instagram.",
+    // NAMES THE CONSTRAINT rather than claiming exclusivity. "Exclusive" is a
+    // word that can mean anything and that a reader has been trained to
+    // discount; a length limit on a platform they use themselves is checkable,
+    // and it explains the situation instead of asserting it.
+    "Instagram can carry a clip. It cannot carry an episode — so this is the only place to watch one.",
   ],
   memberLine: "Included with the LunaVerse.",
-  memberNote: "You'll get these first — they land here before anywhere else.",
+  memberNote: "Each one lands here, and here is the only place it lands.",
 };

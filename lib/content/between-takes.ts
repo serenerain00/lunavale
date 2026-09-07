@@ -38,7 +38,7 @@
  * they now end on the generous reading, which is both truer to these people and
  * a great deal better to read.
  *
- * ACCESS: 5 of the 32 pages are open, deliberately few. They are the funny ones
+ * ACCESS: 5 of the 33 pages are open, deliberately few. They are the funny ones
  * and the ones that give away a technique rather than a turn — enough for a
  * visitor to know exactly what the rest of the notebook is, which is the whole
  * job of a shop window. Everything that explains a scene the visitor cannot
@@ -528,6 +528,22 @@ export const notes: SetNote[] = [
       "Then, right at the end, I get up. Once, and I am the only one who does. That is the architecture of the whole thing: you spend the scene establishing that neither man moves, so the one who finally moves owns everything after it.",
       "It buys exactly one line. “You think you’re handling it? You’re not.” I am talking about Luna and I will not say her name, and that is the closest I come in the entire film to admitting I thought she was worth something.",
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work in that room than I am.",
+    ],
+  },
+  {
+    id: "rick-the-rod",
+    author: "rick",
+    kind: "insight",
+    heading: "I do not put the rod down",
+    dateline: "Day 20 · the lake",
+    sceneSlug: "josh-rick-lake",
+    place: "lake",
+    access: "premium",
+    body: [
+      "Melissa gave me one instruction for the whole scene and it was about my eyes: keep them on the water. My son comes out here to ask his father for help, and I do not put the rod down for it. Not to answer him. Not once.",
+      "That sounds like nothing until you try to play a scene that way. All you have left is the pause before you speak and the fact that you are not going to stop what you are doing to have the conversation. It turns out that is plenty. You never have to raise anything if you never give the other man your face.",
+      "The other half of it is that I already knew. I had spoken to her mother, so I knew where Luna was staying before he had worked out how to tell me. He is standing there with his news and I have had it for days. We deliberately did not play that as a win — being a step ahead of him is not an event in this family, it is the weather.",
+      "Then I tell him: good, now you know how she felt. It is the truest thing anybody says to him in the entire film and I say it to a lake. That is the only shape the care ever comes in and I have not got another one. He drove out and asked me anyway, which I would like noticed, because he knew before he set off exactly what he was going to get.",
     ],
   },
 

@@ -810,6 +810,41 @@ This is where **Luna starts seeing Tyson differently.** She is still tied up in
 Josh, so it is not a switch being flipped — it is the beginning of something
 bigger, and **more complicated than Josh alone.**
 
+### New York — the weekend of the event — month five
+*(Canon set by Melissa, 2026-09-08, with the footage.)*
+
+**About five months** into the break-up, and it is the furthest either of them
+has been from the whole of the rest of the story.
+
+**Luna has a modeling event in New York**, and **she invited Tyson out for the
+weekend.** He came. They are staying at a five-star hotel — **the Whitmore**,
+which is lettered on the reception desk in the footage, so the name is settled
+by the picture rather than chosen.
+
+**Where they both are by this point:** already feeling it, and both **refusing
+to talk about it.** He gives her clear signals at times. She probes him for the
+truth. Neither of them will put a sentence to it — which is the same standoff
+`### THE PROMISE` explains and which does not break here.
+
+**The scene is the night of the company dinner party.** They spend the evening
+out with **her peers**, drinking and socializing, and come back to the hotel and
+**keep drinking in Tyson's room.** Everything in the video unfolds from there.
+
+**IT DOES NOT RESOLVE ANYTHING, and nothing written against it may imply that it
+does.** `the-night`, much later, turns on its own first line — twenty years and
+it did not arrive as a decision. So this is a night that goes a very long way
+and is still inside the refusal. The published copy (lib/content/videos.ts
+`luna-ty-nyc-hotel`, lib/content/clips.ts `luna-ty-nyc-vertical`) is written to
+stop exactly there.
+
+**Two cuts of it exist**: the 4:55 landscape scene and a 4:10 vertical, which is
+its own edit rather than a crop — faces from the first frame where the scene
+opens on the lobby. The vertical is members-only with a public first minute.
+
+**NO JOURNAL PAGE YET.** This is the largest thing that happens to these two
+inside the six months and Luna's book does not mention it. Her account of that
+night is hers to approve before it is written.
+
 ### The kitchen — "who is she?"
 *(Delivered by Melissa, 2026-08-28. CUT AND PUBLISHED as **"Wasn't Planning On
 It"** (`luna-ty-wasntplanningonit`), **0:53**, **free**. Journal page

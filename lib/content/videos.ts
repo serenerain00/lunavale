@@ -1869,27 +1869,41 @@ export const videos: Video[] = [
     // hard on her face. It ends with him carrying her to the bed, both of them
     // laughing, and cuts before anything else.
     //
-    // WHERE THIS SITS IN THE STORY IS MELISSA'S, AND IS NOT GUESSED AT. The
-    // journal currently ends at `what-it-was`, the morning after the lakehouse.
-    // A trip to New York plausibly follows it and could equally be something
-    // else entirely, and this file is not the place to decide. Nothing below
-    // asserts a position in the timeline, no journal entry has been filed
-    // against it, and the synopsis is written so that it stays true wherever
-    // she puts it.
+    // WHERE IT SITS, from Melissa the same evening the footage landed: ABOUT
+    // FIVE MONTHS INTO THE BREAK-UP. Inside the six months, not after them.
     //
-    // WHAT IT MEANS THAT THEY ARE THERE AT ALL is the one thing the copy does
-    // lean on, because it is true of the footage rather than of the plot: this
-    // is the first time these two have been anywhere that is not the farm, the
-    // lakehouse, a bar twenty minutes from both, or a road between them. She
-    // is in a lobby where nobody knows her name. That is the scene, and it is
-    // sayable without knowing when it happens.
+    // She has a modeling event in New York and asked Tyson to fly out for the
+    // weekend. This is the night of the company dinner party — drinks and her
+    // peers all evening, back to the hotel, more drinks in HIS room, and then
+    // everything the cut shows. Both of them are feeling it and both refuse to
+    // say so: he gives her clear signals, she probes him for the truth, and
+    // neither will put a sentence to it.
+    //
+    // THAT DATE IS THE MOST LOAD-BEARING FACT ON THIS ENTRY, because it decides
+    // what the copy may imply. The synopsis was first written with no timeline
+    // and said there was "no reason left to sit the length of a table apart",
+    // which read as two people who had stopped refusing. They have not. The
+    // whole force of `the-night`, much later in the journal, is that it did not
+    // arrive as a decision — so nothing here may read as a beginning, and the
+    // line stops where the refusal is still holding.
+    //
+    // THE HOTEL IS THE WHITMORE and nobody had to choose it: it is lettered on
+    // the desk behind him and legible in the poster. Melissa asked for a
+    // five-star New York hotel, and the footage had already named one — a
+    // fictional one, which is a better outcome here than borrowing a real
+    // business's name for this particular evening.
+    //
+    // NO JOURNAL PAGE IS FILED AGAINST IT YET. There should be one — this is
+    // the biggest thing that happens to these two inside the six months and the
+    // book does not know about it — but her account of a night is hers to
+    // approve, so it is offered rather than written.
     slug: "luna-ty-nyc-hotel",
     // PLACEHOLDER title and synopsis — hers to replace. "The Whitmore" is the
     // hotel's own name off the desk behind him in the poster, so the card and
     // the frame agree, and it names the place without naming a beat.
     title: "The Whitmore",
     synopsis:
-      "She is waiting in the lobby when he comes through it. Two thousand miles from the farm, in a room where nobody knows either of their names, and no reason left to sit the length of a table apart.",
+      "Her event, her people, her weekend — and she asked him to fly out for it. They drink with her colleagues all evening and then keep drinking upstairs in his room: five months into being on her own, twenty years into neither of them saying it.",
     file: "luna-ty-nyc-hotel.proxy.mp4",
     poster: "/posters/luna-ty-nyc-hotel.jpg",
     // 295, and the master needed no trimming — the only cut in the library

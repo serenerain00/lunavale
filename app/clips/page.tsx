@@ -49,7 +49,16 @@ export default async function ClipsPage() {
             // A gated clip a non-member can't open has its poster withheld —
             // for a sex scene the still frame is exactly the thing not to show
             // on a public page. Members see it normally.
-            const locked = clipAccess(clip) === "premium" && !member;
+            //
+            // A PUBLIC OPENING CHANGES THAT (2026-09-08). Where a gated clip
+            // carries a preview, anybody can watch its first minute, so
+            // blurring the card would be hiding a frame from the part that is
+            // already open — and hiding it from the exact person the preview
+            // exists to interest. The "Members" badge below still says the
+            // clip is gated, because it is; only the withholding of the
+            // picture is conditional.
+            const gated = clipAccess(clip) === "premium";
+            const locked = gated && !member && !clip.preview;
 
             return (
               <Link
@@ -73,7 +82,7 @@ export default async function ClipsPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-void via-void/10 to-transparent" />
 
                   <div className="absolute left-2.5 top-2.5 flex flex-wrap gap-1.5">
-                    {locked ? (
+                    {gated ? (
                       <span className="inline-flex items-center gap-1 rounded-full bg-void/70 px-2 py-0.5 text-[0.72rem] font-medium text-amber-soft backdrop-blur-sm">
                         <LockGlyph />
                         Members

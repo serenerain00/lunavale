@@ -73,6 +73,33 @@ export interface Clip {
    * a visitor to guess that thirty seconds is all there is.
    */
   fullSceneSlug?: string;
+  /**
+   * The opening of a members-only clip, played to somebody who may not watch
+   * the rest. The portrait counterpart of Video.preview, added 2026-09-08 for
+   * luna-ty-nyc-vertical.
+   *
+   * BEFORE THIS, A GATED CLIP WAS A CLOSED DOOR. `access: "premium"` meant the
+   * stream route refused outright and the page showed a blurred poster, which
+   * is the correct treatment for the explicit ones — the still frame is the
+   * thing being withheld. It is the wrong treatment for a clip whose whole job
+   * is to make somebody want the rest, and Melissa asked for exactly that:
+   * "behind membership. show the first 1min."
+   *
+   * ALWAYS THE OPENING, and there is no `hookStart` here on purpose. Scenes
+   * grew one when their windows moved off the top (see Video.preview); a
+   * vertical cut is already the hook — it is the edit that opens on a face
+   * instead of a lobby — so the first minute is the right minute, and the
+   * page can honestly say "the first 1:00 of 4:10".
+   *
+   * A SEPARATE, SHORTER FILE, for the same reason scenes' previews are: the
+   * route swaps to it after the entitlement check, so a non-member is never
+   * sent a byte of the full cut. Cut by scripts/import-clips.sh.
+   */
+  preview?: {
+    /** Basename of the preview proxy inside stories/. */
+    file: string;
+    durationSeconds: number;
+  };
 }
 
 /** A clip's effective access. Free is the default, so entries stay terse. */
@@ -234,6 +261,59 @@ const authored: Clip[] = [
     // is a couple soaked on a farm road — closer to `run-at-the-lake` than to
     // the six below it. Melissa's to overrule.
     mature: false,
+  },
+  {
+    /*
+      NEW YORK, vertical — and the first gated clip on the site with a public
+      opening. Melissa, 2026-09-08: "behind membership. show the first 1min."
+
+      THE BACKSTORY, hers, given the same day and the reason this copy can say
+      anything at all: it is about five months into the break-up. Luna and
+      Tyson are already feeling it and both refuse to talk about it — he gives
+      her clear signals, she probes him for the truth, and neither will put a
+      sentence to it. She has a modeling event in New York and invited him out
+      for the weekend. This is the night of the company dinner party: drinks
+      and her peers all evening, back to the hotel, more drinks in HIS room,
+      and then the rest of it.
+
+      SO IT SITS INSIDE THE SIX MONTHS, not after them. That matters more than
+      anything else on this entry, because it decides what the copy is allowed
+      to imply. The journal has these two arriving at it much later and the
+      whole force of `the-night` is that it did not arrive as a decision — so
+      nothing here calls this a beginning, and the caption stops where the
+      refusal is still holding.
+
+      THE HOTEL IS THE WHITMORE, which is not a choice anybody has to make: it
+      is lettered on the desk behind him in the landscape cut and is legible in
+      that scene's poster. Melissa asked for a five-star New York hotel; the
+      footage had already named one, and a fictional one, which is the better
+      outcome than borrowing a real business's name for this particular
+      evening.
+
+      It is its own edit rather than a crop — 4:10 against the scene's 4:55,
+      and it opens on faces where the scene opens on a lobby. See
+      scripts/import-clips.sh.
+    */
+    id: "luna-ty-nyc-vertical",
+    // PLACEHOLDER title and caption — hers to replace.
+    title: "New York",
+    caption:
+      "Five months in, two thousand miles from anybody who knows them, and a whole evening of nearly saying it.",
+    file: "luna-ty-nyc-vertical.proxy.mp4",
+    poster: "/posters/luna-ty-nyc-vertical.jpg",
+    durationSeconds: 250,
+    addedOn: "2026-09-08",
+    about: ["luna", "tyson"],
+    // Intimate the whole way and graphic nowhere. Same call as the landscape
+    // cut, and NOT `explicit` — that field means it is shown.
+    mature: true,
+    access: "premium",
+    preview: {
+      file: "luna-ty-nyc-vertical-preview.proxy.mp4",
+      durationSeconds: 60,
+    },
+    // The same night in 16:9, four minutes longer, and the page says so.
+    fullSceneSlug: "luna-ty-nyc-hotel",
   },
 ];
 

@@ -914,6 +914,112 @@ export const galleries: StillGallery[] = [
     access: "free",
     mature: false,
   },
+  {
+    /*
+      NEW YORK — twenty stills, and the first gallery whose source arrived in
+      the scene folder rather than in stills-src/. Melissa, 2026-09-08.
+
+      THEY WERE ALREADY IN ORDER, which was luck rather than curation: staged
+      by the timestamp in each filename, they run lobby -> suite -> the bar ->
+      close, which is the scene's own arc. Nothing was resequenced. If any get
+      replaced, re-number them in stills-src/the-whitmore/ rather than
+      reshuffling here, because 01 is what the public cover is cut from.
+
+      THE TWO OPEN ONES ARE THE LOBBY, and that is the whole of the reasoning:
+      01 is her waiting alone with THE WHITMORE NEW YORK lettered behind her,
+      02 is him arriving. Neither is intimate, both say exactly where this is,
+      and they are the only frames of the twenty that could sit at a public URL
+      without giving away what the evening turns into. Everything from 03 is
+      the suite.
+
+      FIVE MONTHS INTO THE BREAK-UP — see the journal entry and
+      LUNA_VALE_CONTEXT.md. The captions are written to that: they are allowed
+      to be charged and they are not allowed to resolve, because the night
+      does not.
+    */
+    id: "the-whitmore",
+    // PLACEHOLDER title, subtitle, description and captions — hers to replace.
+    title: "The Whitmore",
+    subtitle: "Luna & Tyson",
+    description: [
+      "Her event, her weekend, her people — and she was the one who asked him to fly out for it. Twenty years of knowing each other and neither of them had ever been anywhere together that was not twenty minutes from the farm.",
+      "This is the night of the company dinner. They drank with her colleagues until one, came back, and kept drinking upstairs in his room. Every frame after the second one is that room.",
+    ],
+    count: 20,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/the-whitmore/cover.jpg",
+    // `desire` and `distance` together, which is the unusual pair and the
+    // correct one. Every other Luna-and-Tyson gallery is one or the other; this
+    // is the set where both are true in the same frame, and 08 and 09 — the
+    // two of them at opposite ends of a room they have all night alone — are
+    // the reason the second tag is there at all.
+    feelings: ["desire", "distance"],
+    place: "new-york",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-ty-nyc-hotel",
+    clipId: "luna-ty-nyc-vertical",
+    journalEntryId: "new-york",
+    stills: [
+      {
+        caption:
+          "Downstairs an hour early, which she would tell you was about the car.",
+        journal: {
+          entryId: "new-york",
+          excerpt:
+            "I invited him. That is the first line and it belongs at the top.",
+        },
+      },
+      {
+        caption: "Two thousand miles, on four weeks' notice, in a jacket he hates.",
+      },
+      {},
+      {
+        caption: "One more, she said, and meant several.",
+      },
+      {},
+      {},
+      {},
+      {
+        caption:
+          "The whole room to themselves and the length of it between them, which took some doing.",
+      },
+      {
+        caption: "Him at the glass with his back to her. Her at the bar, not moving either.",
+        journal: {
+          entryId: "new-york",
+          excerpt:
+            "There is something he is not telling me.",
+        },
+      },
+      {},
+      {},
+      {},
+      {},
+      {
+        caption:
+          "The staring game, from when they were nineteen. The loser is whoever speaks.",
+        journal: {
+          entryId: "new-york",
+          excerpt:
+            "I did not win it last night. I did not lose it either. It just went on far past the point where it was a game.",
+        },
+      },
+      {},
+      {
+        caption: "Somewhere in here he says Josh's name, and she does not write down why.",
+      },
+      {},
+      {},
+      {},
+      {
+        caption: "As close as twenty years has ever got, and nobody said anything.",
+      },
+    ],
+    access: "premium",
+    // Intimate, graphic nowhere, and the same call as the scene and the clip.
+    mature: true,
+  },
 ];
 
 /** All gitignored optimized copies a build step needs to know about. */

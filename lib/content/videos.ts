@@ -1855,6 +1855,89 @@ export const videos: Video[] = [
     // All three, all on screen, all central. Rare for this library.
     about: ["luna", "josh", "tyson"],
   },
+  {
+    // NEW YORK. Melissa dropped stories/luna-ty-nyc-hotel/ on 2026-09-08 with
+    // one line: "new folder luna-ty-nyc-hotel". The technical read is in
+    // scripts/import-cuts.sh; what follows is everything that is a judgment.
+    //
+    // WHAT IS ON SCREEN, and nothing here goes past it: she is waiting alone
+    // in the lobby of a hotel called THE WHITMORE, in a dress, with a clutch.
+    // He comes in through the lobby in a jacket. They talk, they end up at the
+    // bar of a suite with the skyline behind them, and the remaining four
+    // minutes are the two of them at very close range — foreheads, hands,
+    // long looks, one stretch around 2:45 where something is said that lands
+    // hard on her face. It ends with him carrying her to the bed, both of them
+    // laughing, and cuts before anything else.
+    //
+    // WHERE THIS SITS IN THE STORY IS MELISSA'S, AND IS NOT GUESSED AT. The
+    // journal currently ends at `what-it-was`, the morning after the lakehouse.
+    // A trip to New York plausibly follows it and could equally be something
+    // else entirely, and this file is not the place to decide. Nothing below
+    // asserts a position in the timeline, no journal entry has been filed
+    // against it, and the synopsis is written so that it stays true wherever
+    // she puts it.
+    //
+    // WHAT IT MEANS THAT THEY ARE THERE AT ALL is the one thing the copy does
+    // lean on, because it is true of the footage rather than of the plot: this
+    // is the first time these two have been anywhere that is not the farm, the
+    // lakehouse, a bar twenty minutes from both, or a road between them. She
+    // is in a lobby where nobody knows her name. That is the scene, and it is
+    // sayable without knowing when it happens.
+    slug: "luna-ty-nyc-hotel",
+    // PLACEHOLDER title and synopsis — hers to replace. "The Whitmore" is the
+    // hotel's own name off the desk behind him in the poster, so the card and
+    // the frame agree, and it names the place without naming a beat.
+    title: "The Whitmore",
+    synopsis:
+      "She is waiting in the lobby when he comes through it. Two thousand miles from the farm, in a room where nobody knows either of their names, and no reason left to sit the length of a table apart.",
+    file: "luna-ty-nyc-hotel.proxy.mp4",
+    poster: "/posters/luna-ty-nyc-hotel.jpg",
+    // 295, and the master needed no trimming — the only cut in the library
+    // delivered with no trailing black at all. The 3s fade at the end is on
+    // the proxy, not the master.
+    durationSeconds: 295,
+    addedOn: "2026-09-08",
+    // PREMIUM, which is the default for new Luna-and-Tyson material and is the
+    // easiest thing here to change. The free set is deliberately small and is
+    // currently the trailers and the story overview; this is the newest and
+    // most intimate scene on the site, which is the shape of thing membership
+    // is for. Flip it and delete the preview block if it should go out free.
+    access: "premium",
+    // Intimate the whole way and graphic at no point. `mature` is right:
+    // kissing, closeness, a lot of skin at the shoulders, and an ending that
+    // says plainly what happens next without showing it. NOT `explicit` —
+    // that field means it is shown, and here the cut lands before it.
+    mature: true,
+    preview: {
+      file: "luna-ty-nyc-hotel-preview.proxy.mp4",
+      durationSeconds: 15,
+      // 22s-37s: him crossing the lobby, her getting up, and the first thing
+      // they say to each other. It ends before they touch.
+      //
+      // The opening would have been her alone in a chair for twenty seconds,
+      // which is the most beautiful thing in the cut and asks nothing. This
+      // window is a woman waiting and a man arriving, and it stops on the
+      // question the rest of the scene answers.
+      hookStart: 22,
+      hookNote:
+        "he crosses the lobby to her and they speak; ends one beat before either of them reaches for the other",
+    },
+    // No content notes. Nothing here needs bracing for — see
+    // lib/content/content-notes.ts, which exists for violence and control, not
+    // for two people in a good mood.
+    //
+    // `desire` for the obvious reason. `trust` because it is the other half of
+    // what is on screen and the pair of them is the point: twenty years of
+    // knowing each other is why nobody in this scene has to explain anything.
+    // `distance` was considered and rejected — every other Luna-and-Tyson
+    // scene on the site is two people managing a gap, and this is the one
+    // where there isn't one.
+    feelings: ["desire", "trust"],
+    // New place, added to the taxonomy with this scene. Filed the way `mexico`
+    // is: a trip, not a room.
+    place: "new-york",
+    about: ["luna", "tyson"],
+  },
 ];
 
 /**

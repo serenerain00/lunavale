@@ -417,6 +417,40 @@ CUTS=(
   # 208.5s); cutting at 206.4 loses the last of that tail, which is the price
   # of not leaving the player sitting on four seconds of nothing.
   "ty-josh-fight|stories/ty-josh-fight/osh-ty-fight-music.mov|26|206.4"
+  # NEW YORK. The Whitmore, a lobby, a suite bar, and the two of them a long
+  # way from the farm. Melissa dropped the folder 2026-09-08.
+  #
+  # 1920x1080 h264 30fps, 294.8s, and it is the best-conditioned master in this
+  # file: true 16:9, full HD, no pillarbox, and NO TRAILING BLACK AT ALL —
+  # blackdetect at pic_th=0.95 across the whole file finds nothing. So no `end`
+  # on this line, only the second entry here to fade without trimming first.
+  #
+  # NO MUSIC: -32.6 dB mean / -3.6 dB peak, which sits with the garage (-35.5)
+  # and the bathroom (-29.4) rather than with anything scored (-16 to -27).
+  # UNLIKE those two, this is NOT known to be the delivery — nobody has said
+  # whether a scored export is coming. If one arrives, point this line at it and
+  # re-check every number below: the poster second, the fade, and
+  # durationSeconds in lib/content/videos.ts. Standing house rule, unchanged —
+  # the scored mix wins even when it costs resolution.
+  #
+  # FADE 3s, the house length, and applied without being asked for the same
+  # reason ty-luna-six-months was: the cut stops dead. Luminance is 29.7 at
+  # 290s and 26.9 at 294.5s — no self-fade — with the audio still running at
+  # -26.9 dB through the last four seconds. The closing shot is him carrying
+  # her to the bed, so a hard cut lands mid-movement. One edit to remove, and
+  # the master is untouched.
+  #
+  # POSTER AT 32s: the two of them meeting in the lobby, his face over her
+  # shoulder, and THE WHITMORE NEW YORK legible on the desk behind him. It says
+  # who and where in one frame and gives away nothing — the card is a man
+  # arriving to meet her, which is the first thirty seconds of the scene.
+  #
+  # Considered and rejected: 8s (her alone in the lobby — the best-composed
+  # frame in the cut and it sells a two-hander as a woman waiting on her own);
+  # 44s (her beaming at him — warmer, but her face and his shoulder, and it
+  # loses the hotel); anything past 270s (both faces, laughing, and it is the
+  # ending).
+  "luna-ty-nyc-hotel|stories/luna-ty-nyc-hotel/luna-ty-nyc-hotel.mp4|32||3"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

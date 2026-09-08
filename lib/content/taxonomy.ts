@@ -173,6 +173,19 @@ export const places = [
     label: "The Study",
     blurb: "His father's room, and the only chair in it that matters.",
   },
+  {
+    // NEW YORK, added 2026-09-08 with the Whitmore hotel scene. Filed the way
+    // `mexico` is — a trip rather than a room — because that is what it is:
+    // somewhere neither of them lives, two thousand miles from everybody who
+    // knows them, which is most of what the location means.
+    //
+    // No `environmentSlug`. There is no explorable New York and there may
+    // never be one; a place can hold content long before it is a room anybody
+    // can walk into (see `garage`, which did this for a month).
+    id: "new-york",
+    label: "New York",
+    blurb: "Two thousand miles from anyone who knows them.",
+  },
 ] as const satisfies readonly Place[];
 
 /**

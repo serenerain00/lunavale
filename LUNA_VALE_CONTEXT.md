@@ -841,9 +841,14 @@ stop exactly there.
 its own edit rather than a crop — faces from the first frame where the scene
 opens on the lobby. The vertical is members-only with a public first minute.
 
-**NO JOURNAL PAGE YET.** This is the largest thing that happens to these two
-inside the six months and Luna's book does not mention it. Her account of that
-night is hers to approve before it is written.
+**HER ACCOUNT IS THE JOURNAL ENTRY `new-york`** *(written 2026-09-08, draft
+prose)*, filed between `counting-the-pages` and `firepit-not-saying` — she has
+just read the whole book back and worked out whose name is really in it, and
+then she takes him to another city. She wakes in her own room in her dress with
+her shoes lined up by the door and no memory of getting there, and the page
+stops where the footage does. **She does not know about the promise**, so she
+reads his silence as being about her, which is what the canon says she does with
+it.
 
 ### The kitchen — "who is she?"
 *(Delivered by Melissa, 2026-08-28. CUT AND PUBLISHED as **"Wasn't Planning On

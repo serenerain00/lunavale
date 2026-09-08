@@ -1893,10 +1893,12 @@ export const videos: Video[] = [
     // fictional one, which is a better outcome here than borrowing a real
     // business's name for this particular evening.
     //
-    // NO JOURNAL PAGE IS FILED AGAINST IT YET. There should be one — this is
-    // the biggest thing that happens to these two inside the six months and the
-    // book does not know about it — but her account of a night is hers to
-    // approve, so it is offered rather than written.
+    // HER ACCOUNT IS `new-york` in lib/content/journal.ts, written alongside
+    // this entry and filed inside the six months rather than at the end of the
+    // book. The /watch page links the two automatically through `sceneSlug`.
+    // It stops where this cut stops — he picks her up and she remembers
+    // nothing after it — and it does not know about the promise, so her read
+    // of his silence is wrong in the way the canon requires.
     slug: "luna-ty-nyc-hotel",
     // PLACEHOLDER title and synopsis — hers to replace. "The Whitmore" is the
     // hotel's own name off the desk behind him in the poster, so the card and

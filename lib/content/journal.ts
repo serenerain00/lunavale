@@ -1533,6 +1533,103 @@ export const journal: JournalEntry[] = [
       "It is quarter to three. I have read twenty-six entries about a woman who is fine, and I would like to go on record as being extremely not fine, and as having known that since roughly page nine.",
     ],
   },
+  /*
+    NEW YORK. Added 2026-09-08 with the scene and the vertical cut, and it is
+    the largest thing that happens to these two inside the six months — the
+    book had no page for it, which for a woman who writes down a dinner order
+    was itself conspicuous.
+
+    CANON, from Melissa the same day: about five months into the break-up. She
+    has a modeling event in New York and invited Tyson out for the weekend.
+    This is the night of the company dinner party — drinks and her peers all
+    evening, back to the hotel, more drinks in HIS room. Both of them are
+    feeling it and both refuse to say so; he gives clear signals, she probes
+    him for the truth.
+
+    PLACED AFTER `counting-the-pages` AND BEFORE `firepit-not-saying`, which is
+    the only slot that works and improves both neighbours. She has just read
+    the whole book back and worked out whose name is really in it — and then
+    she takes him to another city. And the firepit entry afterwards, "I have
+    never been so grateful to anyone for pretending not to understand me",
+    stops being a general observation and becomes about something specific that
+    happened in a hotel room. Josh calls two pages later.
+
+    IT MUST NOT RESOLVE, and that is the hard constraint on every line here.
+    `the-night` turns on "there was no moment… it did not arrive as a
+    decision", so this night has to go a very long way and still end with
+    nothing said. It does, and the entry stops exactly where the footage stops:
+    he picks her up, and she cannot remember anything after that.
+
+    WHAT SHE DOES NOT KNOW is the whole engine. By month five Tyson has been in
+    love with her for about a month AND has already given Josh his word — see
+    `### THE PROMISE`. Only Cole knows. So every silence in this entry has a
+    reason she cannot see, and she does the thing the canon says she does with
+    it: reads it as something about herself. A reader who has the promise
+    watches her get it wrong in real time.
+
+    HE SAYS JOSH'S NAME, and that is the beat that lands on her face at about
+    2:45 in the cut. Deliberately NOT him naming Josh as the reason he cannot
+    talk to her — that is `he-shouted`, months later, and canon marks it as the
+    first time. Here Josh simply arrives in the room, uninvited, in a sentence
+    about nothing, which is what a man does when he is holding a promise he
+    cannot mention.
+
+    NOT `mature`. Nothing sexual happens on this page, and flagging it would
+    promise a reader something the entry deliberately withholds — the same
+    argument as the notes on `luna-ty-panic-attack` and the NYC scene itself.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "new-york",
+    addedOn: "2026-09-08",
+    dateline: "My own room, and I do not remember getting into it",
+    place: "new-york",
+    where: "The Whitmore, the morning after",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-ty-nyc-hotel",
+    access: "premium",
+    mature: false,
+    body: [
+      "I am going to write down what happened in the order it happened, before I have decided what it was. I know myself. By tonight I will have a version of this that is easier to carry and I would like the real one to exist somewhere first.",
+      "I woke up in my own room. In the dress. Shoes by the door, side by side, which is not how I take shoes off. There is a glass of water on the nightstand and I did not put it there.",
+      "I do not remember getting here.",
+      "So. Backwards, then, from the last thing I have.",
+      "I invited him. That is the first line and it belongs at the top. Not the agency, not the client, not a plus-one somebody assigned me. I sat in that house four weeks ago and typed out three different versions of a message to a man I have known for twenty years, and the one I sent was the shortest, and I have thought about that more than I would like.",
+      "I gave two reasons, both true, neither of them the reason. That he has never seen New York properly. That I hate these dinners and I would be better with somebody in the room who has no stake in any of it.",
+      "The actual reason is on page whatever of this book in my own handwriting, so I do not need to write it out again.",
+      "The dinner was the dinner. Forty of us in a private room, the client at one end, everybody being delightful. I have done a hundred of these and I could do them asleep.",
+      "He was extraordinary, and not in a way anybody could point at.",
+      "Here is what I mean. Everybody at that table performs for a living. Some of them are very good at it. And he sat there in a jacket he has had for six years and did not perform once — did not tell a story, did not work the room, answered what he was asked and stopped talking when he had finished — and by the dessert there were three people angled towards him who had not looked at me all night.",
+      "Josh would have owned that table. He would have had them. It would have been the best thing in the room and I would have watched it happen the way you watch weather.",
+      "Tyson did not want the table. That is the whole difference and it took me until about eleven o'clock to see it, sitting four seats down from him with a glass of something I was not drinking.",
+      "We came back at one. I went up to his room. I want that on the page in my own hand — not he asked me up, not it happened, not somehow. There is a bar in those rooms and I said we should have one more and I meant several.",
+      "We did not talk about anything. Three hours, and I could not give you a subject. The boat. A dog he had when he was nine. Somebody's husband from the dinner. It is the same nothing we have been talking for twenty years and it is the only conversation I have ever been able to do without preparing for it.",
+      "And underneath every single sentence was the sentence, and both of us knew, and neither of us went anywhere near it.",
+      "He did the thing. The one where he looks at me and does not stop looking, from when we were nineteen, and the loser is whoever speaks. I have won that game maybe four times in twenty years.",
+      "I did not win it last night. I did not lose it either. It just went on far past the point where it was a game, and he did not look away, and I did not look away, and something in the room changed temperature and neither of us named it.",
+      "He was giving me everything except the words. That is the part I cannot get past this morning. He did not move away once. Not when I sat down next to him instead of across, not when I put my hand on his arm to make some point that did not need a hand, not for one second all night.",
+      "So I asked him. Not the thing — near it. I asked him why he came.",
+      "It is two thousand miles. He does not like cities. He hates a jacket. He got on a plane on four weeks' notice to sit in a room full of people who make their living being looked at, and I asked him straight out why, and I watched him decide not to answer me.",
+      "He said: you asked.",
+      "Two words. And he held my eye the whole way through them, which is how I know they were not the answer and that he knew I knew.",
+      "And then he said Josh's name.",
+      "I am not going to write what he said around it because it was nothing — it was a sentence about the farm, it was ordinary, it would not survive being written down. It is that he brought him into that room. At that hour, in that light, with the two of us where we were, he reached over and put Josh on the table between us like a man putting down a glass.",
+      "It went through me. I have no better sentence for it. I felt it in my face and I know he saw it, and he looked at his hands and did not take it back.",
+      "There is something he is not telling me.",
+      "I have written that down and looked at it for a while. It has been true for about a month and last night is the first time I have been close enough to see the shape of it. He is holding something, and he is holding it carefully, and it is costing him.",
+      "The obvious answer is that it is me. That he knows exactly what I have been doing and has been kind about it, and that the whole weekend was a man being decent to a woman who is coming apart, and that Josh's name was him putting a hand up. Gently. In the only language we have.",
+      "I have been in this room since seven this morning going through it and I keep landing there, and I notice that I land there very fast, and that a woman who lands somewhere that fast is usually going somewhere she has already been.",
+      "The last thing I have is being picked up.",
+      "I know I was laughing. I know my arms went round his neck the way they have a hundred times since I was eighteen, in kitchens, at the lake, at Avery's wedding. I know he carried me the way he carries anything, like it weighed nothing and like he had already decided where it was going.",
+      "And that is where it stops. There is nothing after it. I have been trying all morning and there is no more film.",
+      "So he put me in my own bed, in my own room, in my dress, and lined my shoes up by the door, and left water where I would find it, and went back down the hall.",
+      "Nothing happened. I want it written down plainly, because in about a week I will have made it into something, and because it is the truest sentence about last night and it is not the sentence anybody would guess: I have never been closer to anyone in my life and nothing happened.",
+      "We have a car at four. I have to go down and have breakfast with him and be a person.",
+      "The thing I keep coming back to is not what he did not say. It is that I did not say it either, and I had the whole night, and I have been telling myself for a month that I am waiting on him.",
+      "One of us was going to have to and neither of us did, and we both got on a plane home about it.",
+    ],
+  },
   {
     id: "firepit-not-saying",
     dateline: "Late — the first cold night",

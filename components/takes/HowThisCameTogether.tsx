@@ -30,7 +30,6 @@ import {
   takeCount,
   takesForScene,
   unusedCount,
-  usedCount,
 } from "@/lib/content/takes";
 import { signTakePosters } from "@/lib/media/presign";
 
@@ -49,7 +48,6 @@ export async function HowThisCameTogether({
 
   const total = takeCount(scene);
   const unused = unusedCount(scene);
-  const starred = usedCount(scene);
   const beats = scene.beats.length;
 
   // Signed here, once, for the whole grid — and only after `member` has been
@@ -91,18 +89,6 @@ export async function HowThisCameTogether({
             Tracing a finished cut back to the attempt it came from is guesswork
             on material this similar, and a star in the wrong place would be
             worse than none — so none of them is starred.
-          </>
-        ) : scene.starring === "partial" ? (
-          /* PARTIALLY SETTLED, and the difference matters: an unstarred take
-             here is UNDETERMINED, not rejected. Saying "N never made it in"
-             would turn "we could not tell" into a verdict on somebody's work.
-             See the `starring` field in lib/content/takes.ts. */
-          <>
-            {starred} of them can be shown to have made the finished scene, and
-            they carry a star. The rest aren&rsquo;t marked either way —
-            several attempts at one moment come back near-identical, so which
-            one the cut took is not something a frame match can settle, and a
-            star in the wrong place would be worse than none.
           </>
         ) : (
           <>

@@ -33,7 +33,6 @@ import { tysonColeBarTakes } from "@/lib/content/takes-data/tyson-cole-bar";
 import { joshLunaWallTakes } from "@/lib/content/takes-data/josh-luna-wall";
 import { lunaTysonCaseyBarTakes } from "@/lib/content/takes-data/luna-tyson-casey-bar";
 import { lunaTysonGingeraleTakes } from "@/lib/content/takes-data/luna-tyson-gingerale";
-import { lunaTyNycHotelTakes } from "@/lib/content/takes-data/luna-ty-nyc-hotel";
 
 /** One attempt at one beat. */
 export interface Take {
@@ -73,24 +72,6 @@ export interface SceneTakes {
   /** The slug of the finished scene in lib/content/videos.ts. */
   sceneSlug: string;
   beats: TakeBeat[];
-  /**
-   * How far the starring can be trusted — set in the list below, NOT in the
-   * generated data, because it is a judgment about evidence rather than
-   * anything the folder layout knows.
-   *
-   * "complete" (the default when absent) means every take that made the cut
-   * carries a star, so a take without one was genuinely rejected. That is what
-   * lets the panel under the scene say "N of them never made it in".
-   *
-   * "partial" means some stars are proven and the remaining takes are simply
-   * UNDETERMINED — not rejected. Frame-matching a finished cut back to the
-   * attempt it came from only works when the attempts differ enough to tell
-   * apart; where a beat was generated four times from one prompt, the runner-up
-   * scores as close as the winner and the honest answer is "cannot tell".
-   * Without this distinction the panel would report undetermined takes as
-   * rejected ones, which is a claim about somebody's work that nobody checked.
-   */
-  starring?: "complete" | "partial";
 }
 
 /** Takes are members-only, always. See the module note. */
@@ -112,31 +93,6 @@ export const takes: SceneTakes[] = [
   joshLunaWallTakes,
   lunaTysonCaseyBarTakes,
   lunaTysonGingeraleTakes,
-  /*
-    NEW YORK, 2026-09-08. `starring: "partial"` and the reason is worth
-    recording, because the number under this scene depends on it.
-
-    Sixty-two unique attempts arrived in one flat folder (eighty files; eighteen
-    were byte-identical re-downloads and are not four separate takes). Each was
-    frame-matched against the finished cut — 4fps on both sides, 32x18
-    greyscale, normalised correlation, and again after a rank transform so that
-    a colour grade could not hide a match.
-
-    SEVEN CAME BACK UNAMBIGUOUS: peaks of 0.997-0.9997 across a run of
-    consecutive frames, which is the signature of the same footage rather than
-    the same setup. All seven are in the lobby.
-
-    THE OTHER FIFTY-FIVE TOP OUT AT 0.96-0.987 and cluster in groups that score
-    within a thousandth of each other — the same moment generated three or four
-    times, where the runner-up is as close as the winner. That is exactly the
-    case the field above exists for: they are undetermined, not rejected, and
-    the panel must not count them as clips that never made it in.
-
-    To settle any of them, rename the file in its beat folder with a `used-`
-    prefix and re-run scripts/import-takes.sh. When they are all settled, drop
-    the wrapper below and let it default to "complete".
-  */
-  { ...lunaTyNycHotelTakes, starring: "partial" },
 ];
 
 /** Proxy basename inside stories/, for the gated stream route. */
@@ -177,14 +133,6 @@ export function getTake(slug: string): TakeLocation | undefined {
 /** Total attempts across a scene — the headline number. */
 export function takeCount(scene: SceneTakes): number {
   return scene.beats.reduce((n, beat) => n + beat.takes.length, 0);
-}
-
-/** How many carry a star — takes shown to have made the finished scene. */
-export function usedCount(scene: SceneTakes): number {
-  return scene.beats.reduce(
-    (n, beat) => n + beat.takes.filter((t) => t.used).length,
-    0,
-  );
 }
 
 /** How many of them never made it in. The more interesting number. */

@@ -66,105 +66,37 @@ export async function GET() {
   ]);
 
   /*
-    TEMPORARY DIAGNOSTIC, added 2026-09-02 and to be removed once the header
-    bug is closed.
+    THE DIAGNOSTIC THAT LIVED HERE IS GONE (2026-09-09), and what it found is
+    worth keeping even though the code is not.
 
-    The report: signed in on the apex, Clerk's own /sign-in bounces her back
-    because the BROWSER has a session — and this route still says signedIn
-    false, so the header offers "Sign in" to somebody who is already in.
+    THE REPORT, 2026-09-02: signed in on the apex, Clerk's own /sign-in bounces
+    her back because the browser has a session, and the header still offers
+    "Sign in". Three rounds of logging were added here to find out whether this
+    route was refusing a good session — cookie names, then the auth() result
+    and the reason it rejected a token, then the __client_uat VALUES after
+    round two proved no __session cookie was arriving at all.
 
-    Everything cheap has already been ruled out from the outside: the route is
-    healthy and returns valid JSON, the viewer bundle ships and loads, the
-    firewall lets a browser-shaped request through, the production Clerk key is
-    the live instance, and CLERK_SECRET_KEY is a Config (not Sensitive)
-    variable so the middleware has it at build time.
+    THE ANSWER, from a live visitor on 2026-09-09: `__client_uat=0`. That is
+    Clerk's own flag for "nobody is signed in in this browser", and there was
+    no __session cookie because there was no session to have one. This route
+    was correct every single time it said signedIn:false.
 
-    What is left is a question only a real request can answer: does the session
-    cookie reach this function at all, and does clerkMiddleware resolve it?
-    Those are different failures with different fixes — a cookie that never
-    arrives is a client/scope problem, a cookie that arrives and resolves to no
-    user is a middleware or handshake problem.
+    The bug was in the header, not here: ViewerProvider asks this route once,
+    in a mount effect in the root layout, and Clerk's <SignIn> finishes with a
+    router navigation that does not remount it — so the context went on serving
+    the answer it had fetched while the person was still a stranger. Fixed
+    2026-09-04 by components/access/ClerkViewerSync.tsx.
 
-    Cookie NAMES and lengths only. No token values, no email, and the user id
-    is cut to eight characters — enough to tell two accounts apart in a log,
-    not enough to be an identifier worth having.
+    IF THE SYMPTOM EVER COMES BACK, do not re-add this block before checking
+    that one thing: whether a signed-in browser sends a __session cookie at
+    all. That single fact separates a client problem from a server one, and it
+    took three deploys to ask it cleanly.
+
+    WHY IT IS NOT LEFT IN "just in case": this route runs for every viewer on
+    every page load, Observability is billed per event, and that meter is the
+    one that produced a $420 August. A log that answers a closed question is
+    not free.
   */
-  // Round two of the same diagnostic. A valid, freshly-minted session JWT for
-  // a real active Clerk session still comes back signedIn:false from this
-  // route, so the problem is not the browser and not the cookie — the server
-  // refuses a good session. These three fields separate the remaining causes:
-  // whether clerkMiddleware() ran at all (it is what auth() depends on and it
-  // is compiled into a different bundle, with its own view of the
-  // environment), what auth() actually returned, and whether it threw.
-  let authProbe: Record<string, unknown> = { ran: false };
-  if (authConfigured()) {
-    try {
-      const { auth } = await import("@clerk/nextjs/server");
-      const a = await auth();
-      authProbe = {
-        ran: true,
-        userId: a.userId ? `${a.userId.slice(0, 10)}…` : null,
-        sessionId: a.sessionId ? `${a.sessionId.slice(0, 10)}…` : null,
-        // Clerk hangs the reason it rejected a token off the auth object in
-        // v6+. This is the field that says "token-expired", "token-invalid",
-        // or that middleware never ran.
-        reason:
-          (a as unknown as { reason?: string }).reason ??
-          (a as unknown as { authStatus?: string }).authStatus ??
-          null,
-      };
-    } catch (err) {
-      authProbe = { ran: true, threw: String(err).slice(0, 200) };
-    }
-  }
-
-  /*
-    ROUND THREE, 2026-09-04, and it exists because round two's output could not
-    settle the question it was built to settle. A real signed-in browser sent:
-
-      clerkCookies: ["__client_uat:1", "__client_uat_L-ekVNyD:1"]
-
-    which says two things and hides the one that matters. It says there is NO
-    __session cookie — so auth() is not refusing a token, it is being handed
-    none, and every "the server rejects a good session" theory is dead. And it
-    says the __client_uat values are one character long, which is either "0"
-    (Clerk's flag for nobody is signed in, and then the server is simply right)
-    or a truncated something else. Logging lengths instead of values was the
-    right instinct for a token and the wrong one for a flag.
-
-    So: the uat VALUES, which are a Unix timestamp or 0 and are readable in
-    devtools by anyone anyway, and the full list of cookie NAMES, which is how
-    a session cookie under a name nobody expected would show up. Still no token
-    values, still no email, still the user id cut to ten characters.
-
-    REMOVE THIS, and the block below it, once the sign-in header is settled.
-    It runs on every viewer request and Observability is billed per event.
-  */
-  console.log(
-    "api/me diag " +
-      JSON.stringify({
-        clerkCookies: jar
-          .getAll()
-          .filter((c) => c.name.startsWith("__session") || c.name.startsWith("__client"))
-          .map((c) =>
-            c.name.startsWith("__client_uat")
-              ? `${c.name}=${c.value}`
-              : `${c.name}:${c.value.length}`,
-          ),
-        // Names only. A session arriving under an unexpected name is exactly
-        // the kind of thing the filter above would hide.
-        allCookies: jar.getAll().map((c) => c.name),
-        signedIn: session.signedIn,
-        member: membership.active,
-        tier: membership.tier,
-        authConfigured: authConfigured(),
-        // Whether the middleware bundle can see the secret. If this is false
-        // while authConfigured() above is true, clerkMiddleware() never ran
-        // and auth() has nothing to read — which would explain every symptom.
-        secretVisibleHere: Boolean(process.env.CLERK_SECRET_KEY),
-        auth: authProbe,
-      }),
-  );
 
   const payload: ViewerPayload = {
     member: membership.active,

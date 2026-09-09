@@ -6,7 +6,6 @@ import { Questions } from "@/components/membership/Questions";
 import { TierCard } from "@/components/membership/TierCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { getMembership } from "@/lib/access/entitlement";
 import { journal } from "@/lib/content/journal";
 import { TIERS } from "@/lib/content/membership";
 import { pageMetadata } from "@/lib/seo/metadata";
@@ -18,9 +17,29 @@ export const metadata: Metadata = pageMetadata({
   path: "/membership",
 });
 
-export default async function MembershipPage() {
-  const { tier } = await getMembership();
+/*
+  STATIC AS OF 2026-09-09, and that is the whole reason this function no longer
+  awaits anything about the viewer.
 
+  It used to open with `const { tier } = await getMembership()`, for one
+  purpose: labelling a card "Your current tier" instead of showing the buy
+  flow. Reading entitlement during render makes a page dynamic — `no-store`,
+  never cached by the CDN, a serverless invocation for every visitor and every
+  crawler — and this page was paying that on every request to change one label.
+
+  It is also the page that has to convert. Of everything on the site, the worst
+  candidate for the slowest possible delivery is the one asking for money.
+
+  The question moved to components/membership/HeldTier.tsx, which resolves it
+  on the client from the answer /api/me already returns. Both variants of the
+  card ship in the cached HTML and the client shows one — the same trade the
+  header and the home page have made since 2026-08-31.
+
+  NOTHING ABOUT ACCESS CHANGED. /membership/start still validates the tier
+  server-side before it creates a Stripe session, and entitlement is still
+  resolved in lib/access/entitlement.ts. This page only ever decided wording.
+*/
+export default function MembershipPage() {
   // Counted, never typed. The pitch below is built out of these, so it cannot
   // still be claiming thirty-nine entries the week after the fortieth goes up.
   const lockedEntries = journal.filter((e) => e.access === "premium").length;
@@ -117,11 +136,7 @@ export default async function MembershipPage() {
                 key={t.id}
                 className={`h-full ${t.featured ? "order-first md:order-none" : ""}`}
               >
-                <TierCard
-                  tier={t}
-                  held={tier}
-                  yearlyOffered={yearlyAvailable(t.id)}
-                />
+                <TierCard tier={t} yearlyOffered={yearlyAvailable(t.id)} />
               </div>
             ))}
           </Reveal>

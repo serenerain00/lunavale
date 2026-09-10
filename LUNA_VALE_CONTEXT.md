@@ -781,6 +781,50 @@ not agree to it dishonestly, and he cannot get out of it honourably.
 **Only Cole knows.** Luna does not — which is why she reads the distance as
 something she did.
 
+### The lakehouse, alone — the first days
+*(Canon set by Melissa, 2026-09-10, with the footage. Scene:
+`luna-lkehouse-wine-shatter`.)*
+
+**A FEW DAYS AFTER THE BREAKUP.** Days, not weeks — the very front of the six
+months, before Tyson is a fixture and before anybody has settled into anything.
+
+**It is over Josh, and specifically over the phone calls and the arguments with
+him.** They are still happening.
+
+**She is not used to being alone in a quiet house** and she is not coping well
+with it. **Tyson is not always around yet**, so she is doing two things at once:
+getting used to a new normal, and deciding whether leaving was the right thing
+at all. The case she puts to herself is the whole of it —
+
+- did she **give up**
+- did she **leave too soon**
+- did she **overreact**
+- did she **not communicate enough**
+
+**AND THEN SHE ANSWERS IT.** She works out that she **did do things to help the
+situation. She did try.** She did not walk away for no reason and end up at the
+lakehouse — **there is a reason she is there.**
+
+**AND IT STILL OVERWHELMS HER**, because being alone is an enormous amount after
+ten years of not being.
+
+> **THE THROW IS NOT THE DOUBT.** She resolves the doubt inside the scene; the
+> glass goes afterwards, because the quiet is more than she can carry. Those are
+> two different things and any copy about this scene has to keep them apart. It
+> is not a woman breaking down over whether she was right. It is a woman who has
+> just decided she was right, alone in a house, finding that it does not help.
+
+**WHAT THE BOOK DOES NOT HAVE YET.** `the-night-i-left` is the leaving and
+`asking-for-less` is missing him. Neither is the verdict — the argument she puts
+against herself and then answers. **No journal entry is filed against this
+scene.**
+
+**NOT `the-bad-one`.** That was guessed before the context arrived, on
+resemblance alone — lakehouse, her alone, no scene attached — and it is wrong:
+`the-bad-one` is months in. Recorded because the same mistake is available to
+anyone else: a solo scene with no date on it will fit almost any bad night in
+this book.
+
 ### The night at the bar — month one
 *(Canon set by Melissa, 2026-07-31.)*
 

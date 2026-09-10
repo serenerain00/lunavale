@@ -2059,9 +2059,31 @@ export const videos: Video[] = [
   },
   {
     /*
-      THE WINE GLASS. Melissa dropped the folder 2026-09-10 with no backstory,
-      so everything below is read off the footage and NOTHING here places it in
-      the timeline.
+      THE WINE GLASS. Melissa dropped the folder 2026-09-10 and gave the
+      context the same day.
+
+      WHEN: A FEW DAYS AFTER THE BREAKUP. Days, not weeks — this is the very
+      front of the six months, which puts it after `asking-for-less` (her first
+      morning at the lakehouse) and well before `tyson-shows-up` in week two.
+
+      WHAT IT IS ABOUT, in her words: it is over Josh, and specifically over
+      the phone calls and the arguments with him. Luna is not used to being
+      alone in a quiet house and is having a hard time coping. Tyson is not
+      always around yet, so she is trying to get used to a new normal and at
+      the same time decide whether leaving was the right thing — did she give
+      up, did she leave too soon, did she overreact, did she not communicate
+      enough.
+
+      AND THEN SHE ARRIVES SOMEWHERE, which is the part that makes this a scene
+      rather than a mood: she works out that she DID do things to help. She did
+      try. She did not walk away for no reason and end up here — there is a
+      reason she is at the lakehouse. It still overwhelms her, because being
+      alone is a great deal after ten years of not being.
+
+      SO THE THROW IS NOT THE DOUBT. She resolves the doubt. The glass goes
+      because the quiet is more than she can carry, which is a different and
+      harder thing, and any copy written about this scene should keep those two
+      apart.
 
       WHAT IS ON SCREEN, and nothing goes past it: Luna alone at the lakehouse
       at night, the lake and a moon through the glass behind her, an open
@@ -2071,13 +2093,20 @@ export const videos: Video[] = [
       glass. Afterwards she is standing at the counter breathing, and there is
       BLOOD on her palm.
 
-      THE ONE READING WORTH PUTTING TO HER, and it is not asserted anywhere:
-      this may be `the-bad-one`. LUNA_VALE_CONTEXT.md names that entry, by
-      name, as one of the two places her worst nights are described — "Wrote
-      this the next day. Could not have written it that night." It is a
-      lakehouse entry, it is her alone, and it has no scene filed against it.
-      If Melissa says yes, this gets `sceneSlug` and the entry gets a scene it
-      has been describing for a month. Until she does, they stay apart.
+      IT IS NOT `the-bad-one`, and that guess is recorded here because it was
+      made and it was wrong. With no context supplied, the obvious pairing
+      looked like the entry canon names among her worst nights — lakehouse, her
+      alone, no scene filed against it. Her placement rules it out: `the-bad-one`
+      sits months in, and this is the first week. The lesson is the cheap one —
+      a solo scene with no date attached will fit almost any bad night in the
+      book, which is exactly why it should not be filed against one on
+      resemblance.
+
+      NO JOURNAL ENTRY IS FILED AGAINST IT. The two neighbours are
+      `the-night-i-left` and `asking-for-less`, and neither is this: the first
+      is the leaving, the second is missing him. What this scene contains that
+      the book does not yet have is the verdict — she puts the case against
+      herself and then answers it. That page is worth writing and has not been.
 
       NOT TAGGED `panic`, and that was checked rather than assumed. Canon has
       her prone to panic attacks and names `the-bad-one` among the worst of
@@ -2101,7 +2130,7 @@ export const videos: Video[] = [
     // Lake), and because naming it after the throw would give the throw away.
     title: "The Glass",
     synopsis:
-      "Nobody is coming and nothing has happened. She is alone at the lakehouse with a bottle open and the lake black behind her, and she holds it together for as long as she can.",
+      "A few days after she left, in a house with nobody else in it and the phone still going. She is working out whether she gave up too soon — and getting used to a quiet she has not lived in for ten years.",
     file: "luna-lkehouse-wine-shatter.proxy.mp4",
     poster: "/posters/luna-lkehouse-wine-shatter.jpg",
     // 148, untrimmed — no trailing black anywhere. The 3s fade is on the proxy.
@@ -2116,6 +2145,10 @@ export const videos: Video[] = [
       // 2:00–2:15, and it ends one second before she throws it. Fifteen
       // seconds of a woman running out of ways to hold something, stopping on
       // the frame before she stops holding it.
+      //
+      // It is also the right fifteen seconds now that the context is known:
+      // this is the stretch AFTER she has answered the question about herself,
+      // where what is left is just the size of the house.
       //
       // The opening was the other candidate and it is the weaker one: her at
       // the table with a glass is a mood, and a mood makes somebody feel they

@@ -2057,6 +2057,82 @@ export const videos: Video[] = [
     // are deliberately not invented as any.
     about: ["luna", "tyson"],
   },
+  {
+    /*
+      THE WINE GLASS. Melissa dropped the folder 2026-09-10 with no backstory,
+      so everything below is read off the footage and NOTHING here places it in
+      the timeline.
+
+      WHAT IS ON SCREEN, and nothing goes past it: Luna alone at the lakehouse
+      at night, the lake and a moon through the glass behind her, an open
+      bottle and a glass of red. Two and a half minutes of her coming apart
+      quietly — hands in her hair, head back, crying, pacing, arms folded at
+      the window, wiping her face and going again. At about 2:16 she throws the
+      glass. Afterwards she is standing at the counter breathing, and there is
+      BLOOD on her palm.
+
+      THE ONE READING WORTH PUTTING TO HER, and it is not asserted anywhere:
+      this may be `the-bad-one`. LUNA_VALE_CONTEXT.md names that entry, by
+      name, as one of the two places her worst nights are described — "Wrote
+      this the next day. Could not have written it that night." It is a
+      lakehouse entry, it is her alone, and it has no scene filed against it.
+      If Melissa says yes, this gets `sceneSlug` and the entry gets a scene it
+      has been describing for a month. Until she does, they stay apart.
+
+      NOT TAGGED `panic`, and that was checked rather than assumed. Canon has
+      her prone to panic attacks and names `the-bad-one` among the worst of
+      them, so the note was the obvious call — but the footage is not that.
+      There is no hand on the chest, no hyperventilating, no floor. It is a
+      woman drinking alone and crying hard for two minutes and then throwing
+      something. `luna-ty-panic-attack` is what a panic attack looks like on
+      this site, and this does not resemble it. Tagging it would mislabel the
+      scene and dilute the note everywhere else it is used.
+
+      THE BLOOD IS FLAGGED FOR HER RATHER THAN NOTED HERE. She cuts her hand —
+      on the throw or on the pieces, the cut does not say — and there is no
+      entry in lib/content/content-notes.ts that covers it. `violence` means an
+      assault between characters and does not apply. Inventing a new note is a
+      decision about what this product warns people about, which is hers. If
+      she wants one, it is a two-line addition and this entry gets it.
+    */
+    slug: "luna-lkehouse-wine-shatter",
+    // PLACEHOLDER title and synopsis — hers to replace. "The Glass" for the
+    // object, the house pattern for a solo scene (The Bolt, The Study, The
+    // Lake), and because naming it after the throw would give the throw away.
+    title: "The Glass",
+    synopsis:
+      "Nobody is coming and nothing has happened. She is alone at the lakehouse with a bottle open and the lake black behind her, and she holds it together for as long as she can.",
+    file: "luna-lkehouse-wine-shatter.proxy.mp4",
+    poster: "/posters/luna-lkehouse-wine-shatter.jpg",
+    // 148, untrimmed — no trailing black anywhere. The 3s fade is on the proxy.
+    durationSeconds: 148,
+    addedOn: "2026-09-10",
+    access: "premium",
+    // Nothing sexual. She is dressed throughout and alone throughout.
+    mature: false,
+    preview: {
+      file: "luna-lkehouse-wine-shatter-preview.proxy.mp4",
+      durationSeconds: 15,
+      // 2:00–2:15, and it ends one second before she throws it. Fifteen
+      // seconds of a woman running out of ways to hold something, stopping on
+      // the frame before she stops holding it.
+      //
+      // The opening was the other candidate and it is the weaker one: her at
+      // the table with a glass is a mood, and a mood makes somebody feel they
+      // have seen it. This ends on a question.
+      hookStart: 120,
+      hookNote:
+        "she runs out of ways to hold it; ends one second before the glass leaves her hand",
+    },
+    // `hurt` is the taxonomy's "when it finally breaks the surface", which is
+    // this scene exactly and in the most literal way it has ever been true.
+    // `grief` because the lakehouse is the room she moved into after leaving,
+    // and two of the three things in it are a bottle and a view.
+    feelings: ["hurt", "grief"],
+    place: "lakehouse",
+    // Her, alone, for the whole runtime. The only solo scene in the library.
+    about: ["luna"],
+  },
 ];
 
 /**

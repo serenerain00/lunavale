@@ -518,6 +518,46 @@ CUTS=(
   # the yell) — a poster sits at a permanent ungated URL and that one is the
   # violence.
   "ty-luna-blonde-guy-bar|stories/ty-luna-blonde-guy-bar/luna-ty-blonde-guy-bar.mp4|146.5||3"
+  # THE WINE GLASS. Melissa, 2026-09-10, and the folder name carries the
+  # "lkehouse" spelling that recurs across these directories — left alone, it
+  # is a path and nothing public inherits it.
+  #
+  # NO BACKSTORY CAME WITH IT, so everything below is read off the footage and
+  # nothing here places it in the timeline. See lib/content/videos.ts for the
+  # one reading worth putting to her.
+  #
+  # 1942x1080 h264 30fps, 148.2s. 1.798, so effectively 16:9.
+  #
+  # NO TRAILING BLACK. Third in a row to arrive clean.
+  #
+  # THE QUIETEST DELIVERY IN THIS FILE at -38.9 dB mean — quieter even than the
+  # lakehouse kitchen's -40.5 — WITH A PEAK AT -0.2 dB, which is essentially
+  # full scale. That combination is the scene: two and a half minutes of a
+  # woman not making any noise, and one glass hitting a wall. Do not "fix" the
+  # level; the gap between those two numbers is the whole point, and
+  # normalising it would flatten the only loud thing in it.
+  #
+  # FADE 3s, house length, same reason as the last three: the picture holds
+  # brightness to the final frame with room tone still running, so it stops
+  # rather than ends. The last shot is her face after, which a hard cut turns
+  # into a file running out.
+  #
+  # POSTER AT 6s: her close, hand in her hair, the glass of red still in it and
+  # her face already gone. It says what the scene is in one look and shows
+  # neither the throw nor what happens to her hand afterwards.
+  #
+  # THE POSTER IS OUTSIDE THE PUBLIC WINDOW, which breaks the rule
+  # ty-josh-fight set, and it is a deliberate trade rather than an oversight.
+  # The window below starts at 2:00 because that is where the hook is; the best
+  # CARD is at 0:06. Both cannot be true at once here. What the rule protects
+  # against is a card promising something better than what a stranger can
+  # watch, and that is not the case — it is the same woman in the same room
+  # eight seconds in. Move either one and the other still works.
+  #
+  # Considered: 103s (her standing in the room with the lake behind, the most
+  # restrained frame in the cut and it says very little) and 111s (hands in her
+  # hair, which is her at her worst and heavy to meet cold on a card).
+  "luna-lkehouse-wine-shatter|stories/luna-lkehouse-wine-shatter/luna-lkehouse-wine-shatter.mp4|6||3"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

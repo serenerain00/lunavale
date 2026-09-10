@@ -98,3 +98,9 @@ public/stills/**
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Studio reference images uploaded in local development. Production writes
+# these to PRIVATE Vercel Blob under studio/refs/; locally they land here, and
+# they are working material — faces, wardrobe, tattoo plates, frames from
+# attempts that did not work. None of it belongs in the repo.
+studio-private

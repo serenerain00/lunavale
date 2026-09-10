@@ -34,6 +34,14 @@ public/stills
 # already excluded above. See scripts/import-takes.sh.
 takes-private
 
+# Studio's reference library — the local half. Same private-Blob model as the
+# takes above, and the same reasoning turned up one notch: this is the raw
+# working material of the image pipeline, none of it finished, and shipped to a
+# deployment it would be a permanent ungated URL showing exactly how the thing
+# is made. Production reads these from private Blob via /api/studio/refs, which
+# checks the owner gate. See lib/studio/storage.ts.
+studio-private
+
 # Large room-capture binaries, hosted out of band.
 public/scans
 public/panos

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { authConfigured } from "@/lib/billing/provider";
+import { isOwner } from "@/lib/access/owner";
 import {
   abandonedCheckouts,
   revenueSummary,
@@ -156,6 +157,24 @@ export default async function AdminPage() {
               Clarity
             </a>
             . This is everything Clarity can&rsquo;t tell you.
+          </p>
+
+          {/*
+            THE TOOLS ROW. This page answers "how is it going"; Studio is the
+            other thing that lives behind the owner gate — the shot workshop
+            that builds the reference set, the camera and the prompts for a
+            generation, and keeps the recipe so shot forty still matches shot
+            one. Kept as a plain link rather than a panel: it is a door, not a
+            number.
+          */}
+          <p className="mt-6">
+            <Link
+              href="/admin/studio"
+              className="inline-flex items-center gap-2 rounded-sm border border-amber/40 bg-amber/10 px-3 py-1.5 text-sm text-amber-soft hover:bg-amber/20"
+            >
+              Studio
+              <span className="text-stone">— build a shot</span>
+            </Link>
           </p>
         </header>
 
@@ -868,10 +887,3 @@ async function freeAccountCount(): Promise<number | null> {
   }
 }
 
-async function isOwner(): Promise<boolean> {
-  const owner = process.env.OWNER_USER_ID;
-  if (!owner) return false;
-  const { auth } = await import("@clerk/nextjs/server");
-  const { userId } = await auth();
-  return Boolean(userId && userId === owner);
-}

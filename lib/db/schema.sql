@@ -366,3 +366,96 @@ ALTER TABLE pending_memberships
 -- The claim path looks up unclaimed rows by email.
 CREATE INDEX IF NOT EXISTS pending_memberships_unclaimed_idx
   ON pending_memberships (email) WHERE claimed_at IS NULL;
+
+
+-- ---------------------------------------------------------------------------
+-- STUDIO — the shot workshop behind /admin/studio.
+--
+-- The only two tables in here nobody but the owner ever touches. No moderation
+-- flag, no user id, no rate limit: the gate is at the route and there is one
+-- person on the other side of it.
+--
+-- WHAT THEY ARE FOR. Studio does not generate images. It builds the exact
+-- input to whatever does — the reference set, the film-language camera state,
+-- and the two prompts (a still, then the motion for image-to-video) — and it
+-- keeps the recipe so the same shot can be made again in a month, or varied on
+-- one axis without losing the other nine. Continuity across forty shots is the
+-- expensive part, not any single picture.
+--
+-- THE BYTES ARE NOT IN HERE. Reference images go to PRIVATE Vercel Blob under
+-- studio/refs/, or studio-private/ on disk locally; this holds only the record
+-- of them. See lib/studio/storage.ts and .vercelignore.
+CREATE TABLE IF NOT EXISTS studio_refs (
+  -- Minted by the upload route, not the database, because the blob object is
+  -- named after it and has to be written before the row exists.
+  id           TEXT PRIMARY KEY,
+
+  -- What the reference is FOR, not what it shows: face, body, tattoo,
+  -- wardrobe, hair, prop, environment, lighting, pose, frame. Decides where it
+  -- lands in a compiled prompt. See lib/studio/types.ts.
+  kind         TEXT        NOT NULL,
+
+  -- Character and place ids from lib/content/taxonomy.ts. Nullable because a
+  -- lighting plate belongs to nobody and a wardrobe screenshot may not have a
+  -- room yet.
+  character_id TEXT,
+  place_id     TEXT,
+
+  label        TEXT        NOT NULL,
+
+  -- Azimuth id from lib/studio/vocab.ts, for face and body refs. This is the
+  -- column that makes the angle control honest: the picker offers the angles
+  -- that exist here and says so plainly when the one you want does not.
+  angle_id     TEXT,
+
+  -- Free text, and load-bearing for tattoos — placement is the single most
+  -- dropped detail across a run of generations.
+  notes        TEXT        NOT NULL DEFAULT '',
+
+  width        INTEGER     NOT NULL,
+  height       INTEGER     NOT NULL,
+  mime         TEXT        NOT NULL,
+  bytes        BIGINT      NOT NULL,
+
+  created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- The library filters by character and by kind constantly, and by nothing else.
+CREATE INDEX IF NOT EXISTS studio_refs_character_idx
+  ON studio_refs (character_id, kind);
+
+
+-- A saved shot. The id is minted client-side so that saving the thing you are
+-- already editing is an upsert rather than a decision about whether it exists.
+CREATE TABLE IF NOT EXISTS studio_shots (
+  id            TEXT PRIMARY KEY,
+  title         TEXT        NOT NULL,
+
+  -- Scene slug from lib/content/videos.ts when the shot belongs to one, which
+  -- is what lets Studio pre-fill place, cast and feeling from published canon
+  -- instead of from memory.
+  scene_slug    TEXT,
+  place_id      TEXT,
+
+  character_ids TEXT[]      NOT NULL DEFAULT '{}',
+  ref_ids       TEXT[]      NOT NULL DEFAULT '{}',
+
+  -- The whole camera state in one object: shot size, height, tilt, azimuth,
+  -- lens, movement. JSONB rather than six columns because it is read and
+  -- written as a unit and the vocabulary will grow.
+  camera        JSONB       NOT NULL,
+
+  lighting_id   TEXT        NOT NULL,
+  time_id       TEXT        NOT NULL,
+  aspect_id     TEXT        NOT NULL,
+
+  -- What she is doing. The one part no vocabulary can supply.
+  action        TEXT        NOT NULL DEFAULT '',
+  extra         TEXT        NOT NULL DEFAULT '',
+
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS studio_shots_recent_idx
+  ON studio_shots (updated_at DESC);

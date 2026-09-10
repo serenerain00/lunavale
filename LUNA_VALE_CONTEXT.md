@@ -1191,12 +1191,17 @@ watched, or is about to.
 ---
 
 ### The bar — the blonde guy
-*(Canon set by Melissa, 2026-09-09, ahead of the footage. Slug:
-`ty-luna-blonde-guy-bar`. **The cut had not arrived when this was written** —
-see the two open questions at the end, both of which change what it means.)*
+*(Canon set by Melissa, 2026-09-09, ahead of the footage; placed and explained
+by her the same day. Slug: `ty-luna-blonde-guy-bar`.)*
 
-Luna and Tyson are meeting for **dinner**. Tyson is **considerably late**,
-because of **a bad day Luna knows nothing about.**
+**ABOUT A MONTH AFTER LUNA GOES BACK TO JOSH.** That is the whole context, and
+it is the period where **Tyson starts to lose his composure around her** —
+because she is back with Josh **knowing everything she went through to get over
+him**, or somewhat over him. **Luna still does not understand why he is
+drifting from her.**
+
+Luna and Tyson are meeting for **dinner, as friends**. Tyson is **considerably
+late**, because of a bad day she knows nothing about.
 
 She is waiting **at the bar** when a man — blonde — approaches her and starts
 asking her things. He wants a date. He **gets pushier than she is comfortable
@@ -1237,20 +1242,47 @@ happens here — he yells at a stranger, and he refuses to explain. If anything
 this makes the later one land harder: she has now seen him lose it once, at
 somebody else, and be unable to tell her why.
 
-**TWO OPEN QUESTIONS, both Melissa's, and neither guessed at here:**
+**WHAT THE BAD DAY WAS** *(Melissa, 2026-09-09, and it is better than the
+single trigger this document originally went looking for)*. It is not one
+event. It is **accumulation**, and all of it is running at once:
 
-1. **WHEN.** Not stated. Everything about what this scene means depends on it —
-   whether it sits inside the six months, after she goes back to Josh, or
-   somewhere else entirely.
+- **feelings he does not really understand**
+- **working around Josh**, every day, knowing Luna is back with him
+- **work stress**
+- **anxiety about this dinner with her**
 
-2. **WHAT THE BAD DAY WAS.** The description says Luna knows nothing about it
-   and he will not say. The open part is whether the AUDIENCE ever learns it.
-   If it is meant to be the day **Josh asked him for help getting her back**
-   (see `### THE PROMISE`), this becomes one of the largest scenes in the
-   story: a man who has just given his word grabs a stranger by the collar for
-   saying she is not worth it, and then cannot answer the one question she
-   asks. **That reading is not asserted anywhere in the product** and will not
-   be until she says so.
+So he is not late because something happened. He is late because he has been
+sitting in all of that, and then he walks into a bar and hears a stranger
+pushing her.
+
+**THAT IS WHY THE SCENE WORKS AND WHY IT IS NOT ABOUT THE BLONDE MAN.** The man
+is not the cause of anything — he is the only thing in Tyson's day that it is
+permissible to be angry at. Everything actually pressing on him is a person he
+loves, a promise he made, or a woman he cannot say any of it to, and none of
+those can be grabbed by the collar.
+
+**"FEELINGS HE DOES NOT REALLY UNDERSTAND" IS HER WORDING AND IT STANDS.** It
+sits alongside `### THE PROMISE`, which has him falling for her around four
+months into the separation — so by this scene he has known for months. Both are
+true and they are not the same thing: knowing what you feel and knowing what to
+do with the weight of it are different, and this is a man losing to the second
+one. Do not "resolve" the tension by making him newly confused.
+
+**WHAT LUNA HAS ALREADY WRITTEN ABOUT THIS EXACT STRETCH.** The journal is
+circling this period without knowing what is in it, which is what makes the
+scene land:
+
+- `distance` — "He isn't punishing me. I know him well enough to know the
+  difference. He's protecting something — and I am fairly sure it isn't
+  himself."
+- `the-six-months` — "He does not raise his voice, which is genuinely
+  infuriating, because it means I am always the only person in the room
+  shouting."
+- `what-it-costs-him` — she works out that he has nowhere at all to put any of
+  it, and asks: **who does he tell.**
+
+This scene is the answer to that last one. He tells nobody, and it comes out
+sideways at a stranger in a bar.
 
 ### The "staring game" (a signature detail)
 An inside thing Luna and Tyson have always done, **learned in the military**:

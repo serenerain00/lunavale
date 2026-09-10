@@ -50,6 +50,7 @@ export function Studio({
   places,
   scenes,
   configured,
+  blobConfigured,
 }: {
   refs: StudioRef[];
   shots: ShotRecipe[];
@@ -57,6 +58,7 @@ export function Studio({
   places: PlaceOpt[];
   scenes: SceneOpt[];
   configured: boolean;
+  blobConfigured: boolean;
 }) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("shot");
@@ -167,7 +169,13 @@ export function Studio({
       )}
 
       {tab === "library" && (
-        <RefLibrary refs={refs} people={people} places={places} onChanged={refresh} />
+        <RefLibrary
+          refs={refs}
+          people={people}
+          places={places}
+          onChanged={refresh}
+          blobConfigured={blobConfigured}
+        />
       )}
 
       {tab === "export" && <ExportDeck refs={refs} />}

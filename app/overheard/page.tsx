@@ -4,6 +4,7 @@ import { PostForm } from "@/components/overheard/PostForm";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
+import { isOwner as viewerIsOwner } from "@/lib/access/owner";
 import { notFound } from "next/navigation";
 import {
   CAST_TINTS,
@@ -386,13 +387,6 @@ function snippet(body: string[], max = 90): string {
   return first.length > max ? `${first.slice(0, max - 1)}…` : first;
 }
 
-async function viewerIsOwner(): Promise<boolean> {
-  const owner = process.env.OWNER_USER_ID;
-  if (!owner || !authConfigured()) return false;
-  const { auth } = await import("@clerk/nextjs/server");
-  const { userId } = await auth();
-  return userId === owner;
-}
 
 async function isSignedIn(): Promise<boolean> {
   if (!authConfigured()) return false;

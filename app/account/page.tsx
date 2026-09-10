@@ -5,6 +5,7 @@ import { PreviewNotice } from "@/components/membership/PreviewNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { SignOut } from "@/components/ui/SignOut";
 import { getMembership } from "@/lib/access/entitlement";
+import { isOwner } from "@/lib/access/owner";
 import { authConfigured, billingLive } from "@/lib/billing/provider";
 import { membershipForUser } from "@/lib/db/memberships";
 import {
@@ -38,9 +39,10 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
   // tell a new member they are a visitor.
   await claimAnythingWaiting();
 
-  const [{ tier, active, preview }, params] = await Promise.all([
+  const [{ tier, active, preview }, params, viewerIsOwner] = await Promise.all([
     getMembership(),
     searchParams,
+    isOwner(),
   ]);
   const current = getTier(tier)!;
   const unlocked = benefitsFor(tier);
@@ -226,7 +228,13 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
             </Link>
           </section>
         )}
-              {process.env.OWNER_USER_ID && (
+        {/*
+          OWNER ONLY. This used to test that OWNER_USER_ID was merely SET,
+          which it always is in production — so every signed-in member was
+          shown a link to /admin. The page itself 404s them correctly, so
+          nothing leaked; it just told paying customers there was a door.
+        */}
+        {viewerIsOwner && (
           <div className="mt-10">
             <Link
               href="/admin"

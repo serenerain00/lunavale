@@ -17,6 +17,7 @@
 import { revalidatePath } from "next/cache";
 import { authConfigured } from "@/lib/billing/provider";
 import { isMember } from "@/lib/access/entitlement";
+import { isOwnerId } from "@/lib/access/owner";
 import { MAX_POST_LENGTH } from "@/lib/content/overheard";
 import { addPost, databaseConfigured } from "@/lib/db/overheard";
 import { CAST_THREAD, resolveMention } from "@/lib/content/overheard";
@@ -80,9 +81,7 @@ export async function submitPost(formData: FormData): Promise<PostResult> {
   // nor a first name, and "" next to a post looks like a bug.
   // Melissa posts under her own name with a badge. Checked against the env var,
   // not against whatever she happens to have called herself in Clerk.
-  const isOwner = Boolean(
-    process.env.OWNER_USER_ID && userId === process.env.OWNER_USER_ID,
-  );
+  const isOwner = isOwnerId(userId);
 
   // Melissa can answer in a character's voice. The row still records HER
   // user_id — only the byline changes — so the allowance, the moderation view

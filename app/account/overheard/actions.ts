@@ -6,16 +6,10 @@
  */
 
 import { revalidatePath } from "next/cache";
-import { authConfigured } from "@/lib/billing/provider";
+import { isOwner } from "@/lib/access/owner";
 import { setHidden } from "@/lib/db/overheard";
 
-async function isOwner(): Promise<boolean> {
-  const owner = process.env.OWNER_USER_ID;
-  if (!owner || !authConfigured()) return false;
-  const { auth } = await import("@clerk/nextjs/server");
-  const { userId } = await auth();
-  return Boolean(userId && userId === owner);
-}
+
 
 export async function toggleHidden(formData: FormData): Promise<void> {
   if (!(await isOwner())) return;

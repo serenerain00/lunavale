@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { isOwner } from "@/lib/access/owner";
 import { allRefs, allShots, databaseConfigured } from "@/lib/db/studio";
+import { studioBlobConfigured } from "@/lib/studio/storage";
 import { people, places } from "@/lib/content/taxonomy";
 import { videos } from "@/lib/content/videos";
 import { Studio } from "@/components/studio/Studio";
@@ -82,6 +83,7 @@ export default async function StudioPage() {
           places={places.map((p) => ({ id: p.id, label: p.label }))}
           scenes={scenes}
           configured={databaseConfigured()}
+          blobConfigured={studioBlobConfigured()}
         />
       </main>
     </>

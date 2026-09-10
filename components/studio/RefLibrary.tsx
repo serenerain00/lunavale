@@ -16,6 +16,7 @@
  */
 
 import { useRef, useState, useTransition } from "react";
+import { upload } from "@vercel/blob/client";
 import { azimuths } from "@/lib/studio/vocab";
 import { refKinds, type RefKind, type StudioRef } from "@/lib/studio/types";
 
@@ -27,15 +28,19 @@ export function RefLibrary({
   people,
   places,
   onChanged,
+  blobConfigured,
 }: {
   refs: StudioRef[];
   people: Person[];
   places: PlaceOpt[];
   onChanged: () => void;
+  /** With Blob set up the browser uploads direct; without it, files go to disk. */
+  blobConfigured: boolean;
 }) {
   const [filterWho, setFilterWho] = useState<string>("");
   const [filterKind, setFilterKind] = useState<string>("");
   const [busy, setBusy] = useState(false);
+  const [progress, setProgress] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
   const [, startTransition] = useTransition();
@@ -46,25 +51,69 @@ export function RefLibrary({
       (!filterKind || r.kind === filterKind),
   );
 
-  async function upload(files: FileList) {
+  /**
+   * THE BYTES DO NOT GO THROUGH A FUNCTION. `upload()` sends the file straight
+   * from this browser to Blob using a token minted by /api/studio/refs/token,
+   * because a serverless request body is far too small for a real photograph —
+   * the multipart version of this returned a bare 413 from the platform before
+   * any of our code ran. Only the metadata is POSTed, afterwards.
+   *
+   * The id is minted here and IS the blob filename, so the row and the object
+   * agree without a second round trip to find out what the object got called.
+   */
+  async function addFiles(files: FileList) {
     setError(null);
     setBusy(true);
+    const list = Array.from(files);
     try {
-      for (const file of Array.from(files)) {
-        // Decode in the browser, which has to happen anyway to show it, and
-        // send the dimensions along rather than putting a decoder on the server.
+      for (const [i, file] of list.entries()) {
+        setProgress(list.length > 1 ? `${i + 1} of ${list.length}: ${file.name}` : file.name);
+
+        const ext = EXT[file.type];
+        if (!ext) throw new Error(`${file.name} is not a JPEG, PNG, WebP or AVIF.`);
+        if (file.size > MAX_BYTES) {
+          throw new Error(`${file.name} is ${(file.size / 1024 / 1024).toFixed(1)}MB — the cap is 25MB.`);
+        }
+
+        // Decoded here anyway to show a preview, so the dimensions come along
+        // rather than putting an image decoder on the server.
         const dims = await imageSize(file);
-        const form = new FormData();
-        form.set("file", file);
-        form.set("kind", filterKind || "face");
-        form.set("characterId", filterWho);
-        form.set("label", file.name.replace(/\.[^.]+$/, ""));
-        form.set("width", String(dims.w));
-        form.set("height", String(dims.h));
-        const res = await fetch("/api/studio/refs", { method: "POST", body: form });
-        if (!res.ok) {
-          const body = (await res.json().catch(() => ({}))) as { error?: string };
-          throw new Error(body.error ?? `Upload failed (${res.status})`);
+        const id = crypto.randomUUID();
+
+        if (blobConfigured) {
+          await upload(`studio/refs/${id}.${ext}`, file, {
+            access: "private",
+            contentType: file.type,
+            handleUploadUrl: "/api/studio/refs/token",
+            onUploadProgress: ({ percentage }) =>
+              setProgress(
+                `${list.length > 1 ? `${i + 1}/${list.length} ` : ""}${file.name} — ${Math.round(percentage)}%`,
+              ),
+          });
+          await post("/api/studio/refs", {
+            id,
+            kind: filterKind || "face",
+            characterId: filterWho,
+            label: file.name.replace(/\.[^.]+$/, ""),
+            width: dims.w,
+            height: dims.h,
+            mime: file.type,
+            bytes: file.size,
+          });
+        } else {
+          // No Blob configured: the old multipart path, straight to disk.
+          const form = new FormData();
+          form.set("file", file);
+          form.set("kind", filterKind || "face");
+          form.set("characterId", filterWho);
+          form.set("label", file.name.replace(/\.[^.]+$/, ""));
+          form.set("width", String(dims.w));
+          form.set("height", String(dims.h));
+          const res = await fetch("/api/studio/refs", { method: "POST", body: form });
+          if (!res.ok) {
+            const body = (await res.json().catch(() => ({}))) as { error?: string };
+            throw new Error(body.error ?? `Upload failed (${res.status})`);
+          }
         }
       }
       startTransition(onChanged);
@@ -72,7 +121,20 @@ export function RefLibrary({
       setError(e instanceof Error ? e.message : "Upload failed.");
     } finally {
       setBusy(false);
+      setProgress(null);
       if (fileInput.current) fileInput.current.value = "";
+    }
+  }
+
+  async function post(url: string, body: unknown) {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      const b = (await res.json().catch(() => ({}))) as { error?: string };
+      throw new Error(b.error ?? `Failed (${res.status})`);
     }
   }
 
@@ -105,7 +167,7 @@ export function RefLibrary({
               accept="image/jpeg,image/png,image/webp,image/avif"
               multiple
               className="hidden"
-              onChange={(e) => e.target.files && upload(e.target.files)}
+              onChange={(e) => e.target.files && addFiles(e.target.files)}
             />
             <button
               type="button"
@@ -121,6 +183,7 @@ export function RefLibrary({
           New uploads take the filters above as their starting tags — set Who and Kind first and a
           batch lands already filed. JPEG, PNG, WebP or AVIF, 25MB each.
         </p>
+        {progress && <p className="text-[12px] text-amber-soft">{progress}</p>}
         {error && <p className="text-sm text-wine">{error}</p>}
       </section>
 
@@ -307,6 +370,14 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
     </label>
   );
 }
+
+const EXT: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+  "image/avif": "avif",
+};
+const MAX_BYTES = 25 * 1024 * 1024;
 
 async function imageSize(file: File): Promise<{ w: number; h: number }> {
   try {

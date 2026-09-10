@@ -98,7 +98,10 @@ CLIPS=(
   # with him when the whole point is that this scene is Tyson's) and 61s (his
   # face mid-confrontation, the most arresting frame in the cut and the
   # violence).
-  "the-blonde-guy|stories/ty-luna-blonde-guy-bar/luna-ty-blonde-guy-short-music.mov|1|89.0"
+  # RENAMED 2026-09-10 to ...-ig.mov. The path here was stale and a re-import
+  # would have failed outright — which is the good failure, but only if
+  # somebody runs it.
+  "the-blonde-guy|stories/ty-luna-blonde-guy-bar/luna-ty-blonde-guy-short-music-ig.mov|1|89.0"
 )
 
 want=("$@")

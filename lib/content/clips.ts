@@ -1,12 +1,14 @@
 /**
- * Vertical clips — the 9:16 cuts that ran on Instagram.
+ * Vertical clips — the social cuts that ran on Instagram.
  *
  * A separate content kind rather than more entries in lib/content/videos.ts,
  * for two concrete reasons:
  *
- *   1. Shape. They are portrait. Dropped into a 16:9 rail they would either be
- *      pillarboxed into a sliver or cropped to nonsense, and every layout that
- *      touches them wants to know their aspect up front.
+ *   1. Shape. They are portrait or square — social shapes, not 16:9. Dropped
+ *      into a 16:9 rail they would either be pillarboxed into a sliver or
+ *      cropped to nonsense, and every layout that touches them wants to know
+ *      their aspect up front. Most are 9:16 and say nothing; one that is not
+ *      declares `aspect` and every card respects it.
  *   2. Access. Most of them ran publicly on Instagram, so there is nothing
  *      left to gate — putting those behind the LunaVerse would be selling
  *      something anybody can already scroll past for free, which
@@ -67,6 +69,22 @@ export interface Clip {
   access?: AccessLevel;
   /** See lib/content/content-notes.ts. A clip carrying one does not autoplay. */
   notes?: ContentNoteId[];
+  /**
+   * The clip's own shape as [width, height], when it is not the 9:16 this
+   * module was built around. Default is portrait and most entries never set it.
+   *
+   * WHY THIS EXISTS. The header above says these are the 9:16 cuts, and the
+   * grid card was written to match: `aspect-[9/16]` with `object-cover`. Hand
+   * that a square Instagram post and it does the one thing this whole module
+   * was created to prevent — crops the sides off to force a shape the clip
+   * never had. The VIDEO element was already honest about this (see the
+   * comment in VerticalPlayer: letting the element size itself keeps every
+   * clip honest); only the poster cards were not.
+   *
+   * So the rule the module actually wants is "not 16:9", not "exactly 9:16",
+   * and a clip that knows its own shape gets shown in it.
+   */
+  aspect?: [number, number];
   /**
    * When this clip is a preview of a longer scene, that scene's slug. Lets the
    * clip page say what the full thing is and where it lives, instead of leaving
@@ -358,6 +376,11 @@ const authored: Clip[] = [
     // actually in it is the note below.
     mature: false,
     notes: ["violence"],
+    // NOT 9:16 — this is the square Instagram post, 1320x1256 at source and
+    // 720x686 as the proxy. Without this the grid card renders it in a 9:16
+    // cell with `object-cover` and takes the sides off, which is the exact
+    // mangling this content kind exists to prevent. See Clip.aspect.
+    aspect: [720, 686],
     // The full 3:03, members-only, and the clip page says so rather than
     // leaving somebody to assume ninety seconds is all there is.
     fullSceneSlug: "ty-luna-blonde-guy-bar",

@@ -44,7 +44,7 @@ export default async function ClipsPage() {
           strip. No rail here on purpose: a portrait card in a horizontal
           scroller ends up taller than the viewport on mobile.
         */}
-        <Reveal className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+        <Reveal className="grid grid-cols-2 items-start gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
           {clips.map((clip) => {
             // A gated clip a non-member can't open has its poster withheld —
             // for a sex scene the still frame is exactly the thing not to show
@@ -67,7 +67,18 @@ export default async function ClipsPage() {
                 data-reveal-item
                 className="group relative block overflow-hidden rounded-lg bg-charcoal ring-1 ring-hairline transition-transform duration-(--duration-standard) ease-(--ease-standard) hover:-translate-y-1 focus-visible:-translate-y-1"
               >
-                <div className="relative aspect-[9/16]">
+                {/*
+                  The clip's own shape, not an assumed one. `object-cover` in
+                  a fixed 9:16 cell crops a square poster down the sides,
+                  which is exactly the mangling this content kind exists to
+                  avoid. Cards in a row are then different heights; the grid
+                  aligns them to the top, which reads as a social grid rather
+                  than a fault.
+                */}
+                <div
+                  className="relative"
+                  style={{ aspectRatio: `${clip.aspect?.[0] ?? 9} / ${clip.aspect?.[1] ?? 16}` }}
+                >
                   <Image
                     src={clip.poster}
                     alt=""

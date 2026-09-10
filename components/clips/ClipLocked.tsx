@@ -19,7 +19,10 @@ import { getTier } from "@/lib/content/membership";
 export function ClipLocked({ clip }: { clip: Clip }) {
   return (
     <div className="mx-auto w-full max-w-sm">
-      <div className="relative aspect-[9/16] overflow-hidden rounded-xl bg-black ring-1 ring-hairline">
+      <div
+        className="relative overflow-hidden rounded-xl bg-black ring-1 ring-hairline"
+        style={{ aspectRatio: `${clip.aspect?.[0] ?? 9} / ${clip.aspect?.[1] ?? 16}` }}
+      >
         <Image
           src={clip.poster}
           alt=""

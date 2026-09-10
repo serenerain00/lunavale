@@ -191,11 +191,25 @@ export function compileShot(
       "No face reference attached. Identity will drift — pick one in the library, or accept that this is a new person.",
     );
   }
+  // AN UNTAGGED FACE IS NOT A FRONT-ON FACE, and this used to say it was.
+  // `byId` falls back to the first option when it gets null, so a reference
+  // uploaded without an angle — which is every reference, since the uploader
+  // does not ask — was reported as "Front on". The panel then told you that
+  // you had two front-on shots of Luna when it had no idea what either one
+  // was. Untagged is its own state and says so.
+  const untagged = faces.filter((r) => !r.angleId);
+  const tagged = faces.filter((r) => r.angleId);
   const wantedAngle = recipe.camera.azimuthId;
-  const haveAngle = faces.some((r) => r.angleId === wantedAngle);
-  if (faces.length && !haveAngle && size.id !== "insert") {
+  const haveAngle = tagged.some((r) => r.angleId === wantedAngle);
+
+  if (untagged.length && size.id !== "insert") {
     gaps.push(
-      `No face reference at "${azimuth.label}". You have ${faces
+      `${untagged.length} face reference${untagged.length > 1 ? "s have" : " has"} no angle recorded, so the angle picker cannot use ${untagged.length > 1 ? "them" : "it"}. Set it in the library — it is the one tag that does real work.`,
+    );
+  }
+  if (tagged.length && !haveAngle && size.id !== "insert") {
+    gaps.push(
+      `No face reference at "${azimuth.label}". You have ${tagged
         .map((f) => byId(azimuths, f.angleId ?? "front").label)
         .join(", ")}. Nothing can invent this angle from what is here — shoot or generate one and add it.`,
     );

@@ -39,6 +39,9 @@ export function RefLibrary({
 }) {
   const [filterWho, setFilterWho] = useState<string>("");
   const [filterKind, setFilterKind] = useState<string>("");
+  // Seeds the angle on upload as well as filtering. See the note by the
+  // Angle control below — an untagged face is invisible to the shot builder.
+  const [filterAngle, setFilterAngle] = useState<string>("");
   const [busy, setBusy] = useState(false);
   const [progress, setProgress] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -48,7 +51,8 @@ export function RefLibrary({
   const shown = refs.filter(
     (r) =>
       (!filterWho || r.characterId === filterWho) &&
-      (!filterKind || r.kind === filterKind),
+      (!filterKind || r.kind === filterKind) &&
+      (!filterAngle || r.angleId === filterAngle),
   );
 
   /**
@@ -95,6 +99,7 @@ export function RefLibrary({
             kind: filterKind || "face",
             characterId: filterWho,
             label: file.name.replace(/\.[^.]+$/, ""),
+            angleId: filterAngle,
             width: dims.w,
             height: dims.h,
             mime: file.type,
@@ -107,6 +112,7 @@ export function RefLibrary({
           form.set("kind", filterKind || "face");
           form.set("characterId", filterWho);
           form.set("label", file.name.replace(/\.[^.]+$/, ""));
+          form.set("angleId", filterAngle);
           form.set("width", String(dims.w));
           form.set("height", String(dims.h));
           const res = await fetch("/api/studio/refs", { method: "POST", body: form });
@@ -160,6 +166,14 @@ export function RefLibrary({
               ))}
             </select>
           </Field>
+          <Field label="Angle">
+            <select value={filterAngle} onChange={(e) => setFilterAngle(e.target.value)} className={SELECT}>
+              <option value="">Not set</option>
+              {azimuths.map((a) => (
+                <option key={a.id} value={a.id}>{a.label}</option>
+              ))}
+            </select>
+          </Field>
           <div className="ml-auto">
             <input
               ref={fileInput}
@@ -180,8 +194,11 @@ export function RefLibrary({
           </div>
         </div>
         <p className="text-[12px] text-stone-dim">
-          New uploads take the filters above as their starting tags — set Who and Kind first and a
-          batch lands already filed. JPEG, PNG, WebP or AVIF, 25MB each.
+          New uploads take the filters above as their starting tags — set Who, Kind and Angle
+          first and a batch lands already filed. JPEG, PNG, WebP or AVIF, 25MB each.
+          <br />
+          <strong className="text-stone">Angle is the one that does real work:</strong> the shot
+          builder can only offer angles that exist here, so an untagged face is one it cannot use.
         </p>
         {progress && <p className="text-[12px] text-amber-soft">{progress}</p>}
         {error && <p className="text-sm text-wine">{error}</p>}

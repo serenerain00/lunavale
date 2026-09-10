@@ -93,6 +93,32 @@ export function ShotBuilder({
     return match ? `/api/studio/refs/${match.id}` : null;
   }, [refs, draft.refIds, draft.characterIds, draft.camera.azimuthId]);
 
+  /**
+   * Every reference belonging to these people, for auto-attaching.
+   *
+   * WHY AUTO-ATTACH AT ALL. The first version made you click each tile, under
+   * a heading that said "References attached" while none were — so picking
+   * Luna and uploading four pictures of her produced a red panel saying
+   * nothing was attached for Luna, with her four pictures visible directly
+   * underneath it. Picking somebody IS the instruction to use their
+   * references; taking one back out is the deliberate act, and still one
+   * click.
+   */
+  const refsFor = (ids: string[]) =>
+    refs.filter((r) => r.characterId && ids.includes(r.characterId)).map((r) => r.id);
+
+  function toggleCharacter(id: string) {
+    const on = draft.characterIds.includes(id);
+    const characterIds = on
+      ? draft.characterIds.filter((x) => x !== id)
+      : [...draft.characterIds, id];
+    const theirs = refsFor([id]);
+    const refIds = on
+      ? draft.refIds.filter((x) => !theirs.includes(x))
+      : [...new Set([...draft.refIds, ...theirs])];
+    setDraft({ ...draft, characterIds, refIds });
+  }
+
   function pickScene(slug: string) {
     const s = scenes.find((x) => x.slug === slug);
     if (!s) {
@@ -105,6 +131,8 @@ export function ShotBuilder({
       sceneSlug: s.slug,
       placeId: s.placeId,
       characterIds: s.characterIds,
+      // The cast came from canon, so their references come with them.
+      refIds: [...new Set([...draft.refIds, ...refsFor(s.characterIds)])],
       title: draft.title.trim() || s.title,
     });
   }
@@ -159,11 +187,7 @@ export function ShotBuilder({
                   <button
                     key={p.id}
                     type="button"
-                    onClick={() =>
-                      set("characterIds", on
-                        ? draft.characterIds.filter((x) => x !== p.id)
-                        : [...draft.characterIds, p.id])
-                    }
+                    onClick={() => toggleCharacter(p.id)}
                     className={`rounded-sm border px-2.5 py-1 text-[13px] ${
                       on
                         ? "border-amber/50 bg-amber/15 text-amber-soft"
@@ -222,7 +246,16 @@ export function ShotBuilder({
         </section>
 
         <section className="space-y-3">
-          <h3 className="font-display text-lg text-ivory">References attached</h3>
+          <h3 className="font-display text-lg text-ivory">
+            References{" "}
+            <span className="text-sm text-stone">
+              — {draft.refIds.length} of {relevant.length} attached
+            </span>
+          </h3>
+          <p className="text-[12px] text-stone-dim">
+            Picking somebody attaches their references. Click a tile to drop one
+            from this shot; dimmed means it is not in the prompt.
+          </p>
           {relevant.length === 0 ? (
             <p className="text-sm text-stone">Nothing in the library for this cast yet.</p>
           ) : (

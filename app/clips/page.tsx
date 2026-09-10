@@ -44,7 +44,7 @@ export default async function ClipsPage() {
           strip. No rail here on purpose: a portrait card in a horizontal
           scroller ends up taller than the viewport on mobile.
         */}
-        <Reveal className="grid grid-cols-2 items-start gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+        <Reveal className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
           {clips.map((clip) => {
             // A gated clip a non-member can't open has its poster withheld —
             // for a sex scene the still frame is exactly the thing not to show
@@ -68,17 +68,24 @@ export default async function ClipsPage() {
                 className="group relative block overflow-hidden rounded-lg bg-charcoal ring-1 ring-hairline transition-transform duration-(--duration-standard) ease-(--ease-standard) hover:-translate-y-1 focus-visible:-translate-y-1"
               >
                 {/*
-                  The clip's own shape, not an assumed one. `object-cover` in
-                  a fixed 9:16 cell crops a square poster down the sides,
-                  which is exactly the mangling this content kind exists to
-                  avoid. Cards in a row are then different heights; the grid
-                  aligns them to the top, which reads as a social grid rather
-                  than a fault.
+                  EVERY CARD IS 9:16 HERE, including the square one, and that
+                  is Melissa's call (2026-09-10): "make that Not Interested
+                  clip the same height for the gallery only so its visually
+                  balanced."
+                  
+                  So the grid crops and the clip page does not. A wall of
+                  matched cards is what this page is for — one short card in a
+                  row of tall ones reads as a mistake, not as a shape — while
+                  the clip's real proportions are what matter the moment you
+                  open it, where VerticalPlayer lets the video size itself and
+                  ClipLocked follows `aspect`.
+
+                  The poster FILE stays at the clip's true shape, so the crop
+                  happens once, in CSS, for this grid only. Baking it into the
+                  poster instead would hand the player a 9:16 still for a
+                  square video and letterbox it while it loads.
                 */}
-                <div
-                  className="relative"
-                  style={{ aspectRatio: `${clip.aspect?.[0] ?? 9} / ${clip.aspect?.[1] ?? 16}` }}
-                >
+                <div className="relative aspect-[9/16]">
                   <Image
                     src={clip.poster}
                     alt=""

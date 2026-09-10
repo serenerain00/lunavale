@@ -73,16 +73,17 @@ export interface Clip {
    * The clip's own shape as [width, height], when it is not the 9:16 this
    * module was built around. Default is portrait and most entries never set it.
    *
-   * WHY THIS EXISTS. The header above says these are the 9:16 cuts, and the
-   * grid card was written to match: `aspect-[9/16]` with `object-cover`. Hand
-   * that a square Instagram post and it does the one thing this whole module
-   * was created to prevent — crops the sides off to force a shape the clip
-   * never had. The VIDEO element was already honest about this (see the
-   * comment in VerticalPlayer: letting the element size itself keeps every
-   * clip honest); only the poster cards were not.
+   * WHY THIS EXISTS. The rule this module actually wants is "not 16:9", not
+   * "exactly 9:16" — the square Instagram cut of the blonde-guy scene is
+   * 1320x1256. The VIDEO element was already honest about it (see the comment
+   * in VerticalPlayer: letting the element size itself keeps every clip
+   * honest); the cards were not.
    *
-   * So the rule the module actually wants is "not 16:9", not "exactly 9:16",
-   * and a clip that knows its own shape gets shown in it.
+   * IT DOES NOT APPLY TO THE /clips GRID, deliberately. Melissa's call
+   * (2026-09-10): every card there is 9:16 so the wall stays visually
+   * balanced, and the odd square one is cropped by CSS to match. This field
+   * governs the places where the clip stands alone and its real proportions
+   * are the point — the player and the locked card.
    */
   aspect?: [number, number];
   /**
@@ -126,6 +127,48 @@ export function clipAccess(clip: Clip): AccessLevel {
 }
 
 const authored: Clip[] = [
+  {
+    /*
+      THE PILOT INTERVIEW. Melissa, 2026-09-10: a film crew comes to the
+      lakehouse to speak with Luna, it is brief, and it exists to promote the
+      pilot — which drops this month.
+
+      IT IS NOT A SCENE AND MUST NOT READ AS ONE. Everything else in this file
+      is the story; this is the story being talked about, in character, to a
+      camera that is admitted to exist. So it carries no `fullSceneSlug` —
+      there is no longer version of it to sell — and no `feelings`, because it
+      is not a beat anybody can be filed under.
+
+      FREE, and not a close call. It is an advertisement for the pilot. Gating
+      it would be charging admission to a trailer.
+
+      SHOT 9:16 at 1080x1920, so it needs no `aspect` — it is exactly the shape
+      this content kind was built around.
+
+      IT LANDS ON THE HOME PAGE BY ITSELF. `clipOfTheDay` shows the newest clip
+      on the day it is added and then rotates it into the pool, and `isFeatured`
+      badges it as new for a week. Nothing here pins it, which is the 2026-09-01
+      decision this file already records — if the pilot needs more than a day at
+      the top, that is a change to the rotation and not to this entry.
+
+      PLACEHOLDER title and caption — hers to replace. The title says what the
+      thing is rather than being evocative, because this one is marketing and a
+      visitor deciding whether to spend forty-six seconds should not have to
+      guess.
+    */
+    id: "pilot-interview",
+    title: "The Pilot Interview",
+    caption:
+      "A film crew comes out to the lakehouse and sits her down. Forty-six seconds on the pilot, out this month.",
+    file: "pilot-interview.proxy.mp4",
+    poster: "/posters/pilot-interview.jpg",
+    // 45, trimmed at 45.3. It fades to near-black by 43 and the fade is part
+    // of the edit; only the true black after it was cut.
+    durationSeconds: 45,
+    addedOn: "2026-09-10",
+    about: ["luna"],
+    mature: false,
+  },
   {
     id: "run-at-the-lake",
     title: "Run",

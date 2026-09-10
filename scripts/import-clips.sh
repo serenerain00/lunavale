@@ -101,6 +101,18 @@ CLIPS=(
   # RENAMED 2026-09-10 to ...-ig.mov. The path here was stale and a re-import
   # would have failed outright — which is the good failure, but only if
   # somebody runs it.
+  # THE PILOT INTERVIEW, added 2026-09-10. A film crew comes to the lakehouse
+  # and sits Luna down — 46s, shot 9:16, made to promote the pilot dropping
+  # this month. Not a scene from the story: it is the story being talked about.
+  #
+  # POSTER AT 14s and it is the whole pitch in one frame — her on the sofa with
+  # the mug, the lake and the sunset through the glass behind her, and the
+  # camera rig in the foreground. It says "interview" without a word of copy.
+  # 8s is the better portrait of her and says nothing about what this is.
+  #
+  # END=45.3. It fades to near-black by 43 (luma 2.8) and goes truly black at
+  # 45.5; the fade is part of the edit and stays.
+  "pilot-interview|stories/pilot-interview.MP4|14|45.3"
   "the-blonde-guy|stories/ty-luna-blonde-guy-bar/luna-ty-blonde-guy-short-music-ig.mov|1|89.0"
 )
 

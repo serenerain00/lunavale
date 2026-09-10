@@ -1190,6 +1190,68 @@ watched, or is about to.
 
 ---
 
+### The bar — the blonde guy
+*(Canon set by Melissa, 2026-09-09, ahead of the footage. Slug:
+`ty-luna-blonde-guy-bar`. **The cut had not arrived when this was written** —
+see the two open questions at the end, both of which change what it means.)*
+
+Luna and Tyson are meeting for **dinner**. Tyson is **considerably late**,
+because of **a bad day Luna knows nothing about.**
+
+She is waiting **at the bar** when a man — blonde — approaches her and starts
+asking her things. He wants a date. He **gets pushier than she is comfortable
+with.**
+
+**Tyson arrives and hears the tail end of it.** He tells the man that *she
+doesn't sound interested.*
+
+The man takes it badly and squares up to him. **Luna stands up to calm Tyson
+down** — she is managing him, not the stranger, and that detail is the scene.
+The man's **friend tries to pull him away — "c'mon, let's go."**
+
+The two of them end up **toe to toe**, and then the blonde man says:
+
+> **"She's not worth it anyway."**
+
+**That is the line that does it.** Tyson takes him **by the collar**, hard,
+**yells at him to leave**, and **shoves him backwards.**
+
+**AFTERWARDS, LEAVING THE BAR.** Luna asks **"where did that come from"** — she
+means the tone, and she means him putting hands on somebody, which is **not
+what Tyson does**, and certainly not over a nobody in a bar.
+
+He says: **"Leave it. It's been a long day."** She says his name as he walks
+away from her. He says **they'll talk in the car.** Cut.
+
+**WHY THIS MATTERS TO THE CHARACTER.** Everything else on this site establishes
+a man who does not raise his voice — `the-six-months` has Luna writing that he
+never does, "which is genuinely infuriating, because it means I am always the
+only person in the room shouting." This is that man with a fistful of a
+stranger's shirt, and the trigger is not being challenged. It is somebody
+saying **she isn't worth it.**
+
+**CONSISTENT WITH `he-shouted`, but only just, and worth keeping straight.**
+That scene is marked as the first time he raises his voice **at Luna**, and the
+first time he **names Josh** as the reason he cannot talk to her. Neither
+happens here — he yells at a stranger, and he refuses to explain. If anything
+this makes the later one land harder: she has now seen him lose it once, at
+somebody else, and be unable to tell her why.
+
+**TWO OPEN QUESTIONS, both Melissa's, and neither guessed at here:**
+
+1. **WHEN.** Not stated. Everything about what this scene means depends on it —
+   whether it sits inside the six months, after she goes back to Josh, or
+   somewhere else entirely.
+
+2. **WHAT THE BAD DAY WAS.** The description says Luna knows nothing about it
+   and he will not say. The open part is whether the AUDIENCE ever learns it.
+   If it is meant to be the day **Josh asked him for help getting her back**
+   (see `### THE PROMISE`), this becomes one of the largest scenes in the
+   story: a man who has just given his word grabs a stranger by the collar for
+   saying she is not worth it, and then cannot answer the one question she
+   asks. **That reading is not asserted anywhere in the product** and will not
+   be until she says so.
+
 ### The "staring game" (a signature detail)
 An inside thing Luna and Tyson have always done, **learned in the military**:
 when one of them thinks the other is lying, they **go silent, move closer to

@@ -2013,9 +2013,18 @@ export const videos: Video[] = [
       "They had dinner plans, as friends. He turns up very late and will not say why. She is waiting at the bar when a man decides she looks like company, and goes on deciding it long after she has made herself clear.",
     file: "ty-luna-blonde-guy-bar.proxy.mp4",
     poster: "/posters/ty-luna-blonde-guy-bar.jpg",
-    // 183, and no trimming needed — no trailing black anywhere in the master.
-    // The 3s fade is on the proxy: the picture holds full brightness to the
-    // last frame with the audio still running, so it stopped rather than ended.
+    // 183. NOW THE SCORED CUT (2026-09-10) — the unscored master is still at
+    // stories/ty-luna-blonde-guy-bar/luna-ty-blonde-guy-bar.mp4 if this needs
+    // reverting. Same edit, so the 2:26 poster and the 2:14 preview window are
+    // unchanged; only the mix and the resolution moved.
+    //
+    // TRIMMED AT 183. The unscored master had no trailing black and this one
+    // has 4s of it, which is the fourth delivery in a row to arrive that way —
+    // check the tail every time, and with a frame-luma sweep rather than
+    // blackdetect, which misses it at pic_th=0.98.
+    //
+    // The 3s fade on the proxy stays: the picture still holds full brightness
+    // to its last frame with the audio running, so it stops rather than ends.
     durationSeconds: 183,
     addedOn: "2026-09-09",
     access: "premium",
@@ -2133,7 +2142,21 @@ export const videos: Video[] = [
       "A few days after she left, in a house with nobody else in it and the phone still going. She is working out whether she gave up too soon — and getting used to a quiet she has not lived in for ten years.",
     file: "luna-lkehouse-wine-shatter.proxy.mp4",
     poster: "/posters/luna-lkehouse-wine-shatter.jpg",
-    // 148, untrimmed — no trailing black anywhere. The 3s fade is on the proxy.
+    // 148. NOW THE SCORED CUT (2026-09-10) — the silent master is still at
+    // stories/luna-lkehouse-wine-shatter/luna-lkehouse-wine-shatter.mp4 if
+    // this needs reverting. Same edit: head frames match, picture runs to
+    // 148.6 in both, the throw is still at 2:16, so the poster second and the
+    // preview window are unchanged.
+    //
+    // THE OLD NOTE HERE ARGUED THE SILENCE WAS THE SCENE — -38.9 dB mean
+    // against a -0.2 dB peak, the quietest delivery in the library, and an
+    // instruction not to normalise it. That is obsolete rather than wrong:
+    // this cut is -17.2 dB mean with the score running underneath the whole
+    // thing, which is the version Melissa is shipping.
+    //
+    // TRIMMED AT 148 — it arrived with 5.6s of black on the tail. The picture
+    // still ends at full brightness with the audio running, so the 3s fade on
+    // the proxy stays; the black was padding, not a fade.
     durationSeconds: 148,
     addedOn: "2026-09-10",
     access: "premium",

@@ -517,7 +517,22 @@ CUTS=(
   # best single frame in the cut and a single face); 154-156s (the collar and
   # the yell) — a poster sits at a permanent ungated URL and that one is the
   # violence.
-  "ty-luna-blonde-guy-bar|stories/ty-luna-blonde-guy-bar/luna-ty-blonde-guy-bar.mp4|146.5||3"
+  #
+  # NOW THE SCORED CUT (2026-09-10), same swap as luna-lkehouse-wine-shatter
+  # and josh-luna-wall on the same day. The unscored master is still at
+  # luna-ty-blonde-guy-bar.mp4 if this needs reverting.
+  #
+  # SAME EDIT: picture runs to 183 in both, so the 2:26 poster, the 2:14
+  # preview window and every timing note downstream are unchanged.
+  #
+  # END=183 — it arrived with 4s of black on the tail, like the wine cut an
+  # hour earlier. Found with a frame-luma sweep; blackdetect at pic_th=0.98
+  # misses this kind of tail.
+  #
+  # COSTS RESOLUTION: 1316x796 against 1912x1080. Same trade as the wine cut,
+  # josh-luna-wall and luna-josh-fair. Worth a re-export at 1080 if the source
+  # allows it.
+  "ty-luna-blonde-guy-bar|stories/ty-luna-blonde-guy-bar/luna-ty-bar-blonde-guy-music.mov|146.5|183|3"
   # THE WINE GLASS. Melissa, 2026-09-10, and the folder name carries the
   # "lkehouse" spelling that recurs across these directories — left alone, it
   # is a path and nothing public inherits it.
@@ -557,7 +572,37 @@ CUTS=(
   # Considered: 103s (her standing in the room with the lake behind, the most
   # restrained frame in the cut and it says very little) and 111s (hands in her
   # hair, which is her at her worst and heavy to meet cold on a card).
-  "luna-lkehouse-wine-shatter|stories/luna-lkehouse-wine-shatter/luna-lkehouse-wine-shatter.mp4|6||3"
+  #
+  # NOW THE SCORED CUT (2026-09-10), the same move josh-luna-wall made. The
+  # silent master is still at luna-lkehouse-wine-shatter.mp4 if this needs
+  # reverting.
+  #
+  # IT IS THE SAME EDIT. Head frames match, the picture runs to 148.6s in both,
+  # and the throw is still at 2:16 — so the poster second, the preview window
+  # and every timing note downstream stay exactly as they were. Only the mix
+  # and the resolution changed.
+  #
+  # THE MIX IS THE POINT and it inverts the old note. The silent cut measured
+  # -38.9 dB mean, the quietest delivery this library had, and the entry in
+  # videos.ts argued that the gap between that and a -0.2 dB peak WAS the
+  # scene. This one is -17.2 dB mean, 0.0 dB peak: the score runs underneath
+  # the whole thing. That reasoning is obsolete rather than wrong, and the
+  # videos.ts comment is updated rather than left describing a file that is no
+  # longer there.
+  #
+  # END=148 BECAUSE IT ARRIVED WITH 5.6s OF BLACK on the tail — the fourth of
+  # the last five deliveries to do so. Picture holds full brightness to 148.6
+  # and hard-cuts; blackdetect at pic_th=0.98 does NOT catch it, which is worth
+  # knowing, and a frame-luma sweep does.
+  #
+  # THE 3s FADE STAYS. The picture still ends at full brightness with the audio
+  # running, so it stops rather than ends. The trailing black is not a fade.
+  #
+  # IT COSTS RESOLUTION: 1320x798 against the silent master's 1942x1080, and
+  # 1.65 rather than 1.80, so it pillarboxes slightly in a 16:9 player. Same
+  # trade as josh-luna-wall and luna-josh-fair. Worth a re-export at 1080 if
+  # the source allows it.
+  "luna-lkehouse-wine-shatter|stories/luna-lkehouse-wine-shatter/luna-lkehouse-wine-shatter-music.mov|6|148|3"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

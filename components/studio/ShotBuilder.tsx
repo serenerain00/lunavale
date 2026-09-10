@@ -34,7 +34,7 @@ import {
   timesOfDay,
   type Option,
 } from "@/lib/studio/vocab";
-import { compileShot } from "@/lib/studio/prompt";
+import { compileShot, compileForTarget, type PromptTarget } from "@/lib/studio/prompt";
 import type { ShotCamera, ShotRecipe, StudioRef } from "@/lib/studio/types";
 import { refKinds } from "@/lib/studio/types";
 import { FramingDiagram } from "@/components/studio/FramingDiagram";
@@ -73,6 +73,13 @@ export function ShotBuilder({
   const compiled = useMemo(
     () => compileShot(draft, refs, names),
     [draft, refs, names],
+  );
+  // Where this is going. Kept in the builder rather than in the recipe: it is
+  // about the tool you happen to be pasting into today, not about the shot.
+  const [target, setTarget] = useState<PromptTarget>("chatgpt");
+  const targeted = useMemo(
+    () => (target === "video" ? null : compileForTarget(draft, refs, names, target)),
+    [draft, refs, names, target],
   );
 
   const set = <K extends keyof ShotRecipe>(k: K, v: ShotRecipe[K]) =>
@@ -297,17 +304,79 @@ export function ShotBuilder({
           </section>
         )}
 
-        <Copyable title="1 — Anchor still" body={compiled.anchor}
-                  note="Make this frame first. Every noun lives here." />
-        <Copyable title="2 — Motion" body={compiled.motion}
-                  note="Paste with the anchor into Kling / Runway / Veo / Sora. Thin on purpose — the look comes from the frame." />
-        {compiled.consistency && (
-          <Copyable title="Consistency" body={compiled.consistency}
-                    note="The details that go missing on shot nine. Paste alongside, every time." />
-        )}
-        <Copyable title="Negative" body={compiled.negative} note="If your tool takes one." />
+        {/*
+          ONE BUTTON PER DESTINATION. The four-block version was written for
+          image-to-video and was actively wrong for a chat generator: two of
+          the blocks (motion, negative) are noise to ChatGPT, and the two that
+          matter arrived split so they had to be pasted twice. See PromptTarget
+          in lib/studio/prompt.ts for why the shapes genuinely differ.
+        */}
+        <div className="flex gap-1.5">
+          {(
+            [
+              ["chatgpt", "ChatGPT"],
+              ["gemini", "Gemini"],
+              ["video", "Video"],
+            ] as [PromptTarget, string][]
+          ).map(([id, label]) => (
+            <button key={id} type="button" onClick={() => setTarget(id)}
+                    className={`rounded-sm border px-2.5 py-1 text-[12px] ${
+                      id === target
+                        ? "border-amber/50 bg-amber/15 text-amber-soft"
+                        : "border-hairline text-stone hover:text-ivory"
+                    }`}>
+              {label}
+            </button>
+          ))}
+        </div>
 
-        {compiled.referenceBrief.length > 0 && (
+        {targeted ? (
+          <>
+            {targeted.caution && (
+              <p className="rounded-sm border border-wine/40 bg-wine/10 p-2.5 text-[12px] text-stone">
+                {targeted.caution}
+              </p>
+            )}
+            <Copyable
+              title={target === "gemini" ? "Paste into Gemini" : "Paste into ChatGPT"}
+              body={targeted.text}
+              note={
+                target === "gemini"
+                  ? "One paste. Gemini holds a long description and takes the Avoid line literally."
+                  : "One paste. No negative prompt — ChatGPT puts whatever you forbid into the frame."
+              }
+            />
+            {targeted.attach.length > 0 && (
+              <section className="space-y-1.5 rounded-sm border border-hairline bg-obsidian p-3">
+                <h4 className="text-[12px] uppercase tracking-wide text-stone">
+                  Then attach these {targeted.attach.length} file
+                  {targeted.attach.length > 1 ? "s" : ""}
+                </h4>
+                <ul className="ml-4 list-disc text-[13px] text-stone">
+                  {targeted.attach.map((a, i) => <li key={i}>{a}</li>)}
+                </ul>
+                <p className="text-[12px] text-stone-dim">
+                  These are the labels they were uploaded under, so they are the filenames on your
+                  machine. The Library tab has each one if you need to pull it back down.
+                </p>
+              </section>
+            )}
+          </>
+        ) : (
+          <>
+            <Copyable title="1 — Anchor still" body={compiled.anchor}
+                      note="Make this frame first. Every noun lives here." />
+            <Copyable title="2 — Motion" body={compiled.motion}
+                      note="Paste with the anchor into Kling / Runway / Veo / Sora. Thin on purpose — the look comes from the frame." />
+            {compiled.consistency && (
+              <Copyable title="Consistency" body={compiled.consistency}
+                        note="The details that go missing on shot nine. Paste alongside, every time." />
+            )}
+            <Copyable title="Negative" body={compiled.negative} note="If your tool takes one." />
+          </>
+        )}
+
+        {target === "video" && compiled.referenceBrief.length > 0 && (
           <section className="space-y-2 rounded-sm border border-hairline bg-obsidian p-3">
             <h4 className="text-[12px] uppercase tracking-wide text-stone">Hand it these, in this order</h4>
             {compiled.referenceBrief.map((g) => (

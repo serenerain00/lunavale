@@ -154,6 +154,35 @@ Before making structural decisions, read:
 subordinate to this file: where it and the Experience Principles below disagree,
 this file wins.
 
+## Daily Health Check
+
+**Every day, before starting work, check the site.** Bugs, pages customers
+should not see but maybe do, checkout issues, general health.
+
+```bash
+npm run health                 # everything, including money
+npm run health -- --offline    # repo only, no network
+```
+
+It covers gates (owner-only surfaces, noindex, robots), leakage (private media
+that would actually deploy, sitemap contents), content integrity (links between
+the content modules, pull quotes not pointing into a paywall, the free-entry
+count) and money (people who paid and cannot get in, cards failing, webhooks
+gone quiet, prices that resolve). Exit code 1 if anything FAILED; warnings never
+fail the run.
+
+It does **not** load pages or look at the rendered site, so it cannot see a
+broken layout or a 500. If the day's work touched the front end, open it.
+
+A SessionStart hook prints a one-line reminder until the day's check has run.
+The full instructions, including how to report the result, are in
+`.claude/skills/health-check/SKILL.md`.
+
+**Every check in `scripts/health-check.ts` exists because that class of thing
+actually broke here.** Delete checks that never catch anything; add one for
+whatever went wrong most recently. Otherwise it becomes decoration and gets
+skipped.
+
 ## Engineering Rules
 
 - Use TypeScript.

@@ -104,3 +104,7 @@ next-env.d.ts
 # they are working material — faces, wardrobe, tattoo plates, frames from
 # attempts that did not work. None of it belongs in the repo.
 studio-private
+
+# Written by scripts/health-check.ts so the session-start reminder knows
+# whether today's check has run. Machine-local, not a project fact.
+.health-check-last

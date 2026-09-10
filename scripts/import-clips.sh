@@ -14,7 +14,13 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-# slug|source|poster seconds|preview seconds (optional)
+# slug|source|poster seconds|end seconds (optional)|preview seconds (optional)
+#
+# END SECONDS trims trailing black, the same field `optimize-media.sh vertical`
+# has carried since luna-josh-rain arrived with 6.6s of it. Measure it —
+# `ffmpeg -vf blackdetect` — rather than eyeballing, and remember the runtime
+# printed at the end of a run is the PROXY's, which is the number clips.ts
+# wants.
 #
 # PREVIEW SECONDS cuts <slug>-preview.proxy.mp4, the public opening of a gated
 # clip — always from 0:00, always from the PROXY rather than the source, and
@@ -62,18 +68,50 @@ CLIPS=(
   # membership. show the first 1min." Four times the fifteen seconds a scene
   # gets, deliberately — a scene's window is bait for a scene, and this one has
   # to carry a whole vertical cut on its own.
-  "luna-ty-nyc-vertical|stories/luna-ty-nyc-hotel/luna-ty-nyc-IGvertical.mov|24|60"
+  "luna-ty-nyc-vertical|stories/luna-ty-nyc-hotel/luna-ty-nyc-IGvertical.mov|24||60"
+  # THE BLONDE GUY, cut for Instagram. Melissa, 2026-09-09, dropped beside the
+  # full scene it comes from (ty-luna-blonde-guy-bar).
+  #
+  # NEARLY SQUARE — 1320x1256, which is 1.05 and the first clip here that is
+  # neither 16:9 nor 9:16. It plays correctly: VerticalPlayer lets the element
+  # size itself rather than forcing an aspect. The POSTER is the compromise —
+  # `vertical` crops posters to a true 9:16 so the grid tiles evenly, and on a
+  # 1.05 source that keeps the middle 53% of the width. So the poster second
+  # below is chosen for a frame that SURVIVES that crop, not just for a good
+  # frame; a two-shot would lose one of the two people.
+  #
+  # IT IS SCORED, and it is the only cut of this material that is: -26.3 dB
+  # against the full scene's -30.9. Worth knowing that a scored mix of these
+  # beats exists — if a scored export of the whole scene ever follows, the
+  # standing rule applies and import-cuts.sh should point at it.
+  #
+  # hevc 60fps in, h264 at 720 wide out.
+  #
+  # TRIMMED AT 89.0s. The delivered file runs 96.8s and blackdetect puts 7.7s
+  # of black on the end — by some way the longest tail any clip here has had,
+  # and the reason this manifest learned an `end` field.
+  #
+  # POSTER AT 1s: Tyson centered, walking in, before any of it has happened.
+  # It survives the 9:16 crop, it is unmistakably him, and it gives nothing
+  # away. Considered: 25s (Luna lit and looking up, the better hook for a
+  # stranger — and she is beside a man nobody knows, which reads as her scene
+  # with him when the whole point is that this scene is Tyson's) and 61s (his
+  # face mid-confrontation, the most arresting frame in the cut and the
+  # violence).
+  "the-blonde-guy|stories/ty-luna-blonde-guy-bar/luna-ty-blonde-guy-short-music.mov|1|89.0"
 )
 
 want=("$@")
 for entry in "${CLIPS[@]}"; do
-  IFS='|' read -r slug src at preview <<<"$entry"
+  IFS='|' read -r slug src at end preview <<<"$entry"
   if [ ${#want[@]} -gt 0 ]; then
     match=0
     for w in "${want[@]}"; do [ "$w" = "$slug" ] && match=1; done
     [ $match -eq 1 ] || continue
   fi
-  ./scripts/optimize-media.sh vertical "$slug" "$src" "$at"
+  # "-" for an unset `at` so an omitted poster second cannot slide `end` into
+  # its place, the same guard import-cuts.sh uses.
+  ./scripts/optimize-media.sh vertical "$slug" "$src" "${at:--}" "${end:-}"
 
   # Cut from the proxy the line above just wrote, so the public minute is
   # bit-for-bit the opening of the file a member gets rather than a second

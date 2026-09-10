@@ -315,6 +315,53 @@ const authored: Clip[] = [
     // The same night in 16:9, four minutes longer, and the page says so.
     fullSceneSlug: "luna-ty-nyc-hotel",
   },
+  {
+    /*
+      THE BLONDE GUY, cut for Instagram. Melissa, 2026-09-09, dropped beside
+      the full scene the same evening she replaced that scene's audio.
+
+      FREE, and that is the rule this file was built on rather than a judgment
+      call: a clip that runs publicly on Instagram has nothing left to gate,
+      and putting it behind the LunaVerse would be selling something anybody
+      can scroll past for free. It is also the best advert the newest scene
+      has — a scored 1:29 that ends on the two of them in the street, with the
+      full 3:03 one click away and members-only.
+
+      SCORED, and the only cut of this material that is: -26.3 dB against the
+      scene's -30.9. The scene itself is still the dialogue mix.
+
+      NEARLY SQUARE at 1320x1256, which is neither of the two shapes this file
+      was built for. It plays correctly — VerticalPlayer sizes itself — and the
+      cost is the card, which crops to 9:16 like every other clip. See
+      scripts/import-clips.sh for why the poster second is what it is.
+
+      IT CONTAINS THE CONFRONTATION, including him taking the other man by the
+      collar. Hence the note, and hence no autoplay: a clip carrying a content
+      note waits to be pressed, which is the correct trade even on the one
+      whose job is to be an advert.
+    */
+    id: "the-blonde-guy",
+    // PLACEHOLDER title and caption — hers to replace. The title is Tyson's
+    // line, which is the hinge of the whole thing.
+    title: "Not Interested",
+    caption:
+      "She is waiting at the bar for a dinner he is very late to. Somebody else decides she looks like company.",
+    file: "the-blonde-guy.proxy.mp4",
+    poster: "/posters/the-blonde-guy.jpg",
+    // 89, the trimmed length — the delivery ran 96.8s with 7.7s of black on
+    // the end.
+    durationSeconds: 89,
+    addedOn: "2026-09-09",
+    about: ["luna", "tyson"],
+    // Nothing sexual, nobody undresses. `mature` on this set means intimate
+    // rather than graphic and would point at the wrong thing entirely; what is
+    // actually in it is the note below.
+    mature: false,
+    notes: ["violence"],
+    // The full 3:03, members-only, and the clip page says so rather than
+    // leaving somebody to assume ninety seconds is all there is.
+    fullSceneSlug: "ty-luna-blonde-guy-bar",
+  },
 ];
 
 /**

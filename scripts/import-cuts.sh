@@ -451,6 +451,56 @@ CUTS=(
   # loses the hotel); anything past 270s (both faces, laughing, and it is the
   # ending).
   "luna-ty-nyc-hotel|stories/luna-ty-nyc-hotel/luna-ty-nyc-hotel.mp4|32||3"
+  # THE BAR, AND THE BLONDE GUY. Melissa, 2026-09-09, with the whole beat
+  # written out — see `### The bar — the blonde guy` in LUNA_VALE_CONTEXT.md,
+  # which has the placement (about a month after Luna goes back to Josh) and
+  # what the bad day actually was.
+  #
+  # THE SLUG IS HERS, NOT THE FILENAME'S. She called the video
+  # ty-luna-blonde-guy-bar and the folder matches; the file inside it is
+  # luna-ty-blond-guy-bar.mp4 — names reversed, and missing the e. Left alone
+  # on purpose, the same as "osh-ty-fight-music.mov" above: it is the name of a
+  # file on disk, not a slug, and nothing public inherits it.
+  #
+  # 1912x1080 h264 30fps, 182.6s. Effectively true 16:9 (1.77) like
+  # ty-josh-fight's 1936x1080, so no pillarboxing worth mentioning.
+  #
+  # NO TRAILING BLACK anywhere in the file, so no `end` — the second cut in a
+  # row to arrive clean that way.
+  #
+  # NO MUSIC: -30.8 dB mean / -4.6 dB peak, which sits with the garage, the
+  # bathroom and the NYC hotel rather than with anything scored. Nobody has
+  # said whether a score is coming; if one lands, re-point this line and
+  # re-check every number below, the poster second and the preview window
+  # included.
+  #
+  # FADE 3s, the house length, and for the established reason: the picture
+  # holds full brightness to the last frame (luma 23-27 from 176s to 182.5s)
+  # with the audio still running at -32 dB, so it stops rather than ends. The
+  # closing shot is the two of them walking out onto a wet street with him
+  # ahead of her, which a hard cut turns into a file ending mid-stride.
+  #
+  # POSTER AT 146.5s, and it took three attempts to land on. All four people
+  # are in it doing exactly what the scene is: Luna at the left with her hand
+  # flat on Tyson's chest, looking up at him; Tyson and the other man nose to
+  # nose; and the friend at the right with a hand on his arm, trying to get him
+  # out of there. The whole beat in one frame, and it gives away nothing about
+  # how it goes.
+  #
+  # It is also the picture of what this scene is ABOUT, which no other frame
+  # manages: she is not calming the stranger down. She is calming Tyson.
+  #
+  # It sits INSIDE the public window below, so the card promises something
+  # anybody can watch — same rule as ty-josh-fight.
+  #
+  # Considered and rejected: 136s (the first pick, and wrong — a tight
+  # two-shot of the two men with no Luna in it, which reads as a fight scene
+  # and hides whose story this is); 0s (her alone at the bar, beautiful, and it
+  # sells a two-hander as a woman waiting); 88s (his face as he walks in, the
+  # best single frame in the cut and a single face); 154-156s (the collar and
+  # the yell) — a poster sits at a permanent ungated URL and that one is the
+  # violence.
+  "ty-luna-blonde-guy-bar|stories/ty-luna-blonde-guy-bar/luna-ty-blond-guy-bar.mp4|146.5||3"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

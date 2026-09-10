@@ -1954,6 +1954,109 @@ export const videos: Video[] = [
     place: "new-york",
     about: ["luna", "tyson"],
   },
+  {
+    /*
+      THE BAR, AND THE BLONDE GUY. Melissa dropped the folder 2026-09-09 and
+      wrote the whole beat out the same day, placement included — the full
+      version is `### The bar — the blonde guy` in LUNA_VALE_CONTEXT.md and it
+      should be read before anybody touches this entry.
+
+      WHEN: the tail end of the six months. She is NOT with Josh yet, not
+      officially — she has been talking to him, smoothing things out, and it is
+      plainly heading back that way. In journal terms: after `coffee`, before
+      `i-said-yes`.
+
+      That placement is Melissa's correction, made the same day she wrote the
+      beat, and it is the fact this entry turns on. It first went down as "a
+      month after she goes back to Josh"; moving it earlier makes the scene
+      worse for Tyson, which is the point. If she were already back with Josh
+      he would be reacting to something that had happened. Here it has not
+      happened yet — it is happening, in front of him, at a pace he cannot
+      affect, and he gave Josh his word to help it along.
+
+      This is the stretch where he starts losing his composure around her, and
+      Luna still does not understand why he is drifting.
+
+      WHAT HAPPENS: dinner plans, as friends. He is very late. She is waiting
+      at the bar when a man starts asking her things and keeps going well past
+      the point where she has made herself clear. Tyson arrives on the tail end
+      of it and tells him she does not sound interested. It goes toe to toe;
+      Luna puts a hand on Tyson's chest; the other man's friend tries to walk
+      him out of it. Then the man says she is not worth it anyway, and Tyson
+      has him by the collar.
+
+      Outside afterwards she asks where that came from — she means the tone, and
+      she means him putting hands on somebody, which is not what he does. He
+      says leave it, it's been a long day. She says his name. He says they'll
+      talk in the car.
+
+      WHY THE SYNOPSIS STOPS WHERE IT DOES. The bad day is real and it is
+      specific — feelings he does not understand, working around Josh every day
+      knowing where she and Josh are heading, work stress, and dread about this
+      exact dinner — and Luna never learns any of it. Neither does the audience, in
+      this scene. So the copy sets up the discomfort and stops before Tyson
+      arrives, because everything after that is the thing you press play for.
+
+      IT IS NOT ABOUT THE MAN AT THE BAR. He is the only thing in Tyson's day
+      that it is permissible to be angry at; everything actually pressing on
+      him is a person he loves, a promise he made, or a woman he cannot say any
+      of it to. Anybody rewriting this copy should keep the stranger
+      incidental.
+    */
+    slug: "ty-luna-blonde-guy-bar",
+    // PLACEHOLDER title and synopsis — hers to replace. "A Long Day" is the
+    // line he uses instead of the truth, which is what the scene is made of.
+    // Titling it off the other man's line ("Not Worth It") was the other
+    // option and it hands the scene to him.
+    title: "A Long Day",
+    synopsis:
+      "They had dinner plans, as friends. He turns up very late and will not say why. She is waiting at the bar when a man decides she looks like company, and goes on deciding it long after she has made herself clear.",
+    file: "ty-luna-blonde-guy-bar.proxy.mp4",
+    poster: "/posters/ty-luna-blonde-guy-bar.jpg",
+    // 183, and no trimming needed — no trailing black anywhere in the master.
+    // The 3s fade is on the proxy: the picture holds full brightness to the
+    // last frame with the audio still running, so it stopped rather than ended.
+    durationSeconds: 183,
+    addedOn: "2026-09-09",
+    access: "premium",
+    // NOT `mature`. Nothing sexual happens and nobody undresses — `mature`
+    // reads as "there is sex in this" and would brace a viewer for entirely
+    // the wrong thing. What is actually in it is in `notes`.
+    mature: false,
+    // A man is taken by the collar, shouted at and shoved. Nobody is hurt and
+    // it is over in about three seconds, which is exactly why it needs saying
+    // in advance rather than being discovered: the whole force of the scene is
+    // that this is not a man who does that.
+    notes: ["violence"],
+    preview: {
+      file: "ty-luna-blonde-guy-bar-preview.proxy.mp4",
+      durationSeconds: 15,
+      // 2:14–2:29. The two of them squared up, her hand flat on his chest, the
+      // other man's friend pulling at his arm — and it stops at 2:29, which is
+      // one beat before the line that sets him off and two before the collar.
+      //
+      // Melissa's rule for these (2026-08-10) is that a window should end
+      // immediately before the thing you want to know. The thing you want to
+      // know here is what he does, and this ends with three people holding a
+      // moment that is obviously about to break.
+      //
+      // The poster is inside it, at 2:26.
+      hookStart: 134,
+      hookNote:
+        "toe to toe with her hand on his chest; ends one beat before \"she's not worth it anyway\" and two before the collar",
+    },
+    // `hurt` for the thing breaking the surface, and `distance` because that is
+    // the actual subject — a man who will not say why, and a woman who cannot
+    // reach him. `desire` was considered and left off deliberately: it is
+    // honest (the pull he will not name is what detonates here) and a shelf
+    // called Desire is not where a stranger should meet somebody being taken
+    // by the collar.
+    feelings: ["hurt", "distance"],
+    place: "bar",
+    // Luna and Tyson. The other two men are not characters in this world and
+    // are deliberately not invented as any.
+    about: ["luna", "tyson"],
+  },
 ];
 
 /**

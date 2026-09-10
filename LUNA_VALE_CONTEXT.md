@@ -1192,12 +1192,30 @@ watched, or is about to.
 
 ### The bar — the blonde guy
 *(Canon set by Melissa, 2026-09-09, ahead of the footage; placed and explained
-by her the same day. Slug: `ty-luna-blonde-guy-bar`.)*
+by her the same day, then **RE-PLACED by her within the hour** — see the
+correction below, which is recorded rather than quietly applied because it
+changes what the scene means. Slug: `ty-luna-blonde-guy-bar`.)*
 
-**ABOUT A MONTH AFTER LUNA GOES BACK TO JOSH.** That is the whole context, and
-it is the period where **Tyson starts to lose his composure around her** —
-because she is back with Josh **knowing everything she went through to get over
-him**, or somewhat over him. **Luna still does not understand why he is
+**THE TAIL END OF THE SIX MONTHS.** She is **not with Josh yet, not
+officially** — she has been **talking to him, smoothing things out**, and it is
+clearly heading back that way. In journal terms that puts this after `coffee`
+and before `i-said-yes`: she is seeing him again and has not committed.
+
+> **CORRECTED 2026-09-09.** This first went down as "about a month after Luna
+> goes back to Josh", which is what the original description implied, and
+> Melissa moved it the same day: *"lets have her not with josh yet officially,
+> shes just been talking to him smoothing things out more. so were on the tail
+> end of the 6mths."*
+>
+> The move makes the scene worse for Tyson, which is presumably the point. If
+> she were already back with Josh, this is a man reacting to a thing that has
+> happened. Here it has not happened yet — **it is happening**, in front of
+> him, at a pace he cannot affect, and he **gave his word to help it along**
+> (see `### THE PROMISE`). He is watching the outcome he agreed to arrive.
+
+This is the period where **Tyson starts to lose his composure around her** —
+because she is going back to Josh **knowing everything she went through to get
+over him**, or somewhat over him. **Luna still does not understand why he is
 drifting from her.**
 
 Luna and Tyson are meeting for **dinner, as friends**. Tyson is **considerably
@@ -1247,7 +1265,7 @@ single trigger this document originally went looking for)*. It is not one
 event. It is **accumulation**, and all of it is running at once:
 
 - **feelings he does not really understand**
-- **working around Josh**, every day, knowing Luna is back with him
+- **working around Josh**, every day, knowing where Luna and Josh are heading
 - **work stress**
 - **anxiety about this dinner with her**
 

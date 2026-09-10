@@ -457,10 +457,27 @@ CUTS=(
   # what the bad day actually was.
   #
   # THE SLUG IS HERS, NOT THE FILENAME'S. She called the video
-  # ty-luna-blonde-guy-bar and the folder matches; the file inside it is
-  # luna-ty-blond-guy-bar.mp4 — names reversed, and missing the e. Left alone
-  # on purpose, the same as "osh-ty-fight-music.mov" above: it is the name of a
-  # file on disk, not a slug, and nothing public inherits it.
+  # ty-luna-blonde-guy-bar and the folder matches; the file inside it has the
+  # names the other way round. Left alone on purpose, the same as
+  # "osh-ty-fight-music.mov" above: it is the name of a file on disk, not a
+  # slug, and nothing public inherits it.
+  #
+  # REPLACED 2026-09-09, hours after the first import — she re-exported and
+  # dropped luna-ty-blonde-guy-bar.mp4 (with the e) over
+  # luna-ty-blond-guy-bar.mp4 (without). Only this line's source path changed;
+  # every number below was re-checked against the new file and every one of
+  # them still holds, because THE PICTURE IS IDENTICAL. Verified rather than
+  # assumed: 365 frames compared at 2fps across the whole 3:03, mean
+  # correlation 0.9997 and nothing anywhere below 0.97, with the duration
+  # matching to six decimal places (182.648163s) and the audio envelope at
+  # 0.995. If she fixed something specific it is below what a 720p proxy
+  # comparison can resolve.
+  #
+  # WHY THE NUMBERS WERE RE-CHECKED ANYWAY, and why the next person should too:
+  # a replacement export is usually a slightly different edit rather than the
+  # same picture in a new container — see the beach and the flashback above,
+  # where the poster second and the runtime both moved. This one happens not to
+  # be. That is a finding, not an assumption.
   #
   # 1912x1080 h264 30fps, 182.6s. Effectively true 16:9 (1.77) like
   # ty-josh-fight's 1936x1080, so no pillarboxing worth mentioning.
@@ -500,7 +517,7 @@ CUTS=(
   # best single frame in the cut and a single face); 154-156s (the collar and
   # the yell) — a poster sits at a permanent ungated URL and that one is the
   # violence.
-  "ty-luna-blonde-guy-bar|stories/ty-luna-blonde-guy-bar/luna-ty-blond-guy-bar.mp4|146.5||3"
+  "ty-luna-blonde-guy-bar|stories/ty-luna-blonde-guy-bar/luna-ty-blonde-guy-bar.mp4|146.5||3"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

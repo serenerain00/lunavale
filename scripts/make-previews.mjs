@@ -78,6 +78,13 @@ const OVERRIDES = {
   // swap was from the dialogue master and sounded different.
   "josh-luna-wall": 60,
 
+  // Melissa, 2026-09-11: "give them a 1min preview". The scene is 4:45 and the
+  // whole first minute is arrival — a lift, a corridor, a knock, a door. There
+  // is no turn in any of it, so a minute costs nothing and buys the thing
+  // fifteen seconds cannot: a stranger gets to stand in the corridor with her
+  // long enough to want the door to open. A fifth of the runtime.
+  "luna-ty-apt-argue": 60,
+
   // Melissa's call on release: "we can show the first 1min of it". Fifteen
   // seconds of this one is Luna alone at the bar before Tyson has walked in —
   // the situation the scene is about has not started yet. A minute gets a

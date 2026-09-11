@@ -137,6 +137,24 @@ export const places = [
     blurb: "Her own place in Denver, and the hours nobody else sees.",
   },
   {
+    // TYSON'S PLACE IN THE CITY, added 2026-09-11 at Melissa's instruction:
+    // "we def. need to account for tysons apt in denver downtown city."
+    //
+    // KEPT APART FROM `apartment`, which is LUNA'S own place in Denver — "the
+    // hours nobody else sees", settled 2026-08-04 with the iPad call. Two
+    // different rooms belonging to two different people, and folding them
+    // together would have lost the only fact that matters about this one: it
+    // is HIS, and she has never had a reason to go there before.
+    //
+    // It also fixes a real error. `luna-ty-apt-argue` was filed under
+    // `downtown` because there was nowhere truer to put it, and the Instagram
+    // clip cut from it went out titled "Her Place" on the assumption the
+    // apartment was Luna's.
+    id: "tysons-apartment",
+    label: "Tyson's Apartment",
+    blurb: "His place in the city — where he goes when he does not want to be found.",
+  },
+  {
     // Cole's bar, confirmed his 2026-08-04 — his surname is Burnett and the
     // sign is on screen. Kept separate from `bar` rather than folded into it:
     // they are visibly different rooms, and more to the point they do

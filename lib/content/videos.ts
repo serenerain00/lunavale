@@ -2254,16 +2254,23 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-ty-apt-argue-preview.proxy.mp4",
-      durationSeconds: 15,
-      hookStart: 45,
+      // A MINUTE, not fifteen seconds (Melissa, 2026-09-11). The first minute
+      // of this scene is all arrival — a lift, a corridor, a knock, a door —
+      // and there is no turn anywhere in it, so it costs nothing to give away
+      // and it buys the one thing a short window cannot: long enough in that
+      // corridor to want the door to open.
+      durationSeconds: 60,
+      hookStart: 0,
       hookNote:
-        "the corridor and the knock; ends two seconds before the door opens",
+        "the whole arrival — up in the lift, along the corridor, the knock, and the door",
     },
     // `distance` is the subject — a month of nothing and a man who will not say
     // why. `desire` for where it ends. `hurt` was considered and left off: the
     // thing that breaks the surface here is the distance itself.
     feelings: ["distance", "desire"],
-    place: "downtown",
+    // His apartment, not hers — see `tysons-apartment` in taxonomy.ts. This
+    // sat under `downtown` for an hour because there was no truer id.
+    place: "tysons-apartment",
     about: ["luna", "tyson"],
   },
 ];

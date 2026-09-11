@@ -384,14 +384,22 @@ ahead — she **tracks him down**, at **his apartment in the city**, and knocks.
 > her. That is a man not drinking, and now it is a man **not drinking on
 > purpose**.
 
-**HIS APARTMENT IS NOT HERS.** The taxonomy's `apartment` is Luna's own place
-in Denver — "the hours nobody else sees", settled 2026-08-04 with the iPad
-call. Tyson's city place is a different room and does not have a place id yet;
-the scene is filed under `downtown` until Melissa names it. Worth naming: it is
-now the second time the story has been in it.
+**HIS APARTMENT IS NOT HERS**, and it now has its own place id —
+`tysons-apartment`, "Tyson's Apartment" (Melissa, 2026-09-11: "we def. need to
+account for tysons apt in denver downtown city"). The taxonomy's `apartment`
+stays Luna's own place in Denver, "the hours nobody else sees", settled
+2026-08-04 with the iPad call. Two rooms, two people, and the only fact that
+matters about this one is that it is HIS and she has never had a reason to go
+there before.
 
 **The scene ends by stopping being an argument.** The last minute is the two of
 them, and the Instagram cut is that stretch.
+
+**THE PUBLIC WINDOW IS A FULL MINUTE** rather than the usual fifteen seconds
+(Melissa, 2026-09-11). The whole first minute is arrival — a lift, a corridor,
+a knock, a door — with no turn anywhere in it, so it gives away nothing and
+buys the thing a short window cannot: long enough in that corridor to want the
+door to open.
 
 **WHERE IT SITS IS OPEN.** A month of silence is longer than the eleven days in
 `i-asked-him` and reads as later — after the park, after he shouted — but

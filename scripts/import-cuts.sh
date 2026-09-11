@@ -593,26 +593,31 @@ CUTS=(
   #
   # 1320x790 against the unimported master's presumably higher resolution;
   # same trade as every other scored cut this week.
-  # SOURCE IS THE CLEANED FILE, not the delivered one. Melissa, 2026-09-11:
-  # "theres a 'shit' she says in the beginning when shes knocking - her lips
-  # dont move, i forgot to remove that."
+  # ONE STRAY WORD REMOVED, AND IT TOOK TWO GOES. Melissa: "that 'shit' she
+  # says in the beginning, her lips dont move" — "when shes knocking, no music
+  # yet" — "when he opens the door".
   #
-  # FOUND AT 48.08s, lasting 0.43s, and identified rather than guessed at: it
-  # sits right after the two door-knocks at 47.48 and 47.55, it is 16 dB above
-  # the room tone either side of it, and it carries seven times the energy
-  # above 2.5kHz that the knock does — which is a sibilant, not a knuckle. The
-  # frame at 48.08 has her in the corridor with her mouth shut.
+  # THE FIRST ATTEMPT CUT THE WRONG THING. It took the 0.44s event at 48.08s,
+  # which is TYSON SAYING HER NAME as he comes to the door. That is a line of
+  # the scene and deleting it was a real loss; it was reverted within the hour.
   #
-  # REPAIRED BY SPLICING ROOM TONE, not by muting. The bed under it runs about
-  # -41 to -47 dB, so half a second of true silence would have read as a hole.
-  # 48.00-48.60 is replaced with the 0.60s of room tone at 48.70-49.30 — the
-  # same acoustic, from after the door is already open — and the video is
-  # stream-copied, so nothing is re-encoded and the duration is unchanged.
+  # THE ACTUAL WORD IS AT 45.42s, 0.26s long, and the frame at 45.4 is the
+  # door opening with his face in the gap — exactly where she said it was.
+  # What settles it is the spectrum: 81% of that event's energy sits above
+  # 2.5kHz, which is a hard sibilant (the "sh" and the "t"), where Tyson's
+  # "Luna" at 48.08 is 39% — two syllables carrying vowels. One syllable of
+  # almost pure fricative against a two-syllable name; they are not close once
+  # measured, and they were indistinguishable by duration alone, which is how
+  # the first attempt went wrong.
   #
-  # Verified after: the word is gone (-24.9 dB -> -47.2 dB, matching the tone),
-  # both knocks survive, and every other onset in 38-66s is untouched.
+  # REPAIRED BY SPLICING ROOM TONE, not muting: 45.36-45.74 is replaced by the
+  # 0.38s at 46.30-46.68 — same acoustic, after the door is open. Video is
+  # stream-copied, duration holds.
   #
-  # The delivered master is still beside it as luna-ty-apt-argue-music.mov.
+  # Verified: 45.36 drops -33.9 -> -40.7 dB (down to room tone) and 48.08 is
+  # bit-for-bit unchanged at -23.4 dB, so his name is still in the scene.
+  #
+  # The delivered master sits beside it for reverting.
   "luna-ty-apt-argue|stories/apt-luna-tyson-argue/v2/luna-ty-apt-argue-music-clean.mov|42||3"
 
   #

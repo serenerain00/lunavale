@@ -101,6 +101,25 @@ CLIPS=(
   # RENAMED 2026-09-10 to ...-ig.mov. The path here was stale and a re-import
   # would have failed outright — which is the good failure, but only if
   # somebody runs it.
+  # HER PLACE, added 2026-09-11 — the Instagram cut from
+  # apt-luna-tyson-argue/v2/. Square, 1320x1280, like the-blonde-guy, so the
+  # clip entry declares `aspect`.
+  #
+  # THE FOLDER SAYS "ARGUE" AND THE CUT DOES NOT. The full master beside it
+  # (ty-luna-apt.MP4, 287MB, unimported) may well open on a fight; these
+  # sixty-five seconds are the other half — foreheads together, his hand on
+  # her jaw, and a kiss. Titled off what is in the file rather than off the
+  # folder name, which is how you end up calling an intimate cut "The
+  # Argument".
+  #
+  # POSTER AT 48s: both faces, both hands, her forearm tattoo in frame. The
+  # closer frames around 34 are a mouth filling the card, which is the wrong
+  # thing to meet on a public grid.
+  #
+  # NO TRIM. Runs to its last frame at luma 11.8 — no black anywhere, which is
+  # the first delivery in five to arrive that way.
+  "her-place|stories/apt-luna-tyson-argue/v2/luna-ty-apt-ig-short.mov|48"
+
   # THE PILOT INTERVIEW, added 2026-09-10. A film crew comes to the lakehouse
   # and sits Luna down — 46s, shot 9:16, made to promote the pilot dropping
   # this month. Not a scene from the story: it is the story being talked about.

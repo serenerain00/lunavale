@@ -129,6 +129,53 @@ export function clipAccess(clip: Clip): AccessLevel {
 const authored: Clip[] = [
   {
     /*
+      HER PLACE. The Instagram cut from apt-luna-tyson-argue/v2/, dropped
+      2026-09-11. Free, like every cut that has already run on Instagram —
+      gating something anybody can scroll past is what MONETIZATION.md exists
+      to prevent.
+
+      SQUARE, 1320x1256 at source and 720x698 as the proxy, so it declares
+      `aspect` — the second clip to need it after `the-blonde-guy`. The /clips
+      grid still renders it 9:16 with the rest (Melissa, 2026-09-10: same
+      height, visually balanced); this governs the player and the locked card.
+
+      TITLED OFF THE FOOTAGE, NOT THE FOLDER. The folder is called
+      apt-luna-tyson-argue and the full master beside it is unimported, so
+      whatever the complete scene is, it may well open on a fight. These
+      sixty-five seconds are not that: foreheads together, his hand on her jaw,
+      her hand over his, and a kiss. Calling it "The Argument" would have been
+      describing a file nobody can watch.
+
+      NOTHING HERE PLACES IT IN THE STORY, deliberately. Luna and Tyson being
+      intimate is a major beat and the book already has one at the lakehouse
+      (`the-night`). Whether this is that night from another room, something
+      earlier, or something that has not been written yet is Melissa's to say —
+      so there is no `fullSceneSlug`, no journal link, and the caption reports
+      the room and nothing else.
+
+      `mature`, not `explicit`. It is intimate and nobody undresses; explicit on
+      this set means graphic, and a clip that ran on Instagram by definition is
+      not — their rules would not have passed it.
+    */
+    id: "her-place",
+    // PLACEHOLDER title and caption — hers to replace. "Her Place" because the
+    // apartment is the one room in this story that belongs to nobody else,
+    // which is most of why this happens in it.
+    title: "Her Place",
+    caption:
+      "Her own apartment, the city still up in the window, and the one conversation neither of them has ever managed to have out loud.",
+    file: "her-place.proxy.mp4",
+    poster: "/posters/her-place.jpg",
+    // 65, untrimmed — it runs to its last frame with no black on the end, the
+    // first delivery in five to arrive that way.
+    durationSeconds: 65,
+    addedOn: "2026-09-11",
+    about: ["luna", "tyson"],
+    mature: true,
+    aspect: [720, 698],
+  },
+  {
+    /*
       THE PILOT INTERVIEW. Melissa, 2026-09-10: a film crew comes to the
       lakehouse to speak with Luna, it is brief, and it exists to promote the
       pilot — which drops this month.

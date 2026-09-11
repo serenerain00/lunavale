@@ -370,7 +370,10 @@ frightening, because it means nobody did anything wrong.
 stretch free as `the-blonde-guy`'s neighbour in /clips.)*
 
 **Tyson goes dark for a MONTH.** No answer, no explanation. Luna does not call
-ahead — she **tracks him down**, at **his apartment in the city**, and knocks.
+ahead — she **gets in her truck and drives into the city** to **his apartment**,
+and knocks. *(Melissa, 2026-09-11: "shes not in a lift, she gets in her truck."
+The cut opens on the lift ride up; the truck is the decision and the drive is
+the part that means something.)*
 
 **He opens the door not expecting anybody, and he is drinking again.**
 

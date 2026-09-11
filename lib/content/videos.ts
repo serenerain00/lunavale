@@ -2214,6 +2214,13 @@ export const videos: Video[] = [
       They argue. There is a bottle on the table. At about 4:10 it stops being
       an argument.
 
+      THE SYNOPSIS SAYS TRUCK AND THE FIRST SHOT IS A LIFT, on purpose.
+      Melissa, 2026-09-11: "shes not in a lift, she gets in her truck." Both
+      are true — she drives across the city and then rides the last thirty feet
+      — and the truck is the one that belongs in the copy, because getting in a
+      truck is a decision and getting in a lift is a corridor. Do not
+      "correct" this back to the footage.
+
       POSTER AT 42s: Luna alone in the corridor, lit, walking toward a door.
       Her face, her intent, and not a frame of what she is about to find. The
       door opening at 62 is the better two-shot and is exactly why it is not
@@ -2239,7 +2246,7 @@ export const videos: Video[] = [
     // cannot answer. Titling it off the bottle would spend the reveal.
     title: "A Month",
     synopsis:
-      "He has not answered his phone in four weeks. She does not call ahead, she gets in a lift, and she knocks — and whatever she had ready on the way up is not what the door opens on.",
+      "He has not answered his phone in four weeks. She does not call ahead — she gets in her truck, drives into the city, and knocks. Whatever she had ready on the way over is not what the door opens on.",
     file: "luna-ty-apt-argue.proxy.mp4",
     poster: "/posters/luna-ty-apt-argue.jpg",
     // 285. No trim — it runs to its last frame with no black, the second

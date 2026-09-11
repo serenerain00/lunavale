@@ -364,6 +364,42 @@ Whether he understood what Tyson was to her at the time, or simply met a
 frightened woman and was kind to her. Both are available. The second is more
 frightening, because it means nobody did anything wrong.
 
+### The month he disappeared — the city apartment
+*(Melissa, 2026-09-11, with the footage. CUT AND PUBLISHED as **"A Month"**
+(`luna-ty-apt-argue`), 4:45, members-only, with the Instagram cut of its last
+stretch free as `the-blonde-guy`'s neighbour in /clips.)*
+
+**Tyson goes dark for a MONTH.** No answer, no explanation. Luna does not call
+ahead — she **tracks him down**, at **his apartment in the city**, and knocks.
+
+**He opens the door not expecting anybody, and he is drinking again.**
+
+> **"AGAIN" IS THE WORD THAT MATTERS**, and it is new. Nothing else published
+> establishes Tyson as a drinker or as sober — checked across every journal
+> entry. So this is the first time the story says there is a version of him
+> that drinks, and that there was a stretch before now when he did.
+>
+> It puts a floor under `ginger-ale` without changing a line of it: he stands
+> in her kitchen drinking the one can of ginger ale in the house slowly, at
+> her. That is a man not drinking, and now it is a man **not drinking on
+> purpose**.
+
+**HIS APARTMENT IS NOT HERS.** The taxonomy's `apartment` is Luna's own place
+in Denver — "the hours nobody else sees", settled 2026-08-04 with the iPad
+call. Tyson's city place is a different room and does not have a place id yet;
+the scene is filed under `downtown` until Melissa names it. Worth naming: it is
+now the second time the story has been in it.
+
+**The scene ends by stopping being an argument.** The last minute is the two of
+them, and the Instagram cut is that stretch.
+
+**WHERE IT SITS IS OPEN.** A month of silence is longer than the eleven days in
+`i-asked-him` and reads as later — after the park, after he shouted — but
+nothing places it and the journal has not reached it. No entry has been written
+against it.
+
+---
+
 ### THE SECRET — why Tyson actually can't
 *(Melissa, 2026-09-11. Full document:
 `docs/content/BETWEEN_US_SECRET_CANON.md`, which is the authority on it and

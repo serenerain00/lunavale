@@ -572,6 +572,49 @@ CUTS=(
   # Considered: 103s (her standing in the room with the lake behind, the most
   # restrained frame in the cut and it says very little) and 111s (hands in her
   # hair, which is her at her worst and heavy to meet cold on a card).
+  # THE CITY APARTMENT — Melissa, 2026-09-11, and the context is hers: Tyson
+  # has been gone a MONTH, Luna tracks him down unannounced at HIS city
+  # apartment, and finds him drinking again.
+  #
+  # THE ARC, read off the footage: she rides up alone in a lift with the city
+  # behind her (0-30), walks a corridor to a door (42), he opens it — shirtless,
+  # not expecting anybody (62), they argue (75+), there is a bottle on the
+  # table (110), and at about 250 it stops being an argument. The Instagram
+  # clip `her-place` is cut from that last stretch.
+  #
+  # POSTER AT 42s: Luna alone in the corridor, lit, walking towards a door.
+  # Her face, her intent, and not one frame of what she is about to find.
+  # Considered 62 (the door opening, both of them, the best two-shot in the
+  # cut) and rejected for the card: it is the hinge, and a card should not
+  # spend the hinge. Her back is to camera there anyway.
+  #
+  # NO TRIM. Runs to its last frame at luma 12 with no black — second delivery
+  # running to bring it. The 3s fade is on the proxy as usual.
+  #
+  # 1320x790 against the unimported master's presumably higher resolution;
+  # same trade as every other scored cut this week.
+  # SOURCE IS THE CLEANED FILE, not the delivered one. Melissa, 2026-09-11:
+  # "theres a 'shit' she says in the beginning when shes knocking - her lips
+  # dont move, i forgot to remove that."
+  #
+  # FOUND AT 48.08s, lasting 0.43s, and identified rather than guessed at: it
+  # sits right after the two door-knocks at 47.48 and 47.55, it is 16 dB above
+  # the room tone either side of it, and it carries seven times the energy
+  # above 2.5kHz that the knock does — which is a sibilant, not a knuckle. The
+  # frame at 48.08 has her in the corridor with her mouth shut.
+  #
+  # REPAIRED BY SPLICING ROOM TONE, not by muting. The bed under it runs about
+  # -41 to -47 dB, so half a second of true silence would have read as a hole.
+  # 48.00-48.60 is replaced with the 0.60s of room tone at 48.70-49.30 — the
+  # same acoustic, from after the door is already open — and the video is
+  # stream-copied, so nothing is re-encoded and the duration is unchanged.
+  #
+  # Verified after: the word is gone (-24.9 dB -> -47.2 dB, matching the tone),
+  # both knocks survive, and every other onset in 38-66s is untouched.
+  #
+  # The delivered master is still beside it as luna-ty-apt-argue-music.mov.
+  "luna-ty-apt-argue|stories/apt-luna-tyson-argue/v2/luna-ty-apt-argue-music-clean.mov|42||3"
+
   #
   # NOW THE SCORED CUT (2026-09-10), the same move josh-luna-wall made. The
   # silent master is still at luna-lkehouse-wine-shatter.mp4 if this needs

@@ -129,10 +129,21 @@ export function clipAccess(clip: Clip): AccessLevel {
 const authored: Clip[] = [
   {
     /*
-      HER PLACE. The Instagram cut from apt-luna-tyson-argue/v2/, dropped
-      2026-09-11. Free, like every cut that has already run on Instagram —
-      gating something anybody can scroll past is what MONETIZATION.md exists
-      to prevent.
+      THE INSTAGRAM CUT of `luna-ty-apt-argue`, dropped 2026-09-11. Free, like
+      every cut that has already run on Instagram — gating something anybody
+      can scroll past is what MONETIZATION.md exists to prevent.
+
+      IT WAS PUBLISHED WRONG FOR ABOUT AN HOUR AND THE RECORD IS KEPT. Titled
+      "Her Place" and captioned as Luna's apartment, because the footage is an
+      apartment and Luna has one. Melissa's context arrived after: it is
+      TYSON'S city apartment, he has been gone a month, and she has tracked him
+      down. The room belongs to the other person in it, which inverts what the
+      card was saying.
+
+      Two things stayed put on purpose. The `id` is `her-place` and is now
+      simply inaccurate — it is in a published URL, ids are load-bearing in
+      this repo, and renaming it would break the link for anyone holding it.
+      And the aspect and poster were right either way.
 
       SQUARE, 1320x1256 at source and 720x698 as the proxy, so it declares
       `aspect` — the second clip to need it after `the-blonde-guy`. The /clips
@@ -146,24 +157,33 @@ const authored: Clip[] = [
       her hand over his, and a kiss. Calling it "The Argument" would have been
       describing a file nobody can watch.
 
-      NOTHING HERE PLACES IT IN THE STORY, deliberately. Luna and Tyson being
-      intimate is a major beat and the book already has one at the lakehouse
-      (`the-night`). Whether this is that night from another room, something
-      earlier, or something that has not been written yet is Melissa's to say —
-      so there is no `fullSceneSlug`, no journal link, and the caption reports
-      the room and nothing else.
+      IT NOW POINTS AT ITS SCENE. `fullSceneSlug` was deliberately absent while
+      the full cut was unimported; the scored 4:45 version is in as
+      `luna-ty-apt-argue`, so the clip page can say what this is sixty-five
+      seconds of instead of leaving a visitor to assume it is the whole thing.
+
+      WHERE IT SITS IN THE STORY IS STILL NOT ASSERTED ANYWHERE. Luna and
+      Tyson being intimate is a major beat and the book already has one at the
+      lakehouse (`the-night`). Whether this is earlier, later, or a thing the
+      journal has not reached is Melissa's to place.
 
       `mature`, not `explicit`. It is intimate and nobody undresses; explicit on
       this set means graphic, and a clip that ran on Instagram by definition is
       not — their rules would not have passed it.
     */
     id: "her-place",
-    // PLACEHOLDER title and caption — hers to replace. "Her Place" because the
-    // apartment is the one room in this story that belongs to nobody else,
-    // which is most of why this happens in it.
-    title: "Her Place",
+    // PLACEHOLDER title and caption — hers to replace. "A Month" matches the
+    // scene this is cut from; the fact underneath it is the only thing Luna
+    // says out loud that he cannot answer.
+    //
+    // THE ID IS NOW WRONG AND IS KEPT ANYWAY. `her-place` was minted an hour
+    // before the context arrived, on the assumption that the apartment was
+    // Luna's. It is Tyson's. The id is in a published URL and ids are
+    // load-bearing here, so it stays and this comment carries the correction —
+    // renaming it would break /clips/her-place for anybody who has it.
+    title: "A Month",
     caption:
-      "Her own apartment, the city still up in the window, and the one conversation neither of them has ever managed to have out loud.",
+      "Four weeks of nothing, and then she is outside his door in the city, and neither of them is saying the thing.",
     file: "her-place.proxy.mp4",
     poster: "/posters/her-place.jpg",
     // 65, untrimmed — it runs to its last frame with no black on the end, the
@@ -173,6 +193,7 @@ const authored: Clip[] = [
     about: ["luna", "tyson"],
     mature: true,
     aspect: [720, 698],
+    fullSceneSlug: "luna-ty-apt-argue",
   },
   {
     /*

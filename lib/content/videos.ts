@@ -2189,6 +2189,83 @@ export const videos: Video[] = [
     // Her, alone, for the whole runtime. The only solo scene in the library.
     about: ["luna"],
   },
+  {
+    /*
+      THE CITY APARTMENT. Melissa, 2026-09-11, and the context is hers: Tyson
+      has been gone a MONTH, Luna tracks him down unannounced at HIS city
+      apartment, and finds him drinking again.
+
+      THE APARTMENT IS HIS, AND THAT IS THE FACT TO HOLD ONTO. The taxonomy's
+      `apartment` is Luna's own place in Denver — "the hours nobody else sees"
+      — and this is not that room. Filed under `downtown` rather than inventing
+      a place id, because where Tyson lives in the city is Melissa's to name.
+      The Instagram clip `her-place` was published an hour before this context
+      arrived and was titled on the assumption it was hers; it is corrected in
+      the same commit.
+
+      "DRINKING AGAIN" IS NEW CANON AND CONTRADICTS NOTHING. Nothing published
+      establishes Tyson as a drinker or as sober — checked across all 98
+      journal entries. What it does do is put a floor under `ginger-ale`, where
+      he stands in her kitchen drinking the one can of ginger ale in the house
+      slowly, at her. That reads differently now, and it did not need changing.
+
+      THE ARC, off the footage: she rides up alone with the city behind her,
+      walks a corridor, knocks. He opens it — shirtless, not expecting anybody.
+      They argue. There is a bottle on the table. At about 4:10 it stops being
+      an argument.
+
+      POSTER AT 42s: Luna alone in the corridor, lit, walking toward a door.
+      Her face, her intent, and not a frame of what she is about to find. The
+      door opening at 62 is the better two-shot and is exactly why it is not
+      the card — it spends the hinge, and her back is to camera there.
+
+      PREVIEW WINDOW ENDS ONE BEAT BEFORE HE OPENS THE DOOR. The thing a
+      stranger wants to know here is what she finds, so the window runs the
+      corridor and the knock and stops at 60, two seconds before it opens.
+
+      NO CONTENT NOTE FOR THE DRINKING, and that is flagged rather than
+      invented. lib/content/content-notes.ts has nothing covering alcohol, and
+      adding one is a decision about what this product warns people about,
+      which is Melissa's — the same call that was left open on the blood in
+      luna-lkehouse-wine-shatter.
+
+      `mature` for the last minute. Nothing graphic and nobody undresses;
+      `explicit` would be wrong and the Instagram cut of this same stretch
+      passed their rules.
+    */
+    slug: "luna-ty-apt-argue",
+    // PLACEHOLDER title and synopsis — hers to replace. "A Month" is the fact
+    // the whole scene is built on and the one thing she says out loud that he
+    // cannot answer. Titling it off the bottle would spend the reveal.
+    title: "A Month",
+    synopsis:
+      "He has not answered his phone in four weeks. She does not call ahead, she gets in a lift, and she knocks — and whatever she had ready on the way up is not what the door opens on.",
+    file: "luna-ty-apt-argue.proxy.mp4",
+    poster: "/posters/luna-ty-apt-argue.jpg",
+    // 285. No trim — it runs to its last frame with no black, the second
+    // delivery running to arrive that way. The 3s fade is on the proxy.
+    //
+    // THE SOURCE IS THE CLEANED FILE. A stray "shit" at 48.08s, spoken over a
+    // shot where her mouth is shut, is replaced with room tone — see
+    // scripts/import-cuts.sh for how it was found and repaired.
+    durationSeconds: 285,
+    addedOn: "2026-09-11",
+    access: "premium",
+    mature: true,
+    preview: {
+      file: "luna-ty-apt-argue-preview.proxy.mp4",
+      durationSeconds: 15,
+      hookStart: 45,
+      hookNote:
+        "the corridor and the knock; ends two seconds before the door opens",
+    },
+    // `distance` is the subject — a month of nothing and a man who will not say
+    // why. `desire` for where it ends. `hurt` was considered and left off: the
+    // thing that breaks the surface here is the distance itself.
+    feelings: ["distance", "desire"],
+    place: "downtown",
+    about: ["luna", "tyson"],
+  },
 ];
 
 /**

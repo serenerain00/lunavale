@@ -2370,13 +2370,21 @@ export const videos: Video[] = [
     mature: false,
     preview: {
       file: "josh-ty-ricks-house-preview.proxy.mp4",
-      durationSeconds: 15,
-      // 48-63: the three of them at the safe, Tyson carrying something out of
-      // it, Rick still in the room. The errand and nothing else. It ends
-      // before Rick leaves them alone, which is when the scene starts.
-      hookStart: 48,
+      // FORTY-FIVE SECONDS FROM THE TOP (Melissa, 2026-09-11), not the fifteen
+      // this shipped with an hour earlier. The whole opening is arrival and
+      // errand — Josh in the hall with his cap, Rick greeting them both, the
+      // walk to the safe — and the conversation has not begun, so it costs no
+      // turn.
+      //
+      // AND IT HANDS THE GESTURE TO EVERYBODY. At about 25s Rick's hand lands
+      // on TYSON\u2019S shoulder rather than his son\u2019s. That is the Stage Two
+      // beat in its silent form: it explains nothing and asks everything,
+      // which is exactly the thing that should not be behind a wall. The
+      // sentence that would explain it is at 60s and stays paid.
+      durationSeconds: 45,
+      hookStart: 0,
       hookNote:
-        "three men and a safe to move; ends before Rick leaves the room",
+        "the arrival and the errand \u2014 including whose shoulder Rick puts his hand on",
     },
     // `lies` is the taxonomy\u2019s "things kept back, and what keeping them does",
     // which is this scene exactly \u2014 a death nobody names for a hundred and ten

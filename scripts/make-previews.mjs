@@ -85,6 +85,15 @@ const OVERRIDES = {
   // long enough to want the door to open. A fifth of the runtime.
   "luna-ty-apt-argue": 60,
 
+  // Melissa, 2026-09-11: "you can show the first 45sec". The first
+  // three-quarters of a minute is arrival and an errand — Josh in the hall
+  // with his cap, Rick greeting them both, the walk to the safe — and the
+  // conversation has not started. It also puts the one gesture that matters
+  // in front of everybody for free: Rick's hand landing on TYSON'S shoulder
+  // rather than his son's. That explains nothing and asks everything, which
+  // is what a Stage Two breadcrumb is for. A quarter of the runtime.
+  "josh-ty-ricks-house": 45,
+
   // Melissa's call on release: "we can show the first 1min of it". Fifteen
   // seconds of this one is Luna alone at the bar before Tyson has walked in —
   // the situation the scene is about has not started yet. A minute gets a

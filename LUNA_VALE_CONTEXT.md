@@ -430,6 +430,15 @@ both.
 **He was protecting himself.** He converted his own culpability into their
 lifelong gratitude, and neither man understands that.
 
+**STAGE TWO IS NOW ON THE SITE** — "The Safe" (`josh-ty-ricks-house`), Josh and
+Tyson moving a safe upstairs at Rick's while declining to name a death. Josh:
+*"And who the fuck were you?"* Both men hold themselves responsible for it, and
+neither says what it is. See the 2026-09-11 addition in the secret document.
+
+**IT SITS ABOUT A MONTH AFTER THE BREAKUP**, which puts it BEFORE `THE PROMISE`
+forms — so the debt to Rick is established before Josh ever asks Tyson for
+anything. Older obligation first.
+
 > **THIS IS WRITER KNOWLEDGE.** Luna does not know it and the audience learns
 > it in stages. Do not write an exposition scene; see §8 of the full document
 > for the ladder.

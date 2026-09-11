@@ -184,9 +184,26 @@ export const places = [
     blurb: "Seven days, and the best of him, all at once.",
   },
   {
-    // Rick's room. Likely to become one room of a larger "Rick's house" once
-    // more of it is shot — filed narrowly for now rather than folded into the
-    // farmhouse, which belongs to Josh and Luna and means something else.
+    // THE REST OF RICK'S HOUSE, added 2026-09-11 — the hall, the stairs, the
+    // landing. `the-study` below predicted this ("likely to become one room of
+    // a larger Rick's house once more of it is shot") and that is what has
+    // happened.
+    //
+    // THE TWO ARE KEPT SEPARATE rather than folded together, for one practical
+    // reason and one real one. Practical: `the-study` is a published facet id
+    // and folding it would break ?place=the-study for anybody holding it. Real:
+    // the study is where Rick receives people, one chair and all, and the rest
+    // of the house is where the family actually happens. A scene in the hall is
+    // not a scene in that room, and the difference is most of what Rick is.
+    //
+    // Fold them if that ever stops being true.
+    id: "ricks-house",
+    label: "Rick's House",
+    blurb: "The house Josh grew up in, and the family Tyson was let into.",
+  },
+  {
+    // Rick's room, specifically — see `ricks-house` above, which now carries
+    // the rest of the building.
     id: "the-study",
     label: "The Study",
     blurb: "His father's room, and the only chair in it that matters.",

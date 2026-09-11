@@ -2304,30 +2304,89 @@ export const videos: Video[] = [
       together — no scene, no journal entry, nothing. The ladder had Stage One
       and Stage Three and no middle rung.
 
-      WHAT IS NEEDED TO PUBLISH: what is said, where it sits, and whether it is
-      free or members-only. Free is the interesting argument — a Stage Two
-      breadcrumb works by being seen, and `josh-rick-study` is already free on
-      the reasoning that explaining Josh costs no turn. Members-only is the
-      other one, if the debt is named out loud.
+      WHEN: ABOUT A MONTH AFTER JOSH AND LUNA BROKE UP (Melissa, 2026-09-11).
+      So it sits early in the six months — Luna is a few weeks into the
+      lakehouse and Tyson is already driving out there (`tyson-shows-up` is
+      week two).
 
-      Title and synopsis below are deliberately inert placeholders. They are
-      not a draft and should not be tidied — replace them.
+      AND IT LANDS BEFORE THE PROMISE, which is the reason the placement is
+      worth writing down rather than just recording. THE PROMISE forms over the
+      following months, out of Josh talking about her on the farm; Tyson does
+      not fall for her until about month four. At month one none of that has
+      happened. So the audience meets the debt to RICK before it ever meets the
+      promise to JOSH — the older, deeper obligation first, with the surface
+      one laid on top of it later.
+
+      That is also why Josh can say "you do not have to come every time he
+      calls" with no self-interest in it at all. He wants nothing from Tyson
+      yet. He is a month out from losing Luna, standing in his father's house,
+      moving furniture.
+
+      WHAT IS SAID (Melissa, 2026-09-11). They are there to move an old safe
+      upstairs — that is the whole occasion, and it matters that it is an
+      errand. Josh tells Tyson he does not have to be there every single time
+      Rick calls. He means it kindly and he is completely wrong about what he
+      is asking, because Tyson believes he owes Rick his life and his career.
+
+      JOSH DOES NOT HAVE THE FULL WHY. To Josh, his father saved them both, and
+      that is the end of it. Tyson knows the asymmetry: Josh is his son. Of
+      course Rick saved his son. And Josh answers that with "and who the fuck
+      were you" — not cruelly. He is saying: you were his too, he thinks of you
+      as another son, stop standing outside the family.
+
+      Which is the worst possible comfort, because being loved by that family
+      IS the debt.
+
+      THE DEATH IS NEVER SAID OUT LOUD. They tiptoe all the way round it for a
+      hundred and ten seconds. Josh tells Tyson it was not his fault; Tyson
+      feels responsible. Nobody names the man, the accident, or the year.
+
+      SO IT IS STAGE TWO AND IT STOPS THERE. §8 of the secret document wants
+      the audience thinking "what the fuck happened between these people" — and
+      an errand, a hand on the wrong shoulder, and two men declining to finish
+      a sentence is exactly that, with no event handed over.
+
+      PREMIUM, and the precedent is this file's own. `tyson-cole-bar` went
+      members-only with the note that every other recent scene was free because
+      it had no turn to protect, and this "contains the mechanism the whole
+      deadlock runs on". So does this one: the debt is acknowledged out loud
+      for the first time anywhere. The 15s window is the errand, which gives a
+      stranger the odd warmth and none of the mechanism.
     */
     slug: "josh-ty-ricks-house",
-    title: "Rick's House",
+    // PLACEHOLDER title and synopsis — hers to replace. "The Safe" for the
+    // object and the house pattern (The Bolt, The Glass, The Study), and
+    // because the joke of it is that the heavy locked thing they came to move
+    // is not the heavy locked thing in the room.
+    title: "The Safe",
     synopsis:
-      "Josh, Tyson and Josh's father, at the house Josh grew up in.",
+      "An old safe to get upstairs at his father\u2019s house, and somewhere between the hall and the landing Josh finally says it: you don\u2019t have to come every time he calls. He means it kindly. He has no idea what he is asking.",
     file: "josh-ty-ricks-house.proxy.mp4",
     poster: "/posters/josh-ty-ricks-house.jpg",
     // 171, untrimmed — runs to its last frame with no black.
     durationSeconds: 171,
     addedOn: "2026-09-11",
-    // HIDDEN. Flip this one line to publish, once the copy above is hers.
-    hidden: true,
     access: "premium",
     mature: false,
-    feelings: [],
-    place: "the-study",
+    preview: {
+      file: "josh-ty-ricks-house-preview.proxy.mp4",
+      durationSeconds: 15,
+      // 48-63: the three of them at the safe, Tyson carrying something out of
+      // it, Rick still in the room. The errand and nothing else. It ends
+      // before Rick leaves them alone, which is when the scene starts.
+      hookStart: 48,
+      hookNote:
+        "three men and a safe to move; ends before Rick leaves the room",
+    },
+    // `lies` is the taxonomy\u2019s "things kept back, and what keeping them does",
+    // which is this scene exactly \u2014 a death nobody names for a hundred and ten
+    // seconds. `distance` for "two people in the same room, further apart than
+    // they\u2019ll admit": they are a foot apart and Josh has no idea where Tyson
+    // is standing.
+    feelings: ["lies", "distance"],
+    // The hall and the stairs, not the study \u2014 see `ricks-house`, added with
+    // this scene.
+    place: "ricks-house",
     about: ["josh", "tyson", "rick"],
   },
 ];

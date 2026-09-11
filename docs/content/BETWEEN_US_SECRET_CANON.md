@@ -481,6 +481,72 @@ built on a version of the truth Josh's father deliberately shaped.**
 
 ------------------------------------------------------------------------
 
+## Addition --- 2026-09-11: the safe, and Tyson's own guilt
+
+*(Melissa, with the footage. **CUT AND PUBLISHED** as **"The Safe"**
+(`josh-ty-ricks-house`), 2:51, members-only. The first Stage Two material the
+product has.)*
+
+**WHEN: about a month after Josh and Luna break up** — early in the six months,
+with Luna a few weeks into the lakehouse.
+
+**THAT PUTS IT BEFORE THE PROMISE**, and the order matters. `THE PROMISE` forms
+over the following months out of Josh talking about her on the farm, and Tyson
+does not fall for her until about month four. At month one, none of it has
+happened yet. So the audience meets **the debt to Rick before the promise to
+Josh** — the older obligation first, and the newer one laid on top of it later.
+
+It is also why Josh can say *you do not have to come every time he calls* with
+no self-interest in it whatsoever. He wants nothing from Tyson yet.
+
+**THE OCCASION IS AN ERRAND.** Josh and Tyson go to Rick's house to move an old
+safe upstairs. That is the whole pretext, and it is the right one: nobody
+arrives to discuss the thing, so the thing arrives sideways.
+
+**WHAT IS SAID.** Josh tells Tyson he does not have to be there every time Rick
+calls. He means it kindly. Tyson believes he owes Rick his life and his career,
+so it is not a kindness, it is a request he cannot grant.
+
+**JOSH DOES NOT HAVE THE FULL WHY**, which is the engine of the scene. To Josh,
+his father saved them both and that is the end of it. Tyson knows the
+asymmetry: **Josh is his son.** Of course Rick saved his son. And Josh answers
+that with:
+
+> **JOSH:** "And who the fuck were you?"
+
+Not cruelly --- he is saying *you were his too, he thinks of you as another
+son, stop standing outside this family.* Which is the worst comfort available,
+because **being loved by that family is the debt.**
+
+**THE DEATH IS NEVER SAID OUT LOUD.** They tiptoe round it for the entire
+scene. Nobody names the man, the accident, or the year. Josh tells Tyson it was
+not his fault; Tyson does not agree.
+
+### TYSON FEELS RESPONSIBLE TOO --- this is new and it is a real addition
+
+§2 of this document has **Josh** believing he may have caused the accident and
+carrying guilt for the death, and has Tyson merely *entangled in the
+aftermath*. Melissa's context adds the other half: **Tyson holds himself
+responsible as well.**
+
+That is not a contradiction and it is worth stating plainly, because it
+completes the document's own thesis. **Both young men took on guilt that
+belonged to Rick.** The father did not simply buy two silences --- he watched
+two people divide his culpability between them and carry it for fifteen years,
+and let them. §9's summary should now read:
+
+> **Tyson:** "I owe them --- and it was my fault."
+> **Josh:** "I caused this."
+> **Josh's father:** "I protected you."
+
+**WHERE THE LADDER NOW STANDS.** Stage One is the journal
+(`the-year-he-went-quiet`, plus the drift). **Stage Two is this scene**, and
+until it landed the site had never carried a frame of Rick and Tyson together.
+Stage Three is already brushed by `he-shouted` and `the-park`. Stage Four ---
+the accident surfacing --- has nothing against it yet.
+
+------------------------------------------------------------------------
+
 ## Correction note --- 2026-09-11
 
 Recorded rather than quietly applied, which is how corrections are handled

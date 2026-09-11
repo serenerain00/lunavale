@@ -34,6 +34,13 @@ public/stills
 # already excluded above. See scripts/import-takes.sh.
 takes-private
 
+# Posters for EXPLICIT clips — same private model as the takes above, and the
+# sharpest case for it in the repo: this is X-rated material, and a file under
+# public/ is a permanent ungated URL that no amount of CSS blur on the card
+# makes private. Reached only through /api/clip-poster, behind the entitlement
+# check. See lib/media/storage.ts.
+clips-private
+
 # Studio's reference library — the local half. Same private-Blob model as the
 # takes above, and the same reasoning turned up one notch: this is the raw
 # working material of the image pipeline, none of it finished, and shipped to a

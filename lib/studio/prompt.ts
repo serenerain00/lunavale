@@ -292,7 +292,6 @@ export function compileForTarget(
   names: Record<string, string>,
   target: Exclude<PromptTarget, "video">,
 ): TargetedPrompt {
-  const c = compileShot(recipe, refs, names);
   const chosen = refs.filter((r) => recipe.refIds.includes(r.id));
   const size = byId(shotSizes, recipe.camera.sizeId);
   const azimuth = byId(azimuths, recipe.camera.azimuthId);

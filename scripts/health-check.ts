@@ -172,12 +172,35 @@ async function checkLeakage() {
 
   // The sitemap points crawlers at pages. A premium journal entry in it is an
   // invitation to a paywall, which is the bait MONETIZATION.md rules out.
+  // AN EXPLICIT CLIP'S POSTER MUST NOT BE A FILE UNDER public/. Anything there
+  // is a permanent ungated URL, and for X-rated material the still frame is
+  // the thing being withheld. This shipped that way until 2026-09-11: the card
+  // blurred a public JPEG whose path was in the page source, and the same file
+  // was the clip's Open Graph image, so a link preview rendered it unblurred.
+  const leakyPosters: string[] = [];
+  for (const c of clips) {
+    if (!c.explicit) continue;
+    if (c.poster.startsWith("/") && (await exists(`public${c.poster}`))) {
+      leakyPosters.push(`${c.id} -> public${c.poster}`);
+    }
+  }
+  if (leakyPosters.length) {
+    fail("Explicit clip posters sitting in /public", leakyPosters.join(", "));
+  } else ok(`${clips.filter((c) => c.explicit).length} explicit clip(s), no poster in /public`);
+
   const sitemap = await read("app/sitemap.ts");
   if (!/freeEntries\(\)/.test(sitemap)) {
     fail("Sitemap no longer restricted to free journal entries");
   } else ok("Sitemap lists only free journal entries");
   if (!/hidden/.test(sitemap)) warn("Sitemap may not be filtering hidden scenes");
   else ok("Sitemap filters hidden scenes");
+
+  // Pointing a crawler at a members-only page with nothing public on it is the
+  // opposite of what a sitemap is for, and it put an explicit clip in front of
+  // Google until 2026-09-11.
+  if (!/explicit/.test(sitemap)) {
+    fail("Sitemap does not exclude explicit clips");
+  } else ok("Sitemap excludes explicit and closed-door clips");
 }
 
 /* ═════════════════════════ C. Content integrity ════════════════════════════

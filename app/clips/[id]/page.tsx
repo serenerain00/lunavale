@@ -32,7 +32,10 @@ export async function generateMetadata({
     openGraph: {
       title: clip.title,
       description: clip.caption,
-      images: [clip.poster],
+      // NO OG IMAGE FOR AN EXPLICIT CLIP. A link preview renders it full size,
+      // unblurred, in somebody else's feed — the one surface where "withheld
+      // on the public grid" was never going to hold.
+      images: clip.explicit ? [] : [clip.poster],
     },
   };
 }

@@ -108,3 +108,11 @@ studio-private
 # Written by scripts/health-check.ts so the session-start reminder knows
 # whether today's check has run. Machine-local, not a project fact.
 .health-check-last
+
+# Posters for EXPLICIT clips. Anything under public/ is a permanent ungated
+# URL, which for X-rated material is the one place it must never be — the
+# `explicit` flag in lib/content/clips.ts promises the poster is withheld from
+# anybody who is not a member, and a blurred <img> of a public file is a CSS
+# effect, not a gate. Served through /api/clip-poster after the entitlement
+# check. Production reads these from private Blob.
+clips-private

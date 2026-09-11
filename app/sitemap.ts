@@ -37,7 +37,7 @@
  */
 import type { MetadataRoute } from "next";
 import { characters } from "@/lib/content/characters";
-import { clips } from "@/lib/content/clips";
+import { clips, clipAccess } from "@/lib/content/clips";
 import { galleries } from "@/lib/content/gallery";
 import { freeEntries } from "@/lib/content/journal";
 import { environments } from "@/lib/content/world";
@@ -79,7 +79,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Every scene has a public page: title, synopsis, poster, and for the
     // gated ones a real preview. All of it is meant to be landed on.
     ...videos.filter((v) => !v.hidden).map((v) => entry(`/watch/${v.slug}`, 0.8)),
-    ...clips.map((c) => entry(`/clips/${c.id}`, 0.7)),
+    /*
+      CLIPS, MINUS THE ONES WITH NOTHING PUBLIC ON THEM. This mapped every
+      clip until 2026-09-11, which put a members-only explicit clip into the
+      sitemap — i.e. submitted it to Google.
+
+      The rule matches the scene line above rather than the journal line. A
+      gated SCENE belongs here because it has a real public preview; a gated
+      clip with a preview is the same and stays. A gated clip WITHOUT one is a
+      closed door, and pointing a crawler at a closed door is the opposite of
+      what a sitemap is for.
+
+      And `explicit` is excluded outright, preview or not. Whether an X-rated
+      page should be indexed at all is a different question from whether it has
+      public content on it, and the answer to this one is no.
+    */
+    ...clips
+      .filter((c) => !c.explicit && !(clipAccess(c) === "premium" && !c.preview))
+      .map((c) => entry(`/clips/${c.id}`, 0.7)),
     ...characters.map((c) => entry(`/characters/${c.id}`, 0.7, "monthly")),
     ...environments.map((e) => entry(`/world/${e.slug}`, 0.6, "monthly")),
     ...galleries.map((g) => entry(`/gallery/${g.id}`, 0.6)),

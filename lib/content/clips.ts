@@ -121,6 +121,23 @@ export interface Clip {
   };
 }
 
+/**
+ * Where a clip's poster is actually served from.
+ *
+ * Almost always the static file in `poster`. For an EXPLICIT clip it is the
+ * gated route instead, because the still frame of an X-rated clip is the thing
+ * being withheld and a file under /public is a permanent ungated URL. The card
+ * used to blur that file with CSS, which is a picture of a gate rather than a
+ * gate — see app/api/clip-poster.
+ *
+ * Callers that render for a possibly-signed-out viewer must ALSO check
+ * `explicit` and draw nothing, rather than pointing an <img> at this and
+ * getting a 403-shaped hole.
+ */
+export function clipPosterSrc(clip: Clip): string {
+  return clip.explicit ? `/api/clip-poster/${clip.id}` : clip.poster;
+}
+
 /** A clip's effective access. Free is the default, so entries stay terse. */
 export function clipAccess(clip: Clip): AccessLevel {
   return clip.access ?? "free";

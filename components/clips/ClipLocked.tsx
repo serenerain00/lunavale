@@ -23,13 +23,22 @@ export function ClipLocked({ clip }: { clip: Clip }) {
         className="relative overflow-hidden rounded-xl bg-black ring-1 ring-hairline"
         style={{ aspectRatio: `${clip.aspect?.[0] ?? 9} / ${clip.aspect?.[1] ?? 16}` }}
       >
-        <Image
-          src={clip.poster}
-          alt=""
-          fill
-          sizes="(max-width: 640px) 100vw, 384px"
-          className="scale-110 object-cover brightness-[0.25] blur-2xl"
-        />
+        {/*
+          NOTHING AT ALL FOR AN EXPLICIT CLIP. Everyone looking at this
+          component is a non-member by definition, and the blurred poster it
+          used to draw came from a public file — decorative withholding. For
+          the rest, the blur stays: those posters are public anyway and the
+          blur is mood, not security.
+        */}
+        {clip.explicit ? null : (
+          <Image
+            src={clip.poster}
+            alt=""
+            fill
+            sizes="(max-width: 640px) 100vw, 384px"
+            className="scale-110 object-cover brightness-[0.25] blur-2xl"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-void via-void/50 to-void/30" />
 
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">

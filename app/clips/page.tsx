@@ -5,7 +5,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { RatingBadge } from "@/components/ui/RatingBadge";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
-import { clipAccess, clips } from "@/lib/content/clips";
+import { clipAccess, clipPosterSrc, clips } from "@/lib/content/clips";
 import { formatDuration } from "@/lib/content/videos";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -86,8 +86,18 @@ export default async function ClipsPage() {
                   square video and letterbox it while it loads.
                 */}
                 <div className="relative aspect-[9/16]">
+                  {/*
+                    AN EXPLICIT CLIP SHOWS A NON-MEMBER NO IMAGE AT ALL. This
+                    used to render the real poster under a blur, from a public
+                    file whose path was right there in the source — so the
+                    withholding was decorative. Members still see it, through
+                    the gated route.
+                  */}
+                  {clip.explicit && locked ? (
+                    <div className="absolute inset-0 bg-charcoal" />
+                  ) : (
                   <Image
-                    src={clip.poster}
+                    src={clipPosterSrc(clip)}
                     alt=""
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
@@ -97,6 +107,7 @@ export default async function ClipsPage() {
                         : "brightness-90 group-hover:brightness-100"
                     }`}
                   />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-void via-void/10 to-transparent" />
 
                   <div className="absolute left-2.5 top-2.5 flex flex-wrap gap-1.5">

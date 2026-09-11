@@ -364,6 +364,45 @@ Whether he understood what Tyson was to her at the time, or simply met a
 frightened woman and was kind to her. Both are available. The second is more
 frightening, because it means nobody did anything wrong.
 
+### THE SECRET — why Tyson actually can't
+*(Melissa, 2026-09-11. Full document:
+`docs/content/BETWEEN_US_SECRET_CANON.md`, which is the authority on it and
+should be read before writing Tyson at any length.)*
+
+**Tyson believes Josh's family saved his future**, and that belief is the real
+engine under everything this document already describes as loyalty.
+
+Fifteen-odd years ago, when Josh and Tyson were 22–23, **a worker died** in a
+preventable accident on family property. The unsafe condition **was known
+beforehand**, and the man who knew and failed to fix it was **Rick**. Josh came
+away believing he may have caused it. Tyson, early in his SEAL career and with
+everything to lose, was entangled in the aftermath — and Rick used lawyers and
+influence to shape the story, positioning himself as the man who protected them
+both.
+
+**He was protecting himself.** He converted his own culpability into their
+lifelong gratitude, and neither man understands that.
+
+> **THIS IS WRITER KNOWLEDGE.** Luna does not know it and the audience learns
+> it in stages. Do not write an exposition scene; see §8 of the full document
+> for the ladder.
+
+**WHAT IT CHANGES ABOUT WHAT IS ALREADY PUBLISHED — nothing, and that is the
+point.** `THE PROMISE` still stands as written; this sits underneath it and
+explains why a promise about a woman outranks twenty years of wanting her.
+Luna's entry `joshs-father` — "he has always been kind to me, and it has a
+strange quality to it" — now reads as her sitting six feet from the man who
+bought her best friend's silence, with no idea.
+
+**LUNA HAD NOT MET JOSH WHEN IT HAPPENED**, and the source document has been
+corrected on this point (recorded at its foot rather than quietly changed). She
+met **Tyson** at 18 and **Josh at 28**. So Tyson carried it for about six years
+before Josh existed in her life, and then had to watch her walk into that
+family. There is an unwritten memory in this: the year Tyson went quiet, which
+she lived through at 22 or 23 and has never had explained.
+
+---
+
 ### Cole Burnett — Tyson's oldest friend
 *(Canon set by Melissa, 2026-08-04. **Tertiary**, but load-bearing: he is the
 only person Tyson can say any of this to.)*

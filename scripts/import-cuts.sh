@@ -593,6 +593,29 @@ CUTS=(
   #
   # 1320x790 against the unimported master's presumably higher resolution;
   # same trade as every other scored cut this week.
+  # RICK'S HOUSE — Josh, Tyson and Rick, 2:50, dropped 2026-09-11. No score
+  # (mean -32.4 dB, dialogue-carried) and 1912x1080, so this is a delivered
+  # master rather than a scored re-export.
+  #
+  # WHAT IS ON SCREEN, and the copy goes no further than this until Melissa
+  # says what is said: Josh arrives at his father's house and takes his cap
+  # off in the hall. Rick greets them both — his hand lands on TYSON'S
+  # shoulder, not his son's. Then it is Josh and Tyson alone for the back two
+  # thirds, face to face and close, through to the end.
+  #
+  # THIS IS THE ROOM THE SECRET LIVES IN. docs/content/BETWEEN_US_SECRET_CANON
+  # .md §8 puts Stage Two — "Josh's father enters the equation" — in exactly
+  # this configuration, and the site has never had a frame of Rick and Tyson
+  # together. Which is why nothing here guesses at the dialogue.
+  #
+  # POSTER AT 115s: Josh and Tyson, both faces sharp, nose to nose. The frame
+  # at 25 is the better story — three men and a hand on the wrong shoulder —
+  # and that is precisely why it is not the card. If that gesture is the Stage
+  # Two beat, a poster spends it before anybody presses play.
+  #
+  # NO TRIM. Runs to its last frame at luma 48.
+  "josh-ty-ricks-house|stories/josh-ty-ricksHouse/josh-ty-ricksHouse.mp4|115||3"
+
   # ONE STRAY WORD REMOVED, AND IT TOOK TWO GOES. Melissa: "that 'shit' she
   # says in the beginning, her lips dont move" — "when shes knocking, no music
   # yet" — "when he opens the door".

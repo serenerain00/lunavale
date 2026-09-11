@@ -2280,6 +2280,56 @@ export const videos: Video[] = [
     place: "tysons-apartment",
     about: ["luna", "tyson"],
   },
+  {
+    /*
+      RICK'S HOUSE — Josh, Tyson and Rick. Dropped 2026-09-11, imported the
+      same day, and HIDDEN until Melissa says what is said in it.
+
+      WHY IT IS HIDDEN RATHER THAN PUBLISHED WITH A GUESS. Every other scene in
+      this file could be described from its footage, because the footage is
+      unambiguous — a man is taken by the collar, a glass is thrown, a door
+      opens. This one is two men talking for a hundred and ten seconds, and
+      what they say IS the scene. Writing a synopsis off three frames would be
+      inventing canon in the most load-bearing room in the story.
+
+      WHAT IS ACTUALLY ON SCREEN, and this is the whole of it: Josh arrives at
+      his father's house and takes his cap off in the hall. Rick greets them
+      both, and his hand lands on TYSON'S shoulder rather than his son's. Then
+      it is Josh and Tyson alone, face to face and close, for the back two
+      thirds, through to the last frame.
+
+      IT IS THE STAGE TWO ROOM. docs/content/BETWEEN_US_SECRET_CANON.md §8 puts
+      "Josh's father enters the equation" in exactly this configuration, and
+      until this landed the site had never had a single frame of Rick and Tyson
+      together — no scene, no journal entry, nothing. The ladder had Stage One
+      and Stage Three and no middle rung.
+
+      WHAT IS NEEDED TO PUBLISH: what is said, where it sits, and whether it is
+      free or members-only. Free is the interesting argument — a Stage Two
+      breadcrumb works by being seen, and `josh-rick-study` is already free on
+      the reasoning that explaining Josh costs no turn. Members-only is the
+      other one, if the debt is named out loud.
+
+      Title and synopsis below are deliberately inert placeholders. They are
+      not a draft and should not be tidied — replace them.
+    */
+    slug: "josh-ty-ricks-house",
+    title: "Rick's House",
+    synopsis:
+      "Josh, Tyson and Josh's father, at the house Josh grew up in.",
+    file: "josh-ty-ricks-house.proxy.mp4",
+    poster: "/posters/josh-ty-ricks-house.jpg",
+    // 171, untrimmed — runs to its last frame with no black.
+    durationSeconds: 171,
+    addedOn: "2026-09-11",
+    // HIDDEN. Flip this one line to publish, once the copy above is hers.
+    hidden: true,
+    access: "premium",
+    mature: false,
+    feelings: [],
+    place: "the-study",
+    about: ["josh", "tyson", "rick"],
+  },
 ];
 
 /**

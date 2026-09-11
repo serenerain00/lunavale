@@ -225,12 +225,17 @@ export const videos: Video[] = [
     file: "luna-josh-first-morning.proxy.mp4",
     poster: "/posters/luna-josh-first-morning.jpg",
     durationSeconds: 141,
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "luna-josh-first-morning-preview.proxy.mp4",
+      durationSeconds: 45,
+    },
     feelings: ["trust", "desire"],
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+
   {
     slug: "tyson-luna-lakehouse-fire",
     title: "Fireside",
@@ -243,8 +248,8 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "tyson-luna-lakehouse-fire-preview.proxy.mp4",
-      durationSeconds: 15,
-      hookStart: 224,
+      durationSeconds: 60,
+      hookStart: 179,
       hookNote:
         "ends on “Can I ask you something?” — the answer she is about to be asked for is “why are you so good to me”",
     },
@@ -252,6 +257,7 @@ export const videos: Video[] = [
     place: "lakehouse",
     about: ["luna", "tyson"],
   },
+
   {
     slug: "tyson-park-fight",
     title: "The Park",
@@ -264,8 +270,8 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "tyson-park-fight-preview.proxy.mp4",
-      durationSeconds: 15,
-      hookStart: 49,
+      durationSeconds: 45,
+      hookStart: 19,
       hookNote:
         "ends hard on him saying stop — withholds her “since when did you start hiding from me” and his eight words",
     },
@@ -297,12 +303,13 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-tyson-bar-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 30,
     },
     feelings: ["desire", "distance"],
     place: "bar",
     about: ["luna", "tyson"],
   },
+
   {
     // Casey's first scene, and the first time the bar has had a third person
     // in it. PLACE is `bar` and not `burnetts` — this is Luna and Tyson's
@@ -358,6 +365,7 @@ export const videos: Video[] = [
     place: "bar",
     about: ["luna", "tyson", "casey"],
   },
+
   {
     slug: "josh-tyson-barn",
     title: "The Barn",
@@ -366,12 +374,17 @@ export const videos: Video[] = [
     file: "josh-tyson-barn.proxy.mp4",
     poster: "/posters/josh-tyson-barn.jpg",
     durationSeconds: 68,
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "josh-tyson-barn-preview.proxy.mp4",
+      durationSeconds: 30,
+    },
     feelings: ["distance"],
     place: "farmhouse",
     about: ["josh", "tyson"],
   },
+
   {
     slug: "luna-tyson-bathroom",
     title: "Groceries",
@@ -384,12 +397,13 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-tyson-bathroom-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 30,
     },
     feelings: ["desire", "lies"],
     place: "lakehouse",
     about: ["luna", "tyson"],
   },
+
   {
     slug: "luna-josh-coffee",
     title: "Coffee",
@@ -398,12 +412,17 @@ export const videos: Video[] = [
     file: "luna-josh-coffee.proxy.mp4",
     poster: "/posters/luna-josh-coffee.jpg",
     durationSeconds: 129,
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "luna-josh-coffee-preview.proxy.mp4",
+      durationSeconds: 45,
+    },
     feelings: ["trust", "desire"],
     place: "coffee-shop",
     about: ["luna", "josh"],
   },
+
   {
     /*
       THE NIGHT SHE LEAVES. Melissa's account, 2026-08-15, recorded here
@@ -465,6 +484,7 @@ export const videos: Video[] = [
     // on screen for well under a minute of it.
     about: ["luna", "josh", "tyson"],
   },
+
   {
     slug: "luna-josh-bed",
     title: "Sunday",
@@ -480,12 +500,13 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-josh-bed-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 45,
     },
     feelings: ["desire", "trust"],
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+
   {
     // Delivered 2026-08-17, and NOT a second cut of Sunday above despite
     // sharing a bed and a folder name — Melissa's call. The scene is built in
@@ -524,7 +545,7 @@ export const videos: Video[] = [
     poster: "/posters/luna-josh-bed-flashback.jpg",
     durationSeconds: 130,
     addedOn: "2026-08-17",
-    access: "free",
+    access: "premium",
     mature: true,
     // One tag per tense, and the tenses are on opposite sides of the break:
     //
@@ -536,6 +557,10 @@ export const videos: Video[] = [
     //             while he was still lying next to me". Two people in the same
     //             room, further apart than they'll admit, is the definition of
     //             the tag, and it is what the flashback is FOR.
+    preview: {
+      file: "luna-josh-bed-flashback-preview.proxy.mp4",
+      durationSeconds: 45,
+    },
     feelings: ["distance", "grief"],
     // The LAKEHOUSE, and not the farmhouse it was first filed under. The
     // present tense is her first morning there after the night she left, so
@@ -545,6 +570,7 @@ export const videos: Video[] = [
     place: "lakehouse",
     about: ["luna", "josh"],
   },
+
   {
     // A 90s PUBLIC WINDOW ON AN EXPLICIT SCENE — Melissa, 2026-08-12: "The
     // First Night should have the first 1:30 free to watch. its safe". This is
@@ -660,7 +686,7 @@ export const videos: Video[] = [
     explicit: true,
     preview: {
       file: "luna-josh-first-night-preview.proxy.mp4",
-      durationSeconds: 90,
+      durationSeconds: 60,
     },
     // "trust" added with the retitle: the scene's first ninety seconds are him
     // holding her and making her laugh, which is the axis a browser looking for
@@ -669,6 +695,7 @@ export const videos: Video[] = [
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+
   {
     slug: "luna-josh-kitchen-kiss",
     title: "The Kitchen",
@@ -684,12 +711,13 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-josh-kitchen-kiss-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 45,
     },
     feelings: ["desire", "trust"],
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+
   {
     slug: "luna-josh-dinner-house",
     title: "The Long Table",
@@ -702,12 +730,13 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-josh-dinner-house-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 30,
     },
     feelings: ["trust", "distance"],
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+
   {
     slug: "luna-josh-house",
     title: "The House",
@@ -720,12 +749,13 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-josh-house-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 60,
     },
     feelings: ["trust", "distance"],
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+
   {
     // Josh and his father. Free on purpose: it explains Josh rather than
     // advancing him, so it costs no turn to give away and it is the fastest
@@ -737,12 +767,17 @@ export const videos: Video[] = [
     file: "josh-rick-study.proxy.mp4",
     poster: "/posters/josh-rick-study.jpg",
     durationSeconds: 57,
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "josh-rick-study-preview.proxy.mp4",
+      durationSeconds: 28,
+    },
     feelings: ["distance", "hurt"],
     place: "the-study",
     about: ["josh", "rick"],
   },
+
   {
     // The second Josh-and-his-father scene, and FREE for the same reason the
     // study is: it explains Josh instead of advancing him. Two of these now
@@ -778,12 +813,17 @@ export const videos: Video[] = [
     poster: "/posters/josh-rick-lake.jpg",
     durationSeconds: 57,
     addedOn: "2026-08-06",
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "josh-rick-lake-preview.proxy.mp4",
+      durationSeconds: 28,
+    },
     feelings: ["distance", "hurt"],
     place: "lake",
     about: ["josh", "rick"],
   },
+
   {
     // Free, and the most useful free thing on the site for Josh. Everything
     // else public about him is charm; this is him being good at something that
@@ -801,13 +841,18 @@ export const videos: Video[] = [
     // "easy, don't force it, don't fight it… just give it one more" — so this
     // is the same scene with Melissa's music under it, not a different edit.
     durationSeconds: 57,
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "josh-luna-bolt-preview.proxy.mp4",
+      durationSeconds: 28,
+    },
     feelings: ["trust", "desire"],
     place: "farmhouse",
     // Tyson is in it, in the doorway, for a few seconds and no lines.
     about: ["luna", "josh", "tyson"],
   },
+
   {
     // The beach, in full — 4m44s, and members-only. The free 9:16 preview of it
     // is a clip (lib/content/clips.ts, "beach-preview"), which is the shop
@@ -832,12 +877,13 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-josh-beach-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 60,
     },
     feelings: ["desire", "trust"],
     place: "mexico",
     about: ["luna", "josh"],
   },
+
   {
     // Cathy's introduction, and the earliest thing in the present-day story —
     // a week after Luna moved out, which puts it just before the month-one
@@ -868,12 +914,17 @@ export const videos: Video[] = [
     poster: "/posters/luna-cathy-phone.jpg",
     durationSeconds: 92,
     addedOn: "2026-08-03",
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "luna-cathy-phone-preview.proxy.mp4",
+      durationSeconds: 30,
+    },
     feelings: ["grief", "distance"],
     place: "lakehouse",
     about: ["luna", "cathy", "josh"],
   },
+
   {
     // Avery's introduction, and the answer to the scene above it. Cathy got
     // nothing out of Luna and called her other daughter about it; Avery calls
@@ -904,12 +955,17 @@ export const videos: Video[] = [
     poster: "/posters/luna-avery-ipad.jpg",
     durationSeconds: 95,
     addedOn: "2026-08-04",
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "luna-avery-ipad-preview.proxy.mp4",
+      durationSeconds: 30,
+    },
     feelings: ["trust", "grief"],
     place: "apartment",
     about: ["luna", "avery"],
   },
+
   {
     // The whole night, free — Melissa's call, 2026-07-31. It was briefly a 30s
     // teaser with the full cut behind the membership (Video.premium); she
@@ -938,12 +994,17 @@ export const videos: Video[] = [
     file: "luna-tyson-dance-full.proxy.mp4",
     poster: "/posters/luna-tyson-dance.jpg",
     durationSeconds: 239,
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "luna-tyson-dance-preview.proxy.mp4",
+      durationSeconds: 60,
+    },
     feelings: ["trust", "desire", "distance"],
     place: "bar",
     about: ["luna", "tyson"],
   },
+
   {
     // EXPLICIT AND FULLY LOCKED as of 2026-08-12, on Melissa's instruction that
     // the explicit scenes sit behind membership. Checked the whole 287s rather
@@ -982,10 +1043,15 @@ export const videos: Video[] = [
     access: "premium",
     mature: true,
     explicit: true,
+    preview: {
+      file: "luna-bathtub-preview.proxy.mp4",
+      durationSeconds: 60,
+    },
     feelings: ["grief", "desire"],
     place: "farmhouse",
     about: ["luna"],
   },
+
   {
     // The farmhouse confrontation. Josh has decided what Luna's face meant
     // when Tyson was in the room, and spends six unbroken minutes on it.
@@ -1046,6 +1112,7 @@ export const videos: Video[] = [
     place: "farmhouse",
     about: ["luna", "josh", "tyson"],
   },
+
   {
     // Cole's introduction, and the first time the promise to Josh is said out
     // loud anywhere in the story.
@@ -1082,8 +1149,8 @@ export const videos: Video[] = [
     mature: false,
     preview: {
       file: "tyson-cole-bar-preview.proxy.mp4",
-      durationSeconds: 13,
-      hookStart: 10,
+      durationSeconds: 20,
+      hookStart: 3,
       hookNote:
         "ends on Cole's “Would you?”, withholding “Luna isn't going to let you avoid her forever”",
     },
@@ -1091,6 +1158,7 @@ export const videos: Video[] = [
     place: "burnetts",
     about: ["tyson", "cole", "luna", "josh"],
   },
+
   {
     // One scene, two edits — the same night, cut twice. The public one is the
     // DIALOGUE cut; members get the SCORED one in its place.
@@ -1123,7 +1191,7 @@ export const videos: Video[] = [
     poster: "/posters/luna-josh-fair.jpg",
     durationSeconds: 159,
     addedOn: "2026-08-02",
-    access: "free",
+    access: "premium",
     mature: false,
     premium: {
       file: "luna-josh-fair-music.proxy.mp4",
@@ -1132,11 +1200,15 @@ export const videos: Video[] = [
       // actually on offer is the score.
       difference: "the scored cut — the same night, with the music it was edited to",
     },
+    preview: {
+      file: "luna-josh-fair-preview.proxy.mp4",
+      durationSeconds: 45,
+    },
     feelings: ["distance", "lies"],
     place: "fair",
     about: ["luna", "josh", "tyson"],
   },
-{
+  {
     // "Breathe" — the hour after the wall. Luna leaves the farm and drives to
     // Tyson; this is the drive.
     //
@@ -1166,6 +1238,18 @@ export const videos: Video[] = [
     file: "luna-truck-breakdown.proxy.mp4",
     poster: "/posters/luna-truck-breakdown.jpg",
     durationSeconds: 15,
+    // THE ONE SCENE STILL FREE UNDER THE 2026-09-11 POLICY, and it is not an
+    // exception to it so much as a scene that already obeyed it by another
+    // route. What sits at this slug is not the scene — it is a fifteen-second
+    // teaser assembled from five beats (scripts/make-preview-cut.sh), and the
+    // actual 3:01 drive is in the `premium` block below, members-only.
+    //
+    // So the public already sees a short window and members already get the
+    // whole thing, which is exactly what the policy asks for. Gating this
+    // would gate the preview and leave nothing visible at all.
+    //
+    // It is also the only scene the tiers cannot serve: thirty seconds of a
+    // fifteen-second file does not exist.
     access: "free",
     mature: false,
     // On the public cut too — fifteen seconds of it is still fifteen seconds
@@ -1211,8 +1295,8 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "ty-luna-bed-preview.proxy.mp4",
-      durationSeconds: 15,
-      hookStart: 65,
+      durationSeconds: 60,
+      hookStart: 20,
       hookNote:
         "ends on “Do you remember last night?”, withholding her answer",
     },
@@ -1225,6 +1309,7 @@ export const videos: Video[] = [
     place: "lakehouse",
     about: ["luna", "tyson"],
   },
+
   {
     // The only funny scene on the site, and the transcript is the whole of it:
     // "Ty, did you drink my last ginger ale?" / "Why are you yelling?" /
@@ -1265,8 +1350,12 @@ export const videos: Video[] = [
     poster: "/posters/luna-tyson-gingerale.jpg",
     durationSeconds: 47,
     addedOn: "2026-08-11",
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "luna-tyson-gingerale-preview.proxy.mp4",
+      durationSeconds: 23,
+    },
     feelings: ["trust", "desire"],
     place: "lakehouse",
     about: ["luna", "tyson"],
@@ -1320,10 +1409,17 @@ export const videos: Video[] = [
     notes: ["panic"],
     preview: {
       file: "luna-ty-panic-attack-preview.proxy.mp4",
+      // THIRTY, NOT THE SIXTY THE TIER WOULD GIVE IT, and the exception is a
+      // content one rather than a monetization one. A preview is served with
+      // no account and no age check, and thirty seconds of this scene is
+      // thirty seconds of a panic attack — which is why it carries the `panic`
+      // note. The 2026-09-11 policy decides how much of a scene to give away;
+      // it did not consider what a stranger is shown without warning, so this
+      // number survives it. Doubling it is a deliberate call, not a tier.
       durationSeconds: 30,
-      // NOT from the top any more. The full cut opens on four quiet minutes of
-      // her moving around the bedroom, so a window at 0:00 would run out
-      // before the phone even rings and show a stranger nothing at all.
+      // NOT from the top. The full cut opens on four quiet minutes of her
+      // moving around the bedroom, so a window at 0:00 would run out before
+      // the phone even rings and show a stranger nothing at all.
       hookStart: 44,
       hookNote:
         "She sees the phone, she answers it, and the argument is well under way when it stops. It ends while she is still standing up and still arguing — the whole rest of the scene is what that call does to her.",
@@ -1335,6 +1431,7 @@ export const videos: Video[] = [
     place: "lakehouse",
     about: ["luna", "tyson"],
   },
+
   {
     // A MONTAGE, not a scene, and the only one in this file. Six minutes of
     // Luna and Tyson across the whole stretch she was without Josh, scored.
@@ -1367,7 +1464,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "ty-luna-six-months-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 60,
     },
     notes: ["panic"],
     // The same three the firepit gallery carries for these two, and for the
@@ -1377,6 +1474,7 @@ export const videos: Video[] = [
     place: "lakehouse",
     about: ["luna", "tyson"],
   },
+
   {
     // The garage, 2026-08-19, and the first scene set in that room — the
     // `the-garage` gallery has been waiting since 2026-08-05 with no scene to
@@ -1407,7 +1505,7 @@ export const videos: Video[] = [
     preview: {
       file: "ty-luna-garage-preview.proxy.mp4",
       // 2:15 — the longest public window on the site. Melissa's call.
-      durationSeconds: 135,
+      durationSeconds: 60,
       hookNote:
         "From the top. The whole argument up to the point where it stops being an argument, and it ends there.",
     },
@@ -1419,6 +1517,7 @@ export const videos: Video[] = [
     place: "garage",
     about: ["luna", "tyson"],
   },
+
   {
     // PLACEHOLDER placement: a road on the farm, filed under the farmhouse
     // because the property is the location. Give it its own place if the road
@@ -1434,12 +1533,13 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "ty-luna-farm-road-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 45,
     },
     feelings: ["distance", "hurt"],
     place: "farmhouse",
     about: ["luna", "tyson"],
   },
+
   {
     // THE DRIVEWAY, 2026-08-25. Josh is going away for three days, and it
     // takes them the whole of the scene to let go of each other: a long
@@ -1472,7 +1572,7 @@ export const videos: Video[] = [
     poster: "/posters/luna-josh-truck-leaving.jpg",
     durationSeconds: 93,
     addedOn: "2026-08-25",
-    access: "free",
+    access: "premium",
     mature: false,
     // `trust` and `desire`, the same pair as the other two scenes from inside
     // the ten years (luna-josh-first-morning, josh-luna-bolt) — this belongs
@@ -1480,10 +1580,15 @@ export const videos: Video[] = [
     // her face, but the scene is not two people who are further apart than
     // they will admit, and filing it that way would read the ending back over
     // the ninety seconds that earn it.
+    preview: {
+      file: "luna-josh-truck-leaving-preview.proxy.mp4",
+      durationSeconds: 30,
+    },
     feelings: ["trust", "desire"],
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+
   {
     // THE PARKING LOT, 2026-08-26, and the second half of a night already on the
     // site. "Your Date" (luna-tyson-casey-bar) ends with her handing him a
@@ -1569,7 +1674,7 @@ export const videos: Video[] = [
     mature: false,
     preview: {
       file: "luna-ty-bar-drunk-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 60,
       hookNote:
         "the opening, for now — she comes out to a parking lot she expected to be empty. A better window can be picked once the dialogue is transcribed (scripts/find-hooks.mjs).",
     },
@@ -1583,6 +1688,7 @@ export const videos: Video[] = [
     place: "bar",
     about: ["luna", "tyson"],
   },
+
   {
     // THE KITCHEN, 2026-08-28. Fifty-three seconds at the lakehouse. He says
     // he is going out, will not say where, and she asks him who she is.
@@ -1641,12 +1747,17 @@ export const videos: Video[] = [
     poster: "/posters/luna-ty-wasntplanningonit.jpg",
     durationSeconds: 53,
     addedOn: "2026-08-28",
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "luna-ty-wasntplanningonit-preview.proxy.mp4",
+      durationSeconds: 26,
+    },
     feelings: ["desire", "distance"],
     place: "lakehouse",
     about: ["luna", "tyson"],
   },
+
   {
     // THE SHOOTING FOLDER HOLDS TWO EXPORTS AND THEY ARE NOT INTERCHANGEABLE.
     // Both are now .mp4, which is a trap, so check the audio and not the name:
@@ -1684,10 +1795,10 @@ export const videos: Video[] = [
       // make-previews.mjs caps an override and 90 of 264 is 34%. This is the
       // real runtime of the real file, which is what the page states. It was
       // 87 against the previous export, which ran a second shorter.
-      durationSeconds: 88,
+      durationSeconds: 60,
       // 1:30–2:58 — see the OVERRIDES note in scripts/make-previews.mjs for
       // why the window sits here and what it stops short of.
-      hookStart: 90,
+      hookStart: 118,
       hookNote:
         "The middle ninety seconds, Melissa's call. It is the stretch where the distance collapses and the old rhythm comes back — and it ends fifteen seconds before he leans in.",
     },
@@ -1699,6 +1810,7 @@ export const videos: Video[] = [
     place: "garage",
     about: ["luna", "tyson"],
   },
+
   {
     // THE SLUG FIXES THE FOLDER'S SPELLING. The shooting folder is
     // stories/luna-ty-lkehouse-confrontation/ and the file inside it matches;
@@ -1745,6 +1857,7 @@ export const videos: Video[] = [
     // beside it carries him instead.
     about: ["luna", "tyson"],
   },
+
   {
     // THE FARM FIGHT. The first assembled cut to come out of the farm
     // material: josh-tyson-farm/ and ty-josh-tractor/ have sat in stories/
@@ -1801,7 +1914,7 @@ export const videos: Video[] = [
     mature: false,
     preview: {
       file: "ty-josh-fight-preview.proxy.mp4",
-      durationSeconds: 30,
+      durationSeconds: 60,
       // TWO WINDOWS, NOT THE OPENING — changed 2026-09-02 when this preview
       // became the Instagram reel as well. The opening is 0:00-0:18 of a truck
       // coming up a road and her at the wheel, which is a good way into a film
@@ -1855,6 +1968,7 @@ export const videos: Video[] = [
     // All three, all on screen, all central. Rare for this library.
     about: ["luna", "josh", "tyson"],
   },
+
   {
     // NEW YORK. Melissa dropped stories/luna-ty-nyc-hotel/ on 2026-09-08 with
     // one line: "new folder luna-ty-nyc-hotel". The technical read is in
@@ -1926,7 +2040,7 @@ export const videos: Video[] = [
     mature: true,
     preview: {
       file: "luna-ty-nyc-hotel-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 60,
       // 22s-37s: him crossing the lobby, her getting up, and the first thing
       // they say to each other. It ends before they touch.
       //
@@ -1934,7 +2048,7 @@ export const videos: Video[] = [
       // which is the most beautiful thing in the cut and asks nothing. This
       // window is a woman waiting and a man arriving, and it stops on the
       // question the rest of the scene answers.
-      hookStart: 22,
+      hookStart: 0,
       hookNote:
         "he crosses the lobby to her and they speak; ends one beat before either of them reaches for the other",
     },
@@ -1954,6 +2068,7 @@ export const videos: Video[] = [
     place: "new-york",
     about: ["luna", "tyson"],
   },
+
   {
     /*
       THE BAR, AND THE BLONDE GUY. Melissa dropped the folder 2026-09-09 and
@@ -2039,7 +2154,7 @@ export const videos: Video[] = [
     notes: ["violence"],
     preview: {
       file: "ty-luna-blonde-guy-bar-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 60,
       // 2:14–2:29. The two of them squared up, her hand flat on his chest, the
       // other man's friend pulling at his arm — and it stops at 2:29, which is
       // one beat before the line that sets him off and two before the collar.
@@ -2050,7 +2165,7 @@ export const videos: Video[] = [
       // moment that is obviously about to break.
       //
       // The poster is inside it, at 2:26.
-      hookStart: 134,
+      hookStart: 89,
       hookNote:
         "toe to toe with her hand on his chest; ends one beat before \"she's not worth it anyway\" and two before the collar",
     },
@@ -2066,6 +2181,7 @@ export const videos: Video[] = [
     // are deliberately not invented as any.
     about: ["luna", "tyson"],
   },
+
   {
     /*
       THE WINE GLASS. Melissa dropped the folder 2026-09-10 and gave the
@@ -2164,7 +2280,7 @@ export const videos: Video[] = [
     mature: false,
     preview: {
       file: "luna-lkehouse-wine-shatter-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 45,
       // 2:00–2:15, and it ends one second before she throws it. Fifteen
       // seconds of a woman running out of ways to hold something, stopping on
       // the frame before she stops holding it.
@@ -2176,7 +2292,7 @@ export const videos: Video[] = [
       // The opening was the other candidate and it is the weaker one: her at
       // the table with a glass is a mood, and a mood makes somebody feel they
       // have seen it. This ends on a question.
-      hookStart: 120,
+      hookStart: 90,
       hookNote:
         "she runs out of ways to hold it; ends one second before the glass leaves her hand",
     },
@@ -2189,6 +2305,7 @@ export const videos: Video[] = [
     // Her, alone, for the whole runtime. The only solo scene in the library.
     about: ["luna"],
   },
+
   {
     /*
       THE CITY APARTMENT. Melissa, 2026-09-11, and the context is hers: Tyson
@@ -2280,6 +2397,7 @@ export const videos: Video[] = [
     place: "tysons-apartment",
     about: ["luna", "tyson"],
   },
+
   {
     /*
       RICK'S HOUSE — Josh, Tyson and Rick. Dropped 2026-09-11, imported the

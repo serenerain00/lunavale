@@ -1181,6 +1181,96 @@ export const journal: JournalEntry[] = [
       "I have been sitting with that for an hour and I still cannot decide whether it is a comfort or the worst thing I have ever written in this book.",
     ],
   },
+  /*
+    THE YEAR HE WENT QUIET. Added 2026-09-11, and it is the first page in this
+    book written against `docs/content/BETWEEN_US_SECRET_CANON.md` — the
+    accident, Rick, and the debt Tyson has been paying ever since.
+
+    IT IS A STAGE ONE BREADCRUMB AND NOTHING MORE. The ladder in §8 of that
+    document starts at "something is off", and this is Luna supplying the
+    evidence twelve years before anyone can read it. She does not solve it, get
+    close to solving it, or know there is anything to solve. Any later pass
+    that has her wondering about Josh's family here is doing Stage Two work in
+    a Stage One page and should be reverted.
+
+    THE ARITHMETIC IS THE CONSTRAINT AND IT IS TIGHT. She met Tyson at 18. The
+    accident is 15-16 years ago, so she is 22-23 and five years into knowing
+    him. She has NOT met Josh — he is six years away — so nothing on this page
+    may touch Josh, Rick, Colorado or a family, because she has no way to reach
+    any of them. That absence is the whole reason the page works: she has the
+    symptom and not one piece of the cause.
+
+    IT MUST NOT REPEAT `the-years-he-was-gone`, which is the page about not
+    hearing from him — the phone, the gaps, the long one she stopped counting.
+    This is the opposite failure mode: he came BACK, and he was wrong, and
+    being in the room with him was the part she could not read. Absence there,
+    presence here.
+
+    THE LEAVE DETAIL IS THE LOAD-BEARING ONE. A man who believes a family has
+    just saved his career starts spending his leave with that family. Luna, at
+    twenty-three, watches him stop coming home to Atlanta and go west instead,
+    and concludes — because she is twenty-three — that it is about her. She is
+    wrong in a way that will not be correctable for another fifteen years, and
+    a reader who knows the secret watches her file the truth under the wrong
+    heading in real time.
+
+    HE SAYS ONE SENTENCE AND IT IS THE ONLY ONE HE EVER SAYS. Canon has him at
+    little words and enormous meaning, so the breadcrumb is four words and a
+    refusal. "I would have lost the whole thing" is true, is about the Navy the
+    way she hears it, and is about something else entirely.
+
+    THE REFUSING-THANKS DETAIL is a psychological inference rather than a canon
+    fact, and it is the one thing here most worth cutting if it rings false:
+    a man carrying a debt he cannot discharge stops being able to be owed
+    anything by anybody.
+
+    WHY IT IS NOT FREE. The open six are an arc and a sixth would undo that —
+    see the top of this file. It also hands a stranger a mystery with no way to
+    resolve it, which is the shape of a paid page rather than a shop window.
+
+    Invented and hers to cut: the storm door, the two lunches on the counter,
+    the year of no staring game. The last of those is the one I would keep.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "the-year-he-went-quiet",
+    addedOn: "2026-09-11",
+    dateline: "Still in the boxes, and I have found a year I had filed wrong",
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    access: "premium",
+    mature: false,
+    body: [
+      "Third night in these boxes and I have stopped pretending it is tidying.",
+      "Here is what I have been circling and could not name until about an hour ago. Everybody who meets that man is told the same sentence, usually by me. He is just like that. Quiet, hard to read, you get four words and a look, he has always been like that.",
+      "He has not always been like that.",
+      "He became like that in one particular year, and I was there for the whole of it, and I have spent fifteen years telling people it is just how he is made.",
+      "The year I was twenty-three. Five years in. I had known him long enough by then to have opinions about him.",
+      "He went away — which was normal, that was the whole of that decade, he went away and the phone rang when it rang — and he came back, and something in him had been moved about six inches to the left and put back down.",
+      "I want to be careful here because the obvious version of this is wrong. He was not damaged. He did not come back haunted, he was not drinking, he did not go strange at loud noises. I have read that version in books and it is not what happened and I would know.",
+      "He came back fine. That is the thing. Scrupulously, immaculately fine, in a way I had never once seen out of him before, because the man I met at eighteen did not bother being fine. He did not bother being anything. That was the entire point of him.",
+      "And he was useful. God, he was useful that year. He turned up with tools. He fixed the storm door nobody had asked him to look at and he fixed the car and he fixed my mother's shelf and he was there every single time anybody needed a thing carrying, and if you tried to thank him for any of it he would leave the room.",
+      "That is the detail I have never been able to place. He could not be thanked. Not modest about it — he genuinely could not stand in front of it. Say thank you and he would find something to do with his hands.",
+      "He stopped doing the thing. That is the other one, and it is the one I would take to a court.",
+      "We had been doing the staring game for five years by then. Over nothing, constantly, both ways — he taught it to me and I used it on him more than he used it on me. And for about a year he would not do it. Not once. I tried it on him in my mother's kitchen and he gave me the silence back and then he simply left, and I stood there feeling like I had done something.",
+      "And he stopped coming home.",
+      "Not to me. He stopped coming home at all — leave came up and he went west, to whatever he had out there, and then leave came up again and he went west again. He had always come to Atlanta. Everybody who knew him knew he came to Atlanta. He had a bag in my mother's hall closet with his name on it in her handwriting.",
+      "I was twenty-three, so I did the twenty-three-year-old thing with it. I decided it was me. I decided I was the part of his life he had grown out of, and I did a year of being extremely relaxed about that in a way that fooled precisely nobody.",
+      "My mother knew. She never said it and she never stopped making two lunches, the whole year, for a man who was two thousand miles away. There were weeks where they sat on that counter until she threw one out.",
+      "I asked him once. Once, in the whole year, and I did it badly, in a car, not looking at him.",
+      "He said: I would have lost the whole thing.",
+      "That was it. That was the entire answer. I sat there and did the arithmetic a person does — the Navy, obviously, something happened at work that could have ended him, he is not allowed to tell me, do not ask — and I put my hand on his arm and said something useless and he changed the subject, and in twenty years he has not said another word about it.",
+      "I have believed the Navy version since I was twenty-three. I have never had a reason not to.",
+      "Here is the part that made me put the box down.",
+      "He got better. That is the thing I forgot until tonight. The year ended and he came back round to something like himself — the staring game came back, he let people thank him again, he started landing in Atlanta on leave again like it had never stopped.",
+      "But he never went back all the way. He came back to about eighty per cent of the man in that photograph and that has been the settled altitude ever since, and because it took a year I never noticed it as a change. I noticed it as him getting better.",
+      "Fifteen years of calling something a personality when it was a scar.",
+      "And I do not know what happened to him. I want that on the page plainly. I have known that man for twenty years, I am the person who knows him, and there is a year in the middle of it with a door on it that I have never once tried the handle of, because I was twenty-three and I had decided it was about me and it was easier to be quietly wounded than to ask a question he had already refused once.",
+      "He would not tell me. I know that much. I could ask tomorrow and get four words and a look.",
+      "I am going to ask him anyway. Not tomorrow. But I am writing it down here so that I have to.",
+    ],
+  },
   {
     // Month one, so it sits after the ordinary Thursdays and before "month
     // four" — the night the pattern between them stops being only a pattern.

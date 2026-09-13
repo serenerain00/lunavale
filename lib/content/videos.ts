@@ -2545,6 +2545,22 @@ export const videos: Video[] = [
       whether to go somewhere — he has nowhere to be, and the driving is what
       he does instead of picking up.
 
+      IT IS ABOUT A WEEK OLD, NOT FIVE MONTHS, and the first synopsis got this
+      wrong. "Five months of this" read as five months of avoiding her; the
+      five months is how long the BREAKUP has run. He has been dodging her for
+      about a week. Melissa: "he just started maybe a week ago."
+
+      That distinction is the entire scene. A man who has never once failed to
+      pick up has stopped picking up, in the last seven days, and she has
+      noticed. If it had been going on for months it would be a state; at a
+      week it is a decision he is making nightly and losing.
+
+      WHY HE IS DOING IT IS NOT ON SCREEN AND MUST NOT REACH THE COPY. He is
+      starting to separate himself from her because of what he feels — which is
+      `THE PROMISE` working exactly as canon describes it: the distance is the
+      only way he can keep a promise he no longer wants to keep. The synopsis
+      stays behavioural and says none of it.
+
       AND HE CALLS BACK AT THE END, which the video does not show the other
       side of. Melissa: "to viewers it could be someone else, but its tyson" —
       the conversation is a scene she will build later. So the synopsis says he
@@ -2573,7 +2589,7 @@ export const videos: Video[] = [
     // he does not do.
     title: "Not Picking Up",
     synopsis:
-      "Five months of this, and she has started calling again. He watches it light up on the table, waits for it to stop, and takes the car out instead \u2014 the long way, with nowhere at the end of it. Then, somewhere past midnight, he rings somebody back.",
+      "He has always picked up. For about a week now he has not \u2014 he watches it light up on the table, waits for it to stop, and takes the car out instead, the long way, with nowhere at the end of it. Then, somewhere past midnight, he rings somebody back.",
     file: "tyson-apt-thinking.proxy.mp4",
     poster: "/posters/tyson-apt-thinking.jpg",
     // 214, trimmed at 213.5 — about 3.5s of black on the tail. It ends on

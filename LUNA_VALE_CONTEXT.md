@@ -377,6 +377,17 @@ happened. There is nothing he is allowed to do about either.
 his phone face-up on the table. **Luna is calling and he is avoiding her
 calls** — she is intercut at the other end of one he lets ring out.
 
+> **THE AVOIDING IS ABOUT A WEEK OLD, NOT FIVE MONTHS** *(Melissa, 2026-09-13:
+> "he just started maybe a week ago")*. The five months is the length of the
+> BREAKUP. This is the beginning of him pulling away, not a settled state — and
+> that is the difference between a man who is distant and a man who has just
+> started becoming distant, which is what Luna is reacting to.
+>
+> **THIS IS WHERE THE SEPARATION STARTS.** He is doing it because of what he
+> feels, which is `THE PROMISE` behaving exactly as that section describes:
+> the distance is the only way to keep a promise he no longer wants to keep.
+> Nothing on screen says so.
+
 **Then he takes the Carrera out and drives**, out of the city, at night, with
 nowhere at the end of it. The driving is what he does *instead of* picking up.
 

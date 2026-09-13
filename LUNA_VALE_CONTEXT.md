@@ -364,6 +364,39 @@ Whether he understood what Tyson was to her at the time, or simply met a
 frightened woman and was kind to her. Both are available. The second is more
 frightening, because it means nobody did anything wrong.
 
+### Month five — she calls, he does not pick up
+*(Melissa, 2026-09-13, with the footage. CUT AND PUBLISHED as **"Not Picking
+Up"** (`tyson-apt-thinking`), 3:34, members-only with the first minute open.)*
+
+**FIVE MONTHS INTO THE SIX**, which is the whole meaning of it. `THE PROMISE`
+has Tyson falling for her at about **month four** and Josh calling her at
+**month six** — so this sits in the gap between them. He knows. Nothing has
+happened. There is nothing he is allowed to do about either.
+
+**Tyson is having a hard time.** He is alone in his apartment with a whisky and
+his phone face-up on the table. **Luna is calling and he is avoiding her
+calls** — she is intercut at the other end of one he lets ring out.
+
+**Then he takes the Carrera out and drives**, out of the city, at night, with
+nowhere at the end of it. The driving is what he does *instead of* picking up.
+
+**AT THE END HE CALLS SOMEBODY BACK, and the conversation is not in this
+video.** Melissa: *"to viewers it could be someone else, but its tyson"* — it
+is Luna he rings, and **that scene is still to be built.** Nothing published
+says who he called, deliberately, because the footage does not.
+
+> **LUNA HAS ALREADY NOTICED HIM PULLING AWAY** by this point, and the journal
+> has been circling this exact stretch for months without knowing what is in
+> it — `distance` ("he isn't punishing me… he's protecting something, and I am
+> fairly sure it isn't himself"), `what-it-costs-him`, `month-four`. This is
+> the other side of those pages and is deliberately not linked to any of them,
+> so neither explains the other.
+
+**The whisky is `drinking again`** from the city-apartment scene, and the car is
+the black 2020 Carrera. Neither is explained on screen and neither needs to be.
+
+---
+
 ### The month he disappeared — the city apartment
 *(Melissa, 2026-09-11, with the footage. CUT AND PUBLISHED as **"A Month"**
 (`luna-ty-apt-argue`), 4:45, members-only, with the Instagram cut of its last

@@ -2533,13 +2533,31 @@ export const videos: Video[] = [
       reads the glass differently from one who has not — which is the whole
       value of putting it in without comment.
 
-      WHERE IT SITS IS NOT ASSERTED. Melissa gave the file and the access, not
-      a placement, and the footage does not settle it: a man drinking alone and
-      then driving somewhere fits several points in this story and means
-      something different at each. No journal entry, no scene link.
+      FIVE MONTHS INTO THE BREAKUP (Melissa, 2026-09-13), and the placement is
+      most of what the scene means. THE PROMISE has Tyson falling for her at
+      about month four and Josh calling her at month six, so this sits in the
+      gap between those two — after he knows, before anything happens, with
+      nothing he can do about either.
 
-      WHO HE IS DRIVING TO IS ALSO NOT ASSERTED, for the same reason. The
-      synopsis stops at the fact that he goes.
+      SHE IS CALLING AND HE IS NOT ANSWERING. That is the scene. The phone
+      face-up on the table is hers; the intercut of Luna on the phone is the
+      other end of a call he is letting ring out. He is not thinking about
+      whether to go somewhere — he has nowhere to be, and the driving is what
+      he does instead of picking up.
+
+      AND HE CALLS BACK AT THE END, which the video does not show the other
+      side of. Melissa: "to viewers it could be someone else, but its tyson" —
+      the conversation is a scene she will build later. So the synopsis says he
+      calls somebody, and stops. That is not coyness; it is exactly what is on
+      screen, and writing "he calls her" would publish a fact the footage does
+      not contain.
+
+      LUNA HAS ALREADY NOTICED HIM PULLING AWAY by this point, which is why
+      this needs no journal entry to carry it — the book has been circling this
+      stretch for months without knowing what is in it. `distance` is her
+      writing "he isn\u2019t punishing me... he\u2019s protecting something, and I am
+      fairly sure it isn\u2019t himself". This is the other side of that, and it is
+      better left unlinked so neither explains the other.
 
       PLACE is `tysons-apartment`, which is where it starts and where the state
       of him is established. Half the runtime is a car; there is no place id
@@ -2547,11 +2565,15 @@ export const videos: Video[] = [
       filing it where it begins.
     */
     slug: "tyson-apt-thinking",
-    // PLACEHOLDER title and synopsis — hers to replace. "Somewhere To Be" is
-    // the turn: the whole scene is a man with nowhere to be, until he has.
-    title: "Somewhere To Be",
+    // PLACEHOLDER title and synopsis — hers to replace.
+    //
+    // IT WAS "Somewhere To Be" FOR AN HOUR AND THAT WAS EXACTLY BACKWARDS,
+    // written off the footage before the context arrived: it read the driving
+    // as a man going to somebody. He is going nowhere. The title is the thing
+    // he does not do.
+    title: "Not Picking Up",
     synopsis:
-      "A glass, a phone face-up on the table, and a man who has been sitting with both for a while. Then he picks up the keys.",
+      "Five months of this, and she has started calling again. He watches it light up on the table, waits for it to stop, and takes the car out instead \u2014 the long way, with nowhere at the end of it. Then, somewhere past midnight, he rings somebody back.",
     file: "tyson-apt-thinking.proxy.mp4",
     poster: "/posters/tyson-apt-thinking.jpg",
     // 214, trimmed at 213.5 — about 3.5s of black on the tail. It ends on
@@ -2568,11 +2590,12 @@ export const videos: Video[] = [
       durationSeconds: 60,
       hookStart: 0,
       hookNote:
-        "the apartment, the glass and the phone — it ends before he goes anywhere",
+        "the apartment, the glass, and a phone he is not answering — it ends before he takes the car out",
     },
-    // `distance` for a man alone with a phone he is not answering, and `desire`
-    // for what the driving is. `hurt` was considered and left off: nothing
-    // breaks the surface here, which is the point of it.
+    // `distance` for a man letting her calls ring out. `desire` because that is
+    // WHY he cannot answer — month five, he has known since month four, and
+    // there is nothing he is allowed to say. `hurt` was considered and left
+    // off: nothing breaks the surface here, which is the point of it.
     feelings: ["distance", "desire"],
     place: "tysons-apartment",
     about: ["tyson", "luna"],

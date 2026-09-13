@@ -593,6 +593,31 @@ CUTS=(
   #
   # 1320x790 against the unimported master's presumably higher resolution;
   # same trade as every other scored cut this week.
+  # TYSON THINKING — 3:37, scored, dropped 2026-09-13. The folder is
+  # tyson-car-thinking and the file is tyson-apt-thinking-music; both are
+  # right, because the scene is both.
+  #
+  # WHAT IS ON SCREEN: Tyson alone in his apartment with a whisky and his
+  # phone face-up on the table. Luna, intercut, on the phone in a bedroom.
+  # Then the black Carrera on a city highway at night, and him driving it out
+  # of the city with water and mountains going past. A man sitting still, and
+  # then a man not sitting still.
+  #
+  # IT LANDS ON TWO THINGS ALREADY PUBLISHED without needing either explained.
+  # The whisky is "drinking again" from luna-ty-apt-argue, and the car is the
+  # black 2020 Carrera canon has had him treating like a child since the
+  # beginning.
+  #
+  # POSTER AT 165s: his face lit by the dash, mid-drive. The decision rather
+  # than the sitting. 5s — him over the whisky with the phone on the table —
+  # is the more atmospheric frame and is in the free minute anyway, so nothing
+  # is being hidden by not using it; it is simply the weaker card.
+  #
+  # END=213.5. The picture holds around luma 25-31 to 213.5 and is hard black
+  # by 214, so there is about 3.5s of black on the tail. It ends ON picture,
+  # which is why the 3s proxy fade still applies.
+  "tyson-apt-thinking|stories/tyson-car-thinking/tyson-apt-thinking-music.mov|165|213.5|3"
+
   # RICK'S HOUSE — Josh, Tyson and Rick, 2:50, dropped 2026-09-11. No score
   # (mean -32.4 dB, dialogue-carried) and 1912x1080, so this is a delivered
   # master rather than a scored re-export.

@@ -2515,6 +2515,68 @@ export const videos: Video[] = [
     place: "ricks-house",
     about: ["josh", "tyson", "rick"],
   },
+  {
+    /*
+      TYSON THINKING. Dropped 2026-09-13, scored, 3:34 after the tail trim.
+
+      WHAT IS ON SCREEN, and the copy goes no further: Tyson alone in his
+      apartment with a whisky and his phone face-up on the table. Luna,
+      intercut, on the phone in a bedroom. Then the black Carrera on a city
+      highway at night, and him driving it out of the city with water and
+      mountains going past. A man sitting still, and then a man not sitting
+      still.
+
+      IT LANDS ON TWO PUBLISHED THINGS WITHOUT EXPLAINING EITHER. The whisky is
+      "drinking again" from `luna-ty-apt-argue`. The car is the black 2020
+      Carrera canon has had him treating like a child since the start. Neither
+      needs a line of setup, and a viewer who has seen the apartment scene
+      reads the glass differently from one who has not — which is the whole
+      value of putting it in without comment.
+
+      WHERE IT SITS IS NOT ASSERTED. Melissa gave the file and the access, not
+      a placement, and the footage does not settle it: a man drinking alone and
+      then driving somewhere fits several points in this story and means
+      something different at each. No journal entry, no scene link.
+
+      WHO HE IS DRIVING TO IS ALSO NOT ASSERTED, for the same reason. The
+      synopsis stops at the fact that he goes.
+
+      PLACE is `tysons-apartment`, which is where it starts and where the state
+      of him is established. Half the runtime is a car; there is no place id
+      for a road and inventing one for a single scene would be worse than
+      filing it where it begins.
+    */
+    slug: "tyson-apt-thinking",
+    // PLACEHOLDER title and synopsis — hers to replace. "Somewhere To Be" is
+    // the turn: the whole scene is a man with nowhere to be, until he has.
+    title: "Somewhere To Be",
+    synopsis:
+      "A glass, a phone face-up on the table, and a man who has been sitting with both for a while. Then he picks up the keys.",
+    file: "tyson-apt-thinking.proxy.mp4",
+    poster: "/posters/tyson-apt-thinking.jpg",
+    // 214, trimmed at 213.5 — about 3.5s of black on the tail. It ends on
+    // picture at luma 25, so the 3s fade on the proxy still applies.
+    durationSeconds: 214,
+    addedOn: "2026-09-13",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "tyson-apt-thinking-preview.proxy.mp4",
+      // Melissa: "free for the first 1m. then membership." Which is exactly
+      // what the 2026-09-13 tiers give a 3:34 scene, so this needs no
+      // exception — the policy and her call agree.
+      durationSeconds: 60,
+      hookStart: 0,
+      hookNote:
+        "the apartment, the glass and the phone — it ends before he goes anywhere",
+    },
+    // `distance` for a man alone with a phone he is not answering, and `desire`
+    // for what the driving is. `hurt` was considered and left off: nothing
+    // breaks the surface here, which is the point of it.
+    feelings: ["distance", "desire"],
+    place: "tysons-apartment",
+    about: ["tyson", "luna"],
+  },
 ];
 
 /**

@@ -2625,6 +2625,82 @@ export const videos: Video[] = [
     place: "tysons-apartment",
     about: ["tyson", "luna"],
   },
+  {
+    /*
+      THE POOL. Josh and Luna, dropped 2026-09-14. Melissa: "the end is
+      explicit. but this is basically the full pool scene with josh and luna
+      having that arguement that leads to them being intimate at the end."
+
+      TWO CUTS, THE ty-luna-bed SHAPE. The public scene is the ARGUMENT — 4:22,
+      1912x1080, unscored, ending on a near-kiss by the pool. The members' cut
+      is the whole thing scored, 7:23, and it is `explicit`.
+
+      THAT SPLIT IS THE RULE, NOT A PREFERENCE. "Explicit goes behind
+      membership" is Melissa's standing instruction, narrowed by name exactly
+      once, for luna-josh-first-night, after she checked that window herself. A
+      single explicit entry here would have had to forfeit its public window
+      entirely — and the first minute of two people arguing across a lit pool
+      is precisely what a stranger should be able to watch.
+
+      So nobody meets anything explicit without an account, and the scene still
+      gets a real shop window. Both halves of the policy, honoured.
+
+      THE EXPLICIT CUT HAS NO POSTER AND MUST NOT GET ONE. /public is ungated
+      and permanent, so a card frame from that cut would publish the exact
+      thing the membership gates. It borrows the public cut's poster, which is
+      what `proxy-only` in scripts/optimize-media.sh exists for.
+
+      POSTER AT 20s: the two of them either side of a lit pool, not looking at
+      each other, both dressed. The distance IS the scene.
+
+      IT COSTS RESOLUTION IN THE WRONG DIRECTION. The paid cut is 1320x762
+      against the public one's 1912x1080, so members get the smaller picture —
+      the same backwards trade luna-josh-fair and luna-truck-breakdown already
+      carry, and worth a re-export at 1080 if the source allows it.
+
+      WHERE IT SITS IS NOT ASSERTED. An argument by a pool that turns fits more
+      than one point in this story; Melissa gave the footage and the shape, not
+      a placement.
+    */
+    slug: "josh-luna-pool",
+    // PLACEHOLDER title and synopsis — hers to replace. The house pattern for
+    // a scene named after its room (The Garage, The Study, The Barn, The Lake).
+    title: "The Pool",
+    synopsis:
+      "Two people on opposite sides of a lit pool, saying the thing they have both been holding on to. It goes the way these go with them \u2014 badly, and then not.",
+    file: "josh-luna-pool.proxy.mp4",
+    poster: "/posters/josh-luna-pool.jpg",
+    // 263, untrimmed — it ends on picture at luma 37 with no black.
+    durationSeconds: 263,
+    addedOn: "2026-09-14",
+    access: "premium",
+    // Intimate at the end, not shown. `explicit` belongs on the members' cut
+    // below and nowhere else on this entry.
+    mature: true,
+    preview: {
+      file: "josh-luna-pool-preview.proxy.mp4",
+      // A minute, the tier for anything over three minutes. It is the argument
+      // and only the argument: at 0:20 they are sitting apart fully dressed,
+      // and the public cut does not reach the near-kiss until 4:18.
+      durationSeconds: 60,
+      hookStart: 0,
+      hookNote:
+        "the argument, from the top \u2014 it ends three minutes before the cut does",
+    },
+    premium: {
+      file: "josh-luna-pool-explicit.proxy.mp4",
+      durationSeconds: 443,
+      explicit: true,
+      difference:
+        "the whole scene, scored \u2014 the argument, and what happens after it stops being one",
+    },
+    // `hurt` for an argument that is genuinely one, and `desire` for where it
+    // goes. `lies` was considered and left off: whatever else this is, neither
+    // of them is holding anything back in it.
+    feelings: ["hurt", "desire"],
+    place: "farmhouse",
+    about: ["luna", "josh"],
+  },
 ];
 
 /**

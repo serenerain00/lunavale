@@ -593,6 +593,30 @@ CUTS=(
   #
   # 1320x790 against the unimported master's presumably higher resolution;
   # same trade as every other scored cut this week.
+  # THE POOL — Josh and Luna, 4:22, dropped 2026-09-14. The ARGUMENT, and the
+  # public half of a two-cut scene. Delivered 1912x1080 and unscored.
+  #
+  # THREE FILES ARRIVED IN THIS FOLDER and picking between them is the whole
+  # decision. josh-luna-pool-argue.mp4 (4:22) is the argument and stops on a
+  # near-kiss. luna-josh-poolArguePlus.mp4 (7:26) carries on past it.
+  # luna-josh-poolFIght-plusMusic.mov (7:33) is that one scored, and is the cut
+  # Melissa pointed at: "the end is explicit... basically the full pool scene".
+  #
+  # SO IT IS FILED THE WAY ty-luna-bed IS. The argument is the scene anybody
+  # can meet; the full scored cut is the members' one and carries `explicit`.
+  # That is not a scruple invented here — "explicit goes behind membership" is
+  # Melissa's standing instruction, narrowed by name exactly once for
+  # luna-josh-first-night. A single explicit entry would have had to forfeit
+  # its public window entirely under that rule, and this way the first minute
+  # of an argument by a pool is exactly what a stranger should be shown.
+  #
+  # POSTER AT 20s: the two of them either side of a lit pool, not looking at
+  # each other, both dressed. The distance is the scene and the frame states it
+  # without spending anything.
+  #
+  # NO TRIM. It ends on picture at luma 37 with no black.
+  "josh-luna-pool|stories/josh-luna-pool-argue/josh-luna-pool-argue.mp4|20||3"
+
   # TYSON THINKING — 3:37, scored, dropped 2026-09-13. The folder is
   # tyson-car-thinking and the file is tyson-apt-thinking-music; both are
   # right, because the scene is both.
@@ -707,6 +731,16 @@ CUTS=(
 # public. The card and the /watch page both use the public cut's poster.
 EXPLICIT_CUTS=(
   "ty-luna-bed-explicit|stories/tyson-luna-bed/explicit/ty-luna-bed-sex2.mp4"
+  # The full pool scene, scored, ending explicit — the members' cut of
+  # `josh-luna-pool`. END=443: it fades out by 7:23 and then runs about four
+  # seconds of black, and because the master fades ITSELF the proxy gets no
+  # extra fade on top.
+  #
+  # IT IS LOWER RESOLUTION THAN THE PUBLIC CUT, 1320x762 against 1912x1080,
+  # which is backwards for a paid edit and is the same trade luna-josh-fair and
+  # luna-truck-breakdown already carry. Worth a re-export at 1080 if the source
+  # allows it.
+  "josh-luna-pool-explicit|stories/josh-luna-pool-argue/luna-josh-poolFIght-plusMusic.mov|443"
 )
 
 want=("$@")
@@ -729,7 +763,7 @@ done
 
 # Proxy only, deliberately no poster — see the note on EXPLICIT_CUTS.
 for entry in "${EXPLICIT_CUTS[@]}"; do
-  IFS='|' read -r slug src <<<"$entry"
+  IFS='|' read -r slug src end <<<"$entry"
   wanted "$slug" || continue
-  ./scripts/optimize-media.sh proxy-only "$slug" "$src"
+  ./scripts/optimize-media.sh proxy-only "$slug" "$src" "${end:--}"
 done

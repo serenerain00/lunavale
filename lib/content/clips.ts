@@ -146,6 +146,55 @@ export function clipAccess(clip: Clip): AccessLevel {
 const authored: Clip[] = [
   {
     /*
+      ONE WEEK IN — the Instagram cut of `luna-lkehouse-wine-shatter`, added
+      2026-09-13. Free, like every cut that has already run on Instagram.
+
+      THE THROW IS NOT IN IT, and this is the cleanest free/paid line any
+      pairing on this site has. Melissa: "she ends up breaking her glass
+      against the wall - but thats in the membership full video." The scene
+      throws at 2:16; this ends at 2:00. So the free cut is two minutes of a
+      woman holding it together, and the paid one is the fourteen seconds where
+      she stops. Nobody has to be told what they are missing — they can feel
+      the cut land early.
+
+      ONE WEEK INTO THE BREAKUP (Melissa, same day), which is also the
+      placement of the parent scene and confirms what was written there. She is
+      alone at the lake at night, stuck in her head about Josh: whether to go
+      back, what was right, what was wrong. She is putting the case against
+      herself.
+
+      NEARLY 9:16 BUT NOT EXACTLY — 1320x2238 at source, 720x1220 as the proxy,
+      against a true 9:16 of 720x1280. Close enough that the poster crop takes
+      a sliver off the sides and nothing else, and close enough not to need
+      `aspect`: that field exists for the square Instagram posts, and a 0.59
+      clip in a 0.5625 card is not the mangling it was added to prevent.
+
+      NOT `mature`. She is dressed, alone, and crying. Nothing else happens —
+      the thing that happens is in the scene.
+
+      NO CONTENT NOTE. The blood and the breaking glass are both past 2:00 and
+      so are both absent, which is worth saying out loud because the parent
+      scene has an open question about whether the blood wants a note at all.
+      Whatever is decided there does not reach this.
+    */
+    id: "one-week-in",
+    // PLACEHOLDER title and caption — hers to replace. "One Week In" because
+    // the number is the thing that hurts: not that she is falling apart, but
+    // how early it is.
+    title: "One Week In",
+    caption:
+      "Seven days out of a ten-year house. Alone at the lake, late, going back over whether she was the one who got it wrong.",
+    file: "one-week-in.proxy.mp4",
+    poster: "/posters/one-week-in.jpg",
+    // 119, trimmed at 118.5 — black from about 119.
+    durationSeconds: 119,
+    addedOn: "2026-09-13",
+    about: ["luna"],
+    mature: false,
+    fullSceneSlug: "luna-lkehouse-wine-shatter",
+  },
+  {
+    /*
       THE INSTAGRAM CUT of `luna-ty-apt-argue`, dropped 2026-09-11. Free, like
       every cut that has already run on Instagram — gating something anybody
       can scroll past is what MONETIZATION.md exists to prevent.

@@ -120,6 +120,22 @@ CLIPS=(
   # the first delivery in five to arrive that way.
   "her-place|stories/apt-luna-tyson-argue/v2/luna-ty-apt-ig-short.mov|48"
 
+  # ONE WEEK IN — the Instagram cut of `luna-lkehouse-wine-shatter` ("The
+  # Glass"), added 2026-09-13. Vertical, 1320x2238, 2:00, scored.
+  #
+  # THE THROW IS NOT IN IT, and that is the whole reason this split works.
+  # Melissa: "she ends up breaking her glass against the wall - but thats in
+  # the membership full video." The scene throws at 2:16; this clip ends at
+  # 2:00. So the free cut is two minutes of a woman holding it together and the
+  # paid one is the fourteen seconds where she stops — which is the cleanest
+  # free/paid line any pairing on this site has.
+  #
+  # POSTER AT 8s: her face, hand at her head, crying. It is the strongest frame
+  # in the cut for a portrait card and it gives away nothing at all.
+  #
+  # END=118.5 — the picture holds to about 118.5 and is black by 119.
+  "one-week-in|stories/luna-lkehouse-wine-shatter/luna-wine-crash-clip.mov|8|118.5"
+
   # THE PILOT INTERVIEW, added 2026-09-10. A film crew comes to the lakehouse
   # and sits Luna down — 46s, shot 9:16, made to promote the pilot dropping
   # this month. Not a scene from the story: it is the story being talked about.

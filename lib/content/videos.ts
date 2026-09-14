@@ -2650,8 +2650,15 @@ export const videos: Video[] = [
       thing the membership gates. It borrows the public cut's poster, which is
       what `proxy-only` in scripts/optimize-media.sh exists for.
 
-      POSTER AT 20s: the two of them either side of a lit pool, not looking at
-      each other, both dressed. The distance IS the scene.
+      POSTER AT 20s: the two of them on the same seat by the pool, turned away
+      from each other, both dressed. Sitting a foot apart and facing opposite
+      directions is the scene.
+
+      THE FIRST SYNOPSIS SAID "opposite sides of a lit pool" AND WAS WRONG in
+      the plain factual way, not the interpretive one — they are side by side
+      on the same lounger for the whole argument. It also ended on "badly, and
+      then not", which reads as meaning something until somebody asks what.
+      Written plainly now.
 
       IT COSTS RESOLUTION IN THE WRONG DIRECTION. The paid cut is 1320x762
       against the public one's 1912x1080, so members get the smaller picture —
@@ -2667,7 +2674,7 @@ export const videos: Video[] = [
     // a scene named after its room (The Garage, The Study, The Barn, The Lake).
     title: "The Pool",
     synopsis:
-      "Two people on opposite sides of a lit pool, saying the thing they have both been holding on to. It goes the way these go with them \u2014 badly, and then not.",
+      "Late, outside by the pool, the two of them sitting close and finally having it out. Neither of them backs down \u2014 and it does not end the way an argument ends.",
     file: "josh-luna-pool.proxy.mp4",
     poster: "/posters/josh-luna-pool.jpg",
     // 263, untrimmed — it ends on picture at luma 37 with no black.
@@ -2698,6 +2705,12 @@ export const videos: Video[] = [
     // goes. `lies` was considered and left off: whatever else this is, neither
     // of them is holding anything back in it.
     feelings: ["hurt", "desire"],
+    // PLACE UNRESOLVED — `farmhouse` is a placeholder and it is WRONG. It was
+    // a guess at import and Melissa has said so. What is on screen: a lit pool
+    // at night, candles, warm low light, palms, outdoor loungers. None of that
+    // is a working farm in Colorado. Mexico is the only existing id that fits
+    // the look, and having already guessed once, a second guess is not worth
+    // publishing another wrong fact. Waiting on her.
     place: "farmhouse",
     about: ["luna", "josh"],
   },

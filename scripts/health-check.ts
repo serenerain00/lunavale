@@ -188,6 +188,31 @@ async function checkLeakage() {
     fail("Explicit clip posters sitting in /public", leakyPosters.join(", "));
   } else ok(`${clips.filter((c) => c.explicit).length} explicit clip(s), no poster in /public`);
 
+  // AN EXPLICIT SCENE MUST NOT GROW A PUBLIC PREVIEW. A preview is served with
+  // no account and no age check, so this is the one thing the site has never
+  // shown a signed-out visitor. Melissa's rule is "explicit goes behind
+  // membership", narrowed once, by name, to allow luna-josh-first-night its 90
+  // seconds because she verified the window frame by frame.
+  //
+  // THIS EXISTS BECAUSE IT HAPPENED. luna-bathtub had its preview deleted on
+  // 2026-08-12 as a leak fix, and the 2026-09-13 "every scene gets a preview"
+  // pass silently put a sixty-second one back. The rule that did it is right
+  // everywhere else and simply does not reach an explicit scene.
+  const ALLOWED_EXPLICIT_PREVIEW = ["luna-josh-first-night"];
+  const explicitWithPreview = videos.filter(
+    (v) => !v.hidden && v.explicit && v.preview && !ALLOWED_EXPLICIT_PREVIEW.includes(v.slug),
+  );
+  if (explicitWithPreview.length) {
+    fail(
+      "Explicit scenes with a public preview",
+      explicitWithPreview.map((v) => `${v.slug} (${v.preview!.durationSeconds}s)`).join(", "),
+    );
+  } else {
+    ok(
+      `${videos.filter((v) => !v.hidden && v.explicit).length} explicit scene(s), only the named one has a public window`,
+    );
+  }
+
   const sitemap = await read("app/sitemap.ts");
   if (!/freeEntries\(\)/.test(sitemap)) {
     fail("Sitemap no longer restricted to free journal entries");

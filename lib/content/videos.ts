@@ -1027,6 +1027,19 @@ export const videos: Video[] = [
     // scene (stories/luna-bathtub/ is three source parts), so a deleted cut
     // could not be regenerated.
     //
+    // NO `preview` KEY, AND IT MUST NOT COME BACK. It was removed on 2026-08-12
+    // as the fix for an actual leak, and on 2026-09-13 the "every scene gets a
+    // preview at its tier" pass put a SIXTY SECOND one back on it — four times
+    // the window that had been judged too much to show a signed-out visitor.
+    // Removed again the next day.
+    //
+    // The policy that did it is right for every other scene and simply does not
+    // reach this one: it decides how much of a scene to give away, and the
+    // question here is whether any of it can be shown to somebody with no
+    // account and no age check. For this scene the answer is no. See
+    // scripts/health-check.ts, which now fails if an explicit scene grows a
+    // preview that Melissa has not named.
+    //
     // POSTER RE-GRABBED to 118s, two mouths about to meet. Posters live in
     // /public at a permanent ungated URL — no flag gates them, `explicit` only
     // drives a badge — so the old one was full-frame nudity on the public
@@ -1043,10 +1056,6 @@ export const videos: Video[] = [
     access: "premium",
     mature: true,
     explicit: true,
-    preview: {
-      file: "luna-bathtub-preview.proxy.mp4",
-      durationSeconds: 60,
-    },
     feelings: ["grief", "desire"],
     place: "farmhouse",
     about: ["luna"],

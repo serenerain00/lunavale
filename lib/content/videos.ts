@@ -2714,6 +2714,61 @@ export const videos: Video[] = [
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+  {
+    /*
+      THE GARAGE, AGAIN — Luna and Tyson, 2:25, dropped 2026-09-14. HIDDEN, for
+      two reasons that are both temporary.
+
+      ONE: THE FILE IS ABOUT TO CHANGE. Melissa: "no music in this one but im
+      gonna add it here shortly." Publishing an unscored cut that is expected
+      to be replaced within the day means a members-facing scene whose audio
+      changes underneath anybody watching it. The swap is routine here — three
+      scenes had it this week — but those arrived days apart and unannounced.
+      This one came with notice, so it waits.
+
+      TWO: NOBODY HAS SAID WHAT IS SAID IN IT. Same restraint as
+      `josh-ty-ricks-house`. What is on screen: the two of them close among the
+      tools, her hand on his arm while he is turned away, and by about 2:00 she
+      is mid-sentence and getting nothing back. That reads as her asking and
+      him not answering, which is the shape of everything else this month — but
+      reading a scene off five frames is exactly how The Pool got a synopsis
+      putting two people on opposite sides of a pool they were sitting beside
+      together.
+
+      IT IS THE THIRD GARAGE SCENE, after `ty-luna-garage` (7:36) and
+      `luna-ty-shop-kiss` (4:24), and it is a different conversation in the
+      same room rather than a recut of either. Worth stating so nobody
+      reconciles them later.
+
+      TO PUBLISH: point the manifest at the scored export, re-import, replace
+      the placeholder title and synopsis, set `feelings`, and delete one
+      `hidden: true`. The 45s preview it will get under the tiers is already
+      declared below.
+    */
+    slug: "ty-luna-grg2",
+    title: "The Garage, Again",
+    synopsis:
+      "Luna and Tyson, in the shop, having a conversation he does not want to have.",
+    file: "ty-luna-grg2.proxy.mp4",
+    poster: "/posters/ty-luna-grg2.jpg",
+    // 146, trimmed at 145.5 — black from about 146.
+    durationSeconds: 146,
+    addedOn: "2026-09-14",
+    // HIDDEN. See the note above; this is one line and a re-import from live.
+    hidden: true,
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "ty-luna-grg2-preview.proxy.mp4",
+      // 45s, the tier for anything over two minutes. Declared now so the swap
+      // to the scored cut is a re-import and nothing else.
+      durationSeconds: 45,
+      hookStart: 0,
+    },
+    feelings: [],
+    place: "garage",
+    about: ["luna", "tyson"],
+  },
 ];
 
 /**

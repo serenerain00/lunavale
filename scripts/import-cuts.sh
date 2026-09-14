@@ -593,6 +593,26 @@ CUTS=(
   #
   # 1320x790 against the unimported master's presumably higher resolution;
   # same trade as every other scored cut this week.
+  # THE GARAGE, AGAIN — Luna and Tyson, 2:25, dropped 2026-09-14. Delivered
+  # 1952x1080 and UNSCORED (-30.4 dB). Melissa: "no music in this one but im
+  # gonna add it here shortly", so this source is expected to be replaced by a
+  # scored export and the entry is staged hidden until it is.
+  #
+  # THE THIRD GARAGE SCENE, after ty-luna-garage (7:36) and luna-ty-shop-kiss
+  # (4:24). Worth keeping straight when the copy is written: this is a
+  # different conversation in the same room, not a recut of either.
+  #
+  # WHAT IS ON SCREEN, and the copy goes no further until she says what is
+  # said: the two of them close among the tools, her hand on his arm while he
+  # is turned away, and by about 2:00 she is mid-sentence and getting nothing
+  # back. It reads as her doing the asking and him not answering, which is the
+  # shape of everything else this month — but reading a scene off five frames
+  # is how The Pool ended up with a synopsis that had them on opposite sides of
+  # a pool they were sitting beside together.
+  #
+  # END=145.5. Picture holds to about 145.5 and is black by 146.
+  "ty-luna-grg2|stories/ty-luna-grg2/luna-ty-grg2.mp4|40|145.5|3"
+
   # THE POOL — Josh and Luna, 4:22, dropped 2026-09-14. The ARGUMENT, and the
   # public half of a two-cut scene. Delivered 1912x1080 and unscored.
   #

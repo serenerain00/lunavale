@@ -43,22 +43,25 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-09-01 against `main` at f29b524. The 2026-07-28 row is kept beneath
+re-run 2026-09-15 against `main` at 6f6004b. The 2026-07-28 row is kept beneath
 so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 126 | 97 |
-| Tyson | 12 | 94 | 79 |
-| Josh | 14 | 86 | 66 |
-| Rick | 1 | 4 | 2 |
+| Luna | 12 | 160 | 137 |
+| Tyson | 12 | 121 | 109 |
+| Josh | 14 | 99 | 88 |
+| Rick | 1 | 8 | 8 |
 
 *As built, 2026-07-28: Luna 8 / 44 / 23 · Tyson 8 / 44 / 33 · Josh 8 / 35 / 21.
 Rick was not on the table at all. Figures above include this week's note.*
 
-> These numbers move fast. They were 105 / 79 / 79 / 4 a week earlier; the
-> journal entries, clips and scenes that landed on `main` in late August added
-> about forty pieces. Re-run the two functions rather than trusting the table.
+> These numbers move fast. Total pieces were 105 / 79 / 79 / 4 in late August and
+> 126 / 94 / 86 / 4 a fortnight ago; the trailer, the new scenes and the pages
+> that landed on `main` in September added another sixty-odd, and the same push
+> put almost everything behind membership — which is why the members-only column
+> now sits just under the total. Re-run the two functions rather than trusting
+> the table.
 
 **Josh is the thinnest of the three leads again.** He has the most *notes* of
 anyone, but he is bottom on total pieces — the late-August content went mostly
@@ -67,27 +70,28 @@ hardest character to hold an audience's sympathy for, and the whole story
 depends on him being genuinely likeable before he turns. What to watch is how
 much of his material makes that case.
 
-**Rick is the real hole.** Four pieces against Josh's eighty-six, and he is
+**Rick is the real hole.** Eight pieces against Josh's ninety-nine, and he is
 the entire explanation for Josh. Every note written for Rick is doing double
 duty on the character the story most needs an audience to like first, which
-makes him the cheapest way to feed Josh as well — but he is boxed in at one
-note per scene, and both his scenes are covered once the open PRs land.
+makes him the cheapest way to feed Josh as well. September gave him a third
+scene — `josh-ty-ricks-house` — and that one has no note from anybody.
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
-> updated 2026-09-01. The counts above and the backlog below describe `main`,
-> and `main` is behind: the drops for 2026-08-03, 08-10, 08-17 and 08-31 are
-> all still open and unmerged (#1, #2, #3, #5), as is this one (#4). A weekly
-> run clones the repo fresh, so it cannot see any of them — and **four**
-> separate weeks have now independently picked the same obvious gap and written
-> the same note, a Rick `insight` note on `josh-rick-lake`: #2, #3, #5, and #4
-> before it was rewritten. #5 even reuses the id `rick-i-already-knew`.
-> Whatever this file says is uncovered, check it against the open PRs first.
+> updated 2026-09-15. The backlog below describes `main`, and `main` is behind:
+> the drops for 2026-08-03, 08-10, 08-17, 08-31, 09-07 and 09-14 are all still
+> open and unmerged (#1, #2, #3, #5, #6, #7), as is this one (#4). A weekly run
+> clones the repo fresh, so it cannot see any of them — and **six** separate
+> weeks have now independently picked the same obvious gap and written the same
+> note, a Rick `insight` note on `josh-rick-lake`: #2, #3, #5, #6, #7, and #4
+> before it was rewritten. #5 reuses the id `rick-i-already-knew`. Whatever this
+> file says is uncovered, check it against the open PRs first.
 >
-> **This paragraph cannot fix that on its own, and it has already failed once.**
-> It has only ever existed on #4's branch, never on `main`, so the 08-31 run
-> could not read it and duplicated anyway. It becomes effective the moment
-> anything carrying it lands on `main`. Until then the only reliable control is
-> the weekly routine's own stored prompt, which is the maintainer's to change.
+> **This paragraph cannot fix that on its own, and it has now failed three
+> times.** It has only ever existed on #4's branch, never on `main`, so the
+> 08-31, 09-07 and 09-14 runs could not read it and duplicated anyway. It
+> becomes effective the moment anything carrying it lands on `main`. Until then
+> the only reliable control is the weekly routine's own stored prompt, which is
+> the maintainer's to change.
 
 Standing backlog, roughly prioritised:
 
@@ -95,13 +99,15 @@ Standing backlog, roughly prioritised:
   `luna-josh-first-night`, `luna-josh-fair` *(taken by #4)*, and `josh-luna-wall`
   — the last of which Melissa may want to write herself, as she is holding the
   journal entry for it
-- `luna-tyson-dance` has no note from either of them, and it is free — so a note
-  on it is a shop window rather than a spoiler
-- Rick is boxed in. He is in two scenes: `josh-rick-study`, which already has
-  `rick-the-chair`, and `josh-rick-lake`, which #2 and #3 both cover. Once one
-  of those lands he has a note on everything he appears in, so the next Rick
-  piece has to come from somewhere other than a scene — the brewery, the
-  liquor, what he made of Luna across ten years
+- `luna-tyson-dance` has no note from either of them. It went members-only in
+  the September push, so a note on it is no longer a shop window — but it is
+  still two leads and an uncovered scene
+- Rick is in three scenes now. `josh-rick-study` has two notes already
+  (`rick-the-chair`, `josh-the-study`); `josh-rick-lake` is the one every open
+  drop keeps re-writing; and `josh-ty-ricks-house`, new in September, has
+  nothing from anybody. That third scene is where a Rick note should go. After
+  it, the next Rick piece has to come from somewhere other than a scene — the
+  brewery, the liquor, what he made of Luna across ten years
 - First notes for Cathy and Avery, who have none at all
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none

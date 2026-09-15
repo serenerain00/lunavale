@@ -459,3 +459,55 @@ CREATE TABLE IF NOT EXISTS studio_shots (
 
 CREATE INDEX IF NOT EXISTS studio_shots_recent_idx
   ON studio_shots (updated_at DESC);
+
+-- ---------------------------------------------------------------------------
+-- Email opt-outs — one suppression list for every address this site can reach.
+--
+-- WHY IT IS SEPARATE FROM `followers.unsubscribed_at`. That column serves the
+-- followers list, which is keyed on email and is the only list that existed
+-- when it was written. Members are not on it: a member is a Clerk user id in
+-- `memberships`, and their address lives in Clerk, not here. So the moment
+-- anything is sent to members there are two populations and exactly one of
+-- them can say no. That is the shape of every list that eventually mails
+-- somebody who asked it not to.
+--
+-- KEYED ON THE ADDRESS, LOWER-CASED, because that is the only identifier the
+-- two populations share, and because the promise a person believes they are
+-- making is "stop emailing me", not "stop emailing this account". Someone who
+-- unsubscribes as a follower and later pays should stay unsubscribed.
+--
+-- THE ROW IS THE ANSWER. There is no `subscribed` boolean to get backwards:
+-- a row here means do not send, no row means send. Nothing deletes from this
+-- table automatically — see the note on followers for why a list that
+-- re-subscribes people is the one unforgivable thing you can do with an
+-- address. Coming back is a deliberate act, by hand, at their request.
+CREATE TABLE IF NOT EXISTS email_optouts (
+  email       TEXT        PRIMARY KEY,
+
+  -- What they were unsubscribing from when they clicked: "release" today, and
+  -- whatever else ever gets sent. Recorded to learn which mail loses people,
+  -- NOT to scope the suppression — a row suppresses everything, because the
+  -- link said "stop emailing me" and that is what it has to mean.
+  source      TEXT        NOT NULL DEFAULT 'release',
+
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- ---------------------------------------------------------------------------
+-- Email sends — what went out, so nothing goes out twice.
+--
+-- The announcement script is run by hand and can be run again: a network
+-- failure halfway through a list, a second thought about the subject line, a
+-- shell history recall three days later. Without this, the safe response to
+-- any of those is "do nothing and hope", because the cost of guessing wrong is
+-- mailing paying members the same announcement twice.
+--
+-- One row per (campaign, address). The campaign id is derived from what is
+-- being announced, so re-running the same announcement finds its own rows and
+-- skips them, while a genuinely new one does not collide.
+CREATE TABLE IF NOT EXISTS email_sends (
+  campaign    TEXT        NOT NULL,
+  email       TEXT        NOT NULL,
+  sent_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (campaign, email)
+);

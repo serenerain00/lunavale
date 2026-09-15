@@ -424,10 +424,72 @@ async function checkStripe() {
 }
 
 /* ══════════════════════════════ report ═════════════════════════════════════ */
+/**
+ * Email — half a mail configuration is worse than none.
+ *
+ * Every failure here is silent in production. A missing RESEND_API_KEY means
+ * help messages are saved and never forwarded, and Melissa finds out when
+ * somebody says "I wrote to you weeks ago". A missing MAIL_SECRET means the
+ * announcement script refuses to run, which is the good outcome — but only
+ * because it checks; the bad version of that bug ships unsubscribe links that
+ * 400 at people who want off a list.
+ */
+async function checkEmail() {
+  section("Email — whether anything we send can be answered or escaped");
+
+  const key = process.env.RESEND_API_KEY;
+  const from = process.env.MAIL_FROM ?? process.env.HELP_FROM_EMAIL;
+  const secret = process.env.MAIL_SECRET;
+
+  if (!key) {
+    warn(
+      "No RESEND_API_KEY — nothing can send",
+      "Help messages are saved and wait on /admin, and the announcement " +
+        "script will not run. Nothing is lost; nothing goes out either.",
+    );
+  } else {
+    ok("A mail provider is configured");
+    if (!from) {
+      fail(
+        "RESEND_API_KEY is set but MAIL_FROM is not",
+        "Every send fails at the provider. Set MAIL_FROM to an address on a " +
+          "domain verified in Resend.",
+      );
+    } else {
+      ok(`Sending as ${from}`);
+    }
+    if (!secret) {
+      fail(
+        "RESEND_API_KEY is set but MAIL_SECRET is not",
+        "Unsubscribe links cannot be signed. scripts/announce.ts refuses to " +
+          "run without it — deliberately — so members' mail is blocked until " +
+          "this is set.",
+      );
+    } else {
+      ok("Unsubscribe links can be signed");
+    }
+  }
+
+  // The unsubscribe page has an address in its URL and must never be indexed.
+  const page = path.join(ROOT, "app/unsubscribe/page.tsx");
+  if (await exists(page)) {
+    const src = await readFile(page, "utf8");
+    if (/robots:\s*\{\s*index:\s*false/.test(src)) {
+      ok("The unsubscribe page is noindex");
+    } else {
+      fail(
+        "The unsubscribe page is indexable",
+        "Its URL contains a member's email address.",
+      );
+    }
+  }
+}
+
 async function main() {
   await checkGates();
   await checkLeakage();
   await checkContent();
+  await checkEmail();
   if (!offlineOnly) { await checkMoney(); await checkStripe(); }
   else { section("Live checks"); warn("--offline: money and Stripe skipped"); }
 

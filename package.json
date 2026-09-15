@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "health": "tsx scripts/health-check.ts"
+    "health": "tsx scripts/health-check.ts",
+    "announce": "tsx scripts/announce.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.5.22",

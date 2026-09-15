@@ -148,20 +148,21 @@ async function applyEvent(event: Stripe.Event): Promise<void> {
       stripeCustomerId,
       stripeSubscriptionId: subscription.id,
       currentPeriodEnd: periodEnd(subscription),
-      cancelAtPeriodEnd: subscription.cancel_at_period_end === true,
+      cancelAtPeriodEnd: isLeaving(subscription),
     });
     return;
   }
 
   /*
-    `cancel_at_period_end` RECORDED FROM 2026-09-03.
+    `cancel_at_period_end` RECORDED FROM 2026-09-03, and READ CORRECTLY FROM
+    2026-09-15 — see isLeaving() below, which is the actual fix.
 
     Stripe reports a subscription as "active" for the whole remaining period
     after somebody switches off renewal, and this table copies status verbatim
-    — so until now a member who had already left looked identical to one who
-    was staying, everywhere: the admin, /account, and any query. It arrives on
-    customer.subscription.updated, which is the event Stripe sends the moment
-    the flag is set, and that event was already being handled and stored.
+    — so a member who has already left looks identical to one who is staying,
+    everywhere: the admin, /account, and any query. That is what this column is
+    for. It arrives on customer.subscription.updated, the event Stripe sends
+    the moment a cancellation is set.
 
     It changes nothing about access. tierForUser() reads status and
     current_period_end, and does not read this.
@@ -173,8 +174,33 @@ async function applyEvent(event: Stripe.Event): Promise<void> {
     stripeCustomerId,
     stripeSubscriptionId: subscription.id,
     currentPeriodEnd: periodEnd(subscription),
-    cancelAtPeriodEnd: subscription.cancel_at_period_end === true,
+    cancelAtPeriodEnd: isLeaving(subscription),
   });
+}
+
+/**
+ * Whether this subscription is on its way out.
+ *
+ * TWO STRIPE FIELDS MEAN THE SAME THING TO A MEMBER AND ONLY ONE WAS BEING
+ * READ. `cancel_at_period_end` is set when renewal is switched off with no
+ * date attached. `cancel_at` is set when the cancellation is SCHEDULED for a
+ * specific date — and it leaves `cancel_at_period_end` FALSE.
+ *
+ * Every cancellation this site has ever had used the second one. Four people
+ * cancelled between 2026-08-28 and 2026-09-15 and all four were recorded as
+ * staying: the admin page showed ten active members and nothing pending, and
+ * the only way anybody found out was by opening Stripe and counting.
+ *
+ * THE COLUMN NAME IS NOW SLIGHTLY WRONG AND IS KEPT ANYWAY. `cancel_at` may
+ * name a date that is not the period end, so "cancel at period end" is not
+ * literally what it records — it records "this person is leaving", which is
+ * the question every caller is actually asking. Renaming it is a migration
+ * across four files to fix a word, and the word is documented here instead.
+ */
+function isLeaving(subscription: Stripe.Subscription): boolean {
+  return (
+    subscription.cancel_at_period_end === true || subscription.cancel_at != null
+  );
 }
 
 /**

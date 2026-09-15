@@ -305,6 +305,32 @@ async function checkMoney() {
       stuck.map((r) => `${r.email} (${new Date(r.created_at).toISOString().slice(0, 10)})`).join(", "));
   } else ok("Nobody has paid and been left without access");
 
+  // WHO IS LEAVING, which the site was unable to answer until 2026-09-15. The
+  // webhook read only `cancel_at_period_end` and every cancellation this site
+  // has had set `cancel_at` instead, so four departures were filed as
+  // renewals and /admin reported ten contented members. Fixed in the webhook
+  // and back-filled by scripts/reconcile-billing.mjs; this makes sure the two
+  // never quietly diverge again.
+  const leaving = (await sql`
+    SELECT current_period_end FROM memberships
+    WHERE cancel_at_period_end = TRUE
+    ORDER BY current_period_end
+  `) as { current_period_end: string | null }[];
+  if (leaving.length) {
+    warn(
+      `${leaving.length} member(s) have cancelled and are running out the period`,
+      "Access until " +
+        leaving
+          .map((r) =>
+            r.current_period_end
+              ? new Date(r.current_period_end).toISOString().slice(0, 10)
+              : "?",
+          )
+          .join(", ") +
+        ". They still have access — a release before then is the cheapest win-back there is.",
+    );
+  } else ok("Nobody is on their way out");
+
   const rows = (await sql`
     SELECT status, count(*)::int n FROM memberships GROUP BY status ORDER BY n DESC
   `) as { status: string; n: number }[];

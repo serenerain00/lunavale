@@ -2769,6 +2769,63 @@ export const videos: Video[] = [
     place: "garage",
     about: ["luna", "tyson"],
   },
+  {
+    /*
+      THE TRAILER, 2026-09-15. The first one, ahead of the pilot.
+
+      FREE, AND IT IS THE ONE JUSTIFIED EXCEPTION TO "keep all videos behind
+      membership". That policy gates the STORY. This is an advertisement for
+      it, and the site has been promising it free the whole time:
+      lib/content/membership.ts lists "Trailers and story overview" as a
+      `from: "free"` benefit, and there has never been a trailer published to
+      honour it. clips.ts already put the argument in writing about the pilot
+      interview — gating an advertisement would be charging admission to a
+      trailer.
+
+      So this closes a promise rather than opening a loophole. Everything that
+      is the story stays gated; the two things that exist to sell it — this and
+      the pilot interview clip — do not. One line to reverse if Melissa
+      disagrees.
+
+      NO PREVIEW BLOCK, because a free scene needs no window onto itself.
+
+      THE END CARD IS HERS. scripts/trailer-end-title.py built the BETWEEN US
+      sequence — letters held apart, then drawn together on an ease-in-out —
+      and she laid it into her own edit with the score carrying underneath,
+      which is what it needed. The version this repo concatenated ended in
+      eight seconds of silence.
+
+      POSTER AT 8s: the photograph in a frame on the table, which is the
+      trailer's own opening image. It is distinctive among forty-six moody
+      two-shots, and a photograph of two people being looked at later is what
+      the series is about. 55s — her laughing, him behind her — is warmer and
+      more clickable, and is the swap if this reads too quiet on the grid.
+
+      `mature: false`. It is a trailer, cut by her for public posting: there is
+      closeness and a kiss and nothing this site would call intimate. If it
+      goes on Instagram it has already passed a stricter test than ours.
+
+      PLACE IS ARBITRARY AND SAID SO. A trailer is not in a room. `farmhouse`
+      matches how the cast interview is filed and is the story's centre; it
+      means nothing here beyond giving the browse axis something to hold.
+    */
+    slug: "between-us-trailer-one",
+    title: "Between Us \u2014 Trailer One",
+    synopsis:
+      "Ten years, six months apart, and the best friend who has been there the whole time. The first look at the series \u2014 the pilot lands this month.",
+    file: "between-us-trailer-one.proxy.mp4",
+    poster: "/posters/between-us-trailer-one.jpg",
+    // 101, untrimmed. It ends on the title card, which fades itself.
+    durationSeconds: 101,
+    addedOn: "2026-09-15",
+    access: "free",
+    mature: false,
+    // Empty on purpose, the same as the cast interview: a trailer is not a
+    // beat and cannot honestly be filed under one feeling.
+    feelings: [],
+    place: "farmhouse",
+    about: ["luna", "josh", "tyson"],
+  },
 ];
 
 /**

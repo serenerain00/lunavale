@@ -593,6 +593,23 @@ CUTS=(
   #
   # 1320x790 against the unimported master's presumably higher resolution;
   # same trade as every other scored cut this week.
+  # THE TRAILER — 1:40, the first one, ahead of the pilot. Melissa's final cut
+  # with her own audio under the end title (2026-09-15).
+  #
+  # THE END CARD IS ALREADY IN IT. scripts/trailer-end-title.py built the
+  # sequence and she laid it into her edit herself with the score carrying
+  # underneath, which is what it needed — the version this repo concatenated
+  # had eight silent seconds at the end. Nothing here re-appends anything.
+  #
+  # POSTER AT 8s: the photograph in a frame on the table, which is the
+  # trailer's own opening image. Distinctive among forty-six moody two-shots,
+  # and a photograph of two people being looked at later is what the whole
+  # series is. 55s (her laughing, him behind her) is the warmer, more
+  # clickable frame and is the alternative if this reads too quiet.
+  #
+  # NO TRIM AND NO FADE. It ends on the title card, which fades itself.
+  "between-us-trailer-one|stories/trailer/between-us-trailer-one-final.mp4|8"
+
   # THE GARAGE, AGAIN — Luna and Tyson, 2:25, dropped 2026-09-14. Delivered
   # 1952x1080 and UNSCORED (-30.4 dB). Melissa: "no music in this one but im
   # gonna add it here shortly", so this source is expected to be replaced by a

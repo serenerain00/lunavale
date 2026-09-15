@@ -167,10 +167,8 @@ export const startingPoints: StartingPoint[] = [
     detail:
       "A dozen scenes, in full and at full quality, with no account needed.",
   },
-  {
-    href: "/world",
-    label: "The world",
-    detail:
-      "Walk into the farmhouse and the lakehouse and find the story by looking around instead of pressing play.",
-  },
+  // "The world" was here — "walk into the farmhouse and the lakehouse and find
+  // the story by looking around instead of pressing play". Removed 2026-09-15
+  // with the rest of it: the rooms are off the site until they are finished
+  // (WORLD_ENABLED in lib/content/world.ts). Put this back when they return.
 ];

@@ -63,10 +63,15 @@ const ALL_TIERS: Tier[] = [
   {
     id: "free",
     name: "Visitor",
-    tagline: "The world, open.",
+    // WAS "The world, open." / "Walk into the farmhouse, watch the public
+    // scenes...". The world is off the site until it is finished
+    // (WORLD_ENABLED in lib/content/world.ts), so the free tier stopped being
+    // able to deliver the first thing it promised. Restore both lines when the
+    // rooms come back.
+    tagline: "The story, open.",
     priceMonthlyCents: 0,
     blurb:
-      "Walk into the farmhouse, watch the public scenes, read the story so far. No account, no card, no countdown. What is free today stays free.",
+      "Watch the trailer, read the story so far, and meet everyone in it. No account, no card, no countdown. What is free today stays free.",
     cta: "Start exploring",
     commitment: "Free forever",
     available: true,
@@ -148,7 +153,7 @@ export interface Benefit {
    * Group heading in the comparison table. Grouping keeps the table scannable
    * instead of turning into a wall of twenty undifferentiated ticks.
    */
-  group: "Watching" | "The world" | "Behind it";
+  group: "Watching" | "Behind it";
 }
 
 /**
@@ -255,29 +260,31 @@ export const BENEFITS: Benefit[] = [
   //
   // The members-only half of the world is already covered by "Locked rooms"
   // below, which is true and stays.
-  {
-    id: "locked-rooms",
-    label: "Locked rooms",
-    detail:
-      "The doors that stay shut for visitors — and the objects inside them.",
-    from: "vault",
-    group: "The world",
-  },
+  // "Locked rooms" was here — "the doors that stay shut for visitors, and the
+  // objects inside them". Pulled 2026-09-15 when the world came off the site
+  // to be finished (WORLD_ENABLED). Selling a door nobody can reach is the
+  // same lie this table has already had to remove three times, and the note
+  // twenty lines up says so about a smaller version of it. Restore it with the
+  // rooms.
   {
     id: "journals",
     label: "Private journals",
     detail:
       "Luna's writing, in her own words, between the scenes you've watched.",
     from: "vault",
-    group: "The world",
+    // Was "The world". The journal is its own route and never needed the
+    // rooms, so it moves rather than going with them.
+    group: "Watching",
   },
   {
     id: "artifacts",
     label: "Character artifacts",
     detail:
-      "Letters, photographs and objects that fill in what the scenes leave out.",
+      "Letters, photographs and stills that fill in what the scenes leave out.",
     from: "vault",
-    group: "The world",
+    // Was "The world", and "objects" meant objects in rooms. The galleries
+    // deliver this on their own, so it moves and the word changes with it.
+    group: "Watching",
   },
   // "Member-only variants" was here — "locations at other hours and in other
   // weather, with their own moments". Pulled 2026-07-28. There is no weather
@@ -354,7 +361,12 @@ export const BENEFITS: Benefit[] = [
   },
 ];
 
-export const BENEFIT_GROUPS = ["Watching", "The world", "Behind it"] as const;
+// "The world" was the middle group and is gone with the rooms (2026-09-15,
+// WORLD_ENABLED). Its three rows either moved to Watching — the journal and
+// the galleries never needed the world — or were pulled outright, in the case
+// of "Locked rooms". Leaving the heading in would have rendered an empty
+// column on the comparison table. Put it back with the rooms.
+export const BENEFIT_GROUPS = ["Watching", "Behind it"] as const;
 
 /**
  * Benefits belonging to a tier that is currently on sale. The comparison table

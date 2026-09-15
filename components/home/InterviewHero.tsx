@@ -33,6 +33,15 @@ interface InterviewHeroProps {
 
 export function InterviewHero({ hero }: InterviewHeroProps) {
   const { video } = hero;
+  // Falls back to the front-door copy so a playInline hero added without its
+  // own strings renders the site's line rather than nothing.
+  const copy = hero.copy ?? {
+    kicker: "An explorable cinematic universe",
+    headline: "Enter the world of Luna.",
+    blurb:
+      "Start with the cast, in their own words — then step inside the world they made.",
+    cta: "Play it",
+  };
   const [playing, setPlaying] = useState(false);
   const [failed, setFailed] = useState(false);
   const ref = useRef<HTMLVideoElement>(null);
@@ -134,14 +143,13 @@ export function InterviewHero({ hero }: InterviewHeroProps) {
         }`}
       >
         <p className="text-xs uppercase tracking-[0.22em] text-amber">
-          An explorable cinematic universe
+          {copy.kicker}
         </p>
         <h1 className="mt-4 max-w-2xl font-display text-4xl font-light leading-[1.05] text-ivory sm:text-6xl lg:text-7xl">
-          Enter the world of Luna.
+          {copy.headline}
         </h1>
         <p className="mt-5 max-w-lg text-base leading-relaxed text-stone sm:text-lg">
-          Start with the cast, in their own words — then step inside the world
-          they made.
+          {copy.blurb}
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
@@ -151,13 +159,19 @@ export function InterviewHero({ hero }: InterviewHeroProps) {
             className="inline-flex min-h-12 items-center gap-2.5 rounded-full bg-ivory px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-white sm:px-7"
           >
             <PlayGlyph />
-            Play the interview
+            {copy.cta}
           </button>
+          {/*
+            WAS "Step into the farmhouse", into /world/farmhouse. The world is
+            off the site until it is finished (WORLD_ENABLED in
+            lib/content/world.ts), so this points at the scenes instead — which
+            is where somebody who just watched a trailer wants to go anyway.
+          */}
           <Link
-            href="/world/farmhouse"
+            href="/browse"
             className="inline-flex min-h-12 items-center rounded-full bg-charcoal/70 px-6 text-sm text-ivory backdrop-blur-md transition-colors duration-(--duration-quick) hover:bg-charcoal sm:px-7"
           >
-            Step into the farmhouse
+            Watch the scenes
           </Link>
           <Guest>
             <Link

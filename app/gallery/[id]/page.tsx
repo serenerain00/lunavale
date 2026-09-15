@@ -16,6 +16,7 @@ import { getEntry } from "@/lib/content/journal";
 import { signGalleryStills } from "@/lib/media/presign";
 import { getPlace } from "@/lib/content/taxonomy";
 import { getVideo } from "@/lib/content/videos";
+import { WORLD_ENABLED } from "@/lib/content/world";
 
 interface GalleryPageProps {
   params: Promise<{ id: string }>;
@@ -173,7 +174,8 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
                 Read what she wrote →
               </Link>
             )}
-            {place?.environmentSlug && (
+            {/* Off while the world is unfinished — WORLD_ENABLED. */}
+            {WORLD_ENABLED && place?.environmentSlug && (
               <Link
                 href={`/world/${place.environmentSlug}`}
                 className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"

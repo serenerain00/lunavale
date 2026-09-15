@@ -22,6 +22,7 @@ import {
   type RawParams,
 } from "@/lib/content/catalog";
 import { getFeeling, getPlace } from "@/lib/content/taxonomy";
+import { WORLD_ENABLED } from "@/lib/content/world";
 
 interface BrowsePageProps {
   searchParams: Promise<RawParams>;
@@ -92,7 +93,8 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
                 </span>
               </h2>
 
-              {focusedPlace?.environmentSlug && (
+              {/* Off while the world is unfinished — WORLD_ENABLED. */}
+              {WORLD_ENABLED && focusedPlace?.environmentSlug && (
                 <Link
                   href={`/world/${focusedPlace.environmentSlug}`}
                   className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 py-2 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber sm:min-h-0"

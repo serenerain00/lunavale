@@ -78,7 +78,47 @@ export interface Hero {
    * teaser for a scene elsewhere.
    */
   playInline?: boolean;
+  /**
+   * The words over it. Only a `playInline` hero has its own — everything else
+   * in the pool is a teaser for a scene and shares the site's front-door copy.
+   *
+   * IT LIVES HERE BECAUSE IT USED TO LIVE IN THE COMPONENT. The hero said
+   * "Start with the cast, in their own words" and "Play the interview" as
+   * literal strings, which was correct while the interview was the only thing
+   * that played inline and became a lie the moment the trailer did. Copy that
+   * describes a particular video belongs with that video.
+   */
+  copy?: HeroCopy;
 }
+
+export interface HeroCopy {
+  kicker: string;
+  headline: string;
+  blurb: string;
+  cta: string;
+}
+
+/** The site's front door, and the fallback for anything without its own. */
+const DEFAULT_COPY: HeroCopy = {
+  kicker: "An explorable cinematic universe",
+  headline: "Enter the world of Luna.",
+  blurb:
+    "Start with the cast, in their own words \u2014 then step inside the world they made.",
+  cta: "Play the interview",
+};
+
+const INLINE_COPY: Record<string, HeroCopy> = {
+  interview: DEFAULT_COPY,
+  "between-us-trailer-one": {
+    kicker: "An explorable cinematic universe",
+    headline: "Enter the world of Luna.",
+    // Says what it is, when the thing it is advertising arrives, and that the
+    // site is not a waiting room — the world is already open.
+    blurb:
+      "The first trailer for Between Us. The pilot lands this month \u2014 and the world it happens in is already here.",
+    cta: "Play the trailer",
+  },
+};
 
 /**
  * The interview used to be PINNED here, overriding the rotation entirely — so
@@ -114,7 +154,9 @@ export function heroes(): Hero[] {
         video,
         loop: `/hero/${slug}.mp4`,
         poster: `/hero/${slug}.jpg`,
-        ...(PLAY_INLINE_SLUGS.has(slug) ? { playInline: true } : {}),
+        ...(PLAY_INLINE_SLUGS.has(slug)
+          ? { playInline: true, copy: INLINE_COPY[slug] ?? DEFAULT_COPY }
+          : {}),
       },
     ];
   });

@@ -40,7 +40,7 @@ import { characters } from "@/lib/content/characters";
 import { clips, clipAccess } from "@/lib/content/clips";
 import { galleries } from "@/lib/content/gallery";
 import { freeEntries } from "@/lib/content/journal";
-import { environments } from "@/lib/content/world";
+import { environments, WORLD_ENABLED } from "@/lib/content/world";
 import { notes as setNotes } from "@/lib/content/between-takes";
 import { videos } from "@/lib/content/videos";
 
@@ -72,7 +72,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/browse", 0.8, "weekly"),
     entry("/characters", 0.8, "monthly"),
     entry("/clips", 0.8, "weekly"),
-    entry("/world", 0.7, "monthly"),
+    // The world is off the site until it is finished (WORLD_ENABLED). A
+    // sitemap entry for a route that 404s is the worst of both.
+    ...(WORLD_ENABLED ? [entry("/world", 0.7, "monthly")] : []),
     entry("/between-takes", 0.6, "weekly"),
     entry("/membership", 0.7, "monthly"),
 
@@ -98,7 +100,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .filter((c) => !c.explicit && !(clipAccess(c) === "premium" && !c.preview))
       .map((c) => entry(`/clips/${c.id}`, 0.7)),
     ...characters.map((c) => entry(`/characters/${c.id}`, 0.7, "monthly")),
-    ...environments.map((e) => entry(`/world/${e.slug}`, 0.6, "monthly")),
+    ...(WORLD_ENABLED
+      ? environments.map((e) => entry(`/world/${e.slug}`, 0.6, "monthly"))
+      : []),
     ...galleries.map((g) => entry(`/gallery/${g.id}`, 0.6)),
     ...setNotes.map((n) => entry(`/between-takes/${n.id}`, 0.5)),
 

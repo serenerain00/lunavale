@@ -1,10 +1,16 @@
 /**
- * InterviewHero — a hero whose video IS the content: click play and the full
- * cast interview plays right here, with sound, no trip to a watch page.
+ * InterviewHero — a hero whose video IS the content: click play and the whole
+ * thing plays right here, with sound, no trip to a watch page.
+ *
+ * NAMED FOR THE CAST INTERVIEW, WHICH IT NO LONGER ONLY SERVES. From
+ * 2026-09-15 it also carries the trailer, and anything else `playInline` is set
+ * on. The file name is left alone because it is imported by app/page.tsx and a
+ * rename buys nothing; the user-facing strings below, which said "interview" to
+ * somebody watching a trailer, are fixed.
  *
  * Two video layers:
  *   - the muted ambient loop behind the copy (AmbientVideo, desktop-only), and
- *   - the full interview, mounted but idle (preload="none", so its 31MB isn't
+ *   - the full video, mounted but idle (preload="none", so nothing is
  *     fetched until asked for), revealed and played on the Play click.
  *
  * play() is called synchronously inside the click handler on purpose: that
@@ -69,7 +75,7 @@ export function InterviewHero({ hero }: InterviewHeroProps) {
       </div>
 
       {/*
-        The full interview. Always mounted (so play() has an element to act on
+        The full thing. Always mounted (so play() has an element to act on
         within the click gesture) but preload="none", so nothing downloads until
         the visitor asks. Shown only while playing, contained on black so faces
         are never cropped.
@@ -98,7 +104,7 @@ export function InterviewHero({ hero }: InterviewHeroProps) {
           <button
             type="button"
             onClick={stop}
-            aria-label="Close the interview"
+            aria-label={`Close ${video.title}`}
             className="absolute right-4 top-4 z-20 inline-flex min-h-11 items-center gap-2 rounded-full border border-hairline bg-void/70 px-4 text-sm text-stone backdrop-blur-md transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber sm:right-6 sm:top-6"
           >
             Close
@@ -108,7 +114,7 @@ export function InterviewHero({ hero }: InterviewHeroProps) {
         {failed && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center">
             <p className="text-balance leading-relaxed text-ivory">
-              The interview won&rsquo;t play right now.
+              {video.title} won&rsquo;t play right now.
             </p>
             <button
               type="button"
@@ -121,7 +127,7 @@ export function InterviewHero({ hero }: InterviewHeroProps) {
         )}
       </div>
 
-      {/* Copy + CTAs, hidden once the interview takes over. */}
+      {/* Copy + CTAs, hidden once the video takes over. */}
       <div
         className={`mx-auto w-full max-w-6xl px-5 pb-12 transition-opacity duration-(--duration-standard) sm:px-8 sm:pb-16 ${
           playing ? "pointer-events-none opacity-0" : "opacity-100"

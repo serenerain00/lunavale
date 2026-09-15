@@ -2810,7 +2810,9 @@ export const videos: Video[] = [
       means nothing here beyond giving the browse axis something to hold.
     */
     slug: "between-us-trailer-one",
-    title: "Between Us \u2014 Trailer One",
+    // "Trailer", not "Trailer One" — Melissa, 2026-09-15. The slug keeps the
+    // -one because it is a published URL; the card does not have to.
+    title: "Trailer",
     synopsis:
       "Ten years, six months apart, and the best friend who has been there the whole time. The first look at the series \u2014 the pilot lands this month.",
     file: "between-us-trailer-one.proxy.mp4",

@@ -67,9 +67,26 @@ export interface Video {
    * The day this scene went up, ISO `YYYY-MM-DD`. Drives the "New" section on
    * the home page — see `latestScene()`.
    *
-   * Only set on scenes released since the field existed. An undated scene is
-   * treated as older than every dated one, which is true and means nothing had
-   * to be back-filled by guesswork.
+   * EVERY SCENE NOW HAS ONE. The twenty that predated the field were back-
+   * filled on 2026-09-15 from git, not from memory: for each slug, the date of
+   * the first commit that introduced its entry to this file
+   * (`git log --reverse -S'slug: "x"' -- lib/content/videos.ts`). That is
+   * provenance rather than guesswork, which is the only reason the back-fill
+   * was allowed — see the standing rule in lib/content/releases.ts.
+   *
+   * ONE CAVEAT, RECORDED RATHER THAN SMOOTHED OVER. The three scenes dated
+   * 2026-07-17 entered the repo on the day it was created, and media did not
+   * play on the live site until 2026-07-22 ("Serve media from private Vercel
+   * Blob so the live site can actually play"). Their true public day is
+   * therefore 07-22, and the catalog date is a few days early. It is left at
+   * the committed date because that is the fact we can actually check, and
+   * because nothing renders dates this old — see below.
+   *
+   * WHAT THIS DOES AND DOES NOT CHANGE. The home page shows `recentReleases(6)`
+   * and `cadenceNote()` looks back thirty days, so back-filled July dates are
+   * invisible today. They exist so a release index, an email, or any future
+   * "everything so far" view is right the day it is written, instead of
+   * starting from a library that looks like it began in August.
    */
   addedOn?: string;
   /** Whether this scene is publicly viewable or requires membership. */
@@ -206,6 +223,7 @@ export const videos: Video[] = [
     file: "interview.proxy.mp4",
     poster: "/posters/interview.jpg",
     durationSeconds: 363,
+    addedOn: "2026-07-23",
     access: "free",
     mature: false,
     hidden: true,
@@ -225,6 +243,7 @@ export const videos: Video[] = [
     file: "luna-josh-first-morning.proxy.mp4",
     poster: "/posters/luna-josh-first-morning.jpg",
     durationSeconds: 141,
+    addedOn: "2026-07-17",
     access: "premium",
     mature: false,
     preview: {
@@ -244,6 +263,7 @@ export const videos: Video[] = [
     file: "tyson-luna-lakehouse-fire.proxy.mp4",
     poster: "/posters/tyson-luna-lakehouse-fire.jpg",
     durationSeconds: 281,
+    addedOn: "2026-07-17",
     access: "premium",
     mature: true,
     preview: {
@@ -266,6 +286,7 @@ export const videos: Video[] = [
     file: "tyson-park-fight.proxy.mp4",
     poster: "/posters/tyson-park-fight.jpg",
     durationSeconds: 155,
+    addedOn: "2026-07-17",
     access: "premium",
     mature: true,
     preview: {
@@ -299,6 +320,7 @@ export const videos: Video[] = [
     file: "luna-tyson-bar.proxy.mp4",
     poster: "/posters/luna-tyson-bar.jpg",
     durationSeconds: 71,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {
@@ -374,6 +396,7 @@ export const videos: Video[] = [
     file: "josh-tyson-barn.proxy.mp4",
     poster: "/posters/josh-tyson-barn.jpg",
     durationSeconds: 68,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: false,
     preview: {
@@ -393,6 +416,7 @@ export const videos: Video[] = [
     file: "luna-tyson-bathroom.proxy.mp4",
     poster: "/posters/luna-tyson-bathroom.jpg",
     durationSeconds: 76,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {
@@ -412,6 +436,7 @@ export const videos: Video[] = [
     file: "luna-josh-coffee.proxy.mp4",
     poster: "/posters/luna-josh-coffee.jpg",
     durationSeconds: 129,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: false,
     preview: {
@@ -496,6 +521,7 @@ export const videos: Video[] = [
     // Not a re-encode of the same picture: the new edit runs sixty-five
     // seconds longer. See the note in scripts/import-cuts.sh.
     durationSeconds: 152,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {
@@ -707,6 +733,7 @@ export const videos: Video[] = [
     // -51dB mean — the dialogue was in it but inaudible on a phone. This one
     // carries a song instead, at -16.7dB.
     durationSeconds: 154,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {
@@ -726,6 +753,7 @@ export const videos: Video[] = [
     file: "luna-josh-dinner-house.proxy.mp4",
     poster: "/posters/luna-josh-dinner-house.jpg",
     durationSeconds: 115,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {
@@ -745,6 +773,7 @@ export const videos: Video[] = [
     file: "luna-josh-house.proxy.mp4",
     poster: "/posters/luna-josh-house.jpg",
     durationSeconds: 263,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {
@@ -767,6 +796,7 @@ export const videos: Video[] = [
     file: "josh-rick-study.proxy.mp4",
     poster: "/posters/josh-rick-study.jpg",
     durationSeconds: 57,
+    addedOn: "2026-07-28",
     access: "premium",
     mature: false,
     preview: {
@@ -841,6 +871,7 @@ export const videos: Video[] = [
     // "easy, don't force it, don't fight it… just give it one more" — so this
     // is the same scene with Melissa's music under it, not a different edit.
     durationSeconds: 57,
+    addedOn: "2026-07-28",
     access: "premium",
     mature: false,
     preview: {
@@ -873,6 +904,7 @@ export const videos: Video[] = [
     // the note in scripts/import-cuts.sh, including what the swap cost in
     // picture.
     durationSeconds: 285,
+    addedOn: "2026-07-29",
     access: "premium",
     mature: true,
     preview: {
@@ -994,6 +1026,7 @@ export const videos: Video[] = [
     file: "luna-tyson-dance-full.proxy.mp4",
     poster: "/posters/luna-tyson-dance.jpg",
     durationSeconds: 239,
+    addedOn: "2026-07-31",
     access: "premium",
     mature: false,
     preview: {
@@ -1053,6 +1086,7 @@ export const videos: Video[] = [
     file: "luna-bathtub.proxy.mp4",
     poster: "/posters/luna-bathtub.jpg",
     durationSeconds: 287,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     explicit: true,
@@ -1247,6 +1281,7 @@ export const videos: Video[] = [
     file: "luna-truck-breakdown.proxy.mp4",
     poster: "/posters/luna-truck-breakdown.jpg",
     durationSeconds: 15,
+    addedOn: "2026-08-03",
     // THE ONE SCENE STILL FREE UNDER THE 2026-09-11 POLICY, and it is not an
     // exception to it so much as a scene that already obeyed it by another
     // route. What sits at this slug is not the scene — it is a fifteen-second
@@ -1300,6 +1335,7 @@ export const videos: Video[] = [
     file: "ty-luna-bed.proxy.mp4",
     poster: "/posters/ty-luna-bed.jpg",
     durationSeconds: 227,
+    addedOn: "2026-07-27",
     access: "premium",
     mature: true,
     preview: {
@@ -1538,6 +1574,7 @@ export const videos: Video[] = [
     file: "ty-luna-farm-road.proxy.mp4",
     poster: "/posters/ty-luna-farm-road.jpg",
     durationSeconds: 128,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {

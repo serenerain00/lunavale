@@ -117,9 +117,11 @@ export interface JournalEntry {
    * journal entry is a release. Without this the cadence looks half as busy as
    * it is, because only the scenes could be dated.
    *
-   * Only set where the date is KNOWN. Most of this file predates the field and
-   * is deliberately left undated rather than back-filled by guesswork — an
-   * undated entry is treated as older than every dated one, which is true.
+   * EVERY ENTRY NOW HAS ONE. The sixty-five that predated the field were
+   * back-filled on 2026-09-15 from git — the first commit that introduced each
+   * id to this file — which is provenance, not guesswork. The same pass did
+   * the same for lib/content/videos.ts and lib/content/clips.ts, and the full
+   * reasoning (including its one caveat) is written out once, in videos.ts.
    */
   addedOn?: string;
   /** The scene this sits beside, when it's the same day. */
@@ -148,6 +150,7 @@ export const journal: JournalEntry[] = [
   */
   {
     id: "second",
+    addedOn: "2026-08-15",
     dateline: "He said he'd be an hour",
     place: "farmhouse",
     about: ["josh"],
@@ -174,6 +177,7 @@ export const journal: JournalEntry[] = [
   */
   {
     id: "everybodys-josh",
+    addedOn: "2026-08-15",
     dateline: "Home from the Harknesses'",
     place: "farmhouse",
     about: ["josh"],
@@ -306,6 +310,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "last-on-my-own-list",
+    addedOn: "2026-08-15",
     dateline: "Sunday, everything done",
     place: "farmhouse",
     about: ["luna"],
@@ -386,6 +391,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "he-wants-it-now",
+    addedOn: "2026-08-15",
     dateline: "The morning of the delivery",
     place: "farmhouse",
     about: ["josh"],
@@ -513,6 +519,7 @@ export const journal: JournalEntry[] = [
   */
   {
     id: "the-night-i-left",
+    addedOn: "2026-08-15",
     dateline: "The afternoon I packed, and after",
     place: "lakehouse",
     about: ["josh", "tyson"],
@@ -637,6 +644,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "the-last-box",
+    addedOn: "2026-07-22",
     dateline: "The day the last box went",
     place: "lakehouse",
     about: ["josh"],
@@ -661,6 +669,7 @@ export const journal: JournalEntry[] = [
    */
   {
     id: "the-work",
+    addedOn: "2026-08-09",
     dateline: "A shoot day, and I needed one",
     place: "downtown",
     about: ["luna"],
@@ -750,6 +759,7 @@ export const journal: JournalEntry[] = [
      * different, cheaper story.
      */
     id: "my-mother-called",
+    addedOn: "2026-08-03",
     dateline: "She finally got me on the phone",
     place: "lakehouse",
     about: ["luna", "cathy", "josh"],
@@ -780,6 +790,7 @@ export const journal: JournalEntry[] = [
    */
   {
     id: "my-mother-likes-him",
+    addedOn: "2026-08-09",
     dateline: "After she hung up, and I have worked something out",
     place: "lakehouse",
     about: ["luna", "cathy", "josh"],
@@ -922,6 +933,7 @@ export const journal: JournalEntry[] = [
      * first act.
      */
     id: "avery-called",
+    addedOn: "2026-08-04",
     dateline: "Interrupted, and I'm glad",
     place: "apartment",
     about: ["luna", "avery", "cathy"],
@@ -941,6 +953,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "tyson-shows-up",
+    addedOn: "2026-07-22",
     dateline: "Week two, and he's here again",
     place: "lakehouse",
     where: "The kitchen",
@@ -1017,6 +1030,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "the-carrera",
+    addedOn: "2026-07-22",
     dateline: "Sunday, and he had the car out",
     place: "lakehouse",
     about: ["tyson"],
@@ -1031,6 +1045,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "the-things-only-we-do",
+    addedOn: "2026-07-22",
     dateline: "Thursday, the usual",
     place: "lakehouse",
     about: ["tyson"],
@@ -1333,6 +1348,7 @@ export const journal: JournalEntry[] = [
     // Members-only: there is a turn in it, which is the rule the rest of the
     // journal follows. The scene's 30s teaser is free; this is what she thought.
     id: "the-night-at-the-bar",
+    addedOn: "2026-07-31",
     dateline: "A month, and he made me go out",
     place: "bar",
     about: ["luna", "tyson"],
@@ -1376,6 +1392,7 @@ export const journal: JournalEntry[] = [
   */
   {
     id: "why-i-write-this-down",
+    addedOn: "2026-08-15",
     dateline: "Half past two, again",
     place: "farmhouse",
     about: ["luna"],
@@ -1391,6 +1408,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "he-found-me",
+    addedOn: "2026-08-15",
     dateline: "I did not call him",
     place: "bar",
     about: ["luna", "tyson"],
@@ -1457,6 +1475,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "nowhere-to-put-it",
+    addedOn: "2026-08-15",
     dateline: "After I broke the blue bowl",
     place: "farmhouse",
     about: ["luna"],
@@ -1473,6 +1492,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "two-kinds-of-quiet",
+    addedOn: "2026-08-15",
     dateline: "Working something out about both of them",
     place: "lakehouse",
     about: ["josh", "tyson"],
@@ -1509,6 +1529,7 @@ export const journal: JournalEntry[] = [
   */
   {
     id: "why-not-the-bear",
+    addedOn: "2026-08-15",
     dateline: "Two in the morning, being honest for once",
     place: "lakehouse",
     about: ["tyson", "josh"],
@@ -1595,6 +1616,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "the-bad-one",
+    addedOn: "2026-08-15",
     dateline: "Wrote this the next day. Could not have written it that night.",
     place: "lakehouse",
     about: ["luna"],
@@ -1616,6 +1638,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "month-four",
+    addedOn: "2026-07-22",
     dateline: "Somewhere around month four",
     place: "lakehouse",
     where: "The back deck",
@@ -1630,6 +1653,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "not-just-a-friend",
+    addedOn: "2026-07-22",
     dateline: "I noticed something tonight",
     place: "lakehouse",
     where: "The back deck",
@@ -1950,6 +1974,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "firepit-not-saying",
+    addedOn: "2026-07-22",
     dateline: "Late — the first cold night",
     place: "lakehouse",
     where: "The firepit",
@@ -1968,6 +1993,7 @@ export const journal: JournalEntry[] = [
   /* -------------------------------------------------- josh comes back ---- */
   {
     id: "he-called",
+    addedOn: "2026-07-22",
     dateline: "He called this morning",
     place: "lakehouse",
     about: ["josh"],
@@ -1981,6 +2007,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "coffee",
+    addedOn: "2026-07-22",
     dateline: "Sitting in the car outside, writing this before I drive",
     place: "coffee-shop",
     about: ["josh"],
@@ -2019,6 +2046,7 @@ export const journal: JournalEntry[] = [
    */
   {
     id: "joshs-father",
+    addedOn: "2026-08-09",
     dateline: "Thinking about Rick, of all people",
     place: "farmhouse",
     about: ["luna", "josh", "rick"],
@@ -2036,6 +2064,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "back-pocket",
+    addedOn: "2026-07-22",
     dateline: "Getting ready, and he turned up",
     place: "lakehouse",
     where: "The kitchen",
@@ -2054,6 +2083,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "the-bathroom",
+    addedOn: "2026-07-22",
     dateline: "In the bathroom, and I'm shaking a bit",
     place: "lakehouse",
     where: "The bathroom",
@@ -2077,6 +2107,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "the-long-table",
+    addedOn: "2026-07-22",
     dateline: "The same night, after dinner",
     place: "farmhouse",
     where: "The long table",
@@ -2093,6 +2124,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "i-said-yes",
+    addedOn: "2026-07-22",
     dateline: "Days later, correcting myself",
     place: "farmhouse",
     where: "Our bedroom",
@@ -2131,6 +2163,7 @@ export const journal: JournalEntry[] = [
      * not happened yet.
      */
     id: "first-night",
+    addedOn: "2026-08-12",
     dateline: "Six in the morning — he's asleep now and I'm not",
     place: "farmhouse",
     where: "Our bedroom",
@@ -2156,6 +2189,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "what-i-didnt-say",
+    addedOn: "2026-07-22",
     dateline: "The next day, still haven't said it",
     place: "lakehouse",
     about: ["tyson"],
@@ -2170,6 +2204,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "he-already-knew",
+    addedOn: "2026-07-22",
     dateline: "He already knew",
     place: "farmhouse",
     about: ["tyson", "josh"],
@@ -2185,6 +2220,7 @@ export const journal: JournalEntry[] = [
   /* --------------------------------------------------- it begins again ---- */
   {
     id: "the-thing-we-do",
+    addedOn: "2026-07-22",
     dateline: "He did the thing",
     place: "farmhouse",
     where: "The yard",
@@ -2333,6 +2369,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "first-morning-back",
+    addedOn: "2026-07-22",
     dateline: "First morning back",
     place: "farmhouse",
     where: "The kitchen island",
@@ -2349,6 +2386,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "the-kitchen",
+    addedOn: "2026-07-22",
     dateline: "Tuesday, nothing happening",
     place: "farmhouse",
     where: "The kitchen",
@@ -2481,6 +2519,7 @@ export const journal: JournalEntry[] = [
     // whole point of the entry — she gets to the question and then does not
     // answer it, which is how she handles everything about him.
     id: "the-bolt",
+    addedOn: "2026-07-28",
     dateline: "After, and my hands won't close properly",
     place: "farmhouse",
     where: "The barn",
@@ -2506,6 +2545,7 @@ export const journal: JournalEntry[] = [
     // nothing to withhold. It is also the best advert the journal has — a
     // visitor who reads this understands exactly what the locked pages are.
     id: "close-quarters",
+    addedOn: "2026-07-28",
     dateline: "An hour in the truck, waiting out the rain",
     place: "farmhouse",
     where: "The farm road",
@@ -2533,6 +2573,7 @@ export const journal: JournalEntry[] = [
      * with her, and she is reading it as something she did.
      */
     id: "the-fair",
+    addedOn: "2026-08-03",
     dateline: "The fair, and I've come back to the truck to write this",
     place: "fair",
     about: ["luna", "tyson", "josh"],
@@ -2575,6 +2616,7 @@ export const journal: JournalEntry[] = [
    */
   {
     id: "mexico-on-the-way",
+    addedOn: "2026-07-29",
     dateline: "Seven days away — somewhere over the water",
     place: "mexico",
     about: ["luna", "josh"],
@@ -2637,6 +2679,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "mexico-the-last-night",
+    addedOn: "2026-07-29",
     dateline: "Seven days away — the last night, and I don't want to go home",
     place: "mexico",
     about: ["luna", "josh"],
@@ -2656,6 +2699,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "the-part-i-forgot",
+    addedOn: "2026-07-22",
     dateline: "Three weeks in",
     place: "farmhouse",
     about: ["josh"],
@@ -2672,6 +2716,7 @@ export const journal: JournalEntry[] = [
     // event — and it does the thing the free pages are supposed to do: it is
     // warm right up until the third paragraph, which is where the story is.
     id: "the-quiet-after",
+    addedOn: "2026-07-28",
     dateline: "Sunday, and neither of us has said anything",
     place: "farmhouse",
     about: ["luna", "josh"],
@@ -2687,6 +2732,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "two-kinds",
+    addedOn: "2026-07-22",
     dateline: "Late, and nobody is asking me this",
     place: "farmhouse",
     about: ["luna", "josh", "tyson"],
@@ -2769,6 +2815,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "distance",
+    addedOn: "2026-07-22",
     dateline: "Walking back up the road",
     place: "farmhouse",
     where: "The farm road",
@@ -2785,6 +2832,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "out-at-the-lake",
+    addedOn: "2026-07-22",
     dateline: "Out at the water",
     place: "lake",
     where: "The dock",
@@ -2801,6 +2849,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "last-call",
+    addedOn: "2026-07-22",
     dateline: "Home from the bar, and I'm not going to sleep",
     place: "bar",
     about: ["tyson"],
@@ -2820,6 +2869,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "reading-it-back",
+    addedOn: "2026-07-22",
     dateline: "The next day, still on it",
     place: "lakehouse",
     about: ["luna", "tyson"],
@@ -3052,6 +3102,7 @@ export const journal: JournalEntry[] = [
   /* ---------------------------------------------------------- it turns ---- */
   {
     id: "he-asked-about-tyson",
+    addedOn: "2026-07-22",
     dateline: "He asked about Tyson tonight",
     place: "farmhouse",
     where: "Our bedroom",
@@ -3084,6 +3135,7 @@ export const journal: JournalEntry[] = [
    */
   {
     id: "your-date",
+    addedOn: "2026-08-09",
     dateline: "Home from the bar again, and this one is mine",
     place: "bar",
     about: ["tyson", "casey"],
@@ -3205,6 +3257,7 @@ export const journal: JournalEntry[] = [
    */
   {
     id: "i-apologized",
+    addedOn: "2026-08-27",
     dateline: "Did it badly, as advertised",
     place: "lakehouse",
     about: ["luna", "tyson", "casey"],
@@ -3224,6 +3277,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "the-window",
+    addedOn: "2026-07-28",
     dateline: "The city, very late, and I should be asleep",
     place: "downtown",
     where: "The window",
@@ -3251,6 +3305,7 @@ export const journal: JournalEntry[] = [
    */
   {
     id: "the-job",
+    addedOn: "2026-08-09",
     dateline: "Three days in the city, and the phone did not stop",
     place: "downtown",
     about: ["luna", "josh"],
@@ -3269,6 +3324,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "the-park",
+    addedOn: "2026-07-22",
     dateline: "The park, and he wouldn't look at me",
     place: "park",
     about: ["luna", "tyson"],
@@ -3291,6 +3347,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "on-paper",
+    addedOn: "2026-07-22",
     dateline: "Our bed, and I'm writing it down anyway",
     place: "farmhouse",
     where: "Our bedroom",
@@ -3325,6 +3382,7 @@ export const journal: JournalEntry[] = [
    */
   {
     id: "nearly-told-avery",
+    addedOn: "2026-08-09",
     dateline: "She left the gap and I didn't take it",
     place: "apartment",
     about: ["luna", "avery"],
@@ -3451,6 +3509,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "the-shape-of-it",
+    addedOn: "2026-07-22",
     dateline: "Late, and he's still up",
     place: "farmhouse",
     about: ["josh"],
@@ -3467,6 +3526,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "still-water",
+    addedOn: "2026-07-22",
     dateline: "Late, alone",
     place: "farmhouse",
     where: "The bathroom",
@@ -3482,6 +3542,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "the-sentence",
+    addedOn: "2026-07-28",
     dateline: "Alone, and I've been carrying this about a month",
     place: "lakehouse",
     about: ["luna"],
@@ -3498,6 +3559,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "day-by-day",
+    addedOn: "2026-07-22",
     dateline: "No date, I've lost track",
     place: "farmhouse",
     about: ["luna"],
@@ -3521,6 +3583,7 @@ export const journal: JournalEntry[] = [
    */
   {
     id: "the-version-i-give",
+    addedOn: "2026-08-09",
     dateline: "The one I hand people",
     place: "farmhouse",
     about: ["luna"],
@@ -3763,6 +3826,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "what-im-deciding",
+    addedOn: "2026-07-22",
     dateline: "Back at the firepit, on my own",
     place: "lakehouse",
     where: "The firepit",
@@ -3806,6 +3870,7 @@ export const journal: JournalEntry[] = [
    */
   {
     id: "the-drive",
+    addedOn: "2026-08-03",
     dateline: "The lakehouse. Not my choice — his",
     place: "lakehouse",
     about: ["luna", "josh", "tyson"],
@@ -3830,6 +3895,7 @@ export const journal: JournalEntry[] = [
   /* ------------------------------------------------------ much later ---- */
   {
     id: "the-night",
+    addedOn: "2026-07-22",
     dateline: "Much later — and I need to write this down properly",
     place: "lakehouse",
     about: ["tyson"],
@@ -3851,6 +3917,7 @@ export const journal: JournalEntry[] = [
   },
   {
     id: "what-it-was",
+    addedOn: "2026-07-22",
     dateline: "The morning after that",
     place: "lakehouse",
     where: "The kitchen",

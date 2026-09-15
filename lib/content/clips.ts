@@ -48,7 +48,8 @@ export interface Clip {
    * Only set on clips published since the field existed. An undated clip is
    * treated as older than every dated one, which is true, and they hold their
    * authored order among themselves — so nothing had to be back-filled by
-   * guesswork. Same rule and same reasoning as `Video.addedOn`.
+   * guesswork. Same rule and same reasoning as `Video.addedOn` — including
+   * the 2026-09-15 back-fill from git, which dated the last nine of these.
    */
   addedOn?: string;
   /** Who's in it. */
@@ -305,6 +306,7 @@ const authored: Clip[] = [
   },
   {
     id: "run-at-the-lake",
+    addedOn: "2026-07-22",
     title: "Run",
     caption: "Six miles, headphones in, nobody to talk to. Her favorite hour.",
     // Trimmed 2026-08-10 at 100.5s, from 103.7. What came off was 1.0s of
@@ -323,6 +325,7 @@ const authored: Clip[] = [
   },
   {
     id: "apartment-window",
+    addedOn: "2026-07-22",
     title: "The Apartment",
     caption: "A city night, and a conversation that doesn't stay a conversation.",
     file: "apartment-window.proxy.mp4",
@@ -333,6 +336,7 @@ const authored: Clip[] = [
   },
   {
     id: "close-quarters",
+    addedOn: "2026-07-22",
     title: "Close Quarters",
     caption: "Not enough room in it to pretend.",
     file: "close-quarters.proxy.mp4",
@@ -343,6 +347,7 @@ const authored: Clip[] = [
   },
   {
     id: "still-awake",
+    addedOn: "2026-07-22",
     title: "Still Awake",
     caption: "Long past the hour either of them meant to stop.",
     file: "still-awake.proxy.mp4",
@@ -356,6 +361,7 @@ const authored: Clip[] = [
   },
   {
     id: "morning-after",
+    addedOn: "2026-07-22",
     title: "The Morning After",
     caption: "Nobody says anything, and it isn't awkward, which is its own problem.",
     file: "morning-after.proxy.mp4",
@@ -375,6 +381,7 @@ const authored: Clip[] = [
     // which sets the rule: Melissa's own music, nothing licensed. The audio
     // here is the master's own location sound.
     id: "beach-preview",
+    addedOn: "2026-07-29",
     title: "The Beach",
     caption:
       "Thirty seconds of an evening that runs nearly five minutes. The rest is in the LunaVerse.",
@@ -393,6 +400,7 @@ const authored: Clip[] = [
     // Free, and the best thing on the site to put in front of a stranger:
     // it is 58 seconds, it needs no context, and somebody wins something.
     id: "one-more",
+    addedOn: "2026-07-29",
     title: "One More",
     caption:
       "She can't shift it and she's done arguing about it. He doesn't take the wrench off her.",
@@ -407,6 +415,7 @@ const authored: Clip[] = [
     // than a turn, and it is the shortest route a stranger has to Tyson —
     // which is what the character pages need most.
     id: "discipline",
+    addedOn: "2026-07-28",
     title: "Discipline",
     caption:
       "The sign on his wall has been there for years. He has never once mentioned it.",
@@ -418,6 +427,7 @@ const authored: Clip[] = [
   },
   {
     id: "said-out-loud",
+    addedOn: "2026-07-22",
     title: "Said Out Loud",
     caption: "The sentence she'd been carrying around for a month.",
     file: "said-out-loud.proxy.mp4",

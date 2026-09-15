@@ -79,14 +79,19 @@ const ALL_TIERS: Tier[] = [
   {
     id: "vault",
     name: "LunaVerse",
-    // The tagline is the first thing under the name, and "the rooms that are
-    // locked" left a visitor to infer that LunaVerse meant the membership. It
-    // now says so.
-    tagline: "The membership. The rooms that are locked.",
+    // The tagline is the first thing under the name, and it has to say two
+    // things at once: that LunaVerse IS the membership, and what the membership
+    // actually contains. "The rooms that are locked" said neither — it named a
+    // world that is off the site (WORLD_ENABLED), and the blurb under it sold
+    // "the parts of each location a visitor can see but not open", which is a
+    // description of something nobody can currently buy. Both now describe the
+    // real product: previews are the free edge, membership is past it. Restore
+    // the room language with the world, not before.
+    tagline: "The membership. Everything behind the previews.",
     priceMonthlyCents: 800,
     priceYearlyCents: 8000,
     blurb:
-      "The full scene library, the mature cuts, the private journals, and the parts of each location a visitor can see but not open. New material lands every month.",
+      "Every scene at full length, the mature cuts, the private journal entries, and the galleries. New material lands every month.",
     cta: "Join the LunaVerse",
     commitment: "Monthly · cancel any time",
     featured: true,
@@ -405,12 +410,18 @@ export const QUESTIONS: Question[] = [
     a: "Yes, from your account page, in one click, with no email or chat in the way. You keep access until the end of the period you already paid for, and you are not charged again.",
   },
   {
+    // THIS ANSWER USED TO PROMISE SOMETHING THAT DOES NOT EXIST: "your progress
+    // through the world is still there". There is no progress tracking in this
+    // app — nothing records what anybody has watched — and the world it refers
+    // to is off the site. It was a promise made on a cancellation screen, which
+    // is the worst possible place to be caught in one. Say only what is true:
+    // access is a switch, and the switch goes back on.
     q: "What happens to what I've unlocked if I leave?",
-    a: "Locked material closes again when your membership ends, and everything public stays open to you exactly as before. If you come back later, your progress through the world is still there.",
+    a: "Locked material closes again when your membership ends, and everything public stays open to you exactly as before. Nothing you watched is deleted \u2014 if you come back later, the whole library opens again the moment you do.",
   },
   {
     q: "Does the free part get worse over time?",
-    a: "No. Public scenes stay public and the open locations stay open. Membership adds rooms; it never takes them away.",
+    a: "No. Public scenes stay public and the previews stay where they are. Membership adds material; it never takes any away.",
   },
   {
     q: "How often does new material arrive?",

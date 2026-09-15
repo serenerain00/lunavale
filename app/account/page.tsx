@@ -199,7 +199,7 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
               <p className="mt-2 max-w-xl text-sm leading-relaxed text-stone">
                 {billingLive()
                   ? "This opens Stripe's billing portal, where you can cancel in one click. You keep access until the end of the period you've already paid for, and you won't be charged again."
-                  : "One click, effective immediately, with no further charges. Your progress through the world is kept, so everything is where you left it if you come back."}
+                  : "One click, effective immediately, with no further charges. Everything public stays open to you, and rejoining later opens the rest again at once."}
               </p>
               <form action={cancelMembership} className="mt-5">
                 <button

@@ -67,21 +67,48 @@ IVORY = (242, 236, 228)
 VOID = (10, 9, 8)          # app/globals.css --color-void, not pure black
 
 # ---- timing, in seconds -----------------------------------------------------
-CONVERGE = 2.8     # letters travelling
-RULE_AT = 2.5      # rule starts drawing before the letters have quite stopped
-RULE_LEN = 0.9
-SUB_AT = 3.0
-SUB_LEN = 1.0
-HOLD = 2.2         # everything up, nothing moving
-FADE_OUT = 1.2
-TOTAL = CONVERGE + HOLD + FADE_OUT + 0.6
+#
+# THE SPREAD IS HELD BEFORE IT MOVES, and that is the whole correction. The
+# first cut of this ran ease-out-quint straight from frame one, which front-
+# loads the travel so hard that the letters were 98% together by 1.5s — they
+# were apart for about half a second, while still fading up, and nobody would
+# have seen it. The brief was "separated then slowly come together", and it was
+# doing the second half only.
+#
+# So: they fade up at full spread and SIT there for most of a second, then
+# travel on an ease-in-out. Slow away, slow into place, and the middle is where
+# the distance actually gets covered — which is the move you can watch.
+SPREAD_HOLD = 0.9  # up, wide, and completely still
+CONVERGE = 2.9     # letters travelling
+RULE_AT = SPREAD_HOLD + CONVERGE - 0.25
+RULE_LEN = 1.0
+SUB_AT = SPREAD_HOLD + CONVERGE + 0.25
+SUB_LEN = 1.1
+HOLD = 2.0         # everything up, nothing moving
+FADE_OUT = 1.3
+TOTAL = SPREAD_HOLD + CONVERGE + 1.35 + HOLD + FADE_OUT
 
-TRACK_START, TRACK_END = 150.0, 16.0
+# THE SPREAD IS DERIVED FROM THE FRAME, NOT A CONSTANT. It was a flat 150px,
+# which is fine at 1920 and runs the B and the S off the edge at 1952 — the
+# spread title is wider than the picture, so the first thing the card does is
+# crop its own title. A fixed letterspacing cannot know how wide the frame is.
+#
+# So the opening tracking is whatever makes the spread title fill SPREAD_FILL
+# of the width, and it is correct at any size this is ever rendered at.
+SPREAD_FILL = 0.88
+TRACK_END = 16.0
 SUB_TRACK_START, SUB_TRACK_END = 24.0, 11.0
 
 
 def ease_out_quint(t: float) -> float:
+    """Used for the rule and the subtitle, where a quick settle is right."""
     return 1 - pow(1 - t, 5)
+
+
+def ease_in_out_cubic(t: float) -> float:
+    """The letters. Eases away from the spread and eases into place, so the
+    distance is covered in the middle where it can be watched."""
+    return 4 * t * t * t if t < 0.5 else 1 - pow(-2 * t + 2, 3) / 2
 
 
 def clamp01(x: float) -> float:
@@ -110,10 +137,15 @@ def render_frame(t: float, W: int, H: int) -> Image.Image:
     y_rule = int(H * 0.565)
     y_sub = int(H * 0.590)
 
-    p = ease_out_quint(clamp01(t / CONVERGE))
-    tracking = TRACK_START + (TRACK_END - TRACK_START) * p
-    # Legible while still moving — see the note at the top.
-    alpha = int(255 * clamp01(t / (CONVERGE * 0.45)))
+    # Nothing moves until the spread has been up long enough to register.
+    letters = sum(d.textlength(c, font=title_f) for c in "BETWEEN US")
+    track_start = max(TRACK_END, (W * SPREAD_FILL - letters) / (len("BETWEEN US") - 1))
+
+    p = ease_in_out_cubic(clamp01((t - SPREAD_HOLD) / CONVERGE))
+    tracking = track_start + (TRACK_END - track_start) * p
+    # Fully up before the travel starts, so the separation is what you see
+    # first rather than something that resolves out of a fade.
+    alpha = int(255 * clamp01(t / (SPREAD_HOLD * 0.8)))
     if alpha:
         draw_tracked(d, "BETWEEN US", title_f, tracking, y_title, IVORY + (alpha,), W)
 
@@ -180,6 +212,11 @@ def main():
                     help="render one frame at T seconds and stop")
     ap.add_argument("--append", metavar="TRAILER",
                     help="concatenate the card onto this file, matching its format")
+    ap.add_argument("--src-end", type=float, metavar="SECONDS",
+                    help="trim the trailer here first. A trailer that already "
+                         "fades to black leaves several seconds of it on the "
+                         "tail, and a card arriving after four seconds of dead "
+                         "air reads as a mistake rather than a beat.")
     ap.add_argument("--width", type=int, default=1920)
     ap.add_argument("--height", type=int, default=1080)
     ap.add_argument("--fps", type=int, default=24)
@@ -199,7 +236,11 @@ def main():
         W, H = int(probe[0]), int(probe[1])
         num, den = probe[2].split("/")
         fps = round(int(num) / int(den))
-        print(f"matching {src.name}: {W}x{H} @ {fps}fps")
+        rate = subprocess.run(
+            ["ffprobe", "-v", "error", "-select_streams", "a:0",
+             "-show_entries", "stream=sample_rate", "-of", "csv=p=0", str(src)],
+            capture_output=True, text=True, check=True).stdout.strip() or "48000"
+        print(f"matching {src.name}: {W}x{H} @ {fps}fps, audio {rate}Hz")
 
     if a.still is not None:
         OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -217,13 +258,16 @@ def main():
         # Re-encode both through one graph rather than concat-demuxing: the
         # trailer and the card will not share an encoder, and a stream copy of
         # mismatched files is how you get a second half that will not seek.
+        trim = f"-t {a.src_end} " if a.src_end else ""
         subprocess.run(
-            ["ffmpeg", "-y", "-loglevel", "error", "-i", str(src), "-i", str(card),
+            ["ffmpeg", "-y", "-loglevel", "error"]
+            + (["-t", str(a.src_end)] if a.src_end else [])
+            + ["-i", str(src), "-i", str(card),
              "-filter_complex",
              f"[0:v]scale={W}:{H},setsar=1,fps={fps}[v0];"
              f"[1:v]scale={W}:{H},setsar=1,fps={fps}[v1];"
-             f"[0:a]aformat=sample_rates=48000:channel_layouts=stereo[a0];"
-             f"anullsrc=r=48000:cl=stereo,atrim=0:{TOTAL}[a1];"
+             f"[0:a]aformat=sample_rates={rate}:channel_layouts=stereo[a0];"
+             f"anullsrc=r={rate}:cl=stereo,atrim=0:{TOTAL}[a1];"
              f"[v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]",
              "-map", "[v]", "-map", "[a]",
              "-c:v", "libx264", "-preset", "slow", "-crf", "18",

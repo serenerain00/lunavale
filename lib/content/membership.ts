@@ -63,10 +63,15 @@ const ALL_TIERS: Tier[] = [
   {
     id: "free",
     name: "Visitor",
-    tagline: "The world, open.",
+    // WAS "The world, open." / "Walk into the farmhouse, watch the public
+    // scenes...". The world is off the site until it is finished
+    // (WORLD_ENABLED in lib/content/world.ts), so the free tier stopped being
+    // able to deliver the first thing it promised. Restore both lines when the
+    // rooms come back.
+    tagline: "The story, open.",
     priceMonthlyCents: 0,
     blurb:
-      "Walk into the farmhouse, watch the public scenes, read the story so far. No account, no card, no countdown. What is free today stays free.",
+      "Watch the trailer, read the story so far, and meet everyone in it. No account, no card, no countdown. What is free today stays free.",
     cta: "Start exploring",
     commitment: "Free forever",
     available: true,
@@ -74,14 +79,19 @@ const ALL_TIERS: Tier[] = [
   {
     id: "vault",
     name: "LunaVerse",
-    // The tagline is the first thing under the name, and "the rooms that are
-    // locked" left a visitor to infer that LunaVerse meant the membership. It
-    // now says so.
-    tagline: "The membership. The rooms that are locked.",
+    // The tagline is the first thing under the name, and it has to say two
+    // things at once: that LunaVerse IS the membership, and what the membership
+    // actually contains. "The rooms that are locked" said neither — it named a
+    // world that is off the site (WORLD_ENABLED), and the blurb under it sold
+    // "the parts of each location a visitor can see but not open", which is a
+    // description of something nobody can currently buy. Both now describe the
+    // real product: previews are the free edge, membership is past it. Restore
+    // the room language with the world, not before.
+    tagline: "The membership. Everything behind the previews.",
     priceMonthlyCents: 800,
     priceYearlyCents: 8000,
     blurb:
-      "The full scene library, the mature cuts, the private journals, and the parts of each location a visitor can see but not open. New material lands every month.",
+      "Every scene at full length, the mature cuts, the private journal entries, and the galleries. New material lands every month.",
     cta: "Join the LunaVerse",
     commitment: "Monthly · cancel any time",
     featured: true,
@@ -148,7 +158,7 @@ export interface Benefit {
    * Group heading in the comparison table. Grouping keeps the table scannable
    * instead of turning into a wall of twenty undifferentiated ticks.
    */
-  group: "Watching" | "The world" | "Behind it";
+  group: "Watching" | "Behind it";
 }
 
 /**
@@ -172,12 +182,48 @@ export const BENEFITS: Benefit[] = [
     group: "Watching",
   },
   {
+    // FIRST OF THE PAID BENEFITS, Melissa 2026-09-03: "for $8 a month theyll
+    // get exclusive access to Between Us episodes dropping soon. that should
+    // be the first benefit." Array order is what TierCard renders, so being
+    // first here is what puts it at the top of the card.
+    //
+    // IT IS THE ONE FORWARD-LOOKING LINE IN THIS FILE, and that is worth
+    // flagging rather than burying. The rule at the top of BENEFITS is that
+    // every row is a promise the product already keeps — "the moment one of
+    // these is aspirational rather than real, the whole page stops being
+    // trustworthy". This one is about something that does not exist yet.
+    //
+    // So the copy is written so it cannot be misread as available now: it says
+    // the series is coming and that members get it when it lands, not that
+    // there is anything to watch today. That is a real and keepable promise.
+    // What it must not become is a row that quietly reads as current — if
+    // Between Us slips, this line is the first thing to revisit, and the
+    // honest move then is to change the wording rather than leave it standing.
+    id: "between-us",
+    label: "Between Us episodes",
+    detail:
+      "The episode series, coming soon — and members-only when it lands.",
+    from: "vault",
+    group: "Watching",
+  },
+  {
     id: "full-library",
     label: "The full scene library",
-    // True as of 2026-07-29: 12 of the 19 scenes are members-only. Before the
-    // gating pass this line was selling two extra scenes and reading as a lie.
+    // NO NUMBER, Melissa 2026-09-03 ("remove the counts").
+    //
+    // It said "Twelve scenes that never go public", which was true when it was
+    // written on 2026-07-29 and had quietly stopped being true: there are 24
+    // members-only scenes now, so the line was underselling the library by
+    // half. That is the failure mode of a hand-typed count — it does not
+    // announce itself, it just drifts, and on a page asking for money a stale
+    // number is worse than no number whether it is too high or too low.
+    //
+    // The counted version of this argument still exists and is safe, because
+    // it is DERIVED: the "depth" section on the home page reads its figures
+    // straight out of the content modules, so it cannot drift. If a number
+    // belongs anywhere it is there, not typed into a sentence here.
     detail:
-      "Twelve scenes that never go public, including the whole of The Beach.",
+      "The scenes that never go public, including the whole of The Beach.",
     from: "vault",
     group: "Watching",
   },
@@ -219,29 +265,31 @@ export const BENEFITS: Benefit[] = [
   //
   // The members-only half of the world is already covered by "Locked rooms"
   // below, which is true and stays.
-  {
-    id: "locked-rooms",
-    label: "Locked rooms",
-    detail:
-      "The doors that stay shut for visitors — and the objects inside them.",
-    from: "vault",
-    group: "The world",
-  },
+  // "Locked rooms" was here — "the doors that stay shut for visitors, and the
+  // objects inside them". Pulled 2026-09-15 when the world came off the site
+  // to be finished (WORLD_ENABLED). Selling a door nobody can reach is the
+  // same lie this table has already had to remove three times, and the note
+  // twenty lines up says so about a smaller version of it. Restore it with the
+  // rooms.
   {
     id: "journals",
     label: "Private journals",
     detail:
       "Luna's writing, in her own words, between the scenes you've watched.",
     from: "vault",
-    group: "The world",
+    // Was "The world". The journal is its own route and never needed the
+    // rooms, so it moves rather than going with them.
+    group: "Watching",
   },
   {
     id: "artifacts",
     label: "Character artifacts",
     detail:
-      "Letters, photographs and objects that fill in what the scenes leave out.",
+      "Letters, photographs and stills that fill in what the scenes leave out.",
     from: "vault",
-    group: "The world",
+    // Was "The world", and "objects" meant objects in rooms. The galleries
+    // deliver this on their own, so it moves and the word changes with it.
+    group: "Watching",
   },
   // "Member-only variants" was here — "locations at other hours and in other
   // weather, with their own moments". Pulled 2026-07-28. There is no weather
@@ -318,7 +366,12 @@ export const BENEFITS: Benefit[] = [
   },
 ];
 
-export const BENEFIT_GROUPS = ["Watching", "The world", "Behind it"] as const;
+// "The world" was the middle group and is gone with the rooms (2026-09-15,
+// WORLD_ENABLED). Its three rows either moved to Watching — the journal and
+// the galleries never needed the world — or were pulled outright, in the case
+// of "Locked rooms". Leaving the heading in would have rendered an empty
+// column on the comparison table. Put it back with the rooms.
+export const BENEFIT_GROUPS = ["Watching", "Behind it"] as const;
 
 /**
  * Benefits belonging to a tier that is currently on sale. The comparison table
@@ -357,12 +410,18 @@ export const QUESTIONS: Question[] = [
     a: "Yes, from your account page, in one click, with no email or chat in the way. You keep access until the end of the period you already paid for, and you are not charged again.",
   },
   {
+    // THIS ANSWER USED TO PROMISE SOMETHING THAT DOES NOT EXIST: "your progress
+    // through the world is still there". There is no progress tracking in this
+    // app — nothing records what anybody has watched — and the world it refers
+    // to is off the site. It was a promise made on a cancellation screen, which
+    // is the worst possible place to be caught in one. Say only what is true:
+    // access is a switch, and the switch goes back on.
     q: "What happens to what I've unlocked if I leave?",
-    a: "Locked material closes again when your membership ends, and everything public stays open to you exactly as before. If you come back later, your progress through the world is still there.",
+    a: "Locked material closes again when your membership ends, and everything public stays open to you exactly as before. Nothing you watched is deleted \u2014 if you come back later, the whole library opens again the moment you do.",
   },
   {
     q: "Does the free part get worse over time?",
-    a: "No. Public scenes stay public and the open locations stay open. Membership adds rooms; it never takes them away.",
+    a: "No. Public scenes stay public and the previews stay where they are. Membership adds material; it never takes any away.",
   },
   {
     q: "How often does new material arrive?",

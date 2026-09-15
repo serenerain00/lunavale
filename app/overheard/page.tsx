@@ -4,6 +4,7 @@ import { PostForm } from "@/components/overheard/PostForm";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
+import { isOwner as viewerIsOwner } from "@/lib/access/owner";
 import { notFound } from "next/navigation";
 import {
   CAST_TINTS,
@@ -12,6 +13,7 @@ import {
   resolveMention,
 } from "@/lib/content/overheard";
 import { recentPosts, type OverheardPost } from "@/lib/db/overheard";
+import { getTier } from "@/lib/content/membership";
 
 export const metadata: Metadata = {
   title: "Overheard",
@@ -227,7 +229,7 @@ function RoomLocked({
         href="/membership"
         className="mt-6 inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
       >
-        See what membership opens
+        {getTier("vault")!.cta}
       </Link>
     </section>
   );
@@ -385,13 +387,6 @@ function snippet(body: string[], max = 90): string {
   return first.length > max ? `${first.slice(0, max - 1)}…` : first;
 }
 
-async function viewerIsOwner(): Promise<boolean> {
-  const owner = process.env.OWNER_USER_ID;
-  if (!owner || !authConfigured()) return false;
-  const { auth } = await import("@clerk/nextjs/server");
-  const { userId } = await auth();
-  return userId === owner;
-}
 
 async function isSignedIn(): Promise<boolean> {
   if (!authConfigured()) return false;

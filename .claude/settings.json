@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "d=$(date +%F); f=\"${CLAUDE_PROJECT_DIR:-.}/.health-check-last\"; [ -f \"$f\" ] && grep -q \"^$d\" \"$f\" && exit 0; printf %s '{\"hookSpecificOutput\": {\"hookEventName\": \"SessionStart\", \"additionalContext\": \"The daily health check has not run today. The standing rule for this project is to check the site before starting work. Run the health-check skill (npm run health), then report anything that FAILED, any warning worth acting on, and one line of state. Do not paste the whole run.\"}, \"systemMessage\": \"Health check not run today - /health-check\"}'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

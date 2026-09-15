@@ -129,12 +129,18 @@ export function Hero({ hero }: HeroProps) {
             {free ? <PlayGlyph /> : <PlayIfMember />}
             Play
           </Link>
+          {/*
+            WAS "Step into <place>", into /world. The world is off the site
+            until it is finished (WORLD_ENABLED in lib/content/world.ts), so
+            this offers the place's scenes instead — the same place, by the
+            route that works.
+          */}
           <Link
-            href={place?.environmentSlug ? `/world/${place.environmentSlug}` : "/world"}
+            href={place ? `/browse?place=${place.id}` : "/browse"}
             className="inline-flex min-h-12 items-center gap-2.5 rounded-full bg-charcoal/70 px-6 text-sm text-ivory backdrop-blur-md transition-colors duration-(--duration-quick) hover:bg-charcoal sm:px-7"
           >
             <PlaceGlyph />
-            {place?.environmentSlug ? `Step into ${place.label}` : "Explore the world"}
+            {place ? `More from ${place.label}` : "Browse everything"}
           </Link>
           {/* Hidden on phones: three stacked full-width buttons push the fold
               past the hero, and the header already carries a pinned Join. */}

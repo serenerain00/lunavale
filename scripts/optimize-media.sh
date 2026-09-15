@@ -231,18 +231,24 @@ case "$cmd" in
     # served ungated and permanently, so generating a card frame from an
     # explicit cut would publish exactly the thing membership is meant to
     # gate. These cuts are displayed using the public cut's poster.
-    slug="${1:?usage: optimize-media.sh proxy-only <slug> <source>}"
-    src="${2:?usage: optimize-media.sh proxy-only <slug> <source>}"
+    slug="${1:?usage: optimize-media.sh proxy-only <slug> <source> [end]}"
+    src="${2:?usage: optimize-media.sh proxy-only <slug> <source> [end]}"
+    # Where the picture ends, same switch and same reason as `import` above:
+    # timeline exports arrive with seconds of trailing black often enough to be
+    # worth one. Added 2026-09-14 for josh-luna-pool-explicit, which fades out
+    # at 7:23 and then runs four more seconds of black.
+    end="$(unset_dash "${3:-}" "")"
     [ -f "$src" ] || die "no source at $src"
 
     out="stories/$slug.proxy.mp4"
     ffmpeg -y -loglevel error -i "$src" \
+      ${end:+-t "$end"} \
       -vf "scale=-2:$PROXY_HEIGHT" \
       -c:v libx264 -preset medium -crf "$PROXY_CRF" -pix_fmt yuv420p \
       -c:a aac -b:a 128k -movflags +faststart \
       "$out"
 
-    dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src")
+    dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$out")
     printf '%-34s proxy %-6s poster %-6s durationSeconds: %.0f\n' \
       "$slug" "$(du -h "$out" | cut -f1)" "none" "$dur"
     ;;
@@ -270,9 +276,30 @@ case "$cmd" in
       -c:a aac -b:a 128k -movflags +faststart \
       "$out"
 
-    # Portrait poster, cropped to a true 9:16 so the cards tile evenly.
+    # POSTER SHAPE FOLLOWS THE SOURCE, and only where it has to.
+    #
+    # A PORTRAIT source is still cropped to a true 9:16, exactly as before, so
+    # the cards tile evenly and every existing clip poster is byte-for-byte
+    # what it was. That crop is not cosmetic: most of these sources are near
+    # 9:16 without being it (apartment-window scales to 720x1212), and dropping
+    # the crop would have quietly reshaped every card on the page.
+    #
+    # A source that is NOT portrait keeps its own shape. The square Instagram
+    # cut of the blonde-guy scene is 1320x1256, and the unconditional crop took
+    # a tall slice out of the middle of it and called that the card — the exact
+    # mangling this content kind exists to prevent. Such a clip declares
+    # `aspect` in lib/content/clips.ts and the cards render it.
+    src_w="$(ffprobe -v error -select_streams v:0 -show_entries stream=width \
+      -of csv=p=0 "$src")"
+    src_h="$(ffprobe -v error -select_streams v:0 -show_entries stream=height \
+      -of csv=p=0 "$src")"
+    if [ "$src_h" -gt "$src_w" ]; then
+      poster_vf="scale=$VERTICAL_WIDTH:$VERTICAL_HEIGHT:force_original_aspect_ratio=increase,crop=$VERTICAL_WIDTH:$VERTICAL_HEIGHT"
+    else
+      poster_vf="scale=$VERTICAL_WIDTH:-2"
+    fi
     ffmpeg -y -loglevel error -ss "$at" -i "$src" -frames:v 1 \
-      -vf "scale=$VERTICAL_WIDTH:$VERTICAL_HEIGHT:force_original_aspect_ratio=increase,crop=$VERTICAL_WIDTH:$VERTICAL_HEIGHT" \
+      -vf "$poster_vf" \
       -q:v "$STILL_Q" "public/posters/$slug.jpg"
 
     # Report the PROXY's duration, not the source's. Trimmed exports made this

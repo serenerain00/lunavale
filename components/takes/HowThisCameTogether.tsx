@@ -25,6 +25,7 @@
 
 import Link from "next/link";
 import { TakeReel } from "@/components/takes/TakeReel";
+import { getTier } from "@/lib/content/membership";
 import {
   takeCount,
   takesForScene,
@@ -118,7 +119,7 @@ export async function HowThisCameTogether({
             href="/membership"
             className="text-amber underline-offset-4 transition-colors duration-(--duration-quick) hover:underline"
           >
-            What membership opens
+            {getTier("vault")!.cta}
           </Link>
         </div>
       )}

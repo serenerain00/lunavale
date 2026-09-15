@@ -63,6 +63,29 @@ export interface WorldObject {
   access: AccessLevel;
 }
 
+/**
+ * THE WORLD IS OFF THE SITE. Melissa, 2026-09-15: "remove everything related to
+ * the 3d world. we need to work on it until its done."
+ *
+ * NOTHING HERE IS DELETED, AND THAT IS THE POINT. The rooms, the objects, the
+ * panorama slots, the components and the capture scripts are all untouched —
+ * the work continues, it just does not have an audience while it is half
+ * built. Nineteen of the rooms below are still placeholder geometry with a
+ * notice on them saying so, and a visitor meeting that cannot tell
+ * "unfinished" from "bad".
+ *
+ * WHAT THIS FLAG ACTUALLY DOES, all of it reversible by setting it true:
+ *   - /world and /world/[slug] return 404 instead of rendering
+ *   - the sitemap stops listing them
+ *   - every link into the world disappears from the home page, /browse,
+ *     /gallery and /about
+ *   - the membership table stops promising rooms that cannot be walked into
+ *
+ * Turning it back on is this line plus restoring the two membership rows and
+ * the /about entry, which are marked where they were removed.
+ */
+export const WORLD_ENABLED = false;
+
 export interface RoomScan {
   /** Only GLB meshes today; splats can be added later. */
   type: "glb";
@@ -854,7 +877,7 @@ export const environments: Environment[] = [
         id: "the-barn",
         name: "The Barn",
         description:
-          "Josh and Tyson at the tractor before the day starts. Family, co-workers, distant cousins — and the thing between them nobody names.",
+          "Josh and Tyson at the tractor before the day starts. Family, co-workers, second cousins — and the thing between them nobody names.",
         spawn: [0, 1.6, 3.5],
         dressing: "barn",
         galleryId: "josh-luna-bolt",

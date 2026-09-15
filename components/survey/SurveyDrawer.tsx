@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { SurveyForm } from "@/components/survey/SurveyForm";
 import type { SurveyOption } from "@/lib/content/survey";
 
@@ -14,12 +13,25 @@ import type { SurveyOption } from "@/lib/content/survey";
  * people decline that trade. The questions arriving where they already are
  * costs them nothing to start and nothing to abandon.
  *
- * IT ASKS THE THREE REQUIRED QUESTIONS and no more — how they are finding it,
- * series or film, would they watch it on a platform. Those three are exactly
- * what submitSurvey insists on, so an answer given here is a COMPLETE row in
- * the same table as a long-form one. There is no partial-response state and no
- * second code path. The other three live on /survey, linked from inside the
- * panel, which is the "whole thing" for anyone who wants to say more.
+ * IT ASKS ALL SIX AS OF 2026-09-09, on Melissa's instruction: "add the last
+ * few questions to the survey on the home page. ppl are engaging with it."
+ *
+ * It used to ask only the three REQUIRED ones — how they are finding it,
+ * series or film, would they watch it on a platform — on the argument that a
+ * shorter form gets finished, with the other three parked on /survey behind a
+ * link. That argument was sound in the abstract and it was untested. The
+ * evidence now runs the other way: the survey is the most-used thing on the
+ * site, and every response so far came through this drawer, which means the
+ * people who open it are willing and were being handed a link instead of a
+ * question.
+ *
+ * THE THREE REQUIRED ONES STILL COME FIRST in lib/content/survey.ts order, so
+ * somebody who runs out of patience halfway has already given the answers that
+ * matter, and the optional three are marked optional rather than merely being
+ * skippable in silence. A drawer answer is still a COMPLETE row in the same
+ * table as a long-form one — there is no partial-response state and no second
+ * code path — and /survey still exists as the standalone page for anyone who
+ * arrives at it from /about or the end of a scene.
  *
  * MOTION is a transform and an opacity fade, and it is dropped entirely under
  * prefers-reduced-motion — the panel still opens, it simply arrives. Nothing
@@ -107,7 +119,7 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
       >
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-amber">
-            Three questions
+            Six questions
           </p>
           <h2 className="mt-3 font-display text-2xl font-light text-ivory sm:text-3xl">
             Should this be a series?
@@ -156,7 +168,7 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
             : "translate-x-0 opacity-100"
         }`}
       >
-        Three questions
+        Six questions
       </button>
 
       {open && (
@@ -174,7 +186,7 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
             ref={panelRef}
             role="dialog"
             aria-modal="true"
-            aria-label="Three questions about Luna"
+            aria-label="Six questions about Luna"
             tabIndex={-1}
             className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-lg flex-col overflow-y-auto border-l border-hairline bg-obsidian shadow-2xl outline-none transition-transform duration-300 ease-out motion-reduce:transition-none ${
               shown ? "translate-x-0" : "translate-x-full"
@@ -183,10 +195,13 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
             <div className="flex items-start justify-between gap-4 border-b border-hairline px-5 py-4 sm:px-7">
               <div>
                 <p className="text-xs uppercase tracking-[0.2em] text-amber">
-                  Three questions
+                  Six questions
                 </p>
+                {/* Says the optional half out loud. Six is a bigger ask than
+                    three, and the honest way to make it is to promise less:
+                    anybody can answer the first three and send it. */}
                 <p className="mt-1 text-sm text-stone">
-                  About a minute. No account, no email.
+                  Three of them are optional. No account, no email.
                 </p>
               </div>
               <button
@@ -213,23 +228,11 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
             </div>
 
             <div className="px-5 pb-10 sm:px-7">
+              {/* No `questionIds` — the drawer is the whole survey now. See
+                  the note at the top of this file. */}
               <SurveyForm
                 scenes={scenes}
-                questionIds={["enjoyment", "format", "would_watch"]}
                 compact
-                footer={
-                  <p className="border-t border-hairline pt-5 text-sm leading-relaxed text-stone">
-                    There are three more — which scene stayed with you, what
-                    you want more of, and anything you want to say to her.{" "}
-                    <Link
-                      href="/survey"
-                      className="text-amber underline-offset-4 transition-colors duration-(--duration-quick) hover:underline"
-                    >
-                      Open the whole survey
-                    </Link>
-                    .
-                  </p>
-                }
               />
             </div>
           </div>

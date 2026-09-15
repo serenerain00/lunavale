@@ -25,7 +25,8 @@ export type ContentNoteId =
   | "control"
   | "panic"
   | "strangling"
-  | "coercion";
+  | "coercion"
+  | "knocked-out";
 
 export interface ContentNote {
   id: ContentNoteId;
@@ -88,6 +89,27 @@ export const CONTENT_NOTES: Record<ContentNoteId, ContentNote> = {
     label: "a panic attack",
     detail:
       "This scene shows a character having a prolonged panic attack, in real time.",
+  },
+  // Added 2026-09-02 for the farm fight, on the same argument that produced
+  // `strangling`: "physical violence" is true of that scene and tells somebody
+  // almost nothing about what is in it. What is in it is a woman stepping
+  // between two men, taking a punch that was not aimed at her, going down on
+  // her head, and losing consciousness with her face bleeding on both sides.
+  // Somebody who has been knocked out, or who has watched it happen, is owed
+  // the actual words before playback rather than a category that could equally
+  // mean two men shoving each other in a barn.
+  //
+  // SEVERE, and this one is genuinely arguable — the two existing severe notes
+  // are both intimate-partner violence and this is an accident inside somebody
+  // else's fight. It is raised anyway because the last minute of the scene is
+  // held on her injuries in close-up, and because the note has to carry the
+  // preview too. Melissa's to downgrade.
+  "knocked-out": {
+    id: "knocked-out",
+    label: "a woman knocked unconscious",
+    detail:
+      "A character is struck in the face during a fight she is trying to stop, falls, and loses consciousness. Her face is bleeding, and the scene stays with her.",
+    severe: true,
   },
 };
 

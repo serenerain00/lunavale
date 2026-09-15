@@ -134,12 +134,16 @@ export const characters: Character[] = [
       },
       { label: "Work", value: "Several things at once. Contract work on Josh's farm is one of them" },
       { label: "Drives", value: "A black 2020 Porsche Carrera he treats like something on loan" },
-      { label: "Family", value: "Josh's distant cousin — second or third, still being decided" },
+      // SECOND cousins, settled by Melissa 2026-09-04. This card used to
+      // say "second or third, still being decided", which put a production
+      // note on a character page: these people are drawn from real ones and
+      // a fact about them is either known or not stated at all.
+      { label: "Family", value: "Josh's second cousin — and it shows" },
       { label: "Cole", value: "Ten years a SEAL beside him, and the only person he can say it to" },
       { label: "Luna", value: "Twenty years. He was there for all six months she was alone" },
     ],
     details: [
-      "Josh's distant cousin, and helps him on the farm",
+      "Josh's second cousin, and helps him on the farm",
       "Puts the groceries away in the wrong cupboards on purpose",
       "Does not ask how she is — asks what she has eaten, then waits",
       "Started the staring game with her at nineteen, over nothing",
@@ -167,7 +171,7 @@ export const characters: Character[] = [
       { label: "From", value: "Denver, Colorado" },
       { label: "Lives", value: "The farm — where he and Luna spent the ten years" },
       { label: "Work", value: "Owns a shop and a large farm. Work first, always" },
-      { label: "Family", value: "Rick, his father. Tyson, his distant cousin" },
+      { label: "Family", value: "Rick, his father. Tyson, his second cousin" },
       { label: "Luna", value: "Met her in Atlanta on business. Long distance, and then she moved" },
     ],
     details: [

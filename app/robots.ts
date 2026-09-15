@@ -108,6 +108,11 @@ export default function robots(): MetadataRoute.Robots {
         disallow: "/",
       },
     ],
+    // Added 2026-09-09 with app/sitemap.ts. Until then /sitemap.xml was a 404
+    // and nothing pointed a crawler at the two-hundred-odd pages here but the
+    // internal links — a slow and lossy way to be found, on a site whose
+    // problem is being found at all.
+    sitemap: "https://lunavale38.com/sitemap.xml",
     host: "https://lunavale38.com",
   };
 }

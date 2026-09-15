@@ -5,6 +5,7 @@ import { PreviewNotice } from "@/components/membership/PreviewNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { SignOut } from "@/components/ui/SignOut";
 import { getMembership } from "@/lib/access/entitlement";
+import { isOwner } from "@/lib/access/owner";
 import { authConfigured, billingLive } from "@/lib/billing/provider";
 import { membershipForUser } from "@/lib/db/memberships";
 import {
@@ -38,9 +39,10 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
   // tell a new member they are a visitor.
   await claimAnythingWaiting();
 
-  const [{ tier, active, preview }, params] = await Promise.all([
+  const [{ tier, active, preview }, params, viewerIsOwner] = await Promise.all([
     getMembership(),
     searchParams,
+    isOwner(),
   ]);
   const current = getTier(tier)!;
   const unlocked = benefitsFor(tier);
@@ -105,8 +107,24 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
                   label="Price"
                   value={`${formatPrice(current.priceMonthlyCents)} / month`}
                 />
+                {/* "RENEWS" WAS A LIE TO ANYBODY WHO HAD CANCELLED. This read
+                    `status === "canceled"`, and Stripe does not move a
+                    subscription to that status when somebody switches off
+                    renewal — it stays "active" until the period actually runs
+                    out. So for the entire month after cancelling, the page told
+                    them their membership renews on the very date it ends.
+
+                    cancel_at_period_end is the flag that was missing; it is
+                    recorded from the webhook as of 2026-09-03. Access is
+                    unchanged either way — they keep everything until the date
+                    shown, which is the promise on the membership page and is
+                    enforced in tierForUser(), not here. */}
                 <Field
-                  label={record?.status === "canceled" ? "Access until" : "Renews"}
+                  label={
+                    record?.status === "canceled" || record?.cancelAtPeriodEnd
+                      ? "Access until"
+                      : "Renews"
+                  }
                   value={
                     record?.currentPeriodEnd
                       ? record.currentPeriodEnd.toLocaleDateString("en-US", {
@@ -181,7 +199,7 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
               <p className="mt-2 max-w-xl text-sm leading-relaxed text-stone">
                 {billingLive()
                   ? "This opens Stripe's billing portal, where you can cancel in one click. You keep access until the end of the period you've already paid for, and you won't be charged again."
-                  : "One click, effective immediately, with no further charges. Your progress through the world is kept, so everything is where you left it if you come back."}
+                  : "One click, effective immediately, with no further charges. Everything public stays open to you, and rejoining later opens the rest again at once."}
               </p>
               <form action={cancelMembership} className="mt-5">
                 <button
@@ -206,11 +224,17 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
               href="/membership"
               className="mt-6 inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
             >
-              See what membership opens
+              {getTier("vault")!.cta}
             </Link>
           </section>
         )}
-              {process.env.OWNER_USER_ID && (
+        {/*
+          OWNER ONLY. This used to test that OWNER_USER_ID was merely SET,
+          which it always is in production — so every signed-in member was
+          shown a link to /admin. The page itself 404s them correctly, so
+          nothing leaked; it just told paying customers there was a door.
+        */}
+        {viewerIsOwner && (
           <div className="mt-10">
             <Link
               href="/admin"

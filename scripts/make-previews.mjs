@@ -44,7 +44,8 @@
  */
 
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import path from "node:path";
 import process from "node:process";
 
@@ -64,144 +65,107 @@ const MAX_FRACTION = 1 / 3;
  * override should have a reason attached — otherwise this table becomes the
  * real rule and the constant above becomes decoration.
  */
+/**
+ * HOW LONG A PREVIEW IS, by how long the scene is. Melissa's policy,
+ * 2026-09-11, replacing the flat fifteen seconds:
+ *
+ *   longer than 3:00  ->  1:00
+ *   longer than 2:00  ->  0:45
+ *   anything shorter  ->  0:30
+ *
+ * IT ARRIVED WITH "keep all videos behind membership" and the two halves are
+ * one idea. Every scene is now gated, and in exchange the window on each one
+ * got substantially bigger — nineteen scenes went UP from fifteen seconds and
+ * only three came down. One wall, and a great deal more visible through it.
+ *
+ * NEVER MORE THAN HALF THE SCENE, which is not a departure from her numbers
+ * but the rule underneath them: at exactly sixty seconds her own tier is
+ * thirty, which is half. Extending that downwards is what stops a 0:41 scene
+ * handing over thirty of its forty-one seconds. It only ever binds below a
+ * minute — every scene above that gets the tier exactly.
+ *
+ * The old MAX_FRACTION of one third no longer applies to the single-window
+ * path; these tiers ARE the fraction rule now, and they are more generous by
+ * design. It still governs hand-built segment edits below.
+ */
+function previewSecondsFor(duration) {
+  const tier = duration > 180 ? 60 : duration > 120 ? 45 : 30;
+  return Math.min(tier, Math.floor(duration / 2));
+}
+
 const OVERRIDES = {
-  // The one scene where fifteen seconds is not a taste of anything. It is a
-  // single unbroken six-minute take with no cuts to punctuate it, so fifteen
-  // is barely an establishing beat and thirty still cuts away mid-thought.
-  // A minute lets the confrontation actually play. It is a sixth of the
-  // scene, which is more than anything else here gives away — the trade is
-  // deliberate and it is Melissa's.
-  //
-  // Note this preview now carries the SCORE, because the scene's `file` is
-  // the scored cut as of 2026-08-05. The 60s version that existed before the
-  // swap was from the dialogue master and sounded different.
-  "josh-luna-wall": 60,
+  /*
+    MOSTLY EMPTIED 2026-09-11, when previewSecondsFor() above became the
+    policy. Every entry that used to live here was one of Melissa's per-scene
+    calls on release — "release the first 2min and 15seconds", "let folks
+    preview the middle, 90 seconds", "the first 1:30 free to watch. its safe" —
+    and the new tiers replace all of them. She pointed at ty-luna-garage
+    specifically, which held the biggest of them at 2:15, and said it should
+    not be that open.
 
-  // Melissa's call on release: "we can show the first 1min of it". Fifteen
-  // seconds of this one is Luna alone at the bar before Tyson has walked in —
-  // the situation the scene is about has not started yet. A minute gets a
-  // visitor through the introduction and into the argument, which is the part
-  // worth paying for the end of. Just under a third of the 3:24 runtime.
-  "luna-tyson-casey-bar": 60,
+    Three of the retired numbers were ABOVE the new tier and come down:
+    ty-luna-garage 135 -> 60, luna-josh-first-night 90 -> 60, luna-ty-shop-kiss
+    90 -> 60. All three move in the direction of showing less, so every safety
+    margin recorded in their old notes gets wider, not narrower. The rest
+    (luna-tyson-casey-bar 60, luna-josh-break 60,
+    luna-ty-lakehouse-confrontation 30) already equalled their tier, which is a
+    decent sign the tiers match how she has been choosing all along.
 
-  // Melissa, 2026-08-12: "The First Night should have the first 1:30 free to
-  // watch. its safe" — and it is. The only explicit scene with a public window,
-  // which is a real exception to how the rest of this file treats them, so the
-  // margin matters: verified frame by frame that 0:00–1:35 is Josh waking her,
-  // dark room, her in a camisole, nothing explicit and no nudity. It turns at
-  // about 1:40, so a 90s cut stops a clear ten seconds short of the turn.
-  //
-  // THIS IS THE OPENING, deliberately, against the hookStart rule above. The
-  // rule exists because an opening usually makes somebody feel finished; here
-  // the opening IS the hook — he cannot sleep so he wakes her, and it is the
-  // only stretch of the scene that can be shown at all.
-  //
-  // It is also very quiet: the score sits far down, around -49dB across this
-  // window. Melissa has confirmed that is the mix and not a fault, so the cut
-  // carries the audio untouched.
-  "luna-josh-first-night": 90,
-  // A FULL MINUTE, Melissa's call on 2026-08-15. The scene runs 5:44, so a
-  // minute is under a fifth of it and well inside the one-third rule — but it
-  // is four times the house default, so it is a decision rather than a
-  // rounding. The first minute is her packing and him arriving, and it ends
-  // before he puts a hand on her, which is the question the rest answers.
-  "luna-josh-break": 60,
+    The reasoning for each is in git, not lost, and restoring one is a line.
+  */
 
-  // 2:15, Melissa's call on release, 2026-08-19: "release the first 2min and
-  // 15seconds". The longest public window on the site by some way, and the
-  // reasoning holds up on the footage rather than only on her say-so.
-  //
-  // The scene is 7:36 and it is two people arguing in a garage until it turns.
-  // Sampled at five-second steps, the turn is at about 2:55 — he puts a hand
-  // to her face and they are kissing by 3:05. 2:15 stops FORTY SECONDS short
-  // of it, which is a wider margin than luna-josh-first-night's ten.
-  //
-  // It also does not cut anybody off mid-word: silencedetect puts a ~6s gap in
-  // the dialogue from about 2:12 to 2:19, so the window ends in a pause.
-  //
-  // Under a third of the runtime, so it needs no exception to the fraction
-  // rule — it is only an override because the house default of fifteen seconds
-  // would end while they are still saying hello.
-  "ty-luna-garage": 135,
+  /*
+    THE ONE THAT STAYS, and it is not a monetization decision.
 
-  // 30s, Melissa's call on release, 2026-08-20: "this you can show 30sec
-  // preview". A sixth of the 2:57 runtime, so well inside the fraction rule.
-  //
-  // MOVED OFF THE OPENING on 2026-08-20, when the full cut replaced the one
-  // that started mid-attack. The scene now opens on about four quiet minutes
-  // of her moving around the bedroom before the phone goes, so a window at
-  // 0:00 spent its entire thirty seconds on a woman hanging up clothes and
-  // ended before anything happened — checked at two-second steps, the phone is
-  // still silent at 0:33.
-  //
-  // hookStart 44 instead: she notices the phone at about 0:48, answers at
-  // 0:52, and by 0:54 it has already turned. The window ends at 1:14 with her
-  // on her feet, still arguing, and the rest of the scene is what that call
-  // does to her.
-  //
-  // Content in the window: a camisole, a phone, and someone shouting and
-  // crying. No nudity, nothing explicit.
-  //
-  // THE `panic` NOTE MATTERS MORE HERE THAN ANYWHERE. A preview is served with
-  // no account and no age check, and thirty seconds of this is thirty seconds
-  // of a panic attack. Same reasoning already written down for
-  // luna-truck-breakdown's public cut: the note has to be readable before the
-  // thing it describes plays, not only for members.
+    luna-ty-panic-attack runs 6:30, so the tier says a minute. Its window is
+    thirty seconds and the reason written down when Melissa set it is that a
+    preview is served with no account and no age check, and thirty seconds of
+    this scene is thirty seconds of a panic attack. The scene carries the
+    `panic` content note for exactly that.
+
+    The new policy is about how much of a scene to give away. This number is
+    about what a stranger is shown without warning, which is a different
+    question, so it survives a rule that did not consider it. Doubling it to
+    sixty is Melissa's call to make deliberately rather than mine to make by
+    applying a tier.
+  */
   "luna-ty-panic-attack": 30,
-
-  // 90s, Melissa's call on release, 2026-08-31: "let folks preview the middle
-  // of the video, 90 seconds". Second only to ty-luna-garage's 2:15.
-  //
-  // THE MIDDLE, LITERALLY. The scene runs 4:24 and the window is 1:30–2:58,
-  // centred on 2:14 against a true midpoint of 2:12. That is the instruction
-  // taken at its word, and it is also the right ninety seconds: 0:00–0:45 is
-  // Tyson alone in the shop and on the phone, and the arrival and the
-  // standing-around are over by about 1:30. The window opens exactly where the
-  // distance starts to collapse.
-  //
-  // IT STOPS FOURTEEN SECONDS SHORT OF THE TURN. He is still being handled at
-  // 3:04 — her laughing, his fingers at her chin — and he leans in at about
-  // 3:12, with the near-kiss sustained from 3:20. Wider margin than
-  // luna-josh-first-night's ten, narrower than ty-luna-garage's forty. The
-  // thing the scene is FOR — that she is the one who closes it, and what she
-  // means by doing it small — is entirely outside the window.
-  //
-  // IT COMES OUT AT 88s, NOT 90, AND THAT IS THE FRACTION RULE WORKING. 90 of
-  // 264 is 34%, over the one-third ceiling, and the ceiling is a hard cap on
-  // overrides by design — see the Math.min below, and note that every other
-  // entry in this table is careful to sit under it. So the request is honoured
-  // to within two seconds and the guardrail is left standing. If Melissa wants
-  // a literal 90, that is a decision to raise the cap for this scene, not
-  // something to slip past it.
-  //
-  // (It was 87 until 2026-09-01, when the master was replaced with a
-  // sync-corrected export running a second longer. The window and the turn
-  // both re-checked against the new file rather than assumed.)
-  //
-  // Content in the window: he is shirtless, as he is for the whole scene, and
-  // she is in a tank top. It is faces and hands. Nothing explicit, no nudity.
-  "luna-ty-shop-kiss": 90,
-
-  // 30s, Melissa's call on release, 2026-09-01: "this is only going to show
-  // the first 30sec". A quarter of the 1:53 runtime, so well inside the
-  // fraction rule and no argument with the cap.
-  //
-  // THE OPENING, against this file's usual hookStart rule, and for the same
-  // reason luna-josh-first-night takes it: here the opening IS the hook. He
-  // spends the first ten seconds walking away from her across the deck, and
-  // the situation — a man finding somewhere else to be in his own friend's
-  // house — is stated before anybody says a word.
-  //
-  // WHAT IT STOPS SHORT OF, sampled at three-second steps: he does not raise
-  // his voice until about 1:12, and the thing the scene exists for — the first
-  // time he names Josh as the reason he cannot talk to her — is later still.
-  // Thirty seconds ends forty-two seconds before the shouting and well before
-  // the reason, which is the part worth paying for.
-  //
-  // Content in the window: two people in a living room, fully dressed, one of
-  // them leaving the room. Nothing to flag.
-  "luna-ty-lakehouse-confrontation": 30,
 };
+
+/**
+ * `preview.segments` for one scene block, or null.
+ *
+ * Bracket-matched rather than regexed to a closing "]": the value is an array
+ * OF arrays, and the first "]" in it is the end of the first pair, not the end
+ * of the field. A lazy regex here would silently return half the edit, which
+ * is the kind of bug that ships a fifteen-second preview claiming to be
+ * thirty.
+ */
+function parseSegments(block) {
+  const at = block.indexOf("segments:");
+  if (at === -1) return null;
+  const open = block.indexOf("[", at);
+  if (open === -1) return null;
+
+  let depth = 0;
+  let close = -1;
+  for (let i = open; i < block.length; i += 1) {
+    if (block[i] === "[") depth += 1;
+    else if (block[i] === "]") {
+      depth -= 1;
+      if (depth === 0) {
+        close = i;
+        break;
+      }
+    }
+  }
+  if (close === -1) return null;
+
+  const nums = block.slice(open, close + 1).match(/\d+(?:\.\d+)?/g)?.map(Number) ?? [];
+  const pairs = [];
+  for (let i = 0; i + 1 < nums.length; i += 2) pairs.push([nums[i], nums[i + 1]]);
+  return pairs.length > 0 ? pairs : null;
+}
 
 /**
  * Scraped out of the content module rather than imported, for the same reason
@@ -219,8 +183,9 @@ function premiumScenes() {
     // Where the hook window starts. Absent = the opening, which is the old
     // behavior and still right for a scene that opens on its best question.
     const hookStart = Number(block.match(/hookStart: ([\d.]+)/)?.[1] ?? 0);
+    const segments = parseSegments(block);
     if (slug && access === "premium" && file && duration) {
-      out.push({ slug, file, duration, hookStart });
+      out.push({ slug, file, duration, hookStart, segments });
     }
   }
   return out;
@@ -235,12 +200,100 @@ if (scenes.length === 0) {
   process.exit(1);
 }
 
+/**
+ * Cut a preview that is more than one window, by rendering each piece and
+ * concatenating them.
+ *
+ * Each piece is re-encoded to identical settings first, so the join itself can
+ * be a stream copy and cannot re-compress anything twice.
+ *
+ * The FADES are the whole reason this is not four lines. A hard splice between
+ * two points in a continuous take pops audibly — the room tone and the score
+ * are both mid-phrase — so every piece gets 60ms of audio ramp at each end,
+ * which is short enough to be inaudible as a fade and long enough to kill the
+ * click. The picture is left to cut hard, because a visible dissolve would
+ * make two windows look like one continuous shot, which is a lie about the
+ * edit.
+ *
+ * The 0.25s fade IN on the first piece is the same one the single-window path
+ * uses, and for the same reason: a window that opens mid-scene lands hard.
+ * There is no fade at the END, also as before — these are meant to stop
+ * mid-breath. The hard cut IS the hook.
+ */
+function cutSegments(src, segments, out) {
+  const dir = mkdtempSync(path.join(tmpdir(), "lv-preview-"));
+  try {
+    const parts = segments.map(([from, to], i) => {
+      const part = path.join(dir, `part${i}.mp4`);
+      const dur = to - from;
+      const vf = i === 0 ? "fade=t=in:st=0:d=0.25" : null;
+      const af = [
+        i === 0 ? "afade=t=in:st=0:d=0.25" : "afade=t=in:st=0:d=0.06",
+        `afade=t=out:st=${(dur - 0.06).toFixed(3)}:d=0.06`,
+      ].join(",");
+      execFileSync(
+        "ffmpeg",
+        [
+          "-nostdin", "-y", "-loglevel", "error",
+          "-ss", String(from),
+          "-i", src,
+          "-t", String(dur),
+          ...(vf ? ["-vf", vf] : []),
+          "-af", af,
+          "-c:v", "libx264", "-preset", "medium", "-crf", "23",
+          "-pix_fmt", "yuv420p",
+          "-c:a", "aac", "-b:a", "128k", "-ar", "48000",
+          part,
+        ],
+        { stdio: "inherit" },
+      );
+      return part;
+    });
+
+    const list = path.join(dir, "list.txt");
+    writeFileSync(list, parts.map((f) => `file '${f}'`).join("\n"));
+    execFileSync(
+      "ffmpeg",
+      [
+        "-nostdin", "-y", "-loglevel", "error",
+        "-f", "concat", "-safe", "0", "-i", list,
+        "-c", "copy", "-movflags", "+faststart",
+        out,
+      ],
+      { stdio: "inherit" },
+    );
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
 let cut = 0;
 for (const scene of scenes) {
-  const seconds = Math.min(
-    OVERRIDES[scene.slug] ?? MAX_SECONDS,
-    Math.floor(scene.duration * MAX_FRACTION),
-  );
+  const segments = scene.segments;
+  const segmentSeconds = segments
+    ? segments.reduce((n, [from, to]) => n + (to - from), 0)
+    : 0;
+
+  /*
+    A HAND-MADE EDIT IS NOT CLAMPED, it is checked and complained about.
+
+    The single-window path takes Math.min against the one-third rule, so an
+    over-long override comes out quietly shortened — which is right for a
+    number in the OVERRIDES table and wrong for a list of in and out points.
+    Truncating segments would silently drop the last piece of somebody's cut
+    and still call it a preview. So this warns and proceeds: the cap exists to
+    stop a preview eating the scene, and a person who wrote two windows by hand
+    has already decided.
+  */
+  if (segments && segmentSeconds > scene.duration * MAX_FRACTION) {
+    console.error(
+      `  WARNING ${scene.slug}: segments total ${segmentSeconds.toFixed(1)}s of a ${scene.duration}s scene — over the one-third rule. Cutting it anyway.`,
+    );
+  }
+
+  const seconds = segments
+    ? segmentSeconds
+    : (OVERRIDES[scene.slug] ?? previewSecondsFor(scene.duration));
   // Clamped so a hookStart that outlived an edit cannot silently produce a
   // preview that runs off the end of the scene into nothing.
   const start = Math.max(0, Math.min(scene.hookStart, Math.max(0, scene.duration - seconds)));
@@ -256,7 +309,11 @@ for (const scene of scenes) {
   const mmss = (n) => `${Math.floor(n / 60)}:${String(Math.round(n) % 60).padStart(2, "0")}`;
   const plan =
     `${scene.slug.padEnd(28)} ${mmss(scene.duration)} -> ${mmss(seconds)}` +
-    (start ? ` from ${mmss(start)}` : " from the top");
+    (segments
+      ? ` in ${segments.length} pieces: ${segments.map(([f, t]) => `${mmss(f)}-${mmss(t)}`).join(" + ")}`
+      : start
+        ? ` from ${mmss(start)}`
+        : " from the top");
 
   if (listOnly) {
     console.log(`  ${plan}`);
@@ -280,22 +337,26 @@ for (const scene of scenes) {
   // The fade IN at the start stays, on the other hand: a window that begins
   // mid-scene lands hard, and a quarter-second up is the difference between
   // arriving somewhere and being dropped there.
-  const fadeIn = start > 0 ? ["-vf", "fade=t=in:st=0:d=0.25", "-af", "afade=t=in:st=0:d=0.25"] : [];
-  execFileSync(
-    "ffmpeg",
-    [
-      "-nostdin", "-y", "-loglevel", "error",
-      "-ss", String(start),
-      "-i", src,
-      "-t", String(seconds),
-      ...fadeIn,
-      "-c:v", "libx264", "-preset", "medium", "-crf", "23",
-      "-pix_fmt", "yuv420p",
-      "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart",
-      out,
-    ],
-    { stdio: "inherit" },
-  );
+  if (segments) {
+    cutSegments(src, segments, out);
+  } else {
+    const fadeIn = start > 0 ? ["-vf", "fade=t=in:st=0:d=0.25", "-af", "afade=t=in:st=0:d=0.25"] : [];
+    execFileSync(
+      "ffmpeg",
+      [
+        "-nostdin", "-y", "-loglevel", "error",
+        "-ss", String(start),
+        "-i", src,
+        "-t", String(seconds),
+        ...fadeIn,
+        "-c:v", "libx264", "-preset", "medium", "-crf", "23",
+        "-pix_fmt", "yuv420p",
+        "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart",
+        out,
+      ],
+      { stdio: "inherit" },
+    );
+  }
   cut += 1;
   console.log(`  ${plan}  -> ${outName}`);
 }

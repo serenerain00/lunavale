@@ -33,11 +33,16 @@ export function SurveyForm({
   /**
    * Which questions to show, by id. Omitted means all of them.
    *
-   * The drawer on the home page passes the three REQUIRED ones, which is what
-   * makes it a real submission rather than a teaser: those three are exactly
-   * the fields submitSurvey insists on, so a drawer answer is a complete row
-   * and lands in the same table as a long-form one. There is no second code
-   * path and no partial-response state to reason about.
+   * NOBODY PASSES THIS ANY MORE (2026-09-09). The drawer on the home page used
+   * to pass the three required ids, on the argument that a shorter form gets
+   * finished; Melissa's call, once the survey turned out to be the most-used
+   * thing on the site, was to put all six in front of the people who are
+   * already answering. The option stays because it costs one line and it is
+   * how you would ship a short form again without a second component.
+   *
+   * Whatever subset is shown, a submission is a COMPLETE row: submitSurvey
+   * insists on the three required fields and the rest are genuinely optional,
+   * so there is no partial-response state and no second code path.
    */
   questionIds?: string[];
   /** Tighter spacing and a shorter thank-you, for the drawer. */

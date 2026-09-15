@@ -212,10 +212,31 @@ Avery. He has known the family for twenty years, **thinks of Avery as a little
 sister**, and is **protective of the whole Vale family**, not only Luna. He
 came and went for a decade while he was serving; some of that was deployment.
 
-**Cousins, and it shows** *(2026-08-03).* Josh and Tyson are **distant
-cousins — second or third, Melissa is deciding which** — and they are meant to
-**share some features**, which is worth landing on screen rather than only in
-the family tree.
+**Cousins, and it shows** *(2026-08-03; settled 2026-09-04).* Josh and Tyson
+are **second cousins** — decided, closed, not open to interpretation — and they
+are meant to **share some features**, which is worth landing on screen rather
+than only in the family tree.
+
+> **NO UNDECIDED FACTS ON THE SITE** *(Melissa, 2026-09-04, and it generalizes
+> past this one line).* Tyson's character card read "second or third, still
+> being decided", which is a production note wearing a character fact's
+> clothes. **These people are drawn from real ones.** A visitor meets them
+> once; being told that their family tree is still being worked out makes them
+> a draft rather than a person, and no amount of good prose around it recovers
+> that.
+>
+> The rule, for anything rendered anywhere on the site: **a fact is either
+> stated plainly or it is not on the page.** Not "probably", not "we're
+> deciding", not "second or third". If a detail genuinely is not settled yet,
+> the answer is to leave it out and ask — this document is where the open
+> questions live, and it is not published.
+>
+> Two things this rule does NOT cover, both deliberate and both staying:
+> Luna's own uncertainty inside the journal (a woman who does not know what
+> she wants is the story), and the production copy on `/about` that says the
+> next scene is not fixed and members are in that conversation — that is an
+> invitation, and it is about what gets shot, never about who these people
+> are.
 
 **After the military** he came out with a **discipline that does not waver**,
 and he makes his living **several different ways** rather than one — the
@@ -342,6 +363,145 @@ He was genuinely good to her, and she was genuinely rescued.
 Whether he understood what Tyson was to her at the time, or simply met a
 frightened woman and was kind to her. Both are available. The second is more
 frightening, because it means nobody did anything wrong.
+
+### Month five — she calls, he does not pick up
+*(Melissa, 2026-09-13, with the footage. CUT AND PUBLISHED as **"Not Picking
+Up"** (`tyson-apt-thinking`), 3:34, members-only with the first minute open.)*
+
+**FIVE MONTHS INTO THE SIX**, which is the whole meaning of it. `THE PROMISE`
+has Tyson falling for her at about **month four** and Josh calling her at
+**month six** — so this sits in the gap between them. He knows. Nothing has
+happened. There is nothing he is allowed to do about either.
+
+**Tyson is having a hard time.** He is alone in his apartment with a whisky and
+his phone face-up on the table. **Luna is calling and he is avoiding her
+calls** — she is intercut at the other end of one he lets ring out.
+
+> **THE AVOIDING IS ABOUT A WEEK OLD, NOT FIVE MONTHS** *(Melissa, 2026-09-13:
+> "he just started maybe a week ago")*. The five months is the length of the
+> BREAKUP. This is the beginning of him pulling away, not a settled state — and
+> that is the difference between a man who is distant and a man who has just
+> started becoming distant, which is what Luna is reacting to.
+>
+> **THIS IS WHERE THE SEPARATION STARTS.** He is doing it because of what he
+> feels, which is `THE PROMISE` behaving exactly as that section describes:
+> the distance is the only way to keep a promise he no longer wants to keep.
+> Nothing on screen says so.
+
+**Then he takes the Carrera out and drives**, out of the city, at night, with
+nowhere at the end of it. The driving is what he does *instead of* picking up.
+
+**AT THE END HE CALLS SOMEBODY BACK, and the conversation is not in this
+video.** Melissa: *"to viewers it could be someone else, but its tyson"* — it
+is Luna he rings, and **that scene is still to be built.** Nothing published
+says who he called, deliberately, because the footage does not.
+
+> **LUNA HAS ALREADY NOTICED HIM PULLING AWAY** by this point, and the journal
+> has been circling this exact stretch for months without knowing what is in
+> it — `distance` ("he isn't punishing me… he's protecting something, and I am
+> fairly sure it isn't himself"), `what-it-costs-him`, `month-four`. This is
+> the other side of those pages and is deliberately not linked to any of them,
+> so neither explains the other.
+
+**The whisky is `drinking again`** from the city-apartment scene, and the car is
+the black 2020 Carrera. Neither is explained on screen and neither needs to be.
+
+---
+
+### The month he disappeared — the city apartment
+*(Melissa, 2026-09-11, with the footage. CUT AND PUBLISHED as **"A Month"**
+(`luna-ty-apt-argue`), 4:45, members-only, with the Instagram cut of its last
+stretch free as `the-blonde-guy`'s neighbour in /clips.)*
+
+**Tyson goes dark for a MONTH.** No answer, no explanation. Luna does not call
+ahead — she **gets in her truck and drives into the city** to **his apartment**,
+and knocks. *(Melissa, 2026-09-11: "shes not in a lift, she gets in her truck."
+The cut opens on the lift ride up; the truck is the decision and the drive is
+the part that means something.)*
+
+**He opens the door not expecting anybody, and he is drinking again.**
+
+> **"AGAIN" IS THE WORD THAT MATTERS**, and it is new. Nothing else published
+> establishes Tyson as a drinker or as sober — checked across every journal
+> entry. So this is the first time the story says there is a version of him
+> that drinks, and that there was a stretch before now when he did.
+>
+> It puts a floor under `ginger-ale` without changing a line of it: he stands
+> in her kitchen drinking the one can of ginger ale in the house slowly, at
+> her. That is a man not drinking, and now it is a man **not drinking on
+> purpose**.
+
+**HIS APARTMENT IS NOT HERS**, and it now has its own place id —
+`tysons-apartment`, "Tyson's Apartment" (Melissa, 2026-09-11: "we def. need to
+account for tysons apt in denver downtown city"). The taxonomy's `apartment`
+stays Luna's own place in Denver, "the hours nobody else sees", settled
+2026-08-04 with the iPad call. Two rooms, two people, and the only fact that
+matters about this one is that it is HIS and she has never had a reason to go
+there before.
+
+**The scene ends by stopping being an argument.** The last minute is the two of
+them, and the Instagram cut is that stretch.
+
+**THE PUBLIC WINDOW IS A FULL MINUTE** rather than the usual fifteen seconds
+(Melissa, 2026-09-11). The whole first minute is arrival — a lift, a corridor,
+a knock, a door — with no turn anywhere in it, so it gives away nothing and
+buys the thing a short window cannot: long enough in that corridor to want the
+door to open.
+
+**WHERE IT SITS IS OPEN.** A month of silence is longer than the eleven days in
+`i-asked-him` and reads as later — after the park, after he shouted — but
+nothing places it and the journal has not reached it. No entry has been written
+against it.
+
+---
+
+### THE SECRET — why Tyson actually can't
+*(Melissa, 2026-09-11. Full document:
+`docs/content/BETWEEN_US_SECRET_CANON.md`, which is the authority on it and
+should be read before writing Tyson at any length.)*
+
+**Tyson believes Josh's family saved his future**, and that belief is the real
+engine under everything this document already describes as loyalty.
+
+Fifteen-odd years ago, when Josh and Tyson were 22–23, **a worker died** in a
+preventable accident on family property. The unsafe condition **was known
+beforehand**, and the man who knew and failed to fix it was **Rick**. Josh came
+away believing he may have caused it. Tyson, early in his SEAL career and with
+everything to lose, was entangled in the aftermath — and Rick used lawyers and
+influence to shape the story, positioning himself as the man who protected them
+both.
+
+**He was protecting himself.** He converted his own culpability into their
+lifelong gratitude, and neither man understands that.
+
+**STAGE TWO IS NOW ON THE SITE** — "The Safe" (`josh-ty-ricks-house`), Josh and
+Tyson moving a safe upstairs at Rick's while declining to name a death. Josh:
+*"And who the fuck were you?"* Both men hold themselves responsible for it, and
+neither says what it is. See the 2026-09-11 addition in the secret document.
+
+**IT SITS ABOUT A MONTH AFTER THE BREAKUP**, which puts it BEFORE `THE PROMISE`
+forms — so the debt to Rick is established before Josh ever asks Tyson for
+anything. Older obligation first.
+
+> **THIS IS WRITER KNOWLEDGE.** Luna does not know it and the audience learns
+> it in stages. Do not write an exposition scene; see §8 of the full document
+> for the ladder.
+
+**WHAT IT CHANGES ABOUT WHAT IS ALREADY PUBLISHED — nothing, and that is the
+point.** `THE PROMISE` still stands as written; this sits underneath it and
+explains why a promise about a woman outranks twenty years of wanting her.
+Luna's entry `joshs-father` — "he has always been kind to me, and it has a
+strange quality to it" — now reads as her sitting six feet from the man who
+bought her best friend's silence, with no idea.
+
+**LUNA HAD NOT MET JOSH WHEN IT HAPPENED**, and the source document has been
+corrected on this point (recorded at its foot rather than quietly changed). She
+met **Tyson** at 18 and **Josh at 28**. So Tyson carried it for about six years
+before Josh existed in her life, and then had to watch her walk into that
+family. There is an unwritten memory in this: the year Tyson went quiet, which
+she lived through at 22 or 23 and has never had explained.
+
+---
 
 ### Cole Burnett — Tyson's oldest friend
 *(Canon set by Melissa, 2026-08-04. **Tertiary**, but load-bearing: he is the
@@ -760,6 +920,50 @@ not agree to it dishonestly, and he cannot get out of it honourably.
 **Only Cole knows.** Luna does not — which is why she reads the distance as
 something she did.
 
+### The lakehouse, alone — the first days
+*(Canon set by Melissa, 2026-09-10, with the footage. Scene:
+`luna-lkehouse-wine-shatter`.)*
+
+**A FEW DAYS AFTER THE BREAKUP.** Days, not weeks — the very front of the six
+months, before Tyson is a fixture and before anybody has settled into anything.
+
+**It is over Josh, and specifically over the phone calls and the arguments with
+him.** They are still happening.
+
+**She is not used to being alone in a quiet house** and she is not coping well
+with it. **Tyson is not always around yet**, so she is doing two things at once:
+getting used to a new normal, and deciding whether leaving was the right thing
+at all. The case she puts to herself is the whole of it —
+
+- did she **give up**
+- did she **leave too soon**
+- did she **overreact**
+- did she **not communicate enough**
+
+**AND THEN SHE ANSWERS IT.** She works out that she **did do things to help the
+situation. She did try.** She did not walk away for no reason and end up at the
+lakehouse — **there is a reason she is there.**
+
+**AND IT STILL OVERWHELMS HER**, because being alone is an enormous amount after
+ten years of not being.
+
+> **THE THROW IS NOT THE DOUBT.** She resolves the doubt inside the scene; the
+> glass goes afterwards, because the quiet is more than she can carry. Those are
+> two different things and any copy about this scene has to keep them apart. It
+> is not a woman breaking down over whether she was right. It is a woman who has
+> just decided she was right, alone in a house, finding that it does not help.
+
+**WHAT THE BOOK DOES NOT HAVE YET.** `the-night-i-left` is the leaving and
+`asking-for-less` is missing him. Neither is the verdict — the argument she puts
+against herself and then answers. **No journal entry is filed against this
+scene.**
+
+**NOT `the-bad-one`.** That was guessed before the context arrived, on
+resemblance alone — lakehouse, her alone, no scene attached — and it is wrong:
+`the-bad-one` is months in. Recorded because the same mistake is available to
+anyone else: a solo scene with no date on it will fit almost any bad night in
+this book.
+
 ### The night at the bar — month one
 *(Canon set by Melissa, 2026-07-31.)*
 
@@ -788,6 +992,46 @@ why she does this to herself.
 This is where **Luna starts seeing Tyson differently.** She is still tied up in
 Josh, so it is not a switch being flipped — it is the beginning of something
 bigger, and **more complicated than Josh alone.**
+
+### New York — the weekend of the event — month five
+*(Canon set by Melissa, 2026-09-08, with the footage.)*
+
+**About five months** into the break-up, and it is the furthest either of them
+has been from the whole of the rest of the story.
+
+**Luna has a modeling event in New York**, and **she invited Tyson out for the
+weekend.** He came. They are staying at a five-star hotel — **the Whitmore**,
+which is lettered on the reception desk in the footage, so the name is settled
+by the picture rather than chosen.
+
+**Where they both are by this point:** already feeling it, and both **refusing
+to talk about it.** He gives her clear signals at times. She probes him for the
+truth. Neither of them will put a sentence to it — which is the same standoff
+`### THE PROMISE` explains and which does not break here.
+
+**The scene is the night of the company dinner party.** They spend the evening
+out with **her peers**, drinking and socializing, and come back to the hotel and
+**keep drinking in Tyson's room.** Everything in the video unfolds from there.
+
+**IT DOES NOT RESOLVE ANYTHING, and nothing written against it may imply that it
+does.** `the-night`, much later, turns on its own first line — twenty years and
+it did not arrive as a decision. So this is a night that goes a very long way
+and is still inside the refusal. The published copy (lib/content/videos.ts
+`luna-ty-nyc-hotel`, lib/content/clips.ts `luna-ty-nyc-vertical`) is written to
+stop exactly there.
+
+**Two cuts of it exist**: the 4:55 landscape scene and a 4:10 vertical, which is
+its own edit rather than a crop — faces from the first frame where the scene
+opens on the lobby. The vertical is members-only with a public first minute.
+
+**HER ACCOUNT IS THE JOURNAL ENTRY `new-york`** *(written 2026-09-08, draft
+prose)*, filed between `counting-the-pages` and `firepit-not-saying` — she has
+just read the whole book back and worked out whose name is really in it, and
+then she takes him to another city. She wakes in her own room in her dress with
+her shoes lined up by the door and no memory of getting there, and the page
+stops where the footage does. **She does not know about the promise**, so she
+reads his silence as being about her, which is what the canon says she does with
+it.
 
 ### The kitchen — "who is she?"
 *(Delivered by Melissa, 2026-08-28. CUT AND PUBLISHED as **"Wasn't Planning On
@@ -1128,6 +1372,118 @@ entire weight comes from being the aftermath of something the audience has just
 watched, or is about to.
 
 ---
+
+### The bar — the blonde guy
+*(Canon set by Melissa, 2026-09-09, ahead of the footage; placed and explained
+by her the same day, then **RE-PLACED by her within the hour** — see the
+correction below, which is recorded rather than quietly applied because it
+changes what the scene means. Slug: `ty-luna-blonde-guy-bar`.)*
+
+**THE TAIL END OF THE SIX MONTHS.** She is **not with Josh yet, not
+officially** — she has been **talking to him, smoothing things out**, and it is
+clearly heading back that way. In journal terms that puts this after `coffee`
+and before `i-said-yes`: she is seeing him again and has not committed.
+
+> **CORRECTED 2026-09-09.** This first went down as "about a month after Luna
+> goes back to Josh", which is what the original description implied, and
+> Melissa moved it the same day: *"lets have her not with josh yet officially,
+> shes just been talking to him smoothing things out more. so were on the tail
+> end of the 6mths."*
+>
+> The move makes the scene worse for Tyson, which is presumably the point. If
+> she were already back with Josh, this is a man reacting to a thing that has
+> happened. Here it has not happened yet — **it is happening**, in front of
+> him, at a pace he cannot affect, and he **gave his word to help it along**
+> (see `### THE PROMISE`). He is watching the outcome he agreed to arrive.
+
+This is the period where **Tyson starts to lose his composure around her** —
+because she is going back to Josh **knowing everything she went through to get
+over him**, or somewhat over him. **Luna still does not understand why he is
+drifting from her.**
+
+Luna and Tyson are meeting for **dinner, as friends**. Tyson is **considerably
+late**, because of a bad day she knows nothing about.
+
+She is waiting **at the bar** when a man — blonde — approaches her and starts
+asking her things. He wants a date. He **gets pushier than she is comfortable
+with.**
+
+**Tyson arrives and hears the tail end of it.** He tells the man that *she
+doesn't sound interested.*
+
+The man takes it badly and squares up to him. **Luna stands up to calm Tyson
+down** — she is managing him, not the stranger, and that detail is the scene.
+The man's **friend tries to pull him away — "c'mon, let's go."**
+
+The two of them end up **toe to toe**, and then the blonde man says:
+
+> **"She's not worth it anyway."**
+
+**That is the line that does it.** Tyson takes him **by the collar**, hard,
+**yells at him to leave**, and **shoves him backwards.**
+
+**AFTERWARDS, LEAVING THE BAR.** Luna asks **"where did that come from"** — she
+means the tone, and she means him putting hands on somebody, which is **not
+what Tyson does**, and certainly not over a nobody in a bar.
+
+He says: **"Leave it. It's been a long day."** She says his name as he walks
+away from her. He says **they'll talk in the car.** Cut.
+
+**WHY THIS MATTERS TO THE CHARACTER.** Everything else on this site establishes
+a man who does not raise his voice — `the-six-months` has Luna writing that he
+never does, "which is genuinely infuriating, because it means I am always the
+only person in the room shouting." This is that man with a fistful of a
+stranger's shirt, and the trigger is not being challenged. It is somebody
+saying **she isn't worth it.**
+
+**CONSISTENT WITH `he-shouted`, but only just, and worth keeping straight.**
+That scene is marked as the first time he raises his voice **at Luna**, and the
+first time he **names Josh** as the reason he cannot talk to her. Neither
+happens here — he yells at a stranger, and he refuses to explain. If anything
+this makes the later one land harder: she has now seen him lose it once, at
+somebody else, and be unable to tell her why.
+
+**WHAT THE BAD DAY WAS** *(Melissa, 2026-09-09, and it is better than the
+single trigger this document originally went looking for)*. It is not one
+event. It is **accumulation**, and all of it is running at once:
+
+- **feelings he does not really understand**
+- **working around Josh**, every day, knowing where Luna and Josh are heading
+- **work stress**
+- **anxiety about this dinner with her**
+
+So he is not late because something happened. He is late because he has been
+sitting in all of that, and then he walks into a bar and hears a stranger
+pushing her.
+
+**THAT IS WHY THE SCENE WORKS AND WHY IT IS NOT ABOUT THE BLONDE MAN.** The man
+is not the cause of anything — he is the only thing in Tyson's day that it is
+permissible to be angry at. Everything actually pressing on him is a person he
+loves, a promise he made, or a woman he cannot say any of it to, and none of
+those can be grabbed by the collar.
+
+**"FEELINGS HE DOES NOT REALLY UNDERSTAND" IS HER WORDING AND IT STANDS.** It
+sits alongside `### THE PROMISE`, which has him falling for her around four
+months into the separation — so by this scene he has known for months. Both are
+true and they are not the same thing: knowing what you feel and knowing what to
+do with the weight of it are different, and this is a man losing to the second
+one. Do not "resolve" the tension by making him newly confused.
+
+**WHAT LUNA HAS ALREADY WRITTEN ABOUT THIS EXACT STRETCH.** The journal is
+circling this period without knowing what is in it, which is what makes the
+scene land:
+
+- `distance` — "He isn't punishing me. I know him well enough to know the
+  difference. He's protecting something — and I am fairly sure it isn't
+  himself."
+- `the-six-months` — "He does not raise his voice, which is genuinely
+  infuriating, because it means I am always the only person in the room
+  shouting."
+- `what-it-costs-him` — she works out that he has nowhere at all to put any of
+  it, and asks: **who does he tell.**
+
+This scene is the answer to that last one. He tells nobody, and it comes out
+sideways at a stranger in a bar.
 
 ### The "staring game" (a signature detail)
 An inside thing Luna and Tyson have always done, **learned in the military**:

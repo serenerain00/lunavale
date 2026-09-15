@@ -9,6 +9,7 @@ import {
 import { Hero } from "@/components/home/Hero";
 import { InterviewHero } from "@/components/home/InterviewHero";
 import { Reveal } from "@/components/motion/Reveal";
+import { FollowForm } from "@/components/follow/FollowForm";
 import { SurveyDrawer } from "@/components/survey/SurveyDrawer";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import {
@@ -16,6 +17,7 @@ import {
   Member,
   UnlessAnswered,
 } from "@/components/access/Viewer";
+import { BETWEEN_US } from "@/lib/content/between-us";
 import { catalog, shelves, type CatalogItem } from "@/lib/content/catalog";
 import { pickHero } from "@/lib/content/hero";
 import {
@@ -30,7 +32,7 @@ import { getCharacter } from "@/lib/content/characters";
 import { galleries } from "@/lib/content/gallery";
 import { cadenceNote, recentReleases } from "@/lib/content/releases";
 import { LatelyRail } from "@/components/home/LatelyRail";
-import { featuredClip } from "@/lib/content/clips";
+import { clipOfTheDay, isFeatured } from "@/lib/content/clips";
 import { resolveWhoSheIs } from "@/lib/content/who-she-is";
 import { twentyQuestions } from "@/lib/content/twenty-questions";
 import { takes } from "@/lib/content/takes";
@@ -89,11 +91,20 @@ export default async function Home() {
   // on your own.
   const latestEntry = latest ? entriesForScene(latest.slug)[0] : undefined;
 
-  // THE NEW CLIP, for seven days and then not. Self-expiring — see
-  // featuredClip() in lib/content/clips.ts. Resolved per render like the hero
-  // and the quote, so the section goes away on its own an hour after the
-  // window closes rather than waiting for somebody to remember to remove it.
-  const featured = featuredClip();
+  // THE CLIP ON THE FRONT TODAY, rotating daily (Melissa, 2026-09-03: "so its
+  // not stagnant"). It used to be the newest clip and only the newest clip for
+  // seven days, which meant a returning visitor met the same card in the same
+  // place all week.
+  //
+  // Resolved per render like the hero and the quote, and deterministic from
+  // the date so every cached copy of this page agrees — see clipOfTheDay().
+  // The rotation is anchored to the newest clip's own release day, so a new
+  // clip still takes the front page on the day it lands.
+  const featured = clipOfTheDay();
+  // Whether TODAY'S clip is genuinely new, which decides the badge. The
+  // seven-day window still means something — it just governs the word rather
+  // than pinning the section.
+  const featuredIsNew = featured ? isFeatured(featured) : false;
 
   // HER, IN HER OWN HANDWRITING — see lib/content/who-she-is.ts for why these
   // five and in this order. Resolved from the journal so the quotes cannot
@@ -139,6 +150,80 @@ export default async function Home() {
             <Hero hero={hero} />
           ))}
 
+
+        {/* -------------------------------------------------------- between us */}
+        {/* THE FIRST THING UNDER THE HERO, Melissa 2026-09-03: "I want new
+            comers to see that membership doesnt unlock just stills/scenes,
+            theyll have access to episodes as they are released with exclusive
+            first view access before IG."
+
+            It goes ABOVE the survey and above "Just added" because it is the
+            only thing on this page aimed at somebody who has not worked out
+            what the membership is yet, and by the time they reach the ask at
+            the foot of the page they have already decided.
+
+            A BAND, NOT A BILLBOARD. One hairline rule, small caps, two
+            sentences. The tone rule in CLAUDE.md is mature and understated,
+            and the thing being announced does not exist yet — shouting about
+            it would be the exact move the monetization doc rules out. No date
+            and no countdown for the same reason: a date this page cannot
+            guarantee is fake scarcity.
+
+            Copy and the on/off switch live in lib/content/between-us.ts,
+            which also carries the reasoning: the band used to promise members
+            got each episode BEFORE Instagram, and now says Instagram cannot
+            carry an episode at all. A fact nobody can post their way out of,
+            in place of an ordering promise somebody had to keep. */}
+        {BETWEEN_US.announced && (
+          <section
+            aria-labelledby="between-us-heading"
+            className="border-b border-hairline"
+          >
+            <div className="mx-auto w-full max-w-6xl px-5 py-8 sm:px-8 sm:py-10 lg:flex lg:items-center lg:justify-between lg:gap-10">
+              <div className="lg:max-w-3xl">
+                <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                  {BETWEEN_US.eyebrow}
+                </p>
+                <h2
+                  id="between-us-heading"
+                  className="mt-2.5 font-display text-2xl font-light text-ivory sm:text-3xl"
+                >
+                  {BETWEEN_US.heading}
+                </h2>
+                {BETWEEN_US.body.map((line) => (
+                  <p
+                    key={line}
+                    className="mt-2.5 max-w-2xl text-sm leading-relaxed text-stone sm:text-base"
+                  >
+                    {line}
+                  </p>
+                ))}
+              </div>
+
+              {/* Both variants ship in the cached HTML and the client shows
+                  one — same rule as everywhere else, and nothing premium is
+                  passed as children to <Member>. */}
+              <div className="mt-5 shrink-0 lg:mt-0">
+                <Guest>
+                  <Link
+                    href="/membership"
+                    className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+                  >
+                    {vault.cta}
+                  </Link>
+                  <p className="mt-2 text-xs text-stone-dim">
+                    {`${BETWEEN_US.memberLine} From ${formatPrice(vault.priceMonthlyCents)} a month.`}
+                  </p>
+                </Guest>
+                <Member>
+                  <p className="max-w-xs text-sm leading-relaxed text-amber-soft">
+                    {BETWEEN_US.memberNote}
+                  </p>
+                </Member>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ------------------------------------------------------------ survey */}
         {/* THE SECOND THING ON THE PAGE (Melissa, 2026-08-26). It used to sit
@@ -234,12 +319,23 @@ export default async function Home() {
                 </Link>
 
                 {/* Says what a non-member actually gets, with the real number
-                    rather than a vague "preview". */}
+                    rather than a vague "preview".
+
+                    AND NOT "THE FIRST" WHEN IT ISN'T. /watch already had this
+                    fix and this copy did not, so on 2026-09-03 the front page
+                    was telling everyone they could watch the first thirty
+                    seconds of ty-josh-fight, whose preview is cut from two
+                    windows in the middle of the scene. Same rule as the line
+                    under the player: state what was actually shown. */}
                 {latest.access !== "free" && latest.preview && (
                   <Guest>
                     <p className="mt-3 text-xs leading-relaxed text-stone-dim">
-                      The first {formatDuration(latest.preview.durationSeconds)}{" "}
-                      is open to everyone. The rest is part of the LunaVerse.
+                      {latest.preview.segments ? "" : "The first "}
+                      {formatDuration(latest.preview.durationSeconds)}{" "}
+                      {latest.preview.segments
+                        ? "of it is open to everyone, from two places in the scene."
+                        : "is open to everyone."}{" "}
+                      The rest is part of the LunaVerse.
                     </p>
                   </Guest>
                 )}
@@ -267,20 +363,28 @@ export default async function Home() {
         )}
 
         {/* ---------------------------------------------------- featured clip */}
-        {/* A NEW CLIP, FOR SEVEN DAYS. Melissa, 2026-09-01. It sits directly
-            under "Just added" because the two make one argument in order: here
-            is the new scene, and here is a minute of these people that costs
-            nothing to watch. The clip is the cheaper thing to say yes to and it
-            is doing the work of an advert, which is why its window is seven
-            days against the scene's fourteen.
+        {/* A CLIP A DAY. It sits directly under "Just added" because the two
+            make one argument in order: here is the new scene, and here is a
+            minute of these people that costs nothing to watch. The clip is the
+            cheaper thing to say yes to and it is doing the work of an advert.
+
+            IT ROTATES NOW (Melissa, 2026-09-03) rather than showing the newest
+            clip for seven days. The trade against the 2026-09-01 reasoning is
+            worth naming: that version was deliberately INTERMITTENT — "the
+            section is genuinely intermittent, which is what stops it reading
+            as furniture" — and this one is permanent, because there is always
+            a clip whose turn it is. What stops it reading as furniture now is
+            that the card is different every morning, which is the opposite
+            answer to the same worry and is the one she asked for.
 
             PORTRAIT, AND THE LAYOUT ADMITS IT. Everything else on this page is
             16:9. Rather than crop a 9:16 clip into a shape it was not made for,
             the poster keeps its aspect and the text sits beside it — the same
             two-column arrangement as the card above, mirrored.
 
-            It renders only while featuredClip() returns something, so there is
-            no empty state to design and nothing to take down by hand. */}
+            It renders whenever there is any free, non-explicit clip at all, so
+            there is still no empty state to design — see featurableClips(),
+            which is what keeps a gated clip from ever landing here. */}
         {featured && (
           <section
             aria-labelledby="featured-clip-heading"
@@ -306,8 +410,14 @@ export default async function Home() {
                   className="object-cover transition-transform duration-(--duration-slow) group-hover:scale-[1.02]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-void/70 to-transparent sm:bg-gradient-to-r" />
+                {/* "New clip" ONLY WHEN IT IS ONE. The badge used to be a
+                    constant because the section only ever showed the newest
+                    clip; now that the card rotates through the library, most
+                    days it is showing something from months ago and calling
+                    that new would be the same lie the "New" badge on a scene
+                    is carefully written to avoid (see isRecent). */}
                 <span className="absolute left-4 top-4 rounded-full bg-amber px-3 py-1 text-[0.7rem] font-medium uppercase tracking-[0.12em] text-void">
-                  New clip
+                  {featuredIsNew ? "New clip" : "Today's clip"}
                 </span>
               </Link>
 
@@ -1041,8 +1151,14 @@ export default async function Home() {
                     expression: JSX drops the whitespace either side of an
                     interpolation here, and "$8a month" is not a typo anyone
                     forgives on a page asking for money. */}
+                {/* BETWEEN US LEADS IT, Melissa 2026-09-03 ("i need that on
+                    the home page too"). It is the only forward-looking claim
+                    on this page, so it says "coming" and not "here" — see the
+                    note on the between-us row in lib/content/membership.ts for
+                    why that distinction is load-bearing on a page asking for
+                    money. */}
                 <p className="mt-4 max-w-lg leading-relaxed text-stone">
-                  {`The full scene library, the cuts that never go public, Luna’s journals, and the rooms you’ve already walked past without being able to open. From ${formatPrice(vault.priceMonthlyCents)} a month, cancel any time, and nothing that’s free today ever moves behind it.`}
+                  {`Between Us — the episode series — lands soon, and members get it. So does the full scene library, the cuts that never go public, Luna’s journals, and the rooms you’ve already walked past without being able to open. From ${formatPrice(vault.priceMonthlyCents)} a month, cancel any time, and nothing that’s free today ever moves behind it.`}
                 </p>
                 {/* SUBTLE ON PURPOSE — Melissa asked for it "somewhere
                     subtle", and this is a home page, not a fundraiser. One
@@ -1054,14 +1170,24 @@ export default async function Home() {
                   and memberships are what fund the ones still being shot.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
-                  {/* CTA WORDING, per the strategy rewrite: name the outcome,
-                      not the transaction. "See what it opens" describes a
-                      product; this describes what happens to her. */}
+                  {/* CTA WORDING, changed 2026-09-02 (Melissa's call). It
+                      read "Read the rest of her", per an earlier argument that
+                      a CTA should name the outcome rather than the
+                      transaction. The trouble with it is that a stranger who
+                      has scrolled this whole page cannot tell from those words
+                      that there is a membership on the other side of them: the
+                      one button here that asks for money read like another
+                      link into the journal.
+
+                      The label is read from vault.cta rather than typed, so
+                      this button and the one that actually starts checkout on
+                      /membership cannot drift apart — both say "Join the
+                      LunaVerse" because the tier data says it once. */}
                   <Link
                     href="/membership"
                     className="inline-flex min-h-12 items-center rounded-full bg-amber px-7 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
                   >
-                    Read the rest of her
+                    {vault.cta}
                   </Link>
                   <Link
                     href="/browse"
@@ -1097,6 +1223,66 @@ export default async function Home() {
                   </div>
                 ))}
               </Reveal>
+            </div>
+          </section>
+        </Guest>
+
+        {/* ------------------------------------------------------------ follow */}
+        {/* THE SMALLER ASK, AND THE LAST THING ON THE PAGE.
+
+            Three days of Clarity, 2026-09-03: 347 people, 1.47 pages each, 56
+            seconds of attention, 2.5% of them ever coming back — and one email
+            address in the table, total. Almost everybody who has ever been
+            here left with no way for Melissa to reach them again, which makes
+            every visit a one-off no matter how good the page is.
+
+            IT SITS UNDER THE MEMBERSHIP ASK ON PURPOSE, and that is not a
+            demotion. This is the person who read the whole argument and did
+            not click join: they are interested and they are not spending eight
+            dollars today. "Then let me write to you when there is a new one"
+            is the only thing left worth saying to them, and it costs them
+            nothing.
+
+            FollowForm's own rule is "never on arrival, never as a pop-up,
+            never on a timer" — the moment to ask is when somebody has just
+            finished something. The foot of a page they have scrolled the whole
+            way down is that moment; the top of it would not be, which is why
+            this is here and not beside the survey.
+
+            <Guest> because a member is already reachable, and because it keeps
+            the section out of the way of the people who have paid. It resolves
+            on the client like every other viewer swap, so the page stays
+            statically cached. */}
+        <Guest>
+          <section
+            aria-labelledby="follow-heading"
+            className="mx-auto w-full max-w-2xl px-5 pb-4 pt-14 sm:px-8 sm:pt-20"
+          >
+            <div className="rounded-xl border border-hairline bg-charcoal/30 px-5 py-6 sm:px-7 sm:py-7">
+              <h2
+                id="follow-heading"
+                className="font-display text-xl font-light text-ivory sm:text-2xl"
+              >
+                Not today, then.
+              </h2>
+              {/* cadenceNote() returns string | UNDEFINED — it needs four
+                  releases in thirty days before it will claim a rhythm, and
+                  says nothing rather than overstate a quiet month. Interpolated
+                  straight into the sentence it would have rendered the word
+                  "undefined" on the front page the first slow fortnight. */}
+              <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
+                That is genuinely fine.{cadence ? ` ${cadence}.` : ""} Leave an
+                address and I&rsquo;ll tell you when the next one is up — no
+                account, and nothing else in it.
+              </p>
+              <div className="mt-4 max-w-sm">
+                <FollowForm
+                  source="home"
+                  label="Your email"
+                  note="A line from me when something new goes up. Nothing else, and you can stop it in one click."
+                  done="Done — I'll write when the next one lands."
+                />
+              </div>
             </div>
           </section>
         </Guest>

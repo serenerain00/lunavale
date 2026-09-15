@@ -10,6 +10,8 @@ import {
 } from "@/lib/content/world";
 import { getVideo } from "@/lib/content/videos";
 import { pageMetadata } from "@/lib/seo/metadata";
+import { WORLD_ENABLED } from "@/lib/content/world";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = pageMetadata({
   title: "The World of Luna",
@@ -36,7 +38,10 @@ function roomCount(env: Environment): string {
   return `${n} ${n === 1 ? "room" : "rooms"}`;
 }
 
+// OFF THE SITE while the world is being finished — see WORLD_ENABLED in
+// lib/content/world.ts. The page is intact; it just has no audience yet.
 export default async function WorldPage() {
+  if (!WORLD_ENABLED) notFound();
 
   return (
     <>

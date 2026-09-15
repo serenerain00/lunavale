@@ -65,6 +65,39 @@ export async function GET() {
     hasAnswered(jar.get(ANSWERED_COOKIE)?.value ?? ""),
   ]);
 
+  /*
+    THE DIAGNOSTIC THAT LIVED HERE IS GONE (2026-09-09), and what it found is
+    worth keeping even though the code is not.
+
+    THE REPORT, 2026-09-02: signed in on the apex, Clerk's own /sign-in bounces
+    her back because the browser has a session, and the header still offers
+    "Sign in". Three rounds of logging were added here to find out whether this
+    route was refusing a good session — cookie names, then the auth() result
+    and the reason it rejected a token, then the __client_uat VALUES after
+    round two proved no __session cookie was arriving at all.
+
+    THE ANSWER, from a live visitor on 2026-09-09: `__client_uat=0`. That is
+    Clerk's own flag for "nobody is signed in in this browser", and there was
+    no __session cookie because there was no session to have one. This route
+    was correct every single time it said signedIn:false.
+
+    The bug was in the header, not here: ViewerProvider asks this route once,
+    in a mount effect in the root layout, and Clerk's <SignIn> finishes with a
+    router navigation that does not remount it — so the context went on serving
+    the answer it had fetched while the person was still a stranger. Fixed
+    2026-09-04 by components/access/ClerkViewerSync.tsx.
+
+    IF THE SYMPTOM EVER COMES BACK, do not re-add this block before checking
+    that one thing: whether a signed-in browser sends a __session cookie at
+    all. That single fact separates a client problem from a server one, and it
+    took three deploys to ask it cleanly.
+
+    WHY IT IS NOT LEFT IN "just in case": this route runs for every viewer on
+    every page load, Observability is billed per event, and that meter is the
+    one that produced a $420 August. A log that answers a closed question is
+    not free.
+  */
+
   const payload: ViewerPayload = {
     member: membership.active,
     tier: membership.tier,

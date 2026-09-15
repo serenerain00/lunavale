@@ -137,6 +137,24 @@ export const places = [
     blurb: "Her own place in Denver, and the hours nobody else sees.",
   },
   {
+    // TYSON'S PLACE IN THE CITY, added 2026-09-11 at Melissa's instruction:
+    // "we def. need to account for tysons apt in denver downtown city."
+    //
+    // KEPT APART FROM `apartment`, which is LUNA'S own place in Denver — "the
+    // hours nobody else sees", settled 2026-08-04 with the iPad call. Two
+    // different rooms belonging to two different people, and folding them
+    // together would have lost the only fact that matters about this one: it
+    // is HIS, and she has never had a reason to go there before.
+    //
+    // It also fixes a real error. `luna-ty-apt-argue` was filed under
+    // `downtown` because there was nowhere truer to put it, and the Instagram
+    // clip cut from it went out titled "Her Place" on the assumption the
+    // apartment was Luna's.
+    id: "tysons-apartment",
+    label: "Tyson's Apartment",
+    blurb: "His place in the city — where he goes when he does not want to be found.",
+  },
+  {
     // Cole's bar, confirmed his 2026-08-04 — his surname is Burnett and the
     // sign is on screen. Kept separate from `bar` rather than folded into it:
     // they are visibly different rooms, and more to the point they do
@@ -166,12 +184,42 @@ export const places = [
     blurb: "Seven days, and the best of him, all at once.",
   },
   {
-    // Rick's room. Likely to become one room of a larger "Rick's house" once
-    // more of it is shot — filed narrowly for now rather than folded into the
-    // farmhouse, which belongs to Josh and Luna and means something else.
+    // THE REST OF RICK'S HOUSE, added 2026-09-11 — the hall, the stairs, the
+    // landing. `the-study` below predicted this ("likely to become one room of
+    // a larger Rick's house once more of it is shot") and that is what has
+    // happened.
+    //
+    // THE TWO ARE KEPT SEPARATE rather than folded together, for one practical
+    // reason and one real one. Practical: `the-study` is a published facet id
+    // and folding it would break ?place=the-study for anybody holding it. Real:
+    // the study is where Rick receives people, one chair and all, and the rest
+    // of the house is where the family actually happens. A scene in the hall is
+    // not a scene in that room, and the difference is most of what Rick is.
+    //
+    // Fold them if that ever stops being true.
+    id: "ricks-house",
+    label: "Rick's House",
+    blurb: "The house Josh grew up in, and the family Tyson was let into.",
+  },
+  {
+    // Rick's room, specifically — see `ricks-house` above, which now carries
+    // the rest of the building.
     id: "the-study",
     label: "The Study",
     blurb: "His father's room, and the only chair in it that matters.",
+  },
+  {
+    // NEW YORK, added 2026-09-08 with the Whitmore hotel scene. Filed the way
+    // `mexico` is — a trip rather than a room — because that is what it is:
+    // somewhere neither of them lives, two thousand miles from everybody who
+    // knows them, which is most of what the location means.
+    //
+    // No `environmentSlug`. There is no explorable New York and there may
+    // never be one; a place can hold content long before it is a room anybody
+    // can walk into (see `garage`, which did this for a month).
+    id: "new-york",
+    label: "New York",
+    blurb: "Two thousand miles from anyone who knows them.",
   },
 ] as const satisfies readonly Place[];
 

@@ -10,6 +10,7 @@
 
 import "server-only";
 import { neon } from "@neondatabase/serverless";
+import { send, mailConfigured } from "@/lib/email/send";
 
 export { MAX_SUBJECT, MAX_BODY } from "@/lib/content/help";
 
@@ -97,27 +98,22 @@ export async function forwardToOwner(msg: {
   body: string;
   replyTo?: string | null;
 }): Promise<void> {
-  const key = process.env.RESEND_API_KEY;
   const to = process.env.OWNER_EMAIL;
-  const from = process.env.HELP_FROM_EMAIL;
-  if (!key || !to || !from) return;
+  if (!to || !mailConfigured()) return;
 
-  try {
-    await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${key}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to,
-        subject: `Luna Vale — ${msg.subject}`,
-        reply_to: msg.replyTo || undefined,
-        text: `${msg.body}\n\n—\nFrom: ${msg.replyTo || "no address given"}\nSee all: https://lunavale38.com/admin`,
-      }),
-    });
-  } catch (err) {
-    console.error("help: forward failed", err);
-  }
+  // No unsubscribe link, and send() rather than sendBulk() for that reason:
+  // this goes to Melissa's own inbox about a message somebody sent her. The
+  // guard that refuses unsubscribable bulk mail exists for customers, and
+  // applying it here would only stop her own mail from reaching her.
+  const res = await send({
+    to,
+    subject: `Luna Vale — ${msg.subject}`,
+    replyTo: msg.replyTo,
+    text: `${msg.body}\n\n—\nFrom: ${msg.replyTo || "no address given"}\nSee all: https://lunavale38.com/admin`,
+  });
+
+  // Failure is swallowed on purpose: the message is already saved and a mail
+  // outage must not turn a visitor's "I can't sign in" into an error page. The
+  // failure is logged for the server, not the sender.
+  if (!res.ok) console.error("help: forward failed", res.error);
 }

@@ -32,7 +32,10 @@ export async function generateMetadata({
     openGraph: {
       title: clip.title,
       description: clip.caption,
-      images: [clip.poster],
+      // NO OG IMAGE FOR AN EXPLICIT CLIP. A link preview renders it full size,
+      // unblurred, in somebody else's feed — the one surface where "withheld
+      // on the public grid" was never going to hold.
+      images: clip.explicit ? [] : [clip.poster],
     },
   };
 }
@@ -76,16 +79,49 @@ export default async function ClipPage({ params }: ClipPageProps) {
 
         <ContentNotice notes={clip.notes} className="mx-auto mb-4 max-w-sm" />
 
-        {allowed ? (
+        {allowed || clip.preview ? (
           <VerticalPlayer clip={clip} />
         ) : (
           <ClipLocked clip={clip} />
         )}
 
+        {/* A visitor gets a real minute of the real clip and then this — the
+            same shape as the note under the scene player, and the same rule
+            behind it: state the numbers once, under the video, rather than
+            running a countdown over the footage.
+
+            "THE FIRST" IS SAFE TO SAY HERE, unlike on a scene. Clip previews
+            have no hookStart and always begin at 0:00 (see Clip.preview), so
+            this cannot make the claim the watch page had to stop making.
+
+            The player above is genuinely playing the shorter file. There is no
+            full cut behind it to reach. */}
+        {!allowed && clip.preview && (
+          <div className="mx-auto mt-4 max-w-sm rounded-lg border border-amber/25 bg-amber/[0.04] px-4 py-3 text-sm leading-relaxed text-stone">
+            You&rsquo;re watching the first{" "}
+            {formatDuration(clip.preview.durationSeconds)} of{" "}
+            {formatDuration(clip.durationSeconds)}. The rest is part of{" "}
+            <Link
+              href="/membership"
+              className="text-amber underline-offset-4 transition-colors duration-(--duration-quick) hover:underline"
+            >
+              the LunaVerse
+            </Link>
+            .
+          </div>
+        )}
+
         <div className="mx-auto mt-8 max-w-sm">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone">
+            {/* The runtime a viewer is actually being given. Printing the
+                full 4:10 over a player holding sixty seconds would be the
+                same small lie the scene page fixed on 2026-08-31. */}
             <span className="tabular-nums">
-              {formatDuration(clip.durationSeconds)}
+              {formatDuration(
+                !allowed && clip.preview
+                  ? clip.preview.durationSeconds
+                  : clip.durationSeconds,
+              )}
             </span>
             <span aria-hidden>·</span>
             <span>

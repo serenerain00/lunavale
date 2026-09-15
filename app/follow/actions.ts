@@ -56,6 +56,13 @@ export async function joinList(formData: FormData): Promise<FollowResult> {
   let source: string;
   if (raw === "survey") {
     source = "survey";
+  } else if (raw === "home") {
+    // ADDED 2026-09-03 with the form at the foot of the home page. Worth
+    // knowing apart from the others: it is the only one given by somebody who
+    // has read an argument rather than watched something, and if it turns out
+    // to be where most of the list comes from, that changes where the next one
+    // goes.
+    source = "home";
   } else if (raw.startsWith("scene:") && getVideo(raw.slice(6))) {
     source = raw;
   } else {

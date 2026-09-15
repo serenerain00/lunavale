@@ -14,7 +14,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { Clip } from "@/lib/content/clips";
+import { clipPosterSrc, type Clip } from "@/lib/content/clips";
 
 interface VerticalPlayerProps {
   clip: Clip;
@@ -62,7 +62,7 @@ export function VerticalPlayer({ clip }: VerticalPlayerProps) {
           <div className="relative aspect-[9/16] w-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={clip.poster}
+              src={clipPosterSrc(clip)}
               alt=""
               className="absolute inset-0 size-full object-cover opacity-40"
             />
@@ -89,7 +89,7 @@ export function VerticalPlayer({ clip }: VerticalPlayerProps) {
           // aspect-[9/16] on the wrapper would fight a clip that isn't exactly
           // 9:16; letting the element size itself keeps every clip honest.
           className="block h-auto w-full"
-          poster={clip.poster}
+          poster={clipPosterSrc(clip)}
           controls
           playsInline
           loop

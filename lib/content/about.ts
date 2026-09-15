@@ -68,7 +68,7 @@ export const premise: AboutSection[] = [
     heading: "The two men",
     body: [
       "**Josh** is ten years of her life. He is charming, commanding, physical, and when he is the man she fell for there is nowhere else she wants to be. He runs a shop and a farm and puts work first. What she feels with him is a thrill she can no longer entirely separate from fear.",
-      "**Tyson** has been her best friend for twenty years. Ex-military, friend of the family, distant cousin of Josh's, and around the farm often enough to be part of it. He is the one who kept her head above water through the six months Josh was gone.",
+      "**Tyson** has been her best friend for twenty years. Ex-military, friend of the family, Josh's second cousin, and around the farm often enough to be part of it. He is the one who kept her head above water through the six months Josh was gone.",
       "Somewhere in those six months it stopped being only friendship, on both sides. Neither of them will say so. That is where you are coming in.",
     ],
   },
@@ -167,10 +167,8 @@ export const startingPoints: StartingPoint[] = [
     detail:
       "A dozen scenes, in full and at full quality, with no account needed.",
   },
-  {
-    href: "/world",
-    label: "The world",
-    detail:
-      "Walk into the farmhouse and the lakehouse and find the story by looking around instead of pressing play.",
-  },
+  // "The world" was here — "walk into the farmhouse and the lakehouse and find
+  // the story by looking around instead of pressing play". Removed 2026-09-15
+  // with the rest of it: the rooms are off the site until they are finished
+  // (WORLD_ENABLED in lib/content/world.ts). Put this back when they return.
 ];

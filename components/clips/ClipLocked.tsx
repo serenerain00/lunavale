@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Clip } from "@/lib/content/clips";
+import { getTier } from "@/lib/content/membership";
 
 /**
  * The locked panel for a members-only clip — the portrait counterpart to
@@ -18,14 +19,26 @@ import type { Clip } from "@/lib/content/clips";
 export function ClipLocked({ clip }: { clip: Clip }) {
   return (
     <div className="mx-auto w-full max-w-sm">
-      <div className="relative aspect-[9/16] overflow-hidden rounded-xl bg-black ring-1 ring-hairline">
-        <Image
-          src={clip.poster}
-          alt=""
-          fill
-          sizes="(max-width: 640px) 100vw, 384px"
-          className="scale-110 object-cover brightness-[0.25] blur-2xl"
-        />
+      <div
+        className="relative overflow-hidden rounded-xl bg-black ring-1 ring-hairline"
+        style={{ aspectRatio: `${clip.aspect?.[0] ?? 9} / ${clip.aspect?.[1] ?? 16}` }}
+      >
+        {/*
+          NOTHING AT ALL FOR AN EXPLICIT CLIP. Everyone looking at this
+          component is a non-member by definition, and the blurred poster it
+          used to draw came from a public file — decorative withholding. For
+          the rest, the blur stays: those posters are public anyway and the
+          blur is mood, not security.
+        */}
+        {clip.explicit ? null : (
+          <Image
+            src={clip.poster}
+            alt=""
+            fill
+            sizes="(max-width: 640px) 100vw, 384px"
+            className="scale-110 object-cover brightness-[0.25] blur-2xl"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-void via-void/50 to-void/30" />
 
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
@@ -42,7 +55,7 @@ export function ClipLocked({ clip }: { clip: Clip }) {
             href="/membership"
             className="inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
           >
-            See what membership opens
+            {getTier("vault")!.cta}
           </Link>
         </div>
       </div>

@@ -47,6 +47,8 @@ import { getVideo, type Video } from "@/lib/content/videos";
  * addition degrades to a shorter pool rather than a broken page.
  */
 export const HERO_SLUGS: string[] = [
+  // The trailer, 2026-09-15. Also PINNED — see HERO_PIN below.
+  "between-us-trailer-one",
   "interview",
   "luna-josh-fair",
   "luna-josh-coffee",
@@ -76,14 +78,54 @@ export interface Hero {
    * teaser for a scene elsewhere.
    */
   playInline?: boolean;
+  /**
+   * The words over it. Only a `playInline` hero has its own — everything else
+   * in the pool is a teaser for a scene and shares the site's front-door copy.
+   *
+   * IT LIVES HERE BECAUSE IT USED TO LIVE IN THE COMPONENT. The hero said
+   * "Start with the cast, in their own words" and "Play the interview" as
+   * literal strings, which was correct while the interview was the only thing
+   * that played inline and became a lie the moment the trailer did. Copy that
+   * describes a particular video belongs with that video.
+   */
+  copy?: HeroCopy;
 }
+
+export interface HeroCopy {
+  kicker: string;
+  headline: string;
+  blurb: string;
+  cta: string;
+}
+
+/** The site's front door, and the fallback for anything without its own. */
+const DEFAULT_COPY: HeroCopy = {
+  kicker: "An explorable cinematic universe",
+  headline: "Enter the world of Luna.",
+  blurb:
+    "Start with the cast, in their own words \u2014 then step inside the world they made.",
+  cta: "Play the interview",
+};
+
+const INLINE_COPY: Record<string, HeroCopy> = {
+  interview: DEFAULT_COPY,
+  "between-us-trailer-one": {
+    kicker: "An explorable cinematic universe",
+    headline: "Enter the world of Luna.",
+    // Says what it is, when the thing it is advertising arrives, and that the
+    // site is not a waiting room — the world is already open.
+    blurb:
+      "The first trailer for Between Us. The pilot lands this month \u2014 and the world it happens in is already here.",
+    cta: "Play the trailer",
+  },
+};
 
 /**
  * The interview used to be PINNED here, overriding the rotation entirely — so
  * the front page showed the same thing to everybody, every day. It is now just
  * one of the pool, and still plays inline when it comes up (see `playInline`).
  */
-const PLAY_INLINE_SLUGS = new Set(["interview"]);
+const PLAY_INLINE_SLUGS = new Set(["interview", "between-us-trailer-one"]);
 
 /* The daily-rotation clock lived here: HERO_ROTATION_MS and a 7-hour offset
  * that moved the changeover to overnight in the US so a full local day showed
@@ -112,7 +154,9 @@ export function heroes(): Hero[] {
         video,
         loop: `/hero/${slug}.mp4`,
         poster: `/hero/${slug}.jpg`,
-        ...(PLAY_INLINE_SLUGS.has(slug) ? { playInline: true } : {}),
+        ...(PLAY_INLINE_SLUGS.has(slug)
+          ? { playInline: true, copy: INLINE_COPY[slug] ?? DEFAULT_COPY }
+          : {}),
       },
     ];
   });
@@ -133,8 +177,33 @@ export function heroes(): Hero[] {
  * move the pick into a client component — the server would render one hero and
  * the client would hydrate a different one.
  */
+/**
+ * A hero that overrides the shuffle while it is set.
+ *
+ * MELISSA, 2026-09-15: "i need the trailer in the hero - with the option to
+ * play it." The pool is nine scenes shuffled per request, so simply adding the
+ * trailer to it would have put it in front of about one visitor in nine —
+ * which is not what "in the hero" means a fortnight before a pilot drops.
+ *
+ * THE FILE ALREADY ARGUED AGAINST PINNING and the argument still holds: the
+ * interview was pinned once, and it was removed because a front page that
+ * shows everybody the same thing every day stops being a reason to come back.
+ * That is a rule about the STEADY STATE. A trailer ahead of a launch is the
+ * exception it was never written for, and it is temporary by construction.
+ *
+ * SET IT BACK TO null WHEN THE PILOT IS OUT. The trailer stays in HERO_SLUGS
+ * and drops into the rotation on its own; nothing else has to change.
+ */
+const HERO_PIN: string | null = "between-us-trailer-one";
+
 export function pickHero(): Hero | undefined {
   const all = heroes();
   if (all.length === 0) return undefined;
+  if (HERO_PIN) {
+    const pinned = all.find((h) => h.slug === HERO_PIN);
+    // Falls through to the shuffle rather than showing nothing if the pin ever
+    // names a slug that heroes() has dropped.
+    if (pinned) return pinned;
+  }
   return all[Math.floor(Math.random() * all.length)];
 }

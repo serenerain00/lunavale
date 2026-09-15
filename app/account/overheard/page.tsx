@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { OVERHEARD_ARCHIVED } from "@/lib/content/overheard";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { authConfigured } from "@/lib/billing/provider";
+import { isOwner } from "@/lib/access/owner";
 import { allPostsForModeration } from "@/lib/db/overheard";
 import { toggleHidden } from "./actions";
 
@@ -28,7 +28,7 @@ export const dynamic = "force-dynamic";
 export default async function ModeratePage() {
   if (OVERHEARD_ARCHIVED) notFound();
 
-  if (!authConfigured() || !(await isOwner())) notFound();
+  if (!(await isOwner())) notFound();
 
   const posts = await allPostsForModeration();
 
@@ -121,14 +121,3 @@ export default async function ModeratePage() {
   );
 }
 
-/**
- * Only Melissa. Gated on an explicit env var rather than "is a member", because
- * every paying member is a member and none of them should see this.
- */
-async function isOwner(): Promise<boolean> {
-  const owner = process.env.OWNER_USER_ID;
-  if (!owner) return false;
-  const { auth } = await import("@clerk/nextjs/server");
-  const { userId } = await auth();
-  return Boolean(userId && userId === owner);
-}

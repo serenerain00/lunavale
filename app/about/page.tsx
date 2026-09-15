@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/components/ui/SiteHeader";
+import { getTier } from "@/lib/content/membership";
 import { getMembership } from "@/lib/access/entitlement";
 import {
   howToWatch,
@@ -178,7 +179,7 @@ export default async function AboutPage() {
                 href="/membership"
                 className="text-amber underline-offset-4 transition-colors duration-(--duration-quick) hover:underline"
               >
-                What membership opens
+                {getTier("vault")!.cta}
               </Link>
             </div>
           )}

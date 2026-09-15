@@ -5,7 +5,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { RatingBadge } from "@/components/ui/RatingBadge";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
-import { clipAccess, clips } from "@/lib/content/clips";
+import { clipAccess, clipPosterSrc, clips } from "@/lib/content/clips";
 import { formatDuration } from "@/lib/content/videos";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -49,7 +49,16 @@ export default async function ClipsPage() {
             // A gated clip a non-member can't open has its poster withheld —
             // for a sex scene the still frame is exactly the thing not to show
             // on a public page. Members see it normally.
-            const locked = clipAccess(clip) === "premium" && !member;
+            //
+            // A PUBLIC OPENING CHANGES THAT (2026-09-08). Where a gated clip
+            // carries a preview, anybody can watch its first minute, so
+            // blurring the card would be hiding a frame from the part that is
+            // already open — and hiding it from the exact person the preview
+            // exists to interest. The "Members" badge below still says the
+            // clip is gated, because it is; only the withholding of the
+            // picture is conditional.
+            const gated = clipAccess(clip) === "premium";
+            const locked = gated && !member && !clip.preview;
 
             return (
               <Link
@@ -58,9 +67,37 @@ export default async function ClipsPage() {
                 data-reveal-item
                 className="group relative block overflow-hidden rounded-lg bg-charcoal ring-1 ring-hairline transition-transform duration-(--duration-standard) ease-(--ease-standard) hover:-translate-y-1 focus-visible:-translate-y-1"
               >
+                {/*
+                  EVERY CARD IS 9:16 HERE, including the square one, and that
+                  is Melissa's call (2026-09-10): "make that Not Interested
+                  clip the same height for the gallery only so its visually
+                  balanced."
+                  
+                  So the grid crops and the clip page does not. A wall of
+                  matched cards is what this page is for — one short card in a
+                  row of tall ones reads as a mistake, not as a shape — while
+                  the clip's real proportions are what matter the moment you
+                  open it, where VerticalPlayer lets the video size itself and
+                  ClipLocked follows `aspect`.
+
+                  The poster FILE stays at the clip's true shape, so the crop
+                  happens once, in CSS, for this grid only. Baking it into the
+                  poster instead would hand the player a 9:16 still for a
+                  square video and letterbox it while it loads.
+                */}
                 <div className="relative aspect-[9/16]">
+                  {/*
+                    AN EXPLICIT CLIP SHOWS A NON-MEMBER NO IMAGE AT ALL. This
+                    used to render the real poster under a blur, from a public
+                    file whose path was right there in the source — so the
+                    withholding was decorative. Members still see it, through
+                    the gated route.
+                  */}
+                  {clip.explicit && locked ? (
+                    <div className="absolute inset-0 bg-charcoal" />
+                  ) : (
                   <Image
-                    src={clip.poster}
+                    src={clipPosterSrc(clip)}
                     alt=""
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
@@ -70,10 +107,11 @@ export default async function ClipsPage() {
                         : "brightness-90 group-hover:brightness-100"
                     }`}
                   />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-void via-void/10 to-transparent" />
 
                   <div className="absolute left-2.5 top-2.5 flex flex-wrap gap-1.5">
-                    {locked ? (
+                    {gated ? (
                       <span className="inline-flex items-center gap-1 rounded-full bg-void/70 px-2 py-0.5 text-[0.72rem] font-medium text-amber-soft backdrop-blur-sm">
                         <LockGlyph />
                         Members

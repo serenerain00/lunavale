@@ -17,10 +17,18 @@
  * lying, and the thing it would lie about is the one claim on the page a
  * visitor can check.
  *
- * ONLY DATED THINGS APPEAR. Most of the journal predates `addedOn` and is
- * undated on purpose rather than back-filled by guesswork. Undated material is
- * simply older than everything here, which is true, and it means this list is
- * short and honest rather than long and invented.
+ * ONLY DATED THINGS APPEAR — AND SINCE 2026-09-15, EVERYTHING IS DATED. The
+ * scenes, clips and journal pages that predated `addedOn` were back-filled
+ * from git: the first commit that introduced each one to its content module.
+ * That is a fact about this repository rather than a memory of when something
+ * felt like it went up, which is the only kind of back-fill the old rule was
+ * written to forbid. See `Video.addedOn` for the method and its one caveat.
+ *
+ * WHAT DID NOT CHANGE. Nothing visible, yet. The home page shows the newest
+ * six and `cadenceNote()` looks back thirty days, so the back-filled July and
+ * August dates render nowhere. They exist so that the first thing to ask this
+ * module for the whole history — a release index, a members' email — gets the
+ * real library instead of one that appears to begin in late August.
  *
  * NO FUTURE DATES, AND NO SCHEDULE. There is deliberately no "next drop
  * Friday" anywhere in this file. The site does not have a release calendar it

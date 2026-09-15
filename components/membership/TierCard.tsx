@@ -1,16 +1,15 @@
 import Link from "next/link";
 import { PlanChoice } from "@/components/membership/PlanChoice";
+import { IfHeld, IfNotHeld } from "@/components/membership/HeldTier";
+import { Guest, Member } from "@/components/access/Viewer";
 import {
   benefitsAddedBy,
   formatPrice,
   type Tier,
-  type TierId,
 } from "@/lib/content/membership";
 
 interface TierCardProps {
   tier: Tier;
-  /** The tier the viewer currently holds, so the card can reflect reality. */
-  held: TierId;
   /**
    * Whether a real yearly Stripe price exists for this tier. Read on the
    * server (the env var is not public) and passed down, so the toggle is only
@@ -27,12 +26,7 @@ interface TierCardProps {
  * step buy me", and answering it in four lines beats answering it in eighteen.
  * The full picture lives in the comparison table below on the same page.
  */
-export function TierCard({
-  tier,
-  held,
-  yearlyOffered = false,
-}: TierCardProps) {
-  const isCurrent = tier.id === held;
+export function TierCard({ tier, yearlyOffered = false }: TierCardProps) {
   const isFree = tier.id === "free";
   const added = benefitsAddedBy(tier.id);
 
@@ -91,55 +85,98 @@ export function TierCard({
           ever charge $8 a month.
 
           The free tier has nothing to choose, so it keeps the plain layout. */}
-      {isFree || isCurrent ? (
+      {/* BOTH VARIANTS SHIP IN THE CACHED HTML and the client shows one —
+          the same rule as the header and the home page. It costs the benefit
+          list twice in the document, about a kilobyte, and it buys a page that
+          is a static file instead of a serverless render for every visitor and
+          every crawler. See components/membership/HeldTier.tsx.
+
+          The free tier keeps the plain layout either way; only its button
+          changes. The paid tier changes shape completely, which is why both
+          shapes are here rather than one with a swapped label. */}
+      {isFree ? (
         <>
           <p className="mt-5 flex items-baseline gap-1.5">
             <span className="font-display text-4xl font-light tabular-nums text-ivory">
               {formatPrice(tier.priceMonthlyCents)}
             </span>
-            {!isFree && <span className="text-sm text-stone">/ month</span>}
           </p>
           <p className="mt-1.5 text-xs text-stone-dim">{tier.commitment}</p>
           {details}
+          {/* <Guest>/<Member> here rather than IfHeld, and the difference is
+              which way the card fails while the answer is still in flight.
+
+              IfHeld treats unknown as NOT held, which is right for the paid
+              card — better to show a member a join button for one frame than
+              to tell a stranger they already own something. On the FREE card
+              that same default is wrong in the common case: every signed-out
+              visitor does hold this tier, so unknown-means-not-held would
+              print "Start exploring" and flip to "Your current tier" a moment
+              later, on the state almost every visitor is in. <Guest> treats
+              unknown as guest, which matches both the static HTML and the
+              truth, and nothing visibly changes when /api/me answers. */}
           <div className="mt-7">
-            {isCurrent ? (
+            <Guest>
               <p className="rounded-full border border-amber/40 bg-amber/10 px-5 py-3 text-center text-sm text-amber-soft">
                 Your current tier
               </p>
-            ) : (
+            </Guest>
+            <Member>
               <Link
                 href="/browse"
                 className="block rounded-full border border-hairline px-5 py-3 text-center text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
               >
                 {tier.cta}
               </Link>
-            )}
+            </Member>
           </div>
         </>
       ) : (
-        // One link into the whole flow: /membership/start handles checkout as a
-        // single continuous path, and since 2026-08-27 it no longer stops at an
-        // account first. The tier and interval are both validated server-side,
-        // so a hand-edited href cannot invent a plan or a price.
-        //
-        // prefetch={false} lives inside PlanChoice and IS LOAD-BEARING: Next
-        // prefetches a Link on hover, and the href is a GET route handler that
-        // CREATES A STRIPE CHECKOUT SESSION — so a prefetch mints a real
-        // session for somebody who has only moved their mouse. Stripe's record
-        // showed the fingerprint: sessions a second apart, hover then click,
-        // for every visitor who reached this button. Nobody was double-charged,
-        // but the abandonment figure was roughly doubled, and that is the one
-        // number this page is judged on.
-        <PlanChoice
-          tierId={tier.id}
-          cta={tier.cta}
-          monthlyCents={tier.priceMonthlyCents}
-          yearlyCents={tier.priceYearlyCents ?? null}
-          commitment={tier.commitment}
-          yearlyAvailable={yearlyOffered}
-        >
-          {details}
-        </PlanChoice>
+        <>
+          <IfHeld tier={tier.id}>
+            <p className="mt-5 flex items-baseline gap-1.5">
+              <span className="font-display text-4xl font-light tabular-nums text-ivory">
+                {formatPrice(tier.priceMonthlyCents)}
+              </span>
+              <span className="text-sm text-stone">/ month</span>
+            </p>
+            <p className="mt-1.5 text-xs text-stone-dim">{tier.commitment}</p>
+            {details}
+            <div className="mt-7">
+              <p className="rounded-full border border-amber/40 bg-amber/10 px-5 py-3 text-center text-sm text-amber-soft">
+                Your current tier
+              </p>
+            </div>
+          </IfHeld>
+
+          <IfNotHeld tier={tier.id}>
+            {/* One link into the whole flow: /membership/start handles checkout
+                as a single continuous path, and since 2026-08-27 it no longer
+                stops at an account first. The tier and interval are both
+                validated server-side, so a hand-edited href cannot invent a
+                plan or a price.
+
+                prefetch={false} lives inside PlanChoice and IS LOAD-BEARING:
+                Next prefetches a Link on hover, and the href is a GET route
+                handler that CREATES A STRIPE CHECKOUT SESSION — so a prefetch
+                mints a real session for somebody who has only moved their
+                mouse. Stripe's record showed the fingerprint: sessions a second
+                apart, hover then click, for every visitor who reached this
+                button. Nobody was double-charged, but the abandonment figure
+                was roughly doubled, and that is the one number this page is
+                judged on. */}
+            <PlanChoice
+              tierId={tier.id}
+              cta={tier.cta}
+              monthlyCents={tier.priceMonthlyCents}
+              yearlyCents={tier.priceYearlyCents ?? null}
+              commitment={tier.commitment}
+              yearlyAvailable={yearlyOffered}
+            >
+              {details}
+            </PlanChoice>
+          </IfNotHeld>
+        </>
       )}
     </div>
   );

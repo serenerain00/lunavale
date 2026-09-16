@@ -61,6 +61,16 @@ export const HERO_SLUGS: string[] = [
   // want people to have a sneak peek"). Allowed by the preview rule above —
   // its play button opens a page that plays the first minute for anybody.
   "luna-tyson-casey-bar",
+
+  // ─── 2026-09-16, with the switch to a newest-first hero. All five are
+  // premium-with-a-preview, which the door rule above allows, and every loop
+  // was cut from inside that clip's own public preview window — see the note
+  // at the top of scripts/make-hero-loop.sh.
+  "josh-luna-pool",
+  "tyson-apt-thinking",
+  "josh-ty-ricks-house",
+  "luna-lkehouse-wine-shatter",
+  "ty-luna-blonde-guy-bar",
 ];
 
 export interface Hero {
@@ -178,32 +188,63 @@ export function heroes(): Hero[] {
  * the client would hydrate a different one.
  */
 /**
- * A hero that overrides the shuffle while it is set.
+ * Which hero plays, and why it is the newest thing rather than a fixed one.
  *
- * MELISSA, 2026-09-15: "i need the trailer in the hero - with the option to
- * play it." The pool is nine scenes shuffled per request, so simply adding the
- * trailer to it would have put it in front of about one visitor in nine —
- * which is not what "in the hero" means a fortnight before a pilot drops.
+ * IT WAS PINNED TO THE TRAILER from 2026-09-15. That was right for the week
+ * before a launch and wrong the moment there was a launch to fill: a front
+ * page that shows everybody the same thirty seconds every day stops being a
+ * reason to come back, which is the rule the pin was a deliberate exception to.
  *
- * THE FILE ALREADY ARGUED AGAINST PINNING and the argument still holds: the
- * interview was pinned once, and it was removed because a front page that
- * shows everybody the same thing every day stops being a reason to come back.
- * That is a rule about the STEADY STATE. A trailer ahead of a launch is the
- * exception it was never written for, and it is temporary by construction.
+ * NOW IT LEADS WITH WHAT WENT UP MOST RECENTLY. Melissa, 2026-09-16: "we're
+ * going to auto play the newest videos posted instead… netflix has their hero
+ * auto play a clip from a series. i like that format, gets the visitors
+ * attention right away." So the hero is the front page's answer to "is this
+ * alive", and it answers it with the actual answer instead of a claim.
  *
- * SET IT BACK TO null WHEN THE PILOT IS OUT. The trailer stays in HERO_SLUGS
- * and drops into the rotation on its own; nothing else has to change.
+ * FIVE, NOT ONE. "The newest video" would be a single clip sitting there until
+ * the next one is cut, which is the pin again under a different name. The pool
+ * is the five most recently added heroes and one is chosen per render, so the
+ * page is both current and different on a second visit.
+ *
+ * THE TRAILER IS OUT OF THE POOL, deliberately — "we'll keep the trailer and
+ * ep 1 thumbnails where they are". It is a card on the Season 1 shelf now, and
+ * a trailer playing full-bleed above a shelf containing the same trailer was
+ * showing it twice on one screen.
+ *
+ * A NEW CLIP DOES NOT ENTER THIS ON ITS OWN. It needs a loop built by
+ * scripts/make-hero-loop.sh and its slug in HERO_SLUGS above — a hero loop is
+ * permanently public and the span has to be chosen by a person, so that step
+ * is a feature. Until then the clip is simply not in the pool and the hero
+ * falls back to the next most recent, which is why this degrades quietly
+ * rather than going blank.
  */
-const HERO_PIN: string | null = "between-us-trailer-one";
+
+/** How many of the most recent heroes the rotation draws from. */
+const RECENT_POOL = 5;
+
+/** Never the hero: it is a card on the Season 1 shelf. */
+const NOT_IN_HERO = new Set(["between-us-trailer-one"]);
+
+/**
+ * The pool, newest first.
+ *
+ * Undated heroes sort last rather than being dropped — every clip has an
+ * `addedOn` since the 2026-09-15 back-fill, so this only matters if one is
+ * ever added without a date, and the safe behaviour there is "still usable,
+ * just not treated as new".
+ */
+export function recentHeroes(): Hero[] {
+  return heroes()
+    .filter((h) => !NOT_IN_HERO.has(h.slug))
+    .sort((a, b) => (b.video.addedOn ?? "").localeCompare(a.video.addedOn ?? ""))
+    .slice(0, RECENT_POOL);
+}
 
 export function pickHero(): Hero | undefined {
-  const all = heroes();
+  const pool = recentHeroes();
+  // Falls back to the whole set rather than showing nothing, in case every
+  // recent hero is ever dropped by the door test in heroes().
+  const all = pool.length > 0 ? pool : heroes();
   if (all.length === 0) return undefined;
-  if (HERO_PIN) {
-    const pinned = all.find((h) => h.slug === HERO_PIN);
-    // Falls through to the shuffle rather than showing nothing if the pin ever
-    // names a slug that heroes() has dropped.
-    if (pinned) return pinned;
-  }
   return all[Math.floor(Math.random() * all.length)];
 }

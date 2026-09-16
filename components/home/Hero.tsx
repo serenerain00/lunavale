@@ -7,6 +7,7 @@ import type { Hero as HeroContent } from "@/lib/content/hero";
 import { getPlace } from "@/lib/content/taxonomy";
 import { formatDuration } from "@/lib/content/videos";
 import { PAGE } from "@/components/ui/layout";
+import { SERIES_TITLE } from "@/lib/content/season";
 
 interface HeroProps {
   hero: HeroContent;
@@ -85,11 +86,17 @@ export function Hero({ hero }: HeroProps) {
       </div>
 
       <div className={`${PAGE} pb-12 sm:pb-16`}>
-        <p className="text-xs uppercase tracking-[0.22em] text-amber">
-          An explorable cinematic universe
+        {/* THE SERIES MARK, above the clip's own title. From 2026-09-16 the
+            hero is whichever clip went up most recently, so without this the
+            front page never says what the show is called — it just plays
+            something. Netflix puts the show's logo here for the same reason.
+            The eyebrow used to read "An explorable cinematic universe", which
+            described the website rather than the thing playing. */}
+        <p className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-amber sm:text-base">
+          {SERIES_TITLE}
         </p>
 
-        <h1 className="mt-4 max-w-3xl font-display text-4xl font-light leading-[1.05] text-ivory sm:text-6xl lg:text-7xl">
+        <h1 className="mt-3 max-w-3xl font-display text-5xl font-semibold leading-[0.95] tracking-tight text-ivory sm:text-7xl lg:text-8xl">
           {video.title}
         </h1>
 
@@ -116,7 +123,7 @@ export function Hero({ hero }: HeroProps) {
           )}
         </div>
 
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-stone sm:text-lg">
+        <p className="mt-5 max-w-xl text-lg leading-relaxed text-stone sm:text-xl">
           {video.synopsis}
         </p>
 

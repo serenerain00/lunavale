@@ -8,9 +8,22 @@
  * It declines to load the video when:
  *   - the viewer prefers reduced motion (a full-bleed moving backdrop is
  *     exactly the kind of thing that rule exists for)
- *   - the screen is phone-sized, where a decorative background costs mobile
- *     data for something nobody came for
  *   - the browser reports a slow connection or Data Saver
+ *
+ * IT USED TO REFUSE ON PHONES TOO, below 640px, "where a decorative background
+ * costs mobile data for something nobody came for". That was the right call
+ * while the loop was decoration behind a generic headline. It stopped being
+ * true on 2026-09-16, when the hero became the newest clip playing itself —
+ * Melissa: "netflix has their hero auto play a clip from a series… gets the
+ * visitors attention right away." Refusing on the device most of this
+ * audience arrives on would have been refusing to ship the thing she asked
+ * for.
+ *
+ * WHAT THAT COSTS, stated plainly: about 2–3MB of cellular data per visit for
+ * a 24–30s loop. It is served straight from /public through the CDN, so it is
+ * a cached static asset rather than a function invocation, and it cannot
+ * repeat the August bill. Data Saver and 2g still opt out, which is the case
+ * the width check was really standing in for.
  *
  * The <video> element is only mounted once those checks pass, so the bytes are
  * never requested in the cases above — `preload="none"` alone wouldn't be
@@ -25,9 +38,6 @@ interface AmbientVideoProps {
   poster: string;
 }
 
-/** Below this width, the still hero is the better trade. */
-const MIN_WIDTH = 640;
-
 interface NetworkInformation {
   saveData?: boolean;
   effectiveType?: string;
@@ -40,7 +50,6 @@ export function AmbientVideo({ src, poster }: AmbientVideoProps) {
 
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const wide = window.matchMedia(`(min-width: ${MIN_WIDTH}px)`);
 
     const connection = (
       navigator as Navigator & { connection?: NetworkInformation }
@@ -50,17 +59,13 @@ export function AmbientVideo({ src, poster }: AmbientVideoProps) {
       (connection?.effectiveType != null &&
         /2g/.test(connection.effectiveType));
 
-    const decide = () => setEnabled(!motion.matches && wide.matches && !thrifty);
+    const decide = () => setEnabled(!motion.matches && !thrifty);
     decide();
 
-    // Someone who turns on Reduce Motion, or rotates a tablet into a phone-ish
-    // width, gets the decision re-made rather than being stuck with it.
+    // Someone who turns Reduce Motion on mid-visit gets the decision re-made
+    // rather than being stuck with it.
     motion.addEventListener("change", decide);
-    wide.addEventListener("change", decide);
-    return () => {
-      motion.removeEventListener("change", decide);
-      wide.removeEventListener("change", decide);
-    };
+    return () => motion.removeEventListener("change", decide);
   }, []);
 
   if (!enabled) return null;

@@ -67,14 +67,21 @@ export function Shelf({ title, href, linkLabel, note, children }: ShelfProps) {
       <div className={PAGE}>
         <div className="mb-4 flex items-baseline justify-between gap-4">
           <div className="min-w-0">
+            {/* BIGGER AND HEAVIER THAN IT WAS (2026-09-16, "we need bolder and
+                bigger copy i think"). A row heading has to win against the
+                poster art directly under it, and at text-xl/medium it was
+                losing — the page read as a wall of pictures with captions
+                rather than as a set of shelves. */}
             <h2
               id={id}
-              className="font-display text-xl font-medium text-ivory sm:text-2xl"
+              className="font-display text-2xl font-semibold tracking-tight text-ivory sm:text-3xl"
             >
               {title}
             </h2>
             {note && (
-              <p className="mt-1 text-sm leading-relaxed text-stone">{note}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-stone sm:text-base">
+                {note}
+              </p>
             )}
           </div>
 

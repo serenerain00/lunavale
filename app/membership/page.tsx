@@ -6,7 +6,6 @@ import { Questions } from "@/components/membership/Questions";
 import { TierCard } from "@/components/membership/TierCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { journal } from "@/lib/content/journal";
 import { TIERS } from "@/lib/content/membership";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -42,7 +41,6 @@ export const metadata: Metadata = pageMetadata({
 export default function MembershipPage() {
   // Counted, never typed. The pitch below is built out of these, so it cannot
   // still be claiming thirty-nine entries the week after the fortieth goes up.
-  const lockedEntries = journal.filter((e) => e.access === "premium").length;
 
   return (
     <>

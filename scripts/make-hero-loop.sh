@@ -81,6 +81,43 @@ HEROES=(
   # 1116x720, so cropping it to 1280x720 would upscale; the 1320x852 master
   # crops down instead.
   "luna-tyson-casey-bar|stories/luna-tyson-casey-bar/luna-tyson-casey-bar-music.mov|86|30"
+
+  # ─── 2026-09-16: the hero now leads with what went up most recently, so the
+  # pool has to be deep enough at the top for "newest" to mean something. Five
+  # added, all from the last three weeks.
+  #
+  # EVERY SPAN BELOW SITS INSIDE THAT CLIP'S EXISTING PUBLIC PREVIEW WINDOW.
+  # That is the rule this batch was cut under and it should hold for every one
+  # after it: a hero loop is permanently public, so taking it from footage that
+  # is already public means publishing a loop can never widen what a
+  # non-member has seen. Windows are `preview.hookStart` to
+  # `hookStart + preview.durationSeconds` in lib/content/videos.ts — check
+  # them before adding a line here, because they are not all from zero.
+  #
+  # Preview 0–60. Night, lit water, candles, the warmest frame in the library.
+  # 18s clears the opening singles and lands on the seated two-shot; the whole
+  # span holds one composition with the pool behind them and the lower left on
+  # loungers. The explicit material in this scene is in the members' cut only
+  # (josh-luna-pool-explicit), never in this file.
+  "josh-luna-pool|stories/josh-luna-pool.proxy.mp4|18|30"
+  # Preview 90–135. Lamplit room, one figure, the lake and a moon through the
+  # glass. The quiet one.
+  "luna-lkehouse-wine-shatter|stories/luna-lkehouse-wine-shatter.proxy.mp4|103|30"
+  # Preview 89–149. Bar, bokeh, a crowd in depth — reads as a film from across
+  # a room, the same job luna-tyson-dance does.
+  "ty-luna-blonde-guy-bar|stories/ty-luna-blonde-guy-bar.proxy.mp4|100|30"
+  # Preview 0–60. Night apartment, lamplight, city through the window.
+  "tyson-apt-thinking|stories/tyson-apt-thinking.proxy.mp4|26|30"
+  # Preview 0–45. Daylight, a truck on a mountain road, then the two of them in
+  # the cab. The only recent one with real exterior distance in it.
+  "josh-ty-ricks-house|stories/josh-ty-ricks-house.proxy.mp4|5|24"
+  #
+  # NOT ADDED, and the reason matters because it is the standing test:
+  #   luna-ty-apt-argue — the newest clip of the lot and excluded anyway. Its
+  #     preview window is almost unlit (a hero carries a headline; that one is
+  #     a black rectangle behind text, the same objection that keeps
+  #     josh-rick-study out) and it reaches partial nudity inside the window.
+  #     Being newest does not get a clip into the hero.
   #
   # Sources are the 720p proxies rather than masters: the output is 720 tall,
   # so a master buys nothing here, and every free scene is guaranteed to have a

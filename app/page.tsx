@@ -12,6 +12,7 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
 import { Guest, Member, UnlessAnswered } from "@/components/access/Viewer";
 import { pickHero } from "@/lib/content/hero";
 import { inStoryOrder } from "@/lib/content/chronology";
+import { categories } from "@/lib/content/categories";
 import { currentSeason, hasReleasedEpisode } from "@/lib/content/season";
 import { characters } from "@/lib/content/characters";
 import { galleries } from "@/lib/content/gallery";
@@ -115,7 +116,7 @@ export default async function Home() {
           old page was built out of.
         */}
         <section className={`${PAGE} pt-8 sm:pt-10`}>
-          <p className="max-w-2xl text-base leading-relaxed text-stone sm:text-lg">
+          <p className="max-w-2xl text-lg leading-relaxed text-stone sm:text-xl">
             Luna and Josh were together ten years. They spent six months apart,
             and in those six months her oldest friend Tyson was the one who
             turned up. Then Josh called. Season one is coming, and the moments
@@ -226,6 +227,36 @@ export default async function Home() {
             </RailItem>
           ))}
         </Shelf>
+
+        {/* ------------------------------------------------------ categories */}
+        {/*
+          THE SAME 46 CLIPS, CUT EIGHT WAYS. One shelf in story order is a
+          correct list and a thin front page — it gives a visitor exactly one
+          reason to scroll, and if the first four posters do not land there is
+          no second chance. Every row here is a predicate over the clip data
+          (lib/content/categories.ts), so a new clip joins its rows the moment
+          it is published and none of this is a second list to keep.
+
+          A clip appearing in several rows is deliberate. "Luna & Tyson" and
+          "The distance" are different questions and the same clip is a good
+          answer to both; a front page is not a partition.
+        */}
+        {categories().map((c) => (
+          <Shelf key={c.id} title={c.label} href={c.href} note={c.note}>
+            {c.clips.map((v) => (
+              <RailItem key={v.slug}>
+                <ClipCard
+                  href={`/clips/${v.slug}`}
+                  title={v.title}
+                  poster={v.poster}
+                  meta={formatDuration(v.durationSeconds)}
+                  premium={v.access === "premium"}
+                  mature={v.mature}
+                />
+              </RailItem>
+            ))}
+          </Shelf>
+        ))}
 
         {/* ----------------------------------------------------------- posts */}
         <Shelf

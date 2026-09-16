@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
 import { ClipCard } from "@/components/shelf/ClipCard";
 import { PAGE } from "@/components/ui/layout";
 import { inStoryOrder, inReleaseOrder } from "@/lib/content/chronology";
+import { getCategory, clipsInCategory, categories } from "@/lib/content/categories";
 import { formatDuration } from "@/lib/content/videos";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -44,11 +45,22 @@ export const revalidate = 3600;
 export default async function ClipsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ sort?: string }>;
+  searchParams: Promise<{ sort?: string; category?: string }>;
 }) {
-  const { sort } = await searchParams;
+  const { sort, category } = await searchParams;
   const latest = sort === "latest";
-  const clips = latest ? inReleaseOrder() : inStoryOrder();
+
+  // The category rows on the home page open this page filtered. An unknown id
+  // falls back to everything rather than to an empty page or a 404 — a
+  // hand-edited URL should land somewhere useful.
+  const picked = category ? getCategory(category) : undefined;
+  const base = latest ? inReleaseOrder() : inStoryOrder();
+  const clips = picked
+    ? (() => {
+        const ids = new Set(clipsInCategory(picked.id).map((v) => v.slug));
+        return base.filter((v) => ids.has(v.slug));
+      })()
+    : base;
 
   // Positions always come from the story, never from the row the card sits in.
   // In the latest view the numbers jump around, which is correct and useful:
@@ -78,29 +90,46 @@ export default async function ClipsPage({
             The sequence is still real and still useful, so it stays — as an
             arrangement the page offers, not as a claim that it is complete.
           */}
-          <h1 className="mt-4 max-w-3xl font-display text-3xl font-light leading-[1.15] text-ivory sm:text-5xl">
-            A peek at what&rsquo;s coming.
+          <h1 className="mt-4 max-w-3xl font-display text-4xl font-medium leading-[1.05] tracking-tight text-ivory sm:text-6xl">
+            {picked ? picked.label : "A peek at what\u2019s coming."}
           </h1>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
-            These are moments from the series — the ones already shot, arranged
-            the way they happen to Luna rather than the way they went up. Start
-            anywhere. Each one stands on its own, and together they give you a
-            sense of what season one is walking into.
+          <p className="mt-4 max-w-xl text-lg leading-relaxed text-stone sm:text-xl">
+            {picked?.note ??
+              "These are moments from the series \u2014 the ones already shot, arranged the way they happen to Luna rather than the way they went up. Start anywhere. Each one stands on its own."}
           </p>
         </header>
 
+        {/* Sort keeps whichever category is on, so switching order does not
+            silently drop the filter the visitor arrived with. */}
         <div
           role="group"
           aria-label="Sort"
-          className="mb-8 inline-flex rounded-full border border-hairline p-1"
+          className="mb-6 inline-flex rounded-full border border-hairline p-1"
         >
-          <SortLink href="/clips" active={!latest}>
+          <SortLink href={href({ category, sort: undefined })} active={!latest}>
             In order
           </SortLink>
-          <SortLink href="/clips?sort=latest" active={latest}>
+          <SortLink href={href({ category, sort: "latest" })} active={latest}>
             Latest
           </SortLink>
         </div>
+
+        {/* Every category, always — this is the page's own navigation, and a
+            filtered view has to offer the way back to everything. */}
+        <nav aria-label="Categories" className="mb-8 flex flex-wrap gap-2">
+          <Chip href={href({ category: undefined, sort })} active={!picked}>
+            Everything
+          </Chip>
+          {categories().map((c) => (
+            <Chip
+              key={c.id}
+              href={href({ category: c.id, sort })}
+              active={picked?.id === c.id}
+            >
+              {c.label}
+            </Chip>
+          ))}
+        </nav>
 
         <ul className="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {clips.map((v) => (
@@ -122,6 +151,45 @@ export default async function ClipsPage({
         </ul>
       </main>
     </>
+  );
+}
+
+/** Builds a /clips URL, dropping empty params rather than writing `?sort=`. */
+function href({
+  category,
+  sort,
+}: {
+  category?: string;
+  sort?: string;
+}): string {
+  const q = new URLSearchParams();
+  if (category) q.set("category", category);
+  if (sort) q.set("sort", sort);
+  const s = q.toString();
+  return s ? `/clips?${s}` : "/clips";
+}
+
+function Chip({
+  href,
+  active,
+  children,
+}: {
+  href: string;
+  active: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      aria-current={active ? "true" : undefined}
+      className={`inline-flex min-h-9 items-center rounded-full border px-4 text-sm transition-colors duration-(--duration-quick) ${
+        active
+          ? "border-amber bg-amber/10 text-amber"
+          : "border-hairline text-stone hover:border-amber hover:text-amber"
+      }`}
+    >
+      {children}
+    </Link>
   );
 }
 

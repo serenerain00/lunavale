@@ -36,6 +36,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Rail, RailItem, RAIL_ITEM_SIZES } from "@/components/browse/Rail";
 import { formatReleaseDate, type Release } from "@/lib/content/releases";
 import { formatDuration } from "@/lib/content/videos";
+import { useScrollLock } from "@/lib/hooks/useScrollLock";
 
 interface LatelyRailProps {
   drops: Release[];
@@ -217,6 +218,11 @@ function ReleasePanel({
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
 
+  // Locks the ROOT element, not the body — see lib/hooks/useScrollLock.ts.
+  // A body-level lock turns body into a scrollport and breaks the sticky
+  // header underneath this overlay.
+  useScrollLock(true);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -225,14 +231,9 @@ function ReleasePanel({
     };
     window.addEventListener("keydown", onKey);
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     panelRef.current?.focus();
 
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = previousOverflow;
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, [onStep, onClose]);
 
   const scene = drop.kind === "scene";

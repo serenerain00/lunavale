@@ -16,6 +16,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useScrollLock } from "@/lib/hooks/useScrollLock";
 
 interface StillWallProps {
   images: string[];
@@ -133,6 +134,11 @@ function Lightbox({
   const [dragX, setDragX] = useState(0);
   const swipe = useRef({ active: false, startX: 0, startY: 0, dx: 0 });
 
+  // Locks the ROOT element, not the body — see lib/hooks/useScrollLock.ts.
+  // A body-level lock turns body into a scrollport and breaks the sticky
+  // header underneath this overlay.
+  useScrollLock(true);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -141,16 +147,9 @@ function Lightbox({
     };
     window.addEventListener("keydown", onKey);
 
-    // Lock the page behind the overlay so scrolling doesn't leak through.
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
     panelRef.current?.focus();
 
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = previousOverflow;
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, [onStep, onClose]);
 
   /* Swipe. The image tracks the finger so the gesture is discoverable by

@@ -43,7 +43,6 @@ export default async function BetweenTakesPage() {
   const { active: member } = await getMembership();
 
   const pages = notebookPages();
-  const open = pages.filter(pageIsOpen).length;
   const days = shootingDaysSoFar();
   const first = pages[0];
 
@@ -67,10 +66,10 @@ export default async function BetweenTakesPage() {
             worked out the others were reading it, to each other.
           </p>
           <p className="mt-4 max-w-2xl leading-relaxed text-stone-dim">
-            It runs in the order it was written, and it is still being written:
-            they are filming now, so pages keep arriving. {days} shooting days
-            in, {open} of the {pages.length} are open to everyone
-            {member ? " — you have the rest." : "; the rest come with membership."}
+            It runs in the order it was written, and it is still being
+            written: they are filming now, so pages keep arriving. {days}{" "}
+            shooting days in, and some of it is open to everyone
+            {member ? " — you have the rest." : "; the rest comes with membership."}
           </p>
 
           {first && (

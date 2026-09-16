@@ -6,7 +6,6 @@ import { canWatch, isMember } from "@/lib/access/entitlement";
 import { entriesForScene } from "@/lib/content/journal";
 import {
   storyPosition,
-  inStoryOrder,
   previousInStory,
   nextInStory,
 } from "@/lib/content/chronology";
@@ -85,7 +84,6 @@ export default async function WatchPage({ params }: WatchPageProps) {
   // anything outside the story (the trailer, the cast interview), which is
   // correct: those are about it, not in it.
   const position = storyPosition(slug);
-  const total = inStoryOrder().length;
   const previous = previousInStory(slug);
   const next = nextInStory(slug);
   const stills = galleryForScene(slug);
@@ -217,18 +215,27 @@ export default async function WatchPage({ params }: WatchPageProps) {
           <h1 className="mt-2 font-display text-3xl font-light text-ivory sm:text-4xl">
             {video.title}
           </h1>
-          {/* WHERE THIS SITS IN THE STORY, added 2026-09-16 with the reorder.
-              Without it the order exists only on the index, and somebody who
-              arrived on this page from a link — which is most people — has no
-              idea there is an order at all, let alone that they are at number
-              nine of forty-six. */}
+          {/*
+            THIS SAID "9 of 46 in the story" FOR ABOUT FOUR HOURS. It was added
+            with the reorder this morning so that somebody arriving from a link
+            — which is most people — could tell there was an order at all.
+            Removed the same day: it is both halves of the thing Melissa does
+            not want on the site, a progress marker and a library total in one
+            line. See the note on app/membership/page.tsx.
+
+            What replaces it does the original job without the arithmetic: it
+            says there is a sequence and offers the way into it. The small
+            number on each card in the rails still marks position, which is
+            what makes the order visible — it just no longer comes with a
+            denominator to measure yourself against.
+          */}
           {position !== undefined && (
             <p className="mt-2 text-sm text-stone">
               <Link
                 href="/clips"
                 className="underline decoration-hairline underline-offset-4 hover:text-amber"
               >
-                {position} of {total} in the story
+                See where this one sits
               </Link>
             </p>
           )}

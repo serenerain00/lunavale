@@ -200,13 +200,18 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
             />
             {!allowed && (
               <div className="mt-8 rounded-xl border border-amber/25 bg-amber/[0.04] p-6 sm:p-8">
+                {/* The counts came out 2026-09-16 — see the note on
+                    /membership. This used to say "37 more from this set" and
+                    "you're seeing 3 of 40", which was built as an honest
+                    number rather than a vague promise, and that argument is
+                    still a good one. It loses to the owner's call not to
+                    publish how much is behind the lock. */}
                 <h2 className="font-display text-2xl font-medium text-ivory sm:text-3xl">
-                  {gallery.count - items.length} more from this set
+                  There&rsquo;s more of this set
                 </h2>
                 <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
-                  You&rsquo;re seeing {items.length} of {gallery.count}. Members
-                  get the whole set at full resolution, and the clip it was cut
-                  from in full.
+                  You&rsquo;re seeing the open frames. Members get the whole set
+                  at full resolution, and the clip it was cut from in full.
                 </p>
                 <Link
                   href="/membership"

@@ -198,7 +198,7 @@ function Shelf({
             href={href}
             className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
           >
-            Show all {items.length}
+            Show all
           </Link>
         )}
       </div>
@@ -215,7 +215,7 @@ function Shelf({
           ))}
           {!complete && (
             <RailItem>
-              <ShelfEndCap heading={heading} href={href} count={items.length} />
+              <ShelfEndCap heading={heading} href={href} />
             </RailItem>
           )}
         </Rail>
@@ -233,11 +233,9 @@ function Shelf({
 function ShelfEndCap({
   heading,
   href,
-  count,
 }: {
   heading: string;
   href: string;
-  count: number;
 }) {
   return (
     <Link
@@ -245,9 +243,8 @@ function ShelfEndCap({
       data-reveal-item
       className="group flex h-full min-h-56 flex-col items-start justify-end gap-2 rounded-lg border border-dashed border-hairline bg-charcoal/40 p-5 transition-colors duration-(--duration-standard) hover:border-amber/50 hover:bg-charcoal/70"
     >
-      <span className="font-display text-3xl font-light tabular-nums text-amber/80 transition-colors duration-(--duration-quick) group-hover:text-amber">
-        {count}
-      </span>
+      {/* A big amber count used to sit here. Removed 2026-09-16 — see the
+          note on app/membership/page.tsx. */}
       <span className="font-display text-lg leading-tight text-ivory">
         Everything in {heading}
       </span>
@@ -298,7 +295,7 @@ function StillsRail({ items }: { items: CatalogItem[] }) {
           href="/gallery"
           className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
         >
-          All {items.length} galleries
+          All galleries
         </Link>
       </div>
 

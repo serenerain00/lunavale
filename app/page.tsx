@@ -84,9 +84,10 @@ export default async function Home() {
   const vault = getTier("vault")!;
 
   // The story, in the order it happens to her — see lib/content/chronology.ts.
+  // NO COUNTS DERIVED FROM IT. There used to be three here feeding the
+  // membership pitch; see the note on app/membership/page.tsx for why they
+  // went.
   const story = inStoryOrder();
-  const clipCount = story.length;
-  const freeClipCount = story.filter((v) => v.access === "free").length;
 
   // Art for an unreleased episode: the trailer's poster, because it is the only
   // image that is honestly about the thing being announced.
@@ -97,7 +98,6 @@ export default async function Home() {
   // What has gone up lately, and how often — both derived, neither hand-kept.
   const fresh = recentReleases(12);
   const cadence = cadenceNote();
-  const stillsCount = galleries.reduce((n, g) => n + g.count, 0);
 
   return (
     <>
@@ -315,7 +315,7 @@ export default async function Home() {
                 href={`/gallery/${g.id}`}
                 title={g.title}
                 poster={g.cover}
-                meta={`${g.count} stills`}
+                meta="Stills"
                 premium={g.access === "premium"}
               />
             </RailItem>
@@ -358,10 +358,9 @@ export default async function Home() {
                 Season one lands for members first.
               </h2>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
-                Membership opens all {clipCount} clips at full length, every
-                page of Luna&rsquo;s journal, and {stillsCount} stills from the
-                set. {freeClipCount === 1 ? "One clip is" : `${freeClipCount} clips are`}{" "}
-                open to everyone and always will be. It&rsquo;s{" "}
+                Membership opens every clip at full length, all of
+                Luna&rsquo;s journal, and the stills from the set. What&rsquo;s
+                open to everyone stays open, always. It&rsquo;s{" "}
                 {formatPrice(vault.priceMonthlyCents)} a month, and you can stop
                 whenever you like.
               </p>
@@ -386,9 +385,9 @@ export default async function Home() {
                 You&rsquo;re in. Season one comes to you first.
               </h2>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
-                All {clipCount} clips are open to you at full length, along with
-                the journal and {stillsCount} stills from the set. The first
-                episode will be here before it is anywhere else.
+                Every clip is open to you at full length, along with the
+                journal and the stills from the set. The first episode will be
+                here before it is anywhere else.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link

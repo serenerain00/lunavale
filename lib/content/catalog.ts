@@ -74,7 +74,8 @@ export const catalog: CatalogItem[] = [
       synopsis: g.description[0] ?? g.subtitle,
       href: `/gallery/${g.id}`,
       poster: g.cover,
-      meta: `${g.count} stills`,
+      // No count — see the note on app/membership/page.tsx.
+      meta: "Stills",
       access: g.access,
       mature: g.mature,
       feelings: [...g.feelings],

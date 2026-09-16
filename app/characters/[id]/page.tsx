@@ -81,7 +81,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
     synopsis: g.description[0] ?? g.subtitle,
     href: `/gallery/${g.id}`,
     poster: g.cover,
-    meta: `${g.count} stills`,
+    meta: "Stills",
     access: g.access,
     mature: g.mature,
     feelings: [...g.feelings],
@@ -318,13 +318,17 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
           {/* --------------------------------------------------- the pitch */}
           {!member && locked > 0 && (
             <section className="mt-16 rounded-xl border border-amber/25 bg-amber/[0.04] p-6 sm:p-8">
+              {/* The count came out 2026-09-16 — see app/membership/page.tsx.
+                  `locked` still decides WHETHER this renders, which is the
+                  part that has to stay honest: no pitch on a character with
+                  nothing behind the lock. */}
               <h2 className="font-display text-2xl font-medium text-ivory sm:text-3xl">
-                {locked} of {character.name}’s pages are in the LunaVerse
+                More of {character.name} is in the LunaVerse
               </h2>
               <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
-                The rest of the notebook, the scenes that are not public, and
-                the pages of Luna&rsquo;s journal that have a turn in them.
-                Eight dollars a month, cancel any time.
+                The rest of the notebook, the clips that are not public, and the
+                pages of Luna&rsquo;s journal that have a turn in them. Eight
+                dollars a month, cancel any time.
               </p>
               <Link
                 href="/membership"

@@ -137,8 +137,8 @@ export default async function AboutPage() {
           </h2>
           <p className="mt-2 max-w-2xl leading-relaxed text-stone">
             Her account, in sequence, from the first box out of the house to
-            where it stands now — {chronology.length} entries in
-            Luna&rsquo;s own hand, with the clip that sits beside each one.
+            where it stands now, in her own hand, with the clip that sits
+            beside each one.
           </p>
 
           {member ? (

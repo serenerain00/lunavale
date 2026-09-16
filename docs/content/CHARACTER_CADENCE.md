@@ -42,25 +42,26 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-08-17 (counts read off `countFor()` / `lockedCountFor()`):
+As built, 2026-09-16 (counts read off `countFor()` / `lockedCountFor()`):
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 98 | 73 |
-| Tyson | 12 | 74 | 61 |
-| Josh | 13 | 75 | 58 |
-| Rick | 2 | 5 | 3 |
-| Cathy | 0 | 5 | 4 |
-| Avery | 0 | 3 | 2 |
+| Luna | 12 | 160 | 137 |
+| Tyson | 12 | 121 | 109 |
+| Josh | 13 | 98 | 87 |
+| Rick | 2 | 9 | 9 |
+| Cathy | 0 | 11 | 11 |
+| Avery | 0 | 6 | 6 |
 
-**Josh has caught up on volume and still needs the most.** He is level with
-Tyson on pieces now, but he is the hardest character to hold an audience's
-sympathy for, and the whole story depends on him being genuinely likeable
-before he turns — so the thing to watch is not his count but how much of it
-makes that case.
+**Josh has the most notes of the three leads and still needs the most work.**
+He has fallen behind Luna and Tyson on pieces as media landed, and he is the
+hardest character to hold an audience's sympathy for — the whole story depends
+on him being genuinely likeable before he turns. So the thing to watch is not
+his count but how much of it makes that case.
 
-**Rick is the thinnest page on the site**, and he is the explanation for Josh.
-Five pieces total. Every one of them is doing double duty.
+**Rick is the thinnest of the people who carry weight**, and he is the
+explanation for Josh. Nine pieces, all of them members-only. Every one is doing
+double duty. Only Avery, who is tertiary, has fewer.
 
 Standing backlog, roughly prioritised:
 

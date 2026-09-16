@@ -43,7 +43,7 @@ if (!process.env.BLOB_READ_WRITE_TOKEN) {
  * nothing missing.
  */
 async function mediaFiles() {
-  const sources = ["lib/content/videos.ts", "lib/content/clips.ts"];
+  const sources = ["lib/content/videos.ts", "lib/content/posts.ts"];
   const files = [];
   for (const source of sources) {
     const text = await readFile(path.join(ROOT, source), "utf8");

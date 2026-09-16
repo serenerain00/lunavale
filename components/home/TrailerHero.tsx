@@ -1,12 +1,18 @@
 /**
- * InterviewHero — a hero whose video IS the content: click play and the whole
- * thing plays right here, with sound, no trip to a watch page.
+ * TrailerHero — the first thing anybody sees, and the first thing they can
+ * play. Click and the trailer runs right here, with sound, without leaving the
+ * page.
  *
- * NAMED FOR THE CAST INTERVIEW, WHICH IT NO LONGER ONLY SERVES. From
- * 2026-09-15 it also carries the trailer, and anything else `playInline` is set
- * on. The file name is left alone because it is imported by app/page.tsx and a
- * rename buys nothing; the user-facing strings below, which said "interview" to
- * somebody watching a trailer, are fixed.
+ * WAS InterviewHero, renamed 2026-09-16 along with the rest of the front page.
+ * It carried the cast interview first and the trailer later, and the old name
+ * had stopped describing it.
+ *
+ * IT LEADS WITH THE SERIES, NOT THE SITE. The headline used to be "Enter the
+ * world of Luna" over a tagline about an explorable universe, which is a
+ * description of a website. What somebody landing here needs, in the order
+ * Netflix and Hulu learned to give it: what is this called, what kind of thing
+ * is it, and can I watch it right now. So: the title, "A Luna Vale Series",
+ * and a Play button.
  *
  * Two video layers:
  *   - the muted ambient loop behind the copy (AmbientVideo, desktop-only), and
@@ -23,15 +29,16 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Guest } from "@/components/access/Viewer";
 import { AmbientVideo } from "@/components/home/AmbientVideo";
 import type { Hero as HeroContent } from "@/lib/content/hero";
+import { SERIES_TITLE, SERIES_SUBTITLE } from "@/lib/content/season";
+import { PAGE } from "@/components/ui/layout";
 
-interface InterviewHeroProps {
+interface TrailerHeroProps {
   hero: HeroContent;
 }
 
-export function InterviewHero({ hero }: InterviewHeroProps) {
+export function TrailerHero({ hero }: TrailerHeroProps) {
   const { video } = hero;
   // Falls back to the front-door copy so a playInline hero added without its
   // own strings renders the site's line rather than nothing.
@@ -138,16 +145,16 @@ export function InterviewHero({ hero }: InterviewHeroProps) {
 
       {/* Copy + CTAs, hidden once the video takes over. */}
       <div
-        className={`mx-auto w-full max-w-6xl px-5 pb-12 transition-opacity duration-(--duration-standard) sm:px-8 sm:pb-16 ${
+        className={`${PAGE} pb-12 transition-opacity duration-(--duration-standard) sm:pb-16 ${
           playing ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >
-        <p className="text-xs uppercase tracking-[0.22em] text-amber">
-          {copy.kicker}
-        </p>
-        <h1 className="mt-4 max-w-2xl font-display text-4xl font-light leading-[1.05] text-ivory sm:text-6xl lg:text-7xl">
-          {copy.headline}
+        <h1 className="max-w-3xl font-display text-5xl font-light leading-[0.95] tracking-tight text-ivory sm:text-7xl lg:text-8xl">
+          {SERIES_TITLE}
         </h1>
+        <p className="mt-3 text-xs uppercase tracking-[0.28em] text-amber">
+          {SERIES_SUBTITLE}
+        </p>
         <p className="mt-5 max-w-lg text-base leading-relaxed text-stone sm:text-lg">
           {copy.blurb}
         </p>
@@ -162,28 +169,31 @@ export function InterviewHero({ hero }: InterviewHeroProps) {
             {copy.cta}
           </button>
           {/*
-            WAS "Step into the farmhouse", into /world/farmhouse. The world is
-            off the site until it is finished (WORLD_ENABLED in
-            lib/content/world.ts), so this points at the scenes instead — which
-            is where somebody who just watched a trailer wants to go anyway.
+            "More info" rather than a third and fourth button. The hero used to
+            carry Play, Browse and Membership, which is three decisions on a
+            screen where the right number is one — and the membership ask now
+            happens once, at the foot of the page, instead of interrupting the
+            thing it is trying to sell.
           */}
           <Link
-            href="/browse"
-            className="inline-flex min-h-12 items-center rounded-full bg-charcoal/70 px-6 text-sm text-ivory backdrop-blur-md transition-colors duration-(--duration-quick) hover:bg-charcoal sm:px-7"
+            href="/about"
+            className="inline-flex min-h-12 items-center gap-2.5 rounded-full bg-charcoal/70 px-6 text-sm text-ivory backdrop-blur-md transition-colors duration-(--duration-quick) hover:bg-charcoal sm:px-7"
           >
-            Watch the scenes
+            <InfoGlyph />
+            More info
           </Link>
-          <Guest>
-            <Link
-              href="/membership"
-              className="hidden min-h-12 items-center rounded-full border border-amber/50 px-6 text-sm text-amber-soft transition-colors duration-(--duration-quick) hover:bg-amber hover:text-void sm:inline-flex sm:px-7"
-            >
-              Membership
-            </Link>
-          </Guest>
         </div>
       </div>
     </section>
+  );
+}
+
+function InfoGlyph() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 11v5M12 7.5v.01" strokeLinecap="round" />
+    </svg>
   );
 }
 

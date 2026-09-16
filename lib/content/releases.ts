@@ -83,7 +83,7 @@ function fromScene(v: Video): Release {
     kind: "scene",
     date: v.addedOn!,
     title: v.title,
-    href: `/watch/${v.slug}`,
+    href: `/clips/${v.slug}`,
     access: v.access,
     durationSeconds: v.durationSeconds,
     poster: v.poster,

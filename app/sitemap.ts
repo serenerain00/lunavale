@@ -37,7 +37,7 @@
  */
 import type { MetadataRoute } from "next";
 import { characters } from "@/lib/content/characters";
-import { clips, clipAccess } from "@/lib/content/clips";
+import { clips, clipAccess } from "@/lib/content/posts";
 import { galleries } from "@/lib/content/gallery";
 import { freeEntries } from "@/lib/content/journal";
 import { environments, WORLD_ENABLED } from "@/lib/content/world";
@@ -67,28 +67,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/about", 0.9, "monthly"),
     entry("/twenty-questions", 0.8, "monthly"),
 
-    // The indexes.
+    // The indexes. /clips is first and rated highest of them because it is
+    // now the main way into the library — it did not exist before 2026-09-16
+    // and the clips had no index at all.
+    entry("/clips", 0.9, "daily"),
     entry("/journal", 0.9, "daily"),
-    entry("/browse", 0.8, "weekly"),
+    entry("/posts", 0.8, "weekly"),
     entry("/characters", 0.8, "monthly"),
-    entry("/clips", 0.8, "weekly"),
+    entry("/browse", 0.8, "weekly"),
     // The world is off the site until it is finished (WORLD_ENABLED). A
     // sitemap entry for a route that 404s is the worst of both.
     ...(WORLD_ENABLED ? [entry("/world", 0.7, "monthly")] : []),
     entry("/between-takes", 0.6, "weekly"),
     entry("/membership", 0.7, "monthly"),
 
-    // Every scene has a public page: title, synopsis, poster, and for the
+    // Every clip has a public page: title, synopsis, poster, and for the
     // gated ones a real preview. All of it is meant to be landed on.
-    ...videos.filter((v) => !v.hidden).map((v) => entry(`/watch/${v.slug}`, 0.8)),
+    ...videos.filter((v) => !v.hidden).map((v) => entry(`/clips/${v.slug}`, 0.8)),
     /*
-      CLIPS, MINUS THE ONES WITH NOTHING PUBLIC ON THEM. This mapped every
-      clip until 2026-09-11, which put a members-only explicit clip into the
+      POSTS, MINUS THE ONES WITH NOTHING PUBLIC ON THEM. This mapped every one
+      of them until 2026-09-11, which put a members-only explicit post into the
       sitemap — i.e. submitted it to Google.
 
-      The rule matches the scene line above rather than the journal line. A
-      gated SCENE belongs here because it has a real public preview; a gated
-      clip with a preview is the same and stays. A gated clip WITHOUT one is a
+      The rule matches the clip line above rather than the journal line. A
+      gated CLIP belongs here because it has a real public preview; a gated
+      post with a preview is the same and stays. A gated post WITHOUT one is a
       closed door, and pointing a crawler at a closed door is the opposite of
       what a sitemap is for.
 
@@ -98,7 +101,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     */
     ...clips
       .filter((c) => !c.explicit && !(clipAccess(c) === "premium" && !c.preview))
-      .map((c) => entry(`/clips/${c.id}`, 0.7)),
+      .map((c) => entry(`/posts/${c.id}`, 0.7)),
     ...characters.map((c) => entry(`/characters/${c.id}`, 0.7, "monthly")),
     ...(WORLD_ENABLED
       ? environments.map((e) => entry(`/world/${e.slug}`, 0.6, "monthly"))

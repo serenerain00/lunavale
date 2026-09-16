@@ -96,9 +96,7 @@ export default async function NotebookPageRoute({
           >
             ← The notebook
           </Link>
-          <p className="mt-2 text-xs text-stone-dim">
-            Page {index + 1} of {pages.length}
-          </p>
+          <p className="mt-2 text-xs text-stone-dim">Page {index + 1}</p>
         </div>
 
         <div className="mt-8">

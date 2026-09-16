@@ -36,54 +36,55 @@ import { MobileNav, type NavItem } from "@/components/ui/MobileNav";
  * vary per request, so it costs no dynamism.
  */
 export function SiteHeader() {
-  // Order and membership set by Melissa, 2026-08-10.
+  /*
+   * REORDERED 2026-09-16, with the rest of the site.
+   *
+   * The old bar led with two explainers — "What this is" and "Interview" —
+   * on the reasoning that most arrivals come off a thirty-second clip with no
+   * idea who these people are. That was true, and the answer was still wrong:
+   * somebody who has just watched a clip wants another clip, not an essay
+   * about the clip. Netflix does not open with an About page.
+   *
+   * So the bar now leads with the library, in the order somebody moves through
+   * it — the story, then the short cuts, then her side of it, then who these
+   * people are. The explainers are still one click away, under More, and the
+   * hero has a "More info" button pointing at the first of them.
+   *
+   * "Clips" USED TO POINT AT /posts, which was the vertical Instagram grid,
+   * and "Browse" pointed at the filter-by-feeling catalog. Both words meant
+   * something other than what a visitor would guess. They now say what they
+   * open.
+   */
   const items: NavItem[] = [
-    // First, and deliberately so. Most arrivals come off a thirty-second clip
-    // with no idea who these people are, and the rest of this bar assumes they
-    // already know — "Browse" and "Cast" are only useful once you care.
-    { href: "/about", label: "What this is" },
-    // ADDED 2026-09-01 with the reader Q&A. Sits second, beside "What this is",
-    // because the two do the same job for a stranger — that page explains the
-    // situation, this one introduces the person it happens to. Labelled
-    // "Interview" rather than "Twenty Questions": the bar already carries six
-    // items at md and a two-word label crowds it, and "Interview" is what
-    // somebody scans for.
-    { href: "/twenty-questions", label: "Interview" },
-    // Then her writing, ahead of the video. Free journal pages are the
-    // strongest thing a stranger can be handed, which is why the home page
-    // leads with them too.
-    { href: "/journal", label: "Journal" },
-    { href: "/browse", label: "Browse" },
-    { href: "/characters", label: "Cast" },
-    // NOT NAMED in the reorder and kept rather than assumed away — she asked
-    // for World and Membership to go and said nothing about these two, and
-    // dropping a whole section on inference is not a thing to do quietly.
+    // The story, in order. The thing this site is for.
     { href: "/clips", label: "Clips" },
-    // ADDED 2026-08-13 with the notebook itself. Not part of the 08-10 reorder
-    // above — a destination with no link in the bar is a destination nobody
-    // finds, which is the exact failure the mobile sign-in link had this
-    // morning. Sits after Clips because it is behind-the-scenes material and
-    // the four above it are the story.
+    // The vertical cuts — what Instagram sent most of these people here from.
+    { href: "/posts", label: "Posts" },
+    // Her writing. The strongest thing a stranger can be handed, and the one
+    // part of this that exists nowhere else.
+    { href: "/journal", label: "Journal" },
+    { href: "/characters", label: "Cast" },
+    // Filter by feeling and place. Genuinely useful, and genuinely a second
+    // move — you browse a library you already know something about.
+    { href: "/browse", label: "Browse" },
     { href: "/between-takes", label: "Between Takes" },
-    // Overheard is archived (lib/content/overheard.ts). The link goes with it —
-    // a nav item pointing at a 404 is worse than a missing nav item.
-    // HELP IS MEMBERS-ONLY IN THE NAV now, her call.
-    //
-    // Worth knowing what it trades: /help exists because "someone who cannot
-    // sign in is exactly the person most likely to need help", and that person
-    // no longer has a link to it. The PAGE is still there and still open to
-    // everyone — this hides the signpost, not the door — so anybody who has
-    // the URL, or reaches it from a footer link or an email, still gets
-    // through. If support requests from non-members dry up entirely, this is
-    // why.
+    { href: "/about", label: "What this is" },
+    // HELP IS MEMBERS-ONLY IN THE NAV, her call. The PAGE is still open to
+    // everyone — this hides the signpost, not the door — so anybody with the
+    // URL, or reaching it from a footer link or an email, still gets through.
+    // If support requests from non-members dry up entirely, this is why.
     //
     // `memberOnly` rather than a filtered list: the list is built on the
-    // server now, where membership is deliberately unknown, so the hiding
-    // happens on the client in both renderings of the nav.
+    // server, where membership is deliberately unknown, so the hiding happens
+    // on the client in both renderings of the nav.
     { href: "/help", label: "Help", memberOnly: true },
-    // MEMBERSHIP IS GONE from the nav: the "Become a member" button on the
-    // right of this same bar already goes to /membership, so the old entry was
-    // the same destination twice, four links apart.
+    // MEMBERSHIP IS NOT HERE: the "Become a member" button on the right of this
+    // same bar already goes to /membership.
+    //
+    // NEITHER IS /twenty-questions, dropped from the bar 2026-09-16. It is the
+    // reader Q&A with Luna and it is good, but it was the second item in a bar
+    // where the first five now have to be the library. It is linked from
+    // /about and from her character page.
   ];
 
   return (

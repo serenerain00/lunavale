@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getNoteKind, type SetNote } from "@/lib/content/between-takes";
 import { getVideo } from "@/lib/content/videos";
-import { getClip } from "@/lib/content/clips";
+import { getClip } from "@/lib/content/posts";
 import { getGallery } from "@/lib/content/gallery";
 import type { PersonId } from "@/lib/content/taxonomy";
 
@@ -130,11 +130,11 @@ function signature(note: SetNote): string {
 function subject(note: SetNote): { label: string; href: string } | undefined {
   if (note.sceneSlug) {
     const scene = getVideo(note.sceneSlug);
-    if (scene) return { label: `On “${scene.title}”`, href: `/watch/${scene.slug}` };
+    if (scene) return { label: `On “${scene.title}”`, href: `/clips/${scene.slug}` };
   }
   if (note.clipId) {
     const clip = getClip(note.clipId);
-    if (clip) return { label: `On “${clip.title}”`, href: `/clips/${clip.id}` };
+    if (clip) return { label: `On “${clip.title}”`, href: `/posts/${clip.id}` };
   }
   if (note.gallerySlug) {
     const gallery = getGallery(note.gallerySlug);

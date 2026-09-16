@@ -6,14 +6,13 @@ import { Questions } from "@/components/membership/Questions";
 import { TierCard } from "@/components/membership/TierCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { journal } from "@/lib/content/journal";
 import { TIERS } from "@/lib/content/membership";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Membership",
   description:
-    "Membership opens the locked rooms of Luna's world — the full scene library, the mature cuts, the journals, and how it all gets made. Cancel any time.",
+    "Membership opens the whole library — every clip at full length, the mature cuts, Luna's journal, and how it all gets made. Season one lands here first. Cancel any time.",
   path: "/membership",
 });
 
@@ -42,8 +41,6 @@ export const metadata: Metadata = pageMetadata({
 export default function MembershipPage() {
   // Counted, never typed. The pitch below is built out of these, so it cannot
   // still be claiming thirty-nine entries the week after the fortieth goes up.
-  const lockedEntries = journal.filter((e) => e.access === "premium").length;
-  const openEntries = journal.length - lockedEntries;
 
   return (
     <>
@@ -69,14 +66,22 @@ export default function MembershipPage() {
               So the page now leads with the ONE unresolved thing — she is in
               it right now, and she wrote it all down — and prices the ask
               against a number, not a bundle. */}
+          {/* THE NUMBERS CAME OUT 2026-09-16. This read "You've read 6
+              pages. The other 99 are…", which priced the ask against a
+              number — deliberately, and it worked as an argument. Melissa's
+              call: "i dont want people knowing how much theyve gone through
+              and whats available." A denominator also dates badly in the
+              other direction; the honest version of the pitch is what is in
+              there, not how much of it. */}
           <h1 className="mt-4 max-w-3xl font-display text-3xl font-light leading-[1.12] text-ivory sm:text-5xl">
-            She wrote all of it down. You&rsquo;ve read {openEntries} pages.
+            She wrote all of it down. You&rsquo;ve read the pages she doesn&rsquo;t
+            mind you seeing.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-stone">
-            The other {lockedEntries} are the ones she never meant anybody to
-            see — what she actually thinks about Josh, what she has worked out
-            about Tyson, and the nights she only ever told this book about. They
-            come with the scenes they were written after.
+            The rest are the ones she never meant anybody to see — what she
+            actually thinks about Josh, what she has worked out about Tyson,
+            and the nights she only ever told this book about. They come with
+            the clips they were written after.
           </p>
           <p className="mt-4 max-w-2xl leading-relaxed text-stone-dim">
             This is happening now. It is being filmed while you read this, it
@@ -174,7 +179,7 @@ export default function MembershipPage() {
             </p>
             <p>
               It is what pays for the next one to get made: the shoot, the cut,
-              the score, the stills, the hours. Scene by scene, that is the
+              the score, the stills, the hours. Clip by clip, that is the
               whole mechanism, and there isn&rsquo;t another one.
             </p>
             <p className="text-ivory">
@@ -280,7 +285,7 @@ const PROMISES = [
   },
   {
     title: "Free stays free",
-    body: "Public scenes and open locations are never moved behind the paywall later. Membership only ever adds.",
+    body: "Anything open today stays open. Nothing is ever moved behind the paywall later — membership only ever adds.",
   },
   {
     title: "No manufactured urgency",
@@ -288,6 +293,6 @@ const PROMISES = [
   },
   {
     title: "No nagging",
-    body: "A locked door says it's locked, once. You won't be interrupted mid-scene or chased around the site.",
+    body: "A locked door says it's locked, once. You won't be interrupted mid-clip or chased around the site.",
   },
 ];

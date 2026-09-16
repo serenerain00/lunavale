@@ -139,9 +139,11 @@ export default async function JournalIndexPage({
                       needed.
                     </p>
                   </div>
-                  <span className="text-sm text-stone-dim">
-                    {freeEntries().length} of {journal.length} entries
-                  </span>
+                  {/* "6 of 105 entries" was here. Melissa, 2026-09-16: "i
+                      dont want people knowing how much theyve gone through and
+                      whats available." A denominator on a shop window is an
+                      invitation to work out the ratio, and the ratio is not
+                      the argument — the writing is. */}
                 </div>
                 <Grid entries={freeEntries()} member={member} />
               </section>

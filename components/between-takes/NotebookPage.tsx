@@ -6,7 +6,7 @@ import {
 } from "@/lib/content/between-takes";
 import { getPerson } from "@/lib/content/taxonomy";
 import { getVideo } from "@/lib/content/videos";
-import { getClip } from "@/lib/content/clips";
+import { getClip } from "@/lib/content/posts";
 import { getGallery } from "@/lib/content/gallery";
 import type { PersonId } from "@/lib/content/taxonomy";
 
@@ -292,11 +292,11 @@ function LockedTail({ id, small = false }: { id: string; small?: boolean }) {
 function subject(note: SetNote): { href: string; label: string } | null {
   if (note.sceneSlug) {
     const video = getVideo(note.sceneSlug);
-    if (video) return { href: `/watch/${video.slug}`, label: video.title };
+    if (video) return { href: `/clips/${video.slug}`, label: video.title };
   }
   if (note.clipId) {
     const clip = getClip(note.clipId);
-    if (clip) return { href: `/clips/${clip.id}`, label: clip.title };
+    if (clip) return { href: `/posts/${clip.id}`, label: clip.title };
   }
   if (note.gallerySlug) {
     const gallery = getGallery(note.gallerySlug);

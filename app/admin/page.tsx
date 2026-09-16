@@ -23,7 +23,7 @@ import { getVideo } from "@/lib/content/videos";
 import { labelFor } from "@/lib/content/survey";
 import { threadRunway, FREE_POST_ALLOWANCE } from "@/lib/content/overheard";
 import { videos } from "@/lib/content/videos";
-import { clips, clipAccess } from "@/lib/content/clips";
+import { clips, clipAccess } from "@/lib/content/posts";
 import { galleries } from "@/lib/content/gallery";
 import { journal } from "@/lib/content/journal";
 import { notes } from "@/lib/content/between-takes";
@@ -120,7 +120,7 @@ export default async function AdminPage() {
       label: "Clips",
       total: clips.length,
       gated: clips.filter((c) => clipAccess(c) === "premium").length,
-      href: "/clips",
+      href: "/posts",
     },
     {
       label: "Journal entries",
@@ -435,7 +435,7 @@ export default async function AdminPage() {
                   >
                     <p className="flex flex-wrap items-baseline gap-x-2 text-sm">
                       <Link
-                        href={`/watch/${c.sceneSlug}`}
+                        href={`/clips/${c.sceneSlug}`}
                         className="font-semibold text-ivory underline decoration-hairline underline-offset-4"
                       >
                         {getVideo(c.sceneSlug)?.title ?? c.sceneSlug}

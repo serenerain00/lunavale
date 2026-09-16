@@ -120,7 +120,7 @@ export interface JournalEntry {
    * EVERY ENTRY NOW HAS ONE. The sixty-five that predated the field were
    * back-filled on 2026-09-15 from git — the first commit that introduced each
    * id to this file — which is provenance, not guesswork. The same pass did
-   * the same for lib/content/videos.ts and lib/content/clips.ts, and the full
+   * the same for lib/content/videos.ts and lib/content/posts.ts, and the full
    * reasoning (including its one caveat) is written out once, in videos.ts.
    */
   addedOn?: string;
@@ -2335,7 +2335,7 @@ export const journal: JournalEntry[] = [
      * side of it here. She gets as far as herself, which is further than she
      * wants to go.
      *
-     * SAME `sceneSlug` AS THE PAGE ABOVE, so /watch offers both — the pattern
+     * SAME `sceneSlug` AS THE PAGE ABOVE, so /clips offers both — the pattern
      * `my-mother-called` and `my-mother-likes-him` already set.
      *
      * DRAFT PROSE. Replace it.
@@ -3950,7 +3950,7 @@ export function entriesAbout(person: PersonId): JournalEntry[] {
   return journal.filter((e) => e.about.includes(person));
 }
 
-/** Entries sitting beside a scene, for cross-linking from /watch. */
+/** Entries sitting beside a scene, for cross-linking from /clips. */
 export function entriesForScene(slug: string): JournalEntry[] {
   return journal.filter((e) => e.sceneSlug === slug);
 }

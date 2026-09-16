@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
  * The 404, and until 2026-09-09 there wasn't one.
  *
  * WHAT WAS ACTUALLY HAPPENING. With no not-found boundary at the root, a bad
- * URL under a dynamic segment — /watch/<slug>, /journal/<id>, /clips/<id>,
+ * URL under a dynamic segment — /clips/<slug>, /journal/<id>, /posts/<id>,
  * /gallery/<id> — did not fall back to a styled page. It fell back to Next's
  * raw error document: `<html id="__next_error__">`, no layout, no header, no
  * navigation, no way back to the site. A visitor following a link to a scene
@@ -40,8 +40,8 @@ export const metadata: Metadata = {
 
 const WAYS_ON = [
   { href: "/journal", label: "Her journal", note: "The pages she kept" },
-  { href: "/browse", label: "The scenes", note: "Everything there is to watch" },
-  { href: "/clips", label: "Clips", note: "The short ones" },
+  { href: "/clips", label: "The clips", note: "Moments from the series" },
+  { href: "/posts", label: "Clips", note: "The short ones" },
   { href: "/", label: "Start again", note: "Back to the beginning" },
 ];
 

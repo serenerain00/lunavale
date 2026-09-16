@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { VerticalPlayer } from "@/components/clips/VerticalPlayer";
+import { VerticalPlayer } from "@/components/posts/VerticalPlayer";
 import { ContentNotice } from "@/components/ui/ContentNotice";
 import { RatingBadge } from "@/components/ui/RatingBadge";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { canWatch } from "@/lib/access/entitlement";
-import { clipAccess, clipNeighbours, clips, getClip } from "@/lib/content/clips";
+import { clipAccess, clipNeighbours, clips, getClip } from "@/lib/content/posts";
 import { getPerson } from "@/lib/content/taxonomy";
 import { formatDuration } from "@/lib/content/videos";
-import { ClipLocked } from "@/components/clips/ClipLocked";
+import { ClipLocked } from "@/components/posts/ClipLocked";
 
 interface ClipPageProps {
   params: Promise<{ id: string }>;
@@ -55,7 +55,7 @@ export default async function ClipPage({ params }: ClipPageProps) {
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-24 sm:px-8">
         <nav className="py-5 text-sm">
           <Link
-            href="/clips"
+            href="/posts"
             className="text-stone transition-colors duration-(--duration-quick) hover:text-ivory"
           >
             ← All clips
@@ -147,7 +147,7 @@ export default async function ClipPage({ params }: ClipPageProps) {
           >
             {previous ? (
               <Link
-                href={`/clips/${previous.id}`}
+                href={`/posts/${previous.id}`}
                 className="min-h-11 max-w-[45%] text-left text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
               >
                 <span className="block text-xs text-stone-dim">Previous</span>
@@ -158,7 +158,7 @@ export default async function ClipPage({ params }: ClipPageProps) {
             )}
             {next && (
               <Link
-                href={`/clips/${next.id}`}
+                href={`/posts/${next.id}`}
                 className="min-h-11 max-w-[45%] text-right text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
               >
                 <span className="block text-xs text-stone-dim">Next</span>

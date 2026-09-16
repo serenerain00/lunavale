@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Guest } from "@/components/access/Viewer";
@@ -6,6 +8,9 @@ import { RatingBadge } from "@/components/ui/RatingBadge";
 import type { Hero as HeroContent } from "@/lib/content/hero";
 import { getPlace } from "@/lib/content/taxonomy";
 import { formatDuration } from "@/lib/content/videos";
+import { PAGE } from "@/components/ui/layout";
+import { useHeroSound } from "@/components/home/useHeroSound";
+import { SERIES_TITLE } from "@/lib/content/season";
 
 interface HeroProps {
   hero: HeroContent;
@@ -27,7 +32,7 @@ interface HeroProps {
  * better than a headline competing with the footage.
  *
  * THE SECOND BUTTON IS NOT "More info". Netflix needs one because Play and the
- * detail page are different destinations; here /watch IS the detail page, so a
+ * detail page are different destinations; here /clips IS the detail page, so a
  * second button pointing at it would be the same button twice. It goes to the
  * location instead, which is this product's actual second verb.
  *
@@ -37,6 +42,17 @@ interface HeroProps {
  */
 export function Hero({ hero }: HeroProps) {
   const { video } = hero;
+
+  /*
+   * A CLIENT COMPONENT SINCE 2026-09-16, and only for this. The sound button
+   * has to sit in the copy layer — the loop lives in a `-z-10` container where
+   * nothing can be clicked — while owning the same state as the video. Holding
+   * it here is the version that needs no ref threaded through the hero.
+   *
+   * The PAGE this renders on is still static and still cached; this hydrates
+   * on top of it and reads nothing per-viewer.
+   */
+  const sound = useHeroSound(hero.hasAudio);
   // WHO MAY WATCH IS NO LONGER ASKED HERE (2026-08-31). It used to arrive as
   // an `unlocked` prop the home page resolved with canWatch(), which made the
   // home page dynamic and therefore uncacheable — see components/access/Viewer.tsx.
@@ -66,7 +82,13 @@ export function Hero({ hero }: HeroProps) {
           sizes="100vw"
           className="object-cover object-[60%_center] sm:object-center"
         />
-        <AmbientVideo key={hero.loop} src={hero.loop} poster={hero.poster} />
+        <AmbientVideo
+          key={hero.loop}
+          src={hero.loop}
+          poster={hero.poster}
+          muted={sound.muted}
+          onSoundRefused={sound.refused}
+        />
 
         {/*
           Three scrims, each doing one job, kept as light as legibility allows
@@ -83,12 +105,38 @@ export function Hero({ hero }: HeroProps) {
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-void to-transparent" />
       </div>
 
-      <div className="mx-auto w-full max-w-6xl px-5 pb-12 sm:px-8 sm:pb-16">
-        <p className="text-xs uppercase tracking-[0.22em] text-amber">
-          An explorable cinematic universe
+      {/*
+        SOUND. Bottom right of the hero, where Netflix puts it, and only on a
+        loop that actually has an audio track — see `hasAudio` in
+        lib/content/hero.ts for why not all of them do. z-20 because the loop
+        it controls is two layers below it.
+      */}
+      {hero.hasAudio && (
+        <button
+          type="button"
+          onClick={sound.toggle}
+          aria-pressed={!sound.muted}
+          aria-label={
+            sound.muted ? `Unmute ${video.title}` : `Mute ${video.title}`
+          }
+          className="absolute bottom-6 right-4 z-20 grid size-11 place-items-center rounded-full border border-hairline bg-void/70 text-stone backdrop-blur-md transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber sm:bottom-8 sm:right-8"
+        >
+          {sound.muted ? <MutedGlyph /> : <SoundGlyph />}
+        </button>
+      )}
+
+      <div className={`${PAGE} pb-12 sm:pb-16`}>
+        {/* THE SERIES MARK, above the clip's own title. From 2026-09-16 the
+            hero is whichever clip went up most recently, so without this the
+            front page never says what the show is called — it just plays
+            something. Netflix puts the show's logo here for the same reason.
+            The eyebrow used to read "An explorable cinematic universe", which
+            described the website rather than the thing playing. */}
+        <p className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-amber sm:text-base">
+          {SERIES_TITLE}
         </p>
 
-        <h1 className="mt-4 max-w-3xl font-display text-4xl font-light leading-[1.05] text-ivory sm:text-6xl lg:text-7xl">
+        <h1 className="mt-3 max-w-3xl font-display text-5xl font-semibold leading-[0.95] tracking-tight text-ivory sm:text-7xl lg:text-8xl">
           {video.title}
         </h1>
 
@@ -115,13 +163,13 @@ export function Hero({ hero }: HeroProps) {
           )}
         </div>
 
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-stone sm:text-lg">
+        <p className="mt-5 max-w-xl text-lg leading-relaxed text-stone sm:text-xl">
           {video.synopsis}
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
           <Link
-            href={`/watch/${video.slug}`}
+            href={`/clips/${video.slug}`}
             className="inline-flex min-h-12 items-center gap-2.5 rounded-full bg-ivory px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-white sm:px-7"
           >
             {/* A locked hero says so on the button rather than promising
@@ -215,6 +263,44 @@ function LockGlyph() {
         strokeWidth="2"
         strokeLinecap="round"
       />
+    </svg>
+  );
+}
+
+function MutedGlyph() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M11 5 6 9H3v6h3l5 4z" />
+      <path d="m17 9 4 6M21 9l-4 6" />
+    </svg>
+  );
+}
+
+function SoundGlyph() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M11 5 6 9H3v6h3l5 4z" />
+      <path d="M16 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11" />
     </svg>
   );
 }

@@ -9,7 +9,7 @@ import { hasAnswered } from "@/lib/db/survey";
 export const metadata: Metadata = {
   title: "Tell her what you think",
   description:
-    "Six questions about the scenes so far — what's landing, and whether you'd watch this as a series or a film. No account needed.",
+    "Six questions about the clips so far — what's landing, what isn't, and how you'd rather watch season one. No account needed.",
   alternates: { canonical: "/survey" },
 };
 
@@ -51,9 +51,10 @@ export default async function SurveyPage() {
             email.
           </p>
           <p className="mt-3 max-w-xl text-base leading-relaxed text-stone">
-            There&rsquo;s also a real question in here about whether this should
-            be a series or a film, and whether you&rsquo;d watch it somewhere
-            like Netflix. That one is not idle curiosity.
+            There&rsquo;s a real question in here about how you&rsquo;d rather
+            get season one &mdash; weekly, all at once, or the way it has been
+            going up so far &mdash; and whether you&rsquo;d watch it somewhere
+            like Netflix. Neither one is idle curiosity.
           </p>
         </header>
 
@@ -79,7 +80,7 @@ export default async function SurveyPage() {
                 href="/browse"
                 className="inline-flex min-h-11 items-center rounded-full border border-hairline px-6 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
               >
-                Back to the scenes
+                Back to the clips
               </Link>
             </div>
           </div>

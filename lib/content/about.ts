@@ -50,7 +50,7 @@ export const premise: AboutSection[] = [
     id: "what-this-is",
     heading: "What this is",
     body: [
-      "Luna Vale is a story about three people, told in scenes you watch, pages from a diary you were never meant to read, and photographs from rooms they were alone in.",
+      "Luna Vale is a story about three people, told in clips you watch, pages from a diary you were never meant to read, and photographs from rooms they were alone in.",
       "It is set on a working farm, at a lakehouse, in a bar, on a track, and along the roads between them. It is for adults, and it is quiet rather than loud — the kind of story where the worst thing that happens in a room is something somebody doesn't say.",
     ],
   },
@@ -85,17 +85,25 @@ export const premise: AboutSection[] = [
 ];
 
 /**
- * The section that answers the actual complaint. Kept separate from `premise`
- * so it can be given its own weight on the page — it is the reason a confused
- * viewer stays rather than scrolling on.
+ * Where to start.
+ *
+ * THIS SECTION USED TO SAY THE OPPOSITE. It was called "It isn't in order, and
+ * that's on purpose", and it existed to reassure somebody who had watched four
+ * clips out of sequence that they had not missed an episode. That was an
+ * honest answer to a real complaint for as long as there was no order to offer.
+ *
+ * There is one now (lib/content/chronology.ts, 2026-09-16), so the reassurance
+ * became a lie about the product — and worse, an instruction to expect
+ * confusion from a library that is no longer confusing. The `id` is kept
+ * because it is an anchor somebody may have linked to.
  */
 export const howToWatch: AboutSection = {
   id: "out-of-order",
-  heading: "It isn't in order, and that's on purpose",
+  heading: "Start at the beginning",
   body: [
-    "Scenes are released as they are finished, not as they happen. A night from the first month can land after something from much later; a five-year-old memory can arrive in the middle of the present.",
-    "So if you have watched a few and felt like you missed one — you didn't. There is no episode you skipped. The pieces are being handed to you out of sequence and they are meant to add up gradually.",
-    "Two things make it click faster. Every scene says where it sits when you open it, and Luna's journal runs in the order it actually happened — so if you would rather have the spine before the fragments, start there.",
+    "These were made in whatever order they finished, which is how anything gets made. They are not shown to you that way. The clips are arranged the way they happen to Luna, and each one tells you where it sits, so you can follow the shape of it rather than guessing.",
+    "They are moments rather than episodes, so there are gaps — this is not the whole story and it is not meant to be. Start at the top, or dip in wherever the picture looks interesting. Each one stands on its own and nothing assumes you have seen the last one.",
+    "Her journal runs the same way. It is the same story from inside her head, on the nights it happened, and several pages are open to anyone.",
   ],
 };
 
@@ -129,11 +137,10 @@ export const inProduction: AboutSection = {
   id: "being-made",
   heading: "It's being made right now",
   body: [
-    "This isn't a finished thing being rolled out on a schedule. The film is in production while you read this — made independently, on a small budget, by a very small number of people.",
-    "Which is the part worth knowing: the next scene isn't fixed yet. What gets made, who it follows and which room it happens in are still open questions, and members are in the conversation where those get decided. A character somebody can't stop thinking about, a room they want to go back into, a question they want answered — at this size, that genuinely moves things.",
-    "The way to be in that conversation is to say something. There's a box at the end of every scene that goes straight to Melissa, and a short survey about where this should go next. She reads all of it — at this size, a few people saying the same thing genuinely moves what gets shot.",
-    "And if you'd rather just answer six questions, there's a short survey — what's landing, what isn't, and whether you'd watch this as a series or a film. No account, no email, about a minute.",
-    "And it may not stay a film. There is a conversation going on about extending it into a series, which is a shape this story can take: it is built out of ordinary days, in a handful of places, between people whose situation does not resolve neatly. That is the kind of story that runs for years rather than finishing in ninety minutes.",
+    "This isn't a finished thing being rolled out on a schedule. It's in production while you read this, made independently, on a small budget, by a very small number of people.",
+    "It's a series. That was an open question for a while and it isn't any more, and it's the right shape for this story: it's built out of ordinary days, in a handful of places, between people whose situation doesn't resolve neatly. That kind of story runs for years. It doesn't finish in ninety minutes.",
+    "Here's the part worth knowing. What gets made next isn't fixed. Who it follows, which room it happens in, what finally gets said out loud — those are still open, and members are in the conversation where they get decided. A character somebody can't stop thinking about, a room they want to go back into, a question they want answered: at this size, that genuinely moves things.",
+    "The way to be in that conversation is to say something. There's a box at the end of every clip that goes straight to Melissa, and a short survey about where this should go next. She reads all of it.",
   ],
   links: [
     { href: "/survey", label: "Answer six questions" },
@@ -150,22 +157,30 @@ export interface StartingPoint {
 
 export const startingPoints: StartingPoint[] = [
   {
-    href: "/watch/interview",
-    label: "The interview",
+    href: "/clips",
+    label: "The clips",
     detail:
-      "The cast, sitting down together, talking about who they are. Six minutes, free, and the least confusing way in.",
+      "Moments from the series, arranged the way they happen rather than the way they were made. A look at what season one is walking into.",
+  },
+  {
+    href: "/clips/interview",
+    label: "The cast interview",
+    detail:
+      "The three of them sitting down together, talking about who they are. Six minutes, free, and the easiest way in.",
   },
   {
     href: "/journal",
     label: "Luna's journal",
     detail:
-      "Her own account, in order. Several entries are open to everyone — they establish the voice without giving away a single turn.",
+      "Her own account of the same nights. Several entries are open to everyone, and they give away the voice without giving away a turn.",
   },
   {
-    href: "/browse",
-    label: "The free scenes",
+    // MOVED HERE 2026-09-16 when it came out of the nav. A page nobody links
+    // to is a page nobody reads, and this was about to become one.
+    href: "/twenty-questions",
+    label: "Twenty questions with Luna",
     detail:
-      "A dozen scenes, in full and at full quality, with no account needed.",
+      "Readers asked, and she answered — about Josh, about Tyson, and about what she is not saying to either of them.",
   },
   // "The world" was here — "walk into the farmhouse and the lakehouse and find
   // the story by looking around instead of pressing play". Removed 2026-09-15

@@ -17,7 +17,7 @@ import {
   lockedCountFor,
   others,
 } from "@/lib/content/characters";
-import { clipAccess } from "@/lib/content/clips";
+import { clipAccess } from "@/lib/content/posts";
 import { formatDuration } from "@/lib/content/videos";
 
 interface CharacterPageProps {
@@ -65,7 +65,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
     kind: "scene",
     title: v.title,
     synopsis: v.synopsis,
-    href: `/watch/${v.slug}`,
+    href: `/clips/${v.slug}`,
     poster: v.poster,
     meta: formatDuration(v.durationSeconds),
     access: v.access,
@@ -81,7 +81,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
     synopsis: g.description[0] ?? g.subtitle,
     href: `/gallery/${g.id}`,
     poster: g.cover,
-    meta: `${g.count} stills`,
+    meta: "Stills",
     access: g.access,
     mature: g.mature,
     feelings: [...g.feelings],
@@ -184,7 +184,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
               id="between-takes"
               eyebrow="Between takes"
               title={`${character.name}’s notes from set`}
-              blurb="What they wrote down while it was being made — the jokes, the reasons a beat was played the way it was, and the things about a scene they only worked out by shooting it."
+              blurb="What they wrote down while it was being made — the jokes, the reasons a beat was played the way it was, and the things about a clip they only worked out by shooting it."
             >
               <p className="mb-5 flex flex-wrap gap-x-5 gap-y-1 text-xs text-stone-dim">
                 {noteKinds.map((kind) => (
@@ -251,7 +251,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
                   return (
                     <Link
                       key={clip.id}
-                      href={`/clips/${clip.id}`}
+                      href={`/posts/${clip.id}`}
                       data-reveal-item
                       className="group relative block overflow-hidden rounded-lg bg-charcoal ring-1 ring-hairline transition-transform duration-(--duration-standard) ease-(--ease-standard) hover:-translate-y-1 focus-visible:-translate-y-1"
                     >
@@ -318,13 +318,17 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
           {/* --------------------------------------------------- the pitch */}
           {!member && locked > 0 && (
             <section className="mt-16 rounded-xl border border-amber/25 bg-amber/[0.04] p-6 sm:p-8">
+              {/* The count came out 2026-09-16 — see app/membership/page.tsx.
+                  `locked` still decides WHETHER this renders, which is the
+                  part that has to stay honest: no pitch on a character with
+                  nothing behind the lock. */}
               <h2 className="font-display text-2xl font-medium text-ivory sm:text-3xl">
-                {locked} of {character.name}’s pages are in the LunaVerse
+                More of {character.name} is in the LunaVerse
               </h2>
               <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
-                The rest of the notebook, the scenes that are not public, and
-                the pages of Luna&rsquo;s journal that have a turn in them.
-                Eight dollars a month, cancel any time.
+                The rest of the notebook, the clips that are not public, and the
+                pages of Luna&rsquo;s journal that have a turn in them. Eight
+                dollars a month, cancel any time.
               </p>
               <Link
                 href="/membership"

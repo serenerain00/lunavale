@@ -18,6 +18,11 @@ import { freeEntries, opening } from "@/lib/content/journal";
 import { clips as postList, clipPosterSrc, clipAccess, type Clip } from "@/lib/content/posts";
 import { notes as setNotes, type SetNote } from "@/lib/content/between-takes";
 import { formatPrice, getTier } from "@/lib/content/membership";
+import {
+  recentReleases,
+  cadenceNote,
+  formatReleaseDate,
+} from "@/lib/content/releases";
 import { formatDuration, videos as videosAll } from "@/lib/content/videos";
 import { sceneOptions } from "@/lib/content/survey";
 
@@ -87,6 +92,10 @@ export default async function Home() {
   const trailer = videosAll.find((v) => v.slug === "between-us-trailer-one");
 
   const openPages = freeEntries();
+
+  // What has gone up lately, and how often — both derived, neither hand-kept.
+  const fresh = recentReleases(12);
+  const cadence = cadenceNote();
   const stillsCount = galleries.reduce((n, g) => n + g.count, 0);
 
   return (
@@ -144,6 +153,57 @@ export default async function Home() {
             </RailItem>
           )}
         </Shelf>
+
+        {/* ------------------------------------------------------------- new */}
+        {/*
+          IS ANYTHING ACTUALLY HAPPENING HERE. This is the shelf that answers
+          the question four of the first fourteen members left over, and it is
+          the one row that has to be derived rather than curated — see
+          lib/content/releases.ts. It cannot show something unpublished, it
+          cannot miss something published, and it goes quiet on its own if the
+          pace stops, which is the only way a claim about rhythm is worth
+          making.
+
+          It renders nothing at all when fewer than three things are dated
+          inside the window, rather than standing there with a heading and one
+          card under it.
+        */}
+        {fresh.length >= 3 && (
+          <Shelf title="New" note={cadence}>
+            {fresh.map((r) => (
+              <RailItem key={r.href}>
+                {r.poster ? (
+                  <ClipCard
+                    href={r.href}
+                    title={r.title}
+                    poster={r.poster}
+                    meta={
+                      r.durationSeconds
+                        ? formatDuration(r.durationSeconds)
+                        : undefined
+                    }
+                    premium={r.access === "premium"}
+                    mature={r.mature}
+                  />
+                ) : (
+                  <Link href={r.href} className="group block">
+                    <div className="flex aspect-video flex-col justify-between rounded-lg bg-[#efe7d9] p-5 ring-1 ring-hairline transition-transform duration-(--duration-standard) group-hover:-translate-y-1">
+                      <p className="font-hand text-lg leading-snug text-[#2a2520]">
+                        {r.blurb}
+                      </p>
+                      <p className="text-xs uppercase tracking-[0.14em] text-[#6b6156]">
+                        {formatReleaseDate(r.date)}
+                      </p>
+                    </div>
+                    <p className="mt-2.5 truncate text-sm text-ivory">
+                      {r.title}
+                    </p>
+                  </Link>
+                )}
+              </RailItem>
+            ))}
+          </Shelf>
+        )}
 
         {/* ----------------------------------------------------------- clips */}
         <Shelf

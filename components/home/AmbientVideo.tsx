@@ -90,6 +90,52 @@ export function AmbientVideo({
   }, []);
 
   /*
+   * OFF SCREEN MEANS OFF. Melissa, 2026-09-16: "if the user scrolls past the
+   * hero and its no longer visible, turn the audio off."
+   *
+   * Sound coming from a video nobody can see is the single most irritating
+   * thing a page can do, and the hero is eleven shelves from the bottom of the
+   * front page — without this, somebody who unmuted it would be reading the
+   * journal with a scene still playing at them.
+   *
+   * It PAUSES rather than only muting, because a video that is still decoding
+   * frames nobody is looking at is pure battery and CPU cost. Coming back
+   * resumes where it left off, which is imperceptible on a loop.
+   *
+   * A HIDDEN TAB COUNTS AS OFF SCREEN, and has to be handled separately:
+   * browsers keep playing audio in a background tab on purpose, so the
+   * IntersectionObserver alone would let a backgrounded tab talk.
+   *
+   * The 0.15 threshold rather than 0 means the audio stops as the hero leaves
+   * rather than clinging on for the last few pixels of it.
+   */
+  const [onScreen, setOnScreen] = useState(true);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+
+    let intersecting = true;
+    const settle = () =>
+      setOnScreen(intersecting && document.visibilityState === "visible");
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        intersecting = entry.isIntersecting;
+        settle();
+      },
+      { threshold: 0.15 },
+    );
+    observer.observe(el);
+    document.addEventListener("visibilitychange", settle);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", settle);
+    };
+  }, [enabled]);
+
+  /*
    * Mute state is applied IMPERATIVELY, not as a prop.
    *
    * React does not reliably reflect `muted` into the DOM element — it is one
@@ -101,17 +147,34 @@ export function AmbientVideo({
    * what browsers refuse is STARTING playback with sound. Safari can pause it
    * anyway, so play() is re-issued and a rejection is reported upward rather
    * than leaving a sound button on over a silent or stopped video.
+   *
+   * MUTING BEFORE PAUSING IS DELIBERATE. Pausing alone leaves the element
+   * unmuted, and the resume on scroll-back would then be a request to start
+   * playback WITH sound — which is the one thing browsers refuse, so it would
+   * fail and leave a frozen frame. Muted first, then unmute once it is running
+   * again, is the order that survives.
    */
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
-    el.muted = muted;
-    if (muted) return;
+
+    const silent = muted || !onScreen;
+    el.muted = silent;
+
+    if (!onScreen) {
+      el.pause();
+      return;
+    }
+
     void el.play().catch(() => {
+      // Only a refusal to play WITH sound is worth reporting: a muted play
+      // that fails is a browser that will not autoplay at all, and the poster
+      // underneath is already the right answer for that.
+      if (silent) return;
       el.muted = true;
       onSoundRefused?.();
     });
-  }, [muted, enabled, onSoundRefused]);
+  }, [muted, onScreen, enabled, onSoundRefused]);
 
   if (!enabled) return null;
 

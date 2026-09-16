@@ -36,6 +36,22 @@ import { useEffect, useRef, useState } from "react";
 interface AmbientVideoProps {
   src: string;
   poster: string;
+  /**
+   * Whether the loop should be silent. Owned by the parent, because the button
+   * that toggles it has to live in the hero's copy layer — this element sits
+   * in a `-z-10` container and nothing inside it can be clicked.
+   */
+  muted?: boolean;
+  /**
+   * Called when the browser REFUSES to unmute, so the parent can put its
+   * button back to "muted" instead of showing a sound icon over silence.
+   *
+   * This is not a rare path. Autoplay with sound is blocked for any visitor
+   * without prior engagement on the domain, so a remembered "sound on"
+   * preference is an intention, not a guarantee, and the UI has to be able to
+   * be told it did not happen.
+   */
+  onSoundRefused?: () => void;
 }
 
 interface NetworkInformation {
@@ -43,7 +59,12 @@ interface NetworkInformation {
   effectiveType?: string;
 }
 
-export function AmbientVideo({ src, poster }: AmbientVideoProps) {
+export function AmbientVideo({
+  src,
+  poster,
+  muted = true,
+  onSoundRefused,
+}: AmbientVideoProps) {
   const [enabled, setEnabled] = useState(false);
   const [ready, setReady] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -68,6 +89,30 @@ export function AmbientVideo({ src, poster }: AmbientVideoProps) {
     return () => motion.removeEventListener("change", decide);
   }, []);
 
+  /*
+   * Mute state is applied IMPERATIVELY, not as a prop.
+   *
+   * React does not reliably reflect `muted` into the DOM element — it is one
+   * of the handful of properties it sets once at mount — so a controlled
+   * `muted={...}` silently stops working after the first toggle. Setting it on
+   * the node is the only version that holds.
+   *
+   * Unmuting an already-playing video is normally allowed without a gesture;
+   * what browsers refuse is STARTING playback with sound. Safari can pause it
+   * anyway, so play() is re-issued and a rejection is reported upward rather
+   * than leaving a sound button on over a silent or stopped video.
+   */
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    el.muted = muted;
+    if (muted) return;
+    void el.play().catch(() => {
+      el.muted = true;
+      onSoundRefused?.();
+    });
+  }, [muted, enabled, onSoundRefused]);
+
   if (!enabled) return null;
 
   return (
@@ -76,6 +121,10 @@ export function AmbientVideo({ src, poster }: AmbientVideoProps) {
       src={src}
       poster={poster}
       autoPlay
+      // Always muted for the FIRST play: every browser refuses autoplay with
+      // sound for a visitor with no prior engagement, and a refused play()
+      // leaves a still frame instead of a hero. The effect above turns sound
+      // on afterwards if it was asked for.
       muted
       loop
       playsInline

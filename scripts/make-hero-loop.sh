@@ -8,8 +8,23 @@
 # never widen what a non-member can watch. If you add a source below, you are
 # choosing to make twelve seconds of it public.
 #
-# Output is silent by design (no audio stream at all, not just muted): the page
-# autoplays it, and autoplay with sound is against the content rules.
+# AUDIO IS OFF BY DEFAULT AND OPT-IN PER LINE — the fifth field. The page
+# autoplays these, and autoplay WITH sound is refused by every browser for a
+# visitor with no prior engagement, so the hero starts muted regardless; the
+# audio exists only so the sound button on the hero has something to unmute
+# (components/home/Hero.tsx).
+#
+# ONLY TURN IT ON WHERE THE SPAN SITS INSIDE THAT CLIP'S PUBLIC PREVIEW WINDOW.
+# The video for a span can be public while its audio is not: the older lines
+# below were cut before that rule existed, and luna-tyson-casey-bar is the
+# worked example — its loop is 86-116s, its preview starts at 131s, so shipping
+# that audio would publish dialogue from a members-only stretch of the scene.
+# Those stay silent, and the hero simply shows no sound button when the loop
+# it is playing has no audio track.
+#
+# A 0.6s fade in and out sits at the loop boundary, because a 30-second span
+# lifted from the middle of a scene hard-cuts on wrap and the click is the
+# thing people notice.
 #
 # NAMING IS LOAD-BEARING. Each loop is named for the scene slug it was cut
 # from, because the hero's play button plays that scene — lib/content/hero.ts
@@ -39,7 +54,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-# scene-slug|source|start seconds|duration seconds
+# scene-slug|source|start seconds|duration seconds|audio (1 = keep, blank = silent)
 #
 # Spans are picked for two things: a composition that leaves the lower left
 # free for the headline, and a wrap-around you can't see — either a near-static
@@ -99,18 +114,18 @@ HEROES=(
   # span holds one composition with the pool behind them and the lower left on
   # loungers. The explicit material in this scene is in the members' cut only
   # (josh-luna-pool-explicit), never in this file.
-  "josh-luna-pool|stories/josh-luna-pool.proxy.mp4|18|30"
+  "josh-luna-pool|stories/josh-luna-pool.proxy.mp4|18|30|1"
   # Preview 90–135. Lamplit room, one figure, the lake and a moon through the
   # glass. The quiet one.
-  "luna-lkehouse-wine-shatter|stories/luna-lkehouse-wine-shatter.proxy.mp4|103|30"
+  "luna-lkehouse-wine-shatter|stories/luna-lkehouse-wine-shatter.proxy.mp4|103|30|1"
   # Preview 89–149. Bar, bokeh, a crowd in depth — reads as a film from across
   # a room, the same job luna-tyson-dance does.
-  "ty-luna-blonde-guy-bar|stories/ty-luna-blonde-guy-bar.proxy.mp4|100|30"
+  "ty-luna-blonde-guy-bar|stories/ty-luna-blonde-guy-bar.proxy.mp4|100|30|1"
   # Preview 0–60. Night apartment, lamplight, city through the window.
-  "tyson-apt-thinking|stories/tyson-apt-thinking.proxy.mp4|26|30"
+  "tyson-apt-thinking|stories/tyson-apt-thinking.proxy.mp4|26|30|1"
   # Preview 0–45. Daylight, a truck on a mountain road, then the two of them in
   # the cab. The only recent one with real exterior distance in it.
-  "josh-ty-ricks-house|stories/josh-ty-ricks-house.proxy.mp4|5|24"
+  "josh-ty-ricks-house|stories/josh-ty-ricks-house.proxy.mp4|5|24|1"
   #
   # NOT ADDED, and the reason matters because it is the standing test:
   #   luna-ty-apt-argue — the newest clip of the lot and excluded anyway. Its
@@ -139,7 +154,7 @@ mkdir -p "$OUT_DIR"
 
 want=("$@")
 for entry in "${HEROES[@]}"; do
-  IFS='|' read -r slug src start duration <<<"$entry"
+  IFS='|' read -r slug src start duration audio <<<"$entry"
 
   if [ ${#want[@]} -gt 0 ]; then
     match=0
@@ -156,12 +171,33 @@ for entry in "${HEROES[@]}"; do
   video="$OUT_DIR/$slug.mp4"
   poster="$OUT_DIR/$slug.jpg"
 
+  # Keep the audio only where the line asked for it AND the source actually has
+  # some — a missing stream would otherwise fail the filter rather than
+  # degrading to silence.
+  has_audio=0
+  if [ "${audio:-}" = "1" ]; then
+    if ffprobe -v error -select_streams a:0 -show_entries stream=index \
+         -of csv=p=0 "$src" | grep -q .; then
+      has_audio=1
+    else
+      echo "  $slug: asked for audio, source has none — writing it silent" >&2
+    fi
+  fi
+
+  if [ "$has_audio" = "1" ]; then
+    fade_out=$(python3 -c "print(max(0, $duration - 0.6))")
+    audio_args=(-af "afade=t=in:st=0:d=0.6,afade=t=out:st=${fade_out}:d=0.6"
+                -c:a aac -b:a 96k -ac 2)
+  else
+    audio_args=(-an)
+  fi
+
   # 30fps and 1280 wide keep an ambient background well under a megabyte from a
   # 1080p master. yuv420p + faststart so it plays inline on iOS and starts
   # before the whole file has arrived.
   ffmpeg -y -v error \
     -ss "$start" -t "$duration" -i "$src" \
-    -an \
+    "${audio_args[@]}" \
     -vf "fps=30,scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720" \
     -c:v libx264 -profile:v high -pix_fmt yuv420p \
     -crf 28 -preset slow -movflags +faststart \
@@ -175,6 +211,7 @@ for entry in "${HEROES[@]}"; do
     -frames:v 1 -vf "scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720" -q:v 4 \
     "$poster"
 
-  printf '%-26s loop %-6s poster %s\n' \
-    "$slug" "$(du -h "$video" | cut -f1)" "$(du -h "$poster" | cut -f1)"
+  printf '%-26s loop %-6s poster %-6s %s\n' \
+    "$slug" "$(du -h "$video" | cut -f1)" "$(du -h "$poster" | cut -f1)" \
+    "$([ "$has_audio" = "1" ] && echo 'with audio' || echo 'silent')"
 done

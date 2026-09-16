@@ -132,6 +132,29 @@ export default async function Home() {
               ? undefined
               : "The first episode is on its way. Nothing here is a placeholder for it — the clips below are the story it comes out of."
           }
+          /*
+            THE ONE PLACE THE SEASON AND THE MEMBERSHIP ARE NAMED TOGETHER.
+            Melissa: "people need to know they can watch the season if they're
+            a member." The Season 1 row is where somebody is already looking at
+            the thing they want, which is the only moment that sentence is
+            information rather than an interruption — the ask at the foot of
+            the page is a long way from here.
+
+            Guest-only: a member reading "become a member" learns nothing and
+            is being sold something they have bought. Both variants ship in the
+            cached HTML and the client picks — see components/access/Viewer.tsx.
+          */
+          action={
+            <Guest>
+              <Link
+                href="/membership"
+                className="shrink-0 text-sm text-amber transition-colors duration-(--duration-quick) hover:text-amber-soft"
+              >
+                Watch it with a membership{" "}
+                <span aria-hidden="true">→</span>
+              </Link>
+            </Guest>
+          }
         >
           {season.episodes.map((ep) => (
             <RailItem key={ep.number}>

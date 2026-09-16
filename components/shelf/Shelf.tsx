@@ -40,10 +40,26 @@ interface ShelfProps {
    * the order is the point and is invisible otherwise.
    */
   note?: string;
+  /**
+   * Replaces the "See all" link in the top-right corner.
+   *
+   * It exists for the Season 1 row, which has nowhere to send anybody yet and
+   * one genuinely useful thing to say instead — that a membership is how you
+   * watch it. Taking over the slot rather than adding a second control keeps
+   * the row to one action, which is the reason the shelves read cleanly.
+   */
+  action?: React.ReactNode;
   children: React.ReactNode;
 }
 
-export function Shelf({ title, href, linkLabel, note, children }: ShelfProps) {
+export function Shelf({
+  title,
+  href,
+  linkLabel,
+  note,
+  action,
+  children,
+}: ShelfProps) {
   const id = `shelf-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 
   /*
@@ -85,14 +101,15 @@ export function Shelf({ title, href, linkLabel, note, children }: ShelfProps) {
             )}
           </div>
 
-          {href && (
-            <Link
-              href={href}
-              className="shrink-0 text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
-            >
-              {linkLabel ?? "See all"} <span aria-hidden="true">→</span>
-            </Link>
-          )}
+          {action ??
+            (href && (
+              <Link
+                href={href}
+                className="shrink-0 text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
+              >
+                {linkLabel ?? "See all"} <span aria-hidden="true">→</span>
+              </Link>
+            ))}
         </div>
 
         <Rail label={title}>{children}</Rail>

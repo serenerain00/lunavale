@@ -77,8 +77,21 @@ export interface Hero {
   slug: string;
   /** The scene this loop was cut from — what the play button plays. */
   video: Video;
-  /** Silent looping trailer, public (see the note in make-hero-loop.sh). */
+  /** Looping trailer, public (see the note in make-hero-loop.sh). */
   loop: string;
+  /**
+   * Whether this loop carries an audio track, and therefore whether the hero
+   * offers a sound button.
+   *
+   * NOT EVERY LOOP DOES, and the reason is a content rule rather than an
+   * oversight: a loop only keeps its audio when its span sits inside that
+   * clip's public preview window. The video for a span can be public while
+   * its audio is not — luna-tyson-casey-bar's loop is 86-116s and its preview
+   * starts at 131s — so shipping that audio would publish dialogue from a
+   * members-only stretch. Those loops stay silent and the button is simply
+   * absent, rather than present over silence.
+   */
+  hasAudio: boolean;
   /** First frame of the loop; also the whole hero when motion is reduced. */
   poster: string;
   /**
@@ -152,6 +165,23 @@ const PLAY_INLINE_SLUGS = new Set(["interview", "between-us-trailer-one"]);
  * putting a locked scene on the front page. Unknown slugs are dropped the same
  * way.
  */
+/**
+ * The loops that were cut with their audio kept.
+ *
+ * Mirrors the fifth field in scripts/make-hero-loop.sh. It is a list here
+ * rather than something probed off the file because this module is content
+ * DATA — no filesystem, no request state — and because the list is the thing
+ * a person should have to edit deliberately when they turn audio on for a
+ * clip.
+ */
+const WITH_AUDIO = new Set([
+  "josh-luna-pool",
+  "luna-lkehouse-wine-shatter",
+  "ty-luna-blonde-guy-bar",
+  "tyson-apt-thinking",
+  "josh-ty-ricks-house",
+]);
+
 export function heroes(): Hero[] {
   return HERO_SLUGS.flatMap((slug) => {
     const video = getVideo(slug);
@@ -164,6 +194,7 @@ export function heroes(): Hero[] {
         video,
         loop: `/hero/${slug}.mp4`,
         poster: `/hero/${slug}.jpg`,
+        hasAudio: WITH_AUDIO.has(slug),
         ...(PLAY_INLINE_SLUGS.has(slug)
           ? { playInline: true, copy: INLINE_COPY[slug] ?? DEFAULT_COPY }
           : {}),

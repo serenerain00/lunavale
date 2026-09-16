@@ -96,11 +96,14 @@ export default async function WatchPage({ params }: WatchPageProps) {
 
       <main className="mx-auto w-full max-w-5xl flex-1 px-5 pb-24 sm:px-8">
         <nav className="py-5 text-sm">
+          {/* Back to the clip index, not to /browse. Before 2026-09-16 there
+              was no clip index and the filter-by-feeling catalog was the only
+              thing to go back to. */}
           <Link
-            href="/browse"
+            href="/clips"
             className="text-stone transition-colors hover:text-ivory"
           >
-            ← Back to the catalog
+            ← All clips
           </Link>
         </nav>
 

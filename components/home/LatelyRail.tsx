@@ -150,7 +150,7 @@ function ReleaseCard({
       <div className="flex flex-1 flex-col p-4">
         <p className="text-[0.7rem] uppercase tracking-[0.14em] text-stone-dim">
           {formatReleaseDate(drop.date)} ·{" "}
-          {drop.kind === "scene" ? "Scene" : "Journal"}
+          {drop.kind === "scene" ? "Clip" : "Journal"}
         </p>
         <h3 className="mt-1.5 font-display text-xl font-medium leading-tight text-ivory">
           {drop.title}
@@ -271,7 +271,7 @@ function ReleasePanel({
         <div className="p-6 sm:p-8">
           <p className="text-xs uppercase tracking-[0.16em] text-amber">
             {formatReleaseDate(drop.date)} ·{" "}
-            {scene ? "Scene" : "Journal"}
+            {scene ? "Clip" : "Journal"}
             {drop.durationSeconds !== undefined && (
               <> · {formatDuration(drop.durationSeconds)}</>
             )}
@@ -299,7 +299,7 @@ function ReleasePanel({
               href={drop.href}
               className="inline-flex min-h-11 items-center rounded-full bg-ivory px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-white"
             >
-              {scene ? "Watch the scene" : "Read the page"}
+              {scene ? "Watch the clip" : "Read the page"}
             </Link>
             <span className="text-xs tabular-nums text-stone-dim">
               {position.index + 1} / {position.total}

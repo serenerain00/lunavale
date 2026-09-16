@@ -184,7 +184,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
               id="between-takes"
               eyebrow="Between takes"
               title={`${character.name}’s notes from set`}
-              blurb="What they wrote down while it was being made — the jokes, the reasons a beat was played the way it was, and the things about a scene they only worked out by shooting it."
+              blurb="What they wrote down while it was being made — the jokes, the reasons a beat was played the way it was, and the things about a clip they only worked out by shooting it."
             >
               <p className="mb-5 flex flex-wrap gap-x-5 gap-y-1 text-xs text-stone-dim">
                 {noteKinds.map((kind) => (

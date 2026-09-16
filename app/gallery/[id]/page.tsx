@@ -163,7 +163,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
                 href={`/clips/${scene.slug}`}
                 className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
               >
-                Watch the scene →
+                Watch the clip →
               </Link>
             )}
             {entry && (
@@ -205,7 +205,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
                 </h2>
                 <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
                   You&rsquo;re seeing {items.length} of {gallery.count}. Members
-                  get the whole set at full resolution, and the scene it was cut
+                  get the whole set at full resolution, and the clip it was cut
                   from in full.
                 </p>
                 <Link

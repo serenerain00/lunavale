@@ -80,7 +80,7 @@ export default async function SurveyPage() {
                 href="/browse"
                 className="inline-flex min-h-11 items-center rounded-full border border-hairline px-6 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
               >
-                Back to the scenes
+                Back to the clips
               </Link>
             </div>
           </div>

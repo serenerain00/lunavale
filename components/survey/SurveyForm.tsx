@@ -74,7 +74,7 @@ export function SurveyForm({
         <p className="mt-3 max-w-lg leading-relaxed text-stone">
           It goes straight to Melissa, and it genuinely moves things — at this
           size, a few dozen people saying the same thing is the difference
-          between a scene getting made and not.
+          between a clip getting made and not.
         </p>
 
         {/* THE ADDRESS IS ASKED FOR HERE, and this is the best moment on the
@@ -92,7 +92,7 @@ export function SurveyForm({
             source="survey"
             compact
             label="Want to know what happens to it?"
-            note="An email when a new scene or a page of her journal goes up. Nothing else, and you can stop any time."
+            note="An email when a new clip or a page of her journal goes up. Nothing else, and you can stop any time."
             done="You're on the list. You'll hear when the next one lands."
           />
         </div>
@@ -102,7 +102,7 @@ export function SurveyForm({
             href="/browse"
             className="inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
           >
-            Back to the scenes
+            Back to the clips
           </Link>
           <Link
             href="/journal"

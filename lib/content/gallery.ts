@@ -124,6 +124,90 @@ export const galleries: StillGallery[] = [
     // of the car. Controlling, not violent.
     notes: ["control"],
   },
+  /* ------------------------------------------------ the morning after that */
+  {
+    /*
+      THE MORNING AFTER the set above — she wakes at the lakehouse for the
+      first time without him. Eight frames, and they are ordered as the scene
+      is: two in the present, five in the memory, and one of her alone at the
+      end of it.
+
+      ORDER IS CURATED, NOT CHRONOLOGICAL. The sources are macOS screenshots
+      and their timestamps run 11:09pm to 1:23am in the order Melissa made
+      them, which is not the order they read in. They were renamed 01–08 while
+      staging into stills-src/ so the wall tells the story rather than the
+      production. The one that matters most is 08: it is the LAST frame here
+      and the second-to-last one made — her sitting up alone in the bed after
+      he has gone, which is the sentence the whole set is built around.
+
+      Every `journal` excerpt below is verbatim from `asking-for-less`, which
+      is Melissa's own writing. Nothing here is captioned in an invented voice.
+
+      GATED, with the house's two open frames — and worth knowing that this is
+      the only gated gallery attached to a FREE scene. Everything in these
+      images can be watched by anybody, in motion, for nothing. What is behind
+      the wall is not the moment but the frames: 3220px stills against a 720p
+      stream. Defensible, and stated here so nobody has to reverse-engineer
+      whether it was deliberate. Flip `gated` and `access` if it reads wrong.
+
+      The two open ones are 01 and 02 — both the present tense, her alone.
+      Josh appears for the first time at 03, behind the wall, which is also
+      how the scene is built.
+    */
+    id: "five-more-minutes",
+    title: "Five More Minutes",
+    subtitle: "The first morning without him",
+    description: [
+      "Eight frames from Luna's first morning at the lakehouse alone. She wakes, and the other side of the bed is the first thing she notices.",
+      "What follows is not where she is. It is the farmhouse, and the mornings she used to spend trying to keep Josh in bed a little longer — nothing important, nothing either of them needed to be anywhere for. He would kiss her back like he wanted the same thing. The set ends where those mornings always ended, which is the point she is only now able to see.",
+    ],
+    count: 8,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/five-more-minutes/cover.jpg",
+    feelings: ["distance", "grief"],
+    // The lakehouse, where she wakes up. The middle five frames are the
+    // farmhouse, but a set is filed where it happens, not where it remembers —
+    // same call as the scene.
+    place: "lakehouse",
+    about: ["luna", "josh"],
+    sceneSlug: "luna-josh-bed-flashback",
+    journalEntryId: "asking-for-less",
+    stills: [
+      {
+        journal: {
+          entryId: "asking-for-less",
+          excerpt:
+            "I used to think missing someone meant they had to be gone.",
+        },
+      },
+      {},
+      {
+        journal: {
+          entryId: "asking-for-less",
+          excerpt:
+            "I remember mornings when I would try to keep him in bed. Nothing important. I just wanted him close. Five more minutes. A few kisses.",
+        },
+      },
+      {},
+      {},
+      {},
+      {
+        journal: {
+          entryId: "asking-for-less",
+          excerpt: "He'd kiss me back like he wanted the same thing.",
+        },
+      },
+      {
+        journal: {
+          entryId: "asking-for-less",
+          excerpt: "And then he'd leave anyway.",
+        },
+      },
+    ],
+    access: "premium",
+    mature: true,
+  },
   /* --------------------------------------------------------------- the bar */
   {
     id: "the-bar",
@@ -194,6 +278,83 @@ export const galleries: StillGallery[] = [
     mature: false,
   },
 
+  /* ------------------------------------------------- the afternoon he went */
+  {
+    // The same island as `gingerale`, and the opposite weather. That set is
+    // the friendship doing the one thing it does easily; this is the first
+    // afternoon it costs her something to be in the room.
+    //
+    // ORDERED BY THE SCENE, NOT BY CAPTURE TIME — which is a departure from
+    // casey-bar, and deliberate. These are thirteen frames spread over two and
+    // a half hours of Melissa working, so capture order is the order she made
+    // them in rather than the order they happen in, and it opens on a close-up
+    // of him and ends in the middle. Run as the scene runs, it reads: she is
+    // writing, he comes through, they talk, she goes back to the book.
+    //
+    // ONE FRAME PULLED as an exact duplicate — the 9.17 and 9.37 screenshots
+    // are the same frame captured twice (SSIM 1.000). Count is 13, not 14.
+    //
+    // STILL 01 IS THE COVER AND IT IS THE BEST IMAGE HERE: her alone at the
+    // island with the book open and the lake in the whole of the window. It is
+    // also the opening shot of the 0:50 assembly that got replaced, so the set
+    // is the only place that frame survives.
+    //
+    // NOT the same image as the scene's poster, on purpose. The poster is the
+    // wide with both of them in it, because a scene card has to say who is in
+    // it; a gallery card can afford to be the quieter one.
+    id: "wasnt-planning-on-it",
+    title: "Wasn't Planning On It",
+    subtitle: "Luna & Tyson",
+    description: [
+      "Thirteen frames from an afternoon at the lakehouse. Luna is writing at the island. Tyson comes through with his keys and says he is going to head out for a bit, and she asks him where — which in twenty years she has never once done.",
+      "Nothing in it is a fight. He answers every question with a question, she says one true thing she would like back, and then she goes on writing without looking up. The set is mostly her face doing arithmetic she has not admitted she is doing.",
+    ],
+    count: 13,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/wasnt-planning-on-it/cover.jpg",
+    feelings: ["desire", "distance"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-ty-wasntplanningonit",
+    journalEntryId: "who-is-she",
+    stills: [
+      {
+        journal: {
+          entryId: "who-is-she",
+          excerpt:
+            "He has said that to me a hundred times in twenty years and I have never once asked him where.",
+        },
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {
+        journal: {
+          entryId: "who-is-she",
+          excerpt:
+            "He didn't answer it. He asked me who said there was a she, which is not a no.",
+        },
+      },
+      {},
+      {},
+      {
+        journal: {
+          entryId: "who-is-she",
+          excerpt:
+            "I said it without looking up, and I have been sitting here since with the pen in my hand not writing anything.",
+        },
+      },
+    ],
+    access: "premium",
+    mature: false,
+  },
+
   /* --------------------------------------------------------------- casey's */
   {
     // The same bar as `the-bar`, a different night and a third person in it.
@@ -208,6 +369,21 @@ export const galleries: StillGallery[] = [
     // No captions yet. The ones on the-bar are Melissa's voice and the wrong
     // thing to invent — the set reads fine without them and they can be added
     // per still whenever she wants.
+    //
+    // SIX STILLS PULLED, 2026-08-27, and the count went 31 -> 25. Six frames
+    // showed a LONG-HAIRED woman standing in for Casey. Casey has short hair —
+    // the undercut, the tank top, the tattoos — so those six were a wrong
+    // render rather than a character, and Melissa's instruction is that the
+    // long-haired woman appears nowhere on the site.
+    //
+    // Old numbers 02, 05, 07, 08, 13, 14. The clearest of them is old 14, the
+    // two women side by side at the bar, which is what settles that they are
+    // not the same person. The frames are kept, not deleted, in
+    // stills-src/_pulled/casey-bar-long-hair/ with a note.
+    //
+    // THE SET RENUMBERED. Everything after a pulled frame shifted down, so the
+    // free previews and the cover are different images than they were, and the
+    // remote copies had to be overwritten rather than size-skipped.
     id: "casey-bar",
     title: "Your Date",
     subtitle: "Luna, Tyson & Casey",
@@ -215,7 +391,7 @@ export const galleries: StillGallery[] = [
       "The same bar, and the first night Luna has walked into it and found somebody else already standing where she stands.",
       "Casey is a friend from the track. That is the whole of what anybody says out loud, and Luna spends the night deciding whether to believe it — which is not really a question about Casey.",
     ],
-    count: 31,
+    count: 25,
     gated: true,
     freePreviewCount: 2,
     cover: "/gallery/casey-bar/cover.jpg",
@@ -278,18 +454,25 @@ export const galleries: StillGallery[] = [
 
   /* ---------------------------------------------------------------- Mexico */
   {
-    // The flashback. Five years into the ten, and the warmest material in the
-    // story — see LUNA_VALE_CONTEXT.md.
+    // Seven days, and the warmest material in the story — see
+    // LUNA_VALE_CONTEXT.md.
+    //
+    // NOT A FLASHBACK any more (Melissa, 2026-08-17). This used to be five
+    // years into the ten, and the description said Luna was "trying to get
+    // back to" this week — which was true when the trip predated the breakup
+    // and is now backwards. She is already back with him when the plane lands.
+    // The week is not what she is reaching for; it is what she got, and what
+    // everything after it gets measured against.
     //
     // Gated, but with the first two stills open. That is the shop window
     // Melissa asked for: roughly 10% of the set, real frames rather than a
     // locked wall, and the page states plainly how many more there are.
     id: "josh-luna-beach",
     title: "Mexico",
-    subtitle: "Luna & Josh, five years in",
+    subtitle: "Luna & Josh, seven days",
     description: [
-      "He booked it himself and told her on a Tuesday like it was nothing. Six days, and whatever they had been carrying they put down at the airport and neither of them went back for it.",
-      "This is the week she is trying to get back to. It is the evidence that the man he becomes is not the only man he is — which is exactly what makes everything after it cost so much.",
+      "He booked it himself and told her on a Tuesday like it was nothing. Seven days, weeks after she took him back, and whatever they had been carrying they put down at the airport and neither of them went back for it.",
+      "This is the best week of her life and she knows it while it is happening. It is the proof that the man he becomes is not the only man he is — which is exactly what makes everything after it cost so much.",
     ],
     count: 15,
     gated: true,
@@ -403,7 +586,7 @@ export const galleries: StillGallery[] = [
     title: "The Run",
     subtitle: "Luna, alone",
     description: [
-      "Six miles at the far end of the lake, headphones in, nobody to talk to and nobody to be all right for. Her favourite hour of the week and the only one in the story she does not spend managing somebody else.",
+      "Six miles at the far end of the lake, headphones in, nobody to talk to and nobody to be all right for. Her favorite hour of the week and the only one in the story she does not spend managing somebody else.",
       "She is not thinking anything through out here. That is the point of it. Everything she has been carrying is still there when she gets back — she just gets to put it down for an hour first.",
     ],
     count: 10,
@@ -495,6 +678,10 @@ export const galleries: StillGallery[] = [
     feelings: ["distance", "desire"],
     place: "garage",
     about: ["tyson", "luna"],
+    // Linked 2026-08-19, when the room finally got a scene. These four stills
+    // predate it by two weeks and still 04's caption — "she turns up and he
+    // keeps working" — turns out to describe the scene's opening exactly.
+    sceneSlug: "ty-luna-garage",
     stills: [
       {
         caption:
@@ -726,6 +913,112 @@ export const galleries: StillGallery[] = [
     journalEntryId: "the-long-table",
     access: "free",
     mature: false,
+  },
+  {
+    /*
+      NEW YORK — twenty stills, and the first gallery whose source arrived in
+      the scene folder rather than in stills-src/. Melissa, 2026-09-08.
+
+      THEY WERE ALREADY IN ORDER, which was luck rather than curation: staged
+      by the timestamp in each filename, they run lobby -> suite -> the bar ->
+      close, which is the scene's own arc. Nothing was resequenced. If any get
+      replaced, re-number them in stills-src/the-whitmore/ rather than
+      reshuffling here, because 01 is what the public cover is cut from.
+
+      THE TWO OPEN ONES ARE THE LOBBY, and that is the whole of the reasoning:
+      01 is her waiting alone with THE WHITMORE NEW YORK lettered behind her,
+      02 is him arriving. Neither is intimate, both say exactly where this is,
+      and they are the only frames of the twenty that could sit at a public URL
+      without giving away what the evening turns into. Everything from 03 is
+      the suite.
+
+      FIVE MONTHS INTO THE BREAK-UP — see the journal entry and
+      LUNA_VALE_CONTEXT.md. The captions are written to that: they are allowed
+      to be charged and they are not allowed to resolve, because the night
+      does not.
+    */
+    id: "the-whitmore",
+    // PLACEHOLDER title, subtitle, description and captions — hers to replace.
+    title: "The Whitmore",
+    subtitle: "Luna & Tyson",
+    description: [
+      "Her event, her weekend, her people — and she was the one who asked him to fly out for it. Twenty years of knowing each other and neither of them had ever been anywhere together that was not twenty minutes from the farm.",
+      "This is the night of the company dinner. They drank with her colleagues until one, came back, and kept drinking upstairs in his room. Every frame after the second one is that room.",
+    ],
+    count: 20,
+    gated: true,
+    freePreviewCount: 2,
+    cover: "/gallery/the-whitmore/cover.jpg",
+    // `desire` and `distance` together, which is the unusual pair and the
+    // correct one. Every other Luna-and-Tyson gallery is one or the other; this
+    // is the set where both are true in the same frame, and 08 and 09 — the
+    // two of them at opposite ends of a room they have all night alone — are
+    // the reason the second tag is there at all.
+    feelings: ["desire", "distance"],
+    place: "new-york",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-ty-nyc-hotel",
+    clipId: "luna-ty-nyc-vertical",
+    journalEntryId: "new-york",
+    stills: [
+      {
+        caption:
+          "Downstairs an hour early, which she would tell you was about the car.",
+        journal: {
+          entryId: "new-york",
+          excerpt:
+            "I invited him. That is the first line and it belongs at the top.",
+        },
+      },
+      {
+        caption: "Two thousand miles, on four weeks' notice, in a jacket he hates.",
+      },
+      {},
+      {
+        caption: "One more, she said, and meant several.",
+      },
+      {},
+      {},
+      {},
+      {
+        caption:
+          "The whole room to themselves and the length of it between them, which took some doing.",
+      },
+      {
+        caption: "Him at the glass with his back to her. Her at the bar, not moving either.",
+        journal: {
+          entryId: "new-york",
+          excerpt:
+            "There is something he is not telling me.",
+        },
+      },
+      {},
+      {},
+      {},
+      {},
+      {
+        caption:
+          "The staring game, from when they were nineteen. The loser is whoever speaks.",
+        journal: {
+          entryId: "new-york",
+          excerpt:
+            "I did not win it last night. I did not lose it either. It just went on far past the point where it was a game.",
+        },
+      },
+      {},
+      {
+        caption: "Somewhere in here he says Josh's name, and she does not write down why.",
+      },
+      {},
+      {},
+      {},
+      {
+        caption: "As close as twenty years has ever got, and nobody said anything.",
+      },
+    ],
+    access: "premium",
+    // Intimate, graphic nowhere, and the same call as the scene and the clip.
+    mature: true,
   },
 ];
 

@@ -8,7 +8,7 @@
  * the route about another module.
  */
 
-import { clipAccess, clips, getClip } from "@/lib/content/clips";
+import { clipAccess, clips, getClip } from "@/lib/content/posts";
 import {
   allTakeSlugs,
   getTake,
@@ -49,7 +49,15 @@ export function getStreamable(slug: string): Streamable | undefined {
     };
 
   const clip = getClip(slug);
-  if (clip) return { slug, file: clip.file, access: clipAccess(clip) };
+  if (clip)
+    return {
+      slug,
+      file: clip.file,
+      access: clipAccess(clip),
+      // A gated clip may have a public opening, same as a scene. Without this
+      // line the route refuses a clip whose page is busy playing its preview.
+      previewFile: clip.preview?.file,
+    };
 
   // Raw attempts at a scene's beats. Members-only without exception, and the
   // file is derived from the slug rather than stored — see lib/content/takes.

@@ -1,0 +1,358 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { getVideo, videos, formatDuration } from "@/lib/content/videos";
+import { canWatch, isMember } from "@/lib/access/entitlement";
+import { entriesForScene } from "@/lib/content/journal";
+import {
+  storyPosition,
+  previousInStory,
+  nextInStory,
+} from "@/lib/content/chronology";
+import { HowThisCameTogether } from "@/components/takes/HowThisCameTogether";
+import { galleryForScene } from "@/lib/content/gallery";
+import { SceneWatch } from "@/components/media/SceneWatch";
+import { JournalCard } from "@/components/journal/JournalCard";
+import { LockedNotice } from "@/components/membership/LockedNotice";
+import { getTier } from "@/lib/content/membership";
+import { Reveal } from "@/components/motion/Reveal";
+import { ContentNotice } from "@/components/ui/ContentNotice";
+import { RatingBadge } from "@/components/ui/RatingBadge";
+import { SiteHeader } from "@/components/ui/SiteHeader";
+import { ANSWERED_COOKIE } from "@/lib/content/survey";
+import { hasAnswered } from "@/lib/db/survey";
+import { cookies } from "next/headers";
+
+interface WatchPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+// Pre-render the known scene routes; still deep-linkable and server-gated.
+export function generateStaticParams() {
+  return videos.map((v) => ({ slug: v.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: WatchPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const video = getVideo(slug);
+  if (!video) return { title: "Scene not found" };
+  return {
+    title: video.title,
+    description: video.synopsis,
+    openGraph: {
+      title: video.title,
+      description: video.synopsis,
+      images: [video.poster],
+    },
+  };
+}
+
+export default async function WatchPage({ params }: WatchPageProps) {
+  const { slug } = await params;
+  const video = getVideo(slug);
+  if (!video) notFound();
+
+  const [allowed, member, jar] = await Promise.all([
+    canWatch(video),
+    isMember(),
+    cookies(),
+  ]);
+  // Whether to bother them with the survey when the scene ends. Read here, on
+  // the server, rather than from document.cookie — the panel is client-side
+  // but the answer is not something the client should be deciding.
+  const surveyAnswered = await hasAnswered(
+    jar.get(ANSWERED_COOKIE)?.value ?? "",
+  );
+  // A scene can exist as two edits (Video.premium). The stream route decides
+  // which one actually plays; this only decides what the page SAYS about it,
+  // and must agree with that decision or the runtime is a surprise.
+  const cut = member && video.premium ? video.premium : null;
+  // The runtime shown must match the file that is actually going to play, or
+  // the page promises six minutes and delivers one.
+  const runtime = !allowed && video.preview
+    ? video.preview.durationSeconds
+    : cut
+      ? cut.durationSeconds
+      : video.durationSeconds;
+  // Her voice, tied to the scene — so it reaches people watching, not only
+  // those who go to /journal. Stills from the same event get a link too.
+  const journalEntries = entriesForScene(slug);
+
+  // Story order — see lib/content/chronology.ts. All three are undefined for
+  // anything outside the story (the trailer, the cast interview), which is
+  // correct: those are about it, not in it.
+  const position = storyPosition(slug);
+  const previous = previousInStory(slug);
+  const next = nextInStory(slug);
+  const stills = galleryForScene(slug);
+
+  return (
+    <>
+      <SiteHeader />
+
+      <main className="mx-auto w-full max-w-5xl flex-1 px-5 pb-24 sm:px-8">
+        <nav className="py-5 text-sm">
+          {/* Back to the clip index, not to /browse. Before 2026-09-16 there
+              was no clip index and the filter-by-feeling catalog was the only
+              thing to go back to. */}
+          <Link
+            href="/clips"
+            className="text-stone transition-colors hover:text-ivory"
+          >
+            ← All clips
+          </Link>
+        </nav>
+
+        {/* Above the player, so it is read before anything plays — including
+            any note that belongs only to the members' cut, which is the one
+            about to play for them. */}
+        <ContentNotice
+          notes={[...(video.notes ?? []), ...(cut?.notes ?? [])]}
+          className="mb-4"
+        />
+
+        {/* An explicit cut says so before it plays, never after.
+
+            Gated on `allowed` and on BOTH explicit flags. It used to read
+            `cut?.explicit` alone, which meant it only fired for a scene built
+            as two edits (ty-luna-bed) and stayed silent for one that is
+            explicit in itself (luna-josh-first-night) — that scene's graphic nine
+            minutes played for a member with the rating sitting under the
+            player instead of above it, which is the thing this notice exists
+            to prevent.
+
+            `allowed` matters now that an explicit scene can have a public
+            window: a signed-out visitor gets the safe 90 seconds, so telling
+            them they are about to watch something graphic would be false. They
+            get the "first 1:30 of 8:57" note below the player instead. */}
+        {allowed && (video.explicit || cut?.explicit) && (
+          <p className="mb-4 rounded-lg border border-amber/25 bg-amber/5 px-4 py-3 text-sm leading-relaxed text-stone">
+            <span className="font-medium text-amber-soft">Explicit · 18+</span>{" "}
+            — you&rsquo;re watching the full cut, which is graphic.
+            {video.preview
+              ? " The public version of this scene is shorter and is not."
+              : ""}
+          </p>
+        )}
+
+        {allowed || video.preview ? (
+          <SceneWatch
+            slug={video.slug}
+            poster={video.poster}
+            title={video.title}
+            surveyAnswered={surveyAnswered}
+            preview={!allowed && Boolean(video.preview)}
+          />
+        ) : (
+          <div className="overflow-hidden rounded-xl bg-black ring-1 ring-hairline">
+            <div className="relative aspect-video">
+              <LockedNotice cover={video.poster} subject="This scene" />
+            </div>
+          </div>
+        )}
+
+        {/* A visitor gets a piece of the scene and then this. Stated once,
+            under the player, with the real numbers — not a countdown over the
+            footage and not a dialog. The player above is genuinely playing the
+            preview file; there is no full version behind it to reach.
+
+            "THE FIRST" ONLY WHEN IT IS. This said "the first N of M" for every
+            preview until 2026-08-31, which stopped being true on 2026-08-10
+            when windows moved off the opening — see the hookStart note in
+            lib/content/videos.ts. Six scenes were affected and nobody had
+            noticed: luna-ty-panic-attack opens its window at 0:44, and
+            luna-ty-shop-kiss at 1:30, and both were telling a visitor they had
+            just watched the start of the scene. That is precisely the claim
+            make-previews.mjs promises this line does not make — "nobody is
+            told they saw the start of anything" — so the wording now follows
+            the data instead of assuming it. */}
+        {!allowed && video.preview && (
+          <div className="mt-4 rounded-lg border border-amber/25 bg-amber/[0.04] px-4 py-3 text-sm leading-relaxed text-stone">
+            You&rsquo;re watching{" "}
+            {video.preview.segments || video.preview.hookStart
+              ? ""
+              : "the first "}
+            {formatDuration(video.preview.durationSeconds)} of{" "}
+            {formatDuration(video.durationSeconds)}
+            {/* A SEGMENTED PREVIEW HAS TO SAY SO. This line already refused to
+                claim a mid-scene window was "the first" — the same refusal
+                applies harder to a cut assembled from two places, which is not
+                a continuous thirty seconds of anything. Without this a visitor
+                would reasonably think they had watched half a minute straight
+                and that the scene simply jumps. */}
+            {video.preview.segments
+              ? `, from ${video.preview.segments.length === 2 ? "two" : String(video.preview.segments.length)} places in it`
+              : ""}
+            . The rest is part of{" "}
+            <Link
+              href="/membership"
+              className="text-amber underline-offset-4 transition-colors duration-(--duration-quick) hover:underline"
+            >
+              the LunaVerse
+            </Link>
+            .
+          </div>
+        )}
+
+        <div className="mt-6">
+          <div className="flex flex-wrap items-center gap-3 text-xs text-stone">
+            <span className="tabular-nums">{formatDuration(runtime)}</span>
+            {(video.mature || video.explicit || cut?.explicit) && (
+              <>
+                <span aria-hidden>·</span>
+                <RatingBadge mature={video.mature} explicit={video.explicit || cut?.explicit} />
+              </>
+            )}
+            {video.access === "premium" && (
+              <>
+                <span aria-hidden>·</span>
+                <span className="text-amber">Members</span>
+              </>
+            )}
+          </div>
+          <h1 className="mt-2 font-display text-3xl font-light text-ivory sm:text-4xl">
+            {video.title}
+          </h1>
+          {/*
+            THIS SAID "9 of 46 in the story" FOR ABOUT FOUR HOURS. It was added
+            with the reorder this morning so that somebody arriving from a link
+            — which is most people — could tell there was an order at all.
+            Removed the same day: it is both halves of the thing Melissa does
+            not want on the site, a progress marker and a library total in one
+            line. See the note on app/membership/page.tsx.
+
+            What replaces it does the original job without the arithmetic: it
+            says there is a sequence and offers the way into it. The small
+            number on each card in the rails still marks position, which is
+            what makes the order visible — it just no longer comes with a
+            denominator to measure yourself against.
+          */}
+          {position !== undefined && (
+            <p className="mt-2 text-sm text-stone">
+              <Link
+                href="/clips"
+                className="underline decoration-hairline underline-offset-4 hover:text-amber"
+              >
+                See where this one sits
+              </Link>
+            </p>
+          )}
+          <p className="mt-3 max-w-2xl leading-relaxed text-stone">
+            {video.synopsis}
+          </p>
+
+          {/* Stated plainly, once, under the scene — the longer cut is a real
+              thing they can have, not a nag. No countdown, no interruption of
+              what they are already watching. See MONETIZATION.md. */}
+          {video.premium && !member && (
+            <p className="mt-5 max-w-2xl rounded-lg border border-hairline px-4 py-3 text-sm leading-relaxed text-stone">
+              {/* Runtime is the pitch only when runtime is the difference.
+                  See PremiumCut.difference — comparing 2:41 to 2:39 sells a
+                  differently-edited scene as two extra seconds. */}
+              {video.premium.difference ? (
+                <>Members watch {video.premium.difference}</>
+              ) : (
+                <>
+                  Members watch a longer cut of this scene —{" "}
+                  {formatDuration(video.premium.durationSeconds)} against{" "}
+                  {formatDuration(video.durationSeconds)}
+                </>
+              )}
+              {video.premium.explicit && ", and explicit"}.{" "}
+              <Link
+                href="/membership"
+                className="text-amber underline-offset-4 transition-colors hover:underline"
+              >
+                {getTier("vault")!.cta}
+              </Link>
+            </p>
+          )}
+
+          {stills && (
+            <Link
+              href={`/gallery/${stills.id}`}
+              className="mt-5 inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+            >
+              See the stills from this scene — {stills.count} frames →
+            </Link>
+          )}
+        </div>
+
+        {journalEntries.length > 0 && (
+          <section aria-labelledby="scene-journal" className="mt-14">
+            <div className="mb-4">
+              <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                From Luna&rsquo;s journal
+              </p>
+              <h2
+                id="scene-journal"
+                className="mt-2 font-display text-2xl font-light text-ivory"
+              >
+                What she wrote about this
+              </h2>
+              <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-stone">
+                The same night, in her own hand — the version she only ever meant
+                for herself.
+              </p>
+            </div>
+            <Reveal className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {journalEntries.map((entry) => (
+                <JournalCard key={entry.id} entry={entry} unlocked={member} />
+              ))}
+            </Reveal>
+          </section>
+        )}
+
+        {/* Last on the page on purpose: the finished clip, then her account
+            of it, and only then the machinery behind it. Leading with process
+            would put the making in front of the story. */}
+        <HowThisCameTogether sceneSlug={slug} member={member} />
+
+        {/*
+          WHAT HAPPENS NEXT. Story order, not release order — somebody who has
+          just finished a clip is following the story, and the useful next
+          thing is the one that happens next, not the one that was uploaded
+          next. This is the whole reason the order was worth building: it turns
+          46 separate pages into something you can sit and watch.
+        */}
+        {(previous || next) && (
+          <nav
+            aria-label="More of the story"
+            className="mt-16 grid gap-4 border-t border-hairline pt-8 sm:grid-cols-2"
+          >
+            {previous ? (
+              <Link
+                href={`/clips/${previous.slug}`}
+                className="group rounded-lg border border-hairline p-5 transition-colors duration-(--duration-quick) hover:border-amber"
+              >
+                <p className="text-xs uppercase tracking-[0.18em] text-stone">
+                  Before this
+                </p>
+                <p className="mt-2 font-display text-lg text-ivory group-hover:text-amber">
+                  {previous.title}
+                </p>
+              </Link>
+            ) : (
+              <span />
+            )}
+            {next && (
+              <Link
+                href={`/clips/${next.slug}`}
+                className="group rounded-lg border border-hairline p-5 text-right transition-colors duration-(--duration-quick) hover:border-amber sm:text-right"
+              >
+                <p className="text-xs uppercase tracking-[0.18em] text-stone">
+                  Next
+                </p>
+                <p className="mt-2 font-display text-lg text-ivory group-hover:text-amber">
+                  {next.title}
+                </p>
+              </Link>
+            )}
+          </nav>
+        )}
+      </main>
+    </>
+  );
+}

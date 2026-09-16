@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { Reveal } from "@/components/motion/Reveal";
-import { getMembership } from "@/lib/access/entitlement";
 import {
   environments,
   readiness,
@@ -11,6 +10,8 @@ import {
 } from "@/lib/content/world";
 import { getVideo } from "@/lib/content/videos";
 import { pageMetadata } from "@/lib/seo/metadata";
+import { WORLD_ENABLED } from "@/lib/content/world";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = pageMetadata({
   title: "The World of Luna",
@@ -37,12 +38,14 @@ function roomCount(env: Environment): string {
   return `${n} ${n === 1 ? "room" : "rooms"}`;
 }
 
+// OFF THE SITE while the world is being finished — see WORLD_ENABLED in
+// lib/content/world.ts. The page is intact; it just has no audience yet.
 export default async function WorldPage() {
-  const { active: member } = await getMembership();
+  if (!WORLD_ENABLED) notFound();
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="flex-1 pb-24">
         <section className="mx-auto w-full max-w-6xl px-5 pt-12 sm:px-8 sm:pt-16">

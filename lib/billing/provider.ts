@@ -36,7 +36,7 @@ export function databaseConfigured(): boolean {
 
 /**
  * True only when real memberships can be sold, recorded and honoured.
- * While false, /membership/start grants a clearly-labelled preview instead and
+ * While false, /membership/start grants a clearly-labeled preview instead and
  * every membership surface says so.
  */
 export function billingLive(): boolean {
@@ -54,14 +54,55 @@ export function billingLive(): boolean {
  *   STRIPE_PRICE_VAULT=price_...
  *   STRIPE_PRICE_PATRON=price_...
  */
-export function priceIdFor(tier: TierId): string | undefined {
-  return process.env[`STRIPE_PRICE_${tier.toUpperCase()}`];
+/**
+ * How often a membership renews. Two prices per tier, one per interval.
+ *
+ * "month" is the default everywhere it is optional, so every existing call
+ * site and every old link keeps buying exactly what it bought before.
+ */
+export type BillingInterval = "month" | "year";
+
+export function isBillingInterval(v: string): v is BillingInterval {
+  return v === "month" || v === "year";
 }
 
-/** Reverse lookup, for turning a webhook's price back into a tier. */
+/**
+ * The Stripe price for a tier at an interval.
+ *
+ * YEARLY WAS UNSELLABLE UNTIL 2026-08-27. There was one env var per tier, so
+ * the membership card could advertise "$80 yearly, 2 months free" and every
+ * button on the page still went to the monthly price. The yearly id lives in
+ * `STRIPE_PRICE_<TIER>_YEARLY`; if it is unset the app falls back to monthly
+ * rather than erroring, so a deploy that has not been given the new variable
+ * keeps selling instead of breaking.
+ */
+export function priceIdFor(
+  tier: TierId,
+  interval: BillingInterval = "month",
+): string | undefined {
+  const base = `STRIPE_PRICE_${tier.toUpperCase()}`;
+  if (interval === "year") {
+    return process.env[`${base}_YEARLY`] ?? process.env[base];
+  }
+  return process.env[base];
+}
+
+/** Whether a real yearly price exists to sell. Drives the UI toggle. */
+export function yearlyAvailable(tier: TierId): boolean {
+  return Boolean(process.env[`STRIPE_PRICE_${tier.toUpperCase()}_YEARLY`]);
+}
+
+/**
+ * Reverse lookup, for turning a webhook's price back into a tier.
+ *
+ * Checks BOTH intervals: a yearly subscription's webhook carries the yearly
+ * price id, and before this it matched nothing and resolved to no tier — which
+ * would have granted an annual member exactly nothing.
+ */
 export function tierForPriceId(priceId: string): TierId | undefined {
   for (const tier of ["vault", "patron"] as const) {
-    if (priceIdFor(tier) === priceId) return tier;
+    if (priceIdFor(tier, "month") === priceId) return tier;
+    if (priceIdFor(tier, "year") === priceId) return tier;
   }
   return undefined;
 }

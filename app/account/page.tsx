@@ -5,6 +5,7 @@ import { PreviewNotice } from "@/components/membership/PreviewNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { SignOut } from "@/components/ui/SignOut";
 import { getMembership } from "@/lib/access/entitlement";
+import { isOwner } from "@/lib/access/owner";
 import { authConfigured, billingLive } from "@/lib/billing/provider";
 import { membershipForUser } from "@/lib/db/memberships";
 import {
@@ -26,9 +27,22 @@ interface AccountPageProps {
 }
 
 export default async function AccountPage({ searchParams }: AccountPageProps) {
-  const [{ tier, active, preview }, params] = await Promise.all([
+  // THE SAFETY NET FOR PAY-FIRST CHECKOUT, and it runs before anything is
+  // read. Since 2026-08-27 somebody can pay before they have an account
+  // (app/membership/start/route.ts), which leaves the membership parked
+  // against their email. /membership/claim picks it up for anyone who follows
+  // the path; this catches everybody else — the person who closed the tab on
+  // /welcome, or paid on a phone and signed in a week later on a laptop.
+  //
+  // Costs one indexed read for a member who has nothing waiting, and it has to
+  // happen before getMembership() or the page would render their old state and
+  // tell a new member they are a visitor.
+  await claimAnythingWaiting();
+
+  const [{ tier, active, preview }, params, viewerIsOwner] = await Promise.all([
     getMembership(),
     searchParams,
+    isOwner(),
   ]);
   const current = getTier(tier)!;
   const unlocked = benefitsFor(tier);
@@ -40,7 +54,7 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
 
   return (
     <>
-      <SiteHeader member={active} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-4xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-8 pt-12 sm:pt-16">
@@ -93,8 +107,24 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
                   label="Price"
                   value={`${formatPrice(current.priceMonthlyCents)} / month`}
                 />
+                {/* "RENEWS" WAS A LIE TO ANYBODY WHO HAD CANCELLED. This read
+                    `status === "canceled"`, and Stripe does not move a
+                    subscription to that status when somebody switches off
+                    renewal — it stays "active" until the period actually runs
+                    out. So for the entire month after cancelling, the page told
+                    them their membership renews on the very date it ends.
+
+                    cancel_at_period_end is the flag that was missing; it is
+                    recorded from the webhook as of 2026-09-03. Access is
+                    unchanged either way — they keep everything until the date
+                    shown, which is the promise on the membership page and is
+                    enforced in tierForUser(), not here. */}
                 <Field
-                  label={record?.status === "canceled" ? "Access until" : "Renews"}
+                  label={
+                    record?.status === "canceled" || record?.cancelAtPeriodEnd
+                      ? "Access until"
+                      : "Renews"
+                  }
                   value={
                     record?.currentPeriodEnd
                       ? record.currentPeriodEnd.toLocaleDateString("en-US", {
@@ -169,7 +199,7 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
               <p className="mt-2 max-w-xl text-sm leading-relaxed text-stone">
                 {billingLive()
                   ? "This opens Stripe's billing portal, where you can cancel in one click. You keep access until the end of the period you've already paid for, and you won't be charged again."
-                  : "One click, effective immediately, with no further charges. Your progress through the world is kept, so everything is where you left it if you come back."}
+                  : "One click, effective immediately, with no further charges. Everything public stays open to you, and rejoining later opens the rest again at once."}
               </p>
               <form action={cancelMembership} className="mt-5">
                 <button
@@ -194,11 +224,17 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
               href="/membership"
               className="mt-6 inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
             >
-              See what membership opens
+              {getTier("vault")!.cta}
             </Link>
           </section>
         )}
-              {process.env.OWNER_USER_ID && (
+        {/*
+          OWNER ONLY. This used to test that OWNER_USER_ID was merely SET,
+          which it always is in production — so every signed-in member was
+          shown a link to /admin. The page itself 404s them correctly, so
+          nothing leaked; it just told paying customers there was a door.
+        */}
+        {viewerIsOwner && (
           <div className="mt-10">
             <Link
               href="/admin"
@@ -254,6 +290,41 @@ function Banner({
 }
 
 /** The signed-in viewer's billing record, or null. */
+/**
+ * Attach a membership that was paid for before this account existed.
+ *
+ * Verified addresses only — that check is the entire security boundary of the
+ * pay-first flow and it lives in the route and in claimPendingFor(); this is
+ * simply the other place it is called from. Silent by design: for almost
+ * everybody there is nothing waiting, and a person who does get one sees it as
+ * the page already reporting them as a member.
+ */
+async function claimAnythingWaiting(): Promise<void> {
+  if (!billingLive()) return;
+  try {
+    const { auth, currentUser } = await import("@clerk/nextjs/server");
+    const { userId } = await auth();
+    if (!userId) return;
+
+    const existing = await membershipForUser(userId);
+    if (existing) return; // already attached — nothing to look for
+
+    const user = await currentUser();
+    const verified = (user?.emailAddresses ?? [])
+      .filter((e) => e.verification?.status === "verified")
+      .map((e) => e.emailAddress);
+
+    const { claimPendingFor } = await import("@/lib/db/memberships");
+    for (const email of verified) {
+      if (await claimPendingFor(userId, email)) return;
+    }
+  } catch (error) {
+    // Never break the account page over this. The claim is also attempted at
+    // /membership/claim and again on the next visit here.
+    console.error("account: claim check failed", error);
+  }
+}
+
 async function currentRecord() {
   if (!authConfigured()) return null;
   const { auth } = await import("@clerk/nextjs/server");

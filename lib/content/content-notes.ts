@@ -14,7 +14,7 @@
  *     story for adults and the tone is restrained everywhere else.
  *   - It appears BEFORE playback, not in the credits. A note nobody sees until
  *     afterwards is decoration. That constraint is why a clip carrying a note
- *     does not autoplay (see components/clips/VerticalPlayer.tsx).
+ *     does not autoplay (see components/posts/VerticalPlayer.tsx).
  *
  * Add entries as the story needs them; keep the labels short enough to sit on
  * one line under a title.
@@ -25,7 +25,8 @@ export type ContentNoteId =
   | "control"
   | "panic"
   | "strangling"
-  | "coercion";
+  | "coercion"
+  | "knocked-out";
 
 export interface ContentNote {
   id: ContentNoteId;
@@ -55,9 +56,9 @@ export const CONTENT_NOTES: Record<ContentNoteId, ContentNote> = {
   },
   control: {
     id: "control",
-    label: "controlling behaviour",
+    label: "controlling behavior",
     detail:
-      "This scene includes possessive, controlling or coercive behaviour in a relationship.",
+      "This scene includes possessive, controlling or coercive behavior in a relationship.",
   },
   // Added 2026-08-05 for the farmhouse confrontation. Both are SEVERE, and
   // both are deliberately specific: "physical violence" is true of that scene
@@ -89,6 +90,27 @@ export const CONTENT_NOTES: Record<ContentNoteId, ContentNote> = {
     detail:
       "This scene shows a character having a prolonged panic attack, in real time.",
   },
+  // Added 2026-09-02 for the farm fight, on the same argument that produced
+  // `strangling`: "physical violence" is true of that scene and tells somebody
+  // almost nothing about what is in it. What is in it is a woman stepping
+  // between two men, taking a punch that was not aimed at her, going down on
+  // her head, and losing consciousness with her face bleeding on both sides.
+  // Somebody who has been knocked out, or who has watched it happen, is owed
+  // the actual words before playback rather than a category that could equally
+  // mean two men shoving each other in a barn.
+  //
+  // SEVERE, and this one is genuinely arguable — the two existing severe notes
+  // are both intimate-partner violence and this is an accident inside somebody
+  // else's fight. It is raised anyway because the last minute of the scene is
+  // held on her injuries in close-up, and because the note has to carry the
+  // preview too. Melissa's to downgrade.
+  "knocked-out": {
+    id: "knocked-out",
+    label: "a woman knocked unconscious",
+    detail:
+      "A character is struck in the face during a fight she is trying to stop, falls, and loses consciousness. Her face is bleeding, and the scene stays with her.",
+    severe: true,
+  },
 };
 
 export function getContentNotes(ids: readonly ContentNoteId[] = []): ContentNote[] {
@@ -100,7 +122,7 @@ export function hasSevereNote(ids: readonly ContentNoteId[] = []): boolean {
   return getContentNotes(ids).some((n) => n.severe);
 }
 
-/** "physical violence" / "physical violence and controlling behaviour". */
+/** "physical violence" / "physical violence and controlling behavior". */
 export function joinNoteLabels(ids: readonly ContentNoteId[] = []): string {
   const labels = getContentNotes(ids).map((n) => n.label);
   if (labels.length === 0) return "";

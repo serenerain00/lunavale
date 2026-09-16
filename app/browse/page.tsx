@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { isMember } from "@/lib/access/entitlement";
 import { CatalogCard } from "@/components/browse/CatalogCard";
 import { FilterBar } from "@/components/browse/FilterBar";
 import {
@@ -23,6 +22,7 @@ import {
   type RawParams,
 } from "@/lib/content/catalog";
 import { getFeeling, getPlace } from "@/lib/content/taxonomy";
+import { WORLD_ENABLED } from "@/lib/content/world";
 
 interface BrowsePageProps {
   searchParams: Promise<RawParams>;
@@ -47,7 +47,7 @@ export async function generateMetadata({
 }
 
 export default async function BrowsePage({ searchParams }: BrowsePageProps) {
-  const [member, params] = await Promise.all([isMember(), searchParams]);
+  const params = await searchParams;
   const query = parseQuery(params);
   const filtering = isActive(query);
   const results = filterCatalog(query);
@@ -59,7 +59,7 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-8 pt-12 sm:pt-16">
@@ -93,10 +93,11 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
                 </span>
               </h2>
 
-              {focusedPlace?.environmentSlug && (
+              {/* Off while the world is unfinished — WORLD_ENABLED. */}
+              {WORLD_ENABLED && focusedPlace?.environmentSlug && (
                 <Link
                   href={`/world/${focusedPlace.environmentSlug}`}
-                  className="rounded-full border border-hairline px-5 py-2 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
+                  className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 py-2 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber sm:min-h-0"
                 >
                   Step inside {focusedPlace.label} →
                 </Link>
@@ -108,7 +109,7 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
             ) : (
               <Reveal className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {results.map((item) => (
-                  <CatalogCard key={item.id} item={item} unlocked={member} />
+                  <CatalogCard key={item.id} item={item} />
                 ))}
               </Reveal>
             )}
@@ -121,7 +122,6 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
               <>
                 <StillsRail
                   items={catalog.filter((item) => item.kind === "gallery")}
-                  member={member}
                 />
                 {shelves().map((shelf, index, all) => (
                 <Shelf
@@ -132,7 +132,6 @@ export default async function BrowsePage({ searchParams }: BrowsePageProps) {
                   blurb={shelf.blurb}
                   href={queryHref({ feelings: [shelf.feelingId], places: [] })}
                   items={shelf.items}
-                  member={member}
                 />
                 ))}
               </>
@@ -159,7 +158,6 @@ function Shelf({
   blurb,
   href,
   items,
-  member,
 }: {
   index: number;
   total: number;
@@ -167,7 +165,6 @@ function Shelf({
   blurb: string;
   href: string;
   items: CatalogItem[];
-  member: boolean;
 }) {
   const headingId = `shelf-${heading.toLowerCase()}`;
   // A shelf that already shows everything it has needs no door at the end and
@@ -201,7 +198,7 @@ function Shelf({
             href={href}
             className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
           >
-            Show all {items.length}
+            Show all
           </Link>
         )}
       </div>
@@ -212,14 +209,13 @@ function Shelf({
             <RailItem key={item.id}>
               <CatalogCard
                 item={item}
-                unlocked={member}
                 sizes={RAIL_ITEM_SIZES}
               />
             </RailItem>
           ))}
           {!complete && (
             <RailItem>
-              <ShelfEndCap heading={heading} href={href} count={items.length} />
+              <ShelfEndCap heading={heading} href={href} />
             </RailItem>
           )}
         </Rail>
@@ -237,11 +233,9 @@ function Shelf({
 function ShelfEndCap({
   heading,
   href,
-  count,
 }: {
   heading: string;
   href: string;
-  count: number;
 }) {
   return (
     <Link
@@ -249,9 +243,8 @@ function ShelfEndCap({
       data-reveal-item
       className="group flex h-full min-h-56 flex-col items-start justify-end gap-2 rounded-lg border border-dashed border-hairline bg-charcoal/40 p-5 transition-colors duration-(--duration-standard) hover:border-amber/50 hover:bg-charcoal/70"
     >
-      <span className="font-display text-3xl font-light tabular-nums text-amber/80 transition-colors duration-(--duration-quick) group-hover:text-amber">
-        {count}
-      </span>
+      {/* A big amber count used to sit here. Removed 2026-09-16 — see the
+          note on app/membership/page.tsx. */}
       <span className="font-display text-lg leading-tight text-ivory">
         Everything in {heading}
       </span>
@@ -276,13 +269,7 @@ function ShelfEndCap({
  * across the emotion shelves where a visitor has to already be hunting to find
  * them. Same rail affordances as the shelves, so it reads as part of the set.
  */
-function StillsRail({
-  items,
-  member,
-}: {
-  items: CatalogItem[];
-  member: boolean;
-}) {
+function StillsRail({ items }: { items: CatalogItem[] }) {
   if (items.length === 0) return null;
 
   return (
@@ -308,7 +295,7 @@ function StillsRail({
           href="/gallery"
           className="inline-flex min-h-11 shrink-0 items-center rounded-full border border-hairline px-5 text-sm text-stone transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
         >
-          All {items.length} galleries
+          All galleries
         </Link>
       </div>
 
@@ -318,7 +305,6 @@ function StillsRail({
             <RailItem key={item.id}>
               <CatalogCard
                 item={item}
-                unlocked={member}
                 sizes={RAIL_ITEM_SIZES}
               />
             </RailItem>

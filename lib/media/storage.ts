@@ -63,6 +63,21 @@ export function takePosterBlobPathFor(scene: string, slug: string): string {
   return `takes/${scene}/${slug}.jpg`;
 }
 
+/**
+ * Poster for an EXPLICIT clip. On disk under `clips-private/<id>.jpg`, in
+ * PRIVATE Blob under `clips/<id>.jpg`, and reachable only through the gated
+ * /api/clip-poster route.
+ *
+ * WHY THIS IS NOT IN /public LIKE EVERY OTHER POSTER. lib/content/posts.ts
+ * says an explicit clip's poster "is withheld on the public grid", and until
+ * 2026-09-11 that was implemented as a CSS blur over a file anybody could
+ * fetch directly — the path was in the page source. A blur is a picture of a
+ * gate. This is the gate.
+ */
+export function clipPosterBlobPathFor(id: string): string {
+  return `clips/${id}.jpg`;
+}
+
 export function blobConfigured(): boolean {
   return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 }

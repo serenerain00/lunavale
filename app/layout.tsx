@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ViewerProvider } from "@/components/access/Viewer";
+import { ClerkViewerSync } from "@/components/access/ClerkViewerSync";
 import { authConfigured } from "@/lib/billing/provider";
 import { Caveat, Fraunces, Inter } from "next/font/google";
 import "./globals.css";
@@ -91,7 +93,26 @@ export default function RootLayout({
       className={`${fraunces.variable} ${inter.variable} ${caveat.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-void text-ivory">
-        {children}
+        {/*
+          Wraps everything so a statically cached page can still tell a member
+          from a stranger. It asks /api/me once after hydration and swaps the
+          handful of labels and links that differ — see components/access/Viewer.tsx
+          for why the alternative (reading the cookie during render) made every
+          page uncacheable and cost $118 in August 2026.
+
+          This provider decides what buttons SAY. It never decides what anyone
+          RECEIVES; that stays server-side in /api/stream and canWatch().
+        */}
+        <ViewerProvider>
+          {/*
+            Inside the provider so it can refresh it, and rendered only where
+            Clerk exists so useAuth() has a ClerkProvider above it. Without
+            this, signing in leaves the header saying "Sign in" until the
+            visitor reloads by hand — see the component for the whole story.
+          */}
+          {authConfigured() && <ClerkViewerSync />}
+          {children}
+        </ViewerProvider>
 
         {/*
           Microsoft Clarity — traffic + session analytics. Production only, so

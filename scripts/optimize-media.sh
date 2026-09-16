@@ -12,9 +12,10 @@
 #   scripts/optimize-media.sh cover   <event-id> NN  # make gallery card cover from still NN
 #   scripts/optimize-media.sh poster  <slug>         # frame from stories/<slug>.mp4 -> public/posters
 #   scripts/optimize-media.sh video   <slug>         # stories/<slug>.mp4 -> <slug>.proxy.mp4
-#   scripts/optimize-media.sh import  <slug> <src> [at] [end] # cut -> proxy + poster
-#                                                     # [at]=poster seconds, [end]=trim trailing black
-#   scripts/optimize-media.sh vertical <slug> <src> [at] # same, for 9:16 portrait cuts
+#   scripts/optimize-media.sh import  <slug> <src> [at] [end] [fade] # cut -> proxy + poster
+#                                                     # [at]=poster seconds, [end]=trim trailing black,
+#                                                     # [fade]=seconds of fade to black + sound. "-" = default
+#   scripts/optimize-media.sh vertical <slug> <src> [at] [end] # same, for 9:16 portrait cuts
 #   scripts/optimize-media.sh proxy-only <slug> <src> # proxy, NO poster (members' cut)
 #
 # Requires ffmpeg (brew install ffmpeg).
@@ -38,6 +39,11 @@ PROXY_CRF=23          # x264 quality; lower = larger file
 
 die() { echo "error: $*" >&2; exit 1; }
 need_ffmpeg() { command -v ffmpeg >/dev/null || die "ffmpeg not found (brew install ffmpeg)"; }
+
+# Optional positional arguments are passed as "-" when a caller wants the
+# default but needs to fill the slot so a LATER argument lands in the right
+# place. Returns $2 (the default) for "-" or empty, and $1 otherwise.
+unset_dash() { if [ -z "$1" ] || [ "$1" = "-" ]; then printf '%s' "$2"; else printf '%s' "$1"; fi; }
 
 cmd="${1:-}"; shift || true
 need_ffmpeg
@@ -160,24 +166,46 @@ case "$cmd" in
     # Everything downstream keys off <slug>, so the proxy lands in stories/
     # root under the standard name and no route or content field needs to know
     # the cut came from a subfolder.
-    slug="${1:?usage: optimize-media.sh import <slug> <source> [poster-seconds] [end-seconds]}"
-    src="${2:?usage: optimize-media.sh import <slug> <source> [poster-seconds] [end-seconds]}"
-    # A few seconds in clears any fade-up, but some cuts open on a flash-
-    # forward or a cutaway that misrepresents the scene on a card. Override
-    # per scene rather than shipping a poster that promises the wrong thing.
-    at="${3:-3}"
+    slug="${1:?usage: optimize-media.sh import <slug> <source> [at] [end] [fade]}"
+    src="${2:?usage: optimize-media.sh import <slug> <source> [at] [end] [fade]}"
+    # Every optional argument below accepts "-" for "not set", so a later one
+    # can be given without inventing a value for an earlier one. import-cuts.sh
+    # always passes all four.
+    at="$(unset_dash "${3:-}" 3)"
     # Where the PICTURE ends, when the delivered file runs on past it. Timeline
     # exports arrive with seconds of trailing black often enough to be worth a
     # switch: left in, it pads durationSeconds with time nobody is watching and
     # leaves the player sitting on an empty frame at the end of the scene.
     # Measure it with `ffmpeg -vf blackdetect` rather than by eye, and record
     # the number in scripts/import-cuts.sh so the trim is reviewable.
-    end="${4:-}"
+    end="$(unset_dash "${4:-}" "")"
+    # Seconds of fade to black, with the sound going down on the same curve.
+    #
+    # Applied to the DERIVED copy, never to the master — the master stays the
+    # thing Melissa exported, and this is reversible by clearing the field and
+    # re-running. It belongs here rather than in the timeline because it is a
+    # property of how the scene ENDS on the site: several cuts stop dead on a
+    # held frame, which reads as the file running out rather than the scene
+    # finishing.
+    fade="$(unset_dash "${5:-}" "")"
     [ -f "$src" ] || die "no source at $src"
+
+    vf="scale=-2:$PROXY_HEIGHT"
+    af=""
+    if [ -n "$fade" ]; then
+      # Fade from (runtime - fade) so it lands exactly on the last frame. Uses
+      # `end` when the cut is trimmed, and the source duration when it is not.
+      total="${end:-$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src")}"
+      st=$(awk -v t="$total" -v f="$fade" 'BEGIN { printf "%.3f", t - f }')
+      awk -v s="$st" 'BEGIN { exit (s > 0) ? 0 : 1 }' \
+        || die "fade of ${fade}s is longer than the ${total}s cut"
+      vf="$vf,fade=t=out:st=$st:d=$fade"
+      af="afade=t=out:st=$st:d=$fade"
+    fi
 
     out="stories/$slug.proxy.mp4"
     ffmpeg -y -loglevel error -i "$src" ${end:+-t "$end"} \
-      -vf "scale=-2:$PROXY_HEIGHT" \
+      -vf "$vf" ${af:+-af "$af"} \
       -c:v libx264 -preset medium -crf "$PROXY_CRF" -pix_fmt yuv420p \
       -c:a aac -b:a 128k -movflags +faststart \
       "$out"
@@ -203,18 +231,24 @@ case "$cmd" in
     # served ungated and permanently, so generating a card frame from an
     # explicit cut would publish exactly the thing membership is meant to
     # gate. These cuts are displayed using the public cut's poster.
-    slug="${1:?usage: optimize-media.sh proxy-only <slug> <source>}"
-    src="${2:?usage: optimize-media.sh proxy-only <slug> <source>}"
+    slug="${1:?usage: optimize-media.sh proxy-only <slug> <source> [end]}"
+    src="${2:?usage: optimize-media.sh proxy-only <slug> <source> [end]}"
+    # Where the picture ends, same switch and same reason as `import` above:
+    # timeline exports arrive with seconds of trailing black often enough to be
+    # worth one. Added 2026-09-14 for josh-luna-pool-explicit, which fades out
+    # at 7:23 and then runs four more seconds of black.
+    end="$(unset_dash "${3:-}" "")"
     [ -f "$src" ] || die "no source at $src"
 
     out="stories/$slug.proxy.mp4"
     ffmpeg -y -loglevel error -i "$src" \
+      ${end:+-t "$end"} \
       -vf "scale=-2:$PROXY_HEIGHT" \
       -c:v libx264 -preset medium -crf "$PROXY_CRF" -pix_fmt yuv420p \
       -c:a aac -b:a 128k -movflags +faststart \
       "$out"
 
-    dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src")
+    dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$out")
     printf '%-34s proxy %-6s poster %-6s durationSeconds: %.0f\n' \
       "$slug" "$(du -h "$out" | cut -f1)" "none" "$dur"
     ;;
@@ -223,31 +257,62 @@ case "$cmd" in
     # Portrait cuts (the Instagram ones). Same idea as `import`, but sized by
     # WIDTH — scaling a 9:16 clip to 720 tall would leave it 405 wide, which is
     # smaller than the phone it was made for.
-    slug="${1:?usage: optimize-media.sh vertical <slug> <source> [poster-seconds]}"
-    src="${2:?usage: optimize-media.sh vertical <slug> <source> [poster-seconds]}"
-    at="${3:-3}"
+    slug="${1:?usage: optimize-media.sh vertical <slug> <source> [poster-seconds] [end]}"
+    src="${2:?usage: optimize-media.sh vertical <slug> <source> [poster-seconds] [end]}"
+    at="$(unset_dash "${3:-}" 3)"
+    # Where the PICTURE ends, same switch and same reasoning as `import` above.
+    # ADDED 2026-09-01: this branch did not have one, and luna-josh-rain arrived
+    # with 6.6s of trailing black (186.4 of a 193.0s export). Without it the
+    # only options were to ship the dead time or to hand-roll an encode beside
+    # the script, and a portrait export is no less likely to have black on the
+    # end than a landscape one. Measure it with `ffmpeg -vf blackdetect`.
+    end="$(unset_dash "${4:-}" "")"
     [ -f "$src" ] || die "no source at $src"
 
     out="stories/$slug.proxy.mp4"
-    ffmpeg -y -loglevel error -i "$src" \
+    ffmpeg -y -loglevel error -i "$src" ${end:+-t "$end"} \
       -vf "scale=$VERTICAL_WIDTH:-2" \
       -c:v libx264 -preset medium -crf "$PROXY_CRF" -pix_fmt yuv420p \
       -c:a aac -b:a 128k -movflags +faststart \
       "$out"
 
-    # Portrait poster, cropped to a true 9:16 so the cards tile evenly.
+    # POSTER SHAPE FOLLOWS THE SOURCE, and only where it has to.
+    #
+    # A PORTRAIT source is still cropped to a true 9:16, exactly as before, so
+    # the cards tile evenly and every existing clip poster is byte-for-byte
+    # what it was. That crop is not cosmetic: most of these sources are near
+    # 9:16 without being it (apartment-window scales to 720x1212), and dropping
+    # the crop would have quietly reshaped every card on the page.
+    #
+    # A source that is NOT portrait keeps its own shape. The square Instagram
+    # cut of the blonde-guy scene is 1320x1256, and the unconditional crop took
+    # a tall slice out of the middle of it and called that the card — the exact
+    # mangling this content kind exists to prevent. Such a clip declares
+    # `aspect` in lib/content/posts.ts and the cards render it.
+    src_w="$(ffprobe -v error -select_streams v:0 -show_entries stream=width \
+      -of csv=p=0 "$src")"
+    src_h="$(ffprobe -v error -select_streams v:0 -show_entries stream=height \
+      -of csv=p=0 "$src")"
+    if [ "$src_h" -gt "$src_w" ]; then
+      poster_vf="scale=$VERTICAL_WIDTH:$VERTICAL_HEIGHT:force_original_aspect_ratio=increase,crop=$VERTICAL_WIDTH:$VERTICAL_HEIGHT"
+    else
+      poster_vf="scale=$VERTICAL_WIDTH:-2"
+    fi
     ffmpeg -y -loglevel error -ss "$at" -i "$src" -frames:v 1 \
-      -vf "scale=$VERTICAL_WIDTH:$VERTICAL_HEIGHT:force_original_aspect_ratio=increase,crop=$VERTICAL_WIDTH:$VERTICAL_HEIGHT" \
+      -vf "$poster_vf" \
       -q:v "$STILL_Q" "public/posters/$slug.jpg"
 
-    dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src")
+    # Report the PROXY's duration, not the source's. Trimmed exports made this
+    # lie: luna-josh-rain printed 193 while the file it had just written was
+    # 186.4, and that number is copied straight into clips.ts.
+    dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$out")
     printf '%-26s proxy %-6s poster %-6s durationSeconds: %.0f\n' \
       "$slug" "$(du -h "$out" | cut -f1)" \
       "$(du -h "public/posters/$slug.jpg" | cut -f1)" "$dur"
     ;;
 
   *)
-    sed -n '3,20p' "$0"
+    sed -n '3,21p' "$0"
     exit 1
     ;;
 esac

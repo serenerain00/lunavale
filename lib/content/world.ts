@@ -10,7 +10,7 @@
  * Each Room has an optional `scan` slot. While it's undefined, the room renders
  * as tinted placeholder geometry. Drop a photogrammetry GLB into the slot (see
  * docs/world/SCAN_CAPTURE.md) and the real space replaces the placeholder with
- * no other code changes. Coordinates are scene metres, origin at room centre.
+ * no other code changes. Coordinates are scene meters, origin at room center.
  */
 
 import type { AccessLevel } from "@/lib/content/videos";
@@ -62,6 +62,29 @@ export interface WorldObject {
   placeholder: string;
   access: AccessLevel;
 }
+
+/**
+ * THE WORLD IS OFF THE SITE. Melissa, 2026-09-15: "remove everything related to
+ * the 3d world. we need to work on it until its done."
+ *
+ * NOTHING HERE IS DELETED, AND THAT IS THE POINT. The rooms, the objects, the
+ * panorama slots, the components and the capture scripts are all untouched —
+ * the work continues, it just does not have an audience while it is half
+ * built. Nineteen of the rooms below are still placeholder geometry with a
+ * notice on them saying so, and a visitor meeting that cannot tell
+ * "unfinished" from "bad".
+ *
+ * WHAT THIS FLAG ACTUALLY DOES, all of it reversible by setting it true:
+ *   - /world and /world/[slug] return 404 instead of rendering
+ *   - the sitemap stops listing them
+ *   - every link into the world disappears from the home page, /browse,
+ *     /gallery and /about
+ *   - the membership table stops promising rooms that cannot be walked into
+ *
+ * Turning it back on is this line plus restoring the two membership rows and
+ * the /about entry, which are marked where they were removed.
+ */
+export const WORLD_ENABLED = false;
 
 export interface RoomScan {
   /** Only GLB meshes today; splats can be added later. */
@@ -455,6 +478,22 @@ export const environments: Environment[] = [
               "Left open on the arm of the couch. Members can read what she wrote.",
             access: "premium",
           },
+          {
+            // The mug on the island, and the first hotspot in this room that
+            // opens onto a scene rather than a placeholder. `item: "mug"`
+            // because it is literally what is sitting there on the counter in
+            // the poster frame.
+            id: "the-island",
+            label: "The Kitchen Island",
+            kind: "clip",
+            item: "mug",
+            hint: "He came through",
+            position: [2.4, 0.95, 0.6],
+            videoSlug: "luna-ty-wasntplanningonit",
+            placeholder:
+              "Where she writes in the afternoons, with the lake in the whole of the window. He came through one day and said he was going out, and for the first time in twenty years she asked him where.",
+            access: "free",
+          },
         ],
       },
       {
@@ -470,7 +509,7 @@ export const environments: Environment[] = [
           {
             // One object for one scene, even though two edits exist behind it.
             // The world never advertises the members' cut as a separate thing
-            // to find — /watch decides what plays. Access stays "free" because
+            // to find — /clips decides what plays. Access stays "free" because
             // the public cut is: a locked object here would misrepresent what
             // clicking it does.
             id: "the-morning",
@@ -838,7 +877,7 @@ export const environments: Environment[] = [
         id: "the-barn",
         name: "The Barn",
         description:
-          "Josh and Tyson at the tractor before the day starts. Family, co-workers, distant cousins — and the thing between them nobody names.",
+          "Josh and Tyson at the tractor before the day starts. Family, co-workers, second cousins — and the thing between them nobody names.",
         spawn: [0, 1.6, 3.5],
         dressing: "barn",
         galleryId: "josh-luna-bolt",

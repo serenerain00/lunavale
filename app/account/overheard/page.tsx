@@ -3,8 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { OVERHEARD_ARCHIVED } from "@/lib/content/overheard";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { getMembership } from "@/lib/access/entitlement";
-import { authConfigured } from "@/lib/billing/provider";
+import { isOwner } from "@/lib/access/owner";
 import { allPostsForModeration } from "@/lib/db/overheard";
 import { toggleHidden } from "./actions";
 
@@ -29,18 +28,15 @@ export const dynamic = "force-dynamic";
 export default async function ModeratePage() {
   if (OVERHEARD_ARCHIVED) notFound();
 
-  if (!authConfigured() || !(await isOwner())) notFound();
+  if (!(await isOwner())) notFound();
 
-  const [{ active: member }, posts] = await Promise.all([
-    getMembership(),
-    allPostsForModeration(),
-  ]);
+  const posts = await allPostsForModeration();
 
   const visible = posts.filter((p) => !p.hidden).length;
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-8 pt-12 sm:pt-16">
@@ -125,14 +121,3 @@ export default async function ModeratePage() {
   );
 }
 
-/**
- * Only Melissa. Gated on an explicit env var rather than "is a member", because
- * every paying member is a member and none of them should see this.
- */
-async function isOwner(): Promise<boolean> {
-  const owner = process.env.OWNER_USER_ID;
-  if (!owner) return false;
-  const { auth } = await import("@clerk/nextjs/server");
-  const { userId } = await auth();
-  return Boolean(userId && userId === owner);
-}

@@ -55,18 +55,41 @@ it is the part that goes stale.
 project `xr14rpnqlh`). Heatmaps and session replay. No funnel, no cohort
 retention, no revenue reporting. See *The Measurement Gap* below.
 
-**Numbers** — re-fill these monthly. Last read **2026-07-28**, site live ~1 week:
+**Numbers** — re-fill these monthly.
+
+Last read **2026-08-26**, site live ~7 weeks:
 
 | | | |
 | --- | --- | --- |
-| Paying members | **0** | Stripe |
-| Unique visitors | **85** (91 sessions) | Clarity, 07/08–07/28 window |
-| Visitor → member conversion | **not yet measurable** | see below |
-| Monthly churn | n/a — no members | Stripe |
+| Paying members | **1** | Stripe |
+| Comped members | 1 (permanent) | Stripe |
+| On the list | **0** — capture shipped 2026-08-26 | `/admin` → The list |
+| Unique visitors | **not re-read since July** | Clarity |
+| Visitor → member conversion | **still not measurable** | see below |
+| Monthly churn | n/a — one member | Stripe |
 
-Engagement baseline, same window: 2.08 pages/session, 76% scroll depth, 1.7 min
-active of 2.1 min total, 5.5% returning. Friction signals: 7.7% dead clicks (7
-sessions), 1.1% rage clicks (1), 0% excessive scrolling.
+Previous read, **2026-07-28**, site live ~1 week: 0 paying members, 85 unique
+visitors (91 sessions), Clarity 07/08–07/28. Engagement that window: 2.08
+pages/session, 76% scroll depth, 1.7 min active of 2.1 min total, 5.5%
+returning. Friction: 7.7% dead clicks (7 sessions), 1.1% rage clicks (1), 0%
+excessive scrolling.
+
+**The visitor number is the one that matters and it is a month stale.** Read
+Clarity for the 07/28–08/26 window and fill it in before acting on anything
+below — every recommendation in this document branches on whether the funnel is
+starved or leaky, and that question cannot be answered from a July number.
+
+**THE LIST IS NOW THE WEEKLY NUMBER.** Until 2026-08-26 there was no way to
+collect an address, which meant the only two outcomes for a visitor were "pays
+eight dollars today" and "gone forever". Most people who like this are neither.
+The capture lives at the end of the survey and under a scene once it has
+finished playing, and the count is on `/admin`.
+
+Watch it weekly instead of watching conversion, and for a concrete reason:
+conversion is unreadable below ~500 visitors/month (below), so it cannot tell
+you whether a week went well. The list can. It also compounds — an address
+collected in September can be sold to in December, which is the only line in
+this document that is true of nothing else on the site.
 
 ### What these numbers mean
 

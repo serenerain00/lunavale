@@ -4,11 +4,12 @@ import { notFound } from "next/navigation";
 import { JournalPaper } from "@/components/journal/JournalPaper";
 import { ContentNotice } from "@/components/ui/ContentNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { canWatch, isMember } from "@/lib/access/entitlement";
+import { canWatch } from "@/lib/access/entitlement";
 import { getEntry, journal, opening } from "@/lib/content/journal";
 import { getPerson, getPlace } from "@/lib/content/taxonomy";
 import { getVideo } from "@/lib/content/videos";
 import { pageMetadata } from "@/lib/seo/metadata";
+import { getTier } from "@/lib/content/membership";
 
 interface EntryPageProps {
   params: Promise<{ id: string }>;
@@ -47,10 +48,7 @@ export default async function JournalEntryPage({ params }: EntryPageProps) {
   const entry = getEntry(id);
   if (!entry) notFound();
 
-  const [allowed, member] = await Promise.all([
-    canWatch({ access: entry.access }),
-    isMember(),
-  ]);
+  const allowed = await canWatch({ access: entry.access });
 
   const place = getPlace(entry.place);
   const scene = entry.sceneSlug ? getVideo(entry.sceneSlug) : undefined;
@@ -69,7 +67,7 @@ export default async function JournalEntryPage({ params }: EntryPageProps) {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-24 sm:px-8">
         <nav className="py-5 text-sm">
@@ -108,7 +106,11 @@ export default async function JournalEntryPage({ params }: EntryPageProps) {
           </h1>
         </header>
 
-        <ContentNotice notes={entry.notes} className="mx-auto mb-6 max-w-2xl" />
+        <ContentNotice
+          notes={entry.notes}
+          action="read"
+          className="mx-auto mb-6 max-w-2xl"
+        />
 
         {allowed ? (
           <JournalPaper entry={entry} tilt={tilt} />
@@ -120,7 +122,7 @@ export default async function JournalEntryPage({ params }: EntryPageProps) {
           <p className="mt-10 text-center text-sm text-stone">
             Written the same night as{" "}
             <Link
-              href={`/watch/${scene.slug}`}
+              href={`/clips/${scene.slug}`}
               className="text-amber underline decoration-hairline underline-offset-4 transition-colors duration-(--duration-quick) hover:text-amber-soft"
             >
               {scene.title}
@@ -214,7 +216,7 @@ function LockedEntry({
             href="/membership"
             className="inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
           >
-            See what membership opens
+            {getTier("vault")!.cta}
           </Link>
         </div>
       </div>

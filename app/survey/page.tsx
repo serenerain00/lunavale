@@ -3,14 +3,13 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { SurveyForm } from "@/components/survey/SurveyForm";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { getMembership } from "@/lib/access/entitlement";
 import { ANSWERED_COOKIE, sceneOptions } from "@/lib/content/survey";
 import { hasAnswered } from "@/lib/db/survey";
 
 export const metadata: Metadata = {
   title: "Tell her what you think",
   description:
-    "Six questions about the scenes so far — what's landing, and whether you'd watch this as a series or a film. No account needed.",
+    "Six questions about the clips so far — what's landing, what isn't, and how you'd rather watch season one. No account needed.",
   alternates: { canonical: "/survey" },
 };
 
@@ -30,15 +29,12 @@ export const dynamic = "force-dynamic";
  * worse answer from a person being polite.
  */
 export default async function SurveyPage() {
-  const [{ active: member }, jar] = await Promise.all([
-    getMembership(),
-    cookies(),
-  ]);
+  const jar = await cookies();
   const answered = await hasAnswered(jar.get(ANSWERED_COOKIE)?.value ?? "");
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-2 pt-12 sm:pt-16">
@@ -55,9 +51,10 @@ export default async function SurveyPage() {
             email.
           </p>
           <p className="mt-3 max-w-xl text-base leading-relaxed text-stone">
-            There&rsquo;s also a real question in here about whether this should
-            be a series or a film, and whether you&rsquo;d watch it somewhere
-            like Netflix. That one is not idle curiosity.
+            There&rsquo;s a real question in here about how you&rsquo;d rather
+            get season one &mdash; weekly, all at once, or the way it has been
+            going up so far &mdash; and whether you&rsquo;d watch it somewhere
+            like Netflix. Neither one is idle curiosity.
           </p>
         </header>
 
@@ -83,7 +80,7 @@ export default async function SurveyPage() {
                 href="/browse"
                 className="inline-flex min-h-11 items-center rounded-full border border-hairline px-6 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
               >
-                Back to the scenes
+                Back to the clips
               </Link>
             </div>
           </div>

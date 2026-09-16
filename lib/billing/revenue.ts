@@ -121,9 +121,9 @@ export async function revenueSummary(): Promise<RevenueSummary | null> {
 }
 
 /**
- * List-price value of a subscription, normalised to one month.
+ * List-price value of a subscription, normalized to one month.
  *
- * Normalising matters because MRR has to compare like with like: an annual
+ * Normalizing matters because MRR has to compare like with like: an annual
  * plan is not twelve times a monthly one for the month you are looking at.
  * Metered prices have no unit_amount and no fixed monthly value, so they
  * contribute nothing here rather than a guess.

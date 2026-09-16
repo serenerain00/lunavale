@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import Link from "next/link";
 import { submitSurvey, type SurveyResult } from "@/app/survey/actions";
+import { FollowForm } from "@/components/follow/FollowForm";
 import {
   MAX_COMMENT,
   questions,
@@ -19,7 +20,7 @@ import {
  *
  * NATIVE RADIOS AND CHECKBOXES under the styling, not divs with click
  * handlers: keyboard support, screen readers, form semantics and the browser's
- * own required-field behaviour all come free and all of them are things a
+ * own required-field behavior all come free and all of them are things a
  * bespoke control gets wrong.
  */
 export function SurveyForm({
@@ -32,11 +33,16 @@ export function SurveyForm({
   /**
    * Which questions to show, by id. Omitted means all of them.
    *
-   * The drawer on the home page passes the three REQUIRED ones, which is what
-   * makes it a real submission rather than a teaser: those three are exactly
-   * the fields submitSurvey insists on, so a drawer answer is a complete row
-   * and lands in the same table as a long-form one. There is no second code
-   * path and no partial-response state to reason about.
+   * NOBODY PASSES THIS ANY MORE (2026-09-09). The drawer on the home page used
+   * to pass the three required ids, on the argument that a shorter form gets
+   * finished; Melissa's call, once the survey turned out to be the most-used
+   * thing on the site, was to put all six in front of the people who are
+   * already answering. The option stays because it costs one line and it is
+   * how you would ship a short form again without a second component.
+   *
+   * Whatever subset is shown, a submission is a COMPLETE row: submitSurvey
+   * insists on the three required fields and the rest are genuinely optional,
+   * so there is no partial-response state and no second code path.
    */
   questionIds?: string[];
   /** Tighter spacing and a shorter thank-you, for the drawer. */
@@ -68,14 +74,35 @@ export function SurveyForm({
         <p className="mt-3 max-w-lg leading-relaxed text-stone">
           It goes straight to Melissa, and it genuinely moves things — at this
           size, a few dozen people saying the same thing is the difference
-          between a scene getting made and not.
+          between a clip getting made and not.
         </p>
+
+        {/* THE ADDRESS IS ASKED FOR HERE, and this is the best moment on the
+            site to ask. Somebody who has just said what they think of it, and
+            whether they would watch it on a platform, has an actual stake in
+            what happens next — and the honest answer to "what happens next" is
+            that it takes months and they will not be here to see it unless
+            somebody tells them.
+
+            AFTER the thank-you, never before: the survey is not a toll gate
+            with an email behind it, and making the address feel like the price
+            of being heard would poison both. */}
+        <div className="mt-6 border-t border-hairline pt-6">
+          <FollowForm
+            source="survey"
+            compact
+            label="Want to know what happens to it?"
+            note="An email when a new clip or a page of her journal goes up. Nothing else, and you can stop any time."
+            done="You're on the list. You'll hear when the next one lands."
+          />
+        </div>
+
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/browse"
             className="inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
           >
-            Back to the scenes
+            Back to the clips
           </Link>
           <Link
             href="/journal"

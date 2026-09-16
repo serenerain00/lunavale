@@ -54,7 +54,7 @@ export interface Membership {
  * falls back to the preview cookie, so a half-configured deploy keeps working
  * instead of locking everybody out of a live site.
  *
- * MEMOISED PER REQUEST with React `cache()`, which is a real cost fix rather
+ * MEMOIZED PER REQUEST with React `cache()`, which is a real cost fix rather
  * than tidiness. Pages routinely ask this question more than once while
  * rendering — `Promise.all([canWatch(video), isMember()])` is the standard
  * shape, and every gated page uses it — and each call was reaching Neon for

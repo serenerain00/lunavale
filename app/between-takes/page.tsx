@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/components/ui/SiteHeader";
+import { getTier } from "@/lib/content/membership";
 import { getMembership } from "@/lib/access/entitlement";
 import {
   notebookPages,
@@ -42,13 +43,12 @@ export default async function BetweenTakesPage() {
   const { active: member } = await getMembership();
 
   const pages = notebookPages();
-  const open = pages.filter(pageIsOpen).length;
   const days = shootingDaysSoFar();
   const first = pages[0];
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="flex-1 px-5 pb-24 sm:px-8">
         {/* ---------------------------------------------------------- cover */}
@@ -66,10 +66,10 @@ export default async function BetweenTakesPage() {
             worked out the others were reading it, to each other.
           </p>
           <p className="mt-4 max-w-2xl leading-relaxed text-stone-dim">
-            It runs in the order it was written, and it is still being written:
-            they are filming now, so pages keep arriving. {days} shooting days
-            in, {open} of the {pages.length} are open to everyone
-            {member ? " — you have the rest." : "; the rest come with membership."}
+            It runs in the order it was written, and it is still being
+            written: they are filming now, so pages keep arriving. {days}{" "}
+            shooting days in, and some of it is open to everyone
+            {member ? " — you have the rest." : "; the rest comes with membership."}
           </p>
 
           {first && (
@@ -85,7 +85,7 @@ export default async function BetweenTakesPage() {
                   href="/membership"
                   className="inline-flex min-h-11 items-center rounded-full border border-hairline px-6 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
                 >
-                  What membership opens
+                  {getTier("vault")!.cta}
                 </Link>
               )}
             </div>

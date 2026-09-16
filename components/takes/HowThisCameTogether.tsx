@@ -20,11 +20,12 @@
  * runner-up), so every take is unstarred and the default line would assert
  * that 250 clips were all rejected. They were not; we just cannot tell which.
  *
- * Renders nothing when a scene has no takes, so /watch doesn't need to guard.
+ * Renders nothing when a scene has no takes, so /clips doesn't need to guard.
  */
 
 import Link from "next/link";
 import { TakeReel } from "@/components/takes/TakeReel";
+import { getTier } from "@/lib/content/membership";
 import {
   takeCount,
   takesForScene,
@@ -118,7 +119,7 @@ export async function HowThisCameTogether({
             href="/membership"
             className="text-amber underline-offset-4 transition-colors duration-(--duration-quick) hover:underline"
           >
-            What membership opens
+            {getTier("vault")!.cta}
           </Link>
         </div>
       )}

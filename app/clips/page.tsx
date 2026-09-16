@@ -1,126 +1,150 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { Reveal } from "@/components/motion/Reveal";
-import { RatingBadge } from "@/components/ui/RatingBadge";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { getMembership } from "@/lib/access/entitlement";
-import { clipAccess, clips } from "@/lib/content/clips";
+import { ClipCard } from "@/components/shelf/ClipCard";
+import { PAGE } from "@/components/ui/layout";
+import { inStoryOrder, inReleaseOrder } from "@/lib/content/chronology";
 import { formatDuration } from "@/lib/content/videos";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = pageMetadata({
   title: "Clips",
   description:
-    "The vertical cuts from Luna's world — the short pieces, collected in one place.",
+    "Every clip from Between Us, in the order it happens. Start at the beginning and watch it through.",
   path: "/clips",
 });
 
-export default async function ClipsPage() {
-  const { active: member } = await getMembership();
+export const revalidate = 3600;
+
+/**
+ * The clip library.
+ *
+ * THIS PAGE DID NOT EXIST UNTIL 2026-09-16. The clips lived at /watch/<slug>
+ * with no index at all — the only ways in were the home page rail, the
+ * filter-by-feeling catalog at /browse, and a link somebody had been sent. So
+ * there was no answer to the most ordinary question a visitor has, which is
+ * "show me all of them, from the start".
+ *
+ * ORDER IS THE POINT, AND IT IS THE DEFAULT. Story order — see
+ * lib/content/chronology.ts, which derives it from the journal rather than
+ * inventing it. Newest-first is one click away because that is the other
+ * thing people look for, but it is not what the page opens on: somebody
+ * arriving at a library of 46 pieces they have never seen is not looking for
+ * the most recent one, they are looking for the first one.
+ *
+ * THE SORT IS A LINK, NOT A CLIENT TOGGLE. `?sort=latest` keeps both views
+ * static, shareable and crawlable, and keeps this page out of the dynamic,
+ * uncacheable category that cost $118 a month the last time the home page fell
+ * into it. No state, no hydration, no flash of the wrong order.
+ *
+ * A GRID RATHER THAN SHELVES, because this is the place you come to see all of
+ * it at once. The home page uses rails; an index that made you scroll 46 cards
+ * sideways would be hiding its own contents.
+ */
+export default async function ClipsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ sort?: string }>;
+}) {
+  const { sort } = await searchParams;
+  const latest = sort === "latest";
+  const clips = latest ? inReleaseOrder() : inStoryOrder();
+
+  // Positions always come from the story, never from the row the card sits in.
+  // In the latest view the numbers jump around, which is correct and useful:
+  // it shows you where a new clip belongs.
+  const positionOf = new Map(inStoryOrder().map((v, i) => [v.slug, i + 1]));
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-24 sm:px-8">
+      <main className={`${PAGE} flex-1 pb-24`}>
         <header className="pb-8 pt-12 sm:pt-16">
           <p className="text-xs uppercase tracking-[0.2em] text-amber">
-            Shot for a phone
+            Between Us
           </p>
+          {/*
+            WAS "The story so far, in order." — Melissa, 2026-09-16: "its not
+            really in order, lets just say a peek into whats coming."
+
+            She is right, and the overclaim was in the noun as much as the
+            adverb. These are moments, not episodes: they do not add up to a
+            continuous story you could watch end to end, so calling them "the
+            story so far" promised something the library does not deliver, and
+            somebody who started at the top and hit a gap would have been
+            right to feel misled.
+
+            The sequence is still real and still useful, so it stays — as an
+            arrangement the page offers, not as a claim that it is complete.
+          */}
           <h1 className="mt-4 max-w-3xl font-display text-3xl font-light leading-[1.15] text-ivory sm:text-5xl">
-            Clips.
+            A peek at what&rsquo;s coming.
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
-            The vertical cuts from Luna&rsquo;s world, kept together here so
-            they don&rsquo;t disappear down someone else&rsquo;s feed. Most are
-            free; a few are part of the membership.
+            These are moments from the series — the ones already shot, arranged
+            the way they happen to Luna rather than the way they went up. Start
+            anywhere. Each one stands on its own, and together they give you a
+            sense of what season one is walking into.
           </p>
         </header>
 
-        {/*
-          Three across on a phone, which is what a vertical grid wants to be —
-          the posters are 9:16, so more columns than that and each one is a
-          strip. No rail here on purpose: a portrait card in a horizontal
-          scroller ends up taller than the viewport on mobile.
-        */}
-        <Reveal className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-          {clips.map((clip) => {
-            // A gated clip a non-member can't open has its poster withheld —
-            // for a sex scene the still frame is exactly the thing not to show
-            // on a public page. Members see it normally.
-            const locked = clipAccess(clip) === "premium" && !member;
+        <div
+          role="group"
+          aria-label="Sort"
+          className="mb-8 inline-flex rounded-full border border-hairline p-1"
+        >
+          <SortLink href="/clips" active={!latest}>
+            In order
+          </SortLink>
+          <SortLink href="/clips?sort=latest" active={latest}>
+            Latest
+          </SortLink>
+        </div>
 
-            return (
-              <Link
-                key={clip.id}
-                href={`/clips/${clip.id}`}
-                data-reveal-item
-                className="group relative block overflow-hidden rounded-lg bg-charcoal ring-1 ring-hairline transition-transform duration-(--duration-standard) ease-(--ease-standard) hover:-translate-y-1 focus-visible:-translate-y-1"
-              >
-                <div className="relative aspect-[9/16]">
-                  <Image
-                    src={clip.poster}
-                    alt=""
-                    fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    className={`object-cover transition-[transform,filter] duration-(--duration-cinematic) ease-(--ease-cinematic) group-hover:scale-[1.04] ${
-                      locked
-                        ? "scale-105 brightness-[0.28] blur-xl"
-                        : "brightness-90 group-hover:brightness-100"
-                    }`}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-void via-void/10 to-transparent" />
-
-                  <div className="absolute left-2.5 top-2.5 flex flex-wrap gap-1.5">
-                    {locked ? (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-void/70 px-2 py-0.5 text-[0.65rem] font-medium text-amber-soft backdrop-blur-sm">
-                        <LockGlyph />
-                        Members
-                      </span>
-                    ) : (
-                      <span className="rounded-full bg-void/70 px-2 py-0.5 text-[0.65rem] font-medium text-stone backdrop-blur-sm">
-                        Free
-                      </span>
-                    )}
-                    <RatingBadge
-                      mature={clip.mature}
-                      explicit={clip.explicit}
-                      variant="pill"
-                    />
-                  </div>
-
-                  <span className="absolute bottom-2.5 right-2.5 rounded bg-void/70 px-1.5 py-0.5 text-[0.65rem] tabular-nums text-stone backdrop-blur-sm">
-                    {formatDuration(clip.durationSeconds)}
-                  </span>
-
-                  <div className="absolute inset-x-0 bottom-0 p-3">
-                    <h2 className="font-display text-base leading-tight text-ivory">
-                      {clip.title}
-                    </h2>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </Reveal>
+        <ul className="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {clips.map((v) => (
+            <li key={v.slug}>
+              <ClipCard
+                href={`/clips/${v.slug}`}
+                title={v.title}
+                poster={v.poster}
+                meta={formatDuration(v.durationSeconds)}
+                position={positionOf.get(v.slug)}
+                premium={v.access === "premium"}
+                mature={v.mature}
+              />
+              <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-stone">
+                {v.synopsis}
+              </p>
+            </li>
+          ))}
+        </ul>
       </main>
     </>
   );
 }
 
-function LockGlyph() {
+function SortLink({
+  href,
+  active,
+  children,
+}: {
+  href: string;
+  active: boolean;
+  children: React.ReactNode;
+}) {
   return (
-    <svg
-      width="9"
-      height="9"
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-      className="shrink-0"
+    <Link
+      href={href}
+      aria-current={active ? "true" : undefined}
+      className={`inline-flex min-h-9 items-center rounded-full px-4 text-sm transition-colors duration-(--duration-quick) ${
+        active
+          ? "bg-ivory text-void"
+          : "text-stone hover:text-amber"
+      }`}
     >
-      <rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" strokeWidth="2.5" />
-      <path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-    </svg>
+      {children}
+    </Link>
   );
 }

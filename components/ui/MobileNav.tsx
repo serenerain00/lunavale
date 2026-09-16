@@ -1,20 +1,23 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SignOut } from "@/components/ui/SignOut";
+import { useViewer } from "@/components/access/Viewer";
+import { useScrollLock } from "@/lib/hooks/useScrollLock";
 
 export interface NavItem {
   href: string;
   label: string;
+  /** Hidden from anyone who is not a member. Resolved on the client — the
+      list is built during a static render, where membership is unknown. */
+  memberOnly?: boolean;
 }
 
 interface MobileNavProps {
   items: NavItem[];
-  signedIn: boolean;
-  /** The signed-in address, so a wrong-account session is visible. May be null. */
-  email: string | null;
   showSignIn: boolean;
 }
 
@@ -26,33 +29,50 @@ interface MobileNavProps {
  * site was unreachable and there was no way to sign out at all. A menu holds
  * however many links there turn out to be, which the old approach could not.
  */
-export function MobileNav({
-  items,
-  signedIn,
-  email,
-  showSignIn,
-}: MobileNavProps) {
+export function MobileNav({ items, showSignIn }: MobileNavProps) {
+  // Who is reading. Null until /api/me answers, which is why every check below
+  // is written so that "unknown" behaves exactly like "signed-out stranger" —
+  // it matches the cached HTML and it fails closed.
+  const viewer = useViewer();
+  const signedIn = Boolean(viewer?.signedIn);
+  const email = viewer?.email ?? null;
+  const visible = items.filter((item) => !item.memberOnly || viewer?.member);
+
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const panelRef = useRef<HTMLDivElement>(null);
 
-  // Escape closes it, and the page behind does not scroll while it is open.
+  // The page behind does not scroll while it is open. Via the ROOT element,
+  // not the body — see lib/hooks/useScrollLock.ts, which is half of the fix
+  // for the menu opening at the top of the page instead of where you are.
+  useScrollLock(open);
+
+  // Escape closes it.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
     document.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
-    };
+    return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // Portalled to <body>, and this is the other half of the fix.
+  //
+  // THE HEADER THIS BUTTON LIVES IN HAS `backdrop-blur-md` ON IT. A
+  // backdrop-filter makes an element the containing block for every
+  // `position: fixed` descendant — the same rule that `transform` and `filter`
+  // follow. So the panel below, which asks to be fixed to the viewport, was
+  // being positioned against the HEADER instead, and went wherever the header
+  // went. Rendering it outside the header is the only real fix; adjusting the
+  // offsets would just be guessing at the header's position from inside it.
+  //
+  // No mounted-guard is needed and none is used. `open` is false on the server
+  // and can only become true from a click, so the branch below is never
+  // evaluated anywhere document.body does not exist.
+
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -64,8 +84,9 @@ export function MobileNav({
         {open ? <CloseGlyph /> : <MenuGlyph />}
       </button>
 
-      {open && (
-        <>
+      {open &&
+        createPortal(
+          <>
           {/* Tap anywhere off the panel to dismiss. */}
           <button
             type="button"
@@ -81,7 +102,7 @@ export function MobileNav({
           >
             <nav aria-label="Site">
               <ul className="divide-y divide-hairline">
-                {items.map((item) => {
+                {visible.map((item) => {
                   const active =
                     pathname === item.href ||
                     pathname.startsWith(`${item.href}/`);
@@ -109,7 +130,7 @@ export function MobileNav({
             {/*
               Sign-in is the only way a returning member gets back to what they
               have paid for, and on a phone this menu is the ONLY place it
-              appears — the header's sign-in link is `hidden md:inline`, and the
+              appears — the header's sign-in link is `hidden lg:inline`, and the
               one prominent button up there says "Read on" and goes to
               /membership. So it gets a real target and the same weight as the
               nav above it. It used to be small muted text at the bottom of the
@@ -146,8 +167,9 @@ export function MobileNav({
               )}
             </div>
           </div>
-        </>
-      )}
+          </>,
+          document.body,
+        )}
     </div>
   );
 }

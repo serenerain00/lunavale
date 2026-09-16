@@ -19,7 +19,7 @@
  * one moment in it.
  */
 
-import { clipAccess, clips, type Clip } from "@/lib/content/clips";
+import { clipAccess, clips, type Clip } from "@/lib/content/posts";
 import { galleries, type StillGallery } from "@/lib/content/gallery";
 import { journal, type JournalEntry } from "@/lib/content/journal";
 import { notes, type SetNote } from "@/lib/content/between-takes";
@@ -82,10 +82,15 @@ export const characters: Character[] = [
     ],
     facts: [
       { label: "Age", value: "38" },
+      // Melissa, 2026-09-01. She and Josh are BOTH Scorpios and Tyson is a
+      // Libra — which is not decoration: two all-or-nothing people in one
+      // house for ten years, and the third man is the one constitutionally
+      // unable to start the fight that would settle it.
+      { label: "Sign", value: "Scorpio" },
       { label: "From", value: "Atlanta, Georgia" },
       { label: "Lives", value: "Denver, Colorado — the lakehouse" },
-      { label: "Work", value: "Models. Her own income, and the only part of her life that was never Josh's" },
-      { label: "Family", value: "Cathy, her mother. Avery, her sister, ten years younger" },
+      { label: "Work", value: "Models, and has since she was eighteen. Her own income, and the only part of her life that was never Josh's" },
+      { label: "Family", value: "Cathy and Tony, forty years married. Avery, her sister, ten years younger" },
       { label: "Josh", value: "Ten years, six months apart, and back again" },
       { label: "Tyson", value: "Twenty years. Best friend, and the thing neither of them says" },
     ],
@@ -113,17 +118,32 @@ export const characters: Character[] = [
     ],
     facts: [
       { label: "Age", value: "38" },
+      // Melissa, 2026-09-01, and it is characterisation rather than trivia:
+      // a Libra between two Scorpios. The man who cannot be in a room with an
+      // argument in it is the reason the argument never happens.
+      { label: "Sign", value: "Libra" },
       { label: "From", value: "Atlanta, Georgia" },
       { label: "Lives", value: "Denver — moved after he retired, for a change of pace" },
-      { label: "Service", value: "Navy SEAL, ten years. Some of it deployed" },
+      // Melissa, 2026-08-30: he was still serving when Luna met Josh. It is
+      // the most load-bearing fact on this card — it means he did not watch
+      // the ten years begin, he was told about them once on a bad line.
+      {
+        label: "Service",
+        value:
+          "Navy SEAL, ten years. Still in when Luna met Josh — he got the beginning of it in a nine-minute phone call",
+      },
       { label: "Work", value: "Several things at once. Contract work on Josh's farm is one of them" },
       { label: "Drives", value: "A black 2020 Porsche Carrera he treats like something on loan" },
-      { label: "Family", value: "Josh's distant cousin — second or third, still being decided" },
+      // SECOND cousins, settled by Melissa 2026-09-04. This card used to
+      // say "second or third, still being decided", which put a production
+      // note on a character page: these people are drawn from real ones and
+      // a fact about them is either known or not stated at all.
+      { label: "Family", value: "Josh's second cousin — and it shows" },
       { label: "Cole", value: "Ten years a SEAL beside him, and the only person he can say it to" },
       { label: "Luna", value: "Twenty years. He was there for all six months she was alone" },
     ],
     details: [
-      "Josh's distant cousin, and helps him on the farm",
+      "Josh's second cousin, and helps him on the farm",
       "Puts the groceries away in the wrong cupboards on purpose",
       "Does not ask how she is — asks what she has eaten, then waits",
       "Started the staring game with her at nineteen, over nothing",
@@ -145,10 +165,13 @@ export const characters: Character[] = [
       "Then he calls. Coffee, then dinner the same night, and it starts again — and once he begins to suspect what Luna and Tyson are to each other, the same intensity that made him magnetic turns into jealousy, then possession, then control.",
     ],
     facts: [
+      // Melissa, 2026-09-01. He and Luna are BOTH Scorpios — ten years of two
+      // people who go all in and never let a thing go.
+      { label: "Sign", value: "Scorpio" },
       { label: "From", value: "Denver, Colorado" },
       { label: "Lives", value: "The farm — where he and Luna spent the ten years" },
       { label: "Work", value: "Owns a shop and a large farm. Work first, always" },
-      { label: "Family", value: "Rick, his father. Tyson, his distant cousin" },
+      { label: "Family", value: "Rick, his father. Tyson, his second cousin" },
       { label: "Luna", value: "Met her in Atlanta on business. Long distance, and then she moved" },
     ],
     details: [
@@ -206,14 +229,16 @@ export const characters: Character[] = [
       "Two thousand miles away, defending a man she has only ever met with the door open.",
     portrait: "/characters/cathy.jpg",
     intro: [
-      "Sixty-five, divorced, and in Atlanta — which is the problem. Her daughter is in Colorado, alone in a lakehouse in the dark, and the only thing Cathy can actually do about that is ring her.",
+      "Sixty-five, and in Atlanta with Tony — which is the problem. Her daughter is in Colorado, alone in a lakehouse in the dark, and the only thing Cathy can actually do about that is call her.",
+      "She and Luna's father have been married forty years. They met in Italy, they fell in love there, and four decades later he still cannot walk past her chair without touching her shoulder. It is the happiest marriage either of her daughters has ever seen up close, and it is quietly the hardest thing in Luna's life — her mother has been loved easily for forty years and has no working picture of what it is to be managed by somebody who loves you.",
       "She is a good mother and she is a pushy one, and those are not in tension. She calls until you answer. She asks the question again. Luna needs a breath before she picks up, the way most daughters do, and there is nothing underneath it — no damage, no old wound, a childhood that was genuinely fine.",
-      "What there is, is a gap. She has known Josh for ten years and never once from inside the room, so when he rings her sounding wrecked she believes him, because he is not lying. She is holding one half of it and asking her daughter to be kinder about the half she can see.",
+      "What there is, is a gap. She has known Josh for ten years and never once from inside the room, so when he calls her sounding wrecked she believes him, because he is not lying. She is holding one half of it and asking her daughter to be kinder about the half she can see.",
     ],
     facts: [
       { label: "Age", value: "65" },
       { label: "Lives", value: "Atlanta, Georgia — two thousand miles from all of it" },
-      { label: "Family", value: "Divorced. Two daughters: Luna, and Avery ten years behind her" },
+      { label: "Married", value: "Forty years to Antonio — Tony. They met in Italy" },
+      { label: "Family", value: "Two daughters: Luna, and Avery ten years behind her" },
       { label: "Tyson", value: "Has known him twenty years. Made the two of them lunches as teenagers" },
       { label: "Josh", value: "Ten years, and never once from inside the room" },
     ],
@@ -222,6 +247,7 @@ export const characters: Character[] = [
       "Was there for Luna the whole time Tyson was deployed",
       "Loves Tyson like a son, and knows exactly whose best friend he is",
       "A shelf of framed photographs of people she cannot get on the phone",
+      "Still tells the Italy story, and still gets one detail wrong on purpose",
       "Two daughters, and she will get one of them to call the other",
     ],
     // Written to Melissa's canon rather than transcribed off the cut — the
@@ -248,7 +274,7 @@ export const characters: Character[] = [
     intro: [
       "Twenty-eight, ten years behind Luna, and close to her for every one of them. Luna wanted a baby sister before there was one, and got her — and until Luna left for Colorado she was the person Avery took everything to first. Less big sister than best friend, and it shows in how alike they are, down to the face.",
       "She is still in Atlanta, where their mother is, three years into a psychiatry residency and on the hours that come with it. So she does not call often. Usually there is a family matter, or their mother has worn her down into it — and Luna is no good at saying anything real down a phone line anyway.",
-      "Which is why the call works when it works. Cathy rings to find out how her daughter is. Avery already knows, because their mother told her and because she would have known regardless. So she doesn't ask. She talks about nothing in particular until Luna is laughing, and then she waits, and lets her get to it herself.",
+      "Which is why the call works when it works. Cathy calls to find out how her daughter is. Avery already knows, because their mother told her and because she would have known regardless. So she doesn't ask. She talks about nothing in particular until Luna is laughing, and then she waits, and lets her get to it herself.",
     ],
     facts: [
       { label: "Age", value: "28" },
@@ -259,7 +285,7 @@ export const characters: Character[] = [
     ],
     details: [
       "Has never once asked Luna how she is",
-      "Third-year psychiatry resident, which is most of why she doesn't ring",
+      "Third-year psychiatry resident, which is most of why she doesn't call",
       "Opened with eleven minutes about a man at her work who microwaves fish",
       "Says okay rather than advice",
       "Has known Tyson as long as she has been alive, and calls him a brother",

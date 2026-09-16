@@ -35,16 +35,32 @@ export default async function SignUpPage({
   const params = await searchParams;
   const redirect = String(params.redirect_url ?? "");
   const buying = redirect.includes("/membership/start");
+  // Arriving from /welcome, having ALREADY PAID. Since 2026-08-27 checkout
+  // runs before sign-up, so this is now the ordinary way a new member reaches
+  // this page — and telling somebody who has just been charged that
+  // "membership is a separate step" would be nonsense.
+  const paid = redirect.includes("/membership/claim");
+  const prefill = String(params.email ?? "");
 
   return (
     <>
-      <SiteHeader member={false} />
+      <SiteHeader />
       <main className="flex flex-1 flex-col items-center px-5 pb-24 pt-16 sm:px-8">
         <h1 className="mb-2 text-center font-display text-3xl font-light text-ivory">
-          {buying ? "One step, then you're in." : "Create an account."}
+          {paid
+            ? "Last thing."
+            : buying
+              ? "One step, then you're in."
+              : "Create an account."}
         </h1>
         <p className="mb-8 max-w-md text-center text-sm leading-relaxed text-stone">
-          {buying ? (
+          {paid ? (
+            <>
+              Your membership is paid for and waiting. This is only so the site
+              knows you when you come back — use the same email you paid with
+              and it attaches itself.
+            </>
+          ) : buying ? (
             <>
               This is where your membership lives, so you can read on any
               device and pick up where you stopped. Payment is the next screen.
@@ -56,7 +72,13 @@ export default async function SignUpPage({
             </>
           )}
         </p>
-        <SignUp />
+        {/* Pre-filled from the Checkout Session, so the address that paid and
+            the address that signs up cannot differ by a typo — which is the
+            one way somebody ends up unable to claim what they bought. Clerk
+            still verifies it; pre-filling saves the typing, not the check. */}
+        <SignUp
+          initialValues={prefill ? { emailAddress: prefill } : undefined}
+        />
       </main>
     </>
   );

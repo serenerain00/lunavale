@@ -49,7 +49,7 @@ export const catalog: CatalogItem[] = [
   ...videos
     // Some videos are watchable but not part of the story catalog — the cast
     // interview, for instance, is the hero, not a scene to shelve under a
-    // feeling. Streaming and /watch still work; it just isn't browsed.
+    // feeling. Streaming and /clips still work; it just isn't browsed.
     .filter((v) => !v.hidden)
     .map(
     (v): CatalogItem => ({
@@ -57,7 +57,7 @@ export const catalog: CatalogItem[] = [
       kind: "scene",
       title: v.title,
       synopsis: v.synopsis,
-      href: `/watch/${v.slug}`,
+      href: `/clips/${v.slug}`,
       poster: v.poster,
       meta: formatDuration(v.durationSeconds),
       access: v.access,
@@ -74,7 +74,8 @@ export const catalog: CatalogItem[] = [
       synopsis: g.description[0] ?? g.subtitle,
       href: `/gallery/${g.id}`,
       poster: g.cover,
-      meta: `${g.count} stills`,
+      // No count — see the note on app/membership/page.tsx.
+      meta: "Stills",
       access: g.access,
       mature: g.mature,
       feelings: [...g.feelings],
@@ -148,7 +149,7 @@ export function isActive(query: CatalogQuery): boolean {
 
 /**
  * Within a facet the selections are OR'd (any of these feelings); across
- * facets they are AND'd (…and in one of these places). That's the behaviour
+ * facets they are AND'd (…and in one of these places). That's the behavior
  * people expect from faceted browsing, and it keeps results from collapsing
  * to zero as soon as a second chip is picked.
  */

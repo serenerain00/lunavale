@@ -26,7 +26,7 @@ export function RatingBadge({
   if (variant === "pill") {
     return (
       <span
-        className={`rounded-full bg-void/70 px-2 py-0.5 text-[0.65rem] font-medium backdrop-blur-sm ${
+        className={`rounded-full bg-void/70 px-2 py-0.5 text-[0.72rem] font-medium backdrop-blur-sm ${
           explicit ? "text-amber-soft" : "text-stone"
         } ${className}`}
       >

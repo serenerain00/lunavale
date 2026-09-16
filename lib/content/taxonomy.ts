@@ -137,6 +137,24 @@ export const places = [
     blurb: "Her own place in Denver, and the hours nobody else sees.",
   },
   {
+    // TYSON'S PLACE IN THE CITY, added 2026-09-11 at Melissa's instruction:
+    // "we def. need to account for tysons apt in denver downtown city."
+    //
+    // KEPT APART FROM `apartment`, which is LUNA'S own place in Denver — "the
+    // hours nobody else sees", settled 2026-08-04 with the iPad call. Two
+    // different rooms belonging to two different people, and folding them
+    // together would have lost the only fact that matters about this one: it
+    // is HIS, and she has never had a reason to go there before.
+    //
+    // It also fixes a real error. `luna-ty-apt-argue` was filed under
+    // `downtown` because there was nowhere truer to put it, and the Instagram
+    // clip cut from it went out titled "Her Place" on the assumption the
+    // apartment was Luna's.
+    id: "tysons-apartment",
+    label: "Tyson's Apartment",
+    blurb: "His place in the city — where he goes when he does not want to be found.",
+  },
+  {
     // Cole's bar, confirmed his 2026-08-04 — his surname is Burnett and the
     // sign is on screen. Kept separate from `bar` rather than folded into it:
     // they are visibly different rooms, and more to the point they do
@@ -149,29 +167,59 @@ export const places = [
   {
     // No `environmentSlug` — the fair is a night, not a room, and it is the
     // one place in the world that will not be there next week. Filed as a
-    // place because the scene has to live somewhere true, and folding an
-    // autumn fair into "downtown" would lose the only thing about it that
+    // place because the scene has to live somewhere true, and folding a
+    // fall fair into "downtown" would lose the only thing about it that
     // matters: everybody they know is in one field at the same time.
     id: "fair",
     label: "The Fair",
     blurb: "Lights strung over a field, and nowhere to have a private word.",
   },
   {
-    // Not part of the present-day world — the Mexico trip is a flashback to five
-    // years into the relationship. Filed as its own place so the two journal
-    // entries and the beach material sit somewhere true rather than being
-    // squeezed into "the lake".
+    // Seven days, and NOT a flashback any more (Melissa, 2026-08-17): Josh
+    // books the trip after they get back together. Filed as its own place so
+    // the three journal entries and the beach material sit somewhere true
+    // rather than being squeezed into "the lake".
     id: "mexico",
     label: "Mexico",
-    blurb: "Five years in, and a week that felt like a reset.",
+    blurb: "Seven days, and the best of him, all at once.",
   },
   {
-    // Rick's room. Likely to become one room of a larger "Rick's house" once
-    // more of it is shot — filed narrowly for now rather than folded into the
-    // farmhouse, which belongs to Josh and Luna and means something else.
+    // THE REST OF RICK'S HOUSE, added 2026-09-11 — the hall, the stairs, the
+    // landing. `the-study` below predicted this ("likely to become one room of
+    // a larger Rick's house once more of it is shot") and that is what has
+    // happened.
+    //
+    // THE TWO ARE KEPT SEPARATE rather than folded together, for one practical
+    // reason and one real one. Practical: `the-study` is a published facet id
+    // and folding it would break ?place=the-study for anybody holding it. Real:
+    // the study is where Rick receives people, one chair and all, and the rest
+    // of the house is where the family actually happens. A scene in the hall is
+    // not a scene in that room, and the difference is most of what Rick is.
+    //
+    // Fold them if that ever stops being true.
+    id: "ricks-house",
+    label: "Rick's House",
+    blurb: "The house Josh grew up in, and the family Tyson was let into.",
+  },
+  {
+    // Rick's room, specifically — see `ricks-house` above, which now carries
+    // the rest of the building.
     id: "the-study",
     label: "The Study",
     blurb: "His father's room, and the only chair in it that matters.",
+  },
+  {
+    // NEW YORK, added 2026-09-08 with the Whitmore hotel scene. Filed the way
+    // `mexico` is — a trip rather than a room — because that is what it is:
+    // somewhere neither of them lives, two thousand miles from everybody who
+    // knows them, which is most of what the location means.
+    //
+    // No `environmentSlug`. There is no explorable New York and there may
+    // never be one; a place can hold content long before it is a room anybody
+    // can walk into (see `garage`, which did this for a month).
+    id: "new-york",
+    label: "New York",
+    blurb: "Two thousand miles from anyone who knows them.",
   },
 ] as const satisfies readonly Place[];
 
@@ -214,6 +262,18 @@ export const people = [
     label: "Cathy",
     blurb:
       "Two thousand miles away in Atlanta, defending a man she only half knows.",
+  },
+  {
+    // Luna's father, named 2026-08-30 — Antonio, Tony. Mediterranean; he and
+    // Cathy met in Italy and have been married forty years. Registered here so
+    // her entries about him can be filed; renders nowhere until there is
+    // content, and this does NOT put him on /characters.
+    //
+    // NOTE this replaces the divorce. Cathy was written as divorced from
+    // 2026-08-03 until Melissa corrected it — see LUNA_VALE_CONTEXT.md.
+    id: "tony",
+    label: "Tony",
+    blurb: "Her father. Forty years married to Cathy, and still ridiculous about her.",
   },
   {
     // Luna's younger sister, named 2026-08-04. Ten years between them, both

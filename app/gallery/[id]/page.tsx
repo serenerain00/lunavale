@@ -5,7 +5,7 @@ import { LockedNotice } from "@/components/membership/LockedNotice";
 import { StillGalleryView, type ViewStill } from "@/components/browse/StillGalleryView";
 import { ContentNotice } from "@/components/ui/ContentNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { canWatch, isMember } from "@/lib/access/entitlement";
+import { canWatch } from "@/lib/access/entitlement";
 import {
   galleries,
   getGallery,
@@ -16,6 +16,7 @@ import { getEntry } from "@/lib/content/journal";
 import { signGalleryStills } from "@/lib/media/presign";
 import { getPlace } from "@/lib/content/taxonomy";
 import { getVideo } from "@/lib/content/videos";
+import { WORLD_ENABLED } from "@/lib/content/world";
 
 interface GalleryPageProps {
   params: Promise<{ id: string }>;
@@ -50,10 +51,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
   const gallery = getGallery(id);
   if (!gallery) notFound();
 
-  const [allowed, member] = await Promise.all([
-    canWatch({ access: gallery.access }),
-    isMember(),
-  ]);
+  const allowed = await canWatch({ access: gallery.access });
   const place = getPlace(gallery.place);
   const scene = gallery.sceneSlug ? getVideo(gallery.sceneSlug) : undefined;
   const entry = gallery.journalEntryId
@@ -104,7 +102,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-24 sm:px-8">
         <nav className="py-5 text-sm">
@@ -153,15 +151,19 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
             ))}
           </div>
 
-          <ContentNotice notes={gallery.notes} className="mt-5 max-w-2xl" />
+          <ContentNotice
+            notes={gallery.notes}
+            action="open"
+            className="mt-5 max-w-2xl"
+          />
 
           <div className="mt-5 flex flex-wrap gap-3">
             {scene && (
               <Link
-                href={`/watch/${scene.slug}`}
+                href={`/clips/${scene.slug}`}
                 className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
               >
-                Watch the scene →
+                Watch the clip →
               </Link>
             )}
             {entry && (
@@ -172,7 +174,8 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
                 Read what she wrote →
               </Link>
             )}
-            {place?.environmentSlug && (
+            {/* Off while the world is unfinished — WORLD_ENABLED. */}
+            {WORLD_ENABLED && place?.environmentSlug && (
               <Link
                 href={`/world/${place.environmentSlug}`}
                 className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
@@ -197,13 +200,18 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
             />
             {!allowed && (
               <div className="mt-8 rounded-xl border border-amber/25 bg-amber/[0.04] p-6 sm:p-8">
+                {/* The counts came out 2026-09-16 — see the note on
+                    /membership. This used to say "37 more from this set" and
+                    "you're seeing 3 of 40", which was built as an honest
+                    number rather than a vague promise, and that argument is
+                    still a good one. It loses to the owner's call not to
+                    publish how much is behind the lock. */}
                 <h2 className="font-display text-2xl font-medium text-ivory sm:text-3xl">
-                  {gallery.count - items.length} more from this set
+                  There&rsquo;s more of this set
                 </h2>
                 <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
-                  You&rsquo;re seeing {items.length} of {gallery.count}. Members
-                  get the whole set at full resolution, and the scene it was cut
-                  from in full.
+                  You&rsquo;re seeing the open frames. Members get the whole set
+                  at full resolution, and the clip it was cut from in full.
                 </p>
                 <Link
                   href="/membership"

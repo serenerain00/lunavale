@@ -32,6 +32,15 @@ export interface MembershipRecord {
   stripeCustomerId: string;
   stripeSubscriptionId: string | null;
   currentPeriodEnd: Date | null;
+  /**
+   * Stripe will stop at `currentPeriodEnd` rather than renew.
+   *
+   * READ THIS FOR WORDING, NEVER FOR ACCESS. `status` stays "active" for the
+   * whole remaining period after somebody cancels, which is correct — they
+   * paid for it. tierForUser() below is the access gate and deliberately does
+   * not look at this field.
+   */
+  cancelAtPeriodEnd: boolean;
 }
 
 /**
@@ -64,7 +73,7 @@ export async function tierForUser(userId: string): Promise<TierId> {
   if (!row) return "free";
   if (!ACTIVE_STATUSES.has(row.status)) {
     // Cancelled, but the period they paid for may not be over yet. The
-    // membership page promises exactly this, so honour it here rather than in
+    // membership page promises exactly this, so honor it here rather than in
     // the UI, where it would be easy to forget.
     const until = row.current_period_end
       ? new Date(row.current_period_end)
@@ -84,23 +93,24 @@ export async function membershipForUser(
 
   const rows = (await sql()`
     SELECT user_id, tier, status, stripe_customer_id,
-           stripe_subscription_id, current_period_end
+           stripe_subscription_id, current_period_end, cancel_at_period_end
     FROM memberships
     WHERE user_id = ${userId}
     LIMIT 1
-  `) as Array<Record<string, string | null>>;
+  `) as Array<Record<string, string | boolean | null>>;
 
   const row = rows[0];
   if (!row) return null;
   return {
-    userId: row.user_id!,
-    tier: (getTier(row.tier!)?.id ?? "free") as TierId,
-    status: row.status!,
-    stripeCustomerId: row.stripe_customer_id!,
-    stripeSubscriptionId: row.stripe_subscription_id,
+    userId: row.user_id as string,
+    tier: (getTier(row.tier as string)?.id ?? "free") as TierId,
+    status: row.status as string,
+    stripeCustomerId: row.stripe_customer_id as string,
+    stripeSubscriptionId: (row.stripe_subscription_id as string | null) ?? null,
     currentPeriodEnd: row.current_period_end
-      ? new Date(row.current_period_end)
+      ? new Date(row.current_period_end as string)
       : null,
+    cancelAtPeriodEnd: row.cancel_at_period_end === true,
   };
 }
 
@@ -112,14 +122,17 @@ export async function recordMembership(input: {
   stripeCustomerId: string;
   stripeSubscriptionId: string | null;
   currentPeriodEnd: Date | null;
+  /** Defaults false so an older caller cannot silently clear a real flag. */
+  cancelAtPeriodEnd?: boolean;
 }): Promise<void> {
   await sql()`
     INSERT INTO memberships (
       user_id, tier, status, stripe_customer_id,
-      stripe_subscription_id, current_period_end, updated_at
+      stripe_subscription_id, current_period_end, cancel_at_period_end, updated_at
     ) VALUES (
       ${input.userId}, ${input.tier}, ${input.status}, ${input.stripeCustomerId},
-      ${input.stripeSubscriptionId}, ${input.currentPeriodEnd?.toISOString() ?? null}, now()
+      ${input.stripeSubscriptionId}, ${input.currentPeriodEnd?.toISOString() ?? null},
+      ${input.cancelAtPeriodEnd ?? false}, now()
     )
     ON CONFLICT (user_id) DO UPDATE SET
       tier                   = EXCLUDED.tier,
@@ -127,8 +140,135 @@ export async function recordMembership(input: {
       stripe_customer_id     = EXCLUDED.stripe_customer_id,
       stripe_subscription_id = EXCLUDED.stripe_subscription_id,
       current_period_end     = EXCLUDED.current_period_end,
+      cancel_at_period_end   = EXCLUDED.cancel_at_period_end,
       updated_at             = now()
   `;
+}
+
+/**
+ * Park a membership that has been paid for but has no account behind it yet.
+ *
+ * Written by the webhook when a Checkout Session carries no Clerk user id,
+ * which since 2026-08-27 is the ordinary path for a new buyer: checkout runs
+ * before the account exists. See the table comment in lib/db/schema.sql.
+ *
+ * GRANTS NOTHING ON ITS OWN. Entitlement is resolved from `memberships` by
+ * Clerk user id and nothing else; this row only becomes access through
+ * claimPendingFor().
+ */
+export async function recordPendingMembership(input: {
+  email: string;
+  tier: TierId;
+  status: string;
+  stripeCustomerId: string;
+  stripeSubscriptionId: string | null;
+  currentPeriodEnd: Date | null;
+  cancelAtPeriodEnd?: boolean;
+}): Promise<void> {
+  await sql()`
+    INSERT INTO pending_memberships (
+      email, tier, status, stripe_customer_id,
+      stripe_subscription_id, current_period_end, cancel_at_period_end, updated_at
+    ) VALUES (
+      ${input.email.toLowerCase()}, ${input.tier}, ${input.status},
+      ${input.stripeCustomerId}, ${input.stripeSubscriptionId},
+      ${input.currentPeriodEnd?.toISOString() ?? null},
+      ${input.cancelAtPeriodEnd ?? false}, now()
+    )
+    ON CONFLICT (email) DO UPDATE SET
+      tier                   = EXCLUDED.tier,
+      status                 = EXCLUDED.status,
+      stripe_customer_id     = EXCLUDED.stripe_customer_id,
+      stripe_subscription_id = EXCLUDED.stripe_subscription_id,
+      current_period_end     = EXCLUDED.current_period_end,
+      cancel_at_period_end   = EXCLUDED.cancel_at_period_end,
+      updated_at             = now()
+  `;
+}
+
+/**
+ * Turn a parked membership into a real one, for a signed-in person.
+ *
+ * THE CALLER MUST PASS A VERIFIED EMAIL. This is the whole security boundary
+ * of the pay-first flow: anybody who can prove they control the address that
+ * paid gets the membership, and Clerk's verified primary email is that proof.
+ * Passing an unverified address here would let somebody claim a stranger's
+ * subscription by typing their email into a sign-up form.
+ *
+ * Idempotent. A claimed row is never claimed twice — the WHERE clause requires
+ * claimed_at IS NULL — so calling this on every /account render costs one
+ * indexed read and does nothing.
+ *
+ * Returns true only when a claim actually happened, so the caller can tell the
+ * difference between "you already had this" and "your membership just arrived".
+ */
+export async function claimPendingFor(
+  userId: string,
+  verifiedEmail: string,
+): Promise<boolean> {
+  if (!databaseConfigured() || !verifiedEmail) return false;
+
+  const rows = (await sql()`
+    SELECT tier, status, stripe_customer_id, stripe_subscription_id,
+           current_period_end, cancel_at_period_end
+    FROM pending_memberships
+    WHERE email = ${verifiedEmail.toLowerCase()} AND claimed_at IS NULL
+    LIMIT 1
+  `) as {
+    tier: string;
+    status: string;
+    stripe_customer_id: string;
+    stripe_subscription_id: string | null;
+    current_period_end: string | null;
+    cancel_at_period_end: boolean | null;
+  }[];
+
+  const row = rows[0];
+  if (!row) return false;
+
+  await recordMembership({
+    userId,
+    tier: row.tier as TierId,
+    status: row.status,
+    stripeCustomerId: row.stripe_customer_id,
+    stripeSubscriptionId: row.stripe_subscription_id,
+    currentPeriodEnd: row.current_period_end
+      ? new Date(row.current_period_end)
+      : null,
+    // Carried across, so a membership claimed days after purchase does not
+    // forget it was already cancelled on the way in.
+    cancelAtPeriodEnd: row.cancel_at_period_end === true,
+  });
+
+  // Marked AFTER the membership is written, never before. If the order were
+  // reversed and the write failed, the row would look spent and the person
+  // would have paid for nothing with no way back.
+  await sql()`
+    UPDATE pending_memberships
+    SET claimed_at = now(), claimed_by = ${userId}, updated_at = now()
+    WHERE email = ${verifiedEmail.toLowerCase()} AND claimed_at IS NULL
+  `;
+
+  return true;
+}
+
+/** Paid-for memberships still waiting for somebody to make an account. */
+export async function unclaimedPending(): Promise<
+  { email: string; tier: string; createdAt: Date }[]
+> {
+  if (!databaseConfigured()) return [];
+  const rows = (await sql()`
+    SELECT email, tier, created_at
+    FROM pending_memberships
+    WHERE claimed_at IS NULL
+    ORDER BY created_at DESC
+    LIMIT 50
+  `) as { email: string; tier: string; created_at: string }[];
+  return rows.map((r) => ({
+    email: r.email,
+    tier: r.tier,
+    createdAt: new Date(r.created_at),
+  }));
 }
 
 /**

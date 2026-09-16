@@ -67,9 +67,26 @@ export interface Video {
    * The day this scene went up, ISO `YYYY-MM-DD`. Drives the "New" section on
    * the home page — see `latestScene()`.
    *
-   * Only set on scenes released since the field existed. An undated scene is
-   * treated as older than every dated one, which is true and means nothing had
-   * to be back-filled by guesswork.
+   * EVERY SCENE NOW HAS ONE. The twenty that predated the field were back-
+   * filled on 2026-09-15 from git, not from memory: for each slug, the date of
+   * the first commit that introduced its entry to this file
+   * (`git log --reverse -S'slug: "x"' -- lib/content/videos.ts`). That is
+   * provenance rather than guesswork, which is the only reason the back-fill
+   * was allowed — see the standing rule in lib/content/releases.ts.
+   *
+   * ONE CAVEAT, RECORDED RATHER THAN SMOOTHED OVER. The three scenes dated
+   * 2026-07-17 entered the repo on the day it was created, and media did not
+   * play on the live site until 2026-07-22 ("Serve media from private Vercel
+   * Blob so the live site can actually play"). Their true public day is
+   * therefore 07-22, and the catalog date is a few days early. It is left at
+   * the committed date because that is the fact we can actually check, and
+   * because nothing renders dates this old — see below.
+   *
+   * WHAT THIS DOES AND DOES NOT CHANGE. The home page shows `recentReleases(6)`
+   * and `cadenceNote()` looks back thirty days, so back-filled July dates are
+   * invisible today. They exist so a release index, an email, or any future
+   * "everything so far" view is right the day it is written, instead of
+   * starting from a library that looks like it began in August.
    */
   addedOn?: string;
   /** Whether this scene is publicly viewable or requires membership. */
@@ -82,7 +99,7 @@ export interface Video {
    * This lived only on PremiumCut, which assumes a scene has a tame public
    * edit and an explicit members' one. luna-josh-first-night has no tame edit —
    * past the first ninety seconds it is one thing the rest of the way — so
-   * there was nowhere to say so, and the page would have labelled it "Mature"
+   * there was nowhere to say so, and the page would have labeled it "Mature"
    * like a kiss.
    *
    * `mature` reads as "there is sex in this". This says it is shown.
@@ -127,7 +144,7 @@ export interface Video {
    * begins. Omitted still means the opening, which is right for scenes that
    * open on their own best question.
    *
-   * Only meaningful on `access: "premium"`. Absent means the old behaviour:
+   * Only meaningful on `access: "premium"`. Absent means the old behavior:
    * the scene is locked outright and the stream route refuses it.
    */
   preview?: {
@@ -142,6 +159,29 @@ export interface Video {
      * human to pick from rather than deciding.
      */
     hookStart?: number;
+    /**
+     * A preview assembled from MORE THAN ONE window, as `[start, end]` pairs in
+     * seconds against the scene.
+     *
+     * The default preview is one contiguous window, which is the right shape
+     * for almost everything here: it is a piece of the real scene, it is
+     * obviously not the whole thing, and it cannot misrepresent the edit.
+     *
+     * It stops being right when the scene's own opening is not watchable as a
+     * hook — ty-josh-fight spends its first fifteen seconds on a truck coming
+     * up a road, which is fine in a film and fatal on a social feed. That
+     * scene's preview doubles as its Instagram reel (Melissa, 2026-09-02:
+     * "create a 30sec reel from that video as bait for IG… and then have that
+     * be the preview"), so the cut has to earn a viewer in the first second.
+     *
+     * WHEN THIS IS SET, `hookStart` is meaningless and must be left off — the
+     * preview has several starts. The /clips page reads this field to say so
+     * rather than claiming the visitor watched the first thirty seconds, which
+     * would be false. Both scripts/make-previews.mjs and scripts/make-reel.mjs
+     * cut from here, so the reel on Instagram and the preview on the site are
+     * the same edit by construction rather than by anybody remembering.
+     */
+    segments?: [number, number][];
     /** Why this window, in a few words. Shows up nowhere; it is for Melissa. */
     hookNote?: string;
   };
@@ -153,7 +193,7 @@ export interface Video {
   notes?: ContentNoteId[];
   /**
    * Watchable but not part of the story catalog — the cast interview is the
-   * hero, not a scene to browse under a feeling. Streaming and /watch still
+   * hero, not a scene to browse under a feeling. Streaming and /clips still
    * work; lib/content/catalog.ts just leaves it off the shelves.
    */
   hidden?: boolean;
@@ -174,7 +214,7 @@ export interface Video {
 export const videos: Video[] = [
   {
     // The cast interview — the pinned hero, playable in full from the home
-    // page. Hidden from the browse catalog (it isn't a story scene); /watch and
+    // page. Hidden from the browse catalog (it isn't a story clip); /clips and
     // streaming still work. See lib/content/hero.ts.
     slug: "interview",
     title: "The Interview",
@@ -183,6 +223,7 @@ export const videos: Video[] = [
     file: "interview.proxy.mp4",
     poster: "/posters/interview.jpg",
     durationSeconds: 363,
+    addedOn: "2026-07-23",
     access: "free",
     mature: false,
     hidden: true,
@@ -202,12 +243,18 @@ export const videos: Video[] = [
     file: "luna-josh-first-morning.proxy.mp4",
     poster: "/posters/luna-josh-first-morning.jpg",
     durationSeconds: 141,
-    access: "free",
+    addedOn: "2026-07-17",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "luna-josh-first-morning-preview.proxy.mp4",
+      durationSeconds: 45,
+    },
     feelings: ["trust", "desire"],
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+
   {
     slug: "tyson-luna-lakehouse-fire",
     title: "Fireside",
@@ -216,12 +263,13 @@ export const videos: Video[] = [
     file: "tyson-luna-lakehouse-fire.proxy.mp4",
     poster: "/posters/tyson-luna-lakehouse-fire.jpg",
     durationSeconds: 281,
+    addedOn: "2026-07-17",
     access: "premium",
     mature: true,
     preview: {
       file: "tyson-luna-lakehouse-fire-preview.proxy.mp4",
-      durationSeconds: 15,
-      hookStart: 224,
+      durationSeconds: 60,
+      hookStart: 179,
       hookNote:
         "ends on “Can I ask you something?” — the answer she is about to be asked for is “why are you so good to me”",
     },
@@ -229,6 +277,7 @@ export const videos: Video[] = [
     place: "lakehouse",
     about: ["luna", "tyson"],
   },
+
   {
     slug: "tyson-park-fight",
     title: "The Park",
@@ -237,12 +286,13 @@ export const videos: Video[] = [
     file: "tyson-park-fight.proxy.mp4",
     poster: "/posters/tyson-park-fight.jpg",
     durationSeconds: 155,
+    addedOn: "2026-07-17",
     access: "premium",
     mature: true,
     preview: {
       file: "tyson-park-fight-preview.proxy.mp4",
-      durationSeconds: 15,
-      hookStart: 49,
+      durationSeconds: 45,
+      hookStart: 19,
       hookNote:
         "ends hard on him saying stop — withholds her “since when did you start hiding from me” and his eight words",
     },
@@ -270,16 +320,18 @@ export const videos: Video[] = [
     file: "luna-tyson-bar.proxy.mp4",
     poster: "/posters/luna-tyson-bar.jpg",
     durationSeconds: 71,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {
       file: "luna-tyson-bar-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 30,
     },
     feelings: ["desire", "distance"],
     place: "bar",
     about: ["luna", "tyson"],
   },
+
   {
     // Casey's first scene, and the first time the bar has had a third person
     // in it. PLACE is `bar` and not `burnetts` — this is Luna and Tyson's
@@ -335,6 +387,7 @@ export const videos: Video[] = [
     place: "bar",
     about: ["luna", "tyson", "casey"],
   },
+
   {
     slug: "josh-tyson-barn",
     title: "The Barn",
@@ -343,30 +396,38 @@ export const videos: Video[] = [
     file: "josh-tyson-barn.proxy.mp4",
     poster: "/posters/josh-tyson-barn.jpg",
     durationSeconds: 68,
-    access: "free",
+    addedOn: "2026-07-22",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "josh-tyson-barn-preview.proxy.mp4",
+      durationSeconds: 30,
+    },
     feelings: ["distance"],
     place: "farmhouse",
     about: ["josh", "tyson"],
   },
+
   {
     slug: "luna-tyson-bathroom",
     title: "Groceries",
     synopsis:
-      "Tyson lets himself in with shopping she didn't ask for. She's on her phone, and she doesn't put it down.",
+      "Tyson lets himself in with groceries she didn't ask for. She's on her phone, and she doesn't put it down.",
     file: "luna-tyson-bathroom.proxy.mp4",
     poster: "/posters/luna-tyson-bathroom.jpg",
     durationSeconds: 76,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {
       file: "luna-tyson-bathroom-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 30,
     },
     feelings: ["desire", "lies"],
     place: "lakehouse",
     about: ["luna", "tyson"],
   },
+
   {
     slug: "luna-josh-coffee",
     title: "Coffee",
@@ -375,12 +436,18 @@ export const videos: Video[] = [
     file: "luna-josh-coffee.proxy.mp4",
     poster: "/posters/luna-josh-coffee.jpg",
     durationSeconds: 129,
-    access: "free",
+    addedOn: "2026-07-22",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "luna-josh-coffee-preview.proxy.mp4",
+      durationSeconds: 45,
+    },
     feelings: ["trust", "desire"],
     place: "coffee-shop",
     about: ["luna", "josh"],
   },
+
   {
     /*
       THE NIGHT SHE LEAVES. Melissa's account, 2026-08-15, recorded here
@@ -394,7 +461,7 @@ export const videos: Video[] = [
         of the car. She is deeply conflicted the entire time, because she is
         still in love with Josh. He is not being there for her in the way she
         needs and she is tired of waiting. He keeps saying he messed up; she
-        does not give him much room to apologise, because it is the same
+        does not give him much room to apologize, because it is the same
         apology as every other time. She goes anyway.
 
       The last third is the lakehouse, in the dark, alone — she walks through
@@ -430,8 +497,8 @@ export const videos: Video[] = [
     // `control`, and deliberately not `violence`. He holds her face, blocks the
     // door and tries to get her out of the car — he never strikes her and never
     // takes her by the throat. Checked frame by frame across the confrontation
-    // rather than assumed from the shape of the scene: labelling this assault
-    // would be as wrong as labelling it nothing.
+    // rather than assumed from the shape of the scene: labeling this assault
+    // would be as wrong as labeling it nothing.
     notes: ["control"],
     feelings: ["hurt", "distance"],
     // The confrontation and the car are here; the last third is the lakehouse.
@@ -442,6 +509,7 @@ export const videos: Video[] = [
     // on screen for well under a minute of it.
     about: ["luna", "josh", "tyson"],
   },
+
   {
     slug: "luna-josh-bed",
     title: "Sunday",
@@ -453,20 +521,22 @@ export const videos: Video[] = [
     // Not a re-encode of the same picture: the new edit runs sixty-five
     // seconds longer. See the note in scripts/import-cuts.sh.
     durationSeconds: 152,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {
       file: "luna-josh-bed-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 45,
     },
     feelings: ["desire", "trust"],
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+
   {
     // Delivered 2026-08-17, and NOT a second cut of Sunday above despite
     // sharing a bed and a folder name — Melissa's call. The scene is built in
-    // two tenses: she is awake in the present, in colour, and the middle of it
+    // two tenses: she is awake in the present, in color, and the middle of it
     // is Josh, graded sepia. The memory is the flashback; the scene is her
     // having it.
     //
@@ -501,7 +571,7 @@ export const videos: Video[] = [
     poster: "/posters/luna-josh-bed-flashback.jpg",
     durationSeconds: 130,
     addedOn: "2026-08-17",
-    access: "free",
+    access: "premium",
     mature: true,
     // One tag per tense, and the tenses are on opposite sides of the break:
     //
@@ -513,6 +583,10 @@ export const videos: Video[] = [
     //             while he was still lying next to me". Two people in the same
     //             room, further apart than they'll admit, is the definition of
     //             the tag, and it is what the flashback is FOR.
+    preview: {
+      file: "luna-josh-bed-flashback-preview.proxy.mp4",
+      durationSeconds: 45,
+    },
     feelings: ["distance", "grief"],
     // The LAKEHOUSE, and not the farmhouse it was first filed under. The
     // present tense is her first morning there after the night she left, so
@@ -522,6 +596,7 @@ export const videos: Video[] = [
     place: "lakehouse",
     about: ["luna", "josh"],
   },
+
   {
     // A 90s PUBLIC WINDOW ON AN EXPLICIT SCENE — Melissa, 2026-08-12: "The
     // First Night should have the first 1:30 free to watch. its safe". This is
@@ -556,7 +631,7 @@ export const videos: Video[] = [
     // The window is very QUIET — around -49dB across it, because the score sits
     // far down (see the audio note below). Melissa confirmed on 2026-08-12 that
     // the volume is low but the audio is there and that is the mix, so the cut
-    // carries it UNTOUCHED. Do not normalise it to make a preview louder.
+    // carries it UNTOUCHED. Do not normalize it to make a preview louder.
     //
     // It ships LOCKED.
     //
@@ -637,7 +712,7 @@ export const videos: Video[] = [
     explicit: true,
     preview: {
       file: "luna-josh-first-night-preview.proxy.mp4",
-      durationSeconds: 90,
+      durationSeconds: 60,
     },
     // "trust" added with the retitle: the scene's first ninety seconds are him
     // holding her and making her laugh, which is the axis a browser looking for
@@ -646,6 +721,7 @@ export const videos: Video[] = [
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+
   {
     slug: "luna-josh-kitchen-kiss",
     title: "The Kitchen",
@@ -657,16 +733,18 @@ export const videos: Video[] = [
     // -51dB mean — the dialogue was in it but inaudible on a phone. This one
     // carries a song instead, at -16.7dB.
     durationSeconds: 154,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {
       file: "luna-josh-kitchen-kiss-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 45,
     },
     feelings: ["desire", "trust"],
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+
   {
     slug: "luna-josh-dinner-house",
     title: "The Long Table",
@@ -675,16 +753,18 @@ export const videos: Video[] = [
     file: "luna-josh-dinner-house.proxy.mp4",
     poster: "/posters/luna-josh-dinner-house.jpg",
     durationSeconds: 115,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {
       file: "luna-josh-dinner-house-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 30,
     },
     feelings: ["trust", "distance"],
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+
   {
     slug: "luna-josh-house",
     title: "The House",
@@ -693,16 +773,18 @@ export const videos: Video[] = [
     file: "luna-josh-house.proxy.mp4",
     poster: "/posters/luna-josh-house.jpg",
     durationSeconds: 263,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {
       file: "luna-josh-house-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 60,
     },
     feelings: ["trust", "distance"],
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+
   {
     // Josh and his father. Free on purpose: it explains Josh rather than
     // advancing him, so it costs no turn to give away and it is the fastest
@@ -714,12 +796,18 @@ export const videos: Video[] = [
     file: "josh-rick-study.proxy.mp4",
     poster: "/posters/josh-rick-study.jpg",
     durationSeconds: 57,
-    access: "free",
+    addedOn: "2026-07-28",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "josh-rick-study-preview.proxy.mp4",
+      durationSeconds: 28,
+    },
     feelings: ["distance", "hurt"],
     place: "the-study",
     about: ["josh", "rick"],
   },
+
   {
     // The second Josh-and-his-father scene, and FREE for the same reason the
     // study is: it explains Josh instead of advancing him. Two of these now
@@ -755,12 +843,17 @@ export const videos: Video[] = [
     poster: "/posters/josh-rick-lake.jpg",
     durationSeconds: 57,
     addedOn: "2026-08-06",
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "josh-rick-lake-preview.proxy.mp4",
+      durationSeconds: 28,
+    },
     feelings: ["distance", "hurt"],
     place: "lake",
     about: ["josh", "rick"],
   },
+
   {
     // Free, and the most useful free thing on the site for Josh. Everything
     // else public about him is charm; this is him being good at something that
@@ -778,16 +871,22 @@ export const videos: Video[] = [
     // "easy, don't force it, don't fight it… just give it one more" — so this
     // is the same scene with Melissa's music under it, not a different edit.
     durationSeconds: 57,
-    access: "free",
+    addedOn: "2026-07-28",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "josh-luna-bolt-preview.proxy.mp4",
+      durationSeconds: 28,
+    },
     feelings: ["trust", "desire"],
     place: "farmhouse",
     // Tyson is in it, in the doorway, for a few seconds and no lines.
     about: ["luna", "josh", "tyson"],
   },
+
   {
     // The beach, in full — 4m44s, and members-only. The free 9:16 preview of it
-    // is a clip (lib/content/clips.ts, "beach-preview"), which is the shop
+    // is a clip (lib/content/posts.ts, "beach-preview"), which is the shop
     // window for this one.
     //
     // NOTE: Melissa also delivered luna-josh-beach-sound.mov, the same cut with
@@ -796,27 +895,34 @@ export const videos: Video[] = [
     slug: "luna-josh-beach",
     title: "The Beach",
     synopsis:
-      "Mexico, five years in. A whole evening on the sand and in the water — the week that reminded her why.",
+      "Mexico, weeks after she took him back. A whole evening on the sand and in the water — the week that reminded her why.",
     file: "luna-josh-beach.proxy.mp4",
     poster: "/posters/luna-josh-beach.jpg",
-    durationSeconds: 284,
+    // 284 -> 285 on 2026-08-17, when the scored cut replaced the one that had
+    // been up since July. Nearly the same runtime, but not the same file: the
+    // mix is louder (-28.2 dB -> -16.1 dB) and the edit moved in places. See
+    // the note in scripts/import-cuts.sh, including what the swap cost in
+    // picture.
+    durationSeconds: 285,
+    addedOn: "2026-07-29",
     access: "premium",
     mature: true,
     preview: {
       file: "luna-josh-beach-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 60,
     },
     feelings: ["desire", "trust"],
     place: "mexico",
     about: ["luna", "josh"],
   },
+
   {
     // Cathy's introduction, and the earliest thing in the present-day story —
     // a week after Luna moved out, which puts it just before the month-one
     // material below.
     //
     // FREE, deliberately. It has no turn in it to give away, it is
-    // licence-clean (dialogue only, no score — checked on the spectrogram,
+    // license-clean (dialogue only, no score — checked on the spectrogram,
     // unlike luna-tyson-dance and luna-josh-fair), and it introduces a whole
     // character. That makes it the best shop-window scene in the library for
     // the /about funnel, which now tells confused arrivals to start at the
@@ -840,15 +946,20 @@ export const videos: Video[] = [
     poster: "/posters/luna-cathy-phone.jpg",
     durationSeconds: 92,
     addedOn: "2026-08-03",
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "luna-cathy-phone-preview.proxy.mp4",
+      durationSeconds: 30,
+    },
     feelings: ["grief", "distance"],
     place: "lakehouse",
     about: ["luna", "cathy", "josh"],
   },
+
   {
     // Avery's introduction, and the answer to the scene above it. Cathy got
-    // nothing out of Luna and rang her other daughter about it; Avery calls
+    // nothing out of Luna and called her other daughter about it; Avery calls
     // already knowing, which is the entire difference between them.
     //
     // FREE, for the same reason "Long Distance" is: no turn to protect, a new
@@ -871,17 +982,22 @@ export const videos: Video[] = [
     slug: "luna-avery-ipad",
     title: "Little Sister",
     synopsis:
-      "Their mother has already made her calls. Avery rings from Atlanta knowing the answer, and for the first time in a week Luna laughs.",
+      "Their mother has already made her calls. Avery calls from Atlanta knowing the answer, and for the first time in a week Luna laughs.",
     file: "luna-avery-ipad.proxy.mp4",
     poster: "/posters/luna-avery-ipad.jpg",
     durationSeconds: 95,
     addedOn: "2026-08-04",
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "luna-avery-ipad-preview.proxy.mp4",
+      durationSeconds: 30,
+    },
     feelings: ["trust", "grief"],
     place: "apartment",
     about: ["luna", "avery"],
   },
+
   {
     // The whole night, free — Melissa's call, 2026-07-31. It was briefly a 30s
     // teaser with the full cut behind the membership (Video.premium); she
@@ -894,7 +1010,7 @@ export const videos: Video[] = [
     // that. Noting it here because the scene is now public rather than behind a
     // login, so it is a known state, not an oversight.
     //
-    // TO REVERT to a licence-clean cut: re-encode from
+    // TO REVERT to a license-clean cut: re-encode from
     // luna-tyson-dance/luna-tyson-dance.mp4 (1920x1080, dialogue only) with
     //   scripts/optimize-media.sh proxy-only luna-tyson-dance-full <that file>
     // and set durationSeconds to 232.
@@ -910,12 +1026,18 @@ export const videos: Video[] = [
     file: "luna-tyson-dance-full.proxy.mp4",
     poster: "/posters/luna-tyson-dance.jpg",
     durationSeconds: 239,
-    access: "free",
+    addedOn: "2026-07-31",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "luna-tyson-dance-preview.proxy.mp4",
+      durationSeconds: 60,
+    },
     feelings: ["trust", "desire", "distance"],
     place: "bar",
     about: ["luna", "tyson"],
   },
+
   {
     // EXPLICIT AND FULLY LOCKED as of 2026-08-12, on Melissa's instruction that
     // the explicit scenes sit behind membership. Checked the whole 287s rather
@@ -938,6 +1060,19 @@ export const videos: Video[] = [
     // scene (stories/luna-bathtub/ is three source parts), so a deleted cut
     // could not be regenerated.
     //
+    // NO `preview` KEY, AND IT MUST NOT COME BACK. It was removed on 2026-08-12
+    // as the fix for an actual leak, and on 2026-09-13 the "every scene gets a
+    // preview at its tier" pass put a SIXTY SECOND one back on it — four times
+    // the window that had been judged too much to show a signed-out visitor.
+    // Removed again the next day.
+    //
+    // The policy that did it is right for every other scene and simply does not
+    // reach this one: it decides how much of a scene to give away, and the
+    // question here is whether any of it can be shown to somebody with no
+    // account and no age check. For this scene the answer is no. See
+    // scripts/health-check.ts, which now fails if an explicit scene grows a
+    // preview that Melissa has not named.
+    //
     // POSTER RE-GRABBED to 118s, two mouths about to meet. Posters live in
     // /public at a permanent ungated URL — no flag gates them, `explicit` only
     // drives a badge — so the old one was full-frame nudity on the public
@@ -951,6 +1086,7 @@ export const videos: Video[] = [
     file: "luna-bathtub.proxy.mp4",
     poster: "/posters/luna-bathtub.jpg",
     durationSeconds: 287,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     explicit: true,
@@ -958,6 +1094,7 @@ export const videos: Video[] = [
     place: "farmhouse",
     about: ["luna"],
   },
+
   {
     // The farmhouse confrontation. Josh has decided what Luna's face meant
     // when Tyson was in the room, and spends six unbroken minutes on it.
@@ -1018,6 +1155,7 @@ export const videos: Video[] = [
     place: "farmhouse",
     about: ["luna", "josh", "tyson"],
   },
+
   {
     // Cole's introduction, and the first time the promise to Josh is said out
     // loud anywhere in the story.
@@ -1054,8 +1192,8 @@ export const videos: Video[] = [
     mature: false,
     preview: {
       file: "tyson-cole-bar-preview.proxy.mp4",
-      durationSeconds: 13,
-      hookStart: 10,
+      durationSeconds: 20,
+      hookStart: 3,
       hookNote:
         "ends on Cole's “Would you?”, withholding “Luna isn't going to let you avoid her forever”",
     },
@@ -1063,6 +1201,7 @@ export const videos: Video[] = [
     place: "burnetts",
     about: ["tyson", "cole", "luna", "josh"],
   },
+
   {
     // One scene, two edits — the same night, cut twice. The public one is the
     // DIALOGUE cut; members get the SCORED one in its place.
@@ -1095,7 +1234,7 @@ export const videos: Video[] = [
     poster: "/posters/luna-josh-fair.jpg",
     durationSeconds: 159,
     addedOn: "2026-08-02",
-    access: "free",
+    access: "premium",
     mature: false,
     premium: {
       file: "luna-josh-fair-music.proxy.mp4",
@@ -1104,11 +1243,15 @@ export const videos: Video[] = [
       // actually on offer is the score.
       difference: "the scored cut — the same night, with the music it was edited to",
     },
+    preview: {
+      file: "luna-josh-fair-preview.proxy.mp4",
+      durationSeconds: 45,
+    },
     feelings: ["distance", "lies"],
     place: "fair",
     about: ["luna", "josh", "tyson"],
   },
-{
+  {
     // "Breathe" — the hour after the wall. Luna leaves the farm and drives to
     // Tyson; this is the drive.
     //
@@ -1138,6 +1281,19 @@ export const videos: Video[] = [
     file: "luna-truck-breakdown.proxy.mp4",
     poster: "/posters/luna-truck-breakdown.jpg",
     durationSeconds: 15,
+    addedOn: "2026-08-03",
+    // THE ONE SCENE STILL FREE UNDER THE 2026-09-11 POLICY, and it is not an
+    // exception to it so much as a scene that already obeyed it by another
+    // route. What sits at this slug is not the scene — it is a fifteen-second
+    // teaser assembled from five beats (scripts/make-preview-cut.sh), and the
+    // actual 3:01 drive is in the `premium` block below, members-only.
+    //
+    // So the public already sees a short window and members already get the
+    // whole thing, which is exactly what the policy asks for. Gating this
+    // would gate the preview and leave nothing visible at all.
+    //
+    // It is also the only scene the tiers cannot serve: thirty seconds of a
+    // fifteen-second file does not exist.
     access: "free",
     mature: false,
     // On the public cut too — fifteen seconds of it is still fifteen seconds
@@ -1179,12 +1335,13 @@ export const videos: Video[] = [
     file: "ty-luna-bed.proxy.mp4",
     poster: "/posters/ty-luna-bed.jpg",
     durationSeconds: 227,
+    addedOn: "2026-07-27",
     access: "premium",
     mature: true,
     preview: {
       file: "ty-luna-bed-preview.proxy.mp4",
-      durationSeconds: 15,
-      hookStart: 65,
+      durationSeconds: 60,
+      hookStart: 20,
       hookNote:
         "ends on “Do you remember last night?”, withholding her answer",
     },
@@ -1197,6 +1354,7 @@ export const videos: Video[] = [
     place: "lakehouse",
     about: ["luna", "tyson"],
   },
+
   {
     // The only funny scene on the site, and the transcript is the whole of it:
     // "Ty, did you drink my last ginger ale?" / "Why are you yelling?" /
@@ -1237,8 +1395,12 @@ export const videos: Video[] = [
     poster: "/posters/luna-tyson-gingerale.jpg",
     durationSeconds: 47,
     addedOn: "2026-08-11",
-    access: "free",
+    access: "premium",
     mature: false,
+    preview: {
+      file: "luna-tyson-gingerale-preview.proxy.mp4",
+      durationSeconds: 23,
+    },
     feelings: ["trust", "desire"],
     place: "lakehouse",
     about: ["luna", "tyson"],
@@ -1247,6 +1409,160 @@ export const videos: Video[] = [
   // Its stills and poster are still on disk; re-add the entry here when the
   // new cut lands, then restore the world object and hero slug that went with
   // it (lib/content/world.ts "the-shore", lib/content/hero.ts).
+  {
+    // THE BATHROOM, 2026-08-20. Two weeks after she leaves. She has been
+    // dodging Josh's calls; he will not stop; she picks up and the argument
+    // takes her apart. Tyson is in the house, and she calls him in to sit with
+    // her through it.
+    //
+    // NOT `mature`. She is in a camisole for all of it and nothing sexual
+    // happens — the thing a person needs telling about here is the panic
+    // attack, and that has its own note. Flagging it mature as well would
+    // blur what the label means everywhere else on the site, and would suggest
+    // to somebody scanning the card that this is a scene about two people in a
+    // bathroom rather than a scene about somebody who cannot breathe.
+    //
+    // 30s PUBLIC WINDOW, her call — but no longer from the top. See
+    // scripts/make-previews.mjs for what moved and why.
+    //
+    // ABOUT is luna and tyson. Josh causes the entire scene and is never in
+    // it — he is a phone call that has already ended by the first frame.
+    //
+    // WHAT THE SCENE IS, so nobody mis-cuts it later: this is where TYSON
+    // FINDS OUT. He knew the small ones from when they were young; he did not
+    // know they had come back or what they had become, because she spent two
+    // years making sure of that. She gets no warning tonight, so there is no
+    // time to go and have it privately, and he walks into the real thing with
+    // nothing prepared. He is working off a twenty-year-old memory, not a
+    // routine. See LUNA_VALE_CONTEXT.md and the note above `i-picked-up`.
+    slug: "luna-ty-panic-attack",
+    // PLACEHOLDER title and synopsis — hers to replace.
+    title: "The Bathroom Floor",
+    synopsis:
+      "She finally answers the phone, and it takes her apart. He is in the next room, and she calls him in.",
+    file: "luna-ty-panic-attack.proxy.mp4",
+    poster: "/posters/luna-ty-panic-attack.jpg",
+    // 177 -> 390 on 2026-08-20, when the full cut replaced the one that
+    // opened mid-attack. Not a re-encode: three and a half minutes of the
+    // bedroom and the phone call now run in front of it. The old cut is
+    // exactly the tail of this one — verified frame-identical at the 214.4s
+    // offset — so nothing already written about the back half is stale.
+    durationSeconds: 390,
+    addedOn: "2026-08-20",
+    access: "premium",
+    mature: false,
+    notes: ["panic"],
+    preview: {
+      file: "luna-ty-panic-attack-preview.proxy.mp4",
+      // THIRTY, NOT THE SIXTY THE TIER WOULD GIVE IT, and the exception is a
+      // content one rather than a monetization one. A preview is served with
+      // no account and no age check, and thirty seconds of this scene is
+      // thirty seconds of a panic attack — which is why it carries the `panic`
+      // note. The 2026-09-11 policy decides how much of a scene to give away;
+      // it did not consider what a stranger is shown without warning, so this
+      // number survives it. Doubling it is a deliberate call, not a tier.
+      durationSeconds: 30,
+      // NOT from the top. The full cut opens on four quiet minutes of her
+      // moving around the bedroom, so a window at 0:00 would run out before
+      // the phone even rings and show a stranger nothing at all.
+      hookStart: 44,
+      hookNote:
+        "She sees the phone, she answers it, and the argument is well under way when it stops. It ends while she is still standing up and still arguing — the whole rest of the scene is what that call does to her.",
+    },
+    // `hurt` for what the call does to her, `trust` for what she does about
+    // it — which is ask for help, out loud, from him. She does not do that
+    // again for months (see `the-bad-one`).
+    feelings: ["hurt", "trust"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+  },
+
+  {
+    // A MONTAGE, not a scene, and the only one in this file. Six minutes of
+    // Luna and Tyson across the whole stretch she was without Josh, scored.
+    // Melissa, 2026-08-19.
+    //
+    // It is filed as a video rather than a clip because clips.ts is 9:16 and
+    // this is landscape; nothing else about it wants a new content type.
+    //
+    // PLACE is the lakehouse because that is where she lived those six months
+    // and where most of this happens — but the montage also visits the bar,
+    // the city and a snowbank, and `place` is one field. It names where the
+    // material belongs, not everywhere the camera went.
+    //
+    // NOTES: `panic`. The note's wording ("a prolonged panic attack, in real
+    // time") was written for luna-truck-breakdown and is stronger than what is
+    // here — this is a montage, so the bad nights are seconds at a time rather
+    // than sustained. Tagged anyway: it IS depicted, and somebody who needs to
+    // know that should not have to find out by watching. Over-stating it is
+    // the safe direction to be wrong in.
+    slug: "ty-luna-six-months",
+    title: "The Six Months",
+    // PLACEHOLDER synopsis — hers to replace.
+    synopsis:
+      "The six months she spent without Josh, and the man who got her through them. The talking, the fighting, and the nights she couldn't breathe.",
+    file: "ty-luna-six-months.proxy.mp4",
+    poster: "/posters/ty-luna-six-months.jpg",
+    durationSeconds: 353,
+    addedOn: "2026-08-19",
+    access: "premium",
+    mature: true,
+    preview: {
+      file: "ty-luna-six-months-preview.proxy.mp4",
+      durationSeconds: 60,
+    },
+    notes: ["panic"],
+    // The same three the firepit gallery carries for these two, and for the
+    // same reason: what they gave each other, what neither will say, and the
+    // fact that somewhere in here it stopped being only friendship.
+    feelings: ["trust", "desire", "distance"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+  },
+
+  {
+    // The garage, 2026-08-19, and the first scene set in that room — the
+    // `the-garage` gallery has been waiting since 2026-08-05 with no scene to
+    // point at. Both now cross-link.
+    //
+    // NO MUSIC. Melissa said so on delivery and the file agrees: -35.1 dB,
+    // which is where a dialogue-only mix sits. This matters because the house
+    // assumption runs the other way — most scenes here are music-forward with
+    // the dialogue deliberately under it, and somebody comparing levels later
+    // could easily read this one as a broken export and go hunting for a
+    // scored version that does not exist. It is two people talking. The words
+    // are the scene.
+    //
+    // 7:36, of which the first 2:15 is public. See the note in
+    // scripts/make-previews.mjs for why that number is safe: the scene turns
+    // at about 2:55 and the window stops forty seconds short of it.
+    slug: "ty-luna-garage",
+    // PLACEHOLDER title and synopsis — hers to replace.
+    title: "The Garage",
+    synopsis:
+      "She came to have it out with him. He keeps his hands on the bike and answers about half of it.",
+    file: "ty-luna-garage.proxy.mp4",
+    poster: "/posters/ty-luna-garage.jpg",
+    durationSeconds: 456,
+    addedOn: "2026-08-19",
+    access: "premium",
+    mature: true,
+    preview: {
+      file: "ty-luna-garage-preview.proxy.mp4",
+      // 2:15 — the longest public window on the site. Melissa's call.
+      durationSeconds: 60,
+      hookNote:
+        "From the top. The whole argument up to the point where it stops being an argument, and it ends there.",
+    },
+    // `distance` and `desire` — the two of them in one room refusing to say
+    // the thing, and then not managing to keep refusing. FIRST DRAFT, like the
+    // title: where this sits against the rest of the Tyson material is not
+    // established and it changes which tags are right.
+    feelings: ["distance", "desire"],
+    place: "garage",
+    about: ["luna", "tyson"],
+  },
+
   {
     // PLACEHOLDER placement: a road on the farm, filed under the farmhouse
     // because the property is the location. Give it its own place if the road
@@ -1258,15 +1574,1296 @@ export const videos: Video[] = [
     file: "ty-luna-farm-road.proxy.mp4",
     poster: "/posters/ty-luna-farm-road.jpg",
     durationSeconds: 128,
+    addedOn: "2026-07-22",
     access: "premium",
     mature: true,
     preview: {
       file: "ty-luna-farm-road-preview.proxy.mp4",
-      durationSeconds: 15,
+      durationSeconds: 45,
     },
     feelings: ["distance", "hurt"],
     place: "farmhouse",
     about: ["luna", "tyson"],
+  },
+
+  {
+    // THE DRIVEWAY, 2026-08-25. Josh is going away for three days, and it
+    // takes them the whole of the scene to let go of each other: a long
+    // goodbye at the truck in the last of the light, him gone, and her still
+    // standing in the drive after it.
+    //
+    // BEFORE THE BREAKUP — Melissa's placement, handed over with the footage.
+    // Inside the ten years, so this is not the coffee shop and not the try
+    // again; it is the ordinary version of the two of them, which the library
+    // is otherwise thin on. Everywhere else Josh is either charming her back
+    // or at the wall. Here he is just a man leaving for work, and how easy she
+    // is with him is the measure of everything that comes after.
+    //
+    // FREE, and no preview. It runs 1:33, and the scenes around that length
+    // are already free — josh-luna-bolt at 0:57, luna-cathy-phone at 1:32,
+    // luna-tyson-gingerale at 0:47. A membership pitch cut out of ninety
+    // seconds would have to take a third of the scene and would sell nothing.
+    //
+    // NOT `mature`. Two clothed people kissing goodbye in a driveway.
+    //
+    // THE MIX IS TEMPORARY. This is the unscored cut; Melissa is uploading the
+    // one with the music (2026-08-25). See scripts/import-cuts.sh for what to
+    // re-check when it lands — `durationSeconds` here is the first thing.
+    slug: "luna-josh-truck-leaving",
+    // PLACEHOLDER title and synopsis — hers to replace.
+    title: "Three Days",
+    synopsis:
+      "Josh is going away for three days. Neither of them hurries the goodbye at the truck — and when it has gone, she is still standing in the drive.",
+    file: "luna-josh-truck-leaving.proxy.mp4",
+    poster: "/posters/luna-josh-truck-leaving.jpg",
+    durationSeconds: 93,
+    addedOn: "2026-08-25",
+    access: "premium",
+    mature: false,
+    // `trust` and `desire`, the same pair as the other two scenes from inside
+    // the ten years (luna-josh-first-morning, josh-luna-bolt) — this belongs
+    // with them. Deliberately NOT `distance`: the last shot leaves a shadow on
+    // her face, but the scene is not two people who are further apart than
+    // they will admit, and filing it that way would read the ending back over
+    // the ninety seconds that earn it.
+    preview: {
+      file: "luna-josh-truck-leaving-preview.proxy.mp4",
+      durationSeconds: 30,
+    },
+    feelings: ["trust", "desire"],
+    place: "farmhouse",
+    about: ["luna", "josh"],
+  },
+
+  {
+    // THE PARKING LOT, 2026-08-26, and the second half of a night already on the
+    // site. "Your Date" (luna-tyson-casey-bar) ends with her handing him a
+    // version of the evening and leaving before he can correct it. Tyson and
+    // Casey go. LUNA STAYS, and drinks bourbon on her own for another couple
+    // of hours. This is what is outside when she finally comes out.
+    //
+    // COLE IS THE REASON TYSON IS THERE, AND IS NEVER ON CAMERA. It is his
+    // bar, he watches her all night, and when she leaves he calls Tyson: she
+    // has been drinking, she has just gone, she is going to try to drive. So
+    // `about` is luna and tyson — the same call as luna-ty-panic-attack, where
+    // Josh causes the whole scene from the other end of a phone and is not in
+    // it.
+    //
+    // SHE KNOWS WHO CALLED (Melissa, 2026-08-26). Cole owns the place, she has
+    // met him for years, and she knows he and Tyson were SEALs together. So
+    // the scene is NOT a mystery about who told him — the synopsis said it was
+    // for about an hour and that was wrong. What she does not know is the far
+    // worse thing, which is that Cole called Tyson rather than the man she lives
+    // with and did not have to think about it. That is the journal page.
+    //
+    // WHERE THEY ARE, in the story rather than on the map: a month or two back
+    // with Josh (Melissa is not certain which, and it is written down that way
+    // rather than picked). Long enough that she and Josh have started fighting
+    // over small things, and long enough that the friendship has gone quiet —
+    // he has been distant since she went back, he will not say why, and she
+    // does not know that the reason is that he is in love with her. She is
+    // confrontational, broken and confused, on bourbon, doing the best she can
+    // and doing it badly.
+    //
+    // PLACE `bar`, matching the scene it continues — and it is now probably
+    // WRONG, for both of them.
+    //
+    // Cole owns Burnett's (LUNA_VALE_CONTEXT.md), Cole was behind the bar all
+    // night, and Melissa confirmed on 2026-08-26 that Luna knows he owns the
+    // place. That puts this night at `burnetts` rather than `bar`, and takes
+    // luna-tyson-casey-bar with it, since they are the same evening.
+    //
+    // NOT CHANGED HERE. It moves a scene that has been live since 2026-08-09,
+    // and the canon note on `burnetts` says in as many words that it is NOT
+    // the bar Tyson takes Luna dancing to — so re-filing this pair has a
+    // knock-on into what that distinction is for. Melissa's call. One line
+    // each when she makes it.
+    //
+    // NO CONTENT NOTE. The notes exist for harm — violence, control, panic —
+    // and nothing here is any of those: she is very drunk and she cries, and
+    // he holds her up. Adding a note would tell somebody scanning the card
+    // that this is a scene about something being done to her, and it is the
+    // opposite: it is the one place this month somebody turns up.
+    //
+    // EXTENDED CUT, swapped in the same evening it first went up. 3:14 -> 5:02,
+    // and it is purely an extension: frames at 20s, 100s and 180s are
+    // identical to the cut it replaces, so the first 194 seconds are untouched
+    // and 108 are new on the end.
+    //
+    // THE NEW MINUTES CHANGE WHAT THE SCENE IS. It was "he collects her". Now
+    // the drive keeps going, they arrive somewhere, there is a long argument
+    // on a sofa, and the last ninety seconds are the two of them standing
+    // inches apart with his hand at her face. It stops on whether that goes
+    // anywhere, which is the most loaded frame either of them has been given.
+    //
+    // WHERE THEY GO IS UNIDENTIFIED HERE ON PURPOSE. It is plainly a city
+    // apartment — sofa, kitchen island, a lit skyline through the window — and
+    // it is plainly NOT the lakehouse Melissa described when she gave the
+    // backstory. It could be Luna's own place (`apartment`) or his. Naming it
+    // sets canon about where Tyson lives, so the synopsis says "somewhere" and
+    // the place tag is unchanged until she says.
+    //
+    // STILL NOT `mature`. Both clothed throughout and nothing happens; the
+    // scene ends on the question rather than the answer. `mature` means there
+    // is sex in it, and putting the label on a near-miss would spend it.
+    slug: "luna-ty-bar-drunk",
+    // PLACEHOLDER title and synopsis — hers to replace. "Last Call" for both
+    // meanings: the bar shutting, and the call Cole made.
+    title: "Last Call",
+    synopsis:
+      "Two hours after he left with somebody else, she comes out of the bar to find him standing in the parking lot. Nobody had to tell her who called him — and the night does not end there.",
+    file: "luna-ty-bar-drunk.proxy.mp4",
+    poster: "/posters/luna-ty-bar-drunk.jpg",
+    durationSeconds: 302,
+    addedOn: "2026-08-26",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "luna-ty-bar-drunk-preview.proxy.mp4",
+      durationSeconds: 60,
+      hookNote:
+        "the opening, for now — she comes out to a parking lot she expected to be empty. A better window can be picked once the dialogue is transcribed (scripts/find-hooks.mjs).",
+    },
+    // `hurt` and `distance` are the pair it shares with the scene it follows —
+    // same fight, two hours later, still about what he did not tell her.
+    //
+    // `desire` ADDED WITH THE EXTENDED CUT, and it is not decoration: the last
+    // ninety seconds are the two of them inches apart with nothing in the way,
+    // and a scene that ends there is not filed honestly under hurt alone.
+    feelings: ["hurt", "distance", "desire"],
+    place: "bar",
+    about: ["luna", "tyson"],
+  },
+
+  {
+    // THE KITCHEN, 2026-08-28. Fifty-three seconds at the lakehouse. He says
+    // he is going out, will not say where, and she asks him who she is.
+    //
+    // WHERE IT SITS — MELISSA'S TO CONFIRM, and the synopsis is written so it
+    // does not depend on the answer. It is her house and the two of them are
+    // easy in it, which puts it in the SIX MONTHS, and the journal page is
+    // filed there: straight after `not-just-a-friend`, where she has just
+    // written that she had to look away from him. Then he goes out without
+    // saying where and her first thought is a woman.
+    //
+    // THE ONE THING THAT ARGUES AGAINST IT is written down in
+    // LUNA_VALE_CONTEXT.md: "Your Date" is described there as the FIRST time
+    // Luna's jealousy is pointed at Tyson. This is earlier and it is jealousy.
+    // The reading that keeps both is that this one is a needle she can still
+    // pass off as a joke and that one is her doing it drunk in front of a
+    // third person — first flicker against first time it costs her something.
+    // That is a reading, not a ruling, and it is one line to move if it is
+    // wrong.
+    //
+    // FREE, and no preview — the same call as the driveway and for the reason
+    // written there: a membership pitch cut out of fifty-three seconds has to
+    // take a third of the scene and sells nothing. The exact precedent is
+    // luna-tyson-gingerale, 0:47 and free, which is the same two people in the
+    // same kitchen, and which Melissa moved to free herself on 2026-08-11 on
+    // the argument that short and shareable is how a stranger ever arrives.
+    //
+    // FREE IS A ONE-WAY DOOR HERE — three pages promise what is free stays
+    // free. What it costs is smaller than gingerale cost: that one made Tyson
+    // half-dressed in her kitchen public and permanent, and this is the two of
+    // them clothed and three feet apart. What it does give away is that she is
+    // jealous, which is the turn the six months is built on.
+    //
+    // NOT `mature`. Nothing happens. Nobody touches anybody.
+    //
+    // NOT tagged `lies`, deliberately, and it is the closest call on the
+    // entry. "Who said there's a she?" is a question asked back, not an
+    // answer — he tells her nothing and he does not tell her anything untrue.
+    // They have never lied to each other and that is load-bearing canon; a
+    // tag here would quietly spend it on a deflection.
+    //
+    // `desire` and `distance`. The jealousy is desire with somewhere else to
+    // be, and the whole scene is him keeping a door shut — which is the
+    // promise doing its work, six months before she has any way of knowing.
+    //
+    // THE SLUG FOLLOWS THE CUT AND NOT THE FOLDER. The shooting folder is
+    // stories/luna-ty-outforabit/, named for his line; the file inside it is
+    // luna-ty-wasntplanningonit.mp4, named for hers. Same rule as
+    // luna-josh-break. See scripts/import-cuts.sh for the two earlier
+    // assemblies this one replaced.
+    slug: "luna-ty-wasntplanningonit",
+    title: "Wasn't Planning On It",
+    synopsis:
+      "He says he is heading out and will not say where. She asks who she is — and then does not look up from the book for the rest of it.",
+    file: "luna-ty-wasntplanningonit.proxy.mp4",
+    poster: "/posters/luna-ty-wasntplanningonit.jpg",
+    durationSeconds: 53,
+    addedOn: "2026-08-28",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "luna-ty-wasntplanningonit-preview.proxy.mp4",
+      durationSeconds: 26,
+    },
+    feelings: ["desire", "distance"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+  },
+
+  {
+    // THE SHOOTING FOLDER HOLDS TWO EXPORTS AND THEY ARE NOT INTERCHANGEABLE.
+    // Both are now .mp4, which is a trap, so check the audio and not the name:
+    //
+    //   luna-ty-shop-kiss.mp4        1776x1080, NO score  (-36dB @120s)
+    //   luna-ty-shop-kiss-music.mp4  1664x1080, the score (-28.5dB @120s)
+    //
+    // The scored one is the cut. Melissa replaced it on 2026-09-01 with the
+    // audio sync corrected; the version it replaced was a 1320x852 HEVC .mov,
+    // which no longer exists. The new one is better on every axis. Do not
+    // "upgrade" this to the larger file — that is the silent one, and the
+    // filenames no longer tell you apart on extension alone.
+    slug: "luna-ty-shop-kiss",
+    // PLACEHOLDER title and synopsis — hers to replace. "The Part" for both
+    // meanings: the thing Josh sent her for, and the one Tyson will not take.
+    title: "The Part",
+    synopsis:
+      "Josh needs a part and Tyson is not at the farm, so she drives to the shop. He has been letting her know he is angry for weeks without once saying what about — and she has not let him forget the window he did not take. Neither of them says it out loud.",
+    file: "luna-ty-shop-kiss.proxy.mp4",
+    poster: "/posters/luna-ty-shop-kiss.jpg",
+    // 264: the picture ends at 263.73 and the export runs on into ~2.6s of
+    // black. Measured with blackdetect, trimmed on import at 263.7.
+    durationSeconds: 264,
+    // Cut and registered on 08-31; goes live 09-01, and this field is
+    // documented as the day it went up rather than the day it was made.
+    addedOn: "2026-09-01",
+    access: "premium",
+    // A kiss, closed and brief, and he has his shirt off for the whole scene.
+    // Nothing is shown. `mature` reads as "there is sex in this" (see the
+    // field), and there is not — so false, and it is Melissa's to overrule.
+    mature: false,
+    preview: {
+      file: "luna-ty-shop-kiss-preview.proxy.mp4",
+      // 88, not the 90 asked for: the one-third fraction rule in
+      // make-previews.mjs caps an override and 90 of 264 is 34%. This is the
+      // real runtime of the real file, which is what the page states. It was
+      // 87 against the previous export, which ran a second shorter.
+      durationSeconds: 60,
+      // 1:30–2:58 — see the OVERRIDES note in scripts/make-previews.mjs for
+      // why the window sits here and what it stops short of.
+      hookStart: 118,
+      hookNote:
+        "The middle ninety seconds, Melissa's call. It is the stretch where the distance collapses and the old rhythm comes back — and it ends fifteen seconds before he leans in.",
+    },
+    // The same pair as ty-luna-garage, and for the same reason: two people in
+    // a workshop refusing to say the thing. `hurt` was considered and left
+    // off — his aggravation is the surface, not the subject, and she is not
+    // wounded here. She is waiting, which is `distance`.
+    feelings: ["desire", "distance"],
+    place: "garage",
+    about: ["luna", "tyson"],
+  },
+
+  {
+    // THE SLUG FIXES THE FOLDER'S SPELLING. The shooting folder is
+    // stories/luna-ty-lkehouse-confrontation/ and the file inside it matches;
+    // "lkehouse" recurs across the working folders (luna-lkehouse-mom-phone,
+    // ty-luna-lkehouseKiss) so it is a habit rather than a one-off. A slug is
+    // a permanent public URL and does not inherit a typo — same rule as
+    // luna-ty-wasntplanningonit, where the slug follows the cut and not the
+    // folder. optimize-media.sh writes the proxy under the slug, so nothing
+    // downstream ever sees the misspelling.
+    slug: "luna-ty-lakehouse-confrontation",
+    // PLACEHOLDER title and synopsis — hers to replace. "The Shirt" because it
+    // is the detail that starts it and the one neither of them mentions.
+    title: "The Shirt",
+    synopsis:
+      "A Saturday with nothing in it, and he has found somewhere else to be since breakfast. She stops letting him. It gets loud — and the reason he finally gives her has Josh's name in it.",
+    file: "luna-ty-lakehouse-confrontation.proxy.mp4",
+    poster: "/posters/luna-ty-lakehouse-confrontation.jpg",
+    // 113, and no trim: blackdetect finds no trailing black, so the export
+    // stops dead on her face. The 0.8s fade is applied to the proxy on import
+    // rather than in the timeline — see the `fade` note in optimize-media.sh.
+    durationSeconds: 113,
+    addedOn: "2026-09-01",
+    access: "premium",
+    // Two people shouting in a living room. Nothing intimate happens and
+    // nobody takes anything off.
+    mature: false,
+    preview: {
+      file: "luna-ty-lakehouse-confrontation-preview.proxy.mp4",
+      durationSeconds: 30,
+      // NO hookStart — this is the opening, on Melissa's instruction ("this is
+      // only going to show the first 30sec"), and the opening happens to be
+      // right: he is already walking away from her in the first ten seconds,
+      // which is the whole situation stated without a word of it.
+      hookNote:
+        "The first thirty seconds, Melissa's call. He is avoiding her and she is walking into it. Stops forty seconds before he raises his voice and long before he says why.",
+    },
+    // `hurt` and `distance`. `lies` was considered and left off — he is not
+    // lying to her here, he is refusing to speak, which is the whole argument.
+    feelings: ["hurt", "distance"],
+    place: "lakehouse",
+    // ON SCREEN ONLY, though this is the scene where Josh becomes the reason.
+    // `about` drives the cast pages, and putting Josh on a scene he is not in
+    // would file him under footage he never appears in. The journal entry
+    // beside it carries him instead.
+    about: ["luna", "tyson"],
+  },
+
+  {
+    // THE FARM FIGHT. The first assembled cut to come out of the farm
+    // material: josh-tyson-farm/ and ty-josh-tractor/ have sat in stories/
+    // since July as raw takes and stills with no edit, and both are listed as
+    // "not imported" at the top of scripts/import-cuts.sh. This is where that
+    // footage finally landed.
+    //
+    // THE SCORED MIX AS OF 2026-09-03, Melissa's instruction. The source is
+    // stories/ty-josh-fight/osh-ty-fight-music.mov (the folder's spelling,
+    // missing the J, deliberately not corrected — see import-cuts.sh), and it
+    // replaces the dialogue export ty-josh-fight.mp4 outright. Same rule as
+    // luna-ty-shop-kiss: where there are two mixes, the scored one is the cut.
+    // It runs 4 dB hotter, which is the score and not a fault — the music
+    // sitting over the dialogue is the intent on this material.
+    //
+    // THE PICTURE RUNS 1.5-2s BEHIND the old export, so every number below
+    // that indexes into the scene was re-found against the new file rather
+    // than shifted by a constant: the poster second, both preview windows, and
+    // the runtime. A constant offset would have been wrong — the drift is not
+    // even across the reel.
+    slug: "ty-josh-fight",
+    // PLACEHOLDER title and synopsis — hers to replace. "Between Them" for
+    // both meanings: where she puts herself the moment she sees it, and where
+    // she has been standing since she went back to Josh.
+    title: "Between Them",
+    // WHAT THE FIGHT IS ABOUT IS WITHHELD HERE ON PURPOSE, and that is canon
+    // rather than a tease. Tyson tells Josh to stop making the same mistakes
+    // with her — he was the one who picked up the pieces when they broke up,
+    // so he is protecting her — and Josh takes it as an accusation. Luna
+    // arrives on the end of it and is unconscious before anyone explains
+    // anything, so she never learns the subject. A synopsis that gave it away
+    // would know something the story does not.
+    synopsis:
+      "They have been working the farm together all summer, and Tyson has been hearing how it is going with Josh. What he says to him is meant to protect her. Josh does not take it that way. She drives in on the end of it — and she never does find out what it was about.",
+    file: "ty-josh-fight.proxy.mp4",
+    poster: "/posters/ty-josh-fight.jpg",
+    // 206, trimmed at 206.4 where blackdetect puts the start of 4.05s of
+    // trailing black. NO FADE is applied on import any more: the dialogue
+    // export stopped dead on a held frame and needed one, and this master
+    // fades itself — luminance falls 62 to 20 across 204s-206.3s. A second
+    // fade would have darkened an already-darkening shot.
+    durationSeconds: 206,
+    addedOn: "2026-09-02",
+    // PREMIUM WITH A PUBLIC WINDOW, Melissa on release: "its behind membership
+    // 30sec preview for now until i update it bc im gonna show parts on IG."
+    // The "for now" is the part to remember — when the Instagram cut goes out,
+    // this is the entry to revisit, and the argument in
+    // instagram-makes-free-cheap applies: footage already public on IG is
+    // footage the one-way door has already closed on.
+    access: "premium",
+    // Nothing sexual happens and nobody undresses. `mature` reads as "there is
+    // sex in this" (see the field) and would brace a viewer for entirely the
+    // wrong thing — what is actually in this scene is in `notes` below.
+    mature: false,
+    preview: {
+      file: "ty-josh-fight-preview.proxy.mp4",
+      durationSeconds: 60,
+      // TWO WINDOWS, NOT THE OPENING — changed 2026-09-02 when this preview
+      // became the Instagram reel as well. The opening is 0:00-0:18 of a truck
+      // coming up a road and her at the wheel, which is a good way into a film
+      // and the wrong way into a feed: a reel has about a second and a half to
+      // earn the next one, and a truck does not.
+      //
+      // 0:21-0:39 opens ON the two of them already walking into each other, so
+      // the first frame is the question. 1:36-1:48 is where she is in the
+      // middle of it — she is shouting between them at 1:37, has a hand on
+      // each of them at 1:38, and the window ends on her face.
+      //
+      // RE-FOUND AGAINST THE SCORED MASTER on 2026-09-03, not shifted. The
+      // windows were 20.5-38.5 and 93-105 against the dialogue export; sampled
+      // at one-second steps in the new file, 93 is motion blur and the beat
+      // that was at 96 is now at 98. Moving them by a constant would have
+      // opened the second window on a smear.
+      //
+      // It still stops well short: she is struck at about 2:03 in this master,
+      // so the window ends fifteen seconds before the punch, and the ground
+      // and her face are nowhere in it.
+      //
+      // NO hookStart, deliberately: with segments there are two starts and the
+      // field would be a lie. See the note on `segments` in the interface.
+      segments: [
+        [21, 39],
+        [96, 108],
+      ],
+      hookNote:
+        "Two windows, cut as the Instagram reel and used as the preview. It opens on the two of them already going at it, and the second piece is her in the middle of it. It ends about a minute before she is struck — the punch, the ground and her face are all outside it, which is the whole point of the bait.",
+    },
+    // BOTH NOTES, AND THEY CARRY THE PREVIEW TOO. Checked at three-second
+    // steps: they square up at about 0:21 and are swinging by 0:28, so the
+    // public thirty seconds is not the quiet before the fight — it contains
+    // the start of one. A preview is served with no account and no age check,
+    // which is the same reason luna-ty-panic-attack's note is written down as
+    // mattering more there than anywhere.
+    //
+    // `knocked-out` is outside the window (she is struck at about 2:03) and is
+    // still listed, because the note describes the scene a visitor is deciding
+    // whether to open, not only the slice they are about to see.
+    notes: ["violence", "knocked-out"],
+    // `hurt` for the obvious reason. `trust` because that is the actual
+    // subject: Tyson acting on what he owes her from the last time, Josh
+    // hearing it as an accusation, and neither of them able to say so without
+    // hands. `distance` was considered and left off — this is the opposite of
+    // two people refusing to close a gap.
+    feelings: ["hurt", "trust"],
+    // The farm. There is no `barn` or `farm` place and `farmhouse` is the one
+    // that covers this ground — same tagging as the rest of the farm material.
+    place: "farmhouse",
+    // All three, all on screen, all central. Rare for this library.
+    about: ["luna", "josh", "tyson"],
+  },
+
+  {
+    // NEW YORK. Melissa dropped stories/luna-ty-nyc-hotel/ on 2026-09-08 with
+    // one line: "new folder luna-ty-nyc-hotel". The technical read is in
+    // scripts/import-cuts.sh; what follows is everything that is a judgment.
+    //
+    // WHAT IS ON SCREEN, and nothing here goes past it: she is waiting alone
+    // in the lobby of a hotel called THE WHITMORE, in a dress, with a clutch.
+    // He comes in through the lobby in a jacket. They talk, they end up at the
+    // bar of a suite with the skyline behind them, and the remaining four
+    // minutes are the two of them at very close range — foreheads, hands,
+    // long looks, one stretch around 2:45 where something is said that lands
+    // hard on her face. It ends with him carrying her to the bed, both of them
+    // laughing, and cuts before anything else.
+    //
+    // WHERE IT SITS, from Melissa the same evening the footage landed: ABOUT
+    // FIVE MONTHS INTO THE BREAK-UP. Inside the six months, not after them.
+    //
+    // She has a modeling event in New York and asked Tyson to fly out for the
+    // weekend. This is the night of the company dinner party — drinks and her
+    // peers all evening, back to the hotel, more drinks in HIS room, and then
+    // everything the cut shows. Both of them are feeling it and both refuse to
+    // say so: he gives her clear signals, she probes him for the truth, and
+    // neither will put a sentence to it.
+    //
+    // THAT DATE IS THE MOST LOAD-BEARING FACT ON THIS ENTRY, because it decides
+    // what the copy may imply. The synopsis was first written with no timeline
+    // and said there was "no reason left to sit the length of a table apart",
+    // which read as two people who had stopped refusing. They have not. The
+    // whole force of `the-night`, much later in the journal, is that it did not
+    // arrive as a decision — so nothing here may read as a beginning, and the
+    // line stops where the refusal is still holding.
+    //
+    // THE HOTEL IS THE WHITMORE and nobody had to choose it: it is lettered on
+    // the desk behind him and legible in the poster. Melissa asked for a
+    // five-star New York hotel, and the footage had already named one — a
+    // fictional one, which is a better outcome here than borrowing a real
+    // business's name for this particular evening.
+    //
+    // HER ACCOUNT IS `new-york` in lib/content/journal.ts, written alongside
+    // this entry and filed inside the six months rather than at the end of the
+    // book. The /clips page links the two automatically through `sceneSlug`.
+    // It stops where this cut stops — he picks her up and she remembers
+    // nothing after it — and it does not know about the promise, so her read
+    // of his silence is wrong in the way the canon requires.
+    slug: "luna-ty-nyc-hotel",
+    // PLACEHOLDER title and synopsis — hers to replace. "The Whitmore" is the
+    // hotel's own name off the desk behind him in the poster, so the card and
+    // the frame agree, and it names the place without naming a beat.
+    title: "The Whitmore",
+    synopsis:
+      "Her event, her people, her weekend — and she asked him to fly out for it. They drink with her colleagues all evening and then keep drinking upstairs in his room: five months into being on her own, twenty years into neither of them saying it.",
+    file: "luna-ty-nyc-hotel.proxy.mp4",
+    poster: "/posters/luna-ty-nyc-hotel.jpg",
+    // 295, and the master needed no trimming — the only cut in the library
+    // delivered with no trailing black at all. The 3s fade at the end is on
+    // the proxy, not the master.
+    durationSeconds: 295,
+    addedOn: "2026-09-08",
+    // PREMIUM, which is the default for new Luna-and-Tyson material and is the
+    // easiest thing here to change. The free set is deliberately small and is
+    // currently the trailers and the story overview; this is the newest and
+    // most intimate scene on the site, which is the shape of thing membership
+    // is for. Flip it and delete the preview block if it should go out free.
+    access: "premium",
+    // Intimate the whole way and graphic at no point. `mature` is right:
+    // kissing, closeness, a lot of skin at the shoulders, and an ending that
+    // says plainly what happens next without showing it. NOT `explicit` —
+    // that field means it is shown, and here the cut lands before it.
+    mature: true,
+    preview: {
+      file: "luna-ty-nyc-hotel-preview.proxy.mp4",
+      durationSeconds: 60,
+      // 22s-37s: him crossing the lobby, her getting up, and the first thing
+      // they say to each other. It ends before they touch.
+      //
+      // The opening would have been her alone in a chair for twenty seconds,
+      // which is the most beautiful thing in the cut and asks nothing. This
+      // window is a woman waiting and a man arriving, and it stops on the
+      // question the rest of the scene answers.
+      hookStart: 0,
+      hookNote:
+        "he crosses the lobby to her and they speak; ends one beat before either of them reaches for the other",
+    },
+    // No content notes. Nothing here needs bracing for — see
+    // lib/content/content-notes.ts, which exists for violence and control, not
+    // for two people in a good mood.
+    //
+    // `desire` for the obvious reason. `trust` because it is the other half of
+    // what is on screen and the pair of them is the point: twenty years of
+    // knowing each other is why nobody in this scene has to explain anything.
+    // `distance` was considered and rejected — every other Luna-and-Tyson
+    // scene on the site is two people managing a gap, and this is the one
+    // where there isn't one.
+    feelings: ["desire", "trust"],
+    // New place, added to the taxonomy with this scene. Filed the way `mexico`
+    // is: a trip, not a room.
+    place: "new-york",
+    about: ["luna", "tyson"],
+  },
+
+  {
+    /*
+      THE BAR, AND THE BLONDE GUY. Melissa dropped the folder 2026-09-09 and
+      wrote the whole beat out the same day, placement included — the full
+      version is `### The bar — the blonde guy` in LUNA_VALE_CONTEXT.md and it
+      should be read before anybody touches this entry.
+
+      WHEN: the tail end of the six months. She is NOT with Josh yet, not
+      officially — she has been talking to him, smoothing things out, and it is
+      plainly heading back that way. In journal terms: after `coffee`, before
+      `i-said-yes`.
+
+      That placement is Melissa's correction, made the same day she wrote the
+      beat, and it is the fact this entry turns on. It first went down as "a
+      month after she goes back to Josh"; moving it earlier makes the scene
+      worse for Tyson, which is the point. If she were already back with Josh
+      he would be reacting to something that had happened. Here it has not
+      happened yet — it is happening, in front of him, at a pace he cannot
+      affect, and he gave Josh his word to help it along.
+
+      This is the stretch where he starts losing his composure around her, and
+      Luna still does not understand why he is drifting.
+
+      WHAT HAPPENS: dinner plans, as friends. He is very late. She is waiting
+      at the bar when a man starts asking her things and keeps going well past
+      the point where she has made herself clear. Tyson arrives on the tail end
+      of it and tells him she does not sound interested. It goes toe to toe;
+      Luna puts a hand on Tyson's chest; the other man's friend tries to walk
+      him out of it. Then the man says she is not worth it anyway, and Tyson
+      has him by the collar.
+
+      Outside afterwards she asks where that came from — she means the tone, and
+      she means him putting hands on somebody, which is not what he does. He
+      says leave it, it's been a long day. She says his name. He says they'll
+      talk in the car.
+
+      WHY THE SYNOPSIS STOPS WHERE IT DOES. The bad day is real and it is
+      specific — feelings he does not understand, working around Josh every day
+      knowing where she and Josh are heading, work stress, and dread about this
+      exact dinner — and Luna never learns any of it. Neither does the audience, in
+      this scene. So the copy sets up the discomfort and stops before Tyson
+      arrives, because everything after that is the thing you press play for.
+
+      IT IS NOT ABOUT THE MAN AT THE BAR. He is the only thing in Tyson's day
+      that it is permissible to be angry at; everything actually pressing on
+      him is a person he loves, a promise he made, or a woman he cannot say any
+      of it to. Anybody rewriting this copy should keep the stranger
+      incidental.
+    */
+    slug: "ty-luna-blonde-guy-bar",
+    // PLACEHOLDER title and synopsis — hers to replace. "A Long Day" is the
+    // line he uses instead of the truth, which is what the scene is made of.
+    // Titling it off the other man's line ("Not Worth It") was the other
+    // option and it hands the scene to him.
+    title: "A Long Day",
+    synopsis:
+      "They had dinner plans, as friends. He turns up very late and will not say why. She is waiting at the bar when a man decides she looks like company, and goes on deciding it long after she has made herself clear.",
+    file: "ty-luna-blonde-guy-bar.proxy.mp4",
+    poster: "/posters/ty-luna-blonde-guy-bar.jpg",
+    // 183. NOW THE SCORED CUT (2026-09-10) — the unscored master is still at
+    // stories/ty-luna-blonde-guy-bar/luna-ty-blonde-guy-bar.mp4 if this needs
+    // reverting. Same edit, so the 2:26 poster and the 2:14 preview window are
+    // unchanged; only the mix and the resolution moved.
+    //
+    // TRIMMED AT 183. The unscored master had no trailing black and this one
+    // has 4s of it, which is the fourth delivery in a row to arrive that way —
+    // check the tail every time, and with a frame-luma sweep rather than
+    // blackdetect, which misses it at pic_th=0.98.
+    //
+    // The 3s fade on the proxy stays: the picture still holds full brightness
+    // to its last frame with the audio running, so it stops rather than ends.
+    durationSeconds: 183,
+    addedOn: "2026-09-09",
+    access: "premium",
+    // NOT `mature`. Nothing sexual happens and nobody undresses — `mature`
+    // reads as "there is sex in this" and would brace a viewer for entirely
+    // the wrong thing. What is actually in it is in `notes`.
+    mature: false,
+    // A man is taken by the collar, shouted at and shoved. Nobody is hurt and
+    // it is over in about three seconds, which is exactly why it needs saying
+    // in advance rather than being discovered: the whole force of the scene is
+    // that this is not a man who does that.
+    notes: ["violence"],
+    preview: {
+      file: "ty-luna-blonde-guy-bar-preview.proxy.mp4",
+      durationSeconds: 60,
+      // 2:14–2:29. The two of them squared up, her hand flat on his chest, the
+      // other man's friend pulling at his arm — and it stops at 2:29, which is
+      // one beat before the line that sets him off and two before the collar.
+      //
+      // Melissa's rule for these (2026-08-10) is that a window should end
+      // immediately before the thing you want to know. The thing you want to
+      // know here is what he does, and this ends with three people holding a
+      // moment that is obviously about to break.
+      //
+      // The poster is inside it, at 2:26.
+      hookStart: 89,
+      hookNote:
+        "toe to toe with her hand on his chest; ends one beat before \"she's not worth it anyway\" and two before the collar",
+    },
+    // `hurt` for the thing breaking the surface, and `distance` because that is
+    // the actual subject — a man who will not say why, and a woman who cannot
+    // reach him. `desire` was considered and left off deliberately: it is
+    // honest (the pull he will not name is what detonates here) and a shelf
+    // called Desire is not where a stranger should meet somebody being taken
+    // by the collar.
+    feelings: ["hurt", "distance"],
+    place: "bar",
+    // Luna and Tyson. The other two men are not characters in this world and
+    // are deliberately not invented as any.
+    about: ["luna", "tyson"],
+  },
+
+  {
+    /*
+      THE WINE GLASS. Melissa dropped the folder 2026-09-10 and gave the
+      context the same day.
+
+      WHEN: A FEW DAYS AFTER THE BREAKUP. Days, not weeks — this is the very
+      front of the six months, which puts it after `asking-for-less` (her first
+      morning at the lakehouse) and well before `tyson-shows-up` in week two.
+
+      WHAT IT IS ABOUT, in her words: it is over Josh, and specifically over
+      the phone calls and the arguments with him. Luna is not used to being
+      alone in a quiet house and is having a hard time coping. Tyson is not
+      always around yet, so she is trying to get used to a new normal and at
+      the same time decide whether leaving was the right thing — did she give
+      up, did she leave too soon, did she overreact, did she not communicate
+      enough.
+
+      AND THEN SHE ARRIVES SOMEWHERE, which is the part that makes this a scene
+      rather than a mood: she works out that she DID do things to help. She did
+      try. She did not walk away for no reason and end up here — there is a
+      reason she is at the lakehouse. It still overwhelms her, because being
+      alone is a great deal after ten years of not being.
+
+      SO THE THROW IS NOT THE DOUBT. She resolves the doubt. The glass goes
+      because the quiet is more than she can carry, which is a different and
+      harder thing, and any copy written about this scene should keep those two
+      apart.
+
+      WHAT IS ON SCREEN, and nothing goes past it: Luna alone at the lakehouse
+      at night, the lake and a moon through the glass behind her, an open
+      bottle and a glass of red. Two and a half minutes of her coming apart
+      quietly — hands in her hair, head back, crying, pacing, arms folded at
+      the window, wiping her face and going again. At about 2:16 she throws the
+      glass. Afterwards she is standing at the counter breathing, and there is
+      BLOOD on her palm.
+
+      IT IS NOT `the-bad-one`, and that guess is recorded here because it was
+      made and it was wrong. With no context supplied, the obvious pairing
+      looked like the entry canon names among her worst nights — lakehouse, her
+      alone, no scene filed against it. Her placement rules it out: `the-bad-one`
+      sits months in, and this is the first week. The lesson is the cheap one —
+      a solo scene with no date attached will fit almost any bad night in the
+      book, which is exactly why it should not be filed against one on
+      resemblance.
+
+      NO JOURNAL ENTRY IS FILED AGAINST IT. The two neighbours are
+      `the-night-i-left` and `asking-for-less`, and neither is this: the first
+      is the leaving, the second is missing him. What this scene contains that
+      the book does not yet have is the verdict — she puts the case against
+      herself and then answers it. That page is worth writing and has not been.
+
+      NOT TAGGED `panic`, and that was checked rather than assumed. Canon has
+      her prone to panic attacks and names `the-bad-one` among the worst of
+      them, so the note was the obvious call — but the footage is not that.
+      There is no hand on the chest, no hyperventilating, no floor. It is a
+      woman drinking alone and crying hard for two minutes and then throwing
+      something. `luna-ty-panic-attack` is what a panic attack looks like on
+      this site, and this does not resemble it. Tagging it would mislabel the
+      scene and dilute the note everywhere else it is used.
+
+      THE BLOOD IS FLAGGED FOR HER RATHER THAN NOTED HERE. She cuts her hand —
+      on the throw or on the pieces, the cut does not say — and there is no
+      entry in lib/content/content-notes.ts that covers it. `violence` means an
+      assault between characters and does not apply. Inventing a new note is a
+      decision about what this product warns people about, which is hers. If
+      she wants one, it is a two-line addition and this entry gets it.
+    */
+    slug: "luna-lkehouse-wine-shatter",
+    // PLACEHOLDER title and synopsis — hers to replace. "The Glass" for the
+    // object, the house pattern for a solo scene (The Bolt, The Study, The
+    // Lake), and because naming it after the throw would give the throw away.
+    title: "The Glass",
+    synopsis:
+      "A few days after she left, in a house with nobody else in it and the phone still going. She is working out whether she gave up too soon — and getting used to a quiet she has not lived in for ten years.",
+    file: "luna-lkehouse-wine-shatter.proxy.mp4",
+    poster: "/posters/luna-lkehouse-wine-shatter.jpg",
+    // 148. NOW THE SCORED CUT (2026-09-10) — the silent master is still at
+    // stories/luna-lkehouse-wine-shatter/luna-lkehouse-wine-shatter.mp4 if
+    // this needs reverting. Same edit: head frames match, picture runs to
+    // 148.6 in both, the throw is still at 2:16, so the poster second and the
+    // preview window are unchanged.
+    //
+    // THE OLD NOTE HERE ARGUED THE SILENCE WAS THE SCENE — -38.9 dB mean
+    // against a -0.2 dB peak, the quietest delivery in the library, and an
+    // instruction not to normalise it. That is obsolete rather than wrong:
+    // this cut is -17.2 dB mean with the score running underneath the whole
+    // thing, which is the version Melissa is shipping.
+    //
+    // TRIMMED AT 148 — it arrived with 5.6s of black on the tail. The picture
+    // still ends at full brightness with the audio running, so the 3s fade on
+    // the proxy stays; the black was padding, not a fade.
+    durationSeconds: 148,
+    addedOn: "2026-09-10",
+    access: "premium",
+    // Nothing sexual. She is dressed throughout and alone throughout.
+    mature: false,
+    preview: {
+      file: "luna-lkehouse-wine-shatter-preview.proxy.mp4",
+      durationSeconds: 45,
+      // 2:00–2:15, and it ends one second before she throws it. Fifteen
+      // seconds of a woman running out of ways to hold something, stopping on
+      // the frame before she stops holding it.
+      //
+      // It is also the right fifteen seconds now that the context is known:
+      // this is the stretch AFTER she has answered the question about herself,
+      // where what is left is just the size of the house.
+      //
+      // The opening was the other candidate and it is the weaker one: her at
+      // the table with a glass is a mood, and a mood makes somebody feel they
+      // have seen it. This ends on a question.
+      hookStart: 90,
+      hookNote:
+        "she runs out of ways to hold it; ends one second before the glass leaves her hand",
+    },
+    // `hurt` is the taxonomy's "when it finally breaks the surface", which is
+    // this scene exactly and in the most literal way it has ever been true.
+    // `grief` because the lakehouse is the room she moved into after leaving,
+    // and two of the three things in it are a bottle and a view.
+    feelings: ["hurt", "grief"],
+    place: "lakehouse",
+    // Her, alone, for the whole runtime. The only solo scene in the library.
+    about: ["luna"],
+  },
+
+  {
+    /*
+      THE CITY APARTMENT. Melissa, 2026-09-11, and the context is hers: Tyson
+      has been gone a MONTH, Luna tracks him down unannounced at HIS city
+      apartment, and finds him drinking again.
+
+      THE APARTMENT IS HIS, AND THAT IS THE FACT TO HOLD ONTO. The taxonomy's
+      `apartment` is Luna's own place in Denver — "the hours nobody else sees"
+      — and this is not that room. Filed under `downtown` rather than inventing
+      a place id, because where Tyson lives in the city is Melissa's to name.
+      The Instagram clip `her-place` was published an hour before this context
+      arrived and was titled on the assumption it was hers; it is corrected in
+      the same commit.
+
+      "DRINKING AGAIN" IS NEW CANON AND CONTRADICTS NOTHING. Nothing published
+      establishes Tyson as a drinker or as sober — checked across all 98
+      journal entries. What it does do is put a floor under `ginger-ale`, where
+      he stands in her kitchen drinking the one can of ginger ale in the house
+      slowly, at her. That reads differently now, and it did not need changing.
+
+      THE ARC, off the footage: she rides up alone with the city behind her,
+      walks a corridor, knocks. He opens it — shirtless, not expecting anybody.
+      They argue. There is a bottle on the table. At about 4:10 it stops being
+      an argument.
+
+      THE SYNOPSIS SAYS TRUCK AND THE FIRST SHOT IS A LIFT, on purpose.
+      Melissa, 2026-09-11: "shes not in a lift, she gets in her truck." Both
+      are true — she drives across the city and then rides the last thirty feet
+      — and the truck is the one that belongs in the copy, because getting in a
+      truck is a decision and getting in a lift is a corridor. Do not
+      "correct" this back to the footage.
+
+      POSTER AT 42s: Luna alone in the corridor, lit, walking toward a door.
+      Her face, her intent, and not a frame of what she is about to find. The
+      door opening at 62 is the better two-shot and is exactly why it is not
+      the card — it spends the hinge, and her back is to camera there.
+
+      PREVIEW WINDOW ENDS ONE BEAT BEFORE HE OPENS THE DOOR. The thing a
+      stranger wants to know here is what she finds, so the window runs the
+      corridor and the knock and stops at 60, two seconds before it opens.
+
+      NO CONTENT NOTE FOR THE DRINKING, and that is flagged rather than
+      invented. lib/content/content-notes.ts has nothing covering alcohol, and
+      adding one is a decision about what this product warns people about,
+      which is Melissa's — the same call that was left open on the blood in
+      luna-lkehouse-wine-shatter.
+
+      `mature` for the last minute. Nothing graphic and nobody undresses;
+      `explicit` would be wrong and the Instagram cut of this same stretch
+      passed their rules.
+    */
+    slug: "luna-ty-apt-argue",
+    // PLACEHOLDER title and synopsis — hers to replace. "A Month" is the fact
+    // the whole scene is built on and the one thing she says out loud that he
+    // cannot answer. Titling it off the bottle would spend the reveal.
+    title: "A Month",
+    synopsis:
+      "He has not answered his phone in four weeks. She does not call ahead — she gets in her truck, drives into the city, and knocks. Whatever she had ready on the way over is not what the door opens on.",
+    file: "luna-ty-apt-argue.proxy.mp4",
+    poster: "/posters/luna-ty-apt-argue.jpg",
+    // 285. No trim — it runs to its last frame with no black, the second
+    // delivery running to arrive that way. The 3s fade is on the proxy.
+    //
+    // THE SOURCE IS THE CLEANED FILE. A stray "shit" at 48.08s, spoken over a
+    // shot where her mouth is shut, is replaced with room tone — see
+    // scripts/import-cuts.sh for how it was found and repaired.
+    durationSeconds: 285,
+    addedOn: "2026-09-11",
+    access: "premium",
+    mature: true,
+    preview: {
+      file: "luna-ty-apt-argue-preview.proxy.mp4",
+      // A MINUTE, not fifteen seconds (Melissa, 2026-09-11). The first minute
+      // of this scene is all arrival — a lift, a corridor, a knock, a door —
+      // and there is no turn anywhere in it, so it costs nothing to give away
+      // and it buys the one thing a short window cannot: long enough in that
+      // corridor to want the door to open.
+      durationSeconds: 60,
+      hookStart: 0,
+      hookNote:
+        "the whole arrival — up in the lift, along the corridor, the knock, and the door",
+    },
+    // `distance` is the subject — a month of nothing and a man who will not say
+    // why. `desire` for where it ends. `hurt` was considered and left off: the
+    // thing that breaks the surface here is the distance itself.
+    feelings: ["distance", "desire"],
+    // His apartment, not hers — see `tysons-apartment` in taxonomy.ts. This
+    // sat under `downtown` for an hour because there was no truer id.
+    place: "tysons-apartment",
+    about: ["luna", "tyson"],
+  },
+
+  {
+    /*
+      RICK'S HOUSE — Josh, Tyson and Rick. Dropped 2026-09-11, imported the
+      same day, and HIDDEN until Melissa says what is said in it.
+
+      WHY IT IS HIDDEN RATHER THAN PUBLISHED WITH A GUESS. Every other scene in
+      this file could be described from its footage, because the footage is
+      unambiguous — a man is taken by the collar, a glass is thrown, a door
+      opens. This one is two men talking for a hundred and ten seconds, and
+      what they say IS the scene. Writing a synopsis off three frames would be
+      inventing canon in the most load-bearing room in the story.
+
+      WHAT IS ACTUALLY ON SCREEN, and this is the whole of it: Josh arrives at
+      his father's house and takes his cap off in the hall. Rick greets them
+      both, and his hand lands on TYSON'S shoulder rather than his son's. Then
+      it is Josh and Tyson alone, face to face and close, for the back two
+      thirds, through to the last frame.
+
+      IT IS THE STAGE TWO ROOM. docs/content/BETWEEN_US_SECRET_CANON.md §8 puts
+      "Josh's father enters the equation" in exactly this configuration, and
+      until this landed the site had never had a single frame of Rick and Tyson
+      together — no scene, no journal entry, nothing. The ladder had Stage One
+      and Stage Three and no middle rung.
+
+      WHEN: ABOUT A MONTH AFTER JOSH AND LUNA BROKE UP (Melissa, 2026-09-11).
+      So it sits early in the six months — Luna is a few weeks into the
+      lakehouse and Tyson is already driving out there (`tyson-shows-up` is
+      week two).
+
+      AND IT LANDS BEFORE THE PROMISE, which is the reason the placement is
+      worth writing down rather than just recording. THE PROMISE forms over the
+      following months, out of Josh talking about her on the farm; Tyson does
+      not fall for her until about month four. At month one none of that has
+      happened. So the audience meets the debt to RICK before it ever meets the
+      promise to JOSH — the older, deeper obligation first, with the surface
+      one laid on top of it later.
+
+      That is also why Josh can say "you do not have to come every time he
+      calls" with no self-interest in it at all. He wants nothing from Tyson
+      yet. He is a month out from losing Luna, standing in his father's house,
+      moving furniture.
+
+      WHAT IS SAID (Melissa, 2026-09-11). They are there to move an old safe
+      upstairs — that is the whole occasion, and it matters that it is an
+      errand. Josh tells Tyson he does not have to be there every single time
+      Rick calls. He means it kindly and he is completely wrong about what he
+      is asking, because Tyson believes he owes Rick his life and his career.
+
+      JOSH DOES NOT HAVE THE FULL WHY. To Josh, his father saved them both, and
+      that is the end of it. Tyson knows the asymmetry: Josh is his son. Of
+      course Rick saved his son. And Josh answers that with "and who the fuck
+      were you" — not cruelly. He is saying: you were his too, he thinks of you
+      as another son, stop standing outside the family.
+
+      Which is the worst possible comfort, because being loved by that family
+      IS the debt.
+
+      THE DEATH IS NEVER SAID OUT LOUD. They tiptoe all the way round it for a
+      hundred and ten seconds. Josh tells Tyson it was not his fault; Tyson
+      feels responsible. Nobody names the man, the accident, or the year.
+
+      SO IT IS STAGE TWO AND IT STOPS THERE. §8 of the secret document wants
+      the audience thinking "what the fuck happened between these people" — and
+      an errand, a hand on the wrong shoulder, and two men declining to finish
+      a sentence is exactly that, with no event handed over.
+
+      PREMIUM, and the precedent is this file's own. `tyson-cole-bar` went
+      members-only with the note that every other recent scene was free because
+      it had no turn to protect, and this "contains the mechanism the whole
+      deadlock runs on". So does this one: the debt is acknowledged out loud
+      for the first time anywhere. The 15s window is the errand, which gives a
+      stranger the odd warmth and none of the mechanism.
+    */
+    slug: "josh-ty-ricks-house",
+    // PLACEHOLDER title and synopsis — hers to replace. "The Safe" for the
+    // object and the house pattern (The Bolt, The Glass, The Study), and
+    // because the joke of it is that the heavy locked thing they came to move
+    // is not the heavy locked thing in the room.
+    title: "The Safe",
+    synopsis:
+      "An old safe to get upstairs at his father\u2019s house, and somewhere between the hall and the landing Josh finally says it: you don\u2019t have to come every time he calls. He means it kindly. He has no idea what he is asking.",
+    file: "josh-ty-ricks-house.proxy.mp4",
+    poster: "/posters/josh-ty-ricks-house.jpg",
+    // 171, untrimmed — runs to its last frame with no black.
+    durationSeconds: 171,
+    addedOn: "2026-09-11",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "josh-ty-ricks-house-preview.proxy.mp4",
+      // FORTY-FIVE SECONDS FROM THE TOP (Melissa, 2026-09-11), not the fifteen
+      // this shipped with an hour earlier. The whole opening is arrival and
+      // errand — Josh in the hall with his cap, Rick greeting them both, the
+      // walk to the safe — and the conversation has not begun, so it costs no
+      // turn.
+      //
+      // AND IT HANDS THE GESTURE TO EVERYBODY. At about 25s Rick's hand lands
+      // on TYSON\u2019S shoulder rather than his son\u2019s. That is the Stage Two
+      // beat in its silent form: it explains nothing and asks everything,
+      // which is exactly the thing that should not be behind a wall. The
+      // sentence that would explain it is at 60s and stays paid.
+      durationSeconds: 45,
+      hookStart: 0,
+      hookNote:
+        "the arrival and the errand \u2014 including whose shoulder Rick puts his hand on",
+    },
+    // `lies` is the taxonomy\u2019s "things kept back, and what keeping them does",
+    // which is this scene exactly \u2014 a death nobody names for a hundred and ten
+    // seconds. `distance` for "two people in the same room, further apart than
+    // they\u2019ll admit": they are a foot apart and Josh has no idea where Tyson
+    // is standing.
+    feelings: ["lies", "distance"],
+    // The hall and the stairs, not the study \u2014 see `ricks-house`, added with
+    // this scene.
+    place: "ricks-house",
+    about: ["josh", "tyson", "rick"],
+  },
+  {
+    /*
+      TYSON THINKING. Dropped 2026-09-13, scored, 3:34 after the tail trim.
+
+      WHAT IS ON SCREEN, and the copy goes no further: Tyson alone in his
+      apartment with a whisky and his phone face-up on the table. Luna,
+      intercut, on the phone in a bedroom. Then the black Carrera on a city
+      highway at night, and him driving it out of the city with water and
+      mountains going past. A man sitting still, and then a man not sitting
+      still.
+
+      IT LANDS ON TWO PUBLISHED THINGS WITHOUT EXPLAINING EITHER. The whisky is
+      "drinking again" from `luna-ty-apt-argue`. The car is the black 2020
+      Carrera canon has had him treating like a child since the start. Neither
+      needs a line of setup, and a viewer who has seen the apartment scene
+      reads the glass differently from one who has not — which is the whole
+      value of putting it in without comment.
+
+      FIVE MONTHS INTO THE BREAKUP (Melissa, 2026-09-13), and the placement is
+      most of what the scene means. THE PROMISE has Tyson falling for her at
+      about month four and Josh calling her at month six, so this sits in the
+      gap between those two — after he knows, before anything happens, with
+      nothing he can do about either.
+
+      SHE IS CALLING AND HE IS NOT ANSWERING. That is the scene. The phone
+      face-up on the table is hers; the intercut of Luna on the phone is the
+      other end of a call he is letting ring out. He is not thinking about
+      whether to go somewhere — he has nowhere to be, and the driving is what
+      he does instead of picking up.
+
+      IT IS ABOUT A WEEK OLD, NOT FIVE MONTHS, and the first synopsis got this
+      wrong. "Five months of this" read as five months of avoiding her; the
+      five months is how long the BREAKUP has run. He has been dodging her for
+      about a week. Melissa: "he just started maybe a week ago."
+
+      That distinction is the entire scene. A man who has never once failed to
+      pick up has stopped picking up, in the last seven days, and she has
+      noticed. If it had been going on for months it would be a state; at a
+      week it is a decision he is making nightly and losing.
+
+      WHY HE IS DOING IT IS NOT ON SCREEN AND MUST NOT REACH THE COPY. He is
+      starting to separate himself from her because of what he feels — which is
+      `THE PROMISE` working exactly as canon describes it: the distance is the
+      only way he can keep a promise he no longer wants to keep. The synopsis
+      stays behavioural and says none of it.
+
+      AND HE CALLS BACK AT THE END, which the video does not show the other
+      side of. Melissa: "to viewers it could be someone else, but its tyson" —
+      the conversation is a scene she will build later. So the synopsis says he
+      calls somebody, and stops. That is not coyness; it is exactly what is on
+      screen, and writing "he calls her" would publish a fact the footage does
+      not contain.
+
+      LUNA HAS ALREADY NOTICED HIM PULLING AWAY by this point, which is why
+      this needs no journal entry to carry it — the book has been circling this
+      stretch for months without knowing what is in it. `distance` is her
+      writing "he isn\u2019t punishing me... he\u2019s protecting something, and I am
+      fairly sure it isn\u2019t himself". This is the other side of that, and it is
+      better left unlinked so neither explains the other.
+
+      PLACE is `tysons-apartment`, which is where it starts and where the state
+      of him is established. Half the runtime is a car; there is no place id
+      for a road and inventing one for a single scene would be worse than
+      filing it where it begins.
+    */
+    slug: "tyson-apt-thinking",
+    // PLACEHOLDER title and synopsis — hers to replace.
+    //
+    // IT WAS "Somewhere To Be" FOR AN HOUR AND THAT WAS EXACTLY BACKWARDS,
+    // written off the footage before the context arrived: it read the driving
+    // as a man going to somebody. He is going nowhere. The title is the thing
+    // he does not do.
+    title: "Not Picking Up",
+    synopsis:
+      "He has always picked up. For about a week now he has not \u2014 he watches it light up on the table, waits for it to stop, and takes the car out instead, the long way, with nowhere at the end of it. Then, somewhere past midnight, he rings somebody back.",
+    file: "tyson-apt-thinking.proxy.mp4",
+    poster: "/posters/tyson-apt-thinking.jpg",
+    // 214, trimmed at 213.5 — about 3.5s of black on the tail. It ends on
+    // picture at luma 25, so the 3s fade on the proxy still applies.
+    durationSeconds: 214,
+    addedOn: "2026-09-13",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "tyson-apt-thinking-preview.proxy.mp4",
+      // Melissa: "free for the first 1m. then membership." Which is exactly
+      // what the 2026-09-13 tiers give a 3:34 scene, so this needs no
+      // exception — the policy and her call agree.
+      durationSeconds: 60,
+      hookStart: 0,
+      hookNote:
+        "the apartment, the glass, and a phone he is not answering — it ends before he takes the car out",
+    },
+    // `distance` for a man letting her calls ring out. `desire` because that is
+    // WHY he cannot answer — month five, he has known since month four, and
+    // there is nothing he is allowed to say. `hurt` was considered and left
+    // off: nothing breaks the surface here, which is the point of it.
+    feelings: ["distance", "desire"],
+    place: "tysons-apartment",
+    about: ["tyson", "luna"],
+  },
+  {
+    /*
+      THE POOL. Josh and Luna, dropped 2026-09-14. Melissa: "the end is
+      explicit. but this is basically the full pool scene with josh and luna
+      having that arguement that leads to them being intimate at the end."
+
+      TWO CUTS, THE ty-luna-bed SHAPE. The public scene is the ARGUMENT — 4:22,
+      1912x1080, unscored, ending on a near-kiss by the pool. The members' cut
+      is the whole thing scored, 7:23, and it is `explicit`.
+
+      THAT SPLIT IS THE RULE, NOT A PREFERENCE. "Explicit goes behind
+      membership" is Melissa's standing instruction, narrowed by name exactly
+      once, for luna-josh-first-night, after she checked that window herself. A
+      single explicit entry here would have had to forfeit its public window
+      entirely — and the first minute of two people arguing across a lit pool
+      is precisely what a stranger should be able to watch.
+
+      So nobody meets anything explicit without an account, and the scene still
+      gets a real shop window. Both halves of the policy, honoured.
+
+      THE EXPLICIT CUT HAS NO POSTER AND MUST NOT GET ONE. /public is ungated
+      and permanent, so a card frame from that cut would publish the exact
+      thing the membership gates. It borrows the public cut's poster, which is
+      what `proxy-only` in scripts/optimize-media.sh exists for.
+
+      POSTER AT 20s: the two of them on the same seat by the pool, turned away
+      from each other, both dressed. Sitting a foot apart and facing opposite
+      directions is the scene.
+
+      THE FIRST SYNOPSIS SAID "opposite sides of a lit pool" AND WAS WRONG in
+      the plain factual way, not the interpretive one — they are side by side
+      on the same lounger for the whole argument. It also ended on "badly, and
+      then not", which reads as meaning something until somebody asks what.
+      Written plainly now.
+
+      IT COSTS RESOLUTION IN THE WRONG DIRECTION. The paid cut is 1320x762
+      against the public one's 1912x1080, so members get the smaller picture —
+      the same backwards trade luna-josh-fair and luna-truck-breakdown already
+      carry, and worth a re-export at 1080 if the source allows it.
+
+      WHERE IT SITS IS NOT ASSERTED. An argument by a pool that turns fits more
+      than one point in this story; Melissa gave the footage and the shape, not
+      a placement.
+    */
+    slug: "josh-luna-pool",
+    // PLACEHOLDER title and synopsis — hers to replace. The house pattern for
+    // a scene named after its room (The Garage, The Study, The Barn, The Lake).
+    title: "The Pool",
+    synopsis:
+      "Late, outside by the pool, the two of them sitting close and finally having it out. Neither of them backs down \u2014 and it does not end the way an argument ends.",
+    file: "josh-luna-pool.proxy.mp4",
+    poster: "/posters/josh-luna-pool.jpg",
+    // 263, untrimmed — it ends on picture at luma 37 with no black.
+    durationSeconds: 263,
+    addedOn: "2026-09-14",
+    access: "premium",
+    // Intimate at the end, not shown. `explicit` belongs on the members' cut
+    // below and nowhere else on this entry.
+    mature: true,
+    preview: {
+      file: "josh-luna-pool-preview.proxy.mp4",
+      // A minute, the tier for anything over three minutes. It is the argument
+      // and only the argument: at 0:20 they are sitting apart fully dressed,
+      // and the public cut does not reach the near-kiss until 4:18.
+      durationSeconds: 60,
+      hookStart: 0,
+      hookNote:
+        "the argument, from the top \u2014 it ends three minutes before the cut does",
+    },
+    premium: {
+      file: "josh-luna-pool-explicit.proxy.mp4",
+      durationSeconds: 443,
+      explicit: true,
+      difference:
+        "the whole scene, scored \u2014 the argument, and what happens after it stops being one",
+    },
+    // `hurt` for an argument that is genuinely one, and `desire` for where it
+    // goes. `lies` was considered and left off: whatever else this is, neither
+    // of them is holding anything back in it.
+    feelings: ["hurt", "desire"],
+    // PLACE UNRESOLVED — `farmhouse` is a placeholder and it is WRONG. It was
+    // a guess at import and Melissa has said so. What is on screen: a lit pool
+    // at night, candles, warm low light, palms, outdoor loungers. None of that
+    // is a working farm in Colorado. Mexico is the only existing id that fits
+    // the look, and having already guessed once, a second guess is not worth
+    // publishing another wrong fact. Waiting on her.
+    place: "farmhouse",
+    about: ["luna", "josh"],
+  },
+  {
+    /*
+      THE GARAGE, AGAIN — Luna and Tyson, 2:25, dropped 2026-09-14. HIDDEN, for
+      two reasons that are both temporary.
+
+      ONE: THE FILE IS ABOUT TO CHANGE. Melissa: "no music in this one but im
+      gonna add it here shortly." Publishing an unscored cut that is expected
+      to be replaced within the day means a members-facing scene whose audio
+      changes underneath anybody watching it. The swap is routine here — three
+      scenes had it this week — but those arrived days apart and unannounced.
+      This one came with notice, so it waits.
+
+      TWO: NOBODY HAS SAID WHAT IS SAID IN IT. Same restraint as
+      `josh-ty-ricks-house`. What is on screen: the two of them close among the
+      tools, her hand on his arm while he is turned away, and by about 2:00 she
+      is mid-sentence and getting nothing back. That reads as her asking and
+      him not answering, which is the shape of everything else this month — but
+      reading a scene off five frames is exactly how The Pool got a synopsis
+      putting two people on opposite sides of a pool they were sitting beside
+      together.
+
+      IT IS THE THIRD GARAGE SCENE, after `ty-luna-garage` (7:36) and
+      `luna-ty-shop-kiss` (4:24), and it is a different conversation in the
+      same room rather than a recut of either. Worth stating so nobody
+      reconciles them later.
+
+      TO PUBLISH: point the manifest at the scored export, re-import, replace
+      the placeholder title and synopsis, set `feelings`, and delete one
+      `hidden: true`. The 45s preview it will get under the tiers is already
+      declared below.
+    */
+    slug: "ty-luna-grg2",
+    title: "The Garage, Again",
+    synopsis:
+      "Luna and Tyson, in the shop, having a conversation he does not want to have.",
+    file: "ty-luna-grg2.proxy.mp4",
+    poster: "/posters/ty-luna-grg2.jpg",
+    // 146, trimmed at 145.5 — black from about 146.
+    durationSeconds: 146,
+    addedOn: "2026-09-14",
+    // HIDDEN. See the note above; this is one line and a re-import from live.
+    hidden: true,
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "ty-luna-grg2-preview.proxy.mp4",
+      // 45s, the tier for anything over two minutes. Declared now so the swap
+      // to the scored cut is a re-import and nothing else.
+      durationSeconds: 45,
+      hookStart: 0,
+    },
+    feelings: [],
+    place: "garage",
+    about: ["luna", "tyson"],
+  },
+  {
+    /*
+      THE TRAILER, 2026-09-15. The first one, ahead of the pilot.
+
+      FREE, AND IT IS THE ONE JUSTIFIED EXCEPTION TO "keep all videos behind
+      membership". That policy gates the STORY. This is an advertisement for
+      it, and the site has been promising it free the whole time:
+      lib/content/membership.ts lists "Trailers and story overview" as a
+      `from: "free"` benefit, and there has never been a trailer published to
+      honour it. clips.ts already put the argument in writing about the pilot
+      interview — gating an advertisement would be charging admission to a
+      trailer.
+
+      So this closes a promise rather than opening a loophole. Everything that
+      is the story stays gated; the two things that exist to sell it — this and
+      the pilot interview clip — do not. One line to reverse if Melissa
+      disagrees.
+
+      NO PREVIEW BLOCK, because a free scene needs no window onto itself.
+
+      THE END CARD IS HERS. scripts/trailer-end-title.py built the BETWEEN US
+      sequence — letters held apart, then drawn together on an ease-in-out —
+      and she laid it into her own edit with the score carrying underneath,
+      which is what it needed. The version this repo concatenated ended in
+      eight seconds of silence.
+
+      POSTER AT 8s: the photograph in a frame on the table, which is the
+      trailer's own opening image. It is distinctive among forty-six moody
+      two-shots, and a photograph of two people being looked at later is what
+      the series is about. 55s — her laughing, him behind her — is warmer and
+      more clickable, and is the swap if this reads too quiet on the grid.
+
+      `mature: false`. It is a trailer, cut by her for public posting: there is
+      closeness and a kiss and nothing this site would call intimate. If it
+      goes on Instagram it has already passed a stricter test than ours.
+
+      PLACE IS ARBITRARY AND SAID SO. A trailer is not in a room. `farmhouse`
+      matches how the cast interview is filed and is the story's centre; it
+      means nothing here beyond giving the browse axis something to hold.
+    */
+    slug: "between-us-trailer-one",
+    // "Trailer", not "Trailer One" — Melissa, 2026-09-15. The slug keeps the
+    // -one because it is a published URL; the card does not have to.
+    title: "Trailer",
+    synopsis:
+      "Ten years, six months apart, and the best friend who has been there the whole time. The first look at the series \u2014 the pilot lands this month.",
+    file: "between-us-trailer-one.proxy.mp4",
+    poster: "/posters/between-us-trailer-one.jpg",
+    // 101, untrimmed. It ends on the title card, which fades itself.
+    durationSeconds: 101,
+    addedOn: "2026-09-15",
+    access: "free",
+    mature: false,
+    // Empty on purpose, the same as the cast interview: a trailer is not a
+    // beat and cannot honestly be filed under one feeling.
+    feelings: [],
+    place: "farmhouse",
+    about: ["luna", "josh", "tyson"],
   },
 ];
 

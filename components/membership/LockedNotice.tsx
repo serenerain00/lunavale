@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getTier } from "@/lib/content/membership";
 
 interface LockedNoticeProps {
   /** Still or poster from the locked item, shown dimmed behind the notice. */
@@ -12,15 +13,23 @@ interface LockedNoticeProps {
  * The conversion moment: a member-only scene or gallery, seen but not opened.
  *
  * It shows the real frame, dimmed — the point is that the visitor can tell
- * what they are missing rather than being handed a grey box. What it does not
+ * what they are missing rather than being handed a gray box. What it does not
  * do is nag: one line, one link out to the pitch, no countdown, no second
  * modal. Per docs/monetization/MONETIZATION.md, a locked door is allowed to be
  * a locked door; it isn't allowed to be a sales pitch that follows you around.
+ *
+ * THE BUTTON NAMES THE MEMBERSHIP (2026-09-02). It read "See what membership
+ * opens", which offers a page to read at the one moment on the site where the
+ * visitor is looking straight at something they want and cannot have. The
+ * label now comes from the tier data, so it says what /membership's own button
+ * says and a future rename moves both.
  *
  * This is presentation only. The actual refusal already happened server-side
  * in lib/access/entitlement.ts — nothing here is the boundary.
  */
 export function LockedNotice({ cover, subject }: LockedNoticeProps) {
+  const vault = getTier("vault")!;
+
   return (
     <div className="absolute inset-0">
       <Image
@@ -51,7 +60,7 @@ export function LockedNotice({ cover, subject }: LockedNoticeProps) {
           href="/membership"
           className="inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
         >
-          See what membership opens
+          {vault.cta}
         </Link>
       </div>
     </div>

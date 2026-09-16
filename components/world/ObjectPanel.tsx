@@ -10,6 +10,7 @@ import { useEffect, useRef } from "react";
 import { getVideo, formatDuration } from "@/lib/content/videos";
 import { VideoPlayer } from "@/components/media/VideoPlayer";
 import type { WorldObject } from "@/lib/content/world";
+import { getTier } from "@/lib/content/membership";
 
 interface ObjectPanelProps {
   object: WorldObject;
@@ -107,7 +108,7 @@ function LockedBody({ object }: { object: WorldObject }) {
         href="/membership"
         className="inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
       >
-        See what membership opens
+        {getTier("vault")!.cta}
       </Link>
     </div>
   );

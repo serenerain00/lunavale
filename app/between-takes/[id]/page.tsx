@@ -86,7 +86,7 @@ export default async function NotebookPageRoute({
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="flex-1 px-5 pb-24 pt-10 sm:px-8 sm:pt-14">
         <div className="mx-auto w-full max-w-2xl">
@@ -96,9 +96,7 @@ export default async function NotebookPageRoute({
           >
             ← The notebook
           </Link>
-          <p className="mt-2 text-xs text-stone-dim">
-            Page {index + 1} of {pages.length}
-          </p>
+          <p className="mt-2 text-xs text-stone-dim">Page {index + 1}</p>
         </div>
 
         <div className="mt-8">

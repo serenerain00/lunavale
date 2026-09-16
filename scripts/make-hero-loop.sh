@@ -45,13 +45,23 @@ cd "$(dirname "$0")/.."
 # free for the headline, and a wrap-around you can't see — either a near-static
 # shot, or one where the loop point lands on a cut.
 HEROES=(
+  # THE TRAILER, 2026-09-15. 38s from 0:12, which clears the opening
+  # photograph-on-a-table (a static object makes a dead ambient loop) and stops
+  # well short of the BETWEEN US end card at 1:33 — a hero loop that contains
+  # the title card would show the title twice on one screen.
+  #
+  # IT IS A MONTAGE, so the lower-left rule the spans below are chosen for
+  # cannot hold across every shot in it. Accepted: this one is pinned and is
+  # meant to read as a film playing behind the headline rather than as a single
+  # composed frame.
+  "between-us-trailer-one|stories/between-us-trailer-one.proxy.mp4|12|38"
   # Night, warm, string lights and movement in depth. The strongest of them.
   "luna-josh-fair|stories/luna-josh-fair.proxy.mp4|8|40"
   # Daylight, big windows, the warmest room in the story.
   "luna-josh-coffee|stories/luna-josh-coffee.proxy.mp4|20|40"
   # The lake through the glass — the only hero with real daylight distance in it.
   "luna-cathy-phone|stories/luna-cathy-phone.proxy.mp4|4|35"
-  # Bodies moving, coloured light, a crowd. Reads as a film from across a room.
+  # Bodies moving, colored light, a crowd. Reads as a film from across a room.
   "luna-tyson-dance|stories/luna-tyson-dance-full.proxy.mp4|30|40"
   # Night interior, lamplight, one figure. Quiet counterweight to the dance.
   "luna-avery-ipad|stories/luna-avery-ipad.proxy.mp4|4|35"

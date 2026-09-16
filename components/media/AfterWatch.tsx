@@ -5,8 +5,9 @@ import Link from "next/link";
 import {
   sendSceneComment,
   type CommentResult,
-} from "@/app/watch/actions";
+} from "@/app/clips/actions";
 import { MAX_COMMENT_BODY } from "@/lib/content/comments";
+import { FollowForm } from "@/components/follow/FollowForm";
 
 /**
  * What appears under a scene once it has finished playing.
@@ -67,7 +68,7 @@ export function AfterWatch({
 
       {state?.ok ? (
         <p className="mt-2 max-w-xl text-sm leading-relaxed text-stone">
-          It goes straight to Melissa with the name of the scene attached, which
+          It goes straight to Melissa with the name of the clip attached, which
           is more useful to her than you might think.
         </p>
       ) : (
@@ -92,7 +93,7 @@ export function AfterWatch({
             <input type="hidden" name="scene" value={slug} />
 
             <label htmlFor={`comment-${slug}`} className="sr-only">
-              What did you think of this scene?
+              What did you think of this one?
             </label>
             <textarea
               id={`comment-${slug}`}
@@ -125,10 +126,38 @@ export function AfterWatch({
         </>
       )}
 
+      {/* THE ADDRESS, at the other moment worth asking: somebody has just
+          watched the whole thing, or run out of preview wanting more.
+
+          It sits BELOW the comment form and behind a rule, because the comment
+          form promises "no account, no email" and that promise has to stay
+          true. This is plainly a separate, optional thing they can ignore —
+          not a condition attached to being heard.
+
+          Note what is NOT here: no "join to unlock", no discount for an
+          address, nothing that makes the list a cheaper membership. It is the
+          third option for the many people who like this and are not going to
+          pay for it today, and its only offer is being told when there is more
+          (MONETIZATION.md — the conversion moments are the story's, not the
+          interface's). */}
+      <div className="mt-5 border-t border-hairline pt-4">
+        <FollowForm
+          source={`scene:${slug}`}
+          compact
+          label={
+            preview
+              ? "Want to know when the next one goes up?"
+              : "Want to know when there's another?"
+          }
+          note="An email when a new clip or a page of her journal lands. Nothing else, and you can stop any time."
+          done="You're on the list. You'll hear when the next one lands."
+        />
+      </div>
+
       {!surveyAnswered && (
         <p className="mt-5 border-t border-hairline pt-4 text-sm leading-relaxed text-stone">
           There are also six questions about where this should go next —
-          including whether it should be a series or a film.{" "}
+          including how you would rather watch season one.{" "}
           <Link
             href="/survey"
             className="text-amber underline-offset-4 transition-colors duration-(--duration-quick) hover:underline"

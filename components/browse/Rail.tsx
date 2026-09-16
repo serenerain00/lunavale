@@ -341,7 +341,7 @@ function Arrow({
  */
 function Progress({ metrics }: { metrics: Metrics }) {
   const total = metrics.start + metrics.end;
-  const travelled = total === 0 ? 0 : metrics.start / total;
+  const traveled = total === 0 ? 0 : metrics.start / total;
   // Floor the thumb so a very long row still shows a grabbable-looking mark.
   const width = Math.max(metrics.ratio, 0.12);
 
@@ -351,7 +351,7 @@ function Progress({ metrics }: { metrics: Metrics }) {
         className="h-px bg-amber/80"
         style={{
           width: `${width * 100}%`,
-          transform: `translateX(${(travelled * (1 - width) * 100) / width}%)`,
+          transform: `translateX(${(traveled * (1 - width) * 100) / width}%)`,
         }}
       />
     </div>

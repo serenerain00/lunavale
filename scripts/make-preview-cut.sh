@@ -10,7 +10,7 @@
 # scene. So the public cut is assembled: a handful of beats pulled from across
 # the take and dissolved together.
 #
-# WHAT THE BEATS ARE FOR. A preview sells the rest; it does not summarise it.
+# WHAT THE BEATS ARE FOR. A preview sells the rest; it does not summarize it.
 # The spans below are chosen to show the state a character is in and to stop
 # before the thing that state is heading towards. That turn is what the
 # membership is. If you add a scene here, pick beats on the same rule and keep

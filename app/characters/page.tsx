@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Guest } from "@/components/access/Viewer";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { getMembership } from "@/lib/access/entitlement";
 import {
   characters,
   countFor,
@@ -20,11 +20,10 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default async function CharactersIndexPage() {
-  const { active: member } = await getMembership();
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-10 pt-12 sm:pt-16">
@@ -44,11 +43,7 @@ export default async function CharactersIndexPage() {
 
         <Reveal className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {characters.map((character) => (
-            <CharacterCard
-              key={character.id}
-              character={character}
-              member={member}
-            />
+            <CharacterCard key={character.id} character={character} />
           ))}
         </Reveal>
       </main>
@@ -56,13 +51,7 @@ export default async function CharactersIndexPage() {
   );
 }
 
-function CharacterCard({
-  character,
-  member,
-}: {
-  character: Character;
-  member: boolean;
-}) {
+function CharacterCard({ character }: { character: Character }) {
   const total = countFor(character.id);
   const locked = lockedCountFor(character.id);
 
@@ -100,7 +89,16 @@ function CharacterCard({
             is owed the actual size of what is behind the wall. */}
         <p className="mt-4 text-xs text-stone-dim">
           {total} pieces
-          {locked > 0 && !member && <> · {locked} members-only</>}
+          {/* Shown to a stranger, hidden from someone who already has them.
+              Resolved on the client so this page can stay static — the count
+              itself is derived from the public catalog, so nothing is
+              disclosed by it being in the HTML. */}
+          {locked > 0 && (
+            <Guest>
+              {" "}
+              · {locked} members-only
+            </Guest>
+          )}
         </p>
       </div>
     </Link>

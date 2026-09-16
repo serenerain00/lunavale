@@ -20,6 +20,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useScrollLock } from "@/lib/hooks/useScrollLock";
 
 export interface ViewStillJournal {
   excerpt: string;
@@ -174,6 +175,11 @@ function Lightbox({
   const swipe = useRef({ active: false, startX: 0, startY: 0, dx: 0 });
   const current = items[index];
 
+  // Locks the ROOT element, not the body — see lib/hooks/useScrollLock.ts.
+  // A body-level lock turns body into a scrollport and breaks the sticky
+  // header underneath this overlay.
+  useScrollLock(true);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -182,14 +188,9 @@ function Lightbox({
     };
     window.addEventListener("keydown", onKey);
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     panelRef.current?.focus();
 
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = previousOverflow;
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, [onStep, onClose]);
 
   const onPointerDown = (e: React.PointerEvent) => {

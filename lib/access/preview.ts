@@ -17,7 +17,7 @@
  *   The secret is compared in constant time, so the endpoint can't be used to
  *   guess it a character at a time.
  *
- *   Anything it unlocks is labelled. `getMembership().preview` stays true, so
+ *   Anything it unlocks is labeled. `getMembership().preview` stays true, so
  *   PreviewNotice keeps telling you this isn't a real membership — the one
  *   thing worse than a back door is one you forget you're standing in.
  */
@@ -54,7 +54,7 @@ export function previewKeyValid(key: string | undefined): boolean {
  * The cookie value to write for a tier.
  *
  * SIGNED, because a cookie is client-controlled. Guarding only the page that
- * sets it would be theatre: anyone could read the cookie name out of this
+ * sets it would be theater: anyone could read the cookie name out of this
  * source and hand themselves `lv_preview=vault`. The signature means forging
  * one requires PREVIEW_SECRET, which is the thing actually being protected.
  */

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HelpForm } from "@/components/help/HelpForm";
 import { SiteHeader } from "@/components/ui/SiteHeader";
-import { getMembership } from "@/lib/access/entitlement";
 import { authConfigured } from "@/lib/billing/provider";
 
 export const metadata: Metadata = {
@@ -22,14 +21,11 @@ export const dynamic = "force-dynamic";
  * for both sides. What is left goes to Melissa.
  */
 export default async function HelpPage() {
-  const [{ active: member }, email] = await Promise.all([
-    getMembership(),
-    signedInEmail(),
-  ]);
+  const email = await signedInEmail();
 
   return (
     <>
-      <SiteHeader member={member} />
+      <SiteHeader />
 
       <main className="mx-auto w-full max-w-3xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-8 pt-12 sm:pt-16">

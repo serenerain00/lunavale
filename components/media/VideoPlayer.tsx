@@ -4,7 +4,7 @@
  *
  * Handles a failed source explicitly. When /api/stream returns anything other
  * than video — media not uploaded, an expired signed URL, a network drop — the
- * browser's own response is to grey out the controls and say nothing, which
+ * browser's own response is to gray out the controls and say nothing, which
  * reads as "this site is broken" and gives the viewer nothing to do. A missing
  * file is a real state and gets a real message.
  */

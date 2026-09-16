@@ -5,6 +5,7 @@ import { ViewerProvider } from "@/components/access/Viewer";
 import { ClerkViewerSync } from "@/components/access/ClerkViewerSync";
 import { authConfigured } from "@/lib/billing/provider";
 import { Caveat, Fraunces, Inter } from "next/font/google";
+import { BackToTop } from "@/components/ui/BackToTop";
 import "./globals.css";
 
 // Display serif for titles; highly readable sans for controls and metadata.
@@ -103,6 +104,14 @@ export default function RootLayout({
           This provider decides what buttons SAY. It never decides what anyone
           RECEIVES; that stays server-side in /api/stream and canWatch().
         */}
+        {/*
+          The focus target for "back to top". A skip-link-style anchor: it
+          takes focus but never a tab stop, so a keyboard visitor sent back to
+          the top lands there rather than being moved visually and left at the
+          bottom of the document.
+        */}
+        <div id="top" tabIndex={-1} className="outline-none" />
+
         <ViewerProvider>
           {/*
             Inside the provider so it can refresh it, and rendered only where
@@ -113,6 +122,9 @@ export default function RootLayout({
           {authConfigured() && <ClerkViewerSync />}
           {children}
         </ViewerProvider>
+
+        {/* Every page, outside the provider — it needs nothing from it. */}
+        <BackToTop />
 
         {/*
           Microsoft Clarity — traffic + session analytics. Production only, so

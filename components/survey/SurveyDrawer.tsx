@@ -150,7 +150,14 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
         </button>
       </div>
 
-      {/* THE TAB. Rendered always and hidden with opacity rather than
+      {/* THE TAB SITS ABOVE THE BACK-TO-TOP BUTTON ON A PHONE, not in the
+          corner — the +3.75rem is that button plus a gap. It gives way rather
+          than the other way round because it is the conditional one: home page
+          only, and only until somebody answers. From `sm` up it moves to the
+          middle of the right edge and the corner is free anyway. See
+          components/ui/BackToTop.tsx.
+
+          THE TAB. Rendered always and hidden with opacity rather than
           unmounted, so it fades rather than blinking into existence on every
           scroll past the band. `pointer-events-none` while hidden keeps it
           from swallowing clicks on whatever is underneath it, and
@@ -167,7 +174,7 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
         aria-expanded={open}
         aria-hidden={bandVisible || open}
         tabIndex={bandVisible || open ? -1 : undefined}
-        className={`fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-30 inline-flex min-h-11 max-w-[calc(100vw-2rem)] items-center rounded-full bg-amber px-5 text-sm font-medium text-void shadow-lg shadow-void/50 transition-[opacity,transform] duration-(--duration-standard) ease-(--ease-standard) hover:bg-amber-soft motion-reduce:transition-none sm:bottom-auto sm:right-0 sm:top-1/2 sm:-translate-y-1/2 sm:rounded-l-lg sm:rounded-r-none sm:px-2.5 sm:py-5 sm:[writing-mode:vertical-rl] ${
+        className={`fixed bottom-[calc(max(1rem,env(safe-area-inset-bottom))+3.75rem)] right-4 z-30 inline-flex min-h-11 max-w-[calc(100vw-2rem)] items-center rounded-full bg-amber px-5 text-sm font-medium text-void shadow-lg shadow-void/50 transition-[opacity,transform] duration-(--duration-standard) ease-(--ease-standard) hover:bg-amber-soft motion-reduce:transition-none sm:bottom-auto sm:right-0 sm:top-1/2 sm:-translate-y-1/2 sm:rounded-l-lg sm:rounded-r-none sm:px-2.5 sm:py-5 sm:[writing-mode:vertical-rl] ${
           bandVisible || open
             ? "pointer-events-none translate-x-4 opacity-0"
             : "translate-x-0 opacity-100"

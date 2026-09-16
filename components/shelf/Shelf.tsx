@@ -25,6 +25,7 @@
 
 import Link from "next/link";
 import { Rail } from "@/components/browse/Rail";
+import { PAGE } from "@/components/ui/layout";
 
 interface ShelfProps {
   /** The row's name. Short enough to scan, specific enough to mean something. */
@@ -45,32 +46,50 @@ interface ShelfProps {
 export function Shelf({ title, href, linkLabel, note, children }: ShelfProps) {
   const id = `shelf-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 
+  /*
+   * THE HEADING AND THE RAIL SHARE ONE CONTAINER, and they have to.
+   *
+   * Rail's scroller carries `-mx-5 px-5` (and `sm:-mx-2 sm:px-2`): the negative
+   * margin pulls it out past its parent's padding so cards can scroll to the
+   * screen edge, and its own matching padding puts the FIRST card back on the
+   * parent's content edge. That only lands correctly when the parent is the
+   * padded box — which is how /browse has always used it.
+   *
+   * The first version of this file padded the heading's own div and left
+   * <Rail> as a bare sibling with no container at all. The result was exactly
+   * what Melissa spotted on 2026-09-16: the titles sat 20px (32px at sm) in
+   * from the posters underneath them. Wrapping both is the fix; nudging the
+   * heading would have been correcting a symptom and would have broken again
+   * the moment either padding changed.
+   */
   return (
     <section aria-labelledby={id} className="pt-10 sm:pt-14">
-      <div className="mx-auto mb-4 flex w-full max-w-[100rem] items-baseline justify-between gap-4 px-5 sm:px-8">
-        <div className="min-w-0">
-          <h2
-            id={id}
-            className="font-display text-xl font-medium text-ivory sm:text-2xl"
-          >
-            {title}
-          </h2>
-          {note && (
-            <p className="mt-1 text-sm leading-relaxed text-stone">{note}</p>
+      <div className={PAGE}>
+        <div className="mb-4 flex items-baseline justify-between gap-4">
+          <div className="min-w-0">
+            <h2
+              id={id}
+              className="font-display text-xl font-medium text-ivory sm:text-2xl"
+            >
+              {title}
+            </h2>
+            {note && (
+              <p className="mt-1 text-sm leading-relaxed text-stone">{note}</p>
+            )}
+          </div>
+
+          {href && (
+            <Link
+              href={href}
+              className="shrink-0 text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
+            >
+              {linkLabel ?? "See all"} <span aria-hidden="true">→</span>
+            </Link>
           )}
         </div>
 
-        {href && (
-          <Link
-            href={href}
-            className="shrink-0 text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
-          >
-            {linkLabel ?? "See all"} <span aria-hidden="true">→</span>
-          </Link>
-        )}
+        <Rail label={title}>{children}</Rail>
       </div>
-
-      <Rail label={title}>{children}</Rail>
     </section>
   );
 }

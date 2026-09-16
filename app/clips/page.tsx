@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { ClipCard } from "@/components/shelf/ClipCard";
+import { PAGE } from "@/components/ui/layout";
 import { inStoryOrder, inReleaseOrder } from "@/lib/content/chronology";
 import { formatDuration } from "@/lib/content/videos";
 import { pageMetadata } from "@/lib/seo/metadata";
@@ -58,18 +59,33 @@ export default async function ClipsPage({
     <>
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-[100rem] flex-1 px-5 pb-24 sm:px-8">
+      <main className={`${PAGE} flex-1 pb-24`}>
         <header className="pb-8 pt-12 sm:pt-16">
           <p className="text-xs uppercase tracking-[0.2em] text-amber">
             Between Us
           </p>
+          {/*
+            WAS "The story so far, in order." — Melissa, 2026-09-16: "its not
+            really in order, lets just say a peek into whats coming."
+
+            She is right, and the overclaim was in the noun as much as the
+            adverb. These are moments, not episodes: they do not add up to a
+            continuous story you could watch end to end, so calling them "the
+            story so far" promised something the library does not deliver, and
+            somebody who started at the top and hit a gap would have been
+            right to feel misled.
+
+            The sequence is still real and still useful, so it stays — as an
+            arrangement the page offers, not as a claim that it is complete.
+          */}
           <h1 className="mt-4 max-w-3xl font-display text-3xl font-light leading-[1.15] text-ivory sm:text-5xl">
-            The story so far, in order.
+            A peek at what&rsquo;s coming.
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
-            These are the pieces season one comes out of. They were made in one
-            order and they happen in another — this is the one they happen in,
-            so you can start at the top and watch straight through.
+            These are moments from the series — the ones already shot, arranged
+            the way they happen to Luna rather than the way they went up. Start
+            anywhere. Each one stands on its own, and together they give you a
+            sense of what season one is walking into.
           </p>
         </header>
 

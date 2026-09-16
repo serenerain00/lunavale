@@ -6,6 +6,7 @@ import { RatingBadge } from "@/components/ui/RatingBadge";
 import type { Hero as HeroContent } from "@/lib/content/hero";
 import { getPlace } from "@/lib/content/taxonomy";
 import { formatDuration } from "@/lib/content/videos";
+import { PAGE } from "@/components/ui/layout";
 
 interface HeroProps {
   hero: HeroContent;
@@ -83,7 +84,7 @@ export function Hero({ hero }: HeroProps) {
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-void to-transparent" />
       </div>
 
-      <div className="mx-auto w-full max-w-6xl px-5 pb-12 sm:px-8 sm:pb-16">
+      <div className={`${PAGE} pb-12 sm:pb-16`}>
         <p className="text-xs uppercase tracking-[0.22em] text-amber">
           An explorable cinematic universe
         </p>

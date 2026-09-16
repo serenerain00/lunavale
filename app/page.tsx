@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { RailItem, RAIL_ITEM_SIZES } from "@/components/browse/Rail";
 import { Shelf } from "@/components/shelf/Shelf";
+import { PAGE } from "@/components/ui/layout";
 import { ClipCard } from "@/components/shelf/ClipCard";
 import { Hero } from "@/components/home/Hero";
 import { TrailerHero } from "@/components/home/TrailerHero";
@@ -113,12 +114,12 @@ export default async function Home() {
           watch right now — in plain sentences rather than the half-lines the
           old page was built out of.
         */}
-        <section className="mx-auto w-full max-w-[100rem] px-5 pt-8 sm:px-8 sm:pt-10">
+        <section className={`${PAGE} pt-8 sm:pt-10`}>
           <p className="max-w-2xl text-base leading-relaxed text-stone sm:text-lg">
             Luna and Josh were together ten years. They spent six months apart,
             and in those six months her oldest friend Tyson was the one who
-            turned up. Then Josh called. Season one is coming — and everything
-            that happens before it is already here to watch, in order.
+            turned up. Then Josh called. Season one is coming, and the moments
+            below are a look at what it is walking into.
           </p>
         </section>
 
@@ -209,7 +210,7 @@ export default async function Home() {
         <Shelf
           title="Clips"
           href="/clips"
-          note="In the order they happen."
+          note="A peek at what season one is walking into."
         >
           {story.slice(0, SHELF_LIMIT).map((v, i) => (
             <RailItem key={v.slug}>
@@ -346,7 +347,7 @@ export default async function Home() {
         */}
         <section
           aria-labelledby="join-heading"
-          className="mx-auto mt-16 w-full max-w-[100rem] px-5 sm:px-8"
+          className={`${PAGE} mt-16`}
         >
           <div className="rounded-xl border border-hairline p-7 sm:p-10">
             <Guest>
@@ -402,7 +403,7 @@ export default async function Home() {
         </section>
 
         {/* ---------------------------------------------------------- follow */}
-        <section className="mx-auto mt-6 w-full max-w-[100rem] px-5 sm:px-8">
+        <section className={`${PAGE} mt-6`}>
           <div className="rounded-xl border border-hairline p-7 sm:p-10">
             <h2 className="font-display text-xl font-light text-ivory sm:text-2xl">
               Know when episode one lands.

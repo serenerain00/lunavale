@@ -71,7 +71,7 @@ const ALL_TIERS: Tier[] = [
     tagline: "The story, open.",
     priceMonthlyCents: 0,
     blurb:
-      "Watch the trailer, read the story so far, and meet everyone in it. No account, no card, no countdown. What is free today stays free.",
+      "Watch the trailer, read some of Luna's journal, and meet everyone in it. No account, no card, no countdown. What is free today stays free.",
     cta: "Start exploring",
     commitment: "Free forever",
     available: true,

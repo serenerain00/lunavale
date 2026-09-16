@@ -32,6 +32,7 @@ import Link from "next/link";
 import { AmbientVideo } from "@/components/home/AmbientVideo";
 import type { Hero as HeroContent } from "@/lib/content/hero";
 import { SERIES_TITLE, SERIES_SUBTITLE } from "@/lib/content/season";
+import { PAGE } from "@/components/ui/layout";
 
 interface TrailerHeroProps {
   hero: HeroContent;
@@ -144,7 +145,7 @@ export function TrailerHero({ hero }: TrailerHeroProps) {
 
       {/* Copy + CTAs, hidden once the video takes over. */}
       <div
-        className={`mx-auto w-full max-w-6xl px-5 pb-12 transition-opacity duration-(--duration-standard) sm:px-8 sm:pb-16 ${
+        className={`${PAGE} pb-12 transition-opacity duration-(--duration-standard) sm:pb-16 ${
           playing ? "pointer-events-none opacity-0" : "opacity-100"
         }`}
       >

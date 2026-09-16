@@ -101,8 +101,8 @@ export const howToWatch: AboutSection = {
   id: "out-of-order",
   heading: "Start at the beginning",
   body: [
-    "These were made in whatever order they finished, which is how anything gets made. They are not shown to you that way. The clips run in the order they happen to Luna, from the day Josh leaves to the night everything it has been building to finally arrives, and every one of them tells you where you are — clip nine of forty-six, and what came before it.",
-    "So you can start at the top and watch straight through. If you would rather dip in, that works too; each one stands on its own, and nothing assumes you have seen the last one.",
+    "These were made in whatever order they finished, which is how anything gets made. They are not shown to you that way. The clips are arranged the way they happen to Luna, and each one tells you where it sits, so you can follow the shape of it rather than guessing.",
+    "They are moments rather than episodes, so there are gaps — this is not the whole story and it is not meant to be. Start at the top, or dip in wherever the picture looks interesting. Each one stands on its own and nothing assumes you have seen the last one.",
     "Her journal runs the same way. It is the same story from inside her head, on the nights it happened, and several pages are open to anyone.",
   ],
 };
@@ -158,9 +158,9 @@ export interface StartingPoint {
 export const startingPoints: StartingPoint[] = [
   {
     href: "/clips",
-    label: "The clips, in order",
+    label: "The clips",
     detail:
-      "Everything that happens before season one, arranged the way it happens rather than the way it was made. Start at the top and watch straight through.",
+      "Moments from the series, arranged the way they happen rather than the way they were made. A look at what season one is walking into.",
   },
   {
     href: "/clips/interview",

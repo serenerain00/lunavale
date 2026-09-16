@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 
 const WAYS_ON = [
   { href: "/journal", label: "Her journal", note: "The pages she kept" },
-  { href: "/clips", label: "The clips", note: "The whole story, in order" },
+  { href: "/clips", label: "The clips", note: "Moments from the series" },
   { href: "/posts", label: "Clips", note: "The short ones" },
   { href: "/", label: "Start again", note: "Back to the beginning" },
 ];

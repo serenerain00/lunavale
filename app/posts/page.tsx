@@ -41,7 +41,7 @@ export default async function PostsPage() {
             These are the vertical cuts that go up on Instagram. They live here
             too, so they don&rsquo;t disappear down somebody else&rsquo;s feed.
             Most are free to watch and a few come with membership. If you want
-            the story in order, that&rsquo;s{" "}
+            more of the story, that&rsquo;s{" "}
             <Link
               href="/clips"
               className="text-ivory underline decoration-hairline underline-offset-4 hover:text-amber"

@@ -14,7 +14,7 @@
  *     story for adults and the tone is restrained everywhere else.
  *   - It appears BEFORE playback, not in the credits. A note nobody sees until
  *     afterwards is decoration. That constraint is why a clip carrying a note
- *     does not autoplay (see components/clips/VerticalPlayer.tsx).
+ *     does not autoplay (see components/posts/VerticalPlayer.tsx).
  *
  * Add entries as the story needs them; keep the labels short enough to sit on
  * one line under a title.

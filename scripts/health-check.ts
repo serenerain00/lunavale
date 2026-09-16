@@ -40,8 +40,9 @@ import process from "node:process";
 
 import { journal, freeEntries, pullQuotes } from "@/lib/content/journal";
 import { videos } from "@/lib/content/videos";
-import { clips } from "@/lib/content/clips";
+import { clips } from "@/lib/content/posts";
 import { galleries } from "@/lib/content/gallery";
+import { assertComplete, inStoryOrder } from "@/lib/content/chronology";
 
 const ROOT = path.join(import.meta.dirname, "..");
 const offlineOnly = process.argv.includes("--offline");
@@ -186,7 +187,7 @@ async function checkLeakage() {
   }
   if (leakyPosters.length) {
     fail("Explicit clip posters sitting in /public", leakyPosters.join(", "));
-  } else ok(`${clips.filter((c) => c.explicit).length} explicit clip(s), no poster in /public`);
+  } else ok(`${clips.filter((c) => c.explicit).length} explicit post(s), no poster in /public`);
 
   // AN EXPLICIT SCENE MUST NOT GROW A PUBLIC PREVIEW. A preview is served with
   // no account and no age check, so this is the one thing the site has never
@@ -209,7 +210,7 @@ async function checkLeakage() {
     );
   } else {
     ok(
-      `${videos.filter((v) => !v.hidden && v.explicit).length} explicit scene(s), only the named one has a public window`,
+      `${videos.filter((v) => !v.hidden && v.explicit).length} explicit clip(s), only the named one has a public window`,
     );
   }
 
@@ -218,14 +219,14 @@ async function checkLeakage() {
     fail("Sitemap no longer restricted to free journal entries");
   } else ok("Sitemap lists only free journal entries");
   if (!/hidden/.test(sitemap)) warn("Sitemap may not be filtering hidden scenes");
-  else ok("Sitemap filters hidden scenes");
+  else ok("Sitemap filters hidden clips");
 
   // Pointing a crawler at a members-only page with nothing public on it is the
   // opposite of what a sitemap is for, and it put an explicit clip in front of
   // Google until 2026-09-11.
   if (!/explicit/.test(sitemap)) {
     fail("Sitemap does not exclude explicit clips");
-  } else ok("Sitemap excludes explicit and closed-door clips");
+  } else ok("Sitemap excludes explicit and closed-door posts");
 }
 
 /* ═════════════════════════ C. Content integrity ════════════════════════════
@@ -240,12 +241,12 @@ async function checkContent() {
   const badScene = journal.filter((e) => e.sceneSlug && !slugs.has(e.sceneSlug));
   if (badScene.length) fail("Journal entries pointing at a scene that does not exist",
     badScene.map((e) => `${e.id} -> ${e.sceneSlug}`).join(", "));
-  else ok(`${journal.filter((e) => e.sceneSlug).length} journal/scene links resolve`);
+  else ok(`${journal.filter((e) => e.sceneSlug).length} journal/clip links resolve`);
 
   const badClip = journal.filter((e) => e.clipId && !clipIds.has(e.clipId));
   if (badClip.length) fail("Journal entries pointing at a clip that does not exist",
     badClip.map((e) => `${e.id} -> ${e.clipId}`).join(", "));
-  else ok("Journal/clip links resolve");
+  else ok("Journal/post links resolve");
 
   // Posters are the card art for every scene. A missing one is a broken image
   // on a page somebody is deciding whether to pay for.
@@ -257,7 +258,7 @@ async function checkContent() {
     }
   }
   if (missingPosters.length) fail("Scene posters missing from /public", missingPosters.join(", "));
-  else ok(`${videos.length} scene posters present`);
+  else ok(`${videos.length} clip posters present`);
 
   // THE PULL QUOTES ARE A PAYWALL TRAP IF THEY DRIFT. The home page quotes a
   // line and links to the entry; journal.ts says free-only, because sending
@@ -278,8 +279,8 @@ async function checkContent() {
   } else ok(`Free journal entries: ${free.size}`);
 
   const openScenes = videos.filter((v) => v.access === "free" && !v.hidden).length;
-  ok(`Published: ${videos.filter((v) => !v.hidden).length} scenes (${openScenes} free), ` +
-     `${journal.length} journal entries, ${clips.length} clips, ${galleries.length} galleries`);
+  ok(`Published: ${videos.filter((v) => !v.hidden).length} clips (${openScenes} free), ` +
+     `${clips.length} posts, ${journal.length} journal entries, ${galleries.length} galleries`);
 }
 
 /* ════════════════════════════ D. Money ═════════════════════════════════════
@@ -485,10 +486,82 @@ async function checkEmail() {
   }
 }
 
+/**
+ * Order — whether the library still has one.
+ *
+ * ADDED 2026-09-16 with the reorder, and it earns its place the way CLAUDE.md
+ * asks: the failure it catches is one that already happened in a different
+ * form. A clip that is not in STORY_ORDER does not error, does not 404 and
+ * does not look wrong anywhere — it simply is not in the ordered view, so a
+ * new clip added next month would silently fail to appear on /clips and on
+ * the home page shelf, and the first person to notice would be a customer who
+ * paid for it.
+ *
+ * The second check is the word "film". The site called itself one for two
+ * months, in about a dozen places, and they were found by grep rather than by
+ * anybody noticing. It is a series now.
+ */
+async function checkOrder() {
+  section("Order — the story still has one, and it is still a series");
+
+  const { missing, unknown } = assertComplete();
+  if (missing.length) {
+    fail(
+      `${missing.length} clip(s) are not in the story order`,
+      `${missing.join(", ")} — they will not appear on /clips or on the home ` +
+        `page. Put each one in its place in STORY_ORDER (lib/content/chronology.ts).`,
+    );
+  } else {
+    ok(`All ${inStoryOrder().length} clips are placed in the story`);
+  }
+
+  if (unknown.length) {
+    fail(
+      `${unknown.length} slug(s) in the story order no longer exist`,
+      unknown.join(", "),
+    );
+  }
+
+  // Every position is reachable, and the first one really is first.
+  const first = inStoryOrder()[0];
+  if (first) ok(`The story starts on "${first.title}"`);
+
+  /*
+   * THE WORD "FILM", in anything a visitor can read. Comments are exempt —
+   * they are where the history of this rename is deliberately written down —
+   * and so is lib/studio, whose prompt vocabulary is about cinematography
+   * rather than about what this product is.
+   */
+  const COPY_DIRS = ["lib/content", "app", "components"];
+  const EXEMPT = /lib\/content\/(journal|videos|between-takes|season|survey|posts)\.ts$/;
+  const offenders: string[] = [];
+  for (const dir of COPY_DIRS) {
+    for (const file of await walk(path.join(ROOT, dir))) {
+      if (!/\.tsx?$/.test(file) || EXEMPT.test(file)) continue;
+      const src = await readFile(file, "utf8");
+      src.split("\n").forEach((line, i) => {
+        const code = line.replace(/^\s*(\/\/|\*|\/\*).*$/, "");
+        if (/\b(a|the|this) film\b/i.test(code)) {
+          offenders.push(`${path.relative(ROOT, file)}:${i + 1}`);
+        }
+      });
+    }
+  }
+  if (offenders.length) {
+    fail(
+      `${offenders.length} place(s) still call this a film`,
+      offenders.slice(0, 6).join(", "),
+    );
+  } else {
+    ok("Nothing visible calls this a film");
+  }
+}
+
 async function main() {
   await checkGates();
   await checkLeakage();
   await checkContent();
+  await checkOrder();
   await checkEmail();
   if (!offlineOnly) { await checkMoney(); await checkStripe(); }
   else { section("Live checks"); warn("--offline: money and Stripe skipped"); }

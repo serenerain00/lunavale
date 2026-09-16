@@ -91,7 +91,7 @@ const ALL_TIERS: Tier[] = [
     priceMonthlyCents: 800,
     priceYearlyCents: 8000,
     blurb:
-      "Every scene at full length, the mature cuts, the private journal entries, and the galleries. New material lands every month.",
+      "Every clip at full length, the mature cuts, the private journal entries, and the galleries. Season one lands here first. New material every month.",
     cta: "Join the LunaVerse",
     commitment: "Monthly · cancel any time",
     featured: true,
@@ -169,8 +169,8 @@ export interface Benefit {
 export const BENEFITS: Benefit[] = [
   {
     id: "public-scenes",
-    label: "Public scenes",
-    detail: "The scenes released openly, in full, at full quality.",
+    label: "Open clips",
+    detail: "The ones released openly, in full, at full quality.",
     from: "free",
     group: "Watching",
   },
@@ -208,7 +208,7 @@ export const BENEFITS: Benefit[] = [
   },
   {
     id: "full-library",
-    label: "The full scene library",
+    label: "The full clip library",
     // NO NUMBER, Melissa 2026-09-03 ("remove the counts").
     //
     // It said "Twelve scenes that never go public", which was true when it was
@@ -223,7 +223,7 @@ export const BENEFITS: Benefit[] = [
     // straight out of the content modules, so it cannot drift. If a number
     // belongs anywhere it is there, not typed into a sentence here.
     detail:
-      "The scenes that never go public, including the whole of The Beach.",
+      "The clips that never go public, including the whole of The Beach.",
     from: "vault",
     group: "Watching",
   },
@@ -231,18 +231,18 @@ export const BENEFITS: Benefit[] = [
     id: "mature",
     label: "Mature cuts",
     detail:
-      "Every intimate scene in the story. The public side keeps the quiet ones.",
+      "Every intimate clip in the story. The public side keeps the quiet ones.",
     from: "vault",
     group: "Watching",
   },
   {
     id: "extended",
-    label: "Full-length scenes",
+    label: "Full-length clips",
     // Was "Extended and alternate edits", which promised plural alternates
     // against exactly one. This says the true and better thing: the clips are
     // teasers and the scenes they come from run minutes, not seconds.
     detail:
-      "The clips are previews. Members get the scenes they were cut from, in full.",
+      "The posts are previews. Members get the clips they were cut from, in full.",
     from: "vault",
     group: "Watching",
   },
@@ -275,7 +275,7 @@ export const BENEFITS: Benefit[] = [
     id: "journals",
     label: "Private journals",
     detail:
-      "Luna's writing, in her own words, between the scenes you've watched.",
+      "Luna's writing, in her own words, between the clips you've watched.",
     from: "vault",
     // Was "The world". The journal is its own route and never needed the
     // rooms, so it moves rather than going with them.
@@ -285,7 +285,7 @@ export const BENEFITS: Benefit[] = [
     id: "artifacts",
     label: "Character artifacts",
     detail:
-      "Letters, photographs and stills that fill in what the scenes leave out.",
+      "Letters, photographs and stills that fill in what the clips leave out.",
     from: "vault",
     // Was "The world", and "objects" meant objects in rooms. The galleries
     // deliver this on their own, so it moves and the word changes with it.
@@ -346,7 +346,7 @@ export const BENEFITS: Benefit[] = [
   {
     id: "scripts",
     label: "Scripts and shot plans",
-    detail: "The written material behind each scene, as it was actually shot.",
+    detail: "The written material behind each clip, as it was actually shot.",
     from: "patron",
     group: "Behind it",
   },
@@ -421,11 +421,11 @@ export const QUESTIONS: Question[] = [
   },
   {
     q: "Does the free part get worse over time?",
-    a: "No. Public scenes stay public and the previews stay where they are. Membership adds material; it never takes any away.",
+    a: "No. What is open stays open, and the previews stay where they are. Membership adds material; it never takes any away.",
   },
   {
     q: "How often does new material arrive?",
-    a: "New scenes and world material land monthly. If a month is thin, the production breakdown will say so plainly rather than padding it out.",
+    a: "New clips and journal pages land every month, and season one arrives here first. If a month is thin, the production breakdown will say so plainly rather than padding it out.",
   },
   {
     q: "Is the mature material separate?",
@@ -433,6 +433,6 @@ export const QUESTIONS: Question[] = [
   },
   {
     q: "Where does the money go?",
-    a: "Into making the next scenes — cast, locations, post, and the time to do it properly. Nothing here is funded by advertising or by selling anything about you.",
+    a: "Into making the next ones — cast, locations, post, and the time to do it properly. Nothing here is funded by advertising or by selling anything about you.",
   },
 ];

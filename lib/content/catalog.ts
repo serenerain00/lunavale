@@ -49,7 +49,7 @@ export const catalog: CatalogItem[] = [
   ...videos
     // Some videos are watchable but not part of the story catalog — the cast
     // interview, for instance, is the hero, not a scene to shelve under a
-    // feeling. Streaming and /watch still work; it just isn't browsed.
+    // feeling. Streaming and /clips still work; it just isn't browsed.
     .filter((v) => !v.hidden)
     .map(
     (v): CatalogItem => ({
@@ -57,7 +57,7 @@ export const catalog: CatalogItem[] = [
       kind: "scene",
       title: v.title,
       synopsis: v.synopsis,
-      href: `/watch/${v.slug}`,
+      href: `/clips/${v.slug}`,
       poster: v.poster,
       meta: formatDuration(v.durationSeconds),
       access: v.access,

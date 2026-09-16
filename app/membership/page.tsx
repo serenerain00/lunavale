@@ -13,7 +13,7 @@ import { pageMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = pageMetadata({
   title: "Membership",
   description:
-    "Membership opens the locked rooms of Luna's world — the full scene library, the mature cuts, the journals, and how it all gets made. Cancel any time.",
+    "Membership opens the whole library — every clip at full length, the mature cuts, Luna's journal, and how it all gets made. Season one lands here first. Cancel any time.",
   path: "/membership",
 });
 
@@ -76,7 +76,7 @@ export default function MembershipPage() {
             The other {lockedEntries} are the ones she never meant anybody to
             see — what she actually thinks about Josh, what she has worked out
             about Tyson, and the nights she only ever told this book about. They
-            come with the scenes they were written after.
+            come with the clips they were written after.
           </p>
           <p className="mt-4 max-w-2xl leading-relaxed text-stone-dim">
             This is happening now. It is being filmed while you read this, it
@@ -174,7 +174,7 @@ export default function MembershipPage() {
             </p>
             <p>
               It is what pays for the next one to get made: the shoot, the cut,
-              the score, the stills, the hours. Scene by scene, that is the
+              the score, the stills, the hours. Clip by clip, that is the
               whole mechanism, and there isn&rsquo;t another one.
             </p>
             <p className="text-ivory">
@@ -280,7 +280,7 @@ const PROMISES = [
   },
   {
     title: "Free stays free",
-    body: "Public scenes and open locations are never moved behind the paywall later. Membership only ever adds.",
+    body: "Anything open today stays open. Nothing is ever moved behind the paywall later — membership only ever adds.",
   },
   {
     title: "No manufactured urgency",
@@ -288,6 +288,6 @@ const PROMISES = [
   },
   {
     title: "No nagging",
-    body: "A locked door says it's locked, once. You won't be interrupted mid-scene or chased around the site.",
+    body: "A locked door says it's locked, once. You won't be interrupted mid-clip or chased around the site.",
   },
 ];

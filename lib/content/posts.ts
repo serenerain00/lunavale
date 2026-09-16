@@ -30,7 +30,7 @@ import type { PersonId } from "@/lib/content/taxonomy";
 import type { AccessLevel } from "@/lib/content/videos";
 
 export interface Clip {
-  /** Stable id — appears in /clips/<id>. Do not rename casually. */
+  /** Stable id — appears in /posts/<id>. Do not rename casually. */
   id: string;
   title: string;
   /** One line, the way a caption reads. PLACEHOLDER. */
@@ -80,7 +80,7 @@ export interface Clip {
    * in VerticalPlayer: letting the element size itself keeps every clip
    * honest); the cards were not.
    *
-   * IT DOES NOT APPLY TO THE /clips GRID, deliberately. Melissa's call
+   * IT DOES NOT APPLY TO THE /posts GRID, deliberately. Melissa's call
    * (2026-09-10): every card there is 9:16 so the wall stays visually
    * balanced, and the odd square one is cropped by CSS to match. This field
    * governs the places where the clip stands alone and its real proportions
@@ -213,7 +213,7 @@ const authored: Clip[] = [
       And the aspect and poster were right either way.
 
       SQUARE, 1320x1256 at source and 720x698 as the proxy, so it declares
-      `aspect` — the second clip to need it after `the-blonde-guy`. The /clips
+      `aspect` — the second clip to need it after `the-blonde-guy`. The /posts
       grid still renders it 9:16 with the rest (Melissa, 2026-09-10: same
       height, visually balanced); this governs the player and the locked card.
 
@@ -247,7 +247,7 @@ const authored: Clip[] = [
     // before the context arrived, on the assumption that the apartment was
     // Luna's. It is Tyson's. The id is in a published URL and ids are
     // load-bearing here, so it stays and this comment carries the correction —
-    // renaming it would break /clips/her-place for anybody who has it.
+    // renaming it would break /posts/her-place for anybody who has it.
     title: "A Month",
     caption:
       "Four weeks of nothing, and then she is outside his door in the city, and neither of them is saying the thing.",

@@ -8,7 +8,7 @@
  * liked it, and are not going to spend eight dollars on a first visit. An
  * account would ask them for more than the thing they came to do.
  *
- * Spam is handled the way /help and /watch handle it: a honeypot field and a
+ * Spam is handled the way /help and /clips handle it: a honeypot field and a
  * hard length limit, not a captcha. A junk row costs one line on /admin.
  *
  * WHAT IT DOES NOT DO: send anything. No welcome mail, no confirmation loop,

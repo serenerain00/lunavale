@@ -17,7 +17,7 @@ import { pageMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = pageMetadata({
   title: "What this is",
   description:
-    "Luna spent ten years with Josh, six months without him, and twenty years with Tyson as her best friend. Who everyone is, and why the scenes arrive out of order.",
+    "Luna spent ten years with Josh, six months without him, and twenty years with Tyson as her best friend. Who everyone is, and where to start watching.",
   path: "/about",
 });
 
@@ -138,7 +138,7 @@ export default async function AboutPage() {
           <p className="mt-2 max-w-2xl leading-relaxed text-stone">
             The whole story so far, in sequence, from the first box out of the
             house to where it stands now — {chronology.length}{" "}
-            entries in Luna&rsquo;s own hand, with the scene that sits beside
+            entries in Luna&rsquo;s own hand, with the clip that sits beside
             each one.
           </p>
 
@@ -161,10 +161,10 @@ export default async function AboutPage() {
                     </Link>
                     {item.scene && (
                       <Link
-                        href={`/watch/${item.scene.slug}`}
+                        href={`/clips/${item.scene.slug}`}
                         className="mt-0.5 block text-xs text-stone-dim transition-colors duration-(--duration-quick) hover:text-amber"
                       >
-                        Scene: {item.scene.title}
+                        Clip: {item.scene.title}
                       </Link>
                     )}
                   </span>
@@ -173,8 +173,8 @@ export default async function AboutPage() {
             </ol>
           ) : (
             <div className="mt-5 max-w-2xl rounded-lg border border-hairline px-4 py-3 text-sm leading-relaxed text-stone">
-              Members get the sequence laid out end to end — useful precisely
-              because the scenes do not arrive in it.{" "}
+              Members get the whole sequence end to end, with nothing missing
+              out of the middle of it.{" "}
               <Link
                 href="/membership"
                 className="text-amber underline-offset-4 transition-colors duration-(--duration-quick) hover:underline"

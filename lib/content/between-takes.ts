@@ -97,7 +97,7 @@ export interface SetNote {
   sceneSlug?: string;
   /** Or the still set (lib/content/gallery.ts). */
   gallerySlug?: string;
-  /** Or the vertical clip (lib/content/clips.ts). */
+  /** Or the vertical clip (lib/content/posts.ts). */
   clipId?: string;
   place?: PlaceId;
   /** Paragraphs, in order. Short — these are notes, not essays. */
@@ -308,7 +308,7 @@ export const notes: SetNote[] = [
     access: "premium",
     body: [
       "Almost nothing gets said here, so the only thing carrying it is where the two of us are sitting.",
-      "We shot it three ways: me closer, her closer, and the one in the film, where the gap between us does not change at all for four minutes. The first two played like two people about to do something. The third plays like two people who have decided not to, and that is the true one.",
+      "We shot it three ways: me closer, her closer, and the one we kept, where the gap between us does not change at all for four minutes. The first two played like two people about to do something. The third plays like two people who have decided not to, and that is the true one.",
       "The fire does the rest of the work. It keeps moving, so the frame is never still, so you keep watching two people who are not moving at all.",
     ],
   },
@@ -350,7 +350,7 @@ export const notes: SetNote[] = [
     access: "premium",
     body: [
       "I am in this one for about four seconds and I have no lines. I stand in the barn door, I watch the two of them get a bolt loose, and I go.",
-      "It is the hardest thing I do in the film. Everywhere else, if Josh is careless with her, I have somewhere to put that. Here he is patient with her, and he is good at it, and he steps back and lets her have the win. There is nothing for me to hold against him. That is the whole problem.",
+      "It is the hardest thing I do in this. Everywhere else, if Josh is careless with her, I have somewhere to put that. Here he is patient with her, and he is good at it, and he steps back and lets her have the win. There is nothing for me to hold against him. That is the whole problem.",
       "Melissa's note was: you are not allowed to look hurt. Just look at it slightly too long, then leave before either of them turns around.",
       "I never say a word about it afterward. Not that day, not ever. And when you read Luna's account of that afternoon I am not in it — she does not mention me once, because as far as she knew there was nothing to mention.",
     ],
@@ -380,7 +380,7 @@ export const notes: SetNote[] = [
     place: "coffee-shop",
     access: "premium",
     body: [
-      "This is the most rehearsed half-second in the film. I am mid-sentence, I do not stop talking, and I brush her lower lip with my thumb like it is nothing at all.",
+      "This is the most rehearsed half-second in the whole series. I am mid-sentence, I do not stop talking, and I brush her lower lip with my thumb like it is nothing at all.",
       "It only works if the sentence does not change. The moment the line falters it becomes a move, and it is not a move — it is me reminding her of ten years in a way she cannot really argue with. Melissa had me run the dialogue underneath it over and over until I could do it without hearing myself do it.",
     ],
   },
@@ -479,7 +479,7 @@ export const notes: SetNote[] = [
     body: [
       "The whole scene is one decision, and the decision is about my hands. I could get that bolt loose in a second and everybody watching knows it. If I touch the wrench even once, even to help, it turns into me doing it for her and the scene is worth nothing.",
       "So I keep my hands off it for four minutes, which is far harder than it sounds, and I get one instruction the entire time: give it one more.",
-      "Melissa was very clear that I do not get to look pleased with myself afterward. No I-knew-you-could. The second I take any credit I have taken it off her, and this is the one thing in the film that is entirely hers.",
+      "Melissa was very clear that I do not get to look pleased with myself afterward. No I-knew-you-could. The second I take any credit I have taken it off her, and this is the one thing in the whole series that is entirely hers.",
       "It is the scene I would show someone who thinks they already know how this goes. I am good here — genuinely, quietly good — and that is not a set-up for anything. It is just true, and everything that comes later costs more because of it.",
     ],
   },
@@ -733,7 +733,7 @@ function dayOf(note: SetNote): number {
  *
  * `notes` is grouped by author, which is right for a character page — you are
  * reading one person. It is wrong for the book, which is one object three
- * people are still writing in as the film is shot, and reading it
+ * people are still writing in as it is shot, and reading it
  * author-by-author would
  * hide the only thing that makes it a book: that they answer each other.
  *
@@ -798,7 +798,7 @@ export function freeNotes(): SetNote[] {
  * Notes written beside a given scene.
  *
  * Nothing calls this yet. It is the hook for showing a scene's notes under the
- * player on /watch/<slug> — the note about a scene is worth most immediately
+ * player on /clips/<slug> — the note about a scene is worth most immediately
  * after watching it, and most of them are members-only, which makes that the
  * strongest conversion moment the notebook has.
  */

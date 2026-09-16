@@ -121,13 +121,18 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
           <p className="text-xs uppercase tracking-[0.2em] text-amber">
             Six questions
           </p>
+          {/* WAS "Should this be a series?" — which it now is, and asking a
+              question the site answers three rows further up made the whole
+              survey look unread. The question that is still genuinely open is
+              what gets made next, and how people want to be given it. */}
           <h2 className="mt-3 font-display text-2xl font-light text-ivory sm:text-3xl">
-            Should this be a series?
+            What should happen next?
           </h2>
           <p className="mt-2 max-w-xl leading-relaxed text-stone">
-            Luna is being made right now, and what happens to it is genuinely
-            still open. Tell her what you make of it, and whether you&rsquo;d
-            watch it somewhere like Netflix.
+            Season one is being made right now, and what happens in it is
+            genuinely still open. Tell Melissa what&rsquo;s landing, how
+            you&rsquo;d rather watch it, and whether you&rsquo;d watch it
+            somewhere like Netflix.
           </p>
         </div>
         <button

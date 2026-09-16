@@ -17,7 +17,7 @@ import {
   lockedCountFor,
   others,
 } from "@/lib/content/characters";
-import { clipAccess } from "@/lib/content/clips";
+import { clipAccess } from "@/lib/content/posts";
 import { formatDuration } from "@/lib/content/videos";
 
 interface CharacterPageProps {
@@ -65,7 +65,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
     kind: "scene",
     title: v.title,
     synopsis: v.synopsis,
-    href: `/watch/${v.slug}`,
+    href: `/clips/${v.slug}`,
     poster: v.poster,
     meta: formatDuration(v.durationSeconds),
     access: v.access,
@@ -251,7 +251,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
                   return (
                     <Link
                       key={clip.id}
-                      href={`/clips/${clip.id}`}
+                      href={`/posts/${clip.id}`}
                       data-reveal-item
                       className="group relative block overflow-hidden rounded-lg bg-charcoal ring-1 ring-hairline transition-transform duration-(--duration-standard) ease-(--ease-standard) hover:-translate-y-1 focus-visible:-translate-y-1"
                     >

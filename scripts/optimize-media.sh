@@ -288,7 +288,7 @@ case "$cmd" in
     # cut of the blonde-guy scene is 1320x1256, and the unconditional crop took
     # a tall slice out of the middle of it and called that the card — the exact
     # mangling this content kind exists to prevent. Such a clip declares
-    # `aspect` in lib/content/clips.ts and the cards render it.
+    # `aspect` in lib/content/posts.ts and the cards render it.
     src_w="$(ffprobe -v error -select_streams v:0 -show_entries stream=width \
       -of csv=p=0 "$src")"
     src_h="$(ffprobe -v error -select_streams v:0 -show_entries stream=height \

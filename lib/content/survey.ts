@@ -13,9 +13,11 @@
  * Google form dropped into it — and it means the results can sit on /admin
  * beside everything else she looks at.
  *
- * WHAT IT IS FOR, in her words: how people are enjoying the scenes and clips,
- * and whether they would want it as a series or a film on a major streaming
- * platform. Everything below serves one of those two questions. The temptation
+ * WHAT IT IS FOR, in her words: how people are enjoying what has gone up, and
+ * whether they would want it on a major streaming platform. It also used to ask
+ * series-or-film; that was settled on 2026-09-16 and the slot now asks how much
+ * of season one somebody wants at a time. Everything below serves one of those
+ * questions. The temptation
  * with a survey is to ask twenty things because the form is already open; this
  * asks SIX, one of them optional, because the response rate on a survey is a
  * curve that falls off a cliff and the only answers that matter are the ones
@@ -112,18 +114,38 @@ export const questions: SurveyQuestion[] = [
     required: false,
   },
   {
+    /*
+     * REPLACED 2026-09-16. This used to ask "a series or a film?", which was a
+     * real open question and is not one any more — it is a series, season one
+     * is coming, and the site says so everywhere else now. Asking a settled
+     * question makes the whole survey look like it is not being read.
+     *
+     * THE ID IS KEPT. Answers already in the database are filed under
+     * `format`, and changing it would orphan them. What the id means has
+     * changed, which is recorded here rather than silently: rows written
+     * before 2026-09-16 answer series-or-film, rows after answer how much of
+     * it somebody wants at a time.
+     */
     id: "format",
-    prompt: "If this got made properly — a series or a film?",
+    prompt: "How would you rather watch it?",
     kind: "single",
     required: true,
     options: [
       {
-        id: "series",
-        label: "A series",
-        detail: "Ordinary days, a few places, running for years",
+        id: "weekly",
+        label: "An episode a week",
+        detail: "Something to come back to",
       },
-      { id: "film", label: "A film", detail: "One story, told once, properly" },
-      { id: "either", label: "Either — as long as it gets made" },
+      {
+        id: "binge",
+        label: "The whole season at once",
+        detail: "Give me all of it and leave me alone",
+      },
+      {
+        id: "clips",
+        label: "Short pieces, often",
+        detail: "The way it has been going up so far",
+      },
       { id: "unsure", label: "Not sure" },
     ],
   },

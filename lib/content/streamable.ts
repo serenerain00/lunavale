@@ -8,7 +8,7 @@
  * the route about another module.
  */
 
-import { clipAccess, clips, getClip } from "@/lib/content/clips";
+import { clipAccess, clips, getClip } from "@/lib/content/posts";
 import {
   allTakeSlugs,
   getTake,

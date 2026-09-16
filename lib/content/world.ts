@@ -509,7 +509,7 @@ export const environments: Environment[] = [
           {
             // One object for one scene, even though two edits exist behind it.
             // The world never advertises the members' cut as a separate thing
-            // to find — /watch decides what plays. Access stays "free" because
+            // to find — /clips decides what plays. Access stays "free" because
             // the public cut is: a locked object here would misrepresent what
             // clicking it does.
             id: "the-morning",

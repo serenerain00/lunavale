@@ -4,6 +4,12 @@ import { notFound } from "next/navigation";
 import { getVideo, videos, formatDuration } from "@/lib/content/videos";
 import { canWatch, isMember } from "@/lib/access/entitlement";
 import { entriesForScene } from "@/lib/content/journal";
+import {
+  storyPosition,
+  inStoryOrder,
+  previousInStory,
+  nextInStory,
+} from "@/lib/content/chronology";
 import { HowThisCameTogether } from "@/components/takes/HowThisCameTogether";
 import { galleryForScene } from "@/lib/content/gallery";
 import { SceneWatch } from "@/components/media/SceneWatch";
@@ -74,6 +80,14 @@ export default async function WatchPage({ params }: WatchPageProps) {
   // Her voice, tied to the scene — so it reaches people watching, not only
   // those who go to /journal. Stills from the same event get a link too.
   const journalEntries = entriesForScene(slug);
+
+  // Story order — see lib/content/chronology.ts. All three are undefined for
+  // anything outside the story (the trailer, the cast interview), which is
+  // correct: those are about it, not in it.
+  const position = storyPosition(slug);
+  const total = inStoryOrder().length;
+  const previous = previousInStory(slug);
+  const next = nextInStory(slug);
   const stills = galleryForScene(slug);
 
   return (
@@ -200,6 +214,21 @@ export default async function WatchPage({ params }: WatchPageProps) {
           <h1 className="mt-2 font-display text-3xl font-light text-ivory sm:text-4xl">
             {video.title}
           </h1>
+          {/* WHERE THIS SITS IN THE STORY, added 2026-09-16 with the reorder.
+              Without it the order exists only on the index, and somebody who
+              arrived on this page from a link — which is most people — has no
+              idea there is an order at all, let alone that they are at number
+              nine of forty-six. */}
+          {position !== undefined && (
+            <p className="mt-2 text-sm text-stone">
+              <Link
+                href="/clips"
+                className="underline decoration-hairline underline-offset-4 hover:text-amber"
+              >
+                {position} of {total} in the story
+              </Link>
+            </p>
+          )}
           <p className="mt-3 max-w-2xl leading-relaxed text-stone">
             {video.synopsis}
           </p>
@@ -266,10 +295,53 @@ export default async function WatchPage({ params }: WatchPageProps) {
           </section>
         )}
 
-        {/* Last on the page on purpose: the finished scene, then her account
+        {/* Last on the page on purpose: the finished clip, then her account
             of it, and only then the machinery behind it. Leading with process
             would put the making in front of the story. */}
         <HowThisCameTogether sceneSlug={slug} member={member} />
+
+        {/*
+          WHAT HAPPENS NEXT. Story order, not release order — somebody who has
+          just finished a clip is following the story, and the useful next
+          thing is the one that happens next, not the one that was uploaded
+          next. This is the whole reason the order was worth building: it turns
+          46 separate pages into something you can sit and watch.
+        */}
+        {(previous || next) && (
+          <nav
+            aria-label="More of the story"
+            className="mt-16 grid gap-4 border-t border-hairline pt-8 sm:grid-cols-2"
+          >
+            {previous ? (
+              <Link
+                href={`/clips/${previous.slug}`}
+                className="group rounded-lg border border-hairline p-5 transition-colors duration-(--duration-quick) hover:border-amber"
+              >
+                <p className="text-xs uppercase tracking-[0.18em] text-stone">
+                  Before this
+                </p>
+                <p className="mt-2 font-display text-lg text-ivory group-hover:text-amber">
+                  {previous.title}
+                </p>
+              </Link>
+            ) : (
+              <span />
+            )}
+            {next && (
+              <Link
+                href={`/clips/${next.slug}`}
+                className="group rounded-lg border border-hairline p-5 text-right transition-colors duration-(--duration-quick) hover:border-amber sm:text-right"
+              >
+                <p className="text-xs uppercase tracking-[0.18em] text-stone">
+                  Next
+                </p>
+                <p className="mt-2 font-display text-lg text-ivory group-hover:text-amber">
+                  {next.title}
+                </p>
+              </Link>
+            )}
+          </nav>
+        )}
       </main>
     </>
   );

@@ -14,7 +14,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { clipPosterSrc, type Clip } from "@/lib/content/clips";
+import { clipPosterSrc, type Clip } from "@/lib/content/posts";
 
 interface VerticalPlayerProps {
   clip: Clip;

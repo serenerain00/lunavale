@@ -27,7 +27,7 @@ interface HeroProps {
  * better than a headline competing with the footage.
  *
  * THE SECOND BUTTON IS NOT "More info". Netflix needs one because Play and the
- * detail page are different destinations; here /watch IS the detail page, so a
+ * detail page are different destinations; here /clips IS the detail page, so a
  * second button pointing at it would be the same button twice. It goes to the
  * location instead, which is this product's actual second verb.
  *
@@ -121,7 +121,7 @@ export function Hero({ hero }: HeroProps) {
 
         <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
           <Link
-            href={`/watch/${video.slug}`}
+            href={`/clips/${video.slug}`}
             className="inline-flex min-h-12 items-center gap-2.5 rounded-full bg-ivory px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-white sm:px-7"
           >
             {/* A locked hero says so on the button rather than promising

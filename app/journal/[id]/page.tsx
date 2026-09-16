@@ -122,7 +122,7 @@ export default async function JournalEntryPage({ params }: EntryPageProps) {
           <p className="mt-10 text-center text-sm text-stone">
             Written the same night as{" "}
             <Link
-              href={`/watch/${scene.slug}`}
+              href={`/clips/${scene.slug}`}
               className="text-amber underline decoration-hairline underline-offset-4 transition-colors duration-(--duration-quick) hover:text-amber-soft"
             >
               {scene.title}

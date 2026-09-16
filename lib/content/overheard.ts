@@ -320,7 +320,7 @@ export const MENTIONABLE = [
   { name: "Tyson", hint: "her best friend of twenty years" },
   { name: "Josh", hint: "her partner of ten years" },
   { name: "Rick", hint: "Josh's father" },
-  { name: "Melissa", hint: "the filmmaker" },
+  { name: "Melissa", hint: "who makes it" },
 ] as const;
 
 /** Byline colors for cast replies, keyed by canonical name. */

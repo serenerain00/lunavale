@@ -3,7 +3,7 @@
  *
  * Every other poster is a static file under /public, which is right: a card
  * for a scene is advertising. An explicit clip is the one case where the still
- * frame is itself the thing being withheld, and lib/content/clips.ts has said
+ * frame is itself the thing being withheld, and lib/content/posts.ts has said
  * so since the flag existed — "its poster is withheld on the public grid".
  *
  * It was not actually withheld. It was a public JPEG with a CSS blur over it,
@@ -17,7 +17,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { canWatch } from "@/lib/access/entitlement";
-import { getClip, clipAccess } from "@/lib/content/clips";
+import { getClip, clipAccess } from "@/lib/content/posts";
 import {
   blobConfigured,
   clipPosterBlobPathFor,

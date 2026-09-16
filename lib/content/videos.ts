@@ -175,7 +175,7 @@ export interface Video {
      * be the preview"), so the cut has to earn a viewer in the first second.
      *
      * WHEN THIS IS SET, `hookStart` is meaningless and must be left off — the
-     * preview has several starts. The /watch page reads this field to say so
+     * preview has several starts. The /clips page reads this field to say so
      * rather than claiming the visitor watched the first thirty seconds, which
      * would be false. Both scripts/make-previews.mjs and scripts/make-reel.mjs
      * cut from here, so the reel on Instagram and the preview on the site are
@@ -193,7 +193,7 @@ export interface Video {
   notes?: ContentNoteId[];
   /**
    * Watchable but not part of the story catalog — the cast interview is the
-   * hero, not a scene to browse under a feeling. Streaming and /watch still
+   * hero, not a scene to browse under a feeling. Streaming and /clips still
    * work; lib/content/catalog.ts just leaves it off the shelves.
    */
   hidden?: boolean;
@@ -214,7 +214,7 @@ export interface Video {
 export const videos: Video[] = [
   {
     // The cast interview — the pinned hero, playable in full from the home
-    // page. Hidden from the browse catalog (it isn't a story scene); /watch and
+    // page. Hidden from the browse catalog (it isn't a story clip); /clips and
     // streaming still work. See lib/content/hero.ts.
     slug: "interview",
     title: "The Interview",
@@ -886,7 +886,7 @@ export const videos: Video[] = [
 
   {
     // The beach, in full — 4m44s, and members-only. The free 9:16 preview of it
-    // is a clip (lib/content/clips.ts, "beach-preview"), which is the shop
+    // is a clip (lib/content/posts.ts, "beach-preview"), which is the shop
     // window for this one.
     //
     // NOTE: Melissa also delivered luna-josh-beach-sound.mov, the same cut with
@@ -2055,7 +2055,7 @@ export const videos: Video[] = [
     //
     // HER ACCOUNT IS `new-york` in lib/content/journal.ts, written alongside
     // this entry and filed inside the six months rather than at the end of the
-    // book. The /watch page links the two automatically through `sceneSlug`.
+    // book. The /clips page links the two automatically through `sceneSlug`.
     // It stops where this cut stops — he picks her up and she remembers
     // nothing after it — and it does not know about the promise, so her read
     // of his silence is wrong in the way the canon requires.

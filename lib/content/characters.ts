@@ -19,7 +19,7 @@
  * one moment in it.
  */
 
-import { clipAccess, clips, type Clip } from "@/lib/content/clips";
+import { clipAccess, clips, type Clip } from "@/lib/content/posts";
 import { galleries, type StillGallery } from "@/lib/content/gallery";
 import { journal, type JournalEntry } from "@/lib/content/journal";
 import { notes, type SetNote } from "@/lib/content/between-takes";

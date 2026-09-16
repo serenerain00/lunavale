@@ -5,18 +5,24 @@ import { Reveal } from "@/components/motion/Reveal";
 import { RatingBadge } from "@/components/ui/RatingBadge";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { getMembership } from "@/lib/access/entitlement";
-import { clipAccess, clipPosterSrc, clips } from "@/lib/content/clips";
+import { clipAccess, clipPosterSrc, clips } from "@/lib/content/posts";
 import { formatDuration } from "@/lib/content/videos";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Clips",
+  title: "Posts",
   description:
-    "The vertical cuts from Luna's world — the short pieces, collected in one place.",
-  path: "/clips",
+    "The vertical cuts that go up on Instagram, collected in one place so they don't disappear down a feed.",
+  path: "/posts",
 });
 
-export default async function ClipsPage() {
+/**
+ * RENAMED FROM "CLIPS" 2026-09-16. These are the vertical cuts that go up on
+ * Instagram; the word "clip" now belongs to the 3-to-5-minute story pieces at
+ * /clips, which is what a visitor was always going to assume it meant. Old
+ * /clips/<id> links still land here — see the redirect table in next.config.ts.
+ */
+export default async function PostsPage() {
   const { active: member } = await getMembership();
 
   return (
@@ -29,12 +35,20 @@ export default async function ClipsPage() {
             Shot for a phone
           </p>
           <h1 className="mt-4 max-w-3xl font-display text-3xl font-light leading-[1.15] text-ivory sm:text-5xl">
-            Clips.
+            Posts.
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
-            The vertical cuts from Luna&rsquo;s world, kept together here so
-            they don&rsquo;t disappear down someone else&rsquo;s feed. Most are
-            free; a few are part of the membership.
+            These are the vertical cuts that go up on Instagram. They live here
+            too, so they don&rsquo;t disappear down somebody else&rsquo;s feed.
+            Most are free to watch and a few come with membership. If you want
+            the story in order, that&rsquo;s{" "}
+            <Link
+              href="/clips"
+              className="text-ivory underline decoration-hairline underline-offset-4 hover:text-amber"
+            >
+              the clips
+            </Link>
+            .
           </p>
         </header>
 
@@ -63,7 +77,7 @@ export default async function ClipsPage() {
             return (
               <Link
                 key={clip.id}
-                href={`/clips/${clip.id}`}
+                href={`/posts/${clip.id}`}
                 data-reveal-item
                 className="group relative block overflow-hidden rounded-lg bg-charcoal ring-1 ring-hairline transition-transform duration-(--duration-standard) ease-(--ease-standard) hover:-translate-y-1 focus-visible:-translate-y-1"
               >

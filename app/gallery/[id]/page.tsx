@@ -160,7 +160,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
           <div className="mt-5 flex flex-wrap gap-3">
             {scene && (
               <Link
-                href={`/watch/${scene.slug}`}
+                href={`/clips/${scene.slug}`}
                 className="inline-flex min-h-11 items-center rounded-full border border-hairline px-5 text-sm text-ivory transition-colors duration-(--duration-quick) hover:border-amber hover:text-amber"
               >
                 Watch the scene →

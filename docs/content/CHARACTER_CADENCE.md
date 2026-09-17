@@ -43,7 +43,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-09-16 against `main` at ce5ecac. The 2026-07-28 row is kept beneath
+re-run 2026-09-17 against `main` at fd671e9. The 2026-07-28 row is kept beneath
 so the drift is visible.
 
 | | Notes | Total pieces | Members-only |

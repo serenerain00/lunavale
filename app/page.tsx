@@ -15,7 +15,7 @@ import { BETWEEN_US } from "@/lib/content/between-us";
 import { inStoryOrder } from "@/lib/content/chronology";
 import { categories } from "@/lib/content/categories";
 import { currentSeason, hasReleasedEpisode } from "@/lib/content/season";
-import { characters, getCharacter } from "@/lib/content/characters";
+import { characters } from "@/lib/content/characters";
 import { galleries } from "@/lib/content/gallery";
 import { freeEntries, opening } from "@/lib/content/journal";
 import { clips as postList, clipPosterSrc, clipAccess, type Clip } from "@/lib/content/posts";
@@ -95,12 +95,6 @@ export default async function Home() {
   // image that is honestly about the thing being announced.
   const trailer = videosAll.find((v) => v.slug === "between-us-trailer-one");
 
-  // The three the story is about, in the order the sentence beside them names
-  // them. `characters` order is not that order, so this is explicit.
-  const LEADS = ["luna", "tyson", "josh"]
-    .map((id) => getCharacter(id))
-    .filter((c): c is NonNullable<typeof c> => Boolean(c));
-
   const openPages = freeEntries();
 
   // What has gone up lately, and how often — both derived, neither hand-kept.
@@ -152,24 +146,31 @@ export default async function Home() {
               moments below are a look at what it is walking into.
             </p>
 
-            <div className="hidden shrink-0 gap-4 lg:flex">
-              {LEADS.map((c) => (
-                <Link key={c.id} href={`/characters/${c.id}`} className="group">
-                  <div className="relative aspect-[3/4] w-40 overflow-hidden rounded-lg ring-1 ring-hairline xl:w-44">
-                    <Image
-                      src={c.portrait}
-                      alt=""
-                      fill
-                      sizes="176px"
-                      className="object-cover brightness-90 transition-[filter,transform] duration-(--duration-cinematic) ease-(--ease-cinematic) group-hover:scale-[1.03] group-hover:brightness-100"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/85 via-transparent to-transparent" />
-                    <p className="absolute inset-x-3 bottom-2.5 font-display text-sm text-ivory">
-                      {c.name}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+            {/*
+              THE THREE OF THEM, ON SET. Replaces the three character
+              portraits that were here for about an hour — Melissa sent this
+              instead, and it is the better picture: one frame with all three
+              in it, the lakehouse behind them and BETWEEN US on the chairs,
+              which says what the series is called without a caption.
+
+              NOT CROPPED, WHICH WAS THE CONSTRAINT. The source is 3226x1772
+              (1.8205); the web copy is the same ratio at 1440 wide, and it is
+              given explicit width and height rather than `fill`, so it renders
+              at its own intrinsic ratio and there is no container for
+              object-cover to trim it against.
+
+              lg only, like the portraits it replaces: on a phone the paragraph
+              should have the full width.
+            */}
+            <div className="hidden shrink-0 lg:block">
+              <Image
+                src="/on-set/cast-on-set.jpg"
+                alt="Luna, Josh and Tyson between takes at the lakehouse"
+                width={1440}
+                height={791}
+                sizes="(max-width: 1280px) 26rem, 32rem"
+                className="w-[26rem] rounded-lg ring-1 ring-hairline xl:w-[32rem]"
+              />
             </div>
           </div>
         </section>

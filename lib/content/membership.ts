@@ -302,11 +302,29 @@ export const BENEFITS: Benefit[] = [
   // writing in it are the same door now, so there is no free half of it left
   // to advertise. A benefits table that still offered it would be promising
   // something the product refuses at the page.
-  // The "Overheard" member row was here and came out on 2026-08-10, when the
-  // wall was archived (lib/content/overheard.ts). It is the third thing this
-  // table has had to stop promising, and the rule is the same each time: a
-  // benefits list is a contract, and a row for a room nobody can enter is a
-  // lie you are charging for. Put it back with the wall.
+  {
+    /*
+     * BACK 2026-09-17, WITH THE WALL. This row came out on 2026-08-10 when
+     * Overheard was archived, under the rule that still holds: a benefits list
+     * is a contract, and a row for a room nobody can enter is a lie you are
+     * charging for. The room is open again (OVERHEARD_ARCHIVED is false), so
+     * the row is honest again.
+     *
+     * THE COPY LEADS WITH THE CAST THREAD, NOT WITH "CHAT WITH OTHER MEMBERS",
+     * and that is deliberate rather than coy. There are ten members and zero
+     * posts in the table; a row promising a lively room would be the same
+     * mistake in a new coat. What is certainly there is Luna, Tyson, Josh and
+     * Rick talking to each other, which is authored and does not depend on
+     * anybody turning up. The part that needs other people is named second and
+     * named plainly.
+     */
+    id: "overheard",
+    label: "The group chat",
+    detail:
+      "Luna, Tyson, Josh and Rick, talking to each other the way they actually do — and a room where you can say something back.",
+    from: "vault",
+    group: "Behind it",
+  },
   // "Selected behind the scenes" was here — "How a few of the public scenes
   // came together", free. Pulled 2026-08-13 with the same instruction, and it
   // should have gone sooner on its own merits: grep the codebase for this

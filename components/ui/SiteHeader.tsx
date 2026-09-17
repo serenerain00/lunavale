@@ -68,6 +68,12 @@ export function SiteHeader() {
     // move — you browse a library you already know something about.
     { href: "/browse", label: "Browse" },
     { href: "/between-takes", label: "Between Takes" },
+    // BACK 2026-09-17 with the wall itself. The link came out when Overheard
+    // was archived — "a nav item pointing at a 404 is worse than a missing nav
+    // item" — and the page 404s no longer. Members-only in the bar for the
+    // same reason /help is: the page gates itself server-side either way, and
+    // a signpost to a room a stranger cannot enter is an invitation to bounce.
+    { href: "/overheard", label: "The group chat", memberOnly: true },
     { href: "/about", label: "What this is" },
     // HELP IS MEMBERS-ONLY IN THE NAV, her call. The PAGE is still open to
     // everyone — this hides the signpost, not the door — so anybody with the

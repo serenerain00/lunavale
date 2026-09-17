@@ -138,6 +138,7 @@ export const inProduction: AboutSection = {
   heading: "It's being made right now",
   body: [
     "This isn't a finished thing being rolled out on a schedule. It's in production while you read this, made independently, on a small budget, by a very small number of people.",
+    "Which is worth saying plainly about one thing: it's finished for a phone. That's the screen it's graded and mastered for, and it's where it looks the way it's meant to. A television will show you the budget. When there's money for a higher-resolution finish there will be one, and until then that's the honest trade — the story is the part the budget went on.",
     "It's a series. That was an open question for a while and it isn't any more, and it's the right shape for this story: it's built out of ordinary days, in a handful of places, between people whose situation doesn't resolve neatly. That kind of story runs for years. It doesn't finish in ninety minutes.",
     "Here's the part worth knowing. What gets made next isn't fixed. Who it follows, which room it happens in, what finally gets said out loud — those are still open, and members are in the conversation where they get decided. A character somebody can't stop thinking about, a room they want to go back into, a question they want answered: at this size, that genuinely moves things.",
     "The way to be in that conversation is to say something. There's a box at the end of every clip that goes straight to Melissa, and a short survey about where this should go next. She reads all of it.",

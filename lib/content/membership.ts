@@ -464,6 +464,29 @@ export const QUESTIONS: Question[] = [
     a: "It is always labeled before you open it, and it is never the only way to follow the story. You can watch the whole arc without it.",
   },
   {
+    /*
+     * ADDED 2026-09-17, and the placement is the decision. Melissa wanted to
+     * say somewhere that this is meant to be watched on a phone, because the
+     * budget does not stretch to a finish that holds up on a television.
+     *
+     * IT IS NOT GOING ANYWHERE NEAR THE ASK. A quality caveat beside a price
+     * is an apology at the exact moment somebody is deciding, and it does the
+     * damage twice: it converts worse, and it primes the reader to go looking
+     * for the flaw — which is how a cancellation reason this week came to say
+     * the quality was lacking. The two resolution claims came out of the sales
+     * copy the same day for the same reason. Nothing sells or excuses the
+     * picture.
+     *
+     * A FAQ ENTRY IS OPT-IN. Somebody reading this has a practical question
+     * and wants the practical answer, and getting it straight is worth more
+     * here than the vagueness would be. Same for the paragraph on /about,
+     * which sits inside the section that is already open about the budget —
+     * in that context it reads as candour rather than as a warning.
+     */
+    q: "What's the best way to watch it?",
+    a: "On your phone. It's graded and mastered for a small screen, which is where it looks the way it's meant to — a television will show you the budget. That's the honest trade at this size: the money went on the story. When there's enough for a higher-resolution finish there will be one.",
+  },
+  {
     q: "Where does the money go?",
     a: "Into making the next ones — cast, locations, post, and the time to do it properly. Nothing here is funded by advertising or by selling anything about you.",
   },

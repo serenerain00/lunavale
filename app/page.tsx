@@ -153,32 +153,50 @@ export default async function Home() {
             aria-labelledby="between-us-heading"
             className="mt-8 border-y border-hairline sm:mt-10"
           >
-            <div
-              className={`${PAGE} py-8 sm:py-10 lg:flex lg:items-center lg:justify-between lg:gap-10`}
-            >
-              <div className="lg:max-w-3xl">
-                <p className="text-xs uppercase tracking-[0.2em] text-amber">
-                  {BETWEEN_US.eyebrow}
-                </p>
-                <h2
-                  id="between-us-heading"
-                  className="mt-2.5 font-display text-2xl font-semibold tracking-tight text-ivory sm:text-3xl"
+            {/*
+              STACKED, NOT SIDE BY SIDE. It was `lg:flex lg:justify-between`,
+              carried over from when this band lived in a max-w-6xl container.
+              In the wider PAGE gutter that pushed the right-hand column to the
+              far edge of a 1600px row — roughly 500px from the text — and for
+              a MEMBER that column holds one 56-character sentence. Melissa saw
+              it and asked what was missing on the right. Nothing was: it was a
+              guest-shaped layout being rendered to a member, and the emptiness
+              was the layout's, not the content's.
+
+              A single column has no far edge to strand anything against, reads
+              the same at every width, and puts the call to action directly
+              under the sentence that earns it.
+            */}
+            <div className={`${PAGE} py-9 sm:py-12`}>
+              <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                {BETWEEN_US.eyebrow}
+              </p>
+              <h2
+                id="between-us-heading"
+                className="mt-2.5 font-display text-2xl font-semibold tracking-tight text-ivory sm:text-3xl"
+              >
+                {BETWEEN_US.heading}
+              </h2>
+
+              {/*
+                THE OFFER, NOT THE PREMISE. The premise is three paragraphs
+                about who these people are, and the hero blurb immediately
+                above this band already says it — rendering both was the page
+                repeating itself at length on the one screen that was supposed
+                to get lighter. See lib/content/between-us.ts.
+              */}
+              {BETWEEN_US.offer.map((line) => (
+                <p
+                  key={line}
+                  className="mt-3 max-w-2xl leading-relaxed text-stone"
                 >
-                  {BETWEEN_US.heading}
-                </h2>
-                {BETWEEN_US.body.map((line) => (
-                  <p
-                    key={line}
-                    className="mt-2.5 max-w-2xl leading-relaxed text-stone"
-                  >
-                    {line}
-                  </p>
-                ))}
-              </div>
+                  {line}
+                </p>
+              ))}
 
               {/* Both variants ship in the cached HTML and the client shows
                   one — nothing premium is passed as children to <Member>. */}
-              <div className="mt-5 shrink-0 lg:mt-0">
+              <div className="mt-6">
                 <Guest>
                   <Link
                     href="/membership"
@@ -186,12 +204,15 @@ export default async function Home() {
                   >
                     {vault.cta}
                   </Link>
-                  <p className="mt-2 text-xs text-stone-dim">
+                  <p className="mt-2.5 text-xs text-stone-dim">
                     {`${BETWEEN_US.memberLine} From ${formatPrice(vault.priceMonthlyCents)} a month.`}
                   </p>
                 </Guest>
                 <Member>
-                  <p className="max-w-xs text-sm leading-relaxed text-amber-soft">
+                  {/* A member is not being sold anything here, so this is a
+                      confirmation rather than a pitch — and it sits where the
+                      button would, instead of floating off to one side. */}
+                  <p className="max-w-xl leading-relaxed text-amber-soft">
                     {BETWEEN_US.memberNote}
                   </p>
                 </Member>

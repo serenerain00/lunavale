@@ -42,12 +42,12 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-09-16 (counts read off `countFor()` / `lockedCountFor()`):
+As built, 2026-09-17 (counts read off `countFor()` / `lockedCountFor()`):
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 160 | 137 |
-| Tyson | 12 | 121 | 109 |
+| Luna | 12 | 161 | 138 |
+| Tyson | 12 | 122 | 110 |
 | Josh | 13 | 98 | 87 |
 | Rick | 2 | 9 | 9 |
 | Cathy | 0 | 11 | 11 |

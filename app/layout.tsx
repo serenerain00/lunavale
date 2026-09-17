@@ -5,6 +5,7 @@ import { ViewerProvider } from "@/components/access/Viewer";
 import { ClerkViewerSync } from "@/components/access/ClerkViewerSync";
 import { authConfigured } from "@/lib/billing/provider";
 import { Caveat, Fraunces, Inter } from "next/font/google";
+import { BackToTop } from "@/components/ui/BackToTop";
 import "./globals.css";
 
 // Display serif for titles; highly readable sans for controls and metadata.
@@ -35,6 +36,16 @@ const caveat = Caveat({
   weight: ["400", "500", "600"],
 });
 
+/**
+ * One sentence for a share card, one for a search result. Written out here
+ * rather than imported from lib/content so this file has no dependency that
+ * could fail during a metadata render.
+ */
+const SHORT_DESCRIPTION =
+  "A cinematic drama series about three people, twenty years of history, and one question nobody wants answered.";
+const LONG_DESCRIPTION =
+  "Between Us \u2014 a cinematic drama series about Luna, Josh and Tyson. Watch the clips in order, read her journal, and get season one first as a member.";
+
 export const metadata: Metadata = {
   /*
     The real domain. This said lunavault.com until 2026-08-13 — a domain
@@ -53,19 +64,31 @@ export const metadata: Metadata = {
     default: "Luna Vale",
     template: "%s · Luna Vale",
   },
-  description:
-    "An explorable cinematic universe of original stories. Enter the world, discover scenes, and unlock deeper access.",
+  /*
+   * REWRITTEN 2026-09-17. This said "An explorable cinematic universe of
+   * original stories. Enter the world, discover scenes, and unlock deeper
+   * access." Three things wrong with it by then, and it is the most-seen copy
+   * on the site: it is the Google result, and it is what renders when somebody
+   * pastes a link into Instagram or a message.
+   *
+   *   "explorable ... universe"  the world came off the site on 09-15
+   *   "Enter the world"          that route 404s
+   *   "discover scenes"          they are called clips since 09-16
+   *
+   * It also never said what the thing IS. Somebody deciding whether to tap a
+   * shared link needs a genre and a premise, not a description of a website.
+   */
+  description: LONG_DESCRIPTION,
   openGraph: {
-    title: "Luna Vale",
-    description:
-      "An explorable cinematic universe of original stories.",
+    title: "Between Us \u2014 a Luna Vale series",
+    description: SHORT_DESCRIPTION,
     siteName: "Luna Vale",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Luna Vale",
-    description: "An explorable cinematic universe of original stories.",
+    title: "Between Us \u2014 a Luna Vale series",
+    description: SHORT_DESCRIPTION,
   },
 };
 
@@ -103,6 +126,14 @@ export default function RootLayout({
           This provider decides what buttons SAY. It never decides what anyone
           RECEIVES; that stays server-side in /api/stream and canWatch().
         */}
+        {/*
+          The focus target for "back to top". A skip-link-style anchor: it
+          takes focus but never a tab stop, so a keyboard visitor sent back to
+          the top lands there rather than being moved visually and left at the
+          bottom of the document.
+        */}
+        <div id="top" tabIndex={-1} className="outline-none" />
+
         <ViewerProvider>
           {/*
             Inside the provider so it can refresh it, and rendered only where
@@ -113,6 +144,9 @@ export default function RootLayout({
           {authConfigured() && <ClerkViewerSync />}
           {children}
         </ViewerProvider>
+
+        {/* Every page, outside the provider — it needs nothing from it. */}
+        <BackToTop />
 
         {/*
           Microsoft Clarity — traffic + session analytics. Production only, so

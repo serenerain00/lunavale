@@ -49,8 +49,55 @@ export const dynamic = "force-dynamic";
 
 const THIRTY_DAYS = 60 * 60 * 24 * 30;
 
+/**
+ * Whether this request is a browser guessing, rather than a person clicking.
+ *
+ * WHY THIS ROUTE NEEDS IT. It is a GET that MUTATES — it mints a live Stripe
+ * Checkout session — which is the exact shape of thing speculative fetching
+ * ruins. The Link that points here already carries `prefetch={false}`, and
+ * that was added for this reason after hover-prefetch was found doubling the
+ * session count. It is not enough: Next's prefetcher is only one of the
+ * things that fetches a link early.
+ *
+ * CHROME'S SPECULATION RULES PRERENDER independently of anything Next does,
+ * and a prerender is a real navigation request that runs this handler in full.
+ * On 2026-09-17 a single click produced two live sessions one second apart —
+ * 19:13:01 and 19:13:02, both signed out, identical metadata. Every completed
+ * checkout in the Stripe record has the same fingerprint: one real session
+ * and one or two ghosts beside it.
+ *
+ * NOBODY IS DOUBLE-CHARGED — an unused session simply expires — but it
+ * roughly doubles the abandonment rate, which is the one number this funnel
+ * is read by, and it means "sessions created" cannot be trusted as a measure
+ * of intent. It also lets anything that crawls links mint sessions.
+ *
+ * `Sec-Purpose` covers Chromium prefetch AND prerender; `Purpose` and
+ * `X-Purpose` cover older Chrome, Firefox and Safari; `Next-Router-Prefetch`
+ * covers Next's own. Checking all four is cheap and none of them is ever set
+ * on a real navigation.
+ */
+function speculative(request: NextRequest): boolean {
+  const h = request.headers;
+  return (
+    (h.get("sec-purpose") ?? "").includes("prefetch") ||
+    (h.get("purpose") ?? "").toLowerCase() === "prefetch" ||
+    (h.get("x-purpose") ?? "").toLowerCase() === "preview" ||
+    h.get("next-router-prefetch") === "1"
+  );
+}
+
 export async function GET(request: NextRequest) {
   const origin = request.nextUrl.origin;
+
+  /*
+   * 204 rather than a redirect. A prerender that receives no content is
+   * discarded, so the real click that follows runs this handler properly and
+   * gets a real session; redirecting would instead teach the prerender a
+   * destination and could serve a stale one. Nothing is created here.
+   */
+  if (speculative(request)) {
+    return new NextResponse(null, { status: 204 });
+  }
   const params = request.nextUrl.searchParams;
   const tier = getTier(params.get("tier") ?? "");
 

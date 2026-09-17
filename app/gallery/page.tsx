@@ -4,6 +4,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { catalog } from "@/lib/content/catalog";
 import { pageMetadata } from "@/lib/seo/metadata";
+import { PAGE } from "@/components/ui/layout";
 
 export const metadata: Metadata = pageMetadata({
   title: "Stills",
@@ -19,7 +20,7 @@ export default async function StillsIndexPage() {
     <>
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-24 sm:px-8">
+      <main className={`${PAGE} flex-1 pb-24`}>
         <header className="pb-8 pt-12 sm:pt-16">
           <p className="text-xs uppercase tracking-[0.2em] text-amber">Stills</p>
           <h1 className="mt-4 max-w-3xl font-display text-3xl font-light leading-[1.15] text-ivory sm:text-5xl">

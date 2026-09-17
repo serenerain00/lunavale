@@ -8,6 +8,7 @@ import { getMembership } from "@/lib/access/entitlement";
 import { clipAccess, clipPosterSrc, clips } from "@/lib/content/posts";
 import { formatDuration } from "@/lib/content/videos";
 import { pageMetadata } from "@/lib/seo/metadata";
+import { PAGE } from "@/components/ui/layout";
 
 export const metadata: Metadata = pageMetadata({
   title: "Posts",
@@ -29,7 +30,7 @@ export default async function PostsPage() {
     <>
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-24 sm:px-8">
+      <main className={`${PAGE} flex-1 pb-24`}>
         <header className="pb-8 pt-12 sm:pt-16">
           <p className="text-xs uppercase tracking-[0.2em] text-amber">
             Shot for a phone

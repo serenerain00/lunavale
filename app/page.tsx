@@ -11,7 +11,9 @@ import { SurveyDrawer } from "@/components/survey/SurveyDrawer";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { Guest, Member, UnlessAnswered } from "@/components/access/Viewer";
 import { pickHero } from "@/lib/content/hero";
+import { BETWEEN_US } from "@/lib/content/between-us";
 import { inStoryOrder } from "@/lib/content/chronology";
+import { categories } from "@/lib/content/categories";
 import { currentSeason, hasReleasedEpisode } from "@/lib/content/season";
 import { characters } from "@/lib/content/characters";
 import { galleries } from "@/lib/content/gallery";
@@ -115,13 +117,189 @@ export default async function Home() {
           old page was built out of.
         */}
         <section className={`${PAGE} pt-8 sm:pt-10`}>
-          <p className="max-w-2xl text-base leading-relaxed text-stone sm:text-lg">
-            Luna and Josh were together ten years. They spent six months apart,
-            and in those six months her oldest friend Tyson was the one who
-            turned up. Then Josh called. Season one is coming, and the moments
-            below are a look at what it is walking into.
-          </p>
+          {/*
+            THE THREE OF THEM, BESIDE THE SENTENCE THAT NAMES THEM. Melissa
+            asked for imagery here rather than dead space: the paragraph sits
+            in a max-w-2xl measure for readability, which on a wide screen left
+            roughly 950px of nothing to its right.
+
+            NOTHING IS CROPPED. The portraits are 900x1200 and render at
+            aspect-[3/4], which is their own ratio exactly — `object-cover` has
+            nothing to trim. That was the constraint ("not cropped weird"), and
+            it is why these and not scene stills: a 16:9 still forced into a
+            portrait slot is precisely the thing that goes wrong.
+
+            They are links. A visitor reading "three people whose lives have
+            been tangled together" and looking at three faces is one tap from
+            wanting to know who they are, and making the faces inert would
+            waste that.
+
+            lg only. On a phone the paragraph should have the full width, and
+            three portraits stacked under it would push the first shelf off the
+            screen.
+          */}
+          <div className="lg:flex lg:items-start lg:justify-between lg:gap-12">
+            <p className="max-w-2xl text-lg leading-relaxed text-stone sm:text-xl">
+              Luna and Josh were together ten years. They spent six months
+              apart, and in those six months her oldest friend Tyson was the one
+              who turned up. Then Josh called. Season one is coming, and the
+              moments below are a look at what it is walking into.
+            </p>
+
+            {/*
+              THE THREE OF THEM, ON SET. Replaces the three character
+              portraits that were here for about an hour — Melissa sent this
+              instead, and it is the better picture: one frame with all three
+              in it, the lakehouse behind them and BETWEEN US on the chairs,
+              which says what the series is called without a caption.
+
+              NOT CROPPED, WHICH WAS THE CONSTRAINT. The source is 3226x1772
+              (1.8205); the web copy is the same ratio at 1440 wide, and it is
+              given explicit width and height rather than `fill`, so it renders
+              at its own intrinsic ratio and there is no container for
+              object-cover to trim it against.
+
+              lg only, like the portraits it replaces: on a phone the paragraph
+              should have the full width.
+            */}
+            <div className="hidden shrink-0 lg:block">
+              <Image
+                src="/on-set/cast-on-set.jpg"
+                alt="Luna, Josh and Tyson between takes at the lakehouse"
+                width={1440}
+                height={791}
+                sizes="(max-width: 1280px) 26rem, 32rem"
+                className="w-[26rem] rounded-lg ring-1 ring-hairline xl:w-[32rem]"
+              />
+            </div>
+          </div>
         </section>
+
+        {/*
+          -------------------------------------------------- between us band
+
+          RESTORED 2026-09-17, AND RECORDING WHY IT WENT MISSING. This band was
+          Melissa's explicit ask on 2026-09-03 — "I want new comers to see that
+          membership doesnt unlock just stills/scenes, theyll have access to
+          episodes as they are released" — and it was the first thing under the
+          hero for two weeks. The 09-16 rebuild cut the home page from fifteen
+          sections to a hero and shelves, and this went with them, which was a
+          mistake: it is not an editorial section, it is the one place the site
+          tells a stranger what a membership is FOR.
+
+          The home page went from four membership links to one in that rebuild,
+          and the one that was left is at the foot of a page that is now twelve
+          shelves long. Between 09-15 and 09-17 not one checkout session was
+          created in live Stripe, against sessions on eight of the thirteen
+          days before it. That is not proof — the checkout code is fine and so
+          is the Stripe config — but it is the only thing that changed, and a
+          funnel is not something to leave thin on a hunch.
+
+          It sits directly under the hero blurb, which is where it was, and
+          reads straight into the Season 1 shelf below it.
+        */}
+        {BETWEEN_US.announced && (
+          <section
+            aria-labelledby="between-us-heading"
+            className="mt-8 border-y border-hairline sm:mt-10"
+          >
+            {/*
+              STACKED, NOT SIDE BY SIDE. It was `lg:flex lg:justify-between`,
+              carried over from when this band lived in a max-w-6xl container.
+              In the wider PAGE gutter that pushed the right-hand column to the
+              far edge of a 1600px row — roughly 500px from the text — and for
+              a MEMBER that column holds one 56-character sentence. Melissa saw
+              it and asked what was missing on the right. Nothing was: it was a
+              guest-shaped layout being rendered to a member, and the emptiness
+              was the layout's, not the content's.
+
+              A single column has no far edge to strand anything against, reads
+              the same at every width, and puts the call to action directly
+              under the sentence that earns it.
+            */}
+            <div
+              className={`${PAGE} py-9 sm:py-12 lg:flex lg:items-center lg:justify-between lg:gap-14`}
+            >
+              <div className="min-w-0">
+              <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                {BETWEEN_US.eyebrow}
+              </p>
+              <h2
+                id="between-us-heading"
+                className="mt-2.5 font-display text-2xl font-semibold tracking-tight text-ivory sm:text-3xl"
+              >
+                {BETWEEN_US.heading}
+              </h2>
+
+              {/*
+                THE OFFER, NOT THE PREMISE. The premise is three paragraphs
+                about who these people are, and the hero blurb immediately
+                above this band already says it — rendering both was the page
+                repeating itself at length on the one screen that was supposed
+                to get lighter. See lib/content/between-us.ts.
+              */}
+              {BETWEEN_US.offer.map((line) => (
+                <p
+                  key={line}
+                  className="mt-3 max-w-2xl leading-relaxed text-stone"
+                >
+                  {line}
+                </p>
+              ))}
+
+              {/* Both variants ship in the cached HTML and the client shows
+                  one — nothing premium is passed as children to <Member>. */}
+              <div className="mt-6">
+                <Guest>
+                  <Link
+                    href="/membership"
+                    className="inline-flex min-h-12 items-center whitespace-nowrap rounded-full bg-amber px-7 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+                  >
+                    {vault.cta}
+                  </Link>
+                  <p className="mt-2.5 text-xs text-stone-dim">
+                    {`${BETWEEN_US.memberLine} From ${formatPrice(vault.priceMonthlyCents)} a month.`}
+                  </p>
+                </Guest>
+                <Member>
+                  {/* A member is not being sold anything here, so this is a
+                      confirmation rather than a pitch — and it sits where the
+                      button would, instead of floating off to one side. */}
+                  <p className="max-w-xl leading-relaxed text-amber-soft">
+                    {BETWEEN_US.memberNote}
+                  </p>
+                </Member>
+              </div>
+              </div>
+
+              {/*
+                THE TRAILER FRAME. 1280x720 rendered at aspect-video — its own
+                ratio, so nothing is cropped. It is the right still for this
+                band specifically: the band is about the episodes, and this is
+                the only image on the site that is about the series rather than
+                about one moment in it.
+
+                Not a link. The trailer is a card on the Season 1 shelf forty
+                pixels below, and two routes to the same video in one screen is
+                the duplication this rebuild spent a day removing.
+              */}
+              {trailer && (
+                <div className="mt-8 hidden shrink-0 lg:mt-0 lg:block">
+                  <div className="relative aspect-video w-[26rem] overflow-hidden rounded-lg ring-1 ring-hairline xl:w-[30rem]">
+                    <Image
+                      src={trailer.poster}
+                      alt=""
+                      fill
+                      sizes="(max-width: 1280px) 416px, 480px"
+                      className="object-cover brightness-90"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/60 via-transparent to-transparent" />
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* ------------------------------------------------------- season one */}
         <Shelf
@@ -130,6 +308,29 @@ export default async function Home() {
             episodeLanded
               ? undefined
               : "The first episode is on its way. Nothing here is a placeholder for it — the clips below are the story it comes out of."
+          }
+          /*
+            THE ONE PLACE THE SEASON AND THE MEMBERSHIP ARE NAMED TOGETHER.
+            Melissa: "people need to know they can watch the season if they're
+            a member." The Season 1 row is where somebody is already looking at
+            the thing they want, which is the only moment that sentence is
+            information rather than an interruption — the ask at the foot of
+            the page is a long way from here.
+
+            Guest-only: a member reading "become a member" learns nothing and
+            is being sold something they have bought. Both variants ship in the
+            cached HTML and the client picks — see components/access/Viewer.tsx.
+          */
+          action={
+            <Guest>
+              <Link
+                href="/membership"
+                className="shrink-0 text-sm text-amber transition-colors duration-(--duration-quick) hover:text-amber-soft"
+              >
+                Watch it with a membership{" "}
+                <span aria-hidden="true">→</span>
+              </Link>
+            </Guest>
           }
         >
           {season.episodes.map((ep) => (
@@ -226,6 +427,36 @@ export default async function Home() {
             </RailItem>
           ))}
         </Shelf>
+
+        {/* ------------------------------------------------------ categories */}
+        {/*
+          THE SAME 46 CLIPS, CUT EIGHT WAYS. One shelf in story order is a
+          correct list and a thin front page — it gives a visitor exactly one
+          reason to scroll, and if the first four posters do not land there is
+          no second chance. Every row here is a predicate over the clip data
+          (lib/content/categories.ts), so a new clip joins its rows the moment
+          it is published and none of this is a second list to keep.
+
+          A clip appearing in several rows is deliberate. "Luna & Tyson" and
+          "The distance" are different questions and the same clip is a good
+          answer to both; a front page is not a partition.
+        */}
+        {categories().map((c) => (
+          <Shelf key={c.id} title={c.label} href={c.href} note={c.note}>
+            {c.clips.map((v) => (
+              <RailItem key={v.slug}>
+                <ClipCard
+                  href={`/clips/${v.slug}`}
+                  title={v.title}
+                  poster={v.poster}
+                  meta={formatDuration(v.durationSeconds)}
+                  premium={v.access === "premium"}
+                  mature={v.mature}
+                />
+              </RailItem>
+            ))}
+          </Shelf>
+        ))}
 
         {/* ----------------------------------------------------------- posts */}
         <Shelf
@@ -359,8 +590,9 @@ export default async function Home() {
               </h2>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
                 Membership opens every clip at full length, all of
-                Luna&rsquo;s journal, and the stills from the set. What&rsquo;s
-                open to everyone stays open, always. It&rsquo;s{" "}
+                Luna&rsquo;s journal, the stills from the set, and the group
+                chat the four of them talk in. What&rsquo;s open to everyone
+                stays open, always. It&rsquo;s{" "}
                 {formatPrice(vault.priceMonthlyCents)} a month, and you can stop
                 whenever you like.
               </p>

@@ -38,6 +38,10 @@
  *                    verified in Resend — an unverified from-address is how a
  *                    first send lands every member in spam at once
  *   MAIL_SECRET      signs unsubscribe links; see lib/email/unsubscribe.ts
+ *   OWNER_EMAIL      where replies go. Optional, and you want it set: people
+ *                    reply to mail from a person, and without it the reply
+ *                    goes to MAIL_FROM — which is usually a send-only address
+ *                    nobody reads, so the reply is silently lost.
  *   SITE_URL         defaults to https://lunavale38.com
  */
 
@@ -176,6 +180,8 @@ async function suppressedAndSent(
  * signature — are imported and shared.
  */
 async function deliver(to: string, subject: string, text: string, html: string, unsub: string) {
+  // Replies go to a human. See OWNER_EMAIL above.
+  const replyTo = process.env.OWNER_EMAIL;
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -188,6 +194,7 @@ async function deliver(to: string, subject: string, text: string, html: string, 
       subject,
       text,
       html,
+      reply_to: replyTo || undefined,
       headers: {
         "List-Unsubscribe": `<${unsub}>`,
         "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
@@ -204,6 +211,13 @@ async function main() {
     die(
       "MAIL_SECRET is not set. Without it the unsubscribe links cannot be\n" +
         "  signed, and mail nobody can get off is worse than no mail at all.",
+    );
+  }
+
+  if (!process.env.OWNER_EMAIL) {
+    console.log(
+      "\n  NOTE: OWNER_EMAIL is not set, so replies will go to MAIL_FROM.\n" +
+        "  If that is a send-only address, replies are lost silently.",
     );
   }
 

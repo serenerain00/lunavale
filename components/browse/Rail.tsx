@@ -268,17 +268,32 @@ export function Rail({ children, label }: RailProps) {
   );
 }
 
-/** One item in a rail: sets the responsive width and the snap target. */
+/**
+ * One item in a rail: sets the responsive width and the snap target.
+ *
+ * WAS 78vw ON A PHONE, which put exactly one card on screen and half of the
+ * next. That is a reasonable size for a card you are meant to read and the
+ * wrong one for a library you are meant to browse — it made a 46-clip shelf
+ * feel like a slideshow, and it is the single biggest reason the front page
+ * read as thin on mobile. Melissa, 2026-09-16: "on mobile i think we can
+ * shrink the clip thumbnails and place them horizontally so users can view
+ * more content faster — its like netflix's layout on mobile."
+ *
+ * 46vw puts two cards and a slice of the third in view, which is what Netflix
+ * shows on a phone and what makes the peeking edge read as "there is more"
+ * rather than as a cropped image.
+ */
 export function RailItem({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-[78vw] max-w-80 shrink-0 snap-start sm:w-80">
+    <div className="w-[46vw] max-w-72 shrink-0 snap-start sm:w-72 lg:w-80">
       {children}
     </div>
   );
 }
 
 /** The responsive `sizes` hint that matches RailItem's width. */
-export const RAIL_ITEM_SIZES = "(max-width: 640px) 78vw, 320px";
+export const RAIL_ITEM_SIZES =
+  "(max-width: 640px) 46vw, (max-width: 1024px) 288px, 320px";
 
 function Scrim({ side, visible }: { side: "start" | "end"; visible: boolean }) {
   return (

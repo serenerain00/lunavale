@@ -21,23 +21,39 @@
  * If you are looking for the rule that decides who may post, it is not this.
  */
 /**
- * ARCHIVED — Melissa, 2026-08-10. "lets archive the convo wall for now".
+ * BACK, 2026-09-17 — Melissa: "lets add the members chat back into the members
+ * perks."
  *
- * Set false to bring it back; that is the whole switch. Everything else is
- * intact: the cast thread below, the database table and its rows, the
- * moderation page, the admin panel. Nothing has been deleted and nothing
- * needs rebuilding.
+ * ARCHIVED 2026-08-10 ("lets archive the convo wall for now") and the reason
+ * is worth keeping, because it is the thing that has to not happen again: the
+ * wall went members-only on 3 August and took ZERO posts in the week after,
+ * because it had one member, who was Melissa. A conversation wall with nobody
+ * on it is worse than no wall — it is a room the site keeps pointing at, and
+ * every visitor who follows the sign finds it empty and learns something true
+ * about how many people are here.
  *
- * WHY IT WENT. The wall was made members-only on 3 August, and in the week
- * that followed it took ZERO posts — because it had one member, who is
- * Melissa. A conversation wall with nobody on it is worse than no wall: it is
- * a room the site keeps pointing at, and every visitor who follows the sign
- * finds it empty and learns something true about how many people are here.
+ * WHAT IS DIFFERENT NOW. Two things, one of them much more important than the
+ * other. There are ten members rather than one — which is still not a crowd.
+ * And CAST_THREAD is below: Luna, Tyson, Josh and Rick talking to each other,
+ * authored, already written, and there whether or not another human ever
+ * posts. That is the fix for the specific failure that killed it. The room is
+ * not an empty box waiting for strangers; it is a conversation you are being
+ * let into, and anything members add happens alongside it.
  *
- * When it comes back it should come back with posting open to free accounts,
- * so it can fill before it is sold.
+ * `overheard_posts` still has zero rows, so this goes back knowing the human
+ * half will be quiet at first. That is survivable now in a way it was not in
+ * August, because the cast thread is the content and the posting is the extra.
+ *
+ * THE OTHER OPTION, RECORDED RATHER THAN TAKEN. The note left here in August
+ * said it should come back "with posting open to free accounts, so it can fill
+ * before it is sold". That is still the better play for filling a room, and it
+ * is not what this is — Melissa asked for it as a members' perk and a perk
+ * that free accounts also get is not one. If the human half stays silent for a
+ * few weeks, opening posting to any signed-in account while keeping the cast
+ * thread members-only is the move, and it needs no new code: the gate is in
+ * app/overheard/actions.ts.
  */
-export const OVERHEARD_ARCHIVED = true;
+export const OVERHEARD_ARCHIVED = false;
 
 export const FREE_POST_ALLOWANCE = 3;
 
@@ -278,6 +294,86 @@ export const CAST_THREAD: CastMessage[] = [
   { id: "d32-1", day: 32, at: "19:30", author: LUNA, addressedTo: null, body: [
     "Last day of August. Thank you for being in here — genuinely.",
     "Keep going. We're not going anywhere.",
+  ] },
+
+  /* ─── September. Days 33-56.
+   *
+   * Written 2026-09-17, when the room came back. The thread stopped on day 32
+   * (31 August) because the wall was archived the same week, so seventeen days
+   * of it arrive at once for anybody opening the room today — which is the
+   * right way round: they are catching up on a conversation, not staring at a
+   * fresh empty box. It keeps unfolding to day 56 after that.
+   *
+   * NO DATES AND NO PROMISES ABOUT THE SERIES, per the rule everywhere else:
+   * nothing in here commits to when anything lands. They can be pleased that
+   * something is coming; they cannot say when, because this file cannot keep
+   * that.
+   *
+   * Voices, per LUNA_VALE_CONTEXT.md: Luna interior and self-revising, Tyson
+   * almost nothing but it lands, Josh charming and certain he is not the
+   * villain, Rick unkind in a way that is also accurate.
+   */
+  { id: "d33-1", day: 33, at: "08:40", author: LUNA, addressedTo: null, body: ["September. The light changed overnight like it does, and I went out to the truck at seven and could see my breath."] },
+  { id: "d33-2", day: 33, at: "09:15", author: JOSH, addressedTo: null, body: ["@Luna It's fifty-eight degrees."] },
+  { id: "d33-3", day: 33, at: "09:22", author: LUNA, addressedTo: null, body: ["@Josh I know what I saw."] },
+  { id: "d34-1", day: 34, at: "18:05", author: TYSON, addressedTo: null, body: ["Last proper ride of the year, probably. Didn't feel like it at the time. They never do."] },
+  { id: "d35-1", day: 35, at: "11:30", author: RICK, addressedTo: null, body: ["Somebody asked what I did before the farm. I did this. There was no before."] },
+  { id: "d35-2", day: 35, at: "12:02", author: JOSH, addressedTo: null, body: ["@Rick There was a before. You were in Tulsa."] },
+  { id: "d35-3", day: 35, at: "12:40", author: RICK, addressedTo: null, body: ["@Josh Eleven months. It doesn't count."] },
+  { id: "d36-1", day: 36, at: "21:10", author: LUNA, addressedTo: null, body: [
+    "Question for the room. No wrong answers, and I'll go first.",
+    "What's something you kept that you should have thrown out?",
+    "Mine's a jacket. It isn't even mine.",
+  ] },
+  { id: "d36-2", day: 36, at: "21:44", author: TYSON, addressedTo: null, body: ["@Luna A receipt."] },
+  { id: "d36-3", day: 36, at: "22:01", author: LUNA, addressedTo: null, body: ["@Tyson For what?"] },
+  { id: "d36-4", day: 36, at: "22:35", author: TYSON, addressedTo: null, body: ["@Luna Coffee."] },
+  { id: "d37-1", day: 37, at: "07:55", author: JOSH, addressedTo: null, body: ["Barn roof. Two days. I'm telling you now so somebody notices when it's done."] },
+  { id: "d38-1", day: 38, at: "16:20", author: RICK, addressedTo: null, body: ["He'll be three days."] },
+  { id: "d39-1", day: 39, at: "19:45", author: JOSH, addressedTo: null, body: ["@Rick Three days."] },
+  { id: "d40-1", day: 40, at: "06:30", author: LUNA, addressedTo: null, body: ["Ran before it was light. Nobody out there. First time all year I've had the whole road."] },
+  { id: "d40-2", day: 40, at: "08:10", author: TYSON, addressedTo: null, body: ["@Luna You had the whole road because it's dark and everyone else has sense."] },
+  { id: "d41-1", day: 41, at: "13:15", author: LUNA, addressedTo: null, body: ["Somebody in here asked whether I actually write all of it down or whether it's tidied up afterwards.",
+    "It is not tidied up. That's the problem with it.",
+  ] },
+  { id: "d42-1", day: 42, at: "20:00", author: RICK, addressedTo: null, body: ["A man showed me a photograph of this place from 1968 today. Same trees. Smaller."] },
+  { id: "d42-2", day: 42, at: "20:30", author: LUNA, addressedTo: null, body: ["@Rick That's the nicest thing you've said in here."] },
+  { id: "d42-3", day: 42, at: "20:52", author: RICK, addressedTo: null, body: ["@Luna Then you haven't been reading."] },
+  { id: "d43-1", day: 43, at: "12:00", author: JOSH, addressedTo: null, body: ["Roof's done. Four days. I'm not taking questions."] },
+  { id: "d43-2", day: 43, at: "12:18", author: TYSON, addressedTo: null, body: ["@Josh It looks good."] },
+  { id: "d43-3", day: 43, at: "12:41", author: JOSH, addressedTo: null, body: ["@Tyson Say that again where my father can see it."] },
+  { id: "d44-1", day: 44, at: "22:20", author: LUNA, addressedTo: null, body: ["Awake again. Not a bad one. Just the kind where the house is loud about being quiet."] },
+  { id: "d44-2", day: 44, at: "22:26", author: TYSON, addressedTo: null, body: ["@Luna Here."] },
+  { id: "d45-1", day: 45, at: "10:40", author: JOSH, addressedTo: null, body: ["Two of you have now asked whether I'm the villain in this. I'm going to let that go."] },
+  { id: "d45-2", day: 45, at: "11:05", author: RICK, addressedTo: null, body: ["@Josh You're not going to let that go."] },
+  { id: "d46-1", day: 46, at: "17:30", author: TYSON, addressedTo: null, body: ["Cleaned the garage. Found three things I'd been looking for and one I hadn't."] },
+  { id: "d46-2", day: 46, at: "18:15", author: LUNA, addressedTo: null, body: ["@Tyson Which one are you going to tell us about?"] },
+  { id: "d46-3", day: 46, at: "18:49", author: TYSON, addressedTo: null, body: ["@Luna The socket set."] },
+  { id: "d47-1", day: 47, at: "09:00", author: LUNA, addressedTo: null, body: [
+    "There's a trailer now. I've watched it four times and I'm not going to pretend that's normal.",
+    "It's strange seeing a year of your life cut down to ninety seconds. Accurate, though. That's the part that got me.",
+  ] },
+  { id: "d47-2", day: 47, at: "09:35", author: JOSH, addressedTo: null, body: ["@Luna I've watched it more than four times."] },
+  { id: "d47-3", day: 47, at: "10:10", author: RICK, addressedTo: null, body: ["I'm in it for two seconds and I'd have cut those."] },
+  { id: "d48-1", day: 48, at: "14:20", author: LUNA, addressedTo: null, body: ["Question, and I mean it: what do you want to see more of in here? Not the story. In here. This room."] },
+  { id: "d48-2", day: 48, at: "15:02", author: TYSON, addressedTo: null, body: ["@Luna Less of Josh."] },
+  { id: "d48-3", day: 48, at: "15:30", author: JOSH, addressedTo: null, body: ["@Tyson Noted and ignored."] },
+  { id: "d49-1", day: 49, at: "19:00", author: LUNA, addressedTo: null, body: [
+    "The room's been quiet a while and that's on us, not on you.",
+    "It's open again. Say something — it does actually get read.",
+  ] },
+  { id: "d50-1", day: 50, at: "08:15", author: RICK, addressedTo: null, body: ["Frost on the low field. Three weeks early. Nobody wants to hear it from me so I'll say it here."] },
+  { id: "d51-1", day: 51, at: "13:40", author: JOSH, addressedTo: null, body: ["Somebody asked what I'd do differently. Everything, and I'd do it in the same order."] },
+  { id: "d52-1", day: 52, at: "20:30", author: LUNA, addressedTo: null, body: ["Made the soup my mother makes and got it wrong in a way I can't identify. Called her. Still can't identify it."] },
+  { id: "d52-2", day: 52, at: "21:00", author: TYSON, addressedTo: null, body: ["@Luna Salt."] },
+  { id: "d52-3", day: 52, at: "21:14", author: LUNA, addressedTo: null, body: ["@Tyson It was salt."] },
+  { id: "d53-1", day: 53, at: "11:20", author: TYSON, addressedTo: null, body: ["Took the long way to town for no reason. Forty extra minutes. Best part of the week."] },
+  { id: "d54-1", day: 54, at: "18:45", author: RICK, addressedTo: null, body: ["My son thinks I don't read this. I read all of it."] },
+  { id: "d54-2", day: 54, at: "19:20", author: JOSH, addressedTo: null, body: ["@Rick I know you read all of it. That's the problem."] },
+  { id: "d55-1", day: 55, at: "07:30", author: LUNA, addressedTo: null, body: ["Cold enough this morning that the truck took three goes. I was pleased about it and I'm not going to examine why."] },
+  { id: "d56-1", day: 56, at: "21:00", author: LUNA, addressedTo: null, body: [
+    "End of another one. Thank you for being in here — I mean that more than it reads.",
+    "More soon. Properly soon, not the other kind.",
   ] },
 ];
 

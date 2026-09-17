@@ -11,6 +11,7 @@ import {
   type Character,
 } from "@/lib/content/characters";
 import { pageMetadata } from "@/lib/seo/metadata";
+import { PAGE } from "@/components/ui/layout";
 
 export const metadata: Metadata = pageMetadata({
   title: "The Three of Them",
@@ -25,7 +26,7 @@ export default async function CharactersIndexPage() {
     <>
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-24 sm:px-8">
+      <main className={`${PAGE} flex-1 pb-24`}>
         <header className="pb-10 pt-12 sm:pt-16">
           <p className="text-xs uppercase tracking-[0.2em] text-amber">
             The three of them

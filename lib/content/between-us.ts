@@ -46,8 +46,16 @@ export interface BetweenUsAnnouncement {
   /** Small caps above the heading. */
   eyebrow: string;
   heading: string;
-  /** The body, in order. Two short paragraphs; a band is not an essay. */
-  body: string[];
+  /**
+   * What the series IS. Not shown on the home band — see the note on the
+   * value below. Written and kept for the page that should carry it.
+   */
+  premise: string[];
+  /**
+   * What a membership has to do with it. This is what the band shows: a band
+   * is not an essay, and the premise is already in the blurb above it.
+   */
+  offer: string[];
   /** The line that answers "and what do I get for eight dollars". */
   memberLine: string;
   /** What a member sees instead of the pitch. */
@@ -90,12 +98,30 @@ export const BETWEEN_US: BetweenUsAnnouncement = {
     what order they run in, and when the first one lands. Those are the exact
     promises this band cannot keep yet.
   */
-  body: [
+  /*
+   * SPLIT IN TWO, 2026-09-17. It was one `body` array of six paragraphs, and
+   * the home page rendered all six under the hero — which put a ~980-character
+   * wall directly beneath a blurb that had just said the same thing. The first
+   * three ARE the premise, and the hero blurb above the band already carries
+   * it, so on the home page they were the page repeating itself at length on
+   * the exact screen Melissa had asked to make less text-heavy.
+   *
+   * `premise` is what the series is. `offer` is what a membership has to do
+   * with it. The band shows the offer, because that is the band's whole job —
+   * telling a stranger that episodes are coming and this is where they land.
+   * The premise is kept because it is good and because the moment there is a
+   * page that should carry it (a series page, the first episode's own page) it
+   * is written and waiting.
+   */
+  premise: [
     "A cinematic drama series about Luna, Josh and Tyson — three people whose lives have been tangled together for more than twenty years. Luna and Josh are trying to find their way back to each other. Tyson is Josh's family, Luna's best friend, and the one person who has always known her a little too well.",
     "Friendship, loyalty, love, and everything we don't say until it's too late. Nothing in it breaks in a single night — it comes apart quietly, over years, in kitchens and trucks and the pauses between sentences. Nobody in it is the villain. Nobody comes out of it clean.",
     "Three people. Twenty years of history. One question nobody wants answered.",
-    // The logistics, kept separate and kept last. Every line below is future
-    // tense with no date in it, for the reason in the header.
+  ],
+
+  // The logistics. Every line is future tense with no date in it, for the
+  // reason in the header.
+  offer: [
     "The first episode is coming, and the ones after it land here as each one is finished. Not a scene and not a clip — episodes.",
     "Every one is part of the membership. Nothing extra to buy, no season to wait for, and they stay yours to watch again.",
     // NAMES THE CONSTRAINT rather than claiming exclusivity. "Exclusive" is a

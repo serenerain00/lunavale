@@ -15,7 +15,7 @@ import { BETWEEN_US } from "@/lib/content/between-us";
 import { inStoryOrder } from "@/lib/content/chronology";
 import { categories } from "@/lib/content/categories";
 import { currentSeason, hasReleasedEpisode } from "@/lib/content/season";
-import { characters } from "@/lib/content/characters";
+import { characters, getCharacter } from "@/lib/content/characters";
 import { galleries } from "@/lib/content/gallery";
 import { freeEntries, opening } from "@/lib/content/journal";
 import { clips as postList, clipPosterSrc, clipAccess, type Clip } from "@/lib/content/posts";
@@ -95,6 +95,12 @@ export default async function Home() {
   // image that is honestly about the thing being announced.
   const trailer = videosAll.find((v) => v.slug === "between-us-trailer-one");
 
+  // The three the story is about, in the order the sentence beside them names
+  // them. `characters` order is not that order, so this is explicit.
+  const LEADS = ["luna", "tyson", "josh"]
+    .map((id) => getCharacter(id))
+    .filter((c): c is NonNullable<typeof c> => Boolean(c));
+
   const openPages = freeEntries();
 
   // What has gone up lately, and how often — both derived, neither hand-kept.
@@ -117,12 +123,55 @@ export default async function Home() {
           old page was built out of.
         */}
         <section className={`${PAGE} pt-8 sm:pt-10`}>
-          <p className="max-w-2xl text-lg leading-relaxed text-stone sm:text-xl">
-            Luna and Josh were together ten years. They spent six months apart,
-            and in those six months her oldest friend Tyson was the one who
-            turned up. Then Josh called. Season one is coming, and the moments
-            below are a look at what it is walking into.
-          </p>
+          {/*
+            THE THREE OF THEM, BESIDE THE SENTENCE THAT NAMES THEM. Melissa
+            asked for imagery here rather than dead space: the paragraph sits
+            in a max-w-2xl measure for readability, which on a wide screen left
+            roughly 950px of nothing to its right.
+
+            NOTHING IS CROPPED. The portraits are 900x1200 and render at
+            aspect-[3/4], which is their own ratio exactly — `object-cover` has
+            nothing to trim. That was the constraint ("not cropped weird"), and
+            it is why these and not scene stills: a 16:9 still forced into a
+            portrait slot is precisely the thing that goes wrong.
+
+            They are links. A visitor reading "three people whose lives have
+            been tangled together" and looking at three faces is one tap from
+            wanting to know who they are, and making the faces inert would
+            waste that.
+
+            lg only. On a phone the paragraph should have the full width, and
+            three portraits stacked under it would push the first shelf off the
+            screen.
+          */}
+          <div className="lg:flex lg:items-start lg:justify-between lg:gap-12">
+            <p className="max-w-2xl text-lg leading-relaxed text-stone sm:text-xl">
+              Luna and Josh were together ten years. They spent six months
+              apart, and in those six months her oldest friend Tyson was the one
+              who turned up. Then Josh called. Season one is coming, and the
+              moments below are a look at what it is walking into.
+            </p>
+
+            <div className="hidden shrink-0 gap-4 lg:flex">
+              {LEADS.map((c) => (
+                <Link key={c.id} href={`/characters/${c.id}`} className="group">
+                  <div className="relative aspect-[3/4] w-40 overflow-hidden rounded-lg ring-1 ring-hairline xl:w-44">
+                    <Image
+                      src={c.portrait}
+                      alt=""
+                      fill
+                      sizes="176px"
+                      className="object-cover brightness-90 transition-[filter,transform] duration-(--duration-cinematic) ease-(--ease-cinematic) group-hover:scale-[1.03] group-hover:brightness-100"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/85 via-transparent to-transparent" />
+                    <p className="absolute inset-x-3 bottom-2.5 font-display text-sm text-ivory">
+                      {c.name}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/*
@@ -167,7 +216,10 @@ export default async function Home() {
               the same at every width, and puts the call to action directly
               under the sentence that earns it.
             */}
-            <div className={`${PAGE} py-9 sm:py-12`}>
+            <div
+              className={`${PAGE} py-9 sm:py-12 lg:flex lg:items-center lg:justify-between lg:gap-14`}
+            >
+              <div className="min-w-0">
               <p className="text-xs uppercase tracking-[0.2em] text-amber">
                 {BETWEEN_US.eyebrow}
               </p>
@@ -217,6 +269,33 @@ export default async function Home() {
                   </p>
                 </Member>
               </div>
+              </div>
+
+              {/*
+                THE TRAILER FRAME. 1280x720 rendered at aspect-video — its own
+                ratio, so nothing is cropped. It is the right still for this
+                band specifically: the band is about the episodes, and this is
+                the only image on the site that is about the series rather than
+                about one moment in it.
+
+                Not a link. The trailer is a card on the Season 1 shelf forty
+                pixels below, and two routes to the same video in one screen is
+                the duplication this rebuild spent a day removing.
+              */}
+              {trailer && (
+                <div className="mt-8 hidden shrink-0 lg:mt-0 lg:block">
+                  <div className="relative aspect-video w-[26rem] overflow-hidden rounded-lg ring-1 ring-hairline xl:w-[30rem]">
+                    <Image
+                      src={trailer.poster}
+                      alt=""
+                      fill
+                      sizes="(max-width: 1280px) 416px, 480px"
+                      className="object-cover brightness-90"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/60 via-transparent to-transparent" />
+                  </div>
+                </div>
+              )}
             </div>
           </section>
         )}

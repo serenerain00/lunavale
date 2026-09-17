@@ -91,7 +91,7 @@ const ALL_TIERS: Tier[] = [
     priceMonthlyCents: 800,
     priceYearlyCents: 8000,
     blurb:
-      "Every clip at full length, the mature cuts, the private journal entries, and the galleries. Season one lands here first. New material every month.",
+      "Every clip at full length, the mature cuts, the private journal entries, the galleries, and the group chat with Luna, Tyson, Josh and Rick. Season one lands here first. New material every month.",
     cta: "Join the LunaVerse",
     commitment: "Monthly · cancel any time",
     featured: true,

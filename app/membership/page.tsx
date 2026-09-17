@@ -84,6 +84,17 @@ export default function MembershipPage() {
             and the nights she only ever told this book about. They come with
             the clips they were written after.
           </p>
+          {/* THE CHAT, NAMED IN THE PITCH and not only in the table below.
+              Melissa, 2026-09-17: "make sure to mention the chat in the
+              membership details." It is the one part of the membership that is
+              not something to watch or read, so a pitch built entirely around
+              her journal was leaving out the whole other kind of thing you
+              get. */}
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-stone">
+            And there is a room. Luna, Tyson, Josh and Rick talk to each other
+            in it most days, and members can say something back — which is the
+            one part of this you cannot do by watching.
+          </p>
           <p className="mt-4 max-w-2xl leading-relaxed text-stone-dim">
             This is happening now. It is being filmed while you read this, it
             is not finished, and nobody — including her — knows yet how it

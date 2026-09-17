@@ -589,8 +589,9 @@ export default async function Home() {
               </h2>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
                 Membership opens every clip at full length, all of
-                Luna&rsquo;s journal, and the stills from the set. What&rsquo;s
-                open to everyone stays open, always. It&rsquo;s{" "}
+                Luna&rsquo;s journal, the stills from the set, and the group
+                chat the four of them talk in. What&rsquo;s open to everyone
+                stays open, always. It&rsquo;s{" "}
                 {formatPrice(vault.priceMonthlyCents)} a month, and you can stop
                 whenever you like.
               </p>

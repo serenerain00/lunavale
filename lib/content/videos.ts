@@ -2777,10 +2777,16 @@ export const videos: Video[] = [
       same room rather than a recut of either. Worth stating so nobody
       reconciles them later.
 
-      TO PUBLISH: point the manifest at the scored export, re-import, replace
-      the placeholder title and synopsis, set `feelings`, and delete one
-      `hidden: true`. The 45s preview it will get under the tiers is already
-      declared below.
+      PUBLISHED 2026-09-17. Melissa: "no music for this one — go ahead and add
+      it though." So the scored export this was waiting for is not coming, and
+      the dialogue cut IS the cut. The 45s preview was cut on publish (the tier
+      for anything over two minutes) and both files went to Blob; it had been
+      declared here for three days without existing, which would have 404'd the
+      preview for every non-member the moment it was unhidden.
+
+      THE SYNOPSIS IS STILL THE CAREFUL READ described above, not something
+      anybody has confirmed. It says what is on screen and stops there. Replace
+      it when there is a line on what is actually said.
     */
     slug: "ty-luna-grg2",
     title: "The Garage, Again",
@@ -2791,18 +2797,20 @@ export const videos: Video[] = [
     // 146, trimmed at 145.5 — black from about 146.
     durationSeconds: 146,
     addedOn: "2026-09-14",
-    // HIDDEN. See the note above; this is one line and a re-import from live.
-    hidden: true,
     access: "premium",
     mature: false,
     preview: {
       file: "ty-luna-grg2-preview.proxy.mp4",
-      // 45s, the tier for anything over two minutes. Declared now so the swap
-      // to the scored cut is a re-import and nothing else.
+      // 45s, the tier for anything over two minutes.
       durationSeconds: 45,
       hookStart: 0,
     },
-    feelings: [],
+    // `distance` only, and deliberately only that. It is the one feeling the
+    // synopsis actually supports — she is asking and getting nothing back. The
+    // other two garage scenes carry `desire` as well and this one probably
+    // does, but nobody has said what is said in it, and a feeling is what
+    // decides which shelf a clip appears on. Add the second one with the line.
+    feelings: ["distance"],
     place: "garage",
     about: ["luna", "tyson"],
   },

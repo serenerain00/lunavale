@@ -211,8 +211,10 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
                   There&rsquo;s more of this set
                 </h2>
                 <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
-                  You&rsquo;re seeing the open frames. Members get the whole set
-                  at full resolution, and the clip it was cut from in full.
+                  {/* "at full resolution" removed 2026-09-17 — see the note
+                      in lib/content/membership.ts. Nothing sells resolution. */}
+                  You&rsquo;re seeing the open frames. Members get the whole set,
+                  and the clip it was cut from in full.
                 </p>
                 <Link
                   href="/membership"

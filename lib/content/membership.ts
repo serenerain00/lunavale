@@ -170,7 +170,18 @@ export const BENEFITS: Benefit[] = [
   {
     id: "public-scenes",
     label: "Open clips",
-    detail: "The ones released openly, in full, at full quality.",
+    /*
+     * "at full quality" CAME OUT 2026-09-17, and the reason is a cancellation.
+     * Melissa: "someone canceled saying quality was lacking… costs too much
+     * for 1080p and AI looks fake, so i dont want that to be a reason ppl sign
+     * up."
+     *
+     * It was never the argument for this product and it was a bad one to make
+     * in passing: it invites a comparison the budget cannot win, and once
+     * somebody is grading the picture they have stopped watching the story.
+     * Nothing anywhere should sell resolution.
+     */
+    detail: "The ones released openly, in full, with no account needed.",
     from: "free",
     group: "Watching",
   },
@@ -347,13 +358,16 @@ export const BENEFITS: Benefit[] = [
     from: "vault",
     group: "Behind it",
   },
-  {
-    id: "stills",
-    label: "Unreleased stills",
-    detail: "The frames that didn't make the cut, at full resolution.",
-    from: "vault",
-    group: "Behind it",
-  },
+  // "Unreleased stills — the frames that didn't make the cut, at full
+  // resolution" was here. Pulled 2026-09-17, Melissa: "get rid of unreleased
+  // stills - dont think anyone cares about that."
+  //
+  // It also carried the second "full resolution" claim, which is the thing
+  // that turned up in a cancellation reason this week. The galleries are still
+  // in the membership and still listed — "Character artifacts" under Watching
+  // — so nothing a member can open has been taken away. What has gone is a row
+  // selling outtakes as a feature, which is a different and weaker promise
+  // than the one above it.
   {
     id: "breakdowns",
     label: "Monthly production breakdown",

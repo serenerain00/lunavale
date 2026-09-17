@@ -124,6 +124,14 @@ export const STORY_ORDER: readonly string[] = [
   "luna-josh-house",
   "luna-bathtub",
   "ty-luna-garage",
+
+  // HAND-PLACED — REASONED. Published 2026-09-17, the third garage scene and a
+  // different conversation in the same room rather than a recut of the others.
+  // It sits after The Garage and before the month of silence because that is
+  // the shape its own staging note describes: her asking, him not answering.
+  // Move it if the line turns out to put it elsewhere.
+  "ty-luna-grg2",
+
   "luna-ty-apt-argue",
   "luna-truck-breakdown",
   "ty-luna-bed",

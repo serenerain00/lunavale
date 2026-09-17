@@ -27,7 +27,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
 export const alt =
-  "Luna Vale — an explorable cinematic universe of original stories";
+  "Between Us — a cinematic drama series about three people and twenty years of history";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -117,7 +117,7 @@ export default async function OpengraphImage() {
               maxWidth: 880,
             }}
           >
-            An explorable cinematic universe of original stories.
+            A cinematic drama series. Three people, twenty years, one question\n            nobody wants answered.
           </div>
         </div>
       </div>

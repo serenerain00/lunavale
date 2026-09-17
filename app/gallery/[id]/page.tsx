@@ -17,6 +17,7 @@ import { signGalleryStills } from "@/lib/media/presign";
 import { getPlace } from "@/lib/content/taxonomy";
 import { getVideo } from "@/lib/content/videos";
 import { WORLD_ENABLED } from "@/lib/content/world";
+import { PAGE } from "@/components/ui/layout";
 
 interface GalleryPageProps {
   params: Promise<{ id: string }>;
@@ -104,7 +105,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
     <>
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-24 sm:px-8">
+      <main className={`${PAGE} flex-1 pb-24`}>
         <nav className="py-5 text-sm">
           <Link
             href="/browse"

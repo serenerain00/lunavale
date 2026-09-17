@@ -19,6 +19,7 @@ import {
 } from "@/lib/content/characters";
 import { clipAccess } from "@/lib/content/posts";
 import { formatDuration } from "@/lib/content/videos";
+import { PAGE } from "@/components/ui/layout";
 
 interface CharacterPageProps {
   params: Promise<{ id: string }>;
@@ -95,7 +96,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
       <main className="flex-1 pb-24">
         {/* ------------------------------------------------------ the person */}
         <header className="relative">
-          <div className="mx-auto grid w-full max-w-6xl gap-8 px-5 pt-10 sm:px-8 sm:pt-14 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-12">
+          <div className={`${PAGE} grid gap-8 pt-10 sm:pt-14 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-12`}>
             <div className="relative mx-auto w-full max-w-xs overflow-hidden rounded-lg ring-1 ring-hairline lg:mx-0 lg:max-w-none">
               <Image
                 src={character.portrait}
@@ -177,7 +178,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
           </div>
         </header>
 
-        <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
+        <div className={`${PAGE}`}>
           {/* --------------------------------------------- between takes */}
           {content.notes.length > 0 && (
             <Section

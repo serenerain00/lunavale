@@ -8,6 +8,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { TIERS } from "@/lib/content/membership";
 import { pageMetadata } from "@/lib/seo/metadata";
+import { PAGE } from "@/components/ui/layout";
 
 export const metadata: Metadata = pageMetadata({
   title: "Membership",
@@ -48,7 +49,7 @@ export default function MembershipPage() {
 
       <main className="flex-1 pb-24">
         {/* ---------------------------------------------------------- pitch */}
-        <section className="mx-auto w-full max-w-6xl px-5 pt-12 sm:px-8 sm:pt-20">
+        <section className={`${PAGE} pt-12 sm:pt-20`}>
           <p className="text-xs uppercase tracking-[0.2em] text-amber">
             Membership
           </p>
@@ -109,7 +110,7 @@ export default function MembershipPage() {
         */}
         <section
           aria-labelledby="tiers-heading"
-          className="mx-auto w-full max-w-6xl scroll-mt-24 px-5 pt-10 sm:px-8 sm:pt-12"
+          className={`${PAGE} scroll-mt-24 pt-10 sm:pt-12`}
           id="tiers"
         >
           <h2 id="tiers-heading" className="sr-only">
@@ -163,7 +164,7 @@ export default function MembershipPage() {
             pressuring the audience. */}
         <section
           aria-labelledby="funds-heading"
-          className="mx-auto w-full max-w-6xl px-5 pt-20 sm:px-8 sm:pt-28"
+          className={`${PAGE} pt-20 sm:pt-28`}
         >
           <h2
             id="funds-heading"
@@ -191,7 +192,7 @@ export default function MembershipPage() {
 
         <section
           aria-labelledby="trust-heading"
-          className="mx-auto w-full max-w-6xl px-5 pt-20 sm:px-8 sm:pt-28"
+          className={`${PAGE} pt-20 sm:pt-28`}
         >
           <h2
             id="trust-heading"

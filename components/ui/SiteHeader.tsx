@@ -11,6 +11,7 @@ import {
   ViewerEmail,
 } from "@/components/access/Viewer";
 import { MobileNav, type NavItem } from "@/components/ui/MobileNav";
+import { PAGE } from "@/components/ui/layout";
 
 /**
  * The bar at the top of every page.
@@ -99,7 +100,23 @@ export function SiteHeader() {
         min-h rather than a fixed h: surfaces below stick at --header-h, so if
         this bar ever grew past that height it would sit under them.
       */}
-      <div className="mx-auto flex min-h-(--header-h) w-full max-w-6xl items-center justify-between gap-3 px-5 sm:px-8">
+      {/*
+        FULL WIDTH, 2026-09-17. Melissa: "make the top menu full width so the
+        links can breathe."
+
+        It was pinned to max-w-6xl while everything below it moved to the
+        shared PAGE gutter on 09-16, so on a wide screen nine links, an email,
+        a sign-out and the account button were crammed into the middle 1152px
+        of a 1600px page — and the wordmark did not even line up with the shelf
+        headings underneath it. Same class of bug as the shelves: a width typed
+        out in one place and changed in another.
+
+        It reads from the same constant now, so the bar, the hero, the shelves
+        and the join panel all share one left edge and one right edge.
+      */}
+      <div
+        className={`${PAGE} flex min-h-(--header-h) items-center justify-between gap-3`}
+      >
         <div className="flex items-center gap-3 sm:gap-6">
           <MobileNav items={items} showSignIn={authConfigured()} />
 

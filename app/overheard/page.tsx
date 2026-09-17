@@ -149,14 +149,34 @@ export default async function OverheardPage({ searchParams }: PageProps) {
               ))}
             </section>
 
-            {/* At the bottom, where a chat's box belongs — you read down to
-                the newest thing and then answer it. */}
-            <div className="mt-8">
-              <PostForm
-                signedIn={signedIn}
-                replyingTo={replyingTo}
-                canPostAsCast={isOwnerViewer}
-              />
+            {/*
+              PINNED TO THE BOTTOM OF THE VIEWPORT, not to the bottom of the
+              page. Melissa, 2026-09-17: "make the say something box fixed to
+              the bottom so the user doesnt have to scroll all the way to the
+              bottom to add a comment."
+
+              The thread is 115 scripted messages and grows daily, so "read to
+              the end, then answer" was turning into a long scroll before you
+              could say anything — and the person most likely to want to reply
+              is the one reading something halfway up.
+
+              The spacer below it is load-bearing: a fixed element is out of
+              flow, so without reserving its height the last few messages sit
+              underneath the composer and cannot be read. It is measured by the
+              composer itself and published as --composer-h, because the form's
+              height changes when a reply banner appears above the textarea.
+            */}
+            <div style={{ height: "var(--composer-h, 0px)" }} aria-hidden />
+
+            <div className="fixed inset-x-0 bottom-0 z-30 border-t border-hairline bg-void/95 backdrop-blur-md">
+              <div className="mx-auto w-full max-w-3xl px-5 py-3 sm:px-8 sm:py-4">
+                <PostForm
+                  signedIn={signedIn}
+                  replyingTo={replyingTo}
+                  canPostAsCast={isOwnerViewer}
+                  pinned
+                />
+              </div>
             </div>
           </>
         ) : (

@@ -12,6 +12,12 @@
  * and a half down, because a "back to top" button visible at the top is
  * clutter that has already told you it is useless.
  *
+ * IT RIDES ABOVE THE CHAT COMPOSER. /overheard pins a full-width composer to
+ * the bottom of the viewport and publishes its height as `--composer-h`; this
+ * button adds that to its own offset, so it sits above the bar instead of on
+ * top of it. The variable is unset everywhere else, where the fallback of 0px
+ * means nothing changes — one expression, no per-page special-casing.
+ *
  * IT KEEPS THE CORNER AND THE SURVEY TAB MOVES. On a phone the survey's "Six
  * questions" pill used to live in exactly this spot. The tab is the one that
  * gives way, because it is conditional — home page only, and only until
@@ -67,7 +73,7 @@ export function BackToTop() {
       // tree changing shape on every scroll.
       aria-hidden={!show}
       tabIndex={show ? undefined : -1}
-      className={`fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-30 grid size-11 place-items-center rounded-full border border-hairline bg-void/80 text-stone shadow-lg shadow-void/50 backdrop-blur-md transition-[opacity,transform] duration-(--duration-standard) ease-(--ease-standard) hover:border-amber hover:text-amber motion-reduce:transition-none sm:bottom-[max(1.5rem,env(safe-area-inset-bottom))] sm:right-6 ${
+      className={`fixed bottom-[calc(max(1rem,env(safe-area-inset-bottom))+var(--composer-h,0px))] right-4 z-30 grid size-11 place-items-center rounded-full border border-hairline bg-void/80 text-stone shadow-lg shadow-void/50 backdrop-blur-md transition-[opacity,transform] duration-(--duration-standard) ease-(--ease-standard) hover:border-amber hover:text-amber motion-reduce:transition-none sm:bottom-[calc(max(1.5rem,env(safe-area-inset-bottom))+var(--composer-h,0px))] sm:right-6 ${
         show
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-3 opacity-0"

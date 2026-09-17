@@ -478,13 +478,25 @@ export const QUESTIONS: Question[] = [
      * picture.
      *
      * A FAQ ENTRY IS OPT-IN. Somebody reading this has a practical question
-     * and wants the practical answer, and getting it straight is worth more
-     * here than the vagueness would be. Same for the paragraph on /about,
-     * which sits inside the section that is already open about the budget —
-     * in that context it reads as candour rather than as a warning.
+     * and wants the practical answer.
+     *
+     * REWRITTEN THE SAME DAY to lead with the intent rather than the
+     * constraint, Melissa's call. That is not spin, and the test for whether
+     * it is spin is whether the claim survives without the budget behind it —
+     * this one does. The story happens in kitchens and trucks and the pauses
+     * between sentences, most of the library is already vertical, and people
+     * watch this alone at night on the thing they are holding. It is a real
+     * position that happens to agree with the money.
+     *
+     * The honest half is NOT deleted, it is moved: /about still says this is
+     * made independently at a small scale, and the line there names both
+     * reasons in the order they actually weigh. What has gone from here is
+     * "a television will show you the budget", which was an apology, and the
+     * promise of a higher-resolution finish, which was a commitment nobody
+     * can currently keep.
      */
     q: "What's the best way to watch it?",
-    a: "On your phone. It's graded and mastered for a small screen, which is where it looks the way it's meant to — a television will show you the budget. That's the honest trade at this size: the money went on the story. When there's enough for a higher-resolution finish there will be one.",
+    a: "On your phone, held close, probably at night. That's what it's made for — it's graded for a small screen, and the whole thing lives in kitchens and trucks and the pauses between sentences. A television is a bigger room than this story wants.",
   },
   {
     q: "Where does the money go?",

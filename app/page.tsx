@@ -11,6 +11,7 @@ import { SurveyDrawer } from "@/components/survey/SurveyDrawer";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { Guest, Member, UnlessAnswered } from "@/components/access/Viewer";
 import { pickHero } from "@/lib/content/hero";
+import { BETWEEN_US } from "@/lib/content/between-us";
 import { inStoryOrder } from "@/lib/content/chronology";
 import { categories } from "@/lib/content/categories";
 import { currentSeason, hasReleasedEpisode } from "@/lib/content/season";
@@ -123,6 +124,81 @@ export default async function Home() {
             below are a look at what it is walking into.
           </p>
         </section>
+
+        {/*
+          -------------------------------------------------- between us band
+
+          RESTORED 2026-09-17, AND RECORDING WHY IT WENT MISSING. This band was
+          Melissa's explicit ask on 2026-09-03 — "I want new comers to see that
+          membership doesnt unlock just stills/scenes, theyll have access to
+          episodes as they are released" — and it was the first thing under the
+          hero for two weeks. The 09-16 rebuild cut the home page from fifteen
+          sections to a hero and shelves, and this went with them, which was a
+          mistake: it is not an editorial section, it is the one place the site
+          tells a stranger what a membership is FOR.
+
+          The home page went from four membership links to one in that rebuild,
+          and the one that was left is at the foot of a page that is now twelve
+          shelves long. Between 09-15 and 09-17 not one checkout session was
+          created in live Stripe, against sessions on eight of the thirteen
+          days before it. That is not proof — the checkout code is fine and so
+          is the Stripe config — but it is the only thing that changed, and a
+          funnel is not something to leave thin on a hunch.
+
+          It sits directly under the hero blurb, which is where it was, and
+          reads straight into the Season 1 shelf below it.
+        */}
+        {BETWEEN_US.announced && (
+          <section
+            aria-labelledby="between-us-heading"
+            className="mt-8 border-y border-hairline sm:mt-10"
+          >
+            <div
+              className={`${PAGE} py-8 sm:py-10 lg:flex lg:items-center lg:justify-between lg:gap-10`}
+            >
+              <div className="lg:max-w-3xl">
+                <p className="text-xs uppercase tracking-[0.2em] text-amber">
+                  {BETWEEN_US.eyebrow}
+                </p>
+                <h2
+                  id="between-us-heading"
+                  className="mt-2.5 font-display text-2xl font-semibold tracking-tight text-ivory sm:text-3xl"
+                >
+                  {BETWEEN_US.heading}
+                </h2>
+                {BETWEEN_US.body.map((line) => (
+                  <p
+                    key={line}
+                    className="mt-2.5 max-w-2xl leading-relaxed text-stone"
+                  >
+                    {line}
+                  </p>
+                ))}
+              </div>
+
+              {/* Both variants ship in the cached HTML and the client shows
+                  one — nothing premium is passed as children to <Member>. */}
+              <div className="mt-5 shrink-0 lg:mt-0">
+                <Guest>
+                  <Link
+                    href="/membership"
+                    className="inline-flex min-h-12 items-center whitespace-nowrap rounded-full bg-amber px-7 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+                  >
+                    {vault.cta}
+                  </Link>
+                  <p className="mt-2 text-xs text-stone-dim">
+                    {`${BETWEEN_US.memberLine} From ${formatPrice(vault.priceMonthlyCents)} a month.`}
+                  </p>
+                </Guest>
+                <Member>
+                  <p className="max-w-xs text-sm leading-relaxed text-amber-soft">
+                    {BETWEEN_US.memberNote}
+                  </p>
+                </Member>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ------------------------------------------------------- season one */}
         <Shelf

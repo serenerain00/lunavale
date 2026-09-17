@@ -21,23 +21,39 @@
  * If you are looking for the rule that decides who may post, it is not this.
  */
 /**
- * ARCHIVED — Melissa, 2026-08-10. "lets archive the convo wall for now".
+ * BACK, 2026-09-17 — Melissa: "lets add the members chat back into the members
+ * perks."
  *
- * Set false to bring it back; that is the whole switch. Everything else is
- * intact: the cast thread below, the database table and its rows, the
- * moderation page, the admin panel. Nothing has been deleted and nothing
- * needs rebuilding.
+ * ARCHIVED 2026-08-10 ("lets archive the convo wall for now") and the reason
+ * is worth keeping, because it is the thing that has to not happen again: the
+ * wall went members-only on 3 August and took ZERO posts in the week after,
+ * because it had one member, who was Melissa. A conversation wall with nobody
+ * on it is worse than no wall — it is a room the site keeps pointing at, and
+ * every visitor who follows the sign finds it empty and learns something true
+ * about how many people are here.
  *
- * WHY IT WENT. The wall was made members-only on 3 August, and in the week
- * that followed it took ZERO posts — because it had one member, who is
- * Melissa. A conversation wall with nobody on it is worse than no wall: it is
- * a room the site keeps pointing at, and every visitor who follows the sign
- * finds it empty and learns something true about how many people are here.
+ * WHAT IS DIFFERENT NOW. Two things, one of them much more important than the
+ * other. There are ten members rather than one — which is still not a crowd.
+ * And CAST_THREAD is below: Luna, Tyson, Josh and Rick talking to each other,
+ * authored, already written, and there whether or not another human ever
+ * posts. That is the fix for the specific failure that killed it. The room is
+ * not an empty box waiting for strangers; it is a conversation you are being
+ * let into, and anything members add happens alongside it.
  *
- * When it comes back it should come back with posting open to free accounts,
- * so it can fill before it is sold.
+ * `overheard_posts` still has zero rows, so this goes back knowing the human
+ * half will be quiet at first. That is survivable now in a way it was not in
+ * August, because the cast thread is the content and the posting is the extra.
+ *
+ * THE OTHER OPTION, RECORDED RATHER THAN TAKEN. The note left here in August
+ * said it should come back "with posting open to free accounts, so it can fill
+ * before it is sold". That is still the better play for filling a room, and it
+ * is not what this is — Melissa asked for it as a members' perk and a perk
+ * that free accounts also get is not one. If the human half stays silent for a
+ * few weeks, opening posting to any signed-in account while keeping the cast
+ * thread members-only is the move, and it needs no new code: the gate is in
+ * app/overheard/actions.ts.
  */
-export const OVERHEARD_ARCHIVED = true;
+export const OVERHEARD_ARCHIVED = false;
 
 export const FREE_POST_ALLOWANCE = 3;
 

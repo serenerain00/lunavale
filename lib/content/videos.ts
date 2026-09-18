@@ -2909,13 +2909,28 @@ export const videos: Video[] = [
          out of STORY_ORDER entirely while hidden; it needs a position the day
          it is published or the health check will say so.
 
-      2. HOW LONG AGO. Melissa said twenty years. The canon doc says 15-16
-         years before the present, with Josh and Tyson at 22-23 (§2), and §7
-         has Luna knowing Tyson about five years by then. The site says
-         everywhere that Luna and Tyson have been friends twenty years — so
-         twenty years ago would put the accident at or before the day they met,
-         which contradicts §7. Fifteen is the number that reconciles all three.
-         The synopsis below avoids the figure rather than picking one.
+      2. HOW LONG AGO — SETTLED, 2026-09-18. Melissa: "tyson is 22 so is
+         josh." Tyson is 38 on his character card, so the accident is exactly
+         SIXTEEN years ago, which confirms the 15-16 this document had already
+         settled from the other direction. Also confirmed and now written into
+         §12: Tyson was on LEAVE FROM THE SEALS and working Rick's sites for
+         Josh and for Rick — which makes his entanglement direct rather than
+         incidental, and is a real sharpening of §2.
+
+      3. ONE THING STILL OPEN, AND IT IS WHY THIS IS STILL HIDDEN. Melissa
+         also said "josh is already with luna at this time too." On the
+         published numbers he cannot be: at the accident Luna is 22 and does
+         not meet Josh until 28, in Atlanta, on business — which her card, his
+         card, LUNA_VALE_CONTEXT.md and the journal entry `twenty-eight` all
+         state. Making it true means either moving the accident to ten years
+         ago (so the men are 28, not 22) or making Luna and Josh sixteen years
+         instead of ten (which breaks the six-months-apart premise the whole
+         present-day story runs on). See §12 of the canon doc for the full
+         arithmetic.
+
+         IT MATTERS FOR THIS SCENE SPECIFICALLY rather than in the abstract: a
+         scene that puts Josh's partner in the room dates the accident on
+         screen, permanently, in front of an audience.
 
       NO PREVIEW, DELIBERATELY, and this is the one place the 2026-09-11 policy
       ("45 sec for videos longer than 2m") should not be applied. A preview is

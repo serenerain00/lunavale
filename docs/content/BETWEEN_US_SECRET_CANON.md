@@ -583,3 +583,63 @@ for.
 disagreed with each other. Settled at **15--16 years** and 22--23, which
 keeps Tyson mid-service --- consistent with "ten years a SEAL" and with him
 still serving when Luna met Josh.
+
+---
+
+## 12. The timeline, settled — 2026-09-18
+
+Melissa, on the accident scene: "tyson is 22 so is josh. tyson is on leave
+from the SEALs and helping josh on the sites working for him and rick." And:
+"josh is already with luna at this time too."
+
+The first two settle the arithmetic. The third cannot be made to fit, and the
+reason is written out below rather than quietly dropped.
+
+### What is fixed, because it is published
+
+| Fact | Where it is stated |
+|---|---|
+| Luna is 38 | her character card |
+| Tyson is 38 | his character card |
+| Avery is 28, ten years younger than Luna | Avery's card — agrees Luna is 38 |
+| Luna and Tyson: twenty years | both cards, his role line, the journal |
+| Luna and Josh: ten years, six months apart | both cards, the premise |
+| Tyson: SEAL ten years, **still in when Luna met Josh** | his card |
+| Luna met Josh at 28, in Atlanta, on business | her card, his card, `LUNA_VALE_CONTEXT.md` |
+
+### The order
+
+| Years ago | Luna / Tyson | What happens |
+|---|---|---|
+| 20 | both 18 | Luna meets Tyson, in Atlanta |
+| **16** | both 22 | **The accident.** Josh 22, Tyson 22 and on leave from the SEALs, working Rick's sites for Josh and for Rick. A worker dies. That night, in the office, it is agreed Rick will take care of it |
+| ~15 | 23 | The year Tyson goes quiet. Luna lives through it with no explanation and never gets one |
+| 10 | 28 | Luna meets Josh, in Atlanta, on business. Tyson is still serving |
+| ~9 | 29 | Luna leaves Atlanta for Colorado |
+| 0.5 | 37 | The break — six months apart |
+| now | 38 | Back together, and it gets worse |
+
+Tyson carries the secret **six years** before Luna ever meets Josh, and he is
+close to her for all of them. Then she meets Josh and walks into the family
+Tyson believes owns his future, and he says nothing.
+
+### The one thing that does not fit
+
+**"Josh is already with Luna at this time."** On the numbers above, at the
+accident Luna is 22, has known Tyson four years, and is six years away from
+meeting Josh.
+
+Making it true requires one of two things, and both are expensive:
+
+- **Move the accident to ten years ago or later.** Then Josh and Tyson are 28+,
+  not 22. This contradicts the age Melissa has just given.
+- **Make Luna and Josh sixteen years rather than ten.** This contradicts both
+  character cards, `LUNA_VALE_CONTEXT.md`, the six-months-apart premise the
+  whole present-day story runs on, and the journal entry `twenty-eight`, which
+  is built entirely on Luna doing this sum.
+
+**Left as-is pending Melissa.** The accident stays at 16 years ago with Luna
+not yet knowing Josh — which is also what the correction at the foot of this
+document settled once already, for the same published reasons. The scene
+`ty-josh-rick-accident` is staged hidden until this is decided, because a
+scene that shows Luna's partner in the room dates the accident on screen.

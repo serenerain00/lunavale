@@ -2873,6 +2873,85 @@ export const videos: Video[] = [
     place: "farmhouse",
     about: ["luna", "josh", "tyson"],
   },
+  {
+    /*
+      THE ACCIDENT, 2026-09-18. Josh, Tyson and Rick, the night of it.
+
+      STAGED HIDDEN, AND THIS IS THE ONE ENTRY IN THIS FILE WHERE THAT IS NOT
+      A TECHNICAL HOLD. Everything is ready — proxy, poster, the lot. What is
+      not settled is whether this should be on the site YET, and that is
+      Melissa's call rather than mine, because it cannot be taken back.
+
+      docs/content/BETWEEN_US_SECRET_CANON.md §8 sets out six stages for how
+      the audience learns this, and opens with "Do not reveal the entire
+      accident early". The site is at Stage 2: `josh-ty-ricks-house` has Josh
+      saying "you don't have to come every time he calls" and the death of the
+      coworker is tiptoed around rather than said. Nobody has reached Stage 3
+      ("you don't know what I owe him") on screen.
+
+      This scene is Stage 4/5 in one move — the audience sees the aftermath and
+      the decision being taken. Season one has not shipped. Publishing it now
+      spends the largest card in the deck before the hand it was built for, and
+      unlike a title or a synopsis there is no version of that which can be
+      undone.
+
+      IT IS ALSO THE BEST ARGUMENT FOR A MEMBERSHIP ON THIS SITE. "The thing
+      Luna does not know", behind the door, is exactly what a membership should
+      open, and Melissa has been asking what members get beyond episodes. Both
+      things are true at once, which is why this is a decision and not a
+      default.
+
+      TWO QUESTIONS BEFORE IT GOES UP:
+
+      1. WHEN IN THE TELLING. Not when it happened — where it lands. It is a
+         flashback, and `luna-josh-bed-flashback` establishes that flashbacks
+         sit in STORY_ORDER where they are TOLD, not when they occurred. Left
+         out of STORY_ORDER entirely while hidden; it needs a position the day
+         it is published or the health check will say so.
+
+      2. HOW LONG AGO. Melissa said twenty years. The canon doc says 15-16
+         years before the present, with Josh and Tyson at 22-23 (§2), and §7
+         has Luna knowing Tyson about five years by then. The site says
+         everywhere that Luna and Tyson have been friends twenty years — so
+         twenty years ago would put the accident at or before the day they met,
+         which contradicts §7. Fifteen is the number that reconciles all three.
+         The synopsis below avoids the figure rather than picking one.
+
+      NO PREVIEW, DELIBERATELY, and this is the one place the 2026-09-11 policy
+      ("45 sec for videos longer than 2m") should not be applied. A preview is
+      a PUBLIC file on a public page that also enters the sitemap. Forty-five
+      seconds of this is forty-five seconds of the secret, published, to
+      everybody, permanently. Whatever else is decided, that is not a thing to
+      do by following a rule.
+
+      WHAT IS ON SCREEN, which is all the synopsis claims: an office at night,
+      rain on the glass, Josh seated with somebody else's blood across his
+      shirt, Tyson standing behind him with his arms crossed, and Rick leaning
+      over the desk doing the talking. The blocking is the canon — Rick taking
+      the room, Tyson standing guard, Josh wrecked and silent. The line about
+      what was agreed is Melissa's own ("the night they all agreed that rick
+      would take care of it"), not a reading off frames.
+    */
+    slug: "ty-josh-rick-accident",
+    title: "What Was Agreed",
+    synopsis:
+      "Years before any of the rest of it, an office at night and the three of them in it: Josh with somebody else's blood on his shirt, Tyson standing behind him, and Josh's father deciding what happens next. Whatever was settled in that room, Luna has never been told about it.",
+    file: "ty-josh-rick-accident.proxy.mp4",
+    poster: "/posters/ty-josh-rick-accident.jpg",
+    // 123.18 from ffprobe.
+    durationSeconds: 123,
+    addedOn: "2026-09-18",
+    // STAGED. See the note above — this is a canon decision, not a file that
+    // is missing. Deleting this line publishes it, and it needs a place in
+    // STORY_ORDER on the same commit.
+    hidden: true,
+    access: "premium",
+    mature: false,
+    // No `preview`. See above.
+    feelings: ["lies", "trust"],
+    place: "the-study",
+    about: ["josh", "tyson", "rick"],
+  },
 ];
 
 /**

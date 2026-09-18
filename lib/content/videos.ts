@@ -2948,13 +2948,28 @@ export const videos: Video[] = [
     // 123.18 from ffprobe.
     durationSeconds: 123,
     addedOn: "2026-09-18",
-    // STAGED. See the note above — this is a canon decision, not a file that
-    // is missing. Deleting this line publishes it, and it needs a place in
-    // STORY_ORDER on the same commit.
-    hidden: true,
-    access: "premium",
+    /*
+      FREE, AND PUBLISHED. Melissa, 2026-09-18: "keep it free to watch."
+
+      That is the opposite of where this entry started — it was staged premium
+      on the reasoning that "the thing Luna does not know" is the best argument
+      a membership has. The call goes the other way and there is a real
+      strategy in it: this is the most gripping two minutes in the library, and
+      free is what makes a stranger care. The membership then sells the rest of
+      the story rather than the hook into it. Same logic as the vertical cuts
+      that already go to Instagram.
+
+      WHAT FREE COSTS, STATED ONCE SO NOBODY IS SURPRISED: it enters the
+      sitemap, it is indexable, and there is no gate on it ever again without
+      taking something back from people who have it. That is the one-way door
+      here — not the canon, which is settled.
+
+      NO PREVIEW, and now for a boring reason rather than a careful one: a
+      preview is the public opening of a GATED scene. There is nothing to
+      preview when the whole thing is open.
+    */
+    access: "free",
     mature: false,
-    // No `preview`. See above.
     feelings: ["lies", "trust"],
     place: "the-study",
     about: ["josh", "tyson", "rick"],

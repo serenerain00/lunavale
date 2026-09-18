@@ -47,6 +47,29 @@ import { videos } from "@/lib/content/videos";
  *   ty-luna-grg2           — hidden, waiting on the scored file
  */
 export const STORY_ORDER: readonly string[] = [
+  // ── Before any of it ────────────────────────────────────────────────────
+  /*
+   * THE PROLOGUE, and the only clip here that predates the rest by years.
+   *
+   * Nine years before "Three Days": the night a worker died on Rick's site and
+   * the three of them agreed he would take care of it. Luna was a year into
+   * her life with Josh and was not told, then or since — see §12 of
+   * docs/content/BETWEEN_US_SECRET_CANON.md.
+   *
+   * FIRST, BECAUSE IT IS THE FOUNDATION. Everything below is Luna living
+   * inside a decision taken in this room, and the order reads correctly only
+   * if you have seen it: she is not a woman whose partner has a secret from
+   * before they met, she is a woman who was already there.
+   *
+   * IT IS ALSO MAXIMALLY EARLY AGAINST §8, which asks that the audience first
+   * feel there is a history they do not know, and reach the accident late.
+   * Position one is the opposite of late. That tension is real and it is
+   * Melissa's to resolve — moving it is one line in this list. It is here
+   * rather than last because it was made free to be watched, and burying the
+   * hook at the bottom of forty-eight clips would undo the reason for that.
+   */
+  "ty-josh-rick-accident",
+
   // ── The six months apart ────────────────────────────────────────────────
   // Ten years end. She packs, he goes, and Tyson is the one who turns up.
   "luna-josh-truck-leaving",

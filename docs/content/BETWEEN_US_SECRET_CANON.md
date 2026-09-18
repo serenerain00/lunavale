@@ -39,8 +39,14 @@ about 22--23 years old.
 
 ## 2. The Accident
 
-Roughly **15--16 years** before the present story, when Josh and Tyson were
-around 22--23, a **preventable accident** occurred on or around
+> **SUPERSEDED IN PART BY §12 (2026-09-18).** The timing below is out of date:
+> the accident is **8--10 years** before the present story, with Josh and Tyson
+> at **28--30**, and Luna and Josh are **already together**. Everything else in
+> this section — the known unsafe condition, Josh's belief that he caused it,
+> Rick's motive — still stands.
+
+Roughly **8--10 years** before the present story, when Josh and Tyson were
+around 28--30, a **preventable accident** occurred on or around
 property/business controlled by Josh's family.
 
 A worker died.
@@ -221,8 +227,14 @@ silence.
 
 ## 7. Luna's Position
 
-Luna knew **Tyson** around this period — she had known him about five years
-by then — and had **not yet met Josh**. She does not know the full truth
+> **SUPERSEDED IN PART BY §12 (2026-09-18).** Luna and Josh ARE already
+> together at the time of the accident, and she has known Tyson about eleven
+> years by then, not five. What survives unchanged, and is the point of this
+> section, is that she does not know the truth and is deliberately kept
+> outside it.
+
+Luna knew **Tyson** around this period — she had known him about eleven years
+by then — and was **already with Josh**. She does not know the full truth
 about any of it.
 
 She should not understand early in the story why Tyson's loyalty to Josh
@@ -554,7 +566,14 @@ across this project's canon (see `LUNA_VALE_CONTEXT.md`, where the Cathy
 divorce and the blonde-guy placement are both kept as records rather than
 edits).
 
-**LUNA HAD NOT MET JOSH.** The document arrived saying Luna "has known both
+**LUNA HAD NOT MET JOSH — REVERSED 2026-09-18, SEE §12.** This correction stood
+from the day the document arrived until Melissa set the timeline out in full,
+moving the accident forward to 8--10 years ago so that Luna and Josh ARE
+together when it happens. It is left here because the reasoning is still worth
+reading — it is why the published ages had to be checked before anything moved,
+and every one of them survived the change. What follows is now history.
+
+The document arrived saying Luna "has known both
 men since they were young" and that she "had already met them" by the time of
 the accident. That is true of Tyson and cannot be true of Josh. Three places
 already published on the site say she met Josh at **28, in Atlanta, on
@@ -586,60 +605,111 @@ still serving when Luna met Josh.
 
 ---
 
-## 12. The timeline, settled — 2026-09-18
+## 12. TIMELINE — CANONICAL, 2026-09-18
 
-Melissa, on the accident scene: "tyson is 22 so is josh. tyson is on leave
-from the SEALs and helping josh on the sites working for him and rick." And:
-"josh is already with luna at this time too."
+**This section supersedes the timing in §2 and §7 and the correction headed
+"LUNA HAD NOT MET JOSH" at the foot of this document.** Melissa set it out in
+full on 2026-09-18 and it is the newest approved reference, so it wins.
 
-The first two settle the arithmetic. The third cannot be made to fit, and the
-reason is written out below rather than quietly dropped.
+WHAT CHANGED, IN ONE LINE: the accident moves from ~15 years ago to **8–10
+years ago**, the men from 22–23 to **28–30**, and **Luna and Josh are already
+together when it happens.**
 
-### What is fixed, because it is published
+### Present day
 
-| Fact | Where it is stated |
+- Luna is 38.
+- Josh and Luna: approximately **10 years** together.
+- Tyson has known Luna far longer — roughly **20 years**, since she was 18.
+- Tyson and Josh are longtime friends and distant cousins.
+- Tyson was already part of Luna and Josh's shared history long before the
+  present-day story.
+
+### The accident / Rick's cover-up
+
+- It happened approximately **8–10 years before the present day**.
+- **Josh and Luna were already together.** Luna is not somebody Josh meets
+  afterwards. Their relationship is established but younger than it is now.
+- Luna already knows Tyson. The three of them have an existing history.
+- Rick knows Luna and knows she is Josh's partner — so Rick can name her on the
+  night without any introduction or explanation.
+
+### Accident night
+
+- Josh and Tyson are approximately **28–30**.
+- A worker is killed when machinery is operated at the family business.
+- The section had been supposed to be shut down.
+- Josh had signed off on something connected to the work and at first believes
+  the death is his responsibility.
+- Tyson was there and carries his own guilt about it.
+- Rick knows there were larger safety and management failures, and takes
+  control of the situation.
+- Rick uses lawyers and connections to bury it, and tells Josh and Tyson not to
+  discuss the night.
+- This is the secret that binds Josh, Tyson and Rick for years afterwards.
+
+### Luna's position at the time
+
+- Luna is **not present**.
+- She does **not** know what actually happened.
+- Josh does not tell her. Tyson does not tell her.
+- Rick actively wants her kept outside it. A line like **"She doesn't need to
+  know about this mess"** is therefore significant: Luna is already Josh's
+  partner, and Rick is the one deciding she will be excluded.
+- The long consequence: Luna spends years building a life with Josh while a
+  major event in his past — involving Josh, Tyson and Rick — has deliberately
+  been kept from her.
+
+### Tyson / Luna continuity in this era
+
+- Do **not** write Tyson as romantically pursuing Luna during this period.
+- They have history and familiarity; Josh and Luna are together.
+- Tyson's later feelings must not retroactively turn every interaction from
+  this era into longing.
+- The accident primarily establishes the Josh/Tyson/Rick bond, the guilt, the
+  secrecy, and Tyson's obligation to Rick.
+- Luna's relevance is that she was already in their lives when the secret
+  began, and was deliberately kept outside it.
+
+### Why this version is stronger
+
+The secret does not predate Luna's relationship with Josh. She was already
+there. So when the truth reaches her the betrayal is not "Josh never told me
+about something terrible that happened before we met". It is:
+
+> This happened while we were together. You came home to me afterward. You
+> built a life with me afterward. Tyson knew. Rick knew. And all of you decided
+> I wasn't allowed to know.
+
+### The arithmetic, checked against what is published
+
+Taking the accident at ~9 years ago, every published number survives:
+
+| | |
 |---|---|
-| Luna is 38 | her character card |
-| Tyson is 38 | his character card |
-| Avery is 28, ten years younger than Luna | Avery's card — agrees Luna is 38 |
-| Luna and Tyson: twenty years | both cards, his role line, the journal |
-| Luna and Josh: ten years, six months apart | both cards, the premise |
-| Tyson: SEAL ten years, **still in when Luna met Josh** | his card |
-| Luna met Josh at 28, in Atlanta, on business | her card, his card, `LUNA_VALE_CONTEXT.md` |
+| Josh and Tyson at the accident | 38 − 9 = **29** ✓ within 28–30 |
+| Luna at the accident | **29** — she met Josh at 28, so about a year in ✓ "younger than present day" |
+| Luna had known Tyson | **11 years** by then ✓ (met at 18) |
+| Tyson still serving | ✓ SEAL ten years, still in when Luna met Josh |
 
-### The order
+Luna is 38, Tyson is 38 and Avery is 28 on their character cards, and Luna
+meeting Josh at 28 in Atlanta is stated on both their cards and in
+`LUNA_VALE_CONTEXT.md`. None of that has to move.
 
-| Years ago | Luna / Tyson | What happens |
-|---|---|---|
-| 20 | both 18 | Luna meets Tyson, in Atlanta |
-| **16** | both 22 | **The accident.** Josh 22, Tyson 22 and on leave from the SEALs, working Rick's sites for Josh and for Rick. A worker dies. That night, in the office, it is agreed Rick will take care of it |
-| ~15 | 23 | The year Tyson goes quiet. Luna lives through it with no explanation and never gets one |
-| 10 | 28 | Luna meets Josh, in Atlanta, on business. Tyson is still serving |
-| ~9 | 29 | Luna leaves Atlanta for Colorado |
-| 0.5 | 37 | The break — six months apart |
-| now | 38 | Back together, and it gets worse |
+### Three sentences in the brief arrived garbled and were reconstructed
 
-Tyson carries the secret **six years** before Luna ever meets Josh, and he is
-close to her for all of them. Then she meets Josh and walks into the family
-Tyson believes owns his future, and he says nothing.
+They are recorded here so the reconstruction is visible rather than silent:
 
-### The one thing that does not fit
+- "Rick knows Luna and knows that sherefore Rick can naturally mention Luna…"
+  → read as *knows that she **is Josh\'s partner. Therefore** Rick can…*
+- "Rick actively wanck saying something like…" → read as *actively **wants her
+  kept out. Rick** saying something like…*
+- "The secret does notlationship with Josh." → read as *does **not predate
+  Luna\'s re**lationship with Josh.*
 
-**"Josh is already with Luna at this time."** On the numbers above, at the
-accident Luna is 22, has known Tyson four years, and is six years away from
-meeting Josh.
+### What this broke, and what was fixed with it
 
-Making it true requires one of two things, and both are expensive:
-
-- **Move the accident to ten years ago or later.** Then Josh and Tyson are 28+,
-  not 22. This contradicts the age Melissa has just given.
-- **Make Luna and Josh sixteen years rather than ten.** This contradicts both
-  character cards, `LUNA_VALE_CONTEXT.md`, the six-months-apart premise the
-  whole present-day story runs on, and the journal entry `twenty-eight`, which
-  is built entirely on Luna doing this sum.
-
-**Left as-is pending Melissa.** The accident stays at 16 years ago with Luna
-not yet knowing Josh — which is also what the correction at the foot of this
-document settled once already, for the same published reasons. The scene
-`ty-josh-rick-accident` is staged hidden until this is decided, because a
-scene that shows Luna's partner in the room dates the accident on screen.
+`the-year-he-went-quiet` was written against the old timeline and said the
+year Tyson changed was "the year I was twenty-three", "five years in", and
+that she had "spent fifteen years" explaining him. Under this timeline it is
+the year she was **29**, **eleven years in**, and **nine years** ago. Corrected
+the same day.

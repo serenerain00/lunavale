@@ -2909,28 +2909,20 @@ export const videos: Video[] = [
          out of STORY_ORDER entirely while hidden; it needs a position the day
          it is published or the health check will say so.
 
-      2. HOW LONG AGO — SETTLED, 2026-09-18. Melissa: "tyson is 22 so is
-         josh." Tyson is 38 on his character card, so the accident is exactly
-         SIXTEEN years ago, which confirms the 15-16 this document had already
-         settled from the other direction. Also confirmed and now written into
-         §12: Tyson was on LEAVE FROM THE SEALS and working Rick's sites for
-         Josh and for Rick — which makes his entanglement direct rather than
-         incidental, and is a real sharpening of §2.
+      2. HOW LONG AGO — SETTLED 2026-09-18, and the whole timeline moved with
+         it. Melissa rewrote it in full: the accident is 8-10 YEARS ago, Josh
+         and Tyson are 28-30, and LUNA AND JOSH ARE ALREADY TOGETHER. See §12
+         of docs/content/BETWEEN_US_SECRET_CANON.md, which supersedes §2, §7
+         and the old "Luna had not met Josh" correction at its foot.
 
-      3. ONE THING STILL OPEN, AND IT IS WHY THIS IS STILL HIDDEN. Melissa
-         also said "josh is already with luna at this time too." On the
-         published numbers he cannot be: at the accident Luna is 22 and does
-         not meet Josh until 28, in Atlanta, on business — which her card, his
-         card, LUNA_VALE_CONTEXT.md and the journal entry `twenty-eight` all
-         state. Making it true means either moving the accident to ten years
-         ago (so the men are 28, not 22) or making Luna and Josh sixteen years
-         instead of ten (which breaks the six-months-apart premise the whole
-         present-day story runs on). See §12 of the canon doc for the full
-         arithmetic.
+         Every published age survives that move, which is the reason it is
+         safe: at ~9 years ago Josh and Tyson are 29, Luna is 29 and about a
+         year into Josh, and she has known Tyson eleven years. Luna 38,
+         Tyson 38, Avery 28 and "met Josh at 28 in Atlanta" all stand.
 
-         IT MATTERS FOR THIS SCENE SPECIFICALLY rather than in the abstract: a
-         scene that puts Josh's partner in the room dates the accident on
-         screen, permanently, in front of an audience.
+         It is also the better story, and the synopsis below now says so:
+         this did not happen before Luna. It happened while she was there,
+         and Rick decided she would not be told.
 
       NO PREVIEW, DELIBERATELY, and this is the one place the 2026-09-11 policy
       ("45 sec for videos longer than 2m") should not be applied. A preview is
@@ -2950,7 +2942,7 @@ export const videos: Video[] = [
     slug: "ty-josh-rick-accident",
     title: "What Was Agreed",
     synopsis:
-      "Years before any of the rest of it, an office at night and the three of them in it: Josh with somebody else's blood on his shirt, Tyson standing behind him, and Josh's father deciding what happens next. Whatever was settled in that room, Luna has never been told about it.",
+      "Nine years ago, an office at night and the three of them in it: Josh with somebody else's blood on his shirt, Tyson standing behind him, and Josh's father deciding what happens next. Luna was already a year into her life with Josh. Nobody in that room has told her since.",
     file: "ty-josh-rick-accident.proxy.mp4",
     poster: "/posters/ty-josh-rick-accident.jpg",
     // 123.18 from ffprobe.

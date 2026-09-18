@@ -43,15 +43,15 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-09-18 against `main` at 9e98300. The 2026-07-28 row is kept beneath
+re-run 2026-09-18 against `main` at 939dfb8. The 2026-07-28 row is kept beneath
 so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
 | Luna | 12 | 161 | 138 |
-| Tyson | 12 | 122 | 110 |
-| Josh | 14 | 99 | 88 |
-| Rick | 1 | 8 | 8 |
+| Tyson | 12 | 123 | 110 |
+| Josh | 14 | 100 | 88 |
+| Rick | 1 | 9 | 8 |
 
 *As built, 2026-07-28: Luna 8 / 44 / 23 · Tyson 8 / 44 / 33 · Josh 8 / 35 / 21.
 Rick was not on the table at all. Figures above include this week's note.*
@@ -70,11 +70,14 @@ real measure for him anyway: he is the hardest character to hold an audience's
 sympathy for, and the whole story depends on him being genuinely likeable before
 he turns. What to watch is how much of his material makes that case.
 
-**Rick is the real hole.** Eight pieces against Josh's ninety-nine, and he is
-the entire explanation for Josh. Every note written for Rick is doing double
-duty on the character the story most needs an audience to like first, which
-makes him the cheapest way to feed Josh as well. September gave him a third
-appearance — `josh-ty-ricks-house` — and that one has no note from anybody.
+**Rick is the real hole.** Nine pieces against Josh's hundred, and he is the
+entire explanation for Josh. Every note written for Rick is doing double duty on
+the character the story most needs an audience to like first, which makes him
+the cheapest way to feed Josh as well. September gave him two more appearances,
+both noteless: `josh-ty-ricks-house`, and `ty-josh-rick-accident` — *What Was
+Agreed*, the accident, published **free** and placed first in the story. A note
+on a free piece is the shop window, so that one is the highest-value gap on this
+list.
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
 > updated 2026-09-15. The backlog below describes `main`, and `main` is behind:
@@ -102,12 +105,17 @@ Standing backlog, roughly prioritised:
 - `luna-tyson-dance` has no note from either of them. It went members-only in
   the September push, so a note on it is no longer a shop window — but it is
   still two leads and uncovered
-- Rick is in three clips now. `josh-rick-study` has two notes already
-  (`rick-the-chair`, `josh-the-study`); `josh-rick-lake` is the one every open
-  drop keeps re-writing; and `josh-ty-ricks-house`, new in September, has
-  nothing from anybody. That third one is where a Rick note should go. After it,
-  the next Rick piece has to come from somewhere other than a clip — the
-  brewery, the liquor, what he made of Luna across ten years
+- Rick is in four clips now, and two of them are empty. `josh-rick-study` has
+  two notes already (`rick-the-chair`, `josh-the-study`); `josh-rick-lake` is the
+  one every open drop keeps re-writing; `josh-ty-ricks-house` has nothing; and
+  `ty-josh-rick-accident` — *What Was Agreed* — has nothing either and is
+  **free**, which makes it the one to take first. Mind the canon: the accident
+  moved to 8–10 years ago on 2026-09-18 and Luna and Josh were already together
+  by then, so read *"TIMELINE — CANONICAL, 2026-09-18"* in
+  `BETWEEN_US_SECRET_CANON.md` before writing a word of it — and note that two
+  sections there are both numbered 12, so go by the title, not the number. After
+  those two, the next Rick piece has to come from somewhere other than a clip —
+  the brewery, the liquor, what he made of Luna across ten years
 - First notes for Cathy and Avery, who have none at all
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none

@@ -42,18 +42,27 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-07-28:
+As built, 2026-09-18 (counts read off `countFor()` / `lockedCountFor()`):
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 8 | 44 | 23 |
-| Tyson | 8 | 44 | 33 |
-| Josh | 8 | 35 | 21 |
+| Luna | 12 | 161 | 138 |
+| Tyson | 12 | 123 | 110 |
+| Josh | 13 | 99 | 87 |
+| Rick | 2 | 10 | 9 |
+| Cathy | 0 | 11 | 11 |
+| Avery | 0 | 6 | 6 |
 
-**Josh is the thinnest** and is the one who benefits most from more. He is the
-hardest character to hold an audience's sympathy for, the whole story depends
-on him being genuinely likeable before he turns, and he has the fewest pieces
-making that case.
+**Josh has the most notes of the three leads and still needs the most work.**
+He has fallen behind Luna and Tyson on pieces as media landed, and he is the
+hardest character to hold an audience's sympathy for — the whole story depends
+on him being genuinely likeable before he turns. So the thing to watch is not
+his count but how much of it makes that case.
+
+**Rick is the thinnest of the people who carry weight**, and he is the
+explanation for Josh. Ten pieces, nine of them members-only — the tenth is
+`ty-josh-rick-accident`, now published free as the way into the story. Every
+one is doing double duty. Only Avery, who is tertiary, has fewer.
 
 Standing backlog, roughly prioritised:
 
@@ -72,3 +81,4 @@ not a changelog.
 | Week of | What shipped | Who |
 | --- | --- | --- |
 | 2026-07-28 | Character hubs built; 24 Between Takes notes (8 each), 7 free | all three |
+| 2026-08-17 | Between Takes note "A line in the water" on `josh-rick-lake` | Rick |

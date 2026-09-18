@@ -43,13 +43,13 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-09-17 against `main` at fd671e9. The 2026-07-28 row is kept beneath
+re-run 2026-09-18 against `main` at 9e98300. The 2026-07-28 row is kept beneath
 so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 160 | 137 |
-| Tyson | 12 | 121 | 109 |
+| Luna | 12 | 161 | 138 |
+| Tyson | 12 | 122 | 110 |
 | Josh | 14 | 99 | 88 |
 | Rick | 1 | 8 | 8 |
 
@@ -57,24 +57,24 @@ so the drift is visible.
 Rick was not on the table at all. Figures above include this week's note.*
 
 > These numbers move fast. Total pieces were 105 / 79 / 79 / 4 in late August and
-> 126 / 94 / 86 / 4 a fortnight ago; the trailer, the new scenes and the pages
-> that landed on `main` in September added another sixty-odd, and the same push
-> put almost everything behind membership — which is why the members-only column
-> now sits just under the total. Re-run the two functions rather than trusting
-> the table.
+> 126 / 94 / 86 / 4 a fortnight ago; the trailer, the new clips and the pages
+> that landed on `main` through September added another seventy-odd, and the same
+> push put almost everything behind membership — which is why the members-only
+> column now sits just under the total. Re-run the two functions rather than
+> trusting the table.
 
 **Josh is the thinnest of the three leads again.** He has the most *notes* of
-anyone, but he is bottom on total pieces — the late-August content went mostly
-to Luna and Tyson. Volume was never the real measure for him anyway: he is the
-hardest character to hold an audience's sympathy for, and the whole story
-depends on him being genuinely likeable before he turns. What to watch is how
-much of his material makes that case.
+anyone, but he is bottom on total pieces, and the gap keeps widening — every
+batch since late August has gone mostly to Luna and Tyson. Volume was never the
+real measure for him anyway: he is the hardest character to hold an audience's
+sympathy for, and the whole story depends on him being genuinely likeable before
+he turns. What to watch is how much of his material makes that case.
 
 **Rick is the real hole.** Eight pieces against Josh's ninety-nine, and he is
 the entire explanation for Josh. Every note written for Rick is doing double
 duty on the character the story most needs an audience to like first, which
 makes him the cheapest way to feed Josh as well. September gave him a third
-scene — `josh-ty-ricks-house` — and that one has no note from anybody.
+appearance — `josh-ty-ricks-house` — and that one has no note from anybody.
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
 > updated 2026-09-15. The backlog below describes `main`, and `main` is behind:
@@ -95,25 +95,26 @@ scene — `josh-ty-ricks-house` — and that one has no note from anybody.
 
 Standing backlog, roughly prioritised:
 
-- Josh scenes with no note yet: `luna-josh-break`, `luna-josh-bed-flashback`,
+- Josh clips with no note yet: `luna-josh-break`, `luna-josh-bed-flashback`,
   `luna-josh-first-night`, `luna-josh-fair` *(taken by #4)*, and `josh-luna-wall`
   — the last of which Melissa may want to write herself, as she is holding the
   journal entry for it
 - `luna-tyson-dance` has no note from either of them. It went members-only in
   the September push, so a note on it is no longer a shop window — but it is
-  still two leads and an uncovered scene
-- Rick is in three scenes now. `josh-rick-study` has two notes already
+  still two leads and uncovered
+- Rick is in three clips now. `josh-rick-study` has two notes already
   (`rick-the-chair`, `josh-the-study`); `josh-rick-lake` is the one every open
   drop keeps re-writing; and `josh-ty-ricks-house`, new in September, has
-  nothing from anybody. That third scene is where a Rick note should go. After
-  it, the next Rick piece has to come from somewhere other than a scene — the
+  nothing from anybody. That third one is where a Rick note should go. After it,
+  the next Rick piece has to come from somewhere other than a clip — the
   brewery, the liquor, what he made of Luna across ten years
 - First notes for Cathy and Avery, who have none at all
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none
-- Notes on the clips; only `run-at-the-lake` has one
-- Wire `notesForScene()` into `/watch/<slug>` so a scene's note appears under
-  the player, which is where a members-only note converts best
+- Notes on the vertical posts; only `run-at-the-lake` has one
+- Wire `notesForScene()` into `/clips/<slug>` so a clip's note appears under the
+  player, which is where a members-only note converts best. NOTE the route moved
+  — this said `/watch/<slug>` until 2026-09-18, and that path is gone
 
 ## Log
 

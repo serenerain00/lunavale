@@ -2873,6 +2873,107 @@ export const videos: Video[] = [
     place: "farmhouse",
     about: ["luna", "josh", "tyson"],
   },
+  {
+    /*
+      THE ACCIDENT, 2026-09-18. Josh, Tyson and Rick, the night of it.
+
+      STAGED HIDDEN, AND THIS IS THE ONE ENTRY IN THIS FILE WHERE THAT IS NOT
+      A TECHNICAL HOLD. Everything is ready — proxy, poster, the lot. What is
+      not settled is whether this should be on the site YET, and that is
+      Melissa's call rather than mine, because it cannot be taken back.
+
+      docs/content/BETWEEN_US_SECRET_CANON.md §8 sets out six stages for how
+      the audience learns this, and opens with "Do not reveal the entire
+      accident early". The site is at Stage 2: `josh-ty-ricks-house` has Josh
+      saying "you don't have to come every time he calls" and the death of the
+      coworker is tiptoed around rather than said. Nobody has reached Stage 3
+      ("you don't know what I owe him") on screen.
+
+      This scene is Stage 4/5 in one move — the audience sees the aftermath and
+      the decision being taken. Season one has not shipped. Publishing it now
+      spends the largest card in the deck before the hand it was built for, and
+      unlike a title or a synopsis there is no version of that which can be
+      undone.
+
+      IT IS ALSO THE BEST ARGUMENT FOR A MEMBERSHIP ON THIS SITE. "The thing
+      Luna does not know", behind the door, is exactly what a membership should
+      open, and Melissa has been asking what members get beyond episodes. Both
+      things are true at once, which is why this is a decision and not a
+      default.
+
+      TWO QUESTIONS BEFORE IT GOES UP:
+
+      1. WHEN IN THE TELLING. Not when it happened — where it lands. It is a
+         flashback, and `luna-josh-bed-flashback` establishes that flashbacks
+         sit in STORY_ORDER where they are TOLD, not when they occurred. Left
+         out of STORY_ORDER entirely while hidden; it needs a position the day
+         it is published or the health check will say so.
+
+      2. HOW LONG AGO — SETTLED 2026-09-18, and the whole timeline moved with
+         it. Melissa rewrote it in full: the accident is 8-10 YEARS ago, Josh
+         and Tyson are 28-30, and LUNA AND JOSH ARE ALREADY TOGETHER. See §12
+         of docs/content/BETWEEN_US_SECRET_CANON.md, which supersedes §2, §7
+         and the old "Luna had not met Josh" correction at its foot.
+
+         Every published age survives that move, which is the reason it is
+         safe: at ~9 years ago Josh and Tyson are 29, Luna is 29 and about a
+         year into Josh, and she has known Tyson eleven years. Luna 38,
+         Tyson 38, Avery 28 and "met Josh at 28 in Atlanta" all stand.
+
+         It is also the better story, and the synopsis below now says so:
+         this did not happen before Luna. It happened while she was there,
+         and Rick decided she would not be told.
+
+      NO PREVIEW, DELIBERATELY, and this is the one place the 2026-09-11 policy
+      ("45 sec for videos longer than 2m") should not be applied. A preview is
+      a PUBLIC file on a public page that also enters the sitemap. Forty-five
+      seconds of this is forty-five seconds of the secret, published, to
+      everybody, permanently. Whatever else is decided, that is not a thing to
+      do by following a rule.
+
+      WHAT IS ON SCREEN, which is all the synopsis claims: an office at night,
+      rain on the glass, Josh seated with somebody else's blood across his
+      shirt, Tyson standing behind him with his arms crossed, and Rick leaning
+      over the desk doing the talking. The blocking is the canon — Rick taking
+      the room, Tyson standing guard, Josh wrecked and silent. The line about
+      what was agreed is Melissa's own ("the night they all agreed that rick
+      would take care of it"), not a reading off frames.
+    */
+    slug: "ty-josh-rick-accident",
+    title: "What Was Agreed",
+    synopsis:
+      "Nine years ago, an office at night and the three of them in it: Josh with somebody else's blood on his shirt, Tyson standing behind him, and Josh's father deciding what happens next. Luna was already a year into her life with Josh. Nobody in that room has told her since.",
+    file: "ty-josh-rick-accident.proxy.mp4",
+    poster: "/posters/ty-josh-rick-accident.jpg",
+    // 123.18 from ffprobe.
+    durationSeconds: 123,
+    addedOn: "2026-09-18",
+    /*
+      FREE, AND PUBLISHED. Melissa, 2026-09-18: "keep it free to watch."
+
+      That is the opposite of where this entry started — it was staged premium
+      on the reasoning that "the thing Luna does not know" is the best argument
+      a membership has. The call goes the other way and there is a real
+      strategy in it: this is the most gripping two minutes in the library, and
+      free is what makes a stranger care. The membership then sells the rest of
+      the story rather than the hook into it. Same logic as the vertical cuts
+      that already go to Instagram.
+
+      WHAT FREE COSTS, STATED ONCE SO NOBODY IS SURPRISED: it enters the
+      sitemap, it is indexable, and there is no gate on it ever again without
+      taking something back from people who have it. That is the one-way door
+      here — not the canon, which is settled.
+
+      NO PREVIEW, and now for a boring reason rather than a careful one: a
+      preview is the public opening of a GATED scene. There is nothing to
+      preview when the whole thing is open.
+    */
+    access: "free",
+    mature: false,
+    feelings: ["lies", "trust"],
+    place: "the-study",
+    about: ["josh", "tyson", "rick"],
+  },
 ];
 
 /**

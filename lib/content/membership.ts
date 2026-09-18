@@ -91,7 +91,7 @@ const ALL_TIERS: Tier[] = [
     priceMonthlyCents: 800,
     priceYearlyCents: 8000,
     blurb:
-      "Every clip at full length, the mature cuts, the private journal entries, and the galleries. Season one lands here first. New material every month.",
+      "Every clip at full length, the mature cuts, the private journal entries, the galleries, and the group chat with Luna, Tyson, Josh and Rick. Season one lands here first. New material every month.",
     cta: "Join the LunaVerse",
     commitment: "Monthly · cancel any time",
     featured: true,
@@ -170,7 +170,18 @@ export const BENEFITS: Benefit[] = [
   {
     id: "public-scenes",
     label: "Open clips",
-    detail: "The ones released openly, in full, at full quality.",
+    /*
+     * "at full quality" CAME OUT 2026-09-17, and the reason is a cancellation.
+     * Melissa: "someone canceled saying quality was lacking… costs too much
+     * for 1080p and AI looks fake, so i dont want that to be a reason ppl sign
+     * up."
+     *
+     * It was never the argument for this product and it was a bad one to make
+     * in passing: it invites a comparison the budget cannot win, and once
+     * somebody is grading the picture they have stopped watching the story.
+     * Nothing anywhere should sell resolution.
+     */
+    detail: "The ones released openly, in full, with no account needed.",
     from: "free",
     group: "Watching",
   },
@@ -347,13 +358,16 @@ export const BENEFITS: Benefit[] = [
     from: "vault",
     group: "Behind it",
   },
-  {
-    id: "stills",
-    label: "Unreleased stills",
-    detail: "The frames that didn't make the cut, at full resolution.",
-    from: "vault",
-    group: "Behind it",
-  },
+  // "Unreleased stills — the frames that didn't make the cut, at full
+  // resolution" was here. Pulled 2026-09-17, Melissa: "get rid of unreleased
+  // stills - dont think anyone cares about that."
+  //
+  // It also carried the second "full resolution" claim, which is the thing
+  // that turned up in a cancellation reason this week. The galleries are still
+  // in the membership and still listed — "Character artifacts" under Watching
+  // — so nothing a member can open has been taken away. What has gone is a row
+  // selling outtakes as a feature, which is a different and weaker promise
+  // than the one above it.
   {
     id: "breakdowns",
     label: "Monthly production breakdown",
@@ -448,6 +462,41 @@ export const QUESTIONS: Question[] = [
   {
     q: "Is the mature material separate?",
     a: "It is always labeled before you open it, and it is never the only way to follow the story. You can watch the whole arc without it.",
+  },
+  {
+    /*
+     * ADDED 2026-09-17, and the placement is the decision. Melissa wanted to
+     * say somewhere that this is meant to be watched on a phone, because the
+     * budget does not stretch to a finish that holds up on a television.
+     *
+     * IT IS NOT GOING ANYWHERE NEAR THE ASK. A quality caveat beside a price
+     * is an apology at the exact moment somebody is deciding, and it does the
+     * damage twice: it converts worse, and it primes the reader to go looking
+     * for the flaw — which is how a cancellation reason this week came to say
+     * the quality was lacking. The two resolution claims came out of the sales
+     * copy the same day for the same reason. Nothing sells or excuses the
+     * picture.
+     *
+     * A FAQ ENTRY IS OPT-IN. Somebody reading this has a practical question
+     * and wants the practical answer.
+     *
+     * REWRITTEN THE SAME DAY to lead with the intent rather than the
+     * constraint, Melissa's call. That is not spin, and the test for whether
+     * it is spin is whether the claim survives without the budget behind it —
+     * this one does. The story happens in kitchens and trucks and the pauses
+     * between sentences, most of the library is already vertical, and people
+     * watch this alone at night on the thing they are holding. It is a real
+     * position that happens to agree with the money.
+     *
+     * The honest half is NOT deleted, it is moved: /about still says this is
+     * made independently at a small scale, and the line there names both
+     * reasons in the order they actually weigh. What has gone from here is
+     * "a television will show you the budget", which was an apology, and the
+     * promise of a higher-resolution finish, which was a commitment nobody
+     * can currently keep.
+     */
+    q: "What's the best way to watch it?",
+    a: "On your phone, held close, probably at night. That's what it's made for — it's graded for a small screen, and the whole thing lives in kitchens and trucks and the pauses between sentences. A television is a bigger room than this story wants.",
   },
   {
     q: "Where does the money go?",

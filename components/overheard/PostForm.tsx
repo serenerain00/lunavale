@@ -1,12 +1,22 @@
 "use client";
 
-import { useActionState, useRef, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { submitPost, type PostResult } from "@/app/overheard/actions";
 import { MAX_POST_LENGTH, MENTIONABLE } from "@/lib/content/overheard";
 
 interface PostFormProps {
+  /**
+   * Rendered in the fixed bar at the bottom of the viewport rather than in the
+   * page flow.
+   *
+   * It changes three things and no behaviour: the panel loses its own border
+   * and background (the bar carries those), the textarea starts at two rows so
+   * the composer does not eat a phone screen, and the form measures itself
+   * into --composer-h so the thread above can reserve the space it occupies.
+   */
+  pinned?: boolean;
   /** Signed in at all — see the note on the sign-in branch below. */
   signedIn: boolean;
   /** The line being answered, when the URL asks for one. */
@@ -25,6 +35,7 @@ interface PostFormProps {
  * unreachable branch.
  */
 export function PostForm({
+  pinned = false,
   signedIn,
   replyingTo = null,
   canPostAsCast = false,
@@ -98,6 +109,8 @@ export function PostForm({
 
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
+  /** The signed-out panel. The signed-in case measures the form itself. */
+  const wrapRef = useRef<HTMLDivElement>(null);
 
   const [state, action, pending] = useActionState<PostResult | null, FormData>(
     async (_prev, formData) => {
@@ -123,16 +136,69 @@ export function PostForm({
   // The "that's your three" branch that used to follow is gone with it: the
   // page does not render this form for a non-member at all, so the allowance
   // can no longer be spent by anybody.
+  /*
+   * PUBLISH THE COMPOSER'S HEIGHT so the thread can reserve it.
+   *
+   * A fixed element is out of flow, so nothing below the last message knows it
+   * is there and the newest few sit underneath it unreadable. A hard-coded
+   * spacer would be wrong within a day: the form grows when a reply banner
+   * appears above the textarea and when the character counter wraps. A
+   * ResizeObserver keeps the number honest at every width and in every state.
+   */
+  useEffect(() => {
+    if (!pinned) return;
+    // Whichever of the two the component actually rendered.
+    const el: HTMLElement | null = formRef.current ?? wrapRef.current;
+    if (!el) return;
+    const publish = () =>
+      document.documentElement.style.setProperty(
+        "--composer-h",
+        `${el.offsetHeight}px`,
+      );
+    publish();
+    const ro = new ResizeObserver(publish);
+    ro.observe(el);
+    return () => {
+      ro.disconnect();
+      document.documentElement.style.removeProperty("--composer-h");
+    };
+  }, [pinned]);
+
   if (!signedIn) {
     return (
-      <div className="rounded-xl border border-hairline bg-charcoal/60 p-6 sm:p-8">
-        <h2 className="font-display text-2xl text-ivory">Say something</h2>
-        <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
-          Sign in and the box is yours — your name shows on what you write.
-        </p>
+      <div
+        ref={wrapRef}
+        className={
+          pinned
+            ? "flex flex-wrap items-center justify-between gap-3"
+            : "rounded-xl border border-hairline bg-charcoal/60 p-6 sm:p-8"
+        }
+      >
+        <div className="min-w-0">
+          <h2
+            className={
+              pinned
+                ? "font-display text-base text-ivory"
+                : "font-display text-2xl text-ivory"
+            }
+          >
+            Say something
+          </h2>
+          <p
+            className={
+              pinned
+                ? "text-sm leading-relaxed text-stone"
+                : "mt-2 max-w-lg text-sm leading-relaxed text-stone"
+            }
+          >
+            Sign in and the box is yours — your name shows on what you write.
+          </p>
+        </div>
         <Link
           href="/sign-in"
-          className="mt-5 inline-flex min-h-10 items-center rounded-full bg-amber px-5 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+          className={`inline-flex min-h-10 shrink-0 items-center rounded-full bg-amber px-5 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft ${
+            pinned ? "" : "mt-5"
+          }`}
         >
           Sign in
         </Link>
@@ -145,7 +211,11 @@ export function PostForm({
       ref={formRef}
       action={action}
       id="say"
-      className="rounded-xl border border-hairline bg-charcoal/60 p-5 sm:p-6"
+      className={
+        pinned
+          ? ""
+          : "rounded-xl border border-hairline bg-charcoal/60 p-5 sm:p-6"
+      }
     >
       {/* Carried in the URL rather than client state, so a "reply to this" link
           is an ordinary link — shareable, and it survives a refresh. */}
@@ -168,7 +238,14 @@ export function PostForm({
         </div>
       )}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <label htmlFor="body" className="font-display text-xl text-ivory">
+        <label
+          htmlFor="body"
+          className={
+            pinned
+              ? "font-display text-base text-ivory"
+              : "font-display text-xl text-ivory"
+          }
+        >
           Say something
         </label>
         {/* Owner only, and only while replying to something — which is when
@@ -196,12 +273,12 @@ export function PostForm({
         )}
       </div>
 
-      <div className="relative mt-4">
+      <div className={pinned ? "relative mt-2" : "relative mt-4"}>
         <textarea
           ref={boxRef}
           id="body"
           name="body"
-          rows={4}
+          rows={pinned ? 2 : 4}
           maxLength={MAX_POST_LENGTH}
           required
           value={text}

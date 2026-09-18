@@ -36,6 +36,16 @@ const caveat = Caveat({
   weight: ["400", "500", "600"],
 });
 
+/**
+ * One sentence for a share card, one for a search result. Written out here
+ * rather than imported from lib/content so this file has no dependency that
+ * could fail during a metadata render.
+ */
+const SHORT_DESCRIPTION =
+  "A cinematic drama series about three people, twenty years of history, and one question nobody wants answered.";
+const LONG_DESCRIPTION =
+  "Between Us \u2014 a cinematic drama series about Luna, Josh and Tyson. Watch the clips in order, read her journal, and get season one first as a member.";
+
 export const metadata: Metadata = {
   /*
     The real domain. This said lunavault.com until 2026-08-13 — a domain
@@ -54,19 +64,31 @@ export const metadata: Metadata = {
     default: "Luna Vale",
     template: "%s · Luna Vale",
   },
-  description:
-    "An explorable cinematic universe of original stories. Enter the world, discover scenes, and unlock deeper access.",
+  /*
+   * REWRITTEN 2026-09-17. This said "An explorable cinematic universe of
+   * original stories. Enter the world, discover scenes, and unlock deeper
+   * access." Three things wrong with it by then, and it is the most-seen copy
+   * on the site: it is the Google result, and it is what renders when somebody
+   * pastes a link into Instagram or a message.
+   *
+   *   "explorable ... universe"  the world came off the site on 09-15
+   *   "Enter the world"          that route 404s
+   *   "discover scenes"          they are called clips since 09-16
+   *
+   * It also never said what the thing IS. Somebody deciding whether to tap a
+   * shared link needs a genre and a premise, not a description of a website.
+   */
+  description: LONG_DESCRIPTION,
   openGraph: {
-    title: "Luna Vale",
-    description:
-      "An explorable cinematic universe of original stories.",
+    title: "Between Us \u2014 a Luna Vale series",
+    description: SHORT_DESCRIPTION,
     siteName: "Luna Vale",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Luna Vale",
-    description: "An explorable cinematic universe of original stories.",
+    title: "Between Us \u2014 a Luna Vale series",
+    description: SHORT_DESCRIPTION,
   },
 };
 

@@ -64,10 +64,13 @@ export default async function WelcomePage({
             <h1 className="mt-4 font-display text-3xl font-light leading-[1.15] text-ivory sm:text-4xl">
               You&rsquo;re in the LunaVerse.
             </h1>
+            {/* "the locked rooms" was here. The world came off the site on
+                2026-09-15 and there are no rooms to unlock — on the one page
+                somebody reads thirty seconds after paying. */}
             <p className="mt-4 leading-relaxed text-stone">
-              The whole library, the locked rooms, and every page of her journal
-              are yours. There is one small thing left: an account, so the site
-              knows you when you come back.
+              Every clip at full length, every page of her journal, and season
+              one the moment it lands. There is one small thing left: an
+              account, so the site knows you when you come back.
             </p>
 
             <Link

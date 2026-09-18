@@ -42,18 +42,25 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-07-28:
+Recounted from the content files, 2026-09-14. Notes counts include replies, the
+way `contentFor()` does:
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 8 | 44 | 23 |
-| Tyson | 8 | 44 | 33 |
-| Josh | 8 | 35 | 21 |
+| Luna | 12 | 125 | 97 |
+| Tyson | 12 | 93 | 79 |
+| Josh | 13 | 85 | 65 |
+| Rick | 2 | 5 | 3 |
 
-**Josh is the thinnest** and is the one who benefits most from more. He is the
-hardest character to hold an audience's sympathy for, the whole story depends
-on him being genuinely likeable before he turns, and he has the fewest pieces
-making that case.
+**Josh is still the thinnest of the three leads** and is the one who benefits
+most from more. He is the hardest character to hold an audience's sympathy for,
+the whole story depends on him being genuinely likeable before he turns, and he
+has the fewest pieces making that case.
+
+**Rick is thinner than all of them by an order of magnitude** — two scenes, one
+journal entry, two notes — and he is the explanation for Josh, so what is thin
+about him is thin about Josh too. He is tertiary and should stay tertiary; that
+is an argument for a handful more pieces, not a profile.
 
 Standing backlog, roughly prioritised:
 
@@ -72,3 +79,4 @@ not a changelog.
 | Week of | What shipped | Who |
 | --- | --- | --- |
 | 2026-07-28 | Character hubs built; 24 Between Takes notes (8 each), 7 free | all three |
+| 2026-09-14 | Between Takes note `rick-her-name`, on `josh-rick-lake` — the first note on that scene, and Rick's second | Rick |

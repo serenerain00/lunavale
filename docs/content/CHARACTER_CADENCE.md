@@ -42,22 +42,36 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-07-28:
+As built, 2026-08-17:
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 8 | 44 | 23 |
-| Tyson | 8 | 44 | 33 |
-| Josh | 8 | 35 | 21 |
+| Luna | 12 | 98 | 73 |
+| Tyson | 12 | 74 | 61 |
+| Josh | 14 | 76 | 59 |
+| Rick | 1 | 4 | 2 |
+| Cathy | 0 | 5 | 4 |
+| Avery | 0 | 3 | 2 |
 
-**Josh is the thinnest** and is the one who benefits most from more. He is the
-hardest character to hold an audience's sympathy for, the whole story depends
-on him being genuinely likeable before he turns, and he has the fewest pieces
-making that case.
+**Josh is no longer the thinnest.** The notebook rewrite and the new scenes
+changed the picture: he now has the most notes of anyone and sits second on
+total pieces. The sympathy problem he was thin on is well covered.
+
+**The thin ones now are Rick, Cathy and Avery.** Rick has one note against four
+pieces; Cathy and Avery have none at all. Rick is still the explanation for
+Josh, so every piece he gets pays out twice — and he is no longer boxed in, because
+`josh-rick-lake` is a second scene he appears in with no note on it.
 
 Standing backlog, roughly prioritised:
 
-- Josh notes on the scenes he is in that have none yet
+- A Rick note on `josh-rick-lake` — his second scene, and the constraint that
+  previously blocked him (one scene, both notes written) is gone
+- First notes for Cathy and Avery, who have none
+- Josh scenes added since the rewrite that carry no note: `luna-josh-break`,
+  `luna-josh-bed-flashback`, `luna-josh-first-night`, `josh-luna-wall`,
+  `luna-josh-fair`
+- `luna-tyson-dance` still has no note from either of them — it is free, so a
+  note on it is a shop window rather than a spoiler
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none
 - Notes on the clips; only `run-at-the-lake` has one
@@ -72,3 +86,4 @@ not a changelog.
 | Week of | What shipped | Who |
 | --- | --- | --- |
 | 2026-07-28 | Character hubs built; 24 Between Takes notes (8 each), 7 free | all three |
+| 2026-08-03 | Between Takes: "I don't know yet" — Mexico, `luna-josh-beach` | Josh |

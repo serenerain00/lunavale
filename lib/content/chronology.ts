@@ -88,6 +88,13 @@ export const STORY_ORDER: readonly string[] = [
 
   "luna-tyson-dance",
   "luna-tyson-gingerale",
+
+  // HAND-PLACED — REASONED. Published 2026-09-20. An evening where nothing
+  // happens, which puts it in the settled middle of the six months rather than
+  // at either end: after the night out and the morning after it, before
+  // anything between them stops being friendship. The ease in it is the
+  // argument — they are not new to this and nothing has gone wrong yet.
+  "luna-ty-couch",
   "luna-ty-wasntplanningonit",
   "luna-ty-nyc-hotel",
 

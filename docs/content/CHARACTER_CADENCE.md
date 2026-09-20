@@ -43,13 +43,13 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-09-18 against `main` at 939dfb8. The 2026-07-28 row is kept beneath
+re-run 2026-09-20 against `main` at 8b512d5. The 2026-07-28 row is kept beneath
 so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 161 | 138 |
-| Tyson | 12 | 123 | 110 |
+| Luna | 12 | 163 | 139 |
+| Tyson | 12 | 125 | 111 |
 | Josh | 14 | 100 | 88 |
 | Rick | 1 | 9 | 8 |
 
@@ -65,10 +65,12 @@ Rick was not on the table at all. Figures above include this week's note.*
 
 **Josh is the thinnest of the three leads again.** He has the most *notes* of
 anyone, but he is bottom on total pieces, and the gap keeps widening — every
-batch since late August has gone mostly to Luna and Tyson. Volume was never the
-real measure for him anyway: he is the hardest character to hold an audience's
-sympathy for, and the whole story depends on him being genuinely likeable before
-he turns. What to watch is how much of his material makes that case.
+batch since late August has gone mostly to Luna and Tyson, including
+`luna-ty-couch` on 2026-09-20, which took both of them up another two. Volume
+was never the real measure for him anyway: he is the hardest character to hold
+an audience's sympathy for, and the whole story depends on him being genuinely
+likeable before he turns. What to watch is how much of his material makes that
+case.
 
 **Rick is the real hole.** Nine pieces against Josh's hundred, and he is the
 entire explanation for Josh. Every note written for Rick is doing double duty on
@@ -76,8 +78,10 @@ the character the story most needs an audience to like first, which makes him
 the cheapest way to feed Josh as well. September gave him two more appearances,
 both noteless: `josh-ty-ricks-house`, and `ty-josh-rick-accident` — *What Was
 Agreed*, the accident, published **free** and placed first in the story. A note
-on a free piece is the shop window, so that one is the highest-value gap on this
-list.
+on a free piece is the shop window, and that one is free, first, and about the
+character who explains Josh, which is what makes it the highest-value gap on
+this list — not merely that it is open. `luna-ty-couch` is free and uncovered
+too as of 2026-09-20, but it pays into the two characters who need it least.
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
 > updated 2026-09-15. The backlog below describes `main`, and `main` is behind:
@@ -105,7 +109,13 @@ Standing backlog, roughly prioritised:
 - `luna-tyson-dance` has no note from either of them. It went members-only in
   the September push, so a note on it is no longer a shop window — but it is
   still two leads and uncovered
-- Rick is in four clips now, and two of them are empty. `josh-rick-study` has
+- `luna-ty-couch` — *Most Nights*, published **free** on 2026-09-20 — has no
+  note either, and its own comment in `videos.ts` says nothing happens in it on
+  purpose: he looks over six times and she never catches him. That is a note
+  waiting to be written, and being free it would convert. Weigh it against the
+  fact that Luna and Tyson are already the best-fed characters on the table
+- Rick is in four clips. Three carry no note on `main`, though one of those
+  three is the contested slot rather than a real gap. `josh-rick-study` has
   two notes already (`rick-the-chair`, `josh-the-study`); `josh-rick-lake` is the
   one every open drop keeps re-writing; `josh-ty-ricks-house` has nothing; and
   `ty-josh-rick-accident` — *What Was Agreed* — has nothing either and is

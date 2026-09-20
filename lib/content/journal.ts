@@ -1449,6 +1449,53 @@ export const journal: JournalEntry[] = [
 
     DRAFT PROSE. Replace it.
   */
+  /*
+    WRITTEN 2026-09-20 beside `luna-ty-couch`, which is ninety seconds of
+    nothing happening. The entry had to be the same — she does not get a
+    realisation out of this evening, she gets an evening, and then catches
+    herself having written it down.
+
+    IT STOPS SHORT ON PURPOSE. Canon: neither of them will say it, and Luna's
+    voice is interior and self-revising. So she circles the gap on the couch,
+    names it once as a measurement, and then explains it away with something
+    that is also true. The reader sees what she is doing. She does not.
+
+    NO ROMANTIC CLAIM IS MADE, which is the §12 continuity rule for this era
+    read forwards rather than backwards: she is six weeks out of a ten-year
+    relationship and he is the person who turns up. That is all the entry is
+    allowed to know.
+  */
+  {
+    id: "most-nights",
+    addedOn: "2026-09-20",
+    dateline: "Nothing happened, which is why I have written it down",
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    /*
+      PREMIUM, THOUGH THE CLIP IT SITS BESIDE IS FREE, and that is the right
+      way round rather than an oversight. The free journal set is SIX and is a
+      deliberate number (see the top of this file, Melissa 2026-08-10, cutting
+      it down from fourteen); the health check warns on drift. Melissa made the
+      VIDEO free, not the journal.
+
+      It is also the better funnel. The clip is the hook and it is open to
+      anybody who finds it on Instagram. Her account of the same evening —
+      the part where she notices she has been keeping track — is the thing
+      membership opens.
+    */
+    access: "premium",
+    mature: false,
+    sceneSlug: "luna-ty-couch",
+    body: [
+      "He came at seven with food I did not ask for and we have not said anything of consequence since.",
+      "I had the laptop. He had the game on with the sound almost off, which he does here and does not do at his own place, and I have never asked why. Two lamps. The candle on the table that I light every night now and could not tell you when that started.",
+      "At some point I looked up and it had been an hour. Not a bad hour or a good one. An hour.",
+      "Here is the thing I am putting down and then leaving alone. There is a whole couch between us. Neither of us has moved the entire evening, and I know that because I have apparently been keeping track, and a person who is not keeping track does not know how long it has been since somebody moved.",
+      "I am aware of how that reads. It is six weeks. My whole life is in boxes in a house that is not mine and the man who has known me since I was eighteen brings dinner on a Tuesday and sits at the other end of a sofa and does not make me talk. That is not a thing to examine. That is a friend.",
+      "He left at eleven and said the same thing he says, which is lock it, and I said I always do, which is not true, and he waited outside until he heard it.",
+      "That is the whole evening. I do not know why I have three paragraphs of it.",
+    ],
+  },
   {
     id: "ginger-ale",
     addedOn: "2026-09-03",

@@ -2974,6 +2974,47 @@ export const videos: Video[] = [
     place: "the-study",
     about: ["josh", "tyson", "rick"],
   },
+  {
+    /*
+      THE COUCH, 2026-09-20. Free, and already on Instagram — which per the
+      standing rule closes the one-way-door objection to publishing it openly.
+
+      SLUG IS `luna-ty-couch`, NOT `luna-ty-couch-pTest`. The file is named
+      pTest and the slug is the public URL; /clips/luna-ty-couch-pTest reads
+      like a build artifact. Renaming was free here because it has never been
+      published — the usual rule about slugs being load-bearing only bites once
+      an address has been shared.
+
+      WHAT IS IN IT, from the frames: the lakehouse at night, lamps and
+      candles, the lake black through the glass. Luna along one end of the
+      sectional with a laptop and a blanket over her legs, smiling at whatever
+      is on the screen. Tyson at the other end, upright, a beer in his hand,
+      watching something off to the side. They are on the same couch and not
+      touching, and the gap between them is most of the couch.
+
+      NOTHING HAPPENS IN IT, AND THAT IS THE ENTIRE POINT. He looks over at
+      21s, 30s, 48s, 84s, 93s and 102s. She does not notice once. That is the
+      six months in ninety seconds — "he kept her head above water, and
+      somewhere in there it stopped being only that, on both sides, and
+      neither will say it."
+
+      NO `mature`, no notes. Two people on a sofa.
+    */
+    slug: "luna-ty-couch",
+    title: "Most Nights",
+    synopsis:
+      "The lakehouse, late, the pair of them at opposite ends of the same couch — her with a laptop and a blanket, him with a beer and the television. Nobody says anything worth writing down. He looks over six times and she does not catch him once.",
+    file: "luna-ty-couch.proxy.mp4",
+    poster: "/posters/luna-ty-couch.jpg",
+    // 108.99 from ffprobe.
+    durationSeconds: 109,
+    addedOn: "2026-09-20",
+    access: "free",
+    mature: false,
+    feelings: ["desire", "trust"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+  },
 ];
 
 /**

@@ -84,21 +84,29 @@ this list — not merely that it is open. `luna-ty-couch` is free and uncovered
 too as of 2026-09-20, but it pays into the two characters who need it least.
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
-> updated 2026-09-15. The backlog below describes `main`, and `main` is behind:
-> the drops for 2026-08-03, 08-10, 08-17, 08-31, 09-07 and 09-14 are all still
-> open and unmerged (#1, #2, #3, #5, #6, #7), as is this one (#4). A weekly run
-> clones the repo fresh, so it cannot see any of them — and **six** separate
-> weeks have now independently picked the same obvious gap and written the same
-> note, a Rick `insight` note on `josh-rick-lake`: #2, #3, #5, #6, #7, and #4
-> before it was rewritten. #5 reuses the id `rick-i-already-knew`. Whatever this
-> file says is uncovered, check it against the open PRs first.
+> updated 2026-09-21. The backlog below describes `main`, and `main` is behind:
+> the drops for 2026-08-03, 08-10, 08-17, 08-31, 09-07, 09-14 and 09-21 are all
+> still open and unmerged (#1, #2, #3, #5, #6, #7, #8), as is this one (#4) —
+> **eight weeks of drops, nothing landed.** A weekly run clones the repo fresh,
+> so it cannot see any of them — and **seven** separate weeks have now
+> independently picked the same obvious gap and written the same note, a Rick
+> `insight` note on `josh-rick-lake`: #2, #3, #5, #6, #7, #8, and #4 before it
+> was rewritten. The ids differ (#5 `rick-i-already-knew`, #8
+> `rick-already-knew`), so merging two of them would not collide — it would
+> quietly give Rick the same page twice. Whatever this file says is uncovered,
+> check it against the open PRs first.
 >
-> **This paragraph cannot fix that on its own, and it has now failed three
+> **This paragraph cannot fix that on its own, and it has now failed four
 > times.** It has only ever existed on #4's branch, never on `main`, so the
-> 08-31, 09-07 and 09-14 runs could not read it and duplicated anyway. It
+> 08-31, 09-07, 09-14 and 09-21 runs could not read it and duplicated anyway. It
 > becomes effective the moment anything carrying it lands on `main`. Until then
 > the only reliable control is the weekly routine's own stored prompt, which is
 > the maintainer's to change.
+>
+> **The count tables across the open PRs disagree, and all of them are right.**
+> Each branch's `countFor()` sees that branch's own note, so #3 and #8 read Josh
+> 13 / Rick 2 while this one reads Josh 14 / Rick 1. Do not "correct" another
+> PR's table against this one; recount on whatever tree you are actually on.
 
 Standing backlog, roughly prioritised:
 

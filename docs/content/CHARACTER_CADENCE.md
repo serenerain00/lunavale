@@ -43,15 +43,15 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-09-20 against `main` at 8b512d5. The 2026-07-28 row is kept beneath
+re-run 2026-09-22 against `main` at 71ec661. The 2026-07-28 row is kept beneath
 so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 163 | 139 |
-| Tyson | 12 | 125 | 111 |
-| Josh | 14 | 100 | 88 |
-| Rick | 1 | 9 | 8 |
+| Luna | 12 | 169 | 145 |
+| Tyson | 12 | 129 | 115 |
+| Josh | 14 | 103 | 91 |
+| Rick | 1 | 10 | 9 |
 
 *As built, 2026-07-28: Luna 8 / 44 / 23 · Tyson 8 / 44 / 33 · Josh 8 / 35 / 21.
 Rick was not on the table at all. Figures above include this week's note.*
@@ -64,15 +64,16 @@ Rick was not on the table at all. Figures above include this week's note.*
 > trusting the table.
 
 **Josh is the thinnest of the three leads again.** He has the most *notes* of
-anyone, but he is bottom on total pieces, and the gap keeps widening — every
-batch since late August has gone mostly to Luna and Tyson, including
-`luna-ty-couch` on 2026-09-20, which took both of them up another two. Volume
-was never the real measure for him anyway: he is the hardest character to hold
-an audience's sympathy for, and the whole story depends on him being genuinely
+anyone, but he is bottom on total pieces, and the gap is still widening even
+when he gains: the 2026-09-21 launch batch gave him three pieces, the most he
+has had in a month, and Tyson's lead over him went from 25 to 26 anyway. Volume
+was never the real measure for him: he is the hardest character to hold an
+audience's sympathy for, and the whole story depends on him being genuinely
 likeable before he turns. What to watch is how much of his material makes that
-case.
+case — and on that, the launch was good for him. **He is one of the three the
+pilot is about**, which is now the first thing a new member watches.
 
-**Rick is the real hole.** Nine pieces against Josh's hundred, and he is the
+**Rick is the real hole.** Ten pieces against Josh's hundred-odd, and he is the
 entire explanation for Josh. Every note written for Rick is doing double duty on
 the character the story most needs an audience to like first, which makes him
 the cheapest way to feed Josh as well. September gave him two more appearances,
@@ -110,6 +111,16 @@ too as of 2026-09-20, but it pays into the two characters who need it least.
 
 Standing backlog, roughly prioritised:
 
+- **`pilot` — *Episode 1 (Pilot)*, published 2026-09-21, and nothing has a note
+  on it.** This is now the top of the list. It is the longest thing in the
+  library (18½ minutes), it is about Luna, Josh and Tyson, and it is the first
+  thing a new member watches. It is `premium`, but the first minute is public
+  and is already on Instagram, so the episode is back in the sitemap — a note on
+  it is reachable in a way a note on an ordinary gated clip is not. Two
+  cautions: it is `mature` and carries `notes: ["danger"]`, and the entry's own
+  comment says the constraint on everything about it is **not to spend the
+  intro**. Read Melissa's synopsis in `videos.ts` rather than writing off frames
+  — she replaced a frames-written one there, and the comment explains why
 - Josh clips with no note yet: `luna-josh-break`, `luna-josh-bed-flashback`,
   `luna-josh-first-night`, `luna-josh-fair` *(taken by #4)*, and `josh-luna-wall`
   — the last of which Melissa may want to write herself, as she is holding the

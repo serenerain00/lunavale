@@ -5,6 +5,7 @@ import { ClipCard } from "@/components/shelf/ClipCard";
 import { PAGE } from "@/components/ui/layout";
 import { inStoryOrder, inReleaseOrder } from "@/lib/content/chronology";
 import { getCategory, clipsInCategory, categories } from "@/lib/content/categories";
+import { currentSeason } from "@/lib/content/season";
 import { formatDuration } from "@/lib/content/videos";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -54,6 +55,11 @@ export default async function ClipsPage({
   // falls back to everything rather than to an empty page or a 404 — a
   // hand-edited URL should land somewhere useful.
   const picked = category ? getCategory(category) : undefined;
+
+  // Released episodes only — a "coming soon" card belongs on the front page,
+  // not in the library.
+  const season = currentSeason();
+  const episodes = season.episodes.filter((e) => !e.comingSoon && e.slug);
   const base = latest ? inReleaseOrder() : inStoryOrder();
   const clips = picked
     ? (() => {
@@ -90,14 +96,70 @@ export default async function ClipsPage({
             The sequence is still real and still useful, so it stays — as an
             arrangement the page offers, not as a claim that it is complete.
           */}
+          {/*
+            WAS "A peek at what's coming." Accurate for exactly as long as
+            nothing had come — episode one landed on 2026-09-21 and the line
+            became a promise about a thing sitting on the same page.
+          */}
           <h1 className="mt-4 max-w-3xl font-display text-4xl font-medium leading-[1.05] tracking-tight text-ivory sm:text-6xl">
-            {picked ? picked.label : "A peek at what\u2019s coming."}
+            {picked
+              ? picked.label
+              : episodes.length > 0
+                ? "Season one, and everything it comes out of."
+                : "A peek at what\u2019s coming."}
           </h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-stone sm:text-xl">
             {picked?.note ??
-              "These are moments from the series \u2014 the ones already shot, arranged the way they happen to Luna rather than the way they went up. Start anywhere. Each one stands on its own."}
+              (episodes.length > 0
+                ? "Episode one is up. Below it are the moments it was built from \u2014 arranged the way they happen to Luna rather than the way they went up."
+                : "These are moments from the series \u2014 the ones already shot, arranged the way they happen to Luna rather than the way they went up. Start anywhere. Each one stands on its own.")}
           </p>
         </header>
+
+        {/*
+          SEASON ONE, ABOVE THE CLIPS. The pilot is deliberately NOT in
+          STORY_ORDER — it is the story rather than a fragment of it (see
+          assertComplete) — and the consequence only became visible on launch
+          night: /clips renders the story order, so the episode was absent from
+          the one page called "Clips" in the nav, which is exactly where
+          somebody would go looking for it.
+
+          Fixing it by adding the pilot to STORY_ORDER would have been the
+          wrong repair: it would put an 18-minute episode in a numbered
+          sequence of two-minute fragments and claim it is one of them. This
+          says what is true instead — here is the season, and below it is what
+          the season came out of.
+
+          UNFILTERED VIEW ONLY. Inside a category the page is answering a
+          narrower question and an episode is not part of the answer.
+        */}
+        {!picked && episodes.length > 0 && (
+          <section aria-labelledby="season-heading" className="mb-10">
+            <h2
+              id="season-heading"
+              className="mb-4 font-display text-2xl font-semibold tracking-tight text-ivory"
+            >
+              Season {season.number}
+            </h2>
+            <ul className="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {episodes.map((ep) => (
+                <li key={ep.number}>
+                  <ClipCard
+                    href={`/clips/${ep.slug}`}
+                    title={ep.title ?? `Episode ${ep.number}`}
+                    poster={ep.poster ?? "/posters/pilot.jpg"}
+                    meta={
+                      ep.runtimeSeconds
+                        ? formatDuration(ep.runtimeSeconds)
+                        : undefined
+                    }
+                    premium
+                  />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {/* Sort keeps whichever category is on, so switching order does not
             silently drop the filter the visitor arrived with. */}

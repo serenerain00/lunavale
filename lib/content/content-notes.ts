@@ -21,6 +21,7 @@
  */
 
 export type ContentNoteId =
+  | "danger"
   | "violence"
   | "control"
   | "panic"
@@ -49,6 +50,30 @@ export interface ContentNote {
 }
 
 export const CONTENT_NOTES: Record<ContentNoteId, ContentNote> = {
+  /*
+   * DELIBERATELY GENERAL, 2026-09-21. Added for the pilot, which has a
+   * sequence Melissa does not want described: "keep it general i dont wanna
+   * give away the intro which is a big deal."
+   *
+   * So it names the WEIGHT and not the event — no weapon, no position in the
+   * running order, nothing a reader could reverse-engineer the opening from.
+   * That is a real tension with the module's first rule, which is to describe
+   * rather than warn, and this is as close to describing as it can get without
+   * spending the thing it is describing.
+   *
+   * `violence` was not reused because its detail says "a physical assault
+   * between characters", which is accurate for the three pieces already
+   * carrying it and would be a guess here.
+   *
+   * SEVERE, because the whole point of a note somebody needs is that they see
+   * it without hunting, and a general note in the quiet box reads as boilerplate.
+   */
+  danger: {
+    id: "danger",
+    label: "violence and serious threat",
+    detail: "There is a sequence in this where somebody is in real danger.",
+    severe: true,
+  },
   violence: {
     id: "violence",
     label: "physical violence",

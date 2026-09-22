@@ -18,6 +18,7 @@
  *   node scripts/upload-media.mjs --dry-run
  */
 
+import { createReadStream } from "node:fs";
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
@@ -26,6 +27,15 @@ import { head, put } from "@vercel/blob";
 const ROOT = path.join(import.meta.dirname, "..");
 const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");
+
+/**
+ * Above this, upload in parts rather than as one body.
+ *
+ * 50MB is well under the size that actually broke (135MB) and well over
+ * everything this script handled before the first episode, so it changes
+ * nothing about the existing library and covers every episode from here.
+ */
+const MULTIPART_ABOVE = 50 * 1024 * 1024;
 const wanted = args.filter((a) => !a.startsWith("--"));
 
 if (!process.env.BLOB_READ_WRITE_TOKEN) {
@@ -135,12 +145,39 @@ for (const file of files) {
     continue;
   }
 
-  await put(pathname, await readFile(local), {
+  /*
+   * STREAMED, AND MULTIPART ABOVE A THRESHOLD.
+   *
+   * This was `await readFile(local)`, which reads the whole file into a Buffer
+   * and sends it as one body. That is fine for the 6-14MB proxies this script
+   * was written for and it FAILED SILENTLY on the first real episode: the
+   * pilot proxy is 135MB, the upload threw, and the run still exited 0.
+   *
+   * WHAT MADE IT DANGEROUS rather than merely broken is the other half —
+   * /api/stream mints a signed URL WITHOUT checking the object exists, so a
+   * missing file still answers 307 and only 404s when the player follows it.
+   * The episode looked uploaded and looked playable and was neither.
+   *
+   * createReadStream keeps memory flat regardless of size, and `multipart`
+   * splits anything big into parts that can each fail and retry on their own
+   * instead of losing a hundred megabytes to one dropped connection.
+   */
+  await put(pathname, createReadStream(local), {
     access: "private",
     contentType: "video/mp4",
     addRandomSuffix: false,
     allowOverwrite: true,
+    multipart: size > MULTIPART_ABOVE,
   });
+
+  // Verify rather than assume. `put` resolving is not proof the object is
+  // retrievable, and this script's whole job is to make that true.
+  const check = await head(pathname).catch(() => null);
+  if (!check) {
+    console.error(`  FAILED   ${file} — put() returned but the object is not there`);
+    process.exitCode = 1;
+    continue;
+  }
   console.log(`  uploaded ${file} (${mb(size)})`);
   uploaded += 1;
 }

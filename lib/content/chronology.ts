@@ -215,7 +215,14 @@ export function previousInStory(slug: string) {
  * ordered that no longer exists.
  */
 export function assertComplete(): { missing: string[]; unknown: string[] } {
-  const EXEMPT = new Set(["between-us-trailer-one", "interview"]);
+  /*
+   * Not clips in the story, and each for its own reason: the trailer is about
+   * the story, the interview is the cast out of character, and the PILOT is
+   * the story itself rather than a piece cut out of it. STORY_ORDER exists to
+   * put the fragments in sequence; an episode does not belong in a list whose
+   * whole purpose is to compensate for not having episodes.
+   */
+  const EXEMPT = new Set(["between-us-trailer-one", "interview", "pilot"]);
   const ordered = new Set(STORY_ORDER);
   const missing = videos
     .filter((v) => !v.hidden && !EXEMPT.has(v.slug) && !ordered.has(v.slug))

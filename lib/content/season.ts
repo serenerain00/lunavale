@@ -48,7 +48,32 @@ export const SERIES_SUBTITLE = "A Luna Vale Series";
 export const SEASONS: Season[] = [
   {
     number: 1,
-    episodes: [{ number: 1, comingSoon: true }],
+    episodes: [
+      {
+        /*
+          LANDED 2026-09-21. `comingSoon: false` is what flips the whole front
+          page: hasReleasedEpisode() drives the Season 1 shelf note, which
+          stops saying the first episode is on its way.
+
+          NAMED 2026-09-21: "call it Episode 1 (Pilot)". The hold from
+          2026-09-16 — "im thinking about redoing it, so just hold off on the
+          title for now" — is lifted, and this is the name rather than a
+          placeholder, so it is safe to put in a share link and an email.
+
+          IT IS SET IN BOTH PLACES ON PURPOSE. This field names the card on the
+          Season 1 shelf; `title` on the matching entry in videos.ts names the
+          page it opens and anything else that reads the library. They have to
+          say the same thing, and nothing enforces that but a person, so this
+          note is the enforcement.
+        */
+        number: 1,
+        title: "Episode 1 (Pilot)",
+        slug: "pilot",
+        poster: "/posters/pilot.jpg",
+        runtimeSeconds: 1116,
+        comingSoon: false,
+      },
+    ],
   },
 ];
 

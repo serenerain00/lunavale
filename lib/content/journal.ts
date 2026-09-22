@@ -3979,6 +3979,128 @@ export const journal: JournalEntry[] = [
       "So now I know. That is the problem with finding out — you can't go back to the part where you were only wondering.",
     ],
   },
+
+  /*
+    FIVE ADDED 2026-09-21, the night the pilot went out. They fill gaps rather
+    than re-tread: at 106 entries the easy subjects are all taken, and another
+    entry about Tyson being quiet would have been the site repeating itself.
+
+    `the-rule` IS THE ONE MELISSA ASKED FOR — her past with Tyson at eighteen.
+    It is deliberately NOT the meeting, because `twenty-years-ago` already has
+    that and has it well: the photograph, the boy she did not like, "it was the
+    opposite of instant." Writing it twice would have made the better version
+    look like a draft.
+
+    What it does instead is give the no-lying rule an origin. characters.ts
+    asserts the rule flatly — "a rule underneath it that neither of them ever
+    wrote down: they do not lie to each other. It has survived two decades of
+    things worth lying about" — and nothing anywhere showed where it came from.
+    The whole present-day rupture is Luna breaking it once, so the rule having
+    a birthday is worth more than another scene of him not talking.
+
+    `what-i-would-say` closes that loop from the other end, which is why the two
+    were written together.
+  */
+  {
+    id: "the-rule",
+    addedOn: "2026-09-21",
+    dateline: "Nineteen years ago, and I have never written it down before",
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    access: "premium",
+    mature: false,
+    body: [
+      "Everybody thinks the thing between us is that we do not lie to each other. That is true and it is not the interesting part. The interesting part is that we decided it, out loud, once, when we were nineteen and had no business deciding anything.",
+      "There was a boy. I am not going to write his name because he does not deserve the space and because I would be embarrassed for anybody to know how long it took me.",
+      "Tyson knew what he was and did not tell me. He had known for about five weeks. He sat in my mother's kitchen through two of those weeks eating her food and watching me be delighted about somebody he knew for a fact was seeing another girl on the other side of Atlanta, and he said nothing, because he had worked out that I would not believe him and he did not want to be the one who made me choose.",
+      "When it came out I did not go for the boy. I went for Tyson. I stood in the car park behind the Waffle House on Ponce and I said things I have never repeated to anybody, and the worst of it was not even angry, it was: I would have believed you. Which we both knew was probably a lie.",
+      "He let me finish. He has always let me finish. And then he said the only thing he has ever said to me that I can still hear in his exact voice, which is: all right. Then we do not do that. Either of us. Ever.",
+      "Not I am sorry. Not you are right. Just — here is the rule now, and it goes both ways, and it starts tonight.",
+      "I said fine. I was still furious and I said it like a threat.",
+      "And that was nineteen years ago and neither of us has broken it. Not about money, not about the two years he was somewhere he was not allowed to name, not about the thing with my father's diagnosis that I did not tell my own mother. He has told me things that cost him to say. I have told him things I have not told a single other living person.",
+      "I am writing this down because I broke it in August. Not a big lie. A dinner I did not mention.",
+      "And I have spent all week telling myself that a dinner is not the same thing as five weeks and a girl on the other side of Atlanta, and that is true, and it is also completely beside the point, because the rule we made in that car park did not have a size limit on it.",
+      "He has not said a word about it. That is how I know he noticed.",
+    ],
+  },
+  {
+    id: "what-rick-knows",
+    addedOn: "2026-09-21",
+    dateline: "Sunday at Rick's, and I have come home unsettled",
+    place: "ricks-house",
+    about: ["luna", "rick", "tyson", "josh"],
+    access: "premium",
+    mature: false,
+    body: [
+      "Rick has been kind to me for ten years in a way I have never once been able to account for.",
+      "Not warm. Rick is not warm. Kind in the specific sense of putting himself between me and things — a conversation going the wrong way at a table, a comment from somebody's wife, one memorable afternoon when Josh was being Josh in front of people and his father changed the subject so smoothly that I do not think anybody else in the room noticed it happen.",
+      "I have always read it as him liking me. I have been quietly pleased about it for a decade.",
+      "Today I watched him do the same thing for Tyson and it looked different from the outside.",
+      "Tyson had been there twenty minutes and had not sat down. Rick asked him something about the north field and Tyson answered it, and Rick said good man, and put his hand flat on his shoulder for about a second, and Tyson stood there and took it the way you take something you owe.",
+      "I do not know how else to write that. He took it. Like a bill being presented.",
+      "And every single thing about Tyson that I have spent years explaining to people — he is just like that, he does not do family, he turns up when Rick calls and he does not complain — rearranged itself about four inches while I was standing at that counter with a bowl of beans in my hands.",
+      "I have asked him. Years ago, once, properly. He said Rick has been good to me and looked at me in a way that closed the subject, and I let it close, because I was twenty-nine and in love with that man's son and I did not want to find the edge of anything.",
+      "There is something in that house that everybody in it knows except me.",
+      "I want to be careful, because I am aware this is the kind of thought you have at eleven at night and feel stupid about at seven. But I have had it now and it has not gone away, and I have learned to write those ones down.",
+    ],
+  },
+  {
+    id: "the-house-that-isnt-mine",
+    addedOn: "2026-09-21",
+    dateline: "Six months up here, and I have finally noticed what I am doing",
+    place: "lakehouse",
+    about: ["luna"],
+    access: "premium",
+    mature: false,
+    body: [
+      "I have been here six months and I still put the mugs back in the wrong cupboard on purpose.",
+      "Not on purpose exactly. I put them where they go in my kitchen, which is the second shelf by the window, and this house wants them above the kettle, and every few days I notice a mug in the wrong place and know that I did it and put it back.",
+      "Six months is not a stay. Six months is living somewhere.",
+      "Two of the boxes in the second bedroom have not been opened. I know what is in both of them. There is nothing in either that I need, and that is precisely why they are still taped, because opening them would be admitting that I am unpacking rather than waiting.",
+      "I have been waiting. That is the honest sentence. Not for him specifically — I want that on the record, because I know how it reads. Waiting for the part where somebody tells me what the arrangement is.",
+      "Nobody is coming to tell me. I am thirty-eight.",
+      "So here is what I did today, and it is not much, and I am writing it down so it counts. I bought a lamp. Not a nice one. A perfectly ordinary lamp for the corner by the chair that has been too dark to read in since February, and I paid for it with my own money out of my own account and I carried it in and put it where I wanted it.",
+      "And then I sat in that corner and read for two hours in the light and cried a bit at the end of it, which was not about the lamp.",
+    ],
+  },
+  {
+    id: "my-own-money",
+    addedOn: "2026-09-21",
+    dateline: "An invoice, and a small piece of arithmetic",
+    place: "lakehouse",
+    about: ["luna", "josh"],
+    access: "premium",
+    mature: false,
+    body: [
+      "I have earned my own money since I was eighteen years old and I have never once had to explain that to anybody until this year.",
+      "It was never a thing between us. Josh has the farm and the shop and I have the work, and the work has paid for things he has never asked about and he has paid for things I have never asked about, and for ten years that was simply the shape of it.",
+      "What I have realised, sitting here with an invoice open on the laptop and no particular reason to feel strange about it, is that it was the only part of my life he never had an opinion about.",
+      "He had opinions about everything else. Where we ate. Which of my friends were worth the drive. What I meant when I said a thing in a particular tone. Whether I was tired or whether I was in a mood about something, and he was very often right, which is the part nobody tells you about — how much easier it is to be managed by somebody who is frequently correct.",
+      "But never the work. The work went out of the house at six in the morning and came back at nine at night and he never once asked me to account for it.",
+      "I have been turning that over all evening trying to decide whether it was respect.",
+      "I do not think it was. I think it was the one room in the house he had no key to, and I think we both knew it, and I think leaving me that room is the reason I stayed as long as I did.",
+      "Which is a much colder thought than I set out to have. I am going to leave it there and go to bed.",
+    ],
+  },
+  {
+    id: "what-i-would-say",
+    addedOn: "2026-09-21",
+    dateline: "Late, drafting something I am not going to send",
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    access: "premium",
+    mature: false,
+    body: [
+      "If the rule still worked I would say this.",
+      "I would say that I did not tell you about the dinner because I already knew what your face would do, and I wanted one evening of it being a nice thing before anybody made it complicated. And that I have replayed that decision about four hundred times and it still looks small every single time, and I still cannot make it look like nothing.",
+      "I would say that you have not asked me one direct question in six weeks and that you used to ask me everything.",
+      "I would say that I know you are doing the thing where you make yourself useful instead of talking, and that it is working, and that it is the most infuriating possible version of being cared for.",
+      "I would say that I have started noticing what time you leave.",
+      "I would not say the last one. I am aware I have just written it down, and I am aware that writing it down in a book nobody reads is the coward's version of the rule, and I am going to do it anyway.",
+      "The rule was: we do not lie to each other. It did not say anything about what we are allowed to not say.",
+      "Nineteen years and we have both been extremely careful about that gap.",
+    ],
+  },
 ];
 
 /* ------------------------------------------------------------------ query */

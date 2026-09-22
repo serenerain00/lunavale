@@ -2859,7 +2859,7 @@ export const videos: Video[] = [
     // -one because it is a published URL; the card does not have to.
     title: "Trailer",
     synopsis:
-      "Ten years, six months apart, and the best friend who has been there the whole time. The first look at the series \u2014 the pilot lands this month.",
+      "Ten years, six months apart, and the best friend who has been there the whole time. The first look at the series \u2014 episode one is up now.",
     file: "between-us-trailer-one.proxy.mp4",
     poster: "/posters/between-us-trailer-one.jpg",
     // 101, untrimmed. It ends on the title card, which fades itself.
@@ -3014,6 +3014,62 @@ export const videos: Video[] = [
     feelings: ["desire", "trust"],
     place: "lakehouse",
     about: ["luna", "tyson"],
+  },
+  {
+    /*
+      MELISSA'S SYNOPSIS, 2026-09-21, VERBATIM. Everything below it in this
+      entry that was written off frames has been replaced by it.
+
+      WHAT THAT REPLACED IS WORTH KEEPING A LINE ON. Mine described the
+      episode's furniture — a lamp on its side, a man holding her by both arms,
+      a phone at the wrong hour — because furniture is what frames show. Hers
+      describes what the episode is ABOUT: ten years, a quiet distance neither
+      of them named, a choice, and a phone answered by the person who has
+      always answered. It is the difference between a description and a
+      synopsis, and it is why the ones written off frames are always marked as
+      provisional.
+
+      It also does not spend the intro, which is the constraint on everything
+      about this entry.
+    */
+    slug: "pilot",
+    // Melissa, 2026-09-21. The hold on naming it is lifted; this is the name.
+    title: "Episode 1 (Pilot)",
+    synopsis:
+      "After ten years together, Luna and Josh have built a life around love, history, and the assumption that they\u2019ll always find their way back to each other. But when one ordinary night exposes just how far apart they\u2019ve quietly grown, Luna makes a choice that sends her searching for something she hasn\u2019t had to define in years: herself. And when the person who\u2019s always been there answers the phone, old loyalties\u2014and the things left unsaid between them\u2014begin to take on a different weight.",
+    file: "pilot.proxy.mp4",
+    poster: "/posters/pilot.jpg",
+    // 1116.23 from ffprobe.
+    durationSeconds: 1116,
+    addedOn: "2026-09-21",
+    access: "premium",
+    mature: true,
+    notes: ["danger"],
+    /*
+      THE FIRST MINUTE, FREE. Melissa, 2026-09-21: "let people view the first
+      1m for free." That is also exactly what the 2026-09-11 policy gives
+      anything over three minutes, so the episode is not an exception to the
+      rule — it is the rule applied to the longest thing in the library.
+
+      FROM THE TOP, hookStart 0. Every other gated clip starts its preview at
+      a chosen beat one move before the answer; this one does not, because an
+      episode has an opening and the opening is the thing. It also means the
+      free minute cannot accidentally spend the intro Melissa wants kept — it
+      IS the intro, in the order she made it.
+
+      ONE CONSEQUENCE, worth knowing rather than discovering: a gated clip WITH
+      a preview goes back into the sitemap, because it now has real public
+      content on it. That is correct and it is what makes the free minute worth
+      having — it is the part search and social can actually reach.
+    */
+    preview: {
+      file: "pilot-preview.proxy.mp4",
+      durationSeconds: 60,
+      hookStart: 0,
+    },
+    feelings: ["hurt", "distance", "trust"],
+    place: "farmhouse",
+    about: ["luna", "josh", "tyson"],
   },
 ];
 

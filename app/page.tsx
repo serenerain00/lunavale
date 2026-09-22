@@ -142,8 +142,8 @@ export default async function Home() {
             <p className="max-w-2xl text-lg leading-relaxed text-stone sm:text-xl">
               Luna and Josh were together ten years. They spent six months
               apart, and in those six months her oldest friend Tyson was the one
-              who turned up. Then Josh called. Season one is coming, and the
-              moments below are a look at what it is walking into.
+              who turned up. Then Josh called. Season one has started, and the
+              moments below are what it comes out of.
             </p>
 
             {/*
@@ -637,7 +637,7 @@ export default async function Home() {
         <section className={`${PAGE} mt-6`}>
           <div className="rounded-xl border border-hairline p-7 sm:p-10">
             <h2 className="font-display text-xl font-light text-ivory sm:text-2xl">
-              Know when episode one lands.
+              Know when the next one lands.
             </h2>
             <p className="mt-3 max-w-xl text-base leading-relaxed text-stone">
               One email when there&rsquo;s something new. No account needed, and

@@ -138,7 +138,7 @@ const INLINE_COPY: Record<string, HeroCopy> = {
     // Says what it is, when the thing it is advertising arrives, and that the
     // site is not a waiting room — the world is already open.
     blurb:
-      "The first trailer for Between Us. The pilot lands this month \u2014 and the world it happens in is already here.",
+      "The first trailer for Between Us. Episode one is up now \u2014 and everything it comes out of is already here.",
     cta: "Play the trailer",
   },
 };

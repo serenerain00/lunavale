@@ -42,14 +42,14 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-09-20 (counts read off `countFor()` / `lockedCountFor()`):
+As built, 2026-09-22 (counts read off `countFor()` / `lockedCountFor()`):
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 163 | 139 |
-| Tyson | 12 | 125 | 111 |
-| Josh | 13 | 99 | 87 |
-| Rick | 2 | 10 | 9 |
+| Luna | 12 | 169 | 145 |
+| Tyson | 12 | 129 | 115 |
+| Josh | 13 | 102 | 90 |
+| Rick | 2 | 11 | 10 |
 | Cathy | 0 | 11 | 11 |
 | Avery | 0 | 6 | 6 |
 
@@ -60,9 +60,9 @@ on him being genuinely likeable before he turns. So the thing to watch is not
 his count but how much of it makes that case.
 
 **Rick is the thinnest of the people who carry weight**, and he is the
-explanation for Josh. Ten pieces, nine of them members-only — the tenth is
-`ty-josh-rick-accident`, now published free as the way into the story. Every
-one is doing double duty. Only Avery, who is tertiary, has fewer.
+explanation for Josh. Eleven pieces, ten of them members-only — the odd one out
+is `ty-josh-rick-accident`, published free as the way into the story. Every one
+is doing double duty. Only Avery, who is tertiary, has fewer.
 
 Standing backlog, roughly prioritised:
 

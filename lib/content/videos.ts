@@ -3051,11 +3051,18 @@ export const videos: Video[] = [
       anything over three minutes, so the episode is not an exception to the
       rule — it is the rule applied to the longest thing in the library.
 
-      FROM THE TOP, hookStart 0. Every other gated clip starts its preview at
-      a chosen beat one move before the answer; this one does not, because an
-      episode has an opening and the opening is the thing. It also means the
-      free minute cannot accidentally spend the intro Melissa wants kept — it
-      IS the intro, in the order she made it.
+      FROM THE TOP, hookStart 0, AND SETTLED. Every other gated clip starts
+      its preview at a chosen beat one move before the answer; this one does
+      not, because an episode has an opening and the opening is the thing.
+
+      Melissa, 2026-09-21, closing the question of whether to pick a different
+      thirty seconds: "we're keeping the first 1m free since i posted it on
+      IG." That is the decisive argument rather than a preference — the minute
+      is already public on Instagram, so there is no door left to close, and
+      the standing rule is that footage already on IG cannot be made more
+      public by publishing it here. It also means the free minute cannot
+      accidentally spend the intro, because it IS the intro, in the order she
+      made it.
 
       ONE CONSEQUENCE, worth knowing rather than discovering: a gated clip WITH
       a preview goes back into the sitemap, because it now has real public

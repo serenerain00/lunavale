@@ -46,8 +46,8 @@ As built, 2026-09-22 (counts read off `countFor()` / `lockedCountFor()`):
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 169 | 145 |
-| Tyson | 12 | 129 | 115 |
+| Luna | 12 | 171 | 146 |
+| Tyson | 12 | 131 | 116 |
 | Josh | 13 | 102 | 90 |
 | Rick | 2 | 11 | 10 |
 | Cathy | 0 | 11 | 11 |

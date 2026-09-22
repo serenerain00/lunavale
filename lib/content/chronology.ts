@@ -47,6 +47,23 @@ import { videos } from "@/lib/content/videos";
  *   ty-luna-grg2           — hidden, waiting on the scored file
  */
 export const STORY_ORDER: readonly string[] = [
+  // ── Twenty years ago ────────────────────────────────────────────────────
+  /*
+   * FIRST, AND IT TOOK THE OPENING FROM THE ACCIDENT on 2026-09-22.
+   *
+   * Atlanta, the two of them at eighteen: she rings him from a party, he is at
+   * the races, he comes anyway. It is the earliest footage on the site by nine
+   * years and it is chronologically first, which is the boring half of the
+   * argument.
+   *
+   * The half that matters is what a stranger meets first. This list opened on
+   * the accident — two men and a dead worker — which is a strange first taste
+   * of a show about three people who love each other badly. It now opens on
+   * why Luna and Tyson are Luna and Tyson, and the accident lands second, as
+   * the other thing that happened before any of this.
+   */
+  "ty-luna-young",
+
   // ── Before any of it ────────────────────────────────────────────────────
   /*
    * THE PROLOGUE, and the only clip here that predates the rest by years.

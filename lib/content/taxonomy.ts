@@ -221,6 +221,20 @@ export const places = [
     label: "New York",
     blurb: "Two thousand miles from anyone who knows them.",
   },
+  {
+    /*
+      ADDED 2026-09-22 with the first footage set there. Atlanta has been in
+      the canon since the beginning — both of them are from it, Luna modelled
+      there from eighteen, and Cathy and Avery are still in it — but until now
+      nothing on the site actually happened there, so it had no place id.
+
+      It is the only entry here that is a city rather than a room, and the only
+      one that is twenty years ago rather than now.
+    */
+    id: "atlanta",
+    label: "Atlanta",
+    blurb: "Where both of them are from, and where it started.",
+  },
 ] as const satisfies readonly Place[];
 
 /**

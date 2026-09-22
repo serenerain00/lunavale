@@ -147,6 +147,48 @@ export function clipAccess(clip: Clip): AccessLevel {
 const authored: Clip[] = [
   {
     /*
+      PICK ME UP — Atlanta, and the pair of them at eighteen. Added
+      2026-09-22, free, already on Instagram.
+
+      THE EARLIEST THING ON THE SITE by nine years. Everything else is the
+      present or the nine-years-ago accident; this is twenty years back, the
+      summer they met, and it is the only footage that shows what the
+      friendship was before any of the rest of it happened to them.
+
+      WHAT IS IN IT: she leaves a party and rings him. He is at the races. He
+      comes anyway. Then the two of them in the car arguing about where to eat,
+      which is the entire relationship in ninety seconds — she called, and he
+      came, and neither of them made anything of it.
+
+      IT PAIRS WITH `the-rule`, written the night before, which is her at
+      thirty-eight remembering the same summer and the promise they made in a
+      car park behind the Waffle House on Ponce. One is the memory; this is the
+      footage. Neither needs the other and they are better together.
+
+      SQUARE, 1320x1272 at source and 748x720 as the proxy. `aspect` is set for
+      the same reason `the-blonde-guy` sets it — the player and the locked card
+      use the clip's real proportions, while the /posts grid crops every card
+      to 9:16 by CSS so the wall stays balanced. Melissa is sending a 16:9
+      version separately; that one becomes a clip in lib/content/videos.ts and
+      goes in STORY_ORDER, where this does not.
+
+      Nothing mature and nothing to note. Two eighteen-year-olds and a car.
+    */
+    id: "pick-me-up",
+    title: "Pick Me Up",
+    caption:
+      "Atlanta, eighteen, and a party she has had enough of. He is at the races and he comes anyway, and they spend the whole drive failing to agree on somewhere to eat.",
+    file: "pick-me-up.proxy.mp4",
+    poster: "/posters/pick-me-up.jpg",
+    // 143.10 from ffprobe.
+    durationSeconds: 143,
+    addedOn: "2026-09-22",
+    about: ["luna", "tyson"],
+    mature: false,
+    aspect: [748, 720],
+  },
+  {
+    /*
       ONE WEEK IN — the Instagram cut of `luna-lkehouse-wine-shatter`, added
       2026-09-13. Free, like every cut that has already run on Instagram.
 

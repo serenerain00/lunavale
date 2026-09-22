@@ -43,13 +43,13 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-09-22 against `main` at 71ec661. The 2026-07-28 row is kept beneath
+re-run 2026-09-22 against `main` at ddebf5f. The 2026-07-28 row is kept beneath
 so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 169 | 145 |
-| Tyson | 12 | 129 | 115 |
+| Luna | 12 | 171 | 145 |
+| Tyson | 12 | 131 | 115 |
 | Josh | 14 | 103 | 91 |
 | Rick | 1 | 10 | 9 |
 
@@ -78,11 +78,15 @@ entire explanation for Josh. Every note written for Rick is doing double duty on
 the character the story most needs an audience to like first, which makes him
 the cheapest way to feed Josh as well. September gave him two more appearances,
 both noteless: `josh-ty-ricks-house`, and `ty-josh-rick-accident` — *What Was
-Agreed*, the accident, published **free** and placed first in the story. A note
-on a free piece is the shop window, and that one is free, first, and about the
-character who explains Josh, which is what makes it the highest-value gap on
-this list — not merely that it is open. `luna-ty-couch` is free and uncovered
-too as of 2026-09-20, but it pays into the two characters who need it least.
+Agreed*, the accident, published **free** and placed near the front of the
+story. A note on a free piece is the shop window, and that one is free, second
+in the order, and about the character who explains Josh, which is what makes it
+the highest-value Rick gap — not merely that it is open. *(It opened the story
+until 2026-09-22, when `ty-luna-young` took first place. Do not restore the
+"first in the story" phrasing; check `STORY_ORDER` before making that claim
+about anything.)* Two other free pieces are uncovered as well —
+`luna-ty-couch` and `ty-luna-young` — but both pay into the two characters who
+need it least.
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
 > updated 2026-09-21. The backlog below describes `main`, and `main` is behind:
@@ -133,12 +137,22 @@ Standing backlog, roughly prioritised:
   purpose: he looks over six times and she never catches him. That is a note
   waiting to be written, and being free it would convert. Weigh it against the
   fact that Luna and Tyson are already the best-fed characters on the table
+- `ty-luna-young` — *Pick Me Up*, published **free** on 2026-09-22 — is
+  uncovered, and it is now **first in `STORY_ORDER`**: Atlanta at eighteen, she
+  rings him from a party, he comes anyway. It is the front door of the ordered
+  library and the earliest footage on the site by nine years, so a note on it is
+  the most-seen page a note could have. Same caveat as the couch — it pays into
+  Luna and Tyson — but the placement is worth more here than it is there. It
+  pairs with the journal entry `the-rule` via `sceneSlug`, and both cuts are
+  free (the 9:16 is the post `pick-me-up`), so read that entry first
 - Rick is in four clips. Three carry no note on `main`, though one of those
   three is the contested slot rather than a real gap. `josh-rick-study` has
   two notes already (`rick-the-chair`, `josh-the-study`); `josh-rick-lake` is the
   one every open drop keeps re-writing; `josh-ty-ricks-house` has nothing; and
   `ty-josh-rick-accident` — *What Was Agreed* — has nothing either and is
-  **free**, which makes it the one to take first. Mind the canon: the accident
+  **free**, which makes it the Rick one to take first (it is second in the
+  order now, not first; `ty-luna-young` took the opening on 2026-09-22). Mind
+  the canon: the accident
   moved to 8–10 years ago on 2026-09-18 and Luna and Josh were already together
   by then, so read *"TIMELINE — CANONICAL, 2026-09-18"* in
   `BETWEEN_US_SECRET_CANON.md` before writing a word of it — and note that two

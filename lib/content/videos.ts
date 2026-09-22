@@ -2875,6 +2875,63 @@ export const videos: Video[] = [
   },
   {
     /*
+      PICK ME UP, WIDE — 2026-09-22. The 16:9 cut of the Atlanta scene. The
+      square Instagram version is a free post at /posts/pick-me-up; this is the
+      full one.
+
+      FREE, BOTH CUTS. Melissa, 2026-09-22: "its free to watch." It was staged
+      premium-with-a-preview on the blonde-guy precedent — IG cut free, wide
+      cut gated — and that precedent does not survive contact with this one.
+
+      The scene is already public on Instagram, so there is no door to hold
+      shut; the only thing gating the wide cut would have achieved is making
+      the FIRST THING IN THE STORY a locked one. A stranger opening /clips in
+      order would have met a paywall on the opening frame of the library. Free
+      makes the front door an actual door.
+
+      The two cuts are still genuinely different edits rather than a reframe —
+      2:31 against the post's 2:23.
+
+      IT IS THE EARLIEST THING ON THE SITE, twenty years back, and it is FIRST
+      in STORY_ORDER — ahead of the accident, which had been the opening since
+      2026-09-17.
+
+      THAT IS A BETTER FRONT DOOR AND IT IS ALSO SIMPLY THE TRUTH. Twenty years
+      before nine years. But the reason it matters is what a stranger meets
+      first: the ordered library used to open on two men and a dead worker,
+      which is a strange first taste of a show about three people who love each
+      other badly. It now opens on why Luna and Tyson are Luna and Tyson — she
+      rings, he comes, neither of them makes anything of it — and the accident
+      lands second, as the other thing that happened before any of this.
+
+      PAIRS WITH `the-rule`, the journal entry written the night before: her at
+      thirty-eight remembering this summer and the promise made in a car park
+      behind the Waffle House on Ponce. `sceneSlug` links them.
+
+      1320x782 at source, 1216x720 as the proxy — pillarboxes very slightly in
+      a 16:9 player, like luna-tyson-casey-bar.
+    */
+    slug: "ty-luna-young",
+    title: "Pick Me Up",
+    synopsis:
+      "Atlanta, and the two of them at eighteen. She has had enough of a party and rings him; he is at the races and he comes anyway. They spend the whole drive failing to agree on somewhere to eat, and neither of them makes anything of the fact that she called him first.",
+    file: "ty-luna-young.proxy.mp4",
+    poster: "/posters/ty-luna-young.jpg",
+    // 151.4 from ffprobe.
+    durationSeconds: 151,
+    addedOn: "2026-09-22",
+    access: "free",
+    mature: false,
+    // No `preview`. A preview is the public opening of a GATED clip, and there
+    // is nothing to preview when the whole thing is open. The 45s file cut on
+    // 09-22 is left on Blob unreferenced rather than deleted — it costs
+    // nothing and it is there if this is ever gated.
+    feelings: ["trust"],
+    place: "atlanta",
+    about: ["luna", "tyson"],
+  },
+  {
+    /*
       THE ACCIDENT, 2026-09-18. Josh, Tyson and Rick, the night of it.
 
       STAGED HIDDEN, AND THIS IS THE ONE ENTRY IN THIS FILE WHERE THAT IS NOT

@@ -28,6 +28,14 @@
 
 import type { Release } from "@/lib/content/releases";
 import { formatReleaseDate } from "@/lib/content/releases";
+import { SEASONS } from "@/lib/content/season";
+
+/** Hrefs that are episodes rather than clips — see subjectFor(). */
+const EPISODE_HREFS = new Set(
+  SEASONS.flatMap((s) =>
+    s.episodes.filter((e) => e.slug).map((e) => `/clips/${e.slug}`),
+  ),
+);
 
 export interface Composed {
   subject: string;
@@ -63,12 +71,23 @@ function runtime(seconds?: number): string {
 }
 
 function subjectFor(releases: Release[]): string {
-  const scenes = releases.filter((r) => r.kind === "scene").length;
+  const clips = releases.filter((r) => r.kind === "scene").length;
   const pages = releases.filter((r) => r.kind === "journal").length;
 
+  /*
+   * AN EPISODE TAKES THE SUBJECT LINE, whatever else went up with it.
+   *
+   * Caught on the night of the pilot, in the dry run. The subject read "2 new
+   * scenes and 1 new journal page" — which is accurate, and which buried the
+   * first episode of the series behind a count, in the one email announcing
+   * it. A release set containing an episode is not a list of things; it is an
+   * episode, plus some things.
+   */
+  const episode = releases.find((r) => EPISODE_HREFS.has(r.href));
+  if (episode) return `${episode.title} is up`;
+
   // Named, when there is one thing. A specific title outperforms a count, and
-  // more to the point it is the honest subject line: this email is about that
-  // scene.
+  // it is the honest subject: this email is about that clip.
   if (releases.length === 1) {
     const only = releases[0];
     return only.kind === "scene"
@@ -76,8 +95,13 @@ function subjectFor(releases: Release[]): string {
       : `Luna wrote something new`;
   }
 
+  /*
+   * "scenes" WAS HERE UNTIL 2026-09-21. The site stopped calling them that on
+   * 09-16 and this was the last place still using the old word — it survived
+   * because nothing had ever been sent, so nobody had read it.
+   */
   const parts: string[] = [];
-  if (scenes) parts.push(`${scenes} new ${scenes === 1 ? "scene" : "scenes"}`);
+  if (clips) parts.push(`${clips} new ${clips === 1 ? "clip" : "clips"}`);
   if (pages) parts.push(`${pages} new journal ${pages === 1 ? "page" : "pages"}`);
   return `New on Luna Vale: ${parts.join(" and ")}`;
 }

@@ -213,7 +213,7 @@ export const BENEFITS: Benefit[] = [
     id: "between-us",
     label: "Between Us episodes",
     detail:
-      "The episode series, coming soon — and members-only when it lands.",
+      "The episode series. Episode one is up, and the rest land here as they are finished.",
     from: "vault",
     group: "Watching",
   },

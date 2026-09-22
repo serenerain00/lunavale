@@ -2879,10 +2879,18 @@ export const videos: Video[] = [
       square Instagram version is a free post at /posts/pick-me-up; this is the
       full one.
 
-      SAME SPLIT AS THE BLONDE GUY, which is the precedent this follows
-      exactly: the Instagram cut is free because it is already public, and the
-      wide cut is the members' version. It is also genuinely a different edit
-      rather than a reframe — 2:31 against the post's 2:23.
+      FREE, BOTH CUTS. Melissa, 2026-09-22: "its free to watch." It was staged
+      premium-with-a-preview on the blonde-guy precedent — IG cut free, wide
+      cut gated — and that precedent does not survive contact with this one.
+
+      The scene is already public on Instagram, so there is no door to hold
+      shut; the only thing gating the wide cut would have achieved is making
+      the FIRST THING IN THE STORY a locked one. A stranger opening /clips in
+      order would have met a paywall on the opening frame of the library. Free
+      makes the front door an actual door.
+
+      The two cuts are still genuinely different edits rather than a reframe —
+      2:31 against the post's 2:23.
 
       IT IS THE EARLIEST THING ON THE SITE, twenty years back, and it is FIRST
       in STORY_ORDER — ahead of the accident, which had been the opening since
@@ -2912,14 +2920,12 @@ export const videos: Video[] = [
     // 151.4 from ffprobe.
     durationSeconds: 151,
     addedOn: "2026-09-22",
-    access: "premium",
+    access: "free",
     mature: false,
-    preview: {
-      file: "ty-luna-young-preview.proxy.mp4",
-      // 45s, the tier for anything over two minutes.
-      durationSeconds: 45,
-      hookStart: 0,
-    },
+    // No `preview`. A preview is the public opening of a GATED clip, and there
+    // is nothing to preview when the whole thing is open. The 45s file cut on
+    // 09-22 is left on Blob unreferenced rather than deleted — it costs
+    // nothing and it is there if this is ever gated.
     feelings: ["trust"],
     place: "atlanta",
     about: ["luna", "tyson"],

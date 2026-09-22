@@ -32,7 +32,10 @@
  *
  * Environment (all required for --send):
  *   DATABASE_URL     the memberships table and the opt-out list
- *   CLERK_SECRET_KEY members' addresses; Clerk owns the person
+ *   CLERK_SECRET_KEY_LIVE  members' addresses. MUST be the live key — the test
+ *                    instance is a different directory and contains none of
+ *                    your actual members. Falls back to CLERK_SECRET_KEY,
+ *                    which on a laptop is the test key.
  *   RESEND_API_KEY   the mail provider
  *   MAIL_FROM        e.g. "Luna Vale <hello@lunavale38.com>", on a domain
  *                    verified in Resend — an unverified from-address is how a
@@ -114,8 +117,35 @@ async function memberUserIds(): Promise<string[]> {
  * own, and mailing it means mailing whoever actually has it.
  */
 async function addressesFor(userIds: string[]): Promise<Map<string, string>> {
-  const key = process.env.CLERK_SECRET_KEY;
-  if (!key) die("CLERK_SECRET_KEY is not set — no way to resolve addresses.");
+  /*
+   * LIVE KEY FIRST, and this is not a nicety — it is the difference between
+   * sending and silently sending to nobody.
+   *
+   * Clerk's test and live instances are separate directories with separate
+   * user ids. `.env.local` holds the TEST key, because that is what the dev
+   * server needs and because live Clerk keys are domain-locked and will not
+   * run on localhost. So this script, run from a laptop, was asking the TEST
+   * instance for the ids of members who exist only in the LIVE one — and got
+   * nothing back for every single one.
+   *
+   * It did not send anything wrong. It reported "14 without a verified primary
+   * address" and sent zero, which is the right failure. But "no verified
+   * address" and "wrong directory" look identical from here, so the message
+   * below now says which key it used.
+   *
+   * Same convention as STRIPE_SECRET_KEY_LIVE, which exists for exactly this
+   * reason.
+   */
+  const key = process.env.CLERK_SECRET_KEY_LIVE ?? process.env.CLERK_SECRET_KEY;
+  if (!key) die("No CLERK_SECRET_KEY_LIVE or CLERK_SECRET_KEY — cannot resolve addresses.");
+  const live = key.startsWith("sk_live_");
+  console.log(`  resolving addresses against the ${live ? "LIVE" : "TEST"} Clerk instance`);
+  if (!live) {
+    console.log(
+      "  WARNING: that is the test directory. Real members live in the live one.\n" +
+        "  Set CLERK_SECRET_KEY_LIVE in .env.local or this will find nobody.",
+    );
+  }
 
   const out = new Map<string, string>();
   // Clerk's list endpoint takes repeated user_id params; 100 at a time is well

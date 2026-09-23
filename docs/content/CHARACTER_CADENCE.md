@@ -43,14 +43,14 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-09-22 against `main` at ddebf5f. The 2026-07-28 row is kept beneath
+re-run 2026-09-23 against `main` at 06dc338. The 2026-07-28 row is kept beneath
 so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 171 | 145 |
-| Tyson | 12 | 131 | 115 |
-| Josh | 14 | 103 | 91 |
+| Luna | 12 | 172 | 146 |
+| Tyson | 12 | 132 | 116 |
+| Josh | 14 | 104 | 92 |
 | Rick | 1 | 10 | 9 |
 
 *As built, 2026-07-28: Luna 8 / 44 / 23 · Tyson 8 / 44 / 33 · Josh 8 / 35 / 21.
@@ -64,14 +64,17 @@ Rick was not on the table at all. Figures above include this week's note.*
 > trusting the table.
 
 **Josh is the thinnest of the three leads again.** He has the most *notes* of
-anyone, but he is bottom on total pieces, and the gap is still widening even
-when he gains: the 2026-09-21 launch batch gave him three pieces, the most he
-has had in a month, and Tyson's lead over him went from 25 to 26 anyway. Volume
-was never the real measure for him: he is the hardest character to hold an
+anyone, but he is bottom on total pieces, and the gap keeps widening even in the
+weeks he gains. Tyson's lead over him was 25 before the launch and is 28 now,
+across a fortnight in which Josh had his best run in a month. Don't re-derive
+that sentence from the table each time — the useful fact is the direction, and
+the direction has not changed once since this file was written. Volume was never
+the real measure for him anyway: he is the hardest character to hold an
 audience's sympathy for, and the whole story depends on him being genuinely
 likeable before he turns. What to watch is how much of his material makes that
-case — and on that, the launch was good for him. **He is one of the three the
-pilot is about**, which is now the first thing a new member watches.
+case — and on that the launch was good for him. **He is one of the three the
+pilot is about**, which is the first thing a new member watches, and he is in
+`luna-ty-groceries` (*Day 2*, 2026-09-23) as well.
 
 **Rick is the real hole.** Ten pieces against Josh's hundred-odd, and he is the
 entire explanation for Josh. Every note written for Rick is doing double duty on

@@ -91,6 +91,11 @@ export const STORY_ORDER: readonly string[] = [
   // Ten years end. She packs, he goes, and Tyson is the one who turns up.
   "luna-josh-truck-leaving",
   "luna-josh-break",
+
+  // HAND-PLACED — CONFIRMED. Melissa: "this is the next day after the
+  // breakup." It goes immediately after the break itself and before the
+  // seven-day mark of `luna-lkehouse-wine-shatter`.
+  "luna-ty-groceries",
   "luna-josh-bed-flashback",
   "luna-lkehouse-wine-shatter",
   "luna-cathy-phone",

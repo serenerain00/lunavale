@@ -2875,6 +2875,68 @@ export const videos: Video[] = [
   },
   {
     /*
+      DAY 2 — a sneak peek into episode two, 2026-09-22.
+
+      TITLED "Day 2" BY MELISSA, and not "Groceries", which matters because
+      `luna-tyson-bathroom` is ALREADY called Groceries — that is Tyson letting
+      himself into her place with shopping she did not ask for, months later.
+      Two clips with the same title and different scenes is the kind of thing
+      nobody notices until somebody is trying to find one of them.
+
+      THE SLUG STAYS `luna-ty-groceries` because it matches the folder and the
+      proxy, and because slug and title already diverge elsewhere in this file
+      for exactly this reason.
+
+      WHAT IT IS, in Melissa's words: the day after the breakup. The two of
+      them shopping, and Luna realising that taking a few days off is close to
+      impossible because she helps manage the business with Josh — which is the
+      thread that keeps her tied to him whatever else happens. She also
+      remembers she was supposed to go to Rick's for paperwork and forgot.
+      THAT BEAT PAYS OFF LATER IN THE EPISODE and is deliberately not in the
+      synopsis.
+
+      So it is doing two jobs at once: her entanglement in his business, and
+      her being plainly happy in a supermarket with her best friend. Both are
+      on screen — she is on her phone in the first minute and being grabbed
+      round the middle in the freezer aisle by 2:20.
+
+      THE FREE MINUTE IS 1:20 TO 2:20, Melissa's exact window, and it is the
+      best-chosen preview on the site. Every other one starts at a beat before
+      an answer; this one is simply the happiest sixty seconds in the clip. A
+      stranger gets the friendship working and none of the business, which is
+      the half that needs the rest of the scene to mean anything.
+
+      The poster is from inside that window, which is deliberate — the card
+      promises exactly what the free minute delivers.
+
+      PLACE IS A GUESS. It is a supermarket and there is no grocery place id;
+      `downtown` is the nearest existing one and may well be wrong. Worth a
+      correction rather than a new taxonomy entry for one clip.
+    */
+    slug: "luna-ty-groceries",
+    title: "Day 2",
+    synopsis:
+      "From episode two. The day after, and the shopping still has to be done. Luna is trying to take a few days out of her own life and finding out how much of it is wired into Josh's — and then Tyson gets hold of her in the freezer aisle and for about a minute she forgets to be a person this is happening to.",
+    file: "luna-ty-groceries.proxy.mp4",
+    poster: "/posters/luna-ty-groceries.jpg",
+    // 215.7 from ffprobe.
+    durationSeconds: 216,
+    addedOn: "2026-09-22",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "luna-ty-groceries-preview.proxy.mp4",
+      durationSeconds: 60,
+      hookStart: 80,
+      hookNote:
+        "the middle minute — the produce aisle through to him grabbing her by the trolley",
+    },
+    feelings: ["trust"],
+    place: "downtown",
+    about: ["luna", "tyson", "josh"],
+  },
+  {
+    /*
       PICK ME UP, WIDE — 2026-09-22. The 16:9 cut of the Atlanta scene. The
       square Instagram version is a free post at /posts/pick-me-up; this is the
       full one.

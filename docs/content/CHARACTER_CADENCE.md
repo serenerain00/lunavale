@@ -42,27 +42,133 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-07-28:
+Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
+re-run 2026-09-23 against `main` at 06dc338. The 2026-07-28 row is kept beneath
+so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 8 | 44 | 23 |
-| Tyson | 8 | 44 | 33 |
-| Josh | 8 | 35 | 21 |
+| Luna | 12 | 172 | 146 |
+| Tyson | 12 | 132 | 116 |
+| Josh | 14 | 104 | 92 |
+| Rick | 1 | 10 | 9 |
 
-**Josh is the thinnest** and is the one who benefits most from more. He is the
-hardest character to hold an audience's sympathy for, the whole story depends
-on him being genuinely likeable before he turns, and he has the fewest pieces
-making that case.
+*As built, 2026-07-28: Luna 8 / 44 / 23 · Tyson 8 / 44 / 33 · Josh 8 / 35 / 21.
+Rick was not on the table at all. Figures above include this week's note.*
+
+> These numbers move fast. Total pieces were 105 / 79 / 79 / 4 in late August and
+> 126 / 94 / 86 / 4 a fortnight ago; the trailer, the new clips and the pages
+> that landed on `main` through September added another seventy-odd, and the same
+> push put almost everything behind membership — which is why the members-only
+> column now sits just under the total. Re-run the two functions rather than
+> trusting the table.
+
+**Josh is the thinnest of the three leads again.** He has the most *notes* of
+anyone, but he is bottom on total pieces, and the gap keeps widening even in the
+weeks he gains. Tyson's lead over him was 25 before the launch and is 28 now,
+across a fortnight in which Josh had his best run in a month. Don't re-derive
+that sentence from the table each time — the useful fact is the direction, and
+the direction has not changed once since this file was written. Volume was never
+the real measure for him anyway: he is the hardest character to hold an
+audience's sympathy for, and the whole story depends on him being genuinely
+likeable before he turns. What to watch is how much of his material makes that
+case — and on that the launch was good for him. **He is one of the three the
+pilot is about**, which is the first thing a new member watches, and he is in
+`luna-ty-groceries` (*Day 2*, 2026-09-23) as well.
+
+**Rick is the real hole.** Ten pieces against Josh's hundred-odd, and he is the
+entire explanation for Josh. Every note written for Rick is doing double duty on
+the character the story most needs an audience to like first, which makes him
+the cheapest way to feed Josh as well. September gave him two more appearances,
+both noteless: `josh-ty-ricks-house`, and `ty-josh-rick-accident` — *What Was
+Agreed*, the accident, published **free** and placed near the front of the
+story. A note on a free piece is the shop window, and that one is free, second
+in the order, and about the character who explains Josh, which is what makes it
+the highest-value Rick gap — not merely that it is open. *(It opened the story
+until 2026-09-22, when `ty-luna-young` took first place. Do not restore the
+"first in the story" phrasing; check `STORY_ORDER` before making that claim
+about anything.)* Two other free pieces are uncovered as well —
+`luna-ty-couch` and `ty-luna-young` — but both pay into the two characters who
+need it least.
+
+> **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
+> updated 2026-09-21. The backlog below describes `main`, and `main` is behind:
+> the drops for 2026-08-03, 08-10, 08-17, 08-31, 09-07, 09-14 and 09-21 are all
+> still open and unmerged (#1, #2, #3, #5, #6, #7, #8), as is this one (#4) —
+> **eight weeks of drops, nothing landed.** A weekly run clones the repo fresh,
+> so it cannot see any of them — and **seven** separate weeks have now
+> independently picked the same obvious gap and written the same note, a Rick
+> `insight` note on `josh-rick-lake`: #2, #3, #5, #6, #7, #8, and #4 before it
+> was rewritten. The ids differ (#5 `rick-i-already-knew`, #8
+> `rick-already-knew`), so merging two of them would not collide — it would
+> quietly give Rick the same page twice. Whatever this file says is uncovered,
+> check it against the open PRs first.
+>
+> **This paragraph cannot fix that on its own, and it has now failed four
+> times.** It has only ever existed on #4's branch, never on `main`, so the
+> 08-31, 09-07, 09-14 and 09-21 runs could not read it and duplicated anyway. It
+> becomes effective the moment anything carrying it lands on `main`. Until then
+> the only reliable control is the weekly routine's own stored prompt, which is
+> the maintainer's to change.
+>
+> **The count tables across the open PRs disagree, and all of them are right.**
+> Each branch's `countFor()` sees that branch's own note, so #3 and #8 read Josh
+> 13 / Rick 2 while this one reads Josh 14 / Rick 1. Do not "correct" another
+> PR's table against this one; recount on whatever tree you are actually on.
 
 Standing backlog, roughly prioritised:
 
-- Josh notes on the scenes he is in that have none yet
+- **`pilot` — *Episode 1 (Pilot)*, published 2026-09-21, and nothing has a note
+  on it.** This is now the top of the list. It is the longest thing in the
+  library (18½ minutes), it is about Luna, Josh and Tyson, and it is the first
+  thing a new member watches. It is `premium`, but the first minute is public
+  and is already on Instagram, so the episode is back in the sitemap — a note on
+  it is reachable in a way a note on an ordinary gated clip is not. Two
+  cautions: it is `mature` and carries `notes: ["danger"]`, and the entry's own
+  comment says the constraint on everything about it is **not to spend the
+  intro**. Read Melissa's synopsis in `videos.ts` rather than writing off frames
+  — she replaced a frames-written one there, and the comment explains why
+- Josh clips with no note yet: `luna-josh-break`, `luna-josh-bed-flashback`,
+  `luna-josh-first-night`, `luna-josh-fair` *(taken by #4)*, and `josh-luna-wall`
+  — the last of which Melissa may want to write herself, as she is holding the
+  journal entry for it
+- `luna-tyson-dance` has no note from either of them. It went members-only in
+  the September push, so a note on it is no longer a shop window — but it is
+  still two leads and uncovered
+- `luna-ty-couch` — *Most Nights*, published **free** on 2026-09-20 — has no
+  note either, and its own comment in `videos.ts` says nothing happens in it on
+  purpose: he looks over six times and she never catches him. That is a note
+  waiting to be written, and being free it would convert. Weigh it against the
+  fact that Luna and Tyson are already the best-fed characters on the table
+- `ty-luna-young` — *Pick Me Up*, published **free** on 2026-09-22 — is
+  uncovered, and it is now **first in `STORY_ORDER`**: Atlanta at eighteen, she
+  rings him from a party, he comes anyway. It is the front door of the ordered
+  library and the earliest footage on the site by nine years, so a note on it is
+  the most-seen page a note could have. Same caveat as the couch — it pays into
+  Luna and Tyson — but the placement is worth more here than it is there. It
+  pairs with the journal entry `the-rule` via `sceneSlug`, and both cuts are
+  free (the 9:16 is the post `pick-me-up`), so read that entry first
+- Rick is in four clips. Three carry no note on `main`, though one of those
+  three is the contested slot rather than a real gap. `josh-rick-study` has
+  two notes already (`rick-the-chair`, `josh-the-study`); `josh-rick-lake` is the
+  one every open drop keeps re-writing; `josh-ty-ricks-house` has nothing; and
+  `ty-josh-rick-accident` — *What Was Agreed* — has nothing either and is
+  **free**, which makes it the Rick one to take first (it is second in the
+  order now, not first; `ty-luna-young` took the opening on 2026-09-22). Mind
+  the canon: the accident
+  moved to 8–10 years ago on 2026-09-18 and Luna and Josh were already together
+  by then, so read *"TIMELINE — CANONICAL, 2026-09-18"* in
+  `BETWEEN_US_SECRET_CANON.md` before writing a word of it — and note that two
+  sections there are both numbered 12, so go by the title, not the number. After
+  those two, the next Rick piece has to come from somewhere other than a clip —
+  the brewery, the liquor, what he made of Luna across ten years
+- First notes for Cathy and Avery, who have none at all
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none
-- Notes on the clips; only `run-at-the-lake` has one
-- Wire `notesForScene()` into `/watch/<slug>` so a scene's note appears under
-  the player, which is where a members-only note converts best
+- Notes on the vertical posts; only `run-at-the-lake` has one
+- Wire `notesForScene()` into `/clips/<slug>` so a clip's note appears under the
+  player, which is where a members-only note converts best. NOTE the route moved
+  — this said `/watch/<slug>` until 2026-09-18, and that path is gone
 
 ## Log
 
@@ -72,3 +178,4 @@ not a changelog.
 | Week of | What shipped | Who |
 | --- | --- | --- |
 | 2026-07-28 | Character hubs built; 24 Between Takes notes (8 each), 7 free | all three |
+| 2026-08-24 | Between Takes note "Asking it straight" on `luna-josh-fair`, premium; counts table re-read off the app | Josh |

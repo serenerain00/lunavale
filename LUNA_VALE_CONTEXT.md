@@ -1530,6 +1530,13 @@ on it. Consistent with "ten years a SEAL" (about
 18–19 to 28–29) and with him being still in when she met Josh and out by the
 time she moved to Colorado.
 
+**NEVER ON THE SITE** *(Melissa, 2026-09-25)*: "i dont wanna mention anywhere
+that tyson fell for luna that long ago." Everything above about eighteen is
+writer knowledge. No synopsis, journal page, character card or description
+may say or hint that Tyson had feelings for Luna at eighteen or at any point
+before the separation. On screen he can look at a door; in copy, nobody says
+why.
+
 **"LOU"** — he calls after her with it in this scene, the first time the
 nickname is on the site.
 

@@ -3303,10 +3303,15 @@ export const videos: Video[] = [
     */
     slug: "young-luna-ty-apt",
     title: "Have Fun",
-    // Melissa's own, 2026-09-25 — replaces the placeholder. The longest
-    // synopsis on the site; cards clamp it, the clip page shows all of it.
+    // Melissa's own, 2026-09-25, trimmed the same night at her request: "i
+    // dont wanna mention anywhere that tyson fell for luna that long ago."
+    // Out went "the earliest hint that Tyson may see Luna as more than a
+    // friend", "Luna remains completely oblivious" (oblivious to what, is the
+    // question it asks) and "burying whatever feeling just surfaced". What is
+    // left is what is on screen. The look at the door stays — it is a shot,
+    // not a claim — and a viewer can make of it what they like.
     synopsis:
-      "In a 2006 flashback, 18-year-old Luna gets ready for a date while her best friend Tyson lounges on her apartment couch. What starts as playful teasing about her outfit and the guy she’s seeing reveals the earliest hint that Tyson may see Luna as more than a friend—even if he doesn’t understand it yet. Luna remains completely oblivious, stealing his hoodie on her way out and laughing at his jokes. After she leaves, Tyson is left alone in the suddenly quiet apartment, staring at the closed door for a beat before turning the TV up and burying whatever feeling just surfaced.",
+      "In a 2006 flashback, 18-year-old Luna gets ready for a date while her best friend Tyson lounges on her apartment couch, teasing her about her outfit and the guy she\u2019s seeing. She steals his hoodie on her way out, laughing at his jokes. After she leaves, Tyson is alone in the suddenly quiet apartment, staring at the closed door for a beat before he turns the TV up.",
     file: "young-luna-ty-apt.proxy.mp4",
     poster: "/posters/young-luna-ty-apt.jpg",
     // 95: picture ends at 89.8 and the score runs out at 94.6 — see

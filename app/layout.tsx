@@ -51,7 +51,7 @@ const caveat = Caveat({
 const SHORT_DESCRIPTION =
   "Between Us is a cinematic slow-burn drama centered on Luna, Josh, and Tyson.";
 const LONG_DESCRIPTION =
-  "Between Us is a cinematic slow-burn drama centered on Luna, Josh, and Tyson. Luna and Josh have been together for ten years, but their relationship begins unraveling when Luna realizes she has spent years waiting for Josh to prioritize the life they already have. Tyson, Josh\u2019s longtime best friend and Luna\u2019s closest friend for nearly two decades, has quietly loved Luna for years without allowing himself to act on it. As Luna begins rediscovering herself, buried feelings, complicated loyalties, and a decade-old secret involving Josh and Tyson\u2019s families begin colliding. At its core, Between Us is about friendship, love, loyalty, timing, and the things people leave unsaid until they can\u2019t anymore.";
+  "Between Us is a cinematic slow-burn drama centered on Luna, Josh, and Tyson. Luna and Josh have been together for ten years, but their relationship begins unraveling when Luna realizes she has spent years waiting for Josh to prioritize the life they already have. Tyson, Josh\u2019s longtime best friend and Luna\u2019s closest friend for nearly two decades, has quietly fallen for Luna without allowing himself to act on it. As Luna begins rediscovering herself, buried feelings, complicated loyalties, and a decade-old secret involving Josh and Tyson\u2019s families begin colliding. At its core, Between Us is about friendship, love, loyalty, timing, and the things people leave unsaid until they can\u2019t anymore.";
 
 export const metadata: Metadata = {
   /*

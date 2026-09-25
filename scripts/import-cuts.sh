@@ -760,6 +760,28 @@ CUTS=(
   # trade as josh-luna-wall and luna-josh-fair. Worth a re-export at 1080 if
   # the source allows it.
   "luna-lkehouse-wine-shatter|stories/luna-lkehouse-wine-shatter/luna-lkehouse-wine-shatter-music.mov|6|148|3"
+
+  # AFTER THE DETECTIVES, 2026-09-24. Held for its score, which landed the
+  # same night as luna-ty-postDetective-music.mp4. The dialogue-only export
+  # beside it (and its *.untrimmed original) is superseded; kept, not used.
+  #
+  # SLUG `luna-ty-detectives`, NOT `luna-ty-post-detective` after the folder.
+  # "post" means the Instagram verticals at /posts since 2026-09-16, and
+  # /clips/luna-ty-post-detective reads like it belongs to the other library.
+  #
+  # THE SCORED CUT IS A LONGER EDIT, NOT JUST A MIX. About 30s went in after
+  # "No secrets, remember?" (0:47) — music, and one new line, "I guess that's
+  # over now" at 1:22 — so every later line sits ~30s later than in the
+  # dialogue-only export. Picture runs to 5:15.
+  #
+  # POSTER AT 40s: the staring game, both faces sharp and close, before a word
+  # about the police. Before the inserted section, so it survived the re-edit.
+  #
+  # END=321, FADE=4. Picture goes black at 315.5 and the score is laid to run
+  # out over 18s of black, fading to nothing by 333. Keeping all of it holds
+  # a black screen too long; cutting at the black stops the music dead. So
+  # six seconds of black under the music, the last four fading it out.
+  "luna-ty-detectives|stories/luna-ty-postDetective/luna-ty-postDetective-music.mp4|40|321|4"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

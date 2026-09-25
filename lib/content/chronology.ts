@@ -187,6 +187,11 @@ export const STORY_ORDER: readonly string[] = [
   "luna-ty-apt-argue",
   "luna-truck-breakdown",
   "ty-luna-bed",
+
+  // HAND-PLACED — CONFIRMED LAST. Melissa, 2026-09-24: "this scene is way in
+  // the future. prob the latest scene we have." The detectives, and Tyson
+  // keeping her out of it. If later scenes arrive, this is where they go.
+  "luna-ty-detectives",
 ];
 
 /** Position in the story, 1-based. `undefined` for anything not in the list. */

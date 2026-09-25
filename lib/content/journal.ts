@@ -1259,17 +1259,20 @@ export const journal: JournalEntry[] = [
 
     IT IS A STAGE ONE BREADCRUMB AND NOTHING MORE. The ladder in §8 of that
     document starts at "something is off", and this is Luna supplying the
-    evidence twelve years before anyone can read it. She does not solve it, get
+    evidence nine years before anyone can read it. She does not solve it, get
     close to solving it, or know there is anything to solve. Any later pass
     that has her wondering about Josh's family here is doing Stage Two work in
     a Stage One page and should be reverted.
 
-    THE ARITHMETIC IS THE CONSTRAINT AND IT IS TIGHT. She met Tyson at 18. The
-    accident is 15-16 years ago, so she is 22-23 and five years into knowing
-    him. She has NOT met Josh — he is six years away — so nothing on this page
-    may touch Josh, Rick, Colorado or a family, because she has no way to reach
-    any of them. That absence is the whole reason the page works: she has the
-    symptom and not one piece of the cause.
+    THE ARITHMETIC IS THE CONSTRAINT AND IT IS TIGHT. Rewritten 2026-09-24 to
+    the timeline in §12 of the secret document (2026-09-18), which moved the
+    accident to ~9 years ago. She met Tyson at 18 and the year he went quiet
+    is the year she was 29 — eleven years into knowing him and about a year
+    into Josh. So Josh IS in her life on this page ("I had a new man"), and
+    that is the point: the cause is sitting at her own table and she files the
+    symptom under the Navy. Nothing here may connect Tyson's year to Josh, Rick
+    or the family — she has every piece within reach and not one reason to put
+    them together.
 
     IT MUST NOT REPEAT `the-years-he-was-gone`, which is the page about not
     hearing from him — the phone, the gaps, the long one she stopped counting.
@@ -1279,9 +1282,9 @@ export const journal: JournalEntry[] = [
 
     THE LEAVE DETAIL IS THE LOAD-BEARING ONE. A man who believes a family has
     just saved his career starts spending his leave with that family. Luna, at
-    twenty-three, watches him stop coming home to Atlanta and go west instead,
-    and concludes — because she is twenty-three — that it is about her. She is
-    wrong in a way that will not be correctable for another fifteen years, and
+    twenty-nine, watches him stop coming home to Atlanta and go west instead,
+    and concludes — because she has a new man and a new life — that it is about
+    her. She is wrong in a way that will not be correctable for nine years, and
     a reader who knows the secret watches her file the truth under the wrong
     heading in real time.
 
@@ -1298,6 +1301,11 @@ export const journal: JournalEntry[] = [
     WHY IT IS NOT FREE. The open six are an arc and a sixth would undo that —
     see the top of this file. It also hands a stranger a mystery with no way to
     resolve it, which is the shape of a paid page rather than a shop window.
+
+    WHERE IT PAYS OFF: `luna-ty-detectives` (held 2026-09-24, awaiting its
+    score), where two detectives ask her about Josh and Tyson and Tyson keeps
+    her out — "the less you know, the less you can tell them". This is the
+    year that scene reaches back to.
 
     Invented and hers to cut: the storm door, the two lunches on the counter,
     the year of no staring game. The last of those is the one I would keep.
@@ -1336,7 +1344,7 @@ export const journal: JournalEntry[] = [
       "Here is the part that made me put the box down.",
       "He got better. That is the thing I forgot until tonight. The year ended and he came back round to something like himself — the staring game came back, he let people thank him again, he started landing in Atlanta on leave again like it had never stopped.",
       "But he never went back all the way. He came back to about eighty per cent of the man in that photograph and that has been the settled altitude ever since, and because it took a year I never noticed it as a change. I noticed it as him getting better.",
-      "Fifteen years of calling something a personality when it was a scar.",
+      "Nine years of calling something a personality when it was a scar.",
       "And I do not know what happened to him. I want that on the page plainly. I have known that man for twenty years, I am the person who knows him, and there is a year in the middle of it with a door on it that I have never once tried the handle of, because I was twenty-nine and busy being happy and I had decided it was about me, and it was easier to be quietly wounded than to ask a question he had already refused once.",
       "He would not tell me. I know that much. I could ask tomorrow and get four words and a look.",
       "I am going to ask him anyway. Not tomorrow. But I am writing it down here so that I have to.",

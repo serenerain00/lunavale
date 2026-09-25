@@ -713,3 +713,45 @@ year Tyson changed was "the year I was twenty-three", "five years in", and
 that she had "spent fifteen years" explaining him. Under this timeline it is
 the year she was **29**, **eleven years in**, and **nine years** ago. Corrected
 the same day.
+
+---
+
+## Addition — 2026-09-24: the detectives
+
+Melissa, with the scene `luna-ty-detectives` (held, awaiting its score):
+
+- **In the present day, two detectives question Luna.** They ask about Josh
+  and about Tyson, and they already know a great deal about her — her name,
+  where she lives, how long she has known Tyson.
+- **Josh will not talk to her about it.** She rings him first; he gives her
+  nothing.
+- **She goes to Tyson**, because he is the one who tells her the truth (the
+  rule — see the journal entry `the-rule`).
+- **Tyson keeps her out on purpose, to protect her.** If she knows nothing,
+  she has nothing to give the police. His line: *"The less you know, the less
+  you can tell them."*
+- It ties back to the accident, and to `the-year-he-went-quiet` — the year
+  she filed under the Navy. The pieces are meant to come together slowly.
+- It is **late in the story** — possibly the latest scene there is.
+
+**WHERE THIS PUTS THE LADDER (§8).** It is past Stage Three: Luna now knows
+there is *something*, and that it is serious enough for the police, but not
+what it is. No accident, no death and no Rick is named on screen, so it is not
+yet Stage Four for her — although an audience that has seen `ty-josh-rick-accident`
+(free, and first in the story order) will know exactly what she is standing
+next to. That gap between what she knows and what the viewer knows is the
+scene's engine.
+
+**ONE THING TO WATCH, NOT A PROBLEM YET.** §9 and the guardrails say the
+secret should stay "emotional/character-driven, not procedural crime
+plotting." Police in the present are the first step in that direction. This
+scene keeps to the spirit — the detectives are never on screen and the whole
+thing is about Tyson choosing to keep her in the dark — but it is worth
+deciding early how much of the investigation is ever shown, rather than
+finding out one scene at a time.
+
+**TYSON KEEPING LUNA OUT MIRRORS RICK KEEPING LUNA OUT.** §12 has Rick deciding,
+on the night itself, that she does not need to know about this mess. Nine years
+later Tyson makes the same decision for the opposite reason — to protect her
+rather than himself. She does not know that she is being excluded for the
+second time, and she will not find the difference comforting.

@@ -3197,6 +3197,69 @@ export const videos: Video[] = [
     place: "farmhouse",
     about: ["luna", "josh", "tyson"],
   },
+  {
+    /*
+      AFTER THE DETECTIVES, 2026-09-24. Scored the same night it arrived.
+
+      WHAT IS SAID, from the transcript rather than the frames. Luna has sat
+      forty-five minutes across from two detectives who asked her about Josh
+      and about Tyson, and knew her name, where she lives, and how long she has
+      known him. Josh told her nothing. She comes to Tyson "because you tell me
+      the truth", and he tells her to leave it alone: "the less you know, the
+      less you can tell them." Her answer is the line of the scene — "don't
+      protect me by making me the stupidest person in the room."
+
+      WHY HE DOES IT (Melissa): to protect her. If she knows nothing she has
+      nothing to give the police. It ties back to the accident and to
+      `the-year-he-went-quiet`, and the pieces are meant to come together
+      slowly. Recorded in docs/content/BETWEEN_US_SECRET_CANON.md, "Addition —
+      2026-09-24: the detectives".
+
+      IT OPENS ON THE STARING GAME and "No secrets, remember?", which is
+      `the-rule` being called in — the first time she has used it on him and
+      lost.
+
+      NOTHING IS NAMED. No accident, no death, no Rick. An audience that has
+      watched `ty-josh-rick-accident` knows exactly what she is standing next
+      to, and she does not. The synopsis keeps to what she knows.
+
+      PREMIUM. Same reasoning as `josh-ty-ricks-house` and `tyson-cole-bar`:
+      it carries the mechanism. The preview is the opening 60s (the tier for
+      anything over three minutes): the staring game, "No secrets,
+      remember?", and the scored stretch after it. The police are not
+      mentioned until 1:34, so the public file gives away none of the scene's
+      news.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace. "Forty-Five
+      Minutes" is her own line and spends nothing.
+
+      PLACE IS A GUESS: a kitchen at night with dark water and lights through
+      the glass, and "I'm in this house alone". Lakehouse is the nearest
+      match. Correct it if it is somewhere else.
+    */
+    slug: "luna-ty-detectives",
+    title: "Forty-Five Minutes",
+    synopsis:
+      "Two detectives kept her for forty-five minutes and asked about the two men in her life. Josh will not tell her anything. So she goes to the one person who has never lied to her, and he asks her to leave it alone.",
+    file: "luna-ty-detectives.proxy.mp4",
+    poster: "/posters/luna-ty-detectives.jpg",
+    // 321: picture ends at 315.5, then six seconds of black under the score
+    // with a 4s fade — see scripts/import-cuts.sh.
+    durationSeconds: 321,
+    addedOn: "2026-09-24",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "luna-ty-detectives-preview.proxy.mp4",
+      durationSeconds: 60,
+      hookStart: 0,
+      hookNote:
+        "the staring game and “No secrets, remember?” — nothing about the police",
+    },
+    feelings: ["lies", "trust"],
+    place: "lakehouse",
+    about: ["luna", "tyson", "josh"],
+  },
 ];
 
 /**

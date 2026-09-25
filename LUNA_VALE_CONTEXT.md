@@ -1503,14 +1503,30 @@ best-friend banter, and she is completely comfortable with him.
   the foundation intact, but gone for long stretches.
 - **That absence is what gives Josh room.** She meets Josh at **28**, around
   the time Tyson is finally out of the SEALs, and gets closer to him.
-- **By then Tyson is over those feelings** — and Luna is with his cousin.
+- **By then Luna is with his cousin**, and Tyson has nothing he would call
+  feelings to set aside.
 - Then the present day.
+
+**THE FEELINGS NEVER GOT AS FAR AS BEING FEELINGS** *(Melissa, 2026-09-25,
+correcting the first version of this section, which said he "got over"
+them)*. He leaves for the SEALs **before he ever starts really having true
+feelings** for her. The SEALs distract him from it, and then they change
+him: **numb, resistant, stronger at holding feelings in.** So there was
+never a love he got over. There was something at eighteen that had not
+formed yet, and then ten years that trained him out of letting anything
+form.
+
+Do not write Tyson as having loved Luna through her twenties, or as carrying
+a torch for her across the years with Josh. The SEALs are not where he went
+to escape a feeling. They are why one never finished forming.
 
 **HOW THIS SITS WITH WHAT IS ALREADY CANON.** It does not contradict "Tyson
 falls first" or THE PROMISE, which has him falling for her about four months
-into the separation. It gives that a history: what he felt at eighteen was
-unformed and he outgrew it, and what comes in the separation is something he
-understands and can't act on. Consistent with "ten years a SEAL" (about
+into the separation. It gives that a history: at eighteen there was the
+beginning of something he couldn't name, and the separation is the first
+time since that it gets past everything the SEALs built. That is why it
+lands so hard, and why a man that good at holding things in still can't act
+on it. Consistent with "ten years a SEAL" (about
 18–19 to 28–29) and with him being still in when she met Josh and out by the
 time she moved to Colorado.
 

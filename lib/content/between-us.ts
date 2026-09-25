@@ -113,10 +113,14 @@ export const BETWEEN_US: BetweenUsAnnouncement = {
    * page that should carry it (a series page, the first episode's own page) it
    * is written and waiting.
    */
+  /*
+   * REPLACED 2026-09-25 with Melissa's synopsis, verbatim — the three
+   * paragraphs from 2026-09-03 (and the two sentences added to them) are
+   * retired. Same text as the home page paragraph and the meta description
+   * in app/layout.tsx.
+   */
   premise: [
-    "A cinematic drama series about Luna, Josh and Tyson — three people whose lives have been tangled together for more than twenty years. Luna and Josh are trying to find their way back to each other. Tyson is Josh's family, Luna's best friend, and the one person who has always known her a little too well.",
-    "Friendship, loyalty, love, and everything we don't say until it's too late. Nothing in it breaks in a single night — it comes apart quietly, over years, in kitchens and trucks and the pauses between sentences. Nobody in it is the villain. Nobody comes out of it clean.",
-    "Three people. Twenty years of history. One question nobody wants answered.",
+    "Between Us is a cinematic slow-burn drama centered on Luna, Josh, and Tyson. Luna and Josh have been together for ten years, but their relationship begins unraveling when Luna realizes she has spent years waiting for Josh to prioritize the life they already have. Tyson, Josh\u2019s longtime best friend and Luna\u2019s closest friend for nearly two decades, has quietly loved Luna for years without allowing himself to act on it. As Luna begins rediscovering herself, buried feelings, complicated loyalties, and a decade-old secret involving Josh and Tyson\u2019s families begin colliding. At its core, Between Us is about friendship, love, loyalty, timing, and the things people leave unsaid until they can\u2019t anymore.",
   ],
 
   // The logistics. Every line is future tense with no date in it, for the

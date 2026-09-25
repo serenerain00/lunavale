@@ -140,10 +140,8 @@ export default async function Home() {
           */}
           <div className="lg:flex lg:items-start lg:justify-between lg:gap-12">
             <p className="max-w-2xl text-lg leading-relaxed text-stone sm:text-xl">
-              Luna and Josh were together ten years. They spent six months
-              apart, and in those six months her oldest friend Tyson was the one
-              who turned up. Then Josh called. Season one has started, and the
-              moments below are what it comes out of.
+              {/* Melissa's synopsis of the series, 2026-09-25. */}
+              Between Us is a cinematic slow-burn drama centered on Luna, Josh, and Tyson. Luna and Josh have been together for ten years, but their relationship begins unraveling when Luna realizes she has spent years waiting for Josh to prioritize the life they already have. Tyson, Josh&rsquo;s longtime best friend and Luna&rsquo;s closest friend for nearly two decades, has quietly loved Luna for years without allowing himself to act on it. As Luna begins rediscovering herself, buried feelings, complicated loyalties, and a decade-old secret involving Josh and Tyson&rsquo;s families begin colliding. At its core, Between Us is about friendship, love, loyalty, timing, and the things people leave unsaid until they can&rsquo;t anymore.
             </p>
 
             {/*

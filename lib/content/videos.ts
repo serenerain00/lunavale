@@ -3299,12 +3299,14 @@ export const videos: Video[] = [
       No preview now — there is nothing to preview when the whole thing is
       open.
 
-      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace.
+      TITLE IS A PLACEHOLDER, hers to replace. The synopsis is hers.
     */
     slug: "young-luna-ty-apt",
     title: "Have Fun",
+    // Melissa's own, 2026-09-25 — replaces the placeholder. The longest
+    // synopsis on the site; cards clamp it, the clip page shows all of it.
     synopsis:
-      "Atlanta, 2006, and they are eighteen. She is getting ready for a date with a guy Tyson has never met and has no plans to, and he is on her couch like he pays rent there. He has an opinion about the outfit, and about the car.",
+      "In a 2006 flashback, 18-year-old Luna gets ready for a date while her best friend Tyson lounges on her apartment couch. What starts as playful teasing about her outfit and the guy she’s seeing reveals the earliest hint that Tyson may see Luna as more than a friend—even if he doesn’t understand it yet. Luna remains completely oblivious, stealing his hoodie on her way out and laughing at his jokes. After she leaves, Tyson is left alone in the suddenly quiet apartment, staring at the closed door for a beat before turning the TV up and burying whatever feeling just surfaced.",
     file: "young-luna-ty-apt.proxy.mp4",
     poster: "/posters/young-luna-ty-apt.jpg",
     // 95: picture ends at 89.8 and the score runs out at 94.6 — see

@@ -1485,6 +1485,38 @@ scene land:
 This scene is the answer to that last one. He tells nobody, and it comes out
 sideways at a stranger in a bar.
 
+### Tyson at eighteen — the date, and why he leaves *(Melissa, 2026-09-25)*
+
+Scene: `young-luna-ty-apt` ("Have Fun"). **Atlanta, 2006, both eighteen.**
+Luna is getting ready for a date with a guy Tyson doesn't know and doesn't
+care to. He's on her couch like he lives there. It's their normal
+best-friend banter, and she is completely comfortable with him.
+
+- **Underneath it Tyson has his own thoughts about her** — and he will never
+  act on them, because **he does not know what they are himself.** Same
+  wording as the present-day "feelings he does not really understand", and
+  deliberately so: at eighteen he doesn't have the words, and at thirty-eight
+  he has them and can't use them.
+- **Her dating makes it easier for him to join the Navy — the SEALs — and
+  leave Atlanta.** Luna doesn't know that it played any part.
+- **Her twenties happen with Tyson in and out of them.** Still best friends,
+  the foundation intact, but gone for long stretches.
+- **That absence is what gives Josh room.** She meets Josh at **28**, around
+  the time Tyson is finally out of the SEALs, and gets closer to him.
+- **By then Tyson is over those feelings** — and Luna is with his cousin.
+- Then the present day.
+
+**HOW THIS SITS WITH WHAT IS ALREADY CANON.** It does not contradict "Tyson
+falls first" or THE PROMISE, which has him falling for her about four months
+into the separation. It gives that a history: what he felt at eighteen was
+unformed and he outgrew it, and what comes in the separation is something he
+understands and can't act on. Consistent with "ten years a SEAL" (about
+18–19 to 28–29) and with him being still in when she met Josh and out by the
+time she moved to Colorado.
+
+**"LOU"** — he calls after her with it in this scene, the first time the
+nickname is on the site.
+
 ### The "staring game" (a signature detail)
 An inside thing Luna and Tyson have always done, **learned in the military**:
 when one of them thinks the other is lying, they **go silent, move closer to

@@ -782,6 +782,21 @@ CUTS=(
   # a black screen too long; cutting at the black stops the music dead. So
   # six seconds of black under the music, the last four fading it out.
   "luna-ty-detectives|stories/luna-ty-postDetective/luna-ty-postDetective-music.mp4|40|321|4"
+
+  # YOUNG, THE APARTMENT, 2026-09-25. Atlanta, 2006, both eighteen: she is
+  # getting ready for a date with a guy Tyson has not met and does not care
+  # to, and he is on her couch like he lives there.
+  #
+  # SOURCE IS THE SCORED .mov, AND IT COSTS RESOLUTION: 1320x796 HEVC against
+  # the silent master's 1930x1080. Same trade as josh-luna-wall and
+  # luna-josh-fair. Worth a re-export at 1080 if CapCut allows it.
+  #
+  # POSTER AT 58s: her grinning down at him on the couch, mid-banter. The
+  # scene in one frame, and it spends none of his last look.
+  #
+  # END=95, FADE=3. Picture goes black at 89.8 and the score runs out at
+  # 94.6; this keeps the music's own tail and fades the last of it.
+  "young-luna-ty-apt|stories/young-luna-ty-apt/young-luna-ty-apt-music.mov|58|95|3"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

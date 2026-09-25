@@ -64,6 +64,12 @@ export const STORY_ORDER: readonly string[] = [
    */
   "ty-luna-young",
 
+  // HAND-PLACED — CONFIRMED ERA, REASONED ORDER. Melissa, 2026-09-25: 2006,
+  // both eighteen. Same summer as Pick Me Up, so it sits beside it; after it
+  // rather than before because that one is why they are who they are, and
+  // this is what that looks like on an ordinary night.
+  "young-luna-ty-apt",
+
   // ── Before any of it ────────────────────────────────────────────────────
   /*
    * THE PROLOGUE, and the only clip here that predates the rest by years.

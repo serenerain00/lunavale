@@ -3260,6 +3260,63 @@ export const videos: Video[] = [
     place: "lakehouse",
     about: ["luna", "tyson", "josh"],
   },
+  {
+    /*
+      YOUNG, THE APARTMENT, 2026-09-25. Atlanta, 2006, both eighteen.
+
+      WHAT IS SAID, from the transcript. She is dressed for a date with a guy
+      Tyson has never met and does not care to. "Is this too much?" / "For
+      him?" / "Yeah." — "You haven't even met him." / "I don't need to." —
+      and he does not know the guy's name, and neither, it turns out, does she
+      ("Do you?"). She tells him to fuck off, he tells her to have fun, and on
+      her way out the door: "If he drives a Civic, I'm gonna be pissed."
+      "Night, Ty." "Night."
+
+      WHAT IT IS FOR (Melissa): their normal best-friend banter — him hanging
+      round her place, her completely at ease with him — with Tyson's own
+      thoughts running underneath, which he will never act on because he does
+      not know what they are himself. Canon addition recorded in
+      LUNA_VALE_CONTEXT.md, "Tyson at eighteen".
+
+      WHAT IT SETS IN MOTION, AND THE SYNOPSIS STAYS OUT OF IT. Her dating
+      makes it easier for him to join the Navy and leave Atlanta, which is how
+      her twenties happen with him in and out of them — and how there is room
+      for Josh at twenty-eight. That is the whole shape of the story from
+      here, and it belongs to the viewer to put together, not to a card.
+
+      PAIRS WITH `ty-luna-young` ("Pick Me Up"), the same summer: there she
+      calls and he comes; here she goes and he stays on the couch. Placed
+      straight after it in STORY_ORDER.
+
+      "LOU" at 1:08 is him calling after her, and it is the first time the
+      nickname is on the site. Worth knowing before anybody writes a line of
+      dialogue that has him call her something else at eighteen.
+
+      FREE. Melissa, 2026-09-25. It is banter with none of the mechanism in
+      it, same as Pick Me Up, and it is the friendship a stranger needs to
+      have seen for everything later to cost anything. It was staged premium
+      with a 30s preview first; that preview file is still in Blob, unused.
+      No preview now — there is nothing to preview when the whole thing is
+      open.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace.
+    */
+    slug: "young-luna-ty-apt",
+    title: "Have Fun",
+    synopsis:
+      "Atlanta, 2006, and they are eighteen. She is getting ready for a date with a guy Tyson has never met and has no plans to, and he is on her couch like he pays rent there. He has an opinion about the outfit, and about the car.",
+    file: "young-luna-ty-apt.proxy.mp4",
+    poster: "/posters/young-luna-ty-apt.jpg",
+    // 95: picture ends at 89.8 and the score runs out at 94.6 — see
+    // scripts/import-cuts.sh.
+    durationSeconds: 95,
+    addedOn: "2026-09-25",
+    access: "free",
+    mature: false,
+    feelings: ["trust"],
+    place: "atlanta",
+    about: ["luna", "tyson"],
+  },
 ];
 
 /**

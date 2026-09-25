@@ -304,7 +304,7 @@ export default async function Home() {
           title={`Season ${season.number}`}
           note={
             episodeLanded
-              ? undefined
+              ? "New episodes weekly."
               : "The first episode is on its way. Nothing here is a placeholder for it — the clips below are the story it comes out of."
           }
           /*
@@ -616,8 +616,8 @@ export default async function Home() {
               </h2>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
                 Every clip is open to you at full length, along with the
-                journal and the stills from the set. The first episode will be
-                here before it is anywhere else.
+                journal and the stills from the set. The pilot is up, and new
+                episodes land here weekly.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link

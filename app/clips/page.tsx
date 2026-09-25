@@ -105,13 +105,13 @@ export default async function ClipsPage({
             {picked
               ? picked.label
               : episodes.length > 0
-                ? "Season one, and everything it comes out of."
+                ? "Season one, and glimpses of everything around it."
                 : "A peek at what\u2019s coming."}
           </h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-stone sm:text-xl">
             {picked?.note ??
               (episodes.length > 0
-                ? "Episode one is up. Below it are the moments it was built from \u2014 arranged the way they happen to Luna rather than the way they went up."
+                ? "The pilot is up, and new episodes land weekly. Below it are clips from across the whole story \u2014 later episodes, later seasons, before and after \u2014 arranged the way they happen to Luna."
                 : "These are moments from the series \u2014 the ones already shot, arranged the way they happen to Luna rather than the way they went up. Start anywhere. Each one stands on its own.")}
           </p>
         </header>

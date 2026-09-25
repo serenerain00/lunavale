@@ -13,10 +13,10 @@
  * fixes the comments:
  *
  *   1. Who Luna is and what the story is, in about ninety seconds of reading.
- *   2. An explicit statement that the releases are NOT in order, on purpose,
- *      and that nobody has missed an episode. A viewer who thinks they are
- *      confused stops watching; a viewer who knows the shape is deliberate
- *      keeps going.
+ *   2. How it is released: episodes, weekly, and clips
+ *      that are glimpses from anywhere in the story rather than the episodes
+ *      in pieces. A viewer who thinks they are confused stops watching; a
+ *      viewer who knows the shape is deliberate keeps going.
  *
  * WHAT IT WILL NOT DO IS SPOIL. Everything below is the premise — what you
  * would know ten minutes in. The turns are not here: not the lie, not what
@@ -97,13 +97,34 @@ export const premise: AboutSection[] = [
  * confusion from a library that is no longer confusing. The `id` is kept
  * because it is an anchor somebody may have linked to.
  */
+/*
+ * REWRITTEN 2026-09-25, Melissa: the pilot is out and episodes drop weekly as
+ * the budget supports it, "so i just dont wanna make the point that we're
+ * dropping scenes in any order anymore" — while clips keep coming, and those
+ * can be from later episodes, later seasons, or past and future events.
+ *
+ * So the section now separates the two things instead of apologising for
+ * one: episodes are the series, in order; clips are glimpses, from anywhere.
+ *
+ * "WEEKLY", FLAT. It was drafted with "as the budget allows" after it and Melissa
+ * dropped that the same night. So this is now a stated cadence rather than a
+ * hedged one: if a week is missed, this section, the clips page header, the
+ * membership benefit, the between-us offer and two lines on the home page
+ * all say otherwise until they are changed. `grep -rn weekly app lib` finds
+ * them.
+ */
 export const howToWatch: AboutSection = {
   id: "out-of-order",
-  heading: "Start at the beginning",
+  heading: "Episodes, and the clips around them",
   body: [
-    "These were made in whatever order they finished, which is how anything gets made. They are not shown to you that way. The clips are arranged the way they happen to Luna, and each one tells you where it sits, so you can follow the shape of it rather than guessing.",
-    "They are moments rather than episodes, so there are gaps — this is not the whole story and it is not meant to be. Start at the top, or dip in wherever the picture looks interesting. Each one stands on its own and nothing assumes you have seen the last one.",
+    "Between Us is told in episodes. **The pilot is out now**, and new episodes land weekly. If you are new, start there.",
+    "The clips are something else. They are glimpses from across the whole story — scenes from episodes that haven't aired yet, from seasons still to come, from years before any of this started and from things that haven't happened to Luna yet. They are not the episodes cut into pieces, and some of them will make more sense later than they do now. That is on purpose.",
+    "On the clips page they are arranged the way they happen to Luna, so you can always see where one sits. Each stands on its own, and nothing assumes you have seen the last one.",
     "Her journal runs the same way. It is the same story from inside her head, on the nights it happened, and several pages are open to anyone.",
+  ],
+  links: [
+    { href: "/clips/pilot", label: "Watch the pilot" },
+    { href: "/clips", label: "Browse the clips" },
   ],
 };
 
@@ -137,7 +158,7 @@ export const inProduction: AboutSection = {
   id: "being-made",
   heading: "It's being made right now",
   body: [
-    "This isn't a finished thing being rolled out on a schedule. It's in production while you read this, made independently, on a small budget, by a very small number of people.",
+    "This isn't a finished thing being rolled out. It's in production while you read this, made independently, on a small budget, by a very small number of people — which is why the episodes come weekly, rather than all at once.",
     "It's also made to be watched close. A phone is the screen it's graded for — partly the scale we're working at, and mostly the story: this happens in kitchens and trucks and the pauses between sentences, and it plays the way it's meant to on the thing you're holding. A television is a bigger room than this needs.",
     "It's a series. That was an open question for a while and it isn't any more, and it's the right shape for this story: it's built out of ordinary days, in a handful of places, between people whose situation doesn't resolve neatly. That kind of story runs for years. It doesn't finish in ninety minutes.",
     "Here's the part worth knowing. What gets made next isn't fixed. Who it follows, which room it happens in, what finally gets said out loud — those are still open, and members are in the conversation where they get decided. A character somebody can't stop thinking about, a room they want to go back into, a question they want answered: at this size, that genuinely moves things.",
@@ -158,10 +179,17 @@ export interface StartingPoint {
 
 export const startingPoints: StartingPoint[] = [
   {
+    // FIRST since 2026-09-25: the pilot is out, and it is the beginning.
+    href: "/clips/pilot",
+    label: "Episode 1 (Pilot)",
+    detail:
+      "Where the series starts. New episodes follow weekly.",
+  },
+  {
     href: "/clips",
     label: "The clips",
     detail:
-      "Moments from the series, arranged the way they happen rather than the way they were made. A look at what season one is walking into.",
+      "Glimpses from across the whole story — later episodes, later seasons, before and after. Arranged the way they happen to Luna.",
   },
   {
     href: "/clips/interview",

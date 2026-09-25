@@ -92,6 +92,19 @@ export default async function AboutPage() {
               {bold(para)}
             </p>
           ))}
+          {howToWatch.links && (
+            <p className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+              {howToWatch.links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-amber underline decoration-hairline underline-offset-4 transition-colors duration-(--duration-quick) hover:decoration-amber"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </p>
+          )}
         </section>
 
         {/* ------------------------------------------------------ where to go */}

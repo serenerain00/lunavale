@@ -28,6 +28,7 @@ import {
   markEventHandled,
   recordMembership,
   recordPendingMembership,
+  userIdForSubscription,
 } from "@/lib/db/memberships";
 
 export const runtime = "nodejs";
@@ -104,7 +105,13 @@ async function applyEvent(event: Stripe.Event): Promise<void> {
   // order, and an old "updated" event overwriting a newer one would hand
   // somebody back access they had canceled.
   const subscription = await stripe().subscriptions.retrieve(subscriptionId);
-  const userId = userIdFor(subscription, event);
+  // Metadata first, then whoever already holds this subscription. The second
+  // lookup is what reaches members who paid before they had an account — see
+  // userIdForSubscription(). Without it their renewals and cancellations were
+  // filed as new purchases against an already-claimed pending row.
+  const userId =
+    userIdFor(subscription, event) ??
+    (await userIdForSubscription(subscription.id));
 
   const priceId = subscription.items.data[0]?.price.id;
   const tier =

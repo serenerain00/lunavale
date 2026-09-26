@@ -252,6 +252,95 @@ export async function claimPendingFor(
   return true;
 }
 
+/**
+ * Claim a parked membership by its Stripe subscription, for a signed-in person
+ * who has just come through checkout.
+ *
+ * ADDED 2026-09-25 because matching on email alone failed a real customer:
+ * she paid with a Hotmail address, made her account with Google on a Gmail
+ * one three minutes later, and claimPendingFor() — which only ever sees the
+ * account's own addresses — had nothing to match. /welcome already asked her
+ * to use the paying address; asking is not enough once a "Continue with
+ * Google" button is on the same screen.
+ *
+ * THE PROOF HERE IS THE CHECKOUT SESSION, NOT THE EMAIL. The caller must have
+ * read `subscriptionId` off a Checkout Session it retrieved from Stripe and
+ * confirmed as paid, using a session id that arrived on the success URL.
+ * That id is only ever handed to the browser that completed the payment, so
+ * holding it is proof of having paid in the same way a verified address is.
+ * NEVER pass a subscription id that came from anywhere a user can type.
+ *
+ * Same idempotency and ordering rules as claimPendingFor().
+ */
+export async function claimPendingBySubscription(
+  userId: string,
+  subscriptionId: string,
+): Promise<boolean> {
+  if (!databaseConfigured() || !subscriptionId) return false;
+
+  const rows = (await sql()`
+    SELECT tier, status, stripe_customer_id, stripe_subscription_id,
+           current_period_end, cancel_at_period_end
+    FROM pending_memberships
+    WHERE stripe_subscription_id = ${subscriptionId} AND claimed_at IS NULL
+    LIMIT 1
+  `) as {
+    tier: string;
+    status: string;
+    stripe_customer_id: string;
+    stripe_subscription_id: string | null;
+    current_period_end: string | null;
+    cancel_at_period_end: boolean | null;
+  }[];
+
+  const row = rows[0];
+  if (!row) return false;
+
+  await recordMembership({
+    userId,
+    tier: row.tier as TierId,
+    status: row.status,
+    stripeCustomerId: row.stripe_customer_id,
+    stripeSubscriptionId: row.stripe_subscription_id,
+    currentPeriodEnd: row.current_period_end
+      ? new Date(row.current_period_end)
+      : null,
+    cancelAtPeriodEnd: row.cancel_at_period_end === true,
+  });
+
+  await sql()`
+    UPDATE pending_memberships
+    SET claimed_at = now(), claimed_by = ${userId}, updated_at = now()
+    WHERE stripe_subscription_id = ${subscriptionId} AND claimed_at IS NULL
+  `;
+
+  return true;
+}
+
+/**
+ * Which account already holds this subscription, if any.
+ *
+ * ADDED 2026-09-25 for the webhook. A membership bought before the account
+ * existed carries no Clerk id in its Stripe metadata — nothing ever writes one
+ * back after the claim — so every later event for it (renewal, cancellation,
+ * failed card) arrived looking like a brand-new buyer and was filed against
+ * the already-claimed pending row. The real membership never heard about it.
+ * On the day this was found, 16 of 21 members had been bought that way and
+ * two cancellations had gone missing. Looking the subscription up here first
+ * sends those events to the membership that owns it.
+ */
+export async function userIdForSubscription(
+  subscriptionId: string,
+): Promise<string | undefined> {
+  if (!databaseConfigured() || !subscriptionId) return undefined;
+  const rows = (await sql()`
+    SELECT user_id FROM memberships
+    WHERE stripe_subscription_id = ${subscriptionId}
+    LIMIT 1
+  `) as { user_id: string }[];
+  return rows[0]?.user_id;
+}
+
 /** Paid-for memberships still waiting for somebody to make an account. */
 export async function unclaimedPending(): Promise<
   { email: string; tier: string; createdAt: Date }[]

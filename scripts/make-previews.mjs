@@ -131,11 +131,12 @@ const OVERRIDES = {
   */
   "luna-ty-panic-attack": 30,
 
-  // EPISODE 2 — THE FIRST 1:30 FREE. Melissa, 2026-09-29: "lets release the
-  // first 1:30 for free." Above the sixty-second tier on purpose, and it ends
-  // cleanly: the opening flashback — the night she meets Josh — through "you
-  // already know it", one beat before "are you following me?".
-  "episode-2": 90,
+  // EPISODE 2 — ABOUT TWO MINUTES FREE. Melissa, 2026-09-29: first "the
+  // first 1:30", then the same day "increase the free clip of ep2 to 2min".
+  // Not exactly 120: at 2:00 Josh is mid-sentence ("you probably have plenty
+  // of those, | but my name is Josh"), so it runs to 123.6 and ends on his
+  // name, before her "I know" at 123.76 (word timings from whisper).
+  "episode-2": 123.6,
 };
 
 /**

@@ -3213,9 +3213,9 @@ export const videos: Video[] = [
       MELISSA'S SYNOPSIS, 2026-09-29, VERBATIM — it replaced a placeholder
       written off the transcript the same day, as hers did for the pilot.
 
-      THE FIRST 1:30 FREE (Melissa). The window is the whole opening
-      flashback and stops one beat before "are you following me?" — see the
-      override in scripts/make-previews.mjs, which is what cuts it.
+      ABOUT TWO MINUTES FREE (Melissa; 1:30 at release, raised the same day).
+      The window is the opening flashback and ends on Josh saying his name —
+      see the override in scripts/make-previews.mjs, which is what cuts it.
 
       NOT `mature`, and no notes. The pilot carries `danger`; nothing in this
       one does. The kitchen is two people with their foreheads together.
@@ -3238,10 +3238,11 @@ export const videos: Video[] = [
     mature: false,
     preview: {
       file: "episode-2-preview.proxy.mp4",
-      durationSeconds: 90,
+      // 123.6 exactly — see the override in scripts/make-previews.mjs.
+      durationSeconds: 124,
       hookStart: 0,
       hookNote:
-        "the night she meets Josh, through \u201cyou already know it\u201d",
+        "the night she meets Josh, ending on \u201cmy name is Josh\u201d",
     },
     feelings: ["distance", "trust", "hurt"],
     place: "farmhouse",

@@ -3228,8 +3228,8 @@ export const videos: Video[] = [
       eighteen" in LUNA_VALE_CONTEXT.md.
     */
     slug: "episode-2",
-    // Placeholder until Melissa names it. Must match lib/content/season.ts.
-    title: "Episode 2",
+    // Melissa, 2026-09-29: "Breathe". Must match lib/content/season.ts.
+    title: "Episode 2: Breathe",
     synopsis:
       "The morning after she leaves, Luna wakes from a dream about the night she met Josh \u2014 and the life she walked out of will not stop calling. There is paperwork waiting at Rick\u2019s, a supermarket with Tyson, and one errand to Josh\u2019s kitchen that was only ever supposed to take five minutes.",
     file: "episode-2.proxy.mp4",

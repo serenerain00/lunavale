@@ -3210,11 +3210,8 @@ export const videos: Video[] = [
       and the truck afterwards with Tyson — "what if I left too fast?". It
       ends on Melissa's card, "BETWEEN US / New episodes every week".
 
-      THE SYNOPSIS STOPS AT THE KITCHEN DOOR. It says there is an errand to
-      Josh's and nothing about how it goes — whether she stays is the
-      episode's question, and the card should ask it rather than answer it.
-      PLACEHOLDER, written off the transcript; hers to replace, as she did the
-      pilot's.
+      MELISSA'S SYNOPSIS, 2026-09-29, VERBATIM — it replaced a placeholder
+      written off the transcript the same day, as hers did for the pilot.
 
       THE FIRST 1:30 FREE (Melissa). The window is the whole opening
       flashback and stops one beat before "are you following me?" — see the
@@ -3231,7 +3228,7 @@ export const videos: Video[] = [
     // Melissa, 2026-09-29: "Breathe". Must match lib/content/season.ts.
     title: "Episode 2: Breathe",
     synopsis:
-      "The morning after she leaves, Luna wakes from a dream about the night she met Josh \u2014 and the life she walked out of will not stop calling. There is paperwork waiting at Rick\u2019s, a supermarket with Tyson, and one errand to Josh\u2019s kitchen that was only ever supposed to take five minutes.",
+      "Episode 2 moves between who Luna and Josh once were and the painful reality of who they\u2019ve become. After waking from a dream of the night they first met, Luna settles into an easy morning with Tyson before a simple grocery run pulls her back into the life she just walked away from. A stop at Rick\u2019s to sign paperwork leads to an emotional conversation about Josh\u2014and eventually forces Luna to face him at the farmhouse. What was supposed to be a quick handoff becomes something much harder, leaving Luna caught between missing the life she had and knowing exactly why she left.",
     file: "episode-2.proxy.mp4",
     poster: "/posters/episode-2.jpg",
     // 1343.4, trimmed at the end card — see scripts/import-cuts.sh.

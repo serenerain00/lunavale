@@ -256,21 +256,22 @@ export const characters: Character[] = [
     pullQuoteSource: "Long Distance",
   },
   {
-    // PORTRAIT BREAKS THE RULE AGAIN, and differently from Cathy's. Avery has
-    // never been in the same room as a camera in this story — she exists only
-    // on the screen of Luna's iPad. So this is a crop of that screen, upscaled
-    // about two-thirds, and it is softer than every other portrait here.
+    // A REAL PORTRAIT SINCE 2026-09-29. Until then this was a crop of Luna's
+    // iPad screen, upscaled and soft, because Avery had never been in a room
+    // with a camera — she existed only on the other end of a video call. The
+    // note here said to replace it the day she was shot in a room, and this
+    // is that day: Melissa's still of her on her own sofa in Atlanta, skyline
+    // through the window and an ATLANTA print behind her, which is her whole
+    // character in one frame — the one who stayed.
     //
-    // Kept anyway, because the softness is not a defect on this one: it is
-    // what a person looks like when the only way you ever see them is a video
-    // call from two thousand miles away. Replace it the day Avery is shot in a
-    // room.
+    // New filename rather than overwriting avery.jpg, so no browser or
+    // image-optimizer cache can go on serving the old face.
     id: "avery",
     name: "Avery",
     role: "Luna's sister",
     tagline:
       "Ten years younger, two thousand miles away, and the only one who doesn't have to ask.",
-    portrait: "/characters/avery.jpg",
+    portrait: "/characters/avery-atlanta.jpg",
     intro: [
       "Twenty-eight, ten years behind Luna, and close to her for every one of them. Luna wanted a baby sister before there was one, and got her — and until Luna left for Colorado she was the person Avery took everything to first. Less big sister than best friend, and it shows in how alike they are, down to the face.",
       "She is still in Atlanta, where their mother is, three years into a psychiatry residency and on the hours that come with it. So she does not call often. Usually there is a family matter, or their mother has worn her down into it — and Luna is no good at saying anything real down a phone line anyway.",

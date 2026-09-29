@@ -797,6 +797,19 @@ CUTS=(
   # END=95, FADE=3. Picture goes black at 89.8 and the score runs out at
   # 94.6; this keeps the music's own tail and fades the last of it.
   "young-luna-ty-apt|stories/young-luna-ty-apt/young-luna-ty-apt-music.mov|58|95|3"
+
+  # EPISODE 2, 2026-09-29. Season one, 22:26 as delivered, 1786x1080 at 30fps
+  # — already the library's frame rate, so unlike the pilot (60fps, encoded
+  # down by hand) it goes through the ordinary import.
+  #
+  # POSTER AT 148s: the night she meets Josh, both of them laughing over her
+  # number going into his phone. Just past the free 1:30 — the card
+  # promises the episode's first scene and spends nothing from its last.
+  #
+  # END=1343.4. Melissa's end card ("BETWEEN US / New episodes every week")
+  # runs to 1343.4 and is kept; three seconds of black after it are not.
+  # No fade: the card already fades itself.
+  "episode-2|stories/ep2/ep2-final-music.MOV|148|1343.4"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

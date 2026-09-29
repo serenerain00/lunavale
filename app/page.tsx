@@ -616,8 +616,8 @@ export default async function Home() {
               </h2>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
                 Every clip is open to you at full length, along with the
-                journal and the stills from the set. The pilot is up, and new
-                episodes land here weekly.
+                journal and the stills from the set. Season one is under way,
+                and new episodes land here weekly.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link

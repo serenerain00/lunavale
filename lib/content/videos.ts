@@ -3199,6 +3199,59 @@ export const videos: Video[] = [
   },
   {
     /*
+      EPISODE 2, 2026-09-29. Season one, 22:23 after the trim.
+
+      WHAT IS IN IT, from the transcript, in order: the night she meets Josh
+      at twenty-eight (the opening flashback); the morning after she leaves,
+      Tyson with breakfast and "I had a dream... the night I met Josh"; the
+      supermarket (`luna-ty-groceries`, "Day 2", was cut from this); the
+      renewal paperwork at Rick's ("you sure as hell don't owe me one because
+      he's my son"); Josh's kitchen, where he asks her to stay and she goes;
+      and the truck afterwards with Tyson — "what if I left too fast?". It
+      ends on Melissa's card, "BETWEEN US / New episodes every week".
+
+      THE SYNOPSIS STOPS AT THE KITCHEN DOOR. It says there is an errand to
+      Josh's and nothing about how it goes — whether she stays is the
+      episode's question, and the card should ask it rather than answer it.
+      PLACEHOLDER, written off the transcript; hers to replace, as she did the
+      pilot's.
+
+      THE FIRST 1:30 FREE (Melissa). The window is the whole opening
+      flashback and stops one beat before "are you following me?" — see the
+      override in scripts/make-previews.mjs, which is what cuts it.
+
+      NOT `mature`, and no notes. The pilot carries `danger`; nothing in this
+      one does. The kitchen is two people with their foreheads together.
+
+      "LOU" IS JOSH'S TOO. He says it at 19:24. The nickname is not only
+      Tyson's, which matters for anything written about it — see "Tyson at
+      eighteen" in LUNA_VALE_CONTEXT.md.
+    */
+    slug: "episode-2",
+    // Placeholder until Melissa names it. Must match lib/content/season.ts.
+    title: "Episode 2",
+    synopsis:
+      "The morning after she leaves, Luna wakes from a dream about the night she met Josh \u2014 and the life she walked out of will not stop calling. There is paperwork waiting at Rick\u2019s, a supermarket with Tyson, and one errand to Josh\u2019s kitchen that was only ever supposed to take five minutes.",
+    file: "episode-2.proxy.mp4",
+    poster: "/posters/episode-2.jpg",
+    // 1343.4, trimmed at the end card — see scripts/import-cuts.sh.
+    durationSeconds: 1343,
+    addedOn: "2026-09-29",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "episode-2-preview.proxy.mp4",
+      durationSeconds: 90,
+      hookStart: 0,
+      hookNote:
+        "the night she meets Josh, through \u201cyou already know it\u201d",
+    },
+    feelings: ["distance", "trust", "hurt"],
+    place: "farmhouse",
+    about: ["luna", "josh", "tyson", "rick"],
+  },
+  {
+    /*
       AFTER THE DETECTIVES, 2026-09-24. Scored the same night it arrived.
 
       WHAT IS SAID, from the transcript rather than the frames. Luna has sat

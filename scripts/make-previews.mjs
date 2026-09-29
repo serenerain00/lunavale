@@ -130,6 +130,12 @@ const OVERRIDES = {
     applying a tier.
   */
   "luna-ty-panic-attack": 30,
+
+  // EPISODE 2 — THE FIRST 1:30 FREE. Melissa, 2026-09-29: "lets release the
+  // first 1:30 for free." Above the sixty-second tier on purpose, and it ends
+  // cleanly: the opening flashback — the night she meets Josh — through "you
+  // already know it", one beat before "are you following me?".
+  "episode-2": 90,
 };
 
 /**

@@ -126,7 +126,7 @@ export const BETWEEN_US: BetweenUsAnnouncement = {
   // The logistics. Every line is future tense with no date in it, for the
   // reason in the header.
   offer: [
-    "The pilot is here, and new episodes land weekly. Not a scene and not a clip — episodes.",
+    "Season one is here, and new episodes land weekly. Not a scene and not a clip — episodes.",
     "Every one is part of the membership. Nothing extra to buy, no season to wait for, and they stay yours to watch again.",
     // NAMES THE CONSTRAINT rather than claiming exclusivity. "Exclusive" is a
     // word that can mean anything and that a reader has been trained to

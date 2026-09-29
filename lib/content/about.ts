@@ -117,7 +117,7 @@ export const howToWatch: AboutSection = {
   id: "out-of-order",
   heading: "Episodes, and the clips around them",
   body: [
-    "Between Us is told in episodes. **The pilot is out now**, and new episodes land weekly. If you are new, start there.",
+    "Between Us is told in episodes. **Season one is under way**, and new episodes land weekly. If you are new, start with the pilot.",
     "The clips are something else. They are glimpses from across the whole story — scenes from episodes that haven't aired yet, from seasons still to come, from years before any of this started and from things that haven't happened to Luna yet. They are not the episodes cut into pieces, and some of them will make more sense later than they do now. That is on purpose.",
     "On the clips page they are arranged the way they happen to Luna, so you can always see where one sits. Each stands on its own, and nothing assumes you have seen the last one.",
     "Her journal runs the same way. It is the same story from inside her head, on the nights it happened, and several pages are open to anyone.",

@@ -37,6 +37,7 @@
  */
 
 import { videos } from "@/lib/content/videos";
+import { SEASONS } from "@/lib/content/season";
 
 /**
  * Every story clip, first to last.
@@ -255,7 +256,13 @@ export function assertComplete(): { missing: string[]; unknown: string[] } {
    * put the fragments in sequence; an episode does not belong in a list whose
    * whole purpose is to compensate for not having episodes.
    */
-  const EXEMPT = new Set(["between-us-trailer-one", "interview", "pilot"]);
+  // Episodes are read from the season rather than listed by hand, so each new
+  // one is exempt the day it is added (2026-09-29, episode 2).
+  const EXEMPT = new Set([
+    "between-us-trailer-one",
+    "interview",
+    ...SEASONS.flatMap((s) => s.episodes.map((e) => e.slug).filter(Boolean)),
+  ]);
   const ordered = new Set(STORY_ORDER);
   const missing = videos
     .filter((v) => !v.hidden && !EXEMPT.has(v.slug) && !ordered.has(v.slug))

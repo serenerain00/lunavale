@@ -73,6 +73,20 @@ export const SEASONS: Season[] = [
         runtimeSeconds: 1116,
         comingSoon: false,
       },
+      {
+        /*
+          LANDED 2026-09-29. Title is "Episode 2" until Melissa names it — the
+          pilot's name was hers, and this is the neutral version of the same
+          pattern, safe in a share link either way. Same both-places rule as
+          above: the matching `title` in videos.ts must say the same thing.
+        */
+        number: 2,
+        title: "Episode 2",
+        slug: "episode-2",
+        poster: "/posters/episode-2.jpg",
+        runtimeSeconds: 1343,
+        comingSoon: false,
+      },
     ],
   },
 ];

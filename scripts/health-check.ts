@@ -332,6 +332,10 @@ async function checkMoney() {
   const leaving = (await sql`
     SELECT current_period_end FROM memberships
     WHERE cancel_at_period_end = TRUE
+      -- Still inside the period. Once it has passed they have left, and
+      -- listing a date that is already over (it showed Sep 28 on the 29th)
+      -- makes the win-back line wrong about who can still be won back.
+      AND current_period_end > now()
     ORDER BY current_period_end
   `) as { current_period_end: string | null }[];
   if (leaving.length) {

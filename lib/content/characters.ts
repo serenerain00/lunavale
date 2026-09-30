@@ -193,7 +193,11 @@ export const characters: Character[] = [
     role: "Josh's father",
     tagline:
       "Dominance with charisma, and no idea how to put love into a form his son could use.",
-    portrait: "/characters/rick.jpg",
+    // NEW PORTRAIT 2026-09-29, from Melissa: Rick at the house, by the safe,
+    // mountains through the doors behind him. The source is 609x786, so the
+    // head-and-shoulders crop is enlarged about 1.9x to match the others and
+    // is a touch softer than them. A larger export would sharpen it.
+    portrait: "/characters/rick-house.jpg",
     intro: [
       "Think boss. He runs a room by sitting still in it, and he has never once had to raise his voice to end a conversation.",
       "Josh did not invent himself. The charm that gets used as control, the certainty, the way being wanted and being obeyed blur into the same thing — all of it was learned in his father's study, from a man who is genuinely strong and genuinely cares, and who has never managed to deliver either in a form his son could do anything with.",

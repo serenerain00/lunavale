@@ -105,6 +105,11 @@ export const STORY_ORDER: readonly string[] = [
   "luna-ty-groceries",
   "luna-josh-bed-flashback",
   "luna-lkehouse-wine-shatter",
+
+  // HAND-PLACED — CONFIRMED. Melissa, 2026-09-29: about a week after the
+  // breakup, and Luna has not picked up for her mother. It goes straight
+  // before the call she finally does pick up.
+  "avery-cathy-kitchen",
   "luna-cathy-phone",
   "josh-rick-lake",
   "luna-avery-ipad",

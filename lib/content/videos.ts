@@ -3375,6 +3375,59 @@ export const videos: Video[] = [
     place: "atlanta",
     about: ["luna", "tyson"],
   },
+  {
+    /*
+      CATHY AND AVERY IN THE KITCHEN, 2026-09-29. Atlanta, about a week after
+      the breakup (Melissa), and Luna has not picked up when her mother calls.
+
+      WHAT IS SAID, from the transcript. Avery gets the real number of calls
+      out of her mother ("Three." / "Okay, fine. Four." / "There it is"), and
+      the pair of them describe Luna exactly: "She waits until she can make it
+      sound like she's fine." Cathy wants to hear her voice; Avery points out
+      she would hear one weird breath and spend three hours on it, "you did it
+      last Christmas". The sandwich ("You once asked me if I was happy with my
+      life while handing me a sandwich." / "You answered." / "Because there
+      was a sandwich."). Then the text instead of a fifth call — "that's just
+      calling with your thumbs" — about their father backing into the trash
+      cans, and "don't put call me". She puts call me.
+
+      IT IS THE OTHER END OF `luna-cathy-phone`, and sits immediately before
+      it in STORY_ORDER: the week of unanswered calls, and then the one Luna
+      picks up. `my-mother-called` in the journal is her side of that.
+
+      CANON IT LEANS ON, all already published: Avery in Atlanta with their
+      mother, Cathy who "calls until Luna picks up", Avery who "does not ask
+      Luna how she is", and Cathy and Tony married forty years — the father
+      and the trash cans are the first time Tony has been mentioned in a scene.
+
+      PREMIUM, FIRST MINUTE FREE — Melissa's call, 2026-09-29. The minute ends
+      on "Exactly." — the two of them agreeing about Luna, one beat before "I
+      hate that".
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace. "Four Times" is
+      the count Avery gets out of her.
+    */
+    slug: "avery-cathy-kitchen",
+    title: "Four Times",
+    synopsis:
+      "A week since Luna left, and she still has not picked up for her mother. In Cathy\u2019s kitchen in Atlanta, Avery gets the real number of missed calls out of her, talks her out of a fifth, and into a text about the trash cans instead.",
+    file: "avery-cathy-kitchen.proxy.mp4",
+    poster: "/posters/avery-cathy-kitchen.jpg",
+    // 221.4: picture and sound stop together — see scripts/import-cuts.sh.
+    durationSeconds: 221,
+    addedOn: "2026-09-29",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "avery-cathy-kitchen-preview.proxy.mp4",
+      durationSeconds: 60,
+      hookStart: 0,
+      hookNote: "the call count and \u201cshe waits until she can make it sound like she\u2019s fine\u201d",
+    },
+    feelings: ["trust", "distance"],
+    place: "atlanta",
+    about: ["cathy", "avery", "luna"],
+  },
 ];
 
 /**

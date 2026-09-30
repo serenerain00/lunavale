@@ -810,6 +810,17 @@ CUTS=(
   # runs to 1343.4 and is kept; three seconds of black after it are not.
   # No fade: the card already fades itself.
   "episode-2|stories/ep2/ep2-final-music.MOV|148|1343.4"
+
+  # CATHY AND AVERY IN THE KITCHEN, 2026-09-29. Atlanta, about a week after
+  # the breakup; Luna has not picked up when her mother calls. Scored, 3:44.
+  #
+  # POSTER AT 128s: Cathy mid-sentence and Avery laughing, round the sandwich
+  # line — the two of them at their warmest, which is what the scene is.
+  #
+  # END=221.4. Picture and sound both stop at 221.39 (blackdetect and
+  # silencedetect agree); the rest is 2.4s of nothing. No fade — the score
+  # has already ended.
+  "avery-cathy-kitchen|stories/cathy-avery/avery-cathy-kitchen-music.mov|128|221.4"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

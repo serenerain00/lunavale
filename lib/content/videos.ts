@@ -3404,13 +3404,13 @@ export const videos: Video[] = [
       on "Exactly." — the two of them agreeing about Luna, one beat before "I
       hate that".
 
-      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace. "Four Times" is
-      the count Avery gets out of her.
+      SYNOPSIS IS MELISSA'S, 2026-09-29, verbatim. TITLE IS STILL A
+      PLACEHOLDER — "Four Times" is the count Avery gets out of her.
     */
     slug: "avery-cathy-kitchen",
     title: "Four Times",
     synopsis:
-      "A week since Luna left, and she still has not picked up for her mother. In Cathy\u2019s kitchen in Atlanta, Avery gets the real number of missed calls out of her, talks her out of a fifth, and into a text about the trash cans instead.",
+      "In Atlanta, Cathy anxiously waits to hear from Luna, repeatedly checking her phone and trying to convince herself she isn\u2019t worried. Avery gently calls out her mother\u2019s habits with affectionate humor, teasing her about overcalling, overanalyzing, and trying to take care of Luna from hundreds of miles away. Beneath the banter, Cathy finally admits the simple truth: she just wants to hear her daughter\u2019s voice. The scene becomes a warm, intimate look at their family dynamic\u2014Avery understanding her mother completely while Cathy struggles with being unable to help Luna from afar.",
     file: "avery-cathy-kitchen.proxy.mp4",
     poster: "/posters/avery-cathy-kitchen.jpg",
     // 221.4: picture and sound stop together — see scripts/import-cuts.sh.

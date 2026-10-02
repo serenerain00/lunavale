@@ -149,6 +149,22 @@ CLIPS=(
   # 45.5; the fade is part of the edit and stays.
   "pilot-interview|stories/pilot-interview.MP4|14|45.3"
   "the-blonde-guy|stories/ty-luna-blonde-guy-bar/luna-ty-blonde-guy-short-music-ig.mov|1|89.0"
+
+  # THE RAIN, added 2026-10-02 — Luna and Tyson in a downpour at night.
+  # Vertical, 1320x2230, 60fps, scored. Members only, no preview: the middle
+  # 30s goes to Instagram, and that is the public window.
+  #
+  # THE DIALOGUE IS TURNED DOWN ON PURPOSE (Melissa): this happens a year or
+  # two ahead of the story, at whenever Tyson tells her, so what they say is
+  # not for hearing yet. Never "fix" the mix.
+  #
+  # POSTER AT 2s: both of them, her looking up at him, before anything has
+  # happened. Gives nothing away; the kiss frames from ~150s do.
+  #
+  # END=286.5. Picture is black from 279.8 but the score runs on under it to
+  # 286.5 — kept, the same way music leads these mixes. Only the last 1.2s of
+  # silence goes.
+  "luna-ty-rain-ig|stories/luna-tyson-rainstorm/luna-ty-rain-ig.mov|2|286.5"
 )
 
 want=("$@")

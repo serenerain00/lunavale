@@ -622,7 +622,8 @@ const authored: Clip[] = [
       IT HAPPENS AHEAD OF THE STORY — a year or two on, at whenever Tyson tells
       her. Melissa turned the dialogue down on purpose so what they say is not
       for hearing yet, and does not want it described. So the caption says
-      what is on screen and nothing about what it means or when it falls. Do
+      what is on screen, that the sound is lowered on purpose, and nothing
+      about what it means or when it falls. Do
       not write a synopsis for it, and do not place it near anything as an
       explanation. Same rule as tyson-no-early-feelings: describe and stop.
 
@@ -635,7 +636,10 @@ const authored: Clip[] = [
     id: "luna-ty-rain-ig",
     // PLACEHOLDER title and caption — hers to replace.
     title: "Rain",
-    caption: "Luna and Tyson, and the rain.",
+    // The second half is Melissa's, 2026-10-02 — viewers are told why they
+    // cannot hear it, and nothing about what is said.
+    caption:
+      "Luna and Tyson, and the rain. The dialogue is turned down on purpose \u2014 we didn\u2019t want to give too much away. If you\u2019re great at lip reading, you\u2019re already ahead of the game.",
     file: "luna-ty-rain-ig.proxy.mp4",
     poster: "/posters/luna-ty-rain-ig.jpg",
     // 286, the trimmed length: picture goes black at 279.8 and the score runs

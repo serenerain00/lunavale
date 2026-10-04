@@ -105,6 +105,10 @@ export const STORY_ORDER: readonly string[] = [
   "luna-ty-groceries",
   "luna-josh-bed-flashback",
   "luna-lkehouse-wine-shatter",
+  // HAND-PLACED — CONFIRMED ERA, REASONED ORDER. Melissa, 2026-10-04: about a
+  // week after the breakup. After the glass, which is the seven-day mark and
+  // her alone with it; this is the same week with somebody there.
+  "luna-tyson-shaving",
 
   // HAND-PLACED — CONFIRMED. Melissa, 2026-09-29: about a week after the
   // breakup, and Luna has not picked up for her mother. It goes straight

@@ -3428,6 +3428,39 @@ export const videos: Video[] = [
     place: "atlanta",
     about: ["cathy", "avery", "luna"],
   },
+  {
+    /*
+      THE SHAVE, 2026-10-04. The lakehouse, about a week after the breakup
+      (Melissa). Luna trims Tyson's beard. Free — Melissa's call.
+
+      WHAT IS SAID, from the transcript. Bickering about who is bossy ("You
+      just listened better before."), then the face she makes when she does
+      not believe him, and the one honest stretch: "I think I'm okay and then
+      something stupid happens and I'm not" / "I just don't know what I'm
+      supposed to feel yet." / "You don't have to know yet." Then twenty
+      minutes of it because he keeps talking, and the moustache threat.
+
+      DESCRIBE AND STOP. It is a week out and nothing in it is about him and
+      her; the synopsis says so by not saying anything else. See
+      tyson-no-early-feelings — a look is fine, a line explaining it is not.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace.
+    */
+    slug: "luna-tyson-shaving",
+    title: "Sit Still",
+    synopsis:
+      "A week since Josh, at the lakehouse. Luna takes the clippers to Tyson\u2019s beard and makes a twenty-minute job of it, and somewhere between telling him to sit still and threatening his moustache, admits she doesn\u2019t know what she\u2019s supposed to feel yet.",
+    file: "luna-tyson-shaving.proxy.mp4",
+    poster: "/posters/luna-tyson-shaving.jpg",
+    // 193.1, trimmed — see scripts/import-cuts.sh.
+    durationSeconds: 193,
+    addedOn: "2026-10-04",
+    access: "free",
+    mature: false,
+    feelings: ["trust", "hurt"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+  },
 ];
 
 /**

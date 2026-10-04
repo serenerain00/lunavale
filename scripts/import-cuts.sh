@@ -821,6 +821,15 @@ CUTS=(
   # silencedetect agree); the rest is 2.4s of nothing. No fade — the score
   # has already ended.
   "avery-cathy-kitchen|stories/cathy-avery/avery-cathy-kitchen-music.mov|128|221.4"
+
+  # THE SHAVE, 2026-10-04. The lakehouse, about a week after the breakup
+  # (Melissa): Luna trims Tyson's beard. Scored, 3:14, 1320x800.
+  #
+  # POSTER AT 58s: her with the clippers, him with his head tipped back, both
+  # faces readable — the whole scene in one frame.
+  #
+  # END=193.1. blackdetect puts 0.8s of black on the end.
+  "luna-tyson-shaving|stories/luna-tyson-shaving/luna-tyson-shaving-music.mov|58|193.1"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

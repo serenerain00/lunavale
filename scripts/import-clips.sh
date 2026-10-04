@@ -165,6 +165,16 @@ CLIPS=(
   # 286.5 — kept, the same way music leads these mixes. Only the last 1.2s of
   # silence goes.
   "luna-ty-rain-ig|stories/luna-tyson-rainstorm/luna-ty-rain-ig.mov|2|286.5"
+
+  # THE COUCH, added 2026-10-03 — Luna and Josh, close and intimate, faces
+  # throughout. Vertical, 1320x2234, 60fps, scored. Free: it is on Instagram.
+  #
+  # POSTER AT 86s: the closing kiss, both faces, warm and readable. Most of
+  # the cut is a mouth or a throat filling the frame, which is the wrong thing
+  # to meet on a public grid — the same reason her-place moved off 34s.
+  #
+  # END=87.7. blackdetect puts black from 87.76 to the end.
+  "luna-josh-couch|stories/luna-josh-couch/luna-josh-couch.mov|86|87.7"
 )
 
 want=("$@")

@@ -652,6 +652,27 @@ const authored: Clip[] = [
     mature: true,
     access: "premium",
   },
+  {
+    /*
+      THE COUCH, Melissa, 2026-10-03. Luna and Josh, close, intimate, faces
+      the whole way through. Free — it runs on Instagram, so there is nothing
+      to gate.
+
+      MATURE, NOT EXPLICIT: nothing is shown below the shoulders. Same call as
+      her-place, which is the Tyson equivalent.
+    */
+    id: "luna-josh-couch",
+    // PLACEHOLDER title and caption — hers to replace.
+    title: "The Couch",
+    caption: "Luna and Josh, late, and nowhere else to be.",
+    file: "luna-josh-couch.proxy.mp4",
+    poster: "/posters/luna-josh-couch.jpg",
+    // 88, the trimmed length — 2s of black came off the end.
+    durationSeconds: 88,
+    addedOn: "2026-10-03",
+    about: ["luna", "josh"],
+    mature: true,
+  },
 ];
 
 /**

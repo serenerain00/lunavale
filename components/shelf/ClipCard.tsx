@@ -35,6 +35,12 @@ export interface ClipCardProps {
   mature?: boolean;
   /** Vertical art (a post) rather than 16:9. */
   portrait?: boolean;
+  /**
+   * Where to crop art that does not match the card's shape, as a CSS
+   * object-position — a portrait post in the New row's 16:9 card. Default is
+   * the centre.
+   */
+  posterPosition?: string;
   /** Nothing to play yet — renders flat and does not pretend to be a link. */
   comingSoon?: boolean;
 }
@@ -48,6 +54,7 @@ export function ClipCard({
   premium,
   mature,
   portrait,
+  posterPosition,
   comingSoon,
 }: ClipCardProps) {
   const art = (
@@ -61,6 +68,7 @@ export function ClipCard({
         alt=""
         fill
         sizes={RAIL_ITEM_SIZES}
+        style={posterPosition ? { objectPosition: posterPosition } : undefined}
         className={`object-cover transition-transform duration-(--duration-cinematic) ease-(--ease-cinematic) group-hover:scale-[1.04] ${
           premium
             ? "brightness-[0.55] [html[data-member]_&]:brightness-90 [html[data-member]_&]:group-hover:brightness-100"

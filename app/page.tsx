@@ -384,6 +384,7 @@ export default async function Home() {
                     }
                     premium={r.access === "premium"}
                     mature={r.mature}
+                    posterPosition={r.posterPosition}
                   />
                 ) : (
                   <Link href={r.href} className="group block">

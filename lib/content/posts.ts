@@ -88,6 +88,13 @@ export interface Clip {
    */
   aspect?: [number, number];
   /**
+   * Where to crop this poster when it has to fill a 16:9 card — the New row on
+   * the home page. A CSS object-position. Unset means "50% 28%", the upper
+   * part of the frame, which suits most of these; set it where the poster's
+   * subject sits elsewhere (The Couch: the kiss is dead centre).
+   */
+  wideCrop?: string;
+  /**
    * When this clip is a preview of a longer scene, that scene's slug. Lets the
    * clip page say what the full thing is and where it lives, instead of leaving
    * a visitor to guess that thirty seconds is all there is.
@@ -672,6 +679,7 @@ const authored: Clip[] = [
     addedOn: "2026-10-03",
     about: ["luna", "josh"],
     mature: true,
+    wideCrop: "50% 50%",
   },
   {
     /*

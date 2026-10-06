@@ -673,6 +673,43 @@ const authored: Clip[] = [
     about: ["luna", "josh"],
     mature: true,
   },
+  {
+    /*
+      AFTER THE DETECTIVES, Melissa, 2026-10-06. Luna confronts Josh the same
+      day two detectives kept her forty-five minutes — the scene right before
+      she goes to Tyson in `luna-ty-detectives`. Late in the series; it is up
+      now to start the mystery under the love story. Free — it runs on
+      Instagram.
+
+      WHAT IS SAID, from the transcript. She lied for him in that room without
+      being asked, and wants to know what for. He will not say: "the second I
+      tell you anything, you're in it." He tells her "I'll take care of it",
+      which is his father's sentence from the night itself (see the journal
+      entry `what-i-told-them`). It ends on "He wasn't supposed to be there." /
+      "Who?" — and no answer.
+
+      NOTHING IS NAMED: no accident, no death, no Rick. The caption keeps to
+      that.
+
+      NOTE: `control` rather than `violence`. He holds her arm to keep her in
+      the room and she tells him not to touch her; nobody is struck.
+
+      TITLE AND CAPTION ARE PLACEHOLDERS, hers to replace.
+    */
+    id: "luna-josh-fight-45m",
+    title: "Then Tell Me",
+    caption: "She lied to two detectives for him. Now she wants to know what for.",
+    file: "luna-josh-fight-45m.proxy.mp4",
+    poster: "/posters/luna-josh-fight-45m.jpg",
+    // 111, the trimmed length — 4.5s of black came off the end.
+    durationSeconds: 111,
+    addedOn: "2026-10-06",
+    about: ["luna", "josh"],
+    mature: false,
+    notes: ["control"],
+    // Near-square, 1320x1282 at source, 720x700 as the proxy. See Clip.aspect.
+    aspect: [720, 700],
+  },
 ];
 
 /**

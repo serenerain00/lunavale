@@ -175,6 +175,18 @@ CLIPS=(
   #
   # END=87.7. blackdetect puts black from 87.76 to the end.
   "luna-josh-couch|stories/luna-josh-couch/luna-josh-couch.mov|86|87.7"
+
+  # AFTER THE DETECTIVES, added 2026-10-06 — Luna confronts Josh, the night
+  # before she goes to Tyson (luna-ty-detectives). Near-square, 1320x1282,
+  # 60fps, scored. Free: it is on Instagram.
+  #
+  # POSTER AT 60s: both faces, her mid-line, him turned to her. Readable and
+  # not the grab — 75s is the physical stretch and the wrong thing to meet on
+  # a grid.
+  #
+  # END=111.0. blackdetect puts black from 110.99; "Who?" lands at ~110 and is
+  # the last line, so nothing spoken is lost.
+  "luna-josh-fight-45m|stories/josh-luna-fight-45m/luna-josh-fight-45m.mov|60|111.0"
 )
 
 want=("$@")

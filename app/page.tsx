@@ -388,11 +388,16 @@ export default async function Home() {
                   />
                 ) : (
                   <Link href={r.href} className="group block">
-                    <div className="flex aspect-video flex-col justify-between rounded-lg bg-[#efe7d9] p-5 ring-1 ring-hairline transition-transform duration-(--duration-standard) group-hover:-translate-y-1">
-                      <p className="font-hand text-lg leading-snug text-[#2a2520]">
+                    {/* overflow-hidden is what holds the 16:9: without it the
+                        box grows to fit her sentence, and on a phone-width
+                        card that made the paper twice the height of the
+                        posters beside it. The clamp ends the text on an
+                        ellipsis instead of a sliced line. */}
+                    <div className="flex aspect-video flex-col justify-between gap-1 overflow-hidden rounded-lg bg-[#efe7d9] p-3 ring-1 ring-hairline transition-transform duration-(--duration-standard) group-hover:-translate-y-1 sm:p-5">
+                      <p className="line-clamp-3 font-hand text-sm leading-snug text-[#2a2520] sm:text-lg">
                         {r.blurb}
                       </p>
-                      <p className="text-xs uppercase tracking-[0.14em] text-[#6b6156]">
+                      <p className="shrink-0 text-[10px] uppercase tracking-[0.14em] text-[#6b6156] sm:text-xs">
                         {formatReleaseDate(r.date)}
                       </p>
                     </div>

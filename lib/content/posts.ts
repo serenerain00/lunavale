@@ -742,6 +742,9 @@ const authored: Clip[] = [
     addedOn: "2026-10-07",
     about: ["luna", "josh"],
     mature: false,
+    // Her face is high in the frame; the default 28% keeps the smile and
+    // loses the eyes.
+    wideCrop: "50% 20%",
   },
 ];
 

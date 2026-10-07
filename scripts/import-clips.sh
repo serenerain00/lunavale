@@ -187,6 +187,17 @@ CLIPS=(
   # END=111.0. blackdetect puts black from 110.99; "Who?" lands at ~110 and is
   # the last line, so nothing spoken is lost.
   "luna-josh-fight-45m|stories/josh-luna-fight-45m/luna-josh-fight-45m.mov|60|111.0"
+
+  # THE JOURNAL MEMORY, added 2026-10-07 — Luna reading her old journal,
+  # cut against early mornings with Josh: eggs, painting, the barn. From the
+  # episode 3 material (stories/ep3/). Vertical, 1320x2222, 60fps, scored.
+  # Free: it is on Instagram.
+  #
+  # POSTER AT 3s: her, smiling down at the open journal. Says what the piece
+  # is in one frame.
+  #
+  # END=176.0. blackdetect puts black from 176.02; nothing is said after 2:58.
+  "luna-josh-journal-mem|stories/ep3/luna-josh-journal-mem.mov|3|176.0"
 )
 
 want=("$@")

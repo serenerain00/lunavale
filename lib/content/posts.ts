@@ -718,6 +718,31 @@ const authored: Clip[] = [
     // Near-square, 1320x1282 at source, 720x700 as the proxy. See Clip.aspect.
     aspect: [720, 700],
   },
+  {
+    /*
+      THE JOURNAL MEMORY, Melissa, 2026-10-07. Luna reading her old journal,
+      cut against early mornings with Josh — the eggs he is very bad at, step
+      four, paint that is not the colour until it dries, the barn. Her voice
+      over it: "I think I'm in trouble. Not bad trouble. The kind that starts
+      to feel familiar way too fast." From the episode 3 material. Free — it
+      runs on Instagram.
+
+      NOT MATURE: nothing in it is more than an arm round her.
+
+      TITLE AND CAPTION ARE PLACEHOLDERS, hers to replace. "Not Bad Trouble"
+      is her own line.
+    */
+    id: "luna-josh-journal-mem",
+    title: "Not Bad Trouble",
+    caption: "She reads back what she wrote the first year, and remembers all of it.",
+    file: "luna-josh-journal-mem.proxy.mp4",
+    poster: "/posters/luna-josh-journal-mem.jpg",
+    // 176, the trimmed length — 3.3s of black came off the end.
+    durationSeconds: 176,
+    addedOn: "2026-10-07",
+    about: ["luna", "josh"],
+    mature: false,
+  },
 ];
 
 /**

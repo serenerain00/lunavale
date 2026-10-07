@@ -1493,6 +1493,44 @@ export const journal: JournalEntry[] = [
       "I am going to ask him anyway. Not tomorrow. But I am writing it down here so that I have to.",
     ],
   },
+  /*
+    THE OLD JOURNAL, Melissa, 2026-10-07, VERBATIM — her prose, not a draft.
+    Beside the free post `luna-josh-journal-mem` ("Not Bad Trouble"), where
+    she reads the journal she kept in her first year with Josh.
+
+    FILED WITH THE BOXES, after `the-year-he-went-quiet`: the old journal is
+    one more thing she finds unpacking at the lakehouse, and the run is
+    already about reading her own past and seeing it differently.
+
+    THE DATELINE IS MINE AND A PLACEHOLDER — hers to replace.
+
+    Members-only: the free six are an arc (top of this file). The post is the
+    free half.
+  */
+  {
+    id: "i-wrote-it-all-down",
+    addedOn: "2026-10-07",
+    dateline: "An old journal, and the first year of us",
+    place: "lakehouse",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "I forgot how happy we were.",
+      "Not in the big ways. Those I remembered.",
+      "It was the little things I forgot.",
+      "How excited I was when his name showed up on my phone. How quickly I started writing “we” instead of “I.” How normal it felt to make room for him in everything.",
+      "Reading it now, I can see exactly when he became home.",
+      "I can also see when I started waiting for him there.",
+      "I don’t think there was a day when we stopped loving each other.",
+      "I think there were just more and more days when loving each other wasn’t enough to make us feel less alone.",
+      "And somehow, while I was living it, I never noticed how far apart we’d gotten.",
+      "Maybe that’s the strangest part.",
+      "I wrote it all down.",
+      "I just didn’t understand what I was writing yet.",
+    ],
+  },
   {
     // Month one, so it sits after the ordinary Thursdays and before "month
     // four" — the night the pattern between them stops being only a pattern.

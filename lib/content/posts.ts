@@ -729,12 +729,15 @@ const authored: Clip[] = [
 
       NOT MATURE: nothing in it is more than an arm round her.
 
-      TITLE AND CAPTION ARE PLACEHOLDERS, hers to replace. "Not Bad Trouble"
-      is her own line.
+      THE CAPTION IS HERS (2026-10-07). The title is still a placeholder —
+      "Not Bad Trouble" is her own line from the voiceover.
     */
     id: "luna-josh-journal-mem",
     title: "Not Bad Trouble",
-    caption: "She reads back what she wrote the first year, and remembers all of it.",
+    // Melissa's synopsis, 2026-10-07, verbatim. Two paragraphs: the post
+    // page keeps the break (whitespace-pre-line).
+    caption:
+      "Luna opens an old journal and finds herself back at the beginning of her ten-year relationship with Josh—first dates, falling fast, and the little moments that once made him feel like home. But as the pages turn, the memories begin to change. What felt insignificant while she was living it looks different in hindsight.\n\nA quiet look at how two people can love each other deeply and still slowly lose their way.",
     file: "luna-josh-journal-mem.proxy.mp4",
     poster: "/posters/luna-josh-journal-mem.jpg",
     // 176, the trimmed length — 3.3s of black came off the end.

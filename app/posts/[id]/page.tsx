@@ -137,7 +137,7 @@ export default async function ClipPage({ params }: ClipPageProps) {
           <h1 className="mt-2 font-display text-2xl font-light text-ivory sm:text-3xl">
             {clip.title}
           </h1>
-          <p className="mt-2 leading-relaxed text-stone">{clip.caption}</p>
+          <p className="mt-2 whitespace-pre-line leading-relaxed text-stone">{clip.caption}</p>
         </div>
 
         {(previous || next) && (

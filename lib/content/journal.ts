@@ -1494,6 +1494,285 @@ export const journal: JournalEntry[] = [
     ],
   },
   /*
+    THE OLD JOURNAL, TEN PAGES, Melissa, 2026-10-07 — VERBATIM, her prose.
+    What Luna is reading in "Not Bad Trouble" (`luna-josh-journal-mem`):
+    the journal she kept from meeting Josh, through the first years, to the
+    page where nothing is broken and she is not happy any more. They run
+    straight into `i-wrote-it-all-down`, which is her reading them now.
+
+    HER PRODUCTION NOTES ARE KEPT HERE, NOT ON THE PAGE. Each page arrived
+    with a line or two of direction; Luna's text is the body and the notes
+    are writer knowledge:
+      1 the beginning — present Luna, over the footage: "Yeah… we got there
+        fast, baby." "The kind that starts to feel familiar way too fast" is
+        the line she reads aloud in the post.
+      4 the night Josh showed up — "needs to feel completely different
+        because Luna didn't understand its significance when she wrote it."
+        It becomes terrifying later: she documented pieces of the cover-up
+        as it happened. "Signed something" is §12's sign-off, in her hand.
+        This page is now the canon account of that night — see
+        `what-i-told-them`, which was brought into line with it.
+      5 home — pairs with the happy domestic montage.
+      6 dinner, and the couch — corresponds to the clip where she waits,
+        falls asleep and Josh comes home. Young Luna sees nothing wrong with
+        this night; she remembers the tenderness, not the waiting.
+      7 he's working a lot — the audience starts seeing what Luna is talking
+        herself out of seeing.
+      8 10:47 — pairs with the phone clip. The repeated "It's fine" is very
+        Luna.
+      9 lonely — the emotional deterioration starts; the last section over
+        very ordinary footage.
+     10 nothing is broken — where the journal sequence ends, before she
+        closes it and walks into the kitchen to Tyson.
+
+    FILED UNDER THE LAKEHOUSE, with `where: "The old journal"`, though they
+    were written in her apartment and at the farmhouse. Deliberate: previous
+    and next on a journal page only walk entries in the same place, and these
+    have to read in a row, into her reflection on them. The lakehouse is where
+    she is reading them.
+
+    THE DATELINES ARE MINE, from her headings, and placeholders. They say
+    "the old journal" so nobody takes a page from ten years ago for now.
+
+    Members-only, like everything outside the free six.
+  */
+  {
+    id: "old-journal-the-beginning",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — the beginning",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "I think I like him.",
+      "Which is annoying because I was absolutely not planning on liking anyone.",
+      "But Josh is easy.",
+      "We talked for hours tonight and somehow it never felt like we were trying to keep the conversation going.",
+      "It was the kind of night you don’t want to end because ending it means admitting you want another one.",
+      "I think that’s what scares me.",
+      "Not that I like him.",
+      "How fast I like him.",
+      "The kind that starts to feel familiar way too fast.",
+    ],
+  },
+  {
+    id: "old-journal-falling",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — falling",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh stayed over again.",
+      "I woke up before him this morning and just watched him sleep for a minute.",
+      "Creepy? Probably.",
+      "But there was something about seeing him here that felt strangely normal.",
+      "Like he belonged in my apartment.",
+      "He made coffee and complained that I don’t own real creamer.",
+      "Then he kissed me goodbye and somehow my apartment felt different after he left.",
+      "I don’t know when this happened.",
+      "But I already miss him when he goes.",
+    ],
+  },
+  {
+    id: "old-journal-we",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — becoming “us”",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "I caught myself saying “we” today.",
+      "Someone asked what I was doing this weekend and I said, “We haven’t decided yet.”",
+      "We.",
+      "Apparently that’s a thing now.",
+      "Josh laughed when I told him.",
+      "Then he said, “You’re stuck with me.”",
+      "I told him not to threaten me with a good time.",
+      "I’m happy.",
+      "Like stupidly, embarrassingly happy.",
+    ],
+  },
+  {
+    id: "old-journal-the-night-he-came-over",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — the night Josh showed up",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh", "rick"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh came over really late tonight.",
+      "Something happened at work.",
+      "I’ve never seen him like that.",
+      "He wouldn’t really tell me what happened. He just kept saying somebody got hurt.",
+      "Then he said he’d signed something.",
+      "I asked him what he meant and he wouldn’t answer me.",
+      "He kept saying his dad was handling it.",
+      "“Rick is handling it.”",
+      "I finally stopped asking questions.",
+      "He stayed here.",
+      "I don’t think either of us slept much.",
+    ],
+  },
+  {
+    id: "old-journal-home",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — home",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "I think Josh has officially become home.",
+      "Not the farmhouse.",
+      "Him.",
+      "It’s the stupid little things.",
+      "His hand finding mine in the car without looking.",
+      "Him bringing me water because apparently I’m incapable of remembering hydration exists.",
+      "The way he kisses my forehead when he thinks I’m asleep.",
+      "I used to think love would feel bigger than this.",
+      "Maybe this is bigger.",
+      "Maybe it’s just quieter than I expected.",
+    ],
+  },
+  {
+    id: "old-journal-dinner",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — dinner, and the couch",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "Made dinner tonight.",
+      "Josh said he’d be home by nine.",
+      "I tried waiting for him and apparently lost that battle because I woke up on the couch with him kissing my forehead.",
+      "He looked exhausted.",
+      "I asked if he’d eaten.",
+      "Of course he hadn’t.",
+      "I tried getting up and he just looked at me and said, “Stay.”",
+      "Then he heated up his own dinner.",
+      "I don’t know why I love that man as much as I do.",
+      "But I really, really do.",
+    ],
+  },
+  {
+    id: "old-journal-working-a-lot",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — he’s working a lot",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh is working a lot.",
+      "I know that’s not exactly breaking news.",
+      "I think I just miss him.",
+      "Which feels ridiculous because I see him every day.",
+      "Or most days.",
+      "We still have dinner together when we can.",
+      "We still fall asleep tangled together.",
+      "We’re good.",
+      "I know we’re good.",
+      "I just wish sometimes that “later” didn’t always seem to belong to work.",
+    ],
+  },
+  {
+    id: "old-journal-10-47",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — 10:47",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "He said eight tonight.",
+      "Then nine.",
+      "It’s 10:47.",
+      "I texted him, “you said 8.”",
+      "He started typing.",
+      "Then stopped.",
+      "Nothing.",
+      "I don’t even know what I wanted him to say.",
+      "Probably just that he remembered I was waiting.",
+      "It’s fine.",
+      "He’s working.",
+      "It’s fine.",
+    ],
+  },
+  {
+    id: "old-journal-lonely",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — lonely",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "I don’t think we’re fighting.",
+      "That’s the weird part.",
+      "Nothing is really wrong.",
+      "Josh still kisses me goodbye.",
+      "He still calls me baby.",
+      "He still reaches for me in his sleep.",
+      "I know he loves me.",
+      "I know that.",
+      "But somehow I’m still lonely.",
+      "I don’t know how you can be loved by someone and lonely because of them at the same time.",
+      "Apparently you can.",
+    ],
+  },
+  {
+    id: "old-journal-nothing-is-broken",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — nothing is broken",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "I keep waiting for something to happen.",
+      "A fight.",
+      "A betrayal.",
+      "Something big enough that I can point to it and say, there. That’s what’s wrong.",
+      "But nothing happens.",
+      "We wake up.",
+      "We go to work.",
+      "We love each other.",
+      "We make plans.",
+      "We cancel some of them.",
+      "We say we’ll do better next week.",
+      "And then another week passes.",
+      "Maybe that’s why I don’t know what to fix.",
+      "Nothing is broken.",
+      "I’m just not happy anymore.",
+    ],
+  },
+  /*
     THE OLD JOURNAL, Melissa, 2026-10-07, VERBATIM — her prose, not a draft.
     Beside the free post `luna-josh-journal-mem` ("Not Bad Trouble"), where
     she reads the journal she kept in her first year with Josh.
@@ -4313,9 +4592,15 @@ export const journal: JournalEntry[] = [
     much" and still makes "you let me lie for you" true. Change it if the
     scene means something else.
 
-    Invented and hers to cut: the jacket he did not take off, the tea, him
-    sleeping on top of the covers. "I'll take care of it" heard as his
-    father's sentence is the transcript plus her brief, not invention.
+    REVISED 2026-10-07 to match Melissa's own page for that night,
+    `old-journal-the-night-he-came-over`, which is newer and is canon:
+    "somebody got hurt", "he'd signed something", "Rick is handling it", and
+    neither of them slept. The draft's jacket, tea and him gone by morning are
+    gone. Her 2026-10-06 brief said he told her "a man died"; her page from
+    the night says "hurt". Reconciled — MY INVENTION, hers to cut — as: hurt
+    that night, and by the end of the week she understood without anybody
+    saying it. "I'll take care of it" heard as his father's sentence is the
+    transcript plus her brief.
 
     Members-only: the free six are an arc (top of this file). The post is the
     free half — the fight is open, what she thought is not.
@@ -4335,9 +4620,10 @@ export const journal: JournalEntry[] = [
       "Two detectives, a table, and forty-five minutes. I have been trying since four o'clock to work out how long forty-five minutes is, because it felt like an afternoon and it felt like nothing.",
       "They knew my name. They knew where I am living, which I have told about six people. They knew how long I have known Tyson, to the year, and they asked about him almost as much as they asked about Josh, and I cannot make that part sit still.",
       "Then one of them asked whether I remembered a night nine years ago. He said the date. He did not need to.",
-      "I remember it. I was twenty-nine and I had the apartment, and Josh came round late without calling, which he never did then. He stood in my kitchen in his work clothes and did not take his jacket off.",
-      "He did not say much. He said a man had died at the site. He said it twice, the second time like he was checking it was true. He said his dad was going to take care of it.",
-      "That was all of it. I made him tea he did not drink, and he slept on top of the covers in his clothes and was gone before I woke up. When I asked the week after, he said it was an accident and it was handled and could we please not, and I said of course. I was a year in and I loved him and I thought not asking was a kindness.",
+      "I remember it. I was twenty-nine and I had the apartment, and Josh came over really late. I had never seen him like that.",
+      "He did not say much. He kept saying somebody got hurt. He said he had signed something, and when I asked what he meant he would not answer. He said his dad was handling it. Rick is handling it — he said that more than once.",
+      "Hurt. That was his word, all night. By the end of the week it was a different word, and nobody ever said that one to me out loud.",
+      "He stayed. I do not think either of us slept. When I asked the week after, he said it was an accident and it was handled and could we please not, and I said of course. I was a year in and I loved him and I thought not asking was a kindness.",
       "I want this down honestly: I have not thought about that night in years. Not because I buried it. It was never a secret, to me. It was a terrible thing that happened at his work, that his father dealt with, the way his father deals with everything.",
       "So when the detective asked, I said I didn't remember.",
       "I did not decide to. I opened my mouth and that is what came out, and then I was sitting in it, and every question after that I answered a little less. By the end I was not being careful. I was frightened. I think they could see the difference better than I could.",

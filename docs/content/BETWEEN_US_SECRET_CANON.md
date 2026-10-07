@@ -794,3 +794,15 @@ knowledge stay off the site. Melissa: introduce the mystery, do not go into
 detail.
 
 **OPEN, NOT FOR THE SITE:** who "he" is in "he wasn't supposed to be there".
+
+**REVISED 2026-10-07 — her own page from that night is now the account.**
+Melissa wrote the journal entry Luna kept at the time
+(`old-journal-the-night-he-came-over`, one of ten old-journal pages read in
+"Not Bad Trouble"). What Josh said that night: **somebody got hurt; he had
+signed something** (and would not say what he meant); **"Rick is handling
+it."** He stayed; neither of them slept. "Hurt", not "died" — `what-i-told-them`
+now has her understanding by the end of that week that the man had died,
+without anybody telling her (reconciliation, flagged in the entry). Writer
+note from Melissa: this page "will become terrifying later, because Luna
+innocently documented pieces of the cover-up contemporaneously." "Signed
+something" is §12's sign-off, on the record in Luna's hand.

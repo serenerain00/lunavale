@@ -764,7 +764,7 @@ Melissa, with the Instagram cut `luna-josh-fight-45m` (free, published as the
 post "Then Tell Me") and the journal entry `what-i-told-them`.
 
 **NEW, AND IT CHANGES WHAT LUNA KNOWS.** On the night of the accident Josh
-came to Luna's apartment. He was shaken and said very little: **a man died,
+came home to Luna (see the 2026-10-08 correction below — not "her apartment"). He was shaken and said very little: **a man died,
 and his dad was going to take care of it.** That is everything she was told.
 She has known for nine years that a man died at the site — but to her it was
 never a secret, only a terrible night at his work that Rick handled. She has
@@ -806,3 +806,12 @@ without anybody telling her (reconciliation, flagged in the entry). Writer
 note from Melissa: this page "will become terrifying later, because Luna
 innocently documented pieces of the cover-up contemporaneously." "Signed
 something" is §12's sign-off, on the record in Luna's hand.
+
+**CORRECTED 2026-10-08 — they were living together.** Episode 3 has Luna
+read "Josh came home at two this morning", and Melissa confirmed it: by the
+accident night, about a year in, Luna and Josh were **living together**. The
+"her apartment" versions above are superseded. Both journal pages were
+brought into line the same day (`old-journal-the-night-he-came-over` now
+opens on the episode's line; `what-i-told-them` says "we were already living
+together" and "our kitchen"). Her own apartment belongs to the earliest
+pages only — `old-journal-falling`, "like he belonged in my apartment".

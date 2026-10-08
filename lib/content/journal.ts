@@ -1512,6 +1512,10 @@ export const journal: JournalEntry[] = [
         as it happened. "Signed something" is §12's sign-off, in her hand.
         This page is now the canon account of that night — see
         `what-i-told-them`, which was brought into line with it.
+        CORRECTED 2026-10-08 to match episode 3: they were LIVING TOGETHER
+        by then (Melissa). The first line is now the episode's own — "Josh
+        came home at two this morning" — and "He stayed here.", which only
+        worked in her apartment, is cut. Nothing else on the page changed.
       5 home — pairs with the happy domestic montage.
       6 dinner, and the couch — corresponds to the clip where she waits,
         falls asleep and Josh comes home. Young Luna sees nothing wrong with
@@ -1526,7 +1530,7 @@ export const journal: JournalEntry[] = [
         closes it and walks into the kitchen to Tyson.
 
     FILED UNDER THE LAKEHOUSE, with `where: "The old journal"`, though they
-    were written in her apartment and at the farmhouse. Deliberate: previous
+    were written in her apartment and, later, at home with Josh. Deliberate: previous
     and next on a journal page only walk entries in the same place, and these
     have to read in a row, into her reflection on them. The lakehouse is where
     she is reading them.
@@ -1613,7 +1617,7 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "Josh came over really late tonight.",
+      "Josh came home at two this morning.",
       "Something happened at work.",
       "I’ve never seen him like that.",
       "He wouldn’t really tell me what happened. He just kept saying somebody got hurt.",
@@ -1622,7 +1626,6 @@ export const journal: JournalEntry[] = [
       "He kept saying his dad was handling it.",
       "“Rick is handling it.”",
       "I finally stopped asking questions.",
-      "He stayed here.",
       "I don’t think either of us slept much.",
     ],
   },
@@ -4576,7 +4579,7 @@ export const journal: JournalEntry[] = [
     in the story: the detectives, then Josh, then Tyson (`luna-ty-detectives`).
 
     WHAT IS NEW CANON, from Melissa: on the night of the accident Josh came to
-    Luna's apartment, shaken, said very little — a man died, his dad was going
+    Luna, shaken, said very little — a man died, his dad was going
     to take care of it. Nine years later she gives the detectives almost
     nothing, more nervous than honest, and lies for him. That lie is what
     sends her to Josh.
@@ -4620,16 +4623,16 @@ export const journal: JournalEntry[] = [
       "Two detectives, a table, and forty-five minutes. I have been trying since four o'clock to work out how long forty-five minutes is, because it felt like an afternoon and it felt like nothing.",
       "They knew my name. They knew where I am living, which I have told about six people. They knew how long I have known Tyson, to the year, and they asked about him almost as much as they asked about Josh, and I cannot make that part sit still.",
       "Then one of them asked whether I remembered a night nine years ago. He said the date. He did not need to.",
-      "I remember it. I was twenty-nine and I had the apartment, and Josh came over really late. I had never seen him like that.",
+      "I remember it. I was twenty-nine and we were already living together, and Josh came home at two in the morning. I had never seen him like that.",
       "He did not say much. He kept saying somebody got hurt. He said he had signed something, and when I asked what he meant he would not answer. He said his dad was handling it. Rick is handling it — he said that more than once.",
       "Hurt. That was his word, all night. By the end of the week it was a different word, and nobody ever said that one to me out loud.",
-      "He stayed. I do not think either of us slept. When I asked the week after, he said it was an accident and it was handled and could we please not, and I said of course. I was a year in and I loved him and I thought not asking was a kindness.",
+      "I do not think either of us slept. When I asked the week after, he said it was an accident and it was handled and could we please not, and I said of course. I was a year in and I loved him and I thought not asking was a kindness.",
       "I want this down honestly: I have not thought about that night in years. Not because I buried it. It was never a secret, to me. It was a terrible thing that happened at his work, that his father dealt with, the way his father deals with everything.",
       "So when the detective asked, I said I didn't remember.",
       "I did not decide to. I opened my mouth and that is what came out, and then I was sitting in it, and every question after that I answered a little less. By the end I was not being careful. I was frightened. I think they could see the difference better than I could.",
       "I lied to the police for him. I have not lied to anybody about anything that mattered in twenty years, and I did it for a man I have left, without being asked, in under a second.",
       "So tonight I asked Josh what I had lied for.",
-      "He would not tell me. He was angry that I was in it — as if I had walked in on my own, as if he had not stood in my kitchen nine years ago and put it in my hands. He said he was protecting me. He said it so many times it stopped being a sentence. He took hold of my arm to keep me in the room and I told him not to touch me, and he let go, which is the only thing tonight he did because I asked.",
+      "He would not tell me. He was angry that I was in it — as if I had walked in on my own, as if he had not stood in our kitchen nine years ago and put it in my hands. He said he was protecting me. He said it so many times it stopped being a sentence. He took hold of my arm to keep me in the room and I told him not to touch me, and he let go, which is the only thing tonight he did because I asked.",
       "Then he said: I'll take care of it.",
       "And I heard his father. The same words in the same order, nine years apart, and I understood that I have been living inside that sentence the whole time and never once asked what it cost.",
       "At the very end he said: he wasn't supposed to be there.",

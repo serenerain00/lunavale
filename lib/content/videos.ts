@@ -3279,8 +3279,8 @@ export const videos: Video[] = [
       to physical is "don't touch me" said and respected.
     */
     slug: "episode-3",
-    // Placeholder until Melissa names it. Must match lib/content/season.ts.
-    title: "Episode 3",
+    // Melissa, 2026-10-08: "The Space Between". Must match lib/content/season.ts.
+    title: "Episode 3: The Space Between",
     synopsis:
       "Luna finds the journal she kept in her first year with Josh and reads it cover to cover \u2014 the burnt eggs, the paint, the nights she waited up. Somewhere in those pages is the moment loving each other stopped being enough, and she cannot find it. Then Tyson finds her reading, and later that night, Josh calls.",
     file: "episode-3.proxy.mp4",

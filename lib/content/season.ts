@@ -91,12 +91,13 @@ export const SEASONS: Season[] = [
       },
       {
         /*
-          LANDED 2026-10-08. "Episode 3" until Melissa names it — Breathe was
-          named the day it landed. Same both-places rule as above: the
-          matching `title` in videos.ts must say the same thing.
+          LANDED 2026-10-08. NAMED THE SAME DAY — Melissa: "The Space
+          Between". Written "Episode 3: The Space Between" for the same reason
+          as Breathe. Same both-places rule as above: the matching `title` in
+          videos.ts must say the same thing.
         */
         number: 3,
-        title: "Episode 3",
+        title: "Episode 3: The Space Between",
         slug: "episode-3",
         poster: "/posters/episode-3.jpg",
         runtimeSeconds: 1295,

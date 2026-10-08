@@ -89,6 +89,19 @@ export const SEASONS: Season[] = [
         runtimeSeconds: 1343,
         comingSoon: false,
       },
+      {
+        /*
+          LANDED 2026-10-08. "Episode 3" until Melissa names it — Breathe was
+          named the day it landed. Same both-places rule as above: the
+          matching `title` in videos.ts must say the same thing.
+        */
+        number: 3,
+        title: "Episode 3",
+        slug: "episode-3",
+        poster: "/posters/episode-3.jpg",
+        runtimeSeconds: 1295,
+        comingSoon: false,
+      },
     ],
   },
 ];

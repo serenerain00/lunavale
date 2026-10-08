@@ -137,6 +137,12 @@ const OVERRIDES = {
   // of those, | but my name is Josh"), so it runs to 123.6 and ends on his
   // name, before her "I know" at 123.76 (word timings from whisper).
   "episode-2": 123.6,
+
+  // EPISODE 3 — ABOUT TWO MINUTES FREE, the same window Melissa set for
+  // episode 2. 129.0 ends on "Misprint." (word ends 128.56), before the score
+  // carries on into the painting. All of it is the journal montage, which is
+  // already free as the post "Not Bad Trouble" — the window spends nothing.
+  "episode-3": 129.0,
 };
 
 /**

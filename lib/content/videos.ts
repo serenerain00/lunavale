@@ -3250,6 +3250,59 @@ export const videos: Video[] = [
   },
   {
     /*
+      EPISODE 3, 2026-10-08. Season one, 21:35 after the trim.
+
+      WHAT IS IN IT, from the transcript, in order: Luna reading the journal
+      she kept in her first year with Josh, over the montage that is already
+      free as the post "Not Bad Trouble" (eggs, step four, the paint, "we
+      were so good"); the accident night as she wrote it — Josh at two in the
+      morning, "was somebody hurt?", "I signed off on something", "Rick is
+      handling it" (the old-journal page `old-journal-the-night-he-came-over`
+      is the same night in her hand); Tyson finding her with "the archives";
+      the couch and "You said nine" / "Stay"; the late-night kitchen fight —
+      "because that means no one took you away from me … you just stopped
+      choosing me", "but somehow I'm still lonely", "come home. Not to the
+      house. To me."; Tyson's hug ("You leaving me?" / "Never."); and Josh's
+      call — "I want to come home, Josh. That's why I need you to stop." It
+      ends on Melissa's card, "BETWEEN US".
+
+      THE SYNOPSIS IS A PLACEHOLDER, written off the transcript; hers to
+      replace, as she did the pilot's and Breathe's. It names the journal,
+      the waiting and the call, and NOT the accident night: that is Stage
+      Four of the secret (docs/content/BETWEEN_US_SECRET_CANON.md §8), and a
+      public synopsis is the wrong place for a stranger to meet it.
+
+      ABOUT TWO MINUTES FREE, the window Melissa set for Breathe — see the
+      override in scripts/make-previews.mjs. It is all journal montage.
+
+      NOT `mature`, and no notes: the fight is words, and the closest thing
+      to physical is "don't touch me" said and respected.
+    */
+    slug: "episode-3",
+    // Placeholder until Melissa names it. Must match lib/content/season.ts.
+    title: "Episode 3",
+    synopsis:
+      "Luna finds the journal she kept in her first year with Josh and reads it cover to cover \u2014 the burnt eggs, the paint, the nights she waited up. Somewhere in those pages is the moment loving each other stopped being enough, and she cannot find it. Then Tyson finds her reading, and later that night, Josh calls.",
+    file: "episode-3.proxy.mp4",
+    poster: "/posters/episode-3.jpg",
+    // 1295, trimmed on the end card with a 2s fade — see scripts/import-cuts.sh.
+    durationSeconds: 1295,
+    addedOn: "2026-10-08",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "episode-3-preview.proxy.mp4",
+      // 129.0 exactly — see the override in scripts/make-previews.mjs.
+      durationSeconds: 129,
+      hookStart: 0,
+      hookNote: "the old journal, ending on \u201cMisprint.\u201d",
+    },
+    feelings: ["distance", "hurt", "trust"],
+    place: "lakehouse",
+    about: ["luna", "josh", "tyson", "rick"],
+  },
+  {
+    /*
       AFTER THE DETECTIVES, 2026-09-24. Scored the same night it arrived.
 
       WHAT IS SAID, from the transcript rather than the frames. Luna has sat

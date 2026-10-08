@@ -830,6 +830,20 @@ CUTS=(
   #
   # END=193.1. blackdetect puts 0.8s of black on the end.
   "luna-tyson-shaving|stories/luna-tyson-shaving/luna-tyson-shaving-music.mov|58|193.1"
+
+  # EPISODE 3, 2026-10-08. Season one, 22:08 as delivered, 1320x798 hevc at
+  # 60fps — so the sixth field brings it down to 30, the rate both earlier
+  # episodes stream at (the pilot was done by hand; this is the same result
+  # without the hand).
+  #
+  # POSTER AT 60s: her hand holding a photograph of the two of them, happy,
+  # tucked into the old journal. The whole episode in one frame, and inside
+  # the free window, so it spends nothing.
+  #
+  # END=1295, FADE=2. Melissa's card ("BETWEEN US") is up by 21:24 and the
+  # score is gone by 21:29; the master then holds the card in silence to
+  # 22:08. Kept six seconds past the music, the last two faded.
+  "episode-3|stories/ep3/final/ep3-final.mov|60|1295|2|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).
@@ -859,12 +873,12 @@ wanted() {
 }
 
 for entry in "${CUTS[@]}"; do
-  IFS='|' read -r slug src at end fade <<<"$entry"
+  IFS='|' read -r slug src at end fade fps <<<"$entry"
   wanted "$slug" || continue
   # All four optional slots are always passed, with "-" standing in for the
   # ones this line does not set. Otherwise an omitted `at` would slide `end`
   # into the poster argument and quietly grab the poster from the wrong frame.
-  ./scripts/optimize-media.sh import "$slug" "$src" \
+  PROXY_FPS="${fps:-}" ./scripts/optimize-media.sh import "$slug" "$src" \
     "${at:--}" "${end:--}" "${fade:--}"
 done
 

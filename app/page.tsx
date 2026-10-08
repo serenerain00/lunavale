@@ -323,7 +323,7 @@ export default async function Home() {
             <Guest>
               <Link
                 href="/membership"
-                className="shrink-0 text-sm text-amber transition-colors duration-(--duration-quick) hover:text-amber-soft"
+                className="-my-3 inline-flex min-h-11 items-center shrink-0 text-sm text-amber transition-colors duration-(--duration-quick) hover:text-amber-soft"
               >
                 Watch it with a membership{" "}
                 <span aria-hidden="true">→</span>
@@ -498,11 +498,13 @@ export default async function Home() {
           {openPages.map((e) => (
             <RailItem key={e.id}>
               <Link href={`/journal/${e.id}`} className="group block">
-                <div className="flex aspect-video flex-col justify-between rounded-lg bg-[#efe7d9] p-5 ring-1 ring-hairline transition-transform duration-(--duration-standard) group-hover:-translate-y-1">
-                  <p className="font-hand text-lg leading-snug text-[#2a2520]">
+                {/* Held to 16:9 the same way as the New row's paper — see
+                    the comment there. */}
+                <div className="flex aspect-video flex-col justify-between gap-1 overflow-hidden rounded-lg bg-[#efe7d9] p-3 ring-1 ring-hairline transition-transform duration-(--duration-standard) group-hover:-translate-y-1 sm:p-5">
+                  <p className="line-clamp-3 font-hand text-sm leading-snug text-[#2a2520] sm:text-lg">
                     {opening(e, 110)}
                   </p>
-                  <p className="text-xs uppercase tracking-[0.14em] text-[#6b6156]">
+                  <p className="shrink-0 truncate text-[10px] uppercase tracking-[0.14em] text-[#6b6156] sm:text-xs">
                     {e.dateline}
                   </p>
                 </div>

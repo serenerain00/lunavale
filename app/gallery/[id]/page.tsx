@@ -109,7 +109,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
         <nav className="py-5 text-sm">
           <Link
             href="/browse"
-            className="text-stone transition-colors duration-(--duration-quick) hover:text-ivory"
+            className="-my-3 inline-flex min-h-11 items-center text-stone transition-colors duration-(--duration-quick) hover:text-ivory"
           >
             ← Back to the catalog
           </Link>

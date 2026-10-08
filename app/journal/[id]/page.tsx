@@ -79,7 +79,7 @@ export default async function JournalEntryPage({ params }: EntryPageProps) {
         <nav className="py-5 text-sm">
           <Link
             href={`/journal?place=${entry.place}`}
-            className="text-stone transition-colors duration-(--duration-quick) hover:text-ivory"
+            className="-my-3 inline-flex min-h-11 items-center text-stone transition-colors duration-(--duration-quick) hover:text-ivory"
           >
             ← {place?.label ?? "The journal"}
           </Link>

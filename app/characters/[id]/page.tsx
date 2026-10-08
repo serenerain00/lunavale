@@ -113,7 +113,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
               <nav aria-label="Breadcrumb">
                 <Link
                   href="/characters"
-                  className="text-xs uppercase tracking-[0.2em] text-amber transition-colors duration-(--duration-quick) hover:text-amber-soft"
+                  className="-my-3 inline-flex min-h-11 items-center text-xs uppercase tracking-[0.2em] text-amber transition-colors duration-(--duration-quick) hover:text-amber-soft"
                 >
                   ← The three of them
                 </Link>
@@ -413,7 +413,7 @@ function Section({
         {action && (
           <Link
             href={action.href}
-            className="whitespace-nowrap text-sm text-amber underline decoration-hairline underline-offset-4 transition-colors duration-(--duration-quick) hover:decoration-amber"
+            className="-my-3 inline-flex min-h-11 items-center whitespace-nowrap text-sm text-amber underline decoration-hairline underline-offset-4 transition-colors duration-(--duration-quick) hover:decoration-amber"
           >
             {action.label}
           </Link>

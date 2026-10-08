@@ -80,7 +80,7 @@ export function NoteCard({ note, unlocked }: NoteCardProps) {
         {about && (
           <Link
             href={about.href}
-            className="text-xs text-[#9a4b45] underline decoration-ink/20 underline-offset-4 transition-colors duration-(--duration-quick) hover:decoration-[#9a4b45]"
+            className="-my-3 inline-flex min-h-11 items-center text-xs text-[#9a4b45] underline decoration-ink/20 underline-offset-4 transition-colors duration-(--duration-quick) hover:decoration-[#9a4b45]"
           >
             {about.label}
           </Link>

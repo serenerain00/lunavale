@@ -844,6 +844,18 @@ CUTS=(
   # score is gone by 21:29; the master then holds the card in silence to
   # 22:08. Kept six seconds past the music, the last two faded.
   "episode-3|stories/ep3/final/ep3-final.mov|60|1295|2|30"
+
+  # THE INTERVIEW, 2026-10-09. A future season: Detectives Harris and
+  # Bennett question Luna about the accident nine years ago, then she rings
+  # Tyson from the car. Scored, 13:20, 1320x798 hevc at 60fps — down to 30
+  # like the episodes; at thirteen minutes it is the same argument.
+  #
+  # POSTER AT 470s: Luna alone across the table, the detectives' backs to
+  # camera. The interview in one frame, and nothing it reveals.
+  #
+  # END=795, FADE=3. Picture is black from 787.1; the score runs on under it,
+  # so it keeps eight seconds of that and fades the last three.
+  "luna-detectives|stories/luna-detectives/luna-detectives-music.mov|470|795|3|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

@@ -3303,6 +3303,57 @@ export const videos: Video[] = [
   },
   {
     /*
+      THE INTERVIEW, Melissa, 2026-10-09. A FUTURE SEASON — the latest thing
+      in the story, the start of the run the detectives set off: this, then
+      the fight with Josh (the post "Then Tell Me"), then Tyson
+      (`luna-ty-detectives`).
+
+      WHAT IS IN IT, from the transcript. Detectives Harris and Bennett (the
+      names as spoken; Melissa's brief had Hale and Reyes, and she chose the
+      screen) come to the lakehouse door and take her to the station. About
+      ten minutes of a forty-five-minute interview: Daniel Mercer, who died
+      at the family facility on September 17th nine years ago; "the original
+      report says" a machine malfunctioned — and she hears what "original"
+      means; Tyson was at the facility that night, which she never knew; Josh
+      signed off on the section hours before Mercer died; do you journal? She
+      admits Josh "came over" that night and says she does not remember him
+      telling her anything. Then, in the car, she rings Tyson: "they said you
+      were there. Were you?"
+
+      THE SYNOPSIS IS A PLACEHOLDER and keeps to the free 1:28 — the door,
+      the accident, the station. Mercer, Tyson and the signature are the
+      members' half and are not on the card.
+
+      THE FIRST 1:28 FREE (Melissa), ending on "What exactly is this about?"
+      — see scripts/make-previews.mjs.
+
+      Canon from her brief, recorded in docs/content/BETWEEN_US_SECRET_CANON.md
+      ("Addition — 2026-10-09: the interview").
+    */
+    slug: "luna-detectives",
+    // PLACEHOLDER — hers to replace. Spoken inside the free minute.
+    title: "Nine Years Ago",
+    synopsis:
+      "Two detectives come to the door of the lakehouse with questions about an accident at Josh\u2019s family business, nine years ago. Luna goes with them to answer a few of them. She comes out with more questions than she went in with.",
+    file: "luna-detectives.proxy.mp4",
+    poster: "/posters/luna-detectives.jpg",
+    // 795, trimmed under the score's tail with a 3s fade — see scripts/import-cuts.sh.
+    durationSeconds: 795,
+    addedOn: "2026-10-09",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "luna-detectives-preview.proxy.mp4",
+      durationSeconds: 88,
+      hookStart: 0,
+      hookNote: "the door and the drive in, ending on \u201cWhat exactly is this about?\u201d",
+    },
+    feelings: ["lies", "trust"],
+    place: "lakehouse",
+    about: ["luna", "josh", "tyson", "rick"],
+  },
+  {
+    /*
       AFTER THE DETECTIVES, 2026-09-24. Scored the same night it arrived.
 
       WHAT IS SAID, from the transcript rather than the frames. Luna has sat

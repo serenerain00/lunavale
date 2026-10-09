@@ -1512,10 +1512,12 @@ export const journal: JournalEntry[] = [
         as it happened. "Signed something" is §12's sign-off, in her hand.
         This page is now the canon account of that night — see
         `what-i-told-them`, which was brought into line with it.
-        CORRECTED 2026-10-08 to match episode 3: they were LIVING TOGETHER
-        by then (Melissa). The first line is now the episode's own — "Josh
-        came home at two this morning" — and "He stayed here.", which only
-        worked in her apartment, is cut. Nothing else on the page changed.
+        SETTLED 2026-10-09 (Melissa): HER APARTMENT, and he was there so
+        much that she called it home for him — but they were not officially
+        living together and he still had his own place. So the first line is
+        the episode's own, "Josh came home at two this morning", and her "He
+        stayed here." stands. (A 2026-10-08 pass had read episode 3 as
+        living together and cut that line; it is back.)
       5 home — pairs with the happy domestic montage.
       6 dinner, and the couch — corresponds to the clip where she waits,
         falls asleep and Josh comes home. Young Luna sees nothing wrong with
@@ -1626,6 +1628,7 @@ export const journal: JournalEntry[] = [
       "He kept saying his dad was handling it.",
       "“Rick is handling it.”",
       "I finally stopped asking questions.",
+      "He stayed here.",
       "I don’t think either of us slept much.",
     ],
   },
@@ -4595,6 +4598,15 @@ export const journal: JournalEntry[] = [
     much" and still makes "you let me lie for you" true. Change it if the
     scene means something else.
 
+    REVISED 2026-10-09 against the interview itself (`luna-detectives`):
+    the detectives TELL her Tyson was at the facility, she phones him from
+    the car ("they said you were there — were you?"), and they ask whether
+    she kept a journal — which she has, and has reread (`old-journal-*`,
+    month one). So the entry now has her learning it there, the call, and a
+    second lie about the journal; "he wasn't supposed to be there" can now
+    mean Tyson. The call's outcome ("he did not say no") is MY READING of
+    her side of it — hers to cut.
+
     REVISED 2026-10-07 to match Melissa's own page for that night,
     `old-journal-the-night-he-came-over`, which is newer and is canon:
     "somebody got hurt", "he'd signed something", "Rick is handling it", and
@@ -4621,24 +4633,27 @@ export const journal: JournalEntry[] = [
     mature: false,
     body: [
       "Two detectives, a table, and forty-five minutes. I have been trying since four o'clock to work out how long forty-five minutes is, because it felt like an afternoon and it felt like nothing.",
-      "They knew my name. They knew where I am living, which I have told about six people. They knew how long I have known Tyson, to the year, and they asked about him almost as much as they asked about Josh, and I cannot make that part sit still.",
+      "They knew my name. They knew where I am living, which I have told about six people. They knew how long I have known Tyson, to the year. And then one of them said, the way you would mention the weather, that he was at the facility that night.",
+      "Tyson. I have known him twenty years. I did not know that.",
       "Then one of them asked whether I remembered a night nine years ago. He said the date. He did not need to.",
-      "I remember it. I was twenty-nine and we were already living together, and Josh came home at two in the morning. I had never seen him like that.",
+      "I remember it. I was twenty-nine, and he was at my apartment more nights than he was at his own — home, he called it, though he still had his place. He came home at two in the morning. I had never seen him like that.",
       "He did not say much. He kept saying somebody got hurt. He said he had signed something, and when I asked what he meant he would not answer. He said his dad was handling it. Rick is handling it — he said that more than once.",
       "Hurt. That was his word, all night. By the end of the week it was a different word, and nobody ever said that one to me out loud.",
-      "I do not think either of us slept. When I asked the week after, he said it was an accident and it was handled and could we please not, and I said of course. I was a year in and I loved him and I thought not asking was a kindness.",
+      "He stayed. I do not think either of us slept. When I asked the week after, he said it was an accident and it was handled and could we please not, and I said of course. I was a year in and I loved him and I thought not asking was a kindness.",
       "I want this down honestly: I have not thought about that night in years. Not because I buried it. It was never a secret, to me. It was a terrible thing that happened at his work, that his father dealt with, the way his father deals with everything.",
-      "So when the detective asked, I said I didn't remember.",
+      "So when they asked what he said to me that night, I said I didn't remember.",
       "I did not decide to. I opened my mouth and that is what came out, and then I was sitting in it, and every question after that I answered a little less. By the end I was not being careful. I was frightened. I think they could see the difference better than I could.",
       "I lied to the police for him. I have not lied to anybody about anything that mattered in twenty years, and I did it for a man I have left, without being asked, in under a second.",
+      "Then they asked if I kept a journal. I said I didn't know if I wrote about it. I know exactly which box it is in. I read that page my first month up here.",
+      "I rang Tyson from the car. I asked him why he was there. Then I asked him if he was there at all. He did not say no.",
       "So tonight I asked Josh what I had lied for.",
-      "He would not tell me. He was angry that I was in it — as if I had walked in on my own, as if he had not stood in our kitchen nine years ago and put it in my hands. He said he was protecting me. He said it so many times it stopped being a sentence. He took hold of my arm to keep me in the room and I told him not to touch me, and he let go, which is the only thing tonight he did because I asked.",
+      "He would not tell me. He was angry that I was in it — as if I had walked in on my own, as if he had not stood in my kitchen nine years ago and put it in my hands. He said he was protecting me. He said it so many times it stopped being a sentence. He took hold of my arm to keep me in the room and I told him not to touch me, and he let go, which is the only thing tonight he did because I asked.",
       "Then he said: I'll take care of it.",
       "And I heard his father. The same words in the same order, nine years apart, and I understood that I have been living inside that sentence the whole time and never once asked what it cost.",
       "At the very end he said: he wasn't supposed to be there.",
       "I said who.",
       "He didn't answer.",
-      "I have been sitting here two hours with that. Somebody who was not supposed to be somewhere. I do not know if he meant the man who died. I do not know who else he could have meant. I do not know why two detectives spent half of forty-five minutes asking me about Tyson.",
+      "I have been sitting here two hours with that. Somebody who was not supposed to be somewhere. I do not know if he meant the man who died. Or Tyson. I do not know which answer I am more afraid of.",
       "Tomorrow I am going to Tyson. He tells me the truth. That is the whole of the rule, and tonight it is the only thing I am sure of.",
     ],
   },

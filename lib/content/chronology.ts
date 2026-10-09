@@ -204,6 +204,12 @@ export const STORY_ORDER: readonly string[] = [
   "luna-truck-breakdown",
   "ty-luna-bed",
 
+  // HAND-PLACED, 2026-10-09. The interview itself — a future season, and the
+  // start of the run it sets off: the detectives, then Josh ("Then Tell Me",
+  // a post, so not in this list), then Tyson. Directly before the scene
+  // below for that reason.
+  "luna-detectives",
+
   // HAND-PLACED — CONFIRMED LAST. Melissa, 2026-09-24: "this scene is way in
   // the future. prob the latest scene we have." The detectives, and Tyson
   // keeping her out of it. If later scenes arrive, this is where they go.

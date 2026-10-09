@@ -43,53 +43,60 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-09-23 against `main` at 06dc338. The 2026-07-28 row is kept beneath
+re-run 2026-10-09 against `main` at 85fb94e. The 2026-07-28 row is kept beneath
 so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 172 | 146 |
-| Tyson | 12 | 132 | 116 |
-| Josh | 14 | 104 | 92 |
-| Rick | 1 | 10 | 9 |
+| Luna | 12 | 197 | 166 |
+| Tyson | 12 | 142 | 124 |
+| Josh | 14 | 123 | 108 |
+| Rick | 1 | 13 | 12 |
+| Cathy | 0 | 13 | 13 |
+| Avery | 0 | 7 | 7 |
 
 *As built, 2026-07-28: Luna 8 / 44 / 23 · Tyson 8 / 44 / 33 · Josh 8 / 35 / 21.
-Rick was not on the table at all. Figures above include this week's note.*
+Rick, Cathy and Avery were not on the table at all. Figures above include this
+week's note.*
 
-> These numbers move fast. Total pieces were 105 / 79 / 79 / 4 in late August and
-> 126 / 94 / 86 / 4 a fortnight ago; the trailer, the new clips and the pages
-> that landed on `main` through September added another seventy-odd, and the same
-> push put almost everything behind membership — which is why the members-only
-> column now sits just under the total. Re-run the two functions rather than
-> trusting the table.
+> These numbers move fast. Total pieces were 105 / 79 / 79 / 4 in late August,
+> 126 / 94 / 86 / 4 in mid-September and 172 / 132 / 104 / 10 a fortnight ago.
+> Episodes 2 and 3, the new clips and Luna's old journal added another
+> seventy-odd in early October. Cathy and Avery earned their rows in the same
+> push. Re-run the two functions rather than trusting the table.
 
-**Josh is the thinnest of the three leads again.** He has the most *notes* of
-anyone, but he is bottom on total pieces, and the gap keeps widening even in the
-weeks he gains. Tyson's lead over him was 25 before the launch and is 28 now,
-across a fortnight in which Josh had his best run in a month. Don't re-derive
-that sentence from the table each time — the useful fact is the direction, and
-the direction has not changed once since this file was written. Volume was never
-the real measure for him anyway: he is the hardest character to hold an
-audience's sympathy for, and the whole story depends on him being genuinely
-likeable before he turns. What to watch is how much of his material makes that
-case — and on that the launch was good for him. **He is one of the three the
-pilot is about**, which is the first thing a new member watches, and he is in
-`luna-ty-groceries` (*Day 2*, 2026-09-23) as well.
+**Josh is the thinnest of the three leads, but the gap is closing.** He has the
+most *notes* of anyone and is still bottom on total pieces. Tyson's lead over
+him was 25 before the September launch, widened to 28, and is **19 now** — the
+first time the direction has reversed since this file was written, and it
+reversed hard. Episodes 2 and 3 are what did it: both are about Luna, Josh and
+Tyson, so they pay Josh and Tyson equally while Josh was starting from behind.
+*(This paragraph used to say the direction had never changed once. That was true
+until 2026-10-09 and is not any more. Re-derive the three numbers when you touch
+this, rather than trusting a remembered trend.)* Volume was never the real
+measure for him anyway: he is the hardest character to hold an audience's
+sympathy for, and the whole story depends on him being genuinely likeable before
+he turns. What to watch is how much of his material makes that case. **He is one
+of the three all three episodes are about**, and the episodes are the first
+thing a new member watches.
 
-**Rick is the real hole.** Ten pieces against Josh's hundred-odd, and he is the
-entire explanation for Josh. Every note written for Rick is doing double duty on
-the character the story most needs an audience to like first, which makes him
-the cheapest way to feed Josh as well. September gave him two more appearances,
-both noteless: `josh-ty-ricks-house`, and `ty-josh-rick-accident` — *What Was
-Agreed*, the accident, published **free** and placed near the front of the
-story. A note on a free piece is the shop window, and that one is free, second
-in the order, and about the character who explains Josh, which is what makes it
-the highest-value Rick gap — not merely that it is open. *(It opened the story
-until 2026-09-22, when `ty-luna-young` took first place. Do not restore the
-"first in the story" phrasing; check `STORY_ORDER` before making that claim
-about anything.)* Two other free pieces are uncovered as well —
-`luna-ty-couch` and `ty-luna-young` — but both pay into the two characters who
-need it least.
+**Rick is the real hole.** Thirteen pieces against Josh's hundred-and-twenty-odd,
+and he is the entire explanation for Josh. Every note written for Rick is doing
+double duty on the character the story most needs an audience to like first,
+which makes him the cheapest way to feed Josh as well. He is in six clips now
+and **five of them carry no note**: `josh-ty-ricks-house` (*The Safe*),
+`ty-josh-rick-accident` (*What Was Agreed*), `josh-rick-lake` (*The Lake* — the
+contested slot, not a real gap), and both new episodes, which added him to the
+cast in October. Only `josh-rick-study` is covered. The accident is still the
+one to take first: published **free**, second in the order, and about the
+character who explains Josh — a note on a free piece is the shop window, and
+that is what makes it the highest-value Rick gap, not merely that it is open.
+*(It opened the story until 2026-09-22, when `ty-luna-young` took first place.
+Do not restore the "first in the story" phrasing; check `STORY_ORDER` before
+making that claim about anything.)* Five other free pieces are uncovered as well
+— `luna-ty-couch`, `ty-luna-young`, `luna-tyson-shaving`, `young-luna-ty-apt`
+and `luna-truck-breakdown` — but every one of them pays into the two characters
+who need it least.
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
 > updated 2026-10-05. The backlog below describes `main`, and `main` is behind:
@@ -122,16 +129,23 @@ need it least.
 
 Standing backlog, roughly prioritised:
 
-- **`pilot` — *Episode 1 (Pilot)*, published 2026-09-21, and nothing has a note
-  on it.** This is now the top of the list. It is the longest thing in the
-  library (18½ minutes), it is about Luna, Josh and Tyson, and it is the first
-  thing a new member watches. It is `premium`, but the first minute is public
-  and is already on Instagram, so the episode is back in the sitemap — a note on
-  it is reachable in a way a note on an ordinary gated clip is not. Two
-  cautions: it is `mature` and carries `notes: ["danger"]`, and the entry's own
-  comment says the constraint on everything about it is **not to spend the
-  intro**. Read Melissa's synopsis in `videos.ts` rather than writing off frames
-  — she replaced a frames-written one there, and the comment explains why
+- **The three episodes carry no note between them.** This is the top of the
+  list, and in October it stopped being one item: `pilot` (*Episode 1*,
+  2026-09-21, 18:36, `mature`, `notes: ["danger"]`), `episode-2` (*Breathe*,
+  22:23) and `episode-3` (*The Space Between*, 21:35). All three are `premium`
+  with a free opening — `preview.durationSeconds` reads 60, 124 and 129, so a
+  minute on the pilot and about two on each of the others, not the "1:30" an
+  early commit message said of Breathe before it was recut. That preview is what
+  keeps them in the sitemap, so a note on an
+  episode is reachable in a way a note on an ordinary gated clip is not. They
+  are the first thing a new member watches, and 2 and 3 add Rick to the cast,
+  so a note on either pays Josh *and* Rick. *(The pilot is no longer the longest
+  thing in the library — `episode-2` is, by nearly four minutes. Don't restore
+  that claim; read `durationSeconds` in `videos.ts`.)* For the pilot, the
+  entry's own comment says the constraint on everything about it is **not to
+  spend the intro**. Read Melissa's synopsis in `videos.ts` for each rather than
+  writing off frames — she replaced the frames-written ones there, and the
+  comments explain why
 - Josh clips with no note yet: `luna-josh-break`, `luna-josh-bed-flashback`,
   `luna-josh-first-night`, `luna-josh-fair` *(taken by #4)*, and `josh-luna-wall`
   — the last of which Melissa may want to write herself, as she is holding the
@@ -152,21 +166,26 @@ Standing backlog, roughly prioritised:
   Luna and Tyson — but the placement is worth more here than it is there. It
   pairs with the journal entry `the-rule` via `sceneSlug`, and both cuts are
   free (the 9:16 is the post `pick-me-up`), so read that entry first
-- Rick is in four clips. Three carry no note on `main`, though one of those
-  three is the contested slot rather than a real gap. `josh-rick-study` has
-  two notes already (`rick-the-chair`, `josh-the-study`); `josh-rick-lake` is the
-  one every open drop keeps re-writing; `josh-ty-ricks-house` has nothing; and
-  `ty-josh-rick-accident` — *What Was Agreed* — has nothing either and is
-  **free**, which makes it the Rick one to take first (it is second in the
-  order now, not first; `ty-luna-young` took the opening on 2026-09-22). Mind
-  the canon: the accident
-  moved to 8–10 years ago on 2026-09-18 and Luna and Josh were already together
-  by then, so read *"TIMELINE — CANONICAL, 2026-09-18"* in
-  `BETWEEN_US_SECRET_CANON.md` before writing a word of it — and note that two
+- Rick is in six clips as of October. Five carry no note on `main`, though one
+  of those five is the contested slot rather than a real gap. `josh-rick-study`
+  is the only covered one (`rick-the-chair`, `josh-the-study`); `josh-rick-lake`
+  is the one every open drop keeps re-writing; `josh-ty-ricks-house` has
+  nothing; `episode-2` and `episode-3` have nothing and are covered by the
+  episodes item above; and `ty-josh-rick-accident` — *What Was Agreed* — has
+  nothing either and is **free**, which makes it the Rick one to take first (it
+  is second in the order now, not first; `ty-luna-young` took the opening on
+  2026-09-22). Mind the canon: the accident
+  moved to 8–10 years ago on 2026-09-18, Luna and Josh were already together
+  by then, and October added that Josh came home that night — so read
+  *"TIMELINE — CANONICAL, 2026-09-18"* in `BETWEEN_US_SECRET_CANON.md` before
+  writing a word of it, and note that two
   sections there are both numbered 12, so go by the title, not the number. After
   those two, the next Rick piece has to come from somewhere other than a clip —
   the brewery, the liquor, what he made of Luna across ten years
-- First notes for Cathy and Avery, who have none at all
+- First notes for Cathy and Avery. They are no longer empty — October gave them
+  thirteen and seven pieces, a kitchen clip (`avery-cathy-kitchen`, *Mom's
+  Kitchen*) and Avery a real portrait — but neither has a single note, which now
+  makes them the two largest wholly uncovered people on the table
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none
 - Notes on the vertical posts; only `run-at-the-lake` has one

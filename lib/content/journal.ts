@@ -4598,7 +4598,9 @@ export const journal: JournalEntry[] = [
     INVENTED, hers to cut: driving herself so she could leave (she is at
     the wheel at the end of the scene, which is where it came from);
     waiting for Josh in the facility car park; the birthday cards and the
-    lease; "he did not say no" (her side of the call is all there is).
+    lease. THE CALL IS FROM THE SCENE (Melissa, 2026-10-09: "Tyson told her
+    yes"): "Luna…" / "No. Don't do that." / "They said you were there. Were
+    you?" / "Yeah." / "Okay." — then, alone, his name shouted. Kept to that.
 
     THE ONE CHOICE WORTH CHECKING: "Nine years ago I was twenty-nine. I
     have written about that year in this book before." That reaches for
@@ -4635,8 +4637,12 @@ export const journal: JournalEntry[] = [
       "They asked if I keep a journal. Sometimes, I said. They said I might have written it down, whatever he told me. I said I didn't remember him telling me anything. I said I didn't know if I wrote about it.",
       "I know exactly which box it is in.",
       "Nine years ago I was twenty-nine. I have written about that year in this book before. I am not going to go back and read it tonight.",
-      "I rang Tyson from here, before I had even started the engine. I asked him where he was. I asked him why he was there. I asked him if he was there at all.",
-      "He did not say no.",
+      "I rang Tyson from here, before I had even started the engine. I asked him where he was. I asked him why he was there.",
+      "He said my name. Just my name, the way he says it when he is about to be careful with me, and I told him not to do that.",
+      "I said, they said you were there. Were you.",
+      "He said yeah.",
+      "One word. Twenty years of not lying to me and he kept the rule, right there, on the phone, and it was the worst thing he could have done.",
+      "I said okay. I do not know why I said okay. Then the line was dead and I sat here and shouted his name at the windscreen, like that would bring him back on.",
       "Now I am going to go and find Josh, and I am going to make him tell me what I just lied for.",
     ],
   },
@@ -4674,8 +4680,7 @@ export const journal: JournalEntry[] = [
     she kept a journal — which she has, and has reread (`old-journal-*`,
     month one). So the entry now has her learning it there, the call, and a
     second lie about the journal; "he wasn't supposed to be there" can now
-    mean Tyson. The call's outcome ("he did not say no") is MY READING of
-    her side of it — hers to cut.
+    mean Tyson. On the call TYSON SAYS YES ("Yeah.") — from the scene.
 
     REVISED 2026-10-07 to match Melissa's own page for that night,
     `old-journal-the-night-he-came-over`, which is newer and is canon:

@@ -856,6 +856,18 @@ CUTS=(
   # END=795, FADE=3. Picture is black from 787.1; the score runs on under it,
   # so it keeps eight seconds of that and fades the last three.
   "luna-detectives|stories/luna-detectives/luna-detectives-music.mov|470|795|3|30"
+
+  # THE INTERVIEW TRAILER, 2026-10-09. Free, and on Instagram — a look at
+  # what is a season away: interview voice-over over Luna, Josh and Tyson
+  # each coming apart on their own, Luna going through her journals. Scored
+  # ("The Devil Within"), 2:58, 1320x804 hevc at 60fps — down to 30.
+  #
+  # POSTER AT 105s: Luna on the bedroom floor in the boxes, papers and
+  # journals everywhere — the trailer's question in one frame.
+  #
+  # END=176.5. Picture is black from 173.2 and the song fades itself out by
+  # 176.5 (-41 dB, then silence); no extra fade.
+  "luna-detectives-trailer|stories/luna-detectives/luna-detective-trailer-music.mov|105|176.5|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

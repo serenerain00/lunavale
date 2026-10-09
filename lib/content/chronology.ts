@@ -275,6 +275,8 @@ export function assertComplete(): { missing: string[]; unknown: string[] } {
   // one is exempt the day it is added (2026-09-29, episode 2).
   const EXEMPT = new Set([
     "between-us-trailer-one",
+    // A trailer for a season away, not a beat in this one (2026-10-09).
+    "luna-detectives-trailer",
     "interview",
     ...SEASONS.flatMap((s) => s.episodes.map((e) => e.slug).filter(Boolean)),
   ]);

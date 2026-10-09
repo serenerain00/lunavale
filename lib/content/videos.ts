@@ -3303,6 +3303,43 @@ export const videos: Video[] = [
   },
   {
     /*
+      THE INTERVIEW TRAILER, Melissa, 2026-10-09. FREE — it runs on
+      Instagram. "I wanna show what's coming down the road even if it is a
+      season away." Voice-over from the interview (`luna-detectives`) over
+      Luna, Josh and Tyson each breaking down on their own — Josh at the
+      workbench, Tyson and the mirror, Luna in the car and on the phone — and
+      Luna going through her journals. Scored loud: "The Devil Within".
+
+      IT SPENDS WHAT THE INTERVIEW'S FREE 1:28 HOLDS BACK — "the one that
+      killed Mercer", "you think it wasn't an accident", "they said you were
+      there. Were you?" That is fine and was not re-litigated: it is on
+      Instagram, so the disclosure is already made — Melissa's standing
+      call: what is already on Instagram is already public.
+
+      NOT IN STORY_ORDER, the same as the first trailer — it is exempt in
+      chronology.ts. NO CONTENT NOTE: the violence is to things (a bench, a
+      mirror), not between people, and `violence` would say otherwise.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace.
+    */
+    slug: "luna-detectives-trailer",
+    title: "Trailer: Nine Years Ago",
+    synopsis:
+      "A season away. Two detectives, a man who died nine years ago, and three people who have never told each other everything about that night.",
+    file: "luna-detectives-trailer.proxy.mp4",
+    poster: "/posters/luna-detectives-trailer.jpg",
+    // 176.5, trimmed where the song fades out — see scripts/import-cuts.sh.
+    durationSeconds: 177,
+    addedOn: "2026-10-09",
+    access: "free",
+    mature: false,
+    // Empty on purpose, as for the first trailer.
+    feelings: [],
+    place: "lakehouse",
+    about: ["luna", "josh", "tyson"],
+  },
+  {
+    /*
       THE INTERVIEW, Melissa, 2026-10-09. A FUTURE SEASON — the latest thing
       in the story, the start of the run the detectives set off: this, then
       the fight with Josh (the post "Then Tell Me"), then Tyson

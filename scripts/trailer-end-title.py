@@ -126,9 +126,12 @@ def draw_tracked(draw, text, fnt, tracking, y, fill, width):
         x += draw.textlength(ch, font=fnt) + tracking
 
 
-def render_frame(t: float, W: int, H: int) -> Image.Image:
+def render_frame(t: float, W: int, H: int, sub_size: float = 0.025) -> Image.Image:
+    """`sub_size` is the credit's height as a share of the frame. 0.025 is
+    the first trailer's; scripts/trailer-bookends.py passes more, because
+    its output is cut for a phone screen."""
     title_f = ImageFont.truetype(DIDOT, int(H * 0.115))
-    sub_f = ImageFont.truetype(DIDOT, int(H * 0.025))
+    sub_f = ImageFont.truetype(DIDOT, int(H * sub_size))
 
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)

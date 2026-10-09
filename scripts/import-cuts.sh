@@ -862,12 +862,17 @@ CUTS=(
   # each coming apart on their own, Luna going through her journals. Scored
   # ("The Devil Within"), 2:58, 1320x804 hevc at 60fps — down to 30.
   #
-  # POSTER AT 105s: Luna on the bedroom floor in the boxes, papers and
-  # journals everywhere — the trailer's question in one frame.
+  # BOOKENDED THE SAME DAY (Melissa): an 8.5s opening card ("A FIRST LOOK /
+  # FROM A FUTURE SEASON OF BETWEEN US"), and at the cut's own fade to black
+  # "Some secrets don't stay buried." then the BETWEEN US end title. Built by
+  # scripts/trailer-bookends.py from the delivered cut — re-run that if the
+  # cut changes, then this line.
   #
-  # END=176.5. Picture is black from 173.2 and the song fades itself out by
-  # 176.5 (-41 dB, then silence); no extra fade.
-  "luna-detectives-trailer|stories/luna-detectives/luna-detective-trailer-music.mov|105|176.5|-|30"
+  # POSTER AT 113.5s: 105s in the cut, plus the 8.5s intro — Luna on the
+  # bedroom floor in the boxes, papers and journals everywhere.
+  #
+  # NO END: the bookended file ends on its own fade.
+  "luna-detectives-trailer|stories/luna-detectives/luna-detective-trailer-music-bookended.mp4|113.5|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

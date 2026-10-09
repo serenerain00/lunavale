@@ -3310,6 +3310,10 @@ export const videos: Video[] = [
       workbench, Tyson and the mirror, Luna in the car and on the phone — and
       Luna going through her journals. Scored loud: "The Devil Within".
 
+      BOOKENDED (Melissa, same day): "A FIRST LOOK / FROM A FUTURE SEASON OF
+      BETWEEN US" before it, and "Some secrets don't stay buried." and the
+      BETWEEN US end title after — type sized for a phone.
+
       IT SPENDS WHAT THE INTERVIEW'S FREE 1:28 HOLDS BACK — "the one that
       killed Mercer", "you think it wasn't an accident", "they said you were
       there. Were you?" That is fine and was not re-litigated: it is on
@@ -3328,8 +3332,9 @@ export const videos: Video[] = [
       "A season away. Two detectives, a man who died nine years ago, and three people who have never told each other everything about that night.",
     file: "luna-detectives-trailer.proxy.mp4",
     poster: "/posters/luna-detectives-trailer.jpg",
-    // 176.5, trimmed where the song fades out — see scripts/import-cuts.sh.
-    durationSeconds: 177,
+    // 195.5: the cut to its fade (173.2), with the 8.5s intro before it and
+    // the tagline and end title after — see scripts/trailer-bookends.py.
+    durationSeconds: 196,
     addedOn: "2026-10-09",
     access: "free",
     mature: false,

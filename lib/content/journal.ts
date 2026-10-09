@@ -4577,6 +4577,71 @@ export const journal: JournalEntry[] = [
   },
 
   /*
+    THE INTERVIEW, added 2026-10-09 beside `luna-detectives` ("Nine Years
+    Ago"). Written that afternoon, in the car outside the station, after
+    the call to Tyson and before she goes to Josh — so it sits directly
+    before `what-i-told-them`, which is that night.
+
+    THE SPLIT. `what-i-told-them` used to retell the interview as well.
+    This page now carries the room — Mercer's name, the photograph, "the
+    original report", the signature, Tyson, the journal question, the call
+    — and that one was trimmed the same day to the memory of the night
+    nine years ago, the lie, and Josh. Neither repeats the other.
+
+    FROM THE SCENE: Daniel Mercer and "I didn't know his name"; the
+    photograph of the facility; "the original report" and "you didn't have
+    to"; the signature "several hours before"; Tyson at the facility and
+    "you were waiting to see my face"; "do you journal" — "sometimes" — "I
+    don't remember him telling me anything"; the call ("why were you
+    there", "they said you were there", "were you").
+
+    INVENTED, hers to cut: driving herself so she could leave (she is at
+    the wheel at the end of the scene, which is where it came from);
+    waiting for Josh in the facility car park; the birthday cards and the
+    lease; "he did not say no" (her side of the call is all there is).
+
+    THE ONE CHOICE WORTH CHECKING: "Nine years ago I was twenty-nine. I
+    have written about that year in this book before." That reaches for
+    `the-year-he-went-quiet` — the year she filed under the Navy — without
+    her opening it. A reader who has read that page makes the connection;
+    she refuses to, tonight. If it is too early on the ladder, cut that
+    paragraph and nothing else needs to change.
+
+    Members-only (Melissa). DRAFT PROSE. Replace it.
+  */
+  {
+    id: "daniel-mercer",
+    addedOn: "2026-10-09",
+    dateline: "In the car outside the station, and my hands won't work yet",
+    place: "downtown",
+    where: "The car, outside the station",
+    about: ["luna", "josh", "tyson"],
+    sceneSlug: "luna-detectives",
+    access: "premium",
+    mature: false,
+    body: [
+      "I am in the car outside the station and my hands will not do anything useful yet, so they can do this.",
+      "I drove myself. They offered to take me and I said I would follow them, because I wanted to be able to leave. I did not know until just now that I had been thinking about leaving before I knew what it was about.",
+      "Daniel Mercer.",
+      "That was his name. I have known for nine years that a man died and I have never once known his name. They said it like I should have. I said I didn't know it, and that was the only completely true thing I said in there.",
+      "They put a photograph on the table of the facility. I have been there. I have stood in that car park waiting for Josh with the engine running. I looked at it for too long and I could feel them watching me look at it.",
+      "The original report. That is how they said it, every time. The original report says a machine malfunctioned. You do not say original unless you think there is another one.",
+      "I said so. They said they hadn't said that. I said they didn't have to. That was the moment I stopped trying to help them and started trying to get out.",
+      "Then a piece of paper with his signature on it. Josh signed off on the section, they said, several hours before. I know that signature. It is on ten years of birthday cards. It is on the lease of a house I do not live in any more.",
+      "And then Tyson.",
+      "He was at the facility that night. They said it the way you would mention the weather, and then neither of them said anything at all, and I understood that they had been waiting forty minutes to see what my face would do.",
+      "I do not know what my face did. I know I said what, and I know I said it twice.",
+      "Twenty years. I have known him for twenty years and he was there and I did not know.",
+      "They asked if I keep a journal. Sometimes, I said. They said I might have written it down, whatever he told me. I said I didn't remember him telling me anything. I said I didn't know if I wrote about it.",
+      "I know exactly which box it is in.",
+      "Nine years ago I was twenty-nine. I have written about that year in this book before. I am not going to go back and read it tonight.",
+      "I rang Tyson from here, before I had even started the engine. I asked him where he was. I asked him why he was there. I asked him if he was there at all.",
+      "He did not say no.",
+      "Now I am going to go and find Josh, and I am going to make him tell me what I just lied for.",
+    ],
+  },
+
+  /*
     AFTER THE DETECTIVES, added 2026-10-06 beside the free post
     `luna-josh-fight-45m`. Last in the journal because it is the latest thing
     in the story: the detectives, then Josh, then Tyson (`luna-ty-detectives`).
@@ -4597,6 +4662,11 @@ export const journal: JournalEntry[] = [
     remember the night. It is the smallest lie that fits "she doesn't give them
     much" and still makes "you let me lie for you" true. Change it if the
     scene means something else.
+
+    TRIMMED 2026-10-09 when `daniel-mercer` was written: the room itself
+    (Tyson at the facility, the journal question, the call) now lives on
+    that page, written in the car that afternoon. This one keeps the night
+    nine years ago, the lie, and Josh, and points back to it.
 
     REVISED 2026-10-09 against the interview itself (`luna-detectives`):
     the detectives TELL her Tyson was at the facility, she phones him from
@@ -4633,9 +4703,8 @@ export const journal: JournalEntry[] = [
     mature: false,
     body: [
       "Two detectives, a table, and forty-five minutes. I have been trying since four o'clock to work out how long forty-five minutes is, because it felt like an afternoon and it felt like nothing.",
-      "They knew my name. They knew where I am living, which I have told about six people. They knew how long I have known Tyson, to the year. And then one of them said, the way you would mention the weather, that he was at the facility that night.",
-      "Tyson. I have known him twenty years. I did not know that.",
-      "Then one of them asked whether I remembered a night nine years ago. He said the date. He did not need to.",
+      "I wrote the room down this afternoon, in the car, while it was still loud. This is the rest of it.",
+      "They asked whether I remembered the night. They said the date. They did not need to.",
       "I remember it. I was twenty-nine, and he was at my apartment more nights than he was at his own — home, he called it, though he still had his place. He came home at two in the morning. I had never seen him like that.",
       "He did not say much. He kept saying somebody got hurt. He said he had signed something, and when I asked what he meant he would not answer. He said his dad was handling it. Rick is handling it — he said that more than once.",
       "Hurt. That was his word, all night. By the end of the week it was a different word, and nobody ever said that one to me out loud.",
@@ -4644,8 +4713,7 @@ export const journal: JournalEntry[] = [
       "So when they asked what he said to me that night, I said I didn't remember.",
       "I did not decide to. I opened my mouth and that is what came out, and then I was sitting in it, and every question after that I answered a little less. By the end I was not being careful. I was frightened. I think they could see the difference better than I could.",
       "I lied to the police for him. I have not lied to anybody about anything that mattered in twenty years, and I did it for a man I have left, without being asked, in under a second.",
-      "Then they asked if I kept a journal. I said I didn't know if I wrote about it. I know exactly which box it is in. I read that page my first month up here.",
-      "I rang Tyson from the car. I asked him why he was there. Then I asked him if he was there at all. He did not say no.",
+      "And then I lied about the journal too, and that one I did decide.",
       "So tonight I asked Josh what I had lied for.",
       "He would not tell me. He was angry that I was in it — as if I had walked in on my own, as if he had not stood in my kitchen nine years ago and put it in my hands. He said he was protecting me. He said it so many times it stopped being a sentence. He took hold of my arm to keep me in the room and I told him not to touch me, and he let go, which is the only thing tonight he did because I asked.",
       "Then he said: I'll take care of it.",

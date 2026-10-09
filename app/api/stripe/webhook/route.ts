@@ -28,6 +28,7 @@ import {
   markEventHandled,
   recordMembership,
   recordPendingMembership,
+  userIdForSubscription,
 } from "@/lib/db/memberships";
 
 export const runtime = "nodejs";
@@ -104,7 +105,13 @@ async function applyEvent(event: Stripe.Event): Promise<void> {
   // order, and an old "updated" event overwriting a newer one would hand
   // somebody back access they had canceled.
   const subscription = await stripe().subscriptions.retrieve(subscriptionId);
-  const userId = userIdFor(subscription, event);
+  // Metadata first, then whoever already holds this subscription. The second
+  // lookup is what reaches members who paid before they had an account — see
+  // userIdForSubscription(). Without it their renewals and cancellations were
+  // filed as new purchases against an already-claimed pending row.
+  const userId =
+    userIdFor(subscription, event) ??
+    (await userIdForSubscription(subscription.id));
 
   const priceId = subscription.items.data[0]?.price.id;
   const tier =
@@ -279,5 +286,15 @@ function periodEnd(subscription: Stripe.Subscription): Date | null {
     subscription.items.data[0]?.current_period_end ??
     (subscription as unknown as { current_period_end?: number })
       .current_period_end;
+  // A subscription cancelled IMMEDIATELY has ended even though its period
+  // has not (2026-09-29). Access runs to the period end for anybody who
+  // cancels renewal — that is the promise — but not for somebody whose
+  // subscription was stopped outright, which on this site means a chargeback:
+  // the bank has already returned their money. Without this, tierForUser()
+  // saw "canceled, paid until the 17th" and kept them in for another month.
+  const ended = subscription.ended_at;
+  if (typeof ended === "number" && (typeof seconds !== "number" || ended < seconds)) {
+    return new Date(ended * 1000);
+  }
   return typeof seconds === "number" ? new Date(seconds * 1000) : null;
 }

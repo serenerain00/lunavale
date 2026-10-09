@@ -37,6 +37,7 @@
  */
 
 import { videos } from "@/lib/content/videos";
+import { SEASONS } from "@/lib/content/season";
 
 /**
  * Every story clip, first to last.
@@ -63,6 +64,12 @@ export const STORY_ORDER: readonly string[] = [
    * the other thing that happened before any of this.
    */
   "ty-luna-young",
+
+  // HAND-PLACED — CONFIRMED ERA, REASONED ORDER. Melissa, 2026-09-25: 2006,
+  // both eighteen. Same summer as Pick Me Up, so it sits beside it; after it
+  // rather than before because that one is why they are who they are, and
+  // this is what that looks like on an ordinary night.
+  "young-luna-ty-apt",
 
   // ── Before any of it ────────────────────────────────────────────────────
   /*
@@ -98,6 +105,15 @@ export const STORY_ORDER: readonly string[] = [
   "luna-ty-groceries",
   "luna-josh-bed-flashback",
   "luna-lkehouse-wine-shatter",
+  // HAND-PLACED — CONFIRMED ERA, REASONED ORDER. Melissa, 2026-10-04: about a
+  // week after the breakup. After the glass, which is the seven-day mark and
+  // her alone with it; this is the same week with somebody there.
+  "luna-tyson-shaving",
+
+  // HAND-PLACED — CONFIRMED. Melissa, 2026-09-29: about a week after the
+  // breakup, and Luna has not picked up for her mother. It goes straight
+  // before the call she finally does pick up.
+  "avery-cathy-kitchen",
   "luna-cathy-phone",
   "josh-rick-lake",
   "luna-avery-ipad",
@@ -187,6 +203,11 @@ export const STORY_ORDER: readonly string[] = [
   "luna-ty-apt-argue",
   "luna-truck-breakdown",
   "ty-luna-bed",
+
+  // HAND-PLACED — CONFIRMED LAST. Melissa, 2026-09-24: "this scene is way in
+  // the future. prob the latest scene we have." The detectives, and Tyson
+  // keeping her out of it. If later scenes arrive, this is where they go.
+  "luna-ty-detectives",
 ];
 
 /** Position in the story, 1-based. `undefined` for anything not in the list. */
@@ -244,7 +265,13 @@ export function assertComplete(): { missing: string[]; unknown: string[] } {
    * put the fragments in sequence; an episode does not belong in a list whose
    * whole purpose is to compensate for not having episodes.
    */
-  const EXEMPT = new Set(["between-us-trailer-one", "interview", "pilot"]);
+  // Episodes are read from the season rather than listed by hand, so each new
+  // one is exempt the day it is added (2026-09-29, episode 2).
+  const EXEMPT = new Set([
+    "between-us-trailer-one",
+    "interview",
+    ...SEASONS.flatMap((s) => s.episodes.map((e) => e.slug).filter(Boolean)),
+  ]);
   const ordered = new Set(STORY_ORDER);
   const missing = videos
     .filter((v) => !v.hidden && !EXEMPT.has(v.slug) && !ordered.has(v.slug))

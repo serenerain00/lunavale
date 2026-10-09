@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "health": "tsx scripts/health-check.ts",
+    "health": "tsx --env-file-if-exists=.env.local scripts/health-check.ts",
     "announce": "tsx scripts/announce.ts"
   },
   "dependencies": {

@@ -296,14 +296,31 @@ async function checkMoney() {
   // account exists, so there is a window where a payment exists and a user id
   // does not. Usually seconds. A row still sitting here after days is somebody
   // who paid and has nothing, and they will not necessarily write in.
+  //
+  // WARNS AFTER AN HOUR, FAILS AFTER TWO DAYS (2026-09-25). It used to say
+  // nothing at all for the first two days, and that is exactly the window it
+  // missed: a customer paid at checkout with one address, made her account
+  // three minutes later with a DIFFERENT one, and the claim — which matches
+  // on the verified email — never fired. She wrote in on Instagram a day
+  // later while this line was printing "Nobody has paid and been left
+  // without access". A claim takes seconds; an hour is already a person.
   const stuck = (await sql`
     SELECT email, created_at FROM pending_memberships
-    WHERE claimed_at IS NULL AND created_at < now() - interval '2 days'
+    WHERE claimed_at IS NULL AND created_at < now() - interval '1 hour'
     ORDER BY created_at
   `) as { email: string; created_at: string }[];
-  if (stuck.length) {
-    fail(`${stuck.length} paid membership(s) unclaimed for over 2 days`,
-      stuck.map((r) => `${r.email} (${new Date(r.created_at).toISOString().slice(0, 10)})`).join(", "));
+  const old = stuck.filter(
+    (r) => Date.now() - new Date(r.created_at).getTime() > 2 * 86_400_000,
+  );
+  const list = (rows: typeof stuck) =>
+    rows.map((r) => `${r.email} (${new Date(r.created_at).toISOString().slice(0, 16).replace("T", " ")}Z)`).join(", ");
+  const hint =
+    "Most likely signed up with a different email from the one they paid with. " +
+    "Look for a Clerk account created a few minutes after the payment.";
+  if (old.length) {
+    fail(`${old.length} paid membership(s) unclaimed for over 2 days`, `${list(old)}. ${hint}`);
+  } else if (stuck.length) {
+    warn(`${stuck.length} paid membership(s) unclaimed for over an hour`, `${list(stuck)}. ${hint}`);
   } else ok("Nobody has paid and been left without access");
 
   // WHO IS LEAVING, which the site was unable to answer until 2026-09-15. The
@@ -315,6 +332,10 @@ async function checkMoney() {
   const leaving = (await sql`
     SELECT current_period_end FROM memberships
     WHERE cancel_at_period_end = TRUE
+      -- Still inside the period. Once it has passed they have left, and
+      -- listing a date that is already over (it showed Sep 28 on the 29th)
+      -- makes the win-back line wrong about who can still be won back.
+      AND current_period_end > now()
     ORDER BY current_period_end
   `) as { current_period_end: string | null }[];
   if (leaving.length) {
@@ -421,6 +442,56 @@ async function checkStripe() {
     }
   } catch (e) {
     warn("Could not read the live Stripe catalogue", e instanceof Error ? e.message : String(e));
+  }
+
+  // DOES THE SITE AGREE WITH STRIPE ABOUT EVERY MEMBER (2026-09-25). Access is
+  // read from `memberships`, and the webhook is the only thing that keeps it
+  // current. Until today, members who paid before making an account — 16 of
+  // 21 — had every later event filed against their old pending row instead,
+  // so two cancellations never reached the site. The webhook is fixed; this is
+  // how the next version of that bug gets noticed in a morning instead of a
+  // month. Same comparison as scripts/reconcile-billing.mjs, which is the fix.
+  if (!process.env.DATABASE_URL) return;
+  try {
+    const live = new Stripe(liveKey);
+    const { neon } = await import("@neondatabase/serverless");
+    const sql = neon(process.env.DATABASE_URL);
+    const subs = (await live.subscriptions.list({ status: "all", limit: 100 })).data;
+    const rows = (await sql`
+      SELECT stripe_subscription_id, status, cancel_at_period_end FROM memberships
+    `) as { stripe_subscription_id: string | null; status: string; cancel_at_period_end: boolean | null }[];
+    const pending = new Set(((await sql`
+      SELECT stripe_subscription_id FROM pending_memberships WHERE claimed_at IS NULL
+    `) as { stripe_subscription_id: string | null }[]).map((r) => r.stripe_subscription_id));
+    const byId = new Map(rows.map((r) => [r.stripe_subscription_id, r]));
+    const leavingIn = (s: { cancel_at_period_end: boolean; cancel_at: number | null }) =>
+      s.cancel_at_period_end === true || s.cancel_at != null;
+
+    const drift: string[] = [];
+    const orphan: string[] = [];
+    for (const s of subs) {
+      const row = byId.get(s.id);
+      if (!row) {
+        // Paid (or paying) in Stripe, held by nobody on the site and not
+        // waiting to be claimed either. That is money with no door.
+        if (["active", "trialing", "past_due"].includes(s.status) && !pending.has(s.id)) orphan.push(s.id);
+        continue;
+      }
+      if (row.status !== s.status || (row.cancel_at_period_end === true) !== leavingIn(s)) {
+        drift.push(`${s.id} (site: ${row.status}${row.cancel_at_period_end ? ", leaving" : ""} / Stripe: ${s.status}${leavingIn(s) ? ", leaving" : ""})`);
+      }
+    }
+    if (orphan.length) {
+      fail(`${orphan.length} live subscription(s) belong to no member and nobody can claim them`, orphan.join(", "));
+    }
+    if (drift.length) {
+      warn(`${drift.length} membership(s) disagree with live Stripe`,
+        `${drift.join("; ")}. Fix: node --env-file=.env.local scripts/reconcile-billing.mjs --live`);
+    } else if (!orphan.length) {
+      ok(`All ${rows.length} memberships agree with live Stripe`);
+    }
+  } catch (e) {
+    warn("Could not compare memberships with live Stripe", e instanceof Error ? e.message : String(e));
   }
 }
 

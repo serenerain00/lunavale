@@ -586,6 +586,53 @@ export const journal: JournalEntry[] = [
       "But I don't miss wondering how long I had before something else needed him more than I did.",
     ],
   },
+
+  /*
+    DAY TWO, added 2026-09-28, against `luna-ty-groceries` ("Day 2"). The
+    clip had no page.
+
+    TWO THINGS HAPPEN AND THE PAGE KEEPS BOTH, because Melissa's note on the
+    clip is that the scene does two jobs at once: the phone keeps going with
+    Josh's business in the first minute, and Tyson grabs her round the middle
+    in the freezer aisle at 2:20. The business is the thread that keeps her
+    tied to him whatever else happens, so it gets the last word.
+
+    NOT IN IT, ON PURPOSE: the Rick's-paperwork beat. It pays off later in
+    the episode and the clip's synopsis keeps it back too.
+
+    IT SITS BESIDE `my-own-money`, NOT AGAINST IT. That page is about her own
+    work, "the one room in the house he had no key to". This one is the
+    opposite room: his business, where she has quietly become the calendar.
+
+    Invented and hers to cut: the supplier about Thursday, the vet's office,
+    the ice he buys anyway.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "day-two",
+    addedOn: "2026-09-28",
+    dateline: "Day two, and I only went out for milk",
+    place: "lakehouse",
+    sceneSlug: "luna-ty-groceries",
+    about: ["luna", "tyson", "josh"],
+    access: "premium",
+    mature: false,
+    body: [
+      "I had a plan for today and the plan was nothing. Two days, maybe three, of not being anybody's anything. I said it out loud in the car like a person announcing a diet.",
+      "The phone went before we were out of the car park.",
+      "A supplier, about Thursday. Then the vet's office wanting to confirm something that is not mine to confirm, except that it is, because it has been mine for years. Then a man I have never met asking whether I was still the person to talk to about the invoice.",
+      "I was standing in the cereal aisle saying yes. Yes, I am still the person. Twice.",
+      "That is what I found out today, and it is so boring that I nearly did not write it down. I can leave the house. I have left the house. What I cannot leave is the calendar. Somewhere in ten years I made myself the place his business keeps its memory, and it turns out you cannot pack that into a box and carry it out to the car.",
+      "Every one of those calls was perfectly reasonable. That is the trap of it. Nobody was being unkind to me. They just wanted Thursday.",
+      "Tyson pushed the trolley and said nothing for about four aisles, which is his way of saying a great deal.",
+      "Then in the freezer aisle — and I am putting this down because I want it on record that it happened on day two and not day forty — he got hold of me round the middle from behind and walked me the length of the frozen peas like I weighed nothing, and I laughed so loudly a woman with a small child turned all the way round to look.",
+      "I have not laughed like that in I do not know how long. I tried to work out the last time in the car on the way back and I could not get there.",
+      "He did not make anything of it. He put me down by the ice cream and asked whether we needed ice. We did not. He put some in the trolley anyway.",
+      "So that is day two. A phone that belongs to somebody else's business, and one minute in a supermarket where I forgot I was a person this was happening to.",
+      "I do not know yet which of those is going to turn out to be the true thing about this week. I have a horrible feeling it is the phone.",
+    ],
+  },
   /*
     THE VERDICT, and the page `luna-lkehouse-wine-shatter` has been asking for
     since it landed. That entry says it plainly: the two journal neighbours are
@@ -1143,6 +1190,102 @@ export const journal: JournalEntry[] = [
       "Then I got it out again and it is on the shelf now, and I am not going to sit here at midnight working out why.",
     ],
   },
+
+  /*
+    THE HOODIE, added 2026-09-28, against `young-luna-ty-apt` ("Have Fun").
+    Atlanta, 2006, both eighteen, remembered from the boxes at thirty-eight.
+
+    THE HARD RULE ON THIS ONE (Melissa, 2026-09-25): nothing on the site may
+    say or hint that Tyson felt anything for her back then. So this page is
+    entirely hers — the boy she could not name, the outfit, the hoodie she
+    walked off with — and it never once wonders what the night was like for
+    him. A reader who knows can bring that; the page does not supply it.
+
+    WHAT IS FROM THE SCENE: the date with a boy Tyson had not met, "you don't
+    even know his name", the Civic line, "Lou" as she goes, stealing his
+    hoodie on the way out. Invented and hers to cut: the paper tablecloth,
+    finding him asleep in front of the television, the hole in the pocket, and
+    the boy actually driving a Civic.
+
+    NOT THE-RULE'S BOY. `the-rule` has a different one, at nineteen, whose
+    name she will not write because she remembers it. This one she cannot
+    write because she never knew it. That is the joke and it is worth keeping
+    the two apart.
+
+    FILED WITH THE BOXES, between `twenty-years-ago` and the Navy, because
+    that is where she is when she finds it.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "the-hoodie",
+    addedOn: "2026-09-28",
+    dateline: "Bottom of the second box, and it is still his",
+    place: "lakehouse",
+    sceneSlug: "young-luna-ty-apt",
+    about: ["luna", "tyson"],
+    access: "premium",
+    mature: false,
+    body: [
+      "Found it at the bottom of the second box. Grey, cuffs gone soft, a hole in the left pocket I have pushed my thumb through so many times it is now a feature.",
+      "It is Tyson's. It has been Tyson's since 2006.",
+      "I took it off the arm of my sofa on my way out of the door to a date, because it was cold and it was there and so was he, lying across the whole of that sofa like he paid rent, and I have never given it back and he has never once asked.",
+      "I cannot tell you the boy's name. I want that on the record, because Tyson asked me that night and I got extremely offended on the boy's behalf, and then realised, standing in my own doorway, that I could not have told him if he had paid me.",
+      "He had an opinion about the top. He had an opinion about the boy, whom he had never met and made it very clear he did not intend to. His entire contribution to my love life that summer was lying on my sofa with one hand behind his head being unimpressed.",
+      "His parting shot was that if the boy drove a Civic he was going to be pissed. The boy drove a Civic. I have never told him.",
+      "I remember nearly nothing about the date itself. Paper on the tables. I was cold and very pleased with myself for having the hoodie.",
+      "What I remember is coming home and he was still there, asleep in front of the television with it up too loud, and I turned it down and put a blanket over him and went to bed, and nobody in the world thought any of that was strange. That was the whole of us at eighteen. My door was his door.",
+      "Lou, he said, from the sofa, as I was halfway out. Just to make me turn round. And I did, and he had nothing to say, he just wanted me to turn round, and I told him where to go and he told me to have fun.",
+      "I have moved it across the country and through five kitchens. I have never once packed it on purpose. It is just always in the box.",
+      "I have it on now. It is still too big. I am sitting up here at thirty-eight in a boy's hoodie writing about a different boy whose name I never knew, and I am laughing, on my own, in an empty house, which I did not expect to be doing tonight.",
+    ],
+  },
+
+  /*
+    THE AUTUMN HE WENT, added 2026-09-28. No clip; it is the gap between
+    "Have Fun" and `the-years-he-was-gone`, which starts with the phone
+    already ringing and never says how the decade began.
+
+    HER SIDE ONLY, AND NOTHING ABOUT WHY. Canon (Melissa, 2026-09-25) is that
+    her dating made the decision easier for him and that she has no idea it
+    played a part. The page must not know that either, and must not wonder.
+    His reason is four words and she takes them at face value — which is the
+    only honest thing she could do, because she was eighteen and it did not
+    occur to her there was anything underneath them.
+
+    TWO ORIGINS IT SUPPLIES, both already canon elsewhere and neither ever
+    explained: the bag in her mother's hall closet with his name on it in
+    Cathy's handwriting (`the-year-he-went-quiet`), and the staring game, which
+    characters.ts has starting "at nineteen" and LUNA_VALE_CONTEXT.md has as
+    "learned in the military". Both fit: he brings it home on his first leave.
+
+    Invented and hers to cut: the tailgate, the dentist's appointment, "it's
+    something to do".
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "the-autumn-he-went",
+    addedOn: "2026-09-28",
+    dateline: "The next box down, and the autumn he told me",
+    place: "lakehouse",
+    about: ["luna", "tyson", "cathy"],
+    access: "premium",
+    mature: false,
+    body: [
+      "He told me on the tailgate of his truck outside my mother's house, the way you would tell somebody you had moved a dentist's appointment.",
+      "I signed up. Navy.",
+      "That was it. That was the whole announcement. He had never once mentioned it. Not as a joke, not as a thing people do, not in the whole of that summer. I asked him why and he looked at the street for a while and said it's something to do, and I said that is not a reason, and he said it is a pretty good one actually, and that was all I ever got.",
+      "I was eighteen and I took it exactly as it was handed to me. Something to do. People did things. I thought he was restless and I thought it suited him, and I think I was a bit impressed and did not want him to see that.",
+      "Everybody expected me to be upset. My mother kept looking at me across the kitchen as though something was going to happen to my face. Nothing happened to my face. I genuinely thought people went away and came back and nothing moved in between.",
+      "It took me about ten years to find out that is not what happens.",
+      "My mother did the practical thing, which is the only kind of thing she does when she is frightened. She bought a sports bag, a cheap navy one, and wrote his name on the strap in marker in her own handwriting and put it in the hall closet. So he has somewhere to keep things, she said. It was still in there when I left for Colorado. I would put money on it still being in there now.",
+      "He went in the November. He came back on his first leave looking exactly the same and completely different, and he had a new trick.",
+      "He would go quiet, and move in close, and wait. Just wait. Over nothing — who had eaten the last of something, whether I had dented his wing mirror, which I had. I lasted about forty seconds the first time and told him everything, including two things he had not asked about.",
+      "He had learned it somewhere he was not allowed to talk about. I learned it off him in my mother's kitchen that week, and I have been using it on him for nineteen years, and I am still better at it than he is, whatever he says.",
+      "That is what I got out of the Navy. A game. He got the rest of it, and I have never asked what the rest of it was, and he has never offered.",
+    ],
+  },
   {
     id: "the-years-he-was-gone",
     addedOn: "2026-08-30",
@@ -1259,17 +1402,20 @@ export const journal: JournalEntry[] = [
 
     IT IS A STAGE ONE BREADCRUMB AND NOTHING MORE. The ladder in §8 of that
     document starts at "something is off", and this is Luna supplying the
-    evidence twelve years before anyone can read it. She does not solve it, get
+    evidence nine years before anyone can read it. She does not solve it, get
     close to solving it, or know there is anything to solve. Any later pass
     that has her wondering about Josh's family here is doing Stage Two work in
     a Stage One page and should be reverted.
 
-    THE ARITHMETIC IS THE CONSTRAINT AND IT IS TIGHT. She met Tyson at 18. The
-    accident is 15-16 years ago, so she is 22-23 and five years into knowing
-    him. She has NOT met Josh — he is six years away — so nothing on this page
-    may touch Josh, Rick, Colorado or a family, because she has no way to reach
-    any of them. That absence is the whole reason the page works: she has the
-    symptom and not one piece of the cause.
+    THE ARITHMETIC IS THE CONSTRAINT AND IT IS TIGHT. Rewritten 2026-09-24 to
+    the timeline in §12 of the secret document (2026-09-18), which moved the
+    accident to ~9 years ago. She met Tyson at 18 and the year he went quiet
+    is the year she was 29 — eleven years into knowing him and about a year
+    into Josh. So Josh IS in her life on this page ("I had a new man"), and
+    that is the point: the cause is sitting at her own table and she files the
+    symptom under the Navy. Nothing here may connect Tyson's year to Josh, Rick
+    or the family — she has every piece within reach and not one reason to put
+    them together.
 
     IT MUST NOT REPEAT `the-years-he-was-gone`, which is the page about not
     hearing from him — the phone, the gaps, the long one she stopped counting.
@@ -1279,9 +1425,9 @@ export const journal: JournalEntry[] = [
 
     THE LEAVE DETAIL IS THE LOAD-BEARING ONE. A man who believes a family has
     just saved his career starts spending his leave with that family. Luna, at
-    twenty-three, watches him stop coming home to Atlanta and go west instead,
-    and concludes — because she is twenty-three — that it is about her. She is
-    wrong in a way that will not be correctable for another fifteen years, and
+    twenty-nine, watches him stop coming home to Atlanta and go west instead,
+    and concludes — because she has a new man and a new life — that it is about
+    her. She is wrong in a way that will not be correctable for nine years, and
     a reader who knows the secret watches her file the truth under the wrong
     heading in real time.
 
@@ -1298,6 +1444,11 @@ export const journal: JournalEntry[] = [
     WHY IT IS NOT FREE. The open six are an arc and a sixth would undo that —
     see the top of this file. It also hands a stranger a mystery with no way to
     resolve it, which is the shape of a paid page rather than a shop window.
+
+    WHERE IT PAYS OFF: `luna-ty-detectives` (held 2026-09-24, awaiting its
+    score), where two detectives ask her about Josh and Tyson and Tyson keeps
+    her out — "the less you know, the less you can tell them". This is the
+    year that scene reaches back to.
 
     Invented and hers to cut: the storm door, the two lunches on the counter,
     the year of no staring game. The last of those is the one I would keep.
@@ -1336,10 +1487,330 @@ export const journal: JournalEntry[] = [
       "Here is the part that made me put the box down.",
       "He got better. That is the thing I forgot until tonight. The year ended and he came back round to something like himself — the staring game came back, he let people thank him again, he started landing in Atlanta on leave again like it had never stopped.",
       "But he never went back all the way. He came back to about eighty per cent of the man in that photograph and that has been the settled altitude ever since, and because it took a year I never noticed it as a change. I noticed it as him getting better.",
-      "Fifteen years of calling something a personality when it was a scar.",
+      "Nine years of calling something a personality when it was a scar.",
       "And I do not know what happened to him. I want that on the page plainly. I have known that man for twenty years, I am the person who knows him, and there is a year in the middle of it with a door on it that I have never once tried the handle of, because I was twenty-nine and busy being happy and I had decided it was about me, and it was easier to be quietly wounded than to ask a question he had already refused once.",
       "He would not tell me. I know that much. I could ask tomorrow and get four words and a look.",
       "I am going to ask him anyway. Not tomorrow. But I am writing it down here so that I have to.",
+    ],
+  },
+  /*
+    THE OLD JOURNAL, TEN PAGES, Melissa, 2026-10-07 — VERBATIM, her prose.
+    What Luna is reading in "Not Bad Trouble" (`luna-josh-journal-mem`):
+    the journal she kept from meeting Josh, through the first years, to the
+    page where nothing is broken and she is not happy any more. They run
+    straight into `i-wrote-it-all-down`, which is her reading them now.
+
+    HER PRODUCTION NOTES ARE KEPT HERE, NOT ON THE PAGE. Each page arrived
+    with a line or two of direction; Luna's text is the body and the notes
+    are writer knowledge:
+      1 the beginning — present Luna, over the footage: "Yeah… we got there
+        fast, baby." "The kind that starts to feel familiar way too fast" is
+        the line she reads aloud in the post.
+      4 the night Josh showed up — "needs to feel completely different
+        because Luna didn't understand its significance when she wrote it."
+        It becomes terrifying later: she documented pieces of the cover-up
+        as it happened. "Signed something" is §12's sign-off, in her hand.
+        This page is now the canon account of that night — see
+        `what-i-told-them`, which was brought into line with it.
+        CORRECTED 2026-10-08 to match episode 3: they were LIVING TOGETHER
+        by then (Melissa). The first line is now the episode's own — "Josh
+        came home at two this morning" — and "He stayed here.", which only
+        worked in her apartment, is cut. Nothing else on the page changed.
+      5 home — pairs with the happy domestic montage.
+      6 dinner, and the couch — corresponds to the clip where she waits,
+        falls asleep and Josh comes home. Young Luna sees nothing wrong with
+        this night; she remembers the tenderness, not the waiting.
+      7 he's working a lot — the audience starts seeing what Luna is talking
+        herself out of seeing.
+      8 10:47 — pairs with the phone clip. The repeated "It's fine" is very
+        Luna.
+      9 lonely — the emotional deterioration starts; the last section over
+        very ordinary footage.
+     10 nothing is broken — where the journal sequence ends, before she
+        closes it and walks into the kitchen to Tyson.
+
+    FILED UNDER THE LAKEHOUSE, with `where: "The old journal"`, though they
+    were written in her apartment and, later, at home with Josh. Deliberate: previous
+    and next on a journal page only walk entries in the same place, and these
+    have to read in a row, into her reflection on them. The lakehouse is where
+    she is reading them.
+
+    THE DATELINES ARE MINE, from her headings, and placeholders. They say
+    "the old journal" so nobody takes a page from ten years ago for now.
+
+    Members-only, like everything outside the free six.
+  */
+  {
+    id: "old-journal-the-beginning",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — the beginning",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "I think I like him.",
+      "Which is annoying because I was absolutely not planning on liking anyone.",
+      "But Josh is easy.",
+      "We talked for hours tonight and somehow it never felt like we were trying to keep the conversation going.",
+      "It was the kind of night you don’t want to end because ending it means admitting you want another one.",
+      "I think that’s what scares me.",
+      "Not that I like him.",
+      "How fast I like him.",
+      "The kind that starts to feel familiar way too fast.",
+    ],
+  },
+  {
+    id: "old-journal-falling",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — falling",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh stayed over again.",
+      "I woke up before him this morning and just watched him sleep for a minute.",
+      "Creepy? Probably.",
+      "But there was something about seeing him here that felt strangely normal.",
+      "Like he belonged in my apartment.",
+      "He made coffee and complained that I don’t own real creamer.",
+      "Then he kissed me goodbye and somehow my apartment felt different after he left.",
+      "I don’t know when this happened.",
+      "But I already miss him when he goes.",
+    ],
+  },
+  {
+    id: "old-journal-we",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — becoming “us”",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "I caught myself saying “we” today.",
+      "Someone asked what I was doing this weekend and I said, “We haven’t decided yet.”",
+      "We.",
+      "Apparently that’s a thing now.",
+      "Josh laughed when I told him.",
+      "Then he said, “You’re stuck with me.”",
+      "I told him not to threaten me with a good time.",
+      "I’m happy.",
+      "Like stupidly, embarrassingly happy.",
+    ],
+  },
+  {
+    id: "old-journal-the-night-he-came-over",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — the night Josh showed up",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh", "rick"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh came home at two this morning.",
+      "Something happened at work.",
+      "I’ve never seen him like that.",
+      "He wouldn’t really tell me what happened. He just kept saying somebody got hurt.",
+      "Then he said he’d signed something.",
+      "I asked him what he meant and he wouldn’t answer me.",
+      "He kept saying his dad was handling it.",
+      "“Rick is handling it.”",
+      "I finally stopped asking questions.",
+      "I don’t think either of us slept much.",
+    ],
+  },
+  {
+    id: "old-journal-home",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — home",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "I think Josh has officially become home.",
+      "Not the farmhouse.",
+      "Him.",
+      "It’s the stupid little things.",
+      "His hand finding mine in the car without looking.",
+      "Him bringing me water because apparently I’m incapable of remembering hydration exists.",
+      "The way he kisses my forehead when he thinks I’m asleep.",
+      "I used to think love would feel bigger than this.",
+      "Maybe this is bigger.",
+      "Maybe it’s just quieter than I expected.",
+    ],
+  },
+  {
+    id: "old-journal-dinner",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — dinner, and the couch",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "Made dinner tonight.",
+      "Josh said he’d be home by nine.",
+      "I tried waiting for him and apparently lost that battle because I woke up on the couch with him kissing my forehead.",
+      "He looked exhausted.",
+      "I asked if he’d eaten.",
+      "Of course he hadn’t.",
+      "I tried getting up and he just looked at me and said, “Stay.”",
+      "Then he heated up his own dinner.",
+      "I don’t know why I love that man as much as I do.",
+      "But I really, really do.",
+    ],
+  },
+  {
+    id: "old-journal-working-a-lot",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — he’s working a lot",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh is working a lot.",
+      "I know that’s not exactly breaking news.",
+      "I think I just miss him.",
+      "Which feels ridiculous because I see him every day.",
+      "Or most days.",
+      "We still have dinner together when we can.",
+      "We still fall asleep tangled together.",
+      "We’re good.",
+      "I know we’re good.",
+      "I just wish sometimes that “later” didn’t always seem to belong to work.",
+    ],
+  },
+  {
+    id: "old-journal-10-47",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — 10:47",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "He said eight tonight.",
+      "Then nine.",
+      "It’s 10:47.",
+      "I texted him, “you said 8.”",
+      "He started typing.",
+      "Then stopped.",
+      "Nothing.",
+      "I don’t even know what I wanted him to say.",
+      "Probably just that he remembered I was waiting.",
+      "It’s fine.",
+      "He’s working.",
+      "It’s fine.",
+    ],
+  },
+  {
+    id: "old-journal-lonely",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — lonely",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "I don’t think we’re fighting.",
+      "That’s the weird part.",
+      "Nothing is really wrong.",
+      "Josh still kisses me goodbye.",
+      "He still calls me baby.",
+      "He still reaches for me in his sleep.",
+      "I know he loves me.",
+      "I know that.",
+      "But somehow I’m still lonely.",
+      "I don’t know how you can be loved by someone and lonely because of them at the same time.",
+      "Apparently you can.",
+    ],
+  },
+  {
+    id: "old-journal-nothing-is-broken",
+    addedOn: "2026-10-07",
+    dateline: "The old journal — nothing is broken",
+    place: "lakehouse",
+    where: "The old journal",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "I keep waiting for something to happen.",
+      "A fight.",
+      "A betrayal.",
+      "Something big enough that I can point to it and say, there. That’s what’s wrong.",
+      "But nothing happens.",
+      "We wake up.",
+      "We go to work.",
+      "We love each other.",
+      "We make plans.",
+      "We cancel some of them.",
+      "We say we’ll do better next week.",
+      "And then another week passes.",
+      "Maybe that’s why I don’t know what to fix.",
+      "Nothing is broken.",
+      "I’m just not happy anymore.",
+    ],
+  },
+  /*
+    THE OLD JOURNAL, Melissa, 2026-10-07, VERBATIM — her prose, not a draft.
+    Beside the free post `luna-josh-journal-mem` ("Not Bad Trouble"), where
+    she reads the journal she kept in her first year with Josh.
+
+    FILED WITH THE BOXES, after `the-year-he-went-quiet`: the old journal is
+    one more thing she finds unpacking at the lakehouse, and the run is
+    already about reading her own past and seeing it differently.
+
+    THE DATELINE IS MINE AND A PLACEHOLDER — hers to replace.
+
+    Members-only: the free six are an arc (top of this file). The post is the
+    free half.
+  */
+  {
+    id: "i-wrote-it-all-down",
+    addedOn: "2026-10-07",
+    dateline: "An old journal, and the first year of us",
+    place: "lakehouse",
+    about: ["luna", "josh"],
+    clipId: "luna-josh-journal-mem",
+    access: "premium",
+    mature: false,
+    body: [
+      "I forgot how happy we were.",
+      "Not in the big ways. Those I remembered.",
+      "It was the little things I forgot.",
+      "How excited I was when his name showed up on my phone. How quickly I started writing “we” instead of “I.” How normal it felt to make room for him in everything.",
+      "Reading it now, I can see exactly when he became home.",
+      "I can also see when I started waiting for him there.",
+      "I don’t think there was a day when we stopped loving each other.",
+      "I think there were just more and more days when loving each other wasn’t enough to make us feel less alone.",
+      "And somehow, while I was living it, I never noticed how far apart we’d gotten.",
+      "Maybe that’s the strangest part.",
+      "I wrote it all down.",
+      "I just didn’t understand what I was writing yet.",
     ],
   },
   {
@@ -4101,6 +4572,77 @@ export const journal: JournalEntry[] = [
       "Nineteen years and we have both been extremely careful about that gap.",
     ],
   },
+
+  /*
+    AFTER THE DETECTIVES, added 2026-10-06 beside the free post
+    `luna-josh-fight-45m`. Last in the journal because it is the latest thing
+    in the story: the detectives, then Josh, then Tyson (`luna-ty-detectives`).
+
+    WHAT IS NEW CANON, from Melissa: on the night of the accident Josh came to
+    Luna, shaken, said very little — a man died, his dad was going
+    to take care of it. Nine years later she gives the detectives almost
+    nothing, more nervous than honest, and lies for him. That lie is what
+    sends her to Josh.
+
+    SO SHE HAS ALWAYS KNOWN A MAN DIED. That sits alongside `what-rick-knows`
+    and `the-year-he-went-quiet` rather than against them: to her it was never
+    a secret, it was a bad night at his work that his father handled. She has
+    never connected it to Tyson's year. She does not connect it here either —
+    she lists what she does not know and stops.
+
+    WHAT SHE LIED ABOUT is my reading, not Melissa's words: that she did not
+    remember the night. It is the smallest lie that fits "she doesn't give them
+    much" and still makes "you let me lie for you" true. Change it if the
+    scene means something else.
+
+    REVISED 2026-10-07 to match Melissa's own page for that night,
+    `old-journal-the-night-he-came-over`, which is newer and is canon:
+    "somebody got hurt", "he'd signed something", "Rick is handling it", and
+    neither of them slept. The draft's jacket, tea and him gone by morning are
+    gone. Her 2026-10-06 brief said he told her "a man died"; her page from
+    the night says "hurt". Reconciled — MY INVENTION, hers to cut — as: hurt
+    that night, and by the end of the week she understood without anybody
+    saying it. "I'll take care of it" heard as his father's sentence is the
+    transcript plus her brief.
+
+    Members-only: the free six are an arc (top of this file). The post is the
+    free half — the fight is open, what she thought is not.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "what-i-told-them",
+    addedOn: "2026-10-06",
+    dateline: "Forty-five minutes, and then Josh",
+    place: "lakehouse",
+    about: ["luna", "josh", "tyson"],
+    clipId: "luna-josh-fight-45m",
+    access: "premium",
+    mature: false,
+    body: [
+      "Two detectives, a table, and forty-five minutes. I have been trying since four o'clock to work out how long forty-five minutes is, because it felt like an afternoon and it felt like nothing.",
+      "They knew my name. They knew where I am living, which I have told about six people. They knew how long I have known Tyson, to the year, and they asked about him almost as much as they asked about Josh, and I cannot make that part sit still.",
+      "Then one of them asked whether I remembered a night nine years ago. He said the date. He did not need to.",
+      "I remember it. I was twenty-nine and we were already living together, and Josh came home at two in the morning. I had never seen him like that.",
+      "He did not say much. He kept saying somebody got hurt. He said he had signed something, and when I asked what he meant he would not answer. He said his dad was handling it. Rick is handling it — he said that more than once.",
+      "Hurt. That was his word, all night. By the end of the week it was a different word, and nobody ever said that one to me out loud.",
+      "I do not think either of us slept. When I asked the week after, he said it was an accident and it was handled and could we please not, and I said of course. I was a year in and I loved him and I thought not asking was a kindness.",
+      "I want this down honestly: I have not thought about that night in years. Not because I buried it. It was never a secret, to me. It was a terrible thing that happened at his work, that his father dealt with, the way his father deals with everything.",
+      "So when the detective asked, I said I didn't remember.",
+      "I did not decide to. I opened my mouth and that is what came out, and then I was sitting in it, and every question after that I answered a little less. By the end I was not being careful. I was frightened. I think they could see the difference better than I could.",
+      "I lied to the police for him. I have not lied to anybody about anything that mattered in twenty years, and I did it for a man I have left, without being asked, in under a second.",
+      "So tonight I asked Josh what I had lied for.",
+      "He would not tell me. He was angry that I was in it — as if I had walked in on my own, as if he had not stood in our kitchen nine years ago and put it in my hands. He said he was protecting me. He said it so many times it stopped being a sentence. He took hold of my arm to keep me in the room and I told him not to touch me, and he let go, which is the only thing tonight he did because I asked.",
+      "Then he said: I'll take care of it.",
+      "And I heard his father. The same words in the same order, nine years apart, and I understood that I have been living inside that sentence the whole time and never once asked what it cost.",
+      "At the very end he said: he wasn't supposed to be there.",
+      "I said who.",
+      "He didn't answer.",
+      "I have been sitting here two hours with that. Somebody who was not supposed to be somewhere. I do not know if he meant the man who died. I do not know who else he could have meant. I do not know why two detectives spent half of forty-five minutes asking me about Tyson.",
+      "Tomorrow I am going to Tyson. He tells me the truth. That is the whole of the rule, and tonight it is the only thing I am sure of.",
+    ],
+  },
+
 ];
 
 /* ------------------------------------------------------------------ query */

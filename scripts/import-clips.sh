@@ -149,6 +149,55 @@ CLIPS=(
   # 45.5; the fade is part of the edit and stays.
   "pilot-interview|stories/pilot-interview.MP4|14|45.3"
   "the-blonde-guy|stories/ty-luna-blonde-guy-bar/luna-ty-blonde-guy-short-music-ig.mov|1|89.0"
+
+  # THE RAIN, added 2026-10-02 — Luna and Tyson in a downpour at night.
+  # Vertical, 1320x2230, 60fps, scored. Members only, no preview: the middle
+  # 30s goes to Instagram, and that is the public window.
+  #
+  # THE DIALOGUE IS TURNED DOWN ON PURPOSE (Melissa): this happens a year or
+  # two ahead of the story, at whenever Tyson tells her, so what they say is
+  # not for hearing yet. Never "fix" the mix.
+  #
+  # POSTER AT 2s: both of them, her looking up at him, before anything has
+  # happened. Gives nothing away; the kiss frames from ~150s do.
+  #
+  # END=286.5. Picture is black from 279.8 but the score runs on under it to
+  # 286.5 — kept, the same way music leads these mixes. Only the last 1.2s of
+  # silence goes.
+  "luna-ty-rain-ig|stories/luna-tyson-rainstorm/luna-ty-rain-ig.mov|2|286.5"
+
+  # THE COUCH, added 2026-10-03 — Luna and Josh, close and intimate, faces
+  # throughout. Vertical, 1320x2234, 60fps, scored. Free: it is on Instagram.
+  #
+  # POSTER AT 86s: the closing kiss, both faces, warm and readable. Most of
+  # the cut is a mouth or a throat filling the frame, which is the wrong thing
+  # to meet on a public grid — the same reason her-place moved off 34s.
+  #
+  # END=87.7. blackdetect puts black from 87.76 to the end.
+  "luna-josh-couch|stories/luna-josh-couch/luna-josh-couch.mov|86|87.7"
+
+  # AFTER THE DETECTIVES, added 2026-10-06 — Luna confronts Josh, the night
+  # before she goes to Tyson (luna-ty-detectives). Near-square, 1320x1282,
+  # 60fps, scored. Free: it is on Instagram.
+  #
+  # POSTER AT 60s: both faces, her mid-line, him turned to her. Readable and
+  # not the grab — 75s is the physical stretch and the wrong thing to meet on
+  # a grid.
+  #
+  # END=111.0. blackdetect puts black from 110.99; "Who?" lands at ~110 and is
+  # the last line, so nothing spoken is lost.
+  "luna-josh-fight-45m|stories/josh-luna-fight-45m/luna-josh-fight-45m.mov|60|111.0"
+
+  # THE JOURNAL MEMORY, added 2026-10-07 — Luna reading her old journal,
+  # cut against early mornings with Josh: eggs, painting, the barn. From the
+  # episode 3 material (stories/ep3/). Vertical, 1320x2222, 60fps, scored.
+  # Free: it is on Instagram.
+  #
+  # POSTER AT 3s: her, smiling down at the open journal. Says what the piece
+  # is in one frame.
+  #
+  # END=176.0. blackdetect puts black from 176.02; nothing is said after 2:58.
+  "luna-josh-journal-mem|stories/ep3/luna-josh-journal-mem.mov|3|176.0"
 )
 
 want=("$@")

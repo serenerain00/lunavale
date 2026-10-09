@@ -37,14 +37,21 @@ const caveat = Caveat({
 });
 
 /**
- * One sentence for a share card, one for a search result. Written out here
- * rather than imported from lib/content so this file has no dependency that
- * could fail during a metadata render.
+ * One sentence for a share card, the whole description for a search result.
+ * Written out here rather than imported from lib/content so this file has no
+ * dependency that could fail during a metadata render.
+ *
+ * REPLACED 2026-09-25 with Melissa's synopsis of the series, everywhere it
+ * appears. The share card gets its first sentence only — Instagram and
+ * messages cut a card's text after a line or two, so a full paragraph would
+ * be cut mid-thought. Google truncates the long one at ~160 characters too;
+ * it is kept whole because the truncation lands after the first sentence,
+ * which is the one that has to be read.
  */
 const SHORT_DESCRIPTION =
-  "A cinematic drama series about three people, twenty years of history, and one question nobody wants answered.";
+  "Between Us is a cinematic slow-burn drama centered on Luna, Josh, and Tyson.";
 const LONG_DESCRIPTION =
-  "Between Us \u2014 a cinematic drama series about Luna, Josh and Tyson. Watch the clips in order, read her journal, and get season one first as a member.";
+  "Between Us is a cinematic slow-burn drama centered on Luna, Josh, and Tyson. Luna and Josh have been together for ten years, but their relationship begins unraveling when Luna realizes she has spent years waiting for Josh to prioritize the life they already have. Tyson, Josh\u2019s longtime best friend and Luna\u2019s closest friend for nearly two decades, has quietly fallen for Luna without allowing himself to act on it. As Luna begins rediscovering herself, buried feelings, complicated loyalties, and a decade-old secret involving Josh and Tyson\u2019s families begin colliding. At its core, Between Us is about friendship, love, loyalty, timing, and the things people leave unsaid until they can\u2019t anymore.";
 
 export const metadata: Metadata = {
   /*

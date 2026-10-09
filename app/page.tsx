@@ -140,10 +140,8 @@ export default async function Home() {
           */}
           <div className="lg:flex lg:items-start lg:justify-between lg:gap-12">
             <p className="max-w-2xl text-lg leading-relaxed text-stone sm:text-xl">
-              Luna and Josh were together ten years. They spent six months
-              apart, and in those six months her oldest friend Tyson was the one
-              who turned up. Then Josh called. Season one has started, and the
-              moments below are what it comes out of.
+              {/* Melissa's synopsis of the series, 2026-09-25. */}
+              Between Us is a cinematic slow-burn drama centered on Luna, Josh, and Tyson. Luna and Josh have been together for ten years, but their relationship begins unraveling when Luna realizes she has spent years waiting for Josh to prioritize the life they already have. Tyson, Josh&rsquo;s longtime best friend and Luna&rsquo;s closest friend for nearly two decades, has quietly fallen for Luna without allowing himself to act on it. As Luna begins rediscovering herself, buried feelings, complicated loyalties, and a decade-old secret involving Josh and Tyson&rsquo;s families begin colliding. At its core, Between Us is about friendship, love, loyalty, timing, and the things people leave unsaid until they can&rsquo;t anymore.
             </p>
 
             {/*
@@ -306,7 +304,7 @@ export default async function Home() {
           title={`Season ${season.number}`}
           note={
             episodeLanded
-              ? undefined
+              ? "New episodes weekly."
               : "The first episode is on its way. Nothing here is a placeholder for it — the clips below are the story it comes out of."
           }
           /*
@@ -325,7 +323,7 @@ export default async function Home() {
             <Guest>
               <Link
                 href="/membership"
-                className="shrink-0 text-sm text-amber transition-colors duration-(--duration-quick) hover:text-amber-soft"
+                className="-my-3 inline-flex min-h-11 items-center shrink-0 text-sm text-amber transition-colors duration-(--duration-quick) hover:text-amber-soft"
               >
                 Watch it with a membership{" "}
                 <span aria-hidden="true">→</span>
@@ -386,14 +384,20 @@ export default async function Home() {
                     }
                     premium={r.access === "premium"}
                     mature={r.mature}
+                    posterPosition={r.posterPosition}
                   />
                 ) : (
                   <Link href={r.href} className="group block">
-                    <div className="flex aspect-video flex-col justify-between rounded-lg bg-[#efe7d9] p-5 ring-1 ring-hairline transition-transform duration-(--duration-standard) group-hover:-translate-y-1">
-                      <p className="font-hand text-lg leading-snug text-[#2a2520]">
+                    {/* overflow-hidden is what holds the 16:9: without it the
+                        box grows to fit her sentence, and on a phone-width
+                        card that made the paper twice the height of the
+                        posters beside it. The clamp ends the text on an
+                        ellipsis instead of a sliced line. */}
+                    <div className="flex aspect-video flex-col justify-between gap-1 overflow-hidden rounded-lg bg-[#efe7d9] p-3 ring-1 ring-hairline transition-transform duration-(--duration-standard) group-hover:-translate-y-1 sm:p-5">
+                      <p className="line-clamp-3 font-hand text-sm leading-snug text-[#2a2520] sm:text-lg">
                         {r.blurb}
                       </p>
-                      <p className="text-xs uppercase tracking-[0.14em] text-[#6b6156]">
+                      <p className="shrink-0 text-[10px] uppercase tracking-[0.14em] text-[#6b6156] sm:text-xs">
                         {formatReleaseDate(r.date)}
                       </p>
                     </div>
@@ -494,11 +498,13 @@ export default async function Home() {
           {openPages.map((e) => (
             <RailItem key={e.id}>
               <Link href={`/journal/${e.id}`} className="group block">
-                <div className="flex aspect-video flex-col justify-between rounded-lg bg-[#efe7d9] p-5 ring-1 ring-hairline transition-transform duration-(--duration-standard) group-hover:-translate-y-1">
-                  <p className="font-hand text-lg leading-snug text-[#2a2520]">
+                {/* Held to 16:9 the same way as the New row's paper — see
+                    the comment there. */}
+                <div className="flex aspect-video flex-col justify-between gap-1 overflow-hidden rounded-lg bg-[#efe7d9] p-3 ring-1 ring-hairline transition-transform duration-(--duration-standard) group-hover:-translate-y-1 sm:p-5">
+                  <p className="line-clamp-3 font-hand text-sm leading-snug text-[#2a2520] sm:text-lg">
                     {opening(e, 110)}
                   </p>
-                  <p className="text-xs uppercase tracking-[0.14em] text-[#6b6156]">
+                  <p className="shrink-0 truncate text-[10px] uppercase tracking-[0.14em] text-[#6b6156] sm:text-xs">
                     {e.dateline}
                   </p>
                 </div>
@@ -618,8 +624,8 @@ export default async function Home() {
               </h2>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
                 Every clip is open to you at full length, along with the
-                journal and the stills from the set. The first episode will be
-                here before it is anywhere else.
+                journal and the stills from the set. Season one is under way,
+                and new episodes land here weekly.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link

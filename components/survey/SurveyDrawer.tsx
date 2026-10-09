@@ -68,6 +68,20 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
   // before the observer has reported, "the band is on screen" is the safe
   // assumption, since the band is the second thing on the page.
   const [bandVisible, setBandVisible] = useState(true);
+  // PAST THE HERO, added 2026-10-07. The band moved from second on the page to
+  // near the foot of it, so "the band is off screen" became true on arrival
+  // and the tab sat on the hero from the first paint — on a phone, over "More
+  // from …" and the sound toggle, which is the first thing 80% of visitors
+  // see. The tab now also waits until one screen has scrolled by.
+  const [pastHero, setPastHero] = useState(false);
+  const hideTab = bandVisible || open || !pastHero;
+
+  useEffect(() => {
+    const onScroll = () => setPastHero(window.scrollY > window.innerHeight * 0.8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const band = bandRef.current;
@@ -172,10 +186,10 @@ export function SurveyDrawer({ scenes }: { scenes: SurveyOption[] }) {
         }}
         aria-haspopup="dialog"
         aria-expanded={open}
-        aria-hidden={bandVisible || open}
-        tabIndex={bandVisible || open ? -1 : undefined}
+        aria-hidden={hideTab}
+        tabIndex={hideTab ? -1 : undefined}
         className={`fixed bottom-[calc(max(1rem,env(safe-area-inset-bottom))+3.75rem)] right-4 z-30 inline-flex min-h-11 max-w-[calc(100vw-2rem)] items-center rounded-full bg-amber px-5 text-sm font-medium text-void shadow-lg shadow-void/50 transition-[opacity,transform] duration-(--duration-standard) ease-(--ease-standard) hover:bg-amber-soft motion-reduce:transition-none sm:bottom-auto sm:right-0 sm:top-1/2 sm:-translate-y-1/2 sm:rounded-l-lg sm:rounded-r-none sm:px-2.5 sm:py-5 sm:[writing-mode:vertical-rl] ${
-          bandVisible || open
+          hideTab
             ? "pointer-events-none translate-x-4 opacity-0"
             : "translate-x-0 opacity-100"
         }`}

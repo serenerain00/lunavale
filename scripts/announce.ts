@@ -78,7 +78,12 @@ const since =
   flag("since") ??
   new Date(Date.now() - 14 * 86_400_000).toISOString().slice(0, 10);
 
-const included: Release[] = releases().filter((r) => r.date >= since);
+// Posts joined releases() on 2026-10-06 for the home page's New row. The mail
+// is not written for them (subjectFor() would call one "Luna wrote something
+// new"), so they stay out of it until it is.
+const included: Release[] = releases().filter(
+  (r) => r.date >= since && r.kind !== "post",
+);
 if (included.length === 0) {
   die(`Nothing published since ${since}. Nothing to announce.`);
 }

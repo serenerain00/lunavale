@@ -92,7 +92,7 @@ export default async function NotebookPageRoute({
         <div className="mx-auto w-full max-w-2xl">
           <Link
             href="/between-takes"
-            className="text-xs uppercase tracking-[0.18em] text-stone transition-colors duration-(--duration-quick) hover:text-amber"
+            className="-my-3 inline-flex min-h-11 items-center text-xs uppercase tracking-[0.18em] text-stone transition-colors duration-(--duration-quick) hover:text-amber"
           >
             ← The notebook
           </Link>

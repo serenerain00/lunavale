@@ -3197,6 +3197,323 @@ export const videos: Video[] = [
     place: "farmhouse",
     about: ["luna", "josh", "tyson"],
   },
+  {
+    /*
+      EPISODE 2, 2026-09-29. Season one, 22:23 after the trim.
+
+      WHAT IS IN IT, from the transcript, in order: the night she meets Josh
+      at twenty-eight (the opening flashback); the morning after she leaves,
+      Tyson with breakfast and "I had a dream... the night I met Josh"; the
+      supermarket (`luna-ty-groceries`, "Day 2", was cut from this); the
+      renewal paperwork at Rick's ("you sure as hell don't owe me one because
+      he's my son"); Josh's kitchen, where he asks her to stay and she goes;
+      and the truck afterwards with Tyson — "what if I left too fast?". It
+      ends on Melissa's card, "BETWEEN US / New episodes every week".
+
+      MELISSA'S SYNOPSIS, 2026-09-29, VERBATIM — it replaced a placeholder
+      written off the transcript the same day, as hers did for the pilot.
+
+      ABOUT TWO MINUTES FREE (Melissa; 1:30 at release, raised the same day).
+      The window is the opening flashback and ends on Josh saying his name —
+      see the override in scripts/make-previews.mjs, which is what cuts it.
+
+      NOT `mature`, and no notes. The pilot carries `danger`; nothing in this
+      one does. The kitchen is two people with their foreheads together.
+
+      "LOU" IS JOSH'S TOO. He says it at 19:24. The nickname is not only
+      Tyson's, which matters for anything written about it — see "Tyson at
+      eighteen" in LUNA_VALE_CONTEXT.md.
+    */
+    slug: "episode-2",
+    // Melissa, 2026-09-29: "Breathe". Must match lib/content/season.ts.
+    title: "Episode 2: Breathe",
+    synopsis:
+      "Episode 2 moves between who Luna and Josh once were and the painful reality of who they\u2019ve become. After waking from a dream of the night they first met, Luna settles into an easy morning with Tyson before a simple grocery run pulls her back into the life she just walked away from. A stop at Rick\u2019s to sign paperwork leads to an emotional conversation about Josh\u2014and eventually forces Luna to face him at the farmhouse. What was supposed to be a quick handoff becomes something much harder, leaving Luna caught between missing the life she had and knowing exactly why she left.",
+    file: "episode-2.proxy.mp4",
+    poster: "/posters/episode-2.jpg",
+    // 1343.4, trimmed at the end card — see scripts/import-cuts.sh.
+    durationSeconds: 1343,
+    addedOn: "2026-09-29",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "episode-2-preview.proxy.mp4",
+      // 123.6 exactly — see the override in scripts/make-previews.mjs.
+      durationSeconds: 124,
+      hookStart: 0,
+      hookNote:
+        "the night she meets Josh, ending on \u201cmy name is Josh\u201d",
+    },
+    feelings: ["distance", "trust", "hurt"],
+    place: "farmhouse",
+    about: ["luna", "josh", "tyson", "rick"],
+  },
+  {
+    /*
+      EPISODE 3, 2026-10-08. Season one, 21:35 after the trim.
+
+      WHAT IS IN IT, from the transcript, in order: Luna reading the journal
+      she kept in her first year with Josh, over the montage that is already
+      free as the post "Not Bad Trouble" (eggs, step four, the paint, "we
+      were so good"); the accident night as she wrote it — Josh at two in the
+      morning, "was somebody hurt?", "I signed off on something", "Rick is
+      handling it" (the old-journal page `old-journal-the-night-he-came-over`
+      is the same night in her hand); Tyson finding her with "the archives";
+      the couch and "You said nine" / "Stay"; the late-night kitchen fight —
+      "because that means no one took you away from me … you just stopped
+      choosing me", "but somehow I'm still lonely", "come home. Not to the
+      house. To me."; Tyson's hug ("You leaving me?" / "Never."); and Josh's
+      call — "I want to come home, Josh. That's why I need you to stop." It
+      ends on Melissa's card, "BETWEEN US".
+
+      THE SYNOPSIS IS A PLACEHOLDER, written off the transcript; hers to
+      replace, as she did the pilot's and Breathe's. It names the journal,
+      the waiting and the call, and NOT the accident night: that is Stage
+      Four of the secret (docs/content/BETWEEN_US_SECRET_CANON.md §8), and a
+      public synopsis is the wrong place for a stranger to meet it.
+
+      ABOUT TWO MINUTES FREE, the window Melissa set for Breathe — see the
+      override in scripts/make-previews.mjs. It is all journal montage.
+
+      NOT `mature`, and no notes: the fight is words, and the closest thing
+      to physical is "don't touch me" said and respected.
+    */
+    slug: "episode-3",
+    // Melissa, 2026-10-08: "The Space Between". Must match lib/content/season.ts.
+    title: "Episode 3: The Space Between",
+    synopsis:
+      "Luna finds the journal she kept in her first year with Josh and reads it cover to cover \u2014 the burnt eggs, the paint, the nights she waited up. Somewhere in those pages is the moment loving each other stopped being enough, and she cannot find it. Then Tyson finds her reading, and later that night, Josh calls.",
+    file: "episode-3.proxy.mp4",
+    poster: "/posters/episode-3.jpg",
+    // 1295, trimmed on the end card with a 2s fade — see scripts/import-cuts.sh.
+    durationSeconds: 1295,
+    addedOn: "2026-10-08",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "episode-3-preview.proxy.mp4",
+      // 129.0 exactly — see the override in scripts/make-previews.mjs.
+      durationSeconds: 129,
+      hookStart: 0,
+      hookNote: "the old journal, ending on \u201cMisprint.\u201d",
+    },
+    feelings: ["distance", "hurt", "trust"],
+    place: "lakehouse",
+    about: ["luna", "josh", "tyson", "rick"],
+  },
+  {
+    /*
+      AFTER THE DETECTIVES, 2026-09-24. Scored the same night it arrived.
+
+      WHAT IS SAID, from the transcript rather than the frames. Luna has sat
+      forty-five minutes across from two detectives who asked her about Josh
+      and about Tyson, and knew her name, where she lives, and how long she has
+      known him. Josh told her nothing. She comes to Tyson "because you tell me
+      the truth", and he tells her to leave it alone: "the less you know, the
+      less you can tell them." Her answer is the line of the scene — "don't
+      protect me by making me the stupidest person in the room."
+
+      WHY HE DOES IT (Melissa): to protect her. If she knows nothing she has
+      nothing to give the police. It ties back to the accident and to
+      `the-year-he-went-quiet`, and the pieces are meant to come together
+      slowly. Recorded in docs/content/BETWEEN_US_SECRET_CANON.md, "Addition —
+      2026-09-24: the detectives".
+
+      IT OPENS ON THE STARING GAME and "No secrets, remember?", which is
+      `the-rule` being called in — the first time she has used it on him and
+      lost.
+
+      NOTHING IS NAMED. No accident, no death, no Rick. An audience that has
+      watched `ty-josh-rick-accident` knows exactly what she is standing next
+      to, and she does not. The synopsis keeps to what she knows.
+
+      PREMIUM. Same reasoning as `josh-ty-ricks-house` and `tyson-cole-bar`:
+      it carries the mechanism. The preview is the opening 60s (the tier for
+      anything over three minutes): the staring game, "No secrets,
+      remember?", and the scored stretch after it. The police are not
+      mentioned until 1:34, so the public file gives away none of the scene's
+      news.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace. "Forty-Five
+      Minutes" is her own line and spends nothing.
+
+      PLACE IS A GUESS: a kitchen at night with dark water and lights through
+      the glass, and "I'm in this house alone". Lakehouse is the nearest
+      match. Correct it if it is somewhere else.
+    */
+    slug: "luna-ty-detectives",
+    title: "Forty-Five Minutes",
+    synopsis:
+      "Two detectives kept her for forty-five minutes and asked about the two men in her life. Josh will not tell her anything. So she goes to the one person who has never lied to her, and he asks her to leave it alone.",
+    file: "luna-ty-detectives.proxy.mp4",
+    poster: "/posters/luna-ty-detectives.jpg",
+    // 321: picture ends at 315.5, then six seconds of black under the score
+    // with a 4s fade — see scripts/import-cuts.sh.
+    durationSeconds: 321,
+    addedOn: "2026-09-24",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "luna-ty-detectives-preview.proxy.mp4",
+      durationSeconds: 60,
+      hookStart: 0,
+      hookNote:
+        "the staring game and “No secrets, remember?” — nothing about the police",
+    },
+    feelings: ["lies", "trust"],
+    place: "lakehouse",
+    about: ["luna", "tyson", "josh"],
+  },
+  {
+    /*
+      YOUNG, THE APARTMENT, 2026-09-25. Atlanta, 2006, both eighteen.
+
+      WHAT IS SAID, from the transcript. She is dressed for a date with a guy
+      Tyson has never met and does not care to. "Is this too much?" / "For
+      him?" / "Yeah." — "You haven't even met him." / "I don't need to." —
+      and he does not know the guy's name, and neither, it turns out, does she
+      ("Do you?"). She tells him to fuck off, he tells her to have fun, and on
+      her way out the door: "If he drives a Civic, I'm gonna be pissed."
+      "Night, Ty." "Night."
+
+      WHAT IT IS FOR (Melissa): their normal best-friend banter — him hanging
+      round her place, her completely at ease with him — with Tyson's own
+      thoughts running underneath, which he will never act on because he does
+      not know what they are himself. Canon addition recorded in
+      LUNA_VALE_CONTEXT.md, "Tyson at eighteen".
+
+      WHAT IT SETS IN MOTION, AND THE SYNOPSIS STAYS OUT OF IT. Her dating
+      makes it easier for him to join the Navy and leave Atlanta, which is how
+      her twenties happen with him in and out of them — and how there is room
+      for Josh at twenty-eight. That is the whole shape of the story from
+      here, and it belongs to the viewer to put together, not to a card.
+
+      PAIRS WITH `ty-luna-young` ("Pick Me Up"), the same summer: there she
+      calls and he comes; here she goes and he stays on the couch. Placed
+      straight after it in STORY_ORDER.
+
+      "LOU" at 1:08 is him calling after her, and it is the first time the
+      nickname is on the site. Worth knowing before anybody writes a line of
+      dialogue that has him call her something else at eighteen.
+
+      FREE. Melissa, 2026-09-25. It is banter with none of the mechanism in
+      it, same as Pick Me Up, and it is the friendship a stranger needs to
+      have seen for everything later to cost anything. It was staged premium
+      with a 30s preview first; that preview file is still in Blob, unused.
+      No preview now — there is nothing to preview when the whole thing is
+      open.
+
+      TITLE IS A PLACEHOLDER, hers to replace. The synopsis is hers.
+    */
+    slug: "young-luna-ty-apt",
+    title: "Have Fun",
+    // Melissa's own, 2026-09-25, trimmed the same night at her request: "i
+    // dont wanna mention anywhere that tyson fell for luna that long ago."
+    // Out went "the earliest hint that Tyson may see Luna as more than a
+    // friend", "Luna remains completely oblivious" (oblivious to what, is the
+    // question it asks) and "burying whatever feeling just surfaced". What is
+    // left is what is on screen. The look at the door stays — it is a shot,
+    // not a claim — and a viewer can make of it what they like.
+    synopsis:
+      "In a 2006 flashback, 18-year-old Luna gets ready for a date while her best friend Tyson lounges on her apartment couch, teasing her about her outfit and the guy she\u2019s seeing. She steals his hoodie on her way out, laughing at his jokes. After she leaves, Tyson is alone in the suddenly quiet apartment, staring at the closed door for a beat before he turns the TV up.",
+    file: "young-luna-ty-apt.proxy.mp4",
+    poster: "/posters/young-luna-ty-apt.jpg",
+    // 95: picture ends at 89.8 and the score runs out at 94.6 — see
+    // scripts/import-cuts.sh.
+    durationSeconds: 95,
+    addedOn: "2026-09-25",
+    access: "free",
+    mature: false,
+    feelings: ["trust"],
+    place: "atlanta",
+    about: ["luna", "tyson"],
+  },
+  {
+    /*
+      CATHY AND AVERY IN THE KITCHEN, 2026-09-29. Atlanta, about a week after
+      the breakup (Melissa), and Luna has not picked up when her mother calls.
+
+      WHAT IS SAID, from the transcript. Avery gets the real number of calls
+      out of her mother ("Three." / "Okay, fine. Four." / "There it is"), and
+      the pair of them describe Luna exactly: "She waits until she can make it
+      sound like she's fine." Cathy wants to hear her voice; Avery points out
+      she would hear one weird breath and spend three hours on it, "you did it
+      last Christmas". The sandwich ("You once asked me if I was happy with my
+      life while handing me a sandwich." / "You answered." / "Because there
+      was a sandwich."). Then the text instead of a fifth call — "that's just
+      calling with your thumbs" — about their father backing into the trash
+      cans, and "don't put call me". She puts call me.
+
+      IT IS THE OTHER END OF `luna-cathy-phone`, and sits immediately before
+      it in STORY_ORDER: the week of unanswered calls, and then the one Luna
+      picks up. `my-mother-called` in the journal is her side of that.
+
+      CANON IT LEANS ON, all already published: Avery in Atlanta with their
+      mother, Cathy who "calls until Luna picks up", Avery who "does not ask
+      Luna how she is", and Cathy and Tony married forty years — the father
+      and the trash cans are the first time Tony has been mentioned in a scene.
+
+      PREMIUM, FIRST MINUTE FREE — Melissa's call, 2026-09-29. The minute ends
+      on "Exactly." — the two of them agreeing about Luna, one beat before "I
+      hate that".
+
+      SYNOPSIS IS MELISSA'S, 2026-09-29, verbatim except "two thousand miles" for "hundreds of miles", at her request, to match the character pages. TITLE IS HERS
+      TOO: "Mom's Kitchen" (it was the placeholder "Four Times" for a day).
+    */
+    slug: "avery-cathy-kitchen",
+    title: "Mom\u2019s Kitchen",
+    synopsis:
+      "In Atlanta, Cathy anxiously waits to hear from Luna, repeatedly checking her phone and trying to convince herself she isn\u2019t worried. Avery gently calls out her mother\u2019s habits with affectionate humor, teasing her about overcalling, overanalyzing, and trying to take care of Luna from two thousand miles away. Beneath the banter, Cathy finally admits the simple truth: she just wants to hear her daughter\u2019s voice. The scene becomes a warm, intimate look at their family dynamic\u2014Avery understanding her mother completely while Cathy struggles with being unable to help Luna from afar.",
+    file: "avery-cathy-kitchen.proxy.mp4",
+    poster: "/posters/avery-cathy-kitchen.jpg",
+    // 221.4: picture and sound stop together — see scripts/import-cuts.sh.
+    durationSeconds: 221,
+    addedOn: "2026-09-29",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "avery-cathy-kitchen-preview.proxy.mp4",
+      durationSeconds: 60,
+      hookStart: 0,
+      hookNote: "the call count and \u201cshe waits until she can make it sound like she\u2019s fine\u201d",
+    },
+    feelings: ["trust", "distance"],
+    place: "atlanta",
+    about: ["cathy", "avery", "luna"],
+  },
+  {
+    /*
+      THE SHAVE, 2026-10-04. The lakehouse, about a week after the breakup
+      (Melissa). Luna trims Tyson's beard. Free — Melissa's call.
+
+      WHAT IS SAID, from the transcript. Bickering about who is bossy ("You
+      just listened better before."), then the face she makes when she does
+      not believe him, and the one honest stretch: "I think I'm okay and then
+      something stupid happens and I'm not" / "I just don't know what I'm
+      supposed to feel yet." / "You don't have to know yet." Then twenty
+      minutes of it because he keeps talking, and the moustache threat.
+
+      DESCRIBE AND STOP. It is a week out and nothing in it is about him and
+      her; the synopsis says so by not saying anything else. See
+      tyson-no-early-feelings — a look is fine, a line explaining it is not.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace.
+    */
+    slug: "luna-tyson-shaving",
+    title: "Sit Still",
+    synopsis:
+      "A week since Josh, at the lakehouse. Luna takes the clippers to Tyson\u2019s beard and makes a twenty-minute job of it, and somewhere between telling him to sit still and threatening his moustache, admits she doesn\u2019t know what she\u2019s supposed to feel yet.",
+    file: "luna-tyson-shaving.proxy.mp4",
+    poster: "/posters/luna-tyson-shaving.jpg",
+    // 193.1, trimmed — see scripts/import-cuts.sh.
+    durationSeconds: 193,
+    addedOn: "2026-10-04",
+    access: "free",
+    mature: false,
+    feelings: ["trust", "hurt"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+  },
 ];
 
 /**

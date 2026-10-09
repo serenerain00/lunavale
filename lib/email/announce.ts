@@ -72,7 +72,10 @@ function runtime(seconds?: number): string {
 
 function subjectFor(releases: Release[]): string {
   const clips = releases.filter((r) => r.kind === "scene").length;
-  const pages = releases.filter((r) => r.kind === "journal").length;
+  // A folded run (Release.pages) is one card and several pages.
+  const pages = releases
+    .filter((r) => r.kind === "journal")
+    .reduce((n, r) => n + (r.pages ?? 1), 0);
 
   /*
    * AN EPISODE TAKES THE SUBJECT LINE, whatever else went up with it.

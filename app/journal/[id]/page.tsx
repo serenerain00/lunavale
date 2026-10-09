@@ -8,6 +8,7 @@ import { canWatch } from "@/lib/access/entitlement";
 import { getEntry, journal, opening } from "@/lib/content/journal";
 import { getPerson, getPlace } from "@/lib/content/taxonomy";
 import { getVideo } from "@/lib/content/videos";
+import { getClip } from "@/lib/content/posts";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { getTier } from "@/lib/content/membership";
 
@@ -52,6 +53,11 @@ export default async function JournalEntryPage({ params }: EntryPageProps) {
 
   const place = getPlace(entry.place);
   const scene = entry.sceneSlug ? getVideo(entry.sceneSlug) : undefined;
+  // `clipId` was carried in the data and checked by the health check, but no
+  // page rendered it until 2026-10-07 — an entry beside a post had no way to
+  // point at it. "Goes with" rather than "written the same night": the old
+  // journal pages she reads in a post were written ten years before it.
+  const post = !scene && entry.clipId ? getClip(entry.clipId) : undefined;
 
   // Neighbours within the same place, so reading one entry leads to the rest
   // of that room rather than dead-ending.
@@ -73,7 +79,7 @@ export default async function JournalEntryPage({ params }: EntryPageProps) {
         <nav className="py-5 text-sm">
           <Link
             href={`/journal?place=${entry.place}`}
-            className="text-stone transition-colors duration-(--duration-quick) hover:text-ivory"
+            className="-my-3 inline-flex min-h-11 items-center text-stone transition-colors duration-(--duration-quick) hover:text-ivory"
           >
             ← {place?.label ?? "The journal"}
           </Link>
@@ -126,6 +132,19 @@ export default async function JournalEntryPage({ params }: EntryPageProps) {
               className="text-amber underline decoration-hairline underline-offset-4 transition-colors duration-(--duration-quick) hover:text-amber-soft"
             >
               {scene.title}
+            </Link>
+            .
+          </p>
+        )}
+
+        {post && (
+          <p className="mt-10 text-center text-sm text-stone">
+            Goes with{" "}
+            <Link
+              href={`/posts/${post.id}`}
+              className="text-amber underline decoration-hairline underline-offset-4 transition-colors duration-(--duration-quick) hover:text-amber-soft"
+            >
+              {post.title}
             </Link>
             .
           </p>

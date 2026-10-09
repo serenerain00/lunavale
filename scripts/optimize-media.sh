@@ -191,6 +191,11 @@ case "$cmd" in
     [ -f "$src" ] || die "no source at $src"
 
     vf="scale=-2:$PROXY_HEIGHT"
+    # PROXY_FPS, set per line in import-cuts.sh (its sixth field). Unset keeps
+    # the source rate, which is what every clip has always had. Episodes are
+    # 30: twenty-odd minutes at 60fps is twice the download for a phone, and
+    # 80% of visitors are on one (2026-10-08, episode 3).
+    [ -n "${PROXY_FPS:-}" ] && vf="$vf,fps=$PROXY_FPS"
     af=""
     if [ -n "$fade" ]; then
       # Fade from (runtime - fade) so it lands exactly on the last frame. Uses

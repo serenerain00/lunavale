@@ -88,6 +88,13 @@ export interface Clip {
    */
   aspect?: [number, number];
   /**
+   * Where to crop this poster when it has to fill a 16:9 card — the New row on
+   * the home page. A CSS object-position. Unset means "50% 28%", the upper
+   * part of the frame, which suits most of these; set it where the poster's
+   * subject sits elsewhere (The Couch: the kiss is dead centre).
+   */
+  wideCrop?: string;
+  /**
    * When this clip is a preview of a longer scene, that scene's slug. Lets the
    * clip page say what the full thing is and where it lives, instead of leaving
    * a visitor to guess that thirty seconds is all there is.
@@ -613,6 +620,134 @@ const authored: Clip[] = [
     // The full 3:03, members-only, and the clip page says so rather than
     // leaving somebody to assume ninety seconds is all there is.
     fullSceneSlug: "ty-luna-blonde-guy-bar",
+  },
+  {
+    /*
+      THE RAIN, Melissa, 2026-10-02. Luna and Tyson at night in a downpour: an
+      argument, then a kiss. Both clothed throughout.
+
+      IT HAPPENS AHEAD OF THE STORY — a year or two on, at whenever Tyson tells
+      her. Melissa turned the dialogue down on purpose so what they say is not
+      for hearing yet, and does not want it described. So the caption says
+      what is on screen, that the sound is lowered on purpose, and nothing
+      about what it means or when it falls. Do
+      not write a synopsis for it, and do not place it near anything as an
+      explanation. Same rule as tyson-no-early-feelings: describe and stop.
+
+      MEMBERS ONLY, NO PREVIEW. She will post about the middle 30s on
+      Instagram, and that is the public window; the site holds the whole 4:46.
+      Not in STORY_ORDER — posts never are, and there is no landscape scene
+      for it to point at (stories/luna-tyson-rainstorm/luna-tyson-rainstorm.mp4
+      sits beside it, unimported).
+    */
+    id: "luna-ty-rain-ig",
+    // PLACEHOLDER title and caption — hers to replace.
+    title: "Rain",
+    // The second half is Melissa's, 2026-10-02 — viewers are told why they
+    // cannot hear it, and nothing about what is said.
+    caption:
+      "Luna and Tyson, and the rain. The dialogue is turned down on purpose \u2014 we didn\u2019t want to give too much away. If you\u2019re great at lip reading, you\u2019re already ahead of the game.",
+    file: "luna-ty-rain-ig.proxy.mp4",
+    poster: "/posters/luna-ty-rain-ig.jpg",
+    // 286, the trimmed length: picture goes black at 279.8 and the score runs
+    // on under it to 286.5. See scripts/import-clips.sh.
+    durationSeconds: 286,
+    addedOn: "2026-10-02",
+    about: ["luna", "tyson"],
+    // A kiss in wet clothes, intimate and graphic nowhere — the same call as
+    // luna-ty-nyc-vertical.
+    mature: true,
+    access: "premium",
+  },
+  {
+    /*
+      THE COUCH, Melissa, 2026-10-03. Luna and Josh, close, intimate, faces
+      the whole way through. Free — it runs on Instagram, so there is nothing
+      to gate.
+
+      MATURE, NOT EXPLICIT: nothing is shown below the shoulders. Same call as
+      her-place, which is the Tyson equivalent.
+    */
+    id: "luna-josh-couch",
+    // PLACEHOLDER title and caption — hers to replace.
+    title: "The Couch",
+    caption: "Luna and Josh, late, and nowhere else to be.",
+    file: "luna-josh-couch.proxy.mp4",
+    poster: "/posters/luna-josh-couch.jpg",
+    // 88, the trimmed length — 2s of black came off the end.
+    durationSeconds: 88,
+    addedOn: "2026-10-03",
+    about: ["luna", "josh"],
+    mature: true,
+    wideCrop: "50% 50%",
+  },
+  {
+    /*
+      AFTER THE DETECTIVES, Melissa, 2026-10-06. Luna confronts Josh the same
+      day two detectives kept her forty-five minutes — the scene right before
+      she goes to Tyson in `luna-ty-detectives`. Late in the series; it is up
+      now to start the mystery under the love story. Free — it runs on
+      Instagram.
+
+      WHAT IS SAID, from the transcript. She lied for him in that room without
+      being asked, and wants to know what for. He will not say: "the second I
+      tell you anything, you're in it." He tells her "I'll take care of it",
+      which is his father's sentence from the night itself (see the journal
+      entry `what-i-told-them`). It ends on "He wasn't supposed to be there." /
+      "Who?" — and no answer.
+
+      NOTHING IS NAMED: no accident, no death, no Rick. The caption keeps to
+      that.
+
+      NOTE: `control` rather than `violence`. He holds her arm to keep her in
+      the room and she tells him not to touch her; nobody is struck.
+
+      TITLE AND CAPTION ARE PLACEHOLDERS, hers to replace.
+    */
+    id: "luna-josh-fight-45m",
+    title: "Then Tell Me",
+    caption: "She lied to two detectives for him. Now she wants to know what for.",
+    file: "luna-josh-fight-45m.proxy.mp4",
+    poster: "/posters/luna-josh-fight-45m.jpg",
+    // 111, the trimmed length — 4.5s of black came off the end.
+    durationSeconds: 111,
+    addedOn: "2026-10-06",
+    about: ["luna", "josh"],
+    mature: false,
+    notes: ["control"],
+    // Near-square, 1320x1282 at source, 720x700 as the proxy. See Clip.aspect.
+    aspect: [720, 700],
+  },
+  {
+    /*
+      THE JOURNAL MEMORY, Melissa, 2026-10-07. Luna reading her old journal,
+      cut against early mornings with Josh — the eggs he is very bad at, step
+      four, paint that is not the colour until it dries, the barn. Her voice
+      over it: "I think I'm in trouble. Not bad trouble. The kind that starts
+      to feel familiar way too fast." From the episode 3 material. Free — it
+      runs on Instagram.
+
+      NOT MATURE: nothing in it is more than an arm round her.
+
+      THE CAPTION IS HERS (2026-10-07). The title is still a placeholder —
+      "Not Bad Trouble" is her own line from the voiceover.
+    */
+    id: "luna-josh-journal-mem",
+    title: "Not Bad Trouble",
+    // Melissa's synopsis, 2026-10-07, verbatim. Two paragraphs: the post
+    // page keeps the break (whitespace-pre-line).
+    caption:
+      "Luna opens an old journal and finds herself back at the beginning of her ten-year relationship with Josh—first dates, falling fast, and the little moments that once made him feel like home. But as the pages turn, the memories begin to change. What felt insignificant while she was living it looks different in hindsight.\n\nA quiet look at how two people can love each other deeply and still slowly lose their way.",
+    file: "luna-josh-journal-mem.proxy.mp4",
+    poster: "/posters/luna-josh-journal-mem.jpg",
+    // 176, the trimmed length — 3.3s of black came off the end.
+    durationSeconds: 176,
+    addedOn: "2026-10-07",
+    about: ["luna", "josh"],
+    mature: false,
+    // Her face is high in the frame; the default 28% keeps the smile and
+    // loses the eyes.
+    wideCrop: "50% 20%",
   },
 ];
 

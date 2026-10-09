@@ -73,6 +73,36 @@ export const SEASONS: Season[] = [
         runtimeSeconds: 1116,
         comingSoon: false,
       },
+      {
+        /*
+          LANDED 2026-09-29. NAMED THE SAME DAY — Melissa: "episode 2 is
+          called Breathe" (her line in the kitchen: "Are you happier?" / "I
+          can breathe."). Written "Episode 2: Breathe" because the shelf card
+          shows only the title, and the number is what tells somebody which
+          one to watch next. Same both-places rule as above: the matching
+          `title` in videos.ts must say the same thing.
+        */
+        number: 2,
+        title: "Episode 2: Breathe",
+        slug: "episode-2",
+        poster: "/posters/episode-2.jpg",
+        runtimeSeconds: 1343,
+        comingSoon: false,
+      },
+      {
+        /*
+          LANDED 2026-10-08. NAMED THE SAME DAY — Melissa: "The Space
+          Between". Written "Episode 3: The Space Between" for the same reason
+          as Breathe. Same both-places rule as above: the matching `title` in
+          videos.ts must say the same thing.
+        */
+        number: 3,
+        title: "Episode 3: The Space Between",
+        slug: "episode-3",
+        poster: "/posters/episode-3.jpg",
+        runtimeSeconds: 1295,
+        comingSoon: false,
+      },
     ],
   },
 ];

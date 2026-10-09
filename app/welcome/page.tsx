@@ -47,7 +47,7 @@ export default async function WelcomePage({
   if (billingLive()) {
     const { auth } = await import("@clerk/nextjs/server");
     const { userId } = await auth();
-    if (userId) redirect("/membership/claim");
+    if (userId) redirect(claimHref(sessionId));
   }
 
   const paid = await readSession(sessionId);
@@ -74,7 +74,7 @@ export default async function WelcomePage({
             </p>
 
             <Link
-              href={signUpHref(paid.email)}
+              href={signUpHref(paid.email, sessionId)}
               className="mt-8 inline-flex min-h-11 items-center rounded-full bg-amber px-7 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
             >
               Make your account
@@ -127,11 +127,26 @@ export default async function WelcomePage({
 }
 
 /**
+ * The claim route, carrying the checkout session.
+ *
+ * THE SESSION IS WHAT MAKES A MISMATCHED EMAIL SURVIVABLE (2026-09-25). The
+ * pre-filled address below is a suggestion, and "Continue with Google" ignores
+ * it — one customer paid with Hotmail, signed up with Gmail, and was locked out
+ * of what she had just bought. With the session id on the way back, the claim
+ * route can match the payment itself rather than the address.
+ */
+function claimHref(sessionId: string): string {
+  return sessionId
+    ? `/membership/claim?session_id=${encodeURIComponent(sessionId)}`
+    : "/membership/claim";
+}
+
+/**
  * Clerk sign-up, pointed back at the claim route, with the paying address
  * pre-filled so the two cannot drift apart by a typo.
  */
-function signUpHref(email: string | null): string {
-  const back = encodeURIComponent("/membership/claim");
+function signUpHref(email: string | null, sessionId: string): string {
+  const back = encodeURIComponent(claimHref(sessionId));
   const prefill = email ? `&email=${encodeURIComponent(email)}` : "";
   return `/sign-up?redirect_url=${back}${prefill}`;
 }

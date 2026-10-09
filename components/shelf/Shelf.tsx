@@ -105,7 +105,7 @@ export function Shelf({
             (href && (
               <Link
                 href={href}
-                className="shrink-0 text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
+                className="-my-3 inline-flex min-h-11 items-center shrink-0 text-sm text-stone transition-colors duration-(--duration-quick) hover:text-amber"
               >
                 {linkLabel ?? "See all"} <span aria-hidden="true">→</span>
               </Link>

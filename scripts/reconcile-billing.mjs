@@ -52,8 +52,12 @@ const sql = neon(process.env.DATABASE_URL);
 const leaving = (s) => s.cancel_at_period_end === true || s.cancel_at != null;
 
 /** Period end moved onto the subscription item in recent API versions. */
-const periodEnd = (s) =>
-  s.items?.data?.[0]?.current_period_end ?? s.current_period_end ?? null;
+// Same rule as the webhook's periodEnd(): a subscription stopped outright
+// (ended_at before its period end) ends then, not at the period end.
+const periodEnd = (s) => {
+  const p = s.items?.data?.[0]?.current_period_end ?? s.current_period_end ?? null;
+  return s.ended_at && (!p || s.ended_at < p) ? s.ended_at : p;
+};
 
 const subs = (await stripe.subscriptions.list({ status: "all", limit: 100 }))
   .data;

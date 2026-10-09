@@ -99,7 +99,7 @@ export default async function WatchPage({ params }: WatchPageProps) {
               thing to go back to. */}
           <Link
             href="/clips"
-            className="text-stone transition-colors hover:text-ivory"
+            className="-my-3 inline-flex min-h-11 items-center text-stone transition-colors hover:text-ivory"
           >
             ← All clips
           </Link>

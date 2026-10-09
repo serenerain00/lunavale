@@ -71,17 +71,30 @@ const PLANS = [
 const TAX_CODE = "txcd_10402200";
 
 // --- The product, once, shared by both prices -------------------------------
+//
+// THE NAME IS WHAT CHECKOUT SAYS: "Subscribe to <name>", with the description
+// under the price. It read "Vault" / "Luna Vault membership" in live Stripe
+// until 2026-10-08, two months after the site became Luna Vale — the last
+// thing a buyer read before paying was a name the site no longer used.
+//
+// FOUND BY METADATA, NOT BY NAME. The lookup used to be name:"Vault", which
+// meant renaming the product in Stripe would make the next run of this script
+// create a duplicate. `role: membership` survives any rename.
+const PRODUCT_NAME = "Luna Vale";
+const PRODUCT_DESCRIPTION =
+  "Every episode of Between Us, every clip at full length, all of Luna's journal, the stills from set, and the group chat.";
+
 async function vaultProduct() {
   const products = await stripe.products.search({
-    query: 'name:"Vault" AND active:"true"',
+    query: 'metadata["role"]:"membership" AND active:"true"',
     limit: 1,
   });
   const product =
     products.data[0] ??
     (await stripe.products.create({
-      name: "Vault",
-      description:
-        "Luna Vale membership — the full scene library, the locked rooms, and Luna's journals.",
+      name: PRODUCT_NAME,
+      description: PRODUCT_DESCRIPTION,
+      metadata: { role: "membership" },
       tax_code: TAX_CODE,
     }));
   // Ensure the tax code is set even on a product that predates this script.

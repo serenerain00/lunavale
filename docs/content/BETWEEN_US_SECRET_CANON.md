@@ -713,3 +713,105 @@ year Tyson changed was "the year I was twenty-three", "five years in", and
 that she had "spent fifteen years" explaining him. Under this timeline it is
 the year she was **29**, **eleven years in**, and **nine years** ago. Corrected
 the same day.
+
+---
+
+## Addition — 2026-09-24: the detectives
+
+Melissa, with the scene `luna-ty-detectives` (held, awaiting its score):
+
+- **In the present day, two detectives question Luna.** They ask about Josh
+  and about Tyson, and they already know a great deal about her — her name,
+  where she lives, how long she has known Tyson.
+- **Josh will not talk to her about it.** She rings him first; he gives her
+  nothing.
+- **She goes to Tyson**, because he is the one who tells her the truth (the
+  rule — see the journal entry `the-rule`).
+- **Tyson keeps her out on purpose, to protect her.** If she knows nothing,
+  she has nothing to give the police. His line: *"The less you know, the less
+  you can tell them."*
+- It ties back to the accident, and to `the-year-he-went-quiet` — the year
+  she filed under the Navy. The pieces are meant to come together slowly.
+- It is **late in the story** — possibly the latest scene there is.
+
+**WHERE THIS PUTS THE LADDER (§8).** It is past Stage Three: Luna now knows
+there is *something*, and that it is serious enough for the police, but not
+what it is. No accident, no death and no Rick is named on screen, so it is not
+yet Stage Four for her — although an audience that has seen `ty-josh-rick-accident`
+(free, and first in the story order) will know exactly what she is standing
+next to. That gap between what she knows and what the viewer knows is the
+scene's engine.
+
+**ONE THING TO WATCH, NOT A PROBLEM YET.** §9 and the guardrails say the
+secret should stay "emotional/character-driven, not procedural crime
+plotting." Police in the present are the first step in that direction. This
+scene keeps to the spirit — the detectives are never on screen and the whole
+thing is about Tyson choosing to keep her in the dark — but it is worth
+deciding early how much of the investigation is ever shown, rather than
+finding out one scene at a time.
+
+**TYSON KEEPING LUNA OUT MIRRORS RICK KEEPING LUNA OUT.** §12 has Rick deciding,
+on the night itself, that she does not need to know about this mess. Nine years
+later Tyson makes the same decision for the opposite reason — to protect her
+rather than himself. She does not know that she is being excluded for the
+second time, and she will not find the difference comforting.
+
+---
+
+## Addition — 2026-10-06: the night Josh came to her, and the lie
+
+Melissa, with the Instagram cut `luna-josh-fight-45m` (free, published as the
+post "Then Tell Me") and the journal entry `what-i-told-them`.
+
+**NEW, AND IT CHANGES WHAT LUNA KNOWS.** On the night of the accident Josh
+came home to Luna (see the 2026-10-08 correction below — not "her apartment"). He was shaken and said very little: **a man died,
+and his dad was going to take care of it.** That is everything she was told.
+She has known for nine years that a man died at the site — but to her it was
+never a secret, only a terrible night at his work that Rick handled. She has
+never connected it to Tyson's quiet year, and does not yet.
+
+§12 still holds in substance: she was not present, she does not know what
+actually happened, nobody told her. Rick's *"She doesn't need to know about
+this mess"* now has an edge — Josh came to her anyway, with the smallest
+possible version.
+
+**THE DETECTIVES, REVISED.** The 2026-09-24 addition had her ringing Josh and
+getting nothing. Newest version: **she gives the detectives almost nothing —
+more nervous than honest — and lies for Josh.** That lie is what sends her to
+confront him in person. He will not tell her what she lied for. **Then** she
+goes to Tyson. Order: detectives → Josh → Tyson.
+
+**WHAT THE FIGHT PUTS ON SCREEN** (transcript): "the second I tell you
+anything, you're in it"; "you let me sit in that room and lie for you";
+"I'll take care of it" — Rick's sentence from the night, now in Josh's mouth;
+and the last line, **"He wasn't supposed to be there." / "Who?"**, unanswered.
+Nobody names the accident, the dead man or Rick.
+
+**LADDER (§8).** This is the first public step into Stage Four: there was a
+death, and Josh's father handled it — said in Luna's journal (members) and
+sitting under the free post. How the man died, the machine, and Rick's
+knowledge stay off the site. Melissa: introduce the mystery, do not go into
+detail.
+
+**OPEN, NOT FOR THE SITE:** who "he" is in "he wasn't supposed to be there".
+
+**REVISED 2026-10-07 — her own page from that night is now the account.**
+Melissa wrote the journal entry Luna kept at the time
+(`old-journal-the-night-he-came-over`, one of ten old-journal pages read in
+"Not Bad Trouble"). What Josh said that night: **somebody got hurt; he had
+signed something** (and would not say what he meant); **"Rick is handling
+it."** He stayed; neither of them slept. "Hurt", not "died" — `what-i-told-them`
+now has her understanding by the end of that week that the man had died,
+without anybody telling her (reconciliation, flagged in the entry). Writer
+note from Melissa: this page "will become terrifying later, because Luna
+innocently documented pieces of the cover-up contemporaneously." "Signed
+something" is §12's sign-off, on the record in Luna's hand.
+
+**CORRECTED 2026-10-08 — they were living together.** Episode 3 has Luna
+read "Josh came home at two this morning", and Melissa confirmed it: by the
+accident night, about a year in, Luna and Josh were **living together**. The
+"her apartment" versions above are superseded. Both journal pages were
+brought into line the same day (`old-journal-the-night-he-came-over` now
+opens on the episode's line; `what-i-told-them` says "we were already living
+together" and "our kitchen"). Her own apartment belongs to the earliest
+pages only — `old-journal-falling`, "like he belonged in my apartment".

@@ -37,9 +37,10 @@
  */
 
 import { journal, opening, type JournalEntry } from "@/lib/content/journal";
+import { clips as posts, clipAccess, type Clip } from "@/lib/content/posts";
 import { videos, type Video } from "@/lib/content/videos";
 
-export type ReleaseKind = "scene" | "journal";
+export type ReleaseKind = "scene" | "journal" | "post";
 
 export interface Release {
   kind: ReleaseKind;
@@ -49,10 +50,11 @@ export interface Release {
   href: string;
   /** "Free" / "Members" — the same word the card uses, decided at source. */
   access: "free" | "premium";
-  /** Runtime for a scene; undefined for a journal page. */
+  /** Runtime for a scene or post; undefined for a journal page. */
   durationSeconds?: number;
   /**
-   * Card art. SCENES ONLY.
+   * Card art. Scenes and posts — a post's is portrait, and the card crops it
+   * to the row's 16:9 at `posterPosition`.
    *
    * A journal page deliberately has none, and the card draws her handwriting
    * on ruled paper instead — the sheet JournalCard already uses on the index.
@@ -66,6 +68,11 @@ export interface Release {
    */
   poster?: string;
   /**
+   * Posts only: how to crop portrait art into the row's 16:9 card, as a CSS
+   * object-position. See Clip.wideCrop.
+   */
+  posterPosition?: string;
+  /**
    * One or two lines of what the thing is: the scene's synopsis, or her real
    * opening sentence. The opening line is already the journal's shop window
    * (see JournalCard) — a locked page shows the handwriting and withholds the
@@ -74,6 +81,11 @@ export interface Release {
   blurb: string;
   /** Carried through so a card can wear the same label the catalog uses. */
   mature?: boolean;
+  /**
+   * Journal only: how many pages this card stands for, when a run of them was
+   * folded into one (see foldRuns). Absent means one.
+   */
+  pages?: number;
   /** Journal only: the room, when she names one. */
   where?: string;
 }
@@ -108,6 +120,31 @@ function fromEntry(e: JournalEntry): Release {
 }
 
 /**
+ * A post as a release. Added 2026-10-06 (Melissa: "we need the posts on the
+ * homepage too") — before this the New row only knew scenes and pages, so a
+ * post published that day sat at the bottom of the front page in its own
+ * shelf and never reached the top.
+ *
+ * EXPLICIT POSTS ARE LEFT OUT. Their poster is withheld on every public grid
+ * (see clipPosterSrc), and a New card with no picture would be a hole in the
+ * row's most visible spot. They are still on /posts.
+ */
+function fromPost(p: Clip): Release {
+  return {
+    kind: "post",
+    date: p.addedOn!,
+    title: p.title,
+    href: `/posts/${p.id}`,
+    access: clipAccess(p),
+    durationSeconds: p.durationSeconds,
+    poster: p.poster,
+    posterPosition: p.wideCrop ?? "50% 28%",
+    blurb: p.caption,
+    mature: p.mature,
+  };
+}
+
+/**
  * Everything dated, newest first. `hidden` scenes are left out for the same
  * reason they are left out of the catalog — the interview is not a release in
  * the story.
@@ -115,8 +152,45 @@ function fromEntry(e: JournalEntry): Release {
 export function releases(): Release[] {
   return [
     ...videos.filter((v) => v.addedOn && !v.hidden).map(fromScene),
-    ...journal.filter((e) => e.addedOn).map(fromEntry),
+    // Posts before pages: the sort is stable, and on a day when a post and
+    // her page about it go up together the card with a picture should lead.
+    ...posts.filter((p) => p.addedOn && !p.explicit).map(fromPost),
+    ...foldRuns(journal.filter((e) => e.addedOn)),
   ].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+}
+
+/**
+ * Journal pages, with same-day runs from one place folded into one card.
+ *
+ * Added 2026-10-07, when ten pages of her old journal went up together.
+ * Unfolded they were ten of the New row's twelve cards — the same paper, the
+ * same heading, and everything else published that week pushed off the end.
+ * A run is entries sharing a day AND a `where` ("The old journal"), three or
+ * more of them; it becomes one card that opens on the first page, which is
+ * where a reader should start anyway. Ordinary days of separate entries are
+ * untouched, because they have no shared `where`.
+ */
+function foldRuns(entries: JournalEntry[]): Release[] {
+  const key = (e: JournalEntry) => (e.where ? `${e.addedOn}|${e.where}` : "");
+  const size = new Map<string, number>();
+  for (const e of entries) {
+    const k = key(e);
+    if (k) size.set(k, (size.get(k) ?? 0) + 1);
+  }
+  const seen = new Set<string>();
+  const out: Release[] = [];
+  for (const e of entries) {
+    const k = key(e);
+    const n = k ? size.get(k)! : 1;
+    if (n < 3) {
+      out.push(fromEntry(e));
+      continue;
+    }
+    if (seen.has(k)) continue;
+    seen.add(k);
+    out.push({ ...fromEntry(e), title: `${e.where} — ${n} pages`, pages: n });
+  }
+  return out;
 }
 
 /** The most recent `n`. */

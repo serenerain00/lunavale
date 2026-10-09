@@ -760,6 +760,90 @@ CUTS=(
   # trade as josh-luna-wall and luna-josh-fair. Worth a re-export at 1080 if
   # the source allows it.
   "luna-lkehouse-wine-shatter|stories/luna-lkehouse-wine-shatter/luna-lkehouse-wine-shatter-music.mov|6|148|3"
+
+  # AFTER THE DETECTIVES, 2026-09-24. Held for its score, which landed the
+  # same night as luna-ty-postDetective-music.mp4. The dialogue-only export
+  # beside it (and its *.untrimmed original) is superseded; kept, not used.
+  #
+  # SLUG `luna-ty-detectives`, NOT `luna-ty-post-detective` after the folder.
+  # "post" means the Instagram verticals at /posts since 2026-09-16, and
+  # /clips/luna-ty-post-detective reads like it belongs to the other library.
+  #
+  # THE SCORED CUT IS A LONGER EDIT, NOT JUST A MIX. About 30s went in after
+  # "No secrets, remember?" (0:47) — music, and one new line, "I guess that's
+  # over now" at 1:22 — so every later line sits ~30s later than in the
+  # dialogue-only export. Picture runs to 5:15.
+  #
+  # POSTER AT 40s: the staring game, both faces sharp and close, before a word
+  # about the police. Before the inserted section, so it survived the re-edit.
+  #
+  # END=321, FADE=4. Picture goes black at 315.5 and the score is laid to run
+  # out over 18s of black, fading to nothing by 333. Keeping all of it holds
+  # a black screen too long; cutting at the black stops the music dead. So
+  # six seconds of black under the music, the last four fading it out.
+  "luna-ty-detectives|stories/luna-ty-postDetective/luna-ty-postDetective-music.mp4|40|321|4"
+
+  # YOUNG, THE APARTMENT, 2026-09-25. Atlanta, 2006, both eighteen: she is
+  # getting ready for a date with a guy Tyson has not met and does not care
+  # to, and he is on her couch like he lives there.
+  #
+  # SOURCE IS THE SCORED .mov, AND IT COSTS RESOLUTION: 1320x796 HEVC against
+  # the silent master's 1930x1080. Same trade as josh-luna-wall and
+  # luna-josh-fair. Worth a re-export at 1080 if CapCut allows it.
+  #
+  # POSTER AT 58s: her grinning down at him on the couch, mid-banter. The
+  # scene in one frame, and it spends none of his last look.
+  #
+  # END=95, FADE=3. Picture goes black at 89.8 and the score runs out at
+  # 94.6; this keeps the music's own tail and fades the last of it.
+  "young-luna-ty-apt|stories/young-luna-ty-apt/young-luna-ty-apt-music.mov|58|95|3"
+
+  # EPISODE 2, 2026-09-29. Season one, 22:26 as delivered, 1786x1080 at 30fps
+  # — already the library's frame rate, so unlike the pilot (60fps, encoded
+  # down by hand) it goes through the ordinary import.
+  #
+  # POSTER AT 148s: the night she meets Josh, both of them laughing over her
+  # number going into his phone. Just past the free 1:30 — the card
+  # promises the episode's first scene and spends nothing from its last.
+  #
+  # END=1343.4. Melissa's end card ("BETWEEN US / New episodes every week")
+  # runs to 1343.4 and is kept; three seconds of black after it are not.
+  # No fade: the card already fades itself.
+  "episode-2|stories/ep2/ep2-final-music.MOV|148|1343.4"
+
+  # CATHY AND AVERY IN THE KITCHEN, 2026-09-29. Atlanta, about a week after
+  # the breakup; Luna has not picked up when her mother calls. Scored, 3:44.
+  #
+  # POSTER AT 128s: Cathy mid-sentence and Avery laughing, round the sandwich
+  # line — the two of them at their warmest, which is what the scene is.
+  #
+  # END=221.4. Picture and sound both stop at 221.39 (blackdetect and
+  # silencedetect agree); the rest is 2.4s of nothing. No fade — the score
+  # has already ended.
+  "avery-cathy-kitchen|stories/cathy-avery/avery-cathy-kitchen-music.mov|128|221.4"
+
+  # THE SHAVE, 2026-10-04. The lakehouse, about a week after the breakup
+  # (Melissa): Luna trims Tyson's beard. Scored, 3:14, 1320x800.
+  #
+  # POSTER AT 58s: her with the clippers, him with his head tipped back, both
+  # faces readable — the whole scene in one frame.
+  #
+  # END=193.1. blackdetect puts 0.8s of black on the end.
+  "luna-tyson-shaving|stories/luna-tyson-shaving/luna-tyson-shaving-music.mov|58|193.1"
+
+  # EPISODE 3, 2026-10-08. Season one, 22:08 as delivered, 1320x798 hevc at
+  # 60fps — so the sixth field brings it down to 30, the rate both earlier
+  # episodes stream at (the pilot was done by hand; this is the same result
+  # without the hand).
+  #
+  # POSTER AT 60s: her hand holding a photograph of the two of them, happy,
+  # tucked into the old journal. The whole episode in one frame, and inside
+  # the free window, so it spends nothing.
+  #
+  # END=1295, FADE=2. Melissa's card ("BETWEEN US") is up by 21:24 and the
+  # score is gone by 21:29; the master then holds the card in silence to
+  # 22:08. Kept six seconds past the music, the last two faded.
+  "episode-3|stories/ep3/final/ep3-final.mov|60|1295|2|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).
@@ -789,12 +873,12 @@ wanted() {
 }
 
 for entry in "${CUTS[@]}"; do
-  IFS='|' read -r slug src at end fade <<<"$entry"
+  IFS='|' read -r slug src at end fade fps <<<"$entry"
   wanted "$slug" || continue
   # All four optional slots are always passed, with "-" standing in for the
   # ones this line does not set. Otherwise an omitted `at` would slide `end`
   # into the poster argument and quietly grab the poster from the wrong frame.
-  ./scripts/optimize-media.sh import "$slug" "$src" \
+  PROXY_FPS="${fps:-}" ./scripts/optimize-media.sh import "$slug" "$src" \
     "${at:--}" "${end:--}" "${fade:--}"
 done
 

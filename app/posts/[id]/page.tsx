@@ -56,9 +56,9 @@ export default async function ClipPage({ params }: ClipPageProps) {
         <nav className="py-5 text-sm">
           <Link
             href="/posts"
-            className="text-stone transition-colors duration-(--duration-quick) hover:text-ivory"
+            className="-my-3 inline-flex min-h-11 items-center text-stone transition-colors duration-(--duration-quick) hover:text-ivory"
           >
-            ← All clips
+            ← All posts
           </Link>
         </nav>
 
@@ -137,7 +137,7 @@ export default async function ClipPage({ params }: ClipPageProps) {
           <h1 className="mt-2 font-display text-2xl font-light text-ivory sm:text-3xl">
             {clip.title}
           </h1>
-          <p className="mt-2 leading-relaxed text-stone">{clip.caption}</p>
+          <p className="mt-2 whitespace-pre-line leading-relaxed text-stone">{clip.caption}</p>
         </div>
 
         {(previous || next) && (

@@ -849,8 +849,8 @@ never were; that is superseded.
   that she does not remember him telling her anything. Protective, not
   combative — shock, fear and uncertainty under it.
 - **After:** she rings Tyson from the car — "They said you were there. Were
-  you?" **He says yes** ("Yeah."). She says "Okay", and alone in the car
-  breaks down and shouts his name. He keeps the no-lying rule (`the-rule`)
+  you?" **He says yes** ("Yeah."). She says "Okay" and **hangs up on him**, then
+  alone in the car breaks down and shouts his name. He keeps the no-lying rule (`the-rule`)
   at the worst possible moment. Order of the run is now: **interview → call to Tyson → Josh ("Then
   Tell Me") → Tyson (`luna-ty-detectives`).**
 

@@ -4600,7 +4600,8 @@ export const journal: JournalEntry[] = [
     waiting for Josh in the facility car park; the birthday cards and the
     lease. THE CALL IS FROM THE SCENE (Melissa, 2026-10-09: "Tyson told her
     yes"): "Luna…" / "No. Don't do that." / "They said you were there. Were
-    you?" / "Yeah." / "Okay." — then, alone, his name shouted. Kept to that.
+    you?" / "Yeah." / "Okay." — and SHE HANGS UP ON HIM (Melissa), then, alone, his
+    name shouted. Kept to that.
 
     THE ONE CHOICE WORTH CHECKING: "Nine years ago I was twenty-nine. I
     have written about that year in this book before." That reaches for
@@ -4642,7 +4643,7 @@ export const journal: JournalEntry[] = [
       "I said, they said you were there. Were you.",
       "He said yeah.",
       "One word. Twenty years of not lying to me and he kept the rule, right there, on the phone, and it was the worst thing he could have done.",
-      "I said okay. I do not know why I said okay. Then the line was dead and I sat here and shouted his name at the windscreen, like that would bring him back on.",
+      "I said okay. I do not know why I said okay. And then I hung up on him, before he could say one more true thing, and sat here and shouted his name at the windscreen like it was his fault I had.",
       "Now I am going to go and find Josh, and I am going to make him tell me what I just lied for.",
     ],
   },

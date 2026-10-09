@@ -3303,8 +3303,13 @@ export const videos: Video[] = [
   },
   {
     /*
-      THE INTERVIEW TRAILER, Melissa, 2026-10-09. FREE — it runs on
-      Instagram. "I wanna show what's coming down the road even if it is a
+      THE INTERVIEW TRAILER, Melissa, 2026-10-09. MEMBERS ONLY ON THE SITE
+      (Melissa, same day, after the music was raised: "can we hide it behind
+      the membership then"). It runs free on Instagram, which carries its own
+      music licensing; the site does not, and gating it here lowers the
+      exposure without licensing it — a paid stream is still a use. A
+      licensed or royalty-free mix for the site is the real fix.
+      Published free first, for a few hours. "I wanna show what's coming down the road even if it is a
       season away." Voice-over from the interview (`luna-detectives`) over
       Luna, Josh and Tyson each breaking down on their own — Josh at the
       workbench, Tyson and the mirror, Luna in the car and on the phone — and
@@ -3336,7 +3341,7 @@ export const videos: Video[] = [
     // the tagline and end title after — see scripts/trailer-bookends.py.
     durationSeconds: 196,
     addedOn: "2026-10-09",
-    access: "free",
+    access: "premium",
     mature: false,
     // Empty on purpose, as for the first trailer.
     feelings: [],

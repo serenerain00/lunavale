@@ -21,6 +21,17 @@
  * If you are looking for the rule that decides who may post, it is not this.
  */
 /**
+ * TAKEN DOWN AGAIN, 2026-10-10 — Melissa: "take down the group chat on the
+ * site." This flag now drives every place the chat is offered, not only the
+ * two pages: the nav link (components/ui/SiteHeader.tsx), the benefits row
+ * and the tier blurb (lib/content/membership.ts), and the pitches on the home
+ * and membership pages. Flip it back and all of them return together. The
+ * Stripe product description is outside the repo — scripts/stripe-setup.mjs
+ * holds the copy; update the live product by hand if the chat comes back.
+ *
+ * Nothing is deleted: `overheard_posts`, the cast thread below and the admin
+ * report all stay.
+ *
  * BACK, 2026-09-17 — Melissa: "lets add the members chat back into the members
  * perks."
  *
@@ -53,7 +64,7 @@
  * thread members-only is the move, and it needs no new code: the gate is in
  * app/overheard/actions.ts.
  */
-export const OVERHEARD_ARCHIVED = false;
+export const OVERHEARD_ARCHIVED = true;
 
 export const FREE_POST_ALLOWANCE = 3;
 

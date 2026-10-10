@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import Link from "next/link";
 import { authConfigured } from "@/lib/billing/provider";
 import { getTier } from "@/lib/content/membership";
+import { OVERHEARD_ARCHIVED } from "@/lib/content/overheard";
 import { SignOut } from "@/components/ui/SignOut";
 import {
   Guest,
@@ -74,7 +75,10 @@ export function SiteHeader() {
     // item" — and the page 404s no longer. Members-only in the bar for the
     // same reason /help is: the page gates itself server-side either way, and
     // a signpost to a room a stranger cannot enter is an invitation to bounce.
-    { href: "/overheard", label: "The group chat", memberOnly: true },
+    // Gone with the room whenever it is archived — see OVERHEARD_ARCHIVED.
+    ...(OVERHEARD_ARCHIVED
+      ? []
+      : [{ href: "/overheard", label: "The group chat", memberOnly: true }]),
     { href: "/about", label: "What this is" },
     // HELP IS MEMBERS-ONLY IN THE NAV, her call. The PAGE is still open to
     // everyone — this hides the signpost, not the door — so anybody with the

@@ -21,6 +21,7 @@ import { freeEntries, opening } from "@/lib/content/journal";
 import { clips as postList, clipPosterSrc, clipAccess, type Clip } from "@/lib/content/posts";
 import { notes as setNotes, type SetNote } from "@/lib/content/between-takes";
 import { formatPrice, getTier } from "@/lib/content/membership";
+import { OVERHEARD_ARCHIVED } from "@/lib/content/overheard";
 import {
   recentReleases,
   cadenceNote,
@@ -595,9 +596,11 @@ export default async function Home() {
                 Season one lands for members first.
               </h2>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
-                Membership opens every clip at full length, all of
-                Luna&rsquo;s journal, the stills from the set, and the group
-                chat the four of them talk in. What&rsquo;s open to everyone
+                {/* The chat is named only while it is open — OVERHEARD_ARCHIVED. */}
+                {OVERHEARD_ARCHIVED
+                  ? "Membership opens every clip at full length, all of Luna\u2019s journal, and the stills from the set."
+                  : "Membership opens every clip at full length, all of Luna\u2019s journal, the stills from the set, and the group chat the four of them talk in."}{" "}
+                What&rsquo;s open to everyone
                 stays open, always. It&rsquo;s{" "}
                 {formatPrice(vault.priceMonthlyCents)} a month, and you can stop
                 whenever you like.

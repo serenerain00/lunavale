@@ -7,6 +7,7 @@ import { TierCard } from "@/components/membership/TierCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { TIERS } from "@/lib/content/membership";
+import { OVERHEARD_ARCHIVED } from "@/lib/content/overheard";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { PAGE } from "@/components/ui/layout";
 
@@ -90,11 +91,14 @@ export default function MembershipPage() {
               not something to watch or read, so a pitch built entirely around
               her journal was leaving out the whole other kind of thing you
               get. */}
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-stone">
-            And there is a room. Luna, Tyson, Josh and Rick talk to each other
-            in it most days, and members can say something back — which is the
-            one part of this you cannot do by watching.
-          </p>
+          {/* Off while the room is archived (2026-10-10) — OVERHEARD_ARCHIVED. */}
+          {!OVERHEARD_ARCHIVED && (
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-stone">
+              And there is a room. Luna, Tyson, Josh and Rick talk to each other
+              in it most days, and members can say something back — which is the
+              one part of this you cannot do by watching.
+            </p>
+          )}
           <p className="mt-4 max-w-2xl leading-relaxed text-stone-dim">
             This is happening now. It is being filmed while you read this, it
             is not finished, and nobody — including her — knows yet how it

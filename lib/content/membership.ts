@@ -24,6 +24,8 @@
  * └─────────────────────────────────────────────────────────────────────────┘
  */
 
+import { OVERHEARD_ARCHIVED } from "@/lib/content/overheard";
+
 export type TierId = "free" | "vault" | "patron";
 
 /** Tiers in ascending order of access. Index doubles as the access rank. */
@@ -90,8 +92,10 @@ const ALL_TIERS: Tier[] = [
     tagline: "The membership. Everything behind the previews.",
     priceMonthlyCents: 800,
     priceYearlyCents: 8000,
-    blurb:
-      "Every clip at full length, the mature cuts, the private journal entries, the galleries, and the group chat with Luna, Tyson, Josh and Rick. Season one lands here first. New material every month.",
+    // The chat is named only while the room is open — OVERHEARD_ARCHIVED.
+    blurb: OVERHEARD_ARCHIVED
+      ? "Every clip at full length, the mature cuts, the private journal entries and the galleries. Season one lands here first. New material every month."
+      : "Every clip at full length, the mature cuts, the private journal entries, the galleries, and the group chat with Luna, Tyson, Josh and Rick. Season one lands here first. New material every month.",
     cta: "Join the LunaVerse",
     commitment: "Monthly · cancel any time",
     featured: true,
@@ -313,6 +317,12 @@ export const BENEFITS: Benefit[] = [
   // writing in it are the same door now, so there is no free half of it left
   // to advertise. A benefits table that still offered it would be promising
   // something the product refuses at the page.
+  // OUT WHILE THE ROOM IS ARCHIVED (2026-10-10). A benefits list is a
+  // contract; a row for a room nobody can enter is a lie you are charging
+  // for. Comes back with OVERHEARD_ARCHIVED.
+  ...(OVERHEARD_ARCHIVED
+    ? []
+    : ([
   {
     /*
      * BACK 2026-09-17, WITH THE WALL. This row came out on 2026-08-10 when
@@ -336,6 +346,7 @@ export const BENEFITS: Benefit[] = [
     from: "vault",
     group: "Behind it",
   },
+      ] satisfies Benefit[])),
   // "Selected behind the scenes" was here — "How a few of the public scenes
   // came together", free. Pulled 2026-08-13 with the same instruction, and it
   // should have gone sooner on its own merits: grep the codebase for this

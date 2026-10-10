@@ -96,6 +96,11 @@ export const STORY_ORDER: readonly string[] = [
 
   // ── The six months apart ────────────────────────────────────────────────
   // Ten years end. She packs, he goes, and Tyson is the one who turns up.
+  // HAND-PLACED, 2026-10-10. Luna and Josh in black and white — before the
+  // breakup (Melissa), so it sits in front of "Three Days", the last of
+  // them together. Exactly where in the ten years is not stated; move it if
+  // she places it.
+  "luna-josh-bed-land",
   "luna-josh-truck-leaving",
   "luna-josh-break",
 

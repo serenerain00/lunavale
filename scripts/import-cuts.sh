@@ -873,6 +873,17 @@ CUTS=(
   #
   # NO END: the bookended file ends on its own fade.
   "luna-detectives-trailer|stories/luna-detectives/luna-detective-trailer-music-bookended.mp4|113.5|-|-|30"
+
+  # LUNA AND JOSH, IN BLACK AND WHITE, 2026-10-10. The landscape cut, for
+  # the site (Melissa); the vertical is the Instagram post `luna-josh-bed-ig`
+  # in import-clips.sh. Before the breakup. Scored, 2:56, 1320x794 at 60fps.
+  #
+  # POSTER AT 25s: the kiss, both faces. Members-only, but a scene poster is
+  # still shown on the cards, so it is the most composed frame in it.
+  #
+  # NO END: picture goes black at 170.9 and the song runs on under it,
+  # fading itself out by the end of the file. Kept, as music leads these.
+  "luna-josh-bed-land|stories/luna-josh/luna-josh-bed-land.mov|25|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

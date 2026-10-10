@@ -3303,6 +3303,50 @@ export const videos: Video[] = [
   },
   {
     /*
+      LUNA AND JOSH, IN BLACK AND WHITE, Melissa, 2026-10-10. The landscape
+      cut is this clip; the vertical is the post `luna-josh-bed-ig`. Both
+      members-only (Melissa).
+
+      WHEN: BEFORE THE BREAKUP (Melissa — "this is a scene before the
+      breakup", correcting a first answer of "after they separate"). Placed
+      in chronology.ts just before "Three Days", the last of them together.
+
+      WHAT IS IN IT: a love scene under the sheets, scored with no dialogue.
+      Checked at five-second intervals end to end: kissing, hands, bare
+      shoulders and backs, nothing graphic. `mature`, not `explicit` — the
+      same call as "The Couch".
+
+      NOT "SUNDAY" (`luna-josh-bed`, a colour morning) and not "First Night"
+      (`luna-josh-first-night`, colour, after the separation) — different
+      footage, though the same two people and the same tattoos.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace.
+    */
+    slug: "luna-josh-bed-land",
+    title: "Still Us",
+    synopsis:
+      "Before any of it. Luna and Josh, late, and nothing else in the room.",
+    file: "luna-josh-bed-land.proxy.mp4",
+    poster: "/posters/luna-josh-bed-land.jpg",
+    // 175.5, the whole file — the song fades itself out under the black.
+    durationSeconds: 176,
+    addedOn: "2026-10-10",
+    access: "premium",
+    mature: true,
+    // The house window for a scene this length (Melissa chose it over a
+    // closed door, 2026-10-10): waking, both faces, the first kisses.
+    preview: {
+      file: "luna-josh-bed-land-preview.proxy.mp4",
+      durationSeconds: 45,
+      hookStart: 0,
+      hookNote: "from the top: waking, and the first kisses",
+    },
+    feelings: ["desire"],
+    place: "farmhouse",
+    about: ["luna", "josh"],
+  },
+  {
+    /*
       THE INTERVIEW TRAILER, Melissa, 2026-10-09. MEMBERS ONLY ON THE SITE
       (Melissa, same day, after the music was raised: "can we hide it behind
       the membership then"). It runs free on Instagram, which carries its own

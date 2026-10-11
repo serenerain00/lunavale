@@ -41,6 +41,7 @@ import process from "node:process";
 import { journal, freeEntries, pullQuotes } from "@/lib/content/journal";
 import { videos } from "@/lib/content/videos";
 import { clips } from "@/lib/content/posts";
+import { SHORT_LINKS } from "@/lib/content/shortlinks";
 import { galleries } from "@/lib/content/gallery";
 import { assertComplete, inStoryOrder } from "@/lib/content/chronology";
 
@@ -293,6 +294,28 @@ async function checkContent() {
     warn(`Free journal entries: ${free.size}, expected ${EXPECTED_FREE}`,
       "Deliberate? Update the count at the top of lib/content/journal.ts and here.");
   } else ok(`Free journal entries: ${free.size}`);
+
+  // SHORT LINKS are printed in Instagram captions and bios, where they can't be
+  // edited after posting. One pointing at a renamed or hidden clip is a dead
+  // end for exactly the person we paid attention to get there.
+  const STATIC_PATHS = new Set(["/", "/clips", "/posts", "/journal", "/membership", "/browse", "/characters", "/about"]);
+  const badLinks: string[] = [];
+  const seen = new Set<string>();
+  for (const l of SHORT_LINKS) {
+    const path = l.to.split("?")[0];
+    const [, kind, id] = path.split("/");
+    const live =
+      STATIC_PATHS.has(path) ||
+      (kind === "clips" && videos.some((v) => v.slug === id && !v.hidden)) ||
+      (kind === "posts" && clipIds.has(id)) ||
+      (kind === "journal" && entryIds.has(id));
+    if (!live) badLinks.push(`/go/${l.code} -> ${l.to}`);
+    if (!/^[a-z0-9-]+$/.test(l.code) || seen.has(l.code)) badLinks.push(`bad or duplicate code: ${l.code}`);
+    if (!/^[a-z0-9-]+$/.test(l.campaign)) badLinks.push(`campaign not lower-case-hyphen: ${l.campaign}`);
+    seen.add(l.code);
+  }
+  if (badLinks.length) fail("Instagram short links that go nowhere", badLinks.join(", "));
+  else ok(`${SHORT_LINKS.length} Instagram short links (/go/…) resolve`);
 
   const openScenes = videos.filter((v) => v.access === "free" && !v.hidden).length;
   ok(`Published: ${videos.filter((v) => !v.hidden).length} clips (${openScenes} free), ` +

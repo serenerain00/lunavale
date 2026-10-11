@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { shortLinkRedirects } from "./lib/content/shortlinks";
 
 /**
  * The fifteen ids that lived at /clips/<id> before 2026-09-16.
@@ -42,6 +43,8 @@ const nextConfig: NextConfig = {
    */
   async redirects() {
     return [
+      // Instagram short links, /go/<code> — lib/content/shortlinks.ts.
+      ...shortLinkRedirects(),
       {
         // Renamed 2026-08-12 at Melissa's request: the word "sex" is out of
         // the URL. The scene is "First Night" and the slug now says so, which

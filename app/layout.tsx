@@ -175,5 +175,17 @@ export default function RootLayout({
     publishable key, and the site is live — a deploy that hasn't been given
     credentials yet has to keep rendering rather than white-screen.
   */
-  return authConfigured() ? <ClerkProvider>{body}</ClerkProvider> : body;
+  // Somebody who signs up WITHOUT a redirect — the "Sign in" link, then "Sign
+  // up" — used to land on the home page with nothing to say they had done
+  // anything, and nothing new open to them, because a free account opens
+  // nothing a visitor can't already see. /account?welcome=1 says so plainly
+  // and shows them where the free side is. An explicit redirect_url (the
+  // buying and claiming paths) still wins over this fallback.
+  return authConfigured() ? (
+    <ClerkProvider signUpFallbackRedirectUrl="/account?welcome=1">
+      {body}
+    </ClerkProvider>
+  ) : (
+    body
+  );
 }

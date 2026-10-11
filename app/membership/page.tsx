@@ -297,7 +297,7 @@ export default function MembershipPage() {
 const PROMISES = [
   {
     title: "Cancel in one click",
-    body: "From your account page. No email, no chat window, no three-step flow asking why you're leaving.",
+    body: "From your account page. No email, no phone call, no three-step flow asking why you're leaving.",
   },
   {
     title: "Free stays free",

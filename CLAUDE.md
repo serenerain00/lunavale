@@ -154,6 +154,17 @@ Before making structural decisions, read:
 subordinate to this file: where it and the Experience Principles below disagree,
 this file wins.
 
+## Marketing & Growth Agent
+
+The growth, editorial and publishing brief for Instagram lives in its own file
+and is loaded with this one, every session:
+
+@CLAUDE_marketing_agent.md
+
+It is subordinate to this file: where they disagree, this file wins. Nothing is
+published to Instagram, and no unapproved change is deployed, without Melissa's
+explicit approval of that specific post or change.
+
 ## Daily Health Check
 
 **Every day, before starting work, check the site.** Bugs, pages customers

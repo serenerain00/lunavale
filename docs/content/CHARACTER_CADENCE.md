@@ -43,15 +43,15 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-09 against `main` at 85fb94e. The 2026-07-28 row is kept beneath
+re-run 2026-10-11 against `main` at 6da23e7. The 2026-07-28 row is kept beneath
 so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 197 | 166 |
-| Tyson | 12 | 142 | 124 |
-| Josh | 14 | 123 | 108 |
-| Rick | 1 | 13 | 12 |
+| Luna | 12 | 202 | 171 |
+| Tyson | 12 | 145 | 127 |
+| Josh | 14 | 128 | 113 |
+| Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 7 | 7 |
 
@@ -67,7 +67,7 @@ week's note.*
 
 **Josh is the thinnest of the three leads, but the gap is closing.** He has the
 most *notes* of anyone and is still bottom on total pieces. Tyson's lead over
-him was 25 before the September launch, widened to 28, and is **19 now** — the
+him was 25 before the September launch, widened to 28, and is **17 now** — the
 first time the direction has reversed since this file was written, and it
 reversed hard. Episodes 2 and 3 are what did it: both are about Luna, Josh and
 Tyson, so they pay Josh and Tyson equally while Josh was starting from behind.
@@ -80,14 +80,15 @@ he turns. What to watch is how much of his material makes that case. **He is one
 of the three all three episodes are about**, and the episodes are the first
 thing a new member watches.
 
-**Rick is the real hole.** Thirteen pieces against Josh's hundred-and-twenty-odd,
+**Rick is the real hole.** Fourteen pieces against Josh's hundred-and-twenty-odd,
 and he is the entire explanation for Josh. Every note written for Rick is doing
 double duty on the character the story most needs an audience to like first,
-which makes him the cheapest way to feed Josh as well. He is in six clips now
-and **five of them carry no note**: `josh-ty-ricks-house` (*The Safe*),
+which makes him the cheapest way to feed Josh as well. He is in seven clips now
+and **six of them carry no note**: `josh-ty-ricks-house` (*The Safe*),
 `ty-josh-rick-accident` (*What Was Agreed*), `josh-rick-lake` (*The Lake* — the
-contested slot, not a real gap), and both new episodes, which added him to the
-cast in October. Only `josh-rick-study` is covered. The accident is still the
+contested slot, not a real gap), both episodes, and `luna-detectives` (*The
+Interview*, 2026-10-11) — October keeps adding him to things. Only
+`josh-rick-study` is covered. The accident is still the
 one to take first: published **free**, second in the order, and about the
 character who explains Josh — a note on a free piece is the shop window, and
 that is what makes it the highest-value Rick gap, not merely that it is open.
@@ -166,12 +167,13 @@ Standing backlog, roughly prioritised:
   Luna and Tyson — but the placement is worth more here than it is there. It
   pairs with the journal entry `the-rule` via `sceneSlug`, and both cuts are
   free (the 9:16 is the post `pick-me-up`), so read that entry first
-- Rick is in six clips as of October. Five carry no note on `main`, though one
-  of those five is the contested slot rather than a real gap. `josh-rick-study`
+- Rick is in seven clips as of 2026-10-11. Six carry no note on `main`, though
+  one of those six is the contested slot rather than a real gap. `josh-rick-study`
   is the only covered one (`rick-the-chair`, `josh-the-study`); `josh-rick-lake`
   is the one every open drop keeps re-writing; `josh-ty-ricks-house` has
   nothing; `episode-2` and `episode-3` have nothing and are covered by the
-  episodes item above; and `ty-josh-rick-accident` — *What Was Agreed* — has
+  episodes item above; `luna-detectives` (*The Interview*) has nothing and is
+  new on 2026-10-11; and `ty-josh-rick-accident` — *What Was Agreed* — has
   nothing either and is **free**, which makes it the Rick one to take first (it
   is second in the order now, not first; `ty-luna-young` took the opening on
   2026-09-22). Mind the canon: the accident

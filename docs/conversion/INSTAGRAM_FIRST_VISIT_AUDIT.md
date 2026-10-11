@@ -95,12 +95,13 @@ them as indicative.
 ### Checkout friction
 
 - **Observed. 75% of opened checkouts are left before an email is typed.**
-- **Known. Apple Pay is generally unavailable inside Instagram's in-app browser on iPhone,** because the app injects scripts into the page.
-  - So an Instagram visitor reaches a card form and has to type a 16-digit number by hand.
-  - **Not yet measured on this site.** Attribution now records whether each checkout came from the in-app browser.
+- **Observed, and it corrects an earlier assumption: Apple Pay *is* offered inside Instagram's in-app browser on iPhone.** Melissa tested it from the Instagram app on 2026-10-11.
+  - The draft of this audit said Apple Pay is generally unavailable there. That was wrong for this setup, and it is **not** what explains the 75% who leave before typing.
+  - The cause of that leak is now open. Candidates, all unmeasured: surprise at leaving the site for Stripe's page; the price seen for the first time on Stripe; or people opening checkout just to look.
+  - Clarity recordings around the Join tap, and attribution by browser, are how to narrow it down.
 - **Observed. Checkout explicitly lists `card` and `cashapp` only.**
   - Stripe **Link** is enabled on the account but excluded by that explicit list.
-  - Link lets anyone who has paid with Link anywhere before pay with their email and a code, with no card typing. That is exactly the in-app-browser case.
+  - Link lets anyone who has paid with Link anywhere before pay with their email and a code, with no card typing. Since Apple Pay already works in the in-app browser, this matters less than first thought: it helps Android and returning Link users.
 - **Observed.** Pay-first works as designed: no account is needed before paying.
 
 ### Calls to action
@@ -129,7 +130,7 @@ None of these changes the visual identity: same palette, type, imagery and tone.
 | # | Change | Impact | Effort | Confidence | Evidence |
 |---|---|---|---|---|---|
 | **1** | **End-of-preview moment.** When the free minute ends, show a quiet card **over the player's last frame**: "That was the first minute of 18:36. The rest of the episode is for members — $8/month, cancel any time." with **[Keep watching]** and **[Not now]**. No countdown, no blur trick. | High | Low, ~half a day | Medium-high | 52 dead taps on the Pilot; 98% scroll; the panel below is off-screen on phones |
-| **2** | **Add Stripe Link to checkout** (dynamic payment methods or add `link`), so returning Stripe users pay without typing a card. | Medium-high for Instagram traffic | Very low, one line in the money path | Medium | 75% leave before typing; Apple Pay is generally unavailable in Instagram's browser |
+| **2** | **Add Stripe Link to checkout** (dynamic payment methods or add `link`), so returning Stripe users pay without typing a card. | Low-medium (lowered 2026-10-11: Apple Pay already works in Instagram's browser) | Very low, one line in the money path | Low-medium | 75% leave before typing, cause unknown |
 | **3** | **Point the Instagram bio at the Pilot,** not Home. Test it by alternating the bio link weekly between `/` and `/clips/pilot`, each tagged. | Medium | **Zero code** | Medium | Home: 5.6 s, a locked random clip, 18 quick returns in 58. Pilot: 49 s active, 98% scroll |
 | **4** | **Home's first screen for first-time visitors:** "Between Us" plus the one-line premise above the fold, the hero fixed to the Pilot or trailer (not a random members clip), the primary button **"Watch the first minute free"**, and the poster as the first paint with the video after. | Medium | Medium, 1–2 days | Medium | 61 of 101 Instagram arrivals land here; LCP 5.6 s; the explanation sits below the first screen |
 | **5** | **A longer free Pilot,** to its natural first turn (perhaps 4–6 min), or the whole Pilot free. A business decision first, then a test. | Potentially the highest | Low for code; your call on content | Low-medium; could also cannibalise | No episode is free today; streaming usually gives episode 1 away |
@@ -198,7 +199,7 @@ nothing like a doubling, the honest conclusion is "no large effect".
 
 ## 6. Open checks (no code needed)
 
-- [ ] **Melissa:** paste a lunavale38.com link into Meta's Sharing Debugger and report whether the preview shows (finding: link previews).
-- [ ] **Melissa:** on an iPhone, open lunavale38.com **from the Instagram app**, tap Join, and note whether Apple Pay is offered on Stripe's page.
+- [ ] **Melissa:** paste a lunavale38.com link into Meta's Sharing Debugger and report whether the preview shows (finding: link previews). She said "yea i see it" on 2026-10-11, which probably means it works; to be confirmed.
+- [x] **Melissa, 2026-10-11:** from the Instagram app on an iPhone, tapped Join. **Apple Pay is offered** on Stripe's page.
 - [ ] **Claude, next session (Clarity MCP loaded):** watch 10 recordings of Instagram visitors on /membership and on the Pilot after the preview ends. Note where taps go and whether any script error coincides with a failed tap.
 - [ ] **On 2026-10-25:** read the 14-day baseline on `/admin/conversion`, set each test's decision rule against it, and start.

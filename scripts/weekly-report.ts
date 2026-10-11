@@ -31,7 +31,7 @@ import path from "node:path";
 import { neon } from "@neondatabase/serverless";
 import Stripe from "stripe";
 import type { TrafficDay } from "@/lib/analytics/clarity";
-import { POST_LABELS, durationBand } from "@/lib/marketing/post-labels";
+import { POST_LABELS, durationBand, type PostLabels } from "@/lib/marketing/post-labels";
 
 /** One post as scripts/ig-import.ts writes it. Metrics are null when the export did not carry them. */
 interface IgPost {
@@ -158,10 +158,16 @@ const pct = (n: number, of: number) => (of ? `${((n / of) * 100).toFixed(of >= 1
 const delta = (a: number, b: number) => (b === 0 ? (a === 0 ? "±0" : "new") : `${a >= b ? "+" : ""}${a - b}`);
 const row = (cells: (string | number)[]) => `| ${cells.join(" | ")} |`;
 
+/** Rule-based labels from scripts/ig-label.ts; hand corrections in POST_LABELS win. */
+const fileLabels: Record<string, PostLabels> = (() => {
+  const f = path.join(DIR, "instagram", "labels.json");
+  return existsSync(f) ? (JSON.parse(readFileSync(f, "utf8")) as Record<string, PostLabels>) : {};
+})();
+
 function igPosts(): { rows: IgPost[]; note: string } {
   const f = path.join(DIR, "instagram", "posts.json");
   if (!existsSync(f)) return { rows: [], note: "**Not connected.** No Instagram export imported yet, so reach, plays, saves, shares and follows per post are unknown this week." };
-  const all = JSON.parse(readFileSync(f, "utf8")) as IgPost[];
+  const all = (JSON.parse(readFileSync(f, "utf8")) as { posts: IgPost[] }).posts;
   return { rows: all.filter((p) => p.published.slice(0, 10) >= start && p.published.slice(0, 10) <= end), note: "" };
 }
 
@@ -243,11 +249,11 @@ async function main() {
     L(row(["Post", "Length", "Characters", "Themes", "Hook", "Caption", "CTA", "Reach", "Plays", "Saves", "Shares", "Follows", "Site sessions"]));
     L(row(Array(13).fill("---")));
     for (const p of ig.rows) {
-      const lab = POST_LABELS[p.shortcode];
+      const lab = POST_LABELS[p.shortcode] ?? fileLabels[p.shortcode];
       const sess = Object.entries(cur.igCampaigns).filter(([k]) => k.endsWith(`|${p.campaign ?? "\u0000"}`)).reduce((a, [, n]) => a + n, 0);
       L(row([
         `[${p.shortcode}](${p.permalink})`, p.durationSeconds === null ? "—" : durationBand(p.durationSeconds),
-        lab?.characters.join(", ") ?? "unlabelled", lab?.themes.join(", ") ?? "—", lab?.hook ?? "—",
+        lab?.characters.join(", ") ?? "unlabelled", lab?.themes.join(", ") || "—", lab?.hook ?? "—",
         lab?.captionStyle ?? "—", lab?.cta ?? "—", p.reach ?? "—", p.plays ?? "—", p.saves ?? "—",
         p.shares ?? "—", p.follows ?? "—", p.campaign ? sess : "untagged",
       ]));

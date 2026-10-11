@@ -32,6 +32,7 @@ export type Hook =
   | "question"; // a question put to the viewer
 
 export type CaptionStyle =
+  | "teaser" // "🎬 SCENE SNEAK PEEK 👀" + a one-line setup — the account's main format since September
   | "quote" // a line from the scene
   | "question" // asks the reader something
   | "scene-setting" // where / when / what's happening
@@ -49,16 +50,24 @@ export type Cta =
 export interface PostLabels {
   characters: PersonId[];
   themes: Theme[];
-  hook: Hook;
+  /** Null when unknown: the export carries the caption, not the video's first second. */
+  hook: Hook | null;
   captionStyle: CaptionStyle;
   cta: Cta;
   /** Site slug the post is cut from or points at (a clip or episode), or "promo" for a custom edit. */
   storyline: string;
-  /** Who labelled it; "claude" until Melissa confirms or corrects it. */
-  by: "claude" | "melissa";
+  /**
+   * Who labelled it. "rules" = scripts/ig-label.ts from caption keywords;
+   * "claude" = judged by hand; "melissa" = confirmed or corrected by her.
+   */
+  by: "rules" | "claude" | "melissa";
 }
 
-/** Shortcode → labels. Filled from the Instagram export; see scripts/ig-import.ts. */
+/**
+ * Shortcode → labels, for corrections made by hand. These override the
+ * rule-based labels in ~/lunavale-analytics/instagram/labels.json
+ * (scripts/ig-label.ts), which cover every imported post.
+ */
 export const POST_LABELS: Record<string, PostLabels> = {};
 
 export type DurationBand = "≤15s" | "16–30s" | "31–60s" | "61–180s" | ">180s";

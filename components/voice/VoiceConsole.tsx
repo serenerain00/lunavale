@@ -73,13 +73,31 @@ function Console() {
     <div>
       <div className="flex flex-wrap items-center gap-4">
         {live ? (
-          <button
-            type="button"
-            onClick={() => conversation.endSession()}
-            className="inline-flex min-h-11 items-center rounded-full border border-hairline px-6 text-sm text-ivory transition-colors hover:border-wine"
-          >
-            End
-          </button>
+          <>
+            {/* MUTE, Melissa 2026-10-11: the TV was being heard as her. The
+                agent also filters background voices, but a closed mic is
+                the only thing that can't be fooled. Muted, nothing reaches
+                ElevenLabs; tap to talk, tap again when done. */}
+            <button
+              type="button"
+              onClick={() => conversation.setMuted(!conversation.isMuted)}
+              aria-pressed={!conversation.isMuted}
+              className={`inline-flex min-h-11 items-center rounded-full px-7 text-sm font-medium transition-colors ${
+                conversation.isMuted
+                  ? "bg-amber text-void hover:bg-amber-soft"
+                  : "border border-amber/60 bg-amber/15 text-amber-soft hover:bg-amber/25"
+              }`}
+            >
+              {conversation.isMuted ? "Tap to talk" : "Mute mic"}
+            </button>
+            <button
+              type="button"
+              onClick={() => conversation.endSession()}
+              className="inline-flex min-h-11 items-center rounded-full border border-hairline px-6 text-sm text-ivory transition-colors hover:border-wine"
+            >
+              End
+            </button>
+          </>
         ) : (
           <button
             type="button"
@@ -91,7 +109,13 @@ function Console() {
           </button>
         )}
         <p role="status" aria-live="polite" className="text-sm text-stone">
-          {live ? (conversation.isSpeaking ? "Speaking…" : "Listening…") : "Not connected"}
+          {live
+            ? conversation.isSpeaking
+              ? "Speaking…"
+              : conversation.isMuted
+                ? "Mic off — the room can't be heard"
+                : "Listening…"
+            : "Not connected"}
         </p>
       </div>
       {error && <p className="mt-3 text-sm text-wine">{error}</p>}

@@ -98,6 +98,9 @@ const CONFIG = {
     },
     conversation: { max_duration_seconds: 300 },
     turn: { silence_end_call_timeout: 20 },
+    // Melissa, 2026-10-11: "its picking up my tv". Filters out voices that
+    // aren't the person at the microphone — TV, other people in the room.
+    vad: { background_voice_detection: true },
   },
   platform_settings: {
     auth: { enable_auth: true },

@@ -121,7 +121,18 @@ export function compose(
   releases: Release[],
   base: string,
   unsubscribeUrl: string,
-  options: { shown?: number; countedFrom?: string } = {},
+  options: {
+    shown?: number;
+    countedFrom?: string;
+    /**
+     * Who is reading. "member" (the default, and all that announce.ts ever
+     * sends) or "follower": somebody on the list from the survey or under a
+     * scene, who asked to hear when something goes up and has not paid. They
+     * get the same list, told plainly which items need a membership, and a
+     * footer that says why they are getting it.
+     */
+    audience?: "member" | "follower";
+  } = {},
 ): Composed {
   const url = (href: string) => new URL(href, base).toString();
 
@@ -137,6 +148,14 @@ export function compose(
   // for one visit, and on a day when one scene and six journal pages went up,
   // strict order buries the scene under six lines of handwriting. Within each
   // kind it is still newest first, so nothing is reordered to flatter it.
+  const follower = options.audience === "follower";
+  const why = follower
+    ? "You're getting this because you asked to hear when something new goes up on Luna Vale."
+    : "You're getting this because you're a Luna Vale member.";
+  const membersNote =
+    follower && releases.some((r) => r.access !== "free")
+      ? `Anything marked "Members" opens with a membership: ${url("/membership")}`
+      : null;
   const shown = options.shown ?? 8;
   const scenes = releases.filter((r) => r.kind === "scene");
   const pages = releases.filter((r) => r.kind !== "scene");
@@ -168,12 +187,13 @@ export function compose(
     ...textSection("Scenes", listedScenes),
     ...textSection("From her journal", listedPages),
     ...(moreText ? [moreText, ""] : []),
+    ...(membersNote ? [membersNote, ""] : []),
     "—",
     "Melissa",
     "",
-    `You're getting this because you're a Luna Vale member.`,
+    why,
     `Stop these emails: ${unsubscribeUrl}`,
-    `This does not cancel your membership.`,
+    ...(follower ? [] : [`This does not cancel your membership.`]),
   ];
 
   const asRow = (r: Release) => `
@@ -212,9 +232,14 @@ export function compose(
       ? `<tr><td style="padding:0 0 28px 0;"><a href="${esc(url("/browse"))}" style="color:#c9a227;font-size:14px;text-decoration:none;">and ${extra} more since ${esc(formatReleaseDate(options.countedFrom ?? releases.at(-1)!.date))} &rarr;</a></td></tr>`
       : ""
   }
+  ${
+    membersNote
+      ? `<tr><td style="padding:0 0 28px 0;"><a href="${esc(url("/membership"))}" style="color:#c9a227;font-size:14px;text-decoration:none;">Anything marked &ldquo;Members&rdquo; opens with a membership &rarr;</a></td></tr>`
+      : ""
+  }
   <tr><td style="border-top:1px solid #2a2724;padding-top:20px;color:#8b8681;font-size:12px;line-height:1.7;">
-    You&rsquo;re getting this because you&rsquo;re a Luna Vale member.<br>
-    <a href="${esc(unsubscribeUrl)}" style="color:#8b8681;">Stop these emails</a> &mdash; it does not cancel your membership.
+    ${esc(why)}<br>
+    <a href="${esc(unsubscribeUrl)}" style="color:#8b8681;">Stop these emails</a>${follower ? "" : " &mdash; it does not cancel your membership."}
   </td></tr>
 </table>
 </td></tr></table>

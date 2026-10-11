@@ -149,6 +149,9 @@ const OVERRIDES = {
   // before the facility photograph and the date — so Daniel Mercer, Tyson at
   // the facility and Josh's signature all stay behind membership.
   "luna-detectives": 88,
+  // Melissa: first minute free. Ends after "They sign my paycheck" (1:01),
+  // before "Who's going?" (1:04).
+  "luna-ty-suit": 62,
 };
 
 /**

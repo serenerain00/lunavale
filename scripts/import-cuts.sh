@@ -884,6 +884,8 @@ CUTS=(
   # NO END: picture goes black at 170.9 and the song runs on under it,
   # fading itself out by the end of the file. Kept, as music leads these.
   "luna-josh-bed-land|stories/luna-josh/luna-josh-bed-land.mov|25|-|-|30"
+  # 2026-10-11: The suit. Poster is the collar, 0:36. 60fps source, proxy at 30.
+  "luna-ty-suit|stories/luna-ty-suit/luna-ty-suit-music.mov|36|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

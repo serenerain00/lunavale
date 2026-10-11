@@ -556,3 +556,20 @@ CREATE TABLE IF NOT EXISTS play_starts (
   n       INTEGER NOT NULL DEFAULT 0,
   PRIMARY KEY (day, slug, viewer, source)
 );
+
+-- ---------------------------------------------------------------------------
+-- A/B events — counts per (day, experiment, variant, event).
+--
+-- The registry, its dates and its decision rules live in
+-- lib/analytics/experiments.ts. Like play_starts this is a COUNTER, not a log:
+-- no user, no session, no IP. The browser sends each event at most once per
+-- experiment, so the counts approximate people without anything here being
+-- able to tell one person from another.
+CREATE TABLE IF NOT EXISTS ab_events (
+  day         DATE    NOT NULL,
+  experiment  TEXT    NOT NULL,
+  variant     TEXT    NOT NULL,
+  event       TEXT    NOT NULL,
+  n           INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (day, experiment, variant, event)
+);

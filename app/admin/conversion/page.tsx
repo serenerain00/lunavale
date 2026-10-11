@@ -5,7 +5,9 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
 import { authConfigured } from "@/lib/billing/provider";
 import { isOwner } from "@/lib/access/owner";
 import { checkoutFunnel } from "@/lib/billing/checkout-funnel";
+import { EXPERIMENTS, experimentLive } from "@/lib/analytics/experiments";
 import {
+  abCounts,
   membershipsCreatedSince,
   playsSince,
   trafficSince,
@@ -58,12 +60,21 @@ export default async function ConversionPage({
   const since = new Date(now.getTime() - days * 864e5).toISOString().slice(0, 10);
   const sinceMidnight = new Date(`${since}T00:00:00Z`);
 
-  const [traffic, plays, checkout, newRows] = await Promise.all([
+  const [traffic, plays, checkout, newRows, ab] = await Promise.all([
     trafficSince(since),
     playsSince(since),
     checkoutFunnel(sinceMidnight),
     membershipsCreatedSince(since),
+    abCounts(),
   ]);
+  // Experiments are read over their whole run, not the range above: a test's
+  // verdict is about its own dates. Stripe is read from the earliest start.
+  const tests = Object.values(EXPERIMENTS);
+  const testStart = tests.map((e) => e.startsOn).sort()[0];
+  const testCheckout =
+    testStart && testStart <= now.toISOString().slice(0, 10)
+      ? await checkoutFunnel(new Date(`${testStart}T00:00:00Z`))
+      : null;
 
   const t = totals(traffic);
   const covered = traffic.reduce((n, d) => n + d.windowDays, 0);
@@ -224,6 +235,64 @@ export default async function ConversionPage({
             </p>
             {checkout?.truncated && <p className="text-amber-soft">Stripe held more sessions than were read; the checkout numbers are a floor.</p>}
           </div>
+        </section>
+
+        <section className="mb-12 border-t border-hairline pt-6">
+          <h2 className="mb-5 font-display text-2xl text-ivory">Experiments</h2>
+          {tests.map((e) => {
+            const counts = ab[e.id] ?? {};
+            const exposure = e.events[0];
+            const live = experimentLive(e, now.toISOString().slice(0, 10));
+            return (
+              <div key={e.id} className="mb-8">
+                <p className="text-sm text-ivory">
+                  {e.id}{" "}
+                  <span className="text-xs text-stone-dim">
+                    {e.startsOn} → {e.endsOn} ·{" "}
+                    {live ? "running" : now.toISOString().slice(0, 10) < e.startsOn ? "not started" : "ended"}
+                  </span>
+                </p>
+                <p className="mt-1 max-w-2xl text-xs leading-relaxed text-stone">{e.question}</p>
+                <div className="mt-3 overflow-x-auto">
+                  <table className="w-full min-w-[30rem] text-sm tabular-nums">
+                    <thead>
+                      <tr className="text-left text-xs uppercase tracking-[0.1em] text-stone-dim">
+                        <th className="pb-2 font-normal">Variant</th>
+                        {e.events.map((ev) => (
+                          <th key={ev} className="pb-2 text-right font-normal">{ev.replace("_", " ")}</th>
+                        ))}
+                        <th className="pb-2 text-right font-normal">{e.decidesOn.replace("_", " ")} rate</th>
+                        <th className="pb-2 text-right font-normal">Began checkout</th>
+                        <th className="pb-2 text-right font-normal">Paid</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-hairline">
+                      {e.variants.map((v) => {
+                        const c = counts[v] ?? {};
+                        const stripeRow = testCheckout?.experiments[e.id]?.[v];
+                        return (
+                          <tr key={v}>
+                            <td className="py-2 text-stone">{v}</td>
+                            {e.events.map((ev) => (
+                              <td key={ev} className="py-2 text-right text-ivory">{c[ev] ?? 0}</td>
+                            ))}
+                            <td className="py-2 text-right text-ivory">
+                              {c[exposure] ? pct(c[e.decidesOn] ?? 0, c[exposure]) : "—"}
+                            </td>
+                            <td className="py-2 text-right text-ivory">{stripeRow?.began ?? 0}</td>
+                            <td className="py-2 text-right text-ivory">{stripeRow?.paid ?? 0}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="mt-3 max-w-2xl text-xs leading-relaxed text-stone-dim">
+                  <strong className="font-normal text-stone">Decided in advance:</strong> {e.decisionRule}
+                </p>
+              </div>
+            );
+          })}
         </section>
 
         <section className="mb-12 border-t border-hairline pt-6">

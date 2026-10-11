@@ -22,6 +22,11 @@ export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
   const done = new NextResponse(null, { status: 204 });
   if (!process.env.DATABASE_URL) return done;
+  // A local dev server shares the production database (.env.local), so a
+  // test run would land in the real counts — it did once, 2026-10-11, and the
+  // rows had to be removed by hand. Counted only in production unless
+  // RECORD_LOCAL_EVENTS=1 is set on purpose.
+  if (process.env.NODE_ENV !== "production" && process.env.RECORD_LOCAL_EVENTS !== "1") return done;
 
   let body: { slug?: unknown; viewer?: unknown; source?: unknown };
   try {

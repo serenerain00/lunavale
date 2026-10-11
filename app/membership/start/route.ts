@@ -49,6 +49,7 @@ import {
   decodeTouch,
   toStripeMetadata,
 } from "@/lib/analytics/attribution";
+import { AB_COOKIE, abMetadata } from "@/lib/analytics/experiments";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -124,10 +125,15 @@ export async function GET(request: NextRequest) {
 
     // Where they came from, so the payment can be traced to a post. Labels
     // only; a missing or mangled cookie is just an unattributed checkout.
-    const attribution = toStripeMetadata(
-      decodeTouch(request.cookies.get(FIRST_TOUCH_COOKIE)?.value),
-      decodeTouch(request.cookies.get(LAST_TOUCH_COOKIE)?.value),
-    );
+    // Plus which A/B variants they were in, for experiments live today, so a
+    // test's checkouts and payments can be read straight from Stripe.
+    const attribution = {
+      ...toStripeMetadata(
+        decodeTouch(request.cookies.get(FIRST_TOUCH_COOKIE)?.value),
+        decodeTouch(request.cookies.get(LAST_TOUCH_COOKIE)?.value),
+      ),
+      ...abMetadata(request.cookies.get(AB_COOKIE)?.value),
+    };
 
     // SIGNED OUT: straight to the card. No account, no verification code, no
     // second visit to this route. Stripe collects the email and the webhook

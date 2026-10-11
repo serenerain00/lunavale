@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getVideo, videos, formatDuration } from "@/lib/content/videos";
-import { canWatch, isMember } from "@/lib/access/entitlement";
+import { PREMIUM_TIER, canWatch, isMember } from "@/lib/access/entitlement";
 import { entriesForScene } from "@/lib/content/journal";
 import {
   storyPosition,
@@ -14,7 +14,7 @@ import { galleryForScene } from "@/lib/content/gallery";
 import { SceneWatch } from "@/components/media/SceneWatch";
 import { JournalCard } from "@/components/journal/JournalCard";
 import { LockedNotice } from "@/components/membership/LockedNotice";
-import { getTier } from "@/lib/content/membership";
+import { formatPrice, getTier } from "@/lib/content/membership";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContentNotice } from "@/components/ui/ContentNotice";
 import { RatingBadge } from "@/components/ui/RatingBadge";
@@ -144,6 +144,12 @@ export default async function WatchPage({ params }: WatchPageProps) {
             title={video.title}
             surveyAnswered={surveyAnswered}
             preview={!allowed && Boolean(video.preview)}
+            watched={
+              !allowed && video.preview
+                ? `${video.preview.segments || video.preview.hookStart ? "" : "the first "}${formatDuration(video.preview.durationSeconds)} of ${formatDuration(video.durationSeconds)}`
+                : undefined
+            }
+            price={formatPrice(getTier(PREMIUM_TIER)?.priceMonthlyCents ?? 0)}
           />
         ) : (
           <div className="overflow-hidden rounded-xl bg-black ring-1 ring-hairline">

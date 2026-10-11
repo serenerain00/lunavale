@@ -48,6 +48,8 @@ export interface CheckoutFunnel {
   unattributed: number;
   /** Per campaign label ("" = Instagram/other source but untagged link), by source. */
   campaigns: { source: string; campaign: string; began: number; paid: number }[];
+  /** experiment → variant → people who began checkout / paid (metadata ab_<id>). */
+  experiments: Record<string, Record<string, FunnelCounts>>;
 }
 
 const MAX_SESSIONS = 1000;
@@ -60,6 +62,7 @@ export async function checkoutFunnel(since: Date): Promise<CheckoutFunnel | null
     const igBegan = new Set<string>();
     const igPaid = new Set<string>();
     const byCampaign = new Map<string, { source: string; campaign: string; began: Set<string>; paid: Set<string> }>();
+    const ab = new Map<string, { began: Set<string>; paid: Set<string> }>();
     let opened = 0;
     let unattributed = 0;
     let truncated = false;
@@ -81,6 +84,15 @@ export async function checkoutFunnel(since: Date): Promise<CheckoutFunnel | null
 
       if (email) emails.add(email);
       if (isPaid) paid.add(who);
+
+      for (const [k, variant] of Object.entries(m)) {
+        if (!k.startsWith("ab_")) continue;
+        const key = `${k.slice(3)}|${variant}`;
+        const row = ab.get(key) ?? { began: new Set<string>(), paid: new Set<string>() };
+        if (email) row.began.add(email);
+        if (isPaid) row.paid.add(who);
+        ab.set(key, row);
+      }
 
       const source = m.lt_source || m.ft_source || "";
       if (!source) {
@@ -109,6 +121,11 @@ export async function checkoutFunnel(since: Date): Promise<CheckoutFunnel | null
       campaigns: [...byCampaign.values()]
         .map((r) => ({ source: r.source, campaign: r.campaign, began: r.began.size, paid: r.paid.size }))
         .sort((a, b) => b.paid - a.paid || b.began - a.began),
+      experiments: [...ab].reduce<Record<string, Record<string, FunnelCounts>>>((out, [key, r]) => {
+        const [id, variant] = key.split("|");
+        (out[id] ??= {})[variant] = { began: r.began.size, paid: r.paid.size };
+        return out;
+      }, {}),
     };
   } catch (error) {
     console.error("checkoutFunnel: Stripe lookup failed", error);

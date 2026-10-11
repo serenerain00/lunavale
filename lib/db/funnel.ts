@@ -129,3 +129,31 @@ export async function membershipsCreatedSince(since: string): Promise<number | n
     return null;
   }
 }
+
+export async function recordAbEvent(experiment: string, variant: string, event: string): Promise<void> {
+  await sql()`
+    INSERT INTO ab_events (day, experiment, variant, event, n)
+    VALUES ((now() AT TIME ZONE 'UTC')::date, ${experiment}, ${variant}, ${event}, 1)
+    ON CONFLICT (day, experiment, variant, event) DO UPDATE
+      SET n = ab_events.n + 1
+  `;
+}
+
+/** experiment → variant → event → count, over the experiment's whole run. */
+export async function abCounts(): Promise<Record<string, Record<string, Record<string, number>>>> {
+  if (!process.env.DATABASE_URL) return {};
+  try {
+    const rows = await sql()`
+      SELECT experiment, variant, event, SUM(n)::int AS n
+      FROM ab_events GROUP BY experiment, variant, event
+    `;
+    const out: Record<string, Record<string, Record<string, number>>> = {};
+    for (const r of rows) {
+      ((out[r.experiment as string] ??= {})[r.variant as string] ??= {})[r.event as string] = Number(r.n);
+    }
+    return out;
+  } catch (error) {
+    console.error("abCounts failed", error);
+    return {};
+  }
+}

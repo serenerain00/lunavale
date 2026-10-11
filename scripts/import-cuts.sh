@@ -844,6 +844,46 @@ CUTS=(
   # score is gone by 21:29; the master then holds the card in silence to
   # 22:08. Kept six seconds past the music, the last two faded.
   "episode-3|stories/ep3/final/ep3-final.mov|60|1295|2|30"
+
+  # THE INTERVIEW, 2026-10-09. A future season: Detectives Harris and
+  # Bennett question Luna about the accident nine years ago, then she rings
+  # Tyson from the car. Scored, 13:20, 1320x798 hevc at 60fps — down to 30
+  # like the episodes; at thirteen minutes it is the same argument.
+  #
+  # POSTER AT 470s: Luna alone across the table, the detectives' backs to
+  # camera. The interview in one frame, and nothing it reveals.
+  #
+  # END=795, FADE=3. Picture is black from 787.1; the score runs on under it,
+  # so it keeps eight seconds of that and fades the last three.
+  "luna-detectives|stories/luna-detectives/luna-detectives-music.mov|470|795|3|30"
+
+  # THE INTERVIEW TRAILER, 2026-10-09. Free, and on Instagram — a look at
+  # what is a season away: interview voice-over over Luna, Josh and Tyson
+  # each coming apart on their own, Luna going through her journals. Scored
+  # ("The Devil Within"), 2:58, 1320x804 hevc at 60fps — down to 30.
+  #
+  # BOOKENDED THE SAME DAY (Melissa): an 8.5s opening card ("A FIRST LOOK /
+  # FROM A FUTURE SEASON OF BETWEEN US"), and at the cut's own fade to black
+  # "Some secrets don't stay buried." then the BETWEEN US end title. Built by
+  # scripts/trailer-bookends.py from the delivered cut — re-run that if the
+  # cut changes, then this line.
+  #
+  # POSTER AT 113.5s: 105s in the cut, plus the 8.5s intro — Luna on the
+  # bedroom floor in the boxes, papers and journals everywhere.
+  #
+  # NO END: the bookended file ends on its own fade.
+  "luna-detectives-trailer|stories/luna-detectives/luna-detective-trailer-music-bookended.mp4|113.5|-|-|30"
+
+  # LUNA AND JOSH, IN BLACK AND WHITE, 2026-10-10. The landscape cut, for
+  # the site (Melissa); the vertical is the Instagram post `luna-josh-bed-ig`
+  # in import-clips.sh. Before the breakup. Scored, 2:56, 1320x794 at 60fps.
+  #
+  # POSTER AT 25s: the kiss, both faces. Members-only, but a scene poster is
+  # still shown on the cards, so it is the most composed frame in it.
+  #
+  # NO END: picture goes black at 170.9 and the song runs on under it,
+  # fading itself out by the end of the file. Kept, as music leads these.
+  "luna-josh-bed-land|stories/luna-josh/luna-josh-bed-land.mov|25|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

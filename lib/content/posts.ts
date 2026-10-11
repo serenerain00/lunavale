@@ -749,6 +749,28 @@ const authored: Clip[] = [
     // loses the eyes.
     wideCrop: "50% 20%",
   },
+  {
+    /*
+      LUNA AND JOSH, IN BLACK AND WHITE, Melissa, 2026-10-10 — the Instagram
+      cut of the clip `luna-josh-bed-land`. Before the breakup. MEMBERS ONLY
+      (Melissa), and no preview: a gated post with no window is a closed
+      door, which is right for a love scene. `mature`, not `explicit` —
+      checked end to end, nothing graphic.
+
+      TITLE AND CAPTION ARE PLACEHOLDERS, hers to replace.
+    */
+    id: "luna-josh-bed-ig",
+    title: "Still Us",
+    caption: "Before any of it. Luna and Josh, late, and nothing else in the room.",
+    file: "luna-josh-bed-ig.proxy.mp4",
+    poster: "/posters/luna-josh-bed-ig.jpg",
+    // 177.5, the whole file — the song fades itself out under the black.
+    durationSeconds: 177,
+    addedOn: "2026-10-10",
+    about: ["luna", "josh"],
+    mature: true,
+    access: "premium",
+  },
 ];
 
 /**

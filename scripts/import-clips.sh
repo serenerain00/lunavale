@@ -198,6 +198,16 @@ CLIPS=(
   #
   # END=176.0. blackdetect puts black from 176.02; nothing is said after 2:58.
   "luna-josh-journal-mem|stories/ep3/luna-josh-journal-mem.mov|3|176.0"
+
+  # LUNA AND JOSH, IN BLACK AND WHITE, added 2026-10-10 — the Instagram cut
+  # of `luna-josh-bed-land`. Vertical, 1320x2212, 59.94fps, scored. MEMBERS
+  # ONLY (Melissa) — so no preview: a gated post with no window is a closed
+  # door, the right treatment for a love scene (see Clip.preview).
+  #
+  # POSTER AT 25s: the kiss. Withheld on the index anyway while gated.
+  #
+  # NO END: black from 169.1, the song fading under it to the end.
+  "luna-josh-bed-ig|stories/luna-josh/luna-josh-bed-ig.mov|25"
 )
 
 want=("$@")

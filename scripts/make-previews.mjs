@@ -143,6 +143,12 @@ const OVERRIDES = {
   // carries on into the painting. All of it is the journal montage, which is
   // already free as the post "Not Bad Trouble" — the window spends nothing.
   "episode-3": 129.0,
+
+  // THE INTERVIEW — FIRST 1:28 FREE (Melissa, 2026-10-09: members, the
+  // opening free). Ends on Luna's "What exactly is this about?" (1:25.9),
+  // before the facility photograph and the date — so Daniel Mercer, Tyson at
+  // the facility and Josh's signature all stay behind membership.
+  "luna-detectives": 88,
 };
 
 /**

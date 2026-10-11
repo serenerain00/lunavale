@@ -306,7 +306,8 @@ async function checkMoney() {
   // without access". A claim takes seconds; an hour is already a person.
   const stuck = (await sql`
     SELECT email, created_at FROM pending_memberships
-    WHERE claimed_at IS NULL AND created_at < now() - interval '1 hour'
+    WHERE claimed_at IS NULL AND status <> 'canceled'
+      AND created_at < now() - interval '1 hour'
     ORDER BY created_at
   `) as { email: string; created_at: string }[];
   const old = stuck.filter(

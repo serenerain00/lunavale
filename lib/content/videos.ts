@@ -3303,6 +3303,148 @@ export const videos: Video[] = [
   },
   {
     /*
+      LUNA AND JOSH, IN BLACK AND WHITE, Melissa, 2026-10-10. The landscape
+      cut is this clip; the vertical is the post `luna-josh-bed-ig`. Both
+      members-only (Melissa).
+
+      WHEN: BEFORE THE BREAKUP (Melissa — "this is a scene before the
+      breakup", correcting a first answer of "after they separate"). Placed
+      in chronology.ts just before "Three Days", the last of them together.
+
+      WHAT IS IN IT: a love scene under the sheets, scored with no dialogue.
+      Checked at five-second intervals end to end: kissing, hands, bare
+      shoulders and backs, nothing graphic. `mature`, not `explicit` — the
+      same call as "The Couch".
+
+      NOT "SUNDAY" (`luna-josh-bed`, a colour morning) and not "First Night"
+      (`luna-josh-first-night`, colour, after the separation) — different
+      footage, though the same two people and the same tattoos.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace.
+    */
+    slug: "luna-josh-bed-land",
+    title: "Still Us",
+    synopsis:
+      "Before any of it. Luna and Josh, late, and nothing else in the room.",
+    file: "luna-josh-bed-land.proxy.mp4",
+    poster: "/posters/luna-josh-bed-land.jpg",
+    // 175.5, the whole file — the song fades itself out under the black.
+    durationSeconds: 176,
+    addedOn: "2026-10-10",
+    access: "premium",
+    mature: true,
+    // The house window for a scene this length (Melissa chose it over a
+    // closed door, 2026-10-10): waking, both faces, the first kisses.
+    preview: {
+      file: "luna-josh-bed-land-preview.proxy.mp4",
+      durationSeconds: 45,
+      hookStart: 0,
+      hookNote: "from the top: waking, and the first kisses",
+    },
+    feelings: ["desire"],
+    place: "farmhouse",
+    about: ["luna", "josh"],
+  },
+  {
+    /*
+      THE INTERVIEW TRAILER, Melissa, 2026-10-09. MEMBERS ONLY ON THE SITE
+      (Melissa, same day, after the music was raised: "can we hide it behind
+      the membership then"). It runs free on Instagram, which carries its own
+      music licensing; the site does not, and gating it here lowers the
+      exposure without licensing it — a paid stream is still a use. A
+      licensed or royalty-free mix for the site is the real fix.
+      Published free first, for a few hours. "I wanna show what's coming down the road even if it is a
+      season away." Voice-over from the interview (`luna-detectives`) over
+      Luna, Josh and Tyson each breaking down on their own — Josh at the
+      workbench, Tyson and the mirror, Luna in the car and on the phone — and
+      Luna going through her journals. Scored loud: "The Devil Within".
+
+      BOOKENDED (Melissa, same day): "A FIRST LOOK / FROM A FUTURE SEASON OF
+      BETWEEN US" before it, and "Some secrets don't stay buried." and the
+      BETWEEN US end title after — type sized for a phone.
+
+      IT SPENDS WHAT THE INTERVIEW'S FREE 1:28 HOLDS BACK — "the one that
+      killed Mercer", "you think it wasn't an accident", "they said you were
+      there. Were you?" That is fine and was not re-litigated: it is on
+      Instagram, so the disclosure is already made — Melissa's standing
+      call: what is already on Instagram is already public.
+
+      NOT IN STORY_ORDER, the same as the first trailer — it is exempt in
+      chronology.ts. NO CONTENT NOTE: the violence is to things (a bench, a
+      mirror), not between people, and `violence` would say otherwise.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace.
+    */
+    slug: "luna-detectives-trailer",
+    title: "Trailer: Nine Years Ago",
+    synopsis:
+      "A season away. Two detectives, a man who died nine years ago, and three people who have never told each other everything about that night.",
+    file: "luna-detectives-trailer.proxy.mp4",
+    poster: "/posters/luna-detectives-trailer.jpg",
+    // 195.5: the cut to its fade (173.2), with the 8.5s intro before it and
+    // the tagline and end title after — see scripts/trailer-bookends.py.
+    durationSeconds: 196,
+    addedOn: "2026-10-09",
+    access: "premium",
+    mature: false,
+    // Empty on purpose, as for the first trailer.
+    feelings: [],
+    place: "lakehouse",
+    about: ["luna", "josh", "tyson"],
+  },
+  {
+    /*
+      THE INTERVIEW, Melissa, 2026-10-09. A FUTURE SEASON — the latest thing
+      in the story, the start of the run the detectives set off: this, then
+      the fight with Josh (the post "Then Tell Me"), then Tyson
+      (`luna-ty-detectives`).
+
+      WHAT IS IN IT, from the transcript. Detectives Harris and Bennett (the
+      names as spoken; Melissa's brief had Hale and Reyes, and she chose the
+      screen) come to the lakehouse door and take her to the station. About
+      ten minutes of a forty-five-minute interview: Daniel Mercer, who died
+      at the family facility on September 17th nine years ago; "the original
+      report says" a machine malfunctioned — and she hears what "original"
+      means; Tyson was at the facility that night, which she never knew; Josh
+      signed off on the section hours before Mercer died; do you journal? She
+      admits Josh "came over" that night and says she does not remember him
+      telling her anything. Then, in the car, she rings Tyson: "they said you
+      were there. Were you?"
+
+      THE SYNOPSIS IS A PLACEHOLDER and keeps to the free 1:28 — the door,
+      the accident, the station. Mercer, Tyson and the signature are the
+      members' half and are not on the card.
+
+      THE FIRST 1:28 FREE (Melissa), ending on "What exactly is this about?"
+      — see scripts/make-previews.mjs.
+
+      Canon from her brief, recorded in docs/content/BETWEEN_US_SECRET_CANON.md
+      ("Addition — 2026-10-09: the interview").
+    */
+    slug: "luna-detectives",
+    // PLACEHOLDER — hers to replace. Spoken inside the free minute.
+    title: "Nine Years Ago",
+    synopsis:
+      "Two detectives come to the door of the lakehouse with questions about an accident at Josh\u2019s family business, nine years ago. Luna goes with them to answer a few of them. She comes out with more questions than she went in with.",
+    file: "luna-detectives.proxy.mp4",
+    poster: "/posters/luna-detectives.jpg",
+    // 795, trimmed under the score's tail with a 3s fade — see scripts/import-cuts.sh.
+    durationSeconds: 795,
+    addedOn: "2026-10-09",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "luna-detectives-preview.proxy.mp4",
+      durationSeconds: 88,
+      hookStart: 0,
+      hookNote: "the door and the drive in, ending on \u201cWhat exactly is this about?\u201d",
+    },
+    feelings: ["lies", "trust"],
+    place: "lakehouse",
+    about: ["luna", "josh", "tyson", "rick"],
+  },
+  {
+    /*
       AFTER THE DETECTIVES, 2026-09-24. Scored the same night it arrived.
 
       WHAT IS SAID, from the transcript rather than the frames. Luna has sat

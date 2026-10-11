@@ -96,6 +96,11 @@ export const STORY_ORDER: readonly string[] = [
 
   // ── The six months apart ────────────────────────────────────────────────
   // Ten years end. She packs, he goes, and Tyson is the one who turns up.
+  // HAND-PLACED, 2026-10-10. Luna and Josh in black and white — before the
+  // breakup (Melissa), so it sits in front of "Three Days", the last of
+  // them together. Exactly where in the ten years is not stated; move it if
+  // she places it.
+  "luna-josh-bed-land",
   "luna-josh-truck-leaving",
   "luna-josh-break",
 
@@ -204,6 +209,12 @@ export const STORY_ORDER: readonly string[] = [
   "luna-truck-breakdown",
   "ty-luna-bed",
 
+  // HAND-PLACED, 2026-10-09. The interview itself — a future season, and the
+  // start of the run it sets off: the detectives, then Josh ("Then Tell Me",
+  // a post, so not in this list), then Tyson. Directly before the scene
+  // below for that reason.
+  "luna-detectives",
+
   // HAND-PLACED — CONFIRMED LAST. Melissa, 2026-09-24: "this scene is way in
   // the future. prob the latest scene we have." The detectives, and Tyson
   // keeping her out of it. If later scenes arrive, this is where they go.
@@ -269,6 +280,8 @@ export function assertComplete(): { missing: string[]; unknown: string[] } {
   // one is exempt the day it is added (2026-09-29, episode 2).
   const EXEMPT = new Set([
     "between-us-trailer-one",
+    // A trailer for a season away, not a beat in this one (2026-10-09).
+    "luna-detectives-trailer",
     "interview",
     ...SEASONS.flatMap((s) => s.episodes.map((e) => e.slug).filter(Boolean)),
   ]);

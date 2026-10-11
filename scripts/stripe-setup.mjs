@@ -82,7 +82,7 @@ const TAX_CODE = "txcd_10402200";
 // create a duplicate. `role: membership` survives any rename.
 const PRODUCT_NAME = "Luna Vale";
 const PRODUCT_DESCRIPTION =
-  "Every episode of Between Us, every clip at full length, all of Luna's journal, the stills from set, and the group chat.";
+  "Every episode of Between Us, every clip at full length, all of Luna's journal, and the stills from set.";
 
 async function vaultProduct() {
   const products = await stripe.products.search({

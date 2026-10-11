@@ -815,3 +815,58 @@ brought into line the same day (`old-journal-the-night-he-came-over` now
 opens on the episode's line; `what-i-told-them` says "we were already living
 together" and "our kitchen"). Her own apartment belongs to the earliest
 pages only — `old-journal-falling`, "like he belonged in my apartment".
+
+**SETTLED 2026-10-09 — supersedes the 2026-10-08 correction above.** Melissa:
+"he stayed there enough for Luna to call it 'home' for him. But they weren't
+officially living together yet. He had his own place." So: **Luna's
+apartment** in Denver; Josh there most nights, so "came home" (episode 3) and
+"came over" (the detectives scene, `luna-detectives`) are both true. Both
+journal pages now say so — her "He stayed here." is restored, and
+`what-i-told-them` reads "at my apartment more nights than he was at his own
+— home, he called it, though he still had his place."
+
+---
+
+## Addition — 2026-10-09: the interview
+
+Melissa, with the scene `luna-detectives` (members, first 1:28 free) and a
+written brief. **The detectives are now on screen** — §"2026-09-24" said they
+never were; that is superseded.
+
+- **Detectives Harris and Bennett** (as spoken on screen; the brief said Hale
+  and Reyes, and Melissa chose the screen). Calm, measured, revealing a piece
+  at a time and watching her face for each one.
+- **The dead man is Daniel Mercer**, an employee, at the family facility on
+  **September 17th**, nine years ago. The original report: a machine
+  malfunction. The detectives are revisiting it — "new information" — and
+  Luna hears "original report" for what it implies.
+- **What Luna learns in the room:** Tyson was at the facility that night
+  (she never knew); Josh **signed off on the section several hours before
+  Mercer died**; they ask whether Josh told her he believed it was his
+  fault; they ask whether she keeps journals — "you may have written it
+  down".
+- **What she gives them:** that Josh "came over" that night and was upset;
+  that she does not remember him telling her anything. Protective, not
+  combative — shock, fear and uncertainty under it.
+- **After:** she rings Tyson from the car — "They said you were there. Were
+  you?" **He says yes** ("Yeah."). She says "Okay" and **hangs up on him**, then
+  alone in the car breaks down and shouts his name. He keeps the no-lying rule (`the-rule`)
+  at the worst possible moment. Order of the run is now: **interview → call to Tyson → Josh ("Then
+  Tell Me") → Tyson (`luna-ty-detectives`).**
+
+**Underlying (writer knowledge, from the brief, not on the site):** Josh was
+the site lead and believed his signature made him responsible; Tyson
+witnessed events that night; Rick knew about the machinery problem and buried
+the circumstances through his lawyers. Luna's old journal may hold
+contemporaneous evidence without her realising it — the page exists
+(`old-journal-the-night-he-came-over`), and `what-i-told-them` now has her
+lying to the detectives about it.
+
+**THE APARTMENT, SETTLED** — see the 2026-10-09 note above: her apartment,
+Josh there most nights, his own place still his. The brief's "they were not
+yet living together" and episode 3's "came home" are both true.
+
+**LADDER (§8).** This is Stage Four on screen for the first time — an
+accident, a death with a name, Josh and Tyson both there, Rick handling it —
+behind membership. Stage Five/Six (Rick's prior knowledge, the manipulation)
+are still off the site.

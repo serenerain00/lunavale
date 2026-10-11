@@ -4,10 +4,15 @@
  * The admin conversion page needs the top of the funnel — visitors, Instagram
  * visitors, who opened an episode page, who saw /membership — and only Clarity
  * sees those. Its export API is rationed (10 requests a project a day, last
- * 1–3 days only, 1,000 rows a request), so this asks TWO questions a day:
+ * 1–3 days only, 1,000 rows a request), so this asks THREE questions a day:
  *
  *   1. no dimension      → site totals, devices
- *   2. Source × URL      → every page, split by where the session came from.
+ *   2. Source × Medium × Campaign
+ *                        → sessions per source, so "Instagram visitors" is a
+ *                          count of visits and not of pages — and per tagged
+ *                          campaign, which is what ties a post to its traffic
+ *                          (docs/analytics/ATTRIBUTION.md: campaign = post).
+ *   3. Source × URL      → every page, split by where the session came from.
  *                          That one table answers "how many Instagram
  *                          visitors", "where do they land" and "how many of
  *                          them reached /membership" at once.
@@ -33,6 +38,12 @@ export interface TrafficDay {
   devices: Record<string, number>;
   instagram: {
     sessions: number;
+    /**
+     * Sessions per "medium|campaign" for Instagram traffic, e.g.
+     * "reel|it-suits-you-30" or "bio|bio". Untagged visits are "referral|"
+     * (the link shim) or "|". Added 2026-10-11; older rows lack it.
+     */
+    campaigns?: Record<string, number>;
     /** Session-pages per path, top 15, for "where do they land". */
     landings: Record<string, number>;
     episodePages: number;
@@ -128,9 +139,14 @@ export function summarize(
 
   // Instagram SESSIONS come from the per-source table. Summing the
   // landings above would count one visitor once per page they opened.
-  day.instagram.sessions = traffic(bySource)
-    .filter((r) => INSTAGRAM_SOURCE.test(String(r.Source ?? "")))
-    .reduce((a, r) => a + num(r.totalSessionCount), 0);
+  const igRows = traffic(bySource).filter((r) => INSTAGRAM_SOURCE.test(String(r.Source ?? "")));
+  day.instagram.sessions = igRows.reduce((a, r) => a + num(r.totalSessionCount), 0);
+  const campaigns: Record<string, number> = {};
+  for (const r of igRows) {
+    const key = `${String(r.Medium ?? "").toLowerCase()}|${String(r.Campaign ?? "").toLowerCase()}`;
+    campaigns[key] = (campaigns[key] ?? 0) + num(r.totalSessionCount);
+  }
+  day.instagram.campaigns = campaigns;
   day.instagram.landings = Object.fromEntries(
     Object.entries(landings).sort((a, b) => b[1] - a[1]).slice(0, 15),
   );
@@ -140,7 +156,7 @@ export function summarize(
 /** Spends exactly three of the day's ten Clarity requests. */
 export async function fetchTrafficDay(token: string, days = 1): Promise<TrafficDay> {
   const totals = await ask(token, days, []);
-  const bySource = await ask(token, days, ["Source"]);
+  const bySource = await ask(token, days, ["Source", "Medium", "Campaign"]);
   const bySourceUrl = await ask(token, days, ["Source", "URL"]);
   return summarize(totals, bySource, bySourceUrl);
 }

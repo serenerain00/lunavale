@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ViewerProvider } from "@/components/access/Viewer";
+import { CaptureAttribution } from "@/components/analytics/CaptureAttribution";
 import { ClerkViewerSync } from "@/components/access/ClerkViewerSync";
 import { authConfigured } from "@/lib/billing/provider";
 import { Caveat, Fraunces, Inter } from "next/font/google";
@@ -154,6 +155,10 @@ export default function RootLayout({
 
         {/* Every page, outside the provider — it needs nothing from it. */}
         <BackToTop />
+
+        {/* Where this visit came from, for tracing a payment back to the post
+            that started it. Writes two first-party cookies; renders nothing. */}
+        <CaptureAttribution />
 
         {/*
           Microsoft Clarity — traffic + session analytics. Production only, so

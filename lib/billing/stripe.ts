@@ -58,6 +58,12 @@ export async function createCheckoutSession(input: {
   interval?: BillingInterval;
   email?: string;
   existingCustomerId?: string;
+  /**
+   * Where the buyer came from — campaign labels only, from the first-party
+   * cookies in lib/analytics/attribution.ts. Copied onto the session and the
+   * subscription so a payment can be traced to the post that started it.
+   */
+  attribution?: Record<string, string>;
 }): Promise<string> {
   if (!stripeConfigured()) throw new Error("Stripe is not configured");
 
@@ -101,14 +107,24 @@ export async function createCheckoutSession(input: {
     // subscription copy is what every later webhook carries; this copy is what
     // openSessionFor() matches on, and what makes an abandoned session on
     // /admin say which tier the person was looking at when they stopped.
-    metadata: { userId: input.userId ?? "", tier: input.tier, interval },
+    metadata: {
+      ...input.attribution,
+      userId: input.userId ?? "",
+      tier: input.tier,
+      interval,
+    },
     ...(input.existingCustomerId
       ? { customer: input.existingCustomerId }
       : input.email
         ? { customer_email: input.email }
         : {}),
     subscription_data: {
-      metadata: { userId: input.userId ?? "", tier: input.tier, interval },
+      metadata: {
+        ...input.attribution,
+        userId: input.userId ?? "",
+        tier: input.tier,
+        interval,
+      },
     },
     // Stripe's own cancellation flow, so "cancel any time" is true at the
     // source rather than something we have to implement and remember to keep.

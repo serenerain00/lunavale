@@ -3,9 +3,20 @@
   "redirects": [
     {
       "source": "/:path((?!api/).*)",
-      "has": [{ "type": "host", "value": "www.lunavale38.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.lunavale38.com"
+        }
+      ],
       "destination": "https://lunavale38.com/:path",
       "permanent": true
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/clarity",
+      "schedule": "15 0 * * *"
     }
   ]
 }

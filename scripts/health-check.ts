@@ -375,6 +375,24 @@ async function checkMoney() {
     if (days > 14) warn(`Last Stripe webhook was ${days} days ago`, "Quiet week, or the endpoint is broken.");
     else ok(`Last Stripe webhook ${days === 0 ? "today" : `${days}d ago`}`);
   }
+
+  // The conversion baseline is only as long as the daily Clarity copy has
+  // kept running. Clarity forgets after three days, so a cron that dies
+  // quietly is a hole in the baseline that can never be filled afterwards.
+  try {
+    const traffic = (await sql`
+      SELECT max(day)::text AS d FROM traffic_daily
+    `) as { d: string | null }[];
+    const d = traffic[0]?.d;
+    if (!d) warn("No traffic days stored yet", "The /api/cron/clarity job has not run — check CLARITY_API_TOKEN and CRON_SECRET.");
+    else {
+      const days = Math.floor((Date.now() - new Date(`${d}T00:00:00Z`).getTime()) / 86_400_000);
+      if (days > 2) warn(`Last Clarity day stored is ${d}`, "The daily copy has stopped; Clarity keeps only 3 days, so fix it today.");
+      else ok(`Clarity traffic stored through ${d}`);
+    }
+  } catch {
+    warn("traffic_daily does not exist yet", "Run scripts/apply-schema.mjs.");
+  }
 }
 
 async function checkStripe() {

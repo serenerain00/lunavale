@@ -185,6 +185,13 @@ def end_frame(t, dur, title, url, kicker):
     return frame.convert("RGB")
 
 
+# ---- sources ---------------------------------------------------------------
+
+def src_of(spec, it) -> Path:
+    """A shot's own `src` (a montage across scenes), else the spec's picture."""
+    return ROOT / (it.get("src") or spec["picture"])
+
+
 # ---- speech guard ----------------------------------------------------------
 
 GUARD = 0.10      # a cut must sit at least this far from any speech
@@ -231,11 +238,10 @@ def _hit(regs, t):
 
 def guard_dialogue(spec, snap: bool):
     """Check (and with `snap`, fix) every audible cut. Returns problems left."""
-    src = ROOT / spec["picture"]
-    regs = speech_regions(src)
     problems = []
     for i, it in enumerate(spec["cut"]):
         kind = it.get("kind", "shot")
+        regs = speech_regions(src_of(spec, it)) if kind in ("shot", "black") else []
         if kind == "shot" and it.get("audio", "dia") != "none":
             it["_a_in"] = it["in"] - it.get("lead", 0)
             it["_a_out"] = it["out"] + it.get("tail", 0)
@@ -275,14 +281,18 @@ MIN_PIECE = 1.0   # no fragment of another camera angle shorter than this
 
 
 def source_cuts(src: Path):
-    """Times of the camera cuts already inside `src`, cached."""
+    """Times of the camera cuts already inside `src`, cached.
+
+    Threshold 0.18, lowered from 0.25 on 2026-10-11: a soft cut in Sit Still
+    (40.47s) scored 0.24 and slipped through. A false positive only makes the
+    guard stricter; a miss lets a flash through, so err low."""
     import re
     cache = OUT_DIR / ".cache" / (src.stem + ".cuts.json")
     if cache.exists() and cache.stat().st_mtime > src.stat().st_mtime:
         return json.loads(cache.read_text())
     log = subprocess.run(
         ["ffmpeg", "-v", "info", "-i", str(src), "-an", "-vf",
-         "scale=320:-2,select='gt(scene,0.25)',showinfo", "-f", "null", "-"],
+         "scale=320:-2,select='gt(scene,0.18)',showinfo", "-f", "null", "-"],
         capture_output=True, text=True).stderr
     cuts = [float(m) for m in re.findall(r"pts_time:([0-9.]+)", log)]
     cache.parent.mkdir(parents=True, exist_ok=True)
@@ -291,12 +301,11 @@ def source_cuts(src: Path):
 
 
 def guard_picture(spec, snap: bool):
-    cuts = source_cuts(ROOT / spec["picture"])
     problems = []
     for i, it in enumerate(spec["cut"]):
         if it.get("kind", "shot") != "shot":
             continue
-        for c in cuts:
+        for c in source_cuts(src_of(spec, it)):
             if not (it["in"] < c < it["out"]):
                 continue
             if c - it["in"] < MIN_PIECE:
@@ -336,9 +345,6 @@ def timeline(spec):
 
 
 def render(spec, tmp: Path, out: Path):
-    src = ROOT / spec["picture"]
-    sw, sh = probe_size(src)
-    cw = round(sh * 4 / 5 / 2) * 2              # 4:5 crop at full height
     items, total = timeline(spec)
 
     # 1. Each item to an intermediate with identical format, then concat.
@@ -348,7 +354,10 @@ def render(spec, tmp: Path, out: Path):
         p = tmp / f"p{i:02d}.mp4"
         kind = it.get("kind", "shot")
         fa = 0.03
+        src = src_of(spec, it)
         if kind == "shot":
+            sw, sh = probe_size(src)
+            cw = round(sh * 4 / 5 / 2) * 2          # 4:5 crop at full height
             cx = it.get("x", 0.5) * sw
             x = int(min(max(cx - cw / 2, 0), sw - cw))
             vol = {"dia": 1.0, "amb": 0.35, "none": 0.0}[it.get("audio", "dia")]
@@ -367,7 +376,7 @@ def render(spec, tmp: Path, out: Path):
                 at = it["start"] - length if side == "lead" else it["start"] + it["dur"]
                 fade = (f"afade=t=in:d={fa}" if side == "lead"
                         else f"afade=t=out:st={length - fa}:d={fa}")
-                extra_audio.append((a0, length, at, vol, fade))
+                extra_audio.append((src, a0, length, at, vol, fade))
             run(["ffmpeg", "-v", "error", "-y", "-ss", str(it["in"]), "-t", str(it["dur"]),
                  "-i", str(src), "-vf", vf, "-af", af,
                  "-c:v", "libx264", "-crf", "14", "-preset", "medium",
@@ -434,8 +443,9 @@ def render(spec, tmp: Path, out: Path):
     music = ROOT / bed["src"]
     seg_inputs, seg_labels = [], []
     base_idx = 1 + len(spec.get("overlays", []))
-    for s_i, (a, b) in enumerate(bed["segments"]):
-        seg_inputs += ["-ss", str(a), "-t", str(b - a), "-i", str(music)]
+    for s_i, seg in enumerate(bed["segments"]):
+        seg_src, a, b = (ROOT / seg[0], seg[1], seg[2]) if len(seg) == 3 else (music, seg[0], seg[1])
+        seg_inputs += ["-ss", str(a), "-t", str(b - a), "-i", str(seg_src)]
         seg_labels.append(f"[{base_idx + s_i}:a]")
     xf = bed.get("crossfade", 1.0)
     chain, cur = [], seg_labels[0]
@@ -453,8 +463,8 @@ def render(spec, tmp: Path, out: Path):
     if extra_audio:
         ex_base = base_idx + len(bed["segments"])
         labels = []
-        for e_i, (a0, length, at, vol, fade) in enumerate(extra_audio):
-            seg_inputs += ["-ss", str(a0), "-t", str(length), "-i", str(src)]
+        for e_i, (e_src, a0, length, at, vol, fade) in enumerate(extra_audio):
+            seg_inputs += ["-ss", str(a0), "-t", str(length), "-i", str(e_src)]
             ms = int(round(at * 1000))
             chain.append(f"[{ex_base + e_i}:a]aresample={AR},aformat=channel_layouts=stereo,"
                          f"volume={vol},{fade},adelay={ms}|{ms}[x{e_i}]")

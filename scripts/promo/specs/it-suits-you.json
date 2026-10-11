@@ -61,10 +61,11 @@
       "note": "her hands, his collar"
     },
     {
-      "in": 166.8,
+      "in": 166.94,
       "out": 170.19,
       "x": 0.45,
-      "note": "L: You look good, Ty."
+      "note": "L: You look good, Ty.",
+      "lead": 0.14
     },
     {
       "in": 179.9,

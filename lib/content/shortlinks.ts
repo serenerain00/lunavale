@@ -42,7 +42,11 @@ export const SHORT_LINKS: ShortLink[] = [
     code: "bio",
     to: "/",
     medium: "bio",
-    campaign: "bio-2026-10",
+    // "bio", NOT "bio-2026-10", until 2026-10-26: the bio already uses
+    // utm_campaign=bio, and the measurement baseline runs Oct 11-25 — a new
+    // label mid-baseline would split bio traffic in two. From Oct 26 the
+    // measurement session's Test B alternates bio-home / bio-pilot weekly.
+    campaign: "bio",
     note: "The Instagram bio link. Re-point `to` (and bump `campaign`) instead of editing the bio.",
     addedOn: "2026-10-11",
   },

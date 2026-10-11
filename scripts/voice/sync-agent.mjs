@@ -23,7 +23,9 @@ import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const KEY = process.env.ELEVENLABS_AGENT_KEY || process.env.ELEVENLABS_API_KEY;
-const NAME = "Luna Vale Assistant";
+// Melissa, 2026-10-11: "change her name to Erin". Found by id when
+// ELEVENLABS_AGENT_ID is set, so renaming never creates a second agent.
+const NAME = "Erin";
 const SITE = process.env.VOICE_SITE_URL || "https://lunavale38.com";
 const SECRET = process.env.VOICE_TOOL_SECRET;
 
@@ -81,7 +83,7 @@ const CONFIG = {
   tags: ["luna-vale"],
   conversation_config: {
     agent: {
-      first_message: "Hi Melissa. What do you want to know?",
+      first_message: "Hi Melissa, it's Erin. What do you want to know?",
       language: "en",
       prompt: {
         prompt: readFileSync(join(here, "agent-prompt.md"), "utf8"),
@@ -104,7 +106,7 @@ const CONFIG = {
   },
   platform_settings: {
     auth: { enable_auth: true },
-    call_limits: { agent_concurrency_limit: 1, daily_limit: 20, bursting_enabled: false },
+    call_limits: { agent_concurrency_limit: 1, daily_limit: 10, bursting_enabled: false },
   },
 };
 
@@ -132,7 +134,9 @@ if (!KEY) {
 
 const apply = process.argv.includes("--apply");
 const { agents = [] } = await api("GET", "/v1/convai/agents?page_size=100");
-const existing = agents.find((a) => a.name === NAME);
+const existing =
+  agents.find((a) => a.agent_id === process.env.ELEVENLABS_AGENT_ID) ??
+  agents.find((a) => a.name === NAME);
 
 console.log(existing ? `update ${NAME} (${existing.agent_id})` : `create ${NAME}`);
 console.log(`  llm ${CONFIG.conversation_config.agent.prompt.llm}, voice Eryn, ` +

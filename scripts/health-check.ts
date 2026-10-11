@@ -101,6 +101,22 @@ async function checkGates() {
   if (ungated.length) fail("Owner-only files missing an isOwner() check", ungated.join(", "));
   else ok(`All ${owned.length} owner-only files call isOwner()`);
 
+  // THE VOICE ROUTES (2026-10-11) have two kinds of caller: Melissa's browser
+  // (session, report — isOwner()) and the ElevenLabs agent (tools — a shared
+  // secret compared in constant time). Every route there must do one or the
+  // other; a new route that does neither is open to the internet with live
+  // Stripe numbers behind it.
+  const voice = (await walk("app/api/voice")).filter((f) => /\.tsx?$/.test(f));
+  const openVoice: string[] = [];
+  for (const f of voice) {
+    const src = await read(f);
+    const owner = /isOwner\s*\(/.test(src);
+    const secret = /VOICE_TOOL_SECRET/.test(src) && /timingSafeEqual/.test(src);
+    if (!owner && !secret) openVoice.push(f);
+  }
+  if (openVoice.length) fail("Voice routes with neither isOwner() nor the agent secret", openVoice.join(", "));
+  else ok(`All ${voice.length} voice routes are gated (owner or agent secret)`);
+
   // REGRESSION GUARD. app/account/page.tsx once decided who the owner was by
   // testing that OWNER_USER_ID was set — which it always is — and so showed an
   // Admin link to every signed-in member. Nothing may compare that env var by

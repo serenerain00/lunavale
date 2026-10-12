@@ -60,6 +60,7 @@ Output goes to stories/_promos/ (gitignored, never deployed).
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -81,7 +82,13 @@ AR = 48000
 
 
 def run(cmd):
-    subprocess.run(cmd, check=True)
+    # -nostdin: an ffmpeg started from a backgrounded shell otherwise waits on
+    # the terminal forever (it happened, 2026-10-11 — 0% CPU, never finishing).
+    if cmd and cmd[0] == "ffmpeg" and "-nostdin" not in cmd:
+        cmd = [cmd[0], "-nostdin", *cmd[1:]]
+    if os.environ.get("PROMO_DEBUG"):
+        print("RUN", " ".join(map(str, cmd)), file=sys.stderr)
+    subprocess.run(cmd, check=True, stdin=subprocess.DEVNULL)
 
 
 def probe_size(src: Path):
@@ -344,6 +351,10 @@ def timeline(spec):
     return items, t
 
 
+# Every intermediate piece gets the same audio rate and video timescale before
+# they're joined. Pieces from different source files otherwise carry different
+# timescales into the concat, and the final mix waits forever for picture
+# timestamps that never arrive (the first montage hung at 0% CPU, 2026-10-11).
 def render(spec, tmp: Path, out: Path):
     items, total = timeline(spec)
 
@@ -380,7 +391,7 @@ def render(spec, tmp: Path, out: Path):
             run(["ffmpeg", "-v", "error", "-y", "-ss", str(it["in"]), "-t", str(it["dur"]),
                  "-i", str(src), "-vf", vf, "-af", af,
                  "-c:v", "libx264", "-crf", "14", "-preset", "medium",
-                 "-c:a", "pcm_s16le", str(p.with_suffix(".mov"))])
+                 "-c:a", "pcm_s16le", "-ar", str(AR), "-video_track_timescale", "15360", str(p.with_suffix(".mov"))])
             p = p.with_suffix(".mov")
         elif kind == "black":
             a_in = it.get("audio_in")
@@ -398,7 +409,7 @@ def render(spec, tmp: Path, out: Path):
             p = p.with_suffix(".mov")
             run(["ffmpeg", "-v", "error", "-y", *inputs, *amap,
                  "-vf", "format=yuv420p", "-af", af,
-                 "-c:v", "libx264", "-crf", "14", "-c:a", "pcm_s16le", str(p)])
+                 "-c:v", "libx264", "-crf", "14", "-c:a", "pcm_s16le", "-ar", str(AR), "-video_track_timescale", "15360", str(p)])
         elif kind == "end":
             fr = tmp / f"end{i}"
             fr.mkdir()
@@ -411,7 +422,7 @@ def render(spec, tmp: Path, out: Path):
                  "-i", str(fr / "f%04d.png"), "-f", "lavfi", "-t", str(it["dur"]),
                  "-i", f"anullsrc=r={AR}:cl=stereo", "-map", "0:v", "-map", "1:a",
                  "-vf", "format=yuv420p", "-c:v", "libx264", "-crf", "14",
-                 "-c:a", "pcm_s16le", "-shortest", str(p)])
+                 "-c:a", "pcm_s16le", "-ar", str(AR), "-video_track_timescale", "15360", "-shortest", str(p)])
         parts.append(p)
 
     lst = tmp / "parts.txt"
@@ -464,10 +475,16 @@ def render(spec, tmp: Path, out: Path):
         ex_base = base_idx + len(bed["segments"])
         labels = []
         for e_i, (e_src, a0, length, at, vol, fade) in enumerate(extra_audio):
-            seg_inputs += ["-ss", str(a0), "-t", str(length), "-i", str(e_src)]
+            # Pre-rendered to its own WAV. Reading a slice straight out of a
+            # different source video inside the final graph deadlocked it
+            # (Twenty Years, 2026-10-11): the mix sat at 0% CPU forever.
+            wav = tmp / f"xa{e_i}.wav"
+            run(["ffmpeg", "-v", "error", "-y", "-ss", str(a0), "-t", str(length), "-i", str(e_src),
+                 "-vn", "-af", f"aresample={AR},aformat=channel_layouts=stereo,volume={vol},{fade}",
+                 "-c:a", "pcm_s16le", str(wav)])
+            seg_inputs += ["-i", str(wav)]
             ms = int(round(at * 1000))
-            chain.append(f"[{ex_base + e_i}:a]aresample={AR},aformat=channel_layouts=stereo,"
-                         f"volume={vol},{fade},adelay={ms}|{ms}[x{e_i}]")
+            chain.append(f"[{ex_base + e_i}:a]adelay={ms}|{ms}[x{e_i}]")
             labels.append(f"[x{e_i}]")
         chain.append(f"[0:a]{''.join(labels)}amix=inputs={1 + len(labels)}:"
                      f"duration=first:normalize=0[dia]")
@@ -537,7 +554,10 @@ def main():
     try:
         render(spec, tmp, out)
     finally:
-        shutil.rmtree(tmp, ignore_errors=True)
+        if os.environ.get("PROMO_KEEP"):
+            print(f"kept {tmp}", file=sys.stderr)
+        else:
+            shutil.rmtree(tmp, ignore_errors=True)
     print(f"wrote {out}")
     if a.sheet:
         sheet(out, total)

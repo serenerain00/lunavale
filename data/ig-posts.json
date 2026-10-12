@@ -30,7 +30,7 @@
       ],
       "captionStyle": "long",
       "postedOn": "2026-10-12T01:03:18Z",
-      "notes": "Posted 2026-10-11 21:03 ET — before the Oct 12 start, and the second post that day (DeXSGIzvjkt at 14:18 ET). Caption links lunavale38.com, not /go/twenty; the end card shows /go/twenty."
+      "note": "Posted 2026-10-11 21:03 ET — before the Oct 12 start, and the second post that day (DeXSGIzvjkt at 14:18 ET). Caption links lunavale38.com, not /go/twenty; the end card shows /go/twenty."
     },
     {
       "shortcode": null,
@@ -59,8 +59,9 @@
         "luna",
         "tyson"
       ],
-      "captionStyle": "teaser",
-      "postedOn": null
+      "captionStyle": "long",
+      "postedOn": null,
+      "note": "Paired with len-promo-2: long story caption, to hold caption style constant within the pair."
     },
     {
       "shortcode": null,

@@ -1,0 +1,12 @@
+{
+  "_about": "Instagram post -> campaign map, for joining the IG export to site sessions and Stripe (read by the measurement session). One row per post. `shortcode` is filled in once the post is live (the part after instagram.com/p/ or /reel/). Owned by the growth/social side; campaigns match lib/content/shortlinks.ts.",
+  "posts": [
+    { "shortcode": null, "campaign": "len-promo-1", "go": "/go/suit", "asset": "stories/_promos/it-suits-you-30.mp4", "format": "reel", "experiment": "length", "arm": "promo", "characters": ["luna", "tyson"], "captionStyle": "teaser", "postedOn": null },
+    { "shortcode": null, "campaign": "len-promo-2", "go": "/go/twenty", "asset": "stories/_promos/twenty-years-30.mp4", "format": "reel", "experiment": "length", "arm": "promo", "characters": ["luna", "tyson"], "captionStyle": "teaser", "postedOn": null },
+    { "shortcode": null, "campaign": "len-cut-1", "go": "/go/mostnights", "asset": "clip:luna-ty-couch", "format": "reel", "experiment": "length", "arm": "cut", "characters": ["luna", "tyson"], "captionStyle": "teaser", "postedOn": null },
+    { "shortcode": null, "campaign": "len-cut-2", "go": "/go/havefun", "asset": "clip:young-luna-ty-apt", "format": "reel", "experiment": "length", "arm": "cut", "characters": ["luna", "tyson"], "captionStyle": "teaser", "postedOn": null },
+    { "shortcode": null, "campaign": "meet-three-1", "go": "/go/meet1", "asset": null, "format": "image", "experiment": "meet-three", "arm": null, "characters": ["luna", "josh", "tyson"], "captionStyle": null, "postedOn": null },
+    { "shortcode": null, "campaign": "meet-three-2", "go": "/go/meet2", "asset": null, "format": "image", "experiment": "meet-three", "arm": null, "characters": ["luna", "josh", "tyson"], "captionStyle": null, "postedOn": null },
+    { "shortcode": null, "campaign": "meet-three-3", "go": "/go/meet3", "asset": null, "format": "image", "experiment": "meet-three", "arm": null, "characters": ["luna", "josh", "tyson"], "captionStyle": null, "postedOn": null }
+  ]
+}

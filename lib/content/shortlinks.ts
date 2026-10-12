@@ -50,14 +50,54 @@ export const SHORT_LINKS: ShortLink[] = [
     note: "The Instagram bio link. Re-point `to` (and bump `campaign`) instead of editing the bio.",
     addedOn: "2026-10-11",
   },
+  /*
+   * THE LENGTH TEST, Oct 12-25 (approved by Melissa 2026-10-11; design in the
+   * measurement session's week-2026-10-10 report). Two ~30s custom promos vs
+   * two 1-2 min scene cuts, all Luna+Tyson, all "teaser" captions; decided on
+   * follows per 1k reached. Campaign names are the measurement session's.
+   */
   {
     code: "suit",
     to: "/clips/luna-ty-suit",
     medium: "reel",
-    campaign: "it-suits-you-30",
-    note: "The It Suits You promo (scripts/promo/specs/it-suits-you.json).",
+    campaign: "len-promo-1",
+    note: "Length test, promo 1: It Suits You (scripts/promo/specs/it-suits-you.json).",
     addedOn: "2026-10-11",
   },
+  {
+    // The code is printed on the video's end card — never rename it.
+    code: "twenty",
+    to: "/clips/ty-luna-young",
+    medium: "reel",
+    campaign: "len-promo-2",
+    note: "Length test, promo 2: Twenty Years montage (specs/twenty-years.json). Lands on Pick Me Up, free, where the twenty years start.",
+    addedOn: "2026-10-11",
+  },
+  {
+    code: "mostnights",
+    to: "/clips/luna-ty-couch",
+    medium: "reel",
+    campaign: "len-cut-1",
+    note: "Length test, scene cut 1: Most Nights (1:49, free).",
+    addedOn: "2026-10-11",
+  },
+  {
+    code: "havefun",
+    to: "/clips/young-luna-ty-apt",
+    medium: "reel",
+    campaign: "len-cut-2",
+    note: "Length test, scene cut 2: Have Fun (1:35, free).",
+    addedOn: "2026-10-11",
+  },
+  // "MEET THE THREE", weekly for 3 weeks — image/carousel posts with a Story link.
+  ...[1, 2, 3].map((n) => ({
+    code: `meet${n}`,
+    to: "/characters",
+    medium: "story" as const,
+    campaign: `meet-three-${n}`,
+    note: `Meet the three, week ${n}.`,
+    addedOn: "2026-10-11",
+  })),
   {
     code: "ep3",
     to: "/clips/episode-3",

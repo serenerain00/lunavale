@@ -1,6 +1,6 @@
 {
   "name": "ep2-trailer-60",
-  "max_seconds": 62,
+  "max_seconds": 64,
   "picture": "stories/ep2/ep2-final-music.MOV",
   "guard_seconds": 0.06,
   "speech_override": {
@@ -158,7 +158,7 @@
     "crossfade": 1.2,
     "low_db": -18,
     "high_db": -7,
-    "swell": 33.0,
+    "swell": 32.2,
     "ramp": 1.5
   },
   "cut": [
@@ -237,7 +237,7 @@
     },
     {
       "in": 870.0,
-      "out": 872.5,
+      "out": 871.5,
       "x": 0.24,
       "audio": "none",
       "note": "Luna, the drive (silent)"
@@ -261,51 +261,58 @@
       "note": "T: Wanting to doesn't mean you have to."
     },
     {
+      "in": 960.51,
+      "out": 962.3,
+      "x": 0.2,
+      "audio": "none",
+      "note": "BREATH — Luna arrives at the farmhouse (song drop)"
+    },
+    {
       "in": 979.2,
-      "out": 980.5,
+      "out": 981.75,
       "x": 0.48,
       "note": "J: You're really just gonna leave."
     },
     {
       "in": 1105.05,
-      "out": 1106.2,
+      "out": 1107.2,
       "x": 0.4,
       "note": "J: Are you happier?"
     },
     {
       "in": 1116.34,
-      "out": 1117.5,
+      "out": 1118.55,
       "x": 0.35,
       "note": "L: I can breathe."
     },
     {
       "in": 1145.1,
-      "out": 1147.55,
+      "out": 1147.95,
       "x": 0.44,
       "note": "L: I didn't leave because I stopped loving you."
     },
     {
       "in": 1169.95,
-      "out": 1170.85,
+      "out": 1171.35,
       "x": 0.57,
       "note": "J: I miss you."
     },
     {
       "in": 1173.27,
-      "out": 1174.6,
+      "out": 1175.4,
       "x": 0.42,
       "note": "L: I miss you too."
     },
     {
       "in": 1180.0,
-      "out": 1183.0,
+      "out": 1183.5,
       "x": 0.42,
       "audio": "none",
       "note": "the embrace (silent)"
     },
     {
       "in": 1239.35,
-      "out": 1244.3,
+      "out": 1245.3,
       "x": 0.45,
       "note": "L: Because if I stay... nothing changes."
     },

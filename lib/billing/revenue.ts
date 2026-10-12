@@ -166,7 +166,13 @@ function grossMonthlyCents(sub: Stripe.Subscription): number {
  * already run out is dropped by its `end` timestamp, though in practice Stripe
  * detaches it first.
  */
-function applyDiscounts(grossCents: number, sub: Stripe.Subscription): number {
+function applyDiscounts(
+  grossCents: number,
+  sub: Stripe.Subscription,
+  // When to judge whether a repeating discount has run out. Now, for the
+  // admin page; the end of a past week, for the weekly scorecard.
+  atSeconds: number = Date.now() / 1000,
+): number {
   // Older API versions carried a single `discount`; current ones carry an
   // array. Read both so a pinned-version bump can't silently zero this out.
   const raw = [
@@ -182,7 +188,7 @@ function applyDiscounts(grossCents: number, sub: Stripe.Subscription): number {
     (d): d is Stripe.Discount => typeof d !== "string" && d !== null,
   );
 
-  const now = Date.now() / 1000;
+  const now = atSeconds;
   let cents = grossCents;
 
   for (const discount of discounts) {
@@ -324,4 +330,14 @@ export function formatCents(cents: number): string {
   return Number.isInteger(dollars)
     ? `$${dollars}`
     : `$${dollars.toFixed(2)}`;
+}
+
+/**
+ * What one subscription bills per month, net of its coupons, in cents — the
+ * same arithmetic as revenueSummary(), for scripts/weekly-report.ts, so the
+ * scorecard's MRR and the admin page's can never disagree by construction.
+ * The subscription must be listed with `expand: ["data.discounts.source.coupon"]`.
+ */
+export function netMonthlyCents(sub: Stripe.Subscription, atSeconds?: number): number {
+  return applyDiscounts(grossMonthlyCents(sub), sub, atSeconds);
 }

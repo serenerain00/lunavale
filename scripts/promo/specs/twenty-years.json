@@ -1,0 +1,115 @@
+{
+  "name": "twenty-years-30",
+  "max_seconds": 30,
+  "picture": "stories/luna-ty-suit/luna-ty-suit.mp4",
+  "bed": {
+    "src": "stories/luna-ty-suit/luna-ty-suit-music.mov",
+    "segments": [
+      [
+        103.0,
+        114.6
+      ],
+      [
+        129.0,
+        149.0
+      ]
+    ],
+    "crossfade": 1.0,
+    "low_db": -16,
+    "high_db": 0,
+    "swell": 7.77,
+    "ramp": 1.4
+  },
+  "cut": [
+    {
+      "kind": "black",
+      "dur": 1.0,
+      "note": "card: 2006."
+    },
+    {
+      "src": "stories/young-ty-luna/young-ty-luna-car.mp4",
+      "in": 28.01,
+      "out": 31.5,
+      "x": 0.6,
+      "note": "T: What do you need? / L: Can you come get me? / T: Yeah.",
+      "lead": 0.98
+    },
+    {
+      "src": "stories/young-luna-ty-apt/young-luna-ty-apt.mp4",
+      "in": 61.5,
+      "out": 63.65,
+      "x": 0.2,
+      "note": "T: Have fun! / L: I will."
+    },
+    {
+      "src": "stories/young-luna-ty-apt/young-luna-ty-apt.mp4",
+      "in": 80.17,
+      "out": 81.3,
+      "x": 0.56,
+      "note": "L: Night, Ty."
+    },
+    {
+      "kind": "black",
+      "dur": 1.5,
+      "note": "card: Twenty years later. (music up)"
+    },
+    {
+      "src": "stories/luna-tyson-shaving/luna-tyson-shaving.mp4",
+      "in": 39.0,
+      "out": 40.46,
+      "x": 0.6,
+      "note": "T: You've gotten bossier."
+    },
+    {
+      "src": "stories/luna-tyson-shaving/luna-tyson-shaving.mp4",
+      "in": 40.51,
+      "out": 42.85,
+      "x": 0.46,
+      "note": "L: I've always been bossy."
+    },
+    {
+      "in": 33.61,
+      "out": 38.02,
+      "x": 0.58,
+      "note": "L: Your collar's all messed up. / T: That's why I brought you."
+    },
+    {
+      "in": 132.67,
+      "out": 134.67,
+      "x": 0.5,
+      "audio": "amb",
+      "note": "the look"
+    },
+    {
+      "in": 166.94,
+      "out": 170.19,
+      "x": 0.45,
+      "lead": 0.14,
+      "note": "L: You look good, Ty."
+    },
+    {
+      "kind": "end",
+      "dur": 3.3,
+      "title": "Twenty Years",
+      "kicker": "FROM THE BEGINNING · FREE",
+      "url": "lunavale38.com/go/twenty",
+      "note": "end card"
+    }
+  ],
+  "overlays": [
+    {
+      "on": 0,
+      "offset": 0.1,
+      "dur": 0.9,
+      "text": "2006.",
+      "y": 0.45
+    },
+    {
+      "on": 4,
+      "offset": 0.1,
+      "dur": 1.4,
+      "text": "Twenty years later.",
+      "y": 0.45
+    }
+  ]
+}

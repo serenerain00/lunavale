@@ -1,0 +1,111 @@
+{
+  "name": "it-suits-you-30",
+  "max_seconds": 30,
+  "picture": "stories/luna-ty-suit/luna-ty-suit.mp4",
+  "bed": {
+    "src": "stories/luna-ty-suit/luna-ty-suit-music.mov",
+    "segments": [
+      [
+        103.0,
+        114.6
+      ],
+      [
+        129.0,
+        149.0
+      ]
+    ],
+    "crossfade": 1.0,
+    "low_db": -18,
+    "high_db": 1,
+    "swell": 10.0,
+    "ramp": 1.6
+  },
+  "cut": [
+    {
+      "in": 23.15,
+      "out": 29.5,
+      "x": 0.33,
+      "note": "T: I look like a banker. / L: ...commercial real estate."
+    },
+    {
+      "in": 33.61,
+      "out": 35.4,
+      "x": 0.55,
+      "note": "L: Your collar's all messed up."
+    },
+    {
+      "in": 36.14,
+      "out": 38.02,
+      "x": 0.62,
+      "note": "T: That's why I brought you."
+    },
+    {
+      "in": 132.67,
+      "out": 134.67,
+      "x": 0.5,
+      "audio": "amb",
+      "note": "the look — music up"
+    },
+    {
+      "in": 146.91,
+      "out": 151.25,
+      "x": 0.5,
+      "note": "T: You look like you want to say something. / L: Do I?",
+      "lead": 0.06
+    },
+    {
+      "in": 154.5,
+      "out": 155.65,
+      "x": 0.58,
+      "audio": "amb",
+      "note": "her hands, his collar"
+    },
+    {
+      "in": 166.94,
+      "out": 170.19,
+      "x": 0.45,
+      "note": "L: You look good, Ty.",
+      "lead": 0.14
+    },
+    {
+      "in": 179.9,
+      "out": 181.52,
+      "x": 0.62,
+      "note": "T: Hey."
+    },
+    {
+      "in": 183.9,
+      "out": 185.2,
+      "x": 0.45,
+      "note": "L: Yeah?"
+    },
+    {
+      "kind": "black",
+      "dur": 1.6,
+      "audio_in": 191.8,
+      "note": "T (over black): ...Nothing."
+    },
+    {
+      "kind": "end",
+      "dur": 3.3,
+      "title": "It Suits You",
+      "kicker": "THE FULL SCENE · ON THE SITE",
+      "url": "lunavale38.com",
+      "note": "end card"
+    }
+  ],
+  "overlays": [
+    {
+      "on": 3,
+      "offset": 0.3,
+      "dur": 1.7,
+      "text": "Twenty years."
+    },
+    {
+      "on": 5,
+      "offset": 0.05,
+      "dur": 1.25,
+      "text": "One afternoon."
+    }
+  ]
+}

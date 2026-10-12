@@ -174,6 +174,13 @@ export default async function AdminPage() {
             >
               Studio
               <span className="text-stone">— build a shot</span>
+            </Link>{" "}
+            <Link
+              href="/admin/conversion"
+              className="ml-2 inline-flex items-center gap-2 rounded-sm border border-amber/40 bg-amber/10 px-3 py-1.5 text-sm text-amber-soft hover:bg-amber/20"
+            >
+              Conversion
+              <span className="text-stone">— Instagram to paid</span>
             </Link>
           </p>
         </header>

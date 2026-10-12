@@ -9,6 +9,7 @@ import { isOwner } from "@/lib/access/owner";
 import { authConfigured, billingLive } from "@/lib/billing/provider";
 import { membershipForUser } from "@/lib/db/memberships";
 import {
+  BENEFITS,
   benefitsFor,
   formatPrice,
   getTier,
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 interface AccountPageProps {
-  searchParams: Promise<{ started?: string; ended?: string }>;
+  searchParams: Promise<{ started?: string; ended?: string; welcome?: string }>;
 }
 
 export default async function AccountPage({ searchParams }: AccountPageProps) {
@@ -46,6 +47,10 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
   ]);
   const current = getTier(tier)!;
   const unlocked = benefitsFor(tier);
+  // Arriving straight from sign-up (see signUpFallbackRedirectUrl in
+  // app/layout.tsx). Only means anything to somebody without a membership —
+  // a member who lands here with it is shown their membership as usual.
+  const welcome = params.welcome === "1" && !active;
 
   // Real billing state, when there is any. Shown instead of the static tier
   // copy so the page reports what Stripe actually thinks rather than what the
@@ -59,15 +64,22 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
       <main className="mx-auto w-full max-w-4xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-8 pt-12 sm:pt-16">
           <p className="text-xs uppercase tracking-[0.2em] text-amber">
-            Your membership
+            {active ? "Your membership" : "Your account"}
           </p>
           <h1 className="mt-4 font-display text-3xl font-light text-ivory sm:text-4xl">
-            {active ? current.name : "You're exploring as a visitor"}
+            {active
+              ? current.name
+              : welcome
+                ? "You\u2019re in. Here\u2019s where to start."
+                : "You\u2019re on the free side"}
           </h1>
+          {/* SAID PLAINLY, 2026-10-10. A free account opens nothing a visitor
+              can't already see, and people were making one expecting it to.
+              Telling them is better than letting them find out by clicking. */}
           <p className="mt-3 max-w-xl leading-relaxed text-stone">
             {active
               ? current.tagline
-              : "Everything public is open to you. Nothing is expiring."}
+              : "Everything free on the site is yours, and nothing here expires. Your account keeps your place, and if you ever join, the membership attaches to it in one step."}
           </p>
         </header>
 
@@ -212,21 +224,7 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
             </section>
           </>
         ) : (
-          <section className="rounded-xl border border-hairline bg-charcoal/40 p-8">
-            <h2 className="font-display text-xl text-ivory">
-              Nothing to manage yet
-            </h2>
-            <p className="mt-2 max-w-lg leading-relaxed text-stone">
-              You don&rsquo;t have a membership, so there&rsquo;s no billing,
-              no renewal date, and nothing to cancel.
-            </p>
-            <Link
-              href="/membership"
-              className="mt-6 inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
-            >
-              {getTier("vault")!.cta}
-            </Link>
-          </section>
+          <FreeSide />
         )}
         {/*
           OWNER ONLY. This used to test that OWNER_USER_ID was merely SET,
@@ -251,6 +249,108 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
         </div>
 
 </main>
+    </>
+  );
+}
+
+/**
+ * The free side, for a signed-in account with no membership.
+ *
+ * WHERE TO GO, THEN WHAT JOINING ADDS — in that order. Somebody who has just
+ * made a free account wants to know what they can do now; the pitch comes
+ * second and is the benefits list itself, so it can never drift from the
+ * membership page or mention something that is switched off (the group chat
+ * row drops out of BENEFITS when OVERHEARD_ARCHIVED is set).
+ */
+const FREE_PLACES = [
+  {
+    href: "/clips",
+    label: "Clips",
+    detail: "The ones released openly, in full, and the opening of some members-only ones.",
+  },
+  {
+    href: "/journal",
+    label: "Luna\u2019s journal",
+    detail: "The pages she leaves open are marked \u201cFree to read.\u201d",
+  },
+  {
+    href: "/posts",
+    label: "Posts",
+    detail: "The verticals from Instagram, the free ones in full.",
+  },
+  {
+    href: "/characters",
+    label: "Who everyone is",
+    detail: "Luna, Tyson, Josh and the people around them.",
+  },
+];
+
+function FreeSide() {
+  const adds = BENEFITS.filter((b) => b.from === "vault");
+  return (
+    <>
+      <section aria-labelledby="free-heading">
+        <h2
+          id="free-heading"
+          className="font-display text-2xl font-medium text-ivory"
+        >
+          Open to you now
+        </h2>
+        <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+          {FREE_PLACES.map((place) => (
+            <li key={place.href}>
+              <Link
+                href={place.href}
+                className="block h-full rounded-xl border border-hairline bg-charcoal/40 p-5 transition-colors duration-(--duration-quick) hover:border-amber"
+              >
+                <span className="font-display text-lg text-ivory">
+                  {place.label} <span aria-hidden className="text-amber">→</span>
+                </span>
+                <span className="mt-1 block text-sm leading-relaxed text-stone">
+                  {place.detail}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section
+        aria-labelledby="adds-heading"
+        className="mt-12 rounded-xl border border-hairline p-6 sm:p-8"
+      >
+        <h2
+          id="adds-heading"
+          className="font-display text-xl font-medium text-ivory"
+        >
+          What membership adds
+        </h2>
+        <ul className="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+          {adds.map((benefit) => (
+            <li key={benefit.id} className="flex gap-2.5 text-sm">
+              <span aria-hidden className="mt-px text-amber">
+                +
+              </span>
+              <span className="text-ivory">
+                {benefit.label}
+                <span className="block text-xs leading-relaxed text-stone">
+                  {benefit.detail}
+                </span>
+              </span>
+            </li>
+          ))}
+        </ul>
+        <Link
+          href="/membership"
+          className="mt-7 inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+        >
+          {getTier("vault")!.cta}
+        </Link>
+        <p className="mt-3 text-xs text-stone-dim">
+          {formatPrice(getTier("vault")!.priceMonthlyCents)} a month. Cancel
+          from this page in one click.
+        </p>
+      </section>
     </>
   );
 }

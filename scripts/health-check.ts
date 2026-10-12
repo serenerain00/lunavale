@@ -41,6 +41,7 @@ import process from "node:process";
 import { journal, freeEntries, pullQuotes } from "@/lib/content/journal";
 import { videos } from "@/lib/content/videos";
 import { clips } from "@/lib/content/posts";
+import { SHORT_LINKS } from "@/lib/content/shortlinks";
 import { galleries } from "@/lib/content/gallery";
 import { assertComplete, inStoryOrder } from "@/lib/content/chronology";
 
@@ -100,6 +101,22 @@ async function checkGates() {
   }
   if (ungated.length) fail("Owner-only files missing an isOwner() check", ungated.join(", "));
   else ok(`All ${owned.length} owner-only files call isOwner()`);
+
+  // THE VOICE ROUTES (2026-10-11) have two kinds of caller: Melissa's browser
+  // (session, report — isOwner()) and the ElevenLabs agent (tools — a shared
+  // secret compared in constant time). Every route there must do one or the
+  // other; a new route that does neither is open to the internet with live
+  // Stripe numbers behind it.
+  const voice = (await walk("app/api/voice")).filter((f) => /\.tsx?$/.test(f));
+  const openVoice: string[] = [];
+  for (const f of voice) {
+    const src = await read(f);
+    const owner = /isOwner\s*\(/.test(src);
+    const secret = /VOICE_TOOL_SECRET/.test(src) && /timingSafeEqual/.test(src);
+    if (!owner && !secret) openVoice.push(f);
+  }
+  if (openVoice.length) fail("Voice routes with neither isOwner() nor the agent secret", openVoice.join(", "));
+  else ok(`All ${voice.length} voice routes are gated (owner or agent secret)`);
 
   // REGRESSION GUARD. app/account/page.tsx once decided who the owner was by
   // testing that OWNER_USER_ID was set — which it always is — and so showed an
@@ -278,6 +295,28 @@ async function checkContent() {
       "Deliberate? Update the count at the top of lib/content/journal.ts and here.");
   } else ok(`Free journal entries: ${free.size}`);
 
+  // SHORT LINKS are printed in Instagram captions and bios, where they can't be
+  // edited after posting. One pointing at a renamed or hidden clip is a dead
+  // end for exactly the person we paid attention to get there.
+  const STATIC_PATHS = new Set(["/", "/clips", "/posts", "/journal", "/membership", "/browse", "/characters", "/about"]);
+  const badLinks: string[] = [];
+  const seen = new Set<string>();
+  for (const l of SHORT_LINKS) {
+    const path = l.to.split("?")[0];
+    const [, kind, id] = path.split("/");
+    const live =
+      STATIC_PATHS.has(path) ||
+      (kind === "clips" && videos.some((v) => v.slug === id && !v.hidden)) ||
+      (kind === "posts" && clipIds.has(id)) ||
+      (kind === "journal" && entryIds.has(id));
+    if (!live) badLinks.push(`/go/${l.code} -> ${l.to}`);
+    if (!/^[a-z0-9-]+$/.test(l.code) || seen.has(l.code)) badLinks.push(`bad or duplicate code: ${l.code}`);
+    if (!/^[a-z0-9-]+$/.test(l.campaign)) badLinks.push(`campaign not lower-case-hyphen: ${l.campaign}`);
+    seen.add(l.code);
+  }
+  if (badLinks.length) fail("Instagram short links that go nowhere", badLinks.join(", "));
+  else ok(`${SHORT_LINKS.length} Instagram short links (/go/…) resolve`);
+
   const openScenes = videos.filter((v) => v.access === "free" && !v.hidden).length;
   ok(`Published: ${videos.filter((v) => !v.hidden).length} clips (${openScenes} free), ` +
      `${clips.length} posts, ${journal.length} journal entries, ${galleries.length} galleries`);
@@ -374,6 +413,24 @@ async function checkMoney() {
     const days = Math.floor((Date.now() - t.getTime()) / 86_400_000);
     if (days > 14) warn(`Last Stripe webhook was ${days} days ago`, "Quiet week, or the endpoint is broken.");
     else ok(`Last Stripe webhook ${days === 0 ? "today" : `${days}d ago`}`);
+  }
+
+  // The conversion baseline is only as long as the daily Clarity copy has
+  // kept running. Clarity forgets after three days, so a cron that dies
+  // quietly is a hole in the baseline that can never be filled afterwards.
+  try {
+    const traffic = (await sql`
+      SELECT max(day)::text AS d FROM traffic_daily
+    `) as { d: string | null }[];
+    const d = traffic[0]?.d;
+    if (!d) warn("No traffic days stored yet", "The /api/cron/clarity job has not run — check CLARITY_API_TOKEN and CRON_SECRET.");
+    else {
+      const days = Math.floor((Date.now() - new Date(`${d}T00:00:00Z`).getTime()) / 86_400_000);
+      if (days > 2) warn(`Last Clarity day stored is ${d}`, "The daily copy has stopped; Clarity keeps only 3 days, so fix it today.");
+      else ok(`Clarity traffic stored through ${d}`);
+    }
+  } catch {
+    warn("traffic_daily does not exist yet", "Run scripts/apply-schema.mjs.");
   }
 }
 

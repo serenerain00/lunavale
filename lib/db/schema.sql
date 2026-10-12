@@ -511,3 +511,65 @@ CREATE TABLE IF NOT EXISTS email_sends (
   sent_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
   PRIMARY KEY (campaign, email)
 );
+
+-- ---------------------------------------------------------------------------
+-- Traffic, one row per day — the top of the funnel, copied out of Clarity.
+--
+-- WHY IT IS STORED AND NOT ASKED FOR. Clarity's export API answers for the
+-- last 1–3 days only and allows ten requests per project per day, so /admin
+-- cannot ask it live: a few page loads would spend the day's allowance, and
+-- anything older than three days is simply gone. A daily cron
+-- (/api/cron/clarity) asks once and keeps the answer here.
+--
+-- `data` is a SUMMARY, not Clarity's raw response — sessions, Instagram
+-- sessions, the funnel pages, where Instagram lands. Shape:
+-- lib/analytics/clarity.ts (TrafficDay). JSONB so adding a number is a code
+-- change, not a migration. No visitor-level data is ever stored.
+--
+-- `day` is the UTC day the window ENDS on. `window_days` is 1 normally; a
+-- backfill from older snapshots may cover up to 3, and readers divide by it.
+CREATE TABLE IF NOT EXISTS traffic_daily (
+  day          DATE        PRIMARY KEY,
+  window_days  SMALLINT    NOT NULL DEFAULT 1,
+  data         JSONB       NOT NULL,
+  fetched_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- ---------------------------------------------------------------------------
+-- Play starts — how many times somebody actually pressed play.
+--
+-- WHY THIS CANNOT COME FROM ANYWHERE ELSE. The player preloads metadata, so
+-- /api/stream is hit by every page view, played or not; and Clarity's export
+-- does not carry custom events. The only honest count of "started watching"
+-- is the player saying so, once per mount, on its first `play`.
+--
+-- A COUNTER, NOT A LOG: one row per (day, scene, viewer, source) and a number.
+-- No user id, no IP, no session — nothing here can be traced to a person, and
+-- nothing needs to be. `viewer` is what the page believed (member / free /
+-- anon), which is a label, not an entitlement. `source` is "instagram" when
+-- the browser is Instagram's or Facebook's in-app one, else "other".
+CREATE TABLE IF NOT EXISTS play_starts (
+  day     DATE    NOT NULL,
+  slug    TEXT    NOT NULL,
+  viewer  TEXT    NOT NULL,
+  source  TEXT    NOT NULL,
+  n       INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (day, slug, viewer, source)
+);
+
+-- ---------------------------------------------------------------------------
+-- A/B events — counts per (day, experiment, variant, event).
+--
+-- The registry, its dates and its decision rules live in
+-- lib/analytics/experiments.ts. Like play_starts this is a COUNTER, not a log:
+-- no user, no session, no IP. The browser sends each event at most once per
+-- experiment, so the counts approximate people without anything here being
+-- able to tell one person from another.
+CREATE TABLE IF NOT EXISTS ab_events (
+  day         DATE    NOT NULL,
+  experiment  TEXT    NOT NULL,
+  variant     TEXT    NOT NULL,
+  event       TEXT    NOT NULL,
+  n           INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (day, experiment, variant, event)
+);

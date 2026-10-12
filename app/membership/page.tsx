@@ -6,6 +6,7 @@ import { Questions } from "@/components/membership/Questions";
 import { TierCard } from "@/components/membership/TierCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
+import { ExperimentEvent } from "@/components/analytics/ExperimentEvent";
 import { TIERS } from "@/lib/content/membership";
 import { OVERHEARD_ARCHIVED } from "@/lib/content/overheard";
 import { pageMetadata } from "@/lib/seo/metadata";
@@ -47,6 +48,9 @@ export default function MembershipPage() {
   return (
     <>
       <SiteHeader />
+      {/* A/B: counts "reached /membership" for any live test this browser is
+          in (lib/analytics/experiments.ts). Renders nothing. */}
+      <ExperimentEvent event="membership_view" />
 
       <main className="flex-1 pb-24">
         {/* ---------------------------------------------------------- pitch */}
@@ -297,7 +301,7 @@ export default function MembershipPage() {
 const PROMISES = [
   {
     title: "Cancel in one click",
-    body: "From your account page. No email, no chat window, no three-step flow asking why you're leaving.",
+    body: "From your account page. No email, no phone call, no three-step flow asking why you're leaving.",
   },
   {
     title: "Free stays free",

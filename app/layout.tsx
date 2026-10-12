@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ViewerProvider } from "@/components/access/Viewer";
+import { CaptureAttribution } from "@/components/analytics/CaptureAttribution";
 import { ClerkViewerSync } from "@/components/access/ClerkViewerSync";
 import { authConfigured } from "@/lib/billing/provider";
 import { Caveat, Fraunces, Inter } from "next/font/google";
@@ -155,6 +156,10 @@ export default function RootLayout({
         {/* Every page, outside the provider — it needs nothing from it. */}
         <BackToTop />
 
+        {/* Where this visit came from, for tracing a payment back to the post
+            that started it. Writes two first-party cookies; renders nothing. */}
+        <CaptureAttribution />
+
         {/*
           Microsoft Clarity — traffic + session analytics. Production only, so
           local dev and preview deploys don't pollute the numbers.
@@ -175,5 +180,17 @@ export default function RootLayout({
     publishable key, and the site is live — a deploy that hasn't been given
     credentials yet has to keep rendering rather than white-screen.
   */
-  return authConfigured() ? <ClerkProvider>{body}</ClerkProvider> : body;
+  // Somebody who signs up WITHOUT a redirect — the "Sign in" link, then "Sign
+  // up" — used to land on the home page with nothing to say they had done
+  // anything, and nothing new open to them, because a free account opens
+  // nothing a visitor can't already see. /account?welcome=1 says so plainly
+  // and shows them where the free side is. An explicit redirect_url (the
+  // buying and claiming paths) still wins over this fallback.
+  return authConfigured() ? (
+    <ClerkProvider signUpFallbackRedirectUrl="/account?welcome=1">
+      {body}
+    </ClerkProvider>
+  ) : (
+    body
+  );
 }

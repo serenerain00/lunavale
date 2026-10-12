@@ -7,6 +7,10 @@
  * ever gone out to the people paying for it. This is the smallest honest
  * version of that: what went up, with links, when Melissa decides to send it.
  *
+ * SUPERSEDED FOR THE WEEKLY CASE (2026-10-11): lib/email/digest.ts now sends a
+ * Friday digest by itself when something is new — Melissa's decision, reasons
+ * there. This script stays for a one-off announcement, run by hand.
+ *
  * IT IS RUN BY HAND, AND THAT IS THE DESIGN. No cron, no "every Friday", no
  * trigger on publish. lib/content/releases.ts refuses to promise a schedule
  * the site cannot keep, and a mailer that fires itself is that promise with a

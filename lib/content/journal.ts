@@ -1994,6 +1994,50 @@ export const journal: JournalEntry[] = [
       "I washed the glass and then stood at the sink holding it for a good deal longer than a glass takes, and I would like it noted that I put it away in the cupboard rather than leaving it on the side, because leaving it on the side would have been a thing I had done on purpose.",
     ],
   },
+  /*
+    THE SUIT. Added 2026-10-11 beside `luna-ty-suit` ("It Suits You"),
+    members-only like the scene past its first minute.
+
+    THE LINE IT HAS TO HOLD, from Melissa's brief: the first time their
+    closeness feels different, and nothing happens. Luna has not stopped loving
+    Josh, and the entry says so in her own words. Tyson is not pursuing her, so
+    the entry never says what he was going to say — she does not know, and the
+    page will not guess. Why she "can't go to this thing" is left unsaid on
+    purpose (canon, 2026-10-11).
+
+    Dialogue is the footage. Invented and hers to cut: Josh's collars, and
+    checking on the drive home.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "it-suits-you",
+    addedOn: "2026-10-11",
+    dateline: "I fixed his collar",
+    place: "downtown",
+    where: "The tailor\u2019s",
+    about: ["luna", "tyson", "josh"],
+    sceneSlug: "luna-ty-suit",
+    access: "premium",
+    mature: false,
+    body: [
+      "Tyson has a work fundraiser tomorrow and owns exactly one suit, which he describes as fine in the voice of a man who knows it is not. So today I went with him to buy another. He asked me to. I want that written down, because he will say I insisted.",
+      "He hated all of them. He said he looked like a banker. I said he looked like a man who could afford commercial real estate, and he said yeah, as if that settled it, and I have been laughing about it on and off all evening.",
+      "Dinner, speeches, everybody made to turn up. I asked if he was really going to do as he was told and he said they sign my paycheck, which is the most obedient sentence I have heard out of him in twenty years.",
+      "He asked if I wanted to be his plus one. Joking, mostly. I said he knew I couldn\u2019t go to that, and he did know, and neither of us said why.",
+      "His collar was a disaster. I told him so and he said that\u2019s why he brought me. So I fixed it, which my hands know how to do without me — ten years of Josh\u2019s collars, every wedding and every dinner, standing in a hallway saying hold still. I did not think about that while I was doing it. I am thinking about it now.",
+      "And then — I don\u2019t know how to write this so it stays the size it was. He looked good. That\u2019s all. He looked good in a way I have somehow not noticed in twenty years of looking at him, and I noticed it with my hands still at his collar, and I left them there a second longer than a collar needs.",
+      "He asked if I was okay. I said I just wasn\u2019t used to seeing him like this, which was true and was not the true thing.",
+      "He said I looked like I wanted to say something. I said do I. He said my eyes were talking. Twenty years of him reading my face, and today I would have paid good money for him to be bad at it.",
+      "So I said the small true thing. You look good, Ty. And he didn\u2019t make a joke, which is the part I keep coming back to. He always makes a joke.",
+      "Then he said hey, the way you start a sentence you mean to finish, and I said yeah, and waited. And he said nothing. Nothing. And we stood in front of that mirror and neither of us moved, and I could not have told you what I was waiting for.",
+      "Then it was over, the way these things are over. I said winner, he said yeah, I guess, I rolled my eyes and went for my bag, and it was an ordinary afternoon again. I told him it suits him. It does.",
+      "Here is what I want on the record, mostly for me. Nothing happened. Nothing was going to. It is Tyson. He has known me since I was eighteen and he is most of the reason I am still upright this month.",
+      "And I still love Josh. That has not gone anywhere. I checked, on the drive home, the way you pat your pocket for your keys.",
+      "It was one minute in a shop. A man I know better than anybody looked, for one minute, like somebody I didn\u2019t know, and I looked too long. That is all it was.",
+      "I am not going to think about what he was going to say.",
+    ],
+  },
   {
     id: "nowhere-to-put-it",
     addedOn: "2026-08-15",

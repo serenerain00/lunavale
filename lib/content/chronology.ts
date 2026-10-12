@@ -131,6 +131,11 @@ export const STORY_ORDER: readonly string[] = [
 
   "luna-tyson-dance",
   "luna-tyson-gingerale",
+  // HAND-PLACED — REASONED, 2026-10-11. The suit: early in the separation
+  // (Melissa), and the first time their closeness feels different. Before
+  // "Most Nights" and "Wasn't Planning On It", which read as later steps of
+  // the same thing. Move it if she places it.
+  "luna-ty-suit",
 
   // HAND-PLACED — REASONED. Published 2026-09-20. An evening where nothing
   // happens, which puts it in the settled middle of the six months rather than

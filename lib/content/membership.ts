@@ -450,7 +450,7 @@ export interface Question {
 export const QUESTIONS: Question[] = [
   {
     q: "Can I cancel whenever I want?",
-    a: "Yes, from your account page, in one click, with no email or chat in the way. You keep access until the end of the period you already paid for, and you are not charged again.",
+    a: "Yes, from your account page, in one click, with no email or phone call in the way. You keep access until the end of the period you already paid for, and you are not charged again.",
   },
   {
     // THIS ANSWER USED TO PROMISE SOMETHING THAT DOES NOT EXIST: "your progress

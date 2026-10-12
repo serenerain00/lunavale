@@ -870,3 +870,16 @@ yet living together" and episode 3's "came home" are both true.
 accident, a death with a name, Josh and Tyson both there, Rick handling it —
 behind membership. Stage Five/Six (Rick's prior knowledge, the manipulation)
 are still off the site.
+
+## Addition — 2026-10-11: the suit (`luna-ty-suit`)
+
+Early in the separation. Tyson has to attend a work fundraiser, in a suit, and
+Luna goes with him to pick one. **He is still a contractor, not an employee**
+(LUNA_VALE_CONTEXT.md, settled 2026-08-03) — Melissa: "they technically do
+sign his check even as a contractor." So "they sign my paycheck" and "everybody
+from work is expected" are consistent with canon. Which company it is, and why
+Luna "can't go to this thing", are not stated; do not settle either on the site.
+
+The scene is the first time their ordinary closeness feels different to both
+of them. Nothing happens: no kiss, no confession. Luna has not stopped loving
+Josh; Tyson is not pursuing her. Feelings come later, over months, Tyson first.

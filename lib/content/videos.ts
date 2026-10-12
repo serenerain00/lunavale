@@ -3347,6 +3347,42 @@ export const videos: Video[] = [
   },
   {
     /*
+      THE SUIT, Melissa, 2026-10-11. Early in the separation: Tyson has to
+      show up to a work fundraiser in a suit, and Luna fixes his collar. The
+      first moment their closeness feels different to either of them — and
+      nothing happens. Melissa's brief is explicit: not a romance, not a
+      confession, Luna has not stopped loving Josh, Tyson is not pursuing her.
+      Copy here must stay on that side of the line.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace. "It Suits You" is
+      Luna's last line.
+    */
+    slug: "luna-ty-suit",
+    title: "It Suits You",
+    synopsis:
+      "Tyson needs a suit for a work fundraiser he would rather skip, and has brought Luna to tell him it doesn't look stupid. She fixes his collar. For a minute, neither of them says anything.",
+    file: "luna-ty-suit.proxy.mp4",
+    poster: "/posters/luna-ty-suit.jpg",
+    // 218.2, the whole file.
+    durationSeconds: 218,
+    addedOn: "2026-10-11",
+    access: "premium",
+    mature: false,
+    // Melissa: "first 1min is free". Ends after "They sign my paycheck"
+    // (1:01) and before "Who's going?" — the banter is free, the quiet is
+    // members'.
+    preview: {
+      file: "luna-ty-suit-preview.proxy.mp4",
+      durationSeconds: 62,
+      hookStart: 0,
+      hookNote: "from the top: the suit, the banter, the collar",
+    },
+    feelings: ["trust", "desire"],
+    place: "downtown",
+    about: ["luna", "tyson"],
+  },
+  {
+    /*
       THE INTERVIEW TRAILER, Melissa, 2026-10-09. MEMBERS ONLY ON THE SITE
       (Melissa, same day, after the music was raised: "can we hide it behind
       the membership then"). It runs free on Instagram, which carries its own

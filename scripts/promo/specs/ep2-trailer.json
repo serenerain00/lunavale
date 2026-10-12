@@ -1,0 +1,343 @@
+{
+  "name": "ep2-trailer-60",
+  "max_seconds": 62,
+  "picture": "stories/ep2/ep2-final-music.MOV",
+  "guard_seconds": 0.06,
+  "speech_override": {
+    "stories/ep2/ep2-final-music.MOV": [
+      [
+        0.63,
+        53.22
+      ],
+      [
+        53.41,
+        61.2
+      ],
+      [
+        62.03,
+        79.22
+      ],
+      [
+        119.04,
+        120.77
+      ],
+      [
+        120.99,
+        121.92
+      ],
+      [
+        123.38,
+        124.28
+      ],
+      [
+        300.42,
+        301.21
+      ],
+      [
+        303.12,
+        303.57
+      ],
+      [
+        304.92,
+        305.24
+      ],
+      [
+        310.35,
+        311.28
+      ],
+      [
+        353.05,
+        354.38
+      ],
+      [
+        359.78,
+        362.02
+      ],
+      [
+        743.2,
+        743.7
+      ],
+      [
+        745.5,
+        746.7
+      ],
+      [
+        747.8,
+        749.3
+      ],
+      [
+        928.56,
+        929.73
+      ],
+      [
+        932.11,
+        932.73
+      ],
+      [
+        934.5,
+        935.35
+      ],
+      [
+        937.6,
+        939.2
+      ],
+      [
+        979.35,
+        980.31
+      ],
+      [
+        981.85,
+        983.01
+      ],
+      [
+        1105.19,
+        1105.99
+      ],
+      [
+        1109.8,
+        1110.14
+      ],
+      [
+        1116.67,
+        1117.34
+      ],
+      [
+        1145.24,
+        1147.43
+      ],
+      [
+        1148.59,
+        1149.09
+      ],
+      [
+        1149.72,
+        1150.83
+      ],
+      [
+        1170.1,
+        1170.7
+      ],
+      [
+        1173.41,
+        1174.45
+      ],
+      [
+        1239.47,
+        1240.95
+      ],
+      [
+        1243.09,
+        1244.16
+      ],
+      [
+        1247.41,
+        1248.49
+      ],
+      [
+        1251.22,
+        1252.42
+      ]
+    ]
+  },
+  "bed": {
+    "src": "stories/ep2/ep2-final-music.MOV",
+    "segments": [
+      [
+        866.0,
+        888.0
+      ],
+      [
+        1177.0,
+        1205.0
+      ],
+      [
+        1319.0,
+        1342.0
+      ]
+    ],
+    "crossfade": 1.2,
+    "low_db": -18,
+    "high_db": -7,
+    "swell": 33.0,
+    "ramp": 1.5
+  },
+  "cut": [
+    {
+      "kind": "black",
+      "dur": 1.0,
+      "note": "card: Ten years ago."
+    },
+    {
+      "in": 53.34,
+      "out": 56.733333,
+      "lead": 0.03,
+      "x": 0.6,
+      "note": "J: You gonna keep doing that? (dream, piece 1)"
+    },
+    {
+      "in": 56.733333,
+      "out": 58.933333,
+      "x": 0.3,
+      "join_prev": true,
+      "note": "L: Doing what? (piece 2, seamless)"
+    },
+    {
+      "in": 58.933333,
+      "out": 61.4,
+      "x": 0.62,
+      "join_prev": true,
+      "note": "J: Looking at me and then pretending you weren't. (piece 3, seamless)"
+    },
+    {
+      "in": 120.88,
+      "out": 122.46,
+      "x": 0.54,
+      "note": "J: My name is Josh."
+    },
+    {
+      "in": 122.54,
+      "out": 124.4,
+      "x": 0.36,
+      "note": "L: I know."
+    },
+    {
+      "kind": "black",
+      "dur": 1.2,
+      "note": "card: Now."
+    },
+    {
+      "in": 300.3,
+      "out": 301.4,
+      "x": 0.3,
+      "note": "L: I had a dream."
+    },
+    {
+      "in": 310.2,
+      "out": 311.45,
+      "x": 0.34,
+      "note": "L: That's kind of the problem."
+    },
+    {
+      "in": 352.9,
+      "out": 354.5,
+      "x": 0.42,
+      "note": "L: I think I miss who we were."
+    },
+    {
+      "in": 359.6,
+      "out": 362.2,
+      "x": 0.32,
+      "note": "L: And I don't know if that's the same thing as missing him."
+    },
+    {
+      "in": 745.0,
+      "out": 749.6,
+      "x": 0.68,
+      "note": "R: Ten years is a long time, Luna. People don't walk out over one bad night."
+    },
+    {
+      "in": 870.0,
+      "out": 872.5,
+      "x": 0.24,
+      "audio": "none",
+      "note": "Luna, the drive (silent)"
+    },
+    {
+      "in": 928.4,
+      "out": 929.9,
+      "x": 0.25,
+      "note": "L: He's gonna ask me to stay."
+    },
+    {
+      "in": 934.01,
+      "out": 935.5,
+      "x": 0.25,
+      "note": "L: And I'm gonna want to."
+    },
+    {
+      "in": 936.77,
+      "out": 939.6,
+      "x": 0.76,
+      "note": "T: Wanting to doesn't mean you have to."
+    },
+    {
+      "in": 979.2,
+      "out": 980.5,
+      "x": 0.48,
+      "note": "J: You're really just gonna leave."
+    },
+    {
+      "in": 1105.05,
+      "out": 1106.2,
+      "x": 0.4,
+      "note": "J: Are you happier?"
+    },
+    {
+      "in": 1116.34,
+      "out": 1117.5,
+      "x": 0.35,
+      "note": "L: I can breathe."
+    },
+    {
+      "in": 1145.1,
+      "out": 1147.55,
+      "x": 0.44,
+      "note": "L: I didn't leave because I stopped loving you."
+    },
+    {
+      "in": 1169.95,
+      "out": 1170.85,
+      "x": 0.57,
+      "note": "J: I miss you."
+    },
+    {
+      "in": 1173.27,
+      "out": 1174.6,
+      "x": 0.42,
+      "note": "L: I miss you too."
+    },
+    {
+      "in": 1180.0,
+      "out": 1183.0,
+      "x": 0.42,
+      "audio": "none",
+      "note": "the embrace (silent)"
+    },
+    {
+      "in": 1239.35,
+      "out": 1244.3,
+      "x": 0.45,
+      "note": "L: Because if I stay... nothing changes."
+    },
+    {
+      "kind": "black",
+      "dur": 1.45,
+      "audio_in": 1251.1,
+      "note": "L (over black): That's why I have to go."
+    },
+    {
+      "kind": "end",
+      "dur": 3.5,
+      "title": "Episode 2 · Breathe",
+      "kicker": "NOW STREAMING · THE FIRST TWO MINUTES ARE FREE",
+      "url": "lunavale38.com/go/ep2",
+      "note": "end card"
+    }
+  ],
+  "overlays": [
+    {
+      "on": 0,
+      "offset": 0.05,
+      "dur": 0.95,
+      "text": "Ten years ago.",
+      "y": 0.45
+    },
+    {
+      "on": 6,
+      "offset": 0.1,
+      "dur": 1.1,
+      "text": "Now.",
+      "y": 0.45
+    }
+  ]
+}

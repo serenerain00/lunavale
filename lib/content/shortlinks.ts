@@ -99,6 +99,17 @@ export const SHORT_LINKS: ShortLink[] = [
     addedOn: "2026-10-11",
   })),
   {
+    // The Episode 2 trailer (scripts/promo/specs/ep2-trailer.json). Outside
+    // the Oct 12-25 tests — no experiment, no arm — and posted on a day with
+    // no other post, so it doesn't touch the one-a-day test.
+    code: "ep2",
+    to: "/clips/episode-2",
+    medium: "reel",
+    campaign: "ep2-trailer",
+    note: "Episode 2 trailer, ~54s. The code is printed on its end card.",
+    addedOn: "2026-10-11",
+  },
+  {
     code: "ep3",
     to: "/clips/episode-3",
     medium: "reel",

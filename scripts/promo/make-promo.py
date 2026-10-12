@@ -245,10 +245,17 @@ def _hit(regs, t):
 
 def guard_dialogue(spec, snap: bool):
     """Check (and with `snap`, fix) every audible cut. Returns problems left."""
+    # A spec can supply a hand-verified speech map for a source whose dialogue
+    # sits under a score (Episode 2 has no clean export, and the energy
+    # detector can't tell a voice from a swell). Paths are relative to ROOT.
+    overrides = {str(ROOT / k): v for k, v in spec.get("speech_override", {}).items()}
+    global GUARD
+    GUARD = spec.get("guard_seconds", GUARD)
     problems = []
     for i, it in enumerate(spec["cut"]):
         kind = it.get("kind", "shot")
-        regs = speech_regions(src_of(spec, it)) if kind in ("shot", "black") else []
+        src_i = src_of(spec, it)
+        regs = (overrides.get(str(src_i)) or speech_regions(src_i)) if kind in ("shot", "black") else []
         if kind == "shot" and it.get("audio", "dia") != "none":
             it["_a_in"] = it["in"] - it.get("lead", 0)
             it["_a_out"] = it["out"] + it.get("tail", 0)
@@ -258,7 +265,13 @@ def guard_dialogue(spec, snap: bool):
             keys = ("audio_in", "out_audio")
         else:
             continue
+        nxt = spec["cut"][i + 1] if i + 1 < len(spec["cut"]) else {}
         for k in keys:
+            # A SEAMLESS JOIN (`join_prev` on the next shot) is not a cut in the
+            # sound: the two pieces are contiguous in the source and play
+            # straight through, so a line may run across it.
+            if (k == "_a_in" and it.get("join_prev")) or (k == "_a_out" and nxt.get("join_prev")):
+                continue
             hit = _hit(regs, it[k])
             if not hit:
                 continue
@@ -376,8 +389,9 @@ def render(spec, tmp: Path, out: Path):
                   f"pad={W}:{H}:0:{PIC_Y}:color=0x0a0908,fps={FPS},format=yuv420p")
             # Where a lead or tail carries the sound on, the edge is not an
             # edge — no fade there, or the line dips at the picture cut.
-            fin = "" if it.get("lead") else f",afade=t=in:d={fa}"
-            fout = "" if it.get("tail") else f",afade=t=out:st={it['dur'] - fa}:d={fa}"
+            joined_next = i + 1 < len(items) and items[i + 1].get("join_prev")
+            fin = "" if (it.get("lead") or it.get("join_prev")) else f",afade=t=in:d={fa}"
+            fout = "" if (it.get("tail") or joined_next) else f",afade=t=out:st={it['dur'] - fa}:d={fa}"
             af = (f"aresample={AR},aformat=channel_layouts=stereo,volume={vol}"
                   f"{fin}{fout}")
             for side, length in (("lead", it.get("lead", 0)), ("tail", it.get("tail", 0))):

@@ -220,10 +220,31 @@ const fileLabels: Record<string, PostLabels> = (() => {
   return existsSync(f) ? (JSON.parse(readFileSync(f, "utf8")) as Record<string, PostLabels>) : {};
 })();
 
+/**
+ * The growth side's post → campaign map (data/ig-posts.json, owned there):
+ * which tagged campaign, experiment and arm each live post belongs to.
+ * Joined by shortcode; rows whose shortcode is still null are not live yet.
+ */
+interface PlannedPost {
+  shortcode: string | null;
+  campaign: string;
+  experiment?: string;
+  arm?: string;
+}
+const planned: PlannedPost[] = (() => {
+  const f = path.join(process.cwd(), "data", "ig-posts.json");
+  return existsSync(f) ? (JSON.parse(readFileSync(f, "utf8")) as { posts: PlannedPost[] }).posts : [];
+})();
+
+function withCampaigns(posts: IgPost[]): IgPost[] {
+  const byCode = new Map(planned.filter((p) => p.shortcode).map((p) => [p.shortcode!, p]));
+  return posts.map((p) => ({ ...p, campaign: p.campaign ?? byCode.get(p.shortcode)?.campaign ?? null }));
+}
+
 function igPosts(): { rows: IgPost[]; note: string } {
   const f = path.join(DIR, "instagram", "posts.json");
   if (!existsSync(f)) return { rows: [], note: "**Not connected.** No Instagram export imported yet, so reach, plays, saves, shares and follows per post are unknown this week." };
-  const all = (JSON.parse(readFileSync(f, "utf8")) as { posts: IgPost[] }).posts;
+  const all = withCampaigns((JSON.parse(readFileSync(f, "utf8")) as { posts: IgPost[] }).posts);
   return { rows: all.filter((p) => p.published.slice(0, 10) >= start && p.published.slice(0, 10) <= end), note: "" };
 }
 
@@ -381,6 +402,43 @@ async function main() {
     }
   }
   L();
+  // ---------------------------------------------- Instagram experiments
+  // Whole run to date, not this week: an experiment's arms are compared over
+  // all their posts. Follows on REELS exist only in the Business Suite
+  // export (the API does not report them), so a follows column with dashes
+  // means "export needed", not zero.
+  const igAll = existsSync(path.join(DIR, "instagram", "posts.json"))
+    ? withCampaigns((JSON.parse(readFileSync(path.join(DIR, "instagram", "posts.json"), "utf8")) as { posts: IgPost[] }).posts)
+    : [];
+  const experiments = [...new Set(planned.map((p) => p.experiment).filter(Boolean))] as string[];
+  if (experiments.length) {
+    L("## Instagram experiments (all posts to date)");
+    L();
+    const traffic = (await sql`SELECT data FROM traffic_daily`.catch(() => [])) as { data: TrafficDay }[];
+    const sessionsFor = (campaign: string) =>
+      traffic.reduce((a, t) => a + Object.entries(t.data.instagram.campaigns ?? {}).filter(([k]) => k.endsWith(`|${campaign}`)).reduce((x, [, n]) => x + n, 0), 0);
+    for (const ex of experiments) {
+      L(`**${ex}**`);
+      L();
+      L(row(["Arm", "Posts live", "Reach", "Follows", "Follows / 1k reached", "Saves / 1k", "Shares / 1k", "Tagged visits"]));
+      L(row(["---", "---:", "---:", "---:", "---:", "---:", "---:", "---:"]));
+      const arms = [...new Set(planned.filter((p) => p.experiment === ex).map((p) => p.arm ?? "—"))];
+      for (const arm of arms) {
+        const plan = planned.filter((p) => p.experiment === ex && (p.arm ?? "—") === arm);
+        const live = igAll.filter((p) => plan.some((q) => q.shortcode === p.shortcode));
+        const reach = live.reduce((a, p) => a + (p.reach ?? 0), 0);
+        const fol = live.length && live.every((p) => p.follows !== null) ? live.reduce((a, p) => a + (p.follows ?? 0), 0) : null;
+        const per = (n: number | null) => (n === null || !reach ? "—" : ((1000 * n) / reach).toFixed(1));
+        L(row([
+          arm, `${live.length} of ${plan.length}`, reach || "—", fol ?? "—", per(fol),
+          per(live.reduce((a, p) => a + (p.saves ?? 0), 0)), per(live.reduce((a, p) => a + (p.shares ?? 0), 0)),
+          plan.reduce((a, p) => a + sessionsFor(p.campaign), 0),
+        ]));
+      }
+      L();
+    }
+  }
+
   const story = rest.join("").trim();
   L(story || "## Narrative\n\n_Not written yet — goes in " + path.basename(narrativeFile) + "._");
 

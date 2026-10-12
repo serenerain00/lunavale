@@ -42,18 +42,27 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-07-28:
+Counts as at 2026-10-12, read off `countFor()` / `lockedCountFor()` rather
+than typed from memory:
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 8 | 44 | 23 |
-| Tyson | 8 | 44 | 33 |
-| Josh | 8 | 35 | 21 |
+| Luna | 12 | 204 | 173 |
+| Tyson | 12 | 147 | 129 |
+| Josh | 13 | 128 | 113 |
+| Rick | 2 | 15 | 14 |
+| Cathy | 0 | 13 | 13 |
+| Avery | 0 | 7 | 7 |
 
-**Josh is the thinnest** and is the one who benefits most from more. He is the
-hardest character to hold an audience's sympathy for, the whole story depends
-on him being genuinely likeable before he turns, and he has the fewest pieces
-making that case.
+**Josh is still the thinnest of the three leads**, and he is the one who
+benefits most from more. He is the hardest character to hold an audience's
+sympathy for, the whole story depends on him being genuinely likeable before he
+turns, and he has the fewest pieces making that case — though the notebook has
+now caught him up and the gap is in his scenes rather than his notes.
+
+**Below the leads, Rick is where a single note goes furthest.** He exists to
+explain Josh, so every piece on him does double duty, and until this week he
+had exactly one note against two scenes. Cathy and Avery have none at all.
 
 Standing backlog, roughly prioritised:
 
@@ -72,3 +81,4 @@ not a changelog.
 | Week of | What shipped | Who |
 | --- | --- | --- |
 | 2026-07-28 | Character hubs built; 24 Between Takes notes (8 each), 7 free | all three |
+| 2026-10-12 | Between Takes note — Rick on `josh-rick-lake`, "Round the outside" | Rick |

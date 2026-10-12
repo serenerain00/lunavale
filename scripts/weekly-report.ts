@@ -23,7 +23,10 @@
  * cells read "—". Every rate is printed with the counts behind it, and any
  * group smaller than MIN_N is marked as too small to compare.
  *
- *   npx tsx --env-file=.env.local scripts/weekly-report.ts [--end=YYYY-MM-DD]
+ *   npx tsx --conditions=react-server --env-file=.env.local scripts/weekly-report.ts [--end=YYYY-MM-DD]
+ *
+ * (--conditions=react-server lets it import lib/billing/revenue, which is
+ * server-only, for the same MRR arithmetic as /admin.)
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import os from "node:os";
@@ -31,6 +34,7 @@ import path from "node:path";
 import { neon } from "@neondatabase/serverless";
 import Stripe from "stripe";
 import type { TrafficDay } from "@/lib/analytics/clarity";
+import { netMonthlyCents } from "@/lib/billing/revenue";
 import { POST_LABELS, durationBand, type PostLabels } from "@/lib/marketing/post-labels";
 
 /** One post as scripts/ig-import.ts writes it. Metrics are null when the export did not carry them. */
@@ -81,17 +85,43 @@ interface Week {
   newSubs: number;
   cancelClicks: number;
   ended: number;
+  // ---- scorecard (Stripe, live) ----
+  /** Paying subscriptions live at the end of the week (net amount > 0). */
+  activePaying: number;
+  /** Comped (100% off) subscriptions live at the end of the week. */
+  activeComped: number;
+  /** Net monthly recurring revenue at the end of the week, cents. */
+  mrrCents: number;
+  /** Of those paying at week end, how many had already cancelled (they run out their period). */
+  leaving: number;
+  leavingCents: number;
+  /** New PAYING subscriptions started in the week (comps excluded). */
+  newPaying: number;
+  /** Cash collected: paid invoices in the week, minus refunds in the week, cents. */
+  collectedCents: number;
+  /** Paid checkouts in the week with Instagram as first or last touch, cents. */
+  igAttributedCents: number;
+  /** Follows Instagram credits to posts published in the week (gross). */
+  igFollows: number | null;
+  /** Lifetime reach of posts published in the week, summed. */
+  igReach: number | null;
+  igPosts: number | null;
 }
 
 const sql = neon(process.env.DATABASE_URL!);
 const stripeKey = process.env.STRIPE_SECRET_KEY_LIVE;
 const stripe = stripeKey?.startsWith("sk_live_") ? new Stripe(stripeKey) : null;
 
+/** Never-completed checkouts leave these behind; they were never live. */
+const NEVER_LIVE = new Set(["incomplete", "incomplete_expired"]);
+
 async function week(label: string, from: string, to: string): Promise<Week> {
   const w: Week = {
     label, start: from, end: to, trafficDays: 0, visitors: 0, igVisitors: 0, igCampaigns: {},
     episodePages: 0, membershipViews: 0, playsNonMember: 0, playsIg: 0, checkoutsOpened: 0,
     checkoutsWithEmail: 0, paid: 0, paidIg: 0, byCampaign: {}, newSubs: 0, cancelClicks: 0, ended: 0,
+    activePaying: 0, activeComped: 0, mrrCents: 0, leaving: 0, leavingCents: 0, newPaying: 0, collectedCents: 0, igAttributedCents: 0,
+    igFollows: null, igReach: null, igPosts: null,
   };
 
   const traffic = (await sql`
@@ -131,7 +161,10 @@ async function week(label: string, from: string, to: string): Promise<Week> {
       if (email) emails.add(email);
       if (isPaid) paid.add(who);
       const m = s.metadata ?? {};
-      if (isPaid && (m.lt_source === "instagram" || m.ft_source === "instagram")) paidIg.add(who);
+      if (isPaid && (m.lt_source === "instagram" || m.ft_source === "instagram")) {
+        paidIg.add(who);
+        w.igAttributedCents += s.amount_total ?? 0;
+      }
       const source = m.lt_source || m.ft_source;
       const key = source ? `${source}|${m.lt_campaign || m.ft_campaign || "untagged"}` : "unattributed";
       camp[key] ??= { began: new Set(), paid: new Set() };
@@ -143,10 +176,33 @@ async function week(label: string, from: string, to: string): Promise<Week> {
     w.paidIg = paidIg.size;
     for (const [k, v] of Object.entries(camp)) w.byCampaign[k] = { began: v.began.size, paid: v.paid.size };
 
-    for await (const sub of stripe.subscriptions.list({ status: "all", limit: 100 })) {
-      if (sub.start_date >= gte && sub.start_date < lt) w.newSubs += 1;
+    for await (const sub of stripe.subscriptions.list({ status: "all", limit: 100, expand: ["data.discounts.source.coupon"] })) {
+      if (NEVER_LIVE.has(sub.status)) continue;
+      // Judged at the end of the week, with the admin page's own arithmetic.
+      // Trials count as not paying, as there.
+      const monthly = sub.trial_end && sub.trial_end >= lt ? 0 : netMonthlyCents(sub, lt);
+      if (sub.start_date >= gte && sub.start_date < lt) {
+        w.newSubs += 1;
+        if (monthly > 0) w.newPaying += 1;
+      }
       if (sub.canceled_at && sub.canceled_at >= gte && sub.canceled_at < lt) w.cancelClicks += 1;
       if (sub.ended_at && sub.ended_at >= gte && sub.ended_at < lt) w.ended += 1;
+      // Live at the end of the week: started by then, not ended by then.
+      const live = sub.start_date < lt && (!sub.ended_at || sub.ended_at >= lt);
+      if (live && monthly > 0) {
+        w.activePaying += 1;
+        w.mrrCents += monthly;
+        // Cancelled by the end of the week but still paid up: this MRR goes
+        // away on its own unless they switch renewal back on.
+        if (sub.canceled_at && sub.canceled_at < lt) { w.leaving += 1; w.leavingCents += monthly; }
+      }
+      else if (live) w.activeComped += 1;
+    }
+    for await (const inv of stripe.invoices.list({ status: "paid", created: { gte, lt }, limit: 100 })) {
+      w.collectedCents += inv.amount_paid;
+    }
+    for await (const r of stripe.refunds.list({ created: { gte, lt }, limit: 100 })) {
+      if (r.status === "succeeded") w.collectedCents -= r.amount;
     }
   }
   return w;
@@ -171,8 +227,23 @@ function igPosts(): { rows: IgPost[]; note: string } {
   return { rows: all.filter((p) => p.published.slice(0, 10) >= start && p.published.slice(0, 10) <= end), note: "" };
 }
 
+/** Instagram's own numbers for posts PUBLISHED in a week, from the imported export. */
+function igWeek(w: Week): void {
+  const f = path.join(DIR, "instagram", "posts.json");
+  if (!existsSync(f)) return;
+  const all = (JSON.parse(readFileSync(f, "utf8")) as { posts: IgPost[] }).posts;
+  const inWeek = all.filter((p) => p.published.slice(0, 10) >= w.start && p.published.slice(0, 10) <= w.end);
+  w.igPosts = inWeek.length;
+  w.igReach = inWeek.reduce((a, p) => a + (p.reach ?? 0), 0);
+  w.igFollows = inWeek.reduce((a, p) => a + (p.follows ?? 0), 0);
+}
+
+const money = (c: number) => `${c < 0 ? "−" : ""}$${(Math.abs(c) / 100).toFixed(c % 100 ? 2 : 0)}`;
+
 async function main() {
   const [cur, prev] = await Promise.all([week("This week", start, end), week("Week before", prevStart, prevEnd)]);
+  igWeek(cur);
+  igWeek(prev);
   const ig = igPosts();
   const lines: string[] = [];
   const L = (s = "") => lines.push(s);
@@ -180,6 +251,56 @@ async function main() {
   L(`# Between Us — weekly data pack, ${start} → ${end}`);
   L();
   L(`Generated ${new Date().toISOString().slice(0, 16)}Z. Compared with ${prevStart} → ${prevEnd}. Counts are exact; rates show their counts. Groups under ${MIN_N} are marked "too few".`);
+  L();
+  // ------------------------------------------------------------- scorecard
+  // Basis says how each number is known. "Confirmed" = money Stripe recorded.
+  // "Measured" = counted by an instrument (Clarity, Instagram, our own DB).
+  // "Attribution" = a rule decided who gets credit. "Not tracked" = no source;
+  // left blank rather than estimated.
+  L("## Scorecard");
+  L();
+  L(row(["Metric", "This week", "Week before", "Change", "Basis"]));
+  L(row(["---", "---:", "---:", "---:", "---"]));
+  const sc = (label: string, a: number | null, b: number | null, basis: string, fmt: (n: number) => string = String) =>
+    L(row([label, a === null ? "—" : fmt(a), b === null ? "—" : fmt(b), a === null || b === null ? "—" : `${a - b > 0 ? "+" : a - b === 0 ? "±" : ""}${fmt(a - b)}`, basis]));
+  const st = stripe ? (n: number) => n : () => null;
+  sc("Active paying subscribers (end of week)", st(cur.activePaying), st(prev.activePaying), "Confirmed · Stripe");
+  sc("…plus comped (not paying)", st(cur.activeComped), st(prev.activeComped), "Confirmed · Stripe");
+  sc("New paying subscribers", st(cur.newPaying), st(prev.newPaying), "Confirmed · Stripe");
+  sc("Cancellations clicked", st(cur.cancelClicks), st(prev.cancelClicks), "Confirmed · Stripe");
+  sc("Subscriptions ended", st(cur.ended), st(prev.ended), "Confirmed · Stripe");
+  sc("MRR (end of week, net of coupons)", st(cur.mrrCents), st(prev.mrrCents), "Confirmed · Stripe prices × coupons", money);
+  sc("…of which already cancelled, running out their period", st(cur.leaving), st(prev.leaving), "Confirmed · Stripe");
+  sc("MRR scheduled to end (those members)", st(cur.leavingCents), st(prev.leavingCents), "Confirmed · Stripe", money);
+  sc("Cash collected (paid invoices − refunds)", st(cur.collectedCents), st(prev.collectedCents), "Confirmed · Stripe", money);
+  sc("Instagram reach (posts published this week)", cur.igReach, prev.igReach, "Measured · IG export, lifetime to date");
+  sc("Instagram follows from those posts", cur.igFollows, prev.igFollows, "Measured · IG export (gross, not net follower change)");
+  sc("Instagram → site visits", cur.trafficDays ? cur.igVisitors : null, prev.trafficDays ? prev.igVisitors : null, "Measured · Clarity");
+  sc("Site visitors", cur.trafficDays ? cur.visitors : null, prev.trafficDays ? prev.visitors : null, "Measured · Clarity");
+  L(row([
+    "Site → paid conversion",
+    cur.trafficDays && stripe ? `${pct(cur.paid, cur.visitors)} (${cur.paid}/${cur.visitors})` : "—",
+    prev.trafficDays && stripe ? `${pct(prev.paid, prev.visitors)} (${prev.paid}/${prev.visitors})` : "—",
+    "—",
+    "Measured ÷ Confirmed; different instruments, not one cohort",
+  ]));
+  sc("Revenue attributed to Instagram", cur.end >= ATTRIBUTION_FROM && stripe ? cur.igAttributedCents : null, prev.end >= ATTRIBUTION_FROM && stripe ? prev.igAttributedCents : null, "Attribution · IG as first or last touch; first payment only", money);
+  L(row(["Content production & marketing costs", "—", "—", "—", "Not tracked (Melissa, 2026-10-11)"]));
+  L();
+  L(`Net follower change is not in Instagram's content export; it needs the API (account insights). MRR for past weeks uses each subscription's current coupon. "Attributed" revenue is a rule, not proof: it credits Instagram whenever an Instagram visit came first or last before paying.`);
+  L();
+  // The written parts live beside the numbers, in week-<end>.narrative.md,
+  // so regenerating the tables can never erase them. Its "## Scorecard
+  // commentary" section lands here; the rest goes at the end.
+  const narrativeFile = path.join(DIR, "reports", `week-${end}.narrative.md`);
+  const narrative = existsSync(narrativeFile) ? readFileSync(narrativeFile, "utf8") : "";
+  const [scoreNotes, ...rest] = narrative.split(/^(?=## )/m).reduce<[string, ...string[]]>(
+    (acc, part) => (part.startsWith("## Scorecard commentary") ? ((acc[0] = part.replace(/^## Scorecard commentary\s*/, "")), acc) : (acc.push(part), acc)),
+    [""],
+  );
+  L("### Biggest drivers and three actions");
+  L();
+  L(scoreNotes.trim() || "_Not written yet: add a \"## Scorecard commentary\" section to " + path.basename(narrativeFile) + "._");
   L();
   L("## Data completeness");
   L();
@@ -260,9 +381,8 @@ async function main() {
     }
   }
   L();
-  L("## Narrative");
-  L();
-  L("_To be written from the tables above: what worked, what didn't, and three experiments — observations and hypotheses kept separate, with the sample size behind every claim._");
+  const story = rest.join("").trim();
+  L(story || "## Narrative\n\n_Not written yet — goes in " + path.basename(narrativeFile) + "._");
 
   mkdirSync(path.join(DIR, "reports"), { recursive: true });
   const out = path.join(DIR, "reports", `week-${end}.md`);

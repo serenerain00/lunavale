@@ -573,3 +573,44 @@ CREATE TABLE IF NOT EXISTS ab_events (
   n           INTEGER NOT NULL DEFAULT 0,
   PRIMARY KEY (day, experiment, variant, event)
 );
+
+-- ---------------------------------------------------------------------------
+-- Instagram numbers, one row per post — so the voice assistant can answer
+-- "how did Twenty Years do?" (2026-10-12).
+--
+-- WHY A COPY AND NOT A CALL. The Instagram token lives in the Keychain on
+-- Melissa's Mac and never goes to Vercel (see scripts/ig-sync.ts). So the Mac
+-- syncs, then scripts/ig-push.ts copies the numbers here. The site never talks
+-- to Instagram; it only reads this. As fresh as the last sync (Mondays 7am, or
+-- `npm run ig:refresh`). Written only by ig-push; nothing personal in it.
+CREATE TABLE IF NOT EXISTS ig_post_stats (
+  shortcode       TEXT PRIMARY KEY,
+  published_at    TIMESTAMPTZ,
+  kind            TEXT,           -- "IG reel", "IG carousel", ...
+  caption_head    TEXT,           -- first ~120 characters, to recognise it by
+  title           TEXT,           -- "Twenty Years", for tracked posts (from the asset name)
+  duration_s      REAL,
+  campaign        TEXT,           -- from data/ig-posts.json, when tracked
+  short_link      TEXT,           -- "/go/twenty"
+  views           INTEGER,
+  reach           INTEGER,
+  likes           INTEGER,
+  comments        INTEGER,
+  shares          INTEGER,
+  saves           INTEGER,
+  follows         INTEGER,        -- reels: only from a Business Suite export
+  follows_source  TEXT,
+  avg_watch_ms    INTEGER,
+  synced_at       TIMESTAMPTZ NOT NULL
+);
+ALTER TABLE ig_post_stats ADD COLUMN IF NOT EXISTS title TEXT;
+CREATE INDEX IF NOT EXISTS ig_post_stats_published ON ig_post_stats (published_at DESC);
+
+-- Account-level snapshots, one per sync: follower count, and gross follows /
+-- unfollows over the 7 days Instagram reports.
+CREATE TABLE IF NOT EXISTS ig_account_snapshots (
+  at              TIMESTAMPTZ PRIMARY KEY,
+  followers       INTEGER NOT NULL,
+  follows_7d      INTEGER,
+  unfollows_7d    INTEGER
+);

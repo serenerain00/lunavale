@@ -19,7 +19,7 @@ import { useCallback, useState } from "react";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 
 type Line = { who: "you" | "assistant"; text: string };
-type Report = { name: "snapshot" | "content"; range: string; data: unknown };
+type Report = { name: "snapshot" | "content" | "instagram"; range: string; data: unknown };
 
 export function VoiceConsole() {
   return (
@@ -40,10 +40,12 @@ function Console() {
       setLines((l) => [...l, { who: source === "user" ? "you" : "assistant", text: message } as Line].slice(-40)),
     onError: (e: unknown) => setError(typeof e === "string" ? e : "Something went wrong with the call."),
     clientTools: {
-      show_report: async (params: { name?: string; range?: string }) => {
-        const name = params?.name === "content" ? "content" : "snapshot";
+      show_report: async (params: { name?: string; range?: string; post?: string }) => {
+        const name = params?.name === "content" || params?.name === "instagram" ? params.name : "snapshot";
         const range = ["today", "week", "month"].includes(params?.range ?? "") ? params.range! : "week";
-        const r = await fetch(`/api/voice/report?name=${name}&range=${range}`, { cache: "no-store" });
+        const q = new URLSearchParams({ name, range });
+        if (name === "instagram" && params?.post) q.set("post", params.post);
+        const r = await fetch(`/api/voice/report?${q}`, { cache: "no-store" });
         if (!r.ok) return "I couldn't load that report.";
         setReport({ name, range, data: await r.json() });
         return "It's on the screen now.";
@@ -145,13 +147,23 @@ function ReportPanel({ report, onClose }: { report: Report; onClose: () => void 
     <section className="mt-10 rounded-xl border border-hairline bg-charcoal/40 p-5 sm:p-6">
       <div className="mb-4 flex items-baseline justify-between gap-4">
         <h2 className="font-display text-xl text-ivory">
-          {report.name === "snapshot" ? `The business, ${report.range === "today" ? "today" : `last ${report.range}`}` : "What's out"}
+          {report.name === "snapshot"
+            ? `The business, ${report.range === "today" ? "today" : `last ${report.range}`}`
+            : report.name === "instagram"
+              ? "Instagram"
+              : "What's out"}
         </h2>
         <button type="button" onClick={onClose} className="-my-3 inline-flex min-h-11 items-center text-xs text-stone-dim hover:text-amber">
           Close
         </button>
       </div>
-      {report.name === "snapshot" ? <SnapshotTable s={report.data as SnapshotView} /> : <ContentTable c={report.data as ContentView} />}
+      {report.name === "snapshot" ? (
+        <SnapshotTable s={report.data as SnapshotView} />
+      ) : report.name === "instagram" ? (
+        <InstagramTable g={report.data as InstagramView} />
+      ) : (
+        <ContentTable c={report.data as ContentView} />
+      )}
     </section>
   );
 }
@@ -224,6 +236,85 @@ function ContentTable({ c }: { c: ContentView }) {
           </li>
         ))}
       </ul>
+    </>
+  );
+}
+
+type InstagramView = {
+  syncedAt: string | null;
+  followers: { now: number; follows7d: number | null; unfollows7d: number | null } | null;
+  days: number;
+  matched: string | null;
+  posts: {
+    shortcode: string;
+    name: string;
+    published: string | null;
+    reach: number | null;
+    views: number | null;
+    likes: number | null;
+    shares: number | null;
+    saves: number | null;
+    site: { began: number; paid: number } | null;
+  }[];
+};
+
+function num(n: number | null) {
+  return n === null ? "—" : n.toLocaleString("en-US");
+}
+
+function InstagramTable({ g }: { g: InstagramView }) {
+  const f = g.followers;
+  return (
+    <>
+      <p className="mb-3 text-xs text-stone-dim">
+        {g.syncedAt ? `As of the last sync, ${new Date(g.syncedAt).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" })}.` : "No sync yet."}
+        {f && ` ${num(f.now)} followers${f.follows7d !== null ? ` · +${num(f.follows7d)} / −${num(f.unfollows7d)} this week` : ""}.`}
+        {g.matched ? ` Matching “${g.matched}”.` : ` Posts from the last ${g.days} days.`}
+      </p>
+      {g.posts.length === 0 ? (
+        <p className="text-sm text-stone">Nothing to show.</p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[34rem] text-sm">
+            <thead>
+              <tr className="text-left text-xs uppercase tracking-[0.12em] text-stone-dim">
+                <th className="py-1.5 pr-3 font-normal">Post</th>
+                <th className="py-1.5 pr-3 text-right font-normal">Reach</th>
+                <th className="py-1.5 pr-3 text-right font-normal">Likes</th>
+                <th className="py-1.5 pr-3 text-right font-normal">Shares</th>
+                <th className="py-1.5 pr-3 text-right font-normal">Saves</th>
+                <th className="py-1.5 text-right font-normal">Checkout → paid</th>
+              </tr>
+            </thead>
+            <tbody>
+              {g.posts.map((p) => (
+                <tr key={p.shortcode} className="border-t border-hairline/60">
+                  <td className="py-1.5 pr-3">
+                    <a
+                      href={`https://www.instagram.com/p/${p.shortcode}/`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-ivory hover:text-amber"
+                    >
+                      {p.name}
+                    </a>
+                    {p.published && (
+                      <span className="block text-xs text-stone-dim">
+                        {new Date(p.published).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                      </span>
+                    )}
+                  </td>
+                  <td className="py-1.5 pr-3 text-right text-ivory">{num(p.reach)}</td>
+                  <td className="py-1.5 pr-3 text-right text-ivory">{num(p.likes)}</td>
+                  <td className="py-1.5 pr-3 text-right text-ivory">{num(p.shares)}</td>
+                  <td className="py-1.5 pr-3 text-right text-ivory">{num(p.saves)}</td>
+                  <td className="py-1.5 text-right text-stone">{p.site ? `${p.site.began} → ${p.site.paid}` : "not tracked"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </>
   );
 }

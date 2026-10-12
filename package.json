@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "health": "tsx --env-file-if-exists=.env.local scripts/health-check.ts",
-    "announce": "tsx scripts/announce.ts"
+    "announce": "tsx scripts/announce.ts",
+    "ig:refresh": "tsx scripts/ig-sync.ts && tsx --env-file=.env.local scripts/ig-push.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.5.22",

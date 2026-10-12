@@ -398,7 +398,10 @@ async function checkMoney() {
   `) as { status: string; n: number }[];
   const byStatus = Object.fromEntries(rows.map((r) => [r.status, r.n]));
   const pastDue = byStatus["past_due"] ?? 0;
-  if (pastDue) warn(`${pastDue} membership(s) past due`, "Card failing — Stripe retries, then cancels.");
+  // Since 2026-10-12 past due means LOCKED OUT (lib/db/memberships.ts) until
+  // every invoice is paid, except anyone in PAST_DUE_GRACE. Somebody shut out
+  // of something they think they pay for is worth a look every day.
+  if (pastDue) warn(`${pastDue} membership(s) past due`, "Card failing — shut out until paid (unless in PAST_DUE_GRACE). The account page shows them an Update payment button.");
   else ok("No memberships past due");
   ok("Memberships by status", rows.map((r) => `${r.status}: ${r.n}`).join(", ") || "none yet");
 

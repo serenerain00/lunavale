@@ -28,7 +28,11 @@ import type Stripe from "stripe";
 import { stripe } from "@/lib/billing/stripe";
 import { stripeConfigured } from "@/lib/billing/provider";
 
-/** Statuses Stripe considers live. Mirrors ACTIVE_STATUSES in lib/db/memberships.ts. */
+/**
+ * Statuses Stripe considers live, for counting — NOT for access. Past-due
+ * members are counted (and reported separately as pastDue) but shut out of the
+ * site until they pay; see ACTIVE_STATUSES in lib/db/memberships.ts.
+ */
 const LIVE_STATUSES: Stripe.SubscriptionListParams.Status[] = [
   "active",
   "trialing",

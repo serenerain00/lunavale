@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { cancelMembership } from "@/app/actions/session";
+import { cancelMembership, payOutstanding } from "@/app/actions/session";
 import { PreviewNotice } from "@/components/membership/PreviewNotice";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { SignOut } from "@/components/ui/SignOut";
 import { getMembership } from "@/lib/access/entitlement";
 import { isOwner } from "@/lib/access/owner";
 import { authConfigured, billingLive } from "@/lib/billing/provider";
-import { membershipForUser } from "@/lib/db/memberships";
+import { lockedForPayment, membershipForUser } from "@/lib/db/memberships";
 import {
   BENEFITS,
   benefitsFor,
@@ -56,6 +56,9 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
   // copy so the page reports what Stripe actually thinks rather than what the
   // content file says the plan costs.
   const record = billingLive() ? await currentRecord() : null;
+  // Shut out by a failed renewal (2026-10-12): say so, and how to get back in,
+  // instead of greeting a paying member as a visitor.
+  const unpaid = !active && lockedForPayment(record);
 
   return (
     <>
@@ -64,14 +67,16 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
       <main className="mx-auto w-full max-w-4xl flex-1 px-5 pb-24 sm:px-8">
         <header className="pb-8 pt-12 sm:pt-16">
           <p className="text-xs uppercase tracking-[0.2em] text-amber">
-            {active ? "Your membership" : "Your account"}
+            {active || unpaid ? "Your membership" : "Your account"}
           </p>
           <h1 className="mt-4 font-display text-3xl font-light text-ivory sm:text-4xl">
             {active
               ? current.name
-              : welcome
-                ? "You\u2019re in. Here\u2019s where to start."
-                : "You\u2019re on the free side"}
+              : unpaid
+                ? "Your membership is paused"
+                : welcome
+                  ? "You\u2019re in. Here\u2019s where to start."
+                  : "You\u2019re on the free side"}
           </h1>
           {/* SAID PLAINLY, 2026-10-10. A free account opens nothing a visitor
               can't already see, and people were making one expecting it to.
@@ -79,8 +84,20 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
           <p className="mt-3 max-w-xl leading-relaxed text-stone">
             {active
               ? current.tagline
-              : "Everything free on the site is yours, and nothing here expires. Your account keeps your place, and if you ever join, the membership attaches to it in one step."}
+              : unpaid
+                ? "Your last payment didn\u2019t go through. Pay what\u2019s owed and everything opens again straight away."
+                : "Everything free on the site is yours, and nothing here expires. Your account keeps your place, and if you ever join, the membership attaches to it in one step."}
           </p>
+          {unpaid && (
+            <form action={payOutstanding} className="mt-6">
+              <button
+                type="submit"
+                className="inline-flex min-h-11 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+              >
+                Update payment
+              </button>
+            </form>
+          )}
         </header>
 
         {/* Transitions are announced rather than left to be inferred from a

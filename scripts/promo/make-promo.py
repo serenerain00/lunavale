@@ -471,6 +471,7 @@ def render(spec, tmp: Path, out: Path):
     chain.append(f"{cur}aresample={AR},aformat=channel_layouts=stereo,{gain},"
                  f"apad,atrim=0:{total},afade=t=out:st={total - 1.6}:d=1.6[bed]")
     dia = "[0:a]"
+    jcuts = []   # (wav, delay ms) — reused for the no-music version
     if extra_audio:
         ex_base = base_idx + len(bed["segments"])
         labels = []
@@ -484,6 +485,7 @@ def render(spec, tmp: Path, out: Path):
                  "-c:a", "pcm_s16le", str(wav)])
             seg_inputs += ["-i", str(wav)]
             ms = int(round(at * 1000))
+            jcuts.append((wav, ms))
             chain.append(f"[{ex_base + e_i}:a]adelay={ms}|{ms}[x{e_i}]")
             labels.append(f"[x{e_i}]")
         chain.append(f"[0:a]{''.join(labels)}amix=inputs={1 + len(labels)}:"
@@ -501,6 +503,25 @@ def render(spec, tmp: Path, out: Path):
          "-pix_fmt", "yuv420p", "-r", str(FPS),
          "-c:a", "aac", "-b:a", "192k", "-ar", str(AR),
          "-movflags", "+faststart", "-t", str(total), str(out)])
+
+    # THE NO-MUSIC VERSION (Melissa, 2026-10-11: "i may want them w/o music
+    # that way i can post with music that works better"). Same picture, copied
+    # bit for bit; the sound is only the dialogue and room tone, J-cuts
+    # included, so a song can be laid under it in the Instagram app.
+    bare = out.with_name(out.stem + "-nomusic.mp4")
+    ins = ["-i", str(out), "-i", str(body)]
+    graph, labels = [], []
+    for k, (wav, ms) in enumerate(jcuts):
+        ins += ["-i", str(wav)]
+        graph.append(f"[{k + 2}:a]adelay={ms}|{ms}[j{k}]")
+        labels.append(f"[j{k}]")
+    mix = (f"[1:a]{''.join(labels)}amix=inputs={1 + len(labels)}:duration=first:normalize=0,"
+           if labels else "[1:a]")
+    graph.append(f"{mix}loudnorm=I=-14:TP=-1.5:LRA=11[aout]")
+    run(["ffmpeg", "-v", "error", "-y", *ins, "-filter_complex", ";".join(graph),
+         "-map", "0:v", "-map", "[aout]", "-c:v", "copy",
+         "-c:a", "aac", "-b:a", "192k", "-ar", str(AR),
+         "-movflags", "+faststart", "-t", str(total), str(bare)])
     return total
 
 
@@ -559,6 +580,7 @@ def main():
         else:
             shutil.rmtree(tmp, ignore_errors=True)
     print(f"wrote {out}")
+    print(f"wrote {out.with_name(out.stem + '-nomusic.mp4')}")
     if a.sheet:
         sheet(out, total)
 

@@ -43,14 +43,14 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-11 against `main` at 6da23e7. The 2026-07-28 row is kept beneath
+re-run 2026-10-12 against `main` at 5ebf06d. The 2026-07-28 row is kept beneath
 so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 202 | 171 |
-| Tyson | 12 | 145 | 127 |
-| Josh | 14 | 128 | 113 |
+| Luna | 12 | 204 | 173 |
+| Tyson | 12 | 147 | 129 |
+| Josh | 14 | 129 | 114 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 7 | 7 |
@@ -65,15 +65,17 @@ week's note.*
 > seventy-odd in early October. Cathy and Avery earned their rows in the same
 > push. Re-run the two functions rather than trusting the table.
 
-**Josh is the thinnest of the three leads, but the gap is closing.** He has the
-most *notes* of anyone and is still bottom on total pieces. Tyson's lead over
-him was 25 before the September launch, widened to 28, and is **17 now** — the
-first time the direction has reversed since this file was written, and it
-reversed hard. Episodes 2 and 3 are what did it: both are about Luna, Josh and
-Tyson, so they pay Josh and Tyson equally while Josh was starting from behind.
-*(This paragraph used to say the direction had never changed once. That was true
-until 2026-10-09 and is not any more. Re-derive the three numbers when you touch
-this, rather than trusting a remembered trend.)* Volume was never the real
+**Josh is the thinnest of the three leads, and the gap no longer has a
+direction.** He has the most *notes* of anyone and is still bottom on total
+pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
+17 → **18 at 5ebf06d**: it widened for six weeks, snapped in hard when episodes
+2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
+equally while Josh started from behind), and has since been drifting a point
+either way. **Treat it as noise in the high teens, not a trend.** *(This
+paragraph has now been wrong twice: it claimed the direction had never changed,
+which died on 2026-10-09, and then that the gap was closing, which died on
+10-12. Do not write a third trend sentence — re-derive the two numbers and quote
+them.)* Volume was never the real
 measure for him anyway: he is the hardest character to hold an audience's
 sympathy for, and the whole story depends on him being genuinely likeable before
 he turns. What to watch is how much of his material makes that case. **He is one

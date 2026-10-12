@@ -230,6 +230,8 @@ interface PlannedPost {
   campaign: string;
   experiment?: string;
   arm?: string;
+  /** Free-text protocol note from the growth side, e.g. a deviation from the test design. */
+  note?: string;
 }
 const planned: PlannedPost[] = (() => {
   const f = path.join(process.cwd(), "data", "ig-posts.json");
@@ -434,6 +436,14 @@ async function main() {
           per(live.reduce((a, p) => a + (p.saves ?? 0), 0)), per(live.reduce((a, p) => a + (p.shares ?? 0), 0)),
           plan.reduce((a, p) => a + sessionsFor(p.campaign), 0),
         ]));
+      }
+      // Deviations from the test design, as recorded when each post went up —
+      // a readout that leaves these out overstates how clean the test was.
+      const notes = planned.filter((p) => p.experiment === ex && p.note);
+      if (notes.length) {
+        L();
+        L("Protocol notes:");
+        for (const p of notes) L(`- ${p.campaign}${p.arm ? ` (${p.arm})` : ""}: ${p.note}`);
       }
       L();
     }

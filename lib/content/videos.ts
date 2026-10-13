@@ -2784,14 +2784,16 @@ export const videos: Video[] = [
       declared here for three days without existing, which would have 404'd the
       preview for every non-member the moment it was unhidden.
 
-      THE SYNOPSIS IS STILL THE CAREFUL READ described above, not something
-      anybody has confirmed. It says what is on screen and stops there. Replace
-      it when there is a line on what is actually said.
+      SYNOPSIS REWRITTEN FROM THE DIALOGUE, 2026-10-13 (Melissa asked), off
+      the first transcript: "You don't get to disappear for weeks...", "maybe
+      you shouldn't call me every time something goes wrong", "Can you please
+      just go home?", "Can't or won't." It still stops at what is said — why
+      he can't is writer knowledge (THE PROMISE) and stays off the page.
     */
     slug: "ty-luna-grg2",
     title: "The Garage, Again",
     synopsis:
-      "Luna and Tyson, in the shop, having a conversation he does not want to have.",
+      "Tyson has been gone for weeks and has stopped picking up. In the shop, Luna won't let him decide when they're allowed to talk. He tells her maybe she shouldn't call him every time something goes wrong, and asks her to go home. She asks whether he can't tell her what's going on, or won't.",
     file: "ty-luna-grg2.proxy.mp4",
     poster: "/posters/ty-luna-grg2.jpg",
     // 146, trimmed at 145.5 — black from about 146.

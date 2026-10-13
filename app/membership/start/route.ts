@@ -119,14 +119,23 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const form = await request.formData().catch(() => null);
+  // Which button: "play" is the strip under the player (PlayJoin), anything
+  // else is the membership page. A label, from a fixed list.
+  const from = form?.get("from") === "play" ? "play" : null;
   return start(
     request,
     String(form?.get("tier") ?? ""),
     String(form?.get("interval") ?? "month"),
+    from,
   );
 }
 
-async function start(request: NextRequest, tierParam: string, intervalParam: string) {
+async function start(
+  request: NextRequest,
+  tierParam: string,
+  intervalParam: string,
+  from: string | null = null,
+) {
   const origin = request.nextUrl.origin;
   // 303 everywhere below: the answer to a POST, to be followed with a GET.
   const go = (url: string | URL) => NextResponse.redirect(url, 303);
@@ -156,6 +165,7 @@ async function start(request: NextRequest, tierParam: string, intervalParam: str
         decodeTouch(request.cookies.get(LAST_TOUCH_COOKIE)?.value),
       ),
       ...abMetadata(request.cookies.get(AB_COOKIE)?.value),
+      ...(from ? { entry: from } : {}),
     };
 
     // SIGNED OUT: straight to the card. No account, no verification code, no

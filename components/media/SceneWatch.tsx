@@ -5,6 +5,7 @@ import { assignVariant, trackOnce } from "@/components/analytics/experiments";
 import { AfterWatch } from "@/components/media/AfterWatch";
 import { PreviewEndCard } from "@/components/media/PreviewEndCard";
 import { VideoPlayer } from "@/components/media/VideoPlayer";
+import { PlayJoin } from "@/components/membership/PlayJoin";
 
 /**
  * The player and whatever comes after it.
@@ -41,6 +42,8 @@ export function SceneWatch({
 }) {
   const [finished, setFinished] = useState(false);
   const [card, setCard] = useState(false);
+  // Pressed play at least once: PlayJoin appears under the frame and stays.
+  const [played, setPlayed] = useState(false);
 
   function ended() {
     setFinished(true);
@@ -64,6 +67,7 @@ export function SceneWatch({
             poster={poster}
             title={title}
             onEnded={ended}
+            onPlay={() => setPlayed(true)}
           />
           {card && watched && price && (
             <PreviewEndCard
@@ -75,6 +79,8 @@ export function SceneWatch({
           )}
         </div>
       </div>
+
+      {played && <PlayJoin />}
 
       {finished && (
         <AfterWatch

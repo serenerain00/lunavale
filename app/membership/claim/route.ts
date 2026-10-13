@@ -26,6 +26,7 @@
  * people, and anybody who arrives here signed out is simply sent to sign in.
  */
 
+import { PAID_COOKIE } from "@/lib/billing/paid-cookie";
 import { NextResponse, type NextRequest } from "next/server";
 import { billingLive } from "@/lib/billing/provider";
 import {
@@ -87,9 +88,13 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  return NextResponse.redirect(
+  const res = NextResponse.redirect(
     new URL(claimed ? "/account?started=1" : "/account", origin),
   );
+  // The paid-browser marker has done its job once there is an account: from
+  // here on, signing in is what recognises them.
+  res.cookies.delete(PAID_COOKIE);
+  return res;
 }
 
 /**

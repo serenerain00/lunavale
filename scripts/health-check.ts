@@ -167,6 +167,17 @@ async function checkGates() {
   } else if (linked.length) {
     fail("Something links to /membership/start", `${linked.join(", ")} — use the PlanChoice form (POST).`);
   } else ok("Checkout starts on POST only, and nothing links to it");
+
+  // A SECOND PAYMENT FROM SOMEBODY WHO HAS ALREADY PAID (2026-10-05, and again
+  // 2026-10-13 with a cancel note saying so). Join must send an existing
+  // member — or a browser that just paid, before its account exists — back to
+  // what they bought, and the access check must claim a pay-first payment.
+  const entSrc = await read("lib/access/entitlement.ts");
+  if (!/isMember\(\)/.test(startSrc) || !startSrc.includes("PAID_COOKIE")) {
+    fail("Join can charge somebody who already paid", "/membership/start must check isMember() and the lv_paid cookie before creating a checkout.");
+  } else if (!entSrc.includes("claimWaiting(")) {
+    fail("A pay-first payment is only claimed on /account", "readTier() must claim waiting payments, or the member sees Join and pays twice.");
+  } else ok("Join won't take a second payment from somebody who has paid");
 }
 
 /* ═══════════════════════════ B. Premium leakage ════════════════════════════

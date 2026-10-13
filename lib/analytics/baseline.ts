@@ -34,6 +34,12 @@ export const BREAKS: readonly BaselineBreak[] = [
     effect:
       "A new route to checkout that skips /membership, so /membership views → checkout no longer covers every checkout. Its sessions carry entry=play and are counted separately under \"By entry point\".",
   },
+  {
+    on: "2026-10-13",
+    what: "Join no longer opens a checkout for somebody who has already paid: members (and pay-first buyers, now claimed on any page) go to /account; a browser that paid but has no account yet goes back to /welcome.",
+    effect:
+      "Removes duplicate payments (Oct 5, Oct 13). \"Paid\" counts after this date can drop by those duplicates; they were never new members, so compare people, not payments.",
+  },
 ];
 
 /** Breaks that went live on or between two UTC days (inclusive). */

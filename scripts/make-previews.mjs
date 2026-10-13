@@ -152,6 +152,9 @@ const OVERRIDES = {
   // Melissa: first minute free. Ends after "They sign my paycheck" (1:01),
   // before "Who's going?" (1:04).
   "luna-ty-suit": 62,
+  // Melissa, 2026-10-13: first minute free. Ends after "I know." (1:02.7),
+  // before "I thought you weren't coming." (1:06.7).
+  "luna-josh-ty-event": 64.5,
 };
 
 /**

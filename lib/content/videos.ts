@@ -3383,6 +3383,79 @@ export const videos: Video[] = [
   },
   {
     /*
+      THE EVENT, 2026-10-13. Melissa: the night after the suit — the event
+      Josh's company hosts every year. Josh talked Luna into coming though she
+      had told Tyson she couldn't go; they argue in the hall. Nobody at the
+      company knows yet that she and Josh have separated (she has been
+      quietly letting go of her operational duties there), and walking in
+      with another man would have made Josh look bad. Title hers: "I Was
+      Going to Text You". First minute free, members after.
+
+      WHAT IS SAID, from the transcript. "I was going to text you." "When?"
+      … "I thought you weren't coming." "I wasn't gonna come. Josh asked me
+      to." "I'm having a little bit of a reaction, yeah." "I couldn't walk in
+      with you while he was here." "Ty, it would've looked like I was trying to
+      hurt him." "What changed between yesterday and today?" "Nothing's
+      changed with me and Josh… I told him me coming didn't mean I was coming
+      home." "I wanted to come with you. It just felt complicated, Ty." He's
+      leaving early; "I'll come sit with you." "You came with Josh." "I can
+      still spend time with you." "Yeah. I'll find you."
+
+      THE COPY SAYS WHAT HE DOES, NOT WHAT HE FEELS. Melissa's read is that
+      he is not jealous but is stung that she said no to him and yes to
+      Josh — and that she is still bending for Josh. That is writer
+      knowledge. The site says he's upset and she pleads; it never names
+      jealousy or anything under it (feelings come later, Tyson first, and
+      are never hinted early — see the suit's canon note).
+    */
+    slug: "luna-josh-ty-event",
+    title: "I Was Going to Text You",
+    synopsis:
+      "The night after the suit, at the fundraiser Josh\u2019s company hosts every year. Luna told Tyson she couldn\u2019t come \u2014 and walked in with Josh. Nobody there knows the two of them have separated. Out in the hall, Tyson doesn\u2019t pretend it\u2019s fine, and Luna tries to make him understand why she couldn\u2019t walk in beside him.",
+    file: "luna-josh-ty-event.proxy.mp4",
+    poster: "/posters/luna-josh-ty-event.jpg",
+    // 298, the whole file: picture goes black at 295.2 under the score.
+    durationSeconds: 298,
+    addedOn: "2026-10-13",
+    access: "premium",
+    mature: false,
+    // Melissa: first minute free. Ends after "It would've been helpful." /
+    // "I know." (1:02.7), before "I thought you weren't coming." (1:06.7).
+    preview: {
+      file: "luna-josh-ty-event-preview.proxy.mp4",
+      durationSeconds: 64.5,
+      hookStart: 0,
+      hookNote: "from the top: Josh greeting the room, Luna seeing Tyson, \"I was going to text you\"",
+    },
+    feelings: ["distance", "hurt"],
+    place: "downtown",
+    about: ["luna", "tyson", "josh"],
+  },
+  {
+    /*
+      THE LIGHT BULB, 2026-10-13. Melissa: "new short clip, funny one…
+      this one is free". Lakehouse, 0:39. From the transcript: "Okay, I know I
+      bought the right bulb." / "Would you just fit, please?" / "Need some
+      help?" / "No, I need this to fit." — and while both her arms are up, he
+      grabs her sides. "Oh my god! You're such a fucking asshole!" He laughs
+      and walks off. Title is a placeholder, hers to replace.
+    */
+    slug: "luna-ty-bulb",
+    title: "The Right Bulb",
+    synopsis:
+      "At the lakehouse, Luna is losing a fight with a light bulb she is sure is the right one. Tyson offers to help. She would rather do it herself. He waits until both her arms are over her head.",
+    file: "luna-ty-bulb.proxy.mp4",
+    poster: "/posters/luna-ty-bulb.jpg",
+    durationSeconds: 39,
+    addedOn: "2026-10-13",
+    access: "free",
+    mature: false,
+    feelings: ["trust"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+  },
+  {
+    /*
       THE INTERVIEW TRAILER, Melissa, 2026-10-09. MEMBERS ONLY ON THE SITE
       (Melissa, same day, after the music was raised: "can we hide it behind
       the membership then"). It runs free on Instagram, which carries its own

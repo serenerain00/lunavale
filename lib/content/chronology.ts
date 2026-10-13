@@ -141,6 +141,13 @@ export const STORY_ORDER: readonly string[] = [
   // "Most Nights" and "Wasn't Planning On It", which read as later steps of
   // the same thing. Move it if she places it.
   "luna-ty-suit",
+  // Melissa, 2026-10-13: the next night — the event the suit was for.
+  "luna-josh-ty-event",
+
+  // HAND-PLACED — REASONED, 2026-10-13, Melissa to move it. The light bulb:
+  // an ordinary afternoon at the lakehouse with the ease back, so it sits at
+  // the start of the settled middle, beside "Most Nights".
+  "luna-ty-bulb",
 
   // HAND-PLACED — REASONED. Published 2026-09-20. An evening where nothing
   // happens, which puts it in the settled middle of the six months rather than

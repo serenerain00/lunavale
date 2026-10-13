@@ -148,6 +148,25 @@ async function checkGates() {
   const missing = ["/admin", "/account", "/api/"].filter((p) => !robots.includes(`"${p}"`));
   if (missing.length) warn("robots.txt does not disallow", missing.join(", "));
   else ok("robots.txt disallows the private paths");
+
+  // A GET THAT CREATES A STRIPE SESSION WILL BE FETCHED BY THINGS THAT ARE NOT
+  // PEOPLE (2026-10-13): every click made two or three live sessions for a
+  // month, through four rounds of header checks. Checkout starts on POST only,
+  // and nothing on the site may link to it.
+  const startSrc = await read("app/membership/start/route.ts");
+  const getBody = startSrc.slice(
+    startSrc.indexOf("export async function GET"),
+    startSrc.indexOf("export async function POST"),
+  );
+  const linked: string[] = [];
+  for (const f of [...appFiles, ...(await walk("components")).filter((x) => /\.tsx?$/.test(x))]) {
+    if (/href=\{?[`"']\/membership\/start/.test(await read(f))) linked.push(f);
+  }
+  if (!startSrc.includes("export async function POST") || /createCheckoutSession|start\(/.test(getBody)) {
+    fail("/membership/start can create a checkout on GET", "Prefetchers, previews and crawlers will mint sessions. POST only.");
+  } else if (linked.length) {
+    fail("Something links to /membership/start", `${linked.join(", ")} — use the PlanChoice form (POST).`);
+  } else ok("Checkout starts on POST only, and nothing links to it");
 }
 
 /* ═══════════════════════════ B. Premium leakage ════════════════════════════

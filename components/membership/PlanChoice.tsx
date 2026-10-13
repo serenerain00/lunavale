@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { formatPrice } from "@/lib/content/membership";
 
 /**
@@ -13,18 +12,19 @@ import { formatPrice } from "@/lib/content/membership";
  * advertised a plan it could not take money for, and anybody who chose the
  * year got charged for a month.
  *
- * The toggle changes the price shown AND the href, which is the whole job.
+ * The toggle changes the price shown AND what the form sends, which is the
+ * whole job.
  *
- * IT IS A CLIENT COMPONENT FOR ONE PIECE OF STATE and nothing else. Everything
- * around it — the tier, the benefits, the copy — stays server-rendered. The
- * two links it produces are real links to a real GET route, so this works the
- * same whether or not the JavaScript arrives; without it you get the monthly
- * button, which is the safe default rather than a broken page.
+ * IT IS A CLIENT COMPONENT FOR TWO PIECES OF STATE and nothing else. Everything
+ * around it — the tier, the benefits, the copy — stays server-rendered.
  *
- * `prefetch={false}` IS LOAD-BEARING, inherited from TierCard: Next prefetches
- * a Link on hover, the href is a route handler that creates a Stripe Checkout
- * Session, and a hover would otherwise mint sessions nobody asked for and
- * inflate the one number that measures this page.
+ * THE BUTTON IS A FORM THAT POSTS, NOT A LINK (2026-10-13). The link to a GET
+ * route that created a Stripe session got fetched two or three times per
+ * click by things that were not the person — hover prefetch first (hence the
+ * old `prefetch={false}`), then prerenders, then link previews and in-app
+ * browsers nobody could list. Nothing fetches a POST on its own. It still
+ * works without JavaScript — a plain form submit, monthly by default — and
+ * with it, the button disables itself so a double tap is one checkout.
  */
 export function PlanChoice({
   tierId,
@@ -55,6 +55,14 @@ export function PlanChoice({
   children?: React.ReactNode;
 }) {
   const [interval, setInterval] = useState<"month" | "year">("month");
+  const [sending, setSending] = useState(false);
+  // Back from Stripe restores this page from the back/forward cache with the
+  // button still saying "Opening checkout…". Give it back.
+  useEffect(() => {
+    const reset = (e: PageTransitionEvent) => e.persisted && setSending(false);
+    window.addEventListener("pageshow", reset);
+    return () => window.removeEventListener("pageshow", reset);
+  }, []);
   const groupId = useId();
   const showToggle = yearlyAvailable && yearlyCents !== null;
   const yearly = interval === "year" && showToggle;
@@ -122,15 +130,26 @@ export function PlanChoice({
 
       {children}
 
-      <div className="mt-7">
-        <Link
-          href={`/membership/start?tier=${tierId}&interval=${interval}`}
-          prefetch={false}
-          className="block rounded-full bg-amber px-5 py-3 text-center text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+      <form
+        method="post"
+        action="/membership/start"
+        className="mt-7"
+        onSubmit={(e) => {
+          if (sending) e.preventDefault();
+          else setSending(true);
+        }}
+      >
+        <input type="hidden" name="tier" value={tierId} />
+        <input type="hidden" name="interval" value={interval} />
+        <button
+          type="submit"
+          disabled={sending}
+          aria-busy={sending}
+          className="block w-full rounded-full bg-amber px-5 py-3 text-center text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft disabled:cursor-wait disabled:opacity-70"
         >
-          {cta}
-        </Link>
-      </div>
+          {sending ? "Opening checkout\u2026" : cta}
+        </button>
+      </form>
     </>
   );
 }

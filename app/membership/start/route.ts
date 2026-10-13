@@ -93,30 +93,53 @@ function speculative(request: NextRequest): boolean {
   );
 }
 
+/*
+ * GET NO LONGER STARTS ANYTHING (2026-10-13).
+ *
+ * The header checks above were not enough. Stripe still showed two or three
+ * live sessions per click, 1–3 seconds apart, every day of October, all
+ * signed out and without any of those headers — some with Cash App missing,
+ * which Stripe only drops for a request from outside the US: a link preview
+ * or an in-app browser fetching the same URL from somewhere that is not the
+ * person. Anything that can fetch a link will, and there is no list of them
+ * to keep up with.
+ *
+ * So the Join button is now a FORM that POSTs here (components/membership/
+ * PlanChoice.tsx). Nothing fetches a POST speculatively, previews never
+ * submit forms, and the button disables itself once pressed. A GET — an old
+ * link, a crawler, a sign-up redirect from before pay-first — goes to the
+ * plans and creates nothing.
+ */
 export async function GET(request: NextRequest) {
-  const origin = request.nextUrl.origin;
-
-  /*
-   * 204 rather than a redirect. A prerender that receives no content is
-   * discarded, so the real click that follows runs this handler properly and
-   * gets a real session; redirecting would instead teach the prerender a
-   * destination and could serve a stale one. Nothing is created here.
-   */
   if (speculative(request)) {
     return new NextResponse(null, { status: 204 });
   }
-  const params = request.nextUrl.searchParams;
-  const tier = getTier(params.get("tier") ?? "");
+  return NextResponse.redirect(new URL("/membership#tiers", request.nextUrl.origin), 303);
+}
+
+export async function POST(request: NextRequest) {
+  const form = await request.formData().catch(() => null);
+  return start(
+    request,
+    String(form?.get("tier") ?? ""),
+    String(form?.get("interval") ?? "month"),
+  );
+}
+
+async function start(request: NextRequest, tierParam: string, intervalParam: string) {
+  const origin = request.nextUrl.origin;
+  // 303 everywhere below: the answer to a POST, to be followed with a GET.
+  const go = (url: string | URL) => NextResponse.redirect(url, 303);
+  const tier = getTier(tierParam);
 
   // Unknown or free tier: nothing to start.
   if (!tier || tier.id === "free") {
-    return NextResponse.redirect(new URL("/membership", origin));
+    return go(new URL("/membership", origin));
   }
 
   // Anything that is not "year" is monthly, including nothing at all — so
   // every link that predates the yearly plan keeps buying what it always did.
-  const raw = params.get("interval") ?? "month";
-  const interval = isBillingInterval(raw) ? raw : "month";
+  const interval = isBillingInterval(intervalParam) ? intervalParam : "month";
 
   if (billingLive()) {
     const { auth, currentUser } = await import("@clerk/nextjs/server");
@@ -145,7 +168,7 @@ export async function GET(request: NextRequest) {
         interval,
         attribution,
       });
-      return NextResponse.redirect(url);
+      return go(url);
     }
 
     const [user, existing] = await Promise.all([
@@ -161,11 +184,11 @@ export async function GET(request: NextRequest) {
       existingCustomerId: existing?.stripeCustomerId,
       attribution,
     });
-    return NextResponse.redirect(url);
+    return go(url);
   }
 
   // ---- Preview mode: grant the labeled preview, no charge -----------------
-  const res = NextResponse.redirect(new URL("/account?started=1", origin));
+  const res = go(new URL("/account?started=1", origin));
   res.cookies.set(MEMBER_COOKIE, tier.id, {
     httpOnly: true,
     sameSite: "lax",

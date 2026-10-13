@@ -43,14 +43,13 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-13 against `main` at ac6ccf5 — identical to 5ebf06d, which is
-what you would expect: that advance touched no content module. The 2026-07-28
-row is kept beneath so the drift is visible.
+re-run 2026-10-13 against `main` at 91a4661. The 2026-07-28 row is kept beneath
+so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 204 | 173 |
-| Tyson | 12 | 147 | 129 |
+| Luna | 12 | 205 | 173 |
+| Tyson | 12 | 148 | 129 |
 | Josh | 14 | 129 | 114 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
@@ -69,7 +68,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → **18, holding at ac6ccf5**: it widened for six weeks, snapped in hard when episodes
+17 → 18 → **19 at 91a4661**: it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has since been drifting a point
 either way. **Treat it as noise in the high teens, not a trend.** *(This
@@ -97,10 +96,10 @@ character who explains Josh — a note on a free piece is the shop window, and
 that is what makes it the highest-value Rick gap, not merely that it is open.
 *(It opened the story until 2026-09-22, when `ty-luna-young` took first place.
 Do not restore the "first in the story" phrasing; check `STORY_ORDER` before
-making that claim about anything.)* Five other free pieces are uncovered as well
-— `luna-ty-couch`, `ty-luna-young`, `luna-tyson-shaving`, `young-luna-ty-apt`
-and `luna-truck-breakdown` — but every one of them pays into the two characters
-who need it least.
+making that claim about anything.)* Six other free pieces are uncovered as well
+— `luna-ty-couch`, `ty-luna-young`, `luna-tyson-shaving`, `young-luna-ty-apt`,
+`young-luna-ty-seals` (new and free on 2026-10-13) and `luna-truck-breakdown` —
+but every one of them pays into the two characters who need it least.
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
 > updated 2026-10-12. The backlog below describes `main`, and `main` is behind:
@@ -168,10 +167,14 @@ Standing backlog, roughly prioritised:
   waiting to be written, and being free it would convert. Weigh it against the
   fact that Luna and Tyson are already the best-fed characters on the table
 - `ty-luna-young` — *Pick Me Up*, published **free** on 2026-09-22 — is
-  uncovered, and it is now **first in `STORY_ORDER`**: Atlanta at eighteen, she
+  uncovered, and it is still **first in `STORY_ORDER`** — re-checked 2026-10-13,
+  when a 2006 clip landed and went *third*, not first: Atlanta at eighteen, she
   rings him from a party, he comes anyway. It is the front door of the ordered
-  library and the earliest footage on the site by nine years, so a note on it is
-  the most-seen page a note could have. Same caveat as the couch — it pays into
+  library, so a note on it is the most-seen page a note could have. *(Do not
+  restore "the earliest footage on the site by nine years". That gap was to the
+  main timeline, and the opening of the library is now three clips deep in the
+  same era — `young-luna-ty-apt` and `young-luna-ty-seals` sit right behind it.
+  It is still the earliest; it is no longer an outlier.)* Same caveat as the couch — it pays into
   Luna and Tyson — but the placement is worth more here than it is there. It
   pairs with the journal entry `the-rule` via `sceneSlug`, and both cuts are
   free (the 9:16 is the post `pick-me-up`), so read that entry first
@@ -196,6 +199,14 @@ Standing backlog, roughly prioritised:
   thirteen and seven pieces, a kitchen clip (`avery-cathy-kitchen`, *Mom's
   Kitchen*) and Avery a real portrait — but neither has a single note, which now
   makes them the two largest wholly uncovered people on the table
+- `young-luna-ty-seals` — *We'll Be Fine*, published **free** on 2026-10-13 and
+  third in the order — is the strongest new opening on the board. A 2006
+  flashback: Tyson sits Luna on a tailgate and tells her he has already joined
+  the Navy and is going for the SEALs; she asks what happens if something
+  happens to him, and he keeps saying they'll be fine. It is the decision the
+  rest of Tyson is downstream of, it is free, and it is near the front door. The
+  usual caveat holds — it pays into Luna and Tyson, who need it least — but of
+  the free uncovered pieces this is the one with the most under it
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none
 - Notes on the vertical posts; only `run-at-the-lake` has one

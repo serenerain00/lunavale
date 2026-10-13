@@ -46,20 +46,56 @@ export interface MembershipRecord {
 /**
  * Statuses that actually open the doors.
  *
- * `past_due` deliberately still grants access: a card that failed to renew is
- * usually an expired card, not a person who left, and locking someone out on
- * the first failed charge while Stripe is still retrying is a bad way to treat
- * a paying member. Stripe moves them to `canceled` or `unpaid` when it gives
- * up, and those don't grant.
+ * `past_due` DOES NOT, as of 2026-10-12. It used to, on the theory that a
+ * failed renewal is usually an expired card and locking a paying member out
+ * mid-retry is unkind. Melissa's call: a card that has failed is out until
+ * every invoice is paid, and the account page tells them so and gives them
+ * the payment link (see lockedForPayment()). `unpaid` is the same thing after
+ * Stripe stops retrying.
+ *
+ * Stripe's own revenue-recovery setting decides whether a subscription is
+ * eventually cancelled. Either way the door is shut from the first failure.
  */
-const ACTIVE_STATUSES = new Set(["active", "trialing", "past_due"]);
+const ACTIVE_STATUSES = new Set(["active", "trialing"]);
+const PAYMENT_FAILED_STATUSES = new Set(["past_due", "unpaid"]);
+
+/**
+ * Promises already made in writing, by subscription id → the moment the
+ * promise runs out. A member here keeps access while past due until then.
+ *
+ * Lorna was emailed on 2026-10-12, before the rule above existed, that she
+ * keeps full access while she fixes her card and has until Tuesday Oct 20.
+ * That promise is kept. Add nobody here without Melissa saying so.
+ */
+const PAST_DUE_GRACE: Record<string, string> = {
+  sub_1UBaX6GjKS2wfUha1JJKkw75: "2026-10-21T04:00:00Z", // end of Oct 20, Eastern
+};
+
+function inGrace(subscriptionId: string | null | undefined): boolean {
+  const until = subscriptionId ? PAST_DUE_GRACE[subscriptionId] : undefined;
+  return Boolean(until && Date.now() < new Date(until).getTime());
+}
+
+/**
+ * Whether this membership is shut because a payment failed — what the account
+ * page reads to say "pay to get back in" instead of "you're on the free side".
+ */
+export function lockedForPayment(
+  record: Pick<MembershipRecord, "status" | "stripeSubscriptionId"> | null,
+): boolean {
+  return Boolean(
+    record &&
+      PAYMENT_FAILED_STATUSES.has(record.status) &&
+      !inGrace(record.stripeSubscriptionId),
+  );
+}
 
 /** What the entitlement layer asks for: the tier this user currently holds. */
 export async function tierForUser(userId: string): Promise<TierId> {
   if (!databaseConfigured()) return "free";
 
   const rows = (await sql()`
-    SELECT tier, status, current_period_end
+    SELECT tier, status, current_period_end, stripe_subscription_id
     FROM memberships
     WHERE user_id = ${userId}
     LIMIT 1
@@ -67,11 +103,16 @@ export async function tierForUser(userId: string): Promise<TierId> {
     tier: string;
     status: string;
     current_period_end: string | null;
+    stripe_subscription_id: string | null;
   }>;
 
   const row = rows[0];
   if (!row) return "free";
-  if (!ACTIVE_STATUSES.has(row.status)) {
+  if (PAYMENT_FAILED_STATUSES.has(row.status)) {
+    // Not the period-end fallback below: a failed renewal has already moved
+    // the period end a month forward, and that month was never paid for.
+    if (!inGrace(row.stripe_subscription_id)) return "free";
+  } else if (!ACTIVE_STATUSES.has(row.status)) {
     // Cancelled, but the period they paid for may not be over yet. The
     // membership page promises exactly this, so honor it here rather than in
     // the UI, where it would be easy to forget.

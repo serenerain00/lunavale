@@ -30,7 +30,7 @@ const SITE = process.env.VOICE_SITE_URL || "https://lunavale38.com";
 const SECRET = process.env.VOICE_TOOL_SECRET;
 
 /**
- * The tools. Two webhooks into app/api/voice/tools/[tool] (read-only — there is
+ * The tools. Three webhooks into app/api/voice/tools/[tool] (read-only — there is
  * no tool that can change anything) and one client tool the page handles.
  * The secret header is how those routes know the caller is this agent.
  */
@@ -62,6 +62,17 @@ const TOOLS = [
     "content_inventory",
     "What has been released on the site: recent clips, posts, journal pages and episodes, free or members-only, and counts. Use for questions about content or what to promote. Returns a `speak` summary.",
   ),
+  webhook(
+    "instagram_stats",
+    "Instagram numbers: followers and the week's follows, and per post reach, views, likes, shares, saves, plus — for posts whose link was tracked — how many people began checkout and paid from it. Use for any question about Instagram, a post, a reel, or what's performing. As fresh as the last sync (Mondays). Returns a `speak` summary.",
+    {
+      post: {
+        type: "string",
+        description: "Optional. Which post she means, in her words: 'twenty years', 'it suits you', words from the caption. Leave out for an overview.",
+      },
+      days: { type: "number", description: "Optional. How far back for the overview. Default 30." },
+    },
+  ),
   {
     type: "client",
     name: "show_report",
@@ -70,7 +81,8 @@ const TOOLS = [
     parameters: {
       type: "object",
       properties: {
-        name: { type: "string", enum: ["snapshot", "content"], description: "snapshot for business numbers, content for releases" },
+        name: { type: "string", enum: ["snapshot", "content", "instagram"], description: "snapshot for business numbers, content for releases, instagram for Instagram posts" },
+        post: { type: "string", description: "for instagram: which post, as passed to instagram_stats" },
         range: { type: "string", enum: ["today", "week", "month"], description: "for snapshot; default week" },
       },
       required: ["name"],

@@ -19,6 +19,7 @@
 import { timingSafeEqual } from "node:crypto";
 import { businessSnapshot, type Range } from "@/lib/marketing/snapshot";
 import { contentInventory } from "@/lib/marketing/content";
+import { instagramStats } from "@/lib/marketing/instagram";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -37,7 +38,7 @@ const RANGES: Range[] = ["today", "week", "month"];
 export async function POST(req: Request, { params }: { params: Promise<{ tool: string }> }) {
   if (!authorised(req)) return new Response("Not found", { status: 404 });
   const { tool } = await params;
-  const body = (await req.json().catch(() => ({}))) as { range?: string };
+  const body = (await req.json().catch(() => ({}))) as { range?: string; post?: string; days?: number };
 
   try {
     switch (tool) {
@@ -47,6 +48,13 @@ export async function POST(req: Request, { params }: { params: Promise<{ tool: s
       }
       case "content_inventory":
         return Response.json(contentInventory());
+      case "instagram_stats":
+        return Response.json(
+          await instagramStats({
+            post: typeof body.post === "string" ? body.post.slice(0, 80) : undefined,
+            days: typeof body.days === "number" ? body.days : undefined,
+          }),
+        );
       default:
         return new Response("Not found", { status: 404 });
     }

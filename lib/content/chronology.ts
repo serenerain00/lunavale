@@ -71,6 +71,11 @@ export const STORY_ORDER: readonly string[] = [
   // this is what that looks like on an ordinary night.
   "young-luna-ty-apt",
 
+  // HAND-PLACED — CONFIRMED ERA. Melissa, 2026-10-12: both eighteen, the
+  // night he tells her about the Navy. After "Have Fun" (same summer, and he
+  // goes "in a couple of months"); before the prologue, which is years later.
+  "young-luna-ty-seals",
+
   // ── Before any of it ────────────────────────────────────────────────────
   /*
    * THE PROLOGUE, and the only clip here that predates the rest by years.

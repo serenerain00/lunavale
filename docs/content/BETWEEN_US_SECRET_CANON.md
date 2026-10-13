@@ -883,3 +883,24 @@ Luna "can't go to this thing", are not stated; do not settle either on the site.
 The scene is the first time their ordinary closeness feels different to both
 of them. Nothing happens: no kiss, no confession. Luna has not stopped loving
 Josh; Tyson is not pursuing her. Feelings come later, over months, Tyson first.
+
+## Addition — 2026-10-12: the night he told her (`young-luna-ty-seals`)
+
+Melissa: "this is when tyson tells luna that he's joining the navy seals.
+theyre 18." Published free as "We'll Be Fine".
+
+- 2006, both eighteen. A party at night, the two of them on a tailgate.
+- His words: "I'm joining the Navy. I'm gonna try for BUD/S." He goes "in a
+  couple months" (the journal has him leaving in the November).
+- They **had** talked about it as an idea; she didn't know he'd already signed.
+- His reason, as he gives it: "There's nothing for me here, Lou." / "I'm here,
+  Ty." / "I know you are. But Lou, you know what I mean."
+- She is scared for him ("what if something happens to you?"). He: "We'll
+  still talk… I'm not leaving you." She: "But you are." He ends on "We'll be
+  fine, Lou"; she leans into his shoulder.
+- Sits on top of the existing writer canon (2026-09-25): her dating made the
+  decision easier for him, and she has no idea. "Nothing for me here" is the
+  surface of that and must never be interpreted on the site.
+- Superseded: the first draft of journal `the-autumn-he-went` (her mother's
+  house, "it's something to do", never mentioned before, not upset). Rewritten
+  2026-10-13 to match.

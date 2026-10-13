@@ -3608,6 +3608,42 @@ export const videos: Video[] = [
   },
   {
     /*
+      THE NAVY, 2026-10-12. Melissa: "when tyson tells luna that he's joining
+      the navy seals. theyre 18." Title is hers ("We'll Be Fine"), free like
+      the other two 2006 scenes.
+
+      WHAT IS SAID, from the transcript. A party at night, the two of them on
+      a tailgate; friends run off because somebody fell in the pool with his
+      phone. "Don't freak out on me." "I'm joining the Navy. I'm gonna try for
+      BUD/S." "A couple months." Why: "Because there's nothing for me here,
+      Lou." / "I'm here, Ty." / "I know you are. But Lou, you know what I
+      mean." They had talked about it; she didn't know he'd already done it.
+      "What if something happens to you?" "We'll still talk… I'm not leaving
+      you." "But you are." He ends on "We'll be fine, Lou", and she leans into
+      his shoulder.
+
+      THE SYNOPSIS SAYS NONE OF WHY. "Nothing for me here" is his line and the
+      viewer gets it on screen; the copy must not interpret it. Canon has her
+      dating as part of what made it easier for him and her not knowing — that
+      is writer knowledge (tyson-no-early-feelings rule) and stays off the site.
+    */
+    slug: "young-luna-ty-seals",
+    title: "We\u2019ll Be Fine",
+    synopsis:
+      "In a 2006 flashback, at a party, 18-year-old Tyson sits Luna down on a tailgate and asks her not to freak out. He\u2019s joining the Navy \u2014 and going for the SEALs \u2014 in a couple of months. They had talked about it; she didn\u2019t know he had already done it. She asks him why, and what happens if something happens to him, and he keeps telling her they\u2019ll be fine.",
+    file: "young-luna-ty-seals.proxy.mp4",
+    poster: "/posters/young-luna-ty-seals.jpg",
+    // 195: picture goes black at 188.75 and the score runs on under it.
+    durationSeconds: 195,
+    addedOn: "2026-10-12",
+    access: "free",
+    mature: false,
+    feelings: ["trust", "distance"],
+    place: "atlanta",
+    about: ["luna", "tyson"],
+  },
+  {
+    /*
       CATHY AND AVERY IN THE KITCHEN, 2026-09-29. Atlanta, about a week after
       the breakup (Melissa), and Luna has not picked up when her mother calls.
 

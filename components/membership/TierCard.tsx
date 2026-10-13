@@ -156,15 +156,9 @@ export function TierCard({ tier, yearlyOffered = false }: TierCardProps) {
                 validated server-side, so a hand-edited href cannot invent a
                 plan or a price.
 
-                prefetch={false} lives inside PlanChoice and IS LOAD-BEARING:
-                Next prefetches a Link on hover, and the href is a GET route
-                handler that CREATES A STRIPE CHECKOUT SESSION — so a prefetch
-                mints a real session for somebody who has only moved their
-                mouse. Stripe's record showed the fingerprint: sessions a second
-                apart, hover then click, for every visitor who reached this
-                button. Nobody was double-charged, but the abandonment figure
-                was roughly doubled, and that is the one number this page is
-                judged on. */}
+                Since 2026-10-13 PlanChoice's button is a form that POSTs
+                there, because a link to a route that creates a Stripe
+                session got fetched by everything that prefetches links. */}
             <PlanChoice
               tierId={tier.id}
               cta={tier.cta}

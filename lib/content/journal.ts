@@ -1242,47 +1242,55 @@ export const journal: JournalEntry[] = [
   },
 
   /*
-    THE AUTUMN HE WENT, added 2026-09-28. No clip; it is the gap between
-    "Have Fun" and `the-years-he-was-gone`, which starts with the phone
-    already ringing and never says how the decade began.
+    THE AUTUMN HE WENT, added 2026-09-28; REWRITTEN 2026-10-13 to match the
+    scene. `young-luna-ty-seals` ("We'll Be Fine") now shows the night he told
+    her, and it is the newest approved reference, so it is canon: a party, a
+    tailgate, "don't freak out on me", "I'm joining the Navy. I'm gonna try
+    for BUD/S", "a couple months", "there's nothing for me here, Lou" / "I'm
+    here, Ty", they HAD talked about it, she is scared for him, "we'll be
+    fine, Lou", her head on his shoulder. The first draft had her mother's
+    house, "it's something to do", him never having mentioned it, and her not
+    upset — all four gone. Melissa chose "rewrite to match".
 
     HER SIDE ONLY, AND NOTHING ABOUT WHY. Canon (Melissa, 2026-09-25) is that
     her dating made the decision easier for him and that she has no idea it
     played a part. The page must not know that either, and must not wonder.
-    His reason is four words and she takes them at face value — which is the
-    only honest thing she could do, because she was eighteen and it did not
-    occur to her there was anything underneath them.
+    "Nothing for me here" is his line from the scene; she quotes it and takes
+    it as given, and the page does not interpret it.
 
-    TWO ORIGINS IT SUPPLIES, both already canon elsewhere and neither ever
-    explained: the bag in her mother's hall closet with his name on it in
-    Cathy's handwriting (`the-year-he-went-quiet`), and the staring game, which
-    characters.ts has starting "at nineteen" and LUNA_VALE_CONTEXT.md has as
-    "learned in the military". Both fit: he brings it home on his first leave.
+    KEPT FROM THE FIRST DRAFT, both already canon elsewhere: the bag in her
+    mother's hall closet with his name on it in Cathy's handwriting
+    (`the-year-he-went-quiet`), and the staring game, which he brings home on
+    his first leave. Also kept: he went in the November ("a couple months"
+    from the party fits).
 
-    Invented and hers to cut: the tailgate, the dentist's appointment, "it's
-    something to do".
+    Invented and hers to cut: the house she couldn't find again, "which is how
+    you know to freak out", the two-in-the-morning floor.
 
     DRAFT PROSE. Replace it.
   */
   {
     id: "the-autumn-he-went",
     addedOn: "2026-09-28",
-    dateline: "The next box down, and the autumn he told me",
+    dateline: "The next box down, and the night he told me",
     place: "lakehouse",
+    sceneSlug: "young-luna-ty-seals",
     about: ["luna", "tyson", "cathy"],
     access: "premium",
     mature: false,
     body: [
-      "He told me on the tailgate of his truck outside my mother's house, the way you would tell somebody you had moved a dentist's appointment.",
-      "I signed up. Navy.",
-      "That was it. That was the whole announcement. He had never once mentioned it. Not as a joke, not as a thing people do, not in the whole of that summer. I asked him why and he looked at the street for a while and said it's something to do, and I said that is not a reason, and he said it is a pretty good one actually, and that was all I ever got.",
-      "I was eighteen and I took it exactly as it was handed to me. Something to do. People did things. I thought he was restless and I thought it suited him, and I think I was a bit impressed and did not want him to see that.",
-      "Everybody expected me to be upset. My mother kept looking at me across the kitchen as though something was going to happen to my face. Nothing happened to my face. I genuinely thought people went away and came back and nothing moved in between.",
-      "It took me about ten years to find out that is not what happens.",
+      "A party at a house I could not find again if you paid me. String lights on the porch, red cups, and somebody falling in the pool with his phone, his wallet and his keys, which is the only reason everybody else ran off and left the two of us on that tailgate.",
+      "He said, don\u2019t freak out on me, okay. Which is how you know to freak out.",
+      "I\u2019m joining the Navy. I\u2019m gonna try for BUD/S. I had to ask him if that was the SEALs. It was the SEALs.",
+      "We had talked about it. That is the part I keep turning over. We had talked about it the way you talk about everything at eighteen, on somebody\u2019s floor at two in the morning, as a thing a person could do one day. I did not know he had gone and done it. A couple of months, he said.",
+      "I asked him why, and he said there was nothing for him here, and I said I\u2019m here, Ty, which I thought was a very good point. He said he knew. He said, Lou, you know what I mean, and I did, because we had talked about it, and that was the whole answer.",
+      "What I was, was scared. Not of him going. Of what they do to you there, and what they send you to do after. I asked him what happens if something happens to you, and he said nothing\u2019s gonna happen to me, and I said how do you know that, and he did not know that, and neither of us said so.",
+      "He said we would still talk. He said, I\u2019m not leaving you. I said, but you are, which was not fair and was also true, and he asked if that meant I was not going to take his calls, and I told him to shut up. He said I could still annoy him while he was there. Then he said we\u2019ll be fine, Lou, and I put my head on his shoulder, because there is nothing you can say back to that.",
+      "I genuinely thought people went away and came back and nothing moved in between. It took me about ten years to find out that is not what happens.",
       "My mother did the practical thing, which is the only kind of thing she does when she is frightened. She bought a sports bag, a cheap navy one, and wrote his name on the strap in marker in her own handwriting and put it in the hall closet. So he has somewhere to keep things, she said. It was still in there when I left for Colorado. I would put money on it still being in there now.",
       "He went in the November. He came back on his first leave looking exactly the same and completely different, and he had a new trick.",
-      "He would go quiet, and move in close, and wait. Just wait. Over nothing — who had eaten the last of something, whether I had dented his wing mirror, which I had. I lasted about forty seconds the first time and told him everything, including two things he had not asked about.",
-      "He had learned it somewhere he was not allowed to talk about. I learned it off him in my mother's kitchen that week, and I have been using it on him for nineteen years, and I am still better at it than he is, whatever he says.",
+      "He would go quiet, and move in close, and wait. Just wait. Over nothing \u2014 who had eaten the last of something, whether I had dented his wing mirror, which I had. I lasted about forty seconds the first time and told him everything, including two things he had not asked about.",
+      "He had learned it somewhere he was not allowed to talk about. I learned it off him in my mother\u2019s kitchen that week, and I have been using it on him for nineteen years, and I am still better at it than he is, whatever he says.",
       "That is what I got out of the Navy. A game. He got the rest of it, and I have never asked what the rest of it was, and he has never offered.",
     ],
   },

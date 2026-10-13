@@ -34,6 +34,7 @@ import path from "node:path";
 import { neon } from "@neondatabase/serverless";
 import Stripe from "stripe";
 import type { TrafficDay } from "@/lib/analytics/clarity";
+import { ENTRY_LABELS, breaksBetween } from "@/lib/analytics/baseline";
 import { netMonthlyCents } from "@/lib/billing/revenue";
 import { POST_LABELS, durationBand, type PostLabels } from "@/lib/marketing/post-labels";
 
@@ -82,6 +83,8 @@ interface Week {
   paid: number;
   paidIg: number;
   byCampaign: Record<string, { began: number; paid: number }>;
+  /** metadata `entry` ("" = /membership or an older link), from 2026-10-13. */
+  byEntry: Record<string, { began: number; paid: number }>;
   newSubs: number;
   cancelClicks: number;
   ended: number;
@@ -119,7 +122,7 @@ async function week(label: string, from: string, to: string): Promise<Week> {
   const w: Week = {
     label, start: from, end: to, trafficDays: 0, visitors: 0, igVisitors: 0, igCampaigns: {},
     episodePages: 0, membershipViews: 0, playsNonMember: 0, playsIg: 0, checkoutsOpened: 0,
-    checkoutsWithEmail: 0, paid: 0, paidIg: 0, byCampaign: {}, newSubs: 0, cancelClicks: 0, ended: 0,
+    checkoutsWithEmail: 0, paid: 0, paidIg: 0, byCampaign: {}, byEntry: {}, newSubs: 0, cancelClicks: 0, ended: 0,
     activePaying: 0, activeComped: 0, mrrCents: 0, leaving: 0, leavingCents: 0, newPaying: 0, collectedCents: 0, igAttributedCents: 0,
     igFollows: null, igReach: null, igPosts: null,
   };
@@ -153,6 +156,7 @@ async function week(label: string, from: string, to: string): Promise<Week> {
     const lt = Math.floor(Date.parse(`${addDays(to, 1)}T00:00:00Z`) / 1000);
     const emails = new Set<string>(), paid = new Set<string>(), paidIg = new Set<string>();
     const camp: Record<string, { began: Set<string>; paid: Set<string> }> = {};
+    const entry: Record<string, { began: Set<string>; paid: Set<string> }> = {};
     for await (const s of stripe.checkout.sessions.list({ created: { gte, lt }, limit: 100 })) {
       w.checkoutsOpened += 1;
       const email = (s.customer_email ?? s.customer_details?.email ?? "").toLowerCase();
@@ -170,11 +174,16 @@ async function week(label: string, from: string, to: string): Promise<Week> {
       camp[key] ??= { began: new Set(), paid: new Set() };
       if (email) camp[key].began.add(email);
       if (isPaid) camp[key].paid.add(who);
+      const e = m.entry ?? "";
+      entry[e] ??= { began: new Set(), paid: new Set() };
+      if (email) entry[e].began.add(email);
+      if (isPaid) entry[e].paid.add(who);
     }
     w.checkoutsWithEmail = emails.size;
     w.paid = paid.size;
     w.paidIg = paidIg.size;
     for (const [k, v] of Object.entries(camp)) w.byCampaign[k] = { began: v.began.size, paid: v.paid.size };
+    for (const [k, v] of Object.entries(entry)) w.byEntry[k] = { began: v.began.size, paid: v.paid.size };
 
     for await (const sub of stripe.subscriptions.list({ status: "all", limit: 100, expand: ["data.discounts.source.coupon"] })) {
       if (NEVER_LIVE.has(sub.status)) continue;
@@ -330,6 +339,8 @@ async function main() {
   L(`- Clarity traffic: ${cur.trafficDays} of 7 days stored this week; ${prev.trafficDays} of 7 the week before.`);
   L(`- Stripe: ${stripe ? "live, read directly" : "**not available** (no live key)"}. Campaign attribution exists only for checkouts from 2026-10-11 on.`);
   L(`- Plays: counted from 2026-10-11.`);
+  const breaks = breaksBetween(prevStart, end);
+  for (const b of breaks) L(`- **Baseline break ${b.on}${b.on > prevEnd ? " (this week)" : " (week before)"}:** ${b.what} ${b.effect}`);
   L(`- Instagram: ${ig.note || `${ig.rows.length} post(s) in this week from the imported export.`}`);
   L();
   L("## The funnel, week on week");
@@ -384,6 +395,18 @@ async function main() {
     L(row(["Source / campaign", "Began checkout", "Paid", "Note"]));
     L(row(["---", "---:", "---:", "---"]));
     for (const [k, v] of bc) L(row([k.replace("|", " / "), v.began, v.paid, v.began < MIN_N ? "too few" : ""]));
+  }
+  L();
+  L("## Checkouts by entry point (Stripe)");
+  L();
+  const be = Object.entries(cur.byEntry).sort((a, b) => b[1].began - a[1].began);
+  if (!be.length) L("No checkouts this week.");
+  else {
+    L(row(["Entry point", "Began checkout", "Paid", "Note"]));
+    L(row(["---", "---:", "---:", "---"]));
+    for (const [k, v] of be) L(row([ENTRY_LABELS[k] ?? k, v.began, v.paid, v.began < MIN_N ? "too few" : ""]));
+    L();
+    L("Tagged from 2026-10-13: checkouts before then all count as the membership page.");
   }
   L();
   L("## Instagram posts this week");

@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
 import { authConfigured } from "@/lib/billing/provider";
 import { isOwner } from "@/lib/access/owner";
 import { checkoutFunnel } from "@/lib/billing/checkout-funnel";
+import { ENTRY_LABELS, breaksBetween } from "@/lib/analytics/baseline";
 import { EXPERIMENTS, experimentLive } from "@/lib/analytics/experiments";
 import {
   abCounts,
@@ -84,6 +85,8 @@ export default async function ConversionPage({
   const playsIg = nonMemberPlays.filter((r) => r.source === "instagram").reduce((n, r) => n + r.n, 0);
   const memberPlays = plays.rows.filter((r) => r.viewer === "member").reduce((n, r) => n + r.n, 0);
   const playsMeasured = plays.firstDay !== null;
+  const breaks = breaksBetween(since, now.toISOString().slice(0, 10));
+  const entries = checkout ? Object.entries(checkout.byEntry).sort((a, b) => b[1].began - a[1].began) : [];
 
   const steps: Step[] = [
     {
@@ -213,6 +216,43 @@ export default async function ConversionPage({
             <Stat label="New membership rows" value={newRows === null ? "—" : String(newRows)} />
             <Stat label="Member plays" value={playsMeasured ? String(memberPlays) : "—"} />
           </div>
+
+          {entries.length > 0 && (
+            <div className="mt-8 max-w-md">
+              <h3 className="mb-2 text-xs uppercase tracking-[0.1em] text-stone-dim">By entry point</h3>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="text-left text-xs text-stone-dim">
+                    <th className="pb-1 font-normal">Where they tapped Join</th>
+                    <th className="pb-1 text-right font-normal">Began</th>
+                    <th className="pb-1 text-right font-normal">Paid</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-hairline">
+                  {entries.map(([k, v]) => (
+                    <tr key={k}>
+                      <td className="py-2 pr-4 text-ivory">{ENTRY_LABELS[k] ?? k}</td>
+                      <Cell value={v.began} />
+                      <Cell value={v.paid} />
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="mt-2 text-xs text-stone-dim">Tagged from Oct 13; earlier checkouts all count as the membership page.</p>
+            </div>
+          )}
+
+          {breaks.length > 0 && (
+            <div className="mt-8 max-w-2xl border-l-2 border-amber-soft pl-4 text-xs leading-relaxed text-stone">
+              <p className="mb-2 uppercase tracking-[0.1em] text-amber-soft">Baseline break in this range</p>
+              {breaks.map((b) => (
+                <p key={b.what} className="mb-2">
+                  <strong className="font-normal text-ivory">{b.on}:</strong> {b.what}{" "}
+                  <span className="text-stone-dim">{b.effect}</span>
+                </p>
+              ))}
+            </div>
+          )}
 
           <div className="mt-6 max-w-2xl space-y-2 text-xs leading-relaxed text-stone-dim">
             <p>

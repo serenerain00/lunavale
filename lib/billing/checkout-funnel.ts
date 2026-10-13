@@ -50,6 +50,8 @@ export interface CheckoutFunnel {
   campaigns: { source: string; campaign: string; began: number; paid: number }[];
   /** experiment → variant → people who began checkout / paid (metadata ab_<id>). */
   experiments: Record<string, Record<string, FunnelCounts>>;
+  /** Where the tap came from (metadata `entry`; "" = /membership or an older link). From 2026-10-13. */
+  byEntry: Record<string, FunnelCounts>;
 }
 
 const MAX_SESSIONS = 1000;
@@ -63,6 +65,7 @@ export async function checkoutFunnel(since: Date): Promise<CheckoutFunnel | null
     const igPaid = new Set<string>();
     const byCampaign = new Map<string, { source: string; campaign: string; began: Set<string>; paid: Set<string> }>();
     const ab = new Map<string, { began: Set<string>; paid: Set<string> }>();
+    const entries = new Map<string, { began: Set<string>; paid: Set<string> }>();
     let opened = 0;
     let unattributed = 0;
     let truncated = false;
@@ -93,6 +96,11 @@ export async function checkoutFunnel(since: Date): Promise<CheckoutFunnel | null
         if (isPaid) row.paid.add(who);
         ab.set(key, row);
       }
+
+      const entry = entries.get(m.entry ?? "") ?? { began: new Set<string>(), paid: new Set<string>() };
+      if (email) entry.began.add(email);
+      if (isPaid) entry.paid.add(who);
+      entries.set(m.entry ?? "", entry);
 
       const source = m.lt_source || m.ft_source || "";
       if (!source) {
@@ -126,6 +134,9 @@ export async function checkoutFunnel(since: Date): Promise<CheckoutFunnel | null
         (out[id] ??= {})[variant] = { began: r.began.size, paid: r.paid.size };
         return out;
       }, {}),
+      byEntry: Object.fromEntries(
+        [...entries].map(([k, r]) => [k, { began: r.began.size, paid: r.paid.size }]),
+      ),
     };
   } catch (error) {
     console.error("checkoutFunnel: Stripe lookup failed", error);

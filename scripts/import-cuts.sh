@@ -886,6 +886,11 @@ CUTS=(
   "luna-josh-bed-land|stories/luna-josh/luna-josh-bed-land.mov|25|-|-|30"
   # 2026-10-11: The suit. Poster is the collar, 0:36. 60fps source, proxy at 30.
   "luna-ty-suit|stories/luna-ty-suit/luna-ty-suit-music.mov|36|-|-|30"
+  # 2026-10-12: Tyson tells Luna he's joining the Navy (2006, both 18). A
+  # party, night, on a tailgate. Poster at 90s, both faces
+  # under the string lights. Picture is black from 188.75; the score runs on
+  # under it to the end, kept, as music leads. 60fps source, proxy at 30.
+  "young-luna-ty-seals|stories/young-luna-ty-seals/young-luna-ty-seals-music.mov|90|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

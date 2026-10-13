@@ -42,6 +42,8 @@ interface VideoPlayerProps {
    * to a parent instead of state held in here.
    */
   onEnded?: () => void;
+  /** Fired on every play; SceneWatch uses the first to show PlayJoin. */
+  onPlay?: () => void;
 }
 
 export function VideoPlayer({
@@ -49,6 +51,7 @@ export function VideoPlayer({
   poster,
   title,
   onEnded,
+  onPlay,
 }: VideoPlayerProps) {
   const [failed, setFailed] = useState(false);
   // Changing the key remounts the element, which is the only reliable way to
@@ -116,7 +119,10 @@ export function VideoPlayer({
       poster={poster}
       aria-label={title}
       onError={() => setFailed(true)}
-      onPlay={countPlay}
+      onPlay={() => {
+        countPlay();
+        onPlay?.();
+      }}
       onEnded={onEnded}
     >
       <source src={`/api/stream/${slug}`} type="video/mp4" />

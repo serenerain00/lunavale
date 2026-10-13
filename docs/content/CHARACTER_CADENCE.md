@@ -43,8 +43,9 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-12 against `main` at 5ebf06d. The 2026-07-28 row is kept beneath
-so the drift is visible.
+re-run 2026-10-13 against `main` at ac6ccf5 — identical to 5ebf06d, which is
+what you would expect: that advance touched no content module. The 2026-07-28
+row is kept beneath so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
@@ -68,7 +69,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → **18 at 5ebf06d**: it widened for six weeks, snapped in hard when episodes
+17 → **18, holding at ac6ccf5**: it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has since been drifting a point
 either way. **Treat it as noise in the high teens, not a trend.** *(This

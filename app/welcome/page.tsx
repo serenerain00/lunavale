@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { billingLive } from "@/lib/billing/provider";
+import { RememberPayment } from "@/components/membership/RememberPayment";
 
 export const metadata: Metadata = {
   title: "You're in",
@@ -58,6 +59,7 @@ export default async function WelcomePage({
       <main className="mx-auto w-full max-w-xl flex-1 px-5 pb-24 pt-16 sm:px-8 sm:pt-24">
         {paid ? (
           <>
+            <RememberPayment sessionId={sessionId} />
             <p className="text-xs uppercase tracking-[0.2em] text-amber">
               That&rsquo;s paid
             </p>

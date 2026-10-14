@@ -167,6 +167,17 @@ async function checkGates() {
   } else if (linked.length) {
     fail("Something links to /membership/start", `${linked.join(", ")} — use the PlanChoice form (POST).`);
   } else ok("Checkout starts on POST only, and nothing links to it");
+
+  // A SECOND PAYMENT FROM SOMEBODY WHO HAS ALREADY PAID (2026-10-05, and again
+  // 2026-10-13 with a cancel note saying so). Join must send an existing
+  // member — or a browser that just paid, before its account exists — back to
+  // what they bought, and the access check must claim a pay-first payment.
+  const entSrc = await read("lib/access/entitlement.ts");
+  if (!/isMember\(\)/.test(startSrc) || !startSrc.includes("PAID_COOKIE")) {
+    fail("Join can charge somebody who already paid", "/membership/start must check isMember() and the lv_paid cookie before creating a checkout.");
+  } else if (!entSrc.includes("claimWaiting(")) {
+    fail("A pay-first payment is only claimed on /account", "readTier() must claim waiting payments, or the member sees Join and pays twice.");
+  } else ok("Join won't take a second payment from somebody who has paid");
 }
 
 /* ═══════════════════════════ B. Premium leakage ════════════════════════════
@@ -536,7 +547,7 @@ async function checkStripe() {
     const live = new Stripe(liveKey);
     const { neon } = await import("@neondatabase/serverless");
     const sql = neon(process.env.DATABASE_URL);
-    const subs = (await live.subscriptions.list({ status: "all", limit: 100 })).data;
+    const subs = (await live.subscriptions.list({ status: "all", limit: 100, expand: ["data.customer"] })).data;
     const rows = (await sql`
       SELECT stripe_subscription_id, status, cancel_at_period_end FROM memberships
     `) as { stripe_subscription_id: string | null; status: string; cancel_at_period_end: boolean | null }[];
@@ -561,6 +572,33 @@ async function checkStripe() {
         drift.push(`${s.id} (site: ${row.status}${row.cancel_at_period_end ? ", leaving" : ""} / Stripe: ${s.status}${leavingIn(s) ? ", leaving" : ""})`);
       }
     }
+    // ONE PERSON, TWO LIVE SUBSCRIPTIONS = PAID TWICE (2026-10-05, 2026-10-13).
+    // Both were somebody who paid before making an account and then paid
+    // again. Melissa: "when it comes to people's money there's no mistakes
+    // acceptable." Grouped by the email on the Stripe customer, since a second
+    // payment usually makes a second customer. Fix: refund + cancel the extra
+    // one (reason=duplicate) with Melissa's OK, and email them.
+    const byEmail = new Map<string, string[]>();
+    for (const s of subs) {
+      if (!["active", "trialing", "past_due"].includes(s.status)) continue;
+      const c = s.customer;
+      const email = typeof c === "object" && c && !("deleted" in c && c.deleted) ? (c.email ?? "").toLowerCase() : "";
+      if (!email) continue;
+      byEmail.set(email, [...(byEmail.get(email) ?? []), s.id]);
+    }
+    const doubled = [...byEmail.values()].filter((ids) => ids.length > 1);
+    if (doubled.length) {
+      fail(`${doubled.length} person(s) are paying for more than one membership`,
+        `${doubled.map((ids) => ids.join(" + ")).join("; ")}. Refund + cancel the extra one with Melissa's OK.`);
+    } else ok("Nobody is paying twice");
+
+    // A CHARGEBACK is a customer telling their bank we took money wrongly.
+    const disputes = (await live.disputes.list({ limit: 20 })).data.filter((d) =>
+      ["warning_needs_response", "needs_response", "under_review", "warning_under_review"].includes(d.status));
+    if (disputes.length) {
+      fail(`${disputes.length} open chargeback(s) in live Stripe`, `${disputes.map((d) => `${d.id} ${d.reason}`).join(", ")}. Each has a response deadline.`);
+    } else ok("No open chargebacks");
+
     if (orphan.length) {
       fail(`${orphan.length} live subscription(s) belong to no member and nobody can claim them`, orphan.join(", "));
     }

@@ -904,3 +904,22 @@ theyre 18." Published free as "We'll Be Fine".
 - Superseded: the first draft of journal `the-autumn-he-went` (her mother's
   house, "it's something to do", never mentioned before, not upset). Rewritten
   2026-10-13 to match.
+
+## Addition — 2026-10-13: the event (`luna-josh-ty-event`)
+
+The night after the suit. **The event is the one Josh's company hosts every
+year** (Melissa) — this settles the suit note's open question of which company:
+it's Josh's, which is consistent with Tyson contracting for him. Luna's reason
+for "can't go" is now known too: she was going with Josh.
+
+- Josh talked Luna into coming, though she had told Tyson she couldn't go.
+- **Nobody at the company knows Josh and Luna have separated.** Luna has been
+  gradually letting go of her **operational duties** at the company.
+- Her reason, in the scene: walking in with another man would have looked like
+  she was trying to hurt Josh. "I told him me coming didn't mean I was coming
+  home." "I wanted to come with you. It just felt complicated, Ty."
+- Tyson (writer knowledge, never on the site): not jealous, but stung that she
+  said no to him and yes to Josh, maybe because he wasn't pushy like Josh; he
+  can see she's still bending for Josh though she's left him. Luna hates him
+  being upset with her and pleads. Ends: "I'll come sit with you." / "You came
+  with Josh." / "I can still spend time with you." / "Yeah. I'll find you."

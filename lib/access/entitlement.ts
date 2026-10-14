@@ -25,7 +25,7 @@ import {
   type TierId,
 } from "@/lib/content/membership";
 import { billingLive } from "@/lib/billing/provider";
-import { tierForUser } from "@/lib/db/memberships";
+import { tierForUser, anyUnclaimed, claimPendingFor } from "@/lib/db/memberships";
 import { previewTier } from "@/lib/access/preview";
 import type { AccessLevel } from "@/lib/content/videos";
 
@@ -81,7 +81,13 @@ const readTier = cache(async function readTier(): Promise<TierId> {
     const { auth } = await import("@clerk/nextjs/server");
     const { userId } = await auth();
     if (!userId) return "free";
-    return tierForUser(userId);
+    const tier = await tierForUser(userId);
+    if (tier !== "free") return tier;
+    // Paid before the account existed and never went through /welcome or
+    // /account, where the claim used to live. 2026-10-13: a customer did
+    // exactly that, was shown as free everywhere, pressed Join and paid twice.
+    // So the claim also runs here, on any page, the moment she is signed in.
+    return (await claimWaiting(userId)) ? tierForUser(userId) : tier;
   }
 
   const store = await cookies();
@@ -94,6 +100,28 @@ const readTier = cache(async function readTier(): Promise<TierId> {
 
   return getTier(raw)?.id ?? "free";
 });
+
+/**
+ * Attach a payment parked against this person's verified email, if there is
+ * one. CHEAP FOR EVERYONE ELSE: one indexed read that is almost always empty,
+ * and Clerk is only asked for the email when something is actually waiting.
+ * Verified addresses only — see claimPendingFor().
+ */
+async function claimWaiting(userId: string): Promise<boolean> {
+  try {
+    if (!(await anyUnclaimed())) return false;
+    const { currentUser } = await import("@clerk/nextjs/server");
+    const user = await currentUser();
+    for (const e of user?.emailAddresses ?? []) {
+      if (e.verification?.status !== "verified") continue;
+      if (await claimPendingFor(userId, e.emailAddress)) return true;
+    }
+  } catch (error) {
+    // Never break a page over this; /account and /membership/claim try too.
+    console.error("entitlement: claim check failed", error);
+  }
+  return false;
+}
 
 export async function getMembership(): Promise<Membership> {
   const [tier, previewing] = await Promise.all([readTier(), previewTier()]);

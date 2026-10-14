@@ -39,10 +39,10 @@
  */
 
 import { NextResponse, type NextRequest } from "next/server";
-import { MEMBER_COOKIE } from "@/lib/access/entitlement";
+import { MEMBER_COOKIE, isMember } from "@/lib/access/entitlement";
 import { billingLive, isBillingInterval } from "@/lib/billing/provider";
 import { getTier } from "@/lib/content/membership";
-import { membershipForUser } from "@/lib/db/memberships";
+import { lockedForPayment, membershipForUser } from "@/lib/db/memberships";
 import {
   FIRST_TOUCH_COOKIE,
   LAST_TOUCH_COOKIE,
@@ -50,11 +50,13 @@ import {
   toStripeMetadata,
 } from "@/lib/analytics/attribution";
 import { AB_COOKIE, abMetadata } from "@/lib/analytics/experiments";
+import { PAID_COOKIE } from "@/lib/billing/paid-cookie";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const THIRTY_DAYS = 60 * 60 * 24 * 30;
+
 
 /**
  * Whether this request is a browser guessing, rather than a person clicking.
@@ -171,7 +173,14 @@ async function start(
     // SIGNED OUT: straight to the card. No account, no verification code, no
     // second visit to this route. Stripe collects the email and the webhook
     // does the rest.
+    // 2026-10-13: a customer paid, didn't make her account there and then,
+    // and later paid a second time. Neither branch below may take a second
+    // payment from somebody who has already made one.
     if (!userId) {
+      const paid = request.cookies.get(PAID_COOKIE)?.value;
+      if (paid && /^cs_(live|test)_[A-Za-z0-9]+$/.test(paid)) {
+        return go(new URL(`/welcome?session_id=${encodeURIComponent(paid)}`, origin));
+      }
       const url = await createCheckoutSession({
         tier: tier.id,
         userId: null,
@@ -185,6 +194,12 @@ async function start(
       currentUser(),
       membershipForUser(userId),
     ]);
+
+    // Already a member (isMember also claims a payment made before the
+    // account existed), or one whose card failed: never a new subscription.
+    if ((await isMember()) || (existing && lockedForPayment(existing))) {
+      return go(new URL("/account", origin));
+    }
 
     const url = await createCheckoutSession({
       tier: tier.id,

@@ -458,6 +458,39 @@ export const journal: JournalEntry[] = [
     ],
   },
   /*
+    STILL US, added 2026-10-13 beside `luna-josh-bed-land` — the black-and-white
+    love scene from BEFORE the breakup (Melissa, 2026-10-10). Written that
+    night, in the farmhouse, like the other pages from the last stretch of
+    them together; it sits just before `four-minutes` because the scene sits
+    just before "Three Days".
+
+    THE SCENE HAS NO DIALOGUE, so nothing here is quoted and the page does not
+    describe what is on screen. Luna's journal is never explicit (canon, tone
+    rules); the page is about why she is writing a good night down at all.
+
+    Invented and hers to cut: his hand on her back, the phone left downstairs.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "still-us",
+    addedOn: "2026-10-13",
+    dateline: "Late, and he is asleep, and I am not ready to be",
+    place: "farmhouse",
+    about: ["luna", "josh"],
+    sceneSlug: "luna-josh-bed-land",
+    access: "premium",
+    mature: true,
+    body: [
+      "He fell asleep with his hand on my back. He has done that for ten years and I have never once told him that I lie still on purpose until it goes heavy.",
+      "I want tonight written down, and I want to be honest about why. It is not because anything happened. It is because nothing went wrong, and I have started to notice those nights are further apart than they used to be.",
+      "He was home before dark. He left his phone downstairs. That is the whole list, and look at me writing it out like an occasion.",
+      "When he is here, he is completely here. That has never been the problem. Josh has never in his life done anything halfway, and when all of that is pointed at me it is like standing too close to a fire.",
+      "I am not going to write the rest of it. I don't need to. I just want it on paper, in my handwriting, that it is still us. That we still know how.",
+      "Because there will be a bad month. There is always a bad month. And I would like the woman who reads this in it to know that she was not imagining him.",
+    ],
+  },
+  /*
     THE DRIVEWAY, 2026-08-25, and the last page from inside the ten years.
     Sits beside `luna-josh-truck-leaving` — Josh going away for three days,
     the long goodbye at the truck, and her still standing in the drive after.
@@ -687,6 +720,45 @@ export const journal: JournalEntry[] = [
       "That is not a marriage. That is just being tired.",
       "I threw the glass. It is on the wall and on the floor and in the grout and I have cut my hand and I am not going to make anything of that.",
       "I will clean it up in the morning. I always clean it up in the morning.",
+    ],
+  },
+  /*
+    SIT STILL, added 2026-10-13 beside `luna-tyson-shaving` — the beard trim
+    at the lakehouse, a week after the breakup (Melissa, 2026-10-04). The day
+    after `the-case-against-me`, which is the glass.
+
+    DIALOGUE IS THE FOOTAGE: bossier / "you just listened better before", the
+    face, "I think I'm okay and then something stupid happens and I'm not",
+    "I just don't know what I'm supposed to feel yet" / "You don't have to know
+    yet", twenty minutes, the moustache.
+
+    DESCRIBE AND STOP (tyson-no-early-feelings). Nothing here is about him and
+    her; it is a week out and he is being useful in the only way she'll allow.
+
+    Invented and hers to cut: whose clippers, the kitchen chair.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "sit-still",
+    addedOn: "2026-10-13",
+    dateline: "Eight days, and I took the clippers to Tyson",
+    place: "lakehouse",
+    where: "A kitchen chair on the deck",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-tyson-shaving",
+    access: "premium",
+    mature: false,
+    body: [
+      "Tyson came up this afternoon with a week of beard on him, and I told him I was doing something about the beard, and he said he could do it himself, and I said I have seen you do it yourself.",
+      "So he sat on a kitchen chair on the deck and I did it. It took twenty minutes. He says it took twenty minutes because I would not stop talking. I would like it noted that my mouth was not the part I was trimming.",
+      "He told me I have got bossier. I said I have always been bossy. He said not like this. I said he just used to listen better, and he said no he didn't, and he is right, he never has.",
+      "Then in the middle of it he asked if I was okay, and I said yes, and he said no, that's your face. The face where I don't believe him but I'm pretending I do. I said I do not have a face. Twenty years. Apparently I have a face.",
+      "So I told him the truth, which was smaller than I expected it to be. I think I'm okay, and then something stupid happens and I'm not. A mug. The radio. The way the light comes in at four.",
+      "I said I just don't know what I'm supposed to feel yet. And he said then don't. You don't have to know yet.",
+      "That is the most useful thing anybody has said to me in eight days, and he said it with half a beard while I was holding a pair of clippers near his ear.",
+      "I threatened his moustache, obviously. He said that was messed up. I told him to sit still. He said he was sitting still until I threatened his moustache.",
+      "I swept the deck after he left. It is the first thing I have cleaned up all week that I did not break first.",
     ],
   },
   {
@@ -1191,6 +1263,49 @@ export const journal: JournalEntry[] = [
     ],
   },
 
+  /*
+    PICK ME UP, added 2026-10-13 beside `ty-luna-young` — Atlanta, both
+    eighteen, the party, the races, the drive, the tacos. One of the box
+    pages, so written in the present and filed with them, just ahead of
+    `the-hoodie` (which is `young-luna-ty-apt`, the same summer).
+
+    `the-rule` already covers nineteen and the Waffle House, and
+    `twenty-years-ago` the meeting, so this is neither: it is the first time
+    the pattern shows — she rings, he comes, nobody makes anything of it.
+
+    DIALOGUE IS THE FOOTAGE: "Who's picking you up?" / "Tyson." / "Of
+    course.", "At the races.", "Give me 20.", "Same house?", the little okay
+    thing, "They're the same word, Lou", "I could eat" / "I know", tacos.
+
+    WHAT IT MUST NOT DO (tyson-no-early-feelings): read anything into why he
+    came. "Of course" is everybody else's joke about HER, and that is how she
+    takes it. Nothing about what he was thinking.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "pick-me-up",
+    addedOn: "2026-10-13",
+    dateline: "Still in the boxes, and I remembered a party I left",
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    sceneSlug: "ty-luna-young",
+    access: "premium",
+    mature: false,
+    body: [
+      "There is nothing in the box for this one. No photograph, no ticket. I was holding something else entirely and it came back whole, which is how the good ones come back.",
+      "Eighteen. A party in Atlanta that I had had enough of by about ten. Somebody asked who was picking me up and I said Tyson, and three people said of course at the same time, the way you say it about a girl who always orders the same thing.",
+      "I was annoyed about that for the whole call. I am less annoyed about it now.",
+      "He was at the races. I asked if he was busy. He said what do you need. Not what's wrong, not where are you. What do you need. I said can you come and get me, and he said yeah, and I said are you sure, and he said same house? Give me twenty.",
+      "That was the whole conversation. He left the races. I don't think I even said thank you, and I am fairly sure he would have been embarrassed if I had.",
+      "In the car he asked if I was hungry. I said no. He said okay. I said what. He said nothing. I said you did a thing, the little okay thing, and he said he had said okay, which is a simple thing, and I said no, you said okay, and he said they are the same word, Lou.",
+      "They are not the same word. Everybody who knows him knows they are not the same word.",
+      "I said I could eat. He said I know.",
+      "Then twenty minutes of not choosing. He would not pick because I would hate wherever he picked. I said I don't do that. I said okay, sometimes. We had tacos. We always had tacos. He knew that before he asked.",
+      "I have been trying to work out what it is about that night that makes it worth a page, and I think it is that nothing about it was unusual. I rang, and he came. At eighteen that did not seem like a thing anybody would write down.",
+      "Twenty years on, three people saying of course turns out to be the most accurate thing anybody said about me that year.",
+    ],
+  },
   /*
     THE HOODIE, added 2026-09-28, against `young-luna-ty-apt` ("Have Fun").
     Atlanta, 2006, both eighteen, remembered from the boxes at thirty-eight.
@@ -2044,6 +2159,134 @@ export const journal: JournalEntry[] = [
       "And I still love Josh. That has not gone anywhere. I checked, on the drive home, the way you pat your pocket for your keys.",
       "It was one minute in a shop. A man I know better than anybody looked, for one minute, like somebody I didn\u2019t know, and I looked too long. That is all it was.",
       "I am not going to think about what he was going to say.",
+    ],
+  },
+  /*
+    THE TEXT I DIDN'T SEND, added 2026-10-13. The evening of
+    `luna-josh-ty-event`, before it — the day after `it-suits-you`.
+
+    CANON (Melissa, 2026-10-13): the event is the one Josh's company hosts
+    every year. Josh talked her into coming although she had told Tyson she
+    couldn't go. Nobody at the company knows they have separated, and she has
+    been letting go of her operational duties there. In the scene: "I had the
+    text ready. I couldn't send it." and "He kept pushing me to come with him."
+
+    WHAT IT MUST NOT DO: say what her duties at the company are (not settled),
+    or explain Tyson. She does not know how he will take it; she only knows
+    she has not told him.
+
+    Invented and hers to cut: the wording of the text, Josh arriving at seven,
+    "every year we walk in together".
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "the-text-i-didnt-send",
+    addedOn: "2026-10-13",
+    dateline: "Dressed, and the text is still sitting there",
+    place: "lakehouse",
+    about: ["luna", "josh", "tyson"],
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh is picking me up at seven for the company night. I am dressed. I have been dressed for forty minutes, which is how I know something is wrong with me.",
+      "I told Tyson yesterday that I couldn't go. That was true when I said it. Then Josh asked, and asked again, and the third time it was easier to say yes than to keep finding new ways to say no.",
+      "His reason is a good one, which is the trouble with Josh. Nobody there knows. Every year we walk in together, and if I am not on his arm this year, people will ask, and he will have to answer in a room full of people who work for him.",
+      "I have spent months quietly handing my part of that place to other people, a piece at a time, so that when it comes out nobody is left holding anything. Nobody has noticed. That was the point. Tonight I am going to stand there and smile and let them keep not noticing.",
+      "It is one night. I said that to myself in the mirror, out loud, like a crazy person.",
+      "The text says: Changed my plans, I am coming tonight after all. With Josh. Didn't want you to hear it from someone else.",
+      "I have written it four times. Every version is true, and every version reads as if I am telling him something worse than what I am telling him.",
+      "Tyson and I do not lie to each other. This is not a lie. It is just a text I have not sent yet.",
+      "I know exactly how that sentence would sound if somebody else wrote it.",
+    ],
+  },
+
+  /*
+    I WAS GOING TO TEXT YOU, added 2026-10-13 beside `luna-josh-ty-event`,
+    members-only like the scene past its first minute. Written during the
+    event, in the ladies' room, straight after the hall — so it ends on "I'll
+    find you" and does not know how the rest of the night went.
+
+    DIALOGUE IS THE FOOTAGE: "half of Denver", "I was going to text you" /
+    "When?" / "Before we got here." / "It would have been helpful.", "I'm
+    coming would have worked." / "With?" / "Josh." / "That part became pretty
+    clear.", "it would have looked like I was trying to hurt him", "Don't tell
+    me it's fine when you're showing me it's not", "What changed between
+    yesterday and today?", "me coming didn't mean I was coming home", "I
+    wanted to come with you. It just felt complicated", "I'll come sit with
+    you." / "You came with Josh." / "I'll find you."
+
+    Invented and hers to cut: the ladies' room, the back of the program.
+
+    TYSON'S SIDE IS WRITER KNOWLEDGE (canon, 2026-10-13). She sees that he is
+    upset and that he will not pretend otherwise. She does not know why it
+    lands as hard as it does, and the page does not guess.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "i-was-going-to-text-you",
+    addedOn: "2026-10-13",
+    dateline: "In the ladies' room at Josh's company night, and I have ten minutes",
+    place: "downtown",
+    where: "The hall outside",
+    about: ["luna", "tyson", "josh"],
+    sceneSlug: "luna-josh-ty-event",
+    access: "premium",
+    mature: false,
+    body: [
+      "I never sent it.",
+      "Half of Denver is in that room. I walked in on Josh's arm and smiled at everybody I have smiled at for ten years, and then I looked up and Tyson was looking straight at me, in the new suit, and I watched him work it out from across the room.",
+      "I caught him in the hall. I said I was going to text you. He said when. I said before we got here. He said that would have been helpful, and I said I know, because I did know, I have known since four o'clock this afternoon.",
+      "He said I thought you weren't coming. I said I wasn't, Josh asked me to. He said I didn't have to explain why I was here, that he had only asked, and then he said, very evenly, that he was having a little bit of a reaction. Tyson does not have reactions. He has silences.",
+      "I told him I had the text ready and could not send it. He said I'm coming would have worked. I said with, and he said Josh, and I said yes, and he said that part had become pretty clear.",
+      "So I told him the real reason, badly. That if I had walked in with him, with another man, in front of all of them, it would have looked like I was trying to hurt Josh. In his own room. In front of people who still think we are fine.",
+      "He said he wasn't asking me to. He's right. He wasn't asking me for anything. He never does.",
+      "Then he said it's fine, and I said don't do that. Don't tell me it's fine when you're showing me it's not. I have never in twenty years had to say that to him, because he has never once said fine to me and not meant it.",
+      "He asked what changed between yesterday and today. Yesterday I was fixing his collar.",
+      "I said nothing has changed with me and Josh. I told him I had said it to Josh, too: me coming tonight does not mean I am coming home. I wanted Tyson to know that. I don't know why it mattered so much that he knew it, but it did. It does.",
+      "And I said the truest thing, which was the smallest: I wanted to come with you. It just felt complicated.",
+      "He said he would talk to a few people and then probably head out. I asked if it was because of this. He said he did not really want to sit in there all night. I said I would come and sit with him. He said you came with Josh.",
+      "I said I can still spend time with you. He said yeah. I'll find you.",
+      "I cannot stand him being upset with me. I did not know that about myself until about twenty minutes ago. Josh can be angry with me for a week and I can live in it. Tyson was not even angry, and I am in a toilet cubicle writing on the back of the program.",
+      "I am going to go back out and find him before he finds me.",
+    ],
+  },
+
+  /*
+    THE RIGHT BULB, added 2026-10-13 beside `luna-ty-bulb`, the short funny
+    one (free scene; members-only page). Placed after the event and before
+    "Most Nights", as the clip is.
+
+    FROM THE FOOTAGE: "Okay, I know I bought the right bulb." / "Would you
+    just fit, please?" / "Need some help?" / "No, I need this to fit." — he
+    waits until both her arms are up, grabs her sides, "Oh my god! You're such
+    a fucking asshole!", he laughs and walks off.
+
+    Invented and hers to cut: "since we were eighteen", the bulb going in afterwards, and
+    "we have not talked about the fundraiser" (true to the order, but nothing
+    on screen says it).
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "the-right-bulb",
+    addedOn: "2026-10-13",
+    dateline: "For the record, it was the right bulb",
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-ty-bulb",
+    access: "premium",
+    mature: false,
+    body: [
+      "I bought the right bulb. I want that on paper before anything else, because he is going to tell this story and in his version it will have been the wrong one.",
+      "It would not go in. I was up on my toes with both arms over my head telling it, out loud, to just fit, please, and Tyson came in behind me and said need some help, in the voice of a man who already knew the answer.",
+      "I said no, I need this to fit.",
+      "And he waited. That is the part. He did not do it straight away. He waited until both my arms were as far up as they go, and then he got me in both sides at once, which he has been doing since we were eighteen and which I have never once in twenty years seen coming.",
+      "I screamed. I called him something I will not write down in my own journal. He laughed all the way out of the room, the real laugh, the one where he has to look at the floor.",
+      "The bulb went in on the next try. It was the right one.",
+      "We have not talked about the fundraiser. I think this was us not talking about it. I think he came in, saw me losing a fight with a light fitting, and decided that was a better use of the afternoon.",
+      "He was right. I am still annoyed. Both of those are true.",
     ],
   },
   {
@@ -3163,6 +3406,49 @@ export const journal: JournalEntry[] = [
       "Three sentences. I have taken them apart four times sitting in this truck and they do not add up to anything. Not here — where, then. Complicated by what. I'll talk to you — when.",
       "And the worst of it is I said okay. I stood there in the dark behind a barn and let a man I have known since I was nineteen hand me nothing, and I said okay, and I went and found Josh and rode the Ferris wheel.",
       "He is not going to talk to me. I knew it while he was saying it. I don't know how I knew and I am writing it down here so that when he doesn't, I have proof I wasn't surprised.",
+    ],
+  },
+  /*
+    THE POOL, added 2026-10-13 beside `josh-luna-pool`. Late, by the pool at
+    the farmhouse, the argument that does not end like an argument. Sits after
+    `the-fair` and before Mexico because the scene does in chronology.ts; the
+    video note says its placement was never asserted, so if the scene moves,
+    this page moves with it.
+
+    DIALOGUE IS THE FOOTAGE: waiting up / "I didn't ask you to wait up", "Do
+    you ever miss me? ... When you're gone." / "Of course I miss you", "Act
+    like I don't miss you because I'm working", "what you mean is fuck you",
+    "I'm trying to talk to you" / "You're wanting to start a fight", "Josh,
+    no, okay? Just stop.", "I don't even know how to talk to you anymore."
+
+    NEVER EXPLICIT, though the members' cut is. MATURE, to match. No content
+    note: the page does not depict anything being done to her, and it must
+    not imply it. It is her own account of how their fights have always
+    turned, which is canon (the thrill and the fear, unseparated).
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "by-the-pool",
+    addedOn: "2026-10-13",
+    dateline: "Late, by the pool, and he's gone up",
+    place: "farmhouse",
+    where: "The pool",
+    about: ["luna", "josh"],
+    sceneSlug: "josh-luna-pool",
+    access: "premium",
+    mature: true,
+    body: [
+      "I waited up. I told him so when he came out, which was a mistake, because he said he hadn't asked me to, and he was right, and that was the end of the good part of the night.",
+      "We sat on the same lounger facing opposite ways, like two people waiting for different buses.",
+      "I asked him if he ever misses me. When he's gone. I meant it as a question. He heard it as an accusation and answered it like one: of course he misses me, don't do that, don't act like I don't miss you because I'm working.",
+      "Then he said the thing he says. Why don't I just say what I really want to say. That all of this is me saying the long version of something short and rude.",
+      "It isn't. I was trying to talk to him. I said so, and he said no, I wanted to start a fight. I did not want to start a fight. I wanted him to hear the question.",
+      "I said stop. I said it more than once. I meant stop the conversation, stop making me the person in it I don't want to be, and I said the only true thing I had left, which was that I don't even know how to talk to him anymore.",
+      "And then it did not end the way an argument ends. It never has, with us. Somewhere in the next minute it turned into the other thing, the way it always turns, and I let it, and I am not going to sit here and pretend I didn't want to.",
+      "That is the part I have to be honest about on this page if nowhere else. It has always been like this. The fight and the rest of it come out of the same place in him, and in me, and for ten years I have called that passion.",
+      "Tonight I could not tell where one stopped. I am not sure I could tell before either. I am just sure I noticed it tonight.",
+      "We are supposed to be trying again. I would like to know what it is we are trying.",
     ],
   },
   /* -------------------------------------------------- seven days: Mexico ---
@@ -4300,6 +4586,54 @@ export const journal: JournalEntry[] = [
       "I drove the eleven miles back with the window down in weather that did not call for it. There was no part on the passenger seat this time. I had not brought one out and I did not bring one back, and when I came in Josh looked up and asked where I had been and I said the store.",
       "That is not the first lie in this book. There is one on about page four, told to my father, about a man who was forty feet away with the television on.",
       "It is the first one I did not have to tell.",
+    ],
+  },
+  /*
+    THE GARAGE, AGAIN, added 2026-10-13 beside `ty-luna-grg2`, the third
+    garage scene. After `i-asked-him` (ty-luna-garage) and before
+    `i-drove-in` (luna-ty-apt-argue), as the scenes are.
+
+    DIALOGUE IS THE FOOTAGE (first transcript of it, 2026-10-13): "Did you see
+    me call?" / "Didn't want to talk.", "You don't get to disappear for weeks,
+    show back up like nothing happened, and then decide when we're allowed to
+    talk", "for 20 years you've still managed to pick up the phone" / "Maybe I
+    shouldn't have.", "maybe you shouldn't call me every time something goes
+    wrong" / "Okay, and you call me." / "That's different.", "You can barely
+    look at me", "Can you please just go home?", "Can't or won't." / "Does it
+    matter?" / "It matters to me."
+
+    WHAT IT MUST NOT DO: explain him. THE PROMISE and the debt are writer
+    knowledge; she knows only that there is something he will not tell her,
+    and that is all the page has.
+
+    The scene's synopsis was written before anybody had the dialogue and is
+    still a careful read of the frames ("a conversation he does not want to
+    have") — accurate, but it can now say more if Melissa wants it to.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "can-or-wont",
+    addedOn: "2026-10-13",
+    dateline: "The shop again, and he asked me to go home",
+    place: "garage",
+    about: ["luna", "tyson"],
+    sceneSlug: "ty-luna-grg2",
+    access: "premium",
+    mature: false,
+    body: [
+      "I called him. He saw it. He said so — yeah — as if that was an answer. I asked why he didn't pick up and he said he didn't want to talk. I said to me, and he did not say no.",
+      "He told me to leave it. I said no. He does not get to disappear for weeks, show back up like nothing happened, and then decide when we are allowed to talk. He said he was standing right there. That is not what I meant and he knows it.",
+      "He said he has stuff going on. He always has stuff going on, and somehow for twenty years he has still managed to pick up the phone.",
+      "He said maybe he shouldn't have.",
+      "I have been driving around with that sentence for an hour.",
+      "He said maybe I shouldn't call him every time something goes wrong. I said I don't. He said I do. I said and you call me. He said that's different. I asked how it is different and he said because it is, and he said my name like a door closing.",
+      "I asked why he is mad at me. He says he isn't. He could barely look at me. I said there, that, what is that, and he asked me to please just go home.",
+      "So I asked the only question left. Did I do something. He said no. Then stop treating me like I did. Just tell me what's going on.",
+      "He said I can't.",
+      "I said can't, or won't. He said does it matter. And I said yes, Ty, it matters to me, and he swore at nothing, at the floor, and that was it. That was the whole answer.",
+      "Here is what I keep coming back to. He did not say there is nothing. Tyson has never in his life told me there was nothing when there was something. He said can't. There is something, and it is big enough that he would rather lose me over it than say it.",
+      "I don't know what that is. I know it isn't me. I think I know that.",
     ],
   },
   /* ------------------------------------------------- the city apartment ---

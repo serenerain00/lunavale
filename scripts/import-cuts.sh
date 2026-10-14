@@ -891,6 +891,15 @@ CUTS=(
   # under the string lights. Picture is black from 188.75; the score runs on
   # under it to the end, kept, as music leads. 60fps source, proxy at 30.
   "young-luna-ty-seals|stories/young-luna-ty-seals/young-luna-ty-seals-music.mov|90|-|-|30"
+  # 2026-10-13: the event the day after the suit — Josh's company's annual
+  # night, Luna there with Josh, Tyson in the hall. 4:58, 60fps, proxy at 30.
+  # Poster at 105s: Luna facing Tyson, his back to camera, the ballroom lights.
+  # Picture is black from 295.2; kept, the score runs out under it.
+  "luna-josh-ty-event|stories/luna-tyson-josh-event/luna-josh-ty-event-music.mov|105|-|-|30"
+  # 2026-10-13: the light bulb — short and funny, free (Melissa). Lakehouse,
+  # 0:39, 30fps, one file (no separate music mix). Poster at 26s: Luna with
+  # both arms up at the fitting, Tyson beside her, watching — before the joke.
+  "luna-ty-bulb|stories/luna-ty-bulb/luna-ty-bulb.mp4|26"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

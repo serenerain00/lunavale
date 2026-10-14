@@ -228,6 +228,20 @@ export async function recordPendingMembership(input: {
 }
 
 /**
+ * Is any paid-for membership still waiting for its account? Lets the access
+ * check skip the Clerk lookup on every page for the (usual) answer: no.
+ */
+export async function anyUnclaimed(): Promise<boolean> {
+  if (!databaseConfigured()) return false;
+  const rows = (await sql()`
+    SELECT 1 FROM pending_memberships
+    WHERE claimed_at IS NULL AND status IN ('active', 'trialing')
+    LIMIT 1
+  `) as unknown[];
+  return rows.length > 0;
+}
+
+/**
  * Turn a parked membership into a real one, for a signed-in person.
  *
  * THE CALLER MUST PASS A VERIFIED EMAIL. This is the whole security boundary

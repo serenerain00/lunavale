@@ -923,3 +923,11 @@ for "can't go" is now known too: she was going with Josh.
   can see she's still bending for Josh though she's left him. Luna hates him
   being upset with her and pleads. Ends: "I'll come sit with you." / "You came
   with Josh." / "I can still spend time with you." / "Yeah. I'll find you."
+
+## Addition — 2026-10-14: the call from the field (`tyson-luna-call-from-field`, "You Survived")
+
+Both about 28 (~2016). Tyson calls Luna from deployment, close to the end of
+his time in the Navy. She is just back from a session with her trainer. The
+date she reports — a guy who "works in the building", forty minutes on his
+ex — is **a random guy, not Josh** (Melissa): she has not started dating Josh
+yet. Nothing on the site says why Tyson called or what he makes of the date.

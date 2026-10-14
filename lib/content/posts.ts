@@ -771,6 +771,47 @@ const authored: Clip[] = [
     mature: true,
     access: "premium",
   },
+  {
+    /*
+      THE CALL FROM THE FIELD, 2026-10-14. Melissa: Tyson calling from the
+      field; both about 28 (so ~2016, ten years after the tailgate in "We'll
+      Be Fine"); close to the end of his time in the Navy, still deployed.
+      First minute free, the rest members-only (Melissa). Vertical, so a post
+      rather than a scene; same shape and gating as New York.
+
+      FROM THE TRANSCRIPT: "Hey, stranger." / "You survive?" / "Barely. I
+      think she's trying to kill us." (her trainer) / "Response time's
+      terrible out here", "Have you eaten?" / "Yes, Mom", "Lou, you're
+      holding a pink drink." / "It's purple and it has protein.", Avery
+      borrowed the black dress and denies it despite sending a picture in it,
+      and the date with the guy who "works in the building", who spent forty
+      minutes on his ex.
+
+      THE DATE IS NOT JOSH and must not be implied to be. She meets Josh at
+      28 (canon), but nothing here names him, and this man is a punchline.
+
+      DESCRIBE AND STOP (tyson-no-early-feelings): a phone call between best
+      friends. Nothing about why he called or what he thinks of the date.
+
+      TITLE AND CAPTION ARE PLACEHOLDERS, hers to replace.
+    */
+    id: "tyson-luna-call-from-field",
+    title: "Hey, Stranger",
+    caption:
+      "Ten years after the tailgate, Tyson calls from deployment, near the end of his time in the Navy. Luna has just survived her trainer, is holding a drink she insists is purple, and has a date to report.",
+    file: "tyson-luna-call-from-field.proxy.mp4",
+    poster: "/posters/tyson-luna-call-from-field.jpg",
+    // 135.7, the whole file — the score fades out under the closing black.
+    durationSeconds: 136,
+    addedOn: "2026-10-14",
+    about: ["luna", "tyson"],
+    mature: false,
+    access: "premium",
+    preview: {
+      file: "tyson-luna-call-from-field-preview.proxy.mp4",
+      durationSeconds: 67.5,
+    },
+  },
 ];
 
 /**

@@ -43,14 +43,14 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-13 against `main` at 91a4661. The 2026-07-28 row is kept beneath
+re-run 2026-10-14 against `main` at cfa67e0. The 2026-07-28 row is kept beneath
 so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 205 | 173 |
-| Tyson | 12 | 148 | 129 |
-| Josh | 14 | 129 | 114 |
+| Luna | 12 | 215 | 182 |
+| Tyson | 12 | 156 | 136 |
+| Josh | 14 | 134 | 119 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 7 | 7 |
@@ -68,10 +68,13 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → **19 at 91a4661**: it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → **22 at cfa67e0**: it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
-equally while Josh started from behind), and has since been drifting a point
-either way. **Treat it as noise in the high teens, not a trend.** *(This
+equally while Josh started from behind), and has moved as much as three points in
+a single day since. **It has sat anywhere between 17 and 28. Quote the two
+current numbers at a sha and do not characterise the movement at all** — an
+earlier version of this line said "noise in the high teens", which 22 killed.
+*(This
 paragraph has now been wrong twice: it claimed the direction had never changed,
 which died on 2026-10-09, and then that the gap was closing, which died on
 10-12. Do not write a third trend sentence — re-derive the two numbers and quote
@@ -96,9 +99,10 @@ character who explains Josh — a note on a free piece is the shop window, and
 that is what makes it the highest-value Rick gap, not merely that it is open.
 *(It opened the story until 2026-09-22, when `ty-luna-young` took first place.
 Do not restore the "first in the story" phrasing; check `STORY_ORDER` before
-making that claim about anything.)* Six other free pieces are uncovered as well
+making that claim about anything.)* Seven other free pieces are uncovered as well
 — `luna-ty-couch`, `ty-luna-young`, `luna-tyson-shaving`, `young-luna-ty-apt`,
-`young-luna-ty-seals` (new and free on 2026-10-13) and `luna-truck-breakdown` —
+`young-luna-ty-seals` (new and free on 2026-10-13), `luna-ty-bulb` (*The Right
+Bulb*, free, 2026-10-14, thirty-nine seconds) and `luna-truck-breakdown` —
 but every one of them pays into the two characters who need it least.
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
@@ -155,9 +159,13 @@ Standing backlog, roughly prioritised:
   writing off frames — she replaced the frames-written ones there, and the
   comments explain why
 - Josh clips with no note yet: `luna-josh-break`, `luna-josh-bed-flashback`,
-  `luna-josh-first-night`, `luna-josh-fair` *(taken by #4)*, and `josh-luna-wall`
-  — the last of which Melissa may want to write herself, as she is holding the
-  journal entry for it
+  `luna-josh-first-night`, `luna-josh-fair` *(taken by #4)*, `josh-luna-wall`
+  — which Melissa may want to write herself, as she is holding the journal entry
+  for it — and, new on 2026-10-14, **`luna-josh-ty-event`** (*I Was Going to Text
+  You*, five minutes, `premium`). That last one is the pick of them: all three
+  leads are in it, and `preview.durationSeconds` reads 64.5, so it has a free
+  first minute and stays in the sitemap the way the episodes do. A note on it is
+  reachable in a way a note on a fully gated clip is not
 - `luna-tyson-dance` has no note from either of them. It went members-only in
   the September push, so a note on it is no longer a shop window — but it is
   still two leads and uncovered

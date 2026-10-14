@@ -787,16 +787,17 @@ const authored: Clip[] = [
       and the date with the guy who "works in the building", who spent forty
       minutes on his ex.
 
-      THE DATE IS NOT JOSH and must not be implied to be. She meets Josh at
-      28 (canon), but nothing here names him, and this man is a punchline.
+      THE DATE IS A RANDOM GUY, NOT JOSH (Melissa, 2026-10-14): she has not
+      started dating Josh yet. Nothing here may imply otherwise.
 
       DESCRIBE AND STOP (tyson-no-early-feelings): a phone call between best
       friends. Nothing about why he called or what he thinks of the date.
 
-      TITLE AND CAPTION ARE PLACEHOLDERS, hers to replace.
+      TITLE IS MELISSA'S ("You Survived", 2026-10-14). Caption is a
+      placeholder, hers to replace.
     */
     id: "tyson-luna-call-from-field",
-    title: "Hey, Stranger",
+    title: "You Survived",
     caption:
       "Ten years after the tailgate, Tyson calls from deployment, near the end of his time in the Navy. Luna has just survived her trainer, is holding a drink she insists is purple, and has a date to report.",
     file: "tyson-luna-call-from-field.proxy.mp4",

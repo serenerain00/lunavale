@@ -25,7 +25,14 @@ In rough order of cost:
 2. **A journal entry** — `lib/content/journal.ts`. Higher value and much more
    canon-sensitive; this is Luna's interior voice.
 3. **A detail or intro revision** — `lib/content/characters.ts`. Cheap, and the
-   intros are still draft prose written to canon rather than by Melissa.
+   intros are still draft prose written to canon rather than by Melissa (the
+   file header still says so: *"The beats are hers; the sentences are not"*).
+   Less of a gap than it was, though — on 2026-10-14 the three leads' intros
+   were rewritten against her character bible and gained an `inner` block of
+   four rows (wants, afraid of, at their best, gets in their own way), and on
+   10-15 she picked Tyson's and Josh's portraits herself. **Rick, Cathy and
+   Avery have no `inner` block at all**, which is now the cheapest real drop on
+   the board.
 4. **New media tagged to a person** — a still set or clip with `about` set.
    Highest value, highest cost.
 
@@ -43,8 +50,9 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-15 against `main` at 61c22c2. The 2026-07-28 row is kept beneath
-so the drift is visible.
+re-run 2026-10-15 against `main` at fdecf97 — unchanged from 61c22c2, because
+that advance replaced the three lead portraits one for one rather than adding
+pieces. The 2026-07-28 row is kept beneath so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
@@ -68,7 +76,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → **23 at 61c22c2**: it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → **23, still 23 at fdecf97**: it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has sat anywhere between 17 and 28. Quote the two
@@ -138,6 +146,20 @@ but every one of them pays into the two characters who need it least.
 > note each tree carries. Do not "correct"
 > another PR's table against this one; recount on whatever tree you are actually
 > on.
+
+> **THERE IS A CHARACTER BIBLE NOW, AND MOST OF IT MUST NOT REACH A NOTE.**
+> `docs/content/BETWEEN_US_CHARACTER_BIBLE.md` arrived 2026-10-14. It is
+> Melissa's, and it is **writer knowledge**. The header of
+> `lib/content/characters.ts` records exactly what she allowed onto the public
+> cast page — personality, wants, fears, blind spots, build and ink — and
+> exactly what she kept off it: **anything about the accident beyond what *What
+> Was Agreed* already shows for free, where the story goes after the
+> reconciliation, Tyson's drinking history, and Miller (still PROPOSED).** Read
+> the bible for who somebody is on any given day. Do not put the rest in a
+> Between Takes note, which is a cast member talking about a shoot and has no
+> business knowing the ending. The same rule that keeps the fall-fair note from
+> loading Josh's one line applies here: the audience hears the second half
+> coming long before it should.
 
 Standing backlog, roughly prioritised:
 

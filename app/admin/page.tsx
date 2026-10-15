@@ -6,10 +6,15 @@ import { authConfigured } from "@/lib/billing/provider";
 import { isOwner } from "@/lib/access/owner";
 import {
   abandonedCheckouts,
+  billingProblems,
   revenueSummary,
   formatCents,
 } from "@/lib/billing/revenue";
-import { membershipSummary, unclaimedPending } from "@/lib/db/memberships";
+import {
+  accessCounts,
+  membershipSummary,
+  unclaimedPending,
+} from "@/lib/db/memberships";
 import { allPostsForModeration, posterStats } from "@/lib/db/overheard";
 import { recentHelpMessages } from "@/lib/db/help";
 import { surveyResults, type Tally } from "@/lib/db/survey";
@@ -66,12 +71,15 @@ export default async function AdminPage() {
       revenueSummary(),
       abandonedCheckouts(),
     ]);
-  const [listSize, listSources, list, pending] = await Promise.all([
-    followerCount(),
-    followerSources(),
-    recentFollowers(200),
-    unclaimedPending(),
-  ]);
+  const [listSize, listSources, list, pending, access, problems] =
+    await Promise.all([
+      followerCount(),
+      followerSources(),
+      recentFollowers(200),
+      unclaimedPending(),
+      accessCounts(),
+      billingProblems(),
+    ]);
   const unreadComments = sceneComments.filter((c) => !c.handled).length;
 
   // The two numbers Melissa actually wants off this page, pulled out of the
@@ -93,12 +101,18 @@ export default async function AdminPage() {
   const seriesPct = share(survey.format, ["series"]);
   const openHelp = help.filter((h) => !h.handled);
 
-  // Head COUNT comes from the local table — it is the access record and it is
-  // one query. Head count is all it can honestly answer: the table stores tier
-  // and status and no amount, so the money below comes from Stripe instead.
-  const withAccess = members
-    .filter((m) => ["active", "trialing", "past_due"].includes(m.status))
-    .reduce((n, m) => n + m.n, 0);
+  // Head COUNT comes from the local table — it is the access record. Since
+  // 2026-10-12 past due is LOCKED OUT (unless in PAST_DUE_GRACE), so this asks
+  // the same rule the access check uses instead of summing statuses, which
+  // counted every failing card as somebody who could watch.
+  const withAccess = access.withAccess;
+
+  // Paid, no account, for over an hour: health-check warns at an hour and
+  // fails at two days. A claim takes seconds; an hour is already a person.
+  const HOUR = 3_600_000;
+  const stuckPending = pending.filter(
+    (p) => now.getTime() - p.createdAt.getTime() > HOUR,
+  );
 
   const runway = threadRunway(now);
 
@@ -181,9 +195,115 @@ export default async function AdminPage() {
             >
               Conversion
               <span className="text-stone">— Instagram to paid</span>
+            </Link>{" "}
+            <Link
+              href="/admin/voice"
+              className="ml-2 inline-flex items-center gap-2 rounded-sm border border-amber/40 bg-amber/10 px-3 py-1.5 text-sm text-amber-soft hover:bg-amber/20"
+            >
+              Voice
+              <span className="text-stone">— ask Erin</span>
             </Link>
           </p>
         </header>
+
+        {/* ------------------------------------------------ needs attention */}
+        {/*
+          MONEY FIRST. Melissa, 2026-10-13: "when it comes to people's money
+          there's no mistakes acceptable." Everything here is a real person who
+          is out of pocket or out of access: paying twice (2026-10-05 and
+          10-13, both pay-first buyers who paid again), a chargeback, a card
+          that has shut somebody out, a payment nobody has claimed. Shown
+          every time, so "nothing" is something you can see, not assume.
+          Nothing on this page acts — refunds, cancels and dispute responses
+          are done in Stripe, each with Melissa's OK.
+        */}
+        <Section title="Needs attention">
+          {problems === null ? (
+            <p className="mt-1 text-sm text-stone-dim">
+              — Stripe could not be reached, so paying-twice and chargebacks are
+              unknown, not clear. Run <code>npm run health</code>.
+            </p>
+          ) : null}
+          <ul className="space-y-4 text-sm">
+            <Check
+              ok={problems !== null && problems.doubled.length === 0}
+              unknown={problems === null}
+              good="Nobody is paying twice"
+              bad={`${problems?.doubled.length ?? 0} paying for more than one membership`}
+            >
+              {problems?.doubled.map((d) => (
+                <li key={d.email}>
+                  <span className="text-ivory">{d.email}</span>{" "}
+                  <span className="text-xs text-stone-dim">
+                    {d.subscriptionIds.join(" + ")}
+                  </span>
+                </li>
+              ))}
+              <li className="text-xs text-stone-dim">
+                Refund and cancel the extra one in Stripe (reason: duplicate),
+                then email them.
+              </li>
+            </Check>
+            <Check
+              ok={problems !== null && problems.disputes.length === 0}
+              unknown={problems === null}
+              good="No open chargebacks"
+              bad={`${problems?.disputes.length ?? 0} open chargeback${problems?.disputes.length === 1 ? "" : "s"}`}
+            >
+              {problems?.disputes.map((d) => (
+                <li key={d.id}>
+                  <span className="text-ivory">
+                    {formatCents(d.amountCents)} · {d.reason.replace(/_/g, " ")}
+                  </span>{" "}
+                  <span className="text-xs text-stone-dim">
+                    {d.id}
+                    {d.dueBy &&
+                      ` · respond by ${d.dueBy.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`}
+                  </span>
+                </li>
+              ))}
+            </Check>
+            <Check
+              ok={access.locked === 0}
+              good="No cards failing"
+              bad={`${access.locked} shut out by a failing card`}
+            >
+              <li className="text-xs text-stone-dim">
+                Locked out until every invoice is paid. Their account page
+                shows an Update payment button that goes straight to Stripe.
+              </li>
+            </Check>
+            {access.grace.map((g, i) => (
+              <li key={i} className="flex gap-3">
+                <span aria-hidden className="text-amber">●</span>
+                <span className="text-stone">
+                  <span className="text-ivory">
+                    1 card failing, still in on a written promise
+                  </span>{" "}
+                  through{" "}
+                  {new Date(g.until.getTime() - 1).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    timeZone: "America/New_York",
+                  })}
+                  . After that it locks like any other — cancel only with your
+                  OK.
+                </span>
+              </li>
+            ))}
+            <Check
+              ok={stuckPending.length === 0}
+              good="Everybody who paid has an account"
+              bad={`${stuckPending.length} paid over an hour ago and has no account`}
+            >
+              <li className="text-xs text-stone-dim">
+                Listed under &ldquo;Paid, no account yet&rdquo; below. Usually
+                they signed up with a different email from the one they paid
+                with.
+              </li>
+            </Check>
+          </ul>
+        </Section>
 
         {/* --------------------------------------------------------- funnel */}
         {/*
@@ -287,6 +407,9 @@ export default async function AdminPage() {
             {revenue && revenue.pastDue > 0 && (
               <Stat label="Card failing" value={String(revenue.pastDue)} warn />
             )}
+            {access.locked > 0 && (
+              <Stat label="Locked out" value={String(access.locked)} warn />
+            )}
           </div>
 
           {/* The gap between the headline number and list price, spelled out.
@@ -321,7 +444,9 @@ export default async function AdminPage() {
           <p className="mt-4 text-xs text-stone-dim">
             The money is read live from Stripe, net of coupons, with annual
             plans divided down to a month and trials counted as nothing until
-            they convert. The tier list above it is the webhook&rsquo;s
+            they convert. A failing card is still counted in the money (it is
+            owed) but not in &ldquo;with access&rdquo; — since 12 October it
+            shuts the door until paid. The tier list above it is the webhook&rsquo;s
             projection, so if the two disagree it is the webhook that is behind,
             not the billing. A dash means Stripe could not be reached.
           </p>
@@ -487,9 +612,12 @@ export default async function AdminPage() {
           <Section title="Paid, no account yet">
             <p className="mt-1 text-sm text-stone">
               These people have paid and have not made an account, so they
-              cannot open anything yet. It attaches itself the moment they sign
-              in with the same address — but if one has been sitting here for a
-              day, write to them.
+              cannot open anything yet. It attaches itself on whatever page they
+              land on the moment they sign in with the same address, and Join
+              will not take a second payment from them. If they sign up with a
+              different address it can&rsquo;t match — if one has sat here for
+              an hour, look for a new account made a few minutes after the
+              payment, and write to them.
             </p>
             <ul className="mt-5 space-y-1.5">
               {pending.map((p) => (
@@ -894,3 +1022,41 @@ async function freeAccountCount(): Promise<number | null> {
   }
 }
 
+/**
+ * One line of "Needs attention": a quiet tick when it's fine, the problem and
+ * its rows when it isn't. `unknown` is its own state — a check that couldn't
+ * run must never read as one that passed.
+ */
+function Check({
+  ok,
+  unknown = false,
+  good,
+  bad,
+  children,
+}: {
+  ok: boolean;
+  unknown?: boolean;
+  good: string;
+  bad: string;
+  children?: React.ReactNode;
+}) {
+  if (unknown) {
+    return (
+      <li className="flex gap-3">
+        <span aria-hidden className="text-stone-dim">?</span>
+        <span className="text-stone-dim">{good} — unknown</span>
+      </li>
+    );
+  }
+  return (
+    <li className="flex gap-3">
+      <span aria-hidden className={ok ? "text-stone-dim" : "text-amber"}>
+        {ok ? "✓" : "●"}
+      </span>
+      <div>
+        <p className={ok ? "text-stone" : "text-ivory"}>{ok ? good : bad}</p>
+        {!ok && <ul className="mt-1.5 space-y-1">{children}</ul>}
+      </div>
+    </li>
+  );
+}

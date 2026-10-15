@@ -404,7 +404,9 @@ export async function unclaimedPending(): Promise<
   const rows = (await sql()`
     SELECT email, tier, created_at
     FROM pending_memberships
-    WHERE claimed_at IS NULL
+    -- Not the cancelled ones: a refunded duplicate (2026-10-05, 10-13) is
+    -- unclaimed forever and owes nobody an account. Same filter as health-check.
+    WHERE claimed_at IS NULL AND status <> 'canceled'
     ORDER BY created_at DESC
     LIMIT 50
   `) as { email: string; tier: string; created_at: string }[];
@@ -461,4 +463,38 @@ export async function membershipSummary(): Promise<
     GROUP BY tier, status
     ORDER BY n DESC
   `) as { tier: string; status: string; n: number }[];
+}
+
+/**
+ * Who can actually open the doors right now, for the admin dashboard.
+ *
+ * Not a sum of status counts: since 2026-10-12 a past-due member is shut out
+ * unless their subscription is in PAST_DUE_GRACE, and /admin used to count
+ * every past_due row as "with access". Same rule as tierForUser, by
+ * construction — it asks inGrace() rather than re-deriving it.
+ */
+export async function accessCounts(): Promise<{
+  withAccess: number;
+  /** Past due and shut out until they pay. */
+  locked: number;
+  /** Past due but still in, on a promise in PAST_DUE_GRACE, with its end. */
+  grace: { until: Date }[];
+}> {
+  if (!databaseConfigured()) return { withAccess: 0, locked: 0, grace: [] };
+  const rows = (await sql()`
+    SELECT status, stripe_subscription_id FROM memberships
+  `) as { status: string; stripe_subscription_id: string | null }[];
+  let withAccess = 0;
+  let locked = 0;
+  const grace: { until: Date }[] = [];
+  for (const r of rows) {
+    if (ACTIVE_STATUSES.has(r.status)) withAccess += 1;
+    else if (PAYMENT_FAILED_STATUSES.has(r.status)) {
+      if (inGrace(r.stripe_subscription_id)) {
+        withAccess += 1;
+        grace.push({ until: new Date(PAST_DUE_GRACE[r.stripe_subscription_id!]) });
+      } else locked += 1;
+    }
+  }
+  return { withAccess, locked, grace };
 }

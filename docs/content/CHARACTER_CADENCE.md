@@ -43,13 +43,13 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-14 against `main` at cfa67e0. The 2026-07-28 row is kept beneath
+re-run 2026-10-15 against `main` at 61c22c2. The 2026-07-28 row is kept beneath
 so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 215 | 182 |
-| Tyson | 12 | 156 | 136 |
+| Luna | 12 | 216 | 183 |
+| Tyson | 12 | 157 | 137 |
 | Josh | 14 | 134 | 119 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
@@ -68,7 +68,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → **22 at cfa67e0**: it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → **23 at 61c22c2**: it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has sat anywhere between 17 and 28. Quote the two
@@ -217,7 +217,14 @@ Standing backlog, roughly prioritised:
   the free uncovered pieces this is the one with the most under it
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none
-- Notes on the vertical posts; only `run-at-the-lake` has one
+- Notes on the vertical posts — there are twenty-two now and only
+  `run-at-the-lake` has one. The newest is **`tyson-luna-call-from-field`**
+  (2026-10-15): Tyson calling Luna from deployment around 2016, `premium` with a
+  67.5-second free preview, so it is reachable without a membership. Its title is
+  **"You Survived"** — Melissa renamed it the same day it landed, and the commit
+  that added it says *"Hey, Stranger"*. **Read the title out of `posts.ts`, not
+  out of a commit message** (the same trap that produced the wrong free-preview
+  figure for *Breathe*)
 - Wire `notesForScene()` into `/clips/<slug>` so a clip's note appears under the
   player, which is where a members-only note converts best. NOTE the route moved
   — this said `/watch/<slug>` until 2026-09-18, and that path is gone

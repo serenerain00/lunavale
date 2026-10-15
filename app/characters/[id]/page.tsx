@@ -97,10 +97,10 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
         {/* ------------------------------------------------------ the person */}
         <header className="relative">
           <div className={`${PAGE} grid gap-8 pt-10 sm:pt-14 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-12`}>
-            <div className="relative mx-auto w-full max-w-xs overflow-hidden rounded-lg ring-1 ring-hairline lg:mx-0 lg:max-w-none">
+            <div className="relative mx-auto w-full max-w-xs self-start overflow-hidden rounded-lg ring-1 ring-hairline lg:mx-0 lg:max-w-none">
               <Image
                 src={character.portrait}
-                alt={`${character.name}, from the cast interview`}
+                alt={character.portraitAlt}
                 width={900}
                 height={1200}
                 priority
@@ -133,6 +133,24 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
                   </p>
                 ))}
               </div>
+
+              {/* Underneath — want, fear, best, worst. The part of the
+                  character bible that makes them people rather than roles;
+                  see Character.inner. */}
+              {character.inner && character.inner.length > 0 && (
+                <dl className="mt-7 max-w-2xl space-y-4">
+                  {character.inner.map((row) => (
+                    <div key={row.label} className="grid gap-1 sm:grid-cols-[9.5rem_minmax(0,1fr)] sm:gap-5">
+                      <dt className="pt-0.5 text-xs uppercase tracking-[0.14em] text-amber">
+                        {row.label}
+                      </dt>
+                      <dd className="text-sm leading-relaxed text-ivory/90">
+                        {row.text}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
 
               {/* The dossier, above the quote. Scannable before the prose,
                   because "38, ex-SEAL, drives a Carrera he treats like

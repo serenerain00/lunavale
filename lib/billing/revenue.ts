@@ -345,3 +345,62 @@ export function formatCents(cents: number): string {
 export function netMonthlyCents(sub: Stripe.Subscription, atSeconds?: number): number {
   return applyDiscounts(grossMonthlyCents(sub), sub, atSeconds);
 }
+
+export interface BillingProblems {
+  /** One person, more than one live subscription: they are paying twice. */
+  doubled: { email: string; subscriptionIds: string[] }[];
+  /** Chargebacks still open — each has a response deadline. */
+  disputes: { id: string; reason: string; amountCents: number; dueBy: Date | null }[];
+}
+
+const OPEN_DISPUTE = new Set([
+  "warning_needs_response",
+  "needs_response",
+  "under_review",
+  "warning_under_review",
+]);
+
+/**
+ * The two money mistakes health-check FAILs on (2026-10-13), on the page
+ * Melissa actually opens: somebody paying twice (both cases so far were a
+ * pay-first buyer who then paid again), and open chargebacks.
+ *
+ * Grouped by the email on the Stripe CUSTOMER, since a second payment usually
+ * makes a second customer. Same logic as scripts/health-check.ts. Null when
+ * Stripe can't be reached, which the page shows as a dash — never as "fine".
+ */
+export async function billingProblems(): Promise<BillingProblems | null> {
+  if (!stripeConfigured()) return null;
+  try {
+    const byEmail = new Map<string, string[]>();
+    for (const status of LIVE_STATUSES) {
+      const page = stripe().subscriptions.list({ status, limit: 100, expand: ["data.customer"] });
+      for await (const s of page) {
+        const c = s.customer;
+        const email =
+          typeof c === "object" && c && !("deleted" in c && c.deleted)
+            ? (c.email ?? "").toLowerCase()
+            : "";
+        if (!email) continue;
+        byEmail.set(email, [...(byEmail.get(email) ?? []), s.id]);
+      }
+    }
+    const doubled = [...byEmail.entries()]
+      .filter(([, ids]) => ids.length > 1)
+      .map(([email, subscriptionIds]) => ({ email, subscriptionIds }));
+
+    const disputes = (await stripe().disputes.list({ limit: 20 })).data
+      .filter((d) => OPEN_DISPUTE.has(d.status))
+      .map((d) => ({
+        id: d.id,
+        reason: d.reason,
+        amountCents: d.amount,
+        dueBy: d.evidence_details?.due_by ? new Date(d.evidence_details.due_by * 1000) : null,
+      }));
+
+    return { doubled, disputes };
+  } catch (error) {
+    console.error("billingProblems: Stripe lookup failed", error);
+    return null;
+  }
+}

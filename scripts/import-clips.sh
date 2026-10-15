@@ -208,6 +208,22 @@ CLIPS=(
   #
   # NO END: black from 169.1, the song fading under it to the end.
   "luna-josh-bed-ig|stories/luna-josh/luna-josh-bed-ig.mov|25"
+
+  # THE CALL FROM THE FIELD, 2026-10-14 (Melissa: "tyson calling from the
+  # field... about 28... getting close to tyson getting out of the navy, still
+  # on deployment"). Vertical, 1320x2208 like New York, hevc 60fps, scored.
+  # Arrived as stories/tyson-luna-callFromField/; the slug is that name
+  # hyphenated, since ids are lower-case.
+  #
+  # FIRST MINUTE FREE, rest members (Melissa). The preview runs to 67.5s, not
+  # 60: "Because you know I'm right" ends at ~67.45 and the shot changes at
+  # 67.56; at 60.0 it would cut "It's purple and it has protein" in half.
+  #
+  # POSTER AT 10s: Luna laughing on the phone, drink in hand (the "purple"
+  # drink) — inside the free minute. 45s was Tyson, but cropped to half a face.
+  #
+  # NO END: black from 130.5, the score fading out under it to the end.
+  "tyson-luna-call-from-field|stories/tyson-luna-callFromField/luna-ty-call-field.mov|10||67.5"
 )
 
 want=("$@")

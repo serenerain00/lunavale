@@ -27,7 +27,9 @@
  * 2026-10-14, when Melissa asked for new headshots. They are now 3:4 crops of
  * stills from published scenes, picked for being the person rather than the
  * moment: nobody mid-argument, mid-kiss or in tears. New filenames rather than
- * overwriting, so no image cache goes on serving the old faces.
+ * overwriting, so no image cache goes on serving the old faces. On
+ * 2026-10-15 Melissa picked Tyson's (white shirt, lakehouse) and Josh's (by
+ * the pool) herself, from her Dropbox stills.
  */
 
 import { clipAccess, clips, type Clip } from "@/lib/content/posts";
@@ -143,8 +145,8 @@ export const characters: Character[] = [
     role: "Her best friend of twenty years",
     tagline:
       "Ex-military, few words, and six months of keeping her head above water that turned into something neither of them will say.",
-    portrait: "/characters/tyson-lakehouse.jpg",
-    portraitAlt: "Tyson, at the lakehouse (The Shirt)",
+    portrait: "/characters/tyson-white.jpg",
+    portraitAlt: "Tyson, in a white shirt at the lakehouse",
     intro: [
       "Twenty years of friendship, and a rule underneath it that neither of them ever wrote down: they do not lie to each other. Not about anything. It has survived two decades of things worth lying about.",
       "He is ex-military, which shows up less in how he talks than in what he does not say. Extreme sports, motorcycles, track days — and a black 2020 Carrera he treats like something on loan from a man he respects. He will ride recklessly alone and will not take a hard corner with Luna in the passenger seat.",
@@ -211,8 +213,8 @@ export const characters: Character[] = [
     role: "Her partner of ten years",
     tagline:
       "He called after six months apart, and she said yes to dinner when she had meant to say no.",
-    portrait: "/characters/josh-lake.jpg",
-    portraitAlt: "Josh, at the lake (The Lake)",
+    portrait: "/characters/josh-pool.jpg",
+    portraitAlt: "Josh, by the pool",
     intro: [
       "He is not the villain of this, and the story never treats him as one. Intense, driven, physically imposing, used to being the man who gets things done — and capable of real tenderness, mostly in ordinary things rather than declarations. Their ten years had good years in them: cooking, dancing, laughing, wanting each other. None of it was one long mistake.",
       "Ten years, and by the end of them he had gone lazy — stopped noticing the house, the calendar, her. He could not tell you the day it started, because there wasn't one.",

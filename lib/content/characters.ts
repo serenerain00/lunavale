@@ -29,7 +29,8 @@
  * moment: nobody mid-argument, mid-kiss or in tears. New filenames rather than
  * overwriting, so no image cache goes on serving the old faces. On
  * 2026-10-15 Melissa picked Tyson's (white shirt, lakehouse) and Josh's (by
- * the pool) herself, from her Dropbox stills.
+ * the pool) herself, from her Dropbox stills, and Luna's (at the
+ * event) too.
  */
 
 import { clipAccess, clips, type Clip } from "@/lib/content/posts";
@@ -95,8 +96,8 @@ export const characters: Character[] = [
     role: "The one it happens to",
     tagline:
       "Ten years with one man, twenty with the other, and no version of this where nobody gets hurt.",
-    portrait: "/characters/luna-groceries.jpg",
-    portraitAlt: "Luna, smiling, in the grocery store (Day 2)",
+    portrait: "/characters/luna-event.jpg",
+    portraitAlt: "Luna, at the Denver Foundation event",
     intro: [
       "The story is her interior life. Everything else — the farmhouse, the lake, both men — is weather moving across it.",
       "She is from Atlanta. Josh was a man she met there on business, and for a while they did it long distance — and then, ten years ago, she left her mother, her sister and everyone she had known since she was a child, and moved to Colorado to live on his farm. That is the size of the bet, and it is worth holding onto when she is deciding whether to make another one.",

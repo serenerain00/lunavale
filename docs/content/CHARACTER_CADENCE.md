@@ -29,8 +29,10 @@ In rough order of cost:
    file header still says so: *"The beats are hers; the sentences are not"*).
    Less of a gap than it was, though — on 2026-10-14 the three leads' intros
    were rewritten against her character bible and gained an `inner` block of
-   four rows (wants, afraid of, at their best, gets in their own way), and on
-   10-15 she picked Tyson's and Josh's portraits herself. **Rick, Cathy and
+   four rows (wants, afraid of, at their best, gets in their own way), and over
+   10-15 and 10-16 she picked all three leads' portraits herself (Luna at the
+   Denver Foundation event, Tyson in a white shirt at the lakehouse, Josh by the
+   pool). **Rick, Cathy and
    Avery have no `inner` block at all**, which is now the cheapest real drop on
    the board.
 4. **New media tagged to a person** — a still set or clip with `about` set.
@@ -50,9 +52,11 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-15 against `main` at fdecf97 — unchanged from 61c22c2, because
-that advance replaced the three lead portraits one for one rather than adding
-pieces. The 2026-07-28 row is kept beneath so the drift is visible.
+re-run 2026-10-16 against `main` at a6daa5f — unchanged since 61c22c2, because
+the two advances since replaced the three lead portraits one for one rather
+than adding pieces. **A touched `lib/content/` file does not mean the figures
+moved; re-derive and say which it was.** The 2026-07-28 row is kept beneath so
+the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
@@ -76,7 +80,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → **23, still 23 at fdecf97**: it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → **23, and 23 again at a6daa5f**: it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has sat anywhere between 17 and 28. Quote the two

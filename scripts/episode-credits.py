@@ -18,8 +18,12 @@ WHERE THEY GO.
   cuts straight to Tyson waking, and a card there would undo the match cut).
   So the title comes first and the episode's first sound lands on it.
   CLOSING, where the episode's own picture has gone to black: `--end` trims the
-  dead black and silence the export ends on, then "Created by Melissa Casole",
-  then the end title. Silent, as the trailers are.
+  dead black and silence the export ends on, then the end title. Silent, as the
+  trailers are.
+
+NO NAME ON IT BY DEFAULT. Melissa, 2026-10-17, on seeing "Created by Melissa
+Casole" before the end title: "take my name off the video". A credit line is
+only added if one is passed with `--credit`.
 
 THE CARDS ARE RENDERED AT THE EPISODE'S OWN SIZE AND FRAME RATE, so nothing is
 scaled and the join is a straight concat.
@@ -59,7 +63,6 @@ draw_tracked = end_title.draw_tracked
 O_HOLD, O_CONVERGE, O_SETTLE, O_FADE = 0.6, 2.2, 1.6, 1.0
 O_TOTAL = O_HOLD + O_CONVERGE + O_SETTLE + O_FADE
 
-CREDIT = "Created by Melissa Casole"
 C_TOTAL = 3.6
 
 
@@ -114,12 +117,12 @@ def opening_frame(t, W, H, number):
     return _finish(img, W, H, clamp01((t - (O_TOTAL - O_FADE)) / O_FADE))
 
 
-def credit_frame(t, W, H):
+def credit_frame(t, W, H, text):
     f = ImageFont.truetype(DIDOT, int(H * 0.048), index=1)   # italic
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
     a = smooth(t / 0.9) * (1 - smooth((t - (C_TOTAL - 0.9)) / 0.9))
-    draw_tracked(d, CREDIT, f, 1, int(H * 0.47), IVORY + (int(235 * a),), W)
+    draw_tracked(d, text, f, 1, int(H * 0.47), IVORY + (int(235 * a),), W)
     return _finish(img, W, H, 0)
 
 
@@ -156,6 +159,7 @@ def main():
     ap.add_argument("--end", type=float, required=True,
                     help="seconds: where the episode's own picture and sound are over")
     ap.add_argument("-o", "--out")
+    ap.add_argument("--credit", help="optional line before the end title; none by default")
     ap.add_argument("--still", action="store_true", help="write a few frames to look at")
     a = ap.parse_args()
     src = Path(a.episode).resolve()
@@ -165,7 +169,8 @@ def main():
         outdir = src.parent
         opening_frame(1.0, W, H, a.number).save(outdir / "credits-open-1s.jpg")
         opening_frame(O_HOLD + O_CONVERGE + 1.0, W, H, a.number).save(outdir / "credits-open-settled.jpg")
-        credit_frame(C_TOTAL / 2, W, H).save(outdir / "credits-created-by.jpg")
+        if a.credit:
+            credit_frame(C_TOTAL / 2, W, H, a.credit).save(outdir / "credits-line.jpg")
         end_title.render_frame(end_title.TOTAL - end_title.FADE_OUT - 0.5, W, H, 0.038).save(outdir / "credits-end.jpg")
         print(f"stills in {outdir}")
         return
@@ -177,7 +182,7 @@ def main():
         n = int(round(O_TOTAL * fps))
         frames_to_movie((opening_frame(i / fps, W, H, a.number) for i in range(n)), fps, op, W, H)
         nc, ne = int(round(C_TOTAL * fps)), int(round(end_title.TOTAL * fps))
-        closing = [credit_frame(i / fps, W, H) for i in range(nc)]
+        closing = [credit_frame(i / fps, W, H, a.credit) for i in range(nc)] if a.credit else []
         closing += [end_title.render_frame(i / fps, W, H, 0.038) for i in range(ne)]
         frames_to_movie(iter(closing), fps, cl, W, H)
 

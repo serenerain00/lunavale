@@ -57,6 +57,13 @@ export interface Video {
   title: string;
   /** Short public-facing description. PLACEHOLDER. */
   synopsis: string;
+  /**
+   * The full synopsis, in paragraphs, shown on the scene's own page in place
+   * of `synopsis`. Optional: for an episode whose synopsis Melissa wrote out
+   * at length (Episode 4). `synopsis` stays short because cards, the home
+   * hero and link previews all print it.
+   */
+  synopsisLong?: string[];
   /** Basename of the media file inside `stories/` (proxy used for playback). */
   file: string;
   /** Poster image served from /public. */
@@ -3302,6 +3309,62 @@ export const videos: Video[] = [
     feelings: ["distance", "hurt", "trust"],
     place: "lakehouse",
     about: ["luna", "josh", "tyson", "rick"],
+  },
+  {
+    /*
+      EPISODE 4, 2026-10-17, released that night. Season one, 15:09 with the
+      credits (scripts/episode-credits.py: the title on black first, then the
+      episode, then the end title — no name card, Melissa: "take my name off
+      the video"). Master: stories/ep4/ep4-final.mp4, built from ep-4-music.mov.
+
+      SYNOPSIS IS MELISSA'S, 2026-10-17, word for word. `synopsis` is her
+      opening paragraph, because cards, the home hero and link previews print
+      it; `synopsisLong` is the rest on the episode's own page. Her closing
+      paragraph ("Their relationship remains a best-friend dynamic at this
+      stage…") is a note about the show rather than copy for it, and is kept
+      here instead of on the page.
+
+      FREE: THE WHOLE FIREFIGHT, 2:38 — the title, then Reed hit and Tyson
+      keeping him alive, ending on "Medic! I need help!" at the camera cut to
+      the bedroom (scripts/make-previews.mjs). Poster at 2:08, inside it:
+      Tyson over Reed on the ridge at sunset, before the blood in the frames
+      that follow.
+
+      NOTE `danger` ("violence and serious threat"): gunfire, a teammate shot
+      and dying. The general note rather than `violence`, whose detail is an
+      assault between characters.
+
+      PLACE: Tyson's apartment, per her synopsis ("watching television at his
+      apartment") and the city skyline in the nightmare scene.
+    */
+    slug: "episode-4",
+    title: "Episode 4",
+    synopsis:
+      "Episode 4 explores the parts of Tyson\u2019s past that still follow him home\u2014and the everyday friendship that gives him somewhere to land.",
+    synopsisLong: [
+      "Episode 4 explores the parts of Tyson\u2019s past that still follow him home\u2014and the everyday friendship that gives him somewhere to land.",
+      "The episode opens during Tyson\u2019s time as a Navy SEAL. When his teammate Reed is critically wounded, Tyson fights to keep him alive, reassuring him while struggling with the reality of his injuries. Reed\u2019s death becomes a memory Tyson cannot put to rest.",
+      "Back in the present, a nightmare wakes Tyson in the early morning. Luna finds him struggling to regain his composure. As he opens up about Reed, she stays with him, offering quiet company without pushing him to talk or trying to fix what happened. Their familiar dry humor eventually returns, giving him a little relief.",
+      "Later, a trip to find Tyson a suit for an upcoming formal event brings a lighter mood, with teasing and a brief moment of unexpected closeness. Luna is still only days into her separation from Josh. She loves him, but returning would require more than promises, and she has not yet agreed to attend the event.",
+      "The episode closes with Luna and Tyson watching television at his apartment. Takeout plans dissolve into playful bickering and tickling\u2014a glimpse of the ease they have built over nearly twenty years of friendship.",
+    ],
+    file: "episode-4.proxy.mp4",
+    poster: "/posters/episode-4.jpg",
+    durationSeconds: 909,
+    addedOn: "2026-10-17",
+    access: "premium",
+    mature: false,
+    notes: ["danger"],
+    preview: {
+      file: "episode-4-preview.proxy.mp4",
+      // 158.2 — see the override in scripts/make-previews.mjs.
+      durationSeconds: 158,
+      hookStart: 0,
+      hookNote: "the firefight, ending on \u201cMedic! I need help!\u201d",
+    },
+    feelings: ["grief", "trust"],
+    place: "tysons-apartment",
+    about: ["tyson", "luna"],
   },
   {
     /*

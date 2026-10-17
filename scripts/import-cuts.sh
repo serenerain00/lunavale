@@ -845,6 +845,15 @@ CUTS=(
   # 22:08. Kept six seconds past the music, the last two faded.
   "episode-3|stories/ep3/final/ep3-final.mov|60|1295|2|30"
 
+  # EPISODE 4, 2026-10-17. stories/ep4/ep4-final.mp4 is ep-4-music.mov with
+  # the credits on (scripts/episode-credits.py), 1080x656 at 60fps — the
+  # sixth field brings it to 30 like the others. No END or FADE: the end
+  # title already fades itself to black.
+  #
+  # POSTER AT 128s: Tyson over Reed on the ridge at sunset, inside the free
+  # window, before the blood in the frames that follow.
+  "episode-4|stories/ep4/ep4-final.mp4|128|-|-|30"
+
   # THE INTERVIEW, 2026-10-09. A future season: Detectives Harris and
   # Bennett question Luna about the accident nine years ago, then she rings
   # Tyson from the car. Scored, 13:20, 1320x798 hevc at 60fps — down to 30

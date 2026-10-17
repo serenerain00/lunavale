@@ -144,6 +144,13 @@ const OVERRIDES = {
   // already free as the post "Not Bad Trouble" — the window spends nothing.
   "episode-3": 129.0,
 
+  // EPISODE 4 — THE WHOLE FIREFIGHT FREE, 2:38 (Melissa sets about two
+  // minutes; the cold open runs a little past, and stopping inside it would
+  // cut Tyson off mid-shout). 158.2 is the last frame before the camera cuts
+  // to the bedroom, and "Medic! I need help!" is finished by then (checked
+  // on the energy, not whisper: loud to 158.20, room tone from 158.30).
+  "episode-4": 158.2,
+
   // THE INTERVIEW — FIRST 1:28 FREE (Melissa, 2026-10-09: members, the
   // opening free). Ends on Luna's "What exactly is this about?" (1:25.9),
   // before the facility photograph and the date — so Daniel Mercer, Tyson at

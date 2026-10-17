@@ -127,6 +127,7 @@ export function PlanChoice({
           </>
         )}
       </p>
+      <p className="mt-1 text-xs text-stone-dim">US dollars · local tax added at checkout where it applies</p>
 
       {children}
 

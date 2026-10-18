@@ -3338,7 +3338,10 @@ export const videos: Video[] = [
       apartment") and the city skyline in the nightmare scene.
     */
     slug: "episode-4",
-    title: "Episode 4",
+    // Melissa, 2026-10-17: "Peace and Quiet" — Tyson's "I've spent half my
+    // life trying to get some peace and quiet. Now I can't stand it."
+    // Must match lib/content/season.ts.
+    title: "Episode 4: Peace and Quiet",
     synopsis:
       "Episode 4 explores the parts of Tyson\u2019s past that still follow him home\u2014and the everyday friendship that gives him somewhere to land.",
     synopsisLong: [

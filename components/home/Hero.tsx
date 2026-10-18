@@ -11,9 +11,12 @@ import { formatDuration } from "@/lib/content/videos";
 import { PAGE } from "@/components/ui/layout";
 import { useHeroSound } from "@/components/home/useHeroSound";
 import { SERIES_TITLE } from "@/lib/content/season";
+import { SeriesHeroCopy, type SeriesFacts } from "@/components/home/FirstScreen";
 
 interface HeroProps {
   hero: HeroContent;
+  /** For the first-screen test's series arm. */
+  series?: SeriesFacts;
 }
 
 /**
@@ -40,7 +43,7 @@ interface HeroProps {
  * chrome can't crop the buttons off the bottom, and floored in `rem` so the
  * composition doesn't collapse on a short laptop window.
  */
-export function Hero({ hero }: HeroProps) {
+export function Hero({ hero, series }: HeroProps) {
   const { video } = hero;
 
   /*
@@ -125,7 +128,8 @@ export function Hero({ hero }: HeroProps) {
         </button>
       )}
 
-      <div className={`${PAGE} pb-12 sm:pb-16`}>
+      {series && <SeriesHeroCopy facts={series} />}
+      <div data-fs-variant="control" className={`${PAGE} pb-12 sm:pb-16`}>
         {/* THE SERIES MARK, above the clip's own title. From 2026-09-16 the
             hero is whichever clip went up most recently, so without this the
             front page never says what the show is called — it just plays

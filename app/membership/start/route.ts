@@ -121,9 +121,11 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const form = await request.formData().catch(() => null);
-  // Which button: "play" is the strip under the player (PlayJoin), anything
-  // else is the membership page. A label, from a fixed list.
-  const from = form?.get("from") === "play" ? "play" : null;
+  // Which button: "play" is the strip under the player (PlayJoin), "hero" the
+  // home page's first screen (first-screen test, 2026-10-18), anything else is
+  // the membership page. A label, from a fixed list.
+  const raw = form?.get("from");
+  const from = raw === "play" || raw === "hero" ? raw : null;
   return start(
     request,
     String(form?.get("tier") ?? ""),

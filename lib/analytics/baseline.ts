@@ -46,6 +46,12 @@ export const BREAKS: readonly BaselineBreak[] = [
     effect:
       "Not a change to the funnel itself, but a new audience inside the baseline window. Compare Instagram-sourced rows across this date, not totals; Facebook-tagged visits that would have been untagged (app with no referrer) now show as facebook.",
   },
+  {
+    on: "2026-10-18",
+    what: "From the Facebook conversion audit, all approved by Melissa: the header Join shows the price (\"Join · $8/mo\"); the home page's first screen is an A/B test (first-screen: control vs a series screen with Join · $8/month → checkout, entry=hero); the membership page opens with the episodes; the pilot's free preview is longer; Google sign-in is hidden inside Facebook/Instagram's browsers; unclaimed buyers get an automatic reminder after an hour.",
+    effect:
+      "Several changes on one day, so before/after comparisons across Oct 18 cannot separate them — the A/B test is the only clean read, and only for the first screen. \"Direct\" is now a recorded source, and Facebook plays are counted as Facebook, so source splits before Oct 18 are not comparable.",
+  },
 ];
 
 /** Breaks that went live on or between two UTC days (inclusive). */
@@ -56,5 +62,6 @@ export function breaksBetween(from: string, to: string): BaselineBreak[] {
 /** Checkouts tagged with an entry point; untagged ones came from /membership or an older link. */
 export const ENTRY_LABELS: Record<string, string> = {
   play: "Join box under the player",
+  hero: "Join on the home page's first screen (first-screen test, series arm)",
   "": "Membership page (or an older link)",
 };

@@ -115,3 +115,18 @@ html,
 body {
   overflow-x: clip;
 }
+
+/*
+ * The first-screen A/B test (components/home/FirstScreen.tsx). Both versions
+ * of the home hero's words are in the cached HTML; an inline script sets
+ * html[data-fs] before paint and this shows one. Members always get control.
+ */
+[data-fs-variant="series"] {
+  display: none;
+}
+html[data-fs="series"]:not([data-member]) [data-fs-variant="series"] {
+  display: block;
+}
+html[data-fs="series"]:not([data-member]) [data-fs-variant="control"] {
+  display: none;
+}

@@ -150,6 +150,14 @@ const OVERRIDES = {
   // to the bedroom, and "Medic! I need help!" is finished by then (checked
   // on the energy, not whisper: loud to 158.20, room tone from 158.30).
   "episode-4": 158.2,
+  // Melissa, 2026-10-18 ("ok do all of the above", the Facebook conversion
+  // audit): the pilot's free window was its first minute, which is the
+  // music-only opening — not one line of dialogue — on the most-played
+  // video for non-members. It now runs through the cold open, Luna and
+  // Tyson at night, and ends on "There's fucking more!": 190.0 is the last
+  // frame before the cut to the farmhouse at sunset (190.03), and the shout
+  // has finished by 189.3 (energy trace).
+  "pilot": 190.0,
 
   // THE INTERVIEW — FIRST 1:28 FREE (Melissa, 2026-10-09: members, the
   // opening free). Ends on Luna's "What exactly is this about?" (1:25.9),

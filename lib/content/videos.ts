@@ -3190,10 +3190,21 @@ export const videos: Video[] = [
       content on it. That is correct and it is what makes the free minute worth
       having — it is the part search and social can actually reach.
     */
+    /*
+      THREE MINUTES TEN, FROM 2026-10-18. Melissa approved lengthening it
+      ("ok do all of the above", the Facebook conversion audit): the first
+      minute is the music-only opening — no dialogue — and the pilot was the
+      most-played video for non-members on the day Facebook arrived. The
+      window now runs through the cold open and ends on "There's fucking
+      more!", the last frame before the cut to the farmhouse (190.0; see
+      scripts/make-previews.mjs). The first minute is still the part already
+      on Instagram; this only adds to it.
+    */
     preview: {
       file: "pilot-preview.proxy.mp4",
-      durationSeconds: 60,
+      durationSeconds: 190,
       hookStart: 0,
+      hookNote: "the cold open, ending on \u201cThere\u2019s fucking more!\u201d",
     },
     feelings: ["hurt", "distance", "trust"],
     place: "farmhouse",

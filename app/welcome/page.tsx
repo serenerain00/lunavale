@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { ClarityEvent } from "@/components/analytics/ClarityEvent";
+import { inAppBrowser } from "@/lib/access/in-app";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { billingLive } from "@/lib/billing/provider";
 import { RememberPayment } from "@/components/membership/RememberPayment";
@@ -52,6 +55,7 @@ export default async function WelcomePage({
   }
 
   const paid = await readSession(sessionId);
+  const inApp = inAppBrowser((await headers()).get("user-agent"));
 
   return (
     <>
@@ -60,6 +64,9 @@ export default async function WelcomePage({
         {paid ? (
           <>
             <RememberPayment sessionId={sessionId} />
+            {/* The one moment Clarity can know a payment happened — it
+                cannot see stripe.com. No id, no email: just the event. */}
+            <ClarityEvent name="purchase" />
             <p className="text-xs uppercase tracking-[0.2em] text-amber">
               That&rsquo;s paid
             </p>
@@ -81,6 +88,19 @@ export default async function WelcomePage({
             >
               Make your account
             </Link>
+
+            {/* Inside Facebook's or Instagram's browser Google sign-in is
+                refused, and this is the page a new member reaches seconds
+                after paying. Two of seven buyers on 2026-10-18 had not made
+                an account. See lib/access/in-app.ts. */}
+            {inApp && (
+              <p className="mt-4 text-sm leading-relaxed text-stone">
+                You&rsquo;re in {inApp === "facebook" ? "Facebook" : "Instagram"}&rsquo;s
+                browser, where Google sign-in doesn&rsquo;t work — make the account
+                with your email address, or tap <span className="text-ivory">···</span>{" "}
+                and choose <span className="text-ivory">Open in browser</span> first.
+              </p>
+            )}
 
             {paid.email && (
               <p className="mt-4 text-sm text-stone-dim">

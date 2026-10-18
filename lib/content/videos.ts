@@ -3515,6 +3515,48 @@ export const videos: Video[] = [
   },
   {
     /*
+      THE PROMISE, ON FILM, 2026-10-18. Melissa: "new video
+      ty-josh-kitchen-corner … file it in canon, im gonna post it on IG so it
+      just needs to be in the clips section". FREE — it is going on Instagram.
+      Farmhouse kitchen, daylight, 1:26. Canon: LUNA_VALE_CONTEXT.md, "THE
+      PROMISE" and "The kitchen corner" under it.
+
+      WHAT IS SAID, from the transcript, speakers by who is on camera. Josh
+      asks if Tyson has seen Luna ("Yeah, yesterday." / "She's all right.").
+      Josh: they talked the other night, "she told me she wants to come home"
+      — then that he needs to stop calling her. "If she wants to be here, then
+      what the fuck are we doing? … She keeps telling me two different things.
+      I don't know how to fix this." Then the favour: "Talk to her." Tyson:
+      "Oh, no, no, no, no." Josh: "I'm not asking you to pressure her. Just
+      don't let her forget what we have." / "She hasn't forgotten." / "You're
+      family. I need you in my corner on this." / "I'm always in your corner."
+      / "Good."
+
+      THE COPY SAYS LOYALTY AND NOTHING ELSE. Under canon Tyson has no
+      feelings for her yet here — he gives his word months before he
+      understands them — and the site never hints otherwise
+      (tyson-no-early-feelings rule). Nor does it say Luna knows: only Cole
+      ever does. "She wants to come home" is Josh's account and the synopsis
+      keeps it his.
+
+      TITLE IS A PLACEHOLDER, hers to replace.
+    */
+    slug: "josh-ty-kitchen-corner",
+    title: "In Your Corner",
+    synopsis:
+      "At the farmhouse, Josh can\u2019t make sense of what Luna keeps telling him \u2014 that she wants to come home, and that he needs to stop calling. So he asks Tyson, who she still talks to, for one favor.",
+    file: "josh-ty-kitchen-corner.proxy.mp4",
+    poster: "/posters/josh-ty-kitchen-corner.jpg",
+    durationSeconds: 86,
+    addedOn: "2026-10-18",
+    access: "free",
+    mature: false,
+    feelings: ["hurt", "trust"],
+    place: "farmhouse",
+    about: ["josh", "tyson"],
+  },
+  {
+    /*
       THE INTERVIEW TRAILER, Melissa, 2026-10-09. MEMBERS ONLY ON THE SITE
       (Melissa, same day, after the music was raised: "can we hide it behind
       the membership then"). It runs free on Instagram, which carries its own

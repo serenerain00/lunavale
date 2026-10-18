@@ -132,6 +132,12 @@ export const STORY_ORDER: readonly string[] = [
   // HAND-PLACED — CONFIDENT. Melissa, 2026-09-11: "this is after josh and luna
   // broke up, about a month." The clip either side of it is the one-month mark
   // in her journal ("A month, and he made me go out"), so this sits with it.
+  // HAND-PLACED — REASONED, 2026-10-18, Melissa to move it. Josh asks Tyson
+  // to talk to Luna, and Tyson gives his word. Josh is still calling her and
+  // she is asking him to stop, so it is early in the six months — and canon
+  // puts the promise months before Tyson works out what he feels. Beside the
+  // other Josh-and-Tyson scene of the early months.
+  "josh-ty-kitchen-corner",
   "josh-ty-ricks-house",
 
   "luna-tyson-dance",

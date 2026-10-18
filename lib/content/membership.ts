@@ -510,6 +510,13 @@ export const QUESTIONS: Question[] = [
     a: "On your phone, held close, probably at night. That's what it's made for — it's graded for a small screen, and the whole thing lives in kitchens and trucks and the pauses between sentences. A television is a bigger room than this story wants.",
   },
   {
+    // ADDED 2026-10-17 after an Irish viewer met $9.84 at checkout for an $8
+    // membership (Stripe adds local VAT) and her bank's check then failed.
+    // The price on the page is honest only if the page says what can be added.
+    q: "I'm outside the US. What will I actually pay?",
+    a: "Membership is priced in US dollars. Depending on where you live, local sales tax or VAT is added at checkout (about 20% in most of Europe; in Ireland, $8 becomes $9.84), and Stripe shows you the exact total before you pay. If your card isn't in dollars, your bank converts it and may add its own foreign-transaction fee. That fee is the bank's, not ours.",
+  },
+  {
     q: "Where does the money go?",
     a: "Into making the next ones — cast, locations, post, and the time to do it properly. Nothing here is funded by advertising or by selling anything about you.",
   },

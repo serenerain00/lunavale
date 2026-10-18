@@ -13,6 +13,8 @@
  * wardrobe reference is description, an environment plate is the room. Getting
  * this wrong is the main way a generator drifts.
  */
+import type { Blocking } from "@/lib/studio/blocking";
+
 export type RefKind =
   | "face"
   | "body"
@@ -68,6 +70,12 @@ export interface ShotCamera {
   azimuthId: string;
   lensId: string;
   movementId: string;
+  /**
+   * The mannequin staging from the Blocking tab, when there is one. Kept in
+   * the camera JSON column because it IS the camera and the staging, and that
+   * column already round-trips any shape — no migration.
+   */
+  blocking?: Blocking;
 }
 
 export interface ShotRecipe {

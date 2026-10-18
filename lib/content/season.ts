@@ -103,6 +103,21 @@ export const SEASONS: Season[] = [
         runtimeSeconds: 1295,
         comingSoon: false,
       },
+      {
+        /*
+          LANDED 2026-10-17, released that night, and named the same night —
+          Melissa chose "Peace and Quiet" (Tyson: "I've spent half my life
+          trying to get some peace and quiet. Now I can't stand it."). Same
+          both-places rule as above: the matching `title` in videos.ts must say
+          the same thing.
+        */
+        number: 4,
+        title: "Episode 4: Peace and Quiet",
+        slug: "episode-4",
+        poster: "/posters/episode-4.jpg",
+        runtimeSeconds: 909,
+        comingSoon: false,
+      },
     ],
   },
 ];

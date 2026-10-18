@@ -117,6 +117,15 @@ export const SHORT_LINKS: ShortLink[] = [
     note: "Episode 3: The Space Between.",
     addedOn: "2026-10-11",
   },
+  {
+    // Printed on the Episode 4 trailer's end card — never rename it.
+    code: "ep4",
+    to: "/clips/episode-4",
+    medium: "reel",
+    campaign: "ep4-trailer",
+    note: "Episode 4 trailer (~55s, scripts/promo/specs/ep4-trailer.json).",
+    addedOn: "2026-10-17",
+  },
 ];
 
 export function shortLinkDestination(link: ShortLink, medium: ShortMedium = link.medium): string {

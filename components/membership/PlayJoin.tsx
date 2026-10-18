@@ -52,6 +52,7 @@ export function PlayJoin() {
         Watch everything <span className="text-stone">·</span>{" "}
         <span className="tabular-nums">{formatPrice(tier.priceMonthlyCents)}</span>
         <span className="text-stone">/month</span>
+        <span className="block text-xs text-stone-dim">USD, plus local tax where it applies</span>
       </p>
       <button
         type="submit"

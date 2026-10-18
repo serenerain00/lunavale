@@ -3305,6 +3305,63 @@ export const videos: Video[] = [
   },
   {
     /*
+      EPISODE 4, 2026-10-17, released that night. Season one, 15:09 with the
+      credits (scripts/episode-credits.py: the title on black first, then the
+      episode, then the end title — no name card, Melissa: "take my name off
+      the video"). Master: stories/ep4/ep4-final.mp4, built from ep-4-music.mov.
+
+      SYNOPSIS: SHORT ON PURPOSE. Melissa first gave a full synopsis, then the
+      same night asked for "netflix hulu" length so it gives nothing away. The
+      line on the page names no death, no flashback and no suit. Her full
+      version, kept here as writer material: Tyson's SEAL teammate Reed is
+      critically wounded and dies; a nightmare wakes Tyson and Luna stays
+      with him; a suit-shopping trip for an upcoming formal event, with a
+      brief moment of unexpected closeness (Luna days into the separation,
+      not yet agreed to go to the event); TV and takeout at his apartment,
+      bickering and tickling. Still a best-friend dynamic at this stage.
+
+      FREE: THE WHOLE FIREFIGHT, 2:38 — the title, then Reed hit and Tyson
+      keeping him alive, ending on "Medic! I need help!" at the camera cut to
+      the bedroom (scripts/make-previews.mjs). Poster at 2:08, inside it:
+      Tyson over Reed on the ridge at sunset, before the blood in the frames
+      that follow.
+
+      NOTE `danger` ("violence and serious threat"): gunfire, a teammate shot
+      and dying. The general note rather than `violence`, whose detail is an
+      assault between characters.
+
+      PLACE: Tyson's apartment, per her synopsis ("watching television at his
+      apartment") and the city skyline in the nightmare scene.
+    */
+    slug: "episode-4",
+    // Melissa, 2026-10-17: "Peace and Quiet" — Tyson's "I've spent half my
+    // life trying to get some peace and quiet. Now I can't stand it."
+    // Must match lib/content/season.ts.
+    title: "Episode 4: Peace and Quiet",
+    // Melissa, 2026-10-17: "i dont wanna give to much away. think netflix
+    // hulu" — the long version below came off the page the same night.
+    synopsis:
+      "Tyson spent half his life chasing peace and quiet. Now that he has it, a night from his past won\u2019t let him sleep \u2014 and Luna, his best friend of twenty years, is the one who stays up with him.",
+    file: "episode-4.proxy.mp4",
+    poster: "/posters/episode-4.jpg",
+    durationSeconds: 909,
+    addedOn: "2026-10-17",
+    access: "premium",
+    mature: false,
+    notes: ["danger"],
+    preview: {
+      file: "episode-4-preview.proxy.mp4",
+      // 158.2 — see the override in scripts/make-previews.mjs.
+      durationSeconds: 158,
+      hookStart: 0,
+      hookNote: "the firefight, ending on \u201cMedic! I need help!\u201d",
+    },
+    feelings: ["grief", "trust"],
+    place: "tysons-apartment",
+    about: ["tyson", "luna"],
+  },
+  {
+    /*
       LUNA AND JOSH, IN BLACK AND WHITE, Melissa, 2026-10-10. The landscape
       cut is this clip; the vertical is the post `luna-josh-bed-ig`. Both
       members-only (Melissa).

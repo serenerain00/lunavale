@@ -5,6 +5,7 @@ import { formatPrice, getTier } from "@/lib/content/membership";
 import { JoinLink } from "@/components/membership/JoinLink";
 import { OVERHEARD_ARCHIVED } from "@/lib/content/overheard";
 import { SignOut } from "@/components/ui/SignOut";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import {
   Guest,
   Member,
@@ -168,6 +169,7 @@ export function SiteHeader() {
         </div>
 
         <div className="flex items-center gap-3">
+          <SocialLinks />
           {authConfigured() && (
             <>
               <SignedIn>

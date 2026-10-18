@@ -19,8 +19,9 @@ import { emptyCamera } from "@/lib/studio/types";
 import { RefLibrary, type Person, type PlaceOpt } from "@/components/studio/RefLibrary";
 import { ShotBuilder, type SceneOpt } from "@/components/studio/ShotBuilder";
 import { ExportDeck } from "@/components/studio/ExportDeck";
+import { Blocking } from "@/components/studio/Blocking";
 
-type Tab = "shot" | "library" | "export";
+type Tab = "shot" | "blocking" | "library" | "export";
 
 function blankShot(): ShotRecipe {
   return {
@@ -108,6 +109,7 @@ export function Studio({
         {(
           [
             ["shot", "Shot"],
+            ["blocking", "Pose & angle"],
             ["library", `Library${refs.length ? ` (${refs.length})` : ""}`],
             ["export", "Export"],
           ] as [Tab, string][]
@@ -166,6 +168,18 @@ export function Studio({
             </section>
           )}
         </>
+      )}
+
+      {/* Keyed on the shot, so loading a saved shot loads its blocking. */}
+      {tab === "blocking" && (
+        <Blocking
+          key={draft.id}
+          draft={draft}
+          setDraft={setDraft}
+          people={people}
+          blobConfigured={blobConfigured}
+          onChanged={refresh}
+        />
       )}
 
       {tab === "library" && (

@@ -341,6 +341,22 @@ export function compileForTarget(
     `CAMERA: ${lens.prompt}, ${height.prompt}${tilt.id === "level" ? "" : `, ${tilt.prompt}`}.`,
   );
 
+  // THE POSE REFERENCE IS THE ANGLE. Melissa's mannequin frames (the Pose &
+  // angle tab) and any photo filed as a pose: the generator is told to copy
+  // the camera and the bodies from it and nothing else, or it draws a
+  // mannequin, or a grey room.
+  const poses = chosen.filter((r) => r.kind === "pose");
+  if (poses.length) {
+    lines.push(
+      `POSE AND ANGLE: follow the attached pose reference${poses.length > 1 ? "s" : ""} (${poses.map((p) => p.label).join("; ")}) exactly — the same camera angle, camera height, lens and framing, and every body, limb and head turned exactly as posed there. It is a stand-in for blocking only: take nothing else from it — not its colour, its smooth surface, the grey room or the floor grid.`,
+    );
+    for (const p of poses) if (p.notes.trim()) lines.push(`  ${p.notes.trim()}`);
+  }
+  const measured = recipe.camera.blocking?.readout;
+  if (measured && !poses.some((p) => p.notes.includes(measured))) {
+    lines.push(`MEASURED CAMERA: ${measured}`);
+  }
+
   if (wardrobe.length) lines.push(`WEARING: ${wardrobe.join("; ")}.`);
   if (marks.length) lines.push(`MUST STAY CONSISTENT: ${marks.join("; ")}.`);
   if (recipe.extra.trim()) lines.push(`ALSO: ${recipe.extra.trim()}`);

@@ -1,0 +1,705 @@
+"use client";
+
+/**
+ * The 3D half of Blocking: mannequins, block props, a free camera.
+ *
+ * Loaded with next/dynamic and ssr:false from Blocking.tsx — three.js does not
+ * render on a server, and nothing else in Studio pays for it until the tab is
+ * opened. Owner-only page, so CLAUDE.md's 3D restraint is about the public
+ * world, not this: here the 3D IS the feature (see lib/studio/blocking.ts).
+ *
+ * CONTROLS. Drag orbits, right-drag pans, scroll zooms — OrbitControls as
+ * stock, because that is what every 3D tool she has touched does. Clicking a
+ * body part selects the joint that part hangs from and puts a rotate gizmo on
+ * it; the panel beside the stage has the same joint as sliders.
+ *
+ * THE SNAPSHOT IS THE FRAME, at delivery size: the drawing buffer is resized
+ * to the aspect's pixel size for one render, read, and put back. Helpers (the
+ * gizmo, the selection glow) are hidden by the parent for that frame.
+ */
+
+/* eslint-disable react-hooks/immutability -- Imperative Three.js: the camera, controls and scratch objects are mutated in place, as R3F intends. */
+
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, type ReactNode } from "react";
+import { Canvas, useThree, type ThreeEvent } from "@react-three/fiber";
+import { OrbitControls, TransformControls } from "@react-three/drei";
+import * as THREE from "three";
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
+import {
+  FIGURE_TONES,
+  JOINT_ORDER,
+  PROPORTIONS,
+  azimuthDeg,
+  fovFor,
+  spineOffsets,
+  type Blocking,
+  type BlockingFigure,
+  type BlockingProp,
+  type JointId,
+  type Proportions,
+  type Vec3,
+} from "@/lib/studio/blocking";
+
+export type Selection =
+  | { type: "joint"; figureId: string; joint: JointId }
+  | { type: "prop"; propId: string }
+  | null;
+
+export interface CameraReading {
+  figureId: string;
+  /** Metres from the camera to her head. */
+  distance: number;
+  cameraY: number;
+  eyeY: number;
+  /** Degrees; positive looks down. */
+  pitch: number;
+  /** Degrees, negative = camera on her left. */
+  bodyAzimuth: number;
+  headAzimuth: number;
+  mm: number;
+  /** A standing figure's height as a share of frame height, at her distance. */
+  fill: number;
+  inFrame: boolean;
+}
+
+export interface StageApi {
+  capture: (px: [number, number]) => Promise<Blob>;
+  read: (figureId: string) => CameraReading | null;
+  /** Head turn and nod (degrees, in the chest's frame) that would face the camera. */
+  lookAtCamera: (figureId: string) => { turn: number; nod: number } | null;
+  /** Put the camera at an azimuth around a figure, at a height relative to her eyes. */
+  placeCamera: (figureId: string, azimuth: number, eyeDelta: number | "overhead" | "floor") => void;
+  cameraState: () => Blocking["camera"];
+}
+
+const rad = (d: number) => (d * Math.PI) / 180;
+const deg = (r: number) => (r * 180) / Math.PI;
+
+export function BlockingStage({
+  blocking,
+  aspect,
+  selection,
+  mode,
+  hideHelpers,
+  onSelect,
+  onFigure,
+  onProp,
+  onCamera,
+  api,
+}: {
+  blocking: Blocking;
+  aspect: number;
+  selection: Selection;
+  mode: "rotate" | "translate";
+  hideHelpers: boolean;
+  onSelect: (s: Selection) => void;
+  onFigure: (f: BlockingFigure) => void;
+  onProp: (p: BlockingProp) => void;
+  onCamera: (c: Blocking["camera"]) => void;
+  api: React.MutableRefObject<StageApi | null>;
+}) {
+  // One registry of live Object3Ds, keyed `${figureId}:${joint}` or `prop:${id}`,
+  // so the gizmo and the readout can reach the real node.
+  const nodes = useRef(new Map<string, THREE.Object3D>());
+  const register = useCallback(
+    (key: string) => (o: THREE.Object3D | null) => {
+      if (o) nodes.current.set(key, o);
+      else nodes.current.delete(key);
+    },
+    [],
+  );
+
+  return (
+    <Canvas
+      shadows="percentage"
+      dpr={[1, 2]}
+      gl={{ preserveDrawingBuffer: true, antialias: true }}
+      camera={{ position: blocking.camera.position, fov: 40, near: 0.05, far: 200 }}
+      onPointerMissed={(e) => {
+        if (e.button === 0) onSelect(null);
+      }}
+    >
+      <color attach="background" args={["#3a3835"]} />
+      <hemisphereLight args={["#f2eee6", "#3b3936", 1.1]} />
+      <directionalLight
+        position={[3, 6, 4]}
+        intensity={1.6}
+        castShadow
+        shadow-mapSize={[2048, 2048]}
+        shadow-camera-left={-6}
+        shadow-camera-right={6}
+        shadow-camera-top={6}
+        shadow-camera-bottom={-6}
+        shadow-bias={-0.0004}
+      />
+      <directionalLight position={[-4, 3, -3]} intensity={0.45} />
+
+      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow onClick={() => onSelect(null)}>
+        <planeGeometry args={[60, 60]} />
+        <meshStandardMaterial color="#55524d" roughness={0.95} />
+      </mesh>
+      {blocking.grid && <gridHelper args={[20, 20, "#8a8680", "#6a6762"]} position={[0, 0.002, 0]} />}
+
+      {blocking.figures.map((f, i) => (
+        <Figure
+          key={f.id}
+          fig={f}
+          tone={FIGURE_TONES[i % FIGURE_TONES.length].hex}
+          selectedJoint={
+            !hideHelpers && selection?.type === "joint" && selection.figureId === f.id ? selection.joint : null
+          }
+          register={register}
+          onSelect={onSelect}
+        />
+      ))}
+
+      {blocking.props.map((p) => (
+        <group
+          key={p.id}
+          ref={register(`prop:${p.id}`)}
+          position={p.position}
+          rotation={[0, rad(p.rotationY), 0]}
+          onClick={(e: ThreeEvent<MouseEvent>) => {
+            if (e.delta > 4) return;
+            e.stopPropagation();
+            onSelect({ type: "prop", propId: p.id });
+          }}
+        >
+          <PropMesh kind={p.kind} selected={!hideHelpers && selection?.type === "prop" && selection.propId === p.id} />
+        </group>
+      ))}
+
+      <Rig
+        blocking={blocking}
+        aspect={aspect}
+        nodes={nodes}
+        onCamera={onCamera}
+        api={api}
+      />
+
+      {!hideHelpers && (
+        <Gizmo
+          selection={selection}
+          mode={mode}
+          nodes={nodes}
+          blocking={blocking}
+          onFigure={onFigure}
+          onProp={onProp}
+        />
+      )}
+    </Canvas>
+  );
+}
+
+/* ------------------------------------------------------------------ rig -- */
+
+function Rig({
+  blocking,
+  aspect,
+  nodes,
+  onCamera,
+  api,
+}: {
+  blocking: Blocking;
+  aspect: number;
+  nodes: React.MutableRefObject<Map<string, THREE.Object3D>>;
+  onCamera: (c: Blocking["camera"]) => void;
+  api: React.MutableRefObject<StageApi | null>;
+}) {
+  const { camera, gl, scene, size, invalidate } = useThree();
+  const controls = useRef<OrbitControlsImpl>(null);
+  const mm = blocking.camera.mm;
+
+  // Lens → field of view, across the long side of whatever frame this is.
+  useEffect(() => {
+    const cam = camera as THREE.PerspectiveCamera;
+    cam.fov = fovFor(mm, aspect).vfov;
+    cam.updateProjectionMatrix();
+    invalidate();
+  }, [camera, mm, aspect, size.width, size.height, invalidate]);
+
+  // Restore the saved camera once.
+  const restored = useRef(false);
+  useEffect(() => {
+    if (restored.current || !controls.current) return;
+    restored.current = true;
+    camera.position.set(...blocking.camera.position);
+    controls.current.target.set(...blocking.camera.target);
+    controls.current.update();
+  }, [camera, blocking.camera]);
+
+  const state = (): Blocking["camera"] => {
+    const t = controls.current?.target ?? new THREE.Vector3();
+    return {
+      position: camera.position.toArray().map(round3) as Vec3,
+      target: t.toArray().map(round3) as Vec3,
+      mm,
+    };
+  };
+
+  useEffect(() => {
+    const world = (key: string) => {
+      const o = nodes.current.get(key);
+      if (!o) return null;
+      o.updateWorldMatrix(true, false);
+      return o;
+    };
+
+    const horizForward = (o: THREE.Object3D) => {
+      const v = new THREE.Vector3(0, 0, 1).applyQuaternion(o.getWorldQuaternion(new THREE.Quaternion()));
+      return { x: v.x, z: v.z, len: Math.hypot(v.x, v.z) };
+    };
+
+    const eyeOf = (figureId: string) => {
+      const head = world(`${figureId}:head`);
+      if (!head) return null;
+      const fig = blocking.figures.find((f) => f.id === figureId);
+      const k = fig ? PROPORTIONS[fig.build].height / 1.7 : 1;
+      return { head, eye: head.localToWorld(new THREE.Vector3(0, 0.1 * k, 0.04 * k)), k };
+    };
+
+    api.current = {
+      capture: async ([w, h]) => {
+        const prevRatio = gl.getPixelRatio();
+        // The canvas is already at this aspect; scale its buffer to delivery size.
+        gl.setPixelRatio(Math.max(w / size.width, h / size.height));
+        gl.render(scene, camera);
+        // The buffer is within a pixel or two of the target (CSS sizes are not
+        // whole numbers); drawn onto an exact canvas so the file is exactly it.
+        const out = document.createElement("canvas");
+        out.width = w;
+        out.height = h;
+        out.getContext("2d")?.drawImage(gl.domElement, 0, 0, w, h);
+        gl.setPixelRatio(prevRatio);
+        const blob = await new Promise<Blob>((resolve, reject) =>
+          out.toBlob((b) => (b ? resolve(b) : reject(new Error("Snapshot failed."))), "image/png"),
+        );
+        invalidate();
+        return blob;
+      },
+
+      read: (figureId) => {
+        const e = eyeOf(figureId);
+        const chest = world(`${figureId}:chest`);
+        if (!e || !chest) return null;
+        const cam = camera as THREE.PerspectiveCamera;
+        const toCam = new THREE.Vector3().subVectors(cam.position, e.eye);
+        const flat = { x: toCam.x, z: toCam.z };
+        let body = horizForward(chest);
+        if (body.len < 0.3) body = horizForward(world(`${figureId}:pelvis`) ?? chest);
+        let face = horizForward(e.head);
+        if (face.len < 0.3) face = body;
+
+        const dir = new THREE.Vector3();
+        cam.getWorldDirection(dir);
+        const pitch = deg(Math.atan2(-dir.y, Math.hypot(dir.x, dir.z)));
+        // Distance along the view axis, which is what decides how big she is.
+        const along = toCam.clone().negate().dot(dir);
+        const frameH = 2 * Math.max(along, 0.05) * Math.tan(rad(cam.fov) / 2);
+        const ndc = e.eye.clone().project(cam);
+
+        return {
+          figureId,
+          distance: toCam.length(),
+          cameraY: cam.position.y,
+          eyeY: e.eye.y,
+          pitch,
+          bodyAzimuth: azimuthDeg(body, flat),
+          headAzimuth: azimuthDeg(face, flat),
+          mm,
+          fill: (1.7 * e.k) / frameH,
+          inFrame: along > 0 && Math.abs(ndc.x) <= 1 && Math.abs(ndc.y) <= 1,
+        };
+      },
+
+      lookAtCamera: (figureId) => {
+        const neck = world(`${figureId}:neck`);
+        const chest = world(`${figureId}:chest`);
+        if (!neck || !chest) return null;
+        const at = neck.getWorldPosition(new THREE.Vector3());
+        const local = chest.worldToLocal(camera.position.clone()).sub(chest.worldToLocal(at.clone()));
+        const turn = deg(Math.atan2(local.x, local.z));
+        const nod = deg(Math.atan2(-local.y, Math.hypot(local.x, local.z)));
+        return { turn: clamp(turn, -85, 85), nod: clamp(nod, -50, 50) };
+      },
+
+      placeCamera: (figureId, azimuth, eyeDelta) => {
+        const e = eyeOf(figureId);
+        const chest = world(`${figureId}:chest`);
+        if (!e || !chest || !controls.current) return;
+        const body = horizForward(chest);
+        const f = body.len > 0.3 ? { x: body.x / body.len, z: body.z / body.len } : { x: 0, z: 1 };
+        // Rotate her forward by the azimuth. Negative azimuth = her left = +X side.
+        const a = rad(-azimuth);
+        const dx = f.x * Math.cos(a) + f.z * Math.sin(a);
+        const dz = -f.x * Math.sin(a) + f.z * Math.cos(a);
+        const dist = Math.max(camera.position.distanceTo(controls.current.target), 1.2);
+        const target = e.eye.clone();
+        if (eyeDelta === "overhead") {
+          camera.position.set(target.x + dx * 0.05, target.y + dist, target.z + dz * 0.05);
+        } else {
+          const y = eyeDelta === "floor" ? 0.15 : target.y + eyeDelta;
+          const flat = Math.sqrt(Math.max(dist * dist - (y - target.y) ** 2, 0.5));
+          camera.position.set(target.x + dx * flat, y, target.z + dz * flat);
+        }
+        controls.current.target.copy(target);
+        controls.current.update();
+        invalidate();
+        onCamera(state());
+      },
+
+      cameraState: state,
+    };
+  });
+
+  return (
+    <OrbitControls
+      ref={controls}
+      makeDefault
+      enableDamping={false}
+      zoomSpeed={0.8}
+      panSpeed={0.9}
+      minDistance={0.15}
+      maxDistance={40}
+      onEnd={() => onCamera(state())}
+    />
+  );
+}
+
+/* ---------------------------------------------------------------- gizmo -- */
+
+function Gizmo({
+  selection,
+  mode,
+  nodes,
+  blocking,
+  onFigure,
+  onProp,
+}: {
+  selection: Selection;
+  mode: "rotate" | "translate";
+  nodes: React.MutableRefObject<Map<string, THREE.Object3D>>;
+  blocking: Blocking;
+  onFigure: (f: BlockingFigure) => void;
+  onProp: (p: BlockingProp) => void;
+}) {
+  if (!selection) return null;
+  const key = selection.type === "joint" ? `${selection.figureId}:${selection.joint}` : `prop:${selection.propId}`;
+  const obj = nodes.current.get(key);
+  if (!obj) return null;
+
+  if (selection.type === "prop") {
+    const p = blocking.props.find((x) => x.id === selection.propId);
+    if (!p) return null;
+    return (
+      <TransformControls
+        object={obj}
+        mode={mode}
+        space="world"
+        size={0.8}
+        showY={mode === "rotate"}
+        showX={mode === "translate"}
+        showZ={mode === "translate"}
+        onObjectChange={() =>
+          onProp({
+            ...p,
+            position: [round3(obj.position.x), 0, round3(obj.position.z)],
+            rotationY: round1(deg(obj.rotation.y)),
+          })
+        }
+      />
+    );
+  }
+
+  const fig = blocking.figures.find((f) => f.id === selection.figureId);
+  if (!fig) return null;
+  const moving = mode === "translate" && selection.joint === "pelvis";
+  return (
+    <TransformControls
+      object={obj}
+      mode={moving ? "translate" : "rotate"}
+      space={moving ? "world" : "local"}
+      size={0.6}
+      onObjectChange={() => {
+        if (moving) {
+          onFigure({ ...fig, position: obj.position.toArray().map(round3) as Vec3 });
+        } else {
+          const r = obj.rotation;
+          onFigure({
+            ...fig,
+            joints: { ...fig.joints, [selection.joint]: [round1(deg(r.x)), round1(deg(r.y)), round1(deg(r.z))] },
+          });
+        }
+      }}
+    />
+  );
+}
+
+/* --------------------------------------------------------------- figure -- */
+
+/**
+ * The joint and segment helpers live at module level and read the figure from
+ * context. Defined inside Figure they would be new component types on every
+ * render, so every drag of the gizmo would remount the whole body — and drop
+ * the very node the gizmo is attached to.
+ */
+interface FigureCtxValue {
+  fig: BlockingFigure;
+  selectedJoint: JointId | null;
+  mat: THREE.Material;
+  hot: THREE.Material;
+  register: (key: string) => (o: THREE.Object3D | null) => void;
+  onPick: (j: JointId) => void;
+}
+const FigureCtx = createContext<FigureCtxValue | null>(null);
+const useFig = () => useContext(FigureCtx)!;
+
+function J({ id, at, children }: { id: JointId; at: Vec3; children: ReactNode }) {
+  const { fig, register, onPick } = useFig();
+  const r = fig.joints[id] ?? [0, 0, 0];
+  const reg = useMemo(() => register(`${fig.id}:${id}`), [register, fig.id, id]);
+  return (
+    <group
+      ref={reg}
+      position={at}
+      rotation={[rad(r[0]), rad(r[1]), rad(r[2]), JOINT_ORDER[id]]}
+      onClick={(e: ThreeEvent<MouseEvent>) => {
+        if (e.delta > 4) return;
+        // Only the innermost joint under the pointer takes the click.
+        if ((e.object.userData.joint as string) !== id) return;
+        e.stopPropagation();
+        onPick(id);
+      }}
+    >
+      {children}
+    </group>
+  );
+}
+
+function useMat(joint: JointId) {
+  const { selectedJoint, mat, hot } = useFig();
+  return selectedJoint === joint ? hot : mat;
+}
+
+function Cap({ joint, r, len, at, rot }: { joint: JointId; r: number; len: number; at?: Vec3; rot?: Vec3 }) {
+  const m = useMat(joint);
+  return (
+    <mesh position={at ?? [0, -len / 2, 0]} rotation={rot} castShadow userData={{ joint }} material={m}>
+      <capsuleGeometry args={[r, Math.max(len - 2 * r, 0.001), 6, 14]} />
+    </mesh>
+  );
+}
+
+function Ball({ joint, r, at, scale }: { joint: JointId; r: number; at: Vec3; scale?: Vec3 }) {
+  const m = useMat(joint);
+  return (
+    <mesh position={at} scale={scale} castShadow userData={{ joint }} material={m}>
+      <sphereGeometry args={[r, 24, 16]} />
+    </mesh>
+  );
+}
+
+function Box({ joint, size, at }: { joint: JointId; size: Vec3; at: Vec3 }) {
+  const m = useMat(joint);
+  return (
+    <mesh position={at} castShadow userData={{ joint }} material={m}>
+      <boxGeometry args={size} />
+    </mesh>
+  );
+}
+
+const EYE = new THREE.MeshStandardMaterial({ color: "#1d1a17", roughness: 0.4 });
+
+function Arm({ side, p, s, k }: { side: "L" | "R"; p: Proportions; s: ReturnType<typeof spineOffsets>; k: number }) {
+  const x = side === "L" ? p.shoulderHalf : -p.shoulderHalf;
+  const sh = `shoulder${side}` as JointId;
+  const el = `elbow${side}` as JointId;
+  const wr = `wrist${side}` as JointId;
+  // Thumb toward the front, on the inside edge of the hand.
+  const thumbX = side === "L" ? -0.012 : 0.012;
+  return (
+    <J id={sh} at={[x, s.neck * 0.8, 0]}>
+      <Ball joint={sh} r={p.limb * 1.35} at={[0, 0, 0]} />
+      <Cap joint={sh} r={p.limb * 1.05} len={p.upperArm} />
+      <J id={el} at={[0, -p.upperArm, 0]}>
+        <Ball joint={el} r={p.limb * 0.95} at={[0, 0, 0]} />
+        <Cap joint={el} r={p.limb * 0.85} len={p.forearm} />
+        <J id={wr} at={[0, -p.forearm, 0]}>
+          <Box joint={wr} size={[0.028 * k, p.hand * 0.84, 0.085 * k]} at={[0, -p.hand * 0.42, 0]} />
+          <Cap joint={wr} r={0.011 * k} len={0.07 * k} at={[thumbX, -0.04 * k, 0.04 * k]} rot={[rad(-30), 0, 0]} />
+        </J>
+      </J>
+    </J>
+  );
+}
+
+function Leg({ side, p, k }: { side: "L" | "R"; p: Proportions; k: number }) {
+  const x = side === "L" ? p.hipHalf : -p.hipHalf;
+  const hip = `hip${side}` as JointId;
+  const knee = `knee${side}` as JointId;
+  const ankle = `ankle${side}` as JointId;
+  return (
+    <J id={hip} at={[x, -0.07 * k, 0]}>
+      <Cap joint={hip} r={p.limb * 1.6} len={p.thigh} />
+      <J id={knee} at={[0, -p.thigh, 0]}>
+        <Ball joint={knee} r={p.limb * 1.25} at={[0, 0, 0]} />
+        <Cap joint={knee} r={p.limb * 1.15} len={p.shin} />
+        <J id={ankle} at={[0, -p.shin, 0]}>
+          <Box joint={ankle} size={[0.085 * k, 0.055 * k, 0.24 * k]} at={[0, -0.025 * k, 0.065 * k]} />
+        </J>
+      </J>
+    </J>
+  );
+}
+
+function Figure({
+  fig,
+  tone,
+  selectedJoint,
+  register,
+  onSelect,
+}: {
+  fig: BlockingFigure;
+  tone: string;
+  selectedJoint: JointId | null;
+  register: (key: string) => (o: THREE.Object3D | null) => void;
+  onSelect: (s: Selection) => void;
+}) {
+  const onPick = useCallback(
+    (joint: JointId) => onSelect({ type: "joint", figureId: fig.id, joint }),
+    [onSelect, fig.id],
+  );
+  const p = PROPORTIONS[fig.build];
+  const s = spineOffsets(p);
+  const k = p.height / 1.7;
+
+  const mat = useMemo(() => new THREE.MeshStandardMaterial({ color: tone, roughness: 0.62 }), [tone]);
+  const hot = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: tone, roughness: 0.5, emissive: "#c98a2b", emissiveIntensity: 0.55 }),
+    [tone],
+  );
+  const ctx = useMemo(
+    () => ({ fig, selectedJoint, mat, hot, register, onPick }),
+    [fig, selectedJoint, mat, hot, register, onPick],
+  );
+
+  return (
+    <FigureCtx.Provider value={ctx}>
+      <J id="pelvis" at={fig.position}>
+        <Ball joint="pelvis" r={1} at={[0, -0.03 * k, 0]} scale={[p.hipHalf + 0.068 * k, 0.095 * k, 0.1 * k]} />
+        <J id="spine" at={[0, s.spine, 0]}>
+          <Ball joint="spine" r={1} at={[0, s.chest * 0.45, 0]} scale={[p.torso * 0.82, s.chest * 0.7, p.torso * 0.62]} />
+          <J id="chest" at={[0, s.chest, 0]}>
+            <Ball joint="chest" r={1} at={[0, s.neck * 0.48, 0]} scale={[p.shoulderHalf * (fig.build === "woman" ? 0.8 : 0.86), s.neck * 0.58, p.torso * 0.7]} />
+            {fig.build === "woman" && (
+              <>
+                <Ball joint="chest" r={0.046} at={[0.058, s.neck * 0.4, p.torso * 0.48]} />
+                <Ball joint="chest" r={0.046} at={[-0.058, s.neck * 0.4, p.torso * 0.48]} />
+              </>
+            )}
+            <J id="neck" at={[0, s.neck, 0]}>
+              <Cap joint="neck" r={0.042 * k} len={s.head + 0.05 * k} at={[0, s.head / 2, 0]} />
+              <J id="head" at={[0, s.head, 0]}>
+                <Ball joint="head" r={1} at={[0, s.skull, 0.005]} scale={[0.08 * k, 0.11 * k, 0.096 * k]} />
+                {/* Chin, tucked into the skull, so a nod reads as a nod. */}
+                <Ball joint="head" r={1} at={[0, s.skull * 0.5, 0.045 * k]} scale={[0.045 * k, 0.04 * k, 0.045 * k]} />
+                {/* Nose and eyes: which way the face points has to be unmistakable from any angle. */}
+                <mesh position={[0, s.skull * 0.88, 0.098 * k]} rotation={[rad(90), 0, 0]} castShadow userData={{ joint: "head" }} material={selectedJoint === "head" ? hot : mat}>
+                  <coneGeometry args={[0.016 * k, 0.04 * k, 12]} />
+                </mesh>
+                <mesh position={[0.031 * k, s.skull * 1.06, 0.085 * k]} material={EYE} userData={{ joint: "head" }}>
+                  <sphereGeometry args={[0.011 * k, 12, 8]} />
+                </mesh>
+                <mesh position={[-0.031 * k, s.skull * 1.06, 0.085 * k]} material={EYE} userData={{ joint: "head" }}>
+                  <sphereGeometry args={[0.011 * k, 12, 8]} />
+                </mesh>
+              </J>
+            </J>
+            <Arm side="L" p={p} s={s} k={k} />
+            <Arm side="R" p={p} s={s} k={k} />
+          </J>
+        </J>
+        <Leg side="L" p={p} k={k} />
+        <Leg side="R" p={p} k={k} />
+      </J>
+    </FigureCtx.Provider>
+  );
+}
+
+/* ---------------------------------------------------------------- props -- */
+
+function PropBox({ s, at, mat }: { s: Vec3; at: Vec3; mat: THREE.Material }) {
+  return (
+    <mesh position={at} material={mat} castShadow receiveShadow>
+      <boxGeometry args={s} />
+    </mesh>
+  );
+}
+
+function PropMesh({ kind, selected }: { kind: BlockingProp["kind"]; selected: boolean }) {
+  const mat = useMemo(
+    () =>
+      new THREE.MeshStandardMaterial({
+        color: "#7b7771",
+        roughness: 0.9,
+        emissive: selected ? "#c98a2b" : "#000000",
+        emissiveIntensity: selected ? 0.25 : 0,
+      }),
+    [selected],
+  );
+  const B = (s: Vec3, at: Vec3, key?: string) => <PropBox key={key} s={s} at={at} mat={mat} />;
+  switch (kind) {
+    case "chair":
+      return (
+        <>
+          {B([0.46, 0.05, 0.46], [0, 0.425, 0])}
+          {B([0.46, 0.46, 0.04], [0, 0.68, -0.21])}
+          {[[-0.2, -0.2], [0.2, -0.2], [-0.2, 0.2], [0.2, 0.2]].map(([x, z]) => B([0.04, 0.4, 0.04], [x, 0.2, z], `${x}${z}`))}
+        </>
+      );
+    case "couch":
+      return (
+        <>
+          {B([2.0, 0.42, 0.9], [0, 0.21, 0])}
+          {B([2.0, 0.42, 0.2], [0, 0.63, -0.35])}
+          {B([0.2, 0.22, 0.9], [-0.9, 0.53, 0])}
+          {B([0.2, 0.22, 0.9], [0.9, 0.53, 0])}
+        </>
+      );
+    case "bed":
+      return (
+        <>
+          {B([1.6, 0.35, 2.1], [0, 0.175, 0])}
+          {B([1.54, 0.25, 2.0], [0, 0.475, 0.02])}
+          {B([1.6, 1.1, 0.08], [0, 0.55, -1.06])}
+          {B([0.6, 0.12, 0.38], [-0.38, 0.66, -0.75])}
+          {B([0.6, 0.12, 0.38], [0.38, 0.66, -0.75])}
+        </>
+      );
+    case "table":
+      return (
+        <>
+          {B([1.4, 0.04, 0.8], [0, 0.73, 0])}
+          {[[-0.64, -0.34], [0.64, -0.34], [-0.64, 0.34], [0.64, 0.34]].map(([x, z]) => B([0.05, 0.71, 0.05], [x, 0.355, z], `${x}${z}`))}
+        </>
+      );
+    case "counter":
+      return B([2.0, 0.92, 0.62], [0, 0.46, 0]);
+    case "wall":
+      return B([3, 2.6, 0.1], [0, 1.3, 0]);
+    case "door":
+      return (
+        <>
+          {B([0.1, 2.1, 0.14], [-0.5, 1.05, 0])}
+          {B([0.1, 2.1, 0.14], [0.5, 1.05, 0])}
+          {B([1.1, 0.1, 0.14], [0, 2.15, 0])}
+        </>
+      );
+  }
+}
+
+/* ---------------------------------------------------------------- utils -- */
+
+const round3 = (n: number) => Math.round(n * 1000) / 1000;
+const round1 = (n: number) => Math.round(n * 10) / 10;
+const clamp = (n: number, a: number, b: number) => Math.min(b, Math.max(a, n));

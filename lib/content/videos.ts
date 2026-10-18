@@ -57,13 +57,6 @@ export interface Video {
   title: string;
   /** Short public-facing description. PLACEHOLDER. */
   synopsis: string;
-  /**
-   * The full synopsis, in paragraphs, shown on the scene's own page in place
-   * of `synopsis`. Optional: for an episode whose synopsis Melissa wrote out
-   * at length (Episode 4). `synopsis` stays short because cards, the home
-   * hero and link previews all print it.
-   */
-  synopsisLong?: string[];
   /** Basename of the media file inside `stories/` (proxy used for playback). */
   file: string;
   /** Poster image served from /public. */
@@ -3317,12 +3310,15 @@ export const videos: Video[] = [
       episode, then the end title — no name card, Melissa: "take my name off
       the video"). Master: stories/ep4/ep4-final.mp4, built from ep-4-music.mov.
 
-      SYNOPSIS IS MELISSA'S, 2026-10-17, word for word. `synopsis` is her
-      opening paragraph, because cards, the home hero and link previews print
-      it; `synopsisLong` is the rest on the episode's own page. Her closing
-      paragraph ("Their relationship remains a best-friend dynamic at this
-      stage…") is a note about the show rather than copy for it, and is kept
-      here instead of on the page.
+      SYNOPSIS: SHORT ON PURPOSE. Melissa first gave a full synopsis, then the
+      same night asked for "netflix hulu" length so it gives nothing away. The
+      line on the page names no death, no flashback and no suit. Her full
+      version, kept here as writer material: Tyson's SEAL teammate Reed is
+      critically wounded and dies; a nightmare wakes Tyson and Luna stays
+      with him; a suit-shopping trip for an upcoming formal event, with a
+      brief moment of unexpected closeness (Luna days into the separation,
+      not yet agreed to go to the event); TV and takeout at his apartment,
+      bickering and tickling. Still a best-friend dynamic at this stage.
 
       FREE: THE WHOLE FIREFIGHT, 2:38 — the title, then Reed hit and Tyson
       keeping him alive, ending on "Medic! I need help!" at the camera cut to
@@ -3342,15 +3338,10 @@ export const videos: Video[] = [
     // life trying to get some peace and quiet. Now I can't stand it."
     // Must match lib/content/season.ts.
     title: "Episode 4: Peace and Quiet",
+    // Melissa, 2026-10-17: "i dont wanna give to much away. think netflix
+    // hulu" — the long version below came off the page the same night.
     synopsis:
-      "Episode 4 explores the parts of Tyson\u2019s past that still follow him home\u2014and the everyday friendship that gives him somewhere to land.",
-    synopsisLong: [
-      "Episode 4 explores the parts of Tyson\u2019s past that still follow him home\u2014and the everyday friendship that gives him somewhere to land.",
-      "The episode opens during Tyson\u2019s time as a Navy SEAL. When his teammate Reed is critically wounded, Tyson fights to keep him alive, reassuring him while struggling with the reality of his injuries. Reed\u2019s death becomes a memory Tyson cannot put to rest.",
-      "Back in the present, a nightmare wakes Tyson in the early morning. Luna finds him struggling to regain his composure. As he opens up about Reed, she stays with him, offering quiet company without pushing him to talk or trying to fix what happened. Their familiar dry humor eventually returns, giving him a little relief.",
-      "Later, a trip to find Tyson a suit for an upcoming formal event brings a lighter mood, with teasing and a brief moment of unexpected closeness. Luna is still only days into her separation from Josh. She loves him, but returning would require more than promises, and she has not yet agreed to attend the event.",
-      "The episode closes with Luna and Tyson watching television at his apartment. Takeout plans dissolve into playful bickering and tickling\u2014a glimpse of the ease they have built over nearly twenty years of friendship.",
-    ],
+      "Tyson spent half his life chasing peace and quiet. Now that he has it, a night from his past won\u2019t let him sleep \u2014 and Luna, his best friend of twenty years, is the one who stays up with him.",
     file: "episode-4.proxy.mp4",
     poster: "/posters/episode-4.jpg",
     durationSeconds: 909,

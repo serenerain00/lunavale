@@ -245,17 +245,9 @@ export default async function WatchPage({ params }: WatchPageProps) {
               </Link>
             </p>
           )}
-          {video.synopsisLong ? (
-            <div className="mt-3 max-w-2xl space-y-3 leading-relaxed text-stone">
-              {video.synopsisLong.map((para) => (
-                <p key={para.slice(0, 40)}>{para}</p>
-              ))}
-            </div>
-          ) : (
-            <p className="mt-3 max-w-2xl leading-relaxed text-stone">
-              {video.synopsis}
-            </p>
-          )}
+          <p className="mt-3 max-w-2xl leading-relaxed text-stone">
+            {video.synopsis}
+          </p>
 
           {/* Stated plainly, once, under the scene — the longer cut is a real
               thing they can have, not a nag. No countdown, no interruption of

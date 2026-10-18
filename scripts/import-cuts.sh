@@ -909,6 +909,12 @@ CUTS=(
   # 0:39, 30fps, one file (no separate music mix). Poster at 26s: Luna with
   # both arms up at the fitting, Tyson beside her, watching — before the joke.
   "luna-ty-bulb|stories/luna-ty-bulb/luna-ty-bulb.mp4|26"
+  # 2026-10-18: Josh asks Tyson to talk to Luna — the promise, on film. Free
+  # (going on IG, Melissa). Farmhouse kitchen. The scored cut, 1:34 — the
+  # music opens it, first line at 6.9s (Melissa: "replace with the version w
+  # music"). Poster at 58s: Josh just up from the island, Tyson across it,
+  # the fields behind.
+  "josh-ty-kitchen-corner|stories/josh-ty-kitchen-corner/ty-josh-kitchen-corner-music.mov|58|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

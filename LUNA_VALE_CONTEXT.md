@@ -920,6 +920,47 @@ not agree to it dishonestly, and he cannot get out of it honourably.
 **Only Cole knows.** Luna does not — which is why she reads the distance as
 something she did.
 
+#### The kitchen corner — the promise, on film
+*(Footage from Melissa, 2026-10-18: `josh-ty-kitchen-corner`, 1:34 scored, in the
+clips as "In Your Corner" (title a placeholder), free — it is going on
+Instagram.)*
+
+**THIS IS THE MOMENT THE PROMISE IS MADE.** The farmhouse kitchen in daylight,
+fields and fence through the glass. Josh at the island with his laptop, head in
+his hand; Tyson across from him with papers — the contract work that has the
+two of them together every day.
+
+**EARLY IN THE SIX MONTHS.** Josh is still calling Luna and she is asking him
+to stop, which is the front of the separation (see the lakehouse's first days
+and the phone call a week in). It also has to be early for the timing above to
+hold: the promise comes **months before** Tyson works out what he feels.
+
+**WHAT JOSH SAYS.** He asks whether Tyson has seen her — yesterday; she's all
+right. Then the thing he cannot make sense of: they talked the other night and
+**she told him she wants to come home** — and then **that he needs to stop
+calling her.** "If she wants to be here, then what the fuck are we doing?"
+She never wanted to leave; they were fine; she keeps telling him two different
+things, and he doesn't know how to fix it. So: **"Talk to her."** He is not
+asking Tyson to pressure her — **"just don't let her forget what we have."**
+**"You're family. I need you in my corner on this."**
+
+**WHAT TYSON SAYS.** **"Oh, no, no, no, no"** — the first thing out of him is
+that he does not want the job. Then **"She hasn't forgotten,"** and then the
+promise itself: **"I'm always in your corner."** Josh: "Good."
+
+**HE MEANS IT.** At this point Tyson is not hiding anything and not lying —
+the feeling comes later. His reluctance is about being put in the middle of
+two people he loves as family and best friend, nothing more, and any copy
+about this scene says loyalty and only loyalty (the site never hints at his
+feelings before the separation, and here he does not have them yet).
+
+**OPEN — "SHE WANTS TO COME HOME."** This is Josh's account of the call, and
+it is not settled whether Luna said it in those words or Josh heard what he
+needed to. Either way it sits with Luna still loving Josh. Melissa to say.
+
+**WHO KNOWS.** The audience now watches the promise being made. Luna still
+does not know it exists; Cole is still the only one Tyson tells.
+
 ### The lakehouse, alone — the first days
 *(Canon set by Melissa, 2026-09-10, with the footage. Scene:
 `luna-lkehouse-wine-shatter`.)*

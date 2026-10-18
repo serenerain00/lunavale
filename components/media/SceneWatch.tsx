@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { assignVariant, trackOnce } from "@/components/analytics/experiments";
+import { clarityEvent } from "@/components/analytics/clarity";
+import { playSource } from "@/components/media/VideoPlayer";
 import { AfterWatch } from "@/components/media/AfterWatch";
 import { PreviewEndCard } from "@/components/media/PreviewEndCard";
 import { VideoPlayer } from "@/components/media/VideoPlayer";
@@ -47,6 +49,15 @@ export function SceneWatch({
 
   function ended() {
     setFinished(true);
+    // The paywall moment, counted (2026-10-18): a non-member reached the end
+    // of a free preview. Our own counter (/api/play, preview_ends) and a
+    // Clarity event, so recordings can be filtered to the people who got here.
+    if (preview) {
+      clarityEvent("preview_end");
+      try {
+        navigator.sendBeacon("/api/play", JSON.stringify({ slug, viewer: "anon", source: playSource(), event: "preview_end" }));
+      } catch {}
+    }
     // A/B: reaching the end of a preview is the exposure. Assignment happens
     // here, at the moment the two arms start to differ, so everybody counted
     // actually saw (or did not see) the card. Outside the experiment's dates

@@ -38,6 +38,10 @@ export function CaptureAttribution() {
       if (!document.cookie.includes(`${FIRST_TOUCH_COOKIE}=`)) {
         setCookie(FIRST_TOUCH_COOKIE, value, FIRST_TOUCH_DAYS);
       }
+      // "Direct" (no referrer) fills an empty slot but never replaces a real
+      // source: somebody who came from Facebook and later types the address
+      // still came from Facebook.
+      if (touch.s === "direct" && document.cookie.includes(`${LAST_TOUCH_COOKIE}=`)) return;
       setCookie(LAST_TOUCH_COOKIE, value, LAST_TOUCH_DAYS);
     } catch {
       // Cookies blocked: the visit is simply unattributed.

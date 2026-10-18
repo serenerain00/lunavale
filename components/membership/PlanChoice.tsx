@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useState } from "react";
 import { formatPrice } from "@/lib/content/membership";
+import { clarityEvent } from "@/components/analytics/clarity";
 
 /**
  * Monthly or yearly, and the button that buys the one you picked.
@@ -137,7 +138,10 @@ export function PlanChoice({
         className="mt-7"
         onSubmit={(e) => {
           if (sending) e.preventDefault();
-          else setSending(true);
+          else {
+            setSending(true);
+            clarityEvent("checkout_start");
+          }
         }}
       >
         <input type="hidden" name="tier" value={tierId} />

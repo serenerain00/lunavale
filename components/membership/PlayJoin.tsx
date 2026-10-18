@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useViewer } from "@/components/access/Viewer";
 import { formatPrice, getTier } from "@/lib/content/membership";
+import { clarityEvent } from "@/components/analytics/clarity";
 
 /**
  * "Watch everything · $8/month  [Join]" — under the player, once somebody
@@ -41,7 +42,10 @@ export function PlayJoin() {
       action="/membership/start"
       onSubmit={(e) => {
         if (sending) e.preventDefault();
-        else setSending(true);
+        else {
+          setSending(true);
+          clarityEvent("checkout_start");
+        }
       }}
       className="mt-3 flex items-center justify-between gap-4 rounded-xl border border-hairline bg-charcoal/40 px-4 py-3 sm:px-5"
     >

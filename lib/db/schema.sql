@@ -558,6 +558,19 @@ CREATE TABLE IF NOT EXISTS play_starts (
 );
 
 -- ---------------------------------------------------------------------------
+-- Free previews that ran to their end, for a non-member — the paywall moment.
+-- A counter like play_starts: no user, no session. Added 2026-10-18 with the
+-- Facebook conversion audit; there was no way to tell how many viewers ever
+-- reached the end of a preview.
+CREATE TABLE IF NOT EXISTS preview_ends (
+  day     DATE    NOT NULL,
+  slug    TEXT    NOT NULL,
+  source  TEXT    NOT NULL,
+  n       INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (day, slug, source)
+);
+
+-- ---------------------------------------------------------------------------
 -- A/B events — counts per (day, experiment, variant, event).
 --
 -- The registry, its dates and its decision rules live in

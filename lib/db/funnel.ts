@@ -20,7 +20,10 @@ function sql() {
 
 export const PLAY_VIEWERS = ["member", "free", "anon"] as const;
 export type PlayViewer = (typeof PLAY_VIEWERS)[number];
-export const PLAY_SOURCES = ["instagram", "other"] as const;
+// "facebook" from 2026-10-18. Before that the Facebook app (FBAN/FBAV) was
+// counted as "instagram" — so Oct 18's Instagram plays are mostly Facebook,
+// and nothing before that date can be split.
+export const PLAY_SOURCES = ["instagram", "facebook", "other"] as const;
 export type PlaySource = (typeof PLAY_SOURCES)[number];
 
 export interface StoredTrafficDay {
@@ -113,6 +116,30 @@ export async function playsSince(since: string): Promise<PlaySummary> {
   } catch (error) {
     console.error("playsSince failed", error);
     return { rows: [], firstDay: null };
+  }
+}
+
+/**
+ * A non-member reached the end of a free preview — the paywall moment.
+ * Same counter shape as play_starts (no person, no session), from 2026-10-18.
+ */
+export async function recordPreviewEnd(slug: string, source: PlaySource): Promise<void> {
+  await sql()`
+    INSERT INTO preview_ends (day, slug, source, n)
+    VALUES ((now() AT TIME ZONE 'UTC')::date, ${slug}, ${source}, 1)
+    ON CONFLICT (day, slug, source) DO UPDATE
+      SET n = preview_ends.n + 1
+  `;
+}
+
+export async function previewEndsSince(since: string): Promise<number | null> {
+  if (!process.env.DATABASE_URL) return null;
+  try {
+    const rows = await sql()`SELECT COALESCE(SUM(n), 0)::int AS n FROM preview_ends WHERE day >= ${since}`;
+    return Number(rows[0]?.n ?? 0);
+  } catch (error) {
+    console.error("previewEndsSince failed", error);
+    return null;
   }
 }
 

@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-18 against `main` at 38b87af. **A touched `lib/content/` file
+re-run 2026-10-18 against `main` at ab18494. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The 2026-07-28 row is kept beneath so the drift is visible.
@@ -60,8 +60,8 @@ was. The 2026-07-28 row is kept beneath so the drift is visible.
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
 | Luna | 12 | 217 | 184 |
-| Tyson | 12 | 158 | 138 |
-| Josh | 14 | 134 | 119 |
+| Tyson | 12 | 159 | 138 |
+| Josh | 14 | 135 | 119 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 7 | 7 |
@@ -79,7 +79,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 at 38b87af**: it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24, and 24 again at ab18494**: it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has sat anywhere between 17 and 28. Quote the two
@@ -115,6 +115,10 @@ making that claim about anything.)* Seven other free pieces are uncovered as wel
 `young-luna-ty-seals` (new and free on 2026-10-13), `luna-ty-bulb` (*The Right
 Bulb*, free, 2026-10-14, thirty-nine seconds) and `luna-truck-breakdown` —
 but every one of them pays into the two characters who need it least.
+*(`josh-ty-kitchen-corner` is free and uncovered too and is deliberately **not**
+on this list: it pays Josh, which is the whole reason it ranks above everything
+here. It is in the Josh item below. Do not file a free Josh or Rick piece under
+this clause — it is what makes the clause true.)*
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
 > updated 2026-10-12. The backlog below describes `main`, and `main` is behind:
@@ -189,14 +193,33 @@ Standing backlog, roughly prioritised:
   writing off frames — she replaced the frames-written ones there, and the
   comments explain why. Episode 4's synopsis is deliberately written to give
   nothing away, so do not mine it for plot
+- **`josh-ty-kitchen-corner`** — *In Your Corner* (title a placeholder),
+  published **free** on 2026-10-18, 1:34, Josh and Tyson. **This is now the best
+  Josh gap on the board and the best free one.** Josh at the kitchen island
+  early in the six months, asking Tyson whether he has seen her, unable to make
+  sense of her telling him she wants to come home and then to stop calling —
+  *"If she wants to be here, then what the fuck are we doing?"* — and then
+  asking him to look after her: *"just don't let her forget what we have. You're
+  family. I need you in my corner on this."* It is free, so it is the shop
+  window, and it is the single piece that most does the job the doc keeps saying
+  Josh needs: making him someone an audience likes before he turns.
+  **Canon guardrail, from `LUNA_VALE_CONTEXT.md`, "The kitchen corner":** at
+  this point Tyson is not hiding anything and does not yet feel what he later
+  feels. *Any* copy about this scene is **loyalty and only loyalty** — the site
+  never hints at his feelings before the separation. A Tyson note here that
+  plays reluctance as something withheld would break that, and his reluctance is
+  about being put between two people he loves, nothing more. Whether Luna really
+  said "I want to come home" in those words is **open and Melissa's to settle**,
+  so write it as Josh's account of the call, not as fact
 - Josh clips with no note yet: `luna-josh-break`, `luna-josh-bed-flashback`,
   `luna-josh-first-night`, `luna-josh-fair` *(taken by #4)*, `josh-luna-wall`
   — which Melissa may want to write herself, as she is holding the journal entry
-  for it — and, new on 2026-10-14, **`luna-josh-ty-event`** (*I Was Going to Text
-  You*, five minutes, `premium`). That last one is the pick of them: all three
-  leads are in it, and `preview.durationSeconds` reads 64.5, so it has a free
-  first minute and stays in the sitemap the way the episodes do. A note on it is
-  reachable in a way a note on a fully gated clip is not
+  for it — and **`luna-josh-ty-event`** (*I Was Going to Text You*, five minutes,
+  `premium`, 2026-10-14): all three leads are in it, and
+  `preview.durationSeconds` reads 64.5, so it has a free first minute and stays
+  in the sitemap the way the episodes do. A note on it is reachable in a way a
+  note on a fully gated clip is not — second only to the kitchen corner above,
+  which is free outright
 - `luna-tyson-dance` has no note from either of them. It went members-only in
   the September push, so a note on it is no longer a shop window — but it is
   still two leads and uncovered

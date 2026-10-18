@@ -48,7 +48,7 @@ export const BREAKS: readonly BaselineBreak[] = [
   },
   {
     on: "2026-10-18",
-    what: "From the Facebook conversion audit, all approved by Melissa: the header Join shows the price (\"Join · $8/mo\"); the home page's first screen is an A/B test (first-screen: control vs a series screen with Join · $8/month → checkout, entry=hero); the membership page opens with the episodes; the pilot's free preview is longer; Google sign-in is hidden inside Facebook/Instagram's browsers; unclaimed buyers get an automatic reminder after an hour.",
+    what: "From the Facebook conversion audit, all approved by Melissa: the header Join shows the price (\"Join · $8/mo\"); the home page's first screen is an A/B test (first-screen: control vs a series screen with Join · $8/month → /membership); the membership page opens with the episodes; the pilot's free preview is longer; Google sign-in is hidden inside Facebook/Instagram's browsers; unclaimed buyers get an automatic reminder after an hour.",
     effect:
       "Several changes on one day, so before/after comparisons across Oct 18 cannot separate them — the A/B test is the only clean read, and only for the first screen. \"Direct\" is now a recorded source, and Facebook plays are counted as Facebook, so source splits before Oct 18 are not comparable.",
   },

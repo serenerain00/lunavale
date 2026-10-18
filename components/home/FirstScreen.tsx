@@ -17,7 +17,7 @@
  */
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useViewer } from "@/components/access/Viewer";
 import { currentVariant, trackOnce } from "@/components/analytics/experiments";
 import { clarityEvent, clarityTag } from "@/components/analytics/clarity";
@@ -38,13 +38,6 @@ export interface SeriesFacts {
 
 /** The series version of the hero's words. Hidden unless html[data-fs=series]. */
 export function SeriesHeroCopy({ facts, className = "" }: { facts: SeriesFacts; className?: string }) {
-  const [sending, setSending] = useState(false);
-  useEffect(() => {
-    const reset = (e: PageTransitionEvent) => e.persisted && setSending(false);
-    window.addEventListener("pageshow", reset);
-    return () => window.removeEventListener("pageshow", reset);
-  }, []);
-
   return (
     <div data-fs-variant="series" className={`${PAGE} pb-12 sm:pb-16 ${className}`}>
       <p className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-amber sm:text-base">
@@ -71,29 +64,20 @@ export function SeriesHeroCopy({ facts, className = "" }: { facts: SeriesFacts; 
             Watch the trailer
           </Link>
         )}
-        <form
-          method="post"
-          action="/membership/start"
-          onSubmit={(e) => {
-            if (sending) return e.preventDefault();
-            setSending(true);
+        {/* To /membership, not straight to Stripe — Melissa, 2026-10-18:
+            "i dont wanna put people on strip when they click join, they
+            prob, wanna see the details". The details page's own Join is the
+            one that opens checkout. */}
+        <Link
+          href="/membership"
+          onClick={() => {
             trackOnce("first-screen", "join_click");
             clarityEvent("join_click");
-            clarityEvent("checkout_start");
           }}
+          className="inline-flex min-h-12 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft sm:px-7"
         >
-          <input type="hidden" name="tier" value="vault" />
-          <input type="hidden" name="interval" value="month" />
-          <input type="hidden" name="from" value="hero" />
-          <button
-            type="submit"
-            disabled={sending}
-            aria-busy={sending}
-            className="inline-flex min-h-12 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft disabled:cursor-wait disabled:opacity-70 sm:px-7"
-          >
-            {sending ? "Opening…" : `Join · ${facts.price}/month`}
-          </button>
-        </form>
+          {`Join · ${facts.price}/month`}
+        </Link>
       </div>
 
       <p className="mt-4 text-sm text-stone-dim">

@@ -48,7 +48,8 @@ export const EXPERIMENTS: Record<string, Experiment> = {
    *
    * `series` keeps the same footage behind it and replaces only the words and
    * buttons over it: the series, how many episodes are out, Watch the trailer
-   * (free), Join · $8/month straight to checkout (entry=hero), and "start with
+   * (free), Join · $8/month to /membership (not straight to Stripe — Melissa
+   * wants people to see the details first), and "start with
    * the pilot". Members never see it. Mechanics: components/home/FirstScreen.tsx.
    *
    * INSIDE THE OCT 11-25 BASELINE, by Melissa's decision — see BREAKS.

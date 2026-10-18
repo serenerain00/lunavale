@@ -40,6 +40,12 @@ export const BREAKS: readonly BaselineBreak[] = [
     effect:
       "Removes duplicate payments (Oct 5, Oct 13). \"Paid\" counts after this date can drop by those duplicates; they were never new members, so compare people, not payments.",
   },
+  {
+    on: "2026-10-18",
+    what: "Facebook page launched (traffic ~3x in a day) and /go/fb added: Facebook links now arrive tagged utm_source=facebook, utm_campaign=fb-page.",
+    effect:
+      "Not a change to the funnel itself, but a new audience inside the baseline window. Compare Instagram-sourced rows across this date, not totals; Facebook-tagged visits that would have been untagged (app with no referrer) now show as facebook.",
+  },
 ];
 
 /** Breaks that went live on or between two UTC days (inclusive). */

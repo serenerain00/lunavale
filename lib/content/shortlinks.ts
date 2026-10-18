@@ -1,5 +1,5 @@
 /**
- * Short links for Instagram: lunavale38.com/go/<code>.
+ * Short links for Instagram (and, since 2026-10-18, Facebook): lunavale38.com/go/<code>.
  *
  * Melissa, 2026-10-11: "adding those tags manually is a pain". So every promo
  * gets a code here, and the redirect adds the tracking tags for her —
@@ -29,6 +29,11 @@ export type ShortMedium = (typeof SHORT_MEDIUMS)[number];
 export interface ShortLink {
   /** lower-case letters, digits, hyphens — what people type */
   code: string;
+  /**
+   * utm_source. Instagram unless said otherwise — the Facebook page arrived
+   * 2026-10-18 and its links need to say they came from Facebook.
+   */
+  source?: "instagram" | "facebook";
   /** a path on this site */
   to: string;
   medium: ShortMedium;
@@ -126,11 +131,25 @@ export const SHORT_LINKS: ShortLink[] = [
     note: "Episode 4 trailer (~55s, scripts/promo/specs/ep4-trailer.json).",
     addedOn: "2026-10-17",
   },
+  {
+    // Melissa's new Facebook page took off on 2026-10-18 (~150 sessions in a
+    // day). Visits from facebook.com were already attributed by referrer; this
+    // is the link to paste into Facebook posts so they also carry a campaign,
+    // and so visits from the Facebook app — which often strips the referrer —
+    // are not lost. /go/fb/story etc. work the same way.
+    code: "fb",
+    source: "facebook",
+    to: "/",
+    medium: "post",
+    campaign: "fb-page",
+    note: "The Facebook page. Paste into posts and the page's website field.",
+    addedOn: "2026-10-18",
+  },
 ];
 
 export function shortLinkDestination(link: ShortLink, medium: ShortMedium = link.medium): string {
   const q = new URLSearchParams({
-    utm_source: "instagram",
+    utm_source: link.source ?? "instagram",
     utm_medium: medium,
     utm_campaign: link.campaign,
   });

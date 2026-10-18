@@ -3518,7 +3518,7 @@ export const videos: Video[] = [
       THE PROMISE, ON FILM, 2026-10-18. Melissa: "new video
       ty-josh-kitchen-corner … file it in canon, im gonna post it on IG so it
       just needs to be in the clips section". FREE — it is going on Instagram.
-      Farmhouse kitchen, daylight, 1:26. Canon: LUNA_VALE_CONTEXT.md, "THE
+      Farmhouse kitchen, daylight, 1:34 scored. Canon: LUNA_VALE_CONTEXT.md, "THE
       PROMISE" and "The kitchen corner" under it.
 
       WHAT IS SAID, from the transcript, speakers by who is on camera. Josh
@@ -3547,7 +3547,11 @@ export const videos: Video[] = [
       "At the farmhouse, Josh can\u2019t make sense of what Luna keeps telling him \u2014 that she wants to come home, and that he needs to stop calling. So he asks Tyson, who she still talks to, for one favor.",
     file: "josh-ty-kitchen-corner.proxy.mp4",
     poster: "/posters/josh-ty-kitchen-corner.jpg",
-    durationSeconds: 86,
+    // 94: the scored cut, music under the first 6.9s before "You seen Luna
+    // lately?" (Melissa swapped it in the same day). It is a different edit
+    // from the first upload — more of Tyson listening — and exported at
+    // 1320x842, not 16:9, so the player letterboxes it slightly.
+    durationSeconds: 94,
     addedOn: "2026-10-18",
     access: "free",
     mature: false,

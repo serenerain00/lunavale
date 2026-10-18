@@ -921,7 +921,7 @@ not agree to it dishonestly, and he cannot get out of it honourably.
 something she did.
 
 #### The kitchen corner — the promise, on film
-*(Footage from Melissa, 2026-10-18: `josh-ty-kitchen-corner`, 1:26, in the
+*(Footage from Melissa, 2026-10-18: `josh-ty-kitchen-corner`, 1:34 scored, in the
 clips as "In Your Corner" (title a placeholder), free — it is going on
 Instagram.)*
 

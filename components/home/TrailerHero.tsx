@@ -33,12 +33,15 @@ import { AmbientVideo } from "@/components/home/AmbientVideo";
 import type { Hero as HeroContent } from "@/lib/content/hero";
 import { SERIES_TITLE, SERIES_SUBTITLE } from "@/lib/content/season";
 import { PAGE } from "@/components/ui/layout";
+import { SeriesHeroCopy, type SeriesFacts } from "@/components/home/FirstScreen";
 
 interface TrailerHeroProps {
   hero: HeroContent;
+  /** For the first-screen test's series arm. */
+  series?: SeriesFacts;
 }
 
-export function TrailerHero({ hero }: TrailerHeroProps) {
+export function TrailerHero({ hero, series }: TrailerHeroProps) {
   const { video } = hero;
   // Falls back to the front-door copy so a playInline hero added without its
   // own strings renders the site's line rather than nothing.
@@ -143,8 +146,15 @@ export function TrailerHero({ hero }: TrailerHeroProps) {
         )}
       </div>
 
+      {series && (
+        <SeriesHeroCopy
+          facts={series}
+          className={`transition-opacity duration-(--duration-standard) ${playing ? "pointer-events-none opacity-0" : "opacity-100"}`}
+        />
+      )}
       {/* Copy + CTAs, hidden once the video takes over. */}
       <div
+        data-fs-variant="control"
         className={`${PAGE} pb-12 transition-opacity duration-(--duration-standard) sm:pb-16 ${
           playing ? "pointer-events-none opacity-0" : "opacity-100"
         }`}

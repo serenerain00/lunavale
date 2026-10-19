@@ -1,4 +1,8 @@
 import { SignUp } from "@clerk/nextjs";
+import { headers } from "next/headers";
+import { InAppNotice } from "@/components/access/InAppNotice";
+import { inAppBrowser } from "@/lib/access/in-app";
+import { HIDE_SOCIAL } from "@/lib/access/clerk-appearance";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 
 export const metadata = {
@@ -41,6 +45,7 @@ export default async function SignUpPage({
   // "membership is a separate step" would be nonsense.
   const paid = redirect.includes("/membership/claim");
   const prefill = String(params.email ?? "");
+  const inApp = inAppBrowser((await headers()).get("user-agent"));
 
   return (
     <>
@@ -76,8 +81,10 @@ export default async function SignUpPage({
             the address that signs up cannot differ by a typo — which is the
             one way somebody ends up unable to claim what they bought. Clerk
             still verifies it; pre-filling saves the typing, not the check. */}
+        {inApp && <InAppNotice app={inApp} />}
         <SignUp
           initialValues={prefill ? { emailAddress: prefill } : undefined}
+          appearance={inApp ? HIDE_SOCIAL : undefined}
         />
       </main>
     </>

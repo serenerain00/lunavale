@@ -38,6 +38,34 @@ export interface Experiment {
 }
 
 export const EXPERIMENTS: Record<string, Experiment> = {
+  /*
+   * THE NEWCOMER FIRST SCREEN — Melissa, 2026-10-18 ("ok do all of the
+   * above", on the Facebook conversion audit). The Facebook launch put ~480
+   * sessions a day on the home page, and the first phone screen was a random
+   * pick from five MEMBERS-ONLY scenes: a scene title, a "Members" badge, a
+   * padlocked Play, no series name, nothing free, no price (first price was
+   * ~2.5 screens down; Facebook visitors scroll ~30% of the page).
+   *
+   * `series` keeps the same footage behind it and replaces only the words and
+   * buttons over it: the series, how many episodes are out, Watch the trailer
+   * (free), Join · $8/month to /membership (not straight to Stripe — Melissa
+   * wants people to see the details first), and "start with
+   * the pilot". Members never see it. Mechanics: components/home/FirstScreen.tsx.
+   *
+   * INSIDE THE OCT 11-25 BASELINE, by Melissa's decision — see BREAKS.
+   */
+  "first-screen": {
+    id: "first-screen",
+    variants: ["control", "series"],
+    startsOn: "2026-10-18",
+    endsOn: "2026-11-01",
+    events: ["exposed", "trailer_play", "join_click", "membership_view"],
+    question:
+      "For a non-member landing on the home page, does a first screen that names the series, says what is free and shows the price turn more visitors into paying members than today's random members-only scene?",
+    decidesOn: "paid",
+    decisionRule:
+      "Exposed = a non-member saw the home page's first screen. Decided on confirmed payments (Stripe, ab_first-screen) per exposed visitor, by Nov 1 or 40 payments in the test, whichever is later. Ship `series` if its paid rate is at least 1.5x control's and play starts per exposed visitor did not fall by more than 10%. If it is at or below control, drop it. Anything in between is 'no large effect': Melissa decides. Checkouts opened and trailer plays are supporting evidence, never the verdict.",
+  },
   "preview-card": {
     id: "preview-card",
     variants: ["control", "card"],

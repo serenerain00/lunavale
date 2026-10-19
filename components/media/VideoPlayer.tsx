@@ -10,6 +10,7 @@
  */
 "use client";
 
+import { clarityEvent } from "@/components/analytics/clarity";
 import { useRef, useState } from "react";
 import { useViewer } from "@/components/access/Viewer";
 import {
@@ -24,12 +25,17 @@ import {
  * lib/analytics/attribution.ts), or Instagram's/Facebook's in-app browser,
  * which names itself in the user agent for the whole visit.
  */
-function playSource(): "instagram" | "other" {
+export function playSource(): "instagram" | "facebook" | "other" {
   const touches = [FIRST_TOUCH_COOKIE, LAST_TOUCH_COOKIE].map((name) =>
     decodeTouch(document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`))?.[1]),
   );
   if (touches.some((t) => t?.s === "instagram")) return "instagram";
-  return /Instagram|FBAN|FBAV/.test(navigator.userAgent) ? "instagram" : "other";
+  if (touches.some((t) => t?.s === "facebook")) return "facebook";
+  // Instagram's in-app browser names itself "Instagram"; Facebook's says
+  // FBAN/FBAV. Until 2026-10-18 both were counted as Instagram, which hid the
+  // whole Facebook launch inside the Instagram number.
+  if (/Instagram/.test(navigator.userAgent)) return "instagram";
+  return /FBAN|FBAV/.test(navigator.userAgent) ? "facebook" : "other";
 }
 
 interface VideoPlayerProps {
@@ -65,6 +71,7 @@ export function VideoPlayer({
   function countPlay() {
     if (counted.current) return;
     counted.current = true;
+    clarityEvent("video_play");
     try {
       navigator.sendBeacon(
         "/api/play",

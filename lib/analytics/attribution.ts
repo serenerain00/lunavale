@@ -103,6 +103,12 @@ export function touchFrom(
   // the site has our own host as referrer and was handled above.
   if (!refHost && /Instagram/.test(userAgent)) return make("instagram", "inapp");
   if (!refHost && /FBAN|FBAV/.test(userAgent)) return make("facebook", "inapp");
+  // No referrer, no tags, no in-app browser: a typed address, a bookmark, a
+  // link opened from a message. Labelled "direct" since 2026-10-18 — before
+  // that it was simply not recorded, and 3 of the 7 payments that day arrived
+  // with no source at all, indistinguishable from a tracking failure.
+  // CaptureAttribution never lets "direct" overwrite an earlier last touch.
+  if (!refHost) return make("direct", "none");
   return null;
 }
 

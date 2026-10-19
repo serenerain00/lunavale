@@ -14,7 +14,8 @@ import { pickHero } from "@/lib/content/hero";
 import { BETWEEN_US } from "@/lib/content/between-us";
 import { inStoryOrder } from "@/lib/content/chronology";
 import { categories } from "@/lib/content/categories";
-import { currentSeason, hasReleasedEpisode } from "@/lib/content/season";
+import { SEASONS, currentSeason, hasReleasedEpisode } from "@/lib/content/season";
+import { FirstScreenAssign, FirstScreenExposure } from "@/components/home/FirstScreen";
 import { characters } from "@/lib/content/characters";
 import { galleries } from "@/lib/content/gallery";
 import { freeEntries, opening } from "@/lib/content/journal";
@@ -77,6 +78,8 @@ import { sceneOptions } from "@/lib/content/survey";
  */
 export const revalidate = 3600;
 
+const NUMBER_WORDS = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"];
+
 /** How many cards a shelf shows before "See all" takes over. */
 const SHELF_LIMIT = 14;
 
@@ -102,13 +105,36 @@ export default async function Home() {
   const fresh = recentReleases(12);
   const cadence = cadenceNote();
 
+  // The first-screen test's series arm (lib/analytics/experiments.ts). Counted
+  // from the season's own episode list and the tier's own price, so the words
+  // over the hero cannot drift from what is actually out or what checkout charges.
+  const releasedEps = SEASONS.flatMap((s) => s.episodes).filter((e) => !e.comingSoon);
+  const released = releasedEps.length;
+  const seriesFacts = {
+    episodesWord: NUMBER_WORDS[released] ?? String(released),
+    price: formatPrice(vault.priceMonthlyCents),
+    trailerSlug: trailer && trailer.access === "free" && !trailer.hidden ? trailer.slug : null,
+    // "every episode opens free" is only said while it is true.
+    everyEpisodeOpens: releasedEps.every((e) => {
+      const v = videosAll.find((x) => x.slug === e.slug);
+      return Boolean(v && (v.access === "free" || v.preview));
+    }),
+  };
+
   return (
     <>
       <SiteHeader />
+      {/* Before the hero in the HTML, so the arm is decided before it paints. */}
+      <FirstScreenAssign force={process.env.NODE_ENV !== "production" && process.env.NEXT_PUBLIC_AB_FORCE === "first-screen"} />
+      <FirstScreenExposure />
 
       <main className="flex-1 pb-24">
         {hero &&
-          (hero.playInline ? <TrailerHero hero={hero} /> : <Hero hero={hero} />)}
+          (hero.playInline ? (
+            <TrailerHero hero={hero} series={seriesFacts} />
+          ) : (
+            <Hero hero={hero} series={seriesFacts} />
+          ))}
 
         {/*
           THE BLURB, directly under the hero and deliberately one paragraph.

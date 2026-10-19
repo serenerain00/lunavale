@@ -14,7 +14,7 @@
  */
 import { NextResponse } from "next/server";
 import { getStreamable } from "@/lib/content/streamable";
-import { PLAY_SOURCES, PLAY_VIEWERS, recordPlay, type PlaySource, type PlayViewer } from "@/lib/db/funnel";
+import { PLAY_SOURCES, PLAY_VIEWERS, recordPlay, recordPreviewEnd, type PlaySource, type PlayViewer } from "@/lib/db/funnel";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
   // RECORD_LOCAL_EVENTS=1 is set on purpose.
   if (process.env.NODE_ENV !== "production" && process.env.RECORD_LOCAL_EVENTS !== "1") return done;
 
-  let body: { slug?: unknown; viewer?: unknown; source?: unknown };
+  let body: { slug?: unknown; viewer?: unknown; source?: unknown; event?: unknown };
   try {
     body = JSON.parse(await request.text());
   } catch {
@@ -47,7 +47,10 @@ export async function POST(request: Request) {
   }
 
   try {
-    await recordPlay(slug, viewer, source);
+    // `event: "preview_end"` — a non-member reached the end of a free
+    // preview (2026-10-18). Anything else is a play start, as before.
+    if (body.event === "preview_end") await recordPreviewEnd(slug, source);
+    else await recordPlay(slug, viewer, source);
   } catch (error) {
     console.error("play beacon failed", error);
   }

@@ -122,6 +122,11 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${fraunces.variable} ${inter.variable} ${caveat.variable} h-full`}
+      // The home page's first-screen test sets data-fs on <html> from an
+      // inline script before hydration (components/home/FirstScreen.tsx),
+      // the same way a theme script would. Only this element's own
+      // attributes are exempt; everything inside still hydrates strictly.
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-void text-ivory">
         {/*

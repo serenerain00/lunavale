@@ -1,9 +1,11 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import { authConfigured } from "@/lib/billing/provider";
-import { getTier } from "@/lib/content/membership";
+import { formatPrice, getTier } from "@/lib/content/membership";
+import { JoinLink } from "@/components/membership/JoinLink";
 import { OVERHEARD_ARCHIVED } from "@/lib/content/overheard";
 import { SignOut } from "@/components/ui/SignOut";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import {
   Guest,
   Member,
@@ -167,6 +169,7 @@ export function SiteHeader() {
         </div>
 
         <div className="flex items-center gap-3">
+          <SocialLinks />
           {authConfigured() && (
             <>
               <SignedIn>
@@ -200,8 +203,7 @@ export function SiteHeader() {
             </Link>
           </Member>
           <Guest>
-            <Link
-              href="/membership"
+            <JoinLink
               className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full bg-amber px-3.5 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft sm:px-4"
             >
               {/* THE MOST PROMINENT CTA ON THE SITE — the amber pill in a
@@ -220,9 +222,14 @@ export function SiteHeader() {
                   starts checkout cannot drift. The short one is not derived —
                   it is the same word cut down to fit a 390px bar, and it has
                   to stay hand-written for that. */}
-              <span className="sm:hidden">Join</span>
-              <span className="hidden sm:inline">{getTier("vault")!.cta}</span>
-            </Link>
+              {/* THE PRICE ON THE BUTTON, Melissa 2026-10-18: "lets add the
+                  cost of membership to the button cta right as people land".
+                  Read from the tier, so it cannot drift from checkout. */}
+              <span className="sm:hidden">Join · {formatPrice(getTier("vault")!.priceMonthlyCents)}/mo</span>
+              <span className="hidden sm:inline">
+                {getTier("vault")!.cta} · {formatPrice(getTier("vault")!.priceMonthlyCents)}/mo
+              </span>
+            </JoinLink>
           </Guest>
         </div>
       </div>

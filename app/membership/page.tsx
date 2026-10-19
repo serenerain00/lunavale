@@ -7,7 +7,8 @@ import { TierCard } from "@/components/membership/TierCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { ExperimentEvent } from "@/components/analytics/ExperimentEvent";
-import { TIERS } from "@/lib/content/membership";
+import { TIERS, formatPrice, getTier } from "@/lib/content/membership";
+import { SEASONS } from "@/lib/content/season";
 import { OVERHEARD_ARCHIVED } from "@/lib/content/overheard";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { PAGE } from "@/components/ui/layout";
@@ -45,6 +46,12 @@ export default function MembershipPage() {
   // Counted, never typed. The pitch below is built out of these, so it cannot
   // still be claiming thirty-nine entries the week after the fortieth goes up.
 
+  const released = SEASONS.flatMap((x) => x.episodes).filter((e) => !e.comingSoon).length;
+  const episodesWord =
+    ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"][released] ??
+    String(released);
+  const price = formatPrice(getTier("vault")!.priceMonthlyCents);
+
   return (
     <>
       <SiteHeader />
@@ -79,15 +86,25 @@ export default function MembershipPage() {
               and whats available." A denominator also dates badly in the
               other direction; the honest version of the pitch is what is in
               there, not how much of it. */}
+          {/* THE EPISODES FIRST (Melissa, 2026-10-18, from the Facebook
+              conversion audit). The page opened on Luna's journal — written
+              for somebody who had been reading her. The Facebook launch sends
+              people who have seen a clip and want the show; they scrolled
+              about half of this page and the episodes were not named until
+              the table. The journal is still the second thing said, in its
+              own words. Episode count and price are read from the season and
+              the tier, never typed. */}
           <h1 className="mt-4 max-w-3xl font-display text-3xl font-light leading-[1.12] text-ivory sm:text-5xl">
-            She wrote all of it down. You&rsquo;ve read the pages she doesn&rsquo;t
-            mind you seeing.
+            Every episode of Between Us, in full.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-stone">
-            The rest are the ones she never meant anybody to see — what she
-            actually thinks about Josh, what she has worked out about Tyson,
-            and the nights she only ever told this book about. They come with
-            the clips they were written after.
+            {`${episodesWord} episodes out now and a new one weekly \u2014 plus every scene at full length, all of Luna\u2019s journal, and the stills from the set. ${price} a month, and you can stop anytime.`}
+          </p>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-stone">
+            She wrote all of it down. The pages she never meant anybody to see
+            — what she actually thinks about Josh, what she has worked out
+            about Tyson, and the nights she only ever told this book about —
+            come with the clips they were written after.
           </p>
           {/* THE CHAT, NAMED IN THE PITCH and not only in the table below.
               Melissa, 2026-09-17: "make sure to mention the chat in the

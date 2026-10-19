@@ -3417,6 +3417,62 @@ export const videos: Video[] = [
   },
   {
     /*
+      LUNA AND JOSH BEFORE THE BREAKUP — THE LONG CUT, Melissa, 2026-10-19:
+      "free for 1min. behind membership. this is pre-breakup b/t josh and
+      luna. this is basiclaly a simulated sex scene so we need to mark it
+      explicit."
+
+      SAME NIGHT AS "STILL US" (`luna-josh-bed-land`): the first two minutes
+      match it shot for shot, then this carries on for four more into the sex
+      itself. Melissa chose a SEPARATE CLIP over making it Still Us's members'
+      cut, so the two cards open on the same shots on purpose; Still Us stays
+      the 2:56 edit that is only `mature`.
+
+      THE FREE MINUTE IS AN EXPLICIT SCENE'S PUBLIC WINDOW, served with no
+      account and no age check, so it was checked frame by frame rather than
+      taken on trust (2s steps across 0:00–1:20, 1s across 0:18–0:30):
+
+        0:00–0:17  asleep, him at her neck, her waking and smiling. Kissing.
+        0:18–0:30  kissing; two wide frames at ~0:27 of his bare back over her
+                   under the sheet — implied, nothing shown.
+        0:30–1:00  kissing, hands, shoulders, her bra strap. No nudity.
+
+      So it is the First Night call again: the minute is intimate but not
+      graphic, and `explicit` puts "Explicit · 18+" and the notice in front of
+      it before it plays. Named in scripts/health-check.ts
+      ALLOWED_EXPLICIT_PREVIEW, which fails on any explicit preview she has
+      not named.
+
+      60s is simply the house tier for a scene this long (make-previews.mjs),
+      so no override.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace.
+    */
+    slug: "josh-luna-pre-break",
+    title: "Before",
+    synopsis:
+      "Before any of it came apart. Luna and Josh, the whole of the night.",
+    file: "josh-luna-pre-break.proxy.mp4",
+    poster: "/posters/josh-luna-pre-break.jpg",
+    // 418.5, the whole file — picture is black from 411 and the score fades
+    // itself out under it, as in Still Us.
+    durationSeconds: 418,
+    addedOn: "2026-10-19",
+    access: "premium",
+    mature: true,
+    explicit: true,
+    preview: {
+      file: "josh-luna-pre-break-preview.proxy.mp4",
+      durationSeconds: 60,
+      hookStart: 0,
+      hookNote: "from the top: waking, and it starting — nothing shown",
+    },
+    feelings: ["desire"],
+    place: "farmhouse",
+    about: ["luna", "josh"],
+  },
+  {
+    /*
       THE SUIT, Melissa, 2026-10-11. Early in the separation: Tyson has to
       show up to a work fundraiser in a suit, and Luna fixes his collar. The
       first moment their closeness feels different to either of them — and

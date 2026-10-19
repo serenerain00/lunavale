@@ -239,14 +239,15 @@ async function checkLeakage() {
   // AN EXPLICIT SCENE MUST NOT GROW A PUBLIC PREVIEW. A preview is served with
   // no account and no age check, so this is the one thing the site has never
   // shown a signed-out visitor. Melissa's rule is "explicit goes behind
-  // membership", narrowed once, by name, to allow luna-josh-first-night its 90
-  // seconds because she verified the window frame by frame.
+  // membership", narrowed by name: luna-josh-first-night (its window verified
+  // frame by frame), then josh-luna-pre-break, 2026-10-19 ("free for 1min.
+  // behind membership ... mark it explicit"), its minute checked the same way.
   //
   // THIS EXISTS BECAUSE IT HAPPENED. luna-bathtub had its preview deleted on
   // 2026-08-12 as a leak fix, and the 2026-09-13 "every scene gets a preview"
   // pass silently put a sixty-second one back. The rule that did it is right
   // everywhere else and simply does not reach an explicit scene.
-  const ALLOWED_EXPLICIT_PREVIEW = ["luna-josh-first-night"];
+  const ALLOWED_EXPLICIT_PREVIEW = ["luna-josh-first-night", "josh-luna-pre-break"];
   const explicitWithPreview = videos.filter(
     (v) => !v.hidden && v.explicit && v.preview && !ALLOWED_EXPLICIT_PREVIEW.includes(v.slug),
   );
@@ -257,7 +258,7 @@ async function checkLeakage() {
     );
   } else {
     ok(
-      `${videos.filter((v) => !v.hidden && v.explicit).length} explicit clip(s), only the named one has a public window`,
+      `${videos.filter((v) => !v.hidden && v.explicit).length} explicit clip(s), only the named ones have a public window`,
     );
   }
 

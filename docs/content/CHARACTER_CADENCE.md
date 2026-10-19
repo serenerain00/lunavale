@@ -52,16 +52,16 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-19 against `main` at 5c61171 — figures unchanged from ab18494. **A touched `lib/content/` file
+re-run 2026-10-19 against `main` at 667a1fa. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The 2026-07-28 row is kept beneath so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 217 | 184 |
+| Luna | 12 | 218 | 185 |
 | Tyson | 12 | 159 | 138 |
-| Josh | 14 | 135 | 119 |
+| Josh | 14 | 136 | 120 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 7 | 7 |
@@ -79,7 +79,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24, and 24 again at 5c61171**: it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 at 667a1fa**: it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has sat anywhere between 17 and 28. Quote the two
@@ -122,21 +122,23 @@ this clause — it is what makes the clause true.)*
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
 > updated 2026-10-12. The backlog below describes `main`, and `main` is behind:
-> the drops for 2026-08-03, 08-10, 08-17, 08-31, 09-07, 09-14, 09-21, 10-05 and
-> 10-12 are all still open and unmerged (#1, #2, #3, #5, #6, #7, #8, #9, #10), as
-> is this one (#4) — **ten weeks of drops, nothing landed.** A weekly run clones
-> the repo fresh, so it cannot see any of them — and **nine** separate weeks have
-> now independently picked the same obvious gap and written the same note, a Rick
-> `insight` note on `josh-rick-lake`: #2, #3, #5, #6, #7, #8, #9, #10, and #4
-> before it was rewritten. The ids differ (#5 `rick-i-already-knew`, #8
-> `rick-already-knew`, #9 `rick-the-line-in-the-water`, #10
-> `rick-round-the-outside`), so merging two of them
-> would not collide — it would quietly give Rick the same page twice. Whatever
+> the drops for 2026-08-03, 08-10, 08-17, 08-31, 09-07, 09-14, 09-21, 10-05,
+> 10-12 and 10-19 are all still open and unmerged (#1, #2, #3, #5, #6, #7, #8,
+> #9, #10, #11), as is this one (#4) — **eleven weeks of drops, nothing landed.**
+> A weekly run clones the repo fresh, so it cannot see any of them — and **ten**
+> separate weeks have now independently picked the same obvious gap and written
+> the same note, a Rick `insight` note on `josh-rick-lake`: #2, #3, #5, #6, #7,
+> #8, #9, #10, #11, and #4 before it was rewritten. Most ids differ (#5
+> `rick-i-already-knew`, #8 `rick-already-knew`, #9 `rick-the-line-in-the-water`),
+> so merging two of those would not collide — it would quietly give Rick the same
+> page twice. **#10 and #11 are the exception: both are `rick-round-the-outside`,
+> same id and same heading**, so that pair would actually conflict rather than
+> duplicate silently. Do not generalise either way — read the ids. Whatever
 > this file says is uncovered, check it against the open PRs first.
 >
-> **This paragraph cannot fix that on its own, and it has now failed six
+> **This paragraph cannot fix that on its own, and it has now failed seven
 > times.** It has only ever existed on #4's branch, never on `main`, so the
-> 08-31, 09-07, 09-14, 09-21, 10-05 and 10-12 runs could not read it and
+> 08-31, 09-07, 09-14, 09-21, 10-05, 10-12 and 10-19 runs could not read it and
 > duplicated anyway. It becomes effective the moment anything carrying it lands on `main`.
 > Until then the only reliable control is the weekly routine's own stored prompt,
 > which is the maintainer's to change.
@@ -154,6 +156,20 @@ this clause — it is what makes the clause true.)*
 > another PR's table against this one; recount on whatever tree you are actually
 > on.
 
+> **SIMONE IS IN CANON AND NOT ON THE SITE. DO NOT PUT HER IN A NOTE.**
+> `LUNA_VALE_CONTEXT.md` gained *"Simone — the first of them, named"* on
+> 2026-10-19, marked **INCOMING**: 38, a model, Luna's longtime friend and
+> effectively her partner at the Denver studio. Melissa's own words are that she
+> is *"going to be introduced soon"* and that **nothing about her is on the site
+> yet — no character card, no copy, no tags**, with anything unstated **OPEN** and
+> proposals to be labelled as proposals. A Between Takes note is public,
+> members-only at most, and would be the first mention of her anywhere. She is
+> not a gap to fill; she is an announcement that is Melissa's to make. **Miller
+> is the same case** — named in canon, still PROPOSED, and absent from
+> `lib/content/` entirely. **Cole is not**: he is already on the site, in
+> `tyson-cole-bar` with `about: ["tyson", "cole", "luna", "josh"]`, so he is
+> fair game. Check `lib/content/` before assuming a canon name is unpublished.
+>
 > **THERE IS A CHARACTER BIBLE NOW, AND MOST OF IT MUST NOT REACH A NOTE.**
 > `docs/content/BETWEEN_US_CHARACTER_BIBLE.md` arrived 2026-10-14. It is
 > Melissa's, and it is **writer knowledge**. The header of
@@ -220,7 +236,10 @@ Standing backlog, roughly prioritised:
   said "I want to come home" in those words is **open and Melissa's to settle**,
   so write it as Josh's account of the call, not as fact
 - Josh clips with no note yet: `luna-josh-break`, `luna-josh-bed-flashback`,
-  `luna-josh-first-night`, `luna-josh-fair` *(taken by #4)*, `josh-luna-wall`
+  `luna-josh-first-night`, `luna-josh-fair` *(taken by #4)*, **`josh-luna-pre-break`**
+  (*Before*, 2026-10-19, 6:58, `premium` with a sixty-second free opening — Luna
+  and Josh before the breakup, and the longest explicit cut on the site, so weigh
+  what a note on it would be doing), `josh-luna-wall`
   — which Melissa may want to write herself, as she is holding the journal entry
   for it — and **`luna-josh-ty-event`** (*I Was Going to Text You*, five minutes,
   `premium`, 2026-10-14): all three leads are in it, and

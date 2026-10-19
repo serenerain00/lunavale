@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-18 against `main` at ab18494. **A touched `lib/content/` file
+re-run 2026-10-19 against `main` at 5c61171 — figures unchanged from ab18494. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The 2026-07-28 row is kept beneath so the drift is visible.
@@ -79,7 +79,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24, and 24 again at ab18494**: it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24, and 24 again at 5c61171**: it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has sat anywhere between 17 and 28. Quote the two
@@ -175,9 +175,17 @@ Standing backlog, roughly prioritised:
   `notes: ["danger"]`), `episode-2` (*Breathe*, 22:23), `episode-3` (*The Space
   Between*, 21:35) and — new on 2026-10-18 — `episode-4` (*Peace and Quiet*,
   15:09, `notes: ["danger"]`). All four are `premium` with a free opening —
-  `preview.durationSeconds` reads 60, 124, 129 and **158**, so a minute on the
-  pilot, about two on the middle pair, and the firefight on episode 4. (Not the
-  "1:30" an early commit message said of Breathe before it was recut.) That
+  `preview.durationSeconds` reads **190**, 124, 129 and 158 as of 2026-10-19, so
+  three minutes ten on the pilot, about two on the middle pair, and the firefight
+  on episode 4. (Not the "1:30" an early commit message said of Breathe before it
+  was recut.) **These move on purpose — re-read all four before comparing them.**
+  The pilot's window was 60 until 10-19, when Melissa approved lengthening it
+  after the Facebook conversion audit: it was the most-played video for
+  non-members the day Facebook arrived, its first minute is music-only with no
+  dialogue, and the window now runs through the cold open to the last frame
+  before the cut to the farmhouse. *(An earlier version of this item said
+  episode 4 had the longest free opening of the four. That held for one day. The
+  pilot does.)* That
   preview is what keeps them in the sitemap, so a note on an
   episode is reachable in a way a note on an ordinary gated clip is not. They
   are the first thing a new member watches. **Check `about` before claiming an

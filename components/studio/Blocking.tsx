@@ -92,6 +92,7 @@ export function Blocking({
   const [activeFigure, setActiveFigure] = useState<string>(b.figures[0]?.id ?? "");
   const [mode, setMode] = useState<"rotate" | "translate">("rotate");
   const [hide, setHide] = useState(false);
+  const [dragPeople, setDragPeople] = useState(false);
   const [reading, setReading] = useState<CameraReading | null>(null);
   const [shot, setShot] = useState<{ url: string; blob: Blob } | null>(null);
   const [status, setStatus] = useState<string | null>(null);
@@ -315,7 +316,9 @@ export function Blocking({
             selection={selection}
             mode={mode}
             hideHelpers={hide}
+            dragPeople={dragPeople}
             onSelect={onSelect}
+            onActive={setActiveFigure}
             onFigure={updateFigure}
             onProp={updateProp}
             onCamera={onCamera}
@@ -330,9 +333,18 @@ export function Blocking({
           </div>
         </div>
 
-        <p className="text-center text-[12px] text-stone-dim">
-          Drag to orbit · right-drag (or two fingers) to pan · scroll or pinch to zoom · click a body part to bend it
-        </p>
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[12px] text-stone-dim">
+          <span className="flex items-center gap-1">
+            Dragging a body
+            <button type="button" className={chip(!dragPeople)} onClick={() => setDragPeople(false)}>Orbits the camera</button>
+            <button type="button" className={chip(dragPeople)} onClick={() => setDragPeople(true)}>Moves the person</button>
+          </span>
+          <span>
+            {dragPeople
+              ? "Drag a person across the floor · drag empty space to orbit"
+              : "Drag to orbit · right-drag (or two fingers) to pan · scroll or pinch to zoom · click a body part to bend it"}
+          </span>
+        </div>
 
         <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
           <button
@@ -459,6 +471,16 @@ export function Blocking({
               </div>
               <Slider label="Facing" min={-180} max={180} value={jointOf(f, "pelvis")[1]}
                 onChange={(v) => { const p = jointOf(f, "pelvis"); setJoint(f, "pelvis", [p[0], v, p[2]]); }} />
+              {(() => {
+                const other = nearestOther(f, b.figures);
+                if (!other) return null;
+                const d = floorDistance(f, other);
+                return (
+                  <Slider label={`Apart from ${other.characterId ? names[other.characterId] ?? "them" : "the stand-in"}`}
+                    hint={spacingWords(d)} min={0.15} max={4} step={0.01} unit="m" value={d}
+                    onChange={(v) => updateFigure(atDistance(f, other, v))} />
+                );
+              })()}
             </div>
           ))}
           {b.figures.length < MAX_FIGURES && (
@@ -558,6 +580,37 @@ function Slider({ label, hint, min, max, step = 1, value, unit = "°", onChange 
         onChange={(e) => onChange(Number(e.target.value))} className="w-full accent-amber" />
     </label>
   );
+}
+
+/* ------------------------------------------------------------ spacing -- */
+// Pelvis to pelvis, along the floor.
+
+function floorDistance(a: BlockingFigure, b: BlockingFigure) {
+  return Math.hypot(a.position[0] - b.position[0], a.position[2] - b.position[2]);
+}
+
+function nearestOther(f: BlockingFigure, all: BlockingFigure[]) {
+  let best: BlockingFigure | null = null;
+  for (const o of all) if (o.id !== f.id && (!best || floorDistance(f, o) < floorDistance(f, best))) best = o;
+  return best;
+}
+
+/** Slide `f` along the line from `other`, so the other person stays put. */
+function atDistance(f: BlockingFigure, other: BlockingFigure, d: number): BlockingFigure {
+  let dx = f.position[0] - other.position[0];
+  let dz = f.position[2] - other.position[2];
+  const len = Math.hypot(dx, dz);
+  if (len < 1e-3) { dx = 1; dz = 0; } else { dx /= len; dz /= len; }
+  const r = (n: number) => Math.round(n * 1000) / 1000;
+  return { ...f, position: [r(other.position[0] + dx * d), f.position[1], r(other.position[2] + dz * d)] };
+}
+
+function spacingWords(m: number) {
+  const ft = `${(m * 3.281).toFixed(1)} ft`;
+  if (m < 0.35) return `${ft} · touching`;
+  if (m < 0.6) return `${ft} · close`;
+  if (m < 1.2) return `${ft} · talking distance`;
+  return `${ft} · apart`;
 }
 
 const btn = "rounded-sm border border-hairline px-2.5 py-1 text-[13px] text-ivory hover:border-amber/50 disabled:opacity-50";

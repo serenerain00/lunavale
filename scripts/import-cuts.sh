@@ -915,6 +915,20 @@ CUTS=(
   # music"). Poster at 58s: Josh just up from the island, Tyson across it,
   # the fields behind.
   "josh-ty-kitchen-corner|stories/josh-ty-kitchen-corner/ty-josh-kitchen-corner-music.mov|58|-|-|30"
+  # 2026-10-19: Luna and Josh before the breakup — the long cut of the same
+  # night as "Still Us" (luna-josh-bed-land), carried on into the explicit
+  # part (Melissa: "basiclaly a simulated sex scene so we need to mark it
+  # explicit"). Its own clip, by her choice, not Still Us's members' cut.
+  # 6:58, 1320x804 at 60fps, proxy at 30.
+  #
+  # POSTER AT 14s: her eyes open and smiling, his hand at her face — waking,
+  # before anything. A scene poster is a public, ungated URL, so it comes from
+  # the opening and not from anywhere past it.
+  #
+  # NO END: picture goes black at 411.0 and the score runs on under it, fading
+  # itself out — same as Still Us. The master's name has "sex" in it; the slug,
+  # poster and proxy do not (Melissa's rule from First Night).
+  "josh-luna-pre-break|stories/josh-luna-pre-Break/luna-josh-preBreak-sex.mov|14|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

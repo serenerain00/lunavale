@@ -106,6 +106,8 @@ export const STORY_ORDER: readonly string[] = [
   // them together. Exactly where in the ten years is not stated; move it if
   // she places it.
   "luna-josh-bed-land",
+  // The long cut of the same night (Melissa, 2026-10-19: "pre-breakup").
+  "josh-luna-pre-break",
   "luna-josh-truck-leaving",
   "luna-josh-break",
 

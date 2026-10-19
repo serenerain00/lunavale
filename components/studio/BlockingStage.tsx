@@ -13,6 +13,12 @@
  * body part selects the joint that part hangs from and puts a rotate gizmo on
  * it; the panel beside the stage has the same joint as sliders.
  *
+ * MOVING PEOPLE. Melissa, 2026-10-18: "i need to be able to move the person,
+ * so if i wnat them standing closer to gether". With `dragPeople` on, a drag
+ * that starts on a body slides that person across the floor instead of
+ * orbiting — under the pointer, at whatever height they are (sitting on a
+ * chair stays sitting). A drag that starts on empty floor still orbits.
+ *
  * THE SNAPSHOT IS THE FRAME, at delivery size: the drawing buffer is resized
  * to the aspect's pixel size for one render, read, and put back. Helpers (the
  * gizmo, the selection glow) are hidden by the parent for that frame.
@@ -81,7 +87,9 @@ export function BlockingStage({
   selection,
   mode,
   hideHelpers,
+  dragPeople,
   onSelect,
+  onActive,
   onFigure,
   onProp,
   onCamera,
@@ -92,7 +100,9 @@ export function BlockingStage({
   selection: Selection;
   mode: "rotate" | "translate";
   hideHelpers: boolean;
+  dragPeople: boolean;
   onSelect: (s: Selection) => void;
+  onActive: (figureId: string) => void;
   onFigure: (f: BlockingFigure) => void;
   onProp: (p: BlockingProp) => void;
   onCamera: (c: Blocking["camera"]) => void;
@@ -140,18 +150,19 @@ export function BlockingStage({
       </mesh>
       {blocking.grid && <gridHelper args={[20, 20, "#8a8680", "#6a6762"]} position={[0, 0.002, 0]} />}
 
-      {blocking.figures.map((f, i) => (
-        <Figure
-          key={f.id}
-          fig={f}
-          tone={FIGURE_TONES[i % FIGURE_TONES.length].hex}
-          selectedJoint={
-            !hideHelpers && selection?.type === "joint" && selection.figureId === f.id ? selection.joint : null
-          }
-          register={register}
-          onSelect={onSelect}
-        />
-      ))}
+      <People figures={blocking.figures} enabled={dragPeople} onActive={onActive} onFigure={onFigure}>
+        {(f, i) => (
+          <Figure
+            fig={f}
+            tone={FIGURE_TONES[i % FIGURE_TONES.length].hex}
+            selectedJoint={
+              !hideHelpers && selection?.type === "joint" && selection.figureId === f.id ? selection.joint : null
+            }
+            register={register}
+            onSelect={onSelect}
+          />
+        )}
+      </People>
 
       {blocking.props.map((p) => (
         <group
@@ -366,6 +377,91 @@ function Rig({
   );
 }
 
+/* --------------------------------------------------------- people drag -- */
+
+/**
+ * Each figure in a group that, when dragging people, takes a pointer-down on
+ * the body and slides the figure along the floor. The pointer is followed on a
+ * level plane through the grab point, offset kept, so the part grabbed stays
+ * under the cursor.
+ * Window listeners rather than pointer capture: the drag survives the pointer
+ * leaving the body, and the canvas, mid-move.
+ */
+function People({
+  figures,
+  enabled,
+  onActive,
+  onFigure,
+  children,
+}: {
+  figures: BlockingFigure[];
+  enabled: boolean;
+  onActive: (figureId: string) => void;
+  onFigure: (f: BlockingFigure) => void;
+  children: (f: BlockingFigure, i: number) => ReactNode;
+}) {
+  const { camera, gl } = useThree();
+  const controls = useThree((st) => st.controls) as OrbitControlsImpl | null;
+  // The drag's window listeners outlive the render that started them.
+  const latest = useRef(figures);
+  useEffect(() => { latest.current = figures; }, [figures]);
+
+  const start = (id: string, e: ThreeEvent<PointerEvent>) => {
+    if (!enabled || e.nativeEvent.button !== 0) return;
+    // Level with the point grabbed, not the floor: from a near-eye-level
+    // camera the floor behind a chest is metres away, and a small hand
+    // movement would throw the body across the room.
+    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -e.point.y);
+    const ray = new THREE.Raycaster();
+    const ndc = new THREE.Vector2();
+    const pointAt = (cx: number, cy: number) => {
+      const r = gl.domElement.getBoundingClientRect();
+      ndc.set(((cx - r.left) / r.width) * 2 - 1, -((cy - r.top) / r.height) * 2 + 1);
+      ray.setFromCamera(ndc, camera);
+      return ray.ray.intersectPlane(plane, new THREE.Vector3());
+    };
+    const f0 = latest.current.find((f) => f.id === id);
+    const p0 = pointAt(e.nativeEvent.clientX, e.nativeEvent.clientY);
+    if (!f0 || !p0) return;
+    e.stopPropagation();
+    onActive(id);
+    const off = { x: f0.position[0] - p0.x, z: f0.position[2] - p0.z };
+    if (controls) controls.enabled = false;
+    gl.domElement.style.cursor = "grabbing";
+    const move = (ev: PointerEvent) => {
+      const p = pointAt(ev.clientX, ev.clientY);
+      const f = latest.current.find((x) => x.id === id);
+      if (!p || !f) return;
+      onFigure({ ...f, position: [round3(p.x + off.x), f.position[1], round3(p.z + off.z)] });
+    };
+    const up = () => {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+      window.removeEventListener("pointercancel", up);
+      if (controls) controls.enabled = true;
+      gl.domElement.style.cursor = "grab";
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+    window.addEventListener("pointercancel", up);
+  };
+
+  return (
+    <>
+      {figures.map((f, i) => (
+        <group
+          key={f.id}
+          onPointerDown={(e: ThreeEvent<PointerEvent>) => start(f.id, e)}
+          onPointerOver={() => { if (enabled) gl.domElement.style.cursor = "grab"; }}
+          onPointerOut={() => { gl.domElement.style.cursor = ""; }}
+        >
+          {children(f, i)}
+        </group>
+      ))}
+    </>
+  );
+}
+
 /* ---------------------------------------------------------------- gizmo -- */
 
 function Gizmo({
@@ -420,6 +516,8 @@ function Gizmo({
       mode={moving ? "translate" : "rotate"}
       space={moving ? "world" : "local"}
       size={0.6}
+      // Along the floor only; height has its own slider.
+      showY={!moving}
       onObjectChange={() => {
         if (moving) {
           onFigure({ ...fig, position: obj.position.toArray().map(round3) as Vec3 });

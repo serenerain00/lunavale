@@ -174,6 +174,170 @@ yet and nobody should be.
   when she introduces them, and the journal treats it as a memory rather than a
   scene.
 
+### Simone — the first of them, named *(Melissa, 2026-10-19; INCOMING)*
+
+*Melissa's character reference, filed as she sent it apart from obvious typos.
+She is "going to be introduced soon", and a portrait is coming as the facial
+reference. **Nothing about her is on the site yet:** no character card, no
+copy, no tags. Anything not stated below is OPEN, and proposals must be
+labelled as proposals.*
+
+**Who she is.** **38**, an established fashion model, and Luna's longtime
+friend and trusted collaborator. **Effectively a business partner at Luna's
+Denver modeling studio:** she still models selectively, develops new talent
+and helps run the studio. The studio is **Luna's**. Simone's responsibilities
+grew until the working relationship is essentially a partnership, but **no
+formal ownership or equity is established.** She is single.
+
+**Where she's from.** **Brooklyn-born and partly Native American.** Her
+specific nation or tribal affiliation is **not established**. She grew up with
+little money and a difficult home life, and modeling was her route to
+independence. She started professionally **at eighteen** and has twenty years
+of both the creative and the commercial side.
+
+**With Luna.** They met about **twenty years ago**, early in both careers,
+working a **New York show or event** together. They became close around
+Simone's **move from Brooklyn to Atlanta**, and kept it up through travel,
+jobs and life changes. When Luna opened the Denver studio, she **brought Simone
+there to help build it.**
+
+**Work.** She does model development, castings, and relationships with
+photographers and clients. She can lead a session, judge a portfolio, manage a
+difficult client and keep the day moving, and Luna trusts her to run the place.
+- She pays people promptly and reads contracts carefully.
+- She notices when a young model is afraid to refuse a request. She remembers
+  needing a booking badly enough to overlook the warning signs.
+- Her protectiveness is practical: she clarifies terms *(the reference reads
+  "clarifying acking terms", probably booking terms)* or quietly pulls someone
+  aside.
+
+She and Luna have years of shorthand. They can disagree without undermining
+each other. Show that through decisions, not explanatory speeches.
+
+**Personality.** Real, observant, honest and direct. She does not bullshit
+Luna, and Luna never has to perform being okay for her. Her confidence is
+earned. She is sophisticated, with an understated edge and a dry sense of
+humour.
+- She likes clothes, good food, and one more bracelet she doesn't need.
+- Money once meant uncertainty. Now she values knowing where it goes and
+  having choices.
+- Her warmth is familiarity: a sip of Luna's coffee, finishing a task unasked,
+  remembering what Luna has avoided eating, letting a silence breathe.
+- She has her own working life and her own opinions beyond Luna's
+  relationships.
+
+**Her flaw:** she sometimes decides she understands a situation before the
+other person has finished explaining it. Perceptiveness becomes certainty. She
+can recognise it and back off.
+
+**Family.** She **does not speak to her parents**. The cause is **not
+established**: do not invent abuse, addiction or a defining incident. She has
+a **brother** she talks to inconsistently: a late-night call, a practical
+check-in, a meme after weeks of silence. She keeps answering. His name, age and
+location are open. She is single and selective, and private about loneliness.
+She does not need a romance soon. Past partners are open.
+
+**Voice.**
+- Economical dialogue, dry, with profanity when it's earned.
+- A light New York cadence. No phonetic accent and no constant tough-girl act.
+- Asks a direct question and waits for the answer.
+- Teases from familiarity, and can challenge Luna without humiliating her.
+- Responds to what she can see. She cannot read minds or know a secret she
+  hasn't been told.
+- Loose shoulders, practical movement, steady attention. Small expressions
+  carry her reactions.
+
+**Look (continuity).**
+- **Body and face:** realistic adult skin and natural proportions; a slender
+  model's build. Delicate features, softly defined cheekbones, a graceful jaw,
+  almond-shaped deep brown eyes, warm medium skin.
+- **Hair:** long, straight and very dark, parted slightly off-centre, often
+  tucked behind one ear.
+- **Tattoo:** a black-and-grey botanical/abstract sleeve on her **LEFT arm**,
+  shoulder to wrist. The **right arm is untattooed.**
+- **Right wrist:** stacked silver bangles and slim worn leather bracelets, plus
+  thin silver rings.
+- **Piercings:** small silver hoops, a few tiny cartilage studs, a discreet
+  nostril stud.
+- **First studio look:** fitted charcoal sleeveless top, tailored black
+  trousers, black leather belt with a silver buckle, fine silver necklace.
+- Her heritage is part of her identity, **never a costume or shorthand for
+  mystical traits.** The approved portrait is the face reference.
+
+**Guardrails.** Not the sassy best friend, the amateur therapist, an exposition
+device or an all-knowing matchmaker. She is funny, busy, occasionally wrong and
+emotionally invested. Because she is loyal, Luna can trust what she says,
+including what Luna would rather not hear. **No surname, tribal affiliation,
+ownership share, family incident or romantic backstory** unless Melissa
+approves it.
+
+#### The studio scene — her first, approved dialogue
+
+**What the scene does.** Simone notices the extra beat Luna spends watching
+Tyson leave. She suspects attraction and tests Luna's explanation. She is
+curious and gently provocative, but she does not treat the suspicion as fact or
+push Luna toward a relationship. **She doesn't make Josh a villain, and she
+doesn't frame Luna as dishonest or cruel for being conflicted.** Her job is to
+make room for an honest admission, not to decide Luna's life.
+
+> SIMONE: You always look at him like that?
+> LUNA: Like what?
+> SIMONE: Okay.
+> LUNA: Nothing's happened.
+> SIMONE: I didn't ask if anything happened.
+> LUNA: He's been my best friend since I was eighteen.
+> SIMONE: I know who he is, Lu.
+> SIMONE: Has it ever been anything else?
+> LUNA: No.
+> *Luna straightens the edge of a portfolio.*
+> LUNA: He left before—
+> *Her hands briefly stop. She hears what she has admitted. Simone waits.*
+> LUNA: Anyway. That was a long time ago.
+> SIMONE: I was asking about now.
+> *Luna has no answer ready. A work interruption gives her somewhere to go.
+> Simone sees the opening has closed and lets her go back to work.*
+
+**Keep the unfinished "before."** It reveals there was a possibility without a
+retrospective confession. Keep the performances restrained.
+
+**Updated direction, Luna's side at eighteen.** In Melissa's words, "at
+eighteen, there were emerging feelings before he left for the Navy. Nothing
+became a relationship." Luna's current closeness with Tyson is starting to make
+her notice possibilities she hasn't named. **This replaces any earlier blanket
+rule that Luna cannot feel attraction yet.** It does **not** lift the separate
+rule about **Tyson** (see "Tyson at eighteen"): no copy may say or hint that
+*he* had feelings before the separation. "He left before—" is Luna's line about
+herself, and copy around the scene has to stay on her side of it.
+
+#### OPEN — things this reference rubs against, for Melissa
+
+1. **When the studio opened.** She said fifteen years ago, but canon has Luna
+   moving to Denver **ten** years ago, at 28, to live with Josh. **Provisional
+   until she reconciles it.** The wider chronology is not touched.
+2. **A Denver studio is new, and it changes Luna's isolation.** "Her friends —
+   WHO IS LEFT" above says her surviving people are all **somewhere else,
+   reachable only by phone**, and that in Colorado she has Josh and Tyson and
+   "that is the entire list". The journal page `the-work` has her modeling as
+   a job she drives to and back from, with no studio. Simone running Luna's
+   studio in Denver puts a close friend in the same city. Both can be true, but
+   the "entire list" line and the isolation argument need rewording when she
+   launches.
+3. **Is Simone one of "the girls"?** The journal page `the-girls` (live,
+   members) describes four unnamed women from the work, and one of them once
+   asked "does he know?" about Tyson. **Proposal only:** Simone as that woman
+   would make the studio scene a payoff, since "I was asking about now" lands
+   harder if she asked the first time fifteen years ago. The page also says
+   Luna "is not going to ask" them, and Simone asking her instead fits it.
+4. **That same page may already break the Tyson rule.** "Does he know?" and
+   "They knew", about Tyson waiting three hours in a truck about fifteen years
+   ago, can read as Tyson having felt something long before the separation. It
+   predates the 2026-09-25 "never on the site" rule. Also, fifteen years ago
+   Tyson was in the SEALs (about 18–28), so the truck memory may not fit the
+   timeline either. Flagged, not changed.
+5. **"Lu" vs "Lou."** Simone calls her "Lu" in the approved dialogue, while
+   Tyson's nickname on the site is "Lou". If subtitles or copy ever print it,
+   decide whether that's deliberate (hers vs his) or one spelling.
+
 ### Josh — her partner of ten years
 Together with Luna **10 years**, then **separated for 6 months**. By the end
 of the ten years he'd gone **lazy** — stopped noticing the house, the

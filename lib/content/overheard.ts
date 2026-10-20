@@ -344,7 +344,7 @@ export const CAST_THREAD: CastMessage[] = [
   { id: "d39-1", day: 39, at: "19:45", author: JOSH, addressedTo: null, body: ["@Rick Three days."] },
   { id: "d40-1", day: 40, at: "06:30", author: LUNA, addressedTo: null, body: ["Ran before it was light. Nobody out there. First time all year I've had the whole road."] },
   { id: "d40-2", day: 40, at: "08:10", author: TYSON, addressedTo: null, body: ["@Luna You had the whole road because it's dark and everyone else has sense."] },
-  { id: "d41-1", day: 41, at: "13:15", author: LUNA, addressedTo: null, body: ["Somebody in here asked whether I actually write all of it down or whether it's tidied up afterwards.",
+  { id: "d41-1", day: 41, at: "13:15", author: LUNA, addressedTo: null, body: ["Somebody in here asked whether I actually write all of it down or whether it's tidied up afterward.",
     "It is not tidied up. That's the problem with it.",
   ] },
   { id: "d42-1", day: 42, at: "20:00", author: RICK, addressedTo: null, body: ["A man showed me a photograph of this place from 1968 today. Same trees. Smaller."] },

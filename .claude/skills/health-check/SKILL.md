@@ -7,6 +7,9 @@ description: The daily look at the live site — bugs, pages customers should no
 
 Melissa's rule: **every day we start working, check the site.** Bugs, pages
 customers should not see but maybe do, checkout issues, general health.
+And, since 2026-10-20, **American English** in everything a visitor reads
+("i just saw color spelled colour… make sure to check this every day") —
+report any British spellings it lists and fix them the same day.
 
 ## Run it
 

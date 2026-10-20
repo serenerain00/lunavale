@@ -176,6 +176,10 @@ yet and nobody should be.
 
 ### Simone — the first of them, named *(Melissa, 2026-10-19; INCOMING)*
 
+**ON HOLD** *(Melissa, 2026-10-20: "hold of on simone till i say, still
+building the scene and context")*. Don't build, write or propose anything for
+her until she brings it back.
+
 *Melissa's character reference, filed as she sent it apart from obvious typos.
 She is "going to be introduced soon", and a portrait is coming as the facial
 reference. **Nothing about her is on the site yet:** no character card, no
@@ -304,7 +308,9 @@ retrospective confession. Keep the performances restrained.
 eighteen, there were emerging feelings before he left for the Navy. Nothing
 became a relationship." Luna's current closeness with Tyson is starting to make
 her notice possibilities she hasn't named. **This replaces any earlier blanket
-rule that Luna cannot feel attraction yet.** It does **not** lift the separate
+rule that Luna cannot feel attraction yet.** But it is **VERY subtle**
+*(Melissa, 2026-10-20)*: a look a beat too long, a sentence that stops. Never
+stated, never played up. It does **not** lift the separate
 rule about **Tyson** (see "Tyson at eighteen"): no copy may say or hint that
 *he* had feelings before the separation. "He left before—" is Luna's line about
 herself, and copy around the scene has to stay on her side of it.

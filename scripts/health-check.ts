@@ -587,7 +587,40 @@ async function checkStripe() {
       if (!email) continue;
       byEmail.set(email, [...(byEmail.get(email) ?? []), s.id]);
     }
-    const doubled = [...byEmail.values()].filter((ids) => ids.length > 1);
+    // AND BY SITE ACCOUNT (2026-10-20). Andrea paid as one address and again,
+    // signed in, as another — two customers, two emails, one person, and this
+    // check said "Nobody is paying twice". The owner of a subscription is
+    // whoever holds it on the site: the member row, the account that claimed
+    // the pending payment, or the userId the checkout carried.
+    // A subscription can have several owners now (linked logins share one),
+    // so this is per USER: anybody holding more than one live subscription.
+    const owners = new Map<string, Set<string>>();
+    const own = (sub: string, user: string | null | undefined) => {
+      if (!user) return;
+      owners.set(sub, (owners.get(sub) ?? new Set()).add(user));
+    };
+    for (const r of (await sql`
+      SELECT stripe_subscription_id, claimed_by AS user_id FROM pending_memberships WHERE claimed_by IS NOT NULL
+      UNION ALL
+      SELECT stripe_subscription_id, user_id FROM memberships WHERE stripe_subscription_id IS NOT NULL
+    `) as { stripe_subscription_id: string; user_id: string }[]) own(r.stripe_subscription_id, r.user_id);
+    const byOwner = new Map<string, string[]>();
+    for (const s of subs) {
+      if (!["active", "trialing", "past_due"].includes(s.status)) continue;
+      own(s.id, s.metadata?.userId);
+      for (const user of owners.get(s.id) ?? []) {
+        byOwner.set(user, [...(byOwner.get(user) ?? []), s.id]);
+      }
+    }
+    const seen = new Set<string>();
+    const doubled = [...byEmail.values(), ...byOwner.values()]
+      .filter((ids) => ids.length > 1)
+      .filter((ids) => {
+        const key = [...ids].sort().join("+");
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
     if (doubled.length) {
       fail(`${doubled.length} person(s) are paying for more than one membership`,
         `${doubled.map((ids) => ids.join(" + ")).join("; ")}. Refund + cancel the extra one with Melissa's OK.`);
@@ -726,13 +759,13 @@ async function checkOrder() {
   const EXEMPT = /lib\/content\/(journal|videos|between-takes|season|survey|posts)\.ts$/;
   const offenders: string[] = [];
   for (const dir of COPY_DIRS) {
-    for (const file of await walk(path.join(ROOT, dir))) {
+    for (const file of await walk(dir)) {
       if (!/\.tsx?$/.test(file) || EXEMPT.test(file)) continue;
-      const src = await readFile(file, "utf8");
+      const src = await readFile(path.join(ROOT, file), "utf8");
       src.split("\n").forEach((line, i) => {
         const code = line.replace(/^\s*(\/\/|\*|\/\*).*$/, "");
         if (/\b(a|the|this) film\b/i.test(code)) {
-          offenders.push(`${path.relative(ROOT, file)}:${i + 1}`);
+          offenders.push(`${file}:${i + 1}`);
         }
       });
     }
@@ -747,11 +780,63 @@ async function checkOrder() {
   }
 }
 
+/*
+ * AMERICAN ENGLISH, in anything a visitor can read (Melissa, 2026-10-20: "i
+ * just saw color spelled colour… make sure to check this every day"). The
+ * first sweep found ~65 lines: colour, grey, realised, afterwards, car park,
+ * windscreen, and Luna "ringing" people. She is from Atlanta; she calls them.
+ *
+ * Comments are exempt (lines starting //, * or inside a block comment), and so
+ * are code names that cannot change without breaking things: aria-labelledby,
+ * normaliseEmail, the favourite_scene survey column, the cole-rang-him URL.
+ * Fix with the word on the right; never rename an id or a URL to get a pass.
+ */
+const BRITISH: [RegExp, string][] = [
+  [/\bcolou?r(?<=colour)\w*/i, "color"],
+  [/\bgrey(s|ish)?\b/i, "gray"],
+  [/\b(favour|honour|behaviour|neighbour|humour|flavour|labour|rumour|harbour|armour|odour|endeavour|savour)\w*/i, "-or"],
+  [/\b(centre|theatre|metre|litre|fibre|sombre|calibre)s?\b/i, "-er"],
+  [/\b\w+(is|ys)(e|ed|es|ing|ation)\b(?<=(realis|apologis|organis|recognis|emphasis|criticis|prioritis|memoris|sympathis|authoris|minimis|maximis|summaris|apologis|analys|paralys|categoris|characteris|finalis|personalis|customis|visualis|utilis|optimis)\w*)/i, "-ize"],
+  [/\b(travell|cancell|labell|modell|counsell|marvell|fuell)(ed|ing|er)\b/i, "single l"],
+  [/\b(crueller|whilst|amongst|learnt|spelt|programme|catalogue|defence|licence|offence|practis(e|ed|ing)|cheque|tyres?|kerb|aluminium|jewellery|moustache|pyjamas|plough|cosy|sceptic\w*|aeroplane|enrolment|judgement|instalment)\b/i, "US spelling"],
+  [/\b(afterwards|towards|backwards|forwards)\b/i, "-ward"],
+  [/\b(car parks?|windscreen|petrol|motorway|lorry|pavement|fortnight|mum)\b/i, "US word"],
+  [/\b(I|he|she|we|they|you|Josh|Tyson|Luna|Cole|Avery|Rick|Cathy) (rang|rings)\b|\b(rang|ring) (him|her|me|you|them|us|back)\b/, "called / call"],
+  [/\bthe phone went\b/i, "the phone rang"],
+];
+const BRITISH_OK = /aria-labelledby|labelledby|normalis|favourite_scene|favouriteScene|cole-rang-him|serialis|\.metres\b|\bmetres:|\bauthorised\(|\.cancelling\b|\bcancelling:/gi;
+
+async function checkAmerican() {
+  section("Spelling — American English in everything a visitor reads");
+  const offenders: string[] = [];
+  for (const dir of ["lib/content", "lib/studio", "lib/email", "app", "components"]) {
+    for (const file of await walk(dir)) {
+      if (!/\.tsx?$/.test(file)) continue;
+      let inBlock = false;
+      (await readFile(path.join(ROOT, file), "utf8")).split("\n").forEach((line, i) => {
+        const t = line.trim();
+        if (inBlock) { if (t.includes("*/")) inBlock = false; return; }
+        if (t.startsWith("/*") || t.startsWith("{/*")) { if (!t.includes("*/")) inBlock = true; return; }
+        if (t.startsWith("//") || t.startsWith("*")) return;
+        const code = line.replace(/\s\/\/\s.*$/, "").replace(BRITISH_OK, "");
+        for (const [re, fix] of BRITISH) {
+          const m = code.match(re);
+          if (m) { offenders.push(`${file}:${i + 1} "${m[0]}" → ${fix}`); break; }
+        }
+      });
+    }
+  }
+  if (offenders.length) {
+    warn(`${offenders.length} British spelling(s) in visible text`, offenders.slice(0, 12).join("; "));
+  } else ok("Everything a visitor reads is in American English");
+}
+
 async function main() {
   await checkGates();
   await checkLeakage();
   await checkContent();
   await checkOrder();
+  await checkAmerican();
   await checkEmail();
   if (!offlineOnly) { await checkMoney(); await checkStripe(); }
   else { section("Live checks"); warn("--offline: money and Stripe skipped"); }

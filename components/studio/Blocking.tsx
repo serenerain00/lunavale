@@ -42,7 +42,7 @@ import {
 } from "@/lib/studio/blocking";
 import { aspects, azimuths, byId, cameraHeights, lenses, shotSizes, tilts } from "@/lib/studio/vocab";
 import type { ShotRecipe } from "@/lib/studio/types";
-import type { CameraReading, Selection, StageApi } from "@/components/studio/BlockingStage";
+import type { CameraReading, Selection, StageApi, Tool } from "@/components/studio/BlockingStage";
 import { SELECT, type Person } from "@/components/studio/RefLibrary";
 
 const BlockingStage = dynamic(
@@ -92,7 +92,7 @@ export function Blocking({
   const [activeFigure, setActiveFigure] = useState<string>(b.figures[0]?.id ?? "");
   const [mode, setMode] = useState<"rotate" | "translate">("rotate");
   const [hide, setHide] = useState(false);
-  const [dragPeople, setDragPeople] = useState(false);
+  const [tool, setTool] = useState<Tool>("camera");
   const [reading, setReading] = useState<CameraReading | null>(null);
   const [shot, setShot] = useState<{ url: string; blob: Blob } | null>(null);
   const [status, setStatus] = useState<string | null>(null);
@@ -122,6 +122,28 @@ export function Blocking({
   }, [fig]);
 
   useEffect(() => () => { if (shot) URL.revokeObjectURL(shot.url); }, [shot]);
+
+  // Shortcuts (Melissa, 2026-10-20): M move, R rotate — the same key again, or
+  // Esc, hands the drag back to the camera. Not while typing in a field, and
+  // not with a modifier, so Cmd-R still reloads.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = e.target as HTMLElement | null;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) {
+        // Range sliders are inputs too, but typing never happens in one.
+        if (!(t.tagName === "INPUT" && (t as HTMLInputElement).type === "range")) return;
+      }
+      const k = e.key.toLowerCase();
+      if (k === "m") setTool((x) => (x === "move" ? "camera" : "move"));
+      else if (k === "r") setTool((x) => (x === "rotate" ? "camera" : "rotate"));
+      else if (e.key === "Escape") setTool("camera");
+      else return;
+      e.preventDefault();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   const updateFigure = useCallback(
     (f: BlockingFigure) => setB((x) => ({ ...x, figures: x.figures.map((y) => (y.id === f.id ? f : y)) })),
@@ -316,7 +338,9 @@ export function Blocking({
             selection={selection}
             mode={mode}
             hideHelpers={hide}
-            dragPeople={dragPeople}
+            tool={tool}
+            activeFigure={fig?.id ?? null}
+            onTool={setTool}
             onSelect={onSelect}
             onActive={setActiveFigure}
             onFigure={updateFigure}
@@ -335,14 +359,18 @@ export function Blocking({
 
         <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[12px] text-stone-dim">
           <span className="flex items-center gap-1">
-            Dragging a body
-            <button type="button" className={chip(!dragPeople)} onClick={() => setDragPeople(false)}>Orbits the camera</button>
-            <button type="button" className={chip(dragPeople)} onClick={() => setDragPeople(true)}>Moves the person</button>
+            {([["camera", "Camera", "Esc"], ["move", "Move", "M"], ["rotate", "Rotate", "R"]] as [Tool, string, string][]).map(([t, label, key]) => (
+              <button key={t} type="button" className={chip(tool === t)} onClick={() => setTool(t)}>
+                {label} <kbd className="ml-0.5 font-sans text-[10px] opacity-60">{key}</kbd>
+              </button>
+            ))}
           </span>
           <span>
-            {dragPeople
-              ? "Drag a person across the floor · drag empty space to orbit"
-              : "Drag to orbit · right-drag (or two fingers) to pan · scroll or pinch to zoom · click a body part to bend it"}
+            {tool === "move"
+              ? "Drag a person, or their dot, across the floor · drag empty space to orbit"
+              : tool === "rotate"
+                ? "Drag a person, or their dot, left or right to turn them · drag empty space to orbit"
+                : "Drag to orbit · right-drag (or two fingers) to pan · scroll or pinch to zoom · click a body part to bend it · drag a dot to move a person"}
           </span>
         </div>
 
@@ -458,8 +486,8 @@ export function Blocking({
                   {POSES.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
                 </select>
                 <button type="button" className={chip(false)} onClick={() => updateFigure(mirrorFigure(f))} title="Swap left and right">Mirror</button>
-                <button type="button" className={chip(false)}
-                  onClick={() => { onSelect({ type: "joint", figureId: f.id, joint: "pelvis" }); setMode("translate"); }}>
+                <button type="button" className={chip(tool === "move" && f.id === fig?.id)}
+                  onClick={(e) => { e.stopPropagation(); setActiveFigure(f.id); setTool("move"); }}>
                   Move
                 </button>
                 {b.figures.length > 1 && (

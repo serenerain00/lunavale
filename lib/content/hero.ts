@@ -271,7 +271,20 @@ export function recentHeroes(): Hero[] {
     .slice(0, RECENT_POOL);
 }
 
-export function pickHero(): Hero | undefined {
+/**
+ * PINNED TO THE TRAILER FOR SEVEN DAYS (Melissa, 2026-10-20: "lets have the
+ * trailer as the hero for 7days"). Everybody gets the trailer until `until`,
+ * then the newest-first rotation below takes over again by itself — nothing
+ * to remember to undo. The page revalidates hourly, so it lets go within the
+ * hour. `until` is the first moment it stops: midnight Eastern, Oct 27.
+ */
+const HERO_PIN = { slug: "between-us-trailer-one", until: new Date("2026-10-27T04:00:00Z") };
+
+export function pickHero(now: Date = new Date()): Hero | undefined {
+  if (now < HERO_PIN.until) {
+    const pinned = heroes().find((h) => h.slug === HERO_PIN.slug);
+    if (pinned) return pinned;
+  }
   const pool = recentHeroes();
   // Falls back to the whole set rather than showing nothing, in case every
   // recent hero is ever dropped by the door test in heroes().

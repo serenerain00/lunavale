@@ -29,10 +29,8 @@
 import { PAID_COOKIE } from "@/lib/billing/paid-cookie";
 import { NextResponse, type NextRequest } from "next/server";
 import { billingLive } from "@/lib/billing/provider";
-import {
-  claimPendingBySubscription,
-  claimPendingFor,
-} from "@/lib/db/memberships";
+import { claimPendingFor } from "@/lib/db/memberships";
+import { claimBySession } from "@/lib/billing/claim-by-session";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -82,42 +80,16 @@ export async function GET(request: NextRequest) {
   // The email did not match — the paying address is not on this account.
   // The checkout session still can.
   if (!claimed && sessionId) {
-    const subscriptionId = await paidSubscriptionFor(sessionId);
-    if (subscriptionId) {
-      claimed = await claimPendingBySubscription(userId, subscriptionId);
-    }
+    claimed = await claimBySession(userId, sessionId);
   }
 
   const res = NextResponse.redirect(
     new URL(claimed ? "/account?started=1" : "/account", origin),
   );
-  // The paid-browser marker has done its job once there is an account: from
-  // here on, signing in is what recognises them.
-  res.cookies.delete(PAID_COOKIE);
+  // The paid-browser marker has done its job once the payment is attached:
+  // from here on, signing in is what recognises them. ONLY THEN (2026-10-20) —
+  // it used to go on every visit, claimed or not, which threw away the one
+  // thing that stops this browser paying a second time.
+  if (claimed) res.cookies.delete(PAID_COOKIE);
   return res;
-}
-
-/**
- * The subscription on a Checkout Session, only if Stripe says it was paid.
- *
- * Retrieved from Stripe rather than trusted from the URL: the only thing taken
- * from the request is the session id, and a made-up or abandoned one returns
- * nothing. Failure is quiet on purpose — the email path above has already run,
- * and the health check warns about anything left unclaimed for over an hour.
- */
-async function paidSubscriptionFor(sessionId: string): Promise<string | null> {
-  if (!sessionId.startsWith("cs_")) return null;
-  try {
-    const { stripe } = await import("@/lib/billing/stripe");
-    const session = await stripe().checkout.sessions.retrieve(sessionId);
-    const done =
-      session.payment_status === "paid" || session.status === "complete";
-    if (!done || !session.subscription) return null;
-    return typeof session.subscription === "string"
-      ? session.subscription
-      : session.subscription.id;
-  } catch (error) {
-    console.error("claim: could not read checkout session", error);
-    return null;
-  }
 }

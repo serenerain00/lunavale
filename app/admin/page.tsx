@@ -14,6 +14,7 @@ import {
   accessCounts,
   membershipSummary,
   unclaimedPending,
+  recentBillingActions,
 } from "@/lib/db/memberships";
 import { allPostsForModeration, posterStats } from "@/lib/db/overheard";
 import { recentHelpMessages } from "@/lib/db/help";
@@ -71,7 +72,7 @@ export default async function AdminPage() {
       revenueSummary(),
       abandonedCheckouts(),
     ]);
-  const [listSize, listSources, list, pending, access, problems] =
+  const [listSize, listSources, list, pending, access, problems, billingLog] =
     await Promise.all([
       followerCount(),
       followerSources(),
@@ -79,6 +80,7 @@ export default async function AdminPage() {
       unclaimedPending(),
       accessCounts(),
       billingProblems(),
+      recentBillingActions(15),
     ]);
   const unreadComments = sceneComments.filter((c) => !c.handled).length;
 
@@ -232,7 +234,7 @@ export default async function AdminPage() {
               bad={`${problems?.doubled.length ?? 0} paying for more than one membership`}
             >
               {problems?.doubled.map((d) => (
-                <li key={d.email}>
+                <li key={d.subscriptionIds.join("+")}>
                   <span className="text-ivory">{d.email}</span>{" "}
                   <span className="text-xs text-stone-dim">
                     {d.subscriptionIds.join(" + ")}
@@ -292,6 +294,23 @@ export default async function AdminPage() {
               </li>
             ))}
             <Check
+              ok={problems !== null && problems.orphans.length === 0}
+              unknown={problems === null}
+              good="Every payment belongs to somebody"
+              bad={`${problems?.orphans.length ?? 0} live payment${problems?.orphans.length === 1 ? "" : "s"} nobody on the site holds`}
+            >
+              {problems?.orphans.map((o) => (
+                <li key={o.id}>
+                  <span className="text-ivory">{o.email || "no email"}</span>{" "}
+                  <span className="text-xs text-stone-dim">{o.id}</span>
+                </li>
+              ))}
+              <li className="text-xs text-stone-dim">
+                Being charged with no access. Usually the second half of a
+                double payment — check before refunding.
+              </li>
+            </Check>
+            <Check
               ok={stuckPending.length === 0}
               good="Everybody who paid has an account"
               bad={`${stuckPending.length} paid over an hour ago and has no account`}
@@ -303,6 +322,45 @@ export default async function AdminPage() {
               </li>
             </Check>
           </ul>
+        </Section>
+
+        {/* ---------------------------------------------------- billing log */}
+        {/*
+          WHAT'S BEEN DONE, AND WHY (2026-10-20). Melissa: "make sure when we
+          do this billing stuff we update the admin page w anything i need to
+          know." Every refund, cancel, voided invoice, linked login and the
+          email that went with it lands here, written by
+          scripts/log-billing.mjs at the time it is done.
+        */}
+        <Section title="Billing log">
+          {billingLog.length === 0 ? (
+            <p className="text-sm text-stone-dim">Nothing done by hand yet.</p>
+          ) : (
+            <ul className="space-y-3 text-sm">
+              {billingLog.map((a, i) => (
+                <li key={i} className="flex gap-3">
+                  <span className="w-16 shrink-0 text-xs uppercase tracking-[0.12em] text-amber">
+                    {a.kind}
+                  </span>
+                  <span className="text-stone">
+                    <span className="text-ivory">{a.who}</span>
+                    {a.amountCents != null && (
+                      <span className="text-ivory"> · {formatCents(a.amountCents)}</span>
+                    )}{" "}
+                    — {a.summary}{" "}
+                    <span className="text-xs text-stone-dim">
+                      {a.at.toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        timeZone: "America/New_York",
+                      })}
+                      {a.refs && ` · ${a.refs}`}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
         </Section>
 
         {/* --------------------------------------------------------- funnel */}

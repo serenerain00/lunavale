@@ -183,7 +183,34 @@ export async function recordMembership(input: {
       current_period_end     = EXCLUDED.current_period_end,
       cancel_at_period_end   = EXCLUDED.cancel_at_period_end,
       updated_at             = now()
+    -- ONE ROW PER PERSON, SO A SECOND SUBSCRIPTION MUST NOT CLOBBER A LIVE
+    -- FIRST ONE (2026-10-20). Andrea paid twice; the row swapped between her
+    -- two subscriptions with each write, and refunding + cancelling the
+    -- duplicate would have filed "canceled" over the one she was keeping,
+    -- locking her out. A different subscription only replaces this row when
+    -- the one held here is no longer live. Same subscription: always. The
+    -- one left out shows up in the health check as an orphan.
+    WHERE memberships.stripe_subscription_id IS NOT DISTINCT FROM EXCLUDED.stripe_subscription_id
+       OR memberships.status NOT IN ('active', 'trialing', 'past_due')
   `;
+
+  // LINKED LOGINS (2026-10-20). One person, two accounts — Andrea has one per
+  // email — can share one subscription: a second row with the same
+  // stripe_subscription_id. The webhook only knows one user id per event, so
+  // whatever it learns is copied to every other row on that subscription, or
+  // the second login would keep the access it had on the day it was linked.
+  if (input.stripeSubscriptionId) {
+    await sql()`
+      UPDATE memberships SET
+        tier                 = ${input.tier},
+        status               = ${input.status},
+        current_period_end   = ${input.currentPeriodEnd?.toISOString() ?? null},
+        cancel_at_period_end = ${input.cancelAtPeriodEnd ?? false},
+        updated_at           = now()
+      WHERE stripe_subscription_id = ${input.stripeSubscriptionId}
+        AND user_id <> ${input.userId}
+    `;
+  }
 }
 
 /**
@@ -497,4 +524,52 @@ export async function accessCounts(): Promise<{
     }
   }
   return { withAccess, locked, grace };
+}
+
+/** The billing log, newest first. See billing_actions in lib/db/schema.sql. */
+export async function recentBillingActions(limit = 15): Promise<
+  { at: Date; kind: string; who: string; summary: string; amountCents: number | null; refs: string | null }[]
+> {
+  if (!databaseConfigured()) return [];
+  try {
+    const rows = (await sql()`
+      SELECT at, kind, who, summary, amount_cents, refs FROM billing_actions
+      ORDER BY at DESC LIMIT ${limit}
+    `) as { at: string; kind: string; who: string; summary: string; amount_cents: number | null; refs: string | null }[];
+    return rows.map((r) => ({
+      at: new Date(r.at), kind: r.kind, who: r.who, summary: r.summary,
+      amountCents: r.amount_cents, refs: r.refs,
+    }));
+  } catch (error) {
+    // Older database without the table: an empty log, not a broken page.
+    console.error("recentBillingActions failed", error);
+    return [];
+  }
+}
+
+/**
+ * Who holds each subscription on the site, for spotting one person paying
+ * twice across two emails (2026-10-20). A subscription can have more than one
+ * holder now — linked logins share one. `waiting` is paid and parked, not yet
+ * anybody's, which is fine; anything live that is in neither is an orphan.
+ */
+export async function subscriptionHolders(): Promise<{
+  holders: Map<string, Set<string>>;
+  waiting: Set<string>;
+}> {
+  const holders = new Map<string, Set<string>>();
+  const waiting = new Set<string>();
+  if (!databaseConfigured()) return { holders, waiting };
+  const rows = (await sql()`
+    SELECT stripe_subscription_id AS sub, user_id FROM memberships WHERE stripe_subscription_id IS NOT NULL
+    UNION ALL
+    SELECT stripe_subscription_id, claimed_by FROM pending_memberships
+    WHERE stripe_subscription_id IS NOT NULL AND claimed_by IS NOT NULL
+  `) as { sub: string; user_id: string }[];
+  for (const r of rows) holders.set(r.sub, (holders.get(r.sub) ?? new Set()).add(r.user_id));
+  for (const r of (await sql()`
+    SELECT stripe_subscription_id AS sub FROM pending_memberships
+    WHERE claimed_at IS NULL AND stripe_subscription_id IS NOT NULL
+  `) as { sub: string }[]) waiting.add(r.sub);
+  return { holders, waiting };
 }

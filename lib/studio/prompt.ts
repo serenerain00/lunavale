@@ -65,9 +65,9 @@ const placeStyle: Record<string, string> = {
     "working motorsport garage, polished concrete, steel shelving, cold overhead fluorescents against warm task lamps",
   "coffee-shop": "soft naturalistic daylight, muted earth tones, unstyled and real",
   park: "soft naturalistic daylight, muted earth tones, unstyled and real",
-  fair: "strung festival lights over a dark field, warm bulbs against blue night, carnival colour kept muted",
+  fair: "strung festival lights over a dark field, warm bulbs against blue night, carnival color kept muted",
   mexico: "hot coastal light, bleached sand and deep water, white plaster and dark wood, salt haze",
-  "new-york": "anonymous luxury hotel interior, cool grey and brass, city glow through glass, two thousand miles from anywhere",
+  "new-york": "anonymous luxury hotel interior, cool gray and brass, city glow through glass, two thousand miles from anywhere",
   apartment: "small city apartment at night, one lamp, city light through the window, lived-in",
   "the-study": "a dim panelled study, leather and old wood, one green banker's lamp, decades of the same chair",
 };
@@ -78,7 +78,7 @@ const HOUSE_STYLE =
 
 /** What consistently ruins these, in the order it ruins them. */
 const NEGATIVE =
-  "no text, no watermark, no logo, no extra fingers, no distorted hands, no plastic skin, no beauty retouching, no teeth showing in a neutral expression, no bright saturated colour, no lens flare, no motion blur on the face, no second person in frame unless specified, no modern phone unless specified";
+  "no text, no watermark, no logo, no extra fingers, no distorted hands, no plastic skin, no beauty retouching, no teeth showing in a neutral expression, no bright saturated color, no lens flare, no motion blur on the face, no second person in frame unless specified, no modern phone unless specified";
 
 export interface CompiledShot {
   anchor: string;
@@ -321,7 +321,7 @@ export function compileForTarget(
 
   if (identity.length) {
     lines.push(
-      `WHO: ${subject}. Use the attached reference image${identity.length > 1 ? "s" : ""} for her face and keep her exactly as she appears there — same bone structure, same colouring, same hair. This is a specific woman, not a type.`,
+      `WHO: ${subject}. Use the attached reference image${identity.length > 1 ? "s" : ""} for her face and keep her exactly as she appears there — same bone structure, same coloring, same hair. This is a specific woman, not a type.`,
     );
   } else {
     lines.push(`WHO: ${subject}.`);
@@ -348,7 +348,7 @@ export function compileForTarget(
   const poses = chosen.filter((r) => r.kind === "pose");
   if (poses.length) {
     lines.push(
-      `POSE AND ANGLE: follow the attached pose reference${poses.length > 1 ? "s" : ""} (${poses.map((p) => p.label).join("; ")}) exactly — the same camera angle, camera height, lens and framing, and every body, limb and head turned exactly as posed there. It is a stand-in for blocking only: take nothing else from it — not its colour, its smooth surface, the grey room or the floor grid.`,
+      `POSE AND ANGLE: follow the attached pose reference${poses.length > 1 ? "s" : ""} (${poses.map((p) => p.label).join("; ")}) exactly — the same camera angle, camera height, lens and framing, and every body, limb and head turned exactly as posed there. It is a stand-in for blocking only: take nothing else from it — not its color, its smooth surface, the gray room or the floor grid.`,
     );
     for (const p of poses) if (p.notes.trim()) lines.push(`  ${p.notes.trim()}`);
   }
@@ -369,7 +369,7 @@ export function compileForTarget(
   if (target === "gemini") {
     // Gemini takes an explicit exclusion list and does the right thing with it.
     lines.push(
-      "AVOID: text, watermarks, logos, plastic or airbrushed skin, beauty retouching, bright saturated colour, lens flare, a posed smile, extra fingers, anyone else in frame unless named above.",
+      "AVOID: text, watermarks, logos, plastic or airbrushed skin, beauty retouching, bright saturated color, lens flare, a posed smile, extra fingers, anyone else in frame unless named above.",
     );
   }
 

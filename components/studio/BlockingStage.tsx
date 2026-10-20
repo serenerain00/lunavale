@@ -14,10 +14,18 @@
  * it; the panel beside the stage has the same joint as sliders.
  *
  * MOVING PEOPLE. Melissa, 2026-10-18: "i need to be able to move the person,
- * so if i wnat them standing closer to gether". With `dragPeople` on, a drag
+ * so if i wnat them standing closer to gether". With the `move` tool, a drag
  * that starts on a body slides that person across the floor instead of
  * orbiting — under the pointer, at whatever height they are (sitting on a
- * chair stays sitting). A drag that starts on empty floor still orbits.
+ * chair stays sitting). With `rotate`, dragging left and right turns them.
+ * A drag that starts on empty floor still orbits.
+ *
+ * THE DOT. Melissa, 2026-10-20: "most the shots i do are torso up, so i need
+ * like a marker / dot near each model, clicking on it gives me the move tool".
+ * The floor and the pelvis gizmo are out of frame in a torso-up shot, so each
+ * figure carries a dot on its chest — DOM, via drei's Html, so it is never in
+ * the snapshot. Pressing on it makes that person active and, from the camera
+ * tool, switches to move; dragging it moves (or turns) them.
  *
  * THE SNAPSHOT IS THE FRAME, at delivery size: the drawing buffer is resized
  * to the aspect's pixel size for one render, read, and put back. Helpers (the
@@ -28,7 +36,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, type ReactNode } from "react";
 import { Canvas, useThree, type ThreeEvent } from "@react-three/fiber";
-import { OrbitControls, TransformControls } from "@react-three/drei";
+import { Html, OrbitControls, TransformControls } from "@react-three/drei";
 import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import {
@@ -45,6 +53,8 @@ import {
   type Proportions,
   type Vec3,
 } from "@/lib/studio/blocking";
+
+export type Tool = "camera" | "move" | "rotate";
 
 export type Selection =
   | { type: "joint"; figureId: string; joint: JointId }
@@ -87,7 +97,9 @@ export function BlockingStage({
   selection,
   mode,
   hideHelpers,
-  dragPeople,
+  tool,
+  activeFigure,
+  onTool,
   onSelect,
   onActive,
   onFigure,
@@ -100,7 +112,9 @@ export function BlockingStage({
   selection: Selection;
   mode: "rotate" | "translate";
   hideHelpers: boolean;
-  dragPeople: boolean;
+  tool: Tool;
+  activeFigure: string | null;
+  onTool: (t: Tool) => void;
   onSelect: (s: Selection) => void;
   onActive: (figureId: string) => void;
   onFigure: (f: BlockingFigure) => void;
@@ -150,10 +164,20 @@ export function BlockingStage({
       </mesh>
       {blocking.grid && <gridHelper args={[20, 20, "#8a8680", "#6a6762"]} position={[0, 0.002, 0]} />}
 
-      <People figures={blocking.figures} enabled={dragPeople} onActive={onActive} onFigure={onFigure}>
-        {(f, i) => (
+      <People
+        figures={blocking.figures}
+        tool={tool}
+        activeFigure={activeFigure}
+        showDots={!hideHelpers}
+        nodes={nodes}
+        onTool={onTool}
+        onActive={onActive}
+        onFigure={onFigure}
+      >
+        {(f, i, marker) => (
           <Figure
             fig={f}
+            marker={marker}
             tone={FIGURE_TONES[i % FIGURE_TONES.length].hex}
             selectedJoint={
               !hideHelpers && selection?.type === "joint" && selection.figureId === f.id ? selection.joint : null
@@ -379,26 +403,40 @@ function Rig({
 
 /* --------------------------------------------------------- people drag -- */
 
+/** Pixels of horizontal drag per degree of turn, in the rotate tool. */
+const PX_PER_DEG = 2;
+
 /**
- * Each figure in a group that, when dragging people, takes a pointer-down on
- * the body and slides the figure along the floor. The pointer is followed on a
- * level plane through the grab point, offset kept, so the part grabbed stays
- * under the cursor.
- * Window listeners rather than pointer capture: the drag survives the pointer
- * leaving the body, and the canvas, mid-move.
+ * Each figure in a group that, with the move or rotate tool, takes a
+ * pointer-down on the body and moves or turns the whole figure; plus the chest
+ * dot, which does the same from anywhere in the frame.
+ *
+ * MOVE follows the pointer on a level plane through the grab point, offset
+ * kept, so the part grabbed stays under the cursor. ROTATE turns the pelvis
+ * (the whole body) by horizontal distance dragged, whichever way the camera
+ * faces. Window listeners rather than pointer capture: the drag survives the
+ * pointer leaving the body, and the canvas, mid-move.
  */
 function People({
   figures,
-  enabled,
+  tool,
+  activeFigure,
+  showDots,
+  nodes,
+  onTool,
   onActive,
   onFigure,
   children,
 }: {
   figures: BlockingFigure[];
-  enabled: boolean;
+  tool: Tool;
+  activeFigure: string | null;
+  showDots: boolean;
+  nodes: React.MutableRefObject<Map<string, THREE.Object3D>>;
+  onTool: (t: Tool) => void;
   onActive: (figureId: string) => void;
   onFigure: (f: BlockingFigure) => void;
-  children: (f: BlockingFigure, i: number) => ReactNode;
+  children: (f: BlockingFigure, i: number, marker: ReactNode) => ReactNode;
 }) {
   const { camera, gl } = useThree();
   const controls = useThree((st) => st.controls) as OrbitControlsImpl | null;
@@ -406,58 +444,109 @@ function People({
   const latest = useRef(figures);
   useEffect(() => { latest.current = figures; }, [figures]);
 
-  const start = (id: string, e: ThreeEvent<PointerEvent>) => {
-    if (!enabled || e.nativeEvent.button !== 0) return;
+  const drag = (id: string, as: "move" | "rotate", cx: number, cy: number, grabY: number) => {
     // Level with the point grabbed, not the floor: from a near-eye-level
     // camera the floor behind a chest is metres away, and a small hand
     // movement would throw the body across the room.
-    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -e.point.y);
+    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -grabY);
     const ray = new THREE.Raycaster();
     const ndc = new THREE.Vector2();
-    const pointAt = (cx: number, cy: number) => {
+    const pointAt = (x: number, y: number) => {
       const r = gl.domElement.getBoundingClientRect();
-      ndc.set(((cx - r.left) / r.width) * 2 - 1, -((cy - r.top) / r.height) * 2 + 1);
+      ndc.set(((x - r.left) / r.width) * 2 - 1, -((y - r.top) / r.height) * 2 + 1);
       ray.setFromCamera(ndc, camera);
       return ray.ray.intersectPlane(plane, new THREE.Vector3());
     };
     const f0 = latest.current.find((f) => f.id === id);
-    const p0 = pointAt(e.nativeEvent.clientX, e.nativeEvent.clientY);
-    if (!f0 || !p0) return;
-    e.stopPropagation();
+    const p0 = pointAt(cx, cy);
+    if (!f0 || (as === "move" && !p0)) return false;
     onActive(id);
-    const off = { x: f0.position[0] - p0.x, z: f0.position[2] - p0.z };
+    const off = p0 ? { x: f0.position[0] - p0.x, z: f0.position[2] - p0.z } : { x: 0, z: 0 };
+    const yaw0 = (f0.joints.pelvis ?? [0, 0, 0])[1];
     if (controls) controls.enabled = false;
-    gl.domElement.style.cursor = "grabbing";
+    const cursor = as === "move" ? "grabbing" : "ew-resize";
+    gl.domElement.style.cursor = cursor;
+    document.body.style.cursor = cursor;
     const move = (ev: PointerEvent) => {
-      const p = pointAt(ev.clientX, ev.clientY);
       const f = latest.current.find((x) => x.id === id);
-      if (!p || !f) return;
-      onFigure({ ...f, position: [round3(p.x + off.x), f.position[1], round3(p.z + off.z)] });
+      if (!f) return;
+      if (as === "move") {
+        const p = pointAt(ev.clientX, ev.clientY);
+        if (!p) return;
+        onFigure({ ...f, position: [round3(p.x + off.x), f.position[1], round3(p.z + off.z)] });
+      } else {
+        const pel = f.joints.pelvis ?? [0, 0, 0];
+        let yaw = yaw0 + (ev.clientX - cx) / PX_PER_DEG;
+        yaw = ((((yaw + 180) % 360) + 360) % 360) - 180;
+        onFigure({ ...f, joints: { ...f.joints, pelvis: [pel[0], Math.round(yaw), pel[2]] } });
+      }
     };
     const up = () => {
       window.removeEventListener("pointermove", move);
       window.removeEventListener("pointerup", up);
       window.removeEventListener("pointercancel", up);
       if (controls) controls.enabled = true;
-      gl.domElement.style.cursor = "grab";
+      gl.domElement.style.cursor = "";
+      document.body.style.cursor = "";
     };
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerup", up);
     window.addEventListener("pointercancel", up);
+    return true;
   };
+
+  const chestY = (id: string) => {
+    const n = nodes.current.get(`${id}:chest`);
+    return n ? n.getWorldPosition(new THREE.Vector3()).y : 1.3;
+  };
+
+  const hoverCursor = tool === "move" ? "grab" : tool === "rotate" ? "ew-resize" : "";
 
   return (
     <>
-      {figures.map((f, i) => (
-        <group
-          key={f.id}
-          onPointerDown={(e: ThreeEvent<PointerEvent>) => start(f.id, e)}
-          onPointerOver={() => { if (enabled) gl.domElement.style.cursor = "grab"; }}
-          onPointerOut={() => { gl.domElement.style.cursor = ""; }}
-        >
-          {children(f, i)}
-        </group>
-      ))}
+      {figures.map((f, i) => {
+        const active = f.id === activeFigure;
+        const marker = showDots ? (
+          <Html center zIndexRange={[20, 0]}>
+            <button
+              type="button"
+              aria-label="Move this person (M), turn them (R)"
+              title={tool === "rotate" ? "Drag to turn · R" : "Drag to move · M"}
+              onPointerDown={(e) => {
+                if (e.button !== 0) return;
+                e.preventDefault();
+                e.stopPropagation();
+                // A press on the dot is a request to move them: from the camera
+                // tool it switches to move; rotate stays rotate.
+                const as = tool === "rotate" ? "rotate" : "move";
+                if (tool === "camera") onTool("move");
+                drag(f.id, as, e.clientX, e.clientY, chestY(f.id));
+              }}
+              style={{
+                cursor: tool === "rotate" ? "ew-resize" : "grab",
+                background: FIGURE_TONES[i % FIGURE_TONES.length].hex,
+                touchAction: "none",
+              }}
+              className={`block h-4 w-4 rounded-full border-2 shadow-[0_0_0_1px_rgba(0,0,0,0.6)] transition-opacity ${
+                active ? "border-amber opacity-100" : "border-white/80 opacity-60 hover:opacity-100"
+              }`}
+            />
+          </Html>
+        ) : null;
+        return (
+          <group
+            key={f.id}
+            onPointerDown={(e: ThreeEvent<PointerEvent>) => {
+              if (tool === "camera" || e.nativeEvent.button !== 0) return;
+              if (drag(f.id, tool, e.nativeEvent.clientX, e.nativeEvent.clientY, e.point.y)) e.stopPropagation();
+            }}
+            onPointerOver={() => { if (hoverCursor) gl.domElement.style.cursor = hoverCursor; }}
+            onPointerOut={() => { gl.domElement.style.cursor = ""; }}
+          >
+            {children(f, i, marker)}
+          </group>
+        );
+      })}
     </>
   );
 }
@@ -653,12 +742,15 @@ function Leg({ side, p, k }: { side: "L" | "R"; p: Proportions; k: number }) {
 function Figure({
   fig,
   tone,
+  marker,
   selectedJoint,
   register,
   onSelect,
 }: {
   fig: BlockingFigure;
   tone: string;
+  /** The chest dot (see People). Rides on the chest, so it follows any pose. */
+  marker?: ReactNode;
   selectedJoint: JointId | null;
   register: (key: string) => (o: THREE.Object3D | null) => void;
   onSelect: (s: Selection) => void;
@@ -688,6 +780,7 @@ function Figure({
         <J id="spine" at={[0, s.spine, 0]}>
           <Ball joint="spine" r={1} at={[0, s.chest * 0.45, 0]} scale={[p.torso * 0.82, s.chest * 0.7, p.torso * 0.62]} />
           <J id="chest" at={[0, s.chest, 0]}>
+            {marker && <group position={[0, s.neck * 0.45, p.torso * 0.75]}>{marker}</group>}
             <Ball joint="chest" r={1} at={[0, s.neck * 0.48, 0]} scale={[p.shoulderHalf * (fig.build === "woman" ? 0.8 : 0.86), s.neck * 0.58, p.torso * 0.7]} />
             {fig.build === "woman" && (
               <>

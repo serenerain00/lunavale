@@ -22,7 +22,12 @@ const EPISODE_HREFS = new Set(
   SEASONS.flatMap((s) => s.episodes.filter((e) => e.slug).map((e) => `/clips/${e.slug}`)),
 );
 
-export type WinbackGroup = "a" | "b";
+/**
+ * "r" is the short renewal note (Melissa, 2026-10-20): members who switched
+ * renewal off and whose access ends soon. Group A, but most of them already
+ * had the "Previously on" email, so it is its own shorter thing.
+ */
+export type WinbackGroup = "a" | "b" | "r";
 
 export interface WinbackPerson {
   firstName?: string;
@@ -41,7 +46,78 @@ export interface Composed {
 export const SUBJECT = "Previously on Between Us";
 
 export function campaignFor(group: WinbackGroup): string {
-  return `winback-2026-10-${group}`;
+  return group === "r" ? "renew-2026-10-20" : `winback-2026-10-${group}`;
+}
+
+export const RENEW_SUBJECT = "Before your membership ends";
+
+/**
+ * The renewal note. Wording approved by Melissa, 2026-10-20. Same refusals as
+ * the win-back: the date is stated because it is a fact, not a countdown.
+ */
+export function composeRenewal(
+  person: WinbackPerson,
+  releases: Release[],
+  base: string,
+  unsubscribeUrl: string,
+): Composed {
+  const u = new URL("/account", base);
+  u.searchParams.set("utm_source", "email");
+  u.searchParams.set("utm_medium", "winback");
+  u.searchParams.set("utm_campaign", campaignFor("r"));
+  const actionUrl = u.toString();
+  const name = person.firstName?.trim();
+  const hi = name ? `Hi ${name.charAt(0).toUpperCase()}${name.slice(1)},` : "Hi,";
+  const until = longDate(person.accessUntil ?? person.since);
+  const opening = `A quick note: your Luna Vale membership ends on ${until}, and everything stays open until then.`;
+  const list = sinceList(releases, person.since);
+  const listLines = [
+    ...list.scenes.map((r) => r.title),
+    ...(list.moreScenes ? [`and ${list.moreScenes} more`] : []),
+    ...(list.pages ? [`${list.pages} new ${list.pages === 1 ? "page" : "pages"} of Luna's journal`] : []),
+  ];
+  const keep = "If you'd like to keep watching, you can switch renewal back on from your account. Same price, nothing else changes.";
+  const ask = "If something didn't work for you, just reply. I read every one.";
+  const footer = "You're getting this because you're a Luna Vale member.";
+
+  const text = [
+    hi, "", opening, "",
+    ...(listLines.length ? ["Since you joined:", ...listLines.map((l) => `- ${l}`), ""] : []),
+    keep, `Keep my membership → ${actionUrl}`, "",
+    ask, "", "Melissa", "", "—", footer,
+    `Stop these emails: ${unsubscribeUrl}`,
+    "This does not cancel or change your membership.",
+  ].join("\n");
+
+  const p = (s: string) =>
+    `<tr><td style="color:#d8d2ca;font-size:15px;line-height:1.7;padding:0 0 18px 0;">${s}</td></tr>`;
+  const html = `<!doctype html>
+<html><body style="margin:0;padding:0;background:#0a0908;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0a0908;">
+<tr><td align="center" style="padding:40px 16px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;">
+  <tr><td style="color:#c9a227;font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding-bottom:22px;">Luna Vale</td></tr>
+  ${p(esc(hi))}
+  ${p(esc(opening))}
+  ${
+    listLines.length
+      ? `<tr><td style="color:#c9a227;font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:0 0 10px 0;">Since you joined</td></tr>
+  <tr><td style="color:#d8d2ca;font-size:15px;line-height:1.8;padding:0 0 22px 0;">${listLines.map(esc).join("<br>")}</td></tr>`
+      : ""
+  }
+  ${p(esc(keep))}
+  <tr><td style="padding:4px 0 26px 0;"><a href="${esc(actionUrl)}" style="display:inline-block;background:#c9a227;color:#0a0908;text-decoration:none;font-size:14px;padding:11px 20px;border-radius:999px;">Keep my membership &rarr;</a></td></tr>
+  ${p(esc(ask))}
+  ${p("Melissa")}
+  <tr><td style="border-top:1px solid #2a2724;padding-top:20px;color:#8b8681;font-size:12px;line-height:1.7;">
+    ${esc(footer)}<br>
+    <a href="${esc(unsubscribeUrl)}" style="color:#8b8681;">Stop these emails</a> &mdash; it does not cancel or change your membership.
+  </td></tr>
+</table>
+</td></tr></table>
+</body></html>`;
+
+  return { subject: RENEW_SUBJECT, text, html };
 }
 
 /** "September 26" — the reader's calendar, not ISO. */

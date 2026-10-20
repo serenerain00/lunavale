@@ -568,7 +568,7 @@ export const galleries: StillGallery[] = [
       {},
       {
         caption:
-          "He doesn't come in, and he never mentions it afterwards. Her account of this afternoon does not have him in it at all.",
+          "He doesn't come in, and he never mentions it afterward. Her account of this afternoon does not have him in it at all.",
       },
     ],
     access: "premium",

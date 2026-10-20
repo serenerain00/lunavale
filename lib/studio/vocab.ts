@@ -212,7 +212,7 @@ export const movements: Option[] = [
   { id: "push", label: "Push in", prompt: "slow push in toward her", note: "Pressure. Use when she is deciding something." },
   { id: "pull", label: "Pull back", prompt: "slow pull back away from her", note: "Abandonment. The room gets bigger around her." },
   { id: "pan", label: "Pan", prompt: "slow pan across the room", note: "Turning the head. Reveals by rotation." },
-  { id: "dolly", label: "Dolly", prompt: "smooth dolly move alongside her", note: "Travelling with her, not toward her." },
+  { id: "dolly", label: "Dolly", prompt: "smooth dolly move alongside her", note: "Traveling with her, not toward her." },
   { id: "orbit", label: "Orbit", prompt: "slow orbit around her", note: "Circles the subject. Expensive-looking, easy to overdo." },
   { id: "track", label: "Track", prompt: "tracking shot following her as she moves", note: "Follows movement. Needs her to actually go somewhere." },
   { id: "rack", label: "Rack focus", prompt: "rack focus from foreground to her", note: "Shifts what matters without moving an inch." },
@@ -236,7 +236,7 @@ export const lighting: Option[] = [
 ];
 
 export const timesOfDay: Option[] = [
-  { id: "dawn", label: "Dawn", prompt: "first light, cold and grey" },
+  { id: "dawn", label: "Dawn", prompt: "first light, cold and gray" },
   { id: "morning", label: "Morning", prompt: "mid-morning" },
   { id: "afternoon", label: "Afternoon", prompt: "late afternoon, low warm sun" },
   { id: "dusk", label: "Dusk", prompt: "dusk, the light going" },

@@ -315,7 +315,7 @@ export const PROPS: Record<PropKind, { label: string; note: string }> = {
 export const FIGURE_TONES = [
   { name: "pale", hex: "#d8c9b2" },
   { name: "dark", hex: "#5f4c3e" },
-  { name: "grey-blue", hex: "#8a98a6" },
+  { name: "gray-blue", hex: "#8a98a6" },
 ];
 
 export function defaultBuild(characterId: string | null): Build {

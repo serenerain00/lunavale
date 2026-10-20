@@ -759,13 +759,13 @@ async function checkOrder() {
   const EXEMPT = /lib\/content\/(journal|videos|between-takes|season|survey|posts)\.ts$/;
   const offenders: string[] = [];
   for (const dir of COPY_DIRS) {
-    for (const file of await walk(path.join(ROOT, dir))) {
+    for (const file of await walk(dir)) {
       if (!/\.tsx?$/.test(file) || EXEMPT.test(file)) continue;
-      const src = await readFile(file, "utf8");
+      const src = await readFile(path.join(ROOT, file), "utf8");
       src.split("\n").forEach((line, i) => {
         const code = line.replace(/^\s*(\/\/|\*|\/\*).*$/, "");
         if (/\b(a|the|this) film\b/i.test(code)) {
-          offenders.push(`${path.relative(ROOT, file)}:${i + 1}`);
+          offenders.push(`${file}:${i + 1}`);
         }
       });
     }
@@ -780,11 +780,63 @@ async function checkOrder() {
   }
 }
 
+/*
+ * AMERICAN ENGLISH, in anything a visitor can read (Melissa, 2026-10-20: "i
+ * just saw color spelled colour… make sure to check this every day"). The
+ * first sweep found ~65 lines: colour, grey, realised, afterwards, car park,
+ * windscreen, and Luna "ringing" people. She is from Atlanta; she calls them.
+ *
+ * Comments are exempt (lines starting //, * or inside a block comment), and so
+ * are code names that cannot change without breaking things: aria-labelledby,
+ * normaliseEmail, the favourite_scene survey column, the cole-rang-him URL.
+ * Fix with the word on the right; never rename an id or a URL to get a pass.
+ */
+const BRITISH: [RegExp, string][] = [
+  [/\bcolou?r(?<=colour)\w*/i, "color"],
+  [/\bgrey(s|ish)?\b/i, "gray"],
+  [/\b(favour|honour|behaviour|neighbour|humour|flavour|labour|rumour|harbour|armour|odour|endeavour|savour)\w*/i, "-or"],
+  [/\b(centre|theatre|metre|litre|fibre|sombre|calibre)s?\b/i, "-er"],
+  [/\b\w+(is|ys)(e|ed|es|ing|ation)\b(?<=(realis|apologis|organis|recognis|emphasis|criticis|prioritis|memoris|sympathis|authoris|minimis|maximis|summaris|apologis|analys|paralys|categoris|characteris|finalis|personalis|customis|visualis|utilis|optimis)\w*)/i, "-ize"],
+  [/\b(travell|cancell|labell|modell|counsell|marvell|fuell)(ed|ing|er)\b/i, "single l"],
+  [/\b(crueller|whilst|amongst|learnt|spelt|programme|catalogue|defence|licence|offence|practis(e|ed|ing)|cheque|tyres?|kerb|aluminium|jewellery|moustache|pyjamas|plough|cosy|sceptic\w*|aeroplane|enrolment|judgement|instalment)\b/i, "US spelling"],
+  [/\b(afterwards|towards|backwards|forwards)\b/i, "-ward"],
+  [/\b(car parks?|windscreen|petrol|motorway|lorry|pavement|fortnight|mum)\b/i, "US word"],
+  [/\b(I|he|she|we|they|you|Josh|Tyson|Luna|Cole|Avery|Rick|Cathy) (rang|rings)\b|\b(rang|ring) (him|her|me|you|them|us|back)\b/, "called / call"],
+  [/\bthe phone went\b/i, "the phone rang"],
+];
+const BRITISH_OK = /aria-labelledby|labelledby|normalis|favourite_scene|favouriteScene|cole-rang-him|serialis|\.metres\b|\bmetres:|\bauthorised\(|\.cancelling\b|\bcancelling:/gi;
+
+async function checkAmerican() {
+  section("Spelling — American English in everything a visitor reads");
+  const offenders: string[] = [];
+  for (const dir of ["lib/content", "lib/studio", "lib/email", "app", "components"]) {
+    for (const file of await walk(dir)) {
+      if (!/\.tsx?$/.test(file)) continue;
+      let inBlock = false;
+      (await readFile(path.join(ROOT, file), "utf8")).split("\n").forEach((line, i) => {
+        const t = line.trim();
+        if (inBlock) { if (t.includes("*/")) inBlock = false; return; }
+        if (t.startsWith("/*") || t.startsWith("{/*")) { if (!t.includes("*/")) inBlock = true; return; }
+        if (t.startsWith("//") || t.startsWith("*")) return;
+        const code = line.replace(/\s\/\/\s.*$/, "").replace(BRITISH_OK, "");
+        for (const [re, fix] of BRITISH) {
+          const m = code.match(re);
+          if (m) { offenders.push(`${file}:${i + 1} "${m[0]}" → ${fix}`); break; }
+        }
+      });
+    }
+  }
+  if (offenders.length) {
+    warn(`${offenders.length} British spelling(s) in visible text`, offenders.slice(0, 12).join("; "));
+  } else ok("Everything a visitor reads is in American English");
+}
+
 async function main() {
   await checkGates();
   await checkLeakage();
   await checkContent();
   await checkOrder();
+  await checkAmerican();
   await checkEmail();
   if (!offlineOnly) { await checkMoney(); await checkStripe(); }
   else { section("Live checks"); warn("--offline: money and Stripe skipped"); }

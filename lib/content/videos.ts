@@ -2432,7 +2432,7 @@ export const videos: Video[] = [
       durationSeconds: 60,
       hookStart: 0,
       hookNote:
-        "the whole arrival — up in the lift, along the corridor, the knock, and the door",
+        "the whole arrival — up in the elevator, along the corridor, the knock, and the door",
     },
     // `distance` is the subject — a month of nothing and a man who will not say
     // why. `desire` for where it ends. `hurt` was considered and left off: the
@@ -2635,7 +2635,7 @@ export const videos: Video[] = [
     // he does not do.
     title: "Not Picking Up",
     synopsis:
-      "He has always picked up. For about a week now he has not \u2014 he watches it light up on the table, waits for it to stop, and takes the car out instead, the long way, with nowhere at the end of it. Then, somewhere past midnight, he rings somebody back.",
+      "He has always picked up. For about a week now he has not \u2014 he watches it light up on the table, waits for it to stop, and takes the car out instead, the long way, with nowhere at the end of it. Then, somewhere past midnight, he calls somebody back.",
     file: "tyson-apt-thinking.proxy.mp4",
     poster: "/posters/tyson-apt-thinking.jpg",
     // 214, trimmed at 213.5 — about 3.5s of black on the tail. It ends on
@@ -3961,7 +3961,7 @@ export const videos: Video[] = [
     slug: "luna-tyson-shaving",
     title: "Sit Still",
     synopsis:
-      "A week since Josh, at the lakehouse. Luna takes the clippers to Tyson\u2019s beard and makes a twenty-minute job of it, and somewhere between telling him to sit still and threatening his moustache, admits she doesn\u2019t know what she\u2019s supposed to feel yet.",
+      "A week since Josh, at the lakehouse. Luna takes the clippers to Tyson\u2019s beard and makes a twenty-minute job of it, and somewhere between telling him to sit still and threatening his mustache, admits she doesn\u2019t know what she\u2019s supposed to feel yet.",
     file: "luna-tyson-shaving.proxy.mp4",
     poster: "/posters/luna-tyson-shaving.jpg",
     // 193.1, trimmed — see scripts/import-cuts.sh.

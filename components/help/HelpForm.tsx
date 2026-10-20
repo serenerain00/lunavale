@@ -20,7 +20,7 @@ export function HelpForm({ defaultEmail }: { defaultEmail?: string }) {
         <h2 className="font-display text-2xl text-ivory">That&rsquo;s sent.</h2>
         <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
           It goes straight to Melissa. She reads everything, and she answers
-          most things — but she&rsquo;s one person making a film, so give her a
+          most things — but she&rsquo;s one person making a series, so give her a
           few days before you assume it vanished.
         </p>
       </div>

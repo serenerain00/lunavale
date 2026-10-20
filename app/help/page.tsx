@@ -59,7 +59,7 @@ export default async function HelpPage() {
               <Link href="/account" className="text-amber underline decoration-hairline underline-offset-4">
                 Your account page
               </Link>{" "}
-              has the billing portal. Cancelling is immediate and you keep
+              has the billing portal. Canceling is immediate and you keep
               access until the end of the period you have already paid for. No
               email required, and nobody will try to talk you out of it.
             </Answer>

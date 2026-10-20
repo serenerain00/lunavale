@@ -182,7 +182,7 @@ function SnapshotTable({ s }: { s: SnapshotView }) {
   const rows: [string, string][] = [
     ["Collected", dollars(s.collectedCents)],
     ["Renewing members", `${s.members.renewing} (${dollars(s.mrrCents)}/mo)`],
-    ["Cancelled, still have access", String(s.members.cancelling)],
+    ["Canceled, still have access", String(s.members.cancelling)],
     ["Cards failing", String(s.members.pastDue)],
     ["New members", s.newMembers === null ? "—" : String(s.newMembers)],
     ["Began checkout → paid", s.checkout ? `${s.checkout.began} → ${s.checkout.paid}` : "—"],

@@ -154,7 +154,7 @@ function spoken(s: Omit<Snapshot, "speak">): string {
   const m = s.members;
   parts.push(
     `${m.renewing} ${m.renewing === 1 ? "member is" : "members are"} set to renew, worth ${dollars(s.mrrCents)} a month` +
-      (m.cancelling ? `, and ${m.cancelling} have cancelled but still have access` : "") +
+      (m.cancelling ? `, and ${m.cancelling} have canceled but still have access` : "") +
       (m.pastDue ? `; ${m.pastDue} card${m.pastDue === 1 ? " is" : "s are"} failing` : "") +
       ".",
   );

@@ -358,6 +358,19 @@ export default async function Home() {
             </Guest>
           }
         >
+          {/* TRAILER FIRST (Melissa, 2026-10-20: "i want people to see
+              that"), so it is the first thing on the shelf, ahead of the
+              pilot, rather than the last card after the episodes. */}
+          {trailer && (
+            <RailItem>
+              <ClipCard
+                href={`/clips/${trailer.slug}`}
+                title="Trailer"
+                poster={trailer.poster}
+                meta={formatDuration(trailer.durationSeconds)}
+              />
+            </RailItem>
+          )}
           {season.episodes.map((ep) => (
             <RailItem key={ep.number}>
               <ClipCard
@@ -369,16 +382,6 @@ export default async function Home() {
               />
             </RailItem>
           ))}
-          {trailer && (
-            <RailItem>
-              <ClipCard
-                href={`/clips/${trailer.slug}`}
-                title="Trailer"
-                poster={trailer.poster}
-                meta={formatDuration(trailer.durationSeconds)}
-              />
-            </RailItem>
-          )}
         </Shelf>
 
         {/* ------------------------------------------------------------- new */}

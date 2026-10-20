@@ -627,3 +627,28 @@ CREATE TABLE IF NOT EXISTS ig_account_snapshots (
   follows_7d      INTEGER,
   unfollows_7d    INTEGER
 );
+
+-- Billing log (2026-10-20) — every money action taken by hand, in plain words.
+--
+-- Melissa: "make sure when we do this billing stuff we update the admin page w
+-- anything i need to know." Refunds, cancels, voided invoices, linked logins
+-- and the emails that went with them were happening in Stripe and in the
+-- terminal, and the only record was a chat. /admin shows the latest of these.
+--
+-- Written by scripts/log-billing.mjs every time one of those is done. Who it
+-- was for is a name, not an address: the page is owner-only, but a log does
+-- not need more than it takes to recognise the person.
+CREATE TABLE IF NOT EXISTS billing_actions (
+  id          BIGSERIAL   PRIMARY KEY,
+  at          TIMESTAMPTZ NOT NULL DEFAULT now(),
+  -- refund | cancel | void | link | email | note
+  kind        TEXT        NOT NULL,
+  who         TEXT        NOT NULL,
+  -- What was done, in a sentence she can read without Stripe open.
+  summary     TEXT        NOT NULL,
+  amount_cents INTEGER,
+  -- Stripe ids, for finding it again: sub_, re_, in_ …
+  refs        TEXT
+);
+
+CREATE INDEX IF NOT EXISTS billing_actions_at_idx ON billing_actions (at DESC);

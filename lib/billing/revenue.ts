@@ -27,6 +27,7 @@ import "server-only";
 import type Stripe from "stripe";
 import { stripe } from "@/lib/billing/stripe";
 import { stripeConfigured } from "@/lib/billing/provider";
+import { subscriptionHolders } from "@/lib/db/memberships";
 
 /**
  * Statuses Stripe considers live, for counting — NOT for access. Past-due
@@ -349,6 +350,11 @@ export function netMonthlyCents(sub: Stripe.Subscription, atSeconds?: number): n
 export interface BillingProblems {
   /** One person, more than one live subscription: they are paying twice. */
   doubled: { email: string; subscriptionIds: string[] }[];
+  /**
+   * Live subscriptions nobody on the site holds and nobody can claim: money
+   * with no door. Usually the leftover half of a double payment.
+   */
+  orphans: { id: string; email: string }[];
   /** Chargebacks still open — each has a response deadline. */
   disputes: { id: string; reason: string; amountCents: number; dueBy: Date | null }[];
 }
@@ -372,7 +378,14 @@ const OPEN_DISPUTE = new Set([
 export async function billingProblems(): Promise<BillingProblems | null> {
   if (!stripeConfigured()) return null;
   try {
+    const { holders, waiting } = await subscriptionHolders();
     const byEmail = new Map<string, string[]>();
+    // AND BY SITE ACCOUNT (2026-10-20): Andrea paid as one address and again,
+    // signed in, as another, and this panel would have said nobody was paying
+    // twice. Keyed by user id; shown with the email of the first payment.
+    const byUser = new Map<string, string[]>();
+    const emailOf = new Map<string, string>();
+    const orphans: { id: string; email: string }[] = [];
     for (const status of LIVE_STATUSES) {
       const page = stripe().subscriptions.list({ status, limit: 100, expand: ["data.customer"] });
       for await (const s of page) {
@@ -381,13 +394,27 @@ export async function billingProblems(): Promise<BillingProblems | null> {
           typeof c === "object" && c && !("deleted" in c && c.deleted)
             ? (c.email ?? "").toLowerCase()
             : "";
-        if (!email) continue;
-        byEmail.set(email, [...(byEmail.get(email) ?? []), s.id]);
+        emailOf.set(s.id, email);
+        if (email) byEmail.set(email, [...(byEmail.get(email) ?? []), s.id]);
+        const users = new Set(holders.get(s.id) ?? []);
+        if (s.metadata?.userId) users.add(s.metadata.userId);
+        for (const u of users) byUser.set(u, [...(byUser.get(u) ?? []), s.id]);
+        if (!holders.has(s.id) && !waiting.has(s.id)) orphans.push({ id: s.id, email });
       }
     }
-    const doubled = [...byEmail.entries()]
-      .filter(([, ids]) => ids.length > 1)
-      .map(([email, subscriptionIds]) => ({ email, subscriptionIds }));
+    const seen = new Set<string>();
+    const doubled = [...byEmail.values(), ...byUser.values()]
+      .filter((ids) => ids.length > 1)
+      .filter((ids) => {
+        const key = [...ids].sort().join("+");
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .map((subscriptionIds) => ({
+        email: [...new Set(subscriptionIds.map((id) => emailOf.get(id)).filter(Boolean))].join(" / "),
+        subscriptionIds,
+      }));
 
     const disputes = (await stripe().disputes.list({ limit: 20 })).data
       .filter((d) => OPEN_DISPUTE.has(d.status))
@@ -398,7 +425,7 @@ export async function billingProblems(): Promise<BillingProblems | null> {
         dueBy: d.evidence_details?.due_by ? new Date(d.evidence_details.due_by * 1000) : null,
       }));
 
-    return { doubled, disputes };
+    return { doubled, disputes, orphans };
   } catch (error) {
     console.error("billingProblems: Stripe lookup failed", error);
     return null;

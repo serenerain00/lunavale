@@ -525,3 +525,51 @@ export async function accessCounts(): Promise<{
   }
   return { withAccess, locked, grace };
 }
+
+/** The billing log, newest first. See billing_actions in lib/db/schema.sql. */
+export async function recentBillingActions(limit = 15): Promise<
+  { at: Date; kind: string; who: string; summary: string; amountCents: number | null; refs: string | null }[]
+> {
+  if (!databaseConfigured()) return [];
+  try {
+    const rows = (await sql()`
+      SELECT at, kind, who, summary, amount_cents, refs FROM billing_actions
+      ORDER BY at DESC LIMIT ${limit}
+    `) as { at: string; kind: string; who: string; summary: string; amount_cents: number | null; refs: string | null }[];
+    return rows.map((r) => ({
+      at: new Date(r.at), kind: r.kind, who: r.who, summary: r.summary,
+      amountCents: r.amount_cents, refs: r.refs,
+    }));
+  } catch (error) {
+    // Older database without the table: an empty log, not a broken page.
+    console.error("recentBillingActions failed", error);
+    return [];
+  }
+}
+
+/**
+ * Who holds each subscription on the site, for spotting one person paying
+ * twice across two emails (2026-10-20). A subscription can have more than one
+ * holder now — linked logins share one. `waiting` is paid and parked, not yet
+ * anybody's, which is fine; anything live that is in neither is an orphan.
+ */
+export async function subscriptionHolders(): Promise<{
+  holders: Map<string, Set<string>>;
+  waiting: Set<string>;
+}> {
+  const holders = new Map<string, Set<string>>();
+  const waiting = new Set<string>();
+  if (!databaseConfigured()) return { holders, waiting };
+  const rows = (await sql()`
+    SELECT stripe_subscription_id AS sub, user_id FROM memberships WHERE stripe_subscription_id IS NOT NULL
+    UNION ALL
+    SELECT stripe_subscription_id, claimed_by FROM pending_memberships
+    WHERE stripe_subscription_id IS NOT NULL AND claimed_by IS NOT NULL
+  `) as { sub: string; user_id: string }[];
+  for (const r of rows) holders.set(r.sub, (holders.get(r.sub) ?? new Set()).add(r.user_id));
+  for (const r of (await sql()`
+    SELECT stripe_subscription_id AS sub FROM pending_memberships
+    WHERE claimed_at IS NULL AND stripe_subscription_id IS NOT NULL
+  `) as { sub: string }[]) waiting.add(r.sub);
+  return { holders, waiting };
+}

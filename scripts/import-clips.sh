@@ -150,6 +150,16 @@ CLIPS=(
   "pilot-interview|stories/pilot-interview.MP4|14|45.3"
   "the-blonde-guy|stories/ty-luna-blonde-guy-bar/luna-ty-blonde-guy-short-music-ig.mov|1|89.0"
 
+  # WHERE TO WATCH, added 2026-10-20 — Luna to camera in a bright studio,
+  # telling people the series is on lunavale38.com and to start with Episode 1.
+  # 21s, 1080x1920, 24fps. Out of the story, like pilot-interview: it is the
+  # show talking about itself. Free; it runs on Instagram.
+  #
+  # POSTER AT 19.5 would be the end card; 17s is her smiling, which sells it.
+  # NO END: blackdetect flags 18.4–21.0, but that is the "Between Us now
+  # streaming" card (small white text on black), part of the edit.
+  "luna-brief-about-site|stories/luna-brief-about-site.MP4|17"
+
   # THE RAIN, added 2026-10-02 — Luna and Tyson in a downpour at night.
   # Vertical, 1320x2230, 60fps, scored. Members only, no preview: the middle
   # 30s goes to Instagram, and that is the public window.

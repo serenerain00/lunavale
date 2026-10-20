@@ -313,6 +313,26 @@ const authored: Clip[] = [
   },
   {
     /*
+      WHERE TO WATCH, Melissa, 2026-10-20. Luna to camera in a bright studio:
+      "a lot of people want to know where they can watch Between Us… my
+      website, lunavale38.com… start with Episode One, I'll see you there."
+      Ends on a "now streaming, link in bio" card. Out of the story, like
+      pilot-interview — the show talking about itself. Free; it runs on
+      Instagram. Title and caption are placeholders, hers to replace.
+    */
+    id: "luna-brief-about-site",
+    title: "Where to Watch",
+    caption: "Everybody keeps asking where to watch. Luna, on where it all lives, and where to start.",
+    file: "luna-brief-about-site.proxy.mp4",
+    poster: "/posters/luna-brief-about-site.jpg",
+    // 21, the whole file — the last 2.6s is her end card, kept.
+    durationSeconds: 21,
+    addedOn: "2026-10-20",
+    about: ["luna"],
+    mature: false,
+  },
+  {
+    /*
       THE PILOT INTERVIEW. Melissa, 2026-09-10: a film crew comes to the
       lakehouse to speak with Luna, it is brief, and it exists to promote the
       pilot — which drops this month.

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 interface AccountPageProps {
-  searchParams: Promise<{ started?: string; ended?: string; welcome?: string }>;
+  searchParams: Promise<{ started?: string; ended?: string; welcome?: string; paid_elsewhere?: string }>;
 }
 
 export default async function AccountPage({ searchParams }: AccountPageProps) {
@@ -116,6 +116,17 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
             Your membership has ended and you won&rsquo;t be charged again.
             You&rsquo;re back to visitor access — everything public is still
             yours.
+          </Banner>
+        )}
+
+        {/* Sent here by Join instead of a second checkout (2026-10-20): this
+            browser paid, and the payment belongs to a different login. */}
+        {params.paid_elsewhere === "1" && !active && (
+          <Banner tone="plain">
+            This browser has already paid for a membership, and it&rsquo;s on a
+            different account. Sign out and sign back in with the email you
+            paid with, or reply to your receipt and Melissa will move it over.
+            Nothing has been charged again.
           </Banner>
         )}
 

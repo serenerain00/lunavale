@@ -19,6 +19,7 @@
 
 import { cache } from "react";
 import { cookies } from "next/headers";
+import { PAID_COOKIE } from "@/lib/billing/paid-cookie";
 import {
   getTier,
   tierCovers,
@@ -115,6 +116,16 @@ async function claimWaiting(userId: string): Promise<boolean> {
     for (const e of user?.emailAddresses ?? []) {
       if (e.verification?.status !== "verified") continue;
       if (await claimPendingFor(userId, e.emailAddress)) return true;
+    }
+    // THE BROWSER THAT PAID (2026-10-20). Andrea paid signed out, made her
+    // account with a different email three minutes later without passing back
+    // through /welcome's link, and fourteen seconds after that pressed Join
+    // and paid again. Her browser was holding the paid session the whole
+    // time. It is the same proof /membership/claim accepts in the URL.
+    const paid = (await cookies()).get(PAID_COOKIE)?.value;
+    if (paid) {
+      const { claimBySession } = await import("@/lib/billing/claim-by-session");
+      if (await claimBySession(userId, paid)) return true;
     }
   } catch (error) {
     // Never break a page over this; /account and /membership/claim try too.

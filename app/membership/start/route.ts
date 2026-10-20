@@ -42,7 +42,11 @@ import { NextResponse, type NextRequest } from "next/server";
 import { MEMBER_COOKIE, isMember } from "@/lib/access/entitlement";
 import { billingLive, isBillingInterval } from "@/lib/billing/provider";
 import { getTier } from "@/lib/content/membership";
-import { lockedForPayment, membershipForUser } from "@/lib/db/memberships";
+import {
+  lockedForPayment,
+  membershipForUser,
+  userIdForSubscription,
+} from "@/lib/db/memberships";
 import {
   FIRST_TOUCH_COOKIE,
   LAST_TOUCH_COOKIE,
@@ -201,6 +205,22 @@ async function start(
     // account existed), or one whose card failed: never a new subscription.
     if ((await isMember()) || (existing && lockedForPayment(existing))) {
       return go(new URL("/account", origin));
+    }
+
+    // THIS BROWSER HAS ALREADY PAID, FOR SOMEBODY ELSE'S ACCOUNT (2026-10-20).
+    // isMember() above claims a payment parked against this browser's paid
+    // session (lib/access/entitlement.ts), so getting here with the cookie
+    // means that payment is already attached — to another account. Usually
+    // the same person with two logins: Andrea paid on one, was signed in on
+    // the other, and nothing stopped a second charge. Send them to say so.
+    const paidSession = request.cookies.get(PAID_COOKIE)?.value;
+    if (paidSession) {
+      const { paidSubscriptionFor } = await import("@/lib/billing/claim-by-session");
+      const sub = await paidSubscriptionFor(paidSession);
+      const owner = sub ? await userIdForSubscription(sub) : undefined;
+      if (owner && owner !== userId) {
+        return go(new URL("/account?paid_elsewhere=1", origin));
+      }
     }
 
     const url = await createCheckoutSession({

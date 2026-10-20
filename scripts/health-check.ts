@@ -587,7 +587,40 @@ async function checkStripe() {
       if (!email) continue;
       byEmail.set(email, [...(byEmail.get(email) ?? []), s.id]);
     }
-    const doubled = [...byEmail.values()].filter((ids) => ids.length > 1);
+    // AND BY SITE ACCOUNT (2026-10-20). Andrea paid as one address and again,
+    // signed in, as another — two customers, two emails, one person, and this
+    // check said "Nobody is paying twice". The owner of a subscription is
+    // whoever holds it on the site: the member row, the account that claimed
+    // the pending payment, or the userId the checkout carried.
+    // A subscription can have several owners now (linked logins share one),
+    // so this is per USER: anybody holding more than one live subscription.
+    const owners = new Map<string, Set<string>>();
+    const own = (sub: string, user: string | null | undefined) => {
+      if (!user) return;
+      owners.set(sub, (owners.get(sub) ?? new Set()).add(user));
+    };
+    for (const r of (await sql`
+      SELECT stripe_subscription_id, claimed_by AS user_id FROM pending_memberships WHERE claimed_by IS NOT NULL
+      UNION ALL
+      SELECT stripe_subscription_id, user_id FROM memberships WHERE stripe_subscription_id IS NOT NULL
+    `) as { stripe_subscription_id: string; user_id: string }[]) own(r.stripe_subscription_id, r.user_id);
+    const byOwner = new Map<string, string[]>();
+    for (const s of subs) {
+      if (!["active", "trialing", "past_due"].includes(s.status)) continue;
+      own(s.id, s.metadata?.userId);
+      for (const user of owners.get(s.id) ?? []) {
+        byOwner.set(user, [...(byOwner.get(user) ?? []), s.id]);
+      }
+    }
+    const seen = new Set<string>();
+    const doubled = [...byEmail.values(), ...byOwner.values()]
+      .filter((ids) => ids.length > 1)
+      .filter((ids) => {
+        const key = [...ids].sort().join("+");
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
     if (doubled.length) {
       fail(`${doubled.length} person(s) are paying for more than one membership`,
         `${doubled.map((ids) => ids.join(" + ")).join("; ")}. Refund + cancel the extra one with Melissa's OK.`);

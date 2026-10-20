@@ -183,7 +183,34 @@ export async function recordMembership(input: {
       current_period_end     = EXCLUDED.current_period_end,
       cancel_at_period_end   = EXCLUDED.cancel_at_period_end,
       updated_at             = now()
+    -- ONE ROW PER PERSON, SO A SECOND SUBSCRIPTION MUST NOT CLOBBER A LIVE
+    -- FIRST ONE (2026-10-20). Andrea paid twice; the row swapped between her
+    -- two subscriptions with each write, and refunding + cancelling the
+    -- duplicate would have filed "canceled" over the one she was keeping,
+    -- locking her out. A different subscription only replaces this row when
+    -- the one held here is no longer live. Same subscription: always. The
+    -- one left out shows up in the health check as an orphan.
+    WHERE memberships.stripe_subscription_id IS NOT DISTINCT FROM EXCLUDED.stripe_subscription_id
+       OR memberships.status NOT IN ('active', 'trialing', 'past_due')
   `;
+
+  // LINKED LOGINS (2026-10-20). One person, two accounts — Andrea has one per
+  // email — can share one subscription: a second row with the same
+  // stripe_subscription_id. The webhook only knows one user id per event, so
+  // whatever it learns is copied to every other row on that subscription, or
+  // the second login would keep the access it had on the day it was linked.
+  if (input.stripeSubscriptionId) {
+    await sql()`
+      UPDATE memberships SET
+        tier                 = ${input.tier},
+        status               = ${input.status},
+        current_period_end   = ${input.currentPeriodEnd?.toISOString() ?? null},
+        cancel_at_period_end = ${input.cancelAtPeriodEnd ?? false},
+        updated_at           = now()
+      WHERE stripe_subscription_id = ${input.stripeSubscriptionId}
+        AND user_id <> ${input.userId}
+    `;
+  }
 }
 
 /**

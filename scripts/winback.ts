@@ -39,6 +39,7 @@ import Stripe from "stripe";
 import { releases } from "@/lib/content/releases";
 import {
   campaignFor,
+  composeRenewal,
   composeWinback,
   type WinbackGroup,
   type WinbackPerson,
@@ -53,13 +54,20 @@ const only = flag("to")?.trim().toLowerCase();
 const groupArg = flag("group");
 const base = process.env.SITE_URL ?? "https://lunavale38.com";
 const ENDED_SINCE = "2026-09-01";
+// Group R (2026-10-20): access ending by this day. Andrea is left out — she
+// cancelled after being charged twice and gets her own email.
+const RENEW_BY = "2026-11-03";
+const RENEW_SKIP = new Set(["as.2525socialmedia@gmail.com", "andreaschreck@mac.com"]);
+const compose = (r: WinbackPerson, all: ReturnType<typeof releases>, unsub: string) =>
+  group === "r" ? composeRenewal(r, all, base, unsub) : composeWinback(group, r, all, base, unsub);
 
 function die(message: string): never {
   console.error(`\n  ${message}\n`);
   process.exit(1);
 }
 
-if (groupArg !== "a" && groupArg !== "b") die("Pass --group=a (leaving, still in) or --group=b (already gone).");
+if (groupArg !== "a" && groupArg !== "b" && groupArg !== "r")
+  die("Pass --group=a (leaving, still in), --group=b (already gone) or --group=r (renewal note).");
 const group: WinbackGroup = groupArg;
 const campaign = campaignFor(group);
 const day = (d: Date | number) => new Date(d).toISOString().slice(0, 10);
@@ -188,13 +196,18 @@ async function main() {
     // A test: sample details, so it shows what a real recipient would see
     // without putting anybody else's dates in your inbox.
     recipients = [
-      group === "a"
+      group !== "b"
         ? { email: only, firstName: flag("name"), since: "2026-09-26", accessUntil: "2026-10-26" }
         : { email: only, firstName: flag("name"), since: "2026-10-06" },
     ];
   } else {
     const leaving = await groupA();
-    const people = group === "a" ? leaving : await groupB(new Set(leaving.map((r) => r.email)));
+    const people =
+      group === "a"
+        ? leaving
+        : group === "r"
+          ? leaving.filter((r) => (r.accessUntil ?? "") <= RENEW_BY && !RENEW_SKIP.has(r.email))
+          : await groupB(new Set(leaving.map((r) => r.email)));
     const { off, done } = await suppressedAndSent(people.map((p) => p.email));
     recipients = people.filter((p) => !off.has(p.email) && !done.has(p.email));
     console.log(`\n  Group ${group.toUpperCase()}: ${people.length} found`);
@@ -211,7 +224,7 @@ async function main() {
     // Signed for a placeholder address, so a dry run never prints a member's.
     // Name replaced too: the preview shows the shape, not the person.
     const sample = { ...first, firstName: first.firstName ? "{First name}" : undefined };
-    const m = composeWinback(group, sample, all, base, unsubscribeUrl(base, "preview@example.com"));
+    const m = compose(sample, all, unsubscribeUrl(base, "preview@example.com"));
     console.log(`\n  Campaign ${campaign}\n  Subject: ${m.subject}\n  ---`);
     console.log(m.text.split("\n").map((l) => `  ${l}`).join("\n"));
     console.log("  ---");
@@ -228,7 +241,7 @@ async function main() {
   let sent = 0;
   for (const r of recipients) {
     const unsub = unsubscribeUrl(base, r.email);
-    const m = composeWinback(group, r, all, base, unsub);
+    const m = compose(r, all, unsub);
     try {
       await deliver(r.email, m.subject, m.text, m.html, unsub);
       if (!only) {

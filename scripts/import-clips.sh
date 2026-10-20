@@ -160,6 +160,14 @@ CLIPS=(
   # streaming" card (small white text on black), part of the edit.
   "luna-brief-about-site|stories/luna-brief-about-site.MP4|17"
 
+  # THE STUDIO, added 2026-10-20 — Tyson drops by Luna's studio, then Luna and
+  # Simone talk about him and Josh. 74s, 1080x1920, 30fps, no black. Free; it
+  # already ran on Instagram (Melissa), which is why Simone appears here while
+  # she is otherwise still on hold.
+  #
+  # POSTER AT 17: the two of them side by side, both smiling.
+  "luna-ty-studio|stories/luna-ty-studio.MP4|17"
+
   # THE RAIN, added 2026-10-02 — Luna and Tyson in a downpour at night.
   # Vertical, 1320x2230, 60fps, scored. Members only, no preview: the middle
   # 30s goes to Instagram, and that is the public window.

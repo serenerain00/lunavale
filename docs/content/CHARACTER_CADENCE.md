@@ -52,19 +52,19 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-19 against `main` at 667a1fa. **A touched `lib/content/` file
+re-run 2026-10-20 against `main` at 9ba69fc. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The 2026-07-28 row is kept beneath so the drift is visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 218 | 185 |
-| Tyson | 12 | 159 | 138 |
-| Josh | 14 | 136 | 120 |
+| Luna | 12 | 229 | 195 |
+| Tyson | 12 | 164 | 143 |
+| Josh | 14 | 142 | 126 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
-| Avery | 0 | 7 | 7 |
+| Avery | 0 | 9 | 9 |
 
 *As built, 2026-07-28: Luna 8 / 44 / 23 · Tyson 8 / 44 / 33 · Josh 8 / 35 / 21.
 Rick, Cathy and Avery were not on the table at all. Figures above include this
@@ -79,7 +79,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 at 667a1fa**: it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 at 9ba69fc**: it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has sat anywhere between 17 and 28. Quote the two
@@ -156,9 +156,11 @@ this clause — it is what makes the clause true.)*
 > another PR's table against this one; recount on whatever tree you are actually
 > on.
 
-> **SIMONE IS IN CANON AND NOT ON THE SITE. DO NOT PUT HER IN A NOTE.**
-> `LUNA_VALE_CONTEXT.md` gained *"Simone — the first of them, named"* on
-> 2026-10-19, marked **INCOMING**: 38, a model, Luna's longtime friend and
+> **SIMONE IS ON HOLD. DO NOT BUILD, WRITE OR PROPOSE ANYTHING FOR HER.**
+> Canon says so outright as of 2026-10-20 — Melissa: *"hold of on simone till i
+> say, still building the scene and context"* — so this is firmer than the
+> 10-19 entry it replaces, and it covers proposals, not just notes.
+> The 10-19 entry *"Simone — the first of them, named"* describes her: 38, a model, Luna's longtime friend and
 > effectively her partner at the Denver studio. Melissa's own words are that she
 > is *"going to be introduced soon"* and that **nothing about her is on the site
 > yet — no character card, no copy, no tags**, with anything unstated **OPEN** and
@@ -183,6 +185,15 @@ this clause — it is what makes the clause true.)*
 > business knowing the ending. The same rule that keeps the fall-fair note from
 > loading Josh's one line applies here: the audience hears the second half
 > coming long before it should.
+
+> **WRITE THE NOTE IN AMERICAN ENGLISH.** As of 2026-10-20 the health check has
+> a daily spelling check over `lib/content`, `lib/studio`, `lib/email`, `app`
+> and `components` — everything a visitor reads — and `between-takes.ts` is in
+> that set. A British spelling in a note will FAIL the run, not warn. There is a
+> `BRITISH_OK` allow-list in `scripts/health-check.ts` for the handful of real
+> exceptions (`aria-labelledby`, `normalis…`, `favouriteScene`, `cole-rang-him`
+> and a few more); do not add to it to get a note through. **This file is not in
+> scope** — `docs/` is internal, so its own spellings are nobody's problem.
 
 Standing backlog, roughly prioritised:
 
@@ -298,8 +309,12 @@ Standing backlog, roughly prioritised:
   the free uncovered pieces this is the one with the most under it
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none
-- Notes on the vertical posts — there are twenty-two now and only
-  `run-at-the-lake` has one. The newest is **`tyson-luna-call-from-field`**
+- Notes on the vertical posts — there are twenty-three now and only
+  `run-at-the-lake` has one. The newest is **`luna-brief-about-site`**
+  (*Where to Watch*, **free**, 2026-10-20): Luna on where the series lives. Its
+  commit calls it a "new free clip", but it is a **vertical post** in
+  `posts.ts`, not a video in `videos.ts` — one more reason to read the module
+  rather than the message. Before it, **`tyson-luna-call-from-field`**
   (2026-10-15): Tyson calling Luna from deployment around 2016, `premium` with a
   67.5-second free preview, so it is reachable without a membership. Its title is
   **"You Survived"** — Melissa renamed it the same day it landed, and the commit

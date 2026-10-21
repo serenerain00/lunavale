@@ -174,11 +174,137 @@ yet and nobody should be.
   when she introduces them, and the journal treats it as a memory rather than a
   scene.
 
-### Simone — the first of them, named *(Melissa, 2026-10-19; INCOMING)*
+### Simone — Luna's studio manager *(Melissa, 2026-10-20; CANONICAL)*
 
-**ON HOLD** *(Melissa, 2026-10-20: "hold of on simone till i say, still
-building the scene and context")*. Don't build, write or propose anything for
-her until she brings it back.
+*Melissa's character reference of 2026-10-20, filed as she sent it apart from
+obvious typos. **This is the newest approved reference and wins** wherever the
+2026-10-19 one further down disagrees. She is off hold: the studio clip
+`luna-ty-studio` (free, already on Instagram) is her first appearance on the
+site. Portrait (face reference):
+`~/Library/CloudStorage/Dropbox/AI Model:Luna/simone/Screenshot 2026-10-20 at 7.58.16 PM.png`.*
+
+**Status.** Recurring supporting character. First appearance: Luna's modeling
+studio, the Episode 5 storyline.
+
+**Identity.**
+- **38**, Sagittarius. **From Manhattan**, New York City. **Lives in Denver.**
+- **Studio Manager at Luna's modeling studio.** The studio is **Luna's**.
+- Relationship status: **not established.** Don't state it either way.
+- Luna's longtime friend. Intelligent, confident, independent, observant and
+  naturally funny, with a distinctly New York directness. Sophisticated without
+  pretension, warm without sentimentality, confident without dominating.
+- A fully developed woman with her own career and life, not Luna's sounding
+  board.
+
+**Look (continuity).**
+- Long, dark brunette hair, usually loose. Expressive, naturally attractive
+  features. Fit, feminine build.
+- **Extensive floral tattoos covering one arm.** The portrait shows it on her
+  **left** arm, shoulder to wrist.
+- Sophisticated, contemporary style. Relaxed, confident posture, natural
+  expressions, understated mannerisms.
+- **First studio wardrobe:** charcoal sleeveless fitted top, tailored black
+  trousers, black belt, delicate jewelry. Polished without looking overly
+  styled: she works in fashion but no longer needs to impress anyone.
+- **She is the tattooed brunette. She is never the young blonde model** seen
+  working in the studio.
+
+**The job.** She runs the studio's day: schedules, coordinating models and
+photographers, organizing shoots, supervising staff, production logistics and
+professional standards. She works closely with Luna on portfolios, photographs
+and creative decisions. Luna stays heavily involved on the creative side: she
+reviews photographs, mentors younger models and joins in the operations.
+
+The relationship is **collaborative, not hierarchical.** Simone can decide
+things without asking. She knows Luna trusts her, and she knows Luna has to
+be involved in everything, which makes for affectionate banter:
+
+> SIMONE: You know, one of these days you're actually gonna let somebody else run this place.
+> LUNA: I do let other people run it. I just like knowing what they're doing.
+
+**Personality.**
+- **Confident:** she doesn't need approval.
+- **Quick-witted:** dry observations.
+- **Observant:** especially of Luna.
+- **Direct:** Manhattan.
+- **Independent:** her own opinions and priorities.
+- **Warm:** under the sarcasm.
+- **Curious:** she asks slightly uncomfortable questions.
+- **Emotionally perceptive:** she sees avoidance and doesn't automatically
+  push.
+- **Sagittarius:** independence, spontaneity, humor, candor, teasing people
+  she's close to. **Never a caricature;** she is a believable adult woman
+  first.
+
+**Voice.**
+- A natural American accent shaped by Manhattan: mature, slightly husky,
+  conversational. The New York shows in rhythm, confidence and directness,
+  **not an exaggerated accent.** She speaks quickly when amused or teasing.
+- **She calls Luna "Lu."** (Tyson's is "Lou" on the site; hers is "Lu".)
+- Conversational rather than constructed. Unfinished thoughts, teasing,
+  occasional sarcasm. She lets her expression finish the sentence.
+- Examples:
+  - "Don't look at me."
+  - "Yeah, you're done."
+  - "So… are we gonna…?"
+  - "I didn't ask if anything happened."
+  - "Seriously, Lu. I mean, I wouldn't blame you."
+  - "Yeah, he's Ty. Your big teddy bear, I know."
+- **Avoid:** polished dialogue, therapy language, speeches, exaggerated New
+  York slang, and constant one-liners.
+
+**With Luna.** An established friendship beyond work. They talk about personal
+things while working, moving between business, gossip, humor and the
+occasional vulnerability.
+- Simone knows Luna overworks and takes on too much.
+- She knows **Luna has been struggling with Josh.**
+- Luna is more guarded. Simone is more direct and teases her when she's
+  avoiding something, but doesn't push forever and knows when Luna needs
+  space.
+- She is the friend who notices what Luna isn't saying, finds the humor in it,
+  and knows when to stop.
+- Their scenes have ordinary physical behavior, laughter, interruptions,
+  unfinished conversations and comfortable silences. **Mostly their friendship
+  is fun**, not constant profound talk.
+
+**With Tyson.** She knows him personally. **She met him after he came back from
+the Navy**, and they have a comfortable, bantering rapport.
+- She thinks he's attractive. She isn't pursuing him or flirting.
+- She knows he's been Luna's best friend since they were eighteen.
+- She's amused that someone muscular, heavily tattooed and imposing is
+  playful, ridiculous, affectionate and relaxed around Luna. He's Luna's "big
+  teddy bear."
+- She notices their physical familiarity and **wonders** whether it has ever
+  been romantic. She isn't convinced they're secretly in love. She just finds it
+  hard to believe two attractive people who've known each other twenty years
+  never had one moment of attraction.
+
+**Site guardrails still in force.** Simone's curiosity is hers. On the site it
+stays a question and never confirms anything. Copy must never say or hint that
+**Tyson** felt anything before the separation (see "Tyson at eighteen"). Luna's
+side stays VERY subtle.
+
+#### Superseded by the 2026-10-20 reference, and still OPEN
+
+- **Superseded:**
+  - From **Manhattan**, not Brooklyn.
+  - **Studio manager**, not "effectively a business partner" and still-working
+    model.
+  - Relationship status **not established**, not "single".
+- **OPEN: do the 10-19 details the new reference doesn't mention still
+  stand?** That covers:
+  - partly Native American;
+  - grew up with little money and started modeling at eighteen;
+  - doesn't speak to her parents, and has a brother;
+  - met Luna ~20 years ago at a New York show, then Atlanta;
+  - the 10-19 flaw ("decides she understands before you've finished");
+  - the piercings and bangles.
+
+  Treat them as **writer background, not for the site**, until Melissa says.
+- The 10-19 OPEN items below (studio founding year, Luna's Colorado isolation,
+  `the-girls`, the Tyson-rule risk on that page) are all still open.
+
+#### Earlier reference (2026-10-19), kept for the record
 
 *Melissa's character reference, filed as she sent it apart from obvious typos.
 She is "going to be introduced soon", and a portrait is coming as the facial

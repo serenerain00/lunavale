@@ -335,9 +335,8 @@ const authored: Clip[] = [
     /*
       THE STUDIO, Melissa, 2026-10-20. Tyson drops by Luna's studio ("you
       keep Luna out of trouble?"), leaves, and Luna and Simone talk about him
-      and Josh. Already on Instagram, so free. Simone is still on hold as a
-      character — she is not in `about` and has no page; this clip is the
-      only place she appears. Title and caption are placeholders, hers to
+      and Josh. Already on Instagram, so free. Simone's first appearance —
+      she launched with it. Title and caption are placeholders, hers to
       replace.
     */
     id: "luna-ty-studio",
@@ -348,7 +347,7 @@ const authored: Clip[] = [
     // 74, the whole file — no black to trim.
     durationSeconds: 74,
     addedOn: "2026-10-20",
-    about: ["luna", "tyson"],
+    about: ["luna", "tyson", "simone"],
     mature: false,
   },
   {

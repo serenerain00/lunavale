@@ -116,6 +116,8 @@ const SIGNATURES: Record<PersonId, string> = {
   // Added with `tony` to the taxonomy on 2026-08-30; he has no notes and may
   // never have any. The record has to stay total either way.
   tony: "— Tony",
+  // No collision, added 2026-10-20 to keep the record total.
+  simone: "— S",
 };
 
 function signature(note: SetNote): string {

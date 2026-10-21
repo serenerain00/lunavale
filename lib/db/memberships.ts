@@ -233,7 +233,14 @@ export async function recordPendingMembership(input: {
   currentPeriodEnd: Date | null;
   cancelAtPeriodEnd?: boolean;
 }): Promise<void> {
-  await sql()`
+  // ONE ROW PER EMAIL, so a second payment on the same address used to
+  // overwrite the first — which is how Tina's first subscription (2026-10-21)
+  // ended up belonging to nobody, and how cancelling that duplicate would then
+  // have written a canceled sub over her real one. Same guard as
+  // recordMembership(): another subscription may only replace this one once
+  // it is no longer live. A payment refused here is an orphan, and the health
+  // check and /admin both list orphans, so it is loud rather than lost.
+  const written = (await sql()`
     INSERT INTO pending_memberships (
       email, tier, status, stripe_customer_id,
       stripe_subscription_id, current_period_end, cancel_at_period_end, updated_at
@@ -251,7 +258,16 @@ export async function recordPendingMembership(input: {
       current_period_end     = EXCLUDED.current_period_end,
       cancel_at_period_end   = EXCLUDED.cancel_at_period_end,
       updated_at             = now()
-  `;
+    WHERE pending_memberships.stripe_subscription_id IS NOT DISTINCT FROM EXCLUDED.stripe_subscription_id
+       OR pending_memberships.status NOT IN ('active', 'trialing', 'past_due')
+    RETURNING email
+  `) as unknown[];
+  if (written.length === 0) {
+    console.error(
+      `pending membership for ${input.email} already holds a live subscription; ` +
+        `${input.stripeSubscriptionId} (${input.status}) not recorded — likely a double payment`,
+    );
+  }
 }
 
 /**

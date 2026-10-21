@@ -188,7 +188,8 @@ studio, the Episode 5 storyline.
 
 **Identity.**
 - **38**, Sagittarius. **From Manhattan**, New York City. **Lives in Denver.**
-- **Studio Manager at Luna's modeling studio.** The studio is **Luna's**.
+- **Studio Manager at Luna's modeling studio, Vale Studios** *(named by
+  Melissa, 2026-10-20)*. The studio is **Luna's**.
 - Relationship status: **not established.** Don't state it either way.
 - Luna's longtime friend. Intelligent, confident, independent, observant and
   naturally funny, with a distinctly New York directness. Sophisticated without

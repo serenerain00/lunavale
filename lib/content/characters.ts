@@ -394,7 +394,7 @@ export const characters: Character[] = [
     portrait: "/characters/simone-studio.jpg",
     portraitAlt: "Simone, at the light table in Luna's studio",
     intro: [
-      "Thirty-eight, from Manhattan, and the person who actually runs Luna's modeling studio in Denver. Schedules, photographers, models, shoots, the people on the floor, and the hundred small things that keep a day from falling apart. The studio is Luna's. Most days, the day is Simone's, and she makes the call without asking first.",
+      "Thirty-eight, from Manhattan, and the person who actually runs Vale Studios, Luna's modeling studio in Denver. Schedules, photographers, models, shoots, the people on the floor, and the hundred small things that keep a day from falling apart. The studio is Luna's. Most days, the day is Simone's, and she makes the call without asking first.",
       "She and Luna go back years, and it shows in how little either of them has to explain. They talk while they work — clients, gossip, photographs, whatever Luna is busy not talking about — and most of it is fun. Simone knows Luna works too much, and has to have a hand in everything. She says so anyway.",
       "She is direct the way New Yorkers are, quick when something amuses her, and she sees what people leave out. She will ask the slightly uncomfortable question. She also knows when to stop asking.",
       "She met Tyson after he came home from the Navy, and she finds him very funny: all that size and ink, and around Luna he is a big teddy bear.",
@@ -404,7 +404,7 @@ export const characters: Character[] = [
       { label: "Sign", value: "Sagittarius" },
       { label: "From", value: "Manhattan, New York" },
       { label: "Lives", value: "Denver" },
-      { label: "Work", value: "Manages Luna's modeling studio" },
+      { label: "Work", value: "Manages Vale Studios, Luna's modeling studio" },
       { label: "Ink", value: "Florals from her shoulder to her wrist, on one arm" },
       { label: "Luna", value: "A longtime friend. Knows she's been struggling with Josh" },
       { label: "Tyson", value: "Met him after he came home from the Navy. They give each other a hard time" },

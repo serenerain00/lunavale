@@ -31,6 +31,7 @@ import {
   PROPS,
   azimuthWords,
   defaultBuild,
+  frameRect,
   mirrorFigure,
   posedFigure,
   type Blocking as BlockingData,
@@ -98,9 +99,22 @@ export function Blocking({
   const [status, setStatus] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const api = useRef<StageApi | null>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [box, setBox] = useState({ w: 0, h: 0 });
+  const [menuFor, setMenuFor] = useState<string | null>(null);
+  const down = useRef<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([e]) => setBox({ w: e.contentRect.width, h: e.contentRect.height }));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   const aspect = byId(aspects, draft.aspectId);
   const ratio = aspect.w / aspect.h;
+  const frame = frameRect(box.w, box.h, ratio);
   const names = useMemo(() => Object.fromEntries(people.map((p) => [p.id, p.label])), [people]);
   const fig = b.figures.find((f) => f.id === activeFigure) ?? b.figures[0];
 
@@ -158,6 +172,35 @@ export function Blocking({
     setSelection(s);
     if (s?.type === "joint") setActiveFigure(s.figureId);
   }, []);
+
+  /**
+   * A click (not a drag) anywhere on the stage opens the tool menu for the
+   * nearest person within reach of it, or closes it if nobody is near —
+   * whether the click landed on them, on their dot, or on the floor beside.
+   */
+  function onStageClick(e: React.PointerEvent) {
+    const d = down.current;
+    down.current = null;
+    if (!d || Math.hypot(e.clientX - d.x, e.clientY - d.y) > 5 || e.button !== 0) return;
+    const rect = stageRef.current?.getBoundingClientRect();
+    if (!rect || !api.current) return;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    let best: { id: string; dist: number } | null = null;
+    for (const f of b.figures) {
+      const p = api.current.screen(f.id);
+      if (!p || !p.visible) continue;
+      // Measured to the chest, so allow a body's height of reach.
+      const dist = Math.hypot(x - p.x, (y - p.y) * 0.6);
+      if (!best || dist < best.dist) best = { id: f.id, dist };
+    }
+    if (best && best.dist < Math.max(140, box.h * 0.22)) {
+      setActiveFigure(best.id);
+      setMenuFor(best.id);
+    } else {
+      setMenuFor(null);
+    }
+  }
 
   const setJoint = (f: BlockingFigure, j: JointId, v: Vec3) => updateFigure({ ...f, joints: { ...f.joints, [j]: v } });
   const jointOf = (f: BlockingFigure, j: JointId): Vec3 => f.joints[j] ?? [0, 0, 0];
@@ -324,13 +367,21 @@ export function Blocking({
   const selectedJoint = selection?.type === "joint" ? selection : null;
   const jointFig = selectedJoint ? b.figures.find((f) => f.id === selectedJoint.figureId) : undefined;
 
+  const menuFig = menuFor ? b.figures.find((f) => f.id === menuFor) : undefined;
+  const menuIndex = menuFig ? b.figures.indexOf(menuFig) : -1;
+
   return (
-    <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
-      {/* ------------------------------------------------------------ stage -- */}
-      <div className="space-y-3">
+    <div className="space-y-6">
+      {/* ------------------------------------------------------------ stage --
+          Wide on purpose (2026-10-21): as wide as the window, not the page,
+          so there is room to walk people about. The shot is the lit
+          rectangle in the middle; everything outside it is darkened room. */}
+      <div className="relative left-1/2 w-[calc(100vw-3rem)] max-w-[120rem] -translate-x-1/2 space-y-3">
         <div
-          className="relative mx-auto overflow-hidden rounded-sm border border-hairline bg-charcoal"
-          style={{ aspectRatio: `${aspect.w} / ${aspect.h}`, width: `min(100%, calc(72vh * ${ratio}))` }}
+          ref={stageRef}
+          className="relative h-[min(80vh,60vw)] min-h-[22rem] overflow-hidden rounded-sm border border-hairline bg-charcoal"
+          onPointerDown={(e) => { down.current = { x: e.clientX, y: e.clientY }; }}
+          onPointerUp={onStageClick}
         >
           <BlockingStage
             blocking={b}
@@ -348,13 +399,73 @@ export function Blocking({
             onCamera={onCamera}
             api={api}
           />
-          {/* Thirds, for framing. Outside the canvas, so never in the snapshot. */}
-          <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-y-0 left-1/3 border-l border-white/10" />
-            <div className="absolute inset-y-0 left-2/3 border-l border-white/10" />
-            <div className="absolute inset-x-0 top-1/3 border-t border-white/10" />
-            <div className="absolute inset-x-0 top-2/3 border-t border-white/10" />
-          </div>
+          {/* The shot frame, the room around it dimmed, and thirds inside it.
+              All DOM over the canvas, so never in the snapshot. */}
+          {frame.w > 0 && (
+            <div
+              aria-hidden
+              className="pointer-events-none absolute border border-amber/40"
+              style={{ left: frame.x, top: frame.y, width: frame.w, height: frame.h, boxShadow: "0 0 0 9999px rgba(12, 11, 10, 0.55)" }}
+            >
+              <div className="absolute inset-y-0 left-1/3 border-l border-white/10" />
+              <div className="absolute inset-y-0 left-2/3 border-l border-white/10" />
+              <div className="absolute inset-x-0 top-1/3 border-t border-white/10" />
+              <div className="absolute inset-x-0 top-2/3 border-t border-white/10" />
+              <span className="absolute left-1.5 top-1 text-[11px] text-amber-soft/70">{aspect.label} · the shot</span>
+            </div>
+          )}
+          {menuFig && !hide && (
+            <FloatingTools api={api} figureId={menuFig.id} box={box} onClose={() => setMenuFor(null)}>
+              <div className="flex items-center gap-2">
+                <span className="h-3 w-3 shrink-0 rounded-full" style={{ background: FIGURE_TONES[menuIndex % FIGURE_TONES.length].hex }} />
+                <select value={menuFig.characterId ?? ""} onChange={(e) => updateFigure({ ...menuFig, characterId: e.target.value || null })} className={`${SELECT} flex-1`}>
+                  <option value="">Stand-in</option>
+                  {people.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+                </select>
+                <button type="button" aria-label="Close" className="px-1 text-stone-dim hover:text-ivory" onClick={() => setMenuFor(null)}>✕</button>
+              </div>
+              <div className="flex gap-1">
+                {([["move", "Move", "M"], ["rotate", "Rotate", "R"], ["camera", "Camera", "Esc"]] as [Tool, string, string][]).map(([t, label, key]) => (
+                  <button key={t} type="button" className={`${chip(tool === t)} flex-1`} onClick={() => setTool(t)}>
+                    {label} <kbd className="ml-0.5 font-sans text-[10px] opacity-60">{key}</kbd>
+                  </button>
+                ))}
+              </div>
+              <Slider label="Facing" min={-180} max={180} value={jointOf(menuFig, "pelvis")[1]}
+                onChange={(v) => { const p = jointOf(menuFig, "pelvis"); setJoint(menuFig, "pelvis", [p[0], v, p[2]]); }} />
+              {(() => {
+                const other = nearestOther(menuFig, b.figures);
+                if (!other) return null;
+                const d = floorDistance(menuFig, other);
+                return (
+                  <Slider label={`Apart from ${other.characterId ? names[other.characterId] ?? "them" : "the stand-in"}`}
+                    hint={spacingWords(d)} min={0.15} max={4} step={0.01} unit="m" value={d}
+                    onChange={(v) => updateFigure(atDistance(menuFig, other, v))} />
+                );
+              })()}
+              {fig?.id === menuFig.id && (
+                <>
+                  <Slider label="Head turn" min={-90} max={90} value={head.turn} onChange={(v) => setHead({ turn: v })} />
+                  <Slider label="Head nod" min={-60} max={60} value={head.nod} onChange={(v) => setHead({ nod: v })} />
+                  <div className="flex gap-1">
+                    <button type="button" className={`${chip(false)} flex-1`} onClick={lookAtCamera}>Look at camera</button>
+                    <button type="button" className={`${chip(false)} flex-1`} onClick={() => setHead({ turn: 0, nod: 0, tilt: 0 })}>Straight</button>
+                  </div>
+                </>
+              )}
+              <div className="flex items-center gap-1">
+                <select value="" onChange={(e) => e.target.value && applyPose(menuFig, e.target.value)} className={`${SELECT} flex-1`}>
+                  <option value="">Pose…</option>
+                  {POSES.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+                </select>
+                <button type="button" className={chip(false)} onClick={() => updateFigure(mirrorFigure(menuFig))} title="Swap left and right">Mirror</button>
+                <button type="button" className={chip(false)} title="Put the camera on them, from the front"
+                  onClick={() => api.current?.placeCamera(menuFig.id, 0, reading && fig?.id === menuFig.id ? reading.cameraY - reading.eyeY : 0)}>
+                  Frame
+                </button>
+              </div>
+            </FloatingTools>
+          )}
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[12px] text-stone-dim">
@@ -460,8 +571,10 @@ export function Blocking({
         )}
       </div>
 
-      {/* ------------------------------------------------------------ panel -- */}
-      <aside className="space-y-6 text-[13px]">
+      {/* ------------------------------------------------------------ panels --
+          Below the stage now, so the stage gets the width. The floating menu
+          covers what you reach for mid-move; these are the rest. */}
+      <div className="grid gap-6 text-[13px] md:grid-cols-2 xl:grid-cols-4">
         <section className="space-y-2">
           <h3 className="text-[12px] uppercase tracking-wider text-stone-dim">People</h3>
           {b.figures.map((f, i) => (
@@ -584,11 +697,68 @@ export function Blocking({
           )}
         </section>
 
+      </div>
         <button type="button" className="text-[12px] text-stone-dim hover:text-wine"
           onClick={() => { const n = initialBlocking(draft.characterIds); setB(n); setActiveFigure(n.figures[0].id); setSelection(null); }}>
           Start the blocking over
         </button>
-      </aside>
+    </div>
+  );
+}
+
+/**
+ * The per-person tool menu that sits next to whoever you clicked near
+ * (Melissa, 2026-10-21: "my tools are already by my mouse where im moving and
+ * adjusting character position" — Fitts's law). Follows its person every
+ * frame without re-rendering the builder: the position is written straight to
+ * the element. Flips to their other side near the edge.
+ */
+function FloatingTools({ api, figureId, box, onClose, children }: {
+  api: React.MutableRefObject<StageApi | null>;
+  figureId: string;
+  box: { w: number; h: number };
+  onClose: () => void;
+  children: React.ReactNode;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    let raf = 0;
+    const tick = () => {
+      const el = ref.current;
+      const p = api.current?.screen(figureId);
+      if (el && p) {
+        const w = el.offsetWidth;
+        const h = el.offsetHeight;
+        const gap = 56;
+        let x = p.x + gap;
+        if (x + w > box.w - 8) x = p.x - gap - w;
+        x = Math.min(Math.max(x, 8), Math.max(box.w - w - 8, 8));
+        const y = Math.min(Math.max(p.y - h / 2, 8), Math.max(box.h - h - 8, 8));
+        el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+        el.style.opacity = p.visible ? "1" : "0.4";
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+    return () => cancelAnimationFrame(raf);
+  }, [api, figureId, box.w, box.h]);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+  return (
+    <div
+      ref={ref}
+      role="dialog"
+      aria-label="Tools for this person"
+      className="absolute left-0 top-0 z-20 w-64 space-y-2 rounded-md border border-hairline bg-ink/95 p-2.5 text-[13px] shadow-xl backdrop-blur"
+      style={{ transform: "translate(-9999px, 0)" }}
+      onPointerDown={(e) => e.stopPropagation()}
+      onPointerUp={(e) => e.stopPropagation()}
+      onWheel={(e) => e.stopPropagation()}
+    >
+      {children}
     </div>
   );
 }

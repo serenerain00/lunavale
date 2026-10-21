@@ -31,6 +31,7 @@ import {
   PROPS,
   azimuthWords,
   defaultBuild,
+  frameRect,
   mirrorFigure,
   posedFigure,
   type Blocking as BlockingData,
@@ -98,9 +99,33 @@ export function Blocking({
   const [status, setStatus] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const api = useRef<StageApi | null>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [box, setBox] = useState({ w: 0, h: 0 });
+  const [menuFor, setMenuFor] = useState<string | null>(null);
+  const [readOpen, setReadOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  // The docks fold away with P. Remembered per browser — a convenience only.
+  // Blocking mounts only when its tab is opened, on the client, so reading
+  // storage in the initializer cannot mismatch a server render.
+  const [panels, setPanels] = useState(() => {
+    try { return typeof window === "undefined" || localStorage.getItem("studio.blocking.panels") !== "0"; } catch { return true; }
+  });
+  useEffect(() => {
+    try { localStorage.setItem("studio.blocking.panels", panels ? "1" : "0"); } catch {}
+  }, [panels]);
+  const down = useRef<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([e]) => setBox({ w: e.contentRect.width, h: e.contentRect.height }));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   const aspect = byId(aspects, draft.aspectId);
   const ratio = aspect.w / aspect.h;
+  const frame = frameRect(box.w, box.h, ratio);
   const names = useMemo(() => Object.fromEntries(people.map((p) => [p.id, p.label])), [people]);
   const fig = b.figures.find((f) => f.id === activeFigure) ?? b.figures[0];
 
@@ -137,6 +162,7 @@ export function Blocking({
       const k = e.key.toLowerCase();
       if (k === "m") setTool((x) => (x === "move" ? "camera" : "move"));
       else if (k === "r") setTool((x) => (x === "rotate" ? "camera" : "rotate"));
+      else if (k === "p") setPanels((x) => !x);
       else if (e.key === "Escape") setTool("camera");
       else return;
       e.preventDefault();
@@ -158,6 +184,35 @@ export function Blocking({
     setSelection(s);
     if (s?.type === "joint") setActiveFigure(s.figureId);
   }, []);
+
+  /**
+   * A click (not a drag) anywhere on the stage opens the tool menu for the
+   * nearest person within reach of it, or closes it if nobody is near —
+   * whether the click landed on them, on their dot, or on the floor beside.
+   */
+  function onStageClick(e: React.PointerEvent) {
+    const d = down.current;
+    down.current = null;
+    if (!d || Math.hypot(e.clientX - d.x, e.clientY - d.y) > 5 || e.button !== 0) return;
+    const rect = stageRef.current?.getBoundingClientRect();
+    if (!rect || !api.current) return;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    let best: { id: string; dist: number } | null = null;
+    for (const f of b.figures) {
+      const p = api.current.screen(f.id);
+      if (!p || !p.visible) continue;
+      // Measured to the chest, so allow a body's height of reach.
+      const dist = Math.hypot(x - p.x, (y - p.y) * 0.6);
+      if (!best || dist < best.dist) best = { id: f.id, dist };
+    }
+    if (best && best.dist < Math.max(140, box.h * 0.22)) {
+      setActiveFigure(best.id);
+      setMenuFor(best.id);
+    } else {
+      setMenuFor(null);
+    }
+  }
 
   const setJoint = (f: BlockingFigure, j: JointId, v: Vec3) => updateFigure({ ...f, joints: { ...f.joints, [j]: v } });
   const jointOf = (f: BlockingFigure, j: JointId): Vec3 => f.joints[j] ?? [0, 0, 0];
@@ -215,6 +270,17 @@ export function Blocking({
     } finally {
       setHide(false);
       setBusy(false);
+    }
+  }
+
+  async function copyWords() {
+    if (!words) return;
+    try {
+      await navigator.clipboard.writeText(words);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      setStatus("This browser would not copy. Open the readout with More and select the text instead.");
     }
   }
 
@@ -324,13 +390,21 @@ export function Blocking({
   const selectedJoint = selection?.type === "joint" ? selection : null;
   const jointFig = selectedJoint ? b.figures.find((f) => f.id === selectedJoint.figureId) : undefined;
 
+  const menuFig = menuFor ? b.figures.find((f) => f.id === menuFor) : undefined;
+  const menuIndex = menuFig ? b.figures.indexOf(menuFig) : -1;
+
   return (
-    <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
-      {/* ------------------------------------------------------------ stage -- */}
-      <div className="space-y-3">
+    <div className="space-y-6">
+      {/* ------------------------------------------------------------ stage --
+          Wide on purpose (2026-10-21): as wide as the window, not the page,
+          so there is room to walk people about. The shot is the lit
+          rectangle in the middle; everything outside it is darkened room. */}
+      <div className="relative left-1/2 w-[calc(100vw-3rem)] max-w-[120rem] -translate-x-1/2 space-y-3">
         <div
-          className="relative mx-auto overflow-hidden rounded-sm border border-hairline bg-charcoal"
-          style={{ aspectRatio: `${aspect.w} / ${aspect.h}`, width: `min(100%, calc(72vh * ${ratio}))` }}
+          ref={stageRef}
+          className="relative h-[min(86vh,62vw)] min-h-[30rem] overflow-hidden rounded-sm border border-hairline bg-charcoal"
+          onPointerDown={(e) => { down.current = { x: e.clientX, y: e.clientY }; }}
+          onPointerUp={onStageClick}
         >
           <BlockingStage
             blocking={b}
@@ -348,93 +422,308 @@ export function Blocking({
             onCamera={onCamera}
             api={api}
           />
-          {/* Thirds, for framing. Outside the canvas, so never in the snapshot. */}
-          <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-y-0 left-1/3 border-l border-white/10" />
-            <div className="absolute inset-y-0 left-2/3 border-l border-white/10" />
-            <div className="absolute inset-x-0 top-1/3 border-t border-white/10" />
-            <div className="absolute inset-x-0 top-2/3 border-t border-white/10" />
-          </div>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[12px] text-stone-dim">
-          <span className="flex items-center gap-1">
-            {([["camera", "Camera", "Esc"], ["move", "Move", "M"], ["rotate", "Rotate", "R"]] as [Tool, string, string][]).map(([t, label, key]) => (
-              <button key={t} type="button" className={chip(tool === t)} onClick={() => setTool(t)}>
+          {/* The shot frame, the room around it dimmed, and thirds inside it.
+              All DOM over the canvas, so never in the snapshot. */}
+          {frame.w > 0 && (
+            <div
+              aria-hidden
+              className="pointer-events-none absolute border border-amber/40"
+              style={{ left: frame.x, top: frame.y, width: frame.w, height: frame.h, boxShadow: "0 0 0 9999px rgba(12, 11, 10, 0.55)" }}
+            >
+              <div className="absolute inset-y-0 left-1/3 border-l border-white/10" />
+              <div className="absolute inset-y-0 left-2/3 border-l border-white/10" />
+              <div className="absolute inset-x-0 top-1/3 border-t border-white/10" />
+              <div className="absolute inset-x-0 top-2/3 border-t border-white/10" />
+              <span className="absolute left-1.5 top-1 text-[11px] text-amber-soft/70">{aspect.label} · the shot</span>
+            </div>
+          )}
+          {/* ---------------------------------------------------- on-canvas --
+              The tools float on the stage (2026-10-21) so the stage keeps the
+              room: a toolbar that never hides, a camera dock on the left, an
+              inspector on the right, the readout and the shutter at the
+              bottom. P (or "Panels") folds the two docks away. */}
+          <Dock label="Tools" className={`left-3 top-3 flex ${panels ? "max-w-[calc(100%-20rem)]" : "max-w-[calc(100%-1.5rem)]"} flex-wrap items-center gap-1 p-1`}>
+            {([["camera", "Camera", "Esc", "Drag to orbit · right-drag or two fingers to pan · scroll to zoom · click a body part to bend it"],
+               ["move", "Move", "M", "Drag a person, or their dot, across the floor"],
+               ["rotate", "Rotate", "R", "Drag a person, or their dot, left or right to turn them"]] as [Tool, string, string, string][]).map(([t, label, key, hint]) => (
+              <button key={t} type="button" title={hint} className={seg(tool === t)} onClick={() => setTool(t)}>
                 {label} <kbd className="ml-0.5 font-sans text-[10px] opacity-60">{key}</kbd>
               </button>
             ))}
-          </span>
-          <span>
-            {tool === "move"
-              ? "Drag a person, or their dot, across the floor · drag empty space to orbit"
-              : tool === "rotate"
-                ? "Drag a person, or their dot, left or right to turn them · drag empty space to orbit"
-                : "Drag to orbit · right-drag (or two fingers) to pan · scroll or pinch to zoom · click a body part to bend it · drag a dot to move a person"}
-          </span>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
-          <button
-            type="button"
-            onClick={takeShot}
-            disabled={busy}
-            className="rounded-sm bg-amber px-4 py-2 text-sm font-medium text-ink hover:bg-amber-soft disabled:opacity-50"
-          >
-            Take the shot
-          </button>
-          <label className="flex items-center gap-2 text-[13px] text-stone">
-            Lens
-            <input
-              type="range" min={14} max={200} step={1} value={b.camera.mm}
-              onChange={(e) => onCamera({ ...(api.current?.cameraState() ?? b.camera), mm: Number(e.target.value) })}
-              className="w-36 accent-amber"
-            />
-            <span className="w-12 tabular-nums text-ivory">{b.camera.mm}mm</span>
-          </label>
-          <div className="flex gap-1">
+            <span className="mx-1 h-5 w-px bg-hairline" />
+            <label className="flex items-center gap-1.5 px-1 text-[12px] text-stone" title="Lens">
+              <input
+                type="range" min={14} max={200} step={1} value={b.camera.mm}
+                onChange={(e) => onCamera({ ...(api.current?.cameraState() ?? b.camera), mm: Number(e.target.value) })}
+                className="w-20 accent-amber"
+                aria-label="Lens"
+              />
+              <span className="w-10 tabular-nums text-ivory">{b.camera.mm}mm</span>
+            </label>
             {lenses.map((l) => (
-              <button key={l.id} type="button"
-                onClick={() => onCamera({ ...(api.current?.cameraState() ?? b.camera), mm: l.mm })}
-                className={chip(b.camera.mm === l.mm)}>{l.mm}</button>
+              <button key={l.id} type="button" className={seg(b.camera.mm === l.mm)}
+                onClick={() => onCamera({ ...(api.current?.cameraState() ?? b.camera), mm: l.mm })}>{l.mm}</button>
             ))}
-          </div>
-          <label className="flex items-center gap-2 text-[13px] text-stone">
-            <input type="checkbox" checked={b.grid} onChange={(e) => setB((x) => ({ ...x, grid: e.target.checked }))} className="accent-amber" />
-            Floor grid
-          </label>
-        </div>
+            <span className="mx-1 h-5 w-px bg-hairline" />
+            <button type="button" className={seg(b.grid)} onClick={() => setB((x) => ({ ...x, grid: !x.grid }))}>Grid</button>
+            <button type="button" className={seg(panels)} aria-pressed={panels} onClick={() => setPanels((x) => !x)}
+              title="Show or hide the camera dock and the inspector">
+              Panels <kbd className="ml-0.5 font-sans text-[10px] opacity-60">P</kbd>
+            </button>
+          </Dock>
 
-        <div className="space-y-1.5">
-          <div className="flex flex-wrap items-center gap-1">
-            <span className="mr-1 text-[12px] uppercase tracking-wider text-stone-dim">Camera to {who}</span>
-            {[["Front", 0], ["¾ left", -40], ["Profile L", -90], ["Behind L", -140], ["Behind", 180], ["Behind R", 140], ["Profile R", 90], ["¾ right", 40]].map(([label, a]) => (
-              <button key={label} type="button" className={chip(false)}
-                onClick={() => fig && api.current?.placeCamera(fig.id, a as number, reading ? reading.cameraY - reading.eyeY : 0)}>
-                {label}
-              </button>
-            ))}
-          </div>
-          <div className="flex flex-wrap items-center gap-1">
-            <span className="mr-1 text-[12px] uppercase tracking-wider text-stone-dim">Height</span>
-            {([["Floor", "floor"], ["Low", -0.8], ["Chest", -0.35], ["Eye", 0], ["High", 0.5], ["Overhead", "overhead"]] as [string, number | "floor" | "overhead"][]).map(([label, d]) => (
-              <button key={label} type="button" className={chip(false)}
-                onClick={() => fig && api.current?.placeCamera(fig.id, reading?.bodyAzimuth ?? 0, d)}>
-                {label}
-              </button>
-            ))}
-          </div>
-        </div>
+          {panels && (
+            <Dock label="Camera" className="left-3 top-16 w-[8.75rem] space-y-3 p-2.5">
+              <p className="truncate text-[11px] uppercase tracking-wider text-stone-dim" title={`Camera to ${who}`}>Camera → {who}</p>
+              {/* Seen from above, the person in the middle facing down the
+                  page, so "Front" is the spot in front of them. */}
+              <div className="grid grid-cols-3 gap-1">
+                {COMPASS.map((c, k) =>
+                  c ? (
+                    <button key={c.short} type="button" title={c.label} aria-label={`Camera ${c.label}`}
+                      className={`${seg(reading ? Math.abs(wrap(c.az - reading.bodyAzimuth)) < 20 : false)} h-8 px-0`}
+                      onClick={() => fig && api.current?.placeCamera(fig.id, c.az, reading ? reading.cameraY - reading.eyeY : 0)}>
+                      {c.short}
+                    </button>
+                  ) : (
+                    <span key={k} className="grid h-8 place-items-center">
+                      <span className="h-3 w-3 rounded-full" style={{ background: FIGURE_TONES[Math.max(0, b.figures.findIndex((f) => f.id === fig?.id)) % FIGURE_TONES.length].hex }} />
+                    </span>
+                  ),
+                )}
+              </div>
+              <div className="space-y-1">
+                <p className="text-[11px] uppercase tracking-wider text-stone-dim">Height</p>
+                {HEIGHTS.map(([label, d]) => (
+                  <button key={label} type="button" className={`${seg(false)} block w-full text-left`}
+                    onClick={() => fig && api.current?.placeCamera(fig.id, reading?.bodyAzimuth ?? 0, d)}>
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </Dock>
+          )}
 
-        <div className="rounded-sm border border-hairline bg-charcoal/60 p-3 text-[13px] leading-relaxed text-stone">
-          {words ? (
-            <>
-              <p className="text-ivory">{words}</p>
-              {reading && !reading.inFrame && <p className="mt-1 text-wine">{who}&rsquo;s face is out of frame.</p>}
-              {derived && <p className="mt-1 text-stone-dim">In Studio terms: {derived.summary}</p>}
-            </>
-          ) : (
-            "Reading the camera…"
+          {panels && (
+            <Dock label="Inspector" className="bottom-16 right-3 top-3 w-72 space-y-5 overflow-y-auto overscroll-contain p-3 text-[13px]">
+              <section className="space-y-2">
+                <h3 className="text-[12px] uppercase tracking-wider text-stone-dim">People</h3>
+                {b.figures.map((f, i) => (
+                  <div key={f.id}
+                    className={`space-y-2 rounded-sm border p-2.5 ${f.id === fig?.id ? "border-amber/50 bg-amber/5" : "border-hairline"}`}
+                    onClick={() => setActiveFigure(f.id)}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="h-3 w-3 shrink-0 rounded-full" style={{ background: FIGURE_TONES[i % FIGURE_TONES.length].hex }} />
+                      <select value={f.characterId ?? ""} onChange={(e) => updateFigure({ ...f, characterId: e.target.value || null })} className={`${SELECT} flex-1`}>
+                        <option value="">Stand-in</option>
+                        {people.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+                      </select>
+                      <button type="button" className={chip(false)}
+                        onClick={() => updateFigure({ ...f, build: f.build === "woman" ? "man" : "woman" })}>
+                        {f.build === "woman" ? "Woman" : "Man"}
+                      </button>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <select value="" onChange={(e) => e.target.value && applyPose(f, e.target.value)} className={`${SELECT} flex-1`}>
+                        <option value="">Start from a pose…</option>
+                        {POSES.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+                      </select>
+                      <button type="button" className={chip(false)} onClick={() => updateFigure(mirrorFigure(f))} title="Swap left and right">Mirror</button>
+                      <button type="button" className={chip(tool === "move" && f.id === fig?.id)}
+                        onClick={(e) => { e.stopPropagation(); setActiveFigure(f.id); setTool("move"); }}>
+                        Move
+                      </button>
+                      {b.figures.length > 1 && (
+                        <button type="button" className="text-stone-dim hover:text-wine"
+                          onClick={(e) => { e.stopPropagation(); setB((x) => ({ ...x, figures: x.figures.filter((y) => y.id !== f.id) })); setSelection(null); }}>
+                          ✕
+                        </button>
+                      )}
+                    </div>
+                    <Slider label="Facing" min={-180} max={180} value={jointOf(f, "pelvis")[1]}
+                      onChange={(v) => { const p = jointOf(f, "pelvis"); setJoint(f, "pelvis", [p[0], v, p[2]]); }} />
+                    {(() => {
+                      const other = nearestOther(f, b.figures);
+                      if (!other) return null;
+                      const d = floorDistance(f, other);
+                      return (
+                        <Slider label={`Apart from ${other.characterId ? names[other.characterId] ?? "them" : "the stand-in"}`}
+                          hint={spacingWords(d)} min={0.15} max={4} step={0.01} unit="m" value={d}
+                          onChange={(v) => updateFigure(atDistance(f, other, v))} />
+                      );
+                    })()}
+                  </div>
+                ))}
+                {b.figures.length < MAX_FIGURES && (
+                  <button type="button" onClick={addFigure} className="text-amber-soft hover:underline">+ Add a person</button>
+                )}
+              </section>
+
+              {fig && (
+                <section className="space-y-2">
+                  <h3 className="text-[12px] uppercase tracking-wider text-stone-dim">
+                    Head — {fig.characterId ? names[fig.characterId] : "stand-in"}
+                  </h3>
+                  <Slider label="Turn" hint="− her right · her left +" min={-90} max={90} value={head.turn} onChange={(v) => setHead({ turn: v })} />
+                  <Slider label="Nod" hint="− chin up · chin down +" min={-60} max={60} value={head.nod} onChange={(v) => setHead({ nod: v })} />
+                  <Slider label="Tilt" hint="ear to shoulder" min={-40} max={40} value={head.tilt} onChange={(v) => setHead({ tilt: v })} />
+                  <div className="flex gap-2">
+                    <button type="button" className={btn} onClick={lookAtCamera}>Look at camera</button>
+                    <button type="button" className={btn} onClick={() => setHead({ turn: 0, nod: 0, tilt: 0 })}>Straight ahead</button>
+                  </div>
+                </section>
+              )}
+
+              {selectedJoint && jointFig && (
+                <section className="space-y-2">
+                  <div className="flex items-baseline justify-between">
+                    <h3 className="text-[12px] uppercase tracking-wider text-stone-dim">{JOINT_LABEL[selectedJoint.joint]}</h3>
+                    {selectedJoint.joint === "pelvis" && (
+                      <div className="flex gap-1">
+                        <button type="button" className={chip(mode === "rotate")} onClick={() => setMode("rotate")}>Rotate</button>
+                        <button type="button" className={chip(mode === "translate")} onClick={() => setMode("translate")}>Move</button>
+                      </div>
+                    )}
+                  </div>
+                  {(["X", "Y", "Z"] as const).map((axis, i) => (
+                    <Slider key={axis} label={axis === "X" ? "Bend" : axis === "Y" ? "Twist" : "Side"} min={-180} max={180}
+                      value={jointOf(jointFig, selectedJoint.joint)[i]}
+                      onChange={(v) => {
+                        const cur = [...jointOf(jointFig, selectedJoint.joint)] as Vec3;
+                        cur[i] = v;
+                        setJoint(jointFig, selectedJoint.joint, cur);
+                      }} />
+                  ))}
+                  {selectedJoint.joint === "pelvis" && (
+                    <Slider label="Height" min={0} max={1.4} step={0.01} value={jointFig.position[1]} unit="m"
+                      onChange={(v) => updateFigure({ ...jointFig, position: [jointFig.position[0], v, jointFig.position[2]] })} />
+                  )}
+                  <button type="button" className={btn} onClick={() => setJoint(jointFig, selectedJoint.joint, [0, 0, 0])}>Reset this joint</button>
+                </section>
+              )}
+
+              <section className="space-y-2">
+                <h3 className="text-[12px] uppercase tracking-wider text-stone-dim">Furniture</h3>
+                <div className="flex flex-wrap gap-1">
+                  {(Object.keys(PROPS) as PropKind[]).map((k) => (
+                    <button key={k} type="button" className={chip(false)} title={PROPS[k].note} onClick={() => addProp(k)}>+ {PROPS[k].label}</button>
+                  ))}
+                </div>
+                {selectedProp && (
+                  <div className="space-y-2 rounded-sm border border-hairline p-2.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-ivory">{PROPS[selectedProp.kind].label}</span>
+                      <div className="flex gap-1">
+                        <button type="button" className={chip(mode === "translate")} onClick={() => setMode("translate")}>Move</button>
+                        <button type="button" className={chip(mode === "rotate")} onClick={() => setMode("rotate")}>Rotate</button>
+                        <button type="button" className="ml-2 text-stone-dim hover:text-wine"
+                          onClick={() => { setB((x) => ({ ...x, props: x.props.filter((p) => p.id !== selectedProp.id) })); setSelection(null); }}>
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                    <Slider label="Turn" min={-180} max={180} value={selectedProp.rotationY} onChange={(v) => updateProp({ ...selectedProp, rotationY: v })} />
+                  </div>
+                )}
+              </section>
+              <button type="button" className="text-[12px] text-stone-dim hover:text-wine"
+                onClick={() => { const n = initialBlocking(draft.characterIds); setB(n); setActiveFigure(n.figures[0].id); setSelection(null); setMenuFor(null); }}>
+                Start the blocking over
+              </button>
+            </Dock>
+          )}
+
+          <Dock label="Camera readout" className={`bottom-3 left-3 ${panels ? "max-w-[min(42rem,calc(100%-26rem))]" : "max-w-[min(42rem,calc(100%-12rem))]"} p-0`}>
+            {/* Selectable text plus a Copy button (2026-10-21: "allow me to
+                copy this text easily for chatgpt or gemini"). Copy takes the
+                full camera sentence whether or not it is expanded. */}
+            <div className="flex items-start gap-2 px-3 py-2">
+              <div className="min-w-0 flex-1 select-text cursor-text text-[12px] leading-relaxed text-stone">
+                {reading && !reading.inFrame && <span className="mr-2 text-wine">{who}&rsquo;s face is out of frame ·</span>}
+                {readOpen && words ? (
+                  <>
+                    <span className="text-ivory">{words}</span>
+                    {derived && <span className="mt-1 block text-stone-dim">In Studio terms: {derived.summary}</span>}
+                  </>
+                ) : (
+                  <span className="line-clamp-1">{derived ? derived.summary : "Reading the camera…"}</span>
+                )}
+              </div>
+              <div className="flex shrink-0 gap-1">
+                <button type="button" className={seg(copied)} disabled={!words} onClick={copyWords}
+                  title="Copy the camera description, to paste into ChatGPT or Gemini">
+                  {copied ? "Copied" : "Copy"}
+                </button>
+                <button type="button" className={seg(false)} aria-expanded={readOpen} onClick={() => setReadOpen((x) => !x)}>
+                  {readOpen ? "Less" : "More"}
+                </button>
+              </div>
+            </div>
+          </Dock>
+
+          <Dock label="Shutter" className="bottom-3 right-3 p-0">
+            <button
+              type="button"
+              onClick={takeShot}
+              disabled={busy}
+              className="rounded-md bg-amber px-5 py-2.5 text-sm font-medium text-void shadow-lg hover:bg-amber-soft disabled:opacity-50"
+            >
+              Take the shot
+            </button>
+          </Dock>
+
+          {menuFig && !hide && (
+            <FloatingTools api={api} figureId={menuFig.id} box={box} onClose={() => setMenuFor(null)}>
+              <div className="flex items-center gap-2">
+                <span className="h-3 w-3 shrink-0 rounded-full" style={{ background: FIGURE_TONES[menuIndex % FIGURE_TONES.length].hex }} />
+                <select value={menuFig.characterId ?? ""} onChange={(e) => updateFigure({ ...menuFig, characterId: e.target.value || null })} className={`${SELECT} flex-1`}>
+                  <option value="">Stand-in</option>
+                  {people.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+                </select>
+                <button type="button" aria-label="Close" className="px-1 text-stone-dim hover:text-ivory" onClick={() => setMenuFor(null)}>✕</button>
+              </div>
+              <div className="flex gap-1">
+                {([["move", "Move", "M"], ["rotate", "Rotate", "R"], ["camera", "Camera", "Esc"]] as [Tool, string, string][]).map(([t, label, key]) => (
+                  <button key={t} type="button" className={`${chip(tool === t)} flex-1`} onClick={() => setTool(t)}>
+                    {label} <kbd className="ml-0.5 font-sans text-[10px] opacity-60">{key}</kbd>
+                  </button>
+                ))}
+              </div>
+              <Slider label="Facing" min={-180} max={180} value={jointOf(menuFig, "pelvis")[1]}
+                onChange={(v) => { const p = jointOf(menuFig, "pelvis"); setJoint(menuFig, "pelvis", [p[0], v, p[2]]); }} />
+              {(() => {
+                const other = nearestOther(menuFig, b.figures);
+                if (!other) return null;
+                const d = floorDistance(menuFig, other);
+                return (
+                  <Slider label={`Apart from ${other.characterId ? names[other.characterId] ?? "them" : "the stand-in"}`}
+                    hint={spacingWords(d)} min={0.15} max={4} step={0.01} unit="m" value={d}
+                    onChange={(v) => updateFigure(atDistance(menuFig, other, v))} />
+                );
+              })()}
+              {fig?.id === menuFig.id && (
+                <>
+                  <Slider label="Head turn" min={-90} max={90} value={head.turn} onChange={(v) => setHead({ turn: v })} />
+                  <Slider label="Head nod" min={-60} max={60} value={head.nod} onChange={(v) => setHead({ nod: v })} />
+                  <div className="flex gap-1">
+                    <button type="button" className={`${chip(false)} flex-1`} onClick={lookAtCamera}>Look at camera</button>
+                    <button type="button" className={`${chip(false)} flex-1`} onClick={() => setHead({ turn: 0, nod: 0, tilt: 0 })}>Straight</button>
+                  </div>
+                </>
+              )}
+              <div className="flex items-center gap-1">
+                <select value="" onChange={(e) => e.target.value && applyPose(menuFig, e.target.value)} className={`${SELECT} flex-1`}>
+                  <option value="">Pose…</option>
+                  {POSES.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+                </select>
+                <button type="button" className={chip(false)} onClick={() => updateFigure(mirrorFigure(menuFig))} title="Swap left and right">Mirror</button>
+                <button type="button" className={chip(false)} title="Put the camera on them, from the front"
+                  onClick={() => api.current?.placeCamera(menuFig.id, 0, reading && fig?.id === menuFig.id ? reading.cameraY - reading.eyeY : 0)}>
+                  Frame
+                </button>
+              </div>
+            </FloatingTools>
           )}
         </div>
 
@@ -459,136 +748,63 @@ export function Blocking({
           </div>
         )}
       </div>
+    </div>
+  );
+}
 
-      {/* ------------------------------------------------------------ panel -- */}
-      <aside className="space-y-6 text-[13px]">
-        <section className="space-y-2">
-          <h3 className="text-[12px] uppercase tracking-wider text-stone-dim">People</h3>
-          {b.figures.map((f, i) => (
-            <div key={f.id}
-              className={`space-y-2 rounded-sm border p-2.5 ${f.id === fig?.id ? "border-amber/50 bg-amber/5" : "border-hairline"}`}
-              onClick={() => setActiveFigure(f.id)}
-            >
-              <div className="flex items-center gap-2">
-                <span className="h-3 w-3 shrink-0 rounded-full" style={{ background: FIGURE_TONES[i % FIGURE_TONES.length].hex }} />
-                <select value={f.characterId ?? ""} onChange={(e) => updateFigure({ ...f, characterId: e.target.value || null })} className={`${SELECT} flex-1`}>
-                  <option value="">Stand-in</option>
-                  {people.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
-                </select>
-                <button type="button" className={chip(false)}
-                  onClick={() => updateFigure({ ...f, build: f.build === "woman" ? "man" : "woman" })}>
-                  {f.build === "woman" ? "Woman" : "Man"}
-                </button>
-              </div>
-              <div className="flex items-center gap-2">
-                <select value="" onChange={(e) => e.target.value && applyPose(f, e.target.value)} className={`${SELECT} flex-1`}>
-                  <option value="">Start from a pose…</option>
-                  {POSES.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
-                </select>
-                <button type="button" className={chip(false)} onClick={() => updateFigure(mirrorFigure(f))} title="Swap left and right">Mirror</button>
-                <button type="button" className={chip(tool === "move" && f.id === fig?.id)}
-                  onClick={(e) => { e.stopPropagation(); setActiveFigure(f.id); setTool("move"); }}>
-                  Move
-                </button>
-                {b.figures.length > 1 && (
-                  <button type="button" className="text-stone-dim hover:text-wine"
-                    onClick={(e) => { e.stopPropagation(); setB((x) => ({ ...x, figures: x.figures.filter((y) => y.id !== f.id) })); setSelection(null); }}>
-                    ✕
-                  </button>
-                )}
-              </div>
-              <Slider label="Facing" min={-180} max={180} value={jointOf(f, "pelvis")[1]}
-                onChange={(v) => { const p = jointOf(f, "pelvis"); setJoint(f, "pelvis", [p[0], v, p[2]]); }} />
-              {(() => {
-                const other = nearestOther(f, b.figures);
-                if (!other) return null;
-                const d = floorDistance(f, other);
-                return (
-                  <Slider label={`Apart from ${other.characterId ? names[other.characterId] ?? "them" : "the stand-in"}`}
-                    hint={spacingWords(d)} min={0.15} max={4} step={0.01} unit="m" value={d}
-                    onChange={(v) => updateFigure(atDistance(f, other, v))} />
-                );
-              })()}
-            </div>
-          ))}
-          {b.figures.length < MAX_FIGURES && (
-            <button type="button" onClick={addFigure} className="text-amber-soft hover:underline">+ Add a person</button>
-          )}
-        </section>
-
-        {fig && (
-          <section className="space-y-2">
-            <h3 className="text-[12px] uppercase tracking-wider text-stone-dim">
-              Head — {fig.characterId ? names[fig.characterId] : "stand-in"}
-            </h3>
-            <Slider label="Turn" hint="− her right · her left +" min={-90} max={90} value={head.turn} onChange={(v) => setHead({ turn: v })} />
-            <Slider label="Nod" hint="− chin up · chin down +" min={-60} max={60} value={head.nod} onChange={(v) => setHead({ nod: v })} />
-            <Slider label="Tilt" hint="ear to shoulder" min={-40} max={40} value={head.tilt} onChange={(v) => setHead({ tilt: v })} />
-            <div className="flex gap-2">
-              <button type="button" className={btn} onClick={lookAtCamera}>Look at camera</button>
-              <button type="button" className={btn} onClick={() => setHead({ turn: 0, nod: 0, tilt: 0 })}>Straight ahead</button>
-            </div>
-          </section>
-        )}
-
-        {selectedJoint && jointFig && (
-          <section className="space-y-2">
-            <div className="flex items-baseline justify-between">
-              <h3 className="text-[12px] uppercase tracking-wider text-stone-dim">{JOINT_LABEL[selectedJoint.joint]}</h3>
-              {selectedJoint.joint === "pelvis" && (
-                <div className="flex gap-1">
-                  <button type="button" className={chip(mode === "rotate")} onClick={() => setMode("rotate")}>Rotate</button>
-                  <button type="button" className={chip(mode === "translate")} onClick={() => setMode("translate")}>Move</button>
-                </div>
-              )}
-            </div>
-            {(["X", "Y", "Z"] as const).map((axis, i) => (
-              <Slider key={axis} label={axis === "X" ? "Bend" : axis === "Y" ? "Twist" : "Side"} min={-180} max={180}
-                value={jointOf(jointFig, selectedJoint.joint)[i]}
-                onChange={(v) => {
-                  const cur = [...jointOf(jointFig, selectedJoint.joint)] as Vec3;
-                  cur[i] = v;
-                  setJoint(jointFig, selectedJoint.joint, cur);
-                }} />
-            ))}
-            {selectedJoint.joint === "pelvis" && (
-              <Slider label="Height" min={0} max={1.4} step={0.01} value={jointFig.position[1]} unit="m"
-                onChange={(v) => updateFigure({ ...jointFig, position: [jointFig.position[0], v, jointFig.position[2]] })} />
-            )}
-            <button type="button" className={btn} onClick={() => setJoint(jointFig, selectedJoint.joint, [0, 0, 0])}>Reset this joint</button>
-          </section>
-        )}
-
-        <section className="space-y-2">
-          <h3 className="text-[12px] uppercase tracking-wider text-stone-dim">Furniture</h3>
-          <div className="flex flex-wrap gap-1">
-            {(Object.keys(PROPS) as PropKind[]).map((k) => (
-              <button key={k} type="button" className={chip(false)} title={PROPS[k].note} onClick={() => addProp(k)}>+ {PROPS[k].label}</button>
-            ))}
-          </div>
-          {selectedProp && (
-            <div className="space-y-2 rounded-sm border border-hairline p-2.5">
-              <div className="flex items-center justify-between">
-                <span className="text-ivory">{PROPS[selectedProp.kind].label}</span>
-                <div className="flex gap-1">
-                  <button type="button" className={chip(mode === "translate")} onClick={() => setMode("translate")}>Move</button>
-                  <button type="button" className={chip(mode === "rotate")} onClick={() => setMode("rotate")}>Rotate</button>
-                  <button type="button" className="ml-2 text-stone-dim hover:text-wine"
-                    onClick={() => { setB((x) => ({ ...x, props: x.props.filter((p) => p.id !== selectedProp.id) })); setSelection(null); }}>
-                    Remove
-                  </button>
-                </div>
-              </div>
-              <Slider label="Turn" min={-180} max={180} value={selectedProp.rotationY} onChange={(v) => updateProp({ ...selectedProp, rotationY: v })} />
-            </div>
-          )}
-        </section>
-
-        <button type="button" className="text-[12px] text-stone-dim hover:text-wine"
-          onClick={() => { const n = initialBlocking(draft.characterIds); setB(n); setActiveFigure(n.figures[0].id); setSelection(null); }}>
-          Start the blocking over
-        </button>
-      </aside>
+/**
+ * The per-person tool menu that sits next to whoever you clicked near
+ * (Melissa, 2026-10-21: "my tools are already by my mouse where im moving and
+ * adjusting character position" — Fitts's law). Follows its person every
+ * frame without re-rendering the builder: the position is written straight to
+ * the element. Flips to their other side near the edge.
+ */
+function FloatingTools({ api, figureId, box, onClose, children }: {
+  api: React.MutableRefObject<StageApi | null>;
+  figureId: string;
+  box: { w: number; h: number };
+  onClose: () => void;
+  children: React.ReactNode;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    let raf = 0;
+    const tick = () => {
+      const el = ref.current;
+      const p = api.current?.screen(figureId);
+      if (el && p) {
+        const w = el.offsetWidth;
+        const h = el.offsetHeight;
+        const gap = 56;
+        let x = p.x + gap;
+        if (x + w > box.w - 8) x = p.x - gap - w;
+        x = Math.min(Math.max(x, 8), Math.max(box.w - w - 8, 8));
+        const y = Math.min(Math.max(p.y - h / 2, 8), Math.max(box.h - h - 8, 8));
+        el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+        el.style.opacity = p.visible ? "1" : "0.4";
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+    return () => cancelAnimationFrame(raf);
+  }, [api, figureId, box.w, box.h]);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+  return (
+    <div
+      ref={ref}
+      role="dialog"
+      aria-label="Tools for this person"
+      className="absolute left-0 top-0 z-20 w-64 space-y-2 rounded-md border border-hairline bg-void/95 p-2.5 text-[13px] shadow-[0_8px_30px_rgba(0,0,0,0.6)] backdrop-blur-md"
+      style={{ transform: "translate(-9999px, 0)" }}
+      onPointerDown={(e) => e.stopPropagation()}
+      onPointerUp={(e) => e.stopPropagation()}
+      onWheel={(e) => e.stopPropagation()}
+    >
+      {children}
     </div>
   );
 }
@@ -641,6 +857,32 @@ function spacingWords(m: number) {
   return `${ft} · apart`;
 }
 
+/** Camera spots around the person, seen from above with them facing down the page. null is them. */
+const COMPASS: ({ short: string; label: string; az: number } | null)[] = [
+  { short: "BR", label: "Behind, her right", az: 140 }, { short: "B", label: "Behind", az: 180 }, { short: "BL", label: "Behind, her left", az: -140 },
+  { short: "PR", label: "Profile, her right", az: 90 }, null, { short: "PL", label: "Profile, her left", az: -90 },
+  { short: "¾R", label: "Three-quarter, her right", az: 40 }, { short: "F", label: "Front", az: 0 }, { short: "¾L", label: "Three-quarter, her left", az: -40 },
+];
+
+const HEIGHTS: [string, number | "floor" | "overhead"][] = [
+  ["Overhead", "overhead"], ["High", 0.5], ["Eye", 0], ["Chest", -0.35], ["Low", -0.8], ["Floor", "floor"],
+];
+
+/** A floating panel on the stage. Clicks inside it are not clicks on the stage. */
+function Dock({ label, className, children }: { label: string; className: string; children: React.ReactNode }) {
+  const stop = (e: React.SyntheticEvent) => e.stopPropagation();
+  return (
+    <div role="group" aria-label={label}
+      className={`absolute z-10 rounded-md border border-hairline bg-void/90 shadow-[0_8px_30px_rgba(0,0,0,0.6)] backdrop-blur-md ${className}`}
+      onPointerDown={stop} onPointerUp={stop} onWheel={stop}>
+      {children}
+    </div>
+  );
+}
+
+const seg = (on: boolean) =>
+  `rounded px-2 py-1 text-[12px] ${on ? "bg-amber/15 text-amber-soft" : "text-stone hover:bg-charcoal-raised hover:text-ivory"}`;
+
 const btn = "rounded-sm border border-hairline px-2.5 py-1 text-[13px] text-ivory hover:border-amber/50 disabled:opacity-50";
 const chip = (on: boolean) =>
   `rounded-sm border px-2 py-0.5 text-[12px] ${on ? "border-amber/50 bg-amber/15 text-amber-soft" : "border-hairline text-stone hover:text-ivory"}`;
@@ -687,6 +929,6 @@ function describe(r: CameraReading, v: ReturnType<typeof toVocab>, who: string, 
   return [
     `Camera ${r.distance.toFixed(1)} m from ${who}, ${rel} (${r.cameraY.toFixed(2)} m off the floor), ${pitch}, ${Math.round(r.mm)}mm lens.`,
     turned ? `${Pron} body is seen ${body}; ${pron} face is turned so it is seen ${face}.` : `${subj} is seen ${face}.`,
-    `A ${size.prompt}, ${size.qualifier}.`,
+    `${/^[aeiou]/i.test(size.prompt) ? "An" : "A"} ${size.prompt}, ${size.qualifier}.`,
   ].join(" ");
 }

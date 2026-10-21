@@ -327,6 +327,17 @@ export function defaultBuild(characterId: string | null): Build {
 /* --------------------------------------------------------------- readout -- */
 
 /** Full-frame lens → field of view across the LONG side of the frame. */
+/**
+ * The shot frame inside a W×H stage, centered, as large as fits. CSS px. The
+ * stage is wider than the shot (Blocking's viewfinder); this is the shot.
+ */
+export function frameRect(W: number, H: number, aspect: number) {
+  if (W <= 0 || H <= 0) return { x: 0, y: 0, w: W, h: H };
+  const w = Math.min(W, H * aspect);
+  const h = w / aspect;
+  return { x: (W - w) / 2, y: (H - h) / 2, w, h };
+}
+
 export function fovFor(mm: number, aspect: number): { hfov: number; vfov: number } {
   const longSide = 2 * Math.atan(18 / mm);
   const rad =

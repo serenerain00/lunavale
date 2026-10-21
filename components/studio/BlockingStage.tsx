@@ -30,7 +30,17 @@
  * THE SNAPSHOT IS THE FRAME, at delivery size: the drawing buffer is resized
  * to the aspect's pixel size for one render, read, and put back. Helpers (the
  * gizmo, the selection glow) are hidden by the parent for that frame.
+ *
+ * A VIEWFINDER, NOT A FRAME (Melissa, 2026-10-21: "make the pose and angle
+ * builder wide screen to give me more room to move characters"). The canvas
+ * is as wide as the screen; the shot is the rectangle `frameRect()` (lib/studio/blocking) puts in
+ * the middle of it, and the parent darkens everything outside. The lens
+ * applies to that rectangle — the camera's real field of view is widened so
+ * the frame inside it sees exactly what a camera of this lens and aspect
+ * would — and the readout, "in frame" and the snapshot all use the frame, so
+ * the extra room is only room.
  */
+
 
 /* eslint-disable react-hooks/immutability -- Imperative Three.js: the camera, controls and scratch objects are mutated in place, as R3F intends. */
 
@@ -45,6 +55,7 @@ import {
   PROPORTIONS,
   azimuthDeg,
   fovFor,
+  frameRect,
   spineOffsets,
   type Blocking,
   type BlockingFigure,
@@ -86,6 +97,8 @@ export interface StageApi {
   /** Put the camera at an azimuth around a figure, at a height relative to her eyes. */
   placeCamera: (figureId: string, azimuth: number, eyeDelta: number | "overhead" | "floor") => void;
   cameraState: () => Blocking["camera"];
+  /** Where a figure's chest is on screen, CSS px from the canvas's top left. */
+  screen: (figureId: string) => { x: number; y: number; visible: boolean } | null;
 }
 
 const rad = (d: number) => (d * Math.PI) / 180;
@@ -245,13 +258,17 @@ function Rig({
   const controls = useRef<OrbitControlsImpl>(null);
   const mm = blocking.camera.mm;
 
-  // Lens → field of view, across the long side of whatever frame this is.
+  // Lens → field of view, across the long side of the SHOT frame — then
+  // widened, so that frame (smaller than the canvas) sees exactly that.
+  const frameVfov = fovFor(mm, aspect).vfov;
+  const fr = frameRect(size.width, size.height, aspect);
   useEffect(() => {
     const cam = camera as THREE.PerspectiveCamera;
-    cam.fov = fovFor(mm, aspect).vfov;
+    const f = frameRect(size.width, size.height, aspect);
+    cam.fov = f.h > 0 ? deg(2 * Math.atan(Math.tan(rad(frameVfov) / 2) * (size.height / f.h))) : frameVfov;
     cam.updateProjectionMatrix();
     invalidate();
-  }, [camera, mm, aspect, size.width, size.height, invalidate]);
+  }, [camera, mm, aspect, frameVfov, size.width, size.height, invalidate]);
 
   // Restore the saved camera once.
   const restored = useRef(false);
@@ -296,15 +313,16 @@ function Rig({
     api.current = {
       capture: async ([w, h]) => {
         const prevRatio = gl.getPixelRatio();
-        // The canvas is already at this aspect; scale its buffer to delivery size.
-        gl.setPixelRatio(Math.max(w / size.width, h / size.height));
+        // Scale the buffer so the FRAME inside it is at delivery size, within
+        // what the GPU allows, then cut the frame out.
+        const maxSide = gl.capabilities.maxTextureSize || 8192;
+        const pr = Math.min(Math.max(w / fr.w, h / fr.h), maxSide / Math.max(size.width, size.height));
+        gl.setPixelRatio(pr);
         gl.render(scene, camera);
-        // The buffer is within a pixel or two of the target (CSS sizes are not
-        // whole numbers); drawn onto an exact canvas so the file is exactly it.
         const out = document.createElement("canvas");
         out.width = w;
         out.height = h;
-        out.getContext("2d")?.drawImage(gl.domElement, 0, 0, w, h);
+        out.getContext("2d")?.drawImage(gl.domElement, fr.x * pr, fr.y * pr, fr.w * pr, fr.h * pr, 0, 0, w, h);
         gl.setPixelRatio(prevRatio);
         const blob = await new Promise<Blob>((resolve, reject) =>
           out.toBlob((b) => (b ? resolve(b) : reject(new Error("Snapshot failed."))), "image/png"),
@@ -330,7 +348,7 @@ function Rig({
         const pitch = deg(Math.atan2(-dir.y, Math.hypot(dir.x, dir.z)));
         // Distance along the view axis, which is what decides how big she is.
         const along = toCam.clone().negate().dot(dir);
-        const frameH = 2 * Math.max(along, 0.05) * Math.tan(rad(cam.fov) / 2);
+        const frameH = 2 * Math.max(along, 0.05) * Math.tan(rad(frameVfov) / 2);
         const ndc = e.eye.clone().project(cam);
 
         return {
@@ -343,7 +361,10 @@ function Rig({
           headAzimuth: azimuthDeg(face, flat),
           mm,
           fill: (1.7 * e.k) / frameH,
-          inFrame: along > 0 && Math.abs(ndc.x) <= 1 && Math.abs(ndc.y) <= 1,
+          inFrame:
+            along > 0 &&
+            Math.abs(ndc.x) <= fr.w / Math.max(size.width, 1) &&
+            Math.abs(ndc.y) <= fr.h / Math.max(size.height, 1),
         };
       },
 
@@ -384,6 +405,21 @@ function Rig({
       },
 
       cameraState: state,
+
+      screen: (figureId) => {
+        const chest = world(`${figureId}:chest`);
+        if (!chest) return null;
+        const p = chest.getWorldPosition(new THREE.Vector3());
+        const dir = new THREE.Vector3();
+        camera.getWorldDirection(dir);
+        const ahead = p.clone().sub(camera.position).dot(dir) > 0;
+        const ndc = p.project(camera);
+        return {
+          x: ((ndc.x + 1) / 2) * size.width,
+          y: ((1 - ndc.y) / 2) * size.height,
+          visible: ahead && Math.abs(ndc.x) <= 1.05 && Math.abs(ndc.y) <= 1.05,
+        };
+      },
     };
   });
 

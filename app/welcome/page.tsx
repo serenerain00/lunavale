@@ -93,13 +93,27 @@ export default async function WelcomePage({
                 refused, and this is the page a new member reaches seconds
                 after paying. Two of seven buyers on 2026-10-18 had not made
                 an account. See lib/access/in-app.ts. */}
+            {/* 2026-10-21: "open in browser first" was not enough. Tina paid
+                inside Instagram, then opened the site fresh in another
+                browser — which had no idea she had paid — and paid again.
+                "Open in browser" from THIS page carries the session id with
+                it; opening the site some other way does not. So say which
+                one, and say plainly not to pay twice. */}
             {inApp && (
-              <p className="mt-4 text-sm leading-relaxed text-stone">
-                You&rsquo;re in {inApp === "facebook" ? "Facebook" : "Instagram"}&rsquo;s
-                browser, where Google sign-in doesn&rsquo;t work — make the account
-                with your email address, or tap <span className="text-ivory">···</span>{" "}
-                and choose <span className="text-ivory">Open in browser</span> first.
-              </p>
+              <div className="mt-4 rounded-lg border border-amber/40 p-4 text-sm leading-relaxed text-stone">
+                <p>
+                  You&rsquo;re in {inApp === "facebook" ? "Facebook" : "Instagram"}&rsquo;s
+                  browser, where Google sign-in doesn&rsquo;t work. Make the account
+                  here with your email address.
+                </p>
+                <p className="mt-2">
+                  Rather use Safari or Chrome? Tap <span className="text-ivory">···</span>{" "}
+                  and choose <span className="text-ivory">Open in browser</span> from
+                  this page, and your payment comes with you.{" "}
+                  <span className="text-ivory">You don&rsquo;t need to pay again</span> —
+                  it&rsquo;s done.
+                </p>
+              </div>
             )}
 
             {paid.email && (

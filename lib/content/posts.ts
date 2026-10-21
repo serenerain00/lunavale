@@ -333,6 +333,25 @@ const authored: Clip[] = [
   },
   {
     /*
+      THE STUDIO, Melissa, 2026-10-20. Tyson drops by Luna's studio ("you
+      keep Luna out of trouble?"), leaves, and Luna and Simone talk about him
+      and Josh. Already on Instagram, so free. Simone's first appearance —
+      she launched with it. Title and caption are placeholders, hers to
+      replace.
+    */
+    id: "luna-ty-studio",
+    title: "The Studio",
+    caption: "Tyson stops by the studio. After he leaves, the conversation turns to him.",
+    file: "luna-ty-studio.proxy.mp4",
+    poster: "/posters/luna-ty-studio.jpg",
+    // 74, the whole file — no black to trim.
+    durationSeconds: 74,
+    addedOn: "2026-10-20",
+    about: ["luna", "tyson", "simone"],
+    mature: false,
+  },
+  {
+    /*
       THE PILOT INTERVIEW. Melissa, 2026-09-10: a film crew comes to the
       lakehouse to speak with Luna, it is brief, and it exists to promote the
       pilot — which drops this month.

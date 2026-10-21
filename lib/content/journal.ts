@@ -898,6 +898,41 @@ export const journal: JournalEntry[] = [
       "I have looked at that photograph about forty times and I have not written back yet, and the honest reason is that any one of those four would tell me the truth if I asked her, and I already know that I am not going to ask.",
     ],
   },
+  /*
+    VALE STUDIOS, added 2026-10-20 with Simone's launch. Canon (Melissa,
+    2026-10-20): the studio is Luna's and is called Vale Studios; Simone is its
+    manager and a longtime friend, from Manhattan, who runs the day and makes
+    calls without asking. The banter line is Melissa's, verbatim.
+
+    PLACED AFTER `the-girls`, the other page about her work. Whether Simone is
+    one of those four is OPEN (LUNA_VALE_CONTEXT.md), so this entry neither
+    says she is nor that she isn't. Nothing about how long the studio has been
+    open (also OPEN), and none of the 2026-10-19 background (family, heritage,
+    how they met). No Tyson.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "vale-studios",
+    addedOn: "2026-10-20",
+    dateline: "At the studio, and not needed",
+    place: "downtown",
+    where: "Vale Studios",
+    about: ["luna", "simone"],
+    access: "premium",
+    mature: false,
+    body: [
+      "There is a studio with my name on the door, and today I was in the way in it.",
+      "Vale Studios. I still like seeing it. I like the windows and the long table and the rail of clothes nobody has put back. I like that when the light comes in at about ten, every photographer who walks through goes quiet for a second, and I get to pretend I planned that.",
+      "Simone runs it. That is the true sentence, and I should write it more often. The schedule, the photographers, the girls who are new and the girls who think they aren't, the client who wants it moodier and then, at four, brighter. She does all of it, and she does it without coming to find me first, which is exactly what I hired her for and which I have apparently never forgiven her for.",
+      "Because I go and find her anyway. I wander over with a portfolio I don't need to look at and ask what she's doing about the two o'clock. She has already done it. She did it yesterday.",
+      "Today she didn't even look up. She said: you know, one of these days you're actually gonna let somebody else run this place.",
+      "I said I do let other people run it. I just like knowing what they're doing.",
+      "She gave me the look. The New York one, where she doesn't have to say anything because her eyebrows have said it for her. Then she handed me her coffee to hold while she moved a light, and walked off, and didn't come back for it.",
+      "So I drank it. That is the arrangement. She runs the place, I stand around in it, and every so often one of us steals the other one's coffee.",
+      "I am writing this down because it was a good day and nothing happened in it, and I would like there to be more pages like that in here than there are.",
+    ],
+  },
   {
     /* Cathy's first appearance in the journal, sitting the same week as the
      * last box. Free, like the entries either side of it — this run is the
@@ -2345,6 +2380,39 @@ export const journal: JournalEntry[] = [
       "He left at six. I have not unfolded the blanket. I could not bring myself to be the one who undid it.",
     ],
   },
+  /*
+    LU, added 2026-10-20. In the six months, while she is on her own. Canon:
+    Simone knows Luna overworks and takes on too much; she teases, she notices
+    what Luna isn't saying, and she knows when to stop pushing. Calls her "Lu".
+
+    NO TYSON AND NO JOSH-AS-VILLAIN. Simone knows it has been hard and does
+    not make a speech about it. The dinner is mine.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "lu",
+    addedOn: "2026-10-20",
+    dateline: "Late, at the studio, and caught",
+    place: "downtown",
+    where: "Vale Studios",
+    about: ["luna", "simone"],
+    access: "premium",
+    mature: false,
+    body: [
+      "Simone came back for her keys at nine and found me still there, at the long table, retouching notes for a shoot that isn't until next month.",
+      "She stood in the doorway and said: Lu.",
+      "Just that. Nobody else calls me Lu. It does more work than most people's paragraphs.",
+      "I said I was nearly done. She said I'd said that at six. I hadn't known she'd heard me at six.",
+      "She didn't ask why I was still there. That is the thing about her. She is the most direct person I know, she will ask a stranger at a party what he paid for his apartment, and she has never once asked me how I'm doing since I moved out. She just keeps turning up in doorways at nine o'clock.",
+      "She put her bag down, went to the kitchen, and came back with two forks and the half of somebody's birthday cake that had been in the fridge since Tuesday. We ate it out of the box. She told me about a photographer who'd tried to bill her for a lens he'd dropped himself, and did his voice, and I laughed until I had to put the fork down.",
+      "At some point she said, not looking at me: you know you can go home, right? It's allowed.",
+      "I said I know.",
+      "She said okay, and let it go, and started talking about the lens again.",
+      "That's her. She'll get right up to the thing, close enough that you both know where it is, and then she'll stop. She knows exactly how far she can push me. She stops one step short of it, every time.",
+      "She drove behind me the whole way to the turn for the lake and flashed her lights when she peeled off. I don't think she thinks I noticed.",
+    ],
+  },
   {
     id: "ginger-ale",
     addedOn: "2026-09-03",
@@ -3128,6 +3196,50 @@ export const journal: JournalEntry[] = [
       "He has always been kind to me, and it has a strange quality to it. Twice now he has said something to me that, if you turn it over afterward, is not really a compliment to Josh.",
       "I don't think he knows he does it. I think he means well and it comes out as weather.",
       "Anyway. I understand my own life slightly better than I did this morning, which is not the same as it being any easier.",
+    ],
+  },
+  /*
+    THE STUDIO, added 2026-10-20 beside the free clip `luna-ty-studio`
+    (Simone's first appearance; on Instagram). Tyson drops by with food, asks
+    Simone whether she keeps Luna out of trouble, leaves; Simone calls him
+    Luna's big teddy bear, then asks. Josh has called by now, so it sits after
+    the first dinner run.
+
+    THE GUARDRAILS ARE THE ENTRY.
+    - Simone's question is hers: curious, not convinced, never a verdict.
+    - Luna's side is VERY subtle. "He left before—" stops, the way Melissa's
+      approved dialogue stops, and the page does not finish it for her.
+    - Nothing here says or hints that TYSON felt anything, then or now
+      (`tyson-no-early-feelings-on-site`). He is funny and he leaves.
+    - Josh is not the villain. She doesn't know what she's doing about him.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "teddy-bear",
+    addedOn: "2026-10-20",
+    dateline: "Tyson came by the studio",
+    place: "downtown",
+    where: "Vale Studios",
+    about: ["luna", "simone", "tyson"],
+    clipId: "luna-ty-studio",
+    access: "premium",
+    mature: false,
+    body: [
+      "Tyson came by the studio at lunch, which he never does, with food, which he always does.",
+      "He walked in like he'd been there a hundred times, said hey to Simone, and asked her whether she keeps me out of trouble. She said yeah, she fails every time. He liked that. They have this thing where each of them pretends the other one is too much, and they are both enjoying it far too much to be convincing.",
+      "Then he found the other half of the sandwich I'd been saving in my office and ate it standing up, and told me I'd been warned, and left. That was the whole visit. Eleven minutes, maybe.",
+      "Simone waited until the door shut. Then she said: your big teddy bear.",
+      "I said he's Ty. She said yeah, he's Ty, your big teddy bear, I know.",
+      "And then, picking up a contact sheet like it was the more interesting thing in the room, she asked whether it had ever been anything else. Him and me.",
+      "I said no. Which is true.",
+      "I said he's been my best friend since I was eighteen. She said she knew who he was.",
+      "And then I said: he left before—",
+      "And stopped. I don't know what the end of that sentence was. I heard myself start it and I didn't have the rest, and Simone, who will ask anybody anything, didn't help me find it. She just waited.",
+      "I said that was a long time ago.",
+      "She said she was asking about now.",
+      "I told her the truth, which is that I don't even know what I'm doing about Josh right now, much less anything else. She said okay. She went back to the contact sheet. She didn't say another word about it the whole afternoon, which is how I know she's still thinking about it.",
+      "So am I. Not about him. About the sentence.",
     ],
   },
   {

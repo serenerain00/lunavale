@@ -377,6 +377,48 @@ export const characters: Character[] = [
     pullQuote: "Okay. Tell me the rest.",
     pullQuoteSource: "Luna's journal",
   },
+  {
+    // Launched 2026-10-20 with the studio clip, from Melissa's reference of
+    // the same day (LUNA_VALE_CONTEXT.md, "Simone — Luna's studio manager").
+    // Only what that reference states. The 10-19 background (family,
+    // heritage, how she and Luna met) is still OPEN and stays off this page.
+    // Her wondering about Luna and Tyson is hers and is not on the card: the
+    // clip shows it, and nothing here may suggest Tyson felt anything first.
+    //
+    // Portrait: Melissa's Dropbox still, at the light table in the studio.
+    id: "simone",
+    name: "Simone",
+    role: "Luna's studio manager, and a longtime friend",
+    tagline:
+      "Runs Luna's studio, says what she's thinking, and notices what Luna isn't saying.",
+    portrait: "/characters/simone-studio.jpg",
+    portraitAlt: "Simone, at the light table in Luna's studio",
+    intro: [
+      "Thirty-eight, from Manhattan, and the person who actually runs Vale Studios, Luna's modeling studio in Denver. Schedules, photographers, models, shoots, the people on the floor, and the hundred small things that keep a day from falling apart. The studio is Luna's. Most days, the day is Simone's, and she makes the call without asking first.",
+      "She and Luna go back years, and it shows in how little either of them has to explain. They talk while they work — clients, gossip, photographs, whatever Luna is busy not talking about — and most of it is fun. Simone knows Luna works too much, and has to have a hand in everything. She says so anyway.",
+      "She is direct the way New Yorkers are, quick when something amuses her, and she sees what people leave out. She will ask the slightly uncomfortable question. She also knows when to stop asking.",
+      "She met Tyson after he came home from the Navy, and she finds him very funny: all that size and ink, and around Luna he is a big teddy bear.",
+    ],
+    facts: [
+      { label: "Age", value: "38" },
+      { label: "Sign", value: "Sagittarius" },
+      { label: "From", value: "Manhattan, New York" },
+      { label: "Lives", value: "Denver" },
+      { label: "Work", value: "Manages Vale Studios, Luna's modeling studio" },
+      { label: "Ink", value: "Florals from her shoulder to her wrist, on one arm" },
+      { label: "Luna", value: "A longtime friend. Knows she's been struggling with Josh" },
+      { label: "Tyson", value: "Met him after he came home from the Navy. They give each other a hard time" },
+    ],
+    details: [
+      "Calls Luna \"Lu\"",
+      "Makes decisions without asking, and Luna still wants to hear about every one",
+      "Thinks one of these days Luna will actually let somebody else run the place",
+      "Charcoal top, tailored black trousers, a belt, and nothing to prove",
+      "Calls Tyson Luna's big teddy bear",
+    ],
+    pullQuote: "Yeah, you're done.",
+    pullQuoteSource: "The Studio",
+  },
 ];
 
 export function getCharacter(id: string): Character | undefined {

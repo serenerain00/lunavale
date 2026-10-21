@@ -312,6 +312,13 @@ export const people = [
     label: "Casey",
     blurb: "A friend from the track, which is all anyone has said so far.",
   },
+  {
+    // Luna's studio manager and longtime friend, launched 2026-10-20 with the
+    // studio clip (luna-ty-studio). Reference in LUNA_VALE_CONTEXT.md.
+    id: "simone",
+    label: "Simone",
+    blurb: "Runs Luna's studio, and notices what Luna isn't saying.",
+  },
 ] as const satisfies readonly Person[];
 
 export interface Person {

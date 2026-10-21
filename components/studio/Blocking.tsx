@@ -103,6 +103,7 @@ export function Blocking({
   const [box, setBox] = useState({ w: 0, h: 0 });
   const [menuFor, setMenuFor] = useState<string | null>(null);
   const [readOpen, setReadOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
   // The docks fold away with P. Remembered per browser — a convenience only.
   // Blocking mounts only when its tab is opened, on the client, so reading
   // storage in the initializer cannot mismatch a server render.
@@ -269,6 +270,17 @@ export function Blocking({
     } finally {
       setHide(false);
       setBusy(false);
+    }
+  }
+
+  async function copyWords() {
+    if (!words) return;
+    try {
+      await navigator.clipboard.writeText(words);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      setStatus("This browser would not copy. Open the readout with More and select the text instead.");
     }
   }
 
@@ -623,18 +635,31 @@ export function Blocking({
           )}
 
           <Dock label="Camera readout" className={`bottom-3 left-3 ${panels ? "max-w-[min(42rem,calc(100%-26rem))]" : "max-w-[min(42rem,calc(100%-12rem))]"} p-0`}>
-            <button type="button" onClick={() => setReadOpen((x) => !x)} aria-expanded={readOpen}
-              className="block w-full px-3 py-2 text-left text-[12px] leading-relaxed text-stone hover:text-ivory">
-              {reading && !reading.inFrame && <span className="mr-2 text-wine">{who}&rsquo;s face is out of frame ·</span>}
-              {readOpen && words ? (
-                <>
-                  <span className="text-ivory">{words}</span>
-                  {derived && <span className="mt-1 block text-stone-dim">In Studio terms: {derived.summary}</span>}
-                </>
-              ) : (
-                <span className="line-clamp-1">{derived ? derived.summary : "Reading the camera…"}</span>
-              )}
-            </button>
+            {/* Selectable text plus a Copy button (2026-10-21: "allow me to
+                copy this text easily for chatgpt or gemini"). Copy takes the
+                full camera sentence whether or not it is expanded. */}
+            <div className="flex items-start gap-2 px-3 py-2">
+              <div className="min-w-0 flex-1 select-text cursor-text text-[12px] leading-relaxed text-stone">
+                {reading && !reading.inFrame && <span className="mr-2 text-wine">{who}&rsquo;s face is out of frame ·</span>}
+                {readOpen && words ? (
+                  <>
+                    <span className="text-ivory">{words}</span>
+                    {derived && <span className="mt-1 block text-stone-dim">In Studio terms: {derived.summary}</span>}
+                  </>
+                ) : (
+                  <span className="line-clamp-1">{derived ? derived.summary : "Reading the camera…"}</span>
+                )}
+              </div>
+              <div className="flex shrink-0 gap-1">
+                <button type="button" className={seg(copied)} disabled={!words} onClick={copyWords}
+                  title="Copy the camera description, to paste into ChatGPT or Gemini">
+                  {copied ? "Copied" : "Copy"}
+                </button>
+                <button type="button" className={seg(false)} aria-expanded={readOpen} onClick={() => setReadOpen((x) => !x)}>
+                  {readOpen ? "Less" : "More"}
+                </button>
+              </div>
+            </div>
           </Dock>
 
           <Dock label="Shutter" className="bottom-3 right-3 p-0">
@@ -904,6 +929,6 @@ function describe(r: CameraReading, v: ReturnType<typeof toVocab>, who: string, 
   return [
     `Camera ${r.distance.toFixed(1)} m from ${who}, ${rel} (${r.cameraY.toFixed(2)} m off the floor), ${pitch}, ${Math.round(r.mm)}mm lens.`,
     turned ? `${Pron} body is seen ${body}; ${pron} face is turned so it is seen ${face}.` : `${subj} is seen ${face}.`,
-    `A ${size.prompt}, ${size.qualifier}.`,
+    `${/^[aeiou]/i.test(size.prompt) ? "An" : "A"} ${size.prompt}, ${size.qualifier}.`,
   ].join(" ");
 }

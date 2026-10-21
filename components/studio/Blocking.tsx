@@ -438,7 +438,7 @@ export function Blocking({
                 {label} <kbd className="ml-0.5 font-sans text-[10px] opacity-60">{key}</kbd>
               </button>
             ))}
-            <span className="mx-1 h-5 w-px bg-white/10" />
+            <span className="mx-1 h-5 w-px bg-hairline" />
             <label className="flex items-center gap-1.5 px-1 text-[12px] text-stone" title="Lens">
               <input
                 type="range" min={14} max={200} step={1} value={b.camera.mm}
@@ -452,7 +452,7 @@ export function Blocking({
               <button key={l.id} type="button" className={seg(b.camera.mm === l.mm)}
                 onClick={() => onCamera({ ...(api.current?.cameraState() ?? b.camera), mm: l.mm })}>{l.mm}</button>
             ))}
-            <span className="mx-1 h-5 w-px bg-white/10" />
+            <span className="mx-1 h-5 w-px bg-hairline" />
             <button type="button" className={seg(b.grid)} onClick={() => setB((x) => ({ ...x, grid: !x.grid }))}>Grid</button>
             <button type="button" className={seg(panels)} aria-pressed={panels} onClick={() => setPanels((x) => !x)}
               title="Show or hide the camera dock and the inspector">
@@ -642,7 +642,7 @@ export function Blocking({
               type="button"
               onClick={takeShot}
               disabled={busy}
-              className="rounded-md bg-amber px-5 py-2.5 text-sm font-medium text-ink shadow-lg hover:bg-amber-soft disabled:opacity-50"
+              className="rounded-md bg-amber px-5 py-2.5 text-sm font-medium text-void shadow-lg hover:bg-amber-soft disabled:opacity-50"
             >
               Take the shot
             </button>
@@ -773,7 +773,7 @@ function FloatingTools({ api, figureId, box, onClose, children }: {
       ref={ref}
       role="dialog"
       aria-label="Tools for this person"
-      className="absolute left-0 top-0 z-20 w-64 space-y-2 rounded-md border border-hairline bg-ink/95 p-2.5 text-[13px] shadow-xl backdrop-blur"
+      className="absolute left-0 top-0 z-20 w-64 space-y-2 rounded-md border border-hairline bg-void/95 p-2.5 text-[13px] shadow-[0_8px_30px_rgba(0,0,0,0.6)] backdrop-blur-md"
       style={{ transform: "translate(-9999px, 0)" }}
       onPointerDown={(e) => e.stopPropagation()}
       onPointerUp={(e) => e.stopPropagation()}
@@ -848,7 +848,7 @@ function Dock({ label, className, children }: { label: string; className: string
   const stop = (e: React.SyntheticEvent) => e.stopPropagation();
   return (
     <div role="group" aria-label={label}
-      className={`absolute z-10 rounded-md border border-white/10 bg-ink/80 shadow-lg backdrop-blur-sm ${className}`}
+      className={`absolute z-10 rounded-md border border-hairline bg-void/90 shadow-[0_8px_30px_rgba(0,0,0,0.6)] backdrop-blur-md ${className}`}
       onPointerDown={stop} onPointerUp={stop} onWheel={stop}>
       {children}
     </div>
@@ -856,7 +856,7 @@ function Dock({ label, className, children }: { label: string; className: string
 }
 
 const seg = (on: boolean) =>
-  `rounded px-2 py-1 text-[12px] ${on ? "bg-amber/20 text-amber-soft" : "text-stone hover:bg-white/5 hover:text-ivory"}`;
+  `rounded px-2 py-1 text-[12px] ${on ? "bg-amber/15 text-amber-soft" : "text-stone hover:bg-charcoal-raised hover:text-ivory"}`;
 
 const btn = "rounded-sm border border-hairline px-2.5 py-1 text-[13px] text-ivory hover:border-amber/50 disabled:opacity-50";
 const chip = (on: boolean) =>

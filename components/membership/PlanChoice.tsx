@@ -155,6 +155,20 @@ export function PlanChoice({
           {sending ? "Opening checkout\u2026" : cta}
         </button>
       </form>
+      {/* 2026-10-21: somebody who paid in Instagram's browser and came back
+          in another one has no cookie here, so Join would charge them again
+          (Tina, five minutes apart). Signing in with the paid email claims
+          the membership on any page (lib/access/entitlement.ts). */}
+      <p className="mt-3 text-center text-xs text-stone-dim">
+        Already paid on another phone or browser?{" "}
+        <a
+          href="/membership/claim"
+          className="text-stone underline underline-offset-2 hover:text-ivory"
+        >
+          Sign in with that email
+        </a>{" "}
+        \u2014 it&rsquo;s waiting.
+      </p>
     </>
   );
 }

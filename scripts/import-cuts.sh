@@ -929,6 +929,16 @@ CUTS=(
   # itself out — same as Still Us. The master's name has "sex" in it; the slug,
   # poster and proxy do not (Melissa's rule from First Night).
   "josh-luna-pre-break|stories/josh-luna-pre-Break/luna-josh-preBreak-sex.mov|14|-|-|30"
+  # 2026-10-21: Luna and Tyson driving downtown Denver for a camera lens, the
+  # wrong address. Members, first minute free. 4:03 scored, 1320x766 at 60fps,
+  # proxy at 30. The unscored export (luna-ty-driving-camLens.mp4, 1080p) sits
+  # beside it; Melissa named the -music one.
+  #
+  # POSTER AT 24s: the two-shot, her on her phone, him at the wheel, the
+  # skyline through the back window.
+  #
+  # NO END: black from 236.2, the score fading out under it.
+  "luna-ty-driving|stories/luna-ty-drivingCamLens/luna-ty-driving-camLens-music.mov|24|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

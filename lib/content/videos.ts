@@ -3973,6 +3973,54 @@ export const videos: Video[] = [
     place: "lakehouse",
     about: ["luna", "tyson"],
   },
+  {
+    /*
+      THE WRONG ADDRESS, Melissa, 2026-10-21: "a new video ready to go up for
+      members luna-ty-driving-camLens-music ... just show the first 1min".
+      Members, first minute free. 4:03 scored, Denver at sunset, Tyson
+      driving his truck, Luna navigating.
+
+      WHAT IS SAID, from a whisper transcript of the unscored export
+      (luna-ty-driving-camLens.mp4), speakers by who is on camera. They are
+      picking up a Sony lens ("almost three grand new, guy's selling it for
+      $1,500"). Luna has him turning right onto streets they just left — "That's
+      the same homeless guy." / "Maybe he moved." Twenty minutes of downtown,
+      GPS ("Is it aware of that?"), "driving Miss Daisy around Denver". Then she
+      admits it: "I may have put in the wrong address ... it's literally one
+      number off" — and the one number is in Aurora. "Met a guy three times."
+      He takes her phone: "You've lost navigation rights."
+
+      THE FREE MINUTE (0:00–0:58) is the lens, the first wrong turn and the
+      same man twice. It stops before the address confession, which is the
+      payoff. Nothing in it needs a notice: two friends in a truck.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace. Where it sits in
+      the story is a guess too — see lib/content/chronology.ts.
+    */
+    slug: "luna-ty-driving",
+    title: "One Number Off",
+    synopsis:
+      "Denver at sunset. Luna has Tyson drive her across town to pick up a camera lens, and she is navigating. Twenty minutes in, they have passed the same man three times.",
+    file: "luna-ty-driving.proxy.mp4",
+    poster: "/posters/luna-ty-driving.jpg",
+    // 242.6, the whole file — picture is black from 236.2 and the score fades
+    // itself out under it.
+    durationSeconds: 243,
+    addedOn: "2026-10-21",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "luna-ty-driving-preview.proxy.mp4",
+      // 58, not 60: "It's downtown" starts right on 1:00, so the minute
+      // ends on "I've been driving for twenty minutes" instead (57.0).
+      durationSeconds: 58,
+      hookStart: 0,
+      hookNote: "from the top: the lens, the wrong turn, the same man twice",
+    },
+    feelings: ["trust"],
+    place: "downtown",
+    about: ["luna", "tyson"],
+  },
 ];
 
 /**

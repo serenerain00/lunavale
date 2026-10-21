@@ -7,6 +7,8 @@ import { inAppBrowser } from "@/lib/access/in-app";
 import { SiteHeader } from "@/components/ui/SiteHeader";
 import { billingLive } from "@/lib/billing/provider";
 import { RememberPayment } from "@/components/membership/RememberPayment";
+import { AutoSignIn } from "@/components/membership/AutoSignIn";
+import { accountForPayment } from "@/lib/billing/auto-account";
 
 export const metadata: Metadata = {
   title: "You're in",
@@ -55,7 +57,66 @@ export default async function WelcomePage({
   }
 
   const paid = await readSession(sessionId);
+  // Paying makes the account (lib/billing/auto-account.ts). Null when it is
+  // switched off or anything goes wrong — then the page is the old one.
+  const auto = paid ? await accountForPayment(sessionId) : null;
   const inApp = inAppBrowser((await headers()).get("user-agent"));
+
+  // The account step as it has been since 2026-08-27: make an account
+  // yourself. Still what everyone sees with AUTO_ACCOUNT off, and what the
+  // automatic path falls back to if anything about it fails.
+  const makeYourAccount = paid && (
+    <>
+      <Link
+        href={signUpHref(paid.email, sessionId)}
+        className="mt-8 inline-flex min-h-11 items-center rounded-full bg-amber px-7 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+      >
+        Make your account
+      </Link>
+
+      {/* Inside Facebook's or Instagram's browser Google sign-in is
+          refused, and this is the page a new member reaches seconds
+          after paying. Two of seven buyers on 2026-10-18 had not made
+          an account. See lib/access/in-app.ts. */}
+      {/* 2026-10-21: "open in browser first" was not enough. Tina paid
+          inside Instagram, then opened the site fresh in another
+          browser — which had no idea she had paid — and paid again.
+          "Open in browser" from THIS page carries the session id with
+          it; opening the site some other way does not. So say which
+          one, and say plainly not to pay twice. */}
+      {inApp && (
+        <div className="mt-4 rounded-lg border border-amber/40 p-4 text-sm leading-relaxed text-stone">
+          <p>
+            You&rsquo;re in {inApp === "facebook" ? "Facebook" : "Instagram"}&rsquo;s
+            browser, where Google sign-in doesn&rsquo;t work. Make the account
+            here with your email address.
+          </p>
+          <p className="mt-2">
+            Rather use Safari or Chrome? Tap <span className="text-ivory">···</span>{" "}
+            and choose <span className="text-ivory">Open in browser</span> from
+            this page, and your payment comes with you.{" "}
+            <span className="text-ivory">You don&rsquo;t need to pay again</span> —
+            it&rsquo;s done.
+          </p>
+        </div>
+      )}
+
+      {paid.email && (
+        <p className="mt-4 text-sm text-stone-dim">
+          Use <span className="text-stone">{paid.email}</span> — that is
+          the address the membership is against.
+        </p>
+      )}
+
+      {/* Said plainly, because the alternative is somebody quietly
+          worrying they have paid into a void if they close the tab. */}
+      <p className="mt-8 border-t border-hairline pt-6 text-sm leading-relaxed text-stone-dim">
+        If you close this now, nothing is lost. The membership is held
+        against that email, and the first time you sign in with it —
+        tonight or next month — it will be waiting.
+      </p>
+    </>
+  );
 
   return (
     <>
@@ -78,58 +139,39 @@ export default async function WelcomePage({
                 somebody reads thirty seconds after paying. */}
             <p className="mt-4 leading-relaxed text-stone">
               Every clip at full length, every page of her journal, and season
-              one the moment it lands. There is one small thing left: an
-              account, so the site knows you when you come back.
+              one the moment it lands.
+              {auto?.kind !== "ticket" && (
+                <>
+                  {" "}There is one small thing left: an account, so the site
+                  knows you when you come back.
+                </>
+              )}
             </p>
 
-            <Link
-              href={signUpHref(paid.email, sessionId)}
-              className="mt-8 inline-flex min-h-11 items-center rounded-full bg-amber px-7 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
-            >
-              Make your account
-            </Link>
-
-            {/* Inside Facebook's or Instagram's browser Google sign-in is
-                refused, and this is the page a new member reaches seconds
-                after paying. Two of seven buyers on 2026-10-18 had not made
-                an account. See lib/access/in-app.ts. */}
-            {/* 2026-10-21: "open in browser first" was not enough. Tina paid
-                inside Instagram, then opened the site fresh in another
-                browser — which had no idea she had paid — and paid again.
-                "Open in browser" from THIS page carries the session id with
-                it; opening the site some other way does not. So say which
-                one, and say plainly not to pay twice. */}
-            {inApp && (
-              <div className="mt-4 rounded-lg border border-amber/40 p-4 text-sm leading-relaxed text-stone">
-                <p>
-                  You&rsquo;re in {inApp === "facebook" ? "Facebook" : "Instagram"}&rsquo;s
-                  browser, where Google sign-in doesn&rsquo;t work. Make the account
-                  here with your email address.
+            {auto?.kind === "ticket" ? (
+              <AutoSignIn
+                ticket={auto.ticket}
+                email={auto.email}
+                next={claimHref(sessionId)}
+                fallback={makeYourAccount}
+              />
+            ) : auto?.kind === "existing" ? (
+              <>
+                <p className="mt-6 text-sm leading-relaxed text-stone">
+                  You already have an account with{" "}
+                  <span className="text-ivory">{auto.email}</span>. Sign in and
+                  the membership is on it.
                 </p>
-                <p className="mt-2">
-                  Rather use Safari or Chrome? Tap <span className="text-ivory">···</span>{" "}
-                  and choose <span className="text-ivory">Open in browser</span> from
-                  this page, and your payment comes with you.{" "}
-                  <span className="text-ivory">You don&rsquo;t need to pay again</span> —
-                  it&rsquo;s done.
-                </p>
-              </div>
+                <Link
+                  href={`/sign-in?redirect_url=${encodeURIComponent(claimHref(sessionId))}`}
+                  className="mt-6 inline-flex min-h-11 items-center rounded-full bg-amber px-7 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+                >
+                  Sign in
+                </Link>
+              </>
+            ) : (
+              makeYourAccount
             )}
-
-            {paid.email && (
-              <p className="mt-4 text-sm text-stone-dim">
-                Use <span className="text-stone">{paid.email}</span> — that is
-                the address the membership is against.
-              </p>
-            )}
-
-            {/* Said plainly, because the alternative is somebody quietly
-                worrying they have paid into a void if they close the tab. */}
-            <p className="mt-8 border-t border-hairline pt-6 text-sm leading-relaxed text-stone-dim">
-              If you close this now, nothing is lost. The membership is held
-              against that email, and the first time you sign in with it —
-              tonight or next month — it will be waiting.
-            </p>
           </>
         ) : (
           <>

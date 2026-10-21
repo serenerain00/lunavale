@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
-import { useSignIn } from "@clerk/nextjs";
+import { useClerk } from "@clerk/nextjs";
 import { choosePassword, type PasswordState } from "@/app/welcome/actions";
 
 /**
@@ -9,8 +9,9 @@ import { choosePassword, type PasswordState } from "@/app/welcome/actions";
  * (lib/billing/auto-account.ts): sign in with the one-time ticket, then offer
  * one field — a password, for other devices.
  *
- * If the ticket fails for any reason it renders `fallback`, which is the
- * old "Make your account" block, unchanged. Nobody is left on a spinner.
+ * If the ticket fails for any reason it renders `fallback`: "sign in", since
+ * the account exists by now and "make your account" would be refused for
+ * that address. Nobody is left on a spinner.
  */
 export function AutoSignIn({
   ticket,
@@ -18,32 +19,38 @@ export function AutoSignIn({
   next,
   fallback,
 }: {
-  ticket: string;
+  /** Null when they are already signed in (the page refreshed after the ticket). */
+  ticket: string | null;
   email: string;
   /** Where to go once done: the claim route, carrying the paid session. */
   next: string;
   fallback: React.ReactNode;
 }) {
-  const { signIn } = useSignIn();
-  const [phase, setPhase] = useState<"signing" | "in" | "failed">("signing");
+  const clerk = useClerk();
+  const [phase, setPhase] = useState<"signing" | "in" | "failed">(ticket ? "signing" : "in");
   const started = useRef(false);
 
   useEffect(() => {
-    if (!signIn || started.current) return;
+    if (!ticket || !clerk.loaded || !clerk.client || started.current) return;
     started.current = true;
     (async () => {
       try {
-        const { error } = await signIn.ticket({ ticket });
-        if (error || signIn.status !== "complete") throw error ?? new Error(`sign-in ${signIn.status}`);
-        const done = await signIn.finalize();
-        if (done.error) throw done.error;
+        // The classic resource API, not useSignIn()'s newer one: that wrapper
+        // kept a stale sign-in after the ticket was spent, said
+        // "needs_identifier", and finalize() found no session (2026-10-21,
+        // both seen in the test-mode run). This returns the session itself.
+        const attempt = await clerk.client!.signIn.create({ strategy: "ticket", ticket });
+        if (attempt.status !== "complete" || !attempt.createdSessionId) {
+          throw new Error(`sign-in ${attempt.status}`);
+        }
+        await clerk.setActive({ session: attempt.createdSessionId });
         setPhase("in");
       } catch (error) {
         console.error("welcome: ticket sign-in failed", error);
         setPhase("failed");
       }
     })();
-  }, [signIn, ticket]);
+  }, [clerk, clerk.loaded, ticket]);
 
   const [state, action, pending] = useActionState<PasswordState, FormData>(choosePassword, {});
   useEffect(() => {

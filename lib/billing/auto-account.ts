@@ -90,8 +90,12 @@ export async function accountForPayment(
       }
     }
 
-    if (user.lastSignInAt != null) return null; // already used; they sign in like anyone else
-    if (Date.now() - user.createdAt > WINDOW_MS) return null;
+    // Already signed into once, or too old: the account exists, so the answer
+    // is "sign in". Never null here — the old page says "make your account",
+    // which Clerk refuses for an address that already has one.
+    if (user.lastSignInAt != null || Date.now() - user.createdAt > WINDOW_MS) {
+      return { kind: "existing", email };
+    }
 
     // Attach the payment now if the webhook has already parked it. If it has
     // not landed yet, nothing is lost: the address on this account is the

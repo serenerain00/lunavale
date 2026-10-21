@@ -8,7 +8,7 @@ import { SiteHeader } from "@/components/ui/SiteHeader";
 import { billingLive } from "@/lib/billing/provider";
 import { RememberPayment } from "@/components/membership/RememberPayment";
 import { AutoSignIn } from "@/components/membership/AutoSignIn";
-import { accountForPayment } from "@/lib/billing/auto-account";
+import { accountForPayment, autoAccountEnabled, autoMade } from "@/lib/billing/auto-account";
 
 export const metadata: Metadata = {
   title: "You're in",
@@ -49,17 +49,31 @@ export default async function WelcomePage({
   const params = await searchParams;
   const sessionId = String(params.session_id ?? "");
 
-  // Already signed in — there is nothing to ask for. Claim and go.
+  // Already signed in — there is nothing to ask for. Claim and go. Except
+  // the one case where there is: the account paying just made, which has no
+  // password yet. Clerk refreshes this page the moment the ticket signs them
+  // in, so without this they would skip straight past the password step.
+  let justMade: string | null = null;
   if (billingLive()) {
-    const { auth } = await import("@clerk/nextjs/server");
+    const { auth, currentUser } = await import("@clerk/nextjs/server");
     const { userId } = await auth();
-    if (userId) redirect(claimHref(sessionId));
+    if (userId) {
+      const user = autoAccountEnabled() ? await currentUser() : null;
+      const fresh = user && autoMade(user)?.session === sessionId && !user.passwordEnabled;
+      if (!fresh) redirect(claimHref(sessionId));
+      justMade = user.primaryEmailAddress?.emailAddress ?? "";
+    }
   }
 
   const paid = await readSession(sessionId);
   // Paying makes the account (lib/billing/auto-account.ts). Null when it is
   // switched off or anything goes wrong — then the page is the old one.
-  const auto = paid ? await accountForPayment(sessionId) : null;
+  const auto =
+    justMade !== null
+      ? ({ kind: "ticket", ticket: null, email: justMade } as const)
+      : paid
+        ? await accountForPayment(sessionId)
+        : null;
   const inApp = inAppBrowser((await headers()).get("user-agent"));
 
   // The account step as it has been since 2026-08-27: make an account
@@ -118,6 +132,25 @@ export default async function WelcomePage({
     </>
   );
 
+  // The account already exists: made a moment ago by paying, or long before.
+  // Signing in with that address attaches the payment (verified email), and
+  // the session id on the way back covers anyone who uses Google instead.
+  const signInInstead = (email: string) => (
+    <>
+      <p className="mt-6 text-sm leading-relaxed text-stone">
+        Your account is <span className="text-ivory">{email}</span>. Sign in
+        with it and the membership is there. No password yet? Sign in with
+        a code sent to that email.
+      </p>
+      <Link
+        href={`/sign-in?redirect_url=${encodeURIComponent(claimHref(sessionId))}`}
+        className="mt-6 inline-flex min-h-11 items-center rounded-full bg-amber px-7 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
+      >
+        Sign in
+      </Link>
+    </>
+  );
+
   return (
     <>
       <SiteHeader />
@@ -153,22 +186,10 @@ export default async function WelcomePage({
                 ticket={auto.ticket}
                 email={auto.email}
                 next={claimHref(sessionId)}
-                fallback={makeYourAccount}
+                fallback={signInInstead(auto.email)}
               />
             ) : auto?.kind === "existing" ? (
-              <>
-                <p className="mt-6 text-sm leading-relaxed text-stone">
-                  You already have an account with{" "}
-                  <span className="text-ivory">{auto.email}</span>. Sign in and
-                  the membership is on it.
-                </p>
-                <Link
-                  href={`/sign-in?redirect_url=${encodeURIComponent(claimHref(sessionId))}`}
-                  className="mt-6 inline-flex min-h-11 items-center rounded-full bg-amber px-7 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft"
-                >
-                  Sign in
-                </Link>
-              </>
+              signInInstead(auto.email)
             ) : (
               makeYourAccount
             )}

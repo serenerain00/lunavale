@@ -242,6 +242,22 @@ CLIPS=(
   #
   # NO END: black from 130.5, the score fading out under it to the end.
   "tyson-luna-call-from-field|stories/tyson-luna-callFromField/luna-ty-call-field.mov|10||67.5"
+  # COME HOME, 2026-10-22. Josh and Luna in the farmhouse kitchen, daylight.
+  # Melissa: "new IG clip vertical … post it free". Arrived as
+  # stories/luna-josh-frmhouse-come-home/ beside a 1936x1080 landscape cut
+  # (luna-josh-farmhouse-come-home.mp4, 58.3s), which is a different file and
+  # not this post. 1080x1920, h264 30fps, scored, -27.7 dB mean.
+  #
+  # The slug keeps her folder name, typo and all ("frmhouse"): ids are
+  # permanent and the folder is the record of where it came from.
+  #
+  # NO END, ON PURPOSE. Black from 58.17 to the end is Melissa fading the
+  # music out ("keep the black trim, thats me fading the music"), not dead
+  # air. It was trimmed for an hour on 2026-10-22 and put back. FREE, so no
+  # preview.
+  # POSTER AT 33s: Josh, close, over her shoulder, on "And what happens when
+  # I do?".
+  "luna-josh-frmhouse-come-home|stories/luna-josh-frmhouse-come-home/luna-josh-frmhouse-come-home.MP4|33"
 )
 
 want=("$@")

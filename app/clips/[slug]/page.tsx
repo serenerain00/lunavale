@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getVideo, videos, formatDuration } from "@/lib/content/videos";
+import { getVideo, videos, formatDuration, freeThroughLabel, openNow } from "@/lib/content/videos";
 import { PREMIUM_TIER, canWatch, isMember } from "@/lib/access/entitlement";
 import { entriesForScene } from "@/lib/content/journal";
 import {
@@ -214,7 +214,12 @@ export default async function WatchPage({ params }: WatchPageProps) {
             {video.access === "premium" && (
               <>
                 <span aria-hidden>·</span>
-                <span className="text-amber">Members</span>
+                {/* Members see "Members" as always; only a visitor is told it is free. */}
+                {openNow(video) && !member ? (
+                  <span className="text-amber">Free to watch through {freeThroughLabel(video.openUntil!)}</span>
+                ) : (
+                  <span className="text-amber">Members</span>
+                )}
               </>
             )}
           </div>
@@ -362,3 +367,4 @@ export default async function WatchPage({ params }: WatchPageProps) {
     </>
   );
 }
+

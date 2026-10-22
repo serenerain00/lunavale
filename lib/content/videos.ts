@@ -91,6 +91,14 @@ export interface Video {
   addedOn?: string;
   /** Whether this scene is publicly viewable or requires membership. */
   access: AccessLevel;
+  /**
+   * A members-only piece opened to everyone for a while: an ISO instant, and
+   * until then anybody may watch the whole thing. After it, `access` applies
+   * again on its own: no deploy, no revert to remember. The decision is
+   * canWatch()'s (lib/access/entitlement.ts); cards and the clip page only
+   * follow it through openNow(). Members notice nothing either way.
+   */
+  openUntil?: string;
   /** Mature-content flag — surfaced as a label per content rules. */
   mature: boolean;
   /**
@@ -3164,6 +3172,14 @@ export const videos: Video[] = [
     durationSeconds: 1116,
     addedOn: "2026-09-21",
     access: "premium",
+    /*
+      FREE TO EVERYONE FOR A WEEK, 2026-10-22. Melissa: "lets have the pilot
+      free to non members ... lets see what that does for subs", then "lets
+      make it expire next wednesday". The end of Wednesday Oct 28 in Pacific
+      time (still PDT), so it is free all of that day everywhere in the US.
+      The 3:10 preview below comes back by itself afterwards.
+    */
+    openUntil: "2026-10-29T07:00:00Z",
     mature: true,
     notes: ["danger"],
     /*
@@ -4021,6 +4037,57 @@ export const videos: Video[] = [
     place: "downtown",
     about: ["luna", "tyson"],
   },
+  {
+    /*
+      COME HOME, the landscape cut, 2026-10-22. Melissa: "add the horizontal
+      one as a free clip too ... luna-josh-frmhouse-comehome-horiz". Free, in
+      full. The same scene as the vertical post luna-josh-frmhouse-come-home
+      (lib/content/posts.ts), framed for 16:9: Josh and Luna in the farmhouse
+      kitchen, daylight.
+
+      FROM THE TRANSCRIPT: "You act like the last ten years were all bad." /
+      "Then why does it feel like you're trying to forget everything we had?"
+      / "Because you keep reminding me of everything I miss." / "Baby, come
+      home." / "And what happens when I do?" / "I don't know, Lou. But I'm
+      trying." / "Josh, I've given you ten years." / "And I'm asking you for
+      one more."
+
+      INSIDE RELEASED CANON: she has left, he wants her back. The synopsis
+      says what is asked and stops short of her answer.
+
+      MELISSA'S CONTEXT, 2026-10-22 (writer knowledge; the synopsis uses
+      only the setup): a Sunday, a few weeks into the separation. Luna stops
+      by Josh's farmhouse for equipment she left behind for Vale Studios.
+      Josh is still struggling to accept she is not coming home. He feels
+      she is trying to forget their ten years; she has forgotten nothing,
+      and remembering what she loves and misses is what makes staying away
+      hard. He holds her by the hips and asks her to come home; the
+      chemistry is still alive and she allows the closeness because she
+      misses him, but fears the same unhealthy patterns. He loves her and
+      wants to change without having the answers; she believes he is trying
+      but needs more than another promise. Neither wants to let go. Not a
+      breakup and not a reconciliation: unresolved, on purpose. Never write
+      it as either.
+
+      THE TITLE IS A PLACEHOLDER, hers to replace. The synopsis is from her
+      context above, setup only, and pairs with the post's caption.
+    */
+    slug: "luna-josh-frmhouse-comehome-horiz",
+    title: "Come Home",
+    synopsis:
+      "A few weeks into the separation, Luna stops by the farmhouse on a Sunday to pick up equipment for Vale Studios. Josh still hasn't accepted that she isn't coming home, and what starts as a conversation doesn't stay one.",
+    file: "luna-josh-frmhouse-comehome-horiz.proxy.mp4",
+    poster: "/posters/luna-josh-frmhouse-comehome-horiz.jpg",
+    // 59.9, the whole file: the picture goes black at 58.2 and her score
+    // fades out under it to the last frame.
+    durationSeconds: 60,
+    addedOn: "2026-10-22",
+    access: "free",
+    mature: false,
+    feelings: ["distance", "trust"],
+    place: "farmhouse",
+    about: ["luna", "josh"],
+  },
 ];
 
 /**
@@ -4058,4 +4125,23 @@ export function formatDuration(totalSeconds: number): string {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+/**
+ * "Wednesday, Oct 28": the last day of a Video.openUntil window, in Pacific
+ * time like the window itself. One second back, so a midnight end names the
+ * day it is still free rather than the morning it closes.
+ */
+export function freeThroughLabel(until: string): string {
+  return new Date(Date.parse(until) - 1000).toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "short",
+    day: "numeric",
+    timeZone: "America/Los_Angeles",
+  });
+}
+
+/** Whether a members-only piece is open to everyone right now (Video.openUntil). */
+export function openNow(item: { openUntil?: string }, now: number = Date.now()): boolean {
+  return Boolean(item.openUntil) && now < Date.parse(item.openUntil!);
 }

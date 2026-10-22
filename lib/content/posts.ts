@@ -852,6 +852,53 @@ const authored: Clip[] = [
       durationSeconds: 67.5,
     },
   },
+  {
+    /*
+      COME HOME, 2026-10-22. Melissa: "new IG clip vertical
+      luna-josh-frmhouse-come-home … post it free". Josh and Luna in the
+      farmhouse kitchen, daylight, close.
+
+      FROM THE TRANSCRIPT: "You act like the last ten years were all bad." /
+      "I never said they were." / "Then why does it feel like you're trying
+      to forget everything we had?" / "Because you keep reminding me of
+      everything I miss." / "Baby, come home." / "And what happens when I
+      do?" / "I don't know, Lou. But I'm trying." / "Josh, I've given you ten
+      years." / "And I'm asking you for one more."
+
+      INSIDE RELEASED CANON: she has left and he wants her back, which the
+      pilot and Episode 2 already show. The caption says what is said and
+      stops; it does not answer whether she goes back.
+
+      MELISSA'S CONTEXT, 2026-10-22 (writer knowledge; the synopsis uses
+      only the setup): a Sunday, a few weeks into the separation. Luna stops
+      by Josh's farmhouse for equipment she left behind for Vale Studios.
+      Josh is still struggling to accept she is not coming home. He feels
+      she is trying to forget their ten years; she has forgotten nothing,
+      and remembering what she loves and misses is what makes staying away
+      hard. He holds her by the hips and asks her to come home; the
+      chemistry is still alive and she allows the closeness because she
+      misses him, but fears the same unhealthy patterns. He loves her and
+      wants to change without having the answers; she believes he is trying
+      but needs more than another promise. Neither wants to let go. Not a
+      breakup and not a reconciliation: unresolved, on purpose. Never write
+      it as either.
+
+      THE TITLE IS A PLACEHOLDER, hers to replace. The caption is from her
+      context above, setup only.
+    */
+    id: "luna-josh-frmhouse-come-home",
+    title: "Come Home",
+    caption:
+      "A few weeks apart. Luna stops by the farmhouse for some studio equipment, and Josh still hasn't accepted that she isn't coming home.",
+    file: "luna-josh-frmhouse-come-home.proxy.mp4",
+    poster: "/posters/luna-josh-frmhouse-come-home.jpg",
+    // 59.9, the whole file: the last 1.7s of black is her music fading out.
+    durationSeconds: 60,
+    addedOn: "2026-10-22",
+    about: ["luna", "josh"],
+    mature: false,
+    access: "free",
+  },
 ];
 
 /**

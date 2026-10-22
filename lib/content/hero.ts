@@ -71,6 +71,9 @@ export const HERO_SLUGS: string[] = [
   "josh-ty-ricks-house",
   "luna-lkehouse-wine-shatter",
   "ty-luna-blonde-guy-bar",
+  // 2026-10-22, PINNED while the episode is free (HERO_PINS below), and kept
+  // out of the rotation (NOT_IN_HERO) so the front page is as it was after.
+  "pilot",
 ];
 
 export interface Hero {
@@ -175,6 +178,7 @@ const PLAY_INLINE_SLUGS = new Set(["interview", "between-us-trailer-one"]);
  * clip.
  */
 const WITH_AUDIO = new Set([
+  "pilot",
   "josh-luna-pool",
   "luna-lkehouse-wine-shatter",
   "ty-luna-blonde-guy-bar",
@@ -254,7 +258,7 @@ export function heroes(): Hero[] {
 const RECENT_POOL = 5;
 
 /** Never the hero: it is a card on the Season 1 shelf. */
-const NOT_IN_HERO = new Set(["between-us-trailer-one"]);
+const NOT_IN_HERO = new Set(["between-us-trailer-one", "pilot"]);
 
 /**
  * The pool, newest first.
@@ -278,11 +282,24 @@ export function recentHeroes(): Hero[] {
  * to remember to undo. The page revalidates hourly, so it lets go within the
  * hour. `until` is the first moment it stops: midnight Eastern, Oct 27.
  */
-const HERO_PIN = { slug: "between-us-trailer-one", until: new Date("2026-10-27T04:00:00Z") };
+/*
+ * THEN THE PILOT, AHEAD OF IT (Melissa, 2026-10-22: "lets put the pilot as the
+ * hero, add that its free to watch till next week"). Pinned for exactly as
+ * long as the episode is free, by reading the episode's own openUntil, so
+ * the hero and the paywall cannot disagree about the date. The first pin
+ * still in force wins; the trailer's ends inside the pilot's, so it is
+ * superseded rather than resumed.
+ */
+const PILOT_OPEN_UNTIL = getVideo("pilot")?.openUntil;
+const HERO_PINS: { slug: string; until: Date }[] = [
+  ...(PILOT_OPEN_UNTIL ? [{ slug: "pilot", until: new Date(PILOT_OPEN_UNTIL) }] : []),
+  { slug: "between-us-trailer-one", until: new Date("2026-10-27T04:00:00Z") },
+];
 
 export function pickHero(now: Date = new Date()): Hero | undefined {
-  if (now < HERO_PIN.until) {
-    const pinned = heroes().find((h) => h.slug === HERO_PIN.slug);
+  for (const pin of HERO_PINS) {
+    if (now >= pin.until) continue;
+    const pinned = heroes().find((h) => h.slug === pin.slug);
     if (pinned) return pinned;
   }
   const pool = recentHeroes();

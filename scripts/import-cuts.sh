@@ -939,6 +939,19 @@ CUTS=(
   #
   # NO END: black from 236.2, the score fading out under it.
   "luna-ty-driving|stories/luna-ty-drivingCamLens/luna-ty-driving-camLens-music.mov|24|-|-|30"
+  # 2026-10-22: Come Home, the landscape cut. Josh asks Luna to come home in
+  # the farmhouse kitchen; free (Melissa). The same scene and dialogue as the
+  # vertical post luna-josh-frmhouse-come-home, framed 1080x600, hevc 30fps.
+  # The slug is her file name. A 1936x1080 mp4 (luna-josh-farmhouse-come-home)
+  # sits in the same folder; she named this one.
+  #
+  # POSTER AT 39s: the two of them close, "I know you are." A scene poster is
+  # a public URL; the whole clip is free, so any frame would do.
+  #
+  # NO END: black from 58.23, and the music fades under it to the last frame
+  # (-62.9 dB at 59.8). Her rule: cut black where the music stops, and here it
+  # stops at the end of the file.
+  "luna-josh-frmhouse-comehome-horiz|stories/luna-josh-frmhouse-come-home/luna-josh-frmhouse-comehome-horiz.mov|39"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

@@ -42,6 +42,8 @@ import {
   type Vec3,
 } from "@/lib/studio/blocking";
 import { aspects, azimuths, byId, cameraHeights, lenses, shotSizes, tilts } from "@/lib/studio/vocab";
+import { SHOT_PRESETS, applyShot, focusWords, type ShotGroup, type ShotPreset } from "@/lib/studio/shots";
+import { PLACES, PLACE_LABELS, applyPlace, type PlaceId, type PlaceSetting } from "@/lib/studio/places";
 import type { ShotRecipe } from "@/lib/studio/types";
 import type { CameraReading, Selection, StageApi, Tool } from "@/components/studio/BlockingStage";
 import { SELECT, type Person } from "@/components/studio/RefLibrary";
@@ -104,6 +106,11 @@ export function Blocking({
   const [menuFor, setMenuFor] = useState<string | null>(null);
   const [readOpen, setReadOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  // Shot presets (2026-10-22). Open with S; the tab follows how many people there are.
+  const [shotsOpen, setShotsOpen] = useState(false);
+  const [shotTab, setShotTab] = useState<ShotGroup | "places">(() => (b.figures.length >= 3 ? "three" : b.figures.length === 2 ? "two" : "solo"));
+  const [arrange, setArrange] = useState(true);
+  const [placed, setPlaced] = useState<string | null>(null);
   // The docks fold away with P. Remembered per browser — a convenience only.
   // Blocking mounts only when its tab is opened, on the client, so reading
   // storage in the initializer cannot mismatch a server render.
@@ -163,6 +170,7 @@ export function Blocking({
       if (k === "m") setTool((x) => (x === "move" ? "camera" : "move"));
       else if (k === "r") setTool((x) => (x === "rotate" ? "camera" : "rotate"));
       else if (k === "p") setPanels((x) => !x);
+      else if (k === "s") setShotsOpen((x) => !x);
       else if (e.key === "Escape") setTool("camera");
       else return;
       e.preventDefault();
@@ -241,7 +249,17 @@ export function Blocking({
   /* ---- the camera, in film words --------------------------------------- */
   const derived = reading ? toVocab(reading) : null;
   const who = fig?.characterId ? names[fig.characterId] ?? fig.characterId : "the figure";
-  const words = reading && derived && fig ? describe(reading, derived, who, fig.build) : null;
+  const nameOf = (id: string) => {
+    const i = b.figures.findIndex((f) => f.id === id);
+    const f = b.figures[i];
+    if (!f) return "the other person";
+    return f.characterId ? names[f.characterId] ?? f.characterId : `the ${FIGURE_TONES[i % FIGURE_TONES.length].name} figure`;
+  };
+  // What the mannequin cannot show (a blurred shoulder, an off-screen eyeline),
+  // from the last shot preset. Rides on the camera sentence everywhere it goes.
+  const focus = focusWords(b.shot, nameOf);
+  const withFocus = (t: string) => (focus ? `${t} ${focus}` : t);
+  const words = reading && derived && fig ? withFocus(describe(reading, derived, who, fig.build)) : null;
 
   async function takeShot() {
     if (!api.current || !fig) return;
@@ -257,7 +275,7 @@ export function Blocking({
       const r = api.current.read(fig.id);
       if (r) {
         const v = toVocab(r);
-        const text = describe(r, v, who, fig.build);
+        const text = withFocus(describe(r, v, who, fig.build));
         setB((x) => ({ ...x, readout: text }));
         setDraft((d) => ({
           ...d,
@@ -373,6 +391,65 @@ export function Blocking({
     setActiveFigure(f.id);
   }
 
+  /**
+   * A shot preset (lib/studio/shots.ts). Adds stand-ins if the shot needs more
+   * people than are on the stage, and always arranges them in that case, since
+   * people who were never placed have nowhere sensible to be filmed from.
+   */
+  function applyPreset(preset: ShotPreset, lead: number) {
+    let figures = b.figures;
+    const short = preset.people - figures.length;
+    if (short > 0) {
+      const used = new Set(figures.map((f) => f.characterId));
+      figures = [...figures];
+      for (let k = 0; k < short; k++) {
+        const next = draft.characterIds.find((id) => !used.has(id)) ?? null;
+        used.add(next);
+        figures.push(newFigure(next, figures.length));
+      }
+    }
+    const r = applyShot(preset, figures, {
+      lead,
+      arrange: arrange || short > 0,
+      aspect: ratio,
+      camera: api.current?.cameraState() ?? b.camera,
+    });
+    setB((x) => ({ ...x, figures: r.figures, camera: r.camera, shot: r.shot }));
+    api.current?.setCamera(r.camera);
+    setActiveFigure(r.subjectId);
+    setSelection(null);
+    setMenuFor(null);
+    setStatus(null);
+  }
+
+  /**
+   * A place (lib/studio/places.ts): furniture, people seated on it, a first
+   * camera. Then "Arrange the people" turns off, so the angle presets that
+   * follow film them where they sit instead of standing them up.
+   */
+  function applyPlaceSetting(setting: PlaceSetting) {
+    let figures = b.figures;
+    const short = setting.seats.length - figures.length;
+    if (short > 0) {
+      const used = new Set(figures.map((f) => f.characterId));
+      figures = [...figures];
+      for (let k = 0; k < short; k++) {
+        const next = draft.characterIds.find((id) => !used.has(id)) ?? null;
+        used.add(next);
+        figures.push(newFigure(next, figures.length));
+      }
+    }
+    const r = applyPlace(setting, figures);
+    setB((x) => ({ ...x, figures: r.figures, props: r.props, camera: r.camera, shot: undefined }));
+    api.current?.setCamera(r.camera);
+    setArrange(false);
+    setActiveFigure(r.figures[0].id);
+    setSelection(null);
+    setMenuFor(null);
+    setPlaced(setting.id);
+    setStatus(null);
+  }
+
   function applyPose(f: BlockingFigure, poseId: string) {
     const yaw = jointOf(f, "pelvis")[1];
     const posed = posedFigure(f, poseId, { x: f.position[0], z: f.position[2], yaw });
@@ -466,13 +543,107 @@ export function Blocking({
             ))}
             <span className="mx-1 h-5 w-px bg-hairline" />
             <button type="button" className={seg(b.grid)} onClick={() => setB((x) => ({ ...x, grid: !x.grid }))}>Grid</button>
+            <button type="button" className={seg(shotsOpen)} aria-pressed={shotsOpen} onClick={() => setShotsOpen((x) => !x)}
+              title="Shot presets: close-ups, OTS, two-shots, three-shots">
+              Shots <kbd className="ml-0.5 font-sans text-[10px] opacity-60">S</kbd>
+            </button>
             <button type="button" className={seg(panels)} aria-pressed={panels} onClick={() => setPanels((x) => !x)}
               title="Show or hide the camera dock and the inspector">
               Panels <kbd className="ml-0.5 font-sans text-[10px] opacity-60">P</kbd>
             </button>
           </Dock>
 
-          {panels && (
+          {shotsOpen && (
+            <Dock label="Shot presets" className="bottom-16 left-3 top-16 flex w-[19rem] flex-col p-0 text-[13px]">
+              <div className="flex items-center gap-1 border-b border-hairline p-1.5">
+                {([["places", "Places"], ["solo", "Solo"], ["two", "Two"], ["three", "Three"]] as [ShotGroup | "places", string][]).map(([g, label]) => (
+                  <button key={g} type="button" className={`${seg(shotTab === g)} flex-1`} onClick={() => setShotTab(g)}>{label}</button>
+                ))}
+                <button type="button" aria-label="Close shot presets" className="px-2 text-stone-dim hover:text-ivory" onClick={() => setShotsOpen(false)}>✕</button>
+              </div>
+              <div className="border-b border-hairline px-3 py-2 text-[12px] text-stone">
+                {shotTab === "places" ? (
+                  <>Seats everyone on the furniture and points a camera at them. Then pick any angle from Solo, Two or Three: they stay where they sit.</>
+                ) : shotTab === "solo" ? (
+                  <>On <span className="text-ivory">{who}</span>. Click someone on the stage to switch. Nobody moves.</>
+                ) : (
+                  <label className="flex items-start gap-2">
+                    <input type="checkbox" className="mt-0.5 accent-amber" checked={arrange} onChange={(e) => setArrange(e.target.checked)} />
+                    <span>
+                      Arrange the people
+                      <span className="block text-stone-dim">
+                        {arrange
+                          ? `Places the first ${shotTab === "two" ? "two" : "three"} for the shot, keeps their poses${b.figures.length > (shotTab === "two" ? 2 : 3) ? "; anyone else steps aside" : ""}.`
+                          : "Only the camera moves, around where you put them."}
+                      </span>
+                    </span>
+                  </label>
+                )}
+              </div>
+              {shotTab === "places" && (
+                <div className="flex-1 space-y-3 overflow-y-auto overscroll-contain p-1.5">
+                  {(Object.keys(PLACE_LABELS) as PlaceId[]).map((place) => (
+                    <section key={place}>
+                      <h4 className="px-2 pb-0.5 text-[11px] uppercase tracking-wider text-stone-dim">{PLACE_LABELS[place]}</h4>
+                      <ul className="space-y-0.5">
+                        {PLACES.filter((p) => p.place === place).map((p) => (
+                          <li key={p.id} className={`rounded-sm px-2 py-1.5 ${placed === p.id ? "bg-amber/10" : "hover:bg-charcoal-raised"}`}>
+                            <button type="button" className="block w-full text-left" onClick={() => applyPlaceSetting(p)}>
+                              <span className={placed === p.id ? "text-amber-soft" : "text-ivory"}>{p.label}</span>
+                              <span className="ml-1.5 text-[11px] text-stone-dim">{p.seats.length} people</span>
+                              <span className="block text-[11px] leading-snug text-stone-dim">{p.hint}</span>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                  ))}
+                </div>
+              )}
+              <ul className={`flex-1 space-y-0.5 overflow-y-auto overscroll-contain p-1.5 ${shotTab === "places" ? "hidden" : ""}`}>
+                {SHOT_PRESETS.filter((p) => p.group === shotTab).map((p) => {
+                  const current = b.shot?.id === p.id;
+                  const people = b.figures.slice(0, p.people);
+                  const leads: [number, string][] =
+                    p.people === 1
+                      ? [[Math.max(0, b.figures.findIndex((f) => f.id === fig?.id)), ""]]
+                      : p.variants
+                        ? [...Array(p.people).keys()].map((i) => [i, `${p.variants === "over" ? "over" : "on"} ${people[i] ? nameOf(people[i].id) : `person ${i + 1}`}`])
+                        : [[0, ""]];
+                  return (
+                    <li key={p.id} className={`rounded-sm px-2 py-1.5 ${current ? "bg-amber/10" : "hover:bg-charcoal-raised"}`}>
+                      {leads.length === 1 ? (
+                        <button type="button" className="block w-full text-left" onClick={() => applyPreset(p, leads[0][0])}>
+                          <span className={current ? "text-amber-soft" : "text-ivory"}>{p.label}</span>
+                          <span className="ml-1.5 text-[11px] tabular-nums text-stone-dim">{p.mm}mm</span>
+                          <span className="block text-[11px] leading-snug text-stone-dim">{p.hint}</span>
+                        </button>
+                      ) : (
+                        <>
+                          <span className={current ? "text-amber-soft" : "text-ivory"}>{p.label}</span>
+                          <span className="block text-[11px] leading-snug text-stone-dim">{p.hint}</span>
+                          <span className="mt-1 flex flex-wrap gap-1">
+                            {leads.map(([i, label]) => (
+                              <button key={i} type="button"
+                                className={chip(current && b.shot?.roles[0] === people[i]?.id)}
+                                onClick={() => applyPreset(p, i)}>
+                                {label}
+                              </button>
+                            ))}
+                          </span>
+                        </>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+              <p className="border-t border-hairline px-3 py-2 text-[11px] leading-snug text-stone-dim">
+                A starting point: orbit, move or pose from here as usual. Blur and off-screen eyelines go into the camera words, since the mannequins cannot show them.
+              </p>
+            </Dock>
+          )}
+
+          {panels && !shotsOpen && (
             <Dock label="Camera" className="left-3 top-16 w-[8.75rem] space-y-3 p-2.5">
               <p className="truncate text-[11px] uppercase tracking-wider text-stone-dim" title={`Camera to ${who}`}>Camera → {who}</p>
               {/* Seen from above, the person in the middle facing down the
@@ -640,6 +811,13 @@ export function Blocking({
                 full camera sentence whether or not it is expanded. */}
             <div className="flex items-start gap-2 px-3 py-2">
               <div className="min-w-0 flex-1 select-text cursor-text text-[12px] leading-relaxed text-stone">
+                {b.shot && (
+                  <span className="mr-2 inline-flex select-none items-center gap-1 rounded-sm bg-amber/10 px-1.5 text-amber-soft" title={focus || undefined}>
+                    {b.shot.label}
+                    <button type="button" aria-label="Forget the shot preset (its focus words leave the readout)"
+                      className="text-stone-dim hover:text-ivory" onClick={() => setB((x) => ({ ...x, shot: undefined }))}>✕</button>
+                  </span>
+                )}
                 {reading && !reading.inFrame && <span className="mr-2 text-wine">{who}&rsquo;s face is out of frame ·</span>}
                 {readOpen && words ? (
                   <>

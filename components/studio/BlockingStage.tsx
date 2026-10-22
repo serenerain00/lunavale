@@ -97,6 +97,8 @@ export interface StageApi {
   /** Put the camera at an azimuth around a figure, at a height relative to her eyes. */
   placeCamera: (figureId: string, azimuth: number, eyeDelta: number | "overhead" | "floor") => void;
   cameraState: () => Blocking["camera"];
+  /** Move the camera to a saved/computed position, target and lens (shot presets). */
+  setCamera: (c: Blocking["camera"]) => void;
   /** Where a figure's chest is on screen, CSS px from the canvas's top left. */
   screen: (figureId: string) => { x: number; y: number; visible: boolean } | null;
 }
@@ -405,6 +407,16 @@ function Rig({
       },
 
       cameraState: state,
+
+      setCamera: (c) => {
+        if (!controls.current) return;
+        camera.position.set(...c.position);
+        controls.current.target.set(...c.target);
+        controls.current.update();
+        invalidate();
+        // The lens comes with it: state() would report the old one until rerender.
+        onCamera({ position: [...c.position] as Vec3, target: [...c.target] as Vec3, mm: c.mm });
+      },
 
       screen: (figureId) => {
         const chest = world(`${figureId}:chest`);
@@ -912,6 +924,45 @@ function PropMesh({ kind, selected }: { kind: BlockingProp["kind"]; selected: bo
       );
     case "counter":
       return B([2.0, 0.92, 0.62], [0, 0.46, 0]);
+    case "stool":
+      return (
+        <>
+          {B([0.38, 0.05, 0.38], [0, 0.755, 0])}
+          {B([0.05, 0.73, 0.05], [0, 0.365, 0])}
+          {B([0.4, 0.03, 0.4], [0, 0.015, 0])}
+          {B([0.34, 0.03, 0.04], [0, 0.3, 0.15])}
+        </>
+      );
+    case "car":
+      // The front of a sedan's cabin, facing +Z, driver on the car's left
+      // (+X, US). Open at the sides and without glass, so a camera can see in
+      // from anywhere; the roof, pillars and dash are there for the framing.
+      return (
+        <>
+          {B([1.5, 0.05, 2.3], [0, 0.27, -0.25])}
+          {[-0.37, 0.37].map((x) => (
+            <group key={x}>
+              {B([0.5, 0.14, 0.52], [x, 0.43, 0], `c${x}`)}
+              {B([0.5, 0.62, 0.1], [x, 0.8, -0.3], `b${x}`)}
+              {B([0.26, 0.16, 0.08], [x, 1.2, -0.31], `h${x}`)}
+            </group>
+          ))}
+          {B([0.2, 0.22, 0.62], [0, 0.45, 0.05])}
+          {B([1.5, 0.28, 0.4], [0, 0.82, 0.78])}
+          <mesh position={[0.37, 0.86, 0.5]} rotation={[rad(-62), 0, 0]} material={mat} castShadow>
+            <torusGeometry args={[0.18, 0.02, 8, 32]} />
+          </mesh>
+          {[-0.73, 0.73].map((x) => (
+            <group key={`p${x}`}>
+              {B([0.06, 0.62, 0.06], [x, 1.2, 0.68], `a${x}`)}
+              {B([0.06, 1.15, 0.08], [x, 0.87, -0.62], `bp${x}`)}
+              {B([0.05, 0.3, 1.5], [x, 0.45, 0.05], `d${x}`)}
+            </group>
+          ))}
+          {B([1.5, 0.05, 1.45], [0, 1.47, -0.2])}
+          {B([1.4, 0.5, 0.55], [0, 0.55, -1.05])}
+        </>
+      );
     case "wall":
       return B([3, 2.6, 0.1], [0, 1.3, 0]);
     case "door":

@@ -59,7 +59,7 @@ export const EXPERIMENTS: Record<string, Experiment> = {
     variants: ["control", "series"],
     startsOn: "2026-10-18",
     endsOn: "2026-11-01",
-    events: ["exposed", "trailer_play", "join_click", "membership_view"],
+    events: ["exposed", "trailer_play", "pilot_play", "join_click", "membership_view"],
     question:
       "For a non-member landing on the home page, does a first screen that names the series, says what is free and shows the price turn more visitors into paying members than today's random members-only scene?",
     decidesOn: "paid",

@@ -31,6 +31,8 @@
  *                   chin down), Z = tilt (positive = ear toward HER right shoulder)
  */
 
+import type { AppliedShot } from "@/lib/studio/shots";
+
 export type Build = "woman" | "man";
 
 export type JointId =
@@ -65,7 +67,7 @@ export interface BlockingFigure {
   joints: Partial<Record<JointId, Vec3>>;
 }
 
-export type PropKind = "chair" | "couch" | "bed" | "table" | "counter" | "wall" | "door";
+export type PropKind = "chair" | "couch" | "bed" | "table" | "counter" | "stool" | "car" | "wall" | "door";
 
 export interface BlockingProp {
   id: string;
@@ -82,6 +84,8 @@ export interface Blocking {
   grid: boolean;
   /** The last readout, in words — what the prompt quotes. Set on "Use this camera". */
   readout?: string;
+  /** The shot preset last applied (lib/studio/shots.ts), for its words on focus. */
+  shot?: AppliedShot;
 }
 
 /* ------------------------------------------------------------- skeleton -- */
@@ -212,6 +216,44 @@ export const POSES: { id: string; label: string; pose: Pose }[] = [
     },
   },
   {
+    // 2026-10-22, for the car. Reclined into a seat, hands at ten and two.
+    id: "drive",
+    label: "Driving",
+    pose: {
+      lift: 0.6,
+      joints: {
+        pelvis: [-14, 0, 0], spine: [4, 0, 0], chest: [4, 0, 0],
+        hipL: [-74, 0, 4], hipR: [-74, 0, -4], kneeL: [58, 0, 0], kneeR: [58, 0, 0], ankleL: [-14, 0, 0], ankleR: [-14, 0, 0],
+        shoulderL: [-60, 0, 14], shoulderR: [-60, 0, -14], elbowL: [-40, 0, 0], elbowR: [-40, 0, 0],
+      },
+    },
+  },
+  {
+    id: "passenger",
+    label: "Car passenger",
+    pose: {
+      lift: 0.6,
+      joints: {
+        pelvis: [-14, 0, 0], spine: [4, 0, 0], chest: [4, 0, 0],
+        hipL: [-74, 0, 5], hipR: [-74, 0, -5], kneeL: [62, 0, 0], kneeR: [62, 0, 0], ankleL: [-10, 0, 0], ankleR: [-10, 0, 0],
+        shoulderL: [-26, 0, 10], shoulderR: [-26, 0, -10], elbowL: [-58, 0, 0], elbowR: [-58, 0, 0],
+      },
+    },
+  },
+  {
+    // Sitting up against a headboard or a wall, legs out in front.
+    id: "sit-legs-out",
+    label: "Sitting up, legs out",
+    pose: {
+      lift: 0.12,
+      joints: {
+        pelvis: [-16, 0, 0], spine: [6, 0, 0], chest: [6, 0, 0],
+        hipL: [-74, 0, 4], hipR: [-74, 0, -4], kneeL: [10, 0, 0], kneeR: [14, 0, 0], ankleL: [20, 0, 0], ankleR: [20, 0, 0],
+        shoulderL: [-14, 0, 12], shoulderR: [-14, 0, -12], elbowL: [-40, 0, 0], elbowR: [-40, 0, 0],
+      },
+    },
+  },
+  {
     id: "floor-knees",
     label: "On the floor, knees up",
     pose: {
@@ -301,6 +343,8 @@ export const PROPS: Record<PropKind, { label: string; note: string }> = {
   bed: { label: "Bed", note: "Queen, mattress top at 60cm" },
   table: { label: "Table", note: "75cm high" },
   counter: { label: "Counter / bar", note: "92cm high" },
+  stool: { label: "Bar stool", note: "Seat at 76cm" },
+  car: { label: "Car (front seats)", note: "Faces the way it drives; driver on its left. Seats at 50cm, roof 1.45m" },
   wall: { label: "Wall", note: "3m wide, 2.6m high" },
   door: { label: "Doorway", note: "Frame, 2.1m" },
 };

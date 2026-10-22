@@ -131,6 +131,13 @@ export const STORY_ORDER: readonly string[] = [
   "luna-avery-ipad",
   "luna-ty-panic-attack",
 
+  // HAND-PLACED — CONFIRMED ERA, REASONED ORDER. Come Home. Melissa,
+  // 2026-10-22: "only been separated for a few weeks". So after the
+  // one-week clips above and before the one-month mark below, and before Josh
+  // asks Tyson to talk to her (next), which reads as what he does once asking
+  // her himself has not worked.
+  "luna-josh-frmhouse-comehome-horiz",
+
   // HAND-PLACED — CONFIDENT. Melissa, 2026-09-11: "this is after josh and luna
   // broke up, about a month." The clip either side of it is the one-month mark
   // in her journal ("A month, and he made me go out"), so this sits with it.

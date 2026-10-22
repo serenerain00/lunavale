@@ -22,6 +22,8 @@ export interface Streamable {
   /** Basename of the proxy inside stories/. */
   file: string;
   access: AccessLevel;
+  /** Video.openUntil: members-only, but open to everyone until then. */
+  openUntil?: string;
   /**
    * A fuller cut of the same piece, served INSTEAD of `file` to members. The
    * route picks between the two after the tier check; see Video.premium. Both
@@ -44,6 +46,7 @@ export function getStreamable(slug: string): Streamable | undefined {
       slug,
       file: video.file,
       access: video.access,
+      openUntil: video.openUntil,
       premiumFile: video.premium?.file,
       previewFile: video.preview?.file,
     };

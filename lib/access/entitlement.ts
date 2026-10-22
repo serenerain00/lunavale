@@ -152,8 +152,10 @@ export async function isMember(): Promise<boolean> {
 }
 
 /** Authoritative check: may the current viewer open this? */
-export async function canWatch(item: { access: AccessLevel }): Promise<boolean> {
+export async function canWatch(item: { access: AccessLevel; openUntil?: string }): Promise<boolean> {
   if (item.access === "free") return true;
+  // A free window on a members-only piece (Video.openUntil). Closes on its own.
+  if (item.openUntil && Date.now() < Date.parse(item.openUntil)) return true;
   return tierCovers(await readTier(), PREMIUM_TIER);
 }
 

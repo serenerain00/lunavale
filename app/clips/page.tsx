@@ -6,7 +6,7 @@ import { PAGE } from "@/components/ui/layout";
 import { inStoryOrder, inReleaseOrder } from "@/lib/content/chronology";
 import { getCategory, clipsInCategory, categories } from "@/lib/content/categories";
 import { currentSeason } from "@/lib/content/season";
-import { formatDuration } from "@/lib/content/videos";
+import { formatDuration, openNow } from "@/lib/content/videos";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = pageMetadata({
@@ -202,7 +202,7 @@ export default async function ClipsPage({
                 poster={v.poster}
                 meta={formatDuration(v.durationSeconds)}
                 position={positionOf.get(v.slug)}
-                premium={v.access === "premium"}
+                premium={v.access === "premium" && !openNow(v)}
                 mature={v.mature}
               />
               <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-stone">

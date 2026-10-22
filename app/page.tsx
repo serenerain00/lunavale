@@ -28,7 +28,7 @@ import {
   cadenceNote,
   formatReleaseDate,
 } from "@/lib/content/releases";
-import { formatDuration, videos as videosAll } from "@/lib/content/videos";
+import { formatDuration, openNow, videos as videosAll } from "@/lib/content/videos";
 import { sceneOptions } from "@/lib/content/survey";
 
 /**
@@ -455,7 +455,7 @@ export default async function Home() {
                 poster={v.poster}
                 meta={formatDuration(v.durationSeconds)}
                 position={i + 1}
-                premium={v.access === "premium"}
+                premium={v.access === "premium" && !openNow(v)}
                 mature={v.mature}
               />
             </RailItem>
@@ -484,7 +484,7 @@ export default async function Home() {
                   title={v.title}
                   poster={v.poster}
                   meta={formatDuration(v.durationSeconds)}
-                  premium={v.access === "premium"}
+                  premium={v.access === "premium" && !openNow(v)}
                   mature={v.mature}
                 />
               </RailItem>

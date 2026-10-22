@@ -91,6 +91,14 @@ export interface Video {
   addedOn?: string;
   /** Whether this scene is publicly viewable or requires membership. */
   access: AccessLevel;
+  /**
+   * A members-only piece opened to everyone for a while: an ISO instant, and
+   * until then anybody may watch the whole thing. After it, `access` applies
+   * again on its own: no deploy, no revert to remember. The decision is
+   * canWatch()'s (lib/access/entitlement.ts); cards and the clip page only
+   * follow it through openNow(). Members notice nothing either way.
+   */
+  openUntil?: string;
   /** Mature-content flag — surfaced as a label per content rules. */
   mature: boolean;
   /**
@@ -3164,6 +3172,14 @@ export const videos: Video[] = [
     durationSeconds: 1116,
     addedOn: "2026-09-21",
     access: "premium",
+    /*
+      FREE TO EVERYONE FOR A WEEK, 2026-10-22. Melissa: "lets have the pilot
+      free to non members ... lets see what that does for subs", then "lets
+      make it expire next wednesday". The end of Wednesday Oct 28 in Pacific
+      time (still PDT), so it is free all of that day everywhere in the US.
+      The 3:10 preview below comes back by itself afterwards.
+    */
+    openUntil: "2026-10-29T07:00:00Z",
     mature: true,
     notes: ["danger"],
     /*
@@ -4058,4 +4074,9 @@ export function formatDuration(totalSeconds: number): string {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+/** Whether a members-only piece is open to everyone right now (Video.openUntil). */
+export function openNow(item: { openUntil?: string }, now: number = Date.now()): boolean {
+  return Boolean(item.openUntil) && now < Date.parse(item.openUntil!);
 }

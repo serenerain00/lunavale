@@ -28,7 +28,7 @@ import {
   cadenceNote,
   formatReleaseDate,
 } from "@/lib/content/releases";
-import { formatDuration, openNow, videos as videosAll } from "@/lib/content/videos";
+import { formatDuration, freeThroughLabel, getVideo, openNow, videos as videosAll } from "@/lib/content/videos";
 import { sceneOptions } from "@/lib/content/survey";
 
 /**
@@ -379,6 +379,7 @@ export default async function Home() {
                 poster={ep.poster ?? trailer?.poster ?? "/posters/hero.jpg"}
                 meta={ep.runtimeSeconds ? formatDuration(ep.runtimeSeconds) : undefined}
                 comingSoon={ep.comingSoon}
+                note={freeWeekNote(ep.slug)}
               />
             </RailItem>
           ))}
@@ -702,4 +703,16 @@ export default async function Home() {
       </UnlessAnswered>
     </>
   );
+}
+
+/**
+ * The line under an episode's card while it is free to everyone
+ * (Video.openUntil): "Free to watch through Wednesday, Oct 28". Server-side
+ * on an hourly page, so it can outlive the window by up to an hour; the clip
+ * page it opens is per-request and always right.
+ */
+function freeWeekNote(slug: string | undefined): string | undefined {
+  const video = slug ? getVideo(slug) : undefined;
+  if (!video?.openUntil || !openNow(video)) return undefined;
+  return `Free to watch through ${freeThroughLabel(video.openUntil)}`;
 }

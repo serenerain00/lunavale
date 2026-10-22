@@ -4076,6 +4076,20 @@ export function formatDuration(totalSeconds: number): string {
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
 
+/**
+ * "Wednesday, Oct 28": the last day of a Video.openUntil window, in Pacific
+ * time like the window itself. One second back, so a midnight end names the
+ * day it is still free rather than the morning it closes.
+ */
+export function freeThroughLabel(until: string): string {
+  return new Date(Date.parse(until) - 1000).toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "short",
+    day: "numeric",
+    timeZone: "America/Los_Angeles",
+  });
+}
+
 /** Whether a members-only piece is open to everyone right now (Video.openUntil). */
 export function openNow(item: { openUntil?: string }, now: number = Date.now()): boolean {
   return Boolean(item.openUntil) && now < Date.parse(item.openUntil!);

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getVideo, videos, formatDuration, openNow } from "@/lib/content/videos";
+import { getVideo, videos, formatDuration, freeThroughLabel, openNow } from "@/lib/content/videos";
 import { PREMIUM_TIER, canWatch, isMember } from "@/lib/access/entitlement";
 import { entriesForScene } from "@/lib/content/journal";
 import {
@@ -216,7 +216,7 @@ export default async function WatchPage({ params }: WatchPageProps) {
                 <span aria-hidden>·</span>
                 {/* Members see "Members" as always; only a visitor is told it is free. */}
                 {openNow(video) && !member ? (
-                  <span className="text-amber">Free to watch through {freeThrough(video.openUntil!)}</span>
+                  <span className="text-amber">Free to watch through {freeThroughLabel(video.openUntil!)}</span>
                 ) : (
                   <span className="text-amber">Members</span>
                 )}
@@ -368,13 +368,3 @@ export default async function WatchPage({ params }: WatchPageProps) {
   );
 }
 
-/** "Wednesday, Oct 28" for Video.openUntil, read in Pacific time like the window itself. */
-function freeThrough(until: string): string {
-  // One second back, so an end of midnight names the last day it is free.
-  return new Date(Date.parse(until) - 1000).toLocaleDateString("en-US", {
-    weekday: "long",
-    month: "short",
-    day: "numeric",
-    timeZone: "America/Los_Angeles",
-  });
-}

@@ -7,7 +7,7 @@ import { AmbientVideo } from "@/components/home/AmbientVideo";
 import { RatingBadge } from "@/components/ui/RatingBadge";
 import type { Hero as HeroContent } from "@/lib/content/hero";
 import { getPlace } from "@/lib/content/taxonomy";
-import { formatDuration } from "@/lib/content/videos";
+import { formatDuration, freeThroughLabel, openNow } from "@/lib/content/videos";
 import { PAGE } from "@/components/ui/layout";
 import { useHeroSound } from "@/components/home/useHeroSound";
 import { SERIES_TITLE } from "@/lib/content/season";
@@ -63,7 +63,11 @@ export function Hero({ hero, series }: HeroProps) {
   // A free hero is open to everyone and that is knowable without asking. A
   // premium one is open only to a member, and the two variants below are both
   // in the cached HTML with the client choosing between them.
-  const free = video.access === "free";
+  // A members-only episode in a free week (Video.openUntil) is free to play,
+  // for everybody, until the window closes. Read in the browser, so an hour-old
+  // cached page stops saying "free" the moment it stops being true.
+  const freeWeek = video.access !== "free" && openNow(video);
+  const free = video.access === "free" || freeWeek;
   // Not every place has a walkable environment yet (the fair, Burnett's), so
   // the second button falls back to the world index rather than 404ing.
   const place = getPlace(video.place);
@@ -167,7 +171,18 @@ export function Hero({ hero, series }: HeroProps) {
           )}
         </div>
 
-        <p className="mt-5 max-w-xl text-lg leading-relaxed text-stone sm:text-xl">
+        {/* The free week, said where it is read: the headline's own line,
+            not the small print of the metadata row. */}
+        {freeWeek && (
+          <p className="mt-5 text-lg font-medium text-amber sm:text-xl">
+            Free to watch through {freeThroughLabel(video.openUntil!)}
+          </p>
+        )}
+
+        {/* Clamped to three lines: the hero is a fixed share of the screen and
+            anchored to the bottom, so a long synopsis (the pilot's is five
+            sentences) pushed the series mark up under the header on phones and on short laptop screens. The full text is on the clip page. */}
+        <p className={`${freeWeek ? "mt-2" : "mt-5"} line-clamp-3 max-w-xl text-lg leading-relaxed text-stone sm:text-xl`}>
           {video.synopsis}
         </p>
 

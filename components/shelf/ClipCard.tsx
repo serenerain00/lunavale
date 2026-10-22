@@ -43,6 +43,8 @@ export interface ClipCardProps {
   posterPosition?: string;
   /** Nothing to play yet — renders flat and does not pretend to be a link. */
   comingSoon?: boolean;
+  /** One short line under the title, in amber: "Free to watch through …". */
+  note?: string;
 }
 
 export function ClipCard({
@@ -56,6 +58,7 @@ export function ClipCard({
   portrait,
   posterPosition,
   comingSoon,
+  note,
 }: ClipCardProps) {
   const art = (
     <div
@@ -113,7 +116,10 @@ export function ClipCard({
   );
 
   const caption = (
-    <p className="mt-2.5 truncate text-sm text-ivory">{title}</p>
+    <>
+      <p className="mt-2.5 truncate text-sm text-ivory">{title}</p>
+      {note && <p className="mt-0.5 text-xs text-amber">{note}</p>}
+    </>
   );
 
   // No destination, no anchor. A "coming soon" card that navigates nowhere is

@@ -24,6 +24,7 @@ import { clarityEvent, clarityTag } from "@/components/analytics/clarity";
 import { EXPERIMENTS } from "@/lib/analytics/experiments";
 import { AB_COOKIE, AB_COOKIE_DAYS } from "@/lib/analytics/experiments";
 import { PAGE } from "@/components/ui/layout";
+import { freeThroughLabel, getVideo, openNow } from "@/lib/content/videos";
 
 export interface SeriesFacts {
   /** "Four" — episodes released. */
@@ -38,6 +39,11 @@ export interface SeriesFacts {
 
 /** The series version of the hero's words. Hidden unless html[data-fs=series]. */
 export function SeriesHeroCopy({ facts, className = "" }: { facts: SeriesFacts; className?: string }) {
+  // The pilot's free week (2026-10-22): the pilot is what plays behind this,
+  // so the first button plays it and the free line is as loud as in the
+  // control arm. Both arms carry the same offer; the test stays a test of
+  // the words around it.
+  const freeWeek = pilotFreeWeek();
   return (
     <div data-fs-variant="series" className={`${PAGE} pb-12 sm:pb-16 ${className}`}>
       <p className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-amber sm:text-base">
@@ -50,9 +56,25 @@ export function SeriesHeroCopy({ facts, className = "" }: { facts: SeriesFacts; 
         A slow-burn drama about Luna, Josh and Tyson. {facts.episodesWord} episodes out now,
         new ones weekly.
       </p>
+      {freeWeek && (
+        <p className="mt-3 text-lg font-medium text-amber sm:text-xl">
+          Episode 1 is free to watch through {freeThroughLabel(getVideo("pilot")!.openUntil!)}
+        </p>
+      )}
 
       <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
-        {facts.trailerSlug && (
+        {freeWeek ? (
+          <Link
+            href="/clips/pilot"
+            onClick={() => trackOnce("first-screen", "pilot_play")}
+            className="inline-flex min-h-12 items-center gap-2.5 rounded-full bg-ivory px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-white sm:px-7"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 4.5v15l13-7.5z" fill="currentColor" />
+            </svg>
+            Watch the pilot
+          </Link>
+        ) : facts.trailerSlug && (
           <Link
             href={`/clips/${facts.trailerSlug}`}
             onClick={() => trackOnce("first-screen", "trailer_play")}
@@ -80,13 +102,18 @@ export function SeriesHeroCopy({ facts, className = "" }: { facts: SeriesFacts; 
         </Link>
       </div>
 
-      <p className="mt-4 text-sm text-stone-dim">
-        Start with{" "}
-        <Link href="/clips/pilot" className="text-stone underline decoration-hairline underline-offset-4 hover:text-ivory">
-          the pilot
-        </Link>
-        {facts.everyEpisodeOpens ? " — every episode opens free." : "."}
-      </p>
+      {/* Said by the button above while the pilot is free. */}
+      {!freeWeek && (
+        <p className="mt-4 text-sm text-stone-dim">
+          Start with{" "}
+          <Link href="/clips/pilot" className="text-stone underline decoration-hairline underline-offset-4 hover:text-ivory">
+            the pilot
+          </Link>
+          {facts.everyEpisodeOpens
+              ? " — every episode opens free."
+              : "."}
+        </p>
+      )}
     </div>
   );
 }
@@ -130,4 +157,10 @@ export function FirstScreenExposure() {
     clarityTag("first_screen", v);
   }, [viewer]);
   return null;
+}
+
+/** The pilot's free week (Video.openUntil), so both test arms say it. */
+function pilotFreeWeek(): boolean {
+  const pilot = getVideo("pilot");
+  return Boolean(pilot && openNow(pilot));
 }

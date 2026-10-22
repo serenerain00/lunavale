@@ -126,6 +126,14 @@ HEROES=(
   # Preview 0–45. Daylight, a truck on a mountain road, then the two of them in
   # the cab. The only recent one with real exterior distance in it.
   "josh-ty-ricks-house|stories/josh-ty-ricks-house.proxy.mp4|5|24|1"
+  # THE PILOT, 2026-10-22, pinned while the episode is free (lib/content/hero.ts).
+  # Preview 0–190, and this is inside the music-only first minute that is
+  # already on Instagram. 34.53 to 59.07 runs cut to cut: Luna's close-up, the
+  # truck, the hand on the table, the window, him at the truck door. The
+  # house exteriors before it are lit by a moon and little else, which is the
+  # josh-rick-study objection. It stops before the standoff, so the front page
+  # does not open on a gun pointed at somebody.
+  "pilot|stories/pilot.proxy.mp4|34.53|24.54|1"
   #
   # NOT ADDED, and the reason matters because it is the standing test:
   #   luna-ty-apt-argue — the newest clip of the lot and excluded anyway. Its

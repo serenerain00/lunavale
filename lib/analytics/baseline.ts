@@ -54,7 +54,7 @@ export const BREAKS: readonly BaselineBreak[] = [
   },
   {
     on: "2026-10-22",
-    what: "Episode 1 (Pilot) free to everyone, in full, through Wednesday Oct 28 (Pacific); Melissa's test of what a free pilot does for subscriptions. Its 3:10 preview comes back by itself after (Video.openUntil). Also from Oct 21: paying makes the account (AUTO_ACCOUNT).",
+    what: "Episode 1 (Pilot) free to everyone, in full, through Wednesday Oct 28 (Pacific); Melissa's test of what a free pilot does for subscriptions. Its 3:10 preview comes back by itself after (Video.openUntil). The same day it became the pinned home hero for the same window, saying so in amber; the Season 1 card says it too; the first-screen test's series arm plays the pilot (pilot_play) instead of the trailer. Hero synopses are clamped to three lines from here on. Also from Oct 21: paying makes the account (AUTO_ACCOUNT).",
     effect:
       "Pilot plays by non-members are whole-episode plays this week, so preview_end counts for the pilot drop to near zero and the Join box under the player is the pilot's only in-player route to checkout. Compare paid signups Oct 22–28 against the weeks either side, people not payments; the first-screen A/B runs through it, both arms equally.",
   },

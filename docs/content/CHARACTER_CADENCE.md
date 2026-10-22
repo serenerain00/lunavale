@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-22 against `main` at 90843dd. **A touched `lib/content/` file
+re-run 2026-10-22 against `main` at 9aa7f36. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -64,9 +64,9 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 234 | 199 |
+| Luna | 12 | 236 | 199 |
 | Tyson | 12 | 167 | 145 |
-| Josh | 14 | 142 | 126 |
+| Josh | 14 | 144 | 126 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 9 | 9 |
@@ -85,7 +85,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 at 90843dd** (Tyson 167, Josh 142): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 at 9aa7f36** (Tyson 167, Josh 144): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has sat anywhere between 17 and 28. Quote the two
@@ -124,7 +124,11 @@ but every one of them pays into the two characters who need it least.
 *(`josh-ty-kitchen-corner` is free and uncovered too and is deliberately **not**
 on this list: it pays Josh, which is the whole reason it ranks above everything
 here. It is in the Josh item below. Do not file a free Josh or Rick piece under
-this clause — it is what makes the clause true.)*
+this clause — it is what makes the clause true. **On 2026-10-22 that nearly
+happened**: `luna-josh-frmhouse-comehome-horiz` (*Come Home*, free, 60s, Luna
+and Josh) shipped straight into the free-and-uncovered set, and adding it here
+would have made the clause false in the same commit that cited it. It is in the
+Josh item too.)*
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
 > updated 2026-10-12. The backlog below describes `main`, and `main` is behind:
@@ -238,9 +242,25 @@ Standing backlog, roughly prioritised:
   writing off frames — she replaced the frames-written ones there, and the
   comments explain why. Episode 4's synopsis is deliberately written to give
   nothing away, so do not mine it for plot
+- **`access` is no longer the same thing as what a visitor can watch, and the
+  difference expires by itself.** On 2026-10-22 Melissa added `Video.openUntil`
+  and set it on the **pilot** at `2026-10-29T07:00:00Z` — the end of Wednesday
+  2026-10-28 in Pacific time. The pilot's `access` still reads `premium`, but
+  `canWatch()` in `lib/access/entitlement.ts` returns true for everyone while the
+  window is open, `openNow()` in `videos.ts` is the test, and the pilot is the
+  home hero and says so on both first-screen arms while it lasts. So **a count of
+  free pieces taken off `access` is one short of what is actually open** right
+  now, and the list in this file is the `access` list. More to the point, this is
+  the first claim in the doc with **a built-in expiry date**: nobody has to touch
+  the repo for "the pilot is free" to become false — it stops being true at
+  07:00 UTC on 10-29. Check `openNow()` rather than repeating it, and do not
+  build a note, a pull quote or a promotion on a window that closes on its own
 - **`josh-ty-kitchen-corner`** — *In Your Corner* (title a placeholder),
-  published **free** on 2026-10-18, 1:34, Josh and Tyson. **This is now the best
-  Josh gap on the board and the best free one.** Josh at the kitchen island
+  published **free** on 2026-10-18, 1:34, Josh and Tyson. **It is one of two free
+  Josh gaps on the board and the longer of them** — `luna-josh-frmhouse-comehome-horiz`
+  joined it on 10-22, so read both before calling either the best; this line said
+  "the best Josh gap on the board and the best free one" for four days and a
+  single commit retired the superlative. Josh at the kitchen island
   early in the six months, asking Tyson whether he has seen her, unable to make
   sense of her telling him she wants to come home and then to stop calling —
   *"If she wants to be here, then what the fuck are we doing?"* — and then
@@ -256,6 +276,27 @@ Standing backlog, roughly prioritised:
   about being put between two people he loves, nothing more. Whether Luna really
   said "I want to come home" in those words is **open and Melissa's to settle**,
   so write it as Josh's account of the call, not as fact
+- **`luna-josh-frmhouse-comehome-horiz`** — *Come Home* (title a placeholder,
+  hers to replace), published **free** on 2026-10-22, sixty seconds, Luna and
+  Josh, sixty-fifth in `STORY_ORDER`. The second free uncovered Josh piece, and
+  the only one where Josh asks for something himself: a Sunday a few weeks into
+  the separation, Luna at the farmhouse for equipment she left behind for Vale
+  Studios, Josh holding her by the hips and asking her to come home. The same
+  scene also shipped as the free vertical post `luna-josh-frmhouse-come-home`
+  (`posts.ts`) — **one scene in two aspect ratios, not two pieces**, so it wants
+  at most one note and it is not two entries on any tally.
+  **Canon guardrails, from Melissa's context in `videos.ts`:** the scene is
+  *"not a breakup and not a reconciliation: unresolved, on purpose"* and her
+  instruction is **"never write it as either."** He loves her and wants to change
+  without having the answers; she believes he is trying and needs more than
+  another promise; she allows the closeness because she misses him and fears the
+  same patterns. Neither wants to let go. And the line in it is **Josh asking
+  her** — *"Baby, come home"* — which is **not** evidence that Luna ever said she
+  wanted to come home. That question, from the kitchen corner, is still open and
+  still Melissa's to settle; do not let this clip close it. The synopsis is setup
+  only and stops short of her answer, so do not mine it for one. (The picture
+  goes black at 58.2 seconds and her score fades out under it to the last frame —
+  that is deliberate, not a bad trim.)
 - Josh clips with no note yet: `luna-josh-break`, `luna-josh-bed-flashback`,
   `luna-josh-first-night`, `luna-josh-fair` *(taken by #4)*, **`josh-luna-pre-break`**
   (*Before*, 2026-10-19, 6:58, `premium` with a sixty-second free opening — Luna
@@ -319,7 +360,7 @@ Standing backlog, roughly prioritised:
   the free uncovered pieces this is the one with the most under it
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none
-- Notes on the vertical posts — there are twenty-four now and only
+- Notes on the vertical posts — there are twenty-five now and only
   `run-at-the-lake` has one. The newest is **`luna-brief-about-site`**
   (*Where to Watch*, **free**, 2026-10-20): Luna on where the series lives. Its
   commit calls it a "new free clip", but it is a **vertical post** in

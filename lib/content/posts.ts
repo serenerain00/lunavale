@@ -852,6 +852,38 @@ const authored: Clip[] = [
       durationSeconds: 67.5,
     },
   },
+  {
+    /*
+      COME HOME, 2026-10-22. Melissa: "new IG clip vertical
+      luna-josh-frmhouse-come-home … post it free". Josh and Luna in the
+      farmhouse kitchen, daylight, close.
+
+      FROM THE TRANSCRIPT: "You act like the last ten years were all bad." /
+      "I never said they were." / "Then why does it feel like you're trying
+      to forget everything we had?" / "Because you keep reminding me of
+      everything I miss." / "Baby, come home." / "And what happens when I
+      do?" / "I don't know, Lou. But I'm trying." / "Josh, I've given you ten
+      years." / "And I'm asking you for one more."
+
+      INSIDE RELEASED CANON: she has left and he wants her back, which the
+      pilot and Episode 2 already show. The caption says what is said and
+      stops; it does not answer whether she goes back.
+
+      TITLE AND CAPTION ARE PLACEHOLDERS, hers to replace.
+    */
+    id: "luna-josh-frmhouse-come-home",
+    title: "Come Home",
+    caption:
+      "In the farmhouse kitchen, Josh asks Luna to come home. She has given him ten years. He is asking for one more.",
+    file: "luna-josh-frmhouse-come-home.proxy.mp4",
+    poster: "/posters/luna-josh-frmhouse-come-home.jpg",
+    // 58.2, trimmed where the picture goes to black.
+    durationSeconds: 58,
+    addedOn: "2026-10-22",
+    about: ["luna", "josh"],
+    mature: false,
+    access: "free",
+  },
 ];
 
 /**

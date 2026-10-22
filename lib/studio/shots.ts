@@ -237,7 +237,7 @@ function solve(preset: ShotPreset, roles: BlockingFigure[], camSide: XZ, aspect:
   if (spec.kind === "single") {
     const s = bodyOf(roles[0]);
     const dir = rotate(s.forward, -spec.az);
-    const fr = frameFor(spec.size, s.eye, s.top);
+    const fr = frameFor(spec.size, s.eye, s.top, s.upright);
     let d = fr.h / 2 / tan(vfov / 2);
     if (spec.height === "overhead") return overhead(s.at, Math.max(fr.h, 2.1), vfov, preset.mm, s.forward);
     const y = heightFor(spec.height, spec.size, s.eye, fr.cy);
@@ -247,7 +247,7 @@ function solve(preset: ShotPreset, roles: BlockingFigure[], camSide: XZ, aspect:
 
   if (spec.kind === "group") {
     const bodies = roles.map(bodyOf);
-    const c = centroid(roles);
+    const c = { x: avg(bodies.map((b) => b.at.x)), z: avg(bodies.map((b) => b.at.z)) };
     // Arranged, every layout is built to be filmed from +Z. On people she
     // placed herself, square up to them from the side the camera is on.
     let front = arranged ? camSide : perpToward(roles, camSide);
@@ -258,7 +258,7 @@ function solve(preset: ShotPreset, roles: BlockingFigure[], camSide: XZ, aspect:
     }
     const eye = Math.max(...bodies.map((b) => b.eye));
     const top = Math.max(...bodies.map((b) => b.top));
-    const fr = frameFor(spec.size, eye, top);
+    const fr = frameFor(spec.size, eye, top, bodies.every((b) => b.upright));
     if (spec.height === "overhead") {
       const spread = Math.max(...bodies.map((b) => Math.hypot(b.at.x - c.x, b.at.z - c.z))) * 2 + 0.9;
       return overhead(c, Math.max(fr.h, spread * Math.min(1, 1 / aspect) + 1.6), vfov, preset.mm, front);
@@ -284,7 +284,7 @@ function solve(preset: ShotPreset, roles: BlockingFigure[], camSide: XZ, aspect:
     // show: a shoulder and the back of the head (ots), one soft edge of a
     // shoulder (dirty), or nothing at all (clean).
     const [back, out] = spec.style === "ots" ? [0.6, 0.3] : spec.style === "dirty" ? [0.55, 0.33] : [0.1, 0.65];
-    const fr = frameFor(spec.size, s.eye, s.top);
+    const fr = frameFor(spec.size, s.eye, s.top, s.upright);
     const pos: Vec3 = [o.at.x - u.x * back + p.x * out, o.eye + 0.03, o.at.z - u.z * back + p.z * out];
     const target: Vec3 = [s.at.x, fr.cy, s.at.z];
     return cam(pos, target, lensFor(fr.h, dist(pos, target), aspect));
@@ -321,7 +321,13 @@ function solve(preset: ShotPreset, roles: BlockingFigure[], camSide: XZ, aspect:
 /* ------------------------------------------------------------- framing -- */
 
 /** Vertical extent of the frame at the subject: centre height and height in metres. */
-function frameFor(size: Size, eye: number, top: number): { cy: number; h: number } {
+function frameFor(size: Size, eye: number, top: number, upright = true): { cy: number; h: number } {
+  if (!upright) {
+    // Lying down: the body runs across the frame, not up it, so the frame
+    // centres on the face and only its size follows the shot size.
+    const h = { ecu: 0.16, cu: 0.42, mcu: 0.7, ms: 1.05, mfs: 1.45, fs: 2.0, ws: 3.2, ews: 7.5 }[size];
+    return { cy: eye - (size === "ecu" || size === "cu" ? 0.03 : 0.08), h };
+  }
   switch (size) {
     case "ecu": return { cy: eye, h: 0.16 };
     case "cu": return { cy: eye - 0.07, h: 0.42 };
@@ -376,18 +382,45 @@ type XZ = { x: number; z: number };
  * eyes at 1.06 of the skull offset, the skull 0.11k tall). Upright; a bent
  * spine reads a little high, which only adds headroom.
  */
-function bodyOf(f: BlockingFigure) {
+export function bodyOf(f: BlockingFigure) {
   const p = PROPORTIONS[f.build];
   const s = spineOffsets(p);
   const k = p.height / 1.7;
   const neckTop = s.spine + s.chest + s.neck + s.head;
-  const yaw = (f.joints.pelvis ?? [0, 0, 0])[1];
+  // The whole body turns with the pelvis, so a reclined driver's eyes sit
+  // back and lower, and a person lying down has their eyes at pillow height.
+  // Spine bends below the neck are ignored (a few centimetres).
+  const pel = f.joints.pelvis ?? [0, 0, 0];
+  const up = rotYXZ([0, 1, 0], pel);
+  const fwd = rotYXZ([0, 0, 1], pel);
+  const eyeH = neckTop + s.skull * 1.06;
+  const eye: Vec3 = [
+    f.position[0] + up[0] * eyeH + fwd[0] * 0.06,
+    f.position[1] + up[1] * eyeH + fwd[1] * 0.06,
+    f.position[2] + up[2] * eyeH + fwd[2] * 0.06,
+  ];
+  const upright = up[1] > 0.7;
+  // Which way they face, on the floor plan. Lying on their back they face
+  // the ceiling, so "in front of them" becomes the foot of the bed.
+  const flatFwd = Math.hypot(fwd[0], fwd[2]) > 0.3 ? norm({ x: fwd[0], z: fwd[2] }) : norm({ x: -up[0], z: -up[2] });
   return {
-    at: { x: f.position[0], z: f.position[2] },
-    eye: f.position[1] + neckTop + s.skull * 1.06,
-    top: f.position[1] + neckTop + s.skull + 0.11 * k,
-    forward: { x: Math.sin(rad(yaw)), z: Math.cos(rad(yaw)) },
+    at: upright ? { x: f.position[0], z: f.position[2] } : { x: eye[0], z: eye[2] },
+    eye: eye[1],
+    top: upright ? f.position[1] + up[1] * (neckTop + s.skull + 0.11 * k) : eye[1] + 0.1,
+    eye3: eye,
+    forward: flatFwd,
+    upright,
   };
+}
+
+/** A vector turned by a joint's Euler angles in degrees, YXZ order (Rz, then Rx, then Ry). */
+function rotYXZ(v: Vec3, e: Vec3): Vec3 {
+  const [ax, ay, az] = e.map(rad);
+  let [x, y, z] = v;
+  [x, y] = [x * Math.cos(az) - y * Math.sin(az), x * Math.sin(az) + y * Math.cos(az)];
+  [y, z] = [y * Math.cos(ax) - z * Math.sin(ax), y * Math.sin(ax) + z * Math.cos(ax)];
+  [x, z] = [x * Math.cos(ay) + z * Math.sin(ay), -x * Math.sin(ay) + z * Math.cos(ay)];
+  return [x, y, z];
 }
 
 /** Into a layout spot: their pose kept, turned to the spot's facing, head straightened. */
@@ -425,6 +458,7 @@ function centroid(fs: BlockingFigure[]): XZ & { y: number } {
 /* ------------------------------------------------------------------ math -- */
 
 const rad = (d: number) => (d * Math.PI) / 180;
+const avg = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / (xs.length || 1);
 function deg(r: number) { return (r * 180) / Math.PI; }
 const tan = (d: number) => Math.tan(rad(d));
 const dot = (a: XZ, b: XZ) => a.x * b.x + a.z * b.z;

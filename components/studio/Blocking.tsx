@@ -43,6 +43,7 @@ import {
 } from "@/lib/studio/blocking";
 import { aspects, azimuths, byId, cameraHeights, lenses, shotSizes, tilts } from "@/lib/studio/vocab";
 import { SHOT_PRESETS, applyShot, focusWords, type ShotGroup, type ShotPreset } from "@/lib/studio/shots";
+import { PLACES, PLACE_LABELS, applyPlace, type PlaceId, type PlaceSetting } from "@/lib/studio/places";
 import type { ShotRecipe } from "@/lib/studio/types";
 import type { CameraReading, Selection, StageApi, Tool } from "@/components/studio/BlockingStage";
 import { SELECT, type Person } from "@/components/studio/RefLibrary";
@@ -107,8 +108,9 @@ export function Blocking({
   const [copied, setCopied] = useState(false);
   // Shot presets (2026-10-22). Open with S; the tab follows how many people there are.
   const [shotsOpen, setShotsOpen] = useState(false);
-  const [shotTab, setShotTab] = useState<ShotGroup>(() => (b.figures.length >= 3 ? "three" : b.figures.length === 2 ? "two" : "solo"));
+  const [shotTab, setShotTab] = useState<ShotGroup | "places">(() => (b.figures.length >= 3 ? "three" : b.figures.length === 2 ? "two" : "solo"));
   const [arrange, setArrange] = useState(true);
+  const [placed, setPlaced] = useState<string | null>(null);
   // The docks fold away with P. Remembered per browser — a convenience only.
   // Blocking mounts only when its tab is opened, on the client, so reading
   // storage in the initializer cannot mismatch a server render.
@@ -420,6 +422,34 @@ export function Blocking({
     setStatus(null);
   }
 
+  /**
+   * A place (lib/studio/places.ts): furniture, people seated on it, a first
+   * camera. Then "Arrange the people" turns off, so the angle presets that
+   * follow film them where they sit instead of standing them up.
+   */
+  function applyPlaceSetting(setting: PlaceSetting) {
+    let figures = b.figures;
+    const short = setting.seats.length - figures.length;
+    if (short > 0) {
+      const used = new Set(figures.map((f) => f.characterId));
+      figures = [...figures];
+      for (let k = 0; k < short; k++) {
+        const next = draft.characterIds.find((id) => !used.has(id)) ?? null;
+        used.add(next);
+        figures.push(newFigure(next, figures.length));
+      }
+    }
+    const r = applyPlace(setting, figures);
+    setB((x) => ({ ...x, figures: r.figures, props: r.props, camera: r.camera, shot: undefined }));
+    api.current?.setCamera(r.camera);
+    setArrange(false);
+    setActiveFigure(r.figures[0].id);
+    setSelection(null);
+    setMenuFor(null);
+    setPlaced(setting.id);
+    setStatus(null);
+  }
+
   function applyPose(f: BlockingFigure, poseId: string) {
     const yaw = jointOf(f, "pelvis")[1];
     const posed = posedFigure(f, poseId, { x: f.position[0], z: f.position[2], yaw });
@@ -526,13 +556,15 @@ export function Blocking({
           {shotsOpen && (
             <Dock label="Shot presets" className="bottom-16 left-3 top-16 flex w-[19rem] flex-col p-0 text-[13px]">
               <div className="flex items-center gap-1 border-b border-hairline p-1.5">
-                {([["solo", "Solo"], ["two", "Two"], ["three", "Three"]] as [ShotGroup, string][]).map(([g, label]) => (
+                {([["places", "Places"], ["solo", "Solo"], ["two", "Two"], ["three", "Three"]] as [ShotGroup | "places", string][]).map(([g, label]) => (
                   <button key={g} type="button" className={`${seg(shotTab === g)} flex-1`} onClick={() => setShotTab(g)}>{label}</button>
                 ))}
                 <button type="button" aria-label="Close shot presets" className="px-2 text-stone-dim hover:text-ivory" onClick={() => setShotsOpen(false)}>✕</button>
               </div>
               <div className="border-b border-hairline px-3 py-2 text-[12px] text-stone">
-                {shotTab === "solo" ? (
+                {shotTab === "places" ? (
+                  <>Seats everyone on the furniture and points a camera at them. Then pick any angle from Solo, Two or Three: they stay where they sit.</>
+                ) : shotTab === "solo" ? (
                   <>On <span className="text-ivory">{who}</span>. Click someone on the stage to switch. Nobody moves.</>
                 ) : (
                   <label className="flex items-start gap-2">
@@ -548,7 +580,27 @@ export function Blocking({
                   </label>
                 )}
               </div>
-              <ul className="flex-1 space-y-0.5 overflow-y-auto overscroll-contain p-1.5">
+              {shotTab === "places" && (
+                <div className="flex-1 space-y-3 overflow-y-auto overscroll-contain p-1.5">
+                  {(Object.keys(PLACE_LABELS) as PlaceId[]).map((place) => (
+                    <section key={place}>
+                      <h4 className="px-2 pb-0.5 text-[11px] uppercase tracking-wider text-stone-dim">{PLACE_LABELS[place]}</h4>
+                      <ul className="space-y-0.5">
+                        {PLACES.filter((p) => p.place === place).map((p) => (
+                          <li key={p.id} className={`rounded-sm px-2 py-1.5 ${placed === p.id ? "bg-amber/10" : "hover:bg-charcoal-raised"}`}>
+                            <button type="button" className="block w-full text-left" onClick={() => applyPlaceSetting(p)}>
+                              <span className={placed === p.id ? "text-amber-soft" : "text-ivory"}>{p.label}</span>
+                              <span className="ml-1.5 text-[11px] text-stone-dim">{p.seats.length} people</span>
+                              <span className="block text-[11px] leading-snug text-stone-dim">{p.hint}</span>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                  ))}
+                </div>
+              )}
+              <ul className={`flex-1 space-y-0.5 overflow-y-auto overscroll-contain p-1.5 ${shotTab === "places" ? "hidden" : ""}`}>
                 {SHOT_PRESETS.filter((p) => p.group === shotTab).map((p) => {
                   const current = b.shot?.id === p.id;
                   const people = b.figures.slice(0, p.people);

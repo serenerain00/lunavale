@@ -877,8 +877,8 @@ const authored: Clip[] = [
       "In the farmhouse kitchen, Josh asks Luna to come home. She has given him ten years. He is asking for one more.",
     file: "luna-josh-frmhouse-come-home.proxy.mp4",
     poster: "/posters/luna-josh-frmhouse-come-home.jpg",
-    // 58.2, trimmed where the picture goes to black.
-    durationSeconds: 58,
+    // 59.9, the whole file: the last 1.7s of black is her music fading out.
+    durationSeconds: 60,
     addedOn: "2026-10-22",
     about: ["luna", "josh"],
     mature: false,

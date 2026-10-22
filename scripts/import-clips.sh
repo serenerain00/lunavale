@@ -251,10 +251,13 @@ CLIPS=(
   # The slug keeps her folder name, typo and all ("frmhouse"): ids are
   # permanent and the folder is the record of where it came from.
   #
-  # END 58.2: black from 58.17 to the end (blackdetect). FREE, so no preview.
+  # NO END, ON PURPOSE. Black from 58.17 to the end is Melissa fading the
+  # music out ("keep the black trim, thats me fading the music"), not dead
+  # air. It was trimmed for an hour on 2026-10-22 and put back. FREE, so no
+  # preview.
   # POSTER AT 33s: Josh, close, over her shoulder, on "And what happens when
   # I do?".
-  "luna-josh-frmhouse-come-home|stories/luna-josh-frmhouse-come-home/luna-josh-frmhouse-come-home.MP4|33|58.2"
+  "luna-josh-frmhouse-come-home|stories/luna-josh-frmhouse-come-home/luna-josh-frmhouse-come-home.MP4|33"
 )
 
 want=("$@")

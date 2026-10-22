@@ -131,6 +131,12 @@ const OVERRIDES = {
   */
   "luna-ty-panic-attack": 30,
 
+  // THE WRONG ADDRESS — the tier's minute, ended two seconds early. Melissa,
+  // 2026-10-21: "just show the first 1min". At 1:00 Luna is starting "It's
+  // downtown", so it stops at 58.0, after Tyson's "I've been driving for 20
+  // minutes" (word ends 57.0, whisper on the proxy).
+  "luna-ty-driving": 58,
+
   // EPISODE 2 — ABOUT TWO MINUTES FREE. Melissa, 2026-09-29: first "the
   // first 1:30", then the same day "increase the free clip of ep2 to 2min".
   // Not exactly 120: at 2:00 Josh is mid-sentence ("you probably have plenty

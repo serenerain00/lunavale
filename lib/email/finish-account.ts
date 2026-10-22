@@ -23,6 +23,8 @@ import "server-only";
 import { neon } from "@neondatabase/serverless";
 import { stripe } from "@/lib/billing/stripe";
 import { send } from "@/lib/email/send";
+import { autoMade } from "@/lib/billing/auto-account";
+import { claimPendingBySubscription } from "@/lib/db/memberships";
 
 export const CAMPAIGN = "finish-account";
 const SITE = process.env.SITE_URL ?? "https://lunavale38.com";
@@ -66,11 +68,13 @@ function firstNameOf(name: string | null | undefined): string | null {
   return /^[A-Za-z][A-Za-z'’-]{1,20}$/.test(w) ? w[0].toUpperCase() + w.slice(1).toLowerCase() : null;
 }
 
-async function hasClerkAccount(email: string): Promise<boolean> {
+async function clerkAccount(email: string): Promise<{ id: string; madeFor: string | null } | null> {
   const { clerkClient } = await import("@clerk/nextjs/server");
   const client = await clerkClient();
   const users = await client.users.getUserList({ emailAddress: [email], limit: 1 });
-  return users.totalCount > 0;
+  const user = users.data[0];
+  if (!user) return null;
+  return { id: user.id, madeFor: autoMade(user)?.subscription ?? null };
 }
 
 export interface FinishAccountSummary {
@@ -103,8 +107,18 @@ export async function runFinishAccount({ send: doSend }: { send: boolean }): Pro
       out.skipped.push({ reason: "no subscription id" });
       continue;
     }
-    if (await hasClerkAccount(r.email)) {
-      out.skipped.push({ reason: "already has an account" });
+    const account = await clerkAccount(r.email);
+    if (account) {
+      // Made by /welcome for exactly this payment (lib/billing/auto-account.ts),
+      // and the webhook landed after they had gone: attach it here rather than
+      // wait for their next visit. Matched on the subscription the account was
+      // made for, never on the address alone.
+      if (doSend && account.madeFor && account.madeFor === r.stripe_subscription_id) {
+        await claimPendingBySubscription(account.id, r.stripe_subscription_id);
+        out.skipped.push({ reason: "account made at checkout; payment attached" });
+      } else {
+        out.skipped.push({ reason: "already has an account" });
+      }
       continue;
     }
     const sessions = await stripe().checkout.sessions.list({ subscription: r.stripe_subscription_id, limit: 1 });

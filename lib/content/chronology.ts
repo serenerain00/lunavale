@@ -156,6 +156,10 @@ export const STORY_ORDER: readonly string[] = [
   // an ordinary afternoon at the lakehouse with the ease back, so it sits at
   // the start of the settled middle, beside "Most Nights".
   "luna-ty-bulb",
+  // HAND-PLACED — A GUESS, 2026-10-21, Melissa to move it. The wrong address:
+  // a lens run across Denver, all teasing and no weight, so it sits with the
+  // light bulb in the easy stretch. Nothing in it dates it.
+  "luna-ty-driving",
 
   // HAND-PLACED — REASONED. Published 2026-09-20. An evening where nothing
   // happens, which puts it in the settled middle of the six months rather than

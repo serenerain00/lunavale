@@ -133,7 +133,6 @@ export function VideoPlayer({
       onEnded={onEnded}
     >
       <source src={`/api/stream/${slug}`} type="video/mp4" />
-      Your browser does not support the video tag.
     </video>
   );
 }

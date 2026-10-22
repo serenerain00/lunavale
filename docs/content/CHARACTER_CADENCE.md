@@ -52,19 +52,20 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-21 against `main` at ea7787e, and unchanged at c459e0f: the
-merge that took `main` there was all studio-blocking and membership work and
-touched no `lib/content/` file, so the figures below carry forward by
-construction rather than by a fresh run. **A touched `lib/content/` file
+re-run 2026-10-22 against `main` at 90843dd. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
-and if no `lib/content/` file appears the counts cannot have moved. The 2026-07-28 row is kept beneath so the drift is visible.
+and if no `lib/content/` file appears the counts cannot have moved — that is how
+the merge to c459e0f on 10-21 was handled, and the merge to 90843dd a few hours
+later put two of those files back in the list, so run the check every time rather
+than assuming either outcome. The 2026-07-28 row is kept beneath so the drift is
+visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 233 | 198 |
-| Tyson | 12 | 166 | 144 |
+| Luna | 12 | 234 | 199 |
+| Tyson | 12 | 167 | 145 |
 | Josh | 14 | 142 | 126 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
@@ -84,7 +85,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24, measured at ea7787e and unmoved at c459e0f**: it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 at 90843dd** (Tyson 167, Josh 142): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has sat anywhere between 17 and 28. Quote the two
@@ -326,7 +327,13 @@ Standing backlog, roughly prioritised:
   rather than the message. **`luna-ty-studio`** (*The Studio*, **free**, 74s,
   Luna, Tyson and Simone, 2026-10-21) landed with the same "new free clip"
   wording and is also a post. That phrasing has now meant *post* twice running:
-  check `videos.ts` and `posts.ts` before calling anything a clip. It is also
+  check `videos.ts` and `posts.ts` before calling anything a clip. The counter-
+  example arrived the next morning — **`luna-ty-driving`** (*One Number Off*,
+  **premium**, 4:03 with a 58-second free opening, Luna and Tyson, 2026-10-22,
+  sixty-fourth in `STORY_ORDER`) came in as a *"new members clip"* and **is** a
+  video. So the wording predicts the module in neither direction: open the two
+  files. It is also one more premium piece paying the two leads who need it
+  least, which is why the Josh gap went to 25 the day it landed. It is also
   **Simone's only piece of footage**, and the first place a note could meet her. Before it, **`tyson-luna-call-from-field`**
   (2026-10-15): Tyson calling Luna from deployment around 2016, `premium` with a
   67.5-second free preview, so it is reachable without a membership. Its title is

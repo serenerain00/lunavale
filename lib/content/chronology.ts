@@ -131,6 +131,12 @@ export const STORY_ORDER: readonly string[] = [
   "luna-avery-ipad",
   "luna-ty-panic-attack",
 
+  // HAND-PLACED — A GUESS, 2026-10-22, Melissa to move it. Come Home: Josh
+  // asks her, in the farmhouse kitchen, to come back. Early in the six
+  // months, and before he asks Tyson to talk to her (next), since that reads
+  // as what he does once asking her himself has not worked.
+  "luna-josh-frmhouse-comehome-horiz",
+
   // HAND-PLACED — CONFIDENT. Melissa, 2026-09-11: "this is after josh and luna
   // broke up, about a month." The clip either side of it is the one-month mark
   // in her journal ("A month, and he made me go out"), so this sits with it.

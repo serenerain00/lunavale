@@ -4037,6 +4037,43 @@ export const videos: Video[] = [
     place: "downtown",
     about: ["luna", "tyson"],
   },
+  {
+    /*
+      COME HOME, the landscape cut, 2026-10-22. Melissa: "add the horizontal
+      one as a free clip too ... luna-josh-frmhouse-comehome-horiz". Free, in
+      full. The same scene as the vertical post luna-josh-frmhouse-come-home
+      (lib/content/posts.ts), framed for 16:9: Josh and Luna in the farmhouse
+      kitchen, daylight.
+
+      FROM THE TRANSCRIPT: "You act like the last ten years were all bad." /
+      "Then why does it feel like you're trying to forget everything we had?"
+      / "Because you keep reminding me of everything I miss." / "Baby, come
+      home." / "And what happens when I do?" / "I don't know, Lou. But I'm
+      trying." / "Josh, I've given you ten years." / "And I'm asking you for
+      one more."
+
+      INSIDE RELEASED CANON: she has left, he wants her back. The synopsis
+      says what is asked and stops short of her answer.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace, kept the same as
+      the post's so the two read as one scene.
+    */
+    slug: "luna-josh-frmhouse-comehome-horiz",
+    title: "Come Home",
+    synopsis:
+      "In the farmhouse kitchen, Josh asks Luna to come home. She has given him ten years. He is asking for one more.",
+    file: "luna-josh-frmhouse-comehome-horiz.proxy.mp4",
+    poster: "/posters/luna-josh-frmhouse-comehome-horiz.jpg",
+    // 59.9, the whole file: the picture goes black at 58.2 and her score
+    // fades out under it to the last frame.
+    durationSeconds: 60,
+    addedOn: "2026-10-22",
+    access: "free",
+    mature: false,
+    feelings: ["distance", "trust"],
+    place: "farmhouse",
+    about: ["luna", "josh"],
+  },
 ];
 
 /**

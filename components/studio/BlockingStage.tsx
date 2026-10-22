@@ -97,6 +97,8 @@ export interface StageApi {
   /** Put the camera at an azimuth around a figure, at a height relative to her eyes. */
   placeCamera: (figureId: string, azimuth: number, eyeDelta: number | "overhead" | "floor") => void;
   cameraState: () => Blocking["camera"];
+  /** Move the camera to a saved/computed position, target and lens (shot presets). */
+  setCamera: (c: Blocking["camera"]) => void;
   /** Where a figure's chest is on screen, CSS px from the canvas's top left. */
   screen: (figureId: string) => { x: number; y: number; visible: boolean } | null;
 }
@@ -405,6 +407,16 @@ function Rig({
       },
 
       cameraState: state,
+
+      setCamera: (c) => {
+        if (!controls.current) return;
+        camera.position.set(...c.position);
+        controls.current.target.set(...c.target);
+        controls.current.update();
+        invalidate();
+        // The lens comes with it: state() would report the old one until rerender.
+        onCamera({ position: [...c.position] as Vec3, target: [...c.target] as Vec3, mm: c.mm });
+      },
 
       screen: (figureId) => {
         const chest = world(`${figureId}:chest`);

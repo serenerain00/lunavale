@@ -31,6 +31,8 @@
  *                   chin down), Z = tilt (positive = ear toward HER right shoulder)
  */
 
+import type { AppliedShot } from "@/lib/studio/shots";
+
 export type Build = "woman" | "man";
 
 export type JointId =
@@ -82,6 +84,8 @@ export interface Blocking {
   grid: boolean;
   /** The last readout, in words — what the prompt quotes. Set on "Use this camera". */
   readout?: string;
+  /** The shot preset last applied (lib/studio/shots.ts), for its words on focus. */
+  shot?: AppliedShot;
 }
 
 /* ------------------------------------------------------------- skeleton -- */

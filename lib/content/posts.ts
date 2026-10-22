@@ -869,12 +869,27 @@ const authored: Clip[] = [
       pilot and Episode 2 already show. The caption says what is said and
       stops; it does not answer whether she goes back.
 
-      TITLE AND CAPTION ARE PLACEHOLDERS, hers to replace.
+      MELISSA'S CONTEXT, 2026-10-22 (writer knowledge; the synopsis uses
+      only the setup): a Sunday, a few weeks into the separation. Luna stops
+      by Josh's farmhouse for equipment she left behind for Vale Studios.
+      Josh is still struggling to accept she is not coming home. He feels
+      she is trying to forget their ten years; she has forgotten nothing,
+      and remembering what she loves and misses is what makes staying away
+      hard. He holds her by the hips and asks her to come home; the
+      chemistry is still alive and she allows the closeness because she
+      misses him, but fears the same unhealthy patterns. He loves her and
+      wants to change without having the answers; she believes he is trying
+      but needs more than another promise. Neither wants to let go. Not a
+      breakup and not a reconciliation: unresolved, on purpose. Never write
+      it as either.
+
+      THE TITLE IS A PLACEHOLDER, hers to replace. The caption is from her
+      context above, setup only.
     */
     id: "luna-josh-frmhouse-come-home",
     title: "Come Home",
     caption:
-      "In the farmhouse kitchen, Josh asks Luna to come home. She has given him ten years. He is asking for one more.",
+      "A few weeks apart. Luna stops by the farmhouse for some studio equipment, and Josh still hasn't accepted that she isn't coming home.",
     file: "luna-josh-frmhouse-come-home.proxy.mp4",
     poster: "/posters/luna-josh-frmhouse-come-home.jpg",
     // 59.9, the whole file: the last 1.7s of black is her music fading out.

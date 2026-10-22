@@ -4055,13 +4055,27 @@ export const videos: Video[] = [
       INSIDE RELEASED CANON: she has left, he wants her back. The synopsis
       says what is asked and stops short of her answer.
 
-      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace, kept the same as
-      the post's so the two read as one scene.
+      MELISSA'S CONTEXT, 2026-10-22 (writer knowledge; the synopsis uses
+      only the setup): a Sunday, a few weeks into the separation. Luna stops
+      by Josh's farmhouse for equipment she left behind for Vale Studios.
+      Josh is still struggling to accept she is not coming home. He feels
+      she is trying to forget their ten years; she has forgotten nothing,
+      and remembering what she loves and misses is what makes staying away
+      hard. He holds her by the hips and asks her to come home; the
+      chemistry is still alive and she allows the closeness because she
+      misses him, but fears the same unhealthy patterns. He loves her and
+      wants to change without having the answers; she believes he is trying
+      but needs more than another promise. Neither wants to let go. Not a
+      breakup and not a reconciliation: unresolved, on purpose. Never write
+      it as either.
+
+      THE TITLE IS A PLACEHOLDER, hers to replace. The synopsis is from her
+      context above, setup only, and pairs with the post's caption.
     */
     slug: "luna-josh-frmhouse-comehome-horiz",
     title: "Come Home",
     synopsis:
-      "In the farmhouse kitchen, Josh asks Luna to come home. She has given him ten years. He is asking for one more.",
+      "A few weeks into the separation, Luna stops by the farmhouse on a Sunday to pick up equipment for Vale Studios. Josh still hasn't accepted that she isn't coming home, and what starts as a conversation doesn't stay one.",
     file: "luna-josh-frmhouse-comehome-horiz.proxy.mp4",
     poster: "/posters/luna-josh-frmhouse-comehome-horiz.jpg",
     // 59.9, the whole file: the picture goes black at 58.2 and her score

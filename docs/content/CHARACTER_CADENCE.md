@@ -52,9 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-22 against `main` at 9aa7f36, and unchanged at 4ada21e — that
-merge was one commit of Android-tuned fallback fonts against mobile layout
-shift and touched no `lib/content/` file. **A touched `lib/content/` file
+re-run 2026-10-23 against `main` at 13aeaec. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -66,8 +64,8 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 236 | 199 |
-| Tyson | 12 | 167 | 145 |
+| Luna | 12 | 237 | 199 |
+| Tyson | 12 | 168 | 145 |
 | Josh | 14 | 144 | 126 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
@@ -87,7 +85,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23, measured at 9aa7f36 and unmoved at 4ada21e** (Tyson 167, Josh 144): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 at 13aeaec** (Tyson 168, Josh 144): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has sat anywhere between 17 and 28. Quote the two
@@ -213,6 +211,16 @@ Josh item too.)*
 
 Standing backlog, roughly prioritised:
 
+- **A fifth episode is promised and is not here yet.** On 2026-10-23 Melissa
+  sent win-back group E — everyone still inside a cancelled membership, thirteen
+  people — with the subject *"Episode 5 lands this week"* and her own words in
+  the code: *"ep 5 lands this week"* (`lib/email/winback.ts`). **There is no
+  `episode-5` in `videos.ts`**, so for now this is a dated promise living only in
+  a sent email: it is not false, and it is not something to correct, but it has a
+  deadline and it is hers. Count the episodes from `videos.ts` rather than from
+  that subject line, and expect this item to say five rather than four. The same
+  email names *Come Home* and *Two in the Morning* as the week's two new scenes,
+  which is the shortest statement anywhere of what shipped this week.
 - **The four episodes carry no note between them.** This is the top of the
   list, and it keeps growing: `pilot` (*Episode 1*, 2026-09-21, 18:36,
   `notes: ["danger"]`), `episode-2` (*Breathe*, 22:23), `episode-3` (*The Space
@@ -362,8 +370,15 @@ Standing backlog, roughly prioritised:
   the free uncovered pieces this is the one with the most under it
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none
-- Notes on the vertical posts — there are twenty-five now and only
-  `run-at-the-lake` has one. The newest is **`luna-brief-about-site`**
+- Notes on the vertical posts — there are twenty-six now and only
+  `run-at-the-lake` has one. The newest is **`ty-gym`** (*Two in the Morning*,
+  **free**, 113s, Tyson and Luna, 2026-10-23): Tyson in the gym, and a call he
+  made from deployment years ago. **That call looks like the same event as
+  `tyson-luna-call-from-field`** (*You Survived*) from the other side — read both
+  entries before writing either, because a note that assumes it would be
+  inventing the link. Its runtime is trimmed to 113 because the iOS Control
+  Center frames into the source after 113.1 seconds; the cut is not short by
+  accident. Before it, **`luna-brief-about-site`**
   (*Where to Watch*, **free**, 2026-10-20): Luna on where the series lives. Its
   commit calls it a "new free clip", but it is a **vertical post** in
   `posts.ts`, not a video in `videos.ts` — one more reason to read the module

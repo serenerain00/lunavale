@@ -530,6 +530,22 @@ export const notes: SetNote[] = [
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work in that room than I am.",
     ],
   },
+  {
+    id: "rick-a-line-in-the-water",
+    author: "rick",
+    kind: "insight",
+    heading: "A line in the water",
+    dateline: "Day 20 · the far end of the lake",
+    sceneSlug: "josh-rick-lake",
+    place: "lake",
+    access: "premium",
+    body: [
+      "Melissa put a rod in my hands before she gave me a single line, and the direction was: your son has driven out here to ask you for help, and you are going to keep fishing. I asked whether I could at least reel in when he finally gets to it. No.",
+      "There is no music under this one and there is not going to be any. You can hear the line go out. Every pause I take is just a pause, sitting in the open with nothing holding it up — which turns out to be the most exposed I am anywhere in this film. A man who runs a room by not filling it, in the one place where nothing else is filling it either.",
+      "I already knew where she was staying before he opened his mouth. Her mother told me. So I spend the scene letting him work his way round to asking me something I have had the answer to since before he parked, and that is not cruelty. It is the only way I have ever known how to be his father. Get there first, then hand it over once he has had to reach for it.",
+      "Then I tell him: good. Now you know how she felt. I meant it, I have thought about it since, and I would say it again. But he drove out here for a rope and what he got was the truest sentence available, and those are not the same thing. I have never once managed to give him the first one.",
+    ],
+  },
 
   /* ==================================================================
      WRITTEN TO EACH OTHER

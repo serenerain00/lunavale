@@ -899,6 +899,41 @@ const authored: Clip[] = [
     mature: false,
     access: "free",
   },
+  {
+    /*
+      TY-GYM, 2026-10-23. Melissa: "new vertical clip called ty-gym, hes in
+      the gym, having flashbacks of calling luna while deployed". Tyson
+      training alone now, cut against the call from deployment: him in
+      uniform on the phone, Luna woken in bed.
+
+      FROM THE TRANSCRIPT: "Ty?" / "Is everything okay?" / "Yeah,
+      everything's fine." / "It's two in the morning." / "I know." / "You
+      couldn't wait?" / "Didn't know when I'd get another chance." / "What's
+      going on?" / "Nothing. Just wanted to hear your voice." / "Well, here I
+      am."
+
+      INSIDE RELEASED CANON: Tyson served in the Navy and called Luna from
+      deployment (tyson-luna-call-from-field, "You Survived", is already
+      up). DESCRIBE AND STOP (tyson-no-early-feelings): the caption says he
+      called and when, never why, and never quotes "just wanted to hear your
+      voice" — on the site that line would read as a declaration, which is
+      exactly what the rule forbids. Viewers hear it in the clip and decide.
+
+      FREE, as posts are by default; Melissa did not say otherwise. The
+      title is a placeholder, hers to replace.
+    */
+    id: "ty-gym",
+    title: "Two in the Morning",
+    caption:
+      "Tyson in the gym, and a call from years ago: deployed, two in the morning her time, and Luna picking up anyway.",
+    file: "ty-gym.proxy.mp4",
+    poster: "/posters/ty-gym.jpg",
+    // 112.6: cut where the score reaches silence under the closing black.
+    durationSeconds: 113,
+    addedOn: "2026-10-23",
+    about: ["tyson", "luna"],
+    mature: false,
+  },
 ];
 
 /**

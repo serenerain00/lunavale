@@ -258,6 +258,16 @@ CLIPS=(
   # POSTER AT 33s: Josh, close, over her shoulder, on "And what happens when
   # I do?".
   "luna-josh-frmhouse-come-home|stories/luna-josh-frmhouse-come-home/luna-josh-frmhouse-come-home.MP4|33"
+  # TY-GYM, 2026-10-23. Melissa: "new vertical clip called ty-gym, hes in the
+  # gym, having flashbacks of calling luna while deployed". Present-day Tyson
+  # in the gym, cut against the 2am call from deployment (Navy, in uniform)
+  # and Luna answering in bed. 1320x2088, 60fps, 113.8s, scored. The folder
+  # also holds four stills and four Kling shots; this .mov is the edit.
+  #
+  # END 112.6: black from 109.33 with the score fading under it; the music
+  # reaches silence (-91 dB) at 112.6 and the last 1.2s is dead air.
+  # POSTER AT 36s: Tyson in the gym, face close, sweat, looking off.
+  "ty-gym|stories/ty-gym/ty-gym.mov|36|112.6"
 )
 
 want=("$@")

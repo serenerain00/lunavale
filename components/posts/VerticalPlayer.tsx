@@ -99,7 +99,6 @@ export function VerticalPlayer({ clip }: VerticalPlayerProps) {
           onError={() => setFailed(true)}
         >
           <source src={`/api/stream/${clip.id}`} type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
         )}
       </div>

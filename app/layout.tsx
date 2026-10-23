@@ -15,12 +15,19 @@ const fraunces = Fraunces({
   subsets: ["latin"],
   display: "swap",
   axes: ["opsz"],
+  // Fallback faces are ours, not next/font's: it only knows Times New Roman,
+  // which Android doesn't have, and passing `fallback` drops its own face
+  // anyway. See the fallback faces in app/globals.css.
+  adjustFontFallback: false,
+  fallback: ["Fraunces Fallback", "Fraunces Fallback Android", "serif"],
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
+  adjustFontFallback: false,
+  fallback: ["Inter Fallback", "Inter Fallback Android", "system-ui", "sans-serif"],
 });
 
 // Luna's hand, for the journal pages only. Caveat over the more authentic-

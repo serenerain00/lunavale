@@ -48,6 +48,63 @@
   --duration-cinematic: 1200ms;
 }
 
+/*
+ * FALLBACK FACES (2026-10-22). next/font sizes its fallbacks against
+ * Times New Roman and Arial, and Android has neither, so until Fraunces and
+ * Inter arrived an Android phone drew text in plain Noto Serif / Roboto.
+ * Roboto is about 8% narrower than Inter, so lines broke in different places
+ * and the page jumped when the real fonts landed. That was the homepage's
+ * mobile layout shift in Clarity: it was nearly all first visits from
+ * Instagram's and Facebook's in-app browsers on Android, where the fonts are
+ * never cached yet. (iPhones don't report layout shift at all.)
+ *
+ * Sized so the fallback text wraps exactly like the real font. Measured
+ * against Fraunces 600 for headings and Inter 400 for body text: with these
+ * numbers, no text block in the top 2400px of the homepage changed height at
+ * 360, 393 or 412px wide. The ascent/descent values are the real fonts'
+ * metrics divided by size-adjust, because size-adjust scales them too.
+ *
+ * The first two faces are next/font's own, copied verbatim (its numbers for
+ * Times New Roman and Arial): giving it a `fallback` list stops it emitting
+ * them, so they live here now, and iOS, macOS and Windows get exactly what
+ * they had. Those browsers stop at these and never reach the Android faces.
+ */
+@font-face {
+  font-family: "Fraunces Fallback";
+  src: local("Times New Roman");
+  ascent-override: 84.71%;
+  descent-override: 22.09%;
+  line-gap-override: 0%;
+  size-adjust: 115.45%;
+}
+
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  ascent-override: 90.44%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+  size-adjust: 107.12%;
+}
+
+@font-face {
+  font-family: "Fraunces Fallback Android";
+  src: local("Noto Serif"), local("NotoSerif-Regular");
+  size-adjust: 98.23%;
+  ascent-override: 99.56%;
+  descent-override: 25.96%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Inter Fallback Android";
+  src: local("Roboto"), local("Roboto-Regular");
+  size-adjust: 107.62%;
+  ascent-override: 90.02%;
+  descent-override: 22.41%;
+  line-gap-override: 0%;
+}
+
 html {
   color-scheme: dark;
 }

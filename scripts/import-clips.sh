@@ -265,7 +265,9 @@ CLIPS=(
   # also holds four stills and four Kling shots; this .mov is the edit.
   #
   # END 112.6: black from 109.33 with the score fading under it; the music
-  # reaches silence (-91 dB) at 112.6 and the last 1.2s is dead air.
+  # reaches silence (-91 dB) at 112.6. NEVER LET THIS END GO PAST 113.1:
+  # from 113.13 the source shows her phone's Control Center (the screen
+  # recording being stopped).
   # POSTER AT 36s: Tyson in the gym, face close, sweat, looking off.
   "ty-gym|stories/ty-gym/ty-gym.mov|36|112.6"
 )

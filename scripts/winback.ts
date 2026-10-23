@@ -39,6 +39,7 @@ import Stripe from "stripe";
 import { releases } from "@/lib/content/releases";
 import {
   campaignFor,
+  composeEpisodeNote,
   composeRenewal,
   composeWinback,
   type WinbackGroup,
@@ -59,15 +60,19 @@ const ENDED_SINCE = "2026-09-01";
 const RENEW_BY = "2026-11-03";
 const RENEW_SKIP = new Set(["as.2525socialmedia@gmail.com", "andreaschreck@mac.com"]);
 const compose = (r: WinbackPerson, all: ReturnType<typeof releases>, unsub: string) =>
-  group === "r" ? composeRenewal(r, all, base, unsub) : composeWinback(group, r, all, base, unsub);
+  group === "e"
+    ? composeEpisodeNote(r, base, unsub)
+    : group === "r"
+      ? composeRenewal(r, all, base, unsub)
+      : composeWinback(group, r, all, base, unsub);
 
 function die(message: string): never {
   console.error(`\n  ${message}\n`);
   process.exit(1);
 }
 
-if (groupArg !== "a" && groupArg !== "b" && groupArg !== "r")
-  die("Pass --group=a (leaving, still in), --group=b (already gone) or --group=r (renewal note).");
+if (groupArg !== "a" && groupArg !== "b" && groupArg !== "r" && groupArg !== "e")
+  die("Pass --group=a (leaving, still in), --group=b (already gone), --group=r (renewal note) or --group=e (Episode 5 note).");
 const group: WinbackGroup = groupArg;
 const campaign = campaignFor(group);
 const day = (d: Date | number) => new Date(d).toISOString().slice(0, 10);
@@ -153,6 +158,18 @@ async function groupB(exclude: Set<string>): Promise<Recipient[]> {
   return [...byEmail.values()];
 }
 
+/* ------------------------------------------------------------- group E ---- */
+
+/** Everyone leaving; flags who already had the 10-20 renewal note. */
+async function markWroteLastWeek(leaving: Recipient[]): Promise<Recipient[]> {
+  const sql = neon(process.env.DATABASE_URL!);
+  const had = (await sql`
+    SELECT email FROM email_sends WHERE campaign = ${campaignFor("r")} AND email = ANY(${leaving.map((r) => r.email)})
+  `) as { email: string }[];
+  const wrote = new Set(had.map((r) => r.email));
+  return leaving.map((r) => ({ ...r, wroteLastWeek: wrote.has(r.email) }));
+}
+
 /* -------------------------------------------------------------- shared ---- */
 
 async function suppressedAndSent(addrs: string[]) {
@@ -172,7 +189,13 @@ async function suppressedAndSent(addrs: string[]) {
 async function deliver(to: string, subject: string, text: string, html: string, unsub: string) {
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
-    headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+      // Resend drops a repeat of the same key within 24h, so a retry after a
+      // 5xx (it happened 2026-10-23: four 500/520s) cannot double-send.
+      "Idempotency-Key": `${campaign}:${to}`,
+    },
     body: JSON.stringify({
       from: process.env.MAIL_FROM,
       to,
@@ -197,7 +220,7 @@ async function main() {
     // without putting anybody else's dates in your inbox.
     recipients = [
       group !== "b"
-        ? { email: only, firstName: flag("name"), since: "2026-09-26", accessUntil: "2026-10-26" }
+        ? { email: only, firstName: flag("name"), since: "2026-09-26", accessUntil: "2026-10-26", wroteLastWeek: group === "e" }
         : { email: only, firstName: flag("name"), since: "2026-10-06" },
     ];
   } else {
@@ -207,14 +230,16 @@ async function main() {
         ? leaving
         : group === "r"
           ? leaving.filter((r) => (r.accessUntil ?? "") <= RENEW_BY && !RENEW_SKIP.has(r.email))
-          : await groupB(new Set(leaving.map((r) => r.email)));
+          : group === "e"
+            ? await markWroteLastWeek(leaving)
+            : await groupB(new Set(leaving.map((r) => r.email)));
     const { off, done } = await suppressedAndSent(people.map((p) => p.email));
     recipients = people.filter((p) => !off.has(p.email) && !done.has(p.email));
     console.log(`\n  Group ${group.toUpperCase()}: ${people.length} found`);
     if (off.size) console.log(`  ${off.size} opted out — skipped`);
     if (done.size) console.log(`  ${done.size} already got ${campaign} — skipped`);
     for (const r of recipients) {
-      console.log(`    ${r.since}${r.accessUntil ? ` → ${r.accessUntil}` : ""}  ${r.firstName ? "named" : "no name"}`);
+      console.log(`    ${r.since}${r.accessUntil ? ` → ${r.accessUntil}` : ""}  ${r.firstName ? "named" : "no name"}${r.wroteLastWeek ? "  (had last week's note)" : ""}`);
     }
   }
 

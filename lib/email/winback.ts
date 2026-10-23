@@ -27,7 +27,7 @@ const EPISODE_HREFS = new Set(
  * renewal off and whose access ends soon. Group A, but most of them already
  * had the "Previously on" email, so it is its own shorter thing.
  */
-export type WinbackGroup = "a" | "b" | "r";
+export type WinbackGroup = "a" | "b" | "r" | "e";
 
 export interface WinbackPerson {
   firstName?: string;
@@ -35,6 +35,8 @@ export interface WinbackPerson {
   since: string;
   /** Group A only: the last day of access. */
   accessUntil?: string;
+  /** Group E only: they already got the renewal note (renew-2026-10-20). */
+  wroteLastWeek?: boolean;
 }
 
 export interface Composed {
@@ -46,10 +48,84 @@ export interface Composed {
 export const SUBJECT = "Previously on Between Us";
 
 export function campaignFor(group: WinbackGroup): string {
+  if (group === "e") return "ep5-2026-10-23";
   return group === "r" ? "renew-2026-10-20" : `winback-2026-10-${group}`;
 }
 
 export const RENEW_SUBJECT = "Before your membership ends";
+
+export const EPISODE_NOTE_SUBJECT = "Episode 5 lands this week";
+
+/**
+ * Group "e" (Melissa, 2026-10-23): everyone still inside a cancelled
+ * membership. "send out an email to the folks that will expire soon. maybe we
+ * can keep them." The news is Episode 5 ("ep 5 lands this week", her words)
+ * and the two scenes that went up this week. Short, because nine of them had
+ * the renewal note three days earlier and all of them had the digest that
+ * morning; the "I know I wrote last week" line only goes to those nine.
+ * Same refusals as the rest of this file: no countdown, no discount.
+ */
+export function composeEpisodeNote(
+  person: WinbackPerson,
+  base: string,
+  unsubscribeUrl: string,
+): Composed {
+  const u = new URL("/account", base);
+  u.searchParams.set("utm_source", "email");
+  u.searchParams.set("utm_medium", "winback");
+  u.searchParams.set("utm_campaign", campaignFor("e"));
+  const actionUrl = u.toString();
+  const name = person.firstName?.trim();
+  const hi = name ? `Hi ${name.charAt(0).toUpperCase()}${name.slice(1)},` : "Hi,";
+  const until = longDate(person.accessUntil ?? person.since);
+  const opening =
+    `Your Luna Vale membership ends on ${until}.` +
+    (person.wroteLastWeek ? " I know I wrote last week, so I'll keep this short." : "");
+  const news = "Episode 5 lands this week. And two new scenes went up in the last few days:";
+  const scenes = [
+    ["Come Home", "a few weeks apart, Luna stops by the farmhouse, and Josh still hasn't accepted she isn't coming home."],
+    ["Two in the Morning", "Tyson in the gym, and a call he made from deployment years ago."],
+  ];
+  const keep = "If you'd like to stay, you can switch renewal back on from your account. Same price, nothing else changes.";
+  const ask = "And if you're leaving because something didn't work for you, I'd really like to know. Just reply.";
+  const footer = "You're getting this because you're a Luna Vale member.";
+
+  const text = [
+    hi, "", opening, "", news, ...scenes.map(([t, d]) => `- ${t}: ${d}`), "",
+    keep, `Keep my membership → ${actionUrl}`, "",
+    ask, "", "Melissa", "", "—", footer,
+    `Stop these emails: ${unsubscribeUrl}`,
+    "This does not cancel or change your membership.",
+  ].join("\n");
+
+  const p = (s: string) =>
+    `<tr><td style="color:#d8d2ca;font-size:15px;line-height:1.7;padding:0 0 18px 0;">${s}</td></tr>`;
+  const html = `<!doctype html>
+<html><body style="margin:0;padding:0;background:#0a0908;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0a0908;">
+<tr><td align="center" style="padding:40px 16px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;">
+  <tr><td style="color:#c9a227;font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding-bottom:22px;">Luna Vale</td></tr>
+  ${p(esc(hi))}
+  ${p(esc(opening))}
+  ${p(esc(news))}
+  <tr><td style="color:#d8d2ca;font-size:15px;line-height:1.8;padding:0 0 22px 0;">${scenes
+    .map(([t, d]) => `<strong style="color:#f3ede4;">${esc(t)}</strong>: ${esc(d)}`)
+    .join("<br>")}</td></tr>
+  ${p(esc(keep))}
+  <tr><td style="padding:4px 0 26px 0;"><a href="${esc(actionUrl)}" style="display:inline-block;background:#c9a227;color:#0a0908;text-decoration:none;font-size:14px;padding:11px 20px;border-radius:999px;">Keep my membership &rarr;</a></td></tr>
+  ${p(esc(ask))}
+  ${p("Melissa")}
+  <tr><td style="border-top:1px solid #2a2724;padding-top:20px;color:#8b8681;font-size:12px;line-height:1.7;">
+    ${esc(footer)}<br>
+    <a href="${esc(unsubscribeUrl)}" style="color:#8b8681;">Stop these emails</a> &mdash; it does not cancel or change your membership.
+  </td></tr>
+</table>
+</td></tr></table>
+</body></html>`;
+
+  return { subject: EPISODE_NOTE_SUBJECT, text, html };
+}
 
 /**
  * The renewal note. Wording approved by Melissa, 2026-10-20. Same refusals as

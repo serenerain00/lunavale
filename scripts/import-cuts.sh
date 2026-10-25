@@ -859,8 +859,10 @@ CUTS=(
   # to the last frame, so nothing trimmed). 1786x1080 at 30fps. No END or
   # FADE: the end title fades itself to black.
   #
-  # POSTER AT 737.4s: Luna at the taco table, inside the free window.
-  "episode-5|stories/ep5/ep5-final.mp4|737.4|-|-|30"
+  # POSTER AT 815s (Melissa asked for a better one, 2026-10-25): Luna
+  # smiling across the table at Tyson, candle and bokeh, inside the free
+  # window. Was 737.4s, a mid-bite two-shot.
+  "episode-5|stories/ep5/ep5-final.mp4|815|-|-|30"
 
   # THE INTERVIEW, 2026-10-09. A future season: Detectives Harris and
   # Bennett question Luna about the accident nine years ago, then she rings

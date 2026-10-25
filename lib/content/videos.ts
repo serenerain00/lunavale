@@ -3419,7 +3419,7 @@ export const videos: Video[] = [
       title) to just after "Free drinks, open bar, could be fun", stopping
       before "what are you gonna tell Josh". She said a minute; the scene
       she named runs 1:36 and any minute inside it cuts the invitation in
-      half. Poster inside the window: Luna at the table.
+      half. Poster inside the window: Luna smiling across the table at Tyson (815s).
     */
     slug: "episode-5",
     // Must match lib/content/season.ts.

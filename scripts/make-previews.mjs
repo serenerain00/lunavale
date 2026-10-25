@@ -156,6 +156,15 @@ const OVERRIDES = {
   // to the bedroom, and "Medic! I need help!" is finished by then (checked
   // on the energy, not whisper: loud to 158.20, room tone from 158.30).
   "episode-4": 158.2,
+
+  // EPISODE 5 — THE TACO SCENE AND NEW YORK, 1:36 (Melissa, 2026-10-25:
+  // "let the viewers see the taco scene, the bits about ny"). Starts at its
+  // `hookStart`, 734.93 — the cut to the table (729.53 in the export, plus
+  // the 5.4s opening title) — and ends at 831.0, in the pause after "Free
+  // drinks, open bar, could be fun", before "what are you gonna tell Josh".
+  // Timed on the no-music export (0.9s earlier than the scored one, by
+  // cross-correlation): speech to 823.2, quiet 823.25–825.0 there.
+  "episode-5": 96.07,
   // Melissa, 2026-10-18 ("ok do all of the above", the Facebook conversion
   // audit): the pilot's free window was its first minute, which is the
   // music-only opening — not one line of dialogue — on the most-played

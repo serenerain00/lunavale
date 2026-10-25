@@ -87,6 +87,7 @@ function cta(c: string): Cta {
 }
 
 function storyline(c: string): string {
+  if (has(c, /ep ?5\b|episode 5|episode five/i)) return "episode-5";
   if (has(c, /episode 4/i)) return "episode-4";
   if (has(c, /ep ?3|episode 3|episode three/i)) return "episode-3";
   if (has(c, /ep ?2|episode 2|episode two/i)) return "episode-2";

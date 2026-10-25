@@ -3389,6 +3389,62 @@ export const videos: Video[] = [
   },
   {
     /*
+      EPISODE 5, 2026-10-25, released that day. Season one, with the credits
+      (scripts/episode-credits.py, as Episode 4: the title on black first,
+      then the episode, then the end title — no name card). Master:
+      stories/ep5/ep5-final.mp4, built from ep5-music.mp4. The export has
+      no closing black to trim (the score runs to the last frame), so --end
+      is the whole file.
+
+      WHAT IS IN IT, from the transcript: Tyson's piece to camera ("Luna
+      thinks I need to introduce myself"); Josh at the lakehouse about the
+      plumbing and Saturday's dinner; the studio with Simone, New York
+      booked for the week of the studio promo; Simone asking Luna about Ty;
+      the two-in-the-morning call from deployment; Tyson pushing back on
+      her still working for Josh's company; and tacos — too much cilantro,
+      then "I'm going to New York next month. You should come", which turns
+      into what she will tell Josh, and ends on "no tie".
+
+      TITLE: Luna's line, "everybody seems to have an opinion about what I
+      should be doing" — the thread through every scene (Josh, Simone,
+      Tyson). Melissa asked for a title from the transcript; hers to replace.
+
+      SYNOPSIS: short, the "netflix hulu" rule from Episode 4. It does not
+      quote the call ("just wanted to hear your voice") or Simone's
+      question about Ty — tyson-no-early-feelings: describe and stop.
+
+      FREE: THE TACO SCENE THROUGH THE NEW YORK INVITATION (Melissa,
+      2026-10-25: "let the viewers see the taco scene, the bits about ny").
+      From the cut to the table (729.53s in the export, +5.4s of opening
+      title) to just after "Free drinks, open bar, could be fun", stopping
+      before "what are you gonna tell Josh". She said a minute; the scene
+      she named runs 1:36 and any minute inside it cuts the invitation in
+      half. Poster inside the window: Luna at the table.
+    */
+    slug: "episode-5",
+    // Must match lib/content/season.ts.
+    title: "Episode 5: Everybody Has an Opinion",
+    synopsis:
+      "Luna is trying to step back from Josh’s company and put everything into her studio, and everyone around her has an opinion about how she should do it. Then, over tacos, she asks Tyson to come to New York.",
+    file: "episode-5.proxy.mp4",
+    poster: "/posters/episode-5.jpg",
+    durationSeconds: 1097,
+    addedOn: "2026-10-25",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "episode-5-preview.proxy.mp4",
+      // See the override in scripts/make-previews.mjs.
+      durationSeconds: 96,
+      hookStart: 734.93,
+      hookNote: "tacos, too much cilantro, and New York",
+    },
+    feelings: ["trust", "distance"],
+    place: "downtown",
+    about: ["luna", "tyson", "josh", "simone"],
+  },
+  {
+    /*
       LUNA AND JOSH, IN BLACK AND WHITE, Melissa, 2026-10-10. The landscape
       cut is this clip; the vertical is the post `luna-josh-bed-ig`. Both
       members-only (Melissa).

@@ -854,6 +854,14 @@ CUTS=(
   # window, before the blood in the frames that follow.
   "episode-4|stories/ep4/ep4-final.mp4|128|-|-|30"
 
+  # EPISODE 5, 2026-10-25. stories/ep5/ep5-final.mp4 is ep5-music.mp4 with
+  # the credits on (scripts/episode-credits.py --end 1082.8: the score runs
+  # to the last frame, so nothing trimmed). 1786x1080 at 30fps. No END or
+  # FADE: the end title fades itself to black.
+  #
+  # POSTER AT 737.4s: Luna at the taco table, inside the free window.
+  "episode-5|stories/ep5/ep5-final.mp4|737.4|-|-|30"
+
   # THE INTERVIEW, 2026-10-09. A future season: Detectives Harris and
   # Bennett question Luna about the accident nine years ago, then she rings
   # Tyson from the car. Scored, 13:20, 1320x798 hevc at 60fps — down to 30

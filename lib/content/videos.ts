@@ -3415,28 +3415,33 @@ export const videos: Video[] = [
 
       FREE: THE TACO SCENE THROUGH THE NEW YORK INVITATION (Melissa,
       2026-10-25: "let the viewers see the taco scene, the bits about ny").
-      From the cut to the table (729.53s in the export, +5.4s of opening
-      title) to just after "Free drinks, open bar, could be fun", stopping
+      From the cut to the table (727.57s in the 06:10 re-export, +5.4s of
+      opening title; it was 729.53 in the first export, everything after ~7
+      minutes moved 1.96s earlier) to just after "Free drinks, open bar, could be fun", stopping
       before "what are you gonna tell Josh". She said a minute; the scene
       she named runs 1:36 and any minute inside it cuts the invitation in
-      half. Poster inside the window: Luna smiling across the table at Tyson (815s).
+      half. Poster inside the window: Luna smiling across the table at Tyson (813.04s in the re-export).
     */
     slug: "episode-5",
     // Must match lib/content/season.ts.
     title: "Episode 5: Everybody Has an Opinion",
     synopsis:
       "Luna is trying to step back from Josh’s company and put everything into her studio, and everyone around her has an opinion about how she should do it. Then, over tacos, she asks Tyson to come to New York.",
-    file: "episode-5.proxy.mp4",
+    // -v2 (2026-10-25): Melissa re-exported to stop a filter carrying into
+    // the next scene. NEW NAME ON PURPOSE so anyone mid-episode keeps
+    // streaming the old blob untouched; new plays get this one. The old
+    // episode-5*.proxy.mp4 blobs stay in storage.
+    file: "episode-5-v2.proxy.mp4",
     poster: "/posters/episode-5.jpg",
-    durationSeconds: 1097,
+    durationSeconds: 1095,
     addedOn: "2026-10-25",
     access: "premium",
     mature: false,
     preview: {
-      file: "episode-5-preview.proxy.mp4",
+      file: "episode-5-v2-preview.proxy.mp4",
       // See the override in scripts/make-previews.mjs.
       durationSeconds: 96,
-      hookStart: 734.93,
+      hookStart: 732.97,
       hookNote: "tacos, too much cilantro, and New York",
     },
     feelings: ["trust", "distance"],

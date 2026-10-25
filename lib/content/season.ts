@@ -130,7 +130,7 @@ export const SEASONS: Season[] = [
         title: "Episode 5: Everybody Has an Opinion",
         slug: "episode-5",
         poster: "/posters/episode-5.jpg",
-        runtimeSeconds: 1097,
+        runtimeSeconds: 1095,
         comingSoon: false,
       },
     ],

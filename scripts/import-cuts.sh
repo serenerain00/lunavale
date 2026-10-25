@@ -855,14 +855,18 @@ CUTS=(
   "episode-4|stories/ep4/ep4-final.mp4|128|-|-|30"
 
   # EPISODE 5, 2026-10-25. stories/ep5/ep5-final.mp4 is ep5-music.mp4 with
-  # the credits on (scripts/episode-credits.py --end 1082.8: the score runs
+  # the credits on (scripts/episode-credits.py --end 1080.86: the score runs
   # to the last frame, so nothing trimmed). 1786x1080 at 30fps. No END or
   # FADE: the end title fades itself to black.
   #
-  # POSTER AT 815s (Melissa asked for a better one, 2026-10-25): Luna
+  # RE-EXPORTED 06:10 the same day (a filter was carrying into the next
+  # scene). The proxy this writes is renamed to episode-5-v2.proxy.mp4 so
+  # viewers mid-play keep the old blob — see the note on `file` in videos.ts.
+  #
+  # POSTER AT 813.04s (Melissa asked for a better one, 2026-10-25): Luna
   # smiling across the table at Tyson, candle and bokeh, inside the free
-  # window. Was 737.4s, a mid-bite two-shot.
-  "episode-5|stories/ep5/ep5-final.mp4|815|-|-|30"
+  # window. Was 737.4s, a mid-bite two-shot; 815s before the re-export.
+  "episode-5|stories/ep5/ep5-final.mp4|813.04|-|-|30"
 
   # THE INTERVIEW, 2026-10-09. A future season: Detectives Harris and
   # Bennett question Luna about the accident nine years ago, then she rings

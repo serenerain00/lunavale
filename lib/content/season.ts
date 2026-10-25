@@ -118,6 +118,21 @@ export const SEASONS: Season[] = [
         runtimeSeconds: 909,
         comingSoon: false,
       },
+      {
+        /*
+          LANDED 2026-10-25, released that day. Melissa asked for a title
+          from the transcript; "Everybody Has an Opinion" is Luna's own line
+          to Tyson ("everybody seems to have an opinion about what I should
+          be doing"). Hers to replace. Same both-places rule as above: the
+          matching `title` in videos.ts must say the same thing.
+        */
+        number: 5,
+        title: "Episode 5: Everybody Has an Opinion",
+        slug: "episode-5",
+        poster: "/posters/episode-5.jpg",
+        runtimeSeconds: 1095,
+        comingSoon: false,
+      },
     ],
   },
 ];

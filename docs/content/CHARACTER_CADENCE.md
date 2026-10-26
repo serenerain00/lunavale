@@ -132,25 +132,37 @@ would have made the clause false in the same commit that cited it. It is in the
 Josh item too.)*
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
-> updated 2026-10-12. The backlog below describes `main`, and `main` is behind:
+> updated 2026-10-26. The backlog below describes `main`, and `main` is behind:
 > the drops for 2026-08-03, 08-10, 08-17, 08-31, 09-07, 09-14, 09-21, 10-05,
-> 10-12 and 10-19 are all still open and unmerged (#1, #2, #3, #5, #6, #7, #8,
-> #9, #10, #11), as is this one (#4) — **eleven weeks of drops, nothing landed.**
-> A weekly run clones the repo fresh, so it cannot see any of them — and **ten**
-> separate weeks have now independently picked the same obvious gap and written
-> the same note, a Rick `insight` note on `josh-rick-lake`: #2, #3, #5, #6, #7,
-> #8, #9, #10, #11, and #4 before it was rewritten. Most ids differ (#5
-> `rick-i-already-knew`, #8 `rick-already-knew`, #9 `rick-the-line-in-the-water`),
+> 10-12, 10-19 and 10-26 are all still open and unmerged (#1, #2, #3, #5, #6,
+> #7, #8, #9, #10, #11, #12), as is this one (#4) — **twelve weeks of drops,
+> nothing landed.**
+> A weekly run clones the repo fresh, so it cannot see any of them — and
+> **eleven** separate weeks have now independently picked the same obvious gap
+> and written the same note, a Rick `insight` note on `josh-rick-lake`: #2, #3,
+> #5, #6, #7, #8, #9, #10, #11, #12, and #4 before it was rewritten. Most ids
+> differ (#5 `rick-i-already-knew`, #8 `rick-already-knew`, #9
+> `rick-the-line-in-the-water`, #12 `rick-never-look-at-him`),
 > so merging two of those would not collide — it would quietly give Rick the same
 > page twice. **#10 and #11 are the exception: both are `rick-round-the-outside`,
 > same id and same heading**, so that pair would actually conflict rather than
 > duplicate silently. Do not generalise either way — read the ids. Whatever
 > this file says is uncovered, check it against the open PRs first.
 >
-> **This paragraph cannot fix that on its own, and it has now failed seven
+> **The 10-26 run is the strongest evidence yet that this is structural, not
+> taste.** By then `main` carried Simone, two *Come Home* cuts, `ty-gym`,
+> `luna-ty-driving`, Episode 5 and the free kitchen corner — far more obvious
+> ground than the 10-19 run had, including a free Josh piece where Josh asks for
+> something himself. It still went to Rick at the lake. **A run that cannot see
+> the open PRs will keep finding the same gap however much new material it is
+> given**, because the gap is real: the backlog names Rick first and the lake is
+> his best scene. Adding material does not fix this. Landing one of these, or
+> changing the stored prompt, does.
+>
+> **This paragraph cannot fix that on its own, and it has now failed eight
 > times.** It has only ever existed on #4's branch, never on `main`, so the
-> 08-31, 09-07, 09-14, 09-21, 10-05, 10-12 and 10-19 runs could not read it and
-> duplicated anyway. It becomes effective the moment anything carrying it lands on `main`.
+> 08-31, 09-07, 09-14, 09-21, 10-05, 10-12, 10-19 and 10-26 runs could not read
+> it and duplicated anyway. It becomes effective the moment anything carrying it lands on `main`.
 > Until then the only reliable control is the weekly routine's own stored prompt,
 > which is the maintainer's to change.
 >

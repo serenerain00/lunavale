@@ -745,6 +745,9 @@ export const journal: JournalEntry[] = [
 
     Invented and hers to cut: whose clippers, the kitchen chair.
 
+    REWRITTEN 2026-10-26 to the rule in the header: her side of the
+    scene, not a recap of it.
+
     DRAFT PROSE. Replace it.
   */
   {
@@ -758,15 +761,15 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "Tyson came up this afternoon with a week of beard on him, and I told him I was doing something about the beard, and he said he could do it himself, and I said I have seen you do it yourself.",
-      "So he sat on a kitchen chair on the deck and I did it. It took twenty minutes. He says it took twenty minutes because I would not stop talking. I would like it noted that my mouth was not the part I was trimming.",
-      "He told me I have got bossier. I said I have always been bossy. He said not like this. I said he just used to listen better, and he said no he didn't, and he is right, he never has.",
-      "Then in the middle of it he asked if I was okay, and I said yes, and he said no, that's your face. The face where I don't believe him but I'm pretending I do. I said I do not have a face. Twenty years. Apparently I have a face.",
-      "So I told him the truth, which was smaller than I expected it to be. I think I'm okay, and then something stupid happens and I'm not. A mug. The radio. The way the light comes in at four.",
-      "I said I just don't know what I'm supposed to feel yet. And he said then don't. You don't have to know yet.",
-      "That is the most useful thing anybody has said to me in eight days, and he said it with half a beard while I was holding a pair of clippers near his ear.",
-      "I threatened his mustache, obviously. He said that was messed up. I told him to sit still. He said he was sitting still until I threatened his mustache.",
-      "I swept the deck after he left. It is the first thing I have cleaned up all week that I did not break first.",
+      "I cut Tyson's beard today, on a kitchen chair on the deck, and it's the closest I've felt to normal in eight days.",
+      "I needed something to do with my hands that wasn't breaking things. He let me. I think he knew that was what it was, and he sat there and took twenty minutes of me fussing with the patience of a man getting a haircut from a toddler.",
+      "We bickered the whole time. He says I've gotten bossier. He's probably right. I think bossy is what I do when everything else is out of my control. If I can't fix my life, I can at least fix his jawline.",
+      "Then he asked how I was, and I lied, and he caught it in about a second. I have a face, apparently. Twenty years and nobody told me I have a face.",
+      "So I told him the truth, and the truth turned out to be smaller and stranger than I expected. I'm fine, and then something stupid happens and I'm not. The light at four. The radio. A mug that was his. Grief turns out to be mostly ambushes.",
+      "What I didn't know I needed was for somebody to tell me I don't have to know what I feel yet. He did. Half-shaved, with clippers next to his ear, and it was the kindest thing anybody has said to me since I left.",
+      "I've been treating this like a test I have to pass on time. A week, and I should be angry, or relieved, or sure. I'm none of those things. I'm just here, on a deck, holding clippers.",
+      "I threatened his mustache. Obviously. It was the first time I'd laughed all week and it felt like a muscle I'd forgotten I had.",
+      "I swept the deck after he left. It's the first mess I've cleaned up this week that I didn't make by breaking something.",
     ],
   },
   /*
@@ -1510,6 +1513,9 @@ export const journal: JournalEntry[] = [
     came. "Of course" is everybody else's joke about HER, and that is how she
     takes it. Nothing about what he was thinking.
 
+    REWRITTEN 2026-10-26 to the rule in the header: her side of the
+    scene, not a recap of it.
+
     DRAFT PROSE. Replace it.
   */
   {
@@ -1522,17 +1528,13 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "There is nothing in the box for this one. No photograph, no ticket. I was holding something else entirely and it came back whole, which is how the good ones come back.",
-      "Eighteen. A party in Atlanta that I had had enough of by about ten. Somebody asked who was picking me up and I said Tyson, and three people said of course at the same time, the way you say it about a girl who always orders the same thing.",
-      "I was annoyed about that for the whole call. I am less annoyed about it now.",
-      "He was at the races. I asked if he was busy. He said what do you need. Not what's wrong, not where are you. What do you need. I said can you come and get me, and he said yeah, and I said are you sure, and he said same house? Give me twenty.",
-      "That was the whole conversation. He left the races. I don't think I even said thank you, and I am fairly sure he would have been embarrassed if I had.",
-      "In the car he asked if I was hungry. I said no. He said okay. I said what. He said nothing. I said you did a thing, the little okay thing, and he said he had said okay, which is a simple thing, and I said no, you said okay, and he said they are the same word, Lu.",
-      "They are not the same word. Everybody who knows him knows they are not the same word.",
-      "I said I could eat. He said I know.",
-      "Then twenty minutes of not choosing. He would not pick because I would hate wherever he picked. I said I don't do that. I said okay, sometimes. We had tacos. We always had tacos. He knew that before he asked.",
-      "I have been trying to work out what it is about that night that makes it worth a page, and I think it is that nothing about it was unusual. I called, and he came. At eighteen that did not seem like a thing anybody would write down.",
-      "Twenty years on, three people saying of course turns out to be the most accurate thing anybody said about me that year.",
+      "There's nothing in the box for this one. No photograph, no ticket stub. I was holding something else and it came back whole, the way the good ones do.",
+      "Eighteen, and a party in Atlanta I was done with by ten. I called Tyson, and he came, and that was it. That's the whole memory. I don't know why it's the one that came back today.",
+      "I think it's the people at the party. When I said who was picking me up, three of them said of course at the same time, the way you'd tease a girl who always orders the same thing. I was annoyed for the whole drive. I'm not annoyed now. They saw something about me before I did: that I already had a person I called, and that it never occurred to me to call anybody else.",
+      "He left the races to come and get me. I don't think I even thanked him. It didn't seem like the kind of thing you thanked him for. It was just what happened when I called.",
+      "And then the drive, and the old argument about where to eat, which we were already having at eighteen and are still having now. Some of the best parts of my life are arguments I've been losing for twenty years.",
+      "What gets me is how ordinary it was. I called, he came. At eighteen that didn't seem like something anyone would write down. It seemed like the weather.",
+      "Twenty years later, I'm sitting in a house full of boxes at the end of a different life, and the weather is the thing that held.",
     ],
   },
   /*
@@ -1688,6 +1690,9 @@ export const journal: JournalEntry[] = [
     called or what he made of the date. The store, the drink today and "a
     trade I never noticed making" are mine.
 
+    REWRITTEN 2026-10-26 to the rule in the header: her side of the
+    scene, not a recap of it.
+
     DRAFT PROSE. Replace it.
   */
   {
@@ -1700,18 +1705,13 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "I bought one of those protein drinks at the store today, the purple ones, and stood in the kitchen with it and laughed out loud at nobody, and it took me most of the afternoon to work out why.",
-      "He called from the field once when we were twenty-eight. Near the end, though neither of us knew yet how near. One of the rare ones with a picture, the line doing the thing where your own voice comes back a second late and you keep talking over yourself.",
-      "Hey, stranger. That is how he opened. Not hello. Hey, stranger, as if I were the one who had been away.",
-      "He asked if I had survived. I had just got back from my trainer, who I was fairly sure was trying to kill us all one at a time, and I told him so in more detail than anybody on a call like that needs.",
-      "Then he asked if I had eaten. I said yes, Mom. He said, Lu, you're holding a pink drink. I said it was purple, and it had protein in it, which made it food.",
-      "I told him Avery had borrowed my black dress and was denying it — in a message with a photograph of herself wearing it attached. He laughed at that harder than at anything else. He has always been on her side and has always pretended not to be.",
-      "And I told him about the date. A man who worked in my building, which was the entire basis of it; we had shared an elevator for a year. He spent forty minutes of a two-hour dinner on his ex. I timed it. I told Ty I had timed it.",
-      "That is the whole call. A trainer, a drink, a dress, a man whose name I could not tell you now if you paid me.",
-      "What I keep turning over is not anything he said. It is that I reported it. All of it, in order, to a man calling from somewhere he could not name, and it did not once occur to me that it was a strange use of the minutes.",
-      "That is what we did. He could not tell me anything, so I told him everything. It was a trade I never noticed making.",
-      "Before Josh, that one. I keep having to check where things fall now — which year, whose life I was in. That one was mine. A gym, a sister, a bad dinner. I think I was happy. I did not think about it at the time, which is usually how you can tell.",
-      "I drank the purple thing. It is still terrible.",
+      "I bought one of those purple protein drinks at the store today and laughed out loud at nobody in the kitchen, and it took me most of the afternoon to work out why.",
+      "He called from the field once, when we were twenty-eight. One of the rare calls with a picture, the line a second behind itself. I'd forgotten it completely until the drink brought it back.",
+      "It's not what we talked about that I keep turning over. It was nothing — a trainer, my sister stealing a dress, a terrible date. It's that I told him all of it. In order. In detail. To a man calling from somewhere he couldn't name, with minutes he couldn't spare, and it never once occurred to me that it was a strange way to use them.",
+      "That was the arrangement, I think. He couldn't tell me anything about where he was, so I told him everything about where I was. He got my whole ordinary life, piece by piece, from the other side of the world. I never noticed I was handing it over.",
+      "And I liked my life then. That's the other thing. Before Josh, a gym, a sister, bad dinners with men I've forgotten. I was happy. I didn't think about it at the time, which is usually how you can tell.",
+      "I keep having to check where things fall now. Which year. Whose life I was living in. That one was mine. I'd like to remember what that felt like.",
+      "I drank the purple thing. It's still terrible.",
     ],
   },
   /*
@@ -2501,6 +2501,9 @@ export const journal: JournalEntry[] = [
     Dialogue is the footage. Invented and hers to cut: Josh's collars, and
     checking on the drive home.
 
+    REWRITTEN 2026-10-26 to the rule in the header: her side of the
+    scene, not a recap of it.
+
     DRAFT PROSE. Replace it.
   */
   {
@@ -2514,21 +2517,17 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "Tyson has a work fundraiser tomorrow and owns exactly one suit, which he describes as fine in the voice of a man who knows it is not. So today I went with him to buy another. He asked me to. I want that written down, because he will say I insisted.",
-      "He hated all of them. He said he looked like a banker. I said he looked like a man who could afford commercial real estate, and he said yeah, as if that settled it, and I have been laughing about it on and off all evening.",
-      "Dinner, speeches, everybody made to turn up. I asked if he was really going to do as he was told and he said they sign my paycheck, which is the most obedient sentence I have heard out of him in twenty years.",
-      "He asked if I wanted to be his plus one. Joking, mostly. I said he knew I couldn\u2019t go to that, and he did know, and neither of us said why.",
-      "His collar was a disaster. I told him so and he said that\u2019s why he brought me. So I fixed it, which my hands know how to do without me — ten years of Josh\u2019s collars, every wedding and every dinner, standing in a hallway saying hold still. I did not think about that while I was doing it. I am thinking about it now.",
-      "And then — I don\u2019t know how to write this so it stays the size it was. He looked good. That\u2019s all. He looked good in a way I have somehow not noticed in twenty years of looking at him, and I noticed it with my hands still at his collar, and I left them there a second longer than a collar needs.",
-      "He asked if I was okay. I said I just wasn\u2019t used to seeing him like this, which was true and was not the true thing.",
-      "He said I looked like I wanted to say something. I said do I. He said my eyes were talking. Twenty years of him reading my face, and today I would have paid good money for him to be bad at it.",
-      "So I said the small true thing. You look good, Ty. And he didn\u2019t make a joke, which is the part I keep coming back to. He always makes a joke.",
-      "Then he said hey, the way you start a sentence you mean to finish, and I said yeah, and waited. And he said nothing. Nothing. And we stood in front of that mirror and neither of us moved, and I could not have told you what I was waiting for.",
-      "Then it was over, the way these things are over. I said winner, he said yeah, I guess, I rolled my eyes and went for my bag, and it was an ordinary afternoon again. I told him it suits him. It does.",
-      "Here is what I want on the record, mostly for me. Nothing happened. Nothing was going to. It is Tyson. He has known me since I was eighteen and he is most of the reason I am still upright this month.",
-      "And I still love Josh. That has not gone anywhere. I checked, on the drive home, the way you pat your pocket for your keys.",
-      "It was one minute in a shop. A man I know better than anybody looked, for one minute, like somebody I didn\u2019t know, and I looked too long. That is all it was.",
-      "I am not going to think about what he was going to say.",
+      "I fixed Tyson's collar today, and for about a minute I forgot who he was.",
+      "He needed a suit for a work thing and asked me to come. I want that on the record, because he'll tell it as if I insisted. He hated every one of them. It was the most fun I've had in weeks, watching a man who has been to war be defeated by a three-way mirror.",
+      "His collar was a disaster, so I fixed it, the way my hands have done for ten years of Josh's collars at weddings and dinners. My hands didn't ask me. They just went. I didn't think about that at the time. I'm thinking about it now.",
+      "And then he looked good. That's all. That's the whole thing. He looked good in a way I've somehow not seen in twenty years of looking at him, and I saw it with my hands still at his collar, and I left them there a second longer than a collar needs.",
+      "He noticed. He always notices. He said my eyes were talking, and for once in my life I wanted him to be bad at reading me.",
+      "I told him he looked good, which was the small true thing. He didn't make a joke. He always makes a joke. Then he started to say something and didn't finish it, and we stood there in front of that mirror, and I couldn't have told you what I was waiting for.",
+      "And then it passed, the way these things pass, and it was an ordinary afternoon again.",
+      "Here's what I want written down, mostly for me. Nothing happened. Nothing was going to. It's Tyson. He's most of the reason I'm still standing this month.",
+      "And I still love Josh. I checked on the drive home, the way you pat your pocket for your keys. Still there.",
+      "It was one minute in a shop. A man I know better than anyone looked like somebody I didn't know, and I looked too long. That's all it was.",
+      "I'm not going to think about what he was going to say.",
     ],
   },
   /*
@@ -2592,6 +2591,9 @@ export const journal: JournalEntry[] = [
     upset and that he will not pretend otherwise. She does not know why it
     lands as hard as it does, and the page does not guess.
 
+    REWRITTEN 2026-10-26 to the rule in the header: her side of the
+    scene, not a recap of it.
+
     DRAFT PROSE. Replace it.
   */
   {
@@ -2605,21 +2607,17 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "I never sent it.",
-      "Half of Denver is in that room. I walked in on Josh's arm and smiled at everybody I have smiled at for ten years, and then I looked up and Tyson was looking straight at me, in the new suit, and I watched him work it out from across the room.",
-      "I caught him in the hall. I said I was going to text you. He said when. I said before we got here. He said that would have been helpful, and I said I know, because I did know, I have known since four o'clock this afternoon.",
-      "He said I thought you weren't coming. I said I wasn't, Josh asked me to. He said I didn't have to explain why I was here, that he had only asked, and then he said, very evenly, that he was having a little bit of a reaction. Tyson does not have reactions. He has silences.",
-      "I told him I had the text ready and could not send it. He said I'm coming would have worked. I said with, and he said Josh, and I said yes, and he said that part had become pretty clear.",
-      "So I told him the real reason, badly. That if I had walked in with him, with another man, in front of all of them, it would have looked like I was trying to hurt Josh. In his own room. In front of people who still think we are fine.",
-      "He said he wasn't asking me to. He's right. He wasn't asking me for anything. He never does.",
-      "Then he said it's fine, and I said don't do that. Don't tell me it's fine when you're showing me it's not. I have never in twenty years had to say that to him, because he has never once said fine to me and not meant it.",
-      "He asked what changed between yesterday and today. Yesterday I was fixing his collar.",
-      "I said nothing has changed with me and Josh. I told him I had said it to Josh, too: me coming tonight does not mean I am coming home. I wanted Tyson to know that. I don't know why it mattered so much that he knew it, but it did. It does.",
-      "And I said the truest thing, which was the smallest: I wanted to come with you. It just felt complicated.",
-      "He said he would talk to a few people and then probably head out. I asked if it was because of this. He said he did not really want to sit in there all night. I said I would come and sit with him. He said you came with Josh.",
-      "I said I can still spend time with you. He said yeah. I'll find you.",
-      "I cannot stand him being upset with me. I did not know that about myself until about twenty minutes ago. Josh can be angry with me for a week and I can live in it. Tyson was not even angry, and I am in a toilet cubicle writing on the back of the program.",
-      "I am going to go back out and find him before he finds me.",
+      "I never sent the text. I'm in the ladies' room at Josh's company night writing on the back of the program, and I have about ten minutes before somebody comes looking for me.",
+      "I walked in on Josh's arm and smiled at all the people I've smiled at for ten years, and then I looked up and Tyson was across the room in the new suit, watching me work out that he'd seen.",
+      "I had all afternoon to tell him. I had the text written. I couldn't send it, because sending it meant saying it, and saying it meant admitting I'd made a choice I wasn't sure I could defend.",
+      "Here's the reason, as honestly as I can get it. If I'd walked in with Tyson, in Josh's own room, in front of people who still think we're fine, it would have looked like I wanted to hurt Josh. And I don't. Even now. I didn't leave him to humiliate him.",
+      "But I hurt Tyson instead, and I did it by not saying anything, which is worse.",
+      "He didn't shout. He doesn't. He went very even and very polite, and that's how I knew. Tyson doesn't have reactions. He has silences. Tonight he had a reaction, and he told me so, and I didn't know what to do with my hands.",
+      "The part I needed him to understand most was that coming tonight doesn't mean I'm going home. I said that to Josh too. I don't know why it mattered so much that Tyson heard it. It did. It does.",
+      "And then I told him the smallest, truest thing. I wanted to come with him. It just felt complicated. That's all I had.",
+      "I can't stand him being upset with me. I didn't know that about myself until twenty minutes ago. Josh can be angry with me for a week and I can live in it. Tyson wasn't even angry. He was disappointed, quietly, and I'm hiding in a bathroom stall.",
+      "Yesterday I was fixing his collar. I keep thinking about that.",
+      "I'm going back out to find him before he finds me.",
     ],
   },
 
@@ -2875,13 +2873,13 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "He came through at about four and said he was heading out for a bit. He has said that to me a hundred times in twenty years and I have never once asked him where.",
-      "I asked him where.",
-      "He said out. Not rudely — he said it the way you say a sentence you have decided is finished. And then I heard my own voice ask who she was, and then I had to go on standing in my own kitchen as a woman who had said that out loud.",
-      "He didn't answer it. He asked me who said there was a she, which is not a no. He knows it isn't a no. He knows I know it isn't.",
-      "I said: your face. Which was true, and which also told him I have been reading his face closely enough to do that. I would like that one back.",
-      "Then he said don't wait up, and I said wasn't planning on it, and I said it without looking up, and I have been sitting here since with the pen in my hand not writing anything.",
-      "Here is the part I am not going to say to anybody. It is not that he has somewhere to be. He is thirty-eight and he does not live here and he does not owe me an itinerary. It is that in twenty years he has never not told me, and tonight he didn't, and I noticed. The noticing is mine. It is new. I don't know where to put it.",
+      "He said he was going out, and I asked him who she was, and I've been sitting with a pen in my hand for an hour not writing anything.",
+      "I've never asked. Twenty years of him heading out for a bit, and I've never once wanted to know where. Today the question was out of my mouth before I'd decided to ask it.",
+      "And he didn't answer. He didn't lie, either. He never does. He just turned it back on me, and the look on his face said he knew exactly what my question had given away.",
+      "Because I gave something away. I told him I'd been reading his face closely enough to see a she in it. I would like that back.",
+      "I said the last thing without looking up from the book, as if I didn't care. I wanted it to sound like I didn't care. I don't think it did.",
+      "Here's what I'm not going to say to anybody. It's not that he has somewhere to be. He's a grown man, he doesn't live here, and he doesn't owe me an itinerary. It's that in twenty years he's always told me, and tonight he didn't, and I noticed, and the noticing hurt in a place I didn't know was there.",
+      "The noticing is mine. It's new. I don't know where to put it.",
     ],
   },
   /*
@@ -3402,6 +3400,9 @@ export const journal: JournalEntry[] = [
       (`tyson-no-early-feelings-on-site`). He is funny and he leaves.
     - Josh is not the villain. She doesn't know what she's doing about him.
 
+    REWRITTEN 2026-10-26 to the rule in the header: her side of the
+    scene, not a recap of it.
+
     DRAFT PROSE. Replace it.
   */
   {
@@ -3415,20 +3416,14 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "Tyson came by the studio at lunch, which he never does, with food, which he always does.",
-      "He walked in like he'd been there a hundred times, said hey to Simone, and asked her whether she keeps me out of trouble. She said yeah, she fails every time. He liked that. They have this thing where each of them pretends the other one is too much, and they are both enjoying it far too much to be convincing.",
-      "Then he found the other half of the sandwich I'd been saving in my office and ate it standing up, and told me I'd been warned, and left. That was the whole visit. Eleven minutes, maybe.",
-      "Simone waited until the door shut. Then she said: your big teddy bear.",
-      "I said he's Ty. She said yeah, he's Ty, your big teddy bear, I know.",
-      "And then, picking up a contact sheet like it was the more interesting thing in the room, she asked whether it had ever been anything else. Him and me.",
-      "I said no. Which is true.",
-      "I said he's been my best friend since I was eighteen. She said she knew who he was.",
-      "And then I said: he left before—",
-      "And stopped. I don't know what the end of that sentence was. I heard myself start it and I didn't have the rest, and Simone, who will ask anybody anything, didn't help me find it. She just waited.",
-      "I said that was a long time ago.",
-      "She said she was asking about now.",
-      "I told her the truth, which is that I don't even know what I'm doing about Josh right now, much less anything else. She said okay. She went back to the contact sheet. She didn't say another word about it the whole afternoon, which is how I know she's still thinking about it.",
-      "So am I. Not about him. About the sentence.",
+      "Tyson came by the studio at lunch with food, the way he does, ate the half of my sandwich I'd been saving, and left. Simone waited until the door shut, and then she asked me a question I've been failing to answer all afternoon.",
+      "I love watching the two of them. They've decided to find each other exhausting, and they're both having far too much fun with it to be convincing. Today was easy. That's what I want to remember first.",
+      "Simone isn't subtle, but she's careful. She came at it sideways, picking up a contact sheet as if the question were the less interesting thing in the room. Had it ever been anything else, him and me.",
+      "I said no, and it's true. And then I started a sentence about when we were young, about him leaving, and I heard myself start it and I didn't have the rest.",
+      "I still don't. I've been trying all afternoon to find the end of that sentence, and every time I get close I stop, the way I stopped in front of her.",
+      "She didn't push. She just told me she meant now, and let me go back to work.",
+      "The honest answer is that I don't know what I'm doing about Josh, much less anything else. That's what I gave her. It's true. It's also a very good place to hide.",
+      "So I'm not thinking about him. I'm thinking about the sentence, and why it started at all.",
     ],
   },
   {
@@ -5236,6 +5231,9 @@ export const journal: JournalEntry[] = [
     still a careful read of the frames ("a conversation he does not want to
     have") — accurate, but it can now say more if Melissa wants it to.
 
+    REWRITTEN 2026-10-26 to the rule in the header: her side of the
+    scene, not a recap of it.
+
     DRAFT PROSE. Replace it.
   */
   {
@@ -5248,18 +5246,15 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "I called him. He saw it. He said so — yeah — as if that was an answer. I asked why he didn't pick up and he said he didn't want to talk. I said to me, and he did not say no.",
-      "He told me to leave it. I said no. He does not get to disappear for weeks, show back up like nothing happened, and then decide when we are allowed to talk. He said he was standing right there. That is not what I meant and he knows it.",
-      "He said he has stuff going on. He always has stuff going on, and somehow for twenty years he has still managed to pick up the phone.",
-      "He said maybe he shouldn't have.",
-      "I have been driving around with that sentence for an hour.",
-      "He said maybe I shouldn't call him every time something goes wrong. I said I don't. He said I do. I said and you call me. He said that's different. I asked how it is different and he said because it is, and he said my name like a door closing.",
-      "I asked why he is mad at me. He says he isn't. He could barely look at me. I said there, that, what is that, and he asked me to please just go home.",
-      "So I asked the only question left. Did I do something. He said no. Then stop treating me like I did. Just tell me what's going on.",
-      "He said I can't.",
-      "I said can't, or won't. He said does it matter. And I said yes, Ty, it matters to me, and he swore at nothing, at the floor, and that was it. That was the whole answer.",
-      "Here is what I keep coming back to. He did not say there is nothing. Tyson has never in his life told me there was nothing when there was something. He said can't. There is something, and it is big enough that he would rather lose me over it than say it.",
-      "I don't know what that is. I know it isn't me. I think I know that.",
+      "I went to the shop to make him talk to me, and he asked me to go home, and I've been driving around for an hour because I can't face the lake yet.",
+      "I've had weeks of him half-there. Calls that ring out. Texts that come back a day late with one word in them. I kept telling myself he was busy, and today I stopped being able to tell myself that, so I went and stood in front of him instead.",
+      "I wasn't calm. I'd like to say I was. I was hurt, and I let it come out as anger because anger is easier to stand up straight in.",
+      "The thing he said that I can't put down is that maybe he shouldn't have picked up all those years. I don't think he meant it. I think he said it to make me leave. And it worked a little, which is what frightens me. Twenty years, and one sentence could still find the soft part.",
+      "He wouldn't look at me. That's what I keep seeing. Tyson looks at everybody. He looks at people until they flinch. Today he looked at the floor, at the workbench, at the door. Anywhere I wasn't.",
+      "And when I finally asked him straight out, he didn't say there was nothing. He said he couldn't.",
+      "That's the word I've been carrying. Can't. Tyson has never once told me there was nothing when there was something. He didn't lie to me today either. He just told me there's a room I'm not allowed into, and closed the door while I was standing there.",
+      "Whatever it is, it's big enough that he'd rather lose me than say it. I keep writing that sentence and crossing it out because I can't stand what it means.",
+      "I don't think it's me. I think I know that. I'm going to keep telling myself I know that until I believe it.",
     ],
   },
   /* ------------------------------------------------- the city apartment ---
@@ -5635,28 +5630,18 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "I am in the car outside the station and my hands will not do anything useful yet, so they can do this.",
-      "I drove myself. They offered to take me and I said I would follow them, because I wanted to be able to leave. I did not know until just now that I had been thinking about leaving before I knew what it was about.",
-      "Daniel Mercer.",
-      "That was his name. I have known for nine years that a man died and I have never once known his name. They said it like I should have. I said I didn't know it, and that was the only completely true thing I said in there.",
-      "They put a photograph on the table of the facility. I have been there. I have stood in that parking lot waiting for Josh with the engine running. I looked at it for too long and I could feel them watching me look at it.",
-      "The original report. That is how they said it, every time. The original report says a machine malfunctioned. You do not say original unless you think there is another one.",
-      "I said so. They said they hadn't said that. I said they didn't have to. That was the moment I stopped trying to help them and started trying to get out.",
-      "Then a piece of paper with his signature on it. Josh signed off on the section, they said, several hours before. I know that signature. It is on ten years of birthday cards. It is on the lease of a house I do not live in any more.",
+      "I'm in the car outside the station, and my hands won't do anything useful yet, so they can do this.",
+      "I drove myself. I wanted to be able to leave. I didn't know until just now that I'd been planning my exit before I knew what I'd be exiting.",
+      "Daniel Mercer. A man died nine years ago, and I've lived next to that fact for nine years and never once known his name. They said it like I should have. That was the only completely true thing I said in there, that I didn't know it.",
+      "Everything else in that room was them watching me. The photograph of a place I've stood in, waiting for Josh with the engine running. A signature I know from ten years of birthday cards. The way they kept saying the original report, as if they'd already read another one. I stopped trying to help them about halfway through and started trying to get out.",
       "And then Tyson.",
-      "He was at the facility that night. They said it the way you would mention the weather, and then neither of them said anything at all, and I understood that they had been waiting forty minutes to see what my face would do.",
-      "I do not know what my face did. I know I said what, and I know I said it twice.",
-      "Twenty years. I have known him for twenty years and he was there and I did not know.",
-      "They asked if I keep a journal. Sometimes, I said. They said I might have written it down, whatever he told me. I said I didn't remember him telling me anything. I said I didn't know if I wrote about it.",
-      "I know exactly which box it is in.",
-      "Nine years ago I was twenty-nine. I have written about that year in this book before. I am not going to go back and read it tonight.",
-      "I called Tyson from here, before I had even started the engine. I asked him where he was. I asked him why he was there.",
-      "He said my name. Just my name, the way he says it when he is about to be careful with me, and I told him not to do that.",
-      "I said, they said you were there. Were you.",
-      "He said yeah.",
-      "One word. Twenty years of not lying to me and he kept the rule, right there, on the phone, and it was the worst thing he could have done.",
-      "I said okay. I do not know why I said okay. And then I hung up on him, before he could say one more true thing, and sat here and shouted his name at the windshield like it was his fault I had.",
-      "Now I am going to go and find Josh, and I am going to make him tell me what I just lied for.",
+      "He was there that night. They said it like the weather and then went quiet, and I understood they'd been waiting the whole time to see what my face would do with it. I don't know what it did. I know I couldn't make it stop.",
+      "Twenty years. He was there, and I didn't know.",
+      "They asked whether I keep a journal. I said sometimes. I said I didn't remember him telling me anything. I know exactly which box it's in.",
+      "Nine years ago I was twenty-nine. I've written about that year in this book before. I'm not going to go back and read it tonight.",
+      "I called him before I'd even started the engine. He said yes. One word, and he kept the rule, right there on the phone, and it was the worst thing he could have done. I hung up on him before he could say anything else true, and then I sat here and shouted his name at the windshield as if it were his fault I had.",
+      "I've just lied to the police, and I don't know what I lied about.",
+      "Now I'm going to go find Josh and make him tell me.",
     ],
   },
 
@@ -5759,6 +5744,9 @@ export const journal: JournalEntry[] = [
     `the-year-he-went-quiet`. WHERE they talked is not stated, because the
     scene's place is a guess (see the scene's note).
 
+    REWRITTEN 2026-10-26 to the rule in the header: her side of the
+    scene, not a recap of it.
+
     DRAFT PROSE. Replace it.
   */
   {
@@ -5771,21 +5759,14 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "I did the thing. I want that first, because it is the only part of today I did properly.",
-      "I did not say hello. I walked up to him and stopped closer than people stand, and said nothing, and waited. Twenty years of it — who finished the coffee, who dented the truck. People fill a silence, and they fill it faster if you are near enough.",
-      "He did not fill it.",
-      "He stood there and let me look at him, and looked back, and did not crack, and somewhere around the minute I understood that he was not losing the game. He was not playing it. He had decided before I got there.",
-      "So I said it. No secrets, remember?",
-      "I have never had to say that to him. Not once in nineteen years. It was never a rule you had to say out loud — it was the floor we stood on — and today I had to reach down and point at it, like a woman showing somebody where the floor is.",
-      "I told him all of it. Forty-five minutes, two of them, how much they already knew: my name, this house, how many years I have known him. That Josh will not tell me anything. That I lied in there and do not even know what I lied about.",
-      "And he said: leave it alone.",
-      "Not unkindly. He has never said anything to me unkindly. He said the less I knew, the less I could tell them, as if it were a gift he was holding out and I was being slow to take it.",
-      "I said: don't protect me by making me the stupidest person in the room.",
-      "I have been hearing myself say it all evening. It is the truest thing I have said in a month. I have been the stupidest person in a lot of rooms lately — the station, my own kitchen with Josh, and now this one, with the one man who has never once let me be.",
-      "Here is what I cannot get past. I think he meant it. Wherever he is standing in this, I think he is standing there to keep me out of it, and he would call that the same thing as looking after me. And I believe him. That is the worst part. If I thought he was lying I would know what to do.",
-      "He did not lie. He kept the rule. He just would not say anything at all, and it turns out a man can keep the rule and still leave you standing outside it.",
-      "Josh told me nothing and called it protecting me. Tyson told me nothing and called it the same thing. I have now been protected by both of them, and I have never felt so alone in my life.",
-      "He tells me the truth. I wrote that last night as if it were a fact about the world. It still is. He has just found the one way round it.",
+      "I went to Tyson today to make him tell me the truth, and he looked me in the eye and wouldn't, and I don't know what to do with a version of him that can do that.",
+      "I used our old trick. The silence, standing too close, waiting for the other one to crack. Twenty years, and it's how we've settled everything that mattered and most things that didn't. Today he didn't crack, and somewhere around the minute I understood he wasn't even playing. He'd decided before I got there.",
+      "So I reached for the rule. No secrets. I've never had to say it out loud. It wasn't a rule you said; it was the floor we stood on. Today I had to point at it, like showing somebody where the floor is, and it still didn't hold.",
+      "He wants me out of it. That's what I understand, under everything. The less I know, the safer I am — that's how he sees it, and I believe he means it. That's the worst part. If he were lying, I'd know what to do with that.",
+      "And I told him I won't be protected by being kept stupid. I meant it. I've been the least-informed person in too many rooms lately — the station, my own kitchen with Josh, and now this one, with the one man who has never once let me be.",
+      "Josh told me nothing and called it protecting me. Tyson told me nothing and called it the same thing. I've now been protected by both of them, and I've never felt so alone in my life.",
+      "He didn't lie. He kept the rule. He just found a way to keep it and still leave me standing outside it.",
+      "Last night I wrote that he tells me the truth, as if it were a fact about the world. It still is. He's just found the one way around it.",
     ],
   },
 

@@ -86,7 +86,15 @@
  * out of it.
  *
  * Everything with a turn in it — the growing feelings, the lie, the night — is
- * behind the LunaVerse, because that is the story and the story is the product.
+ * behind the LunaVerse, because that is the story and the story is the product. *
+ * HOW A PAGE IS WRITTEN (Melissa, 2026-10-26): "the journal entries dont need
+ * to repeat the transcription so much … people pay for these … theyve watched
+ * the videos, them and luna both know what was said … luna talks about the
+ * meaning, the emotion, the energy, whats behind it, context, her feelings".
+ * So a page beside a scene is NOT a recap of it. Quote a line only when the
+ * line itself is what she can't put down, and then at most once or twice.
+ * The rest is what she noticed, what it cost, what she didn't say, and what
+ * she thinks it means — written by somebody who was there.
  */
 
 import type { AccessLevel } from "@/lib/content/videos";
@@ -1235,6 +1243,9 @@ export const journal: JournalEntry[] = [
     laundromat is not said in the scene, so it is not said here. No lyrics.
     Nothing about what Tyson feels.
 
+    REWRITTEN THE SAME DAY to the rule in the header: one line of his quoted,
+    the rest is her.
+
     DRAFT PROSE. Replace it.
   */
   {
@@ -1248,22 +1259,14 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "It rained all afternoon, and I spent it folding towels under fluorescent lights next to a man who had nowhere he needed to be and came anyway.",
-      "He said I seemed off. I said I was fine, Ty. He offered to help, and I told him I can fold a shirt, and I said it in a way I would not have liked if somebody had said it to me. He just sat down on the bench behind me and waited. He is very good at waiting. I had forgotten that.",
-      "I lasted maybe a minute.",
-      "He said, Lu, what's going on, and I stood there holding a pillowcase and it all came out, in the wrong order, the way it does.",
-      "That I feel stupid. That I had a good life — I did, I had a good life, that is not something I made up — and I left it, and I wanted to leave it. That is the part that makes me feel stupid. Nobody made me. I wanted this. I wanted to go. I wanted something, and I cannot tell you what, and now I'm folding towels in a laundromat in the rain.",
-      "And then I said I feel so alone, which I have not said out loud to anybody, including myself.",
-      "He said I'm not alone. I said I know. I did know. It doesn't change the feeling. Those turn out to be two different things.",
-      "He told me to listen to him. He said I'm allowed to not have it all figured out. That I keep rushing myself and then blaming myself for not having the answers yet. He said it plainly, the way he says everything, and it landed the way plain things do when you have spent weeks telling yourself complicated ones.",
-      "Then the true thing came out. I miss him. And I don't want to miss him.",
-      "Ty said: he was your life for ten years.",
-      "And that is exactly the problem. I gave him all of me. Not some of me — all of it, on purpose, because I thought that was what you did. And now there's nothing left over that's mine, and I stood there and actually asked out loud who I am without him.",
-      "He said I'm me. That I never stopped being me.",
-      "I said I don't know her anymore.",
-      "He said: then get to know her.",
-      "I have been home two hours. The towels are still in the bag in the hall, folded better than I fold them, because at some point he took over and I let him.",
-      "Get to know her. I'm writing it down because it is the first thing anybody has said to me since I left that sounded like a plan instead of a verdict.",
+      "I cried in a laundromat today, over a folding table, in front of the one person I've been working hardest to look fine for.",
+      "I'd decided I was fine. I'd been fine all week, competently and on purpose, and I was going to fold my laundry and be fine at that too. He saw through it in about a minute. He always does. I think the trying is what gives me away.",
+      "What came out wasn't what I expected. Not that I miss Josh, though I do. It was the shame. I had a good life. I'm not allowed to pretend I didn't. And I left it, and I wanted to, and now I'm grieving the thing I chose to leave, and there's no one to blame for that but me. That's the part that makes me feel stupid. Not the missing him. The wanting to go, and then the missing him anyway.",
+      "And under all of it, the loneliness. Not the kind where nobody's there. Ty was right there. The kind where you look for yourself and nobody answers.",
+      "Ten years. I gave him everything, and I did it on purpose, because I believed that's what it meant to love someone properly. And it worked, in its way. There's just nothing left over that I can point to and say that part was mine.",
+      "Ty didn't try to fix it. He told me I'm allowed not to know yet. That I keep rushing myself and then punishing myself for not having arrived. I've been treating this like a test I'm failing, and he talked to me like it was something I was allowed to take my time with.",
+      "And then he said the thing that's going to stay with me. Then get to know her. As if she's someone I could meet. As if she's out there somewhere, and not just a word I used to have.",
+      "It's the first thing anyone's said to me since I left that sounded like a direction instead of a verdict. I don't know who she is. But it turns out I'd like to find out.",
     ],
   },
   /*
@@ -2902,9 +2905,12 @@ export const journal: JournalEntry[] = [
       her part in it is, so the pages do not either.
     - "The tequila girl" — Josh's line, quoted, never explained.
 
-    TYSON'S LINES ARE QUOTED AND LEFT ALONE. "For ten years she was my first
-    phone call" is on screen; the page records it and what it did to her, and
-    says nothing about what it meant to him. "I just don't want to be the guy
+    TYSON'S LINES ARE LEFT ALONE. "For ten years she was my first phone
+    call" is on screen; the page is about what it did to her, and says
+    nothing about what it meant to him.
+
+    REWRITTEN THE SAME DAY to the rule in the header (no recap of the
+    dialogue — the reader has watched it). "I just don't want to be the guy
     keeping something from him" is THE PROMISE showing through; she does not
     know about it, so she reads it as loyalty to Josh, which is what canon
     says she does with his silences.
@@ -2922,19 +2928,15 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "My kitchen is in pieces, so I am at Ty's, on his couch, under his blanket, with his mug, writing by the light of the stove clock like I'm sixteen.",
-      "Tonight I made him make a video. My idea. He has never once introduced himself to anybody in his life — he just turns up and people work it out — and I decided somebody, someday, should get to hear him do it.",
-      "He held the phone out at arm's length like it might go off and told it that apparently Luna thinks he needs to introduce himself. Then he told it he's not good at this. He isn't. It was wonderful.",
-      "I told him to tell them something about himself. He said he's not that interesting. I said he lies. He said: I was in the Navy for ten years. And then he looked at me like he'd won something.",
-      "He turned it on me and I said I'm boring, and he said I'm the liar, which is fair. When it asked why I was there, he told it my plumbing took a shit, which is now how the record will remember this week.",
-      "One more thing about you, I said. He said I'm a pain. I said he loves me. That is how we talk. Twenty years and it has never once needed a translator.",
-      "Then I told him to tell them something they don't know.",
-      "And he said, to the phone and not to me, that for ten years I was his first phone call when he got back to base.",
-      "I said: Ty, you never told me that.",
-      "He said no. He said: I just called you.",
-      "I remember the calls. A bad line, a voice a second behind itself, him wanting to know what I'd eaten. I just never knew they were the first. I had always assumed there was a list, and that I was somewhere on it, and for ten years I had it in that order without ever asking.",
-      "I'm not going to do anything with that. It is a fact about a phone. I'm only writing it down because I didn't know it this morning and now I do, and I have been lying here an hour with it.",
-      "Stuck with each other tonight, just like the old days — somebody said that, too, before the camera went off. It's true. The blanket, the TV nobody is watching, nobody needing a single thing from me. I had forgotten how much I liked the old days.",
+      "I'm on Ty's couch because my kitchen is in pieces, and I'd like it on the record that I have not minded once.",
+      "Six months ago I would have booked a hotel. Not putting anybody out was the whole point of me for ten years. This time I didn't even think about it. I just came here, and he just made up the couch, and neither of us said a word about it being a favor.",
+      "It feels like being eighteen. Bad TV, both of us with our feet on the same table, nobody needing a single thing from me. I'd forgotten that a whole evening can go by without my having to manage it.",
+      "The video was my idea. I've started wanting proof of ordinary nights. I think I'm collecting them, the way you'd keep receipts if you suspected you might have to account for yourself later.",
+      "And then he said the thing about the phone, and I haven't been able to put it down since.",
+      "Ten years of those calls, and I always assumed I was a stop on a list. Somewhere after the people who mattered in the obvious way. I never asked. I just made myself small in it and was grateful to be included, and I'm starting to notice that's a habit of mine, and not one anybody asked me to have.",
+      "So it rearranged something. Not him. A decade of me, slightly. All those nights I picked up thinking I'd been lucky to be thought of.",
+      "I'm not going to make it mean anything about him. He told a phone a fact, and he went to bed. This is only about what it did to me, which is that I'm lying here at one in the morning with something warm sitting in my chest that I don't want to look at too closely.",
+      "So I won't. Not tonight. Tonight I'm just going to be somebody's first phone call, and go to sleep on his couch, and let that be all it is.",
     ],
   },
   {
@@ -2948,22 +2950,14 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "The plumber was supposed to finish yesterday. So did I. Something with the connection under the sink; he's replacing a section of pipe, and I now know more about my kitchen than I ever wanted to.",
-      "Josh called this morning. I saw it. I didn't call back, and a little after noon his truck was in the drive.",
-      "He came in and did what he does. Who's doing it. A plumber, Josh. Did I know where the main shutoff was. Utility room, back wall. I knew. He said got it, as if he'd been about to go and check.",
-      "Then he asked whether I'd been staying here with all this going on. I said no, I'd had to stay at Ty's, I came back today.",
-      "He said: you could have called me.",
-      "And I asked him — about which part? The plumbing, or a place to stay? Because I can call a plumber. And I called Ty.",
-      "He said what. I said nothing. He said fine. We have a whole language too, Josh and I, and after ten years most of it is the word fine.",
-      "Then Saturday. There is a dinner, made back before everything, and he wants me there to meet some people. I'd already said I wasn't going. He asked why I was so mad. I'm not mad.",
-      "So I said the thing I have been meaning to say for weeks: that I want to start stepping away from the business. That I need to put everything into the studio.",
-      "He said, Lu, it's one dinner. We had this plan before everything. He just needs me there.",
-      "Before everything. That is what he calls it now.",
-      "I said fine. It is apparently my word too. Fine, as long as he brings me back to the lake after.",
-      "He said of course. Unless I decide to be the tequila girl again, in which case he'll have to take me home.",
-      "Home. He meant the farm. I don't think he heard himself say it, and I didn't point it out. I said that's not going to happen, and I am still not sure which part of it I meant.",
-      "He offered to call his guy and get the pipes done properly. I said Josh, I'm fine, he's almost done. He looked at the sink for a while as if it had done something to him personally, and then he went.",
-      "The hard part isn't that he's wrong. He's right about the dinner — I did say yes to it, months ago. He is right about most of the small things. That is exactly what makes it so hard to step back from: a man who is right about everything except the one thing.",
+      "Josh came to the lake today. I hadn't called him back, and he came anyway, and I've been trying all evening to decide whether that's love or habit. With Josh, I've never been able to tell them apart.",
+      "He walked into the middle of the mess and did what he does, which is take charge of it. Who's doing it, where's the shutoff. He needed there to be something for him to fix. I understand that about him better than I understand most things about myself.",
+      "And then he found out where I'd been staying.",
+      "I watched it land. He wasn't angry, and I want to be fair about that. He was hurt. Somewhere in him it's still obvious that he's the person I call, and it hadn't occurred to him until that moment that it isn't obvious anymore. I didn't soften it. I wanted him to hear it, and I hated wanting that.",
+      "Then the dinner. I said I'm not going, and I meant it, and twenty minutes later I'd said yes. That's the part I keep going back to. Not him asking. Me folding. Ten years of yes doesn't come out of you in four months, apparently. It comes out in pieces, and the pieces come out on their own schedule.",
+      "I did say the real thing, though. That I want to step back from the business and put everything into the studio. I've thought it for months. Today was the first time I said it to him as a plan instead of a mood, and my voice did something strange in the middle of it.",
+      "He made a joke on the way out and called the farm home without hearing himself. I heard it. I let it go. I don't think he's wrong to hope. I just don't know anymore whether I'm hoping with him, and I can't tell him that until I know.",
+      "He's right about so many small things. That's what makes him so hard to step away from. Not the big things. The thousand small ones he's right about.",
     ],
   },
   {
@@ -2977,18 +2971,13 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "Ty sat on the couch by the window at the studio all afternoon, waiting for me to be done, which I wasn't, because I was still doing a few things for Josh's company.",
-      "Somebody needed me to look at something, and when I came back he said: thought you were done with that stuff.",
-      "What stuff, I said. As if I didn't know.",
-      "Josh's company. I said I was finishing a few things. He said he thought that was kind of the point of leaving.",
-      "I said I am stepping away. It doesn't happen overnight. He said he knows. I asked him why he was making it sound like I was doing something wrong, then. He said he wasn't. He said he just didn't want to see me right back where I started.",
-      "And I asked him — not nicely — whether he could just let me figure it out without telling me what I should be doing.",
-      "He said my name. Luna. All of it, which he only uses when I've gone a step too far.",
-      "Then I heard myself, and I said the true thing, which is that everybody seems to have an opinion about what I should be doing. Josh has one about Saturday. Simone has one about who runs the studio. And now him.",
-      "He said all right. Then he wouldn't give me his.",
-      "And he didn't. Not for the rest of the afternoon. Which was worse, if I'm honest, because now I am never going to know what it was.",
-      "About an hour later he said he was starving. I said I needed ten more minutes. He said I'd said that twenty minutes ago. I told him one day — one day — I will eat. He said oh my God, Lu, and stood there until I gave in.",
-      "Here is what I'm left with. He's right, and so is Josh, about different things, and so is Simone. I am so tired of everybody being right about my life except me.",
+      "I snapped at Ty today, and he didn't deserve it, and I've been sitting with why.",
+      "He spent the afternoon at the studio waiting for me to finish, which I didn't, because I was still doing things for Josh's company. And he noticed. Of course he noticed. And he said so, carefully, the way you'd mention a step somebody's about to miss.",
+      "It's not that he was wrong. It's that he was the last person I expected to hear it from. Everybody else has a view on how I should be leaving. Josh wants me at a dinner, my mother has had hers since the day I left, Simone wants me to let go of the studio long enough to breathe. I had Ty filed as the one person who just let me be in the middle of it. So when it came from him too, it felt like the last door closing.",
+      "The honest answer, the one I didn't give him, is that I'm still doing that work because I don't know how to stop being useful to Josh. Ten years of being the person who makes things run. You don't just put that down. It's not loyalty exactly. It's more like muscle memory, and I'm scared of what's under it.",
+      "He said fine, then he'd keep his opinion to himself. And he did, and that was worse. It felt like being respected and shut out at the same time. I want to know what he thinks. I just wanted to be the one who decided whether to ask.",
+      "And then, because he's Ty, he stopped me working and made me go eat. No speech, no I-told-you-so. That's the difference I keep forgetting about him. Everyone else's opinion comes with a direction. His comes with dinner.",
+      "I owe him an apology. I'll do it badly. He'll let me.",
     ],
   },
   {
@@ -3001,18 +2990,14 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "He picked the cilantro off. Every taco, every leaf, with the concentration of a man defusing something.",
-      "I asked what he was doing. He said there's too much cilantro. I said he says that every time. He said that's because every time there's too much cilantro.",
-      "You like cilantro, I said. You know you can ask them to leave it off. He said he likes cilantro. Just not this much.",
-      "Twenty years. Twenty years of too much cilantro, and he has never once asked them to leave it off. I think the picking is the point. I made him say cilantro again just to watch his face do it.",
-      "And then I said it, like I'd only just remembered, which I hadn't. I had been carrying it around since Simone booked it.",
-      "I'm going to New York next month. You should come.",
-      "He asked what it was for. A shoot on Friday, and the studio promo the night before. He asked what he was supposed to do while I was working. Whatever you want, Ty. It's New York. I'll be done Friday, and we can hang out Saturday. He said he hadn't been out there in a while.",
-      "So come, I said. Come to the promo with me. Free drinks. Open bar. Could be fun.",
-      "I watched him think about it. I know what he looks like when he's going to say yes. He wasn't there yet, but he was closer than I expected.",
-      "Then he put the taco down and said: so I'm going to ask.",
-      "And I knew what the question was before he asked it, because it is the question everybody asks me now, about everything. What am I going to tell Josh.",
-      "I'll write the rest tomorrow. I want to have it in order first.",
+      "Tacos with Ty, and the same argument about cilantro we've been having for twenty years, and I want to write down how good that felt before I write down anything else.",
+      "There's a kind of comfort that only comes from repetition. The same joke, the same complaint, the same face when he picks it off. Nothing about my life has been the same twice in a row for weeks, and there he was, doing the exact thing he's always done. I could have cried over a taco. I didn't. Nearly.",
+      "Then I asked him to come to New York.",
+      "I made it sound like I'd just thought of it. I hadn't. I'd been carrying it around for days, practicing how casual to be. That should probably tell me something, and I'm choosing not to ask what.",
+      "The reason I gave him was the fun: the promo, a Saturday, a city he hasn't been to in a while. All true. The reason I didn't give him is that I want one weekend where my life is mine. Not the farm's, not the company's, not anybody's idea of what I should be doing. And I want him there for it. I'm not going to explain to myself why that's the shape of it. It just is.",
+      "I watched him want to say yes. I know that face.",
+      "And then he asked about Josh, and the warmth went out of the table like somebody had opened a door.",
+      "I'll write the rest tomorrow. I want to be calmer about it than I am.",
     ],
   },
   {
@@ -3025,23 +3010,13 @@ export const journal: JournalEntry[] = [
     access: "premium",
     mature: false,
     body: [
-      "I told him I'd tell Josh I'm going to New York for work. Which is true. It is the entire truth.",
-      "He asked whether I didn't think it would bother him.",
-      "Ty, I said, I'm not with Josh anymore. And he said: not right now.",
-      "I asked him what that was supposed to mean. He said he wasn't trying to start anything. I asked him what he was doing, then. He said he was asking me to think about it. I said I have thought about it. Have you? And then his full name — Tyson — and he said all right, that came out wrong.",
-      "So I told him. I know he sees Josh every day. I know what Josh thinks is going to happen. But I can't keep living as if I'm already back there. I'm trying to figure out what my life looks like without everything being about Josh, and every time I start to, somebody reminds me I'm supposed to feel bad about it.",
-      "He said that's not what he was saying. I said I know you're not. I'm just tired, Ty.",
-      "And then the part I've been carrying around since. He said he isn't asking me to get Josh's permission. But he's the one sitting across from him when Josh asks where I was all weekend. And he isn't going to lie to him.",
-      "I said I'm not asking you to. He said he just doesn't want to be the guy keeping something from him.",
-      "Keeping what? That is what I can't get past. There is nothing to keep. A shoot, a promo, a Saturday. Then don't, I said. If he asks, tell him. We're going to New York. I'm working. You're coming with me. That is literally what's happening.",
-      "But he said it as though there were something in his hands he had to carry carefully past Josh, and I cannot see what it is. The only thing I can come up with is that it's loyalty. That he's protecting Josh from having to hear I was somewhere good without him. He has always been that loyal. It is one of my favorite things about him, and last night I could have shaken him for it.",
-      "I said I wasn't trying to put him in the middle. I just thought it would be fun. He said it would be, and told me why, and I said oh, now you're interested. He said he was interested before I started negotiating with alcohol.",
-      "All right, he said. All right. I'll go.",
-      "Really?",
-      "But I'm not wearing a tie.",
-      "Okay, I said. No tie.",
-      "Then he told me to eat my taco, as if that settled it. It was cold by then. I ate it anyway.",
-      "So he's coming. I have already decided which dress, which I am writing down so that later I can't pretend I didn't.",
+      "The rest of the tacos, then, now that I'm calm.",
+      "What stung wasn't the question. It's a fair question. It's that even Ty, even at a taco place with cilantro on the table, was looking at my life through Josh first. I'm so tired of that being the lens. I left so I could find out what my life looks like when it isn't organized around one man's feelings about it, and every conversation I have still circles back to him.",
+      "I told him so, more or less. More than I meant to. And he backed off, and I could tell he was sorry, and I was sorry for making him sorry. That's how we fight, Ty and I. Two people apologizing past each other until somebody laughs.",
+      "But there was something under what he said that I can't get to. It was about Josh — not me, Josh. As if keeping a weekend in New York from him would cost Ty something specific, something he couldn't afford. And there's nothing to keep. It's a shoot and a Saturday.",
+      "The only answer I can find is loyalty. He sees Josh every day. He works beside him. He's family, in the complicated way. Maybe he's protecting Josh from hearing I was happy somewhere without him. That's Ty all over, and I love it about him, and tonight it made me want to shake him.",
+      "And then he said yes. Just like that, after all of it. And the no-tie thing came out and we were us again, as if a switch had been thrown back. I don't think I realized how badly I wanted him to say yes until the relief went through me.",
+      "I've already decided which dress. I'm writing that down so I can't pretend later that I hadn't.",
     ],
   },
   /*

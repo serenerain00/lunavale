@@ -4100,6 +4100,53 @@ export const videos: Video[] = [
   },
   {
     /*
+      THE LAUNDROMAT, Melissa, 2026-10-26: "new video called
+      luna-ty-laundrymat-music ... ill send you the free clip shortly but this
+      is members only". Members only, WITH NO FREE WINDOW: she did not ask for
+      one, and the public piece is the separate free clip she is sending.
+      2:51 scored, a rainy afternoon, Luna folding at the table, Tyson
+      waiting.
+
+      WHAT IS SAID, from a whisper transcript; the score has lyrics and none of
+      them are quoted anywhere on the site. "You seem off." / "I'm fine, Ty."
+      He offers to help; she can fold a shirt. Then "Lou, what's going on?",
+      and it comes out: she feels stupid, she had a good life, she wanted to
+      leave and doesn't know what she wanted, she feels so alone. He tells her
+      she's allowed not to have it all figured out, to stop rushing herself and
+      blaming herself. "I just miss him, Ty, and I don't want to miss him." /
+      "He was your life for ten years." She doesn't know who she is without
+      him. "You're you, Luna." / "I don't know her anymore." / "Then get to
+      know her."
+
+      WHERE: no place in the taxonomy is a laundromat, so it is filed under
+      downtown (Denver) rather than adding a location to the world for one
+      scene. WHEN: a guess — see lib/content/chronology.ts.
+
+      DESCRIBE AND STOP. The synopsis is the first fifteen seconds and stops
+      there; everything after "what's going on" is the members' part. Nothing
+      about what he feels (tyson-no-early-feelings).
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace. The title is his
+      last line.
+    */
+    slug: "luna-ty-laundrymat",
+    title: "Get to Know Her",
+    synopsis:
+      "A rainy afternoon at the laundromat. Luna says she\u2019s fine, and that she can fold her own shirts. Tyson sits down and waits.",
+    file: "luna-ty-laundrymat.proxy.mp4",
+    poster: "/posters/luna-ty-laundrymat.jpg",
+    // 171.5, the whole file — picture is black from 168.15 and the score fades
+    // itself out under it.
+    durationSeconds: 171,
+    addedOn: "2026-10-26",
+    access: "premium",
+    mature: false,
+    feelings: ["hurt", "trust"],
+    place: "downtown",
+    about: ["luna", "tyson"],
+  },
+  {
+    /*
       COME HOME, the landscape cut, 2026-10-22. Melissa: "add the horizontal
       one as a free clip too ... luna-josh-frmhouse-comehome-horiz". Free, in
       full. The same scene as the vertical post luna-josh-frmhouse-come-home

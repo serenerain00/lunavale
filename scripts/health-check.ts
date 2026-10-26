@@ -807,6 +807,8 @@ const BRITISH: [RegExp, string][] = [
   // nickname is "Lu", from everybody (Melissa, 2026-10-26: "its noy spelled
   // lou, its Lu"). Fourteen journal lines had "Lou" from the transcripts.
   [/\bLou\b/, "Lu (her nickname)"],
+  // "round" for "around" (2026-10-26: nine of them in the journal, never caught).
+  [/(?<!\ba )\bround (the|her|his|him|me|my|some|it|to|and)\b|\b(way|back|all|go|goes|went|turn|turned|came|come) round\b/i, "around"],
 ];
 const BRITISH_OK = /aria-labelledby|labelledby|normalis|favourite_scene|favouriteScene|cole-rang-him|serialis|\.metres\b|\bmetres:|\bauthorised\(|\.cancelling\b|\bcancelling:/gi;
 

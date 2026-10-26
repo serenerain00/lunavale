@@ -530,6 +530,22 @@ export const notes: SetNote[] = [
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work in that room than I am.",
     ],
   },
+  {
+    id: "rick-never-look-at-him",
+    author: "rick",
+    kind: "insight",
+    heading: "I never look at him",
+    dateline: "Day 20 · the lake",
+    sceneSlug: "josh-rick-lake",
+    place: "lake",
+    access: "premium",
+    body: [
+      "My son drives all the way out here to ask me how to fix it, and I spend the scene watching a line in the water. That was the first thing Melissa gave me and the only one I needed. Do not look at him. Not when he arrives, not when he asks.",
+      "It costs nothing and it does the entire job. A man who will not look at you is a man you keep talking to, so Josh fills every gap I leave him. By the end he has told me a great deal more than he came to say, and I have told him nothing he came for.",
+      "There is no music under this one and Melissa would not let us add any. She is right. All that is holding it up is open water and however long I make him wait, and the waiting belongs to me, not to him.",
+      "The line is “Good. Now you know how she felt.” It is the hardest thing I say to him, and it is also one of the few moments I am plainly on Luna's side, and I manage both at once without putting her name in my mouth. That is the trouble with me and most of the trouble with him. I thought the world of that girl, and the nearest I ever came to saying it out loud was using it to tell my boy he had failed.",
+    ],
+  },
 
   /* ==================================================================
      WRITTEN TO EACH OTHER

@@ -241,7 +241,7 @@ be involved in everything, which makes for affectionate banter:
 - A natural American accent shaped by Manhattan: mature, slightly husky,
   conversational. The New York shows in rhythm, confidence and directness,
   **not an exaggerated accent.** She speaks quickly when amused or teasing.
-- **She calls Luna "Lu."** (Tyson's is "Lou" on the site; hers is "Lu".)
+- **She calls Luna "Lu."** So do Tyson and Josh — one spelling, "Lu" (Melissa, 2026-10-26).
 - Conversational rather than constructed. Unfinished thoughts, teasing,
   occasional sarcasm. She lets her expression finish the sentence.
 - Examples:
@@ -467,9 +467,9 @@ herself, and copy around the scene has to stay on her side of it.
    predates the 2026-09-25 "never on the site" rule. Also, fifteen years ago
    Tyson was in the SEALs (about 18–28), so the truck memory may not fit the
    timeline either. Flagged, not changed.
-5. **"Lu" vs "Lou."** Simone calls her "Lu" in the approved dialogue, while
-   Tyson's nickname on the site is "Lou". If subtitles or copy ever print it,
-   decide whether that's deliberate (hers vs his) or one spelling.
+5. **"Lu" vs "Lou." SETTLED 2026-10-26:** it is "Lu", from everybody
+   (Melissa: "its noy spelled lou, its Lu"). Every "Lou" on the site was
+   changed, and the daily health check flags it if one comes back.
 
 ### Josh — her partner of ten years
 Together with Luna **10 years**, then **separated for 6 months**. By the end

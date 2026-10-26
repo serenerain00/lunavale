@@ -893,11 +893,11 @@ theyre 18." Published free as "We'll Be Fine".
 - His words: "I'm joining the Navy. I'm gonna try for BUD/S." He goes "in a
   couple months" (the journal has him leaving in the November).
 - They **had** talked about it as an idea; she didn't know he'd already signed.
-- His reason, as he gives it: "There's nothing for me here, Lou." / "I'm here,
-  Ty." / "I know you are. But Lou, you know what I mean."
+- His reason, as he gives it: "There's nothing for me here, Lu." / "I'm here,
+  Ty." / "I know you are. But Lu, you know what I mean."
 - She is scared for him ("what if something happens to you?"). He: "We'll
   still talk… I'm not leaving you." She: "But you are." He ends on "We'll be
-  fine, Lou"; she leans into his shoulder.
+  fine, Lu"; she leans into his shoulder.
 - Sits on top of the existing writer canon (2026-09-25): her dating made the
   decision easier for him, and she has no idea. "Nothing for me here" is the
   surface of that and must never be interpreted on the site.

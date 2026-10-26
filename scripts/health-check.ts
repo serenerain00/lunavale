@@ -803,6 +803,10 @@ const BRITISH: [RegExp, string][] = [
   [/\b(car parks?|windscreen|petrol|motorway|lorry|pavement|fortnight|mum)\b/i, "US word"],
   [/\b(I|he|she|we|they|you|Josh|Tyson|Luna|Cole|Avery|Rick|Cathy) (rang|rings)\b|\b(rang|ring) (him|her|me|you|them|us|back)\b/, "called / call"],
   [/\bthe phone went\b/i, "the phone rang"],
+  // Not British, but the same kind of slip and caught the same way: her
+  // nickname is "Lu", from everybody (Melissa, 2026-10-26: "its noy spelled
+  // lou, its Lu"). Fourteen journal lines had "Lou" from the transcripts.
+  [/\bLou\b/, "Lu (her nickname)"],
 ];
 const BRITISH_OK = /aria-labelledby|labelledby|normalis|favourite_scene|favouriteScene|cole-rang-him|serialis|\.metres\b|\bmetres:|\bauthorised\(|\.cancelling\b|\bcancelling:/gi;
 

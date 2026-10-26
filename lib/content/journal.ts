@@ -1225,7 +1225,7 @@ export const journal: JournalEntry[] = [
     it free but not the jounal entry".
 
     From the scene: "You seem off." / "I'm fine, Ty."; she can fold a shirt;
-    "Lou, what's going on?"; she feels stupid, she had a good life, she wanted
+    "Lu, what's going on?"; she feels stupid, she had a good life, she wanted
     to leave; so alone; "You're allowed to not have it all figured out";
     "I just miss him, Ty, and I don't want to miss him"; "He was your life for
     ten years"; "I don't know her anymore." / "Then get to know her."
@@ -1251,7 +1251,7 @@ export const journal: JournalEntry[] = [
       "It rained all afternoon, and I spent it folding towels under fluorescent lights next to a man who had nowhere he needed to be and came anyway.",
       "He said I seemed off. I said I was fine, Ty. He offered to help, and I told him I can fold a shirt, and I said it in a way I would not have liked if somebody had said it to me. He just sat down on the bench behind me and waited. He is very good at waiting. I had forgotten that.",
       "I lasted maybe a minute.",
-      "He said, Lou, what's going on, and I stood there holding a pillowcase and it all came out, in the wrong order, the way it does.",
+      "He said, Lu, what's going on, and I stood there holding a pillowcase and it all came out, in the wrong order, the way it does.",
       "That I feel stupid. That I had a good life — I did, I had a good life, that is not something I made up — and I left it, and I wanted to leave it. That is the part that makes me feel stupid. Nobody made me. I wanted this. I wanted to go. I wanted something, and I cannot tell you what, and now I'm folding towels in a laundromat in the rain.",
       "And then I said I feel so alone, which I have not said out loud to anybody, including myself.",
       "He said I'm not alone. I said I know. I did know. It doesn't change the feeling. Those turn out to be two different things.",
@@ -1501,7 +1501,7 @@ export const journal: JournalEntry[] = [
 
     DIALOGUE IS THE FOOTAGE: "Who's picking you up?" / "Tyson." / "Of
     course.", "At the races.", "Give me 20.", "Same house?", the little okay
-    thing, "They're the same word, Lou", "I could eat" / "I know", tacos.
+    thing, "They're the same word, Lu", "I could eat" / "I know", tacos.
 
     WHAT IT MUST NOT DO (tyson-no-early-feelings): read anything into why he
     came. "Of course" is everybody else's joke about HER, and that is how she
@@ -1524,7 +1524,7 @@ export const journal: JournalEntry[] = [
       "I was annoyed about that for the whole call. I am less annoyed about it now.",
       "He was at the races. I asked if he was busy. He said what do you need. Not what's wrong, not where are you. What do you need. I said can you come and get me, and he said yeah, and I said are you sure, and he said same house? Give me twenty.",
       "That was the whole conversation. He left the races. I don't think I even said thank you, and I am fairly sure he would have been embarrassed if I had.",
-      "In the car he asked if I was hungry. I said no. He said okay. I said what. He said nothing. I said you did a thing, the little okay thing, and he said he had said okay, which is a simple thing, and I said no, you said okay, and he said they are the same word, Lou.",
+      "In the car he asked if I was hungry. I said no. He said okay. I said what. He said nothing. I said you did a thing, the little okay thing, and he said he had said okay, which is a simple thing, and I said no, you said okay, and he said they are the same word, Lu.",
       "They are not the same word. Everybody who knows him knows they are not the same word.",
       "I said I could eat. He said I know.",
       "Then twenty minutes of not choosing. He would not pick because I would hate wherever he picked. I said I don't do that. I said okay, sometimes. We had tacos. We always had tacos. He knew that before he asked.",
@@ -1543,7 +1543,7 @@ export const journal: JournalEntry[] = [
     him. A reader who knows can bring that; the page does not supply it.
 
     WHAT IS FROM THE SCENE: the date with a boy Tyson had not met, "you don't
-    even know his name", the Civic line, "Lou" as she goes, stealing his
+    even know his name", the Civic line, "Lu" as she goes, stealing his
     hoodie on the way out. Invented and hers to cut: the paper tablecloth,
     finding him asleep in front of the television, the hole in the pocket, and
     the boy actually driving a Civic.
@@ -1576,7 +1576,7 @@ export const journal: JournalEntry[] = [
       "His parting shot was that if the boy drove a Civic he was going to be pissed. The boy drove a Civic. I have never told him.",
       "I remember nearly nothing about the date itself. Paper on the tables. I was cold and very pleased with myself for having the hoodie.",
       "What I remember is coming home and he was still there, asleep in front of the television with it up too loud, and I turned it down and put a blanket over him and went to bed, and nobody in the world thought any of that was strange. That was the whole of us at eighteen. My door was his door.",
-      "Lou, he said, from the sofa, as I was halfway out. Just to make me turn round. And I did, and he had nothing to say, he just wanted me to turn round, and I told him where to go and he told me to have fun.",
+      "Lu, he said, from the sofa, as I was halfway out. Just to make me turn round. And I did, and he had nothing to say, he just wanted me to turn round, and I told him where to go and he told me to have fun.",
       "I have moved it across the country and through five kitchens. I have never once packed it on purpose. It is just always in the box.",
       "I have it on now. It is still too big. I am sitting up here at thirty-eight in a boy's hoodie writing about a different boy whose name I never knew, and I am laughing, on my own, in an empty house, which I did not expect to be doing tonight.",
     ],
@@ -1587,9 +1587,9 @@ export const journal: JournalEntry[] = [
     scene. `young-luna-ty-seals` ("We'll Be Fine") now shows the night he told
     her, and it is the newest approved reference, so it is canon: a party, a
     tailgate, "don't freak out on me", "I'm joining the Navy. I'm gonna try
-    for BUD/S", "a couple months", "there's nothing for me here, Lou" / "I'm
+    for BUD/S", "a couple months", "there's nothing for me here, Lu" / "I'm
     here, Ty", they HAD talked about it, she is scared for him, "we'll be
-    fine, Lou", her head on his shoulder. The first draft had her mother's
+    fine, Lu", her head on his shoulder. The first draft had her mother's
     house, "it's something to do", him never having mentioned it, and her not
     upset — all four gone. Melissa chose "rewrite to match".
 
@@ -1624,9 +1624,9 @@ export const journal: JournalEntry[] = [
       "He said, don\u2019t freak out on me, okay. Which is how you know to freak out.",
       "I\u2019m joining the Navy. I\u2019m gonna try for BUD/S. I had to ask him if that was the SEALs. It was the SEALs.",
       "We had talked about it. That is the part I keep turning over. We had talked about it the way you talk about everything at eighteen, on somebody\u2019s floor at two in the morning, as a thing a person could do one day. I did not know he had gone and done it. A couple of months, he said.",
-      "I asked him why, and he said there was nothing for him here, and I said I\u2019m here, Ty, which I thought was a very good point. He said he knew. He said, Lou, you know what I mean, and I did, because we had talked about it, and that was the whole answer.",
+      "I asked him why, and he said there was nothing for him here, and I said I\u2019m here, Ty, which I thought was a very good point. He said he knew. He said, Lu, you know what I mean, and I did, because we had talked about it, and that was the whole answer.",
       "What I was, was scared. Not of him going. Of what they do to you there, and what they send you to do after. I asked him what happens if something happens to you, and he said nothing\u2019s gonna happen to me, and I said how do you know that, and he did not know that, and neither of us said so.",
-      "He said we would still talk. He said, I\u2019m not leaving you. I said, but you are, which was not fair and was also true, and he asked if that meant I was not going to take his calls, and I told him to shut up. He said I could still annoy him while he was there. Then he said we\u2019ll be fine, Lou, and I put my head on his shoulder, because there is nothing you can say back to that.",
+      "He said we would still talk. He said, I\u2019m not leaving you. I said, but you are, which was not fair and was also true, and he asked if that meant I was not going to take his calls, and I told him to shut up. He said I could still annoy him while he was there. Then he said we\u2019ll be fine, Lu, and I put my head on his shoulder, because there is nothing you can say back to that.",
       "I genuinely thought people went away and came back and nothing moved in between. It took me about ten years to find out that is not what happens.",
       "My mother did the practical thing, which is the only kind of thing she does when she is frightened. She bought a sports bag, a cheap navy one, and wrote his name on the strap in marker in her own handwriting and put it in the hall closet. So he has somewhere to keep things, she said. It was still in there when I left for Colorado. I would put money on it still being in there now.",
       "He went in the November. He came back on his first leave looking exactly the same and completely different, and he had a new trick.",
@@ -1675,7 +1675,7 @@ export const journal: JournalEntry[] = [
     BESIDE "YOU SURVIVED" (`tyson-luna-call-from-field`), added 2026-10-20.
     From the transcript (see the post): both about 28, near the end of his
     time in the Navy, still deployed; "Hey, stranger", "You survive?", her
-    trainer, "Have you eaten?" / "Yes, Mom", "Lou, you're holding a pink
+    trainer, "Have you eaten?" / "Yes, Mom", "Lu, you're holding a pink
     drink" / "It's purple and it has protein", Avery and the black dress, and
     the date with the man who works in the building and spent forty minutes
     on his ex.
@@ -1701,7 +1701,7 @@ export const journal: JournalEntry[] = [
       "He called from the field once when we were twenty-eight. Near the end, though neither of us knew yet how near. One of the rare ones with a picture, the line doing the thing where your own voice comes back a second late and you keep talking over yourself.",
       "Hey, stranger. That is how he opened. Not hello. Hey, stranger, as if I were the one who had been away.",
       "He asked if I had survived. I had just got back from my trainer, who I was fairly sure was trying to kill us all one at a time, and I told him so in more detail than anybody on a call like that needs.",
-      "Then he asked if I had eaten. I said yes, Mom. He said, Lou, you're holding a pink drink. I said it was purple, and it had protein in it, which made it food.",
+      "Then he asked if I had eaten. I said yes, Mom. He said, Lu, you're holding a pink drink. I said it was purple, and it had protein in it, which made it food.",
       "I told him Avery had borrowed my black dress and was denying it — in a message with a photograph of herself wearing it attached. He laughed at that harder than at anything else. He has always been on her side and has always pretended not to be.",
       "And I told him about the date. A man who worked in my building, which was the entire basis of it; we had shared an elevator for a year. He spent forty minutes of a two-hour dinner on his ex. I timed it. I told Ty I had timed it.",
       "That is the whole call. A trainer, a drink, a dress, a man whose name I could not tell you now if you paid me.",
@@ -2957,7 +2957,7 @@ export const journal: JournalEntry[] = [
       "He said what. I said nothing. He said fine. We have a whole language too, Josh and I, and after ten years most of it is the word fine.",
       "Then Saturday. There is a dinner, made back before everything, and he wants me there to meet some people. I'd already said I wasn't going. He asked why I was so mad. I'm not mad.",
       "So I said the thing I have been meaning to say for weeks: that I want to start stepping away from the business. That I need to put everything into the studio.",
-      "He said, Lou, it's one dinner. We had this plan before everything. He just needs me there.",
+      "He said, Lu, it's one dinner. We had this plan before everything. He just needs me there.",
       "Before everything. That is what he calls it now.",
       "I said fine. It is apparently my word too. Fine, as long as he brings me back to the lake after.",
       "He said of course. Unless I decide to be the tequila girl again, in which case he'll have to take me home.",
@@ -2987,7 +2987,7 @@ export const journal: JournalEntry[] = [
       "Then I heard myself, and I said the true thing, which is that everybody seems to have an opinion about what I should be doing. Josh has one about Saturday. Simone has one about who runs the studio. And now him.",
       "He said all right. Then he wouldn't give me his.",
       "And he didn't. Not for the rest of the afternoon. Which was worse, if I'm honest, because now I am never going to know what it was.",
-      "About an hour later he said he was starving. I said I needed ten more minutes. He said I'd said that twenty minutes ago. I told him one day — one day — I will eat. He said oh my God, Lou, and stood there until I gave in.",
+      "About an hour later he said he was starving. I said I needed ten more minutes. He said I'd said that twenty minutes ago. I told him one day — one day — I will eat. He said oh my God, Lu, and stood there until I gave in.",
       "Here is what I'm left with. He's right, and so is Josh, about different things, and so is Simone. I am so tired of everybody being right about my life except me.",
     ],
   },

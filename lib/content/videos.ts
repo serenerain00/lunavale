@@ -3249,7 +3249,7 @@ export const videos: Video[] = [
       NOT `mature`, and no notes. The pilot carries `danger`; nothing in this
       one does. The kitchen is two people with their foreheads together.
 
-      "LOU" IS JOSH'S TOO. He says it at 19:24. The nickname is not only
+      "LU" IS JOSH'S TOO. He says it at 19:24. The nickname is not only
       Tyson's, which matters for anything written about it — see "Tyson at
       eighteen" in LUNA_VALE_CONTEXT.md.
     */
@@ -3892,7 +3892,7 @@ export const videos: Video[] = [
       calls and he comes; here she goes and he stays on the couch. Placed
       straight after it in STORY_ORDER.
 
-      "LOU" at 1:08 is him calling after her, and it is the first time the
+      "LU" at 1:08 is him calling after her, and it is the first time the
       nickname is on the site. Worth knowing before anybody writes a line of
       dialogue that has him call her something else at eighteen.
 
@@ -3938,10 +3938,10 @@ export const videos: Video[] = [
       a tailgate; friends run off because somebody fell in the pool with his
       phone. "Don't freak out on me." "I'm joining the Navy. I'm gonna try for
       BUD/S." "A couple months." Why: "Because there's nothing for me here,
-      Lou." / "I'm here, Ty." / "I know you are. But Lou, you know what I
+      Lu." / "I'm here, Ty." / "I know you are. But Lu, you know what I
       mean." They had talked about it; she didn't know he'd already done it.
       "What if something happens to you?" "We'll still talk… I'm not leaving
-      you." "But you are." He ends on "We'll be fine, Lou", and she leans into
+      you." "But you are." He ends on "We'll be fine, Lu", and she leans into
       his shoulder.
 
       THE SYNOPSIS SAYS NONE OF WHY. "Nothing for me here" is his line and the
@@ -4110,7 +4110,7 @@ export const videos: Video[] = [
 
       WHAT IS SAID, from a whisper transcript; the score has lyrics and none of
       them are quoted anywhere on the site. "You seem off." / "I'm fine, Ty."
-      He offers to help; she can fold a shirt. Then "Lou, what's going on?",
+      He offers to help; she can fold a shirt. Then "Lu, what's going on?",
       and it comes out: she feels stupid, she had a good life, she wanted to
       leave and doesn't know what she wanted, she feels so alone. He tells her
       she's allowed not to have it all figured out, to stop rushing herself and
@@ -4157,7 +4157,7 @@ export const videos: Video[] = [
       FROM THE TRANSCRIPT: "You act like the last ten years were all bad." /
       "Then why does it feel like you're trying to forget everything we had?"
       / "Because you keep reminding me of everything I miss." / "Baby, come
-      home." / "And what happens when I do?" / "I don't know, Lou. But I'm
+      home." / "And what happens when I do?" / "I don't know, Lu. But I'm
       trying." / "Josh, I've given you ten years." / "And I'm asking you for
       one more."
 

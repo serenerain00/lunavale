@@ -2835,6 +2835,169 @@ export const journal: JournalEntry[] = [
     ],
   },
   /*
+    EPISODE 5, FIVE PAGES, added 2026-10-26 (Melissa: "write 5 journal
+    entries"), one for each part of the episode the book did not already have.
+    The studio scenes are already here — `vale-studios` (Simone's "one of
+    these days you're actually gonna let somebody else run this place") and
+    `teddy-bear` (Simone's question) — so they are not written twice.
+
+    WHEN: about month four. She asks him to New York "next month", and
+    `new-york` (month five) says she asked four weeks before. So these sit
+    after `who-is-she` and before `counting-the-pages`: she invites him, then
+    reads the book back, then takes him to another city.
+
+    WHAT IS LEFT OUT ON PURPOSE:
+    - The two-in-the-morning call ("just wanted to hear your voice"). It is
+      from his Navy years, and a page about it could only be read as Tyson
+      feeling something early (`tyson-no-early-feelings-on-site`).
+    - What Luna does at Josh's company. The episode says she is stepping away
+      from "the business" and finishing a few things; canon does not say what
+      her part in it is, so the pages do not either.
+    - "The tequila girl" — Josh's line, quoted, never explained.
+
+    TYSON'S LINES ARE QUOTED AND LEFT ALONE. "For ten years she was my first
+    phone call" is on screen; the page records it and what it did to her, and
+    says nothing about what it meant to him. "I just don't want to be the guy
+    keeping something from him" is THE PROMISE showing through; she does not
+    know about it, so she reads it as loyalty to Josh, which is what canon
+    says she does with his silences.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "first-phone-call",
+    addedOn: "2026-10-26",
+    dateline: "Ty's couch, and my plumbing is still broken",
+    place: "tysons-apartment",
+    where: "The couch",
+    about: ["luna", "tyson"],
+    sceneSlug: "episode-5",
+    access: "premium",
+    mature: false,
+    body: [
+      "My kitchen is in pieces, so I am at Ty's, on his couch, under his blanket, with his mug, writing by the light of the stove clock like I'm sixteen.",
+      "Tonight I made him make a video. My idea. He has never once introduced himself to anybody in his life — he just turns up and people work it out — and I decided somebody, someday, should get to hear him do it.",
+      "He held the phone out at arm's length like it might go off and told it that apparently Luna thinks he needs to introduce himself. Then he told it he's not good at this. He isn't. It was wonderful.",
+      "I told him to tell them something about himself. He said he's not that interesting. I said he lies. He said: I was in the Navy for ten years. And then he looked at me like he'd won something.",
+      "He turned it on me and I said I'm boring, and he said I'm the liar, which is fair. When it asked why I was there, he told it my plumbing took a shit, which is now how the record will remember this week.",
+      "One more thing about you, I said. He said I'm a pain. I said he loves me. That is how we talk. Twenty years and it has never once needed a translator.",
+      "Then I told him to tell them something they don't know.",
+      "And he said, to the phone and not to me, that for ten years I was his first phone call when he got back to base.",
+      "I said: Ty, you never told me that.",
+      "He said no. He said: I just called you.",
+      "I remember the calls. A bad line, a voice a second behind itself, him wanting to know what I'd eaten. I just never knew they were the first. I had always assumed there was a list, and that I was somewhere on it, and for ten years I had it in that order without ever asking.",
+      "I'm not going to do anything with that. It is a fact about a phone. I'm only writing it down because I didn't know it this morning and now I do, and I have been lying here an hour with it.",
+      "Stuck with each other tonight, just like the old days — somebody said that, too, before the camera went off. It's true. The blanket, the TV nobody is watching, nobody needing a single thing from me. I had forgotten how much I liked the old days.",
+    ],
+  },
+  {
+    id: "i-called-ty",
+    addedOn: "2026-10-26",
+    dateline: "Back at the lake, and Josh came anyway",
+    place: "lakehouse",
+    where: "The kitchen, half of it on the floor",
+    about: ["luna", "josh", "tyson"],
+    sceneSlug: "episode-5",
+    access: "premium",
+    mature: false,
+    body: [
+      "The plumber was supposed to finish yesterday. So did I. Something with the connection under the sink; he's replacing a section of pipe, and I now know more about my kitchen than I ever wanted to.",
+      "Josh called this morning. I saw it. I didn't call back, and a little after noon his truck was in the drive.",
+      "He came in and did what he does. Who's doing it. A plumber, Josh. Did I know where the main shutoff was. Utility room, back wall. I knew. He said got it, as if he'd been about to go and check.",
+      "Then he asked whether I'd been staying here with all this going on. I said no, I'd had to stay at Ty's, I came back today.",
+      "He said: you could have called me.",
+      "And I asked him — about which part? The plumbing, or a place to stay? Because I can call a plumber. And I called Ty.",
+      "He said what. I said nothing. He said fine. We have a whole language too, Josh and I, and after ten years most of it is the word fine.",
+      "Then Saturday. There is a dinner, made back before everything, and he wants me there to meet some people. I'd already said I wasn't going. He asked why I was so mad. I'm not mad.",
+      "So I said the thing I have been meaning to say for weeks: that I want to start stepping away from the business. That I need to put everything into the studio.",
+      "He said, Lou, it's one dinner. We had this plan before everything. He just needs me there.",
+      "Before everything. That is what he calls it now.",
+      "I said fine. It is apparently my word too. Fine, as long as he brings me back to the lake after.",
+      "He said of course. Unless I decide to be the tequila girl again, in which case he'll have to take me home.",
+      "Home. He meant the farm. I don't think he heard himself say it, and I didn't point it out. I said that's not going to happen, and I am still not sure which part of it I meant.",
+      "He offered to call his guy and get the pipes done properly. I said Josh, I'm fine, he's almost done. He looked at the sink for a while as if it had done something to him personally, and then he went.",
+      "The hard part isn't that he's wrong. He's right about the dinner — I did say yes to it, months ago. He is right about most of the small things. That is exactly what makes it so hard to step back from: a man who is right about everything except the one thing.",
+    ],
+  },
+  {
+    id: "an-opinion",
+    addedOn: "2026-10-26",
+    dateline: "The studio, and he had one too",
+    place: "downtown",
+    where: "Vale Studios",
+    about: ["luna", "tyson", "josh"],
+    sceneSlug: "episode-5",
+    access: "premium",
+    mature: false,
+    body: [
+      "Ty sat on the couch by the window at the studio all afternoon, waiting for me to be done, which I wasn't, because I was still doing a few things for Josh's company.",
+      "Somebody needed me to look at something, and when I came back he said: thought you were done with that stuff.",
+      "What stuff, I said. As if I didn't know.",
+      "Josh's company. I said I was finishing a few things. He said he thought that was kind of the point of leaving.",
+      "I said I am stepping away. It doesn't happen overnight. He said he knows. I asked him why he was making it sound like I was doing something wrong, then. He said he wasn't. He said he just didn't want to see me right back where I started.",
+      "And I asked him — not nicely — whether he could just let me figure it out without telling me what I should be doing.",
+      "He said my name. Luna. All of it, which he only uses when I've gone a step too far.",
+      "Then I heard myself, and I said the true thing, which is that everybody seems to have an opinion about what I should be doing. Josh has one about Saturday. Simone has one about who runs the studio. And now him.",
+      "He said all right. Then he wouldn't give me his.",
+      "And he didn't. Not for the rest of the afternoon. Which was worse, if I'm honest, because now I am never going to know what it was.",
+      "About an hour later he said he was starving. I said I needed ten more minutes. He said I'd said that twenty minutes ago. I told him one day — one day — I will eat. He said oh my God, Lou, and stood there until I gave in.",
+      "Here is what I'm left with. He's right, and so is Josh, about different things, and so is Simone. I am so tired of everybody being right about my life except me.",
+    ],
+  },
+  {
+    id: "too-much-cilantro",
+    addedOn: "2026-10-26",
+    dateline: "Tacos, and I asked him",
+    place: "downtown",
+    about: ["luna", "tyson"],
+    sceneSlug: "episode-5",
+    access: "premium",
+    mature: false,
+    body: [
+      "He picked the cilantro off. Every taco, every leaf, with the concentration of a man defusing something.",
+      "I asked what he was doing. He said there's too much cilantro. I said he says that every time. He said that's because every time there's too much cilantro.",
+      "You like cilantro, I said. You know you can ask them to leave it off. He said he likes cilantro. Just not this much.",
+      "Twenty years. Twenty years of too much cilantro, and he has never once asked them to leave it off. I think the picking is the point. I made him say cilantro again just to watch his face do it.",
+      "And then I said it, like I'd only just remembered, which I hadn't. I had been carrying it around since Simone booked it.",
+      "I'm going to New York next month. You should come.",
+      "He asked what it was for. A shoot on Friday, and the studio promo the night before. He asked what he was supposed to do while I was working. Whatever you want, Ty. It's New York. I'll be done Friday, and we can hang out Saturday. He said he hadn't been out there in a while.",
+      "So come, I said. Come to the promo with me. Free drinks. Open bar. Could be fun.",
+      "I watched him think about it. I know what he looks like when he's going to say yes. He wasn't there yet, but he was closer than I expected.",
+      "Then he put the taco down and said: so I'm going to ask.",
+      "And I knew what the question was before he asked it, because it is the question everybody asks me now, about everything. What am I going to tell Josh.",
+      "I'll write the rest tomorrow. I want to have it in order first.",
+    ],
+  },
+  {
+    id: "no-tie",
+    addedOn: "2026-10-26",
+    dateline: "The next day, and the rest of the tacos",
+    place: "lakehouse",
+    about: ["luna", "tyson", "josh"],
+    sceneSlug: "episode-5",
+    access: "premium",
+    mature: false,
+    body: [
+      "I told him I'd tell Josh I'm going to New York for work. Which is true. It is the entire truth.",
+      "He asked whether I didn't think it would bother him.",
+      "Ty, I said, I'm not with Josh anymore. And he said: not right now.",
+      "I asked him what that was supposed to mean. He said he wasn't trying to start anything. I asked him what he was doing, then. He said he was asking me to think about it. I said I have thought about it. Have you? And then his full name — Tyson — and he said all right, that came out wrong.",
+      "So I told him. I know he sees Josh every day. I know what Josh thinks is going to happen. But I can't keep living as if I'm already back there. I'm trying to figure out what my life looks like without everything being about Josh, and every time I start to, somebody reminds me I'm supposed to feel bad about it.",
+      "He said that's not what he was saying. I said I know you're not. I'm just tired, Ty.",
+      "And then the part I've been carrying around since. He said he isn't asking me to get Josh's permission. But he's the one sitting across from him when Josh asks where I was all weekend. And he isn't going to lie to him.",
+      "I said I'm not asking you to. He said he just doesn't want to be the guy keeping something from him.",
+      "Keeping what? That is what I can't get past. There is nothing to keep. A shoot, a promo, a Saturday. Then don't, I said. If he asks, tell him. We're going to New York. I'm working. You're coming with me. That is literally what's happening.",
+      "But he said it as though there were something in his hands he had to carry carefully past Josh, and I cannot see what it is. The only thing I can come up with is that it's loyalty. That he's protecting Josh from having to hear I was somewhere good without him. He has always been that loyal. It is one of my favorite things about him, and last night I could have shaken him for it.",
+      "I said I wasn't trying to put him in the middle. I just thought it would be fun. He said it would be, and told me why, and I said oh, now you're interested. He said he was interested before I started negotiating with alcohol.",
+      "All right, he said. All right. I'll go.",
+      "Really?",
+      "But I'm not wearing a tie.",
+      "Okay, I said. No tie.",
+      "Then he told me to eat my taco, as if that settled it. It was cold by then. I ate it anyway.",
+      "So he's coming. I have already decided which dress, which I am writing down so that later I can't pretend I didn't.",
+    ],
+  },
+  /*
     THE BOOK READING ITSELF. Added 2026-08-30, and it is the entry that only
     this format can produce — she goes back through the journal from the front
     and finds the pattern she has been writing for months without seeing it.
@@ -2941,6 +3104,10 @@ export const journal: JournalEntry[] = [
     promise a reader something the entry deliberately withholds — the same
     argument as the notes on `luna-ty-panic-attack` and the NYC scene itself.
 
+    THE INVITATION WAS IN PERSON (Episode 5, 2026-10-25, over tacos). Until
+    2026-10-26 this page had her typing it as a message, with two other
+    reasons; the episode is newer and wins, so those two lines follow it now.
+
     DRAFT PROSE. Replace it.
   */
   {
@@ -2958,8 +3125,8 @@ export const journal: JournalEntry[] = [
       "I woke up in my own room. In the dress. Shoes by the door, side by side, which is not how I take shoes off. There is a glass of water on the nightstand and I did not put it there.",
       "I do not remember getting here.",
       "So. Backward, then, from the last thing I have.",
-      "I invited him. That is the first line and it belongs at the top. Not the agency, not the client, not a plus-one somebody assigned me. I sat in that house four weeks ago and typed out three different versions of a message to a man I have known for twenty years, and the one I sent was the shortest, and I have thought about that more than I would like.",
-      "I gave two reasons, both true, neither of them the reason. That he has never seen New York properly. That I hate these dinners and I would be better with somebody in the room who has no stake in any of it.",
+      "I invited him. That is the first line and it belongs at the top. Not the agency, not the client, not a plus-one somebody assigned me. I asked him across a plate of tacos four weeks ago, as if I had only just remembered, which I had not, and I have thought about that more than I would like.",
+      "I gave him two reasons, both true, neither of them the reason. That he hadn't been out here in a while. That there would be an open bar.",
       "The actual reason is on page whatever of this book in my own handwriting, so I do not need to write it out again.",
       "The dinner was the dinner. Forty of us in a private room, the client at one end, everybody being delightful. I have done a hundred of these and I could do them asleep.",
       "He was extraordinary, and not in a way anybody could point at.",

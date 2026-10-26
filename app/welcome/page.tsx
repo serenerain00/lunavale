@@ -9,6 +9,7 @@ import { billingLive } from "@/lib/billing/provider";
 import { RememberPayment } from "@/components/membership/RememberPayment";
 import { AutoSignIn } from "@/components/membership/AutoSignIn";
 import { accountForPayment, autoAccountEnabled, autoMade } from "@/lib/billing/auto-account";
+import { refundIfDuplicate } from "@/lib/billing/duplicate";
 
 export const metadata: Metadata = {
   title: "You're in",
@@ -66,6 +67,10 @@ export default async function WelcomePage({
   }
 
   const paid = await readSession(sessionId);
+  // Already a member, signed out, paid again: cancelled and refunded on the
+  // spot (lib/billing/duplicate.ts), and this page says so instead of
+  // welcoming them. Null whenever it is anything else, or anything fails.
+  const duplicate = paid ? await refundIfDuplicate(sessionId) : null;
   // Paying makes the account (lib/billing/auto-account.ts). Null when it is
   // switched off or anything goes wrong — then the page is the old one.
   const auto =
@@ -155,7 +160,27 @@ export default async function WelcomePage({
     <>
       <SiteHeader />
       <main className="mx-auto w-full max-w-xl flex-1 px-5 pb-24 pt-16 sm:px-8 sm:pt-24">
-        {paid ? (
+        {duplicate ? (
+          <>
+            <p className="text-xs uppercase tracking-[0.2em] text-amber">
+              Already a member
+            </p>
+            <h1 className="mt-4 font-display text-3xl font-light leading-[1.15] text-ivory sm:text-4xl">
+              You&rsquo;re already in the LunaVerse.
+            </h1>
+            <p className="mt-4 leading-relaxed text-stone">
+              <span className="text-ivory">{duplicate.email}</span> already has
+              a membership, so we didn&rsquo;t keep this one. The{" "}
+              {formatCents(duplicate.amountCents)} you just paid has been refunded
+              in full, and you won&rsquo;t be charged for it again. Your
+              membership is exactly as it was.
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-stone-dim">
+              The refund usually reaches your card in five to ten days.
+            </p>
+            {signInInstead(duplicate.email)}
+          </>
+        ) : paid ? (
           <>
             <RememberPayment sessionId={sessionId} />
             {/* The one moment Clarity can know a payment happened — it
@@ -223,6 +248,10 @@ export default async function WelcomePage({
       </main>
     </>
   );
+}
+
+function formatCents(cents: number): string {
+  return `$${(cents / 100).toFixed(2)}`;
 }
 
 /**

@@ -23,6 +23,7 @@
 import type Stripe from "stripe";
 import { stripe } from "@/lib/billing/stripe";
 import { stripeConfigured, tierForPriceId } from "@/lib/billing/provider";
+import { refundIfDuplicate } from "@/lib/billing/duplicate";
 import {
   eventHandled,
   markEventHandled,
@@ -100,6 +101,13 @@ async function applyEvent(event: Stripe.Event): Promise<void> {
       : (event.data.object as Stripe.Subscription).id;
 
   if (!subscriptionId) return;
+
+  // A member who paid again while signed out: cancelled and refunded here,
+  // before the re-read below, which then records it as the cancelled
+  // subscription it now is (lib/billing/duplicate.ts). Never throws.
+  if (event.type === "checkout.session.completed") {
+    await refundIfDuplicate((event.data.object as Stripe.Checkout.Session).id);
+  }
 
   // Always re-read rather than trusting the payload: deliveries arrive out of
   // order, and an old "updated" event overwriting a newer one would hand

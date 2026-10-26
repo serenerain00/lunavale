@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useViewer } from "@/components/access/Viewer";
 import { formatPrice, getTier } from "@/lib/content/membership";
 import { clarityEvent } from "@/components/analytics/clarity";
@@ -23,9 +24,17 @@ import { clarityEvent } from "@/components/analytics/clarity";
  * started here can be told apart from one that started on /membership.
  * Shipped 2026-10-13, inside the Oct 11–25 baseline, by Melissa's decision —
  * compare before/after from that date.
+ *
+ * "ALREADY A MEMBER? SIGN IN" UNDER IT (2026-10-26). A member on a phone or
+ * browser where they are signed out sees this card like anybody else, and
+ * Join takes them straight to Stripe. Jeannie, a member since Oct 6, paid a
+ * second time from here on Oct 25. The membership page has had the same
+ * line since Tina (PlanChoice.tsx); this card did not. Signing in brings
+ * them back to the scene they were on.
  */
 export function PlayJoin() {
   const viewer = useViewer();
+  const pathname = usePathname();
   const [sending, setSending] = useState(false);
   useEffect(() => {
     const reset = (e: PageTransitionEvent) => e.persisted && setSending(false);
@@ -37,35 +46,50 @@ export function PlayJoin() {
   if (!viewer || viewer.member || !tier) return null;
 
   return (
-    <form
-      method="post"
-      action="/membership/start"
-      onSubmit={(e) => {
-        if (sending) e.preventDefault();
-        else {
-          setSending(true);
-          clarityEvent("checkout_start");
-        }
-      }}
-      className="mt-3 flex items-center justify-between gap-4 rounded-xl border border-hairline bg-charcoal/40 px-4 py-3 sm:px-5"
-    >
-      <input type="hidden" name="tier" value={tier.id} />
-      <input type="hidden" name="interval" value="month" />
-      <input type="hidden" name="from" value="play" />
-      <p className="text-sm text-ivory">
-        Watch everything <span className="text-stone">·</span>{" "}
-        <span className="tabular-nums">{formatPrice(tier.priceMonthlyCents)}</span>
-        <span className="text-stone">/month</span>
-        <span className="block text-xs text-stone-dim">USD, plus local tax where it applies</span>
-      </p>
-      <button
-        type="submit"
-        disabled={sending}
-        aria-busy={sending}
-        className="inline-flex min-h-11 shrink-0 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft disabled:cursor-wait disabled:opacity-70"
+    <>
+      <form
+        method="post"
+        action="/membership/start"
+        onSubmit={(e) => {
+          if (sending) e.preventDefault();
+          else {
+            setSending(true);
+            clarityEvent("checkout_start");
+          }
+        }}
+        className="mt-3 flex items-center justify-between gap-4 rounded-xl border border-hairline bg-charcoal/40 px-4 py-3 sm:px-5"
       >
-        {sending ? "Opening…" : "Join"}
-      </button>
-    </form>
+        <input type="hidden" name="tier" value={tier.id} />
+        <input type="hidden" name="interval" value="month" />
+        <input type="hidden" name="from" value="play" />
+        <p className="text-sm text-ivory">
+          Watch everything <span className="text-stone">·</span>{" "}
+          <span className="tabular-nums">
+            {formatPrice(tier.priceMonthlyCents)}
+          </span>
+          <span className="text-stone">/month</span>
+          <span className="block text-xs text-stone-dim">
+            USD, plus local tax where it applies
+          </span>
+        </p>
+        <button
+          type="submit"
+          disabled={sending}
+          aria-busy={sending}
+          className="inline-flex min-h-11 shrink-0 items-center rounded-full bg-amber px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-amber-soft disabled:cursor-wait disabled:opacity-70"
+        >
+          {sending ? "Opening…" : "Join"}
+        </button>
+      </form>
+      <p className="mt-2 px-1 text-xs text-stone-dim">
+        Already a member?{" "}
+        <a
+          href={`/sign-in?redirect_url=${encodeURIComponent(pathname || "/")}`}
+          className="text-stone underline underline-offset-2 hover:text-ivory"
+        >
+          Sign in
+        </a>
+      </p>
+    </>
   );
 }

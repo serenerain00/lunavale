@@ -4101,9 +4101,10 @@ export const videos: Video[] = [
   {
     /*
       THE LAUNDROMAT, Melissa, 2026-10-26: "new video called
-      luna-ty-laundrymat-music ... ill send you the free clip shortly but this
-      is members only". Members only, WITH NO FREE WINDOW: she did not ask for
-      one, and the public piece is the separate free clip she is sending.
+      luna-ty-laundrymat-music ... this is members only", then the same
+      evening: "actually make it free but not the jounal entry". FREE, IN
+      FULL; Luna's page about it (`laundromat`, lib/content/journal.ts) is
+      members-only. Published members-only for about an hour first (d440a86).
       2:51 scored, a rainy afternoon, Luna folding at the table, Tyson
       waiting.
 
@@ -4123,7 +4124,7 @@ export const videos: Video[] = [
       scene. WHEN: a guess — see lib/content/chronology.ts.
 
       DESCRIBE AND STOP. The synopsis is the first fifteen seconds and stops
-      there; everything after "what's going on" is the members' part. Nothing
+      there, so the scene is still found rather than summarized. Nothing
       about what he feels (tyson-no-early-feelings).
 
       TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace. The title is his
@@ -4139,7 +4140,7 @@ export const videos: Video[] = [
     // itself out under it.
     durationSeconds: 171,
     addedOn: "2026-10-26",
-    access: "premium",
+    access: "free",
     mature: false,
     feelings: ["hurt", "trust"],
     place: "downtown",

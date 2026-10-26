@@ -966,15 +966,13 @@ CUTS=(
   # (-62.9 dB at 59.8). Her rule: cut black where the music stops, and here it
   # stops at the end of the file.
   "luna-josh-frmhouse-comehome-horiz|stories/luna-josh-frmhouse-come-home/luna-josh-frmhouse-comehome-horiz.mov|39"
-  # 2026-10-26: the laundromat. Luna and Tyson on a rainy afternoon; members
-  # only (Melissa: "new video called luna-ty-laundrymat-music ... this is
-  # members only"). 2:51 scored, 1320x820 hevc at 60fps, proxy at 30. The
+  # 2026-10-26: the laundromat. Luna and Tyson on a rainy afternoon; free
+  # (Melissa, after first saying members only: "actually make it free"). 2:51 scored, 1320x820 hevc at 60fps, proxy at 30. The
   # unscored export (luna-ty-laundrymat.mp4, 1080p) sits beside it; she named
   # the -music one.
   #
   # POSTER AT 33s (36 had her mid-word): Luna at the folding table, eyes down, Tyson waiting on the bench
-  # behind her among the machines, rain on the glass. Before any of the
-  # conversation, which is the members' part.
+  # behind her among the machines, rain on the glass.
   #
   # NO END: black from 168.15, and the score fades under it to the last frame
   # (still -58.6 dB at 171.3 of 171.48).

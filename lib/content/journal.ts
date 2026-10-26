@@ -1220,6 +1220,53 @@ export const journal: JournalEntry[] = [
     ],
   },
   /*
+    THE LAUNDROMAT, added 2026-10-26 beside the free scene `luna-ty-laundrymat`
+    ("Get to Know Her"). MEMBERS ONLY while the scene is free — Melissa: "make
+    it free but not the jounal entry".
+
+    From the scene: "You seem off." / "I'm fine, Ty."; she can fold a shirt;
+    "Lou, what's going on?"; she feels stupid, she had a good life, she wanted
+    to leave; so alone; "You're allowed to not have it all figured out";
+    "I just miss him, Ty, and I don't want to miss him"; "He was your life for
+    ten years"; "I don't know her anymore." / "Then get to know her."
+
+    PLACED after the panic attack and before she asks Josh to stop calling,
+    with the scene (a guess in chronology.ts, hers to move). Why she is at a
+    laundromat is not said in the scene, so it is not said here. No lyrics.
+    Nothing about what Tyson feels.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "laundromat",
+    addedOn: "2026-10-26",
+    dateline: "Home from the laundromat, and I cried over a folding table",
+    place: "downtown",
+    where: "The laundromat",
+    about: ["luna", "tyson", "josh"],
+    sceneSlug: "luna-ty-laundrymat",
+    access: "premium",
+    mature: false,
+    body: [
+      "It rained all afternoon, and I spent it folding towels under fluorescent lights next to a man who had nowhere he needed to be and came anyway.",
+      "He said I seemed off. I said I was fine, Ty. He offered to help, and I told him I can fold a shirt, and I said it in a way I would not have liked if somebody had said it to me. He just sat down on the bench behind me and waited. He is very good at waiting. I had forgotten that.",
+      "I lasted maybe a minute.",
+      "He said, Lou, what's going on, and I stood there holding a pillowcase and it all came out, in the wrong order, the way it does.",
+      "That I feel stupid. That I had a good life — I did, I had a good life, that is not something I made up — and I left it, and I wanted to leave it. That is the part that makes me feel stupid. Nobody made me. I wanted this. I wanted to go. I wanted something, and I cannot tell you what, and now I'm folding towels in a laundromat in the rain.",
+      "And then I said I feel so alone, which I have not said out loud to anybody, including myself.",
+      "He said I'm not alone. I said I know. I did know. It doesn't change the feeling. Those turn out to be two different things.",
+      "He told me to listen to him. He said I'm allowed to not have it all figured out. That I keep rushing myself and then blaming myself for not having the answers yet. He said it plainly, the way he says everything, and it landed the way plain things do when you have spent weeks telling yourself complicated ones.",
+      "Then the true thing came out. I miss him. And I don't want to miss him.",
+      "Ty said: he was your life for ten years.",
+      "And that is exactly the problem. I gave him all of me. Not some of me — all of it, on purpose, because I thought that was what you did. And now there's nothing left over that's mine, and I stood there and actually asked out loud who I am without him.",
+      "He said I'm me. That I never stopped being me.",
+      "I said I don't know her anymore.",
+      "He said: then get to know her.",
+      "I have been home two hours. The towels are still in the bag in the hall, folded better than I fold them, because at some point he took over and I let him.",
+      "Get to know her. I'm writing it down because it is the first thing anybody has said to me since I left that sounded like a plan instead of a verdict.",
+    ],
+  },
+  /*
     ASKING HIM TO STOP, added 2026-10-20. Canon (THE PROMISE → the kitchen
     corner): early in the six months Josh is still calling and she is asking
     him to stop. Josh tells Tyson she said two things on that call — that she

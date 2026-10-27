@@ -1273,6 +1273,88 @@ export const journal: JournalEntry[] = [
     ],
   },
   /*
+    THE LAUNDROMAT, THREE MORE PAGES, added 2026-10-27 — Melissa: "write
+    journal entries for the laundromat video". Same scene, same rules as
+    `laundromat` above: members only, interior not recap, no lyrics, nothing
+    about what Tyson feels, no reason given for why she was at a laundromat.
+
+      i-can-fold-a-shirt — later that night: why she snapped at him when he
+        tried to help, and what it means that help is the thing she can't take.
+      you-never-stopped — the next morning: arguing with his "You're you"; she
+        can't find a self that wasn't arranged around Josh.
+      getting-to-know-her — a few days on: the first, very small attempt. No
+        invented plot: everything she does is private and inside the house.
+
+    Each quotes at most one line, and none repeats the line `laundromat`
+    already leans on. Placed between `laundromat` and `stop-calling` (three
+    weeks), so the datelines stay inside that gap.
+
+    "The last ten years", not her childhood, is where she learned to keep
+    needing quiet: canon says Luna had a good childhood (Cathy, Tony).
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "i-can-fold-a-shirt",
+    addedOn: "2026-10-27",
+    dateline: "The same night, and I owe him an apology",
+    place: "lakehouse",
+    where: "The bedroom",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-ty-laundrymat",
+    access: "premium",
+    mature: false,
+    body: [
+      "I swore at him today because he tried to help me fold a shirt. I want that written down somewhere, so I can't tell it to myself later as a funnier story than it was.",
+      "It wasn't about the shirt. Nobody gets that angry about laundry. It was that he reached for it so easily, the way you'd steady a cup somebody had knocked, as if it was obvious I needed a hand. And I couldn't stand that it was obvious.",
+      "For ten years I was the one who held things together. Not perfectly, but I was good at it, and I was proud of being good at it. Now I can't get through a week without somebody checking on me, and every kind thing anyone does lands like proof. Look how far she's fallen. She needs help with her shirts now.",
+      "He didn't take it personally. That's almost worse. He just took his hands back and stayed exactly where he was, and waited. He didn't leave and he didn't argue. He let me be awful for a second and then he was still there.",
+      "I think that's why I cried. Not the shirt and not even Josh, not at first. Being snapped at and staying is a small thing, and I'd forgotten anyone did it. Somewhere in the last ten years I learned that needing something was easier kept quiet, and that it went better for everyone if I was the one who was fine. He let me not be fine for a second, and it undid me.",
+      "I'll say sorry tomorrow. He'll say it doesn't matter. It does, a little. I want to be someone who can be helped without treating it like an insult.",
+      "I'm not her yet. But I noticed, which is new.",
+    ],
+  },
+  {
+    id: "you-never-stopped",
+    addedOn: "2026-10-27",
+    dateline: "The morning after the laundromat",
+    place: "lakehouse",
+    where: "The kitchen",
+    about: ["luna", "tyson", "josh"],
+    sceneSlug: "luna-ty-laundrymat",
+    access: "premium",
+    mature: false,
+    body: [
+      "I woke up arguing with something Ty said yesterday, which is a very me way to start a day.",
+      "He told me I never stopped being me. He meant it kindly and he meant it as the truth, and lying in bed this morning I tried to test it. I went looking for her, the one he says never went anywhere.",
+      "Everything I found had Josh in it. What I cook is what he liked. What time I get up is his alarm. I know what I think about money and where to live and whether to have the window open, and every one of those turned out, when I looked, to be an answer we'd worked out together. Mostly he worked it out and I agreed. I'm not even angry about it. I think that's what happens when you love someone for a long time and decide not to keep score.",
+      "But it means that when Ty says I'm still me, I don't know what he's pointing at. Maybe he knew me before, so he can see something I can't. Maybe he's just being loyal. With him those have always been hard to tell apart.",
+      "I'll give him this. When I went looking, I didn't find nothing. I found the bits that don't fit. The things I liked that Josh never did, and that I quietly stopped doing because it was easier than explaining them. They weren't gone. They were just put away, like clothes you stop wearing because nobody comments on them.",
+      "So maybe he's right, and she's still there. She's just been very quiet for a very long time, and I'm not sure she trusts me yet.",
+      "That's fair. I haven't given her much reason.",
+    ],
+  },
+  {
+    id: "getting-to-know-her",
+    addedOn: "2026-10-27",
+    dateline: "A few days after the laundromat",
+    place: "lakehouse",
+    where: "The deck",
+    about: ["luna"],
+    sceneSlug: "luna-ty-laundrymat",
+    access: "premium",
+    mature: false,
+    body: [
+      "I've been trying to do what he said, and it's harder and stupider than I thought it would be.",
+      "There's no class for it. Nobody tells you how to meet yourself at this age. So I've been doing it the only way I know, which is to notice what I reach for when no one's watching and nothing's being decided for two.",
+      "It's tiny things. I made coffee the way I used to take it before I started taking it his way, and I didn't like it, which was its own little shock. I sat out here for an hour without a reason and without my phone, and that part I did like. I left the radio on a station I'd have changed in a second if anyone else was in the house. Nobody was, so I didn't.",
+      "None of that is a self. I know that. It's just a few small facts about a woman I don't know very well. But I'm writing them down the way you'd remember things about someone new — how she takes her coffee, what she does when she's alone. You keep the small things because you're not ready for the big ones.",
+      "The big ones scare me. What I want. Whether I'm going home. Whether the person I'm meeting would even want to go back there. I'm not asking her those yet. You don't ask someone that the first week.",
+      "I still miss him. That hasn't moved. But for an hour out here the missing wasn't the only thing in the room, and that's the first time I can say so.",
+      "I think that's what getting to know her means for now. Not answers. Just company.",
+    ],
+  },
+  /*
     ASKING HIM TO STOP, added 2026-10-20. Canon (THE PROMISE → the kitchen
     corner): early in the six months Josh is still calling and she is asking
     him to stop. Josh tells Tyson she said two things on that call — that she

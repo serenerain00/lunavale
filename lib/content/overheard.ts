@@ -258,7 +258,7 @@ export const CAST_THREAD: CastMessage[] = [
   { id: "d20-2", day: 20, at: "21:26", author: JOSH, addressedTo: null, body: ["@Rick I'll take it."] },
 
   /* --------------------------------------------------------------- day 21 */
-  { id: "d21-1", day: 21, at: "07:50", author: LUNA, addressedTo: null, body: ["Ran the long way round for the first time since April. Nothing happened. That's the update. That's the whole update."] },
+  { id: "d21-1", day: 21, at: "07:50", author: LUNA, addressedTo: null, body: ["Ran the long way around for the first time since April. Nothing happened. That's the update. That's the whole update."] },
 
   /* --------------------------------------------------------------- day 22 */
   { id: "d22-1", day: 22, at: "19:05", author: TYSON, addressedTo: null, body: ["Somebody asked what I listen to on the bike. Nothing. That's the point of the bike."] },

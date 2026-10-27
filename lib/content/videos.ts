@@ -3249,7 +3249,7 @@ export const videos: Video[] = [
       NOT `mature`, and no notes. The pilot carries `danger`; nothing in this
       one does. The kitchen is two people with their foreheads together.
 
-      "LOU" IS JOSH'S TOO. He says it at 19:24. The nickname is not only
+      "LU" IS JOSH'S TOO. He says it at 19:24. The nickname is not only
       Tyson's, which matters for anything written about it — see "Tyson at
       eighteen" in LUNA_VALE_CONTEXT.md.
     */
@@ -3892,7 +3892,7 @@ export const videos: Video[] = [
       calls and he comes; here she goes and he stays on the couch. Placed
       straight after it in STORY_ORDER.
 
-      "LOU" at 1:08 is him calling after her, and it is the first time the
+      "LU" at 1:08 is him calling after her, and it is the first time the
       nickname is on the site. Worth knowing before anybody writes a line of
       dialogue that has him call her something else at eighteen.
 
@@ -3938,10 +3938,10 @@ export const videos: Video[] = [
       a tailgate; friends run off because somebody fell in the pool with his
       phone. "Don't freak out on me." "I'm joining the Navy. I'm gonna try for
       BUD/S." "A couple months." Why: "Because there's nothing for me here,
-      Lou." / "I'm here, Ty." / "I know you are. But Lou, you know what I
+      Lu." / "I'm here, Ty." / "I know you are. But Lu, you know what I
       mean." They had talked about it; she didn't know he'd already done it.
       "What if something happens to you?" "We'll still talk… I'm not leaving
-      you." "But you are." He ends on "We'll be fine, Lou", and she leans into
+      you." "But you are." He ends on "We'll be fine, Lu", and she leans into
       his shoulder.
 
       THE SYNOPSIS SAYS NONE OF WHY. "Nothing for me here" is his line and the
@@ -4100,6 +4100,54 @@ export const videos: Video[] = [
   },
   {
     /*
+      THE LAUNDROMAT, Melissa, 2026-10-26: "new video called
+      luna-ty-laundrymat-music ... this is members only", then the same
+      evening: "actually make it free but not the jounal entry". FREE, IN
+      FULL; Luna's page about it (`laundromat`, lib/content/journal.ts) is
+      members-only. Published members-only for about an hour first (d440a86).
+      2:51 scored, a rainy afternoon, Luna folding at the table, Tyson
+      waiting.
+
+      WHAT IS SAID, from a whisper transcript; the score has lyrics and none of
+      them are quoted anywhere on the site. "You seem off." / "I'm fine, Ty."
+      He offers to help; she can fold a shirt. Then "Lu, what's going on?",
+      and it comes out: she feels stupid, she had a good life, she wanted to
+      leave and doesn't know what she wanted, she feels so alone. He tells her
+      she's allowed not to have it all figured out, to stop rushing herself and
+      blaming herself. "I just miss him, Ty, and I don't want to miss him." /
+      "He was your life for ten years." She doesn't know who she is without
+      him. "You're you, Luna." / "I don't know her anymore." / "Then get to
+      know her."
+
+      WHERE: no place in the taxonomy is a laundromat, so it is filed under
+      downtown (Denver) rather than adding a location to the world for one
+      scene. WHEN: a guess — see lib/content/chronology.ts.
+
+      DESCRIBE AND STOP. The synopsis is the first fifteen seconds and stops
+      there, so the scene is still found rather than summarized. Nothing
+      about what he feels (tyson-no-early-feelings).
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace. The title is his
+      last line.
+    */
+    slug: "luna-ty-laundrymat",
+    title: "Get to Know Her",
+    synopsis:
+      "A rainy afternoon at the laundromat. Luna says she\u2019s fine, and that she can fold her own shirts. Tyson sits down and waits.",
+    file: "luna-ty-laundrymat.proxy.mp4",
+    poster: "/posters/luna-ty-laundrymat.jpg",
+    // 171.5, the whole file — picture is black from 168.15 and the score fades
+    // itself out under it.
+    durationSeconds: 171,
+    addedOn: "2026-10-26",
+    access: "free",
+    mature: false,
+    feelings: ["hurt", "trust"],
+    place: "downtown",
+    about: ["luna", "tyson"],
+  },
+  {
+    /*
       COME HOME, the landscape cut, 2026-10-22. Melissa: "add the horizontal
       one as a free clip too ... luna-josh-frmhouse-comehome-horiz". Free, in
       full. The same scene as the vertical post luna-josh-frmhouse-come-home
@@ -4109,7 +4157,7 @@ export const videos: Video[] = [
       FROM THE TRANSCRIPT: "You act like the last ten years were all bad." /
       "Then why does it feel like you're trying to forget everything we had?"
       / "Because you keep reminding me of everything I miss." / "Baby, come
-      home." / "And what happens when I do?" / "I don't know, Lou. But I'm
+      home." / "And what happens when I do?" / "I don't know, Lu. But I'm
       trying." / "Josh, I've given you ten years." / "And I'm asking you for
       one more."
 

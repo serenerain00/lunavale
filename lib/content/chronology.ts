@@ -130,6 +130,11 @@ export const STORY_ORDER: readonly string[] = [
   "josh-rick-lake",
   "luna-avery-ipad",
   "luna-ty-panic-attack",
+  // HAND-PLACED — A GUESS, 2026-10-26, Melissa to move it. The laundromat:
+  // "I just miss him, Ty, and I don't want to miss him", "I wanted to leave",
+  // "who am I without him". That is the first weeks, before she can say no to
+  // him — so after the panic attack and before Come Home, where Josh asks.
+  "luna-ty-laundrymat",
 
   // HAND-PLACED — CONFIRMED ERA, REASONED ORDER. Come Home. Melissa,
   // 2026-10-22: "only been separated for a few weeks". So after the

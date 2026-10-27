@@ -820,7 +820,7 @@ const authored: Clip[] = [
 
       FROM THE TRANSCRIPT: "Hey, stranger." / "You survive?" / "Barely. I
       think she's trying to kill us." (her trainer) / "Response time's
-      terrible out here", "Have you eaten?" / "Yes, Mom", "Lou, you're
+      terrible out here", "Have you eaten?" / "Yes, Mom", "Lu, you're
       holding a pink drink." / "It's purple and it has protein.", Avery
       borrowed the black dress and denies it despite sending a picture in it,
       and the date with the guy who "works in the building", who spent forty
@@ -862,7 +862,7 @@ const authored: Clip[] = [
       "I never said they were." / "Then why does it feel like you're trying
       to forget everything we had?" / "Because you keep reminding me of
       everything I miss." / "Baby, come home." / "And what happens when I
-      do?" / "I don't know, Lou. But I'm trying." / "Josh, I've given you ten
+      do?" / "I don't know, Lu. But I'm trying." / "Josh, I've given you ten
       years." / "And I'm asking you for one more."
 
       INSIDE RELEASED CANON: she has left and he wants her back, which the

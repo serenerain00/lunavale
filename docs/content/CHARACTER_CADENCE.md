@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-25 against `main` at 2598186. **A touched `lib/content/` file
+re-run 2026-10-27 against `main` at d2e1b13. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -64,9 +64,9 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 238 | 200 |
-| Tyson | 12 | 169 | 146 |
-| Josh | 14 | 145 | 127 |
+| Luna | 12 | 245 | 206 |
+| Tyson | 12 | 176 | 152 |
+| Josh | 14 | 149 | 131 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 9 | 9 |
@@ -85,8 +85,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 at 2598186** (Tyson 169, Josh 145 — Episode 5 pays both, so
-the difference held while both numbers moved): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 at d2e1b13** (Tyson 176, Josh 149): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has sat anywhere between 17 and 28. Quote the two
@@ -120,7 +119,10 @@ Do not restore the "first in the story" phrasing; check `STORY_ORDER` before
 making that claim about anything.)* Seven other free pieces are uncovered as well
 — `luna-ty-couch`, `ty-luna-young`, `luna-tyson-shaving`, `young-luna-ty-apt`,
 `young-luna-ty-seals` (new and free on 2026-10-13), `luna-ty-bulb` (*The Right
-Bulb*, free, 2026-10-14, thirty-nine seconds) and `luna-truck-breakdown` —
+Bulb*, free, 2026-10-14, thirty-nine seconds), `luna-truck-breakdown` and
+**`luna-ty-laundrymat`** (*Get to Know Her*, free, 2:51, 2026-10-27, sixty-sixth
+in the order — Luna's own page about it, `laundromat`, is **premium**, so the
+footage is the shop window and her interior is behind the wall) —
 but every one of them pays into the two characters who need it least.
 *(`josh-ty-kitchen-corner` is free and uncovered too and is deliberately **not**
 on this list: it pays Josh, which is the whole reason it ranks above everything
@@ -213,14 +215,29 @@ Josh item too.)*
 > loading Josh's one line applies here: the audience hears the second half
 > coming long before it should.
 
-> **WRITE THE NOTE IN AMERICAN ENGLISH.** As of 2026-10-20 the health check has
+> **WRITE THE NOTE IN AMERICAN ENGLISH — AND THE CHECK IS NO LONGER ONLY ABOUT
+> BRITISH SPELLINGS.** As of 2026-10-20 the health check has
 > a daily spelling check over `lib/content`, `lib/studio`, `lib/email`, `app`
 > and `components` — everything a visitor reads — and `between-takes.ts` is in
-> that set. A British spelling in a note will FAIL the run, not warn. There is a
+> that set. A hit in a note will FAIL the run, not warn. There is a
 > `BRITISH_OK` allow-list in `scripts/health-check.ts` for the handful of real
 > exceptions (`aria-labelledby`, `normalis…`, `favouriteScene`, `cole-rang-him`
 > and a few more); do not add to it to get a note through. **This file is not in
 > scope** — `docs/` is internal, so its own spellings are nobody's problem.
+>
+> **Two project-specific slips joined the same list on 2026-10-26, and they are
+> the ones a note is actually likely to make.**
+> **Her nickname is `Lu`, never `Lou`** — Melissa, that day: *"its noy spelled
+> lou, its Lu"*. Fourteen journal lines had it wrong, taken from the transcripts,
+> and the *Come Home* transcript in `videos.ts` had it too. Any note quoting Josh
+> or Tyson speaking to her must spell it **Lu**.
+> And **"round" where it should be "around"** — nine of those in the journal,
+> never caught before. The rule only fires on the phrases that are actually wrong
+> (`round the`, `way round`, `came round`), so *"round the outside"* as a title is
+> its own question, but in prose write **around**.
+> Both are in the `BRITISH` list rather than a separate check, so both **FAIL**
+> the run. This branch's note was re-checked against both the day they landed and
+> contains neither.
 
 Standing backlog, roughly prioritised:
 

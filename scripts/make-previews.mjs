@@ -165,6 +165,12 @@ const OVERRIDES = {
   // Re-checked on the re-export: "could be fun" ends ~822.4, quiet to 824.0,
   // "So I'm going to ask" from 824.2.
   "episode-5": 96.07,
+
+  // THE LAKEHOUSE FIGHT — THE FIRST TWO MINUTES (Melissa, 2026-10-27: "first
+  // 2m is free. then members only"). Ends at 119.2, in the pause after "Do
+  // you?" / "Yes." (speech to 118.0, quiet until "Because that's what you're
+  // making this about" at ~119.4). 120.0 lands inside that line.
+  "luna-ty-lkehous-fight": 119.2,
   // Melissa, 2026-10-18 ("ok do all of the above", the Facebook conversion
   // audit): the pilot's free window was its first minute, which is the
   // music-only opening — not one line of dialogue — on the most-played

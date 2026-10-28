@@ -977,6 +977,18 @@ CUTS=(
   # NO END: black from 168.15, and the score fades under it to the last frame
   # (still -58.6 dB at 171.3 of 171.48).
   "luna-ty-laundrymat|stories/luna-ty-laundrymat/luna-ty-laundrymat-music.mov|33|-|-|30"
+
+  # 2026-10-27: the lakehouse fight. Luna and Tyson at night, Josh's questions
+  # between them. 8:12, 1912x1080 h264 at 30fps, dialogue with no score
+  # (-28.6 dB mean). The folder is luna-ty-kitchenFight/; the slug follows the
+  # cut, misspelling and all, because that is what Melissa called it.
+  #
+  # POSTER AT 72s: Luna looking up at Tyson, the lake dark behind them. Inside
+  # the free window, since a poster is public.
+  #
+  # NO END, FADE 1: no black at the end (blackdetect finds none) — it stops
+  # dead on the two of them holding each other, over room tone.
+  "luna-ty-lkehous-fight|stories/luna-ty-kitchenFight/luna-ty-lkehous-fight.mp4|72|-|1|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

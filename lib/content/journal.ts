@@ -1474,6 +1474,41 @@ export const journal: JournalEntry[] = [
       "I did not ask what else Josh says to him. I thought about it. It would be the first time I had ever asked Tyson to carry something between the two of us, and I am not going to be the one who starts that.",
     ],
   },
+  /*
+    BESIDE "IN THE MIDDLE" (`luna-ty-lkehous-fight`), added 2026-10-27 —
+    Melissa: "add a journal page beside it". Interior, not recap: one quoted
+    line, his "since you left him", because it is the phrase she cannot put
+    down. Placed after `his-good-word` because it answers it: she decided
+    never to make him carry anything between her and Josh, and finds out he
+    has been carrying it every day at work. Tyson's reason is family and
+    only that (`tyson-no-early-feelings-on-site`); the hug at the end stays
+    a friend's. Whether she is going home stays open, as in the scene.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "in-the-middle",
+    addedOn: "2026-10-27",
+    dateline: "The night we had it out",
+    place: "lakehouse",
+    where: "The kitchen",
+    about: ["luna", "tyson", "josh"],
+    sceneSlug: "luna-ty-lkehous-fight",
+    access: "premium",
+    mature: false,
+    body: [
+      "Ty and I had the worst fight we have had in twenty years tonight, and it ended with him holding on to me in the kitchen, and I cannot decide which of those two facts I am supposed to be writing about.",
+      "I wrote not long ago that I would never ask him to carry anything between Josh and me. I was so pleased with myself for that. It turns out I did not have to ask. He has been carrying it the whole time, every morning, in the barn and out in the field, with Josh asking him the questions I won't answer. I made a rule about a door I thought was closed, and he has been standing in the doorway for weeks.",
+      "There is one thing he said that I keep turning over. Not the loud parts. Just four words in the middle of it: since you left him.",
+      "Nobody says it like that to me. My mother says since everything happened. Avery says since the separation, as if it were weather. Josh does not say it at all. Ty said it the way it is, as plainly as anything, and I heard it land in my own kitchen. I left. I am the one who did this, and everyone around me is living in what I did.",
+      "That is not why I was angry, though. I was angry because I have been trying so hard to make my own choices, slowly, badly, one at a time, and every time I turn around somebody I love is standing there waiting to hear what I decided. I thought he was the one person who wasn't waiting.",
+      "He wasn't. That is what I worked out somewhere near the end, after the shouting. He has never once asked me when I am going home. He has just been the place everybody else's asking ends up.",
+      "I said something about getting to leave it all at the farm at night, and I watched it hit him. It was true for me and wrong about him. He doesn't leave it anywhere. He drives up here with it.",
+      "And then I asked him for space and asked him not to go in the same breath, and he did both. I don't know anyone else who could.",
+      "I still love Josh. I said it out loud tonight, to Ty of all people, and it did not fix anything. It is just true, the way the other thing is true, that I can't go on living the way we were. I am tired of holding both. But I would rather hold both than let somebody else set one of them down for me.",
+      "Next time he comes up the hill neither of us will bring it up. That is how we do it. But I'm writing this down so I remember: he was in the middle, and he never once asked me to get him out.",
+    ],
+  },
   {
     id: "the-things-only-we-do",
     addedOn: "2026-07-22",

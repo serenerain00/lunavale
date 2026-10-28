@@ -931,3 +931,32 @@ his time in the Navy. She is just back from a session with her trainer. The
 date she reports — a guy who "works in the building", forty minutes on his
 ex — is **a random guy, not Josh** (Melissa): she has not started dating Josh
 yet. Nothing on the site says why Tyson called or what he makes of the date.
+
+## Addition — 2026-10-28: the attack (`luna-alley-attack`)
+
+From Melissa's brief for the arc, "Luna's Attack". **Writer knowledge except
+where marked as on screen.**
+
+- **On screen (free):** about 9 PM, Luna leaves **Vale Studios**, downtown
+  Denver, after getting something from her office, and walks to her black
+  **Ford Raptor**. A masked man drags her into an alley. He knows her name and
+  where she lives, menaces her, and gives her a message: *"Tell Josh and Tyson
+  someone's asking questions. They'll know what that means."* He knocks her
+  out against a brick wall and takes her phone. She comes to, gets back to the
+  truck, and breaks down looking for the phone.
+- **Who he is:** a contractor hired by **Daniel Mercer's family**, who have a
+  dangerous past and are looking for evidence about Daniel's death at the
+  facility, in particular **a journal**. Luna does not know this. (The
+  detectives' "do you journal?" in `luna-detectives` is consistent with it.)
+- **Not yet filmed:** she is hospitalized. Josh arrives first, then Tyson;
+  she tells them what the man said. Josh is furious and feels responsible;
+  Tyson is as shaken but more controlled. Outside the hospital Josh asks Tyson
+  to help him find the man; Tyson agrees in very few words (understated
+  loyalty and dark humor, in the spirit of *The Town* without its dialogue).
+- **Continuity the brief restates:** Luna and Josh separated but still in
+  love, ten years, never married; Tyson and Luna not romantically involved;
+  neither man an action hero. A character drama, not a revenge thriller.
+- **Two small differences from this document, not resolved here:** the brief
+  says Daniel died "approximately ten years earlier" (this document: nine
+  years, September 17th — read as a round number), and calls Tyson Josh's
+  "cousin" (canon: second cousin, which is still a cousin).

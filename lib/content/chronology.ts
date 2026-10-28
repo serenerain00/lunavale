@@ -153,6 +153,11 @@ export const STORY_ORDER: readonly string[] = [
   // other Josh-and-Tyson scene of the early months.
   "josh-ty-kitchen-corner",
   "josh-ty-ricks-house",
+  // HAND-PLACED — A GUESS, 2026-10-27, Melissa to move it. The lakehouse
+  // fight: Josh has asked Luna whether she is coming home and keeps asking
+  // Tyson at the farm, so it follows Come Home and Josh asking Tyson to talk
+  // to her. Still the early months ("since you left him").
+  "luna-ty-lkehous-fight",
 
   "luna-tyson-dance",
   "luna-tyson-gingerale",

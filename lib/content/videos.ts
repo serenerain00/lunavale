@@ -4148,6 +4148,53 @@ export const videos: Video[] = [
   },
   {
     /*
+      THE LAKEHOUSE FIGHT, Melissa, 2026-10-27: "new video called
+      luna-ty-lkehous-fight. first 2m is free. then members only". Source is
+      stories/luna-ty-kitchenFight/luna-ty-lkehous-fight.mp4; the slug follows
+      the cut, as she named it.
+
+      WHAT IS SAID, from a whisper transcript. Night at the lakehouse. Tyson
+      answered a question of Josh's for her; she wants him to let her make her
+      own decisions; he has been "in the middle since you left him", and Josh
+      asks him at work every day whether she is coming home. It gets loud,
+      he says something he shouldn't about her calling him, and it comes back
+      around to "I love him, Ty" and "I can't keep living like that". It ends
+      with her asking for space, then asking him not to go, and the two of
+      them holding each other: "You have me, Lu." / "But he's family. I'm in
+      it either way."
+
+      DESCRIBE AND STOP. The synopsis covers the opening minute and stops;
+      nothing about what he feels (tyson-no-early-feelings). Josh is talked
+      about, not on screen, so he is not in `about`.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace. The title is the
+      thread through the scene: his "in the middle" and his last line.
+    */
+    slug: "luna-ty-lkehous-fight",
+    title: "In the Middle",
+    synopsis:
+      "Night at the lakehouse. Luna wants to make her own decisions. Tyson has been answering Josh\u2019s questions at the farm every day since she left, and tonight neither of them lets it go.",
+    file: "luna-ty-lkehous-fight.proxy.mp4",
+    poster: "/posters/luna-ty-lkehous-fight.jpg",
+    // 492.4, the whole file — no closing black; a 1s fade goes on the proxy.
+    durationSeconds: 492,
+    addedOn: "2026-10-27",
+    access: "premium",
+    // Shouting and swearing in a kitchen, then a hug. Nothing intimate.
+    mature: false,
+    preview: {
+      file: "luna-ty-lkehous-fight-preview.proxy.mp4",
+      // See the override in scripts/make-previews.mjs.
+      durationSeconds: 119,
+      hookNote:
+        "The first two minutes, Melissa's call. Stops on \u201cDo you?\u201d / \u201cYes.\u201d, before he says what she is making this about.",
+    },
+    feelings: ["hurt", "trust"],
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+  },
+  {
+    /*
       COME HOME, the landscape cut, 2026-10-22. Melissa: "add the horizontal
       one as a free clip too ... luna-josh-frmhouse-comehome-horiz". Free, in
       full. The same scene as the vertical post luna-josh-frmhouse-come-home

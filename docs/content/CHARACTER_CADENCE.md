@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-27 against `main` at 817ef6f. **A touched `lib/content/` file
+re-run 2026-10-28 against `main` at 7f3f6eb. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -64,9 +64,9 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 248 | 209 |
-| Tyson | 12 | 178 | 154 |
-| Josh | 14 | 150 | 132 |
+| Luna | 12 | 250 | 211 |
+| Tyson | 12 | 180 | 156 |
+| Josh | 14 | 151 | 133 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 9 | 9 |
@@ -85,14 +85,18 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 at 817ef6f** (Tyson 178, Josh 150 — equal to the widest it has
-ever been, which is the 28 of late September, and still inside the span below
-rather than past it): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 at 7f3f6eb** (Tyson 180, Josh 151): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
-a single day since. **It has sat anywhere between 17 and 28. Quote the two
+a single day since. **It has now sat anywhere between 17 and 29. Quote the two
 current numbers at a sha and do not characterise the movement at all** — an
 earlier version of this line said "noise in the high teens", which 22 killed.
+*(The ceiling was 28, set in late September and matched on 10-27. The 10-28
+merge — one premium Luna-and-Tyson clip and its journal page — put it at 29,
+so the span itself moved for the first time in five weeks. That is a fact about
+the bounds, not a direction: **the previous sentence was "it has sat anywhere
+between 17 and 28", and it was true until it wasn't.** If a later merge passes
+29, extend the number and nothing else.)*
 *(This
 paragraph has now been wrong twice: it claimed the direction had never changed,
 which died on 2026-10-09, and then that the gap was closing, which died on

@@ -5,7 +5,8 @@ Investigation & Frank Dorsey". Hers to rewrite. Target length 3:30–4:00.
 Lines marked **(M)** are hers from the brief, kept or lightly adjusted.*
 
 **Canon kept:** Josh and Tyson are second cousins, so Rick is not Tyson's
-uncle; Frank says "Rick". Nothing about what happened at the facility is said,
+uncle; Frank says "Rick". Josh's mother is not established, so she is not
+mentioned. Nothing about what happened at the facility is said,
 nor about the journal, the Mercers by name, or who Frank calls. Nobody threatens
 anybody with anything but a sentence.
 
@@ -136,9 +137,9 @@ You know how long I've known your family, son?
 Thirty years.
 
 **FRANK**
-Thirty-one in March. I was at your christening. I drove your mother to the
-hospital the night you broke your arm off that tractor, because your father was
-in Kansas City closing on something. *(beat)* And you walk into my place after
+Thirty-one in March. You learned to drive a forklift in that aisle. I drove
+you to the ER the night you broke your arm off that tractor, because your father
+was in Kansas City closing on something. *(beat)* And you walk into my place after
 hours with *him* —
 
 *a small tilt of the head toward Tyson —*
@@ -254,7 +255,7 @@ hand.*
   forward and never touches anything. Frank is careful around him and lets the
   audience see it.
 - **Invented for texture, Melissa's to cut:** the forklift and the racking, the
-  christening, the broken arm off the tractor, Kansas City, "Marco", and Luna's
+  forklift aisle, the broken arm off the tractor, Kansas City, "Marco", and Luna's
   stitches and the night it happened ("Tuesday"). None of them touch the secret.
 - **What Frank knows stays ambiguous.** He reacts to "ten years ago" and he
   makes the call, but he never says what about, and he never names the

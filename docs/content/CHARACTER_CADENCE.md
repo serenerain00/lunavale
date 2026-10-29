@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-28 against `main` at 7f3f6eb. **A touched `lib/content/` file
+re-run 2026-10-29 against `main` at 1df359f. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -64,7 +64,7 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 250 | 211 |
+| Luna | 12 | 251 | 211 |
 | Tyson | 12 | 180 | 156 |
 | Josh | 14 | 151 | 133 |
 | Rick | 1 | 14 | 13 |
@@ -85,7 +85,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 at 7f3f6eb** (Tyson 180, Josh 151): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29, measured at 7f3f6eb and unmoved at 1df359f** (Tyson 180, Josh 151): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has now sat anywhere between 17 and 29. Quote the two
@@ -125,10 +125,14 @@ Do not restore the "first in the story" phrasing; check `STORY_ORDER` before
 making that claim about anything.)* Seven other free pieces are uncovered as well
 — `luna-ty-couch`, `ty-luna-young`, `luna-tyson-shaving`, `young-luna-ty-apt`,
 `young-luna-ty-seals` (new and free on 2026-10-13), `luna-ty-bulb` (*The Right
-Bulb*, free, 2026-10-14, thirty-nine seconds), `luna-truck-breakdown` and
+Bulb*, free, 2026-10-14, thirty-nine seconds), `luna-truck-breakdown`,
 **`luna-ty-laundrymat`** (*Get to Know Her*, free, 2:51, 2026-10-27, sixty-sixth
 in the order — Luna's own page about it, `laundromat`, is **premium**, so the
-footage is the shop window and her interior is behind the wall) —
+footage is the shop window and her interior is behind the wall) and
+**`luna-alley-attack`** (*Someone's Asking Questions*, free, 2:27, 2026-10-29,
+sixty-eighth in the order, **downtown, and `about` is Luna alone** — checked
+against every entry on this list at 1df359f, the only one that names a single
+character, which is the sort of claim to re-derive rather than trust) —
 but every one of them pays into the two characters who need it least.
 *(`josh-ty-kitchen-corner` is free and uncovered too and is deliberately **not**
 on this list: it pays Josh, which is the whole reason it ranks above everything
@@ -221,6 +225,36 @@ Josh item too.)*
 > loading Josh's one line applies here: the audience hears the second half
 > coming long before it should.
 
+> **THE ATTACK ARC IS THE LARGEST BLOCK OF WRITER KNOWLEDGE ON THE BOARD, AND
+> ALMOST NONE OF IT IS FILMED.** `BETWEEN_US_SECRET_CANON.md` gained
+> *"Addition — 2026-10-28: the attack (`luna-alley-attack`)"*, from Melissa's
+> brief, and it marks itself: **writer knowledge except where marked as on
+> screen.** A note may use only the on-screen part, which is the free clip
+> itself: about 9 PM, Luna leaves **Vale Studios** downtown, walks to her truck,
+> a masked man drags her into an alley, knows her name and where she lives, and
+> leaves a message — *"Tell Josh and Tyson someone's asking questions. They'll
+> know what that means."* He knocks her out and takes her phone; she comes to and
+> breaks down looking for it. **That is all a visitor has seen.**
+>
+> **Everything else in that section is off limits to a note**: who the man is and
+> who hired him, the family looking for evidence about a death at the facility,
+> **a journal** they want, Luna being hospitalized, Josh arriving first and then
+> Tyson, what she tells them, and Josh asking Tyson for help outside. None of it
+> is shot. A cast member talking about a day's work cannot know it, and a note
+> that leans on it tells an audience the shape of the next arc. **The same goes
+> for `docs/content/scenes/dorsey-warehouse.md`** — a **draft** scene, Melissa's
+> to rewrite, introducing **Frank Dorsey**, who appears nowhere in
+> `lib/content/`. Treat a drafted scene as not yet existing.
+>
+> **Two small conflicts the brief itself leaves open, so do not "fix" or repeat
+> either:** it says the death was *approximately ten years* earlier where this
+> document says nine (September 17th), and it calls Tyson Josh's *cousin* where
+> canon says **second cousin** — which the Dorsey draft is careful about, since
+> it means **Rick is not Tyson's uncle**. The brief also restates what has not
+> changed: Luna and Josh separated and still in love, ten years, never married;
+> **Tyson and Luna not romantically involved**; neither man an action hero;
+> *"a character drama, not a revenge thriller."*
+
 > **WRITE THE NOTE IN AMERICAN ENGLISH — AND THE CHECK IS NO LONGER ONLY ABOUT
 > BRITISH SPELLINGS.** As of 2026-10-20 the health check has
 > a daily spelling check over `lib/content`, `lib/studio`, `lib/email`, `app`
@@ -293,19 +327,25 @@ Standing backlog, roughly prioritised:
   writing off frames — she replaced the frames-written ones there, and the
   comments explain why. Episode 4's synopsis is deliberately written to give
   nothing away, so do not mine it for plot
-- **`access` is no longer the same thing as what a visitor can watch, and the
-  difference expires by itself.** On 2026-10-22 Melissa added `Video.openUntil`
-  and set it on the **pilot** at `2026-10-29T07:00:00Z` — the end of Wednesday
-  2026-10-28 in Pacific time. The pilot's `access` still reads `premium`, but
-  `canWatch()` in `lib/access/entitlement.ts` returns true for everyone while the
-  window is open, `openNow()` in `videos.ts` is the test, and the pilot is the
-  home hero and says so on both first-screen arms while it lasts. So **a count of
-  free pieces taken off `access` is one short of what is actually open** right
-  now, and the list in this file is the `access` list. More to the point, this is
-  the first claim in the doc with **a built-in expiry date**: nobody has to touch
-  the repo for "the pilot is free" to become false — it stops being true at
-  07:00 UTC on 10-29. Check `openNow()` rather than repeating it, and do not
-  build a note, a pull quote or a promotion on a window that closes on its own
+- **`access` is not necessarily what a visitor can watch — check `openNow()`, not
+  a sentence in this file.** `Video.openUntil` (added 2026-10-22) marks a
+  members-only piece as open to everyone until a timestamp: `canWatch()` in
+  `lib/access/entitlement.ts` returns true for anyone while the window is open,
+  `openNow()` in `videos.ts` is the test, and `streamable.ts` carries the field
+  through. **The pilot carried the only window so far — 2026-10-22 to
+  2026-10-29T07:00:00Z, the end of Wednesday 10-28 Pacific — and it was the home
+  hero and said so on both first-screen arms while it lasted.** The field is
+  still on the entry; `openNow(pilot)` now returns **false**, and `access`-free
+  and watchable-now agree again (both fourteen at 1df359f). If another window
+  opens, the two diverge by however many pieces carry one, and the list in this
+  file is the `access` list.
+  *(**This item is the one claim in this file that went false with nobody
+  touching the repo.** Every other correction here followed a commit; this one
+  followed the clock, at 07:00 UTC on 10-29, and it said "the pilot is open to
+  everyone" and "a free count off `access` is one short" until that minute. It is
+  also why the instruction above is to call the function rather than repeat the
+  sentence. Do not restore the live wording for a window that has closed, and do
+  not build a note, a pull quote or a promotion on one that is open.)*
 - **`josh-ty-kitchen-corner`** — *In Your Corner* (title a placeholder),
   published **free** on 2026-10-18, 1:34, Josh and Tyson. **It is one of two free
   Josh gaps on the board and the longer of them** — `luna-josh-frmhouse-comehome-horiz`

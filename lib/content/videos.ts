@@ -4238,6 +4238,40 @@ export const videos: Video[] = [
   },
   {
     /*
+      THE ATTACK TRAILER, Melissa, 2026-10-29: "the trailer to a future scene,
+      about the attack on luna, the accident. its free for everyone".
+
+      WHAT IS IN IT, from the transcript. The alley (the man in the mask, "I
+      know where you live"), Luna in the hospital, Josh arriving ("I'm Josh.
+      They called me earlier"), Tyson and Josh deciding who to go see, and
+      Frank at the warehouse: "make sure the right people hear me". It says
+      "something that happened ten years ago" and nothing more, so it spends
+      no more of the secret than the Dorsey brief allows.
+
+      NOT IN STORY_ORDER, as for the other two trailers (chronology.ts).
+      CONTENT NOTE `assaulted`, the same as the alley clip: the attack is in
+      the opening.
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace.
+    */
+    slug: "luna-attack-trailer",
+    title: "Trailer: The Right People",
+    synopsis:
+      "Luna wakes up in a hospital bed with a message for Josh and Tyson. They go looking for whoever sent it.",
+    file: "luna-attack-trailer.proxy.mp4",
+    poster: "/posters/luna-attack-trailer.jpg",
+    // Whole file: the score fades to the last frame under the closing black.
+    durationSeconds: 160,
+    addedOn: "2026-10-29",
+    access: "free",
+    mature: false,
+    notes: ["assaulted"],
+    feelings: [],
+    place: "downtown",
+    about: ["luna", "josh", "tyson"],
+  },
+  {
+    /*
       COME HOME, the landscape cut, 2026-10-22. Melissa: "add the horizontal
       one as a free clip too ... luna-josh-frmhouse-comehome-horiz". Free, in
       full. The same scene as the vertical post luna-josh-frmhouse-come-home

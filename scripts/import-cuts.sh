@@ -1001,6 +1001,13 @@ CUTS=(
   # END 147.5: black from 143.38, and the score is under -60 dB from about
   # 147.45 (closing-black rule: cut where the music stops, not at the black).
   "luna-alley-attack|stories/luna-alley-stranger/luna-alley-attack-music.mov|3|147.5|-|30"
+
+  # 2026-10-29: the trailer for what follows the alley. 2:40, 1914x1080 at 30.
+  # POSTER AT 16s: Luna in the hospital bed, bandaged, after the attack rather
+  # than during it.
+  # NO END TRIM: black from 155.5, and the score is still fading into the last
+  # frame (-52 dB at 158), so the music stops where the file does.
+  "luna-attack-trailer|stories/luna-alley-stranger/luna-attack-trailer.mp4|16|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

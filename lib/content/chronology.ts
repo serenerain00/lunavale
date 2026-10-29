@@ -333,6 +333,8 @@ export function assertComplete(): { missing: string[]; unknown: string[] } {
     "between-us-trailer-one",
     // A trailer for a season away, not a beat in this one (2026-10-09).
     "luna-detectives-trailer",
+    // The trailer for what follows the alley (2026-10-29).
+    "luna-attack-trailer",
     "interview",
     ...SEASONS.flatMap((s) => s.episodes.map((e) => e.slug).filter(Boolean)),
   ]);

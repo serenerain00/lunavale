@@ -18,10 +18,16 @@ import { clipPosterSrc, type Clip } from "@/lib/content/posts";
 
 interface VerticalPlayerProps {
   clip: Clip;
+  /**
+   * Called once, the first time it reaches the end. These LOOP, so `ended`
+   * never fires; this watches for the last half-second instead.
+   */
+  onPlayedThrough?: () => void;
 }
 
-export function VerticalPlayer({ clip }: VerticalPlayerProps) {
+export function VerticalPlayer({ clip, onPlayedThrough }: VerticalPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const throughRef = useRef(false);
   const [muted, setMuted] = useState(true);
   const [failed, setFailed] = useState(false);
   // Remounting is the only reliable way to make a <video> retry a source it
@@ -97,6 +103,14 @@ export function VerticalPlayer({ clip }: VerticalPlayerProps) {
           preload="metadata"
           aria-label={clip.title}
           onError={() => setFailed(true)}
+          onTimeUpdate={(e) => {
+            const v = e.currentTarget;
+            if (throughRef.current || !onPlayedThrough || !v.duration) return;
+            if (v.currentTime >= v.duration - 0.5) {
+              throughRef.current = true;
+              onPlayedThrough();
+            }
+          }}
         >
           <source src={`/api/stream/${clip.id}`} type="video/mp4" />
         </video>

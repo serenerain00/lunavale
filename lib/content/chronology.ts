@@ -265,6 +265,11 @@ export const STORY_ORDER: readonly string[] = [
   // the future. prob the latest scene we have." The detectives, and Tyson
   // keeping her out of it. If later scenes arrive, this is where they go.
   "luna-ty-detectives",
+
+  // HAND-PLACED — REASONED, 2026-10-28. The alley: "someone's asking
+  // questions" follows the detectives, and Melissa's brief for the arc puts
+  // it at Vale Studios, so the studio era. Latest scene we have.
+  "luna-alley-attack",
 ];
 
 /** Position in the story, 1-based. `undefined` for anything not in the list. */

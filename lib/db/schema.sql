@@ -652,3 +652,33 @@ CREATE TABLE IF NOT EXISTS billing_actions (
 );
 
 CREATE INDEX IF NOT EXISTS billing_actions_at_idx ON billing_actions (at DESC);
+
+-- ---------------------------------------------------------------------------
+-- Ratings — five stars under a clip or a post, once it has played through.
+--
+-- Melissa, 2026-10-28: "its quicker than sending a typed out message. we'll
+-- have both". So it sits beside scene_comments, not instead of it: one tap
+-- for the many who will not write a sentence, the box for the few who will.
+--
+-- ONE ROW PER VIEWER PER PIECE. `viewer_key` is a random id kept in the
+-- browser (no account needed, same reasoning as scene_comments), and tapping
+-- a different star later updates the row rather than adding a second vote.
+-- Clearing the browser makes a new viewer; for a feedback signal on a site
+-- this size that is fine, and it is not an anonymous-poll fortress.
+CREATE TABLE IF NOT EXISTS ratings (
+  id           BIGSERIAL PRIMARY KEY,
+  -- 'clip' = lib/content/videos.ts (/clips/<slug>); 'post' = the verticals in
+  -- lib/content/posts.ts (/posts/<id>). Slugs are not foreign keys, as above.
+  kind         TEXT        NOT NULL CHECK (kind IN ('clip', 'post')),
+  slug         TEXT        NOT NULL,
+  stars        SMALLINT    NOT NULL CHECK (stars BETWEEN 1 AND 5),
+  viewer_key   TEXT        NOT NULL,
+  user_id      TEXT,
+  -- Whether they could watch all of it, or rated the preview.
+  was_member   BOOLEAN     NOT NULL DEFAULT false,
+  created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE (kind, slug, viewer_key)
+);
+
+CREATE INDEX IF NOT EXISTS ratings_piece_idx ON ratings (kind, slug);

@@ -989,6 +989,18 @@ CUTS=(
   # NO END, FADE 1: no black at the end (blackdetect finds none) — it stops
   # dead on the two of them holding each other, over room tone.
   "luna-ty-lkehous-fight|stories/luna-ty-kitchenFight/luna-ty-lkehous-fight.mp4|72|-|1|30"
+
+  # 2026-10-28: the alley. Luna attacked downtown on the way back to her
+  # truck. 2:28 scored, 1320x812 hevc at 60fps, proxy at 30. Melissa named
+  # the -music one; luna-alley-stranger.mp4 beside it is the unscored export.
+  # The slug drops "-music", as luna-ty-laundrymat did.
+  #
+  # POSTER AT 3s: her walking alone on the wet sidewalk, before anything
+  # happens. The card is public and free; it does not need the attack on it.
+  #
+  # END 147.5: black from 143.38, and the score is under -60 dB from about
+  # 147.45 (closing-black rule: cut where the music stops, not at the black).
+  "luna-alley-attack|stories/luna-alley-stranger/luna-alley-attack-music.mov|3|147.5|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

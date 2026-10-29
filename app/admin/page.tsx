@@ -20,6 +20,8 @@ import { allPostsForModeration, posterStats } from "@/lib/db/overheard";
 import { recentHelpMessages } from "@/lib/db/help";
 import { surveyResults, type Tally } from "@/lib/db/survey";
 import { commentCountsByScene, recentSceneComments } from "@/lib/db/comments";
+import { ratingSummaries } from "@/lib/db/ratings";
+import { getClip } from "@/lib/content/posts";
 import {
   followerCount,
   followerSources,
@@ -63,7 +65,7 @@ export default async function AdminPage() {
       posterStats(FREE_POST_ALLOWANCE),
       freeAccountCount(),
     ]);
-  const [help, survey, sceneComments, commentCounts, revenue, abandoned] =
+  const [help, survey, sceneComments, commentCounts, revenue, abandoned, ratings] =
     await Promise.all([
       recentHelpMessages(20),
       surveyResults(25),
@@ -71,7 +73,12 @@ export default async function AdminPage() {
       commentCountsByScene(),
       revenueSummary(),
       abandonedCheckouts(),
+      ratingSummaries(),
     ]);
+  const ratingCount = ratings.reduce((n, r) => n + r.count, 0);
+  const ratingAverage = ratingCount
+    ? ratings.reduce((n, r) => n + r.average * r.count, 0) / ratingCount
+    : 0;
   const [listSize, listSources, list, pending, access, problems, billingLog] =
     await Promise.all([
       followerCount(),
@@ -649,6 +656,60 @@ export default async function AdminPage() {
                     </p>
                   </li>
                 ))}
+              </ul>
+            </>
+          )}
+        </Section>
+
+        {/* --------------------------------------------------------- ratings */}
+        <Section title="How they rated them">
+          {ratings.length === 0 ? (
+            <p className="mt-1 text-sm text-stone-dim">
+              Nothing yet. The stars appear under a clip once somebody has
+              watched it to the end, and under a post after its first play.
+            </p>
+          ) : (
+            <>
+              <div className="flex flex-wrap gap-8">
+                <Stat label="Ratings" value={String(ratingCount)} />
+                <Stat label="Average" value={`${ratingAverage.toFixed(1)} ★`} />
+                <Stat label="Pieces rated" value={String(ratings.length)} />
+              </div>
+              <ul className="mt-5 divide-y divide-hairline">
+                {ratings.map((r) => {
+                  const title =
+                    r.kind === "clip"
+                      ? (getVideo(r.slug)?.title ?? r.slug)
+                      : (getClip(r.slug)?.title ?? r.slug);
+                  const href = r.kind === "clip" ? `/clips/${r.slug}` : `/posts/${r.slug}`;
+                  return (
+                    <li key={`${r.kind}:${r.slug}`} className="py-3">
+                      <p className="flex flex-wrap items-baseline gap-x-3 text-sm">
+                        <Link
+                          href={href}
+                          className="font-semibold text-ivory underline decoration-hairline underline-offset-4"
+                        >
+                          {title}
+                        </Link>
+                        <span className="text-[0.6875rem] uppercase tracking-wide text-stone-dim">
+                          {r.kind}
+                        </span>
+                        <span className="tabular-nums text-amber">
+                          {r.average.toFixed(1)} ★
+                        </span>
+                        <span className="text-xs text-stone-dim tabular-nums">
+                          {r.count} {r.count === 1 ? "rating" : "ratings"}
+                          {r.previewOnly > 0 && ` · ${r.previewOnly} on the preview`}
+                        </span>
+                      </p>
+                      {/* The spread, five to one: an average of 3 can be
+                          everybody shrugging or half loving it and half not. */}
+                      <p className="mt-1 text-xs tabular-nums text-stone-dim">
+                        {[5, 4, 3, 2, 1].map((n) => `${n}★ ${r.spread[n - 1]}`).join("  ·  ")}
+                      </p>
+                    </li>
+                  );
+                })}
               </ul>
             </>
           )}

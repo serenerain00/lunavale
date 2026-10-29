@@ -931,3 +931,73 @@ his time in the Navy. She is just back from a session with her trainer. The
 date she reports — a guy who "works in the building", forty minutes on his
 ex — is **a random guy, not Josh** (Melissa): she has not started dating Josh
 yet. Nothing on the site says why Tyson called or what he makes of the date.
+
+## Addition — 2026-10-28: the attack (`luna-alley-attack`)
+
+From Melissa's brief for the arc, "Luna's Attack". **Writer knowledge except
+where marked as on screen.**
+
+- **On screen (free):** about 9 PM, Luna leaves **Vale Studios**, downtown
+  Denver, after getting something from her office, and walks to her black
+  **Ford Raptor**. A masked man drags her into an alley. He knows her name and
+  where she lives, menaces her, and gives her a message: *"Tell Josh and Tyson
+  someone's asking questions. They'll know what that means."* He knocks her
+  out against a brick wall and takes her phone. She comes to, gets back to the
+  truck, and breaks down looking for the phone.
+- **Who he is:** a contractor hired by **Daniel Mercer's family**, who have a
+  dangerous past and are looking for evidence about Daniel's death at the
+  facility, in particular **a journal**. Luna does not know this. (The
+  detectives' "do you journal?" in `luna-detectives` is consistent with it.)
+- **Not yet filmed:** she is hospitalized. Josh arrives first, then Tyson;
+  she tells them what the man said. Josh is furious and feels responsible;
+  Tyson is as shaken but more controlled. Outside the hospital Josh asks Tyson
+  to help him find the man; Tyson agrees in very few words (understated
+  loyalty and dark humor, in the spirit of *The Town* without its dialogue).
+- **Continuity the brief restates:** Luna and Josh separated but still in
+  love, ten years, never married; Tyson and Luna not romantically involved;
+  neither man an action hero. A character drama, not a revenge thriller.
+- **Two small differences from this document, not resolved here:** the brief
+  says Daniel died "approximately ten years earlier" (this document: nine
+  years, September 17th — read as a round number), and calls Tyson Josh's
+  "cousin" (canon: second cousin, which is still a cousin).
+
+## Addition — 2026-10-28 (later): Frank Dorsey, and the arc after the alley
+
+From Melissa's second brief, "Story Continuity Update: Luna's Attack, the
+Mercer Investigation & Frank Dorsey". **All writer knowledge; none of it is
+filmed.** Draft of the Frank scene: `docs/content/scenes/dorsey-warehouse.md`.
+
+- **The night of the accident:** Rick told Josh and Tyson to go home,
+  shower, bag their clothes, and stop talking about it. The facility was
+  under deadline pressure; Rick had managed a shutdown earlier that week.
+- **The attacker:** black clothes, gloves, full-face mask; controlled,
+  predatory, enjoys frightening her; deliberately says nothing of the
+  Mercers or the journal. Luna remembers the warning, names included.
+- **Hospital (to film):** Luna does not drive herself. Josh arrives first:
+  tenderness, not anger, and not a reconciliation. Tyson after, controlled.
+  She tells them the warning and watches them recognize it.
+- **Josh and Tyson:** Josh instigates; they mean to deliver a verbal warning,
+  not to hurt anyone. Josh knows how to fight; he has no military background.
+  Josh's truck is a white RAM 2500; Luna's is a black 2020 F-150 Raptor.
+- **Frank Dorsey**, about 58, owns Dorsey Industrial Supply in the industrial
+  district outside Denver (legitimate). Has known Rick about thirty years,
+  watched Josh and Tyson grow up, does business with the Mercers. Dry,
+  pragmatic, hard to intimidate, paternal with Josh, wary of Tyson. **Whether
+  he helped Rick manage the aftermath is deliberately unconfirmed.** He calls
+  someone after the visit; the recipient is not to be revealed.
+- **Rick confronts Josh** the next day at the farmhouse office ("I understand
+  why you're angry. That's not the same thing."). Josh is starting to act
+  outside the family hierarchy.
+- **Luna:** 38. When she learns how much the two men have withheld, she will
+  resent them deciding her safety without her.
+
+**Where the brief and settled canon disagree. Settled canon is kept until
+Melissa says otherwise:**
+- *Detectives "Hale and Reyes":* the screen names, **Harris and Bennett**,
+  were chosen on 2026-10-09 and stay.
+- *"Rick, Tyson's uncle":* Josh and Tyson are **second cousins**
+  (LUNA_VALE_CONTEXT.md, "decided, closed"), so Rick is not Tyson's uncle.
+  The draft has Frank say "Rick".
+- *"Your daddy spent a lot of years making sure certain things stayed
+  buried":* softened in the draft to "stayed quiet", because Rick's prior
+  knowledge (Stage Five) is still off the site and "buried" leans toward it.

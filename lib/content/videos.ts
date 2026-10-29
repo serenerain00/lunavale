@@ -4195,6 +4195,49 @@ export const videos: Video[] = [
   },
   {
     /*
+      THE ALLEY, Melissa, 2026-10-28: "new video called
+      luna-alley-attack-music. free to everyone", with a brief for the arc
+      (recorded in docs/content/BETWEEN_US_SECRET_CANON.md, "Addition —
+      2026-10-28"). Free, no openUntil: free for good.
+
+      WHAT IS IN IT. About nine at night downtown; she has been to Vale
+      Studios and is walking to her truck. A masked man drags her into an
+      alley, hand over her mouth. He knows her name and where she lives.
+      "You tell Josh and Tyson someone's asking questions. They'll know what
+      that means." He knocks her out against the wall and takes her phone.
+      She comes to, gets to the truck, and breaks down looking for it.
+
+      WRITER KNOWLEDGE, NEVER ON THE SITE: who sent him (the Mercer family),
+      what they are looking for (a journal), and anything about the hospital
+      or Josh and Tyson afterwards, which is not filmed yet. The synopsis
+      describes the walk and stops; it does not quote his message either,
+      which the scene should deliver itself.
+
+      NOTES: `assaulted`, added for this. Not `mature`, which here means sex
+      and nudity (see content-notes.ts).
+
+      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace. The title is his
+      line, the hinge of the arc.
+    */
+    slug: "luna-alley-attack",
+    title: "Someone\u2019s Asking Questions",
+    synopsis:
+      "Nine at night, downtown. Luna stops by the studio for something she left in her office, and walks back to her truck alone.",
+    file: "luna-alley-attack.proxy.mp4",
+    poster: "/posters/luna-alley-attack.jpg",
+    // 147.5 of 148.5 — trimmed where the score stops under the closing black.
+    durationSeconds: 147,
+    addedOn: "2026-10-28",
+    access: "free",
+    mature: false,
+    notes: ["assaulted"],
+    feelings: ["hurt", "lies"],
+    place: "downtown",
+    // ON SCREEN ONLY. Josh and Tyson are named, not seen.
+    about: ["luna"],
+  },
+  {
+    /*
       COME HOME, the landscape cut, 2026-10-22. Melissa: "add the horizontal
       one as a free clip too ... luna-josh-frmhouse-comehome-horiz". Free, in
       full. The same scene as the vertical post luna-josh-frmhouse-come-home

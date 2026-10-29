@@ -8,6 +8,7 @@ import {
 } from "@/app/clips/actions";
 import { MAX_COMMENT_BODY } from "@/lib/content/comments";
 import { FollowForm } from "@/components/follow/FollowForm";
+import { StarRating } from "@/components/media/StarRating";
 
 /**
  * What appears under a scene once it has finished playing.
@@ -66,6 +67,17 @@ export function AfterWatch({
             : "That's the end of it."}
       </h2>
 
+      {/* STARS FIRST, the box after (Melissa, 2026-10-28: "its quicker than
+          sending a typed out message. we'll have both"). One tap is the
+          answer most people will give; the box is for the ones with more. */}
+      <div className="mt-4">
+        <StarRating
+          kind="clip"
+          slug={slug}
+          prompt={preview ? "Even on that much, how was it?" : "How was it?"}
+        />
+      </div>
+
       {state?.ok ? (
         <p className="mt-2 max-w-xl text-sm leading-relaxed text-stone">
           It goes straight to Melissa with the name of the clip attached, which
@@ -75,8 +87,8 @@ export function AfterWatch({
         <>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-stone">
             {preview
-              ? "Even on that much — what did you make of it? This goes to Melissa. It isn't posted publicly and nobody else sees it."
-              : "What did you make of it? This goes to Melissa — it isn't posted publicly and nobody else sees it."}
+              ? "Want to say more? Even on that much, it goes to Melissa. It isn't posted publicly and nobody else sees it."
+              : "Want to say more? This goes to Melissa — it isn't posted publicly and nobody else sees it."}
           </p>
 
           <form action={action} className="mt-4">

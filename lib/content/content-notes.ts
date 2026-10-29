@@ -27,7 +27,8 @@ export type ContentNoteId =
   | "panic"
   | "strangling"
   | "coercion"
-  | "knocked-out";
+  | "knocked-out"
+  | "assaulted";
 
 export interface ContentNote {
   id: ContentNoteId;
@@ -134,6 +135,20 @@ export const CONTENT_NOTES: Record<ContentNoteId, ContentNote> = {
     label: "a woman knocked unconscious",
     detail:
       "A character is struck in the face during a fight she is trying to stop, falls, and loses consciousness. Her face is bleeding, and the scene stays with her.",
+    severe: true,
+  },
+  // Added 2026-10-28 for the alley (`luna-alley-attack`), on the argument
+  // behind `strangling` and `knocked-out`: none of the existing notes says
+  // what is in it. A stranger grabs her, covers her mouth, menaces her in a
+  // way that is plainly sexual though nothing sexual happens, and knocks her
+  // out. `knocked-out` was not reused because its detail is the farm fight
+  // (a blow aimed at somebody else). SEVERE: somebody who has been attacked
+  // by a stranger is owed the words before playback.
+  assaulted: {
+    id: "assaulted",
+    label: "assault by a stranger",
+    detail:
+      "A masked man grabs a woman in an alley, covers her mouth, threatens her in a sexually menacing way, and knocks her unconscious. The scene stays with her as she comes to, injured.",
     severe: true,
   },
 };

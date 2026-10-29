@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { VerticalPlayer } from "@/components/posts/VerticalPlayer";
+import { PostWatch } from "@/components/posts/PostWatch";
 import { ContentNotice } from "@/components/ui/ContentNotice";
 import { RatingBadge } from "@/components/ui/RatingBadge";
 import { SiteHeader } from "@/components/ui/SiteHeader";
@@ -80,7 +80,7 @@ export default async function ClipPage({ params }: ClipPageProps) {
         <ContentNotice notes={clip.notes} className="mx-auto mb-4 max-w-sm" />
 
         {allowed || clip.preview ? (
-          <VerticalPlayer clip={clip} />
+          <PostWatch clip={clip} preview={!allowed} />
         ) : (
           <ClipLocked clip={clip} />
         )}

@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-29 against `main` at 1df359f. **A touched `lib/content/` file
+re-run 2026-10-30 against `main` at 944c369. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -64,9 +64,9 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 251 | 211 |
-| Tyson | 12 | 180 | 156 |
-| Josh | 14 | 151 | 133 |
+| Luna | 12 | 252 | 211 |
+| Tyson | 12 | 181 | 156 |
+| Josh | 14 | 152 | 133 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 9 | 9 |
@@ -85,7 +85,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29, measured at 7f3f6eb and unmoved at 1df359f** (Tyson 180, Josh 151): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 at 944c369** (Tyson 181, Josh 152 — the trailer pays both, so the difference held while both moved): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has now sat anywhere between 17 and 29. Quote the two
@@ -236,15 +236,31 @@ Josh item too.)*
 > know what that means."* He knocks her out and takes her phone; she comes to and
 > breaks down looking for it. **That is all a visitor has seen.**
 >
-> **Everything else in that section is off limits to a note**: who the man is and
-> who hired him, the family looking for evidence about a death at the facility,
-> **a journal** they want, Luna being hospitalized, Josh arriving first and then
-> Tyson, what she tells them, and Josh asking Tyson for help outside. None of it
-> is shot. A cast member talking about a day's work cannot know it, and a note
-> that leans on it tells an audience the shape of the next arc. **The same goes
-> for `docs/content/scenes/dorsey-warehouse.md`** — a **draft** scene, Melissa's
-> to rewrite, introducing **Frank Dorsey**, who appears nowhere in
-> `lib/content/`. Treat a drafted scene as not yet existing.
+> **MOST OF THAT LINE LASTED ONE DAY — READ THIS PART CAREFULLY.** On 10-29 this
+> block said the hospital, Josh arriving, Josh and Tyson deciding, and Frank
+> were all unfilmed and off limits. On **2026-10-30** Melissa published
+> **`luna-attack-trailer`** (*The Warning*, **free**, 2:40, Luna/Josh/Tyson,
+> `notes: ["assaulted"]`, **not** in `STORY_ORDER` like the other trailers) —
+> *"the trailer to a future scene, about the attack on luna, the accident. its
+> free for everyone"* — and its transcript puts on screen: **the alley**, **Luna
+> in the hospital**, **Josh arriving** (*"I'm Josh. They called me earlier"*),
+> **Tyson and Josh deciding who to go see**, and **Frank at the warehouse**
+> (*"make sure the right people hear me"*). Its synopsis is plainer still: *"Luna
+> wakes up in a hospital bed with a message for Josh and Tyson. They go looking
+> for whoever sent it."* **So those beats are now public, in a free piece, and a
+> note may use them.** Do not restore the sentence that called them unfilmed.
+>
+> **What is still writer knowledge, and still off limits:** **who the man is and
+> who hired him**, the **family** looking for evidence about a death at the
+> facility, **the journal** they want, and anything naming them. The entry's own
+> comment draws the line: the trailer says *"something that happened ten years
+> ago"* **and nothing more**, so it *"spends no more of the secret than the
+> Dorsey brief allows."* **Match that restraint** — a note may know there is a
+> warning and a man in a warehouse; it may not know why.
+> **`docs/content/scenes/dorsey-warehouse.md` is still a DRAFT**, Melissa's to
+> rewrite, and **Frank still has no entry in `lib/content/`** — he is a face in a
+> trailer, not a character on the site. Treat the drafted scene as not yet
+> existing even though the trailer shows a piece of it.
 >
 > **Two small conflicts the brief itself leaves open, so do not "fix" or repeat
 > either:** it says the death was *approximately ten years* earlier where this
@@ -388,6 +404,17 @@ Standing backlog, roughly prioritised:
   only and stops short of her answer, so do not mine it for one. (The picture
   goes black at 58.2 seconds and her score fades out under it to the last frame —
   that is deliberate, not a bad trim.)
+- **`luna-attack-trailer`** — *The Warning*, published **free** on 2026-10-30,
+  2:40, **Luna, Josh and Tyson**, `notes: ["assaulted"]`, **not in
+  `STORY_ORDER`** (no trailer is). It is free and uncovered and **pays all three
+  leads**, which makes it the only uncovered free piece that reaches Josh *and*
+  Tyson *and* Luna at once — and the reason it is **deliberately not on the
+  free-and-uncovered list above**, whose clause is that every piece there pays
+  the two who need it least. *(`between-us-trailer-one` is off that list for the
+  same reason.)* It is **a trailer for a scene that does not exist yet**, so a
+  note on it would be about cutting a promise rather than playing one — weigh
+  that before taking it, and read the spoiler guard above first, because the
+  trailer is exactly where the public line now sits.
 - Josh clips with no note yet: `luna-josh-break`, `luna-josh-bed-flashback`,
   `luna-josh-first-night`, `luna-josh-fair` *(taken by #4)*, **`josh-luna-pre-break`**
   (*Before*, 2026-10-19, 6:58, `premium` with a sixty-second free opening — Luna

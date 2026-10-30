@@ -4252,10 +4252,11 @@ export const videos: Video[] = [
       CONTENT NOTE `assaulted`, the same as the alley clip: the attack is in
       the opening.
 
-      TITLE AND SYNOPSIS ARE PLACEHOLDERS, hers to replace.
+      TITLE IS HERS ("The Warning", 2026-10-29). The synopsis is still a
+      placeholder.
     */
     slug: "luna-attack-trailer",
-    title: "Trailer: The Right People",
+    title: "The Warning",
     synopsis:
       "Luna wakes up in a hospital bed with a message for Josh and Tyson. They go looking for whoever sent it.",
     file: "luna-attack-trailer.proxy.mp4",

@@ -352,9 +352,18 @@ Standing backlog, roughly prioritised:
   2026-10-29T07:00:00Z, the end of Wednesday 10-28 Pacific — and it was the home
   hero and said so on both first-screen arms while it lasted.** The field is
   still on the entry; `openNow(pilot)` now returns **false**, and `access`-free
-  and watchable-now agree again (both fourteen at 1df359f). If another window
+  and watchable-now agree again — both **fourteen** at 1df359f, both **fifteen**
+  at 944c369 once the free trailer landed. If another window
   opens, the two diverge by however many pieces carry one, and the list in this
   file is the `access` list.
+  *(**There is a third free count, and it is the one the health check prints.**
+  That check counts `access === "free" && !hidden`, so it said **14 free** on
+  10-31 while `access`-free was **15**: `interview` is free and `hidden: true`,
+  the only hidden piece in `videos.ts` at 944c369. None of the three figures is
+  wrong and none of them is the others — say which one you mean, and never
+  reconcile them by editing one. This was checked on 10-31 because the gap looked
+  at first like the new trailer being withheld, and it is not:
+  `luna-attack-trailer` is `hidden: false` and a visitor can watch it.)*
   *(**This item is the one claim in this file that went false with nobody
   touching the repo.** Every other correction here followed a commit; this one
   followed the clock, at 07:00 UTC on 10-29, and it said "the pilot is open to

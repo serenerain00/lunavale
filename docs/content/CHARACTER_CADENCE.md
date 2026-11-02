@@ -144,15 +144,15 @@ would have made the clause false in the same commit that cited it. It is in the
 Josh item too.)*
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
-> updated 2026-10-26. The backlog below describes `main`, and `main` is behind:
+> updated 2026-11-02. The backlog below describes `main`, and `main` is behind:
 > the drops for 2026-08-03, 08-10, 08-17, 08-31, 09-07, 09-14, 09-21, 10-05,
-> 10-12, 10-19 and 10-26 are all still open and unmerged (#1, #2, #3, #5, #6,
-> #7, #8, #9, #10, #11, #12), as is this one (#4) — **twelve weeks of drops,
-> nothing landed.**
+> 10-12, 10-19, 10-26 and 11-02 are all still open and unmerged (#1, #2, #3, #5,
+> #6, #7, #8, #9, #10, #11, #12, #13), as is this one (#4) — **thirteen weeks of
+> drops, nothing landed.**
 > A weekly run clones the repo fresh, so it cannot see any of them — and
-> **eleven** separate weeks have now independently picked the same obvious gap
+> **twelve** separate weeks have now independently picked the same obvious gap
 > and written the same note, a Rick `insight` note on `josh-rick-lake`: #2, #3,
-> #5, #6, #7, #8, #9, #10, #11, #12, and #4 before it was rewritten. Most ids
+> #5, #6, #7, #8, #9, #10, #11, #12, #13, and #4 before it was rewritten. Most ids
 > differ (#5 `rick-i-already-knew`, #8 `rick-already-knew`, #9
 > `rick-the-line-in-the-water`, #12 `rick-never-look-at-him`),
 > so merging two of those would not collide — it would quietly give Rick the same
@@ -160,6 +160,34 @@ Josh item too.)*
 > same id and same heading**, so that pair would actually conflict rather than
 > duplicate silently. Do not generalise either way — read the ids. Whatever
 > this file says is uncovered, check it against the open PRs first.
+>
+> **#13 is the one to look at twice.** The 2026-11-02 run shipped
+> `rick-line-in-the-water` with the heading *The line stays in the water* — and
+> #9 already carries `rick-the-line-in-the-water` under that same heading. **The
+> two ids differ by the single word `the`**, so they would not collide; they would
+> silently give Rick two nearly identically named pages. Reading the ids is not
+> enough any more when they are one word apart — diff the bodies. (They are
+> genuinely different notes: #13 is built on Melissa's note about his hands and
+> the line he never takes out of the water.)
+>
+> **One thing the 11-02 run got right, and it is worth recording.** It was the
+> first weekly run to see `luna-alley-attack`, `luna-attack-trailer` and the
+> 10-28 canon addition on `main`, and its note spends **none** of that: no
+> masked man, no hospital, no family, no journal, nothing about the facility. The
+> failure here is repetition of a subject, not leakage of writer knowledge — do
+> not widen the charge beyond what the runs actually do.
+>
+> **The notebook's own ACCESS header is stale on `main`, and every run makes it
+> worse.** `lib/content/between-takes.ts` on `main` at 944c369 says *"5 of the 32
+> pages are open"* while the module actually holds **38 notes, 8 of them free** —
+> the comment has been hand-maintained and has drifted by six pages and three
+> free ones. Each weekly run then *increments the stale number*: #13 wrote *"5 of
+> the 33"*, which is arithmetic on a wrong figure rather than a count. **Derive
+> it — `notes.length` and `freeNotes().length` — and never add one to the
+> sentence.** #4's branch reads *"8 of the 39"*, which is what those two
+> functions return there, and is the only correct copy on the board. Checked on
+> 2026-11-02 against `main`, #4 and #13 at once, because a header that looks
+> maintained is worse than one that looks obviously old.
 >
 > **The 10-26 run is the strongest evidence yet that this is structural, not
 > taste.** By then `main` carried Simone, two *Come Home* cuts, `ty-gym`,
@@ -171,10 +199,10 @@ Josh item too.)*
 > his best scene. Adding material does not fix this. Landing one of these, or
 > changing the stored prompt, does.
 >
-> **This paragraph cannot fix that on its own, and it has now failed eight
+> **This paragraph cannot fix that on its own, and it has now failed nine
 > times.** It has only ever existed on #4's branch, never on `main`, so the
-> 08-31, 09-07, 09-14, 09-21, 10-05, 10-12, 10-19 and 10-26 runs could not read
-> it and duplicated anyway. It becomes effective the moment anything carrying it lands on `main`.
+> 08-31, 09-07, 09-14, 09-21, 10-05, 10-12, 10-19, 10-26 and 11-02 runs could not
+> read it and duplicated anyway. It becomes effective the moment anything carrying it lands on `main`.
 > Until then the only reliable control is the weekly routine's own stored prompt,
 > which is the maintainer's to change.
 >

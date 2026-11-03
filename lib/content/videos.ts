@@ -3450,6 +3450,53 @@ export const videos: Video[] = [
   },
   {
     /*
+      EPISODE 6, THE EVENT, 2026-11-02, released that day (a day late:
+      Melissa had tech difficulties). Title is Melissa's. Credits as
+      Episodes 4 and 5, with the episode's name under its number
+      (scripts/episode-credits.py --name). Master: stories/ep6/ep6-final.mp4,
+      built from ep6-final-music.mp4, cut at 1568.9 where picture and score
+      stop together.
+
+      WHAT IS IN IT, from the transcript: "One year ago…", Luna and Josh with
+      a therapist (he fixes before he understands; she goes quiet; dinner at
+      seven, then nine, then eleven). Then the present: Josh's company event
+      (the luna-josh-ty-event scene is in it), dancing and Boulder and the
+      apartment with the broken AC; Tyson finding out she came with Josh; a
+      stranger at the bar ("funny how much people can keep to themselves");
+      the investor; and outside, Josh asking her to come home. Ends on "I
+      want to believe you."
+
+      SYNOPSIS: short, and it does not mention the stranger at the bar or
+      anything Tyson feels (tyson-no-early-feelings): describe and stop.
+
+      FREE: THE FIRST MINUTE (Melissa, 2026-11-02), from the top, title card
+      included, to 1:03.1 so it stops between lines. Override in
+      scripts/make-previews.mjs.
+    */
+    slug: "episode-6",
+    // Must match lib/content/season.ts.
+    title: "Episode 6: The Event",
+    synopsis:
+      "A year ago, Luna and Josh sat down with a therapist and tried to say what had gone quiet between them. Now she goes with him to his company’s annual event, where nobody knows they have separated, and where Tyson is too.",
+    file: "episode-6.proxy.mp4",
+    poster: "/posters/episode-6.jpg",
+    durationSeconds: 1584,
+    addedOn: "2026-11-02",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "episode-6-preview.proxy.mp4",
+      // See the override in scripts/make-previews.mjs.
+      durationSeconds: 63,
+      hookStart: 0,
+      hookNote: "the therapist’s office, a year ago",
+    },
+    feelings: ["distance", "hurt"],
+    place: "downtown",
+    about: ["luna", "josh", "tyson"],
+  },
+  {
+    /*
       LUNA AND JOSH, IN BLACK AND WHITE, Melissa, 2026-10-10. The landscape
       cut is this clip; the vertical is the post `luna-josh-bed-ig`. Both
       members-only (Melissa).

@@ -132,6 +132,12 @@ export function compose(
      * footer that says why they are getting it.
      */
     audience?: "member" | "follower";
+    /**
+     * A line or two from Melissa above the list, for a one-off. Episode 6,
+     * 2026-11-02, went up a day late and she wanted to say so. Blank lines
+     * split it into paragraphs.
+     */
+    note?: string;
   } = {},
 ): Composed {
   const url = (href: string) => new URL(href, base).toString();
@@ -181,9 +187,12 @@ export function compose(
   const textSection = (heading: string, items: Release[]): string[] =>
     items.length ? [heading.toUpperCase(), "", ...items.flatMap(asText)] : [];
 
+  const noteParas = (options.note ?? "").split(/\n\s*\n/).map((s) => s.trim()).filter(Boolean);
+
   const textLines = [
     "There's new material on Luna Vale.",
     "",
+    ...noteParas.flatMap((p) => [p, ""]),
     ...textSection("Scenes", listedScenes),
     ...textSection("From her journal", listedPages),
     ...(moreText ? [moreText, ""] : []),
@@ -226,6 +235,12 @@ export function compose(
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;">
   <tr><td style="color:#c9a227;font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding-bottom:12px;">Luna Vale</td></tr>
   <tr><td style="color:#f2ece4;font-family:Georgia,serif;font-size:26px;font-weight:300;line-height:1.2;padding-bottom:28px;">There&rsquo;s new material.</td></tr>
+  ${noteParas
+    .map(
+      (p) =>
+        `<tr><td style="color:#d8d2ca;font-family:Georgia,serif;font-size:16px;line-height:1.7;padding:0 0 24px 0;">${esc(p)}</td></tr>`,
+    )
+    .join("")}
   ${htmlItems}
   ${
     extra > 0

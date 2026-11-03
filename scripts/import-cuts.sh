@@ -868,6 +868,15 @@ CUTS=(
   # window. Was 737.4s, a mid-bite two-shot; 815s before the re-export.
   "episode-5|stories/ep5/ep5-final.mp4|813.04|-|-|30"
 
+  # EPISODE 6, THE EVENT, 2026-11-02. stories/ep6/ep6-final.mp4 is
+  # ep6-final-music.mp4 with the credits on (scripts/episode-credits.py
+  # --number 6 --name "The Event" --end 1568.9: picture and music stop
+  # together there). 1746x1080 at 30fps. No END or FADE.
+  #
+  # POSTER AT 55s: the two of them on the therapist's couch, her in the
+  # frame, inside the free first minute.
+  "episode-6|stories/ep6/ep6-final.mp4|55|-|-|30"
+
   # THE INTERVIEW, 2026-10-09. A future season: Detectives Harris and
   # Bennett question Luna about the accident nine years ago, then she rings
   # Tyson from the car. Scored, 13:20, 1320x798 hevc at 60fps — down to 30

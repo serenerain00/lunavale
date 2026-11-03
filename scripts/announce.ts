@@ -33,6 +33,13 @@
  *   npx tsx scripts/announce.ts --to=me@example.com  # dry run at one address
  *   npx tsx scripts/announce.ts --to=me@example.com --send   # real test send
  *   npx tsx scripts/announce.ts --send               # the real thing
+ *   npx tsx scripts/announce.ts --note="…"           # a line from Melissa on top
+ *   npx tsx scripts/announce.ts --followers          # the email list too
+ *
+ * --followers (Episode 6, 2026-11-02) adds the free email list — people who
+ * asked to hear when something goes up — with the follower wording (what
+ * needs a membership, and why they are getting it). Anyone who is also a
+ * member gets the member copy once, not both.
  *
  * Environment (all required for --send):
  *   DATABASE_URL     the memberships table and the opt-out list
@@ -65,6 +72,8 @@ const flag = (name: string): string | undefined => {
 };
 const send = argv.includes("--send");
 const only = flag("to");
+const note = flag("note")?.replace(/\\n/g, "\n");
+const withFollowers = argv.includes("--followers");
 const base = process.env.SITE_URL ?? "https://lunavale38.com";
 
 function die(message: string): never {
@@ -189,6 +198,15 @@ async function addressesFor(userIds: string[]): Promise<Map<string, string>> {
   return out;
 }
 
+/** The email list: signed up, not unsubscribed. */
+async function followerAddresses(): Promise<string[]> {
+  const sql = neon(process.env.DATABASE_URL!);
+  const rows = (await sql`
+    SELECT email FROM followers WHERE unsubscribed_at IS NULL
+  `) as { email: string }[];
+  return rows.map((r) => r.email.trim().toLowerCase());
+}
+
 async function suppressedAndSent(
   addrs: string[],
 ): Promise<{ off: Set<string>; done: Set<string> }> {
@@ -272,6 +290,7 @@ async function main() {
   const mail = compose(included, base, unsubscribeUrl(base, sample), {
     shown: Number(flag("show") ?? 8),
     countedFrom: since,
+    note,
   });
   console.log(`\n  Subject: ${mail.subject}`);
   console.log("  ---");
@@ -281,17 +300,25 @@ async function main() {
   // --to addresses one person and asks Clerk and the membership table nothing.
   // It is how you send yourself the real email before sending it to customers.
   let recipients: string[];
+  const followerSet = new Set<string>();
   if (only) {
     recipients = [only.trim().toLowerCase()];
   } else {
     const ids = await memberUserIds();
     const byId = await addressesFor(ids);
-    const all = [...new Set(byId.values())];
+    const memberAddrs = new Set(byId.values());
+    if (withFollowers) {
+      for (const a of await followerAddresses()) {
+        if (!memberAddrs.has(a)) followerSet.add(a);
+      }
+    }
+    const all = [...memberAddrs, ...followerSet];
     const missing = ids.length - byId.size;
     const { off, done } = await suppressedAndSent(all);
     recipients = all.filter((a) => !off.has(a) && !done.has(a));
 
     console.log(`  ${ids.length} member(s) with access`);
+    if (withFollowers) console.log(`  ${followerSet.size} on the email list who are not members`);
     if (missing > 0) {
       console.log(`  ${missing} without a verified primary address — skipped`);
     }
@@ -321,6 +348,8 @@ async function main() {
     const m = compose(included, base, unsub, {
       shown: Number(flag("show") ?? 8),
       countedFrom: since,
+      note,
+      audience: followerSet.has(to) ? "follower" : "member",
     });
     try {
       await deliver(to, m.subject, m.text, m.html, unsub);

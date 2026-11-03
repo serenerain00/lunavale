@@ -166,6 +166,13 @@ const OVERRIDES = {
   // "So I'm going to ask" from 824.2.
   "episode-5": 96.07,
 
+  // EPISODE 6 — THE FIRST MINUTE (Melissa, 2026-11-02: "we'll let the first
+  // minute be free"). From the top, title card included. At 1:00 Josh is
+  // mid "Well, she tells me", so it runs on to 63.1, in the pause after
+  // Luna's "Sometimes I haven't even finished telling you" and before his
+  // answer (speech to 62.8, next line from 63.4, on the energy).
+  "episode-6": 63.1,
+
   // THE LAKEHOUSE FIGHT — THE FIRST TWO MINUTES (Melissa, 2026-10-27: "first
   // 2m is free. then members only"). Ends at 119.2, in the pause after "Do
   // you?" / "Yes." (speech to 118.0, quiet until "Because that's what you're

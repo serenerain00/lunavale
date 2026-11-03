@@ -133,6 +133,18 @@ export const SEASONS: Season[] = [
         runtimeSeconds: 1095,
         comingSoon: false,
       },
+      {
+        /*
+          LANDED 2026-11-02, released that day. Melissa named it: "we will
+          title this episode The Event". Same both-places rule as above.
+        */
+        number: 6,
+        title: "Episode 6: The Event",
+        slug: "episode-6",
+        poster: "/posters/episode-6.jpg",
+        runtimeSeconds: 1584,
+        comingSoon: false,
+      },
     ],
   },
 ];

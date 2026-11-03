@@ -62,6 +62,13 @@ draw_tracked = end_title.draw_tracked
 # are not the place for a nine-second card.
 O_HOLD, O_CONVERGE, O_SETTLE, O_FADE = 0.6, 2.2, 1.6, 1.0
 O_TOTAL = O_HOLD + O_CONVERGE + O_SETTLE + O_FADE
+# A named episode (Episode 6, 2026-11-02: "we will title this episode The
+# Event") holds longer so the name, arriving last, can be read.
+O_NAME_HOLD = 1.4
+
+
+def opening_total(name):
+    return O_TOTAL + (O_NAME_HOLD if name else 0)
 
 C_TOTAL = 3.6
 
@@ -89,7 +96,7 @@ def _finish(img, W, H, fade):
     return frame.convert("RGB")
 
 
-def opening_frame(t, W, H, number):
+def opening_frame(t, W, H, number, name=None):
     title_f = ImageFont.truetype(DIDOT, int(H * 0.115))
     sub_f = ImageFont.truetype(DIDOT, int(H * 0.038))
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -114,7 +121,13 @@ def opening_frame(t, W, H, number):
     if s > 0:
         st = 24 + (12 - 24) * ease_out_quint(s)
         draw_tracked(d, f"EPISODE {WORDS.get(str(number), str(number))}", sub_f, st, y_sub, IVORY + (int(215 * s),), W)
-    return _finish(img, W, H, clamp01((t - (O_TOTAL - O_FADE)) / O_FADE))
+    # The name, in the italic the credit line uses, after the number.
+    n = clamp01((t - (O_HOLD + O_CONVERGE + 0.7)) / 1.0) if name else 0
+    if n > 0:
+        name_f = ImageFont.truetype(DIDOT, int(H * 0.052), index=1)
+        draw_tracked(d, name, name_f, 1, int(H * 0.655), IVORY + (int(235 * smooth(n)),), W)
+    total = opening_total(name)
+    return _finish(img, W, H, clamp01((t - (total - O_FADE)) / O_FADE))
 
 
 def credit_frame(t, W, H, text):
@@ -159,6 +172,7 @@ def main():
     ap.add_argument("--end", type=float, required=True,
                     help="seconds: where the episode's own picture and sound are over")
     ap.add_argument("-o", "--out")
+    ap.add_argument("--name", help="the episode's title, under its number")
     ap.add_argument("--credit", help="optional line before the end title; none by default")
     ap.add_argument("--still", action="store_true", help="write a few frames to look at")
     a = ap.parse_args()
@@ -167,8 +181,8 @@ def main():
 
     if a.still:
         outdir = src.parent
-        opening_frame(1.0, W, H, a.number).save(outdir / "credits-open-1s.jpg")
-        opening_frame(O_HOLD + O_CONVERGE + 1.0, W, H, a.number).save(outdir / "credits-open-settled.jpg")
+        opening_frame(1.0, W, H, a.number, a.name).save(outdir / "credits-open-1s.jpg")
+        opening_frame(O_HOLD + O_CONVERGE + 2.0, W, H, a.number, a.name).save(outdir / "credits-open-settled.jpg")
         if a.credit:
             credit_frame(C_TOTAL / 2, W, H, a.credit).save(outdir / "credits-line.jpg")
         end_title.render_frame(end_title.TOTAL - end_title.FADE_OUT - 0.5, W, H, 0.038).save(outdir / "credits-end.jpg")
@@ -179,8 +193,8 @@ def main():
     tmp = Path(tempfile.mkdtemp(prefix="episode-credits-"))
     try:
         op, cl = tmp / "open.mov", tmp / "close.mov"
-        n = int(round(O_TOTAL * fps))
-        frames_to_movie((opening_frame(i / fps, W, H, a.number) for i in range(n)), fps, op, W, H)
+        n = int(round(opening_total(a.name) * fps))
+        frames_to_movie((opening_frame(i / fps, W, H, a.number, a.name) for i in range(n)), fps, op, W, H)
         nc, ne = int(round(C_TOTAL * fps)), int(round(end_title.TOTAL * fps))
         closing = [credit_frame(i / fps, W, H, a.credit) for i in range(nc)] if a.credit else []
         closing += [end_title.render_frame(i / fps, W, H, 0.038) for i in range(ne)]

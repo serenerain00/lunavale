@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-10-30 against `main` at 944c369. **A touched `lib/content/` file
+re-run 2026-11-03 against `main` at 4c195bb. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -64,9 +64,9 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 252 | 211 |
-| Tyson | 12 | 181 | 156 |
-| Josh | 14 | 152 | 133 |
+| Luna | 12 | 253 | 212 |
+| Tyson | 12 | 182 | 157 |
+| Josh | 14 | 153 | 134 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 9 | 9 |
@@ -85,7 +85,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 at 944c369** (Tyson 181, Josh 152 — the trailer pays both, so the difference held while both moved): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 at 4c195bb** (Tyson 182, Josh 153 — Episode 6 pays Luna, Josh and Tyson, so the difference held a third time while all three moved): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has now sat anywhere between 17 and 29. Quote the two
@@ -336,16 +336,19 @@ Standing backlog, roughly prioritised:
   the slug, if you ever need the asset.** *(This item said "a fifth episode is
   promised and is not here yet" for two days, from the win-back email of 10-23.
   It is here. Do not restore the promise wording.)*
-- **The five episodes carry no note between them.** This is the top of the
+- **The six episodes carry no note between them.** This is the top of the
   list, and it keeps growing: `pilot` (*Episode 1*, 2026-09-21, 18:36,
   `notes: ["danger"]`), `episode-2` (*Breathe*, 22:23), `episode-3` (*The Space
   Between*, 21:35) and — new on 2026-10-18 — `episode-4` (*Peace and Quiet*,
-  15:09, `notes: ["danger"]`), and — new on 2026-10-25 — `episode-5`
-  (*Everybody Has an Opinion*, 18:15). All five are `premium` with a free opening
-  — `preview.durationSeconds` reads **190**, 124, 129, 158 and **96** as of
-  2026-10-25, so three minutes ten on the pilot, about two on the middle pair,
-  the firefight on episode 4, and the **shortest of the five** on episode 5, the
-  taco scene. (Not the "1:30" an early commit message said of Breathe before it
+  15:09, `notes: ["danger"]`), — new on 2026-10-25 — `episode-5`
+  (*Everybody Has an Opinion*, 18:15), and — new on 2026-11-02 — **`episode-6`
+  (*The Event*, 26:24)**. All six are `premium` with a free opening
+  — `preview.durationSeconds` reads **190**, 124, 129, 158, 96 and **63** as of
+  2026-11-02, so three minutes ten on the pilot, about two on the middle pair,
+  the firefight on episode 4, the taco scene on episode 5, and the
+  **shortest opening of the six** on episode 6, the therapist's office a year
+  ago. *(Episode 5 held "shortest of the five" for eight days. Don't restore
+  it — read the field.)* (Not the "1:30" an early commit message said of Breathe before it
   was recut.) **These move on purpose — re-read all five before comparing them.**
   The pilot's window was 60 until 10-19, when Melissa approved lengthening it
   after the Facebook conversion audit: it was the most-played video for
@@ -362,15 +365,40 @@ Standing backlog, roughly prioritised:
   Tyson and Luna only**, so it pays into the two best-fed characters on the
   table and buys nothing for the two who need it; and **episode 5 carries Luna,
   Tyson, Josh and Simone** — four people, more than any other episode, and the
-  only episode that reaches Simone at all. *(`episode-2` is the longest
-  thing in the library, by nearly four minutes; the pilot is not, and episode 4
-  is the shortest of the five. Don't restore either claim; read
+  only episode that reaches Simone at all; **episode 6 is Luna, Josh and Tyson**,
+  so it buys nothing for Rick or Simone. *(**`episode-6` is now the longest thing
+  in the library at 1584s**, four minutes past `episode-2`, which held that for
+  six weeks and which this line credited until 2026-11-03. The pilot was never
+  it. Episode 4 is still the shortest. Don't restore any of it; read
   `durationSeconds` in `videos.ts`.)* For the pilot, the
   entry's own comment says the constraint on everything about it is **not to
   spend the intro**. Read Melissa's synopsis in `videos.ts` for each rather than
   writing off frames — she replaced the frames-written ones there, and the
   comments explain why. Episode 4's synopsis is deliberately written to give
   nothing away, so do not mine it for plot
+- **`episode-6` is the first episode that overlaps a clip already on this
+  backlog, and it comes with its own restraint.** Landed 2026-11-02 (a day late;
+  Melissa had tech difficulties), title hers — *The Event*. Its entry comment
+  says what is in it: a therapist's office a year ago (Josh fixes before he
+  understands, Luna goes quiet, dinner at seven then nine then eleven), then
+  Josh's company event, Tyson finding out she came with Josh, a stranger at the
+  bar, the investor, Josh asking her to come home outside, and it **ends on "I
+  want to believe you."** Two things follow for a note.
+  **First: `luna-josh-ty-event` is inside it.** That clip is on the uncovered
+  Josh list below, so a note on it now also describes a stretch of a premium
+  episode — which settles its access (`premium`, not free) and means the note
+  should be written as the scene it is, not as a summary of the episode around
+  it.
+  **Second, and this is the restraint: Melissa's synopsis deliberately leaves
+  out the stranger at the bar and anything Tyson feels** (`tyson-no-early-feelings`
+  — "describe and stop"). Match that. **Do not connect the stranger to the
+  attack arc in writing.** The alley clip's line is *"someone's asking
+  questions"* and the stranger's is *"funny how much people can keep to
+  themselves"*, and the resemblance is inference, not canon — nothing in
+  `lib/content/` or `BETWEEN_US_SECRET_CANON.md` joins them, and a note that
+  joins them would be inventing plot. Ask rather than write it. The ending is
+  also **not a reconciliation**: "I want to believe you" is the same unresolved
+  register as *Come Home*, and Josh asking a second time is not Luna answering.
 - **`access` is not necessarily what a visitor can watch — check `openNow()`, not
   a sentence in this file.** `Video.openUntil` (added 2026-10-22) marks a
   members-only piece as open to everyone until a timestamp: `canWatch()` in
@@ -461,7 +489,10 @@ Standing backlog, roughly prioritised:
   for it — and **`luna-josh-ty-event`** (*I Was Going to Text You*, five minutes,
   `premium`, 2026-10-14): all three leads are in it, and
   `preview.durationSeconds` reads 64.5, so it has a free first minute and stays
-  in the sitemap the way the episodes do. A note on it is reachable in a way a
+  in the sitemap the way the episodes do. **As of 2026-11-02 this scene is also
+  inside `episode-6`**, whose entry comment names it, so a note on it is a note
+  on a stretch of an episode as well — see the episode-6 item above for what
+  that constrains. A note on it is reachable in a way a
   note on a fully gated clip is not — second only to the kitchen corner above,
   which is free outright
 - `luna-tyson-dance` has no note from either of them. It went members-only in

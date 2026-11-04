@@ -1016,7 +1016,8 @@ post shows goes on the site before the episode does.
   few days after the event in Episode 6. Tyson owns it. (This is consistent
   with his "Shop's keeping me busy" at the event, and sits alongside the
   contract work he does for Josh.)
-- **Evan** *(new)*: a younger **former Marine** whom Tyson mentors through a
+- **Evan** *(new)*: **29** (Melissa, 2026-11-04: "no real details right
+  now on him", so nothing more is settled). A younger **former Marine** whom Tyson mentors through a
   **veterans support program**. Their banter is easy and sarcastic, and Evan
   gives as good as he gets. Tyson tells him, bluntly, to take a job offer
   with regular hours and benefits and start building a future. It shows a

@@ -1055,10 +1055,11 @@ post shows goes on the site before the episode does.
   her leave. **No hug** (Melissa, 2026-11-04: "remove the bear hug part, i
   never added that"). It ends on the laughter.
 - **What it is about:** communication and withholding, not jealousy or
-  competition with Josh. **It mirrors a flashback in Episode 7** *(new)*:
-  young Tyson knew Luna's boyfriend was seeing someone else and didn't tell
-  her, and she was hurt that he kept it from her. Twenty years later their
-  positions are reversed. Both of them keep things back to avoid a hard
+  competition with Josh. It is meant to mirror a flashback (young Tyson
+  keeping something about a boyfriend from her) with the positions
+  reversed. **That flashback is not built yet** (Melissa, 2026-11-04: "dont
+  worry about those details yet"). Its details are open, and nothing about
+  it is canon beyond the idea. Both of them keep things back to avoid a hard
   conversation, and the keeping back hurts more.
 - **Tone:** grounded, natural, dry humor, understated. No melodrama, no
   overt jealousy, and Luna is never framed as playing the two men.
@@ -1066,9 +1067,8 @@ post shows goes on the site before the episode does.
 **Guardrails for anything on the site about this scene or the flashback:**
 Tyson's hurt is about being told last. Nothing may say or hint that it is
 jealousy or feelings (see "NEVER ON THE SITE" in LUNA_VALE_CONTEXT.md and
-the memory note tyson-no-early-feelings-on-site). The same goes for the
-flashback: he kept the boyfriend's cheating from her. The copy doesn't say
-why.
+the memory note tyson-no-early-feelings-on-site). The same rule will apply to
+the flashback when it exists.
 
 **Not the same scene as `ty-luna-garage` ("The Garage", published
 2026-08-19).** Same room, a different conversation, and **"The Garage" is not

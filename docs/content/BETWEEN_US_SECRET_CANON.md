@@ -1002,7 +1002,12 @@ Melissa says otherwise:**
   buried":* softened in the draft to "stayed quiet", because Rick's prior
   knowledge (Stage Five) is still off the site and "buried" leans toward it.
 
-## Addition — 2026-11-04: Episode 7, Tyson's garage (with Evan)
+## Addition — 2026-11-04: Episode 7, "Everybody Else" (Tyson's garage, with Evan)
+
+**Working title "Everybody Else"**, from Tyson's "I just don't like finding
+out things from everybody else". Named so it is never confused with "The
+Garage" (`ty-luna-garage`). Melissa asked for a name from the context; she
+can replace it.
 
 From Melissa's scene synopsis for **Episode 7**. **Not released: writer
 knowledge until it is.** The full scene is
@@ -1066,5 +1071,6 @@ flashback: he kept the boyfriend's cheating from her. The copy doesn't say
 why.
 
 **Not the same scene as `ty-luna-garage` ("The Garage", published
-2026-08-19).** Same room, a different conversation. Where that one falls
-against Episode 7 is not settled.
+2026-08-19).** Same room, a different conversation, and **"The Garage" is not
+present day** (Melissa, 2026-11-04). It is an earlier scene. Exactly when it
+falls is not settled here.

@@ -1007,8 +1007,9 @@ Melissa says otherwise:**
 From Melissa's scene synopsis for **Episode 7**. **Not released: writer
 knowledge until it is.** The full scene is
 `stories/luna-ty-garage-event/luna-ty-garage-event.mp4` (6:23). A 2:46 cut
-of the confrontation, `luna-ty-garage-clip.mov`, is "just a brief IG post
-for now" (Melissa, 2026-11-04). It runs from "I know I told you I wasn't
+of the confrontation, `luna-ty-garage-clip.mov`, is **already on Instagram
+as a preview** of Episode 7 (Melissa, 2026-11-04). Present day, like the rest
+of the scene. It runs from "I know I told you I wasn't
 going" to "what do you want, a written statement?" Nothing beyond what that
 post shows goes on the site before the episode does.
 

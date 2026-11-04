@@ -1075,3 +1075,59 @@ the flashback when it exists.
 present day**. It comes **well after Episode 7** (Melissa, 2026-11-04:
 "like waaay later"). That matches its place in the site's story order
 (lib/content/chronology.ts), after the wall and the bathtub.
+
+## Addition — 2026-11-04: "The Night Everything Changed" (the house party)
+
+From Melissa's synopsis. **Far in the future and not to be posted**
+(Melissa, 2026-11-04: "im not gonna post that its way in the future
+still"). Writer knowledge only. Nothing about it goes on the site, in a
+synopsis, journal page, post caption or character card, until she releases it.
+
+About ten minutes, late evening into early morning: a house party at mutual
+friends' → Luna's black 2020 F-150 Raptor → Tyson's high-rise apartment in
+Denver. Luna and Tyson only; Josh is not in it but is present in everything.
+
+- **The kitchen.** Tyson has had a lot more to drink than usual, and his
+  control is slipping. It starts as their usual dry humor, then turns
+  personal. He asks if she ever wondered what would have happened if he'd
+  met her first. She reminds him he *did* (she met him at 18, Josh at 28).
+  He isn't talking about chronology but about the life they never tried. He
+  moves closer, and the teasing goes quiet. **No confession from either of
+  them.** The tension is in what they almost say.
+- **The drive.** She drives him home and he falls asleep in the passenger
+  seat. Alone with it, she replays the evening: the question, his years in
+  the Navy, the twenty years, and Josh. She is still connected to Josh. Her
+  eyes fill, and her hand goes toward her mouth.
+- **Getting him upstairs.** She wakes him and takes as much of his weight as
+  she can (he's much bigger than her). He insists he's fine. In the elevator
+  he rests his forehead on the wall and she rubs his back. That moment isn't
+  romantic. She's looking after her best friend.
+- **The bedroom** (floor-to-ceiling windows, the skyline, a king bed). He's
+  nearly asleep and still worrying about her: did she lock the truck, text
+  him when she's home, he'll come get her. She asks if he needs anything:
+  **"Just you, Lu."** Eyes closed, as if it slipped out. Her smile fades and
+  she reminds herself he's drunk. He says she smells good; she says he
+  already told her. He touches her face and pulls her into **a brief kiss**.
+  She gently pulls back. He doesn't push it, and nothing is said.
+- **Tyson's fantasy.** A glimpse inside his head of being intimate with her.
+  **It does not happen.** On screen it must read clearly as imagined, distinct
+  from the real room.
+- **After.** She goes for water. The camera stays close on her face down the
+  hall as it all catches up with her: disbelief, affection, uncertainty,
+  sadness, anxiety. She isn't over Josh and hasn't decided anything about
+  Tyson. **Ending:** alone in his kitchen holding the water, looking toward
+  the hallway. Going back into that room no longer feels like simply looking
+  after her best friend.
+- **What it is:** a boundary crossed while he is drunk, so not a reliable
+  declaration. It isn't the start of a relationship, an affair, or a
+  betrayal. The central idea is that her own feelings may have been changing
+  before she was ready to see it.
+- **Tone:** grounded and intimate. No exaggerated drunkenness, no theatrical
+  romance, and the drink is never a substitute for consent.
+
+**The synopsis said "Ford F-0 Raptor"**, which is read here as the settled
+black 2020 F-150 Raptor.
+
+**Two things not settled, for Melissa:** where this falls against "The Part"
+(`luna-ty-shop-kiss`) and "The Morning" (`ty-luna-bed`), both already
+published, and whether this is the first time they have kissed.

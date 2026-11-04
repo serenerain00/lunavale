@@ -168,6 +168,8 @@ export const STORY_ORDER: readonly string[] = [
   "luna-ty-suit",
   // Melissa, 2026-10-13: the next night — the event the suit was for.
   "luna-josh-ty-event",
+  // Melissa, 2026-11-04: a few days after the event (Episode 7).
+  "luna-ty-garage-event",
 
   // HAND-PLACED — REASONED, 2026-10-13, Melissa to move it. The light bulb:
   // an ordinary afternoon at the lakehouse with the ease back, so it sits at

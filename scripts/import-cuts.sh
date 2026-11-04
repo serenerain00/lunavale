@@ -928,6 +928,11 @@ CUTS=(
   # Poster at 105s: Luna facing Tyson, his back to camera, the ballroom lights.
   # Picture is black from 295.2; kept, the score runs out under it.
   "luna-josh-ty-event|stories/luna-tyson-josh-event/luna-josh-ty-event-music.mov|105|-|-|30"
+  # EVERYBODY ELSE, 2026-11-04: Tyson's garage, a few days after the event,
+  # from Episode 7 (not yet released). 6:23, 1920x1080 at 30fps. The picture goes
+  # black at 379.67 and the score is gone by 379.9 (-91 dB), so END there.
+  # POSTER AT 372s: Luna and Tyson face to face, after the apology.
+  "luna-ty-garage-event|stories/luna-ty-garage-event/luna-ty-garage-event.mp4|372|379.9|-|30"
   # 2026-10-13: the light bulb — short and funny, free (Melissa). Lakehouse,
   # 0:39, 30fps, one file (no separate music mix). Poster at 26s: Luna with
   # both arms up at the fitting, Tyson beside her, watching — before the joke.

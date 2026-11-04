@@ -1072,7 +1072,6 @@ the flashback when it exists.
 
 **Not the same scene as `ty-luna-garage` ("The Garage", published
 2026-08-19).** Same room, a different conversation, and **"The Garage" is not
-present day** (Melissa, 2026-11-04). The site's story order
-(lib/content/chronology.ts) puts it after the wall and the bathtub, which is
-later in the separation than Episode 7. Whether it is earlier or later is not
-settled here.
+present day**. It comes **well after Episode 7** (Melissa, 2026-11-04:
+"like waaay later"). That matches its place in the site's story order
+(lib/content/chronology.ts), after the wall and the bathtub.

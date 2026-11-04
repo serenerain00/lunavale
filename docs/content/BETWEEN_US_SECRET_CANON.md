@@ -1004,9 +1004,13 @@ Melissa says otherwise:**
 
 ## Addition — 2026-11-04: Episode 7, Tyson's garage (with Evan)
 
-From Melissa's scene synopsis for **Episode 7**. **Not filmed and not
-released: writer knowledge until it is.** Nothing here goes on the site
-before the episode does.
+From Melissa's scene synopsis for **Episode 7**. **Not released: writer
+knowledge until it is.** The full scene is
+`stories/luna-ty-garage-event/luna-ty-garage-event.mp4` (6:23). A 2:46 cut
+of the confrontation, `luna-ty-garage-clip.mov`, is "just a brief IG post
+for now" (Melissa, 2026-11-04). It runs from "I know I told you I wasn't
+going" to "what do you want, a written statement?" Nothing beyond what that
+post shows goes on the site before the episode does.
 
 - **When and where:** late morning, **Tyson's motorcycle garage, Denver**, a
   few days after the event in Episode 6. Tyson owns it. (This is consistent

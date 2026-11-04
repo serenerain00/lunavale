@@ -1078,56 +1078,58 @@ present day**. It comes **well after Episode 7** (Melissa, 2026-11-04:
 
 ## Addition — 2026-11-04: "The Night Everything Changed" (the house party)
 
-From Melissa's synopsis. **Far in the future and not to be posted**
-(Melissa, 2026-11-04: "im not gonna post that its way in the future
-still"). Writer knowledge only. Nothing about it goes on the site, in a
-synopsis, journal page, post caption or character card, until she releases it.
+**Far in the future and not to be posted** (Melissa, 2026-11-04: "im not
+gonna post that its way in the future still"). Writer knowledge only.
+Nothing about it goes on the site, in a synopsis, journal page, post caption
+or character card, until she releases it.
 
-About ten minutes, late evening into early morning: a house party at mutual
-friends' → Luna's black 2020 F-150 Raptor → Tyson's high-rise apartment in
-Denver. Luna and Tyson only; Josh is not in it but is present in everything.
+**THE CUT IS CANON, NOT THE WRITTEN SYNOPSIS.** The video is
+`stories/luna-ty-drunk/luna-ty-party-drunk-music.mov` (10:47, scored).
+Melissa's written synopsis came first and differs from it. Where they
+disagree, the cut wins, and the differences are listed below.
 
-- **The kitchen.** Tyson has had a lot more to drink than usual, and his
-  control is slipping. It starts as their usual dry humor, then turns
-  personal. He asks if she ever wondered what would have happened if he'd
-  met her first. She reminds him he *did* (she met him at 18, Josh at 28).
-  He isn't talking about chronology but about the life they never tried. He
-  moves closer, and the teasing goes quiet. **No confession from either of
-  them.** The tension is in what they almost say.
-- **The drive.** She drives him home and he falls asleep in the passenger
-  seat. Alone with it, she replays the evening: the question, his years in
-  the Navy, the twenty years, and Josh. She is still connected to Josh. Her
-  eyes fill, and her hand goes toward her mouth.
-- **Getting him upstairs.** She wakes him and takes as much of his weight as
-  she can (he's much bigger than her). He insists he's fine. In the elevator
-  he rests his forehead on the wall and she rubs his back. That moment isn't
-  romantic. She's looking after her best friend.
-- **The bedroom** (floor-to-ceiling windows, the skyline, a king bed). He's
-  nearly asleep and still worrying about her: did she lock the truck, text
-  him when she's home, he'll come get her. She asks if he needs anything:
-  **"Just you, Lu."** Eyes closed, as if it slipped out. Her smile fades and
-  she reminds herself he's drunk. He says she smells good; she says he
-  already told her. He touches her face and pulls her into **a brief kiss**.
-  She gently pulls back. He doesn't push it, and nothing is said.
-- **Tyson's fantasy.** A glimpse inside his head of being intimate with her.
-  **It does not happen.** On screen it must read clearly as imagined, distinct
-  from the real room.
-- **After.** She goes for water. The camera stays close on her face down the
-  hall as it all catches up with her: disbelief, affection, uncertainty,
-  sadness, anxiety. She isn't over Josh and hasn't decided anything about
-  Tyson. **Ending:** alone in his kitchen holding the water, looking toward
-  the hallway. Going back into that room no longer feels like simply looking
-  after her best friend.
-- **What it is:** a boundary crossed while he is drunk, so not a reliable
-  declaration. It isn't the start of a relationship, an affair, or a
-  betrayal. The central idea is that her own feelings may have been changing
-  before she was ready to see it.
-- **Tone:** grounded and intimate. No exaggerated drunkenness, no theatrical
-  romance, and the drink is never a substitute for consent.
+**NO KISS** (Melissa, 2026-11-04: "no kiss at the party"). Nothing physical
+happens between them in reality. The kissing and intimacy are all **inside
+Tyson's fantasy**.
 
-**The synopsis said "Ford F-0 Raptor"**, which is read here as the settled
-black 2020 F-150 Raptor.
+From the cut:
+- **The party, Josh there too.** Tyson is drunk. "You've been weird all
+  night." She tries to take the drink off him ("Ty, don't. Come on, put it
+  down."). "Why do you always smell good?" He asks "You ever wonder… what
+  would have happened if I'd met you first?" and she says "You did meet me
+  first."
+- **He pushes, she won't let him decide for her.** "Just tell me… I need you
+  to say it." "We're not doing this." "Because I care about you." / "How
+  much?" / "Don't turn that into something else." / "Maybe I'm tired of
+  everything being something else." "20 years, Lu." He keeps saying things
+  and then telling her to forget it, and she won't let him: "What am I
+  supposed to do with that?" She promises not to pretend the conversation
+  didn't happen. Then "Tell me I'm wrong about what I think's been happening
+  between us… just tell me I'm wrong and I'll shut up." She doesn't answer,
+  and he says "That's what I thought." She says "Don't decide what I'm
+  thinking because I won't give you an answer when you're drunk."
+- **She takes him home.** "Let me get you home, Ty. I'll tell Josh we're
+  leaving." The drive: "Lu, I'm sorry." / "Ty, you're fine." / "We're
+  here." Then getting him up to his apartment and into the bedroom ("Lu,
+  I'm good").
+- **Tyson's fantasy** (about 7:20–9:10, music only, graded apart from the
+  real room): the two of them intimate in his bed. **It does not happen.**
+- **Back in the real room:** "Ty. You're drunk. Do you need anything?" /
+  **"Just you, Lu."** / "I'm gonna get you some water, okay?" / "I'll see
+  you tomorrow, okay?" Then she goes down the hall and stands in his
+  kitchen, and the rest is on her face.
 
-**Two things not settled, for Melissa:** where this falls against "The Part"
+**Where the written synopsis differs** (kept here so it isn't mistaken for
+canon): it has no Josh at the party (in the cut he's there, and she tells him
+they're leaving), no direct "tell me I'm wrong" (in the cut he asks it
+outright), and a brief real kiss in the bedroom plus the lines about locking
+the truck and texting him (none of that is in the cut). It also wrote "Ford
+F-0 Raptor", which would be her settled black 2020 F-150 Raptor.
+
+**Still holds from the synopsis:** this is a turning point for her, not a
+decision. She isn't over Josh and hasn't chosen Tyson. What he says drunk
+isn't a reliable declaration. There is no affair and no betrayal.
+
+**Not settled, for Melissa:** where this falls against "The Part"
 (`luna-ty-shop-kiss`) and "The Morning" (`ty-luna-bed`), both already
-published, and whether this is the first time they have kissed.
+published.

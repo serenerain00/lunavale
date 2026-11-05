@@ -42,6 +42,12 @@ const OFF_LIMITS = [
   "/sign-up",
   "/membership/start",
   "/membership/claim",
+  // Filtered catalog views (2026-11-05). Every feeling x place combination is
+  // its own URL and renders fresh, so a crawler following the filter chips
+  // walked thousands of copies of one page; from Oct 27 that was the bulk of
+  // the bill. The plain /browse stays indexable, and its canonical already
+  // points there.
+  "/browse?",
 ];
 
 /**

@@ -2728,6 +2728,127 @@ export const journal: JournalEntry[] = [
   },
 
   /*
+    FIVE PAGES BESIDE EPISODE 6, THE EVENT, added 2026-11-05 (Melissa: "create
+    5 new journal entries"), members-only like the episode past its first
+    minute. Written at the lake in the days after the night, so they sit after
+    `i-was-going-to-text-you`, which was written during it.
+
+    Written to the rule in the header: her side, not a recap. One line quoted
+    per page at most, and each is the footage: "I just need you to hear me
+    before I run out of them", "I missed it", "Funny how much people can keep
+    to themselves", "That was all Luna", "I can't keep choosing us over
+    myself".
+
+    THE MAN AT THE BAR IS NOT EXPLAINED. She notices that he knew her name and
+    that she never gave it, and she does not tell Josh. Nothing here names
+    him, links him to anything later, or guesses what he wants.
+
+    TYSON: only what she saw (he left early, or she thinks he did). Nothing
+    about what he feels (tyson-no-early-feelings).
+
+    Invented and hers to cut: the cream-colored room, the porch (the footage only
+    shows they are outside, and "I need to go inside"), the porch light, "I
+    looked for Ty once".
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "before-i-run-out",
+    addedOn: "2026-11-05",
+    dateline: "The morning after, and I keep thinking about that office",
+    place: "lakehouse",
+    about: ["luna", "josh"],
+    sceneSlug: "episode-6",
+    access: "premium",
+    mature: false,
+    body: [
+      "I woke up thinking about the therapist's office, which is strange, because last night was a party and that room was a year ago.",
+      "I think it's because I said the same things. A year apart, in a cream-colored room and then on the porch in a dress, I said the same things in nearly the same order, and he gave me nearly the same answers. That's what I can't shake. Not that we fought. That we've already had this conversation, and we had help, and it still came out the same.",
+      "I remember how hard I worked in there to be fair to him. Every time I said something true, I said something kind right after it, so it wouldn't land too hard. I was managing his feelings in a room that was supposed to be for mine.",
+      "And I went quiet. She asked me what I was protecting myself from, and I said asking for too much, and I remember being surprised by my own answer. I'd never said it out loud. I'd only arranged my whole life around it.",
+      "\"I just need you to hear me before I run out of them.\" That's what I told him. The words, I meant. I had a year left of them, it turns out.",
+      "The thing I want to be clear about, even just to myself: he did try. He sat there and he tried, and when she asked him what those evenings felt like for me, he got it right. Lonely. He said it like it was a word he'd never had to use. He wasn't pretending. He just didn't know until somebody made him look.",
+      "I was scared, at the end of that session, that this was how it would always be. I didn't leave because I stopped loving him. I left because a year went by and the fear turned out to be accurate.",
+    ],
+  },
+  {
+    id: "three-fans",
+    addedOn: "2026-11-05",
+    dateline: "About the dancing, because I can't not",
+    place: "lakehouse",
+    where: "The kitchen table",
+    about: ["luna", "josh"],
+    sceneSlug: "episode-6",
+    access: "premium",
+    mature: false,
+    body: [
+      "I need to write down the dancing, because it was the best part of the night, and I don't trust how much it was.",
+      "He's always been like that on a dance floor. Says I make him, which is a lie he tells so he never has to admit he likes it. And within one song we were us. Not the us from the porch. The old one. Boulder, the wine, the woman who came out of nowhere. I laughed the way I haven't laughed in months, and he noticed, and he said so, and that undid me a little.",
+      "Then the apartment. Three fans and the broken air conditioner and him refusing to move over. I'd forgotten that place on purpose, I think. It's easier to leave a man when you've forgotten the year you had nothing and were happy anyway.",
+      "His hand kept going to the back of my neck. He said it was habit, and he was right, and I told him I'd missed it, and I had. Of everything I've missed, it's one of the small ones nobody would think of. The weight of a hand that knows exactly where to go without looking.",
+      "Here's what scares me. For the length of a song, it was easy. Everything I left over was still true, and none of it was in the room. Nostalgia is so warm. It's warm because it leaves out the evenings.",
+      "I don't know whether I miss him or I miss us at twenty-something in that heat. I think, if I'm honest, the answer is both, and the second one isn't coming back.",
+    ],
+  },
+  {
+    id: "keep-to-themselves",
+    addedOn: "2026-11-05",
+    dateline: "Something at the bar I didn't tell Josh",
+    place: "lakehouse",
+    about: ["luna"],
+    sceneSlug: "episode-6",
+    access: "premium",
+    mature: false,
+    body: [
+      "There was a man at the bar last night, and I've been turning him over all day.",
+      "Nothing happened. I want that clear. He asked me earlier where the restroom was, and then later he was next to me ordering, and we did the small talk I'm bad at. He was pleasant. He let me off the hook when I said crowds weren't my thing. If he had walked away then I wouldn't have thought about him again.",
+      "But then he said my name. I never told him my name.",
+      "That alone I could explain. It's Josh's company. Half the room knows who I am, or thinks they do. What I can't explain is what came after, the way he said it. \"Funny how much people can keep to themselves.\" Then something about putting things behind us, and then he smiled and wished me a good night, like we'd talked about the weather.",
+      "Put what behind us? Nobody there knows we've separated. That's the whole reason I was on Josh's arm. So either he meant nothing, and it was just the kind of thing people say at the end of a long night, or he meant something, and I don't know what, and I don't know how he'd know it.",
+      "When Josh asked if I was okay, I said my feet hurt. I didn't decide not to tell him. It was out of my mouth before I'd thought about it, and then it was too late to take back without it becoming a thing.",
+      "I'm probably making it bigger than it was. I'm writing it down so that if it turns out to be nothing, I can laugh at myself, and if it doesn't, I'll know I noticed.",
+    ],
+  },
+  {
+    id: "all-luna",
+    addedOn: "2026-11-05",
+    dateline: "The investor, and what Josh said",
+    place: "lakehouse",
+    about: ["luna", "josh"],
+    sceneSlug: "episode-6",
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh gave me the credit last night. Out loud, to a man with money, in front of people. \"That was all Luna.\"",
+      "Ten years I've done that work. The schedules, the steps nobody needed, the hundred small things that made it look effortless. I never minded that nobody saw. That was sort of the job. It works best when it's invisible.",
+      "So I don't know why it hit me the way it did. I think because it was true, and he knew it, and he'd always known it, and the first time he said so was the one night we were pretending to be together. I was proud and I was angry, at the same time, in the space of one sentence. I didn't know you could be both that fast.",
+      "Then the investor told him not to let me go, and Josh said he didn't plan to, and everyone laughed. I laughed too. That's what you do.",
+      "I told him afterward he didn't have to do that. I meant, you didn't have to say it there, where it costs you nothing and buys you something. That's not fair to him, and I know it isn't. He meant it. Josh doesn't say things he doesn't mean. He just says them in the wrong rooms.",
+      "And I'm still handing that work to other people, a piece at a time. Last night I stood there taking a compliment for something I'm trying to stop doing. I don't know what that makes me. Good at it, I suppose. That was always the trouble.",
+    ],
+  },
+  {
+    id: "choosing-us",
+    addedOn: "2026-11-05",
+    dateline: "He drove me home, and I went inside",
+    place: "lakehouse",
+    where: "The porch",
+    about: ["luna", "josh"],
+    sceneSlug: "episode-6",
+    access: "premium",
+    mature: false,
+    body: [
+      "He said the farm was closer. It is. That's the thing about Josh, he's never wrong about the distance.",
+      "And I wanted to. I told him that, because it was true and I was too tired to make it smaller. It would have been the easiest thing in the world, and I would have woken up in my own bed, and in six months I'd have been standing in that kitchen again trying to explain.",
+      "That's what I finally said properly, out on the porch. Not that he's bad to me. That every time I come back, we stop trying, because it's good again, and good is where we stop. I've watched us do it. I've been the one who made it comfortable, every time, because I'm so good at that.",
+      "\"I can't keep choosing us over myself.\" I've thought that sentence for a year. Last night was the first time it came out of my mouth, and it came out steady. I don't know where the steady came from.",
+      "He didn't fight me. He told me he loved me. He said he wanted a chance to get the next ten years right, and I believed that he meant it, and that isn't the same as believing it. I told him I wanted to believe him. I do. I want to so much it frightens me.",
+      "I looked for Ty once, before we left. I didn't see him. I think he'd already gone, and I don't blame him, and I still owe him more than a hallway.",
+      "I came inside, and I didn't turn the porch light off until his headlights were gone at the end of the road. Old habit. I'm keeping a few.",
+    ],
+  },
+
+  /*
     THE RIGHT BULB, added 2026-10-13 beside `luna-ty-bulb`, the short funny
     one (free scene; members-only page). Placed after the event and before
     "Most Nights", as the clip is.

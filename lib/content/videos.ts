@@ -3731,6 +3731,48 @@ export const videos: Video[] = [
   },
   {
     /*
+      I DON'T KNOW YET, 2026-11-05. Melissa: "new video, members only, first
+      30sec free luna-josh-fight-music". The lakehouse kitchen at night. The
+      scored mix is luna-josh-fight-music.mov; the folder also holds
+      luna-josh-kitchen-argue.mp4, the same 2:42 scene without the score.
+      The slug follows the folder, because "luna-josh-fight" sits too close
+      to luna-josh-fight-45m (a post).
+
+      FROM THE TRANSCRIPT: it opens on "Get out, Josh!" He keeps seeing
+      Tyson's truck when he drives by, and asks whether something is going on
+      between them. She says no, and "I don't have to beg him to show up."
+      Then "Because I'm scared, Luna", "Tyson isn't the reason we're not
+      together", "I still want to work this out" / "And you?" / "I don't know
+      yet." He grabbed her arm, and it ends on him apologizing for it.
+
+      TITLE: her answer, the open question of the scene.
+      SYNOPSIS: describe and stop. Josh's suspicion is his. The copy does not
+      answer it, and says nothing about what Tyson feels
+      (tyson-no-early-feelings).
+    */
+    slug: "luna-josh-kitchen-argue",
+    title: "I Don\u2019t Know Yet",
+    synopsis:
+      "Josh keeps seeing Tyson\u2019s truck at the lakehouse. Tonight he comes inside to ask about it, and Luna wants him gone.",
+    file: "luna-josh-kitchen-argue.proxy.mp4",
+    poster: "/posters/luna-josh-kitchen-argue.jpg",
+    durationSeconds: 164,
+    addedOn: "2026-11-05",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "luna-josh-kitchen-argue-preview.proxy.mp4",
+      // See the override in scripts/make-previews.mjs.
+      durationSeconds: 30,
+      hookStart: 0,
+      hookNote: "from the top: \u201cGet out, Josh!\u201d to \u201cIs something going on between you two?\u201d",
+    },
+    feelings: ["hurt", "distance"],
+    place: "lakehouse",
+    about: ["luna", "josh", "tyson"],
+  },
+  {
+    /*
       THE LIGHT BULB, 2026-10-13. Melissa: "new short clip, funny one…
       this one is free". Lakehouse, 0:39. From the transcript: "Okay, I know I
       bought the right bulb." / "Would you just fit, please?" / "Need some

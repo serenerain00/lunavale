@@ -933,6 +933,12 @@ CUTS=(
   # black at 379.67 and the score is gone by 379.9 (-91 dB), so END there.
   # POSTER AT 372s: Luna and Tyson face to face, after the apology.
   "luna-ty-garage-event|stories/luna-ty-garage-event/luna-ty-garage-event.mp4|372|379.9|-|30"
+  # I DON'T KNOW YET, 2026-11-05: Josh at the lakehouse kitchen about Tyson's
+  # truck. The scored mix, 2:44, 1320x808 hevc at 60fps. Picture is black from
+  # 162.4 but the score is still fading to the last frame (-47 dB at 164), so
+  # no END: the whole file. POSTER AT 150s: the two of them side by side at
+  # the counter, after "I shouldn't have grabbed you".
+  "luna-josh-kitchen-argue|stories/luna-josh-kitchen-argue/luna-josh-fight-music.mov|150"
   # 2026-10-13: the light bulb — short and funny, free (Melissa). Lakehouse,
   # 0:39, 30fps, one file (no separate music mix). Poster at 26s: Luna with
   # both arms up at the fitting, Tyson beside her, watching — before the joke.

@@ -188,6 +188,11 @@ export const STORY_ORDER: readonly string[] = [
   "luna-ty-couch",
   "luna-ty-wasntplanningonit",
   "luna-ty-nyc-hotel",
+  // HAND-PLACED — A GUESS, 2026-11-05, Melissa to move it. Josh at the
+  // lakehouse about Tyson's truck: Tyson is "here all the time" and Josh is
+  // still trying to get her back ("I don't know yet"), so the settled middle,
+  // before Tyson pulls away and before Josh calls and it starts again.
+  "luna-josh-kitchen-argue",
 
   // HAND-PLACED — REASONED. Tyson takes the one subject he cannot raise with
   // Luna to Cole. It belongs immediately before he starts pulling away, which

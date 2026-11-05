@@ -198,6 +198,10 @@ const OVERRIDES = {
   // Melissa, 2026-10-13: first minute free. Ends after "I know." (1:02.7),
   // before "I thought you weren't coming." (1:06.7).
   "luna-josh-ty-event": 64.5,
+  // EVERYBODY ELSE — the first minute (Melissa, 2026-11-04: "members only,
+  // 1st min free"). Tyson and Evan at the bike. At 1:00 Evan is mid "They
+  // offered it to me", so it runs to 62.1, in the pause before "That's good".
+  "luna-ty-garage-event": 62.1,
 };
 
 /**

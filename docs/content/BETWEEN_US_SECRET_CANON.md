@@ -1001,3 +1001,77 @@ Melissa says otherwise:**
 - *"Your daddy spent a lot of years making sure certain things stayed
   buried":* softened in the draft to "stayed quiet", because Rick's prior
   knowledge (Stage Five) is still off the site and "buried" leans toward it.
+
+## Addition — 2026-11-04: Episode 7, "Everybody Else" (Tyson's garage, with Evan)
+
+**Working title "Everybody Else"**, from Tyson's "I just don't like finding
+out things from everybody else". Named so it is never confused with "The
+Garage" (`ty-luna-garage`). Melissa asked for a name from the context; she
+can replace it.
+
+From Melissa's scene synopsis for **Episode 7**. **Not released: writer
+knowledge until it is.** The full scene is
+`stories/luna-ty-garage-event/luna-ty-garage-event.mp4` (6:23). A 2:46 cut
+of the confrontation, `luna-ty-garage-clip.mov`, is **already on Instagram
+as a preview** of Episode 7 (Melissa, 2026-11-04). Present day, like the rest
+of the scene. It runs from "I know I told you I wasn't
+going" to "what do you want, a written statement?" Nothing beyond what that
+post shows goes on the site before the episode does.
+
+- **When and where:** late morning, **Tyson's motorcycle garage, Denver**, a
+  few days after the event in Episode 6. Tyson owns it. (This is consistent
+  with his "Shop's keeping me busy" at the event, and sits alongside the
+  contract work he does for Josh.)
+- **Evan** *(new)*: **29** (Melissa, 2026-11-04: "no real details right
+  now on him", so nothing more is settled). A younger **former Marine** whom Tyson mentors through a
+  **veterans support program**. Their banter is easy and sarcastic, and Evan
+  gives as good as he gets. Tyson tells him, bluntly, to take a job offer
+  with regular hours and benefits and start building a future. It shows a
+  side of Tyson that helps veterans with civilian life and wants no credit
+  for it, and it shows his life extends beyond Luna and Josh. Evan notices
+  how familiar Tyson and Luna are but doesn't understand what they are to
+  each other.
+- **Luna arrives unannounced** in her black Raptor: black tank top, fitted
+  jeans, sunglasses on her head. She says hello to both men and asks to talk
+  to Tyson alone. Tyson sends Evan on a break.
+- **The confrontation, about the event.** She had told Tyson she couldn't
+  go with him, then went with Josh after he kept asking. Tyson found out
+  when he walked in and saw her, along with everyone else. He stayed fairly
+  composed that night but was hurt and embarrassed. Now he keeps working and
+  gives short answers. She knows that behavior after twenty years, and she
+  pushes him. It wasn't that she went with Josh. It was finding out with the
+  room, and feeling blindsided and foolish. She tells him she had written a
+  text before Josh picked her up and never sent it (as in Episode 6), because
+  she didn't want another conversation about Josh on the way out the door.
+  He asks whether she really thought he would have made it difficult.
+- **Neither is entirely wrong.** She wants to make her own choices during
+  the separation without explaining each one. He thinks twenty years earn a
+  heads-up. She admits she should have told him. He says he isn't trying to
+  control her decisions. He just doesn't like hearing important things about
+  someone that close to him from other people.
+- **Ending:** the humor comes back. She asks whether he wants a written
+  apology or a notarized statement, he can't stay angry, and they laugh. The
+  scene ends there and goes straight into the next storyline, without showing
+  her leave. **No hug** (Melissa, 2026-11-04: "remove the bear hug part, i
+  never added that"). It ends on the laughter.
+- **What it is about:** communication and withholding, not jealousy or
+  competition with Josh. It is meant to mirror a flashback (young Tyson
+  keeping something about a boyfriend from her) with the positions
+  reversed. **That flashback is not built yet** (Melissa, 2026-11-04: "dont
+  worry about those details yet"). Its details are open, and nothing about
+  it is canon beyond the idea. Both of them keep things back to avoid a hard
+  conversation, and the keeping back hurts more.
+- **Tone:** grounded, natural, dry humor, understated. No melodrama, no
+  overt jealousy, and Luna is never framed as playing the two men.
+
+**Guardrails for anything on the site about this scene or the flashback:**
+Tyson's hurt is about being told last. Nothing may say or hint that it is
+jealousy or feelings (see "NEVER ON THE SITE" in LUNA_VALE_CONTEXT.md and
+the memory note tyson-no-early-feelings-on-site). The same rule will apply to
+the flashback when it exists.
+
+**Not the same scene as `ty-luna-garage` ("The Garage", published
+2026-08-19).** Same room, a different conversation, and **"The Garage" is not
+present day**. It comes **well after Episode 7** (Melissa, 2026-11-04:
+"like waaay later"). That matches its place in the site's story order
+(lib/content/chronology.ts), after the wall and the bathtub.

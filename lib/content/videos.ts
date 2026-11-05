@@ -3683,6 +3683,54 @@ export const videos: Video[] = [
   },
   {
     /*
+      EVERYBODY ELSE, 2026-11-04. Melissa: "everybody else is the garage
+      scene from ep 7 you can post that" / "but its members only, 1st min
+      free". From Episode 7, which is not released. Present day, a few days
+      after the event (luna-josh-ty-event). A different scene from "The
+      Garage" (ty-luna-garage), which is much later. Canon:
+      docs/content/BETWEEN_US_SECRET_CANON.md, "Everybody Else".
+
+      FROM THE TRANSCRIPT: Tyson and Evan at a bike, the torque numbers, and
+      Evan's job offer ("Take the job. See if you like it." / "And if I
+      don't?" / "Quit."). Luna arrives ("You bringing food?"), Evan
+      introduces himself and goes on a break, then the event: "I know I told
+      you I wasn't going", the unsent text, "I just don't like finding out
+      things from everybody else", "I'm sorry", and it ends on "What do you
+      want, a written statement?"
+
+      TITLE: from Tyson's line, Melissa asked for a name from the context.
+      SYNOPSIS: describe and stop (tyson-no-early-feelings). His hurt is about
+      being told last. The copy doesn't explain it.
+
+      EVAN, 29, a former Marine Tyson mentors through a veterans program. No
+      character card yet ("no real details right now on him").
+
+      The 2:46 Instagram cut of the same confrontation
+      (luna-ty-garage-clip.mov) is already public on Instagram.
+    */
+    slug: "luna-ty-garage-event",
+    title: "Everybody Else",
+    synopsis:
+      "A few days after the event, Luna drives out to Tyson\u2019s garage, where he\u2019s working on a bike with Evan, a young Marine veteran he mentors. She has come to talk about the other night.",
+    file: "luna-ty-garage-event.proxy.mp4",
+    poster: "/posters/luna-ty-garage-event.jpg",
+    durationSeconds: 380,
+    addedOn: "2026-11-04",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "luna-ty-garage-event-preview.proxy.mp4",
+      // See the override in scripts/make-previews.mjs.
+      durationSeconds: 62.1,
+      hookStart: 0,
+      hookNote: "from the top: Tyson and Evan at the bike, and Evan\u2019s job offer",
+    },
+    feelings: ["hurt", "trust"],
+    place: "garage",
+    about: ["luna", "tyson"],
+  },
+  {
+    /*
       THE LIGHT BULB, 2026-10-13. Melissa: "new short clip, funny one…
       this one is free". Lakehouse, 0:39. From the transcript: "Okay, I know I
       bought the right bulb." / "Would you just fit, please?" / "Need some

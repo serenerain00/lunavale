@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-11-03 against `main` at 4c195bb. **A touched `lib/content/` file
+re-run 2026-11-05 against `main` at d47b3a0. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -64,8 +64,8 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 253 | 212 |
-| Tyson | 12 | 182 | 157 |
+| Luna | 12 | 254 | 213 |
+| Tyson | 12 | 183 | 158 |
 | Josh | 14 | 153 | 134 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
@@ -85,10 +85,10 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 at 4c195bb** (Tyson 182, Josh 153 — Episode 6 pays Luna, Josh and Tyson, so the difference held a third time while all three moved): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 at d47b3a0** (Tyson 183, Josh 153 — `luna-ty-garage-event` is Luna and Tyson only, so it moved Tyson alone): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
-a single day since. **It has now sat anywhere between 17 and 29. Quote the two
+a single day since. **It has now sat anywhere between 17 and 30. Quote the two
 current numbers at a sha and do not characterise the movement at all** — an
 earlier version of this line said "noise in the high teens", which 22 killed.
 *(The ceiling was 28, set in late September and matched on 10-27. The 10-28
@@ -96,7 +96,10 @@ merge — one premium Luna-and-Tyson clip and its journal page — put it at 29,
 so the span itself moved for the first time in five weeks. That is a fact about
 the bounds, not a direction: **the previous sentence was "it has sat anywhere
 between 17 and 28", and it was true until it wasn't.** If a later merge passes
-29, extend the number and nothing else.)*
+29, extend the number and nothing else. **It did, on 11-05**: `luna-ty-garage-event`
+is a Luna-and-Tyson clip, so Tyson moved alone and the ceiling is now **30**. The
+number was extended and nothing else was. That is the third ceiling in nine days,
+which is an argument for quoting a sha rather than a range at all.)*
 *(This
 paragraph has now been wrong twice: it claimed the direction had never changed,
 which died on 2026-10-09, and then that the gap was closing, which died on
@@ -399,6 +402,49 @@ Standing backlog, roughly prioritised:
   joins them would be inventing plot. Ask rather than write it. The ending is
   also **not a reconciliation**: "I want to believe you" is the same unresolved
   register as *Come Home*, and Josh asking a second time is not Luna answering.
+- **`luna-ty-garage-event`** — *Everybody Else*, published **premium** on
+  2026-11-04, 380s (6:20) with a **62-second free opening**, Luna and Tyson,
+  place `garage`, **twenty-seventh of sixty-nine in `STORY_ORDER`** — the first
+  new clip in weeks to be placed *inside* the order rather than appended, which
+  is what shifted the ordinals below. It is a scene **from Episode 7, which is
+  not released**, and this is the first time a clip has shipped ahead of its
+  episode, so the boundary is unusually sharp. **What is on the site:** the clip
+  and its free first minute (Tyson and Evan at the bike, the torque numbers,
+  Evan's job offer), and a 2:46 cut of the confrontation that is **already
+  public on Instagram** as an Episode 7 preview. Canon's own rule: *"nothing
+  beyond what that post shows goes on the site before the episode does"* — so a
+  note may play the garage, the bike, the arrival and the argument's surface,
+  and must not reach past them into the episode.
+  **The guardrail is the same one the kitchen corner carries, and canon now
+  states it twice:** Tyson's hurt is about **being told last** — finding out
+  with the room — and **nothing may say or hint that it is jealousy or
+  feelings** (`tyson-no-early-feelings-on-site`). Neither of them is wholly
+  wrong, she admits she should have told him, and **it ends on the laughter**:
+  the written-statement joke, no hug *(Melissa, 2026-11-04: "remove the bear hug
+  part, i never added that")*. Do not write it as a romantic beat.
+  **Two things that look like material and are not.** The scene is meant to
+  mirror **a flashback with the positions reversed** — young Tyson keeping
+  something from her — and **that flashback is not built yet**; nothing about it
+  is canon beyond the idea, so it cannot be described. And **Evan** (29, a
+  former Marine Tyson mentors through a veterans program) has **no character
+  card and no `lib/content/` entry** — `countFor("evan")` returns 0 — with
+  canon saying "no real details right now on him". Like Frank, he is a face in
+  a scene, not a character on the site; a note may have Tyson talk about
+  mentoring without inventing Evan.
+  **And `ty-luna-garage` (*The Garage*, premium, 456s, published 2026-08-19) is
+  a different scene in the same room.** Canon settles only that it is **not
+  present day** and comes **well after Episode 7** — it sits sixty-second in the
+  order, after the wall and the bathtub. **Do not call it earlier than Episode
+  7 either**; "not present day" is the whole of what is settled, and a commit on
+  11-04 exists specifically to stop that inference being made.
+- **Ordinal positions in `STORY_ORDER` are not stable, and two in this file were
+  badly wrong.** A clip inserted mid-list shifts everything after it — which
+  `luna-ty-garage-event` just did at position 27 — and Melissa also hand-moves
+  entries. Re-derived 2026-11-05: *Come Home* is **nineteenth**, not the
+  "sixty-fifth" this file claimed, and `luna-ty-driving` is **twenty-ninth**,
+  not "sixty-fourth". Both were off by more than forty places, which means they
+  had been wrong for some time and nobody re-ran them. **Quote an ordinal only
+  with the sha you derived it at, or say "early in the order" and nothing more.**
 - **`access` is not necessarily what a visitor can watch — check `openNow()`, not
   a sentence in this file.** `Video.openUntil` (added 2026-10-22) marks a
   members-only piece as open to everyone until a timestamp: `canWatch()` in
@@ -450,7 +496,9 @@ Standing backlog, roughly prioritised:
   so write it as Josh's account of the call, not as fact
 - **`luna-josh-frmhouse-comehome-horiz`** — *Come Home* (title a placeholder,
   hers to replace), published **free** on 2026-10-22, sixty seconds, Luna and
-  Josh, sixty-fifth in `STORY_ORDER`. The second free uncovered Josh piece, and
+  Josh, **nineteenth of sixty-nine in `STORY_ORDER`** (re-derived 2026-11-05;
+  this line said "sixty-fifth" and was wrong — see the ordinals warning below).
+  The second free uncovered Josh piece, and
   the only one where Josh asks for something himself: a Sunday a few weeks into
   the separation, Luna at the farmhouse for equipment she left behind for Vale
   Studios, Josh holding her by the hips and asking her to come home. The same
@@ -564,7 +612,8 @@ Standing backlog, roughly prioritised:
   check `videos.ts` and `posts.ts` before calling anything a clip. The counter-
   example arrived the next morning — **`luna-ty-driving`** (*One Number Off*,
   **premium**, 4:03 with a 58-second free opening, Luna and Tyson, 2026-10-22,
-  sixty-fourth in `STORY_ORDER`) came in as a *"new members clip"* and **is** a
+  **twenty-ninth of sixty-nine in `STORY_ORDER`**, re-derived 2026-11-05 — this
+  line said "sixty-fourth") came in as a *"new members clip"* and **is** a
   video. So the wording predicts the module in neither direction: open the two
   files. It is also one more premium piece paying the two leads who need it
   least, which is why the Josh gap went to 25 the day it landed. It is also

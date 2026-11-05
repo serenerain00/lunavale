@@ -2319,6 +2319,43 @@ export const journal: JournalEntry[] = [
       "I just didn’t understand what I was writing yet.",
     ],
   },
+  /*
+    ONE MORE, added 2026-11-05 beside `luna-josh-frmhouse-comehome-horiz`
+    (Come Home, free scene; this page is members-only). A Sunday a few weeks
+    into the separation (Melissa, 2026-10-22), so it sits before month one.
+
+    MELISSA'S CONTEXT IS THE PAGE: she went for equipment for Vale Studios;
+    he thinks she is trying to forget the ten years, and she has forgotten
+    nothing, which is what makes staying away hard; she let him close because
+    she misses him, and fears the same patterns; she believes he is trying
+    and needs more than another promise. NOT a breakup and NOT a
+    reconciliation. Unresolved, on purpose.
+
+    Quoted once, from the footage: "And I'm asking you for one more."
+
+    Invented and hers to cut: the box of equipment left in the truck bed.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "one-more",
+    addedOn: "2026-11-05",
+    dateline: "A Sunday, and I only went for the equipment",
+    place: "lakehouse",
+    about: ["luna", "josh"],
+    sceneSlug: "luna-josh-frmhouse-comehome-horiz",
+    access: "premium",
+    mature: false,
+    body: [
+      "I went to the farmhouse for equipment. I want that written down, because by the time I left, it wasn't what I'd gone for.",
+      "He thinks I'm trying to forget. That's what he said, more or less, that I act like the ten years were all bad. And I wanted to laugh, because it's the opposite. I haven't forgotten a single thing. I walk into that kitchen and I remember all of it at once, and that's the problem. If I could forget, staying away would be easy.",
+      "He put his hands on my hips the way he does, and I let him. I'm not going to pretend I didn't. I miss him. I miss being held by somebody who's known me for ten years and doesn't have to ask where anything goes.",
+      "And I could feel how easy it would be. One yes, in that kitchen, on a Sunday, and I'd be home by dinner. And three months from now I'd be waiting with a plate in the oven again.",
+      "He says he's trying. I believe him. That's what makes it so hard. He isn't lying, and he isn't a bad man, and he doesn't know what trying would even look like yet. Neither do I. I just know it has to be more than him asking.",
+      "\"And I'm asking you for one more.\" One more year. After ten. I didn't say yes and I didn't say no. I just stood there in his arms and didn't answer, which might be the most honest thing I did all day.",
+      "The equipment's still in the back of the truck. I couldn't make myself carry it in.",
+    ],
+  },
   {
     // Month one, so it sits after the ordinary Thursdays and before "month
     // four" — the night the pattern between them stops being only a pattern.
@@ -2849,6 +2886,89 @@ export const journal: JournalEntry[] = [
   },
 
   /*
+    THREE PAGES BESIDE EVERYBODY ELSE (`luna-ty-garage-event`, Episode 7),
+    added 2026-11-05, members-only like the scene past its first minute. The
+    same day, a few days after the event, written at the lake that evening.
+
+    One line quoted per page at most, and each is the footage: "I just don't
+    like finding out things from everybody else", "You got options now.
+    That's the whole point", "That's between you and him".
+
+    EVAN: 29, former Marine, Tyson mentors him (Melissa, "no real details
+    right now on him"). She has just met him, so the page knows only what she
+    heard at the bike. Nothing about his past beyond his own "six years".
+
+    TYSON: what she saw and heard, nothing about what he feels
+    (tyson-no-early-feelings). The third page is HER noticing something in
+    herself and putting it down, the way `it-suits-you` does; it does not
+    name it and does not guess at his side.
+
+    No hug: the scene ends on the laughter (canon, 2026-11-04).
+
+    Invented and hers to cut: rehearsing in the truck, "a Marine, I
+    gathered", Evan waving on the way out.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "a-written-statement",
+    addedOn: "2026-11-05",
+    dateline: "Back from Ty's garage, and we're okay",
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-ty-garage-event",
+    access: "premium",
+    mature: false,
+    body: [
+      "I drove out to the garage this morning to apologize, and I rehearsed it the whole way, and none of what I rehearsed survived the first thirty seconds.",
+      "He started with it's fine. Of course he did. That's his move, the door closing politely before you've reached it. I asked him not to, and he stopped, and then he made me actually say it. I deserved that.",
+      "The thing I had to admit, out loud, in front of him, is why I didn't send the text. Not because I forgot. Because I didn't want one more conversation about Josh before I'd even left the house. And when I said it, I heard how it sounded. Like I'd decided what he'd say before he'd said it. I've been so tired of everybody having an opinion about my life that I'd started holding his against him in advance.",
+      "That wasn't what he was upset about. He told me exactly what he was upset about, and it was so much simpler than what I'd built in my head. \"I just don't like finding out things from everybody else.\"",
+      "Twenty years, and we have never once found out something about each other secondhand. That's the whole thing between us, really. Whatever else changes, I hear it from him and he hears it from me. And I let a room full of strangers tell him for me.",
+      "I said I was sorry, plainly, no explanation after it. It's harder than it sounds. I always want to put a reason after an apology, like a cushion.",
+      "And he asked if I wanted it in writing, and I laughed so hard, and that was it. That's how we end things. Nobody says it's forgiven. Somebody makes a joke, and the other one laughs, and you both know.",
+    ],
+  },
+  {
+    id: "options-now",
+    addedOn: "2026-11-05",
+    dateline: "Something Ty said, and not to me",
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-ty-garage-event",
+    access: "premium",
+    mature: false,
+    body: [
+      "I walked in on Ty teaching. I've never actually seen it before.",
+      "There's a young guy who works on the bikes with him now, Evan. Polite, quick, a Marine, I gathered. They were bent over a bracket arguing about torque numbers, and Ty was being exactly as rude as he is with me, and Evan was giving it right back, and I stood in the doorway for a second before either of them noticed me, just watching.",
+      "Under all the sarcasm, he was so patient. He'd let Evan get it wrong, and then tell him, and then let him get it wrong a slightly different way. I don't think he even knows he does that.",
+      "Evan had been offered a job and couldn't tell whether he wanted it. Regular hours, benefits, all the things you're supposed to want. And Ty told him to take it, and if he hated it, quit. \"You got options now. That's the whole point.\"",
+      "I've been thinking about that all day, because a few nights ago a man I love asked me for the next ten years, and I couldn't answer him. And here's Ty telling somebody else that nobody has to know the next twenty. You just try the next thing and find out.",
+      "He wasn't talking to me. That's probably why I could hear it.",
+      "I don't want to make Ty into a philosopher. He'd hate it. He'd want me to write down that he was also covered in grease and told Evan he was still doing it wrong. He was. Both things.",
+    ],
+  },
+  {
+    id: "between-you-and-him",
+    addedOn: "2026-11-05",
+    dateline: "Late, and one thing I'm not going to think about",
+    place: "lakehouse",
+    about: ["luna", "tyson", "josh"],
+    sceneSlug: "luna-ty-garage-event",
+    access: "premium",
+    mature: false,
+    body: [
+      "There's one line from this morning I keep picking up and putting down.",
+      "He said he didn't care that I went with Josh. \"That's between you and him.\" It's the fairest thing anyone has said to me about any of this. It's exactly what I've been asking everybody for: let it be mine. He gave it to me without my asking.",
+      "So I don't understand why, for about a second, it felt like being let go of.",
+      "I'm not going to dig at that. I'm writing it down so that it's somewhere other than in my head, and then I'm going to bed.",
+      "What I'll let myself say is this. A year ago, if Ty had told me he didn't care where I went or with whom, I'd have heard a friend being a good friend. Today I heard that too. I also heard something else, in me, not in him, and I don't have a word for it, and I'm not looking for one.",
+      "We're okay. That's the true thing, and it's the thing that matters. He laughed, and I laughed, and on the way out Evan waved like we'd all known each other for years.",
+      "Everything else can wait until I'm less tired.",
+    ],
+  },
+
+  /*
     THE RIGHT BULB, added 2026-10-13 beside `luna-ty-bulb`, the short funny
     one (free scene; members-only page). Placed after the event and before
     "Most Nights", as the clip is.
@@ -2882,6 +3002,37 @@ export const journal: JournalEntry[] = [
       "The bulb went in on the next try. It was the right one.",
       "We have not talked about the fundraiser. I think this was us not talking about it. I think he came in, saw me losing a fight with a light fitting, and decided that was a better use of the afternoon.",
       "He was right. I am still annoyed. Both of those are true.",
+    ],
+  },
+  /*
+    NAVIGATION RIGHTS, added 2026-11-05 beside `luna-ty-driving` (One Number
+    Off), members-only like the scene past its first minute. After the light
+    bulb, as the clip is: the easy stretch.
+
+    Quoted once, from the footage: "Met a guy three times."
+
+    Invented and hers to cut: whose lens it is and what it's for (the scene
+    only says a Sony lens, "almost three grand new", $1,500), the drive home.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "navigation-rights",
+    addedOn: "2026-11-05",
+    dateline: "One number. It was one number.",
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    sceneSlug: "luna-ty-driving",
+    access: "premium",
+    mature: false,
+    body: [
+      "I'd like to state that the address was correct except for one number, and that one number is not my fault, and that I am aware of how that sounds.",
+      "Twenty minutes around downtown Denver at sunset, me saying right, him saying we just came from there, me saying we didn't, and the same man on the same corner, three times. By the third time I couldn't look at him. Ty raised a hand to him. I wanted to die.",
+      "And then I saw it, the number, and I knew before I said anything that I was never going to hear the end of this. \"Met a guy three times.\" He's going to say that at my funeral.",
+      "He took my phone. I've lost navigation rights. Apparently that's a real thing now and there's no appeal.",
+      "Here's what I actually want to write down, under the embarrassment. I was wrong for twenty minutes straight, out loud, insisting, and it cost me nothing. He teased me the whole way to Aurora and I laughed the whole way to Aurora, and at no point did I have to make it okay for anybody.",
+      "I'd forgotten that being wrong could be that cheap. For a long time, getting something wrong meant somebody's evening went sideways, and I'd spend the rest of it smoothing it over. Today it just meant I got called Miss Daisy.",
+      "We got the lens. It's beautiful. He's already told me he's charging me for gas, in a voice that means he isn't.",
     ],
   },
   {

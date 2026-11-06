@@ -1028,6 +1028,12 @@ CUTS=(
   # NO END TRIM: black from 155.5, and the score is still fading into the last
   # frame (-52 dB at 158), so the music stops where the file does.
   "luna-attack-trailer|stories/luna-alley-stranger/luna-attack-trailer.mp4|16|-|-|30"
+
+  # 2026-11-06: the house party trailer, free (Melissa). 2:58, 1320x800 hevc
+  # at 60fps, scored. POSTER AT 104s: the truck, Tyson asleep, Luna driving.
+  # END 177.9: black from 173.95, and the score fades to -91 dB by 177.8
+  # (closing-black rule: cut where the music stops, not at the black).
+  "luna-ty-drunk-trailer|stories/luna-ty-drunk/luna-ty-drunk-clip.mov|104|177.9|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

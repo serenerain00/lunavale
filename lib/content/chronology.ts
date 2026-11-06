@@ -342,6 +342,8 @@ export function assertComplete(): { missing: string[]; unknown: string[] } {
     "luna-detectives-trailer",
     // The trailer for what follows the alley (2026-10-29).
     "luna-attack-trailer",
+    // The trailer for the house party (2026-11-06).
+    "luna-ty-drunk-trailer",
     "interview",
     ...SEASONS.flatMap((s) => s.episodes.map((e) => e.slug).filter(Boolean)),
   ]);

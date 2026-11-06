@@ -1078,8 +1078,18 @@ present day**. It comes **well after Episode 7** (Melissa, 2026-11-04:
 
 ## Addition — 2026-11-04: "The Night Everything Changed" (the house party)
 
-**Far in the future and not to be posted** (Melissa, 2026-11-04: "im not
-gonna post that its way in the future still"). Writer knowledge only.
+**A TRAILER IS OUT, 2026-11-06, free** (`luna-ty-drunk-trailer`, "Let Me
+Get You Home"). Released canon is now exactly what the trailer shows: the
+party with Josh there, Tyson drunk and saying things then telling her to
+forget them, "We're not doing this", "I need you to say it", her refusing to
+answer him drunk, and her driving him home and getting him upstairs. Still
+NOT released: the fantasy, "Just you, Lu", "what if I'd met you first",
+"tell me I'm wrong", and the kitchen ending. Those stay off the site until
+the full scene is out.
+
+**The full scene is still far in the future** (Melissa, 2026-11-04: "im not
+gonna post that its way in the future still"). Beyond the trailer, writer
+knowledge only.
 Nothing about it goes on the site, in a synopsis, journal page, post caption
 or character card, until she releases it.
 

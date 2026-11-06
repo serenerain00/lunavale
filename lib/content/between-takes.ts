@@ -38,7 +38,7 @@
  * they now end on the generous reading, which is both truer to these people and
  * a great deal better to read.
  *
- * ACCESS: 5 of the 32 pages are open, deliberately few. They are the funny ones
+ * ACCESS: 5 of the 33 pages are open, deliberately few. They are the funny ones
  * and the ones that give away a technique rather than a turn — enough for a
  * visitor to know exactly what the rest of the notebook is, which is the whole
  * job of a shop window. Everything that explains a scene the visitor cannot
@@ -528,6 +528,23 @@ export const notes: SetNote[] = [
       "Then, right at the end, I get up. Once, and I am the only one who does. That is the architecture of the whole thing: you spend the scene establishing that neither man moves, so the one who finally moves owns everything after it.",
       "It buys exactly one line. “You think you’re handling it? You’re not.” I am talking about Luna and I will not say her name, and that is the closest I come in the entire film to admitting I thought she was worth something.",
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work in that room than I am.",
+    ],
+  },
+
+  {
+    id: "rick-round-the-outside",
+    author: "rick",
+    kind: "insight",
+    heading: "Round the outside",
+    dateline: "Day 20 · the far end of the water",
+    sceneSlug: "josh-rick-lake",
+    place: "lake",
+    access: "premium",
+    body: [
+      "One instruction for the lake, and it was a negative: I do not look at him. Not when he arrives, not when he asks, not once in the whole scene. I keep my eyes on the line and I talk to the water, and my son stands behind me for a minute saying the hardest thing he has ever had to say to me.",
+      "The line in the water was real, which was my idea and was a mistake. Something took it on the fourth take. I had been told not to move, so I did not move, and Josh very nearly got to the end of it before he went. Melissa kept the shot and lost the fish, which I am told is the correct priority.",
+      "Here is what the scene is actually doing. He has driven out here to ask me how to fix it, and I already know more about it than he does, because I telephoned her mother before he got in the car. If I had wanted the straight version from him I would have had to ask him for it, and I have never once asked him for anything in a form he could answer. So I went round the outside, and then I let him finish talking.",
+      "What the scene does not say, and he does not ask, is why I made the call. It was not to keep track of him. I wanted to know whether she was all right. That is the only shape this has ever been able to take with me — find out, say nothing, and let the man standing in front of me believe he is handling it.",
     ],
   },
 

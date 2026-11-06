@@ -104,6 +104,7 @@ function FacetRow({
               ) : (
                 <Link
                   href={queryHref(nextQuery)}
+                  rel="nofollow"
                   scroll={false}
                   aria-current={active ? "true" : undefined}
                   aria-label={

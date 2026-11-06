@@ -1075,3 +1075,61 @@ the flashback when it exists.
 present day**. It comes **well after Episode 7** (Melissa, 2026-11-04:
 "like waaay later"). That matches its place in the site's story order
 (lib/content/chronology.ts), after the wall and the bathtub.
+
+## Addition — 2026-11-04: "The Night Everything Changed" (the house party)
+
+**Far in the future and not to be posted** (Melissa, 2026-11-04: "im not
+gonna post that its way in the future still"). Writer knowledge only.
+Nothing about it goes on the site, in a synopsis, journal page, post caption
+or character card, until she releases it.
+
+**THE CUT IS CANON, NOT THE WRITTEN SYNOPSIS.** The video is
+`stories/luna-ty-drunk/luna-ty-party-drunk-music.mov` (10:47, scored).
+Melissa's written synopsis came first and differs from it. Where they
+disagree, the cut wins, and the differences are listed below.
+
+**NO KISS** (Melissa, 2026-11-04: "no kiss at the party"). Nothing physical
+happens between them in reality. The kissing and intimacy are all **inside
+Tyson's fantasy**.
+
+From the cut:
+- **The party, Josh there too.** Tyson is drunk. "You've been weird all
+  night." She tries to take the drink off him ("Ty, don't. Come on, put it
+  down."). "Why do you always smell good?" He asks "You ever wonder… what
+  would have happened if I'd met you first?" and she says "You did meet me
+  first."
+- **He pushes, she won't let him decide for her.** "Just tell me… I need you
+  to say it." "We're not doing this." "Because I care about you." / "How
+  much?" / "Don't turn that into something else." / "Maybe I'm tired of
+  everything being something else." "20 years, Lu." He keeps saying things
+  and then telling her to forget it, and she won't let him: "What am I
+  supposed to do with that?" She promises not to pretend the conversation
+  didn't happen. Then "Tell me I'm wrong about what I think's been happening
+  between us… just tell me I'm wrong and I'll shut up." She doesn't answer,
+  and he says "That's what I thought." She says "Don't decide what I'm
+  thinking because I won't give you an answer when you're drunk."
+- **She takes him home.** "Let me get you home, Ty. I'll tell Josh we're
+  leaving." The drive: "Lu, I'm sorry." / "Ty, you're fine." / "We're
+  here." Then getting him up to his apartment and into the bedroom ("Lu,
+  I'm good").
+- **Tyson's fantasy** (about 7:20–9:10, music only, graded apart from the
+  real room): the two of them intimate in his bed. **It does not happen.**
+- **Back in the real room:** "Ty. You're drunk. Do you need anything?" /
+  **"Just you, Lu."** / "I'm gonna get you some water, okay?" / "I'll see
+  you tomorrow, okay?" Then she goes down the hall and stands in his
+  kitchen, and the rest is on her face.
+
+**Where the written synopsis differs** (kept here so it isn't mistaken for
+canon): it has no Josh at the party (in the cut he's there, and she tells him
+they're leaving), no direct "tell me I'm wrong" (in the cut he asks it
+outright), and a brief real kiss in the bedroom plus the lines about locking
+the truck and texting him (none of that is in the cut). It also wrote "Ford
+F-0 Raptor", which would be her settled black 2020 F-150 Raptor.
+
+**Still holds from the synopsis:** this is a turning point for her, not a
+decision. She isn't over Josh and hasn't chosen Tyson. What he says drunk
+isn't a reliable declaration. There is no affair and no betrayal.
+
+**Not settled, for Melissa:** where this falls against "The Part"
+(`luna-ty-shop-kiss`) and "The Morning" (`ty-luna-bed`), both already
+published.

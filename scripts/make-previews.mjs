@@ -202,6 +202,10 @@ const OVERRIDES = {
   // 1st min free"). Tyson and Evan at the bike. At 1:00 Evan is mid "They
   // offered it to me", so it runs to 62.1, in the pause before "That's good".
   "luna-ty-garage-event": 62.1,
+  // I DON'T KNOW YET — the first 30 seconds (Melissa, 2026-11-05: "first
+  // 30sec free"). Ends on "Is something going on between you two?", in the
+  // pause before "Are you seriously asking me that?" (30.5).
+  "luna-josh-kitchen-argue": 30,
 };
 
 /**

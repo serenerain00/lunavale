@@ -4466,30 +4466,30 @@ export const videos: Video[] = [
       someone else, and is slow to tell her. "How long have you known he was
       seeing somebody else?" / "I would have appreciated a heads up." / "I
       heard some guy talking at a party. What'd you want me to do?" / "Next
-      time I'll just keep my fucking mouth shut." It opens on a friend at the
-      party asking Tyson "I thought you were seeing Luna. So who's Ashley?"
+      time I'll just keep my fucking mouth shut." It opens on someone at the
+      party asking Matt "I thought you were seeing Luna. So who's Ashley?"
 
       NOW (the garage, from Everybody Else, luna-ty-garage-event, whose
       confrontation is already public on Instagram): "I know I told you I
       wasn't going" / "Josh kept asking and I eventually said yes" / "You
       made the decision for me" / "What do you want, a written statement?"
 
-      The point of the cut is the mirror: at eighteen he kept something from
+      The point of the cut is the mirror: at twenty he kept something from
       her, now she kept something from him. The synopsis says that and stops.
-      It names neither the boyfriend nor Ashley (whisper's names are not to
-      be trusted, and neither is on the site), and reads nothing into the
-      friend's question (tyson-no-early-feelings).
+      It names neither Matt nor Ashley ("not that important right now",
+      Melissa), and says nothing about what Tyson feels
+      (tyson-no-early-feelings).
 
       A MONTAGE ACROSS TWO TIMES, not a beat in the story, so NOT IN
       STORY_ORDER (exempt in chronology.ts, like the trailers).
-      TITLE IS A PLACEHOLDER, from her line at eighteen; hers to replace.
+      TITLE IS A PLACEHOLDER, from her line at twenty; hers to replace.
       Strong language, same as the garage scene: not `mature`, which is for
       sex.
     */
     slug: "luna-ty-montage",
     title: "A Heads Up",
     synopsis:
-      "At eighteen, Tyson finds out something about the guy Luna is seeing and takes too long to tell her. Twenty years later, in his garage, she\u2019s the one who kept something from him. The same argument, from both sides.",
+      "At twenty, Tyson finds out something about the guy Luna is seeing and takes too long to tell her. Years later, in his garage, she\u2019s the one who kept something from him. The same argument, from both sides.",
     file: "luna-ty-montage.proxy.mp4",
     poster: "/posters/luna-ty-montage.jpg",
     // Whole file: picture black from 164.6, score fading into the last frame.

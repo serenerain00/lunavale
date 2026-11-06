@@ -1038,7 +1038,7 @@ CUTS=(
   # 2026-11-06: the montage, free (Melissa). 2:47, 1320x814 at 60fps, scored.
   # The folder also holds "New project 1 2026-11-06 15-09.mp4", an earlier
   # export; luna-ty-montage-music.mov is the one she named.
-  # POSTER AT 76s: the two of them at eighteen, face to face by the car.
+  # POSTER AT 76s: the two of them at twenty, face to face by the car.
   # NO END TRIM: black from 164.6, and the score is still fading into the
   # last frame (-50 dB at 166.8).
   "luna-ty-montage|stories/luna-ty-montage/luna-ty-montage-music.mov|76|-|-|30"

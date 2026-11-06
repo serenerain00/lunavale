@@ -344,7 +344,7 @@ export function assertComplete(): { missing: string[]; unknown: string[] } {
     "luna-attack-trailer",
     // The trailer for the house party (2026-11-06).
     "luna-ty-drunk-trailer",
-    // A montage across two times, eighteen and now (2026-11-06).
+    // A montage across two times, twenty and now (2026-11-06).
     "luna-ty-montage",
     "interview",
     ...SEASONS.flatMap((s) => s.episodes.map((e) => e.slug).filter(Boolean)),

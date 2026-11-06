@@ -1143,3 +1143,19 @@ isn't a reliable declaration. There is no affair and no betrayal.
 **Not settled, for Melissa:** where this falls against "The Part"
 (`luna-ty-shop-kiss`) and "The Morning" (`ty-luna-bed`), both already
 published.
+
+## Addition — 2026-11-06: the heads up, at eighteen (released, free)
+
+From Melissa's montage `luna-ty-montage` ("A Heads Up"), posted free. A new
+2006 Atlanta scene, seen only inside the montage: Tyson hears at a party that
+the guy Luna is seeing has someone else, and is slow to tell her. She's angry
+she didn't get a heads up; he says next time he'll keep his mouth shut. It
+opens on a friend at the party asking Tyson "I thought you were seeing Luna.
+So who's Ashley?" The montage cuts it against the garage argument in
+Everybody Else (`luna-ty-garage-event`), where she's the one who didn't tell
+him.
+
+**Not settled, for Melissa:** the boyfriend's name (whisper heard "Matt",
+unreliable) and who Ashley is. Neither goes on the site until she says. The
+friend's question is read as nothing about Tyson's feelings
+(tyson-no-early-feelings).

@@ -1034,6 +1034,14 @@ CUTS=(
   # END 177.9: black from 173.95, and the score fades to -91 dB by 177.8
   # (closing-black rule: cut where the music stops, not at the black).
   "luna-ty-drunk-trailer|stories/luna-ty-drunk/luna-ty-drunk-clip.mov|104|177.9|-|30"
+
+  # 2026-11-06: the montage, free (Melissa). 2:47, 1320x814 at 60fps, scored.
+  # The folder also holds "New project 1 2026-11-06 15-09.mp4", an earlier
+  # export; luna-ty-montage-music.mov is the one she named.
+  # POSTER AT 76s: the two of them at eighteen, face to face by the car.
+  # NO END TRIM: black from 164.6, and the score is still fading into the
+  # last frame (-50 dB at 166.8).
+  "luna-ty-montage|stories/luna-ty-montage/luna-ty-montage-music.mov|76|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

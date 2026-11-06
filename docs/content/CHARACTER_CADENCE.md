@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-11-05 against `main` at d47b3a0. **A touched `lib/content/` file
+re-run 2026-11-06 against `main` at 6dc6a46. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -64,9 +64,9 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 254 | 213 |
-| Tyson | 12 | 183 | 158 |
-| Josh | 14 | 153 | 134 |
+| Luna | 12 | 265 | 224 |
+| Tyson | 12 | 188 | 163 |
+| Josh | 14 | 160 | 141 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 9 | 9 |
@@ -85,7 +85,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 at d47b3a0** (Tyson 183, Josh 153 — `luna-ty-garage-event` is Luna and Tyson only, so it moved Tyson alone): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 at 6dc6a46** (Tyson 188, Josh 160 — the 11-05 merge brought a Luna-Josh-Tyson clip and ten journal pages, five of them on Episode 6, so Josh gained seven and the gap came back down two days after setting its ceiling): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has now sat anywhere between 17 and 30. Quote the two
@@ -404,7 +404,7 @@ Standing backlog, roughly prioritised:
   register as *Come Home*, and Josh asking a second time is not Luna answering.
 - **`luna-ty-garage-event`** — *Everybody Else*, published **premium** on
   2026-11-04, 380s (6:20) with a **62-second free opening**, Luna and Tyson,
-  place `garage`, **twenty-seventh of sixty-nine in `STORY_ORDER`** — the first
+  place `garage`, **twenty-seventh of seventy in `STORY_ORDER`** (re-derived 2026-11-06) — the first
   new clip in weeks to be placed *inside* the order rather than appended, which
   is what shifted the ordinals below. It is a scene **from Episode 7, which is
   not released**, and this is the first time a clip has shipped ahead of its
@@ -434,14 +434,57 @@ Standing backlog, roughly prioritised:
   **And `ty-luna-garage` (*The Garage*, premium, 456s, published 2026-08-19) is
   a different scene in the same room.** Canon settles only that it is **not
   present day** and comes **well after Episode 7** — it sits sixty-second in the
-  order, after the wall and the bathtub. **Do not call it earlier than Episode
-  7 either**; "not present day" is the whole of what is settled, and a commit on
+  order, **sixty-third of seventy** at 6dc6a46 — it read sixty-second one day
+  earlier, which is the warning below in miniature — after the wall and the
+  bathtub. **Do not call it earlier than Episode 7 either**; "not present day" is the whole of what is settled, and a commit on
   11-04 exists specifically to stop that inference being made.
+- **`luna-josh-kitchen-argue`** — *I Don't Know Yet*, published **premium** on
+  2026-11-05, 164s (2:44) with a **30-second free opening** (the shortest free
+  window on any clip), **Luna, Josh and Tyson**, place `lakehouse`,
+  **thirty-third of seventy** in `STORY_ORDER` — **hand-placed as a guess, and
+  the entry says Melissa is to move it**, so do not build a note on where it
+  falls. This is the strongest new Josh material in weeks and it pays all three
+  leads: Josh comes inside about Tyson's truck, asks whether something is going
+  on, and her answer is the title. **Guardrails from the entry:** the synopsis
+  "describes and stops" — **Josh's suspicion is his**, the copy does not answer
+  it, and it says nothing about what Tyson feels (`tyson-no-early-feelings`).
+  Handle the end with care: **he grabs her arm and the scene ends on him
+  apologizing for it.** That is on screen and may be played, but it is the one
+  moment on the site where Josh puts a hand on her, so a note about it is about
+  an actor's care in staging it, never about excusing him.
+  *(Heading collision to avoid: **#1 is already titled "I don't know yet"**, so a
+  note on this clip wants a different heading even though the clip's own title is
+  hers.)*
+- **Ten new journal pages landed with it, all `premium`** (journal is now 169
+  entries, still **6 free**): five beside Episode 6, three beside *Everybody
+  Else*, one beside *One Number Off*, and one beside **Come Home — a free clip
+  whose page is members-only**. That is the separate-access rule with a third
+  instance, and the most quotable one: *Come Home* is the piece a non-member can
+  watch, and the writing about it is not.
+- **"The Night Everything Changed" (the house party) is writer knowledge and
+  must not be posted at all.** Canon addition 2026-11-04: *"im not gonna post
+  that its way in the future still"* — **nothing** about it goes in a synopsis,
+  a journal page, a caption, a character card or a note until Melissa releases
+  it. Three things in that block matter even so, because they correct what a
+  reader might otherwise infer:
+  **(1) The cut is canon, not the written synopsis.** Where they disagree the
+  cut wins, and the block lists the differences. That generalises: a written
+  synopsis in canon is a draft of a scene, and the video is the scene.
+  **(2) There is no kiss, and the intimacy is only Tyson's fantasy** — a graded
+  passage inside the cut that **does not happen**. Never write it as something
+  that did.
+  **(3) It is a turning point for her, not a decision.** She is not over Josh
+  and has not chosen Tyson; what he says drunk is not a reliable declaration;
+  there is no affair and no betrayal. Josh is at the party.
+  Where it falls against the published `luna-ty-shop-kiss` (fifty-third) and
+  `ty-luna-bed` (sixty-seventh) is **not settled and is Melissa's** — do not
+  order them in writing.
 - **Ordinal positions in `STORY_ORDER` are not stable, and two in this file were
   badly wrong.** A clip inserted mid-list shifts everything after it — which
   `luna-ty-garage-event` just did at position 27 — and Melissa also hand-moves
-  entries. Re-derived 2026-11-05: *Come Home* is **nineteenth**, not the
-  "sixty-fifth" this file claimed, and `luna-ty-driving` is **twenty-ninth**,
+  entries. Re-derived 2026-11-05 and again 2026-11-06: *Come Home* is
+  **nineteenth**, not the "sixty-fifth" this file claimed, and `luna-ty-driving`
+  is **twenty-ninth**,
   not "sixty-fourth". Both were off by more than forty places, which means they
   had been wrong for some time and nobody re-ran them. **Quote an ordinal only
   with the sha you derived it at, or say "early in the order" and nothing more.**
@@ -496,7 +539,7 @@ Standing backlog, roughly prioritised:
   so write it as Josh's account of the call, not as fact
 - **`luna-josh-frmhouse-comehome-horiz`** — *Come Home* (title a placeholder,
   hers to replace), published **free** on 2026-10-22, sixty seconds, Luna and
-  Josh, **nineteenth of sixty-nine in `STORY_ORDER`** (re-derived 2026-11-05;
+  Josh, **nineteenth of seventy in `STORY_ORDER`** (re-derived 2026-11-06;
   this line said "sixty-fifth" and was wrong — see the ordinals warning below).
   The second free uncovered Josh piece, and
   the only one where Josh asks for something himself: a Sunday a few weeks into
@@ -612,7 +655,7 @@ Standing backlog, roughly prioritised:
   check `videos.ts` and `posts.ts` before calling anything a clip. The counter-
   example arrived the next morning — **`luna-ty-driving`** (*One Number Off*,
   **premium**, 4:03 with a 58-second free opening, Luna and Tyson, 2026-10-22,
-  **twenty-ninth of sixty-nine in `STORY_ORDER`**, re-derived 2026-11-05 — this
+  **twenty-ninth of seventy in `STORY_ORDER`**, re-derived 2026-11-06 — this
   line said "sixty-fourth") came in as a *"new members clip"* and **is** a
   video. So the wording predicts the module in neither direction: open the two
   files. It is also one more premium piece paying the two leads who need it

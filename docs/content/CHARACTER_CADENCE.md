@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-11-06 against `main` at 6dc6a46. **A touched `lib/content/` file
+re-run 2026-11-07 against `main` at fdbbc96. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -64,9 +64,9 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 265 | 224 |
-| Tyson | 12 | 188 | 163 |
-| Josh | 14 | 160 | 141 |
+| Luna | 12 | 267 | 224 |
+| Tyson | 12 | 190 | 163 |
+| Josh | 14 | 162 | 141 |
 | Rick | 1 | 14 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 9 | 9 |
@@ -85,7 +85,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 at 6dc6a46** (Tyson 188, Josh 160 — the 11-05 merge brought a Luna-Josh-Tyson clip and ten journal pages, five of them on Episode 6, so Josh gained seven and the gap came back down two days after setting its ceiling): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 at fdbbc96** (Tyson 190, Josh 162 — the 11-06 merge added two free pieces whose `about` names all three leads, so Tyson and Josh moved together and the difference held; the 11-05 merge before it had brought it down from the 30 ceiling): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has now sat anywhere between 17 and 30. Quote the two
@@ -461,12 +461,27 @@ Standing backlog, roughly prioritised:
   whose page is members-only**. That is the separate-access rule with a third
   instance, and the most quotable one: *Come Home* is the piece a non-member can
   watch, and the writing about it is not.
-- **"The Night Everything Changed" (the house party) is writer knowledge and
-  must not be posted at all.** Canon addition 2026-11-04: *"im not gonna post
-  that its way in the future still"* — **nothing** about it goes in a synopsis,
-  a journal page, a caption, a character card or a note until Melissa releases
-  it. Three things in that block matter even so, because they correct what a
-  reader might otherwise infer:
+- **"The Night Everything Changed" (the house party): part of it is public now,
+  and the sentence above it in this file lasted a day.** It read *"writer
+  knowledge and must not be posted at all"*, written 2026-11-06 from the 11-04
+  canon addition, and on **2026-11-07** the free trailer
+  **`luna-ty-drunk-trailer`** (*Let Me Get You Home*, free, 2:58, Luna/Tyson/Josh,
+  place `tysons-apartment`, **not in `STORY_ORDER`**, title a placeholder) put
+  the first public look on the site. **Do not restore the old wording.** The
+  canon block was rewritten to say where the line now falls, and it is narrow:
+  **released** is what the trailer shows — the party with Josh there, Tyson
+  drunk saying things and then telling her to forget them, *"We're not doing
+  this"*, *"I need you to say it"*, her refusing to answer him while he is
+  drunk, and her driving him home and getting him upstairs.
+  **Still not released, and not to be written:** the fantasy, *"Just you, Lu"*,
+  *"what if I'd met you first"*, *"tell me I'm wrong"*, and the kitchen ending.
+  **What he wants her to say is his and is unspoken in the trailer** — the
+  entry says the copy does not name it, so neither does a note. This is the
+  second guard in nine days to go from absolute to partial in a day (the attack
+  arc was the first), so **read the canon block and the entry before trusting a
+  sentence here about anything unreleased.**
+  Three things in that block still hold, because they correct what a reader
+  might otherwise infer:
   **(1) The cut is canon, not the written synopsis.** Where they disagree the
   cut wins, and the block lists the differences. That generalises: a written
   synopsis in canon is a draft of a scene, and the video is the scene.
@@ -479,6 +494,34 @@ Standing backlog, roughly prioritised:
   Where it falls against the published `luna-ty-shop-kiss` (fifty-third) and
   `ty-luna-bed` (sixty-seventh) is **not settled and is Melissa's** — do not
   order them in writing.
+- **`luna-ty-montage`** — *A Heads Up*, published **free** on 2026-11-07, 167s
+  (2:47), `about` **Luna, Tyson and Josh**, place `garage`, **not in
+  `STORY_ORDER`** (it is a montage across two times, exempt in `chronology.ts`
+  like the trailers), title a placeholder. It cuts two arguments against each
+  other: a **new Atlanta scene that exists nowhere else on the site**, and the
+  garage confrontation from *Everybody Else*. The mirror is the point — then he
+  kept something from her, now she kept something from him — and **the synopsis
+  says that and stops**.
+  **Her age in it is twenty, and the entry's own comment is wrong.** Canon (and
+  the synopsis) say **20**; the comment block inside the entry still reads *"AT
+  EIGHTEEN"*, because the correction commit fixed the copy and not the comment.
+  **Read the synopsis and the canon addition, not the comment heading.** That is
+  a new shape of the old trap: it has been commit messages that lie, and now a
+  stale comment inside the entry can too.
+  **Matt and Ashley** (the boyfriend and the other woman in the scene at twenty)
+  are **minor, have no character cards, and the site copy does not name them** —
+  the same bucket as Evan, Frank and Miller. A note does not name them either.
+  *(One thing worth asking rather than fixing: `about` names **Josh**, and he is
+  in neither half of the montage. It pays him a point in the counts. Left as
+  Melissa set it.)*
+- **Both 11-07 pieces are free and uncovered, and both are deliberately off the
+  free-and-uncovered list below** — for the same reason `luna-attack-trailer`
+  is: each pays all three leads, so neither supports the clause that every
+  entry on that list pays only into Luna and Tyson. **Six free pieces now sit
+  outside it** — the three free trailers (`between-us-trailer-one`,
+  `luna-attack-trailer`, `luna-ty-drunk-trailer`), the montage, and the two free
+  Josh clips. Counted at fdbbc96, where free reads 16 published / 17 by
+  `access`.
 - **Ordinal positions in `STORY_ORDER` are not stable, and two in this file were
   badly wrong.** A clip inserted mid-list shifts everything after it — which
   `luna-ty-garage-event` just did at position 27 — and Melissa also hand-moves
@@ -504,7 +547,9 @@ Standing backlog, roughly prioritised:
   *(**There is a third free count, and it is the one the health check prints.**
   That check counts `access === "free" && !hidden`, so it said **14 free** on
   10-31 while `access`-free was **15**: `interview` is free and `hidden: true`,
-  the only hidden piece in `videos.ts` at 944c369. None of the three figures is
+  the only hidden piece in `videos.ts`. At fdbbc96 the three read **16
+  published / 17 `access`-free / 17 watchable** — the gap of one is always
+  `interview`, and the figures themselves move whenever anything free lands. None of the three figures is
   wrong and none of them is the others — say which one you mean, and never
   reconcile them by editing one. This was checked on 10-31 because the gap looked
   at first like the new trailer being withheld, and it is not:

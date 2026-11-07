@@ -1078,8 +1078,18 @@ present day**. It comes **well after Episode 7** (Melissa, 2026-11-04:
 
 ## Addition — 2026-11-04: "The Night Everything Changed" (the house party)
 
-**Far in the future and not to be posted** (Melissa, 2026-11-04: "im not
-gonna post that its way in the future still"). Writer knowledge only.
+**A TRAILER IS OUT, 2026-11-06, free** (`luna-ty-drunk-trailer`, "Let Me
+Get You Home"). Released canon is now exactly what the trailer shows: the
+party with Josh there, Tyson drunk and saying things then telling her to
+forget them, "We're not doing this", "I need you to say it", her refusing to
+answer him drunk, and her driving him home and getting him upstairs. Still
+NOT released: the fantasy, "Just you, Lu", "what if I'd met you first",
+"tell me I'm wrong", and the kitchen ending. Those stay off the site until
+the full scene is out.
+
+**The full scene is still far in the future** (Melissa, 2026-11-04: "im not
+gonna post that its way in the future still"). Beyond the trailer, writer
+knowledge only.
 Nothing about it goes on the site, in a synopsis, journal page, post caption
 or character card, until she releases it.
 
@@ -1133,3 +1143,17 @@ isn't a reliable declaration. There is no affair and no betrayal.
 **Not settled, for Melissa:** where this falls against "The Part"
 (`luna-ty-shop-kiss`) and "The Morning" (`ty-luna-bed`), both already
 published.
+
+## Addition — 2026-11-06: the heads up, at twenty (released, free)
+
+From Melissa's montage `luna-ty-montage` ("A Heads Up"), posted free. A new
+Atlanta scene, seen only inside the montage. **Luna is 20** and dating
+**Matt**, who is cheating on her with **Ashley** (Melissa, 2026-11-06). Tyson
+hears about it at a party and is slow to tell her. She's angry she didn't get
+a heads up; he says next time he'll keep his mouth shut. It opens on someone
+at the party asking Matt "I thought you were seeing Luna. So who's Ashley?"
+The montage cuts it against the garage argument in Everybody Else
+(`luna-ty-garage-event`), where she's the one who didn't tell him.
+
+Matt and Ashley are minor ("not that important right now"). No character
+cards, and the site copy doesn't name them.

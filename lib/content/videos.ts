@@ -4410,6 +4410,99 @@ export const videos: Video[] = [
   },
   {
     /*
+      THE HOUSE PARTY TRAILER, 2026-11-06. Melissa: "lets post this for free
+      its a trailer basically for an event coming up which is ty finally
+      breaking a bit, getting drunk at a house party with josh and luna, luna
+      ends up having to take him home". The file is luna-ty-drunk-clip.mov;
+      the slug says trailer, like the other three, and leaves the plain
+      `luna-ty-drunk` free for the full scene when it comes.
+
+      THIS IS THE FIRST PUBLIC LOOK AT "THE NIGHT EVERYTHING CHANGED"
+      (BETWEEN_US_SECRET_CANON.md, 2026-11-04 addition), which until today
+      was not to be posted. Released canon is now what this trailer shows and
+      no more.
+
+      FROM THE TRANSCRIPT: "You keep saying these things and then telling me
+      to forget it. What am I supposed to do with that?" / "We're not doing
+      this." / "You've had too much to drink." / "Let me get you home, Ty.
+      I'll tell Josh we're leaving." / "Lu, I'm sorry." "Ty, you're fine." /
+      getting him upstairs ("Lu, I'm good", "You're not fine") / "I'm taking
+      you home." Then, over the score: "Don't decide what I'm thinking
+      because I won't give you an answer when you're drunk." / "I need you to
+      say it." / "Nothing."
+
+      NOT IN IT: the fantasy, "Just you, Lu", "what if I'd met you first",
+      "tell me I'm wrong". The copy stays out of all of them. What he wants
+      her to say is his, unspoken here, and the synopsis does not name it.
+
+      TITLE IS A PLACEHOLDER, from her line in the clip; hers to replace.
+      NOT IN STORY_ORDER, as for the other trailers (chronology.ts).
+      POSTER is the truck, him asleep and her driving: the night in one
+      frame without putting the closeness in the kitchen on a public card.
+    */
+    slug: "luna-ty-drunk-trailer",
+    title: "Let Me Get You Home",
+    synopsis:
+      "A house party, Josh there too. Tyson has had far more to drink than he ever does, and he keeps saying things and then telling Luna to forget them. She won’t give him an answer while he’s drunk. She takes him home.",
+    file: "luna-ty-drunk-trailer.proxy.mp4",
+    poster: "/posters/luna-ty-drunk-trailer.jpg",
+    // Trimmed at 177.9, where the score reaches silence (see import-cuts.sh).
+    durationSeconds: 178,
+    addedOn: "2026-11-06",
+    access: "free",
+    mature: false,
+    feelings: [],
+    place: "tysons-apartment",
+    about: ["luna", "tyson", "josh"],
+  },
+  {
+    /*
+      THE MONTAGE, 2026-11-06. Melissa: "go ahead and post this for free
+      luna-ty-montage-music". 2:47, scored, made by her. Two arguments cut
+      against each other, twenty years apart:
+
+      AT EIGHTEEN (Atlanta, a parking lot by the stairs; NEW TO THE SITE, no
+      separate clip): Tyson hears at a party that the guy Luna is seeing has
+      someone else, and is slow to tell her. "How long have you known he was
+      seeing somebody else?" / "I would have appreciated a heads up." / "I
+      heard some guy talking at a party. What'd you want me to do?" / "Next
+      time I'll just keep my fucking mouth shut." It opens on someone at the
+      party asking Matt "I thought you were seeing Luna. So who's Ashley?"
+
+      NOW (the garage, from Everybody Else, luna-ty-garage-event, whose
+      confrontation is already public on Instagram): "I know I told you I
+      wasn't going" / "Josh kept asking and I eventually said yes" / "You
+      made the decision for me" / "What do you want, a written statement?"
+
+      The point of the cut is the mirror: at twenty he kept something from
+      her, now she kept something from him. The synopsis says that and stops.
+      It names neither Matt nor Ashley ("not that important right now",
+      Melissa), and says nothing about what Tyson feels
+      (tyson-no-early-feelings).
+
+      A MONTAGE ACROSS TWO TIMES, not a beat in the story, so NOT IN
+      STORY_ORDER (exempt in chronology.ts, like the trailers).
+      TITLE IS A PLACEHOLDER, from her line at twenty; hers to replace.
+      Strong language, same as the garage scene: not `mature`, which is for
+      sex.
+    */
+    slug: "luna-ty-montage",
+    title: "A Heads Up",
+    synopsis:
+      "At twenty, Tyson finds out something about the guy Luna is seeing and takes too long to tell her. Years later, in his garage, she\u2019s the one who kept something from him. The same argument, from both sides.",
+    file: "luna-ty-montage.proxy.mp4",
+    poster: "/posters/luna-ty-montage.jpg",
+    // Whole file: picture black from 164.6, score fading into the last frame.
+    durationSeconds: 167,
+    addedOn: "2026-11-06",
+    access: "free",
+    mature: false,
+    feelings: ["hurt", "trust"],
+    place: "garage",
+    about: ["luna", "tyson", "josh"],
+  },
+  {
+    /*
       COME HOME, the landscape cut, 2026-10-22. Melissa: "add the horizontal
       one as a free clip too ... luna-josh-frmhouse-comehome-horiz". Free, in
       full. The same scene as the vertical post luna-josh-frmhouse-come-home

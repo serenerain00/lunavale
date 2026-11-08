@@ -38,7 +38,7 @@
  * they now end on the generous reading, which is both truer to these people and
  * a great deal better to read.
  *
- * ACCESS: 5 of the 32 pages are open, deliberately few. They are the funny ones
+ * ACCESS: 5 of the 33 pages are open, deliberately few. They are the funny ones
  * and the ones that give away a technique rather than a turn — enough for a
  * visitor to know exactly what the rest of the notebook is, which is the whole
  * job of a shop window. Everything that explains a scene the visitor cannot
@@ -528,6 +528,22 @@ export const notes: SetNote[] = [
       "Then, right at the end, I get up. Once, and I am the only one who does. That is the architecture of the whole thing: you spend the scene establishing that neither man moves, so the one who finally moves owns everything after it.",
       "It buys exactly one line. “You think you’re handling it? You’re not.” I am talking about Luna and I will not say her name, and that is the closest I come in the entire film to admitting I thought she was worth something.",
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work in that room than I am.",
+    ],
+  },
+  {
+    id: "rick-already-knew",
+    author: "rick",
+    kind: "insight",
+    heading: "I already knew",
+    dateline: "Day 20 · the lake",
+    sceneSlug: "josh-rick-lake",
+    place: "lake",
+    access: "premium",
+    body: [
+      "Melissa put a rod in my hands and then told me I was not to look at him. Not once, not on any take. So my son drives all the way out here to ask his father how to fix his life, and he spends the entire conversation talking to the side of my head.",
+      "The thing that makes the scene work happened before it starts and is not in the film. I had already phoned her mother. So when Josh gets round to telling me Luna won't see him, I am not learning anything — I am waiting to find out how long it takes him to say it out loud. He came here to be helped and I already had all of it.",
+      "I asked whether I could take the edge off the last line. Melissa said he does not need it softened, he needs to hear it, so it goes out flat: “Good. Now you know how she felt.” Written down that looks like a man being cruel to his son. Standing in the water saying it, it is the nearest thing to advice I have got.",
+      "That is the part I would want somebody to notice. I am not holding anything back from him out here. I gave him everything I had, and what I had was a phone call he never asked me to make and one hard sentence. It does not reach him. I could not tell you what would have.",
     ],
   },
 

@@ -530,6 +530,22 @@ export const notes: SetNote[] = [
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work in that room than I am.",
     ],
   },
+  {
+    id: "rick-never-look-at-him",
+    author: "rick",
+    kind: "insight",
+    heading: "I never look at him",
+    dateline: "Day 20 · out at the lake",
+    sceneSlug: "josh-rick-lake",
+    place: "lake",
+    access: "premium",
+    body: [
+      "The study is a room I own and I hold it by sitting still in it. Out here there is nothing to sit in and nothing to run, so Melissa and I spent the first hour hunting for whatever does that same job outdoors. It turned out to be a fishing line. I have one in the water, I do not take my eyes off it, and my son stands behind me asking how to get her back while I watch for a fish.",
+      "The note underneath all of it is that I already know. I have spoken to her mother, so I am the one who tells Josh where Luna is staying — in his own life, about his own ten years. He says he had already heard it from Tyson. I am not allowed to do anything with that. It sits there, and letting it sit is a worse thing to do to a man than arguing with him would have been.",
+      "He says he does not know how to fix this. “You fix you.” He admits she will not see him. “Good. Now you know how she felt.” Playing it I found the thing I had not expected, which is that this is the only moment in the whole series where I am on Luna’s side out loud. I always thought she was too good for him. It turns out the only shape I can get that into is a punishment, delivered to my son, with my back to him.",
+      "Melissa told us up front there would be nothing under this one — no music, two men and the water — so every pause is real time and I had to learn to let them run long. What I would point out is Josh. He drove out here to ask his father for help, which is not a thing anybody in this family does, and he plays it without once protecting himself. I am the one who does not turn around.",
+    ],
+  },
 
   /* ==================================================================
      WRITTEN TO EACH OTHER

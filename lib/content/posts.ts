@@ -673,6 +673,9 @@ const authored: Clip[] = [
       not write a synopsis for it, and do not place it near anything as an
       explanation. Same rule as tyson-no-early-feelings: describe and stop.
 
+      NOT THE SAME NIGHT AS ty-luna-rain-right-music-vert ("Pouring"): a
+      different rain scene (Melissa, 2026-11-09).
+
       MEMBERS ONLY, NO PREVIEW. She will post about the middle 30s on
       Instagram, and that is the public window; the site holds the whole 4:46.
       Not in STORY_ORDER — posts never are, and there is no landscape scene
@@ -993,8 +996,9 @@ const authored: Clip[] = [
 
       NOT THE SAME CUT AS luna-ty-rain-ig ("Rain", 2026-10-02), which is also
       Luna and Tyson arguing then kissing in a downpour, placed "at whenever
-      Tyson tells her". Different shoot, different light. How the two relate
-      is Melissa's to settle; neither comment should be read as deciding it.
+      Tyson tells her". THEY ARE DIFFERENT RAIN SCENES (Melissa, 2026-11-09):
+      two separate nights, not two cuts of one. Never merge or cross-refer
+      them as the same moment.
 
       EXCLUSIVE SCENE: members only, no preview (exclusive-scenes-no-
       preview). Title and caption are placeholders, hers to replace.

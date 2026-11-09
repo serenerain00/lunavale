@@ -1060,6 +1060,13 @@ CUTS=(
   # NO END TRIM: black from 164.6, and the score is still fading into the
   # last frame (-50 dB at 166.8).
   "luna-ty-montage|stories/luna-ty-montage/luna-ty-montage-music.mov|76|-|-|30"
+
+  # TYSON Q&A, 2026-11-09. Melissa: "post this QA session with TY, free for
+  # everyone tyson-qA". Tyson in his car, reading questions off cards.
+  # 1920x1080, 30fps, 1:40, unscored. Free.
+  # POSTER AT 8s: Tyson in the driver's seat holding up "TYSON / HOW OLD ARE YOU?".
+  # NO END TRIM: no black, and "I'll see you" runs to the last second.
+  "tyson-qa|stories/ty-QA/tyson-qA.mp4|8|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

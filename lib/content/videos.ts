@@ -240,6 +240,39 @@ export const videos: Video[] = [
     about: ["luna", "tyson", "josh"],
   },
   {
+    /*
+      TYSON Q&A, 2026-11-09. Melissa: "post this QA session with TY, free for
+      everyone". Tyson in his car, reading questions off cards: 38, single,
+      why he's never dated Luna ("Luna's my best friend. Been that way 20
+      years."), his type, what scares him ("not being there when somebody
+      needs me"), in love once, the date who brought her mother, humility.
+
+      In character, but not a story beat, so it is exempt from STORY_ORDER
+      like the interview, and not hidden: it should be found.
+
+      ONE ANSWER TOUCHES THE TYSON RULE (tyson-no-early-feelings): "Have you
+      ever had feelings for someone you couldn't have?" "Yeah. I think
+      everybody has at some point." It is his own deflection, in Melissa's
+      video; the synopsis does not quote it, name anyone, or read it.
+      Describe and stop.
+
+      FREE. Title and synopsis are placeholders, hers to replace.
+    */
+    slug: "tyson-qa",
+    title: "Questions for Tyson",
+    synopsis:
+      "Tyson, a stack of your questions, and not a lot of patience for them. His age, his type, the worst date he's been on, and what actually scares him.",
+    file: "tyson-qa.proxy.mp4",
+    poster: "/posters/tyson-qa.jpg",
+    durationSeconds: 100,
+    addedOn: "2026-11-09",
+    access: "free",
+    mature: false,
+    feelings: [],
+    place: "park",
+    about: ["tyson"],
+  },
+  {
     slug: "luna-josh-first-morning",
     title: "First Morning",
     synopsis:

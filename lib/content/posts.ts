@@ -1018,6 +1018,47 @@ const authored: Clip[] = [
     mature: true,
     access: "premium",
   },
+  {
+    /*
+      JOSH AND RICK, THE CIGAR BAR, 2026-11-09. Melissa: "new IG video,
+      square, free for everyone josh-rick-cigarBar-square". Josh and his
+      father over cigars and whiskey in a dark lounge. Unscored.
+
+      FROM THE TRANSCRIPT: "Luna came by last week." / "She's a good woman,
+      Josh." / "She told me she still loves you." / "She also told me she's
+      tired. Not of you. Of waiting for things to change." / "She said she's
+      more afraid of coming back and nothing changing than she is of losing
+      you." / "Stop trying to get her home. Start giving her a reason to want
+      to come home." / "If it was easy, your mother would still be here." /
+      "You don't know what to do when something doesn't go the way you
+      planned." / "Wonder where I got that from." / "I just don't want to
+      lose her, Dad." / "Then don't make her afraid to stay." / "I remember
+      having the same conversation with your mother."
+
+      JOSH'S MOTHER IS NOT SETTLED CANON: nothing in the canon docs says
+      whether she left or died, so the caption does not mention her.
+
+      THE EPISODE 7 SYNOPSIS LEAVES THIS OUT on purpose (Melissa asked for
+      "the rick/josh part" to be dropped from it). Do not link the two in
+      visible copy.
+
+      FREE, it runs on Instagram. Title and caption are placeholders, hers
+      to replace.
+    */
+    id: "josh-rick-cigarBar-square",
+    title: "A Reason to Come Home",
+    caption:
+      "Josh and his father, over cigars. Luna came by to see Rick last week, and Rick has been listening.",
+    file: "josh-rick-cigarBar-square.proxy.mp4",
+    poster: "/posters/josh-rick-cigarBar-square.jpg",
+    // 147.7, the whole file: under a second of black, the room still fading.
+    durationSeconds: 148,
+    addedOn: "2026-11-09",
+    about: ["josh", "rick", "luna"],
+    mature: false,
+    // Near-square, 1320x1262 at source, 720x688 as the proxy. See Clip.aspect.
+    aspect: [720, 688],
+  },
 ];
 
 /**

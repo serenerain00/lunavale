@@ -288,6 +288,14 @@ CLIPS=(
   # POSTER AT 56s: faces close in the rain, before the kiss — the kiss is
   # not the cover. NO PREVIEW: an exclusive scene, members only.
   "ty-luna-rain-right-music-vert|stories/ty-luna-rain/ty-luna-rain-right-music-vert.mov|56|89.2"
+  # JOSH AND RICK, THE CIGAR BAR, 2026-11-09. Melissa: "new IG video, square,
+  # free for everyone josh-rick-cigarBar-square". Near-square, 1320x1262,
+  # 60fps, unscored. Free: it is on Instagram.
+  #
+  # NO END TRIM: black is only the last 0.95s (from 146.75), and the room
+  # tone is still fading under it to the final frame.
+  # POSTER AT 86s: Josh, looking off, the cigar lounge lit behind him.
+  "josh-rick-cigarBar-square|stories/josh-rick-cigarbar/josh-rick-cigarBar-square.mov|86"
 )
 
 want=("$@")

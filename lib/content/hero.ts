@@ -16,6 +16,7 @@
  */
 
 import { getVideo, type Video } from "@/lib/content/videos";
+import { SEASONS } from "@/lib/content/season";
 
 /**
  * The pool the hero is drawn from.
@@ -74,6 +75,9 @@ export const HERO_SLUGS: string[] = [
   // 2026-10-22, PINNED while the episode is free (HERO_PINS below), and kept
   // out of the rotation (NOT_IN_HERO) so the front page is as it was after.
   "pilot",
+  // 2026-11-09, pinned for its first five days (NEW_EPISODE_DAYS below) and,
+  // like the pilot, never in the rotation after.
+  "episode-7",
 ];
 
 export interface Hero {
@@ -184,6 +188,7 @@ const WITH_AUDIO = new Set([
   "ty-luna-blonde-guy-bar",
   "tyson-apt-thinking",
   "josh-ty-ricks-house",
+  "episode-7",
 ]);
 
 export function heroes(): Hero[] {
@@ -258,7 +263,12 @@ export function heroes(): Hero[] {
 const RECENT_POOL = 5;
 
 /** Never the hero: it is a card on the Season 1 shelf. */
-const NOT_IN_HERO = new Set(["between-us-trailer-one", "pilot"]);
+const NOT_IN_HERO = new Set([
+  "between-us-trailer-one",
+  // Every episode: each is a card on its season's shelf, and leads the hero
+  // only in its first days (NEW_EPISODE_DAYS).
+  ...SEASONS.flatMap((s) => s.episodes.map((e) => e.slug).filter(Boolean)),
+]);
 
 /**
  * The pool, newest first.
@@ -296,8 +306,39 @@ const HERO_PINS: { slug: string; until: Date }[] = [
   { slug: "between-us-trailer-one", until: new Date("2026-10-27T04:00:00Z") },
 ];
 
+/**
+ * A NEW EPISODE LEADS FOR ITS FIRST FIVE DAYS (Melissa, 2026-11-09: "lets make
+ * sure when a new episode is published, it takes up the hero for the first 5
+ * days"). Read off SEASONS and each episode's `addedOn`, so publishing an
+ * episode is what starts it and nothing has to be remembered to stop it.
+ *
+ * The window runs from midnight Eastern on `addedOn` (05:00 UTC; an hour off
+ * in summer, which does not matter at five days) to the same time five days
+ * later. If two overlap, the newer wins.
+ *
+ * IT STILL NEEDS ITS LOOP: a line in scripts/make-hero-loop.sh and the slug in
+ * HERO_SLUGS, cut from inside the episode's free window. Without one the pin
+ * finds nothing and the rotation carries on — and the daily health check
+ * FAILS for exactly that case, so it cannot be missed quietly.
+ */
+export const NEW_EPISODE_DAYS = 5;
+
+export function newEpisodePins(): { slug: string; until: Date }[] {
+  return SEASONS.flatMap((s) => s.episodes)
+    .filter((e) => !e.comingSoon && e.slug)
+    .flatMap((e) => {
+      const added = getVideo(e.slug!)?.addedOn;
+      if (!added) return [];
+      const start = new Date(`${added}T05:00:00Z`);
+      const until = new Date(start.getTime() + NEW_EPISODE_DAYS * 86_400_000);
+      return [{ slug: e.slug!, start, until }];
+    })
+    .sort((a, b) => b.start.getTime() - a.start.getTime())
+    .map(({ slug, until }) => ({ slug, until }));
+}
+
 export function pickHero(now: Date = new Date()): Hero | undefined {
-  for (const pin of HERO_PINS) {
+  for (const pin of [...newEpisodePins(), ...HERO_PINS]) {
     if (now >= pin.until) continue;
     const pinned = heroes().find((h) => h.slug === pin.slug);
     if (pinned) return pinned;

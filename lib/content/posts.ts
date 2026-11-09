@@ -1047,13 +1047,13 @@ const authored: Clip[] = [
       A SEPARATE SCENE FROM EPISODE 7 (Melissa, 2026-11-09). Not in its
       synopsis or metadata; do not link the two in visible copy.
 
-      FREE, it runs on Instagram. Title and caption are placeholders, hers
-      to replace.
+      FREE, it runs on Instagram. Title is a placeholder; the caption is
+      hers.
     */
     id: "josh-rick-cigarBar-square",
     title: "A Reason to Come Home",
-    caption:
-      "Josh and his father, over cigars. Luna came by to see Rick last week, and Rick has been listening.",
+    // Melissa's, 2026-11-09.
+    caption: "A reason to come home.",
     file: "josh-rick-cigarBar-square.proxy.mp4",
     poster: "/posters/josh-rick-cigarBar-square.jpg",
     // 147.7, the whole file: under a second of black, the room still fading.

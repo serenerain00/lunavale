@@ -173,6 +173,13 @@ const OVERRIDES = {
   // answer (speech to 62.8, next line from 63.4, on the energy).
   "episode-6": 63.1,
 
+  // EPISODE 7 — THE FIRST MINUTE (Melissa, 2026-11-09: "members only, first
+  // minute free"). From the top, title card included. Runs to 63.0: Simone's
+  // "I have something to tell you" and Luna's "Oh God, what did you do?"
+  // (speech to 62.3), before "Why do you automatically assume" from 64.4,
+  // on the energy.
+  "episode-7": 63.0,
+
   // THE LAKEHOUSE FIGHT — THE FIRST TWO MINUTES (Melissa, 2026-10-27: "first
   // 2m is free. then members only"). Ends at 119.2, in the pause after "Do
   // you?" / "Yes." (speech to 118.0, quiet until "Because that's what you're

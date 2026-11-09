@@ -877,6 +877,16 @@ CUTS=(
   # frame, inside the free first minute.
   "episode-6|stories/ep6/ep6-final.mp4|55|-|-|30"
 
+  # EPISODE 7, THE THINGS WE DON'T SAY, 2026-11-09. stories/ep7/
+  # ep7-final-credits.mp4 is ep7-final-music.mp4 with the credits on
+  # (scripts/episode-credits.py --number 7 --name "The Things We Don't Say"
+  # --end 1249.4 --fade-under 2.8 --sound-out 1247.6:1252.36 — the first
+  # episode whose end title comes up over the picture's fade, as Melissa
+  # asked). 1772x1080 at 30fps. No END or FADE: the end title fades itself.
+  #
+  # POSTER AT 12s: Luna at her laptop in the studio, inside the free minute.
+  "episode-7|stories/ep7/ep7-final-credits.mp4|12|-|-|30"
+
   # THE INTERVIEW, 2026-10-09. A future season: Detectives Harris and
   # Bennett question Luna about the accident nine years ago, then she rings
   # Tyson from the car. Scored, 13:20, 1320x798 hevc at 60fps — down to 30

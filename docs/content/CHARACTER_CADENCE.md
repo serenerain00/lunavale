@@ -147,22 +147,33 @@ would have made the clause false in the same commit that cited it. It is in the
 Josh item too.)*
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
-> updated 2026-11-02. The backlog below describes `main`, and `main` is behind:
+> updated 2026-11-09. The backlog below describes `main`, and `main` is behind:
 > the drops for 2026-08-03, 08-10, 08-17, 08-31, 09-07, 09-14, 09-21, 10-05,
-> 10-12, 10-19, 10-26 and 11-02 are all still open and unmerged (#1, #2, #3, #5,
-> #6, #7, #8, #9, #10, #11, #12, #13), as is this one (#4) — **thirteen weeks of
-> drops, nothing landed.**
+> 10-12, 10-19, 10-26, 11-02 and 11-09 are all still open and unmerged (#1, #2,
+> #3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14), as is this one (#4) —
+> **fourteen weeks of drops, nothing landed.**
 > A weekly run clones the repo fresh, so it cannot see any of them — and
-> **twelve** separate weeks have now independently picked the same obvious gap
+> **thirteen** separate weeks have now independently picked the same obvious gap
 > and written the same note, a Rick `insight` note on `josh-rick-lake`: #2, #3,
-> #5, #6, #7, #8, #9, #10, #11, #12, #13, and #4 before it was rewritten. Most ids
-> differ (#5 `rick-i-already-knew`, #8 `rick-already-knew`, #9
-> `rick-the-line-in-the-water`, #12 `rick-never-look-at-him`),
-> so merging two of those would not collide — it would quietly give Rick the same
-> page twice. **#10 and #11 are the exception: both are `rick-round-the-outside`,
-> same id and same heading**, so that pair would actually conflict rather than
-> duplicate silently. Do not generalise either way — read the ids. Whatever
-> this file says is uncovered, check it against the open PRs first.
+> #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, and #4 before it was rewritten.
+> Most ids differ (#5 `rick-i-already-knew`, #8 `rick-already-knew`, #9
+> `rick-the-line-in-the-water`), so merging two of those would not collide — it
+> would quietly give Rick the same page twice. **There are now two colliding
+> pairs: #10 and #11 are both `rick-round-the-outside`, and #12 and #14 are both
+> `rick-never-look-at-him` under the same heading** — either pair would actually
+> conflict rather than duplicate silently. Do not generalise either way — read
+> the ids. Whatever this file says is uncovered, check it against the open PRs
+> first.
+>
+> **#14, the 2026-11-09 run, is the one that settles the argument.** By then
+> `main` carried `luna-josh-kitchen-argue` (a Josh scene at the lakehouse with
+> all three leads and the shortest free window on the site), the free
+> house-party trailer, the free montage, Episode 6 and ten new journal pages —
+> the most obvious new ground the backlog has ever had. **It went to Rick at the
+> lake anyway, and reproduced #12's id exactly.** Whatever else is true, *adding
+> material does not change the outcome*; the only things that will are landing
+> one of these or editing the stored prompt. It spent nothing it should not
+> have: no Episode 7, no house party, no Evan, Matt or Ashley.
 >
 > **#13 is the one to look at twice.** The 2026-11-02 run shipped
 > `rick-line-in-the-water` with the heading *The line stays in the water* — and
@@ -202,10 +213,10 @@ Josh item too.)*
 > his best scene. Adding material does not fix this. Landing one of these, or
 > changing the stored prompt, does.
 >
-> **This paragraph cannot fix that on its own, and it has now failed nine
+> **This paragraph cannot fix that on its own, and it has now failed ten
 > times.** It has only ever existed on #4's branch, never on `main`, so the
-> 08-31, 09-07, 09-14, 09-21, 10-05, 10-12, 10-19, 10-26 and 11-02 runs could not
-> read it and duplicated anyway. It becomes effective the moment anything carrying it lands on `main`.
+> 08-31, 09-07, 09-14, 09-21, 10-05, 10-12, 10-19, 10-26, 11-02 and 11-09 runs
+> could not read it and duplicated anyway. It becomes effective the moment anything carrying it lands on `main`.
 > Until then the only reliable control is the weekly routine's own stored prompt,
 > which is the maintainer's to change.
 >

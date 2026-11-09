@@ -934,6 +934,43 @@ const authored: Clip[] = [
     about: ["tyson", "luna"],
     mature: false,
   },
+  {
+    /*
+      TY-LUNA-ALLEY, 2026-11-09. Melissa: "new ig clip in vertical format
+      called ty-luna-alley-music". Tyson and Luna close against a brick wall
+      outside a party at night, scored.
+
+      FROM THE TRANSCRIPT: "When are you gonna stop this?" / "It's not that
+      easy, Tyson." / "No, it's real easy, Lu. Remember?" / "Look at me." /
+      "I'm looking at you." / "Ty, please, okay? I can't do this here." /
+      "If not here, then where?" / "You really wanna do this?" / "Ty, you
+      don't get it, okay? I can't!" / "Please." / "Don't!"
+
+      FAR FUTURE — WRITER KNOWLEDGE (Melissa, 2026-11-09, "still being
+      defined"): season 3–4 or later. Luna is back with Josh; she and Tyson
+      have an established romantic relationship that slipped while she was
+      with him, and Tyson is waiting for her to come clean. NOTHING here is
+      released canon, and none of it may appear in visible copy. The caption
+      says it is much later and describes the alley; it never names the
+      relationship, Josh, or what she has to come clean about.
+
+      MEMBERS ONLY, NO PREVIEW (Melissa, 2026-11-09: "im not making any of
+      it free"): a closed door, like luna-josh-bed-ig. Title and caption are
+      placeholders, hers to replace.
+    */
+    id: "ty-luna-alley-music",
+    title: "Not Here",
+    caption:
+      "Much later. A party, the alley out back, and Tyson asking Luna a question she won't answer here.",
+    file: "ty-luna-alley-music.proxy.mp4",
+    poster: "/posters/ty-luna-alley-music.jpg",
+    // 84.6, the whole file: no closing black to trim.
+    durationSeconds: 85,
+    addedOn: "2026-11-09",
+    about: ["tyson", "luna"],
+    mature: true,
+    access: "premium",
+  },
 ];
 
 /**

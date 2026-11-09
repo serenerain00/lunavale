@@ -270,6 +270,15 @@ CLIPS=(
   # recording being stopped).
   # POSTER AT 36s: Tyson in the gym, face close, sweat, looking off.
   "ty-gym|stories/ty-gym/ty-gym.mov|36|112.6"
+  # TY-LUNA-ALLEY, 2026-11-09. Melissa: "new ig clip in vertical format called
+  # ty-luna-alley-music". Tyson and Luna close against a brick wall outside a
+  # party, at night, scored. 1320x2252, 60fps, 84.6s.
+  #
+  # NO END TRIM: blackdetect finds no black, and the score is still at -26 dB
+  # into the last second. The edit ends on her face, not on black.
+  # POSTER AT 20s: faces close, Luna looking up at him.
+  # NO PREVIEW: members only, none of it free (Melissa, 2026-11-09).
+  "ty-luna-alley-music|stories/ty-luna-alley/ty-luna-alley-music.mov|20"
 )
 
 want=("$@")

@@ -885,7 +885,15 @@ CUTS=(
   # asked). 1772x1080 at 30fps. No END or FADE: the end title fades itself.
   #
   # POSTER AT 12s: Luna at her laptop in the studio, inside the free minute.
-  "episode-7|stories/ep7/ep7-final-credits.mp4|12|-|-|30"
+  #
+  # RE-EXPORTED 2026-11-09 the same evening: taken down ("theres a fuck up")
+  # and replaced by a new ep7-final-music.mp4, 32.7s shorter, the cut after
+  # the first minute (the opening's shot changes and lines are identical).
+  # Rebuilt as ep7-final-credits-v2.mp4 with --end 1216.75 --sound-out
+  # 1214.95:1219.70, the same ending 32.65s earlier. The proxy this writes is
+  # renamed to episode-7-v2.proxy.mp4, as episode-5-v2 was, so the old cut is
+  # never served under the new name.
+  "episode-7|stories/ep7/ep7-final-credits-v2.mp4|12|-|-|30"
 
   # THE INTERVIEW, 2026-10-09. A future season: Detectives Harris and
   # Bennett question Luna about the accident nine years ago, then she rings

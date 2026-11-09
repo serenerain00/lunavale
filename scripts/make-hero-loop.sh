@@ -138,7 +138,7 @@ HEROES=(
   # NEW_EPISODE_DAYS). Inside the free first minute, so the audio stays.
   # 18.67 to 36.60 runs cut to cut: Luna at her laptop, Simone with the food,
   # "It's called editing" / "It's called needing food" (speech ends 36.3).
-  "episode-7|stories/episode-7.proxy.mp4|18.67|17.93|1"
+  "episode-7|stories/episode-7-v2.proxy.mp4|18.67|17.93|1"
   #
   # NOT ADDED, and the reason matters because it is the standing test:
   #   luna-ty-apt-argue — the newest clip of the lot and excluded anyway. Its

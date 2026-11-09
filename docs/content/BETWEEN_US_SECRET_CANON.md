@@ -1157,3 +1157,53 @@ The montage cuts it against the garage argument in Everybody Else
 
 Matt and Ashley are minor ("not that important right now"). No character
 cards, and the site copy doesn't name them.
+
+## Addition — 2026-11-09: Josh and Rick, the cigar lounge (released, free)
+
+From Melissa's scene note for `josh-rick-cigarBar-square` ("A Reason to Come
+Home"), posted free. **A separate scene from Episode 7.** It is not in Episode
+7's synopsis or metadata, and nothing on the site links the two.
+
+**Setting.** An upscale, dimly lit cigar lounge in **Denver**. Present day,
+**shortly after the separation**.
+
+**What happens.** Josh meets Rick for drinks and cigars. Business talk turns
+into Luna. Rick says Luna came to see him **a week after the separation** and
+told him she still loves Josh, but she's more afraid of coming back to
+nothing changing than of losing him. Josh believes enough time will bring her
+home, and Rick challenges that. Rick sees that **Josh doesn't know how to
+handle what he can't control**. Josh says he learned it from Rick. Rick
+doesn't deny it, and says he had the same problems with **Josh's mother**.
+
+Key lines: "Stop trying to get her home. Start giving her a reason to want to
+come home." / "I just don't wanna lose her, Dad." "Then don't make her afraid
+to stay." / "You don't know what to do when something doesn't go the way you
+planned." "Wonder where I got that from." / "And I remember having this same
+conversation with your mother." "How'd that work out?" "You know how it
+worked out."
+
+**What it's for (writer knowledge).** It lays the psychological ground for
+Josh's growing need for control as things with Luna get worse. He loves her
+and wants to fix it, but his fear of losing her turns into a need for
+reassurance and certainty. He got a lot of that from Rick: a pattern of men
+who treat love, responsibility and protection as keeping control.
+
+**Rick is not a villain.** He's perceptive, protective of his son, and capable
+of real regret. His own history suggests he hasn't always done what he's now
+advising.
+
+**Foreshadowing, not for the site.** Later, Josh struggles more and more when
+Luna asserts her independence or makes decisions outside his control, and he
+gets more aggressive as the fear grows. This scene plants that without
+excusing it.
+
+**Not in this scene:** the Mercer investigation, and any suspicion about Tyson.
+
+**Central theme:** you can love someone deeply and still push them away by
+trying too hard to keep them.
+
+**Josh's mother.** Settled only as far as the dialogue goes: the same
+conversation once happened with her, and it didn't work out. Whether she left
+or died is **not settled**. Don't state it on the site.
+
+Tone: intimate, mature, psychologically tense, subtly ominous.

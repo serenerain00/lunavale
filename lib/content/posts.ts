@@ -1035,12 +1035,17 @@ const authored: Clip[] = [
       lose her, Dad." / "Then don't make her afraid to stay." / "I remember
       having the same conversation with your mother."
 
-      JOSH'S MOTHER IS NOT SETTLED CANON: nothing in the canon docs says
-      whether she left or died, so the caption does not mention her.
+      CANON: docs/content/BETWEEN_US_SECRET_CANON.md, "Addition —
+      2026-11-09: Josh and Rick, the cigar lounge". Denver, present day,
+      shortly after the separation; Luna saw Rick a week after it. Rick is
+      not a villain. The foreshadowing there (Josh's need for control) is
+      writer knowledge and stays off the site.
 
-      THE EPISODE 7 SYNOPSIS LEAVES THIS OUT on purpose (Melissa asked for
-      "the rick/josh part" to be dropped from it). Do not link the two in
-      visible copy.
+      JOSH'S MOTHER IS NOT SETTLED CANON: whether she left or died is not
+      decided, so the caption does not mention her.
+
+      A SEPARATE SCENE FROM EPISODE 7 (Melissa, 2026-11-09). Not in its
+      synopsis or metadata; do not link the two in visible copy.
 
       FREE, it runs on Instagram. Title and caption are placeholders, hers
       to replace.

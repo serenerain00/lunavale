@@ -1063,11 +1063,17 @@ CUTS=(
 
   # TYSON Q&A, 2026-11-09. Melissa: "post this QA session with TY, free for
   # everyone tyson-qA". Tyson in his car, reading questions off cards.
-  # 1920x1080, 30fps, 1:40, unscored. Free.
-  # POSTER AT 90.8s (Melissa asked for a better one, 2026-11-09): Tyson close,
-  # laughing straight at the camera. Was 8s, wide, holding up the first card.
+  # 1920x1080, 30fps, unscored. Free.
+  #
+  # REDONE 2026-11-09 (Melissa: "i had to redo the QA video, so the new one
+  # is called ty-QA"): stories/ty-QA/ty-QA.mp4, 1:38, same questions. The
+  # proxy this writes is renamed to tyson-qa-v2.proxy.mp4 so nobody mid-play
+  # is handed the other cut.
+  # POSTER AT 89.2s (Melissa asked for a better one, 2026-11-09): Tyson close,
+  # laughing straight at the camera — the same moment as 90.8s in the first
+  # cut. Was 8s, wide, holding up the first card.
   # NO END TRIM: no black, and "I'll see you" runs to the last second.
-  "tyson-qa|stories/ty-QA/tyson-qA.mp4|90.8|-|-|30"
+  "tyson-qa|stories/ty-QA/ty-QA.mp4|89.2|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

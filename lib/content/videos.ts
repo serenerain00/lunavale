@@ -262,9 +262,10 @@ export const videos: Video[] = [
     title: "Questions for Tyson",
     synopsis:
       "Tyson, a stack of your questions, and not a lot of patience for them. His age, his type, the worst date he's been on, and what actually scares him.",
-    file: "tyson-qa.proxy.mp4",
+    // -v2: Melissa's redo (stories/ty-QA/ty-QA.mp4), 2026-11-09.
+    file: "tyson-qa-v2.proxy.mp4",
     poster: "/posters/tyson-qa.jpg",
-    durationSeconds: 100,
+    durationSeconds: 98,
     addedOn: "2026-11-09",
     access: "free",
     mature: false,

@@ -1005,8 +1005,8 @@ const authored: Clip[] = [
     */
     id: "ty-luna-rain-right-music-vert",
     title: "Pouring",
-    caption:
-      "Tyson shows up to talk. Then it starts pouring, and neither of them is going anywhere.",
+    // Melissa's, 2026-11-09.
+    caption: "Don’t make me.",
     file: "ty-luna-rain-right-music-vert.proxy.mp4",
     poster: "/posters/ty-luna-rain-right-music-vert.jpg",
     // 89.2: cut where the score stops under the closing black.

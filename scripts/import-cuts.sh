@@ -1069,11 +1069,16 @@ CUTS=(
   # is called ty-QA"): stories/ty-QA/ty-QA.mp4, 1:38, same questions. The
   # proxy this writes is renamed to tyson-qa-v2.proxy.mp4 so nobody mid-play
   # is handed the other cut.
-  # POSTER AT 89.2s (Melissa asked for a better one, 2026-11-09): Tyson close,
+  #
+  # AND AGAIN, WITH MUSIC (Melissa, 2026-11-09: "this one has music in the bg
+  # tyson-QA-music"): stories/ty-QA/tyson-QA-music.mov, 1320x804 at 60fps,
+  # cooler grade, 1:40. Served as tyson-qa-v3. NO END TRIM: black from 98.69
+  # with the music fading under it to the last frame.
+  # POSTER AT 90.0s (Melissa asked for a better one, 2026-11-09): Tyson close,
   # laughing straight at the camera — the same moment as 90.8s in the first
-  # cut. Was 8s, wide, holding up the first card.
+  # cut and 89.2s in the second. Was 8s, wide, holding up the first card.
   # NO END TRIM: no black, and "I'll see you" runs to the last second.
-  "tyson-qa|stories/ty-QA/ty-QA.mp4|89.2|-|-|30"
+  "tyson-qa|stories/ty-QA/tyson-QA-music.mov|90.0|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

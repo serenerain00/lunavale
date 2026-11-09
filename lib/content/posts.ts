@@ -955,8 +955,9 @@ const authored: Clip[] = [
       relationship, Josh, or what she has to come clean about.
 
       MEMBERS ONLY, NO PREVIEW (Melissa, 2026-11-09: "im not making any of
-      it free"): a closed door, like luna-josh-bed-ig. Title and caption are
-      placeholders, hers to replace.
+      it free"): a closed door, like luna-josh-bed-ig. Title is a
+      placeholder; the caption is approved (Melissa, 2026-11-09: "that
+      caption is fine for the alley").
     */
     id: "ty-luna-alley-music",
     title: "Not Here",
@@ -968,6 +969,48 @@ const authored: Clip[] = [
     durationSeconds: 85,
     addedOn: "2026-11-09",
     about: ["tyson", "luna"],
+    mature: true,
+    access: "premium",
+  },
+  {
+    /*
+      TY-LUNA-RAIN-RIGHT, 2026-11-09. Melissa: "this next one is a bit
+      earlier than the alley… tyson shows up to speak to luna when it starts
+      pouring outside, a fight happens then this takes place. tyson still
+      hasnt told luna about his feelings toward her". Night, a downpour,
+      both soaked and clothed: the fight, then a kiss.
+
+      DIALOGUE IS UNDER THE SCORE (music-primary-in-scene-mixes); whisper
+      catches only fragments — "Tyson, would you stop?", "Stop lying to
+      me", "You think any of this is gonna be easy for me?", "I'm right
+      here!" — so nothing here quotes it as settled.
+
+      WRITER KNOWLEDGE, NOT FOR VISIBLE COPY ("scene isnt fully flushed out
+      yet"): before the alley, so still far ahead of released canon. Tyson
+      has not yet told her how he feels. The caption says what is on screen
+      up to the fight and stops — no feelings, no kiss, no when
+      (tyson-no-early-feelings, no-undecided-facts).
+
+      NOT THE SAME CUT AS luna-ty-rain-ig ("Rain", 2026-10-02), which is also
+      Luna and Tyson arguing then kissing in a downpour, placed "at whenever
+      Tyson tells her". Different shoot, different light. How the two relate
+      is Melissa's to settle; neither comment should be read as deciding it.
+
+      EXCLUSIVE SCENE: members only, no preview (exclusive-scenes-no-
+      preview). Title and caption are placeholders, hers to replace.
+    */
+    id: "ty-luna-rain-right-music-vert",
+    title: "Pouring",
+    caption:
+      "Tyson shows up to talk. Then it starts pouring, and neither of them is going anywhere.",
+    file: "ty-luna-rain-right-music-vert.proxy.mp4",
+    poster: "/posters/ty-luna-rain-right-music-vert.jpg",
+    // 89.2: cut where the score stops under the closing black.
+    durationSeconds: 89,
+    addedOn: "2026-11-09",
+    about: ["tyson", "luna"],
+    // A kiss in wet clothes, nothing graphic — the same call as
+    // luna-ty-rain-ig.
     mature: true,
     access: "premium",
   },

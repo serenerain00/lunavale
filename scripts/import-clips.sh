@@ -279,6 +279,15 @@ CLIPS=(
   # POSTER AT 20s: faces close, Luna looking up at him.
   # NO PREVIEW: members only, none of it free (Melissa, 2026-11-09).
   "ty-luna-alley-music|stories/ty-luna-alley/ty-luna-alley-music.mov|20"
+  # TY-LUNA-RAIN-RIGHT, 2026-11-09. Melissa: "the video is called
+  # ty-luna-rain-right-music-vert". Tyson and Luna at night in a downpour:
+  # the fight, then a kiss. 1320x2234, 60fps, 89.6s, scored throughout.
+  #
+  # END 89.2: picture is black from 86.74 but the score runs at full level
+  # under it until 89.24, then silence. Cut where the music stops.
+  # POSTER AT 56s: faces close in the rain, before the kiss — the kiss is
+  # not the cover. NO PREVIEW: an exclusive scene, members only.
+  "ty-luna-rain-right-music-vert|stories/ty-luna-rain/ty-luna-rain-right-music-vert.mov|56|89.2"
 )
 
 want=("$@")

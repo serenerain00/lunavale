@@ -1064,9 +1064,10 @@ CUTS=(
   # TYSON Q&A, 2026-11-09. Melissa: "post this QA session with TY, free for
   # everyone tyson-qA". Tyson in his car, reading questions off cards.
   # 1920x1080, 30fps, 1:40, unscored. Free.
-  # POSTER AT 8s: Tyson in the driver's seat holding up "TYSON / HOW OLD ARE YOU?".
+  # POSTER AT 90.8s (Melissa asked for a better one, 2026-11-09): Tyson close,
+  # laughing straight at the camera. Was 8s, wide, holding up the first card.
   # NO END TRIM: no black, and "I'll see you" runs to the last second.
-  "tyson-qa|stories/ty-QA/tyson-qA.mp4|8|-|-|30"
+  "tyson-qa|stories/ty-QA/tyson-qA.mp4|90.8|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

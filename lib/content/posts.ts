@@ -1001,7 +1001,7 @@ const authored: Clip[] = [
       them as the same moment.
 
       EXCLUSIVE SCENE: members only, no preview (exclusive-scenes-no-
-      preview). Title and caption are placeholders, hers to replace.
+      preview). Title is a placeholder; the caption is hers.
     */
     id: "ty-luna-rain-right-music-vert",
     title: "Pouring",

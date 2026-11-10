@@ -2886,6 +2886,133 @@ export const journal: JournalEntry[] = [
   },
 
   /*
+    FIVE PAGES BESIDE EPISODE 7, THE THINGS WE DON'T SAY, added 2026-11-10
+    (Melissa: "can you make 5 more journal entries"), members-only like the
+    episode past its first minute. They cover the parts of the episode that
+    had no page yet. Its garage scene already has three (`a-written-statement`
+    and the two after it, below), so these come first, in the episode's
+    order: Simone at the studio, the memory at twenty, then Josh's call.
+
+    One line quoted per page at most, and each is from the footage: "From now
+    on, you are to always start with the interesting part", "Or do you just
+    want to not be the bad guy?", "I just don't want to feel alone in my own
+    relationship anymore", "You made the decision for me". The call page
+    quotes nothing.
+
+    THE MEMORY AT TWENTY: Atlanta, the guy who was cheating (canon
+    2026-11-06). The site doesn't name Matt or Ashley ("not that important
+    right now"), so neither does this. Tyson there is only what she saw and
+    heard, nothing about what he felt (tyson-no-early-feelings).
+
+    SIMONE: only what she says on screen. No guesses about Luna and Tyson in
+    her mouth (simone-incoming). Her date is "the finance guy", unnamed.
+
+    JOSH'S CALL: she says no to dinner and he takes it. Nothing here reads it
+    as a warning. The control arc is writer knowledge (the cigar lounge
+    addition in the secret canon).
+
+    Invented and hers to cut: the tacos being from "the place on the corner",
+    the drive home after the studio, the heat in the parking lot at twenty,
+    "I sat in the car after".
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "the-interesting-part",
+    addedOn: "2026-11-10",
+    dateline: "At the studio, and the part I saved for last",
+    place: "downtown",
+    where: "Vale Studios",
+    about: ["luna", "simone", "josh"],
+    sceneSlug: "episode-7",
+    access: "premium",
+    mature: false,
+    body: [
+      "Simone brought me lunch today and made me stop working, which I needed, and then she made me tell her about the weekend, which I didn't know I needed.",
+      "She went first. The finance guy has a girlfriend, eight years of one, and she found out from an anniversary post. She blocked him and then liked the girlfriend's picture. I laughed so hard I had to put the food down, and she called herself a victim with her mouth full, and for a minute that's all the day was. Two women at a long table being ridiculous about men. I don't get much of that.",
+      "Then it was my turn, and I said it was good. Then really good. Then two drinks. I walked her all the way around it before I told her he kissed me.",
+      "\"From now on, you are to always start with the interesting part.\" She's right, and I knew exactly what I was doing. I wanted to hear how it sounded first. If I lead with the kiss, it's a story about a kiss. If I lead with a nice dinner, I get to decide what it means before anybody else does.",
+      "She didn't let me. She never does. That's why I tell her things.",
+      "What I didn't expect was how good it felt to be teased about him. Who started it, did he look good, you sneaky little. Like he's a man I'm seeing and not a man I'm leaving. For ten minutes I got to be someone with a crush, and I liked her. I don't know what to do with that.",
+    ],
+  },
+  {
+    id: "the-bad-guy",
+    addedOn: "2026-11-10",
+    dateline: "The question she asked, which wasn't fair, and was",
+    place: "lakehouse",
+    about: ["luna", "simone", "josh"],
+    sceneSlug: "episode-7",
+    access: "premium",
+    mature: false,
+    body: [
+      "Simone asked me something today I keep hearing in her voice. \"Or do you just want to not be the bad guy?\"",
+      "I told her it wasn't fair. Then I spent the drive home trying to prove it wasn't fair, and I couldn't.",
+      "Here's the thing nobody says out loud. I left. Whatever the reasons were, and they were real, I'm the one who carried the boxes out. So in every room I walk into, at the party, at the farm, in front of his friends, I'm the one who did this. He gets to be the man who's hurting. I get to be the reason.",
+      "And I watch him hurt. He's not dramatic about it. That's what makes it so hard. He just looks tired, and he says the right thing, and he lets me go inside alone.",
+      "So when she asked whether I was going home because something had actually changed, or because I can't stand watching him like this, I said both, maybe. It's the most honest thing I've said about it to anyone.",
+      "She didn't tell me what to do. She said that was an answer, and that I don't know yet was an answer too. I love her for that. Everyone else has been handing me a verdict. She handed me my own words back and let me look at them.",
+      "I do love him. That part was never the question. The question is whether I'm walking back toward him or away from feeling like this.",
+    ],
+  },
+  {
+    id: "alone-in-my-own",
+    addedOn: "2026-11-10",
+    dateline: "The sentence I finally said",
+    place: "lakehouse",
+    where: "The porch",
+    about: ["luna", "josh"],
+    sceneSlug: "episode-7",
+    access: "premium",
+    mature: false,
+    body: [
+      "I told Simone I didn't want to stop. That's the truth, and it's the part that scares me, because I've been acting like the problem was that I didn't want him anymore. It was never that.",
+      "Wanting him has never been hard. I could want him in my sleep. What's hard is the morning after, and the month after, and the evenings where he's in the next room and I'm still on my own.",
+      "\"I just don't want to feel alone in my own relationship anymore.\" I said it to her across a table with tacos on it. I've known it for a year. I've never put it in one sentence before, and when I did, it was so small. That's all. That's the whole reason. Not a fight, not another woman, not anything I could point to. Just lonely, next to someone who loves me.",
+      "She said that's what he needs to understand, and I said I think he does. I think he does. He said the next ten years. He wouldn't have said that if he didn't know something had to be different.",
+      "Then she said now I get to see what he does with it. That's the part I keep thinking about. It's not mine to fix anymore. I said it. Now I watch.",
+      "I'm not used to that. I've always been the one who does something with it.",
+    ],
+  },
+  {
+    id: "a-heads-up",
+    addedOn: "2026-11-10",
+    dateline: "Something from when I was twenty",
+    place: "lakehouse",
+    about: ["luna", "tyson"],
+    sceneSlug: "episode-7",
+    access: "premium",
+    mature: false,
+    body: [
+      "I've been thinking about Atlanta. I don't usually. I was twenty and seeing someone who, it turned out, was also seeing someone else, and everybody seemed to know but me.",
+      "Ty knew. Not for long, and not for certain, but he'd heard something at a party and he sat on it. When I found out, I went straight to him. I remember the parking lot, the heat still coming off the ground, and how angry I was. Not at the boy. At Ty.",
+      "\"You made the decision for me.\" I said that to him like it was the worst thing a person could do. And he stood there and told me it was my relationship. That he wasn't going to be the guy running to me every time someone said something. I thought he was hiding behind that. I thought he was being a coward.",
+      "I was twenty. I didn't understand yet that he was trying to let me have my own life, even the parts that were going badly. He just didn't know how to do that and still look out for me, and neither did I.",
+      "And here I am, all these years later, and I'm the one who sat on something. I decided what he could handle, and I decided he'd hear it from me later, and he heard it from a room full of people instead.",
+      "He's never once said I told you so. Not then, and not now. I'm only noticing that tonight.",
+      "I owe twenty-year-old Ty an apology I never gave him. I don't think I'll say it. I think he'd laugh at me. But I'm writing it down so it's somewhere.",
+    ],
+  },
+  {
+    id: "still-figuring",
+    addedOn: "2026-11-10",
+    dateline: "Josh called, and I said not tonight",
+    place: "lakehouse",
+    about: ["luna", "josh"],
+    sceneSlug: "episode-7",
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh called while I was out running errands. He was thinking about me. He wanted dinner, tonight, just us, somewhere.",
+      "I said no. I said it kindly, and I said we're still figuring things out, which is true, and which I've said before. But it's the first time I've said no to him since the night he kissed me, and I could hear how much it cost to say it.",
+      "Because I wanted to go. That's what nobody tells you about saying no to someone you love. It isn't that you don't want it. It's that you want something else more, and you can't see the something else yet, and the dinner is right there.",
+      "He said he got it. He sounded like he did. Then he said he'd had a really good time, and I said me too, and both of us meant it, and that's the problem in one sentence. We always have a good time. Good is where we stop.",
+      "Simone said I get to see what he does with it. This was the first thing he did. He asked, and he let me say no, and he didn't push.",
+      "I sat in the car after, longer than I needed to. I don't know if I was proud of myself or sad. I think I'm allowed to be both.",
+    ],
+  },
+
+  /*
     THREE PAGES BESIDE EVERYBODY ELSE (`luna-ty-garage-event`, Episode 7),
     added 2026-11-05, members-only like the scene past its first minute. The
     same day, a few days after the event, written at the lake that evening.

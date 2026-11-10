@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-11-07 against `main` at fdbbc96. **A touched `lib/content/` file
+re-run 2026-11-10 against `main` at 9422441. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -64,13 +64,13 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 267 | 224 |
-| Tyson | 12 | 190 | 163 |
-| Josh | 14 | 162 | 141 |
-| Rick | 1 | 14 | 13 |
+| Luna | 12 | 271 | 227 |
+| Tyson | 12 | 194 | 166 |
+| Josh | 14 | 164 | 142 |
+| Rick | 1 | 15 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 9 | 9 |
-| Simone | 0 | 5 | 4 |
+| Simone | 0 | 6 | 5 |
 
 *As built, 2026-07-28: Luna 8 / 44 / 23 · Tyson 8 / 44 / 33 · Josh 8 / 35 / 21.
 Rick, Cathy and Avery were not on the table at all. Figures above include this
@@ -85,7 +85,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 at fdbbc96** (Tyson 190, Josh 162 — the 11-06 merge added two free pieces whose `about` names all three leads, so Tyson and Josh moved together and the difference held; the 11-05 merge before it had brought it down from the 30 ceiling): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 at 9422441** (Tyson 194, Josh 164 — Episode 7 and the free Tyson Q&A moved Tyson more than the cigar-bar post moved Josh, so it is back level with the recorded ceiling rather than past it): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has now sat anywhere between 17 and 30. Quote the two
@@ -350,15 +350,16 @@ Standing backlog, roughly prioritised:
   the slug, if you ever need the asset.** *(This item said "a fifth episode is
   promised and is not here yet" for two days, from the win-back email of 10-23.
   It is here. Do not restore the promise wording.)*
-- **The six episodes carry no note between them.** This is the top of the
+- **The seven episodes carry no note between them.** This is the top of the
   list, and it keeps growing: `pilot` (*Episode 1*, 2026-09-21, 18:36,
   `notes: ["danger"]`), `episode-2` (*Breathe*, 22:23), `episode-3` (*The Space
   Between*, 21:35) and — new on 2026-10-18 — `episode-4` (*Peace and Quiet*,
   15:09, `notes: ["danger"]`), — new on 2026-10-25 — `episode-5`
-  (*Everybody Has an Opinion*, 18:15), and — new on 2026-11-02 — **`episode-6`
-  (*The Event*, 26:24)**. All six are `premium` with a free opening
-  — `preview.durationSeconds` reads **190**, 124, 129, 158, 96 and **63** as of
-  2026-11-02, so three minutes ten on the pilot, about two on the middle pair,
+  (*Everybody Has an Opinion*, 18:15), — new on 2026-11-02 — **`episode-6`
+  (*The Event*, 26:24)**, and — new on 2026-11-09 — **`episode-7` (*The Things
+  We Don't Say*, 20:29)**. All seven are `premium` with a free opening
+  — `preview.durationSeconds` reads **190**, 124, 129, 158, 96, **63 and 63** as
+  of 2026-11-10, so **episodes 6 and 7 tie for the shortest episode opening**, so three minutes ten on the pilot, about two on the middle pair,
   the firefight on episode 4, the taco scene on episode 5, and the
   **shortest opening of the six** on episode 6, the therapist's office a year
   ago. *(Episode 5 held "shortest of the five" for eight days. Don't restore
@@ -417,15 +418,15 @@ Standing backlog, roughly prioritised:
   2026-11-04, 380s (6:20) with a **62-second free opening**, Luna and Tyson,
   place `garage`, **twenty-seventh of seventy in `STORY_ORDER`** (re-derived 2026-11-06) — the first
   new clip in weeks to be placed *inside* the order rather than appended, which
-  is what shifted the ordinals below. It is a scene **from Episode 7, which is
-  not released**, and this is the first time a clip has shipped ahead of its
-  episode, so the boundary is unusually sharp. **What is on the site:** the clip
-  and its free first minute (Tyson and Evan at the bike, the torque numbers,
-  Evan's job offer), and a 2:46 cut of the confrontation that is **already
-  public on Instagram** as an Episode 7 preview. Canon's own rule: *"nothing
-  beyond what that post shows goes on the site before the episode does"* — so a
-  note may play the garage, the bike, the arrival and the argument's surface,
-  and must not reach past them into the episode.
+  is what shifted the ordinals below. It is a scene from Episode 7, and
+  for five days it shipped *ahead* of the episode, which made the boundary
+  unusually sharp: canon's rule was *"nothing beyond what that post shows goes
+  on the site before the episode does"*. **That clause expired on 2026-11-09
+  when Episode 7 was released.** The whole scene is now inside a published
+  episode, so a note on this clip is no longer fenced to the 2:46 Instagram cut
+  — it is fenced the way any note on a premium episode's scene is. **Do not
+  restore the "before the episode does" wording**; it was true for five days and
+  reads as a live restriction if left in place.
   **The guardrail is the same one the kitchen corner carries, and canon now
   states it twice:** Tyson's hurt is about **being told last** — finding out
   with the room — and **nothing may say or hint that it is jealousy or
@@ -433,10 +434,15 @@ Standing backlog, roughly prioritised:
   wrong, she admits she should have told him, and **it ends on the laughter**:
   the written-statement joke, no hug *(Melissa, 2026-11-04: "remove the bear hug
   part, i never added that")*. Do not write it as a romantic beat.
-  **Two things that look like material and are not.** The scene is meant to
-  mirror **a flashback with the positions reversed** — young Tyson keeping
-  something from her — and **that flashback is not built yet**; nothing about it
-  is canon beyond the idea, so it cannot be described. And **Evan** (29, a
+  **One thing that looked like material and is now real, and one that is still
+  not.** The scene was meant to mirror **a flashback with the positions
+  reversed** — young Tyson keeping something from her — which on 11-04 was *"not
+  built yet"*. It exists now: the Atlanta scene at twenty inside
+  `luna-ty-montage`, free since 11-07, and Episode 7's synopsis also promises
+  *"a glimpse into her past with Tyson"*. **Which footage sits inside the
+  episode is not stated in its entry's own what-is-in-it list, so do not assert
+  that the montage's scene is the episode's flashback** — describe whichever
+  piece you are writing about. And **Evan** (29, a
   former Marine Tyson mentors through a veterans program) has **no character
   card and no `lib/content/` entry** — `countFor("evan")` returns 0 — with
   canon saying "no real details right now on him". Like Frank, he is a face in
@@ -533,6 +539,72 @@ Standing backlog, roughly prioritised:
   `luna-attack-trailer`, `luna-ty-drunk-trailer`), the montage, and the two free
   Josh clips. Counted at fdbbc96, where free reads 16 published / 17 by
   `access`.
+- **Rick finally has new material, it is free, and it is the richest canon he
+  has ever had.** `josh-rick-cigarBar-square` — *A Reason to Come Home*, a
+  **free** square post, 2026-11-09 — puts Josh and Rick in a dimly lit cigar
+  lounge in **Denver**, present day, **shortly after the separation**. Rick's
+  tally moves **14 → 15** on it. **It is a separate scene from Episode 7**;
+  canon says so outright and that *nothing on the site links the two*, so a note
+  must not connect them. On screen: business talk turning into Luna, Rick saying
+  she came to see him a week after the separation and still loves Josh but is
+  more afraid of nothing changing than of losing him, and the lines — *"Stop
+  trying to get her home. Start giving her a reason to want to come home."*,
+  *"Then don't make her afraid to stay."*, *"Wonder where I got that from."*
+  **What is writer knowledge and stays off the site:** the reading of *why* the
+  scene exists (the psychological ground for Josh's need for control), and the
+  foreshadowing that he grows more aggressive as the fear grows. Canon labels
+  both; a note plays the room, not the thesis. **Rick is not a villain** —
+  perceptive, protective, capable of real regret. **Josh's mother is settled
+  only as far as the dialogue:** the same conversation happened with her and it
+  did not work out. **Whether she left or died is not settled — do not state it.**
+  And **the investigation canon now calls Mercer, plus any suspicion about
+  Tyson, are not in this scene** and are not to be written into it.
+- **`tyson-qa`** — *Questions for Tyson*, **free**, 2026-11-09, 100s, `about`
+  **Tyson alone**, place `park` (he is in his car), **exempt from `STORY_ORDER`**
+  like the interview, title and synopsis both placeholders. **It is the first
+  free piece on the site that pays Tyson and nobody else**, which makes it an
+  odd fit for the free-and-uncovered list's clause and a genuinely new kind of
+  gap: in character, but not a story beat.
+  **One answer runs straight at the Tyson rule.** Asked whether he has ever had
+  feelings for someone he could not have, he says *"Yeah. I think everybody has
+  at some point."* The entry is explicit that this is **his own deflection**,
+  that the synopsis does not quote it, name anyone or read it, and that the job
+  is to **describe and stop**. A note must do the same: it may be about reading
+  cards in a car, and not about what that answer means.
+  *(Served as `tyson-qa-v3`, after a redo and a first cut. Three files, one
+  slug — read `file`, not the slug, if the version matters.)*
+- **Two new premium verticals arrived with the biggest forward-looking spoiler
+  on the board, and neither has a preview.** `ty-luna-alley-music` (*Not Here*,
+  85s, `mature`) and `ty-luna-rain-right-music-vert` (*Pouring*) are both
+  **members-only with no free window at all** — closed doors, like
+  `luna-josh-bed-ig` — so a note on either is premium and describes something no
+  visitor can sample.
+  **The alley's canon is far-future writer knowledge and none of it may appear
+  in visible copy:** season 3–4 or later, *"still being defined"*, and it turns
+  on where Luna and Tyson end up and what she has not told him. **Do not write
+  any of it, do not hint at it, and do not let a note about an earlier scene
+  lean on it.** The approved caption names none of it; match the caption, not
+  the canon block.
+  **`Pouring` sits before the alley and is also ahead of released canon:**
+  Tyson has **not yet told her how he feels**, its dialogue is under the score
+  so nothing in it is quotable as settled, and its caption stops at the fight —
+  no feelings, no kiss, no when.
+  **And `Pouring` is not `luna-ty-rain-ig` (*Rain*, 2026-10-02).** Both are Luna
+  and Tyson arguing then kissing in a downpour, and canon is explicit that they
+  are **two separate nights, not two cuts of one**. Never merge them or
+  cross-refer them as the same moment.
+- **"Not Here" is now two different pieces.** It is the title of
+  `luna-josh-fair` — the clip this PR's note is on — and, since 11-09, of the
+  post `ty-luna-alley-music`. The note's own header carries the slug, so it
+  stays unambiguous, but **a note or caption that says "Not Here" without a slug
+  no longer identifies anything**.
+- **The health check gained a rule that can fail on absence rather than on
+  error.** From 2026-11-09 a new episode leads the home-page hero for five days,
+  and the check **FAILS** if the pin is live and the loop is missing (no
+  `public/hero/<slug>.mp4` and `.jpg`, or the slug absent from `HERO_SLUGS`, or
+  `pickHero()` choosing something else). It is the first check that fires on a
+  *window* rather than on repo state, so a run inside those five days can fail
+  for a reason that was fine the day before.
 - **Ordinal positions in `STORY_ORDER` are not stable, and two in this file were
   badly wrong.** A clip inserted mid-list shifts everything after it — which
   `luna-ty-garage-event` just did at position 27 — and Melissa also hand-moves

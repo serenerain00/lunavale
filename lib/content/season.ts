@@ -145,6 +145,19 @@ export const SEASONS: Season[] = [
         runtimeSeconds: 1584,
         comingSoon: false,
       },
+      {
+        /*
+          LANDED 2026-11-09. Melissa named it: "Title: The Things We Don't
+          Say". Same both-places rule as above. Taken down and replaced the
+          same evening with a re-export (see videos.ts).
+        */
+        number: 7,
+        title: "Episode 7: The Things We Don\u2019t Say",
+        slug: "episode-7",
+        poster: "/posters/episode-7.jpg",
+        runtimeSeconds: 1229,
+        comingSoon: false,
+      },
     ],
   },
 ];

@@ -126,10 +126,16 @@ def draw_tracked(draw, text, fnt, tracking, y, fill, width):
         x += draw.textlength(ch, font=fnt) + tracking
 
 
-def render_frame(t: float, W: int, H: int, sub_size: float = 0.025) -> Image.Image:
+def render_frame(t: float, W: int, H: int, sub_size: float = 0.025,
+                 transparent: bool = False) -> Image.Image:
     """`sub_size` is the credit's height as a share of the frame. 0.025 is
     the first trailer's; scripts/trailer-bookends.py passes more, because
-    its output is cut for a phone screen."""
+    its output is cut for a phone screen.
+
+    `transparent` returns RGBA with no background — the type and its glow
+    only, the closing fade taken out of the alpha — for laying the title
+    over picture that is still fading (scripts/episode-credits.py
+    --fade-under)."""
     title_f = ImageFont.truetype(DIDOT, int(H * 0.115))
     sub_f = ImageFont.truetype(DIDOT, int(H * sub_size))
 
@@ -174,6 +180,13 @@ def render_frame(t: float, W: int, H: int, sub_size: float = 0.025) -> Image.Ima
     glow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     glow.paste((0, 0, 0, 120), (0, 0, W, H), img.split()[3])
     glow = glow.filter(ImageFilter.GaussianBlur(max(2, H // 90)))
+
+    if transparent:
+        layer = Image.alpha_composite(glow, img)
+        f = clamp01((t - (TOTAL - FADE_OUT)) / FADE_OUT)
+        if f > 0:
+            layer.putalpha(layer.split()[3].point(lambda a: int(a * (1 - f))))
+        return layer
 
     frame = Image.new("RGBA", (W, H), VOID + (255,))
     frame = Image.alpha_composite(frame, glow)

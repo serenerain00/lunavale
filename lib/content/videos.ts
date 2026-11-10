@@ -240,6 +240,41 @@ export const videos: Video[] = [
     about: ["luna", "tyson", "josh"],
   },
   {
+    /*
+      TYSON Q&A, 2026-11-09. Melissa: "post this QA session with TY, free for
+      everyone". Tyson in his car, reading questions off cards: 38, single,
+      why he's never dated Luna ("Luna's my best friend. Been that way 20
+      years."), his type, what scares him ("not being there when somebody
+      needs me"), in love once, the date who brought her mother, humility.
+
+      In character, but not a story beat, so it is exempt from STORY_ORDER
+      like the interview, and not hidden: it should be found.
+
+      ONE ANSWER TOUCHES THE TYSON RULE (tyson-no-early-feelings): "Have you
+      ever had feelings for someone you couldn't have?" "Yeah. I think
+      everybody has at some point." It is his own deflection, in Melissa's
+      video; the synopsis does not quote it, name anyone, or read it.
+      Describe and stop.
+
+      FREE. Title and synopsis are placeholders, hers to replace.
+    */
+    slug: "tyson-qa",
+    title: "Questions for Tyson",
+    synopsis:
+      "Tyson, a stack of your questions, and not a lot of patience for them. His age, his type, the worst date he's been on, and what actually scares him.",
+    // -v3: Melissa's version with music (stories/ty-QA/tyson-QA-music.mov),
+    // 2026-11-09, after the redo (-v2) and the first cut.
+    file: "tyson-qa-v3.proxy.mp4",
+    poster: "/posters/tyson-qa.jpg",
+    durationSeconds: 100,
+    addedOn: "2026-11-09",
+    access: "free",
+    mature: false,
+    feelings: [],
+    place: "park",
+    about: ["tyson"],
+  },
+  {
     slug: "luna-josh-first-morning",
     title: "First Morning",
     synopsis:
@@ -3494,6 +3529,53 @@ export const videos: Video[] = [
     feelings: ["distance", "hurt"],
     place: "downtown",
     about: ["luna", "josh", "tyson"],
+  },
+  {
+    /*
+      EPISODE 7, THE THINGS WE DON'T SAY, 2026-11-09. Title is Melissa's.
+      TAKEN DOWN AND REPLACED the same evening (Melissa: "theres a fuck up",
+      then a new ep7-final-music.mp4, 32.7s shorter, cut after the first
+      minute). Served as episode-7-v2 so the first cut is never reachable.
+
+      Master: stories/ep7/ep7-final-credits-v2.mp4, built from
+      ep7-final-music.mp4 with the end title over the picture's fade-out and
+      the sound eased down under it (episode-credits.py --fade-under).
+
+      WHAT IS IN IT, from the transcript: opens on Vale Studios; Simone
+      brings Luna food while she edits and has something to tell her. Ends
+      in Tyson's garage (the "Everybody Else" scene, luna-ty-garage-event):
+      "I just don't like finding out things from everybody else", still on
+      for New York, Simone calling him her teddy bear, tacos, and the Ducati.
+
+      SYNOPSIS IS MELISSA'S (her second version, 2026-11-09, which replaced
+      a first that she asked to drop the Rick/Josh part from). Do not put
+      the father's warning back.
+
+      FREE: THE FIRST MINUTE (Melissa, 2026-11-09), from the top, title card
+      included, to 1:03.0 so it stops between lines. Override in
+      scripts/make-previews.mjs.
+    */
+    slug: "episode-7",
+    // Must match lib/content/season.ts.
+    title: "Episode 7: The Things We Don’t Say",
+    synopsis:
+      "As Luna wrestles with the possibility of returning to Josh, a conversation with Simone forces her to question what she truly wants. A glimpse into her past with Tyson reveals the complicated history behind their friendship, while a present-day disagreement reminds them that even the strongest bonds require honesty.",
+    file: "episode-7-v2.proxy.mp4",
+    poster: "/posters/episode-7.jpg",
+    durationSeconds: 1229,
+    addedOn: "2026-11-09",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "episode-7-v2-preview.proxy.mp4",
+      // See the override in scripts/make-previews.mjs.
+      durationSeconds: 63,
+      hookStart: 0,
+      hookNote: "Vale Studios, and Simone has something to tell her",
+    },
+    feelings: ["trust", "distance"],
+    place: "garage",
+    about: ["luna", "tyson", "josh", "simone"],
   },
   {
     /*

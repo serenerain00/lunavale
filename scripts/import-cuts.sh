@@ -877,6 +877,24 @@ CUTS=(
   # frame, inside the free first minute.
   "episode-6|stories/ep6/ep6-final.mp4|55|-|-|30"
 
+  # EPISODE 7, THE THINGS WE DON'T SAY, 2026-11-09. stories/ep7/
+  # ep7-final-credits.mp4 is ep7-final-music.mp4 with the credits on
+  # (scripts/episode-credits.py --number 7 --name "The Things We Don't Say"
+  # --end 1249.4 --fade-under 2.8 --sound-out 1247.6:1252.36 — the first
+  # episode whose end title comes up over the picture's fade, as Melissa
+  # asked). 1772x1080 at 30fps. No END or FADE: the end title fades itself.
+  #
+  # POSTER AT 12s: Luna at her laptop in the studio, inside the free minute.
+  #
+  # RE-EXPORTED 2026-11-09 the same evening: taken down ("theres a fuck up")
+  # and replaced by a new ep7-final-music.mp4, 32.7s shorter, the cut after
+  # the first minute (the opening's shot changes and lines are identical).
+  # Rebuilt as ep7-final-credits-v2.mp4 with --end 1216.75 --sound-out
+  # 1214.95:1219.70, the same ending 32.65s earlier. The proxy this writes is
+  # renamed to episode-7-v2.proxy.mp4, as episode-5-v2 was, so the old cut is
+  # never served under the new name.
+  "episode-7|stories/ep7/ep7-final-credits-v2.mp4|12|-|-|30"
+
   # THE INTERVIEW, 2026-10-09. A future season: Detectives Harris and
   # Bennett question Luna about the accident nine years ago, then she rings
   # Tyson from the car. Scored, 13:20, 1320x798 hevc at 60fps — down to 30
@@ -1042,6 +1060,25 @@ CUTS=(
   # NO END TRIM: black from 164.6, and the score is still fading into the
   # last frame (-50 dB at 166.8).
   "luna-ty-montage|stories/luna-ty-montage/luna-ty-montage-music.mov|76|-|-|30"
+
+  # TYSON Q&A, 2026-11-09. Melissa: "post this QA session with TY, free for
+  # everyone tyson-qA". Tyson in his car, reading questions off cards.
+  # 1920x1080, 30fps, unscored. Free.
+  #
+  # REDONE 2026-11-09 (Melissa: "i had to redo the QA video, so the new one
+  # is called ty-QA"): stories/ty-QA/ty-QA.mp4, 1:38, same questions. The
+  # proxy this writes is renamed to tyson-qa-v2.proxy.mp4 so nobody mid-play
+  # is handed the other cut.
+  #
+  # AND AGAIN, WITH MUSIC (Melissa, 2026-11-09: "this one has music in the bg
+  # tyson-QA-music"): stories/ty-QA/tyson-QA-music.mov, 1320x804 at 60fps,
+  # cooler grade, 1:40. Served as tyson-qa-v3. NO END TRIM: black from 98.69
+  # with the music fading under it to the last frame.
+  # POSTER AT 90.0s (Melissa asked for a better one, 2026-11-09): Tyson close,
+  # laughing straight at the camera — the same moment as 90.8s in the first
+  # cut and 89.2s in the second. Was 8s, wide, holding up the first card.
+  # NO END TRIM: no black, and "I'll see you" runs to the last second.
+  "tyson-qa|stories/ty-QA/tyson-QA-music.mov|90.0|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

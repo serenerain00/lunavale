@@ -43,6 +43,7 @@ import { videos } from "@/lib/content/videos";
 import { clips } from "@/lib/content/posts";
 import { SHORT_LINKS } from "@/lib/content/shortlinks";
 import { galleries } from "@/lib/content/gallery";
+import { heroes, newEpisodePins, pickHero } from "@/lib/content/hero";
 import { assertComplete, inStoryOrder } from "@/lib/content/chronology";
 
 const ROOT = path.join(import.meta.dirname, "..");
@@ -325,6 +326,28 @@ async function checkContent() {
     warn(`Free journal entries: ${free.size}, expected ${EXPECTED_FREE}`,
       "Deliberate? Update the count at the top of lib/content/journal.ts and here.");
   } else ok(`Free journal entries: ${free.size}`);
+
+  // A NEW EPISODE LEADS THE HERO FOR FIVE DAYS (Melissa, 2026-11-09), but only
+  // if somebody cut it a loop. Without one the pin silently finds nothing and
+  // the front page carries on with the rotation — so it fails here instead.
+  {
+    const now = new Date();
+    const live = newEpisodePins().find((p) => now < p.until && now >= new Date(p.until.getTime() - 5 * 86_400_000));
+    if (live) {
+      const hasHero = heroes().some((h) => h.slug === live.slug);
+      let files = true;
+      for (const ext of ["mp4", "jpg"]) {
+        try { await stat(path.join(ROOT, "public/hero", `${live.slug}.${ext}`)); } catch { files = false; }
+      }
+      if (!hasHero || !files) {
+        fail(`New episode ${live.slug} has no hero loop`,
+          "It should lead the home page until " + live.until.toISOString().slice(0, 10) +
+          ". Add it to scripts/make-hero-loop.sh (inside its free window), run it, and add the slug to HERO_SLUGS.");
+      } else if (pickHero(now)?.slug !== live.slug) {
+        fail(`New episode ${live.slug} is not the hero`, "pickHero() chose something else during its five days.");
+      } else ok(`Hero: ${live.slug}, new, until ${live.until.toISOString().slice(0, 10)}`);
+    }
+  }
 
   // SHORT LINKS are printed in Instagram captions and bios, where they can't be
   // edited after posting. One pointing at a renamed or hidden clip is a dead

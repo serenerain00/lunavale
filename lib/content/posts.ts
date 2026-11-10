@@ -673,6 +673,9 @@ const authored: Clip[] = [
       not write a synopsis for it, and do not place it near anything as an
       explanation. Same rule as tyson-no-early-feelings: describe and stop.
 
+      NOT THE SAME NIGHT AS ty-luna-rain-right-music-vert ("Pouring"): a
+      different rain scene (Melissa, 2026-11-09).
+
       MEMBERS ONLY, NO PREVIEW. She will post about the middle 30s on
       Instagram, and that is the public window; the site holds the whole 4:46.
       Not in STORY_ORDER — posts never are, and there is no landscape scene
@@ -933,6 +936,133 @@ const authored: Clip[] = [
     addedOn: "2026-10-23",
     about: ["tyson", "luna"],
     mature: false,
+  },
+  {
+    /*
+      TY-LUNA-ALLEY, 2026-11-09. Melissa: "new ig clip in vertical format
+      called ty-luna-alley-music". Tyson and Luna close against a brick wall
+      outside a party at night, scored.
+
+      FROM THE TRANSCRIPT: "When are you gonna stop this?" / "It's not that
+      easy, Tyson." / "No, it's real easy, Lu. Remember?" / "Look at me." /
+      "I'm looking at you." / "Ty, please, okay? I can't do this here." /
+      "If not here, then where?" / "You really wanna do this?" / "Ty, you
+      don't get it, okay? I can't!" / "Please." / "Don't!"
+
+      FAR FUTURE — WRITER KNOWLEDGE (Melissa, 2026-11-09, "still being
+      defined"): season 3–4 or later. Luna is back with Josh; she and Tyson
+      have an established romantic relationship that slipped while she was
+      with him, and Tyson is waiting for her to come clean. NOTHING here is
+      released canon, and none of it may appear in visible copy. The caption
+      says it is much later and describes the alley; it never names the
+      relationship, Josh, or what she has to come clean about.
+
+      MEMBERS ONLY, NO PREVIEW (Melissa, 2026-11-09: "im not making any of
+      it free"): a closed door, like luna-josh-bed-ig. Title is a
+      placeholder; the caption is approved (Melissa, 2026-11-09: "that
+      caption is fine for the alley").
+    */
+    id: "ty-luna-alley-music",
+    title: "Not Here",
+    caption:
+      "Much later. A party, the alley out back, and Tyson asking Luna a question she won't answer here.",
+    file: "ty-luna-alley-music.proxy.mp4",
+    poster: "/posters/ty-luna-alley-music.jpg",
+    // 84.6, the whole file: no closing black to trim.
+    durationSeconds: 85,
+    addedOn: "2026-11-09",
+    about: ["tyson", "luna"],
+    mature: true,
+    access: "premium",
+  },
+  {
+    /*
+      TY-LUNA-RAIN-RIGHT, 2026-11-09. Melissa: "this next one is a bit
+      earlier than the alley… tyson shows up to speak to luna when it starts
+      pouring outside, a fight happens then this takes place. tyson still
+      hasnt told luna about his feelings toward her". Night, a downpour,
+      both soaked and clothed: the fight, then a kiss.
+
+      DIALOGUE IS UNDER THE SCORE (music-primary-in-scene-mixes); whisper
+      catches only fragments — "Tyson, would you stop?", "Stop lying to
+      me", "You think any of this is gonna be easy for me?", "I'm right
+      here!" — so nothing here quotes it as settled.
+
+      WRITER KNOWLEDGE, NOT FOR VISIBLE COPY ("scene isnt fully flushed out
+      yet"): before the alley, so still far ahead of released canon. Tyson
+      has not yet told her how he feels. The caption says what is on screen
+      up to the fight and stops — no feelings, no kiss, no when
+      (tyson-no-early-feelings, no-undecided-facts).
+
+      NOT THE SAME CUT AS luna-ty-rain-ig ("Rain", 2026-10-02), which is also
+      Luna and Tyson arguing then kissing in a downpour, placed "at whenever
+      Tyson tells her". THEY ARE DIFFERENT RAIN SCENES (Melissa, 2026-11-09):
+      two separate nights, not two cuts of one. Never merge or cross-refer
+      them as the same moment.
+
+      EXCLUSIVE SCENE: members only, no preview (exclusive-scenes-no-
+      preview). Title is a placeholder; the caption is hers.
+    */
+    id: "ty-luna-rain-right-music-vert",
+    title: "Pouring",
+    // Melissa's, 2026-11-09.
+    caption: "Don’t make me.",
+    file: "ty-luna-rain-right-music-vert.proxy.mp4",
+    poster: "/posters/ty-luna-rain-right-music-vert.jpg",
+    // 89.2: cut where the score stops under the closing black.
+    durationSeconds: 89,
+    addedOn: "2026-11-09",
+    about: ["tyson", "luna"],
+    // A kiss in wet clothes, nothing graphic — the same call as
+    // luna-ty-rain-ig.
+    mature: true,
+    access: "premium",
+  },
+  {
+    /*
+      JOSH AND RICK, THE CIGAR BAR, 2026-11-09. Melissa: "new IG video,
+      square, free for everyone josh-rick-cigarBar-square". Josh and his
+      father over cigars and whiskey in a dark lounge. Unscored.
+
+      FROM THE TRANSCRIPT: "Luna came by last week." / "She's a good woman,
+      Josh." / "She told me she still loves you." / "She also told me she's
+      tired. Not of you. Of waiting for things to change." / "She said she's
+      more afraid of coming back and nothing changing than she is of losing
+      you." / "Stop trying to get her home. Start giving her a reason to want
+      to come home." / "If it was easy, your mother would still be here." /
+      "You don't know what to do when something doesn't go the way you
+      planned." / "Wonder where I got that from." / "I just don't want to
+      lose her, Dad." / "Then don't make her afraid to stay." / "I remember
+      having the same conversation with your mother."
+
+      CANON: docs/content/BETWEEN_US_SECRET_CANON.md, "Addition —
+      2026-11-09: Josh and Rick, the cigar lounge". Denver, present day,
+      shortly after the separation; Luna saw Rick a week after it. Rick is
+      not a villain. The foreshadowing there (Josh's need for control) is
+      writer knowledge and stays off the site.
+
+      JOSH'S MOTHER IS NOT SETTLED CANON: whether she left or died is not
+      decided, so the caption does not mention her.
+
+      A SEPARATE SCENE FROM EPISODE 7 (Melissa, 2026-11-09). Not in its
+      synopsis or metadata; do not link the two in visible copy.
+
+      FREE, it runs on Instagram. Title is a placeholder; the caption is
+      hers.
+    */
+    id: "josh-rick-cigarBar-square",
+    title: "A Reason to Come Home",
+    // Melissa's, 2026-11-09.
+    caption: "A reason to come home.",
+    file: "josh-rick-cigarBar-square.proxy.mp4",
+    poster: "/posters/josh-rick-cigarBar-square.jpg",
+    // 147.7, the whole file: under a second of black, the room still fading.
+    durationSeconds: 148,
+    addedOn: "2026-11-09",
+    about: ["josh", "rick", "luna"],
+    mature: false,
+    // Near-square, 1320x1262 at source, 720x688 as the proxy. See Clip.aspect.
+    aspect: [720, 688],
   },
 ];
 

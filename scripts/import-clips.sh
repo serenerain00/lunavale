@@ -270,6 +270,32 @@ CLIPS=(
   # recording being stopped).
   # POSTER AT 36s: Tyson in the gym, face close, sweat, looking off.
   "ty-gym|stories/ty-gym/ty-gym.mov|36|112.6"
+  # TY-LUNA-ALLEY, 2026-11-09. Melissa: "new ig clip in vertical format called
+  # ty-luna-alley-music". Tyson and Luna close against a brick wall outside a
+  # party, at night, scored. 1320x2252, 60fps, 84.6s.
+  #
+  # NO END TRIM: blackdetect finds no black, and the score is still at -26 dB
+  # into the last second. The edit ends on her face, not on black.
+  # POSTER AT 20s: faces close, Luna looking up at him.
+  # NO PREVIEW: members only, none of it free (Melissa, 2026-11-09).
+  "ty-luna-alley-music|stories/ty-luna-alley/ty-luna-alley-music.mov|20"
+  # TY-LUNA-RAIN-RIGHT, 2026-11-09. Melissa: "the video is called
+  # ty-luna-rain-right-music-vert". Tyson and Luna at night in a downpour:
+  # the fight, then a kiss. 1320x2234, 60fps, 89.6s, scored throughout.
+  #
+  # END 89.2: picture is black from 86.74 but the score runs at full level
+  # under it until 89.24, then silence. Cut where the music stops.
+  # POSTER AT 56s: faces close in the rain, before the kiss — the kiss is
+  # not the cover. NO PREVIEW: an exclusive scene, members only.
+  "ty-luna-rain-right-music-vert|stories/ty-luna-rain/ty-luna-rain-right-music-vert.mov|56|89.2"
+  # JOSH AND RICK, THE CIGAR BAR, 2026-11-09. Melissa: "new IG video, square,
+  # free for everyone josh-rick-cigarBar-square". Near-square, 1320x1262,
+  # 60fps, unscored. Free: it is on Instagram.
+  #
+  # NO END TRIM: black is only the last 0.95s (from 146.75), and the room
+  # tone is still fading under it to the final frame.
+  # POSTER AT 86s: Josh, looking off, the cigar lounge lit behind him.
+  "josh-rick-cigarBar-square|stories/josh-rick-cigarbar/josh-rick-cigarBar-square.mov|86"
 )
 
 want=("$@")

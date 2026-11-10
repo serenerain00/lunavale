@@ -165,6 +165,63 @@ def frames_to_movie(frames, fps, out, W, H):
         shutil.rmtree(tmp, ignore_errors=True)
 
 
+def fade_under(a, src, out, W, H, fps):
+    """
+    FADE UNDER. Melissa, 2026-11-09, Episode 7: "make sure the ending has a
+    smooth decline in music and the fade out, during the fade out we add the
+    credits".
+
+    The default closing cuts to a silent end title on black. This one does
+    not wait for black: the picture fades out over `--fade-under` seconds
+    ending at `--end`, the end title comes up OVER it from the moment the fade
+    starts (rendered transparent, so the last of the picture shows through
+    behind the letters), and the sound eases down on a quarter-sine from
+    `--sound-out` START to silence at END rather than stopping with the
+    picture. Whatever of the title is left after END plays in silence.
+    """
+    if not a.sound_out:
+        raise SystemExit("--fade-under needs --sound-out START:END")
+    s0, s1 = (float(x) for x in a.sound_out.split(":"))
+    if a.credit:
+        raise SystemExit("--credit is not supported with --fade-under")
+    title_at = a.end - a.fade_under
+    body = max(title_at + end_title.TOTAL, s1)
+    tmp = Path(tempfile.mkdtemp(prefix="episode-credits-"))
+    try:
+        op, ti = tmp / "open.mov", tmp / "title.mov"
+        n = int(round(opening_total(a.name) * fps))
+        frames_to_movie((opening_frame(i / fps, W, H, a.number, a.name) for i in range(n)), fps, op, W, H)
+
+        # The title with its alpha, as PNG-in-MOV.
+        pngs = tmp / "t"
+        pngs.mkdir()
+        for i in range(int(round(end_title.TOTAL * fps))):
+            end_title.render_frame(i / fps, W, H, 0.038, transparent=True).save(pngs / f"f{i:05d}.png")
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-y", "-framerate", str(fps),
+                        "-i", str(pngs / "f%05d.png"), "-c:v", "png", str(ti)], check=True)
+
+        fc = (f"[1:v]trim=0:{a.end},setpts=PTS-STARTPTS,fps={fps},format=yuv420p,"
+              f"fade=t=out:st={title_at}:d={a.fade_under},"
+              f"tpad=stop_mode=add:stop_duration={body - a.end + 1}:color=black,"
+              f"trim=0:{body},setpts=PTS-STARTPTS[pic];"
+              f"[2:v]format=rgba,setpts=PTS-STARTPTS+{title_at}/TB[tt];"
+              f"[pic][tt]overlay=eof_action=pass:format=auto,format=yuv420p[ev];"
+              f"[1:a]atrim=0:{s1},asetpts=PTS-STARTPTS,aresample=48000,"
+              f"aformat=channel_layouts=stereo,afade=t=out:st={s0}:d={s1 - s0}:curve=qsin,"
+              f"apad=whole_dur={body}[ea];"
+              f"[0:v]fps={fps},format=yuv420p[ov];[0:a]aresample=48000[oa];"
+              f"[ov][oa][ev][ea]concat=n=2:v=1:a=1[v][a]")
+        subprocess.run(
+            ["ffmpeg", "-nostdin", "-v", "error", "-stats", "-y", "-i", str(op), "-i", str(src), "-i", str(ti),
+             "-filter_complex", fc, "-map", "[v]", "-map", "[a]",
+             "-c:v", "libx264", "-crf", "17", "-preset", "slow", "-profile:v", "high",
+             "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "256k",
+             "-movflags", "+faststart", str(out)], check=True)
+        print(f"wrote {out}")
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("episode")
@@ -175,6 +232,11 @@ def main():
     ap.add_argument("--name", help="the episode's title, under its number")
     ap.add_argument("--credit", help="optional line before the end title; none by default")
     ap.add_argument("--still", action="store_true", help="write a few frames to look at")
+    ap.add_argument("--fade-under", type=float, metavar="SECONDS",
+                    help="fade the picture to black over this long, ending at --end, "
+                         "with the end title arriving over it (see FADE UNDER)")
+    ap.add_argument("--sound-out", metavar="START:END",
+                    help="with --fade-under: ease the sound down from START to silence at END")
     a = ap.parse_args()
     src = Path(a.episode).resolve()
     W, H, fps = probe(src)
@@ -190,6 +252,8 @@ def main():
         return
 
     out = Path(a.out or src.with_name(src.stem + "-credits.mp4")).resolve()
+    if a.fade_under:
+        return fade_under(a, src, out, W, H, fps)
     tmp = Path(tempfile.mkdtemp(prefix="episode-credits-"))
     try:
         op, cl = tmp / "open.mov", tmp / "close.mov"

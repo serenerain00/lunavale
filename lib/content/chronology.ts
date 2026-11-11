@@ -349,6 +349,7 @@ export function assertComplete(): { missing: string[]; unknown: string[] } {
     "interview",
     // Tyson answering viewers' questions (2026-11-09): cast Q&A, not a beat.
     "tyson-qa",
+    "luna-josh-radio",
     ...SEASONS.flatMap((s) => s.episodes.map((e) => e.slug).filter(Boolean)),
   ]);
   const ordered = new Set(STORY_ORDER);

@@ -275,6 +275,39 @@ export const videos: Video[] = [
     about: ["tyson"],
   },
   {
+    /*
+      LUNA AND JOSH ON THE RADIO, 2026-11-10. Melissa: "its a radio interview
+      w josh and luna, meant to be fun". Free. A host with a gray beard asks
+      the questions; Josh's shoes in the kitchen, Luna stealing his shirts,
+      "ten very long years", and both of them plugging Between Us at the end
+      ("it's a dark romance series").
+
+      In character but not a story beat (they promote the show), so it is
+      exempt from STORY_ORDER like tyson-qa and the interview, and not hidden.
+      It says they have been together about ten years and nothing about the
+      separation; the synopsis doesn't place it in the story either.
+
+      Strong language ("you're such a dick"), playful: not `mature`, which is
+      for sex. The host is unnamed in the footage, so he is unnamed here.
+
+      FREE. Title and synopsis are placeholders, hers to replace.
+    */
+    slug: "luna-josh-radio",
+    title: "On the Air",
+    synopsis:
+      "Luna and Josh on the radio, and neither of them can behave for twenty minutes. Shoes in the kitchen, stolen shirts, and ten very long years.",
+    file: "luna-josh-radio.proxy.mp4",
+    poster: "/posters/luna-josh-radio.jpg",
+    // Whole file: black from 155.3, the music fading under it to the end.
+    durationSeconds: 158,
+    addedOn: "2026-11-10",
+    access: "free",
+    mature: false,
+    feelings: [],
+    place: "downtown",
+    about: ["luna", "josh"],
+  },
+  {
     slug: "luna-josh-first-morning",
     title: "First Morning",
     synopsis:

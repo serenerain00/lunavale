@@ -1079,6 +1079,14 @@ CUTS=(
   # cut and 89.2s in the second. Was 8s, wide, holding up the first card.
   # NO END TRIM: no black, and "I'll see you" runs to the last second.
   "tyson-qa|stories/ty-QA/tyson-QA-music.mov|90.0|-|-|30"
+
+  # LUNA AND JOSH ON THE RADIO, 2026-11-10. Melissa: "post this:
+  # luna-josh-radio-interview-music its free for everyone, its a radio
+  # interview w josh and luna, meant to be fun". 1320x814 at 60fps, scored,
+  # 2:38. NO END TRIM: black from 155.33 with the music fading under it to
+  # 157.44, the end of the file.
+  # POSTER AT 48.0s: both smiling, Luna toward camera, ON AIR sign behind.
+  "luna-josh-radio|stories/luna-josh-radio-questions/luna-josh-radio-interview-music.mov|48.0|-|-|30"
 )
 
 # The members-only edit of a scene that also has a public one (Video.premium).

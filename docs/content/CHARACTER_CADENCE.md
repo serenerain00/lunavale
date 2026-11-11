@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-11-10 against `main` at 9422441. **A touched `lib/content/` file
+re-run 2026-11-11 against `main` at 39fdb2b. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -64,13 +64,13 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 271 | 227 |
-| Tyson | 12 | 194 | 166 |
-| Josh | 14 | 164 | 142 |
+| Luna | 12 | 277 | 232 |
+| Tyson | 12 | 195 | 167 |
+| Josh | 14 | 169 | 146 |
 | Rick | 1 | 15 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 9 | 9 |
-| Simone | 0 | 6 | 5 |
+| Simone | 0 | 8 | 7 |
 
 *As built, 2026-07-28: Luna 8 / 44 / 23 · Tyson 8 / 44 / 33 · Josh 8 / 35 / 21.
 Rick, Cathy and Avery were not on the table at all. Figures above include this
@@ -85,7 +85,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 at 9422441** (Tyson 194, Josh 164 — Episode 7 and the free Tyson Q&A moved Tyson more than the cigar-bar post moved Josh, so it is back level with the recorded ceiling rather than past it): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 at 39fdb2b** (Tyson 195, Josh 169 — five new Episode 7 journal pages and the free radio interview pay Josh without paying Tyson much, which took it to its lowest since mid-October): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has now sat anywhere between 17 and 30. Quote the two
@@ -472,10 +472,13 @@ Standing backlog, roughly prioritised:
   *(Heading collision to avoid: **#1 is already titled "I don't know yet"**, so a
   note on this clip wants a different heading even though the clip's own title is
   hers.)*
-- **Ten new journal pages landed with it, all `premium`** (journal is now 169
-  entries, still **6 free**): five beside Episode 6, three beside *Everybody
-  Else*, one beside *One Number Off*, and one beside **Come Home — a free clip
-  whose page is members-only**. That is the separate-access rule with a third
+- **The journal is at 174 entries and still only 6 free.** Ten `premium` pages
+  landed on 11-05 — five beside Episode 6, three beside *Everybody Else*, one
+  beside *One Number Off*, and one beside **Come Home, a free clip whose page is
+  members-only** — and **five more on 2026-11-11, all beside Episode 7**. So
+  Episodes 6 and 7 both carry journal coverage while **no episode carries a
+  Between Takes note**: two separate backlogs, and the one this file tracks is
+  the notes. That is the separate-access rule with a third
   instance, and the most quotable one: *Come Home* is the piece a non-member can
   watch, and the writing about it is not.
 - **"The Night Everything Changed" (the house party): part of it is public now,
@@ -531,14 +534,17 @@ Standing backlog, roughly prioritised:
   *(One thing worth asking rather than fixing: `about` names **Josh**, and he is
   in neither half of the montage. It pays him a point in the counts. Left as
   Melissa set it.)*
-- **Both 11-07 pieces are free and uncovered, and both are deliberately off the
-  free-and-uncovered list below** — for the same reason `luna-attack-trailer`
-  is: each pays all three leads, so neither supports the clause that every
-  entry on that list pays only into Luna and Tyson. **Six free pieces now sit
-  outside it** — the three free trailers (`between-us-trailer-one`,
-  `luna-attack-trailer`, `luna-ty-drunk-trailer`), the montage, and the two free
-  Josh clips. Counted at fdbbc96, where free reads 16 published / 17 by
-  `access`.
+- **Eight free pieces sit deliberately outside the free-and-uncovered list
+  below**, and the reasons are not all the same. The list's clause is that every
+  piece on it pays **only into Luna and Tyson**, which is what makes it an
+  argument rather than an inventory. Off it for paying someone else: the three
+  free trailers (`between-us-trailer-one`, `luna-attack-trailer`,
+  `luna-ty-drunk-trailer`) and `luna-ty-montage`, each of which pays all three
+  leads, and the two free Josh clips (`josh-ty-kitchen-corner`, *Come Home*).
+  Off it for not being story beats at all: **`tyson-qa`** (free, Tyson alone)
+  and **`luna-josh-radio`** (free, Luna and Josh) — cast-promo pieces, both
+  exempt from `STORY_ORDER`. Counted at 39fdb2b, where free reads **18
+  published / 19 by `access`**.
 - **Rick finally has new material, it is free, and it is the richest canon he
   has ever had.** `josh-rick-cigarBar-square` — *A Reason to Come Home*, a
   **free** square post, 2026-11-09 — puts Josh and Rick in a dimly lit cigar
@@ -559,6 +565,23 @@ Standing backlog, roughly prioritised:
   did not work out. **Whether she left or died is not settled — do not state it.**
   And **the investigation canon now calls Mercer, plus any suspicion about
   Tyson, are not in this scene** and are not to be written into it.
+- **`luna-josh-radio`** — *On the Air*, **free**, 2026-11-10, 158s, `about`
+  **Luna and Josh**, place `downtown`, **exempt from `STORY_ORDER`** like
+  `tyson-qa` and the interview, title and synopsis both placeholders. A radio
+  interview *"meant to be fun"*: his shoes in the kitchen, her stealing his
+  shirts, *"ten very long years"*, and both of them plugging the show at the end.
+  **It is the first free piece that pays Luna and Josh together**, which makes it
+  the cheapest free Josh material on the board and a genuinely new kind of entry:
+  in character, but promoting the series rather than living in it.
+  **Two restraints from the entry.** It says they have been together about ten
+  years and **says nothing about the separation**, and **the synopsis does not
+  place it in the story** — so a note must not place it either, and must not read
+  the separation into it. And **the host is unnamed in the footage, so he is
+  unnamed in the entry**: the same bucket as Evan, Matt, Ashley and Frank. Do not
+  give him a name.
+  *(Second cast-promo piece in two days, after `tyson-qa`. Both are free, both
+  are exempt from the order, and neither is a story beat — a category this file
+  did not have a week ago.)*
 - **`tyson-qa`** — *Questions for Tyson*, **free**, 2026-11-09, 100s, `about`
   **Tyson alone**, place `park` (he is in his car), **exempt from `STORY_ORDER`**
   like the interview, title and synopsis both placeholders. **It is the first

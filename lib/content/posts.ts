@@ -1064,6 +1064,38 @@ const authored: Clip[] = [
     // Near-square, 1320x1262 at source, 720x688 as the proxy. See Clip.aspect.
     aspect: [720, 688],
   },
+  {
+    /*
+      LUNA ON THE SIDEWALK, 2026-11-12. Melissa: "upload this video - free
+      for everyone luna-sidewalk-interview.mp4". A street reporter (DENVER
+      LIVE mic) stops Luna, iced coffee in hand.
+
+      FROM THE TRANSCRIPT: "Hey Luna, can we ask you something real quick?" /
+      "Oh God. Should I be worried?" / "Some of your followers are saying
+      Between Us is getting a little too dark. Too many twists." / "I try not
+      to read the comments. People can be pretty cruel." / "If you could tell
+      your viewers one thing, what would it be?" / "If you think it's dark
+      now, I'd probably stop watching." / "Okay, thanks Luna. Loving it so
+      far." / "Thank you, baby. Have a good one."
+
+      In character but promoting the show, like luna-josh-radio. It tells
+      nothing about the story. Strong language ("shit") is the reporter's, so
+      it is not `mature`, which is for sex. The reporter is unnamed.
+
+      FREE. Title and caption are placeholders, hers to replace.
+    */
+    id: "luna-sidewalk-interview",
+    title: "Too Dark?",
+    caption:
+      "Somebody stopped Luna on the street to ask if Between Us is getting too dark. She has a warning for you.",
+    file: "luna-sidewalk-interview.proxy.mp4",
+    poster: "/posters/luna-sidewalk-interview.jpg",
+    // 33.3, the whole file: no black, the last line runs to the end.
+    durationSeconds: 33,
+    addedOn: "2026-11-12",
+    about: ["luna"],
+    mature: false,
+  },
 ];
 
 /**

@@ -296,6 +296,13 @@ CLIPS=(
   # tone is still fading under it to the final frame.
   # POSTER AT 86s: Josh, looking off, the cigar lounge lit behind him.
   "josh-rick-cigarBar-square|stories/josh-rick-cigarbar/josh-rick-cigarBar-square.mov|86"
+  # LUNA ON THE SIDEWALK, 2026-11-12. Melissa: "upload this video - free for
+  # everyone luna-sidewalk-interview.mp4". 606x1080 vertical, 30fps, 33.3s.
+  # The source was CapCut's SmartCrop export (Movies/CapCut/.../SmartCrop/),
+  # copied into stories/ so the line below is repeatable.
+  # NO END TRIM: no black, and "have a good one" runs to the last second.
+  # POSTER AT 17.5s: Luna smiling wide, iced coffee in hand, the street behind.
+  "luna-sidewalk-interview|stories/luna-sidewalk-interview/luna-sidewalk-interview.mp4|17.5"
 )
 
 want=("$@")

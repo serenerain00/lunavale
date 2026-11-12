@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-11-11 against `main` at 39fdb2b. **A touched `lib/content/` file
+re-run 2026-11-12 against `main` at ddb7381. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -64,7 +64,7 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 277 | 232 |
+| Luna | 12 | 278 | 232 |
 | Tyson | 12 | 195 | 167 |
 | Josh | 14 | 169 | 146 |
 | Rick | 1 | 15 | 13 |
@@ -85,7 +85,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 at 39fdb2b** (Tyson 195, Josh 169 — five new Episode 7 journal pages and the free radio interview pay Josh without paying Tyson much, which took it to its lowest since mid-October): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 → 26 at ddb7381** (Tyson 195, Josh 169 — the 11-12 merge added a free post about Luna alone, so it moved her total and nothing else): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has now sat anywhere between 17 and 30. Quote the two
@@ -543,8 +543,12 @@ Standing backlog, roughly prioritised:
   leads, and the two free Josh clips (`josh-ty-kitchen-corner`, *Come Home*).
   Off it for not being story beats at all: **`tyson-qa`** (free, Tyson alone)
   and **`luna-josh-radio`** (free, Luna and Josh) — cast-promo pieces, both
-  exempt from `STORY_ORDER`. Counted at 39fdb2b, where free reads **18
+  exempt from `STORY_ORDER`. Counted at ddb7381, where free reads **18
   published / 19 by `access`**.
+  **This list is about free *videos* only, and `luna-sidewalk-interview` does
+  not make it nine.** The 11-12 cast-promo piece is a **vertical post**, and
+  posts were never on this list — they are not in `STORY_ORDER` at all, so
+  "exempt from the order" says nothing about them. Count videos against videos.
 - **Rick finally has new material, it is free, and it is the richest canon he
   has ever had.** `josh-rick-cigarBar-square` — *A Reason to Come Home*, a
   **free** square post, 2026-11-09 — puts Josh and Rick in a dimly lit cigar
@@ -579,9 +583,27 @@ Standing backlog, roughly prioritised:
   the separation into it. And **the host is unnamed in the footage, so he is
   unnamed in the entry**: the same bucket as Evan, Matt, Ashley and Frank. Do not
   give him a name.
-  *(Second cast-promo piece in two days, after `tyson-qa`. Both are free, both
-  are exempt from the order, and neither is a story beat — a category this file
-  did not have a week ago.)*
+  *(Second cast-promo piece in two days, after `tyson-qa`, and the third
+  followed on 11-12. All three are free and none is a story beat — a category
+  this file did not have a week ago and now the most active one on the board.)*
+- **`luna-sidewalk-interview`** — *Too Dark?*, a **free vertical post**,
+  2026-11-12, 33s, `about` **Luna alone**. **It is the third cast-promo piece
+  in four days** and the first that is a post rather than a video, so it is
+  **not in `STORY_ORDER`** for the ordinary reason that no post is. A street
+  reporter with a `DENVER LIVE` mic stops her, iced coffee in hand, to say some
+  of her followers think *Between Us* is getting too dark and asks what she
+  would tell her viewers; her answer is *"If you think it's dark now, I'd
+  probably stop watching."*
+  **Three restraints from the entry.** It is in character but **tells nothing
+  about the story** — a note on it has no beat to describe and must not invent
+  one, nor read the answer as a hint about what is coming. **The reporter is
+  unnamed**: the same bucket as the radio host, Evan, Matt, Ashley and Frank.
+  And **`mature` is false on purpose** — the entry records that the strong
+  language in it is the reporter's and that `mature` is for sex, so do not read
+  the flag as a judgement about the language.
+  *(Title and caption are both placeholders, hers to replace. It pays **Luna
+  alone**, which took her total 277 → 278 and left the Josh gap at 26 — the
+  first merge in weeks to move exactly one character.)*
 - **`tyson-qa`** — *Questions for Tyson*, **free**, 2026-11-09, 100s, `about`
   **Tyson alone**, place `park` (he is in his car), **exempt from `STORY_ORDER`**
   like the interview, title and synopsis both placeholders. **It is the first
@@ -788,8 +810,14 @@ Standing backlog, roughly prioritised:
   the free uncovered pieces this is the one with the most under it
 - A Tyson note on `luna-tyson-bar` from the other side of the table
 - Luna notes on the galleries — `the-night`, `the-firepit` — which have none
-- Notes on the vertical posts — there are twenty-six now and only
-  `run-at-the-lake` has one. The newest is **`ty-gym`** (*Two in the Morning*,
+- Notes on the vertical posts — **there are thirty at ddb7381** (23 of them
+  free) and only `run-at-the-lake` has one. **This line read "twenty-six" for
+  weeks while the module held twenty-nine — do not restore a figure here
+  without re-running `clips.length`.** The newest is
+  **`luna-sidewalk-interview`** (*Too Dark?*, **free**, 33s, Luna alone,
+  2026-11-12), which has its own item above; before it,
+  **`josh-rick-cigarBar-square`** (the cigar lounge, 11-09). Older, and still
+  the richest of them for Tyson: **`ty-gym`** (*Two in the Morning*,
   **free**, 113s, Tyson and Luna, 2026-10-23): Tyson in the gym, and a call he
   made from deployment years ago. **That call looks like the same event as
   `tyson-luna-call-from-field`** (*You Survived*) from the other side — read both

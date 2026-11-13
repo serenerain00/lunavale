@@ -38,7 +38,7 @@
  * they now end on the generous reading, which is both truer to these people and
  * a great deal better to read.
  *
- * ACCESS: 5 of the 32 pages are open, deliberately few. They are the funny ones
+ * ACCESS: 5 of the 33 pages are open, deliberately few. They are the funny ones
  * and the ones that give away a technique rather than a turn — enough for a
  * visitor to know exactly what the rest of the notebook is, which is the whole
  * job of a shop window. Everything that explains a scene the visitor cannot
@@ -528,6 +528,22 @@ export const notes: SetNote[] = [
       "Then, right at the end, I get up. Once, and I am the only one who does. That is the architecture of the whole thing: you spend the scene establishing that neither man moves, so the one who finally moves owns everything after it.",
       "It buys exactly one line. “You think you’re handling it? You’re not.” I am talking about Luna and I will not say her name, and that is the closest I come in the entire film to admitting I thought she was worth something.",
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work in that room than I am.",
+    ],
+  },
+  {
+    id: "rick-round-the-outside",
+    author: "rick",
+    kind: "insight",
+    heading: "Round the outside",
+    dateline: "Day 20 · the lake, early",
+    sceneSlug: "josh-rick-lake",
+    place: "lake",
+    access: "premium",
+    body: [
+      "Melissa put a rod in my hands and I did not understand why until we had been at it an hour. Everywhere else in this film I am a man who does not move — I take the best chair in the room and the room arranges itself around me. Here she gives me something to do, and the something is sitting still on purpose, out in the open, where my son has to come and stand next to me to be spoken to.",
+      "So I never look at him. Not once, the whole conversation. I watch the water and I talk to the water, and Josh has to work out for himself whether he is being answered. We tried one take with a look in it and it was warmer and it was wrong — the look is the thing he drove out there for, and he does not get it.",
+      "Nobody put music under this one and nobody should. It leaves the pauses before I answer him as the thing they actually are, which is a man not answering, and that carries further than anything you could lay underneath it.",
+      "Here is the part I only got hold of by playing it. He came to me for a way to fix it, and I had already telephoned her mother before he ever got out there, and I said nothing about that until the moment it was worth something to me to say it. All I give him is “you fix you” — which is true, and which has never once been any use to anybody. I would like it written down that I thought I was helping. That is the whole of me in one afternoon, and he learned it off me in exactly that form.",
     ],
   },
 

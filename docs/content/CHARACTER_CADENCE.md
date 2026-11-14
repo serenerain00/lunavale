@@ -52,7 +52,7 @@ couple of months.
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-11-12 against `main` at ddb7381. **A touched `lib/content/` file
+re-run 2026-11-14 against `main` at 439860b. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -64,9 +64,9 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 278 | 232 |
-| Tyson | 12 | 195 | 167 |
-| Josh | 14 | 169 | 146 |
+| Luna | 12 | 283 | 237 |
+| Tyson | 12 | 199 | 171 |
+| Josh | 14 | 171 | 148 |
 | Rick | 1 | 15 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 9 | 9 |
@@ -85,7 +85,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 → 26 at ddb7381** (Tyson 195, Josh 169 — the 11-12 merge added a free post about Luna alone, so it moved her total and nothing else): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 → 26 → 28 at 439860b** (Tyson 199, Josh 171 — the 11-13 journal pages pay Tyson four and Josh two, so the gap gave back two of the four it had closed): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has now sat anywhere between 17 and 30. Quote the two
@@ -472,15 +472,58 @@ Standing backlog, roughly prioritised:
   *(Heading collision to avoid: **#1 is already titled "I don't know yet"**, so a
   note on this clip wants a different heading even though the clip's own title is
   hers.)*
-- **The journal is at 174 entries and still only 6 free.** Ten `premium` pages
+- **The journal is at 179 entries and still only 6 free.** Ten `premium` pages
   landed on 11-05 — five beside Episode 6, three beside *Everybody Else*, one
   beside *One Number Off*, and one beside **Come Home, a free clip whose page is
-  members-only** — and **five more on 2026-11-11, all beside Episode 7**. So
-  Episodes 6 and 7 both carry journal coverage while **no episode carries a
-  Between Takes note**: two separate backlogs, and the one this file tracks is
-  the notes. That is the separate-access rule with a third
-  instance, and the most quotable one: *Come Home* is the piece a non-member can
+  members-only** — **five more on 2026-11-11, all beside Episode 7**, and **five
+  more on 2026-11-13: three beside Episode 4 and two beside
+  `luna-josh-kitchen-argue`**, all `premium`. **Four of the seven episodes carry
+  journal pages** — 4 has three, 5 has five, 6 has five, 7 has five; the pilot,
+  2 and 3 have none — while **no episode carries a Between Takes note**: two
+  separate backlogs, and the one this file tracks is the notes. *(This line said
+  "Episodes 6 and 7" on 11-11 and was **already wrong when written** — Episode 5
+  had five pages by then. Derive it from `sceneSlug`, do not count the ones a
+  commit message mentions.)* The *Come Home* page remains the most quotable
+  instance of the separate-access rule: the clip is the piece a non-member can
   watch, and the writing about it is not.
+- **Five draft journal pages arrived on 2026-11-13 and three of them put new
+  things into visible copy.** All five are `premium`, all five say **DRAFT
+  PROSE, replace it** in their own comments — the same standing as a note on
+  this branch, so do not quote them as settled.
+  **Reed is now named in copy a reader can reach.** He was writer material and
+  a face in Episode 4's **free** 2:38 opening — hit on the ridge, Tyson keeping
+  him alive, ending on *"Medic! I need help!"* — and `who-was-it` is the first
+  place his **name** appears in prose. **That he dies is from Melissa's full
+  synopsis, which she cut: the public synopsis names no death and neither does
+  the footage.** A note may say Tyson lost a teammate and was woken by it; it
+  must not kill Reed on the page, and nothing about the mission beyond the name
+  is usable. He has **no `lib/content/` entry** — the Miller / Evan / Matt /
+  Ashley / Frank bucket, but the only one of them now spoken in copy.
+  **Why Luna is staying at Tyson's apartment is not said in Episode 4, so
+  nothing on the site says it** — the pages are explicit about leaving it out.
+  And the pages settle a canon conflict the other way from the older file:
+  2026-09-11 canon calls the apartment somewhere she *"never had a reason to
+  go"*; the episode is newer and wins (CLAUDE.md's rule), but **do not write the
+  reason either way**.
+  **"I love you", both directions, is on screen in Episode 4** — said as twenty
+  years of friendship and nothing else, days into the separation. It is not
+  evidence against `tyson-no-early-feelings`; the pages keep Tyson to what she
+  saw and heard, and a note must too.
+- **The two kitchen-argue pages tighten that scene's guard rather than loosening
+  it.** `his-truck` and `i-dont-know-yet` sit beside `luna-josh-kitchen-argue`,
+  premium like the scene past its 30-second opening — **a fourth instance of
+  footage and page carrying separate access**, and like `luna-ty-lkehous-fight`
+  it is the window, not the clip, that differs. Three rulings in their comment:
+  **the grab is not a warning on the page** — she reads it as fear because he
+  told her he was scared, and *"the control arc is writer knowledge; nothing
+  here points at it"*, so a note must not point at it either; **her "no" is
+  true**, and the page goes no further into her side than `new-york` already
+  did and says nothing at all about Tyson's; and **Josh says "cousin" on
+  screen** while canon says **second cousin**, so the page avoids the word
+  rather than repeating or correcting it — the cleanest demonstration yet of
+  how that open conflict is handled. Quoted on the pages: *"I don't have to beg
+  him to show up"* and *"I don't know yet"*. **Not quoted: *"Don't grab me like
+  that"*.**
 - **"The Night Everything Changed" (the house party): part of it is public now,
   and the sentence above it in this file lasted a day.** It read *"writer
   knowledge and must not be posted at all"*, written 2026-11-06 from the 11-04

@@ -2631,6 +2631,73 @@ export const journal: JournalEntry[] = [
     ],
   },
   /*
+    EPISODE 4, PEACE AND QUIET: TWO PAGES FROM THE NIGHT OF THE NIGHTMARE,
+    added 2026-11-13 (Melissa: "do 5 journal entries"), members-only like the
+    episode past its free firefight. The episode had no pages; its suit scene
+    already has `it-suits-you` and its Navy flashback has its own page, so
+    these cover the four in the morning and, after `it-suits-you`, the dinner.
+
+    ON SCREEN: she is staying at his apartment ("I'm a terrible roommate",
+    "I kind of took over your bathroom") and knocks when she hears him. Why
+    she is staying there is not said in the episode, so the pages don't say
+    it either. Older canon (2026-09-11) has the apartment as somewhere she
+    "never had a reason to go"; the episode is newer and wins.
+
+    REED: named on screen, and she says "you told me you did everything you
+    could", so she has heard about him before. How and when he told her is
+    invented ("once, years ago") and hers to cut. Nothing about the mission
+    beyond the name.
+
+    "I love you" both ways is on screen. Twenty years of friendship, said as
+    that and nothing else; days into the separation, still the best-friend
+    dynamic (her brief). Tyson is only what she saw and heard
+    (tyson-no-early-feelings).
+
+    One line quoted per page. Invented and hers to cut: the building noises,
+    her not sleeping since she left, the counter in his bathroom.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "who-was-it",
+    addedOn: "2026-11-13",
+    dateline: "Four in the morning, through his wall",
+    place: "tysons-apartment",
+    about: ["luna", "tyson"],
+    sceneSlug: "episode-4",
+    access: "premium",
+    mature: false,
+    body: [
+      "I told Ty I was already awake, and he didn't believe me, and it was true anyway. I haven't slept through a night since I left. I lie there and learn the sounds of a building I don't know. The elevator. Somebody's dishwasher. The ice maker in his kitchen, which goes off like a small avalanche every forty minutes.",
+      "Tonight it was him.",
+      "I've heard Tyson talk in his sleep before. On a bus to a tournament when we were kids, in the back of my car. Never like that. The yelling was new. I stood outside his door longer than I'd like to admit, because I didn't know if it was mine to knock on.",
+      "I asked who, and he said Reed, and nothing else, and that was plenty. He told me about Reed once, years ago, in about four sentences, and I have never asked for a fifth. You don't. Not with Ty.",
+      "Then he tried to look after me. Apologized for waking me, asked if I was okay, at four in the morning, with his hands still not steady. I told him we weren't doing that. He doesn't get to be the one checking on me tonight.",
+      "\"You can't just decide it didn't happen.\" I said it to him, and I meant him, and I heard it on the way out of my mouth and knew it was about me too. Ten years. You can't decide those didn't happen either. I've been trying, a little, this week, and it doesn't work for me any better than it works for him.",
+      "Before I went back to bed I told him I loved him. We don't say it much. We've never needed to. It has meant exactly the same thing since I was eighteen, and it was the only true thing I had to give him at four in the morning, so I gave it.",
+      "He said it back. Then I lay down the hall and listened to his apartment be quiet, and neither of us slept.",
+    ],
+  },
+  {
+    id: "a-terrible-roommate",
+    addedOn: "2026-11-13",
+    dateline: "The quiet, which neither of us can stand",
+    place: "tysons-apartment",
+    where: "His bathroom counter, mostly",
+    about: ["luna", "tyson"],
+    sceneSlug: "episode-4",
+    access: "premium",
+    mature: false,
+    body: [
+      "\"I've spent half my life trying to get some peace and quiet. Now I can't stand it.\" Ty said that to me at four this morning, and he thinks it's a sentence about him.",
+      "It's about me too. For ten years I lived in a house that was never quiet. Boots by the door at six. The TV on in a room nobody was in. Josh on the phone in the kitchen, the dogs, the guys from the farm at the back door wanting him for something. I used to dream about an empty house. I used to plan what I'd do with one.",
+      "I have one now, more or less. And the quiet is the loudest thing in it. It's where every thought I've been putting off has been waiting for me.",
+      "So I suppose I'm making noise in his. I told him I was a terrible roommate, and I am. My things are all over his bathroom counter, which used to hold a toothbrush, a razor, and one bottle of something that smells like a hardware store. He noticed. He didn't say a word about it until I did. That's him.",
+      "He said he always worries about me. He said it like it was obvious, and I suppose it is. I just haven't heard anybody say it out loud in a long time.",
+      "Two people who can't stand the quiet, in one apartment, keeping each other company in it. It's not a solution. It's just better than doing it alone.",
+    ],
+  },
+  /*
     THE SUIT. Added 2026-10-11 beside `luna-ty-suit` ("It Suits You"),
     members-only like the scene past its first minute.
 
@@ -2671,6 +2738,36 @@ export const journal: JournalEntry[] = [
       "And I still love Josh. I checked on the drive home, the way you pat your pocket for your keys. Still there.",
       "It was one minute in a shop. A man I know better than anyone looked like somebody I didn't know, and I looked too long. That's all it was.",
       "I'm not going to think about what he was going to say.",
+    ],
+  },
+  /*
+    EPISODE 4, THE DINNER: the end of the episode, the same day as the suit,
+    so it sits right after `it-suits-you` (see the note above `who-was-it`).
+    Twenty minutes picking dinner, the nudge, her threatening to kick him, and
+    "Order dinner." The page is about her laughing, nothing more; it does not
+    look back at the tailor's. Invented and hers to cut: the menus, "the first
+    half hour since I left".
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "you-started-it",
+    addedOn: "2026-11-13",
+    dateline: "Twenty minutes to pick dinner, and I'd do it again",
+    place: "tysons-apartment",
+    where: "The couch",
+    about: ["luna", "tyson"],
+    sceneSlug: "episode-4",
+    access: "premium",
+    mature: false,
+    body: [
+      "It took us twenty minutes to decide what to eat tonight, and we never actually decided. He kept saying pizza. He said pizza from four different places and acted like those were four different ideas.",
+      "Then he nudged me, and I warned him, and he did it again, and then it was a war. I threatened to kick him. I told him it wouldn't be my fault. He said I was mad now, in that voice, and I laughed so hard I couldn't get any air.",
+      "I want to remember that. Not because anything happened. Because nothing did. Two grown people on a couch being idiots about dinner, the TV on, the phone with the menus face down on the cushion between us.",
+      "It's the first half hour since I left that I forgot to be sad. I didn't notice I'd forgotten until it was over and I felt it come back, like walking out of a warm room.",
+      "\"Order dinner,\" he said, like a man ending a negotiation. So I did. Pizza. Obviously.",
+      "Ten years of dinners and I can't remember the last time one of them was any fun to decide. That isn't fair to Josh. Some of it is me. I stopped being any fun to eat with a long time ago, I think, somewhere around when every dinner became a conversation we weren't having.",
+      "Tonight was just dinner. I'd forgotten that was allowed.",
     ],
   },
   /*
@@ -3683,6 +3780,70 @@ export const journal: JournalEntry[] = [
       "We have a car at four. I have to go down and have breakfast with him and be a person.",
       "The thing I keep coming back to is not what he did not say. It is that I did not say it either, and I had the whole night, and I have been telling myself for a month that I am waiting on him.",
       "One of us was going to have to and neither of us did, and we both got on a plane home about it.",
+    ],
+  },
+  /*
+    TWO PAGES BESIDE `luna-josh-kitchen-argue` ("I Don't Know Yet"), added
+    2026-11-13, members-only like the scene past its first thirty seconds.
+    Placed after `new-york` and before Tyson stops picking up, which is the
+    STORY_ORDER slot (hand-placed, a guess, Melissa to move it; move these
+    with it).
+
+    One line quoted per page: "I don't have to beg him to show up" and "I
+    don't know yet". "Don't grab me like that" is not quoted; the grab is in
+    the page, and so is his apology.
+
+    THE GRAB IS NOT A WARNING on this page. She takes it as fear, because he
+    told her he was scared and she believes him. The control arc is writer
+    knowledge; nothing here points at it.
+
+    HER "NO" IS TRUE: nothing has happened (`new-york`: "nothing happened").
+    The page does not go further into her side than `new-york` already has,
+    and says nothing about Tyson's. Josh says "cousin"; canon is second
+    cousin, so the page doesn't use the word.
+
+    Invented and hers to cut: the dish towel, the headlights on the road.
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "his-truck",
+    addedOn: "2026-11-13",
+    dateline: "Josh has been driving by",
+    place: "lakehouse",
+    where: "The kitchen",
+    about: ["luna", "josh", "tyson"],
+    sceneSlug: "luna-josh-kitchen-argue",
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh has been driving past the lakehouse. Not once. Enough times to know whose truck is in the driveway, and to come inside tonight with it already decided.",
+      "That's what I was angry about first. Not the question. The headlights. All those nights I thought were mine, and somebody was counting them from the road.",
+      "Then he asked, and I said no, because the answer is no. Nothing is going on. I've written down exactly how much nothing is going on. I don't have to defend it to anybody, and I still heard myself doing it, in my own kitchen, holding a dish towel like it could help.",
+      "\"I don't have to beg him to show up.\" I said that to Josh. I watched it land. I've been carrying that sentence around for about three years, and tonight it came out whole, in the worst possible way, at the worst possible moment.",
+      "And I meant it. That's what I can't get past. It wasn't cruel because it was untrue. It was cruel because it was ten years in one breath, and I handed it to him like a bill.",
+      "Ty comes over. We eat. We watch TV. That's what I said and that's what happens. What I didn't say is why it matters so much that somebody just comes, without being asked, without me making the case for it first. Josh heard it anyway. I think that's the part that frightened him.",
+    ],
+  },
+  {
+    id: "i-dont-know-yet",
+    addedOn: "2026-11-13",
+    dateline: "He asked me, and I told him the truth",
+    place: "lakehouse",
+    where: "The kitchen",
+    about: ["luna", "josh"],
+    sceneSlug: "luna-josh-kitchen-argue",
+    access: "premium",
+    mature: false,
+    body: [
+      "He said he was scared. Josh doesn't say that. I've heard him say it maybe twice in ten years, and both times somebody was in a hospital. So when he said it, I stopped fighting, because I believed him.",
+      "He grabbed my arm tonight, before that. Not hard, but he did, and I had to tell him not to, and I've never had to say that to him in my life. Before he left he said he shouldn't have, before I brought it up. I think he was scared and his hand got there before the rest of him did. I'm writing it down because it happened, and I want this book to have everything in it.",
+      "I told him Tyson isn't the reason we aren't together. That's true. The reason has a sentence now, and it doesn't have anybody's name in it but ours.",
+      "Then he said he still wants to work this out. And he asked me.",
+      "\"I don't know yet.\"",
+      "For ten years I always knew. Whatever he asked, I had the answer ready before he finished asking, because the answer was always us. Tonight I opened my mouth and there wasn't one there, and I didn't make one up.",
+      "I watched him hear it. He didn't argue. He just looked at me like I was a long way off.",
+      "Maybe I am. I don't know that yet either.",
     ],
   },
   /* ------------------------------------------ month five, he stops answering ---

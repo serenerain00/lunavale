@@ -693,6 +693,14 @@ Standing backlog, roughly prioritised:
   `pickHero()` choosing something else). It is the first check that fires on a
   *window* rather than on repo state, so a run inside those five days can fail
   for a reason that was fine the day before.
+  **It also prints nothing at all when no pin is live, and that is the normal
+  state.** The rule looks for a pin whose five days contain *now*
+  (`scripts/health-check.ts:335`), so outside a window there is no `Hero:` line
+  in the output. Episode 7's pin ran to **2026-11-14** and the 11-15 run prints
+  no hero line — **the window closing, not a break.** Do not read a missing
+  line as a regression, and do not quote a `Hero:` line here as current: this is
+  the second claim in this file to go false on the clock rather than on a commit,
+  after the pilot's open window.
 - **Ordinal positions in `STORY_ORDER` are not stable, and two in this file were
   badly wrong.** A clip inserted mid-list shifts everything after it — which
   `luna-ty-garage-event` just did at position 27 — and Melissa also hand-moves

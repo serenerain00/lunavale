@@ -63,6 +63,15 @@ export default async function HelpPage() {
               access until the end of the period you have already paid for. No
               email required, and nobody will try to talk you out of it.
             </Answer>
+            <Answer q="Can I get a refund?">
+              Payments aren&rsquo;t refunded, but canceling stops the next
+              charge and you keep access to the end of the month you paid for.
+              A double charge is refunded automatically. The details are in{" "}
+              <Link href="/terms#refunds" className="text-amber underline decoration-hairline underline-offset-4">
+                Terms &amp; refunds
+              </Link>
+              .
+            </Answer>
             <Answer q="A video won't play.">
               Tell her which one, and what you were using — phone or computer,
               and which browser. That is usually enough to find it.

@@ -7,6 +7,7 @@ import { ClerkViewerSync } from "@/components/access/ClerkViewerSync";
 import { authConfigured } from "@/lib/billing/provider";
 import { Caveat, Fraunces, Inter } from "next/font/google";
 import { BackToTop } from "@/components/ui/BackToTop";
+import { SiteFooter } from "@/components/ui/SiteFooter";
 import "./globals.css";
 
 // Display serif for titles; highly readable sans for controls and metadata.
@@ -164,6 +165,9 @@ export default function RootLayout({
           {authConfigured() && <ClerkViewerSync />}
           {children}
         </ViewerProvider>
+
+        {/* Company details and terms, every page (2026-11-15). */}
+        <SiteFooter />
 
         {/* Every page, outside the provider — it needs nothing from it. */}
         <BackToTop />

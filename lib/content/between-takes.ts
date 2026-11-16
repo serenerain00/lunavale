@@ -530,6 +530,22 @@ export const notes: SetNote[] = [
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work in that room than I am.",
     ],
   },
+  {
+    id: "rick-never-turn-around",
+    author: "rick",
+    kind: "insight",
+    heading: "I never turn around",
+    dateline: "Day 20 · the lake",
+    sceneSlug: "josh-rick-lake",
+    place: "lake",
+    access: "premium",
+    body: [
+      "My son drives out to ask me how to fix his life and I keep a line in the water the whole time. Melissa and I went back and forth on whether I ever turn around. We settled on no. Not when he asks, and not when he stops asking.",
+      "I already know where Luna is staying before he opens his mouth — Cathy told me — and he does not learn that until he has finished explaining it to me. I let him explain it anyway. That is not cruelty and I did not play it as cruelty. It is a man who has been a step ahead of his son his whole life and has never once thought to hand the lead back.",
+      "The line I would keep is “Good. Now you know how she felt.” It is the kindest thing I say all day and it still arrives as a verdict. That is the trouble with me in four words: I was right about her, I am right about him, and being right has never been the slightest use to him.",
+      "There is no score under any of it. Fifty-seven seconds, moving water, two men not looking at each other. I did not realize until I watched it back how much of my performance is being done by the back of my own head.",
+    ],
+  },
 
   /* ==================================================================
      WRITTEN TO EACH OTHER

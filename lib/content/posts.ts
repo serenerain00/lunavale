@@ -1096,6 +1096,37 @@ const authored: Clip[] = [
     about: ["luna"],
     mature: false,
   },
+  {
+    /*
+      THE HOTEL HALLWAY. Melissa, 2026-11-16: "post this as a free IG clip
+      luna-ty-hotelhall". FREE: it runs on Instagram, so there is nothing to gate.
+
+      Ty carries Lu piggyback down a hotel corridor, both laughing, looking
+      for the room. Heard: "Okay, hold on." / "Lu, what's our room number?" /
+      "Ty, just go straight." / "Ty, you're really good at this." / "There's no
+      one here." It ends as they reach the door.
+
+      NOT THE NEW YORK SCENE: different wardrobe and look from
+      luna-ty-nyc-hotel, so no fullSceneSlug and the copy names no city or
+      night. Where it sits in the story is hers to say.
+
+      THE COPY IS FRIENDS, ON PURPOSE. Playful and close, and nothing in the
+      footage is more than that; "our room" is not quoted, so the caption
+      implies nothing about who is staying where. Title and caption are
+      placeholders, hers to replace.
+    */
+    id: "luna-ty-hotelhall",
+    title: "Just Go Straight",
+    caption:
+      "Twenty years of friendship, one long hotel hallway, and neither of them sure which door it is.",
+    file: "luna-ty-hotelhall.proxy.mp4",
+    poster: "/posters/luna-ty-hotelhall.jpg",
+    // 34.2, the whole file.
+    durationSeconds: 34,
+    addedOn: "2026-11-16",
+    about: ["luna", "tyson"],
+    mature: false,
+  },
 ];
 
 /**

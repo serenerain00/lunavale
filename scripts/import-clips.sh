@@ -303,6 +303,11 @@ CLIPS=(
   # NO END TRIM: no black, and "have a good one" runs to the last second.
   # POSTER AT 17.5s: Luna smiling wide, iced coffee in hand, the street behind.
   "luna-sidewalk-interview|stories/luna-sidewalk-interview/luna-sidewalk-interview.mp4|17.5"
+  # THE HOTEL HALLWAY, 2026-11-16. Melissa: "post this as a free IG clip
+  # luna-ty-hotelhall". 1320x806 landscape, 60fps, 34.2s, from Downloads.
+  # NO END TRIM: no black; it ends as they go through the door.
+  # POSTER AT 7.5s: both laughing at camera, Luna on his back, the hall behind.
+  "luna-ty-hotelhall|stories/luna-ty-hotelhall/luna-ty-hotelhall.mov|7.5"
 )
 
 want=("$@")

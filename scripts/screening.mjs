@@ -18,7 +18,7 @@
  *   node --env-file=.env.local scripts/screening.mjs list
  *   node --env-file=.env.local scripts/screening.mjs close <token-prefix>
  *   node --env-file=.env.local scripts/screening.mjs extend <token-prefix> 2027-06-30
- *   node --env-file=.env.local scripts/screening.mjs password <token-prefix>   # new password
+ *   node --env-file=.env.local scripts/screening.mjs password <token-prefix> [--pw=…]   # new password
  *   node --env-file=.env.local scripts/screening.mjs replace <token-prefix> --file=… [--poster-at=50]
  *     (a new cut: same link, same password; the old film is deleted from Blob)
  *
@@ -134,7 +134,10 @@ if (cmd === "replace") {
   console.log(`open until ${positional[1]}`);
 } else if (cmd === "password") {
   const t = await one(positional[0]);
-  const pw = password();
+  // --pw=… sets one of Melissa's choosing (something she can remember for a
+  // festival form); without it, a random one is generated.
+  const pw = arg("pw") ?? password();
+  if (pw.length < 8) throw new Error("Pick at least 8 characters.");
   // New cookie secret too, so anybody let in with the old password is out.
   await sql`UPDATE screenings SET password_hash = ${hash(pw)},
               cookie_secret = ${randomBytes(32).toString("hex")} WHERE token = ${t}`;

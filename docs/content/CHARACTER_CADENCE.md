@@ -47,7 +47,42 @@ character page changed this week.
 month."* Leave it that way even while shipping weekly. Under-promise and
 over-deliver: a monthly promise kept for a year is worth more than a weekly
 promise missed twice. Only raise the copy once the cadence has survived a
-couple of months.
+couple of months. **Re-checked at the 11-16 merge: still there, both arms of
+the blurb.**
+
+**Two public promises joined it on 2026-11-15**, on the new `/terms` page: *"If
+the price ever changes, we'll email you before it applies to you"* and, on a
+double charge, *"the second payment is refunded automatically"*. The second is a
+claim about what the system does, not about intent, so it belongs on the same
+shelf as the monthly promise — **do not write copy anywhere that softens or
+restates either, and treat a money check that contradicts them as urgent.**
+Otherwise the page is firm: payments are not refunded, including for a partly
+used month.
+
+## The site speaks as "us", not as Melissa
+
+From **2026-11-15** her name is off the visitor-facing copy. The Help page used
+to say *"Luna Vale is made by one person… what you write here reaches Melissa,
+and she answers most of it herself"* and *"Ask, and she'll answer."* It now says
+*"a small independent studio"*, *"the people who make the series"*, and *"Ask,
+and we'll answer."* `/terms` introduces the studio the same way: **"Luna Vale is
+an independent studio that makes *Between Us*."**
+
+What that does and does not touch:
+
+- **It does not touch a Between Takes note.** A note is a cast member's voice
+  about their own work, so first person singular is the whole form. This rule is
+  about the *site* speaking, not the characters.
+- **It does touch anything written as the product**, including a heading, a
+  blurb, an email or a page this file might propose. Write "we", never "she",
+  and **do not name Melissa in anything a visitor can read**.
+- Her name still appears, correctly, in **comments**, in the owner-only
+  `/admin`, and as the owner's display name in the archived group chat. Those
+  are not visitor copy; leave them.
+- A **site footer now renders on every page** (`components/ui/SiteFooter.tsx`,
+  mounted in `app/layout.tsx`): copyright, `hello@lunavale38.com`, and a link to
+  `/terms`. So **every page now carries a contact address and a terms link**,
+  which is worth knowing before writing that any page is a dead end.
 
 ## Where the gaps are
 

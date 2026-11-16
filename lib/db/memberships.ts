@@ -427,6 +427,36 @@ export async function claimPendingBySubscription(
  * two cancellations had gone missing. Looking the subscription up here first
  * sends those events to the membership that owns it.
  */
+/**
+ * The account that already proved it owns this email, by claiming an earlier
+ * pay-first membership with it.
+ *
+ * RETURNING MEMBERS WHO PAY SIGNED OUT (2026-11-16). T. Buse paid in
+ * September, claimed it, lapsed in October, and paid again signed out. The
+ * new payment went to pending_memberships, which holds one row per email —
+ * and her September row still said "active", because once a row is claimed
+ * the webhook writes to memberships and never touches it again. The guard
+ * read that stale "active" as a double payment and refused the new one. She
+ * was charged, locked out, and cancelled fifteen minutes later.
+ *
+ * The claim was made with a Clerk-verified email, which is the same proof the
+ * claim flow itself relies on, so a new payment on that address goes straight
+ * to that account. recordMembership() still refuses to replace a LIVE
+ * subscription, so a genuine double payment stays an orphan the health check
+ * reports (and refundIfDuplicate() has normally refunded it already).
+ */
+export async function userIdForClaimedEmail(
+  email: string,
+): Promise<string | undefined> {
+  if (!databaseConfigured() || !email) return undefined;
+  const rows = (await sql()`
+    SELECT claimed_by FROM pending_memberships
+    WHERE email = ${email.toLowerCase()} AND claimed_by IS NOT NULL
+    LIMIT 1
+  `) as { claimed_by: string }[];
+  return rows[0]?.claimed_by;
+}
+
 export async function userIdForSubscription(
   subscriptionId: string,
 ): Promise<string | undefined> {

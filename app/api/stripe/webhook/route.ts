@@ -30,6 +30,7 @@ import {
   recordMembership,
   recordPendingMembership,
   userIdForSubscription,
+  userIdForClaimedEmail,
 } from "@/lib/db/memberships";
 
 export const runtime = "nodejs";
@@ -117,7 +118,7 @@ async function applyEvent(event: Stripe.Event): Promise<void> {
   // lookup is what reaches members who paid before they had an account — see
   // userIdForSubscription(). Without it their renewals and cancellations were
   // filed as new purchases against an already-claimed pending row.
-  const userId =
+  let userId =
     userIdFor(subscription, event) ??
     (await userIdForSubscription(subscription.id));
 
@@ -145,8 +146,13 @@ async function applyEvent(event: Stripe.Event): Promise<void> {
   // This is NOT a failure branch and must not be treated as one. The old code
   // logged "cannot attribute" and dropped the event on the floor, which would
   // now discard every first-time purchase on the site.
+  // A returning member paying signed out: the address already belongs to an
+  // account (see userIdForClaimedEmail), so it goes straight there instead of
+  // waiting in pending_memberships behind their old, stale row.
+  const email = userId ? null : await emailForSubscription(subscription, event);
+  if (!userId && email) userId = await userIdForClaimedEmail(email);
+
   if (!userId) {
-    const email = await emailForSubscription(subscription, event);
     if (!email) {
       // Genuinely unattributable: no id and no address. Stripe always collects
       // an email at checkout, so this means something is wrong rather than

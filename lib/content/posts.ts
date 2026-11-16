@@ -1106,19 +1106,22 @@ const authored: Clip[] = [
       "Ty, just go straight." / "Ty, you're really good at this." / "There's no
       one here." It ends as they reach the door.
 
-      NOT THE NEW YORK SCENE: different wardrobe and look from
-      luna-ty-nyc-hotel, so no fullSceneSlug and the copy names no city or
-      night. Where it sits in the story is hers to say.
+      THE NEW YORK NIGHT, same as luna-ty-nyc-hotel (Melissa, 2026-11-16).
+      The wardrobe looks different because she hid Luna's dress with post
+      edits; cropped right, it doesn't break the scene. Do not "correct" it.
 
-      THE COPY IS FRIENDS, ON PURPOSE. Playful and close, and nothing in the
-      footage is more than that; "our room" is not quoted, so the caption
-      implies nothing about who is staying where. Title and caption are
-      placeholders, hers to replace.
+      THEY ARE NOT SHARING A ROOM. They're heading to TYSON'S room, a bit
+      tipsy after the dinner party, and neither remembers much ("our room
+      number" is just the drinks talking). Matches the backstory on
+      luna-ty-nyc-vertical: more drinks in HIS room.
+
+      The copy stays friends: playful and close, nothing more. Title and
+      caption are placeholders, hers to replace.
     */
     id: "luna-ty-hotelhall",
     title: "Just Go Straight",
     caption:
-      "Twenty years of friendship, one long hotel hallway, and neither of them sure which door it is.",
+      "New York, after the dinner party. A few drinks in, on the way to his room, and neither of them can remember the number.",
     file: "luna-ty-hotelhall.proxy.mp4",
     poster: "/posters/luna-ty-hotelhall.jpg",
     // 34.2, the whole file.
@@ -1126,6 +1129,8 @@ const authored: Clip[] = [
     addedOn: "2026-11-16",
     about: ["luna", "tyson"],
     mature: false,
+    // The rest of that night, members-only.
+    fullSceneSlug: "luna-ty-nyc-hotel",
   },
 ];
 

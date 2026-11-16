@@ -26,6 +26,8 @@ function setCookie(name: string, value: string, days: number) {
 
 export function CaptureAttribution() {
   useEffect(() => {
+    // Private screenings carry their secret in the path; never record it.
+    if (location.pathname.startsWith("/screening/")) return;
     try {
       const touch = touchFrom(
         location.href,

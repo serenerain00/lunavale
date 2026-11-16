@@ -276,6 +276,32 @@ async function checkLeakage() {
   if (!/explicit/.test(sitemap)) {
     fail("Sitemap does not exclude explicit clips");
   } else ok("Sitemap excludes explicit and closed-door posts");
+
+  // PRIVATE SCREENINGS (2026-11-16): a festival's password page for a scene
+  // that may be seasons from release. Its only protection beyond the password
+  // is that nothing points at it, so: no link to /screening/ anywhere in the
+  // site's code or content, it stays off-limits in robots, and analytics stay
+  // off it (Clarity and the attribution cookie both record URLs).
+  const linkers: string[] = [];
+  const allowed = /^(app\/screening\/|app\/api\/screening\/|app\/robots\.ts|lib\/db\/screenings\.ts|components\/analytics\/(ClarityScript|CaptureAttribution)\.tsx)/;
+  for (const dir of ["app", "components", "lib"]) {
+    for (const f of await readdir(path.join(ROOT, dir), { recursive: true })) {
+      const rel = `${dir}/${f}`;
+      if (!/\.(tsx?|mdx?)$/.test(rel) || allowed.test(rel)) continue;
+      if ((await read(rel)).includes("/screening/")) linkers.push(rel);
+    }
+  }
+  if (linkers.length) fail("Something on the site points at a private screening", linkers.join(", "));
+  else ok("Nothing on the site links to a private screening");
+  const guards = [
+    [await read("app/robots.ts"), '"/screening/"', "robots no longer keeps crawlers off /screening/"],
+    [await read("components/analytics/ClarityScript.tsx"), '"/screening/"', "Clarity is no longer kept off screenings"],
+    [await read("components/analytics/CaptureAttribution.tsx"), '"/screening/"', "the attribution cookie can now record a screening URL"],
+    [await read("app/screening/[token]/page.tsx"), "index: false", "the screening page is no longer noindex"],
+  ] as const;
+  const broken = guards.filter(([text, needle]) => !text.includes(needle)).map(([, , why]) => why);
+  if (broken.length) fail("A private screening guard is gone", broken.join("; "));
+  else ok("Screenings stay noindex, out of robots and out of analytics");
 }
 
 /* ═════════════════════════ C. Content integrity ════════════════════════════
@@ -384,6 +410,18 @@ async function checkMoney() {
   if (!process.env.DATABASE_URL) { warn("DATABASE_URL not set — skipped"); return; }
   const { neon } = await import("@neondatabase/serverless");
   const sql = neon(process.env.DATABASE_URL);
+
+  // Which private screenings are open, and until when — so one is never left
+  // running long after the festival without anybody deciding that.
+  try {
+    const open = (await sql`SELECT title, closes_at, note FROM screenings WHERE closes_at > now() ORDER BY closes_at`) as
+      { title: string; closes_at: Date; note: string | null }[];
+    if (open.length) {
+      ok(`${open.length} private screening(s) open`,
+        open.map((r) => `${r.title}${r.note ? ` (${r.note})` : ""} until ${new Date(r.closes_at).toISOString().slice(0, 10)}`).join("; ") +
+        ". Close with: node --env-file=.env.local scripts/screening.mjs close <prefix>");
+    }
+  } catch { /* table not created yet */ }
 
   // THE WORST OUTCOME THIS PRODUCT CAN PRODUCE. Checkout runs before the
   // account exists, so there is a window where a payment exists and a user id

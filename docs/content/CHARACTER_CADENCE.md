@@ -146,14 +146,18 @@ he turns. What to watch is how much of his material makes that case. **He is one
 of the three all three episodes are about**, and the episodes are the first
 thing a new member watches.
 
-**Rick is the real hole.** Fourteen pieces against Josh's hundred-and-twenty-odd,
+**Rick is the real hole.** **Fifteen pieces against Josh's 171 at 2fbd94a** —
 and he is the entire explanation for Josh. Every note written for Rick is doing
 double duty on the character the story most needs an audience to like first,
-which makes him the cheapest way to feed Josh as well. He is in seven clips now
-and **six of them carry no note**: `josh-ty-ricks-house` (*The Safe*),
+which makes him the cheapest way to feed Josh as well. **These two figures were
+"fourteen" and "hundred-and-twenty-odd" for weeks after both had moved** — the
+sentence survived because it reads like prose rather than a number. Re-derive
+both before repeating it. He is in eight pieces now
+and **seven of them carry no note**: `josh-ty-ricks-house` (*The Safe*),
 `ty-josh-rick-accident` (*What Was Agreed*), `josh-rick-lake` (*The Lake* — the
-contested slot, not a real gap), both episodes, and `luna-detectives` (*The
-Interview*, 2026-10-11) — October keeps adding him to things. Only
+contested slot, not a real gap), both episodes, `luna-detectives` (*The
+Interview*, 2026-10-11) and **`josh-rick-cigarBar-square`** (the cigar lounge,
+free, 2026-11-09) — the additions have not stopped. Only
 `josh-rick-study` is covered. The accident is still the
 one to take first: published **free**, second in the order, and about the
 character who explains Josh — a note on a free piece is the shop window, and
@@ -182,23 +186,45 @@ would have made the clause false in the same commit that cited it. It is in the
 Josh item too.)*
 
 > **READ THE OPEN PULL REQUESTS BEFORE PICKING A SUBJECT.** Added 2026-08-25,
-> updated 2026-11-09. The backlog below describes `main`, and `main` is behind:
+> updated 2026-11-16. The backlog below describes `main`, and `main` is behind:
 > the drops for 2026-08-03, 08-10, 08-17, 08-31, 09-07, 09-14, 09-21, 10-05,
-> 10-12, 10-19, 10-26, 11-02 and 11-09 are all still open and unmerged (#1, #2,
-> #3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14), as is this one (#4) —
-> **fourteen weeks of drops, nothing landed.**
+> 10-12, 10-19, 10-26, 11-02, 11-09 and 11-16 are all still open and unmerged
+> (#1, #2, #3, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15), as is this one
+> (#4) — **fifteen weeks of drops, nothing landed.**
 > A weekly run clones the repo fresh, so it cannot see any of them — and
-> **thirteen** separate weeks have now independently picked the same obvious gap
+> **fourteen** separate weeks have now independently picked the same obvious gap
 > and written the same note, a Rick `insight` note on `josh-rick-lake`: #2, #3,
-> #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, and #4 before it was rewritten.
+> #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, **#15**, and #4 before it was
+> rewritten.
 > Most ids differ (#5 `rick-i-already-knew`, #8 `rick-already-knew`, #9
 > `rick-the-line-in-the-water`), so merging two of those would not collide — it
-> would quietly give Rick the same page twice. **There are now two colliding
+> would quietly give Rick the same page twice. **There are two colliding
 > pairs: #10 and #11 are both `rick-round-the-outside`, and #12 and #14 are both
 > `rick-never-look-at-him` under the same heading** — either pair would actually
 > conflict rather than duplicate silently. Do not generalise either way — read
 > the ids. Whatever this file says is uncovered, check it against the open PRs
 > first.
+>
+> **#15, the 2026-11-16 run, is the best-made of the fourteen and changes
+> nothing.** *"I never turn around"* (`rick-never-turn-around`, Rick `insight`,
+> premium, `josh-rick-lake`) is **a new id** — no collision, and not a near-miss
+> on an id either, though it joins #12 and #14 in the *"I never …"* heading
+> family, so match headings as well as ids before merging any two. **It leaked
+> nothing** and, unusually, **every derived claim in it checks out**: the clip is
+> **57 seconds** and the entry's own audio note says *confirmed NO SCORE*, both
+> of which the note states; and *"Cathy told me"* is grounded in the synopsis
+> (*"has already spoken to her mother"*) with `characters.ts` giving Cathy's role
+> as **Luna's mother** — it invents no relationship. Treat it as evidence that
+> the repetition is structural rather than careless: a run doing the job well,
+> on the gap `main` really does show, arriving at the fourteenth copy of it.
+> **It also did something no previous run did**: it replaced the stale *"As
+> built, 2026-07-28"* counts table on `main` with figures derived from
+> `countFor()` / `lockedCountFor()`. Its table reads Luna 12 / 283 / 237, Tyson
+> 12 / 199 / 171, **Josh 13 / 170 / 147, Rick 2 / 16 / 14** — which disagrees
+> with this branch's table and **is correct on its own branch**, because
+> `countFor()` sees that branch's own note. Josh is 13 there and 14 here because
+> #4 adds a Josh note; Rick is 2 there and 1 here for the mirror reason. Do not
+> "fix" one table against the other.
 >
 > **#14, the 2026-11-09 run, is the one that settles the argument.** By then
 > `main` carried `luna-josh-kitchen-argue` (a Josh scene at the lakehouse with

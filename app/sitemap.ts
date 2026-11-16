@@ -66,6 +66,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/", 1.0, "daily"),
     entry("/about", 0.9, "monthly"),
     entry("/twenty-questions", 0.8, "monthly"),
+    // Terms, refunds and company details (2026-11-15).
+    entry("/terms", 0.3, "yearly"),
 
     // The indexes. /clips is first and rated highest of them because it is
     // now the main way into the library — it did not exist before 2026-09-16

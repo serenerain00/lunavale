@@ -7,7 +7,7 @@ import { authConfigured } from "@/lib/billing/provider";
 export const metadata: Metadata = {
   title: "Help",
   description:
-    "Something not working, a question about your membership, or something you just want to say — it reaches Melissa directly.",
+    "Something not working, a question about your membership, or something you just want to say — it reaches us directly.",
   alternates: { canonical: "/help" },
 };
 
@@ -31,12 +31,12 @@ export default async function HelpPage() {
         <header className="pb-8 pt-12 sm:pt-16">
           <p className="text-xs uppercase tracking-[0.2em] text-amber">Help</p>
           <h1 className="mt-4 font-display text-3xl font-light leading-[1.15] text-ivory sm:text-5xl">
-            Ask, and she&rsquo;ll answer.
+            Ask, and we&rsquo;ll answer.
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-stone">
-            Luna Vale is made by one person. There&rsquo;s no support desk —
-            what you write here reaches Melissa, and she answers most of it
-            herself.
+            Luna Vale is a small independent studio. There&rsquo;s no support
+            desk — what you write here reaches the people who make the series,
+            and they answer it.
           </p>
         </header>
 
@@ -53,7 +53,7 @@ export default async function HelpPage() {
               Sign out and back in — access is read when you sign in, so a
               membership bought in another tab sometimes needs that. If it is
               still locked after that, write below and say which page; it is a
-              real bug and she will want to know.
+              real bug and we will want to know.
             </Answer>
             <Answer q="How do I cancel?">
               <Link href="/account" className="text-amber underline decoration-hairline underline-offset-4">
@@ -63,13 +63,22 @@ export default async function HelpPage() {
               access until the end of the period you have already paid for. No
               email required, and nobody will try to talk you out of it.
             </Answer>
+            <Answer q="Can I get a refund?">
+              Payments aren&rsquo;t refunded, but canceling stops the next
+              charge and you keep access to the end of the month you paid for.
+              A double charge is refunded automatically. The details are in{" "}
+              <Link href="/terms#refunds" className="text-amber underline decoration-hairline underline-offset-4">
+                Terms &amp; refunds
+              </Link>
+              .
+            </Answer>
             <Answer q="A video won't play.">
-              Tell her which one, and what you were using — phone or computer,
+              Tell us which one, and what you were using — phone or computer,
               and which browser. That is usually enough to find it.
             </Answer>
             <Answer q="Can I use a still or a clip somewhere?">
               Ask. The answer is often yes with a credit, but it has to be
-              asked — everything here is her work.
+              asked — everything here is original work.
             </Answer>
             <Answer q="Something in the story is wrong, or upsetting.">
               Say so plainly below. Content notes exist for a reason and if one
@@ -81,7 +90,7 @@ export default async function HelpPage() {
         <HelpForm defaultEmail={email ?? undefined} />
 
         <p className="mt-6 text-xs leading-relaxed text-stone-dim">
-          Your message is stored so she can answer it, and is never shown to
+          Your message is stored so we can answer it, and is never shown to
           anyone else or published anywhere.
         </p>
       </main>

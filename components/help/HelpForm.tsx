@@ -19,8 +19,8 @@ export function HelpForm({ defaultEmail }: { defaultEmail?: string }) {
       <div className="rounded-xl border border-amber/25 bg-amber/[0.04] p-6 sm:p-8">
         <h2 className="font-display text-2xl text-ivory">That&rsquo;s sent.</h2>
         <p className="mt-2 max-w-lg text-sm leading-relaxed text-stone">
-          It goes straight to Melissa. She reads everything, and she answers
-          most things — but she&rsquo;s one person making a series, so give her a
+          It goes straight to us. We read everything and answer most
+          things — but we&rsquo;re a small studio making a series, so give us a
           few days before you assume it vanished.
         </p>
       </div>
@@ -51,7 +51,7 @@ export function HelpForm({ defaultEmail }: { defaultEmail?: string }) {
       />
 
       <label htmlFor="body" className="mt-5 block text-sm text-stone">
-        Tell her
+        Tell us
       </label>
       <textarea
         id="body"
@@ -71,11 +71,11 @@ export function HelpForm({ defaultEmail }: { defaultEmail?: string }) {
         name="replyTo"
         type="email"
         defaultValue={defaultEmail}
-        placeholder="Optional — only so she can answer you"
+        placeholder="Optional — only so we can answer you"
         className="mt-2 w-full rounded-lg border border-hairline bg-void px-4 py-2.5 text-base text-ivory placeholder:text-stone-dim focus:border-amber focus:outline-none"
       />
       <p className="mt-2 text-xs text-stone-dim">
-        Leave it blank if you&rsquo;d rather. She just won&rsquo;t be able to
+        Leave it blank if you&rsquo;d rather. We just won&rsquo;t be able to
         reply.
       </p>
 

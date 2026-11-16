@@ -42,15 +42,16 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-07-28:
+As built, 2026-10-05 (notes counts include replies, the way the hubs count them):
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 8 | 44 | 23 |
-| Tyson | 8 | 44 | 33 |
-| Josh | 8 | 35 | 21 |
+| Luna | 12 | 172 | 146 |
+| Tyson | 12 | 132 | 116 |
+| Josh | 13 | 103 | 91 |
+| Rick | 2 | 11 | 10 |
 
-**Josh is the thinnest** and is the one who benefits most from more. He is the
+**Of the three leads Josh is the thinnest** and is the one who benefits most from more. He is the
 hardest character to hold an audience's sympathy for, the whole story depends
 on him being genuinely likeable before he turns, and he has the fewest pieces
 making that case.
@@ -72,3 +73,4 @@ not a changelog.
 | Week of | What shipped | Who |
 | --- | --- | --- |
 | 2026-07-28 | Character hubs built; 24 Between Takes notes (8 each), 7 free | all three |
+| 2026-10-05 | Between Takes: “The line stays in the water” — Rick on The Lake | Rick |

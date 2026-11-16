@@ -38,7 +38,7 @@
  * they now end on the generous reading, which is both truer to these people and
  * a great deal better to read.
  *
- * ACCESS: 5 of the 32 pages are open, deliberately few. They are the funny ones
+ * ACCESS: 5 of the 33 pages are open, deliberately few. They are the funny ones
  * and the ones that give away a technique rather than a turn — enough for a
  * visitor to know exactly what the rest of the notebook is, which is the whole
  * job of a shop window. Everything that explains a scene the visitor cannot
@@ -528,6 +528,23 @@ export const notes: SetNote[] = [
       "Then, right at the end, I get up. Once, and I am the only one who does. That is the architecture of the whole thing: you spend the scene establishing that neither man moves, so the one who finally moves owns everything after it.",
       "It buys exactly one line. “You think you’re handling it? You’re not.” I am talking about Luna and I will not say her name, and that is the closest I come in the entire film to admitting I thought she was worth something.",
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work in that room than I am.",
+    ],
+  },
+
+  {
+    id: "rick-the-line-in-the-water",
+    author: "rick",
+    kind: "insight",
+    heading: "The line stays in the water",
+    dateline: "Day 20 · the lake",
+    sceneSlug: "josh-rick-lake",
+    place: "lake",
+    access: "premium",
+    body: [
+      "Melissa gave me one note before we rolled and it was about where I am looking. The line stays in the water. My son has driven all the way out here to ask me for help, and I do not turn around to hear him ask.",
+      "That is harder than the chairs at the house. In the study I at least had him in front of me, so a pause meant something. Out here every line has to go over my shoulder to a man I am not looking at, and the only thing I have left to work with is how long I take before I answer. We ran it a dozen times finding out how long that is — longer than you would expect, and shorter than I kept trying to make it. I did not catch anything in any take, which Melissa said was correct.",
+      "The scene is really about the order things happened in. He already knew where Luna was; Tyson had told him. What he did not know is that I had spoken to her mother and found out for myself, and he has to stand there and take that in while he is still working up to his question. He came for help and arrived second.",
+      "What I would want noticed is that I did make the call. I went and found out where she was, which in this family is what help looks like. It is what I have instead of asking my son how he is, and I have never once been able to tell the two apart. Neither can he. He learned it here.",
     ],
   },
 

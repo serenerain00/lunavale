@@ -42,13 +42,15 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-07-28:
+Counts as of 2026-10-26 (`countFor` / `lockedCountFor`, so notes include
+replies and pieces include scenes, clips, galleries and journal):
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 8 | 44 | 23 |
-| Tyson | 8 | 44 | 33 |
-| Josh | 8 | 35 | 21 |
+| Luna | 12 | 238 | 200 |
+| Tyson | 12 | 169 | 146 |
+| Josh | 13 | 144 | 126 |
+| Rick | 2 | 15 | 14 |
 
 **Josh is the thinnest** and is the one who benefits most from more. He is the
 hardest character to hold an audience's sympathy for, the whole story depends
@@ -72,3 +74,4 @@ not a changelog.
 | Week of | What shipped | Who |
 | --- | --- | --- |
 | 2026-07-28 | Character hubs built; 24 Between Takes notes (8 each), 7 free | all three |
+| 2026-10-26 | Between Takes note — Rick, “I never look at him”, on `josh-rick-lake` | Rick |

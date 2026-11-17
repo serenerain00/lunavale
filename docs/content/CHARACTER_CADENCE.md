@@ -87,7 +87,7 @@ What that does and does not touch:
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-11-14 against `main` at 439860b. **A touched `lib/content/` file
+re-run 2026-11-17 against `main` at a3ed4a6. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -99,8 +99,8 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 283 | 237 |
-| Tyson | 12 | 199 | 171 |
+| Luna | 12 | 284 | 237 |
+| Tyson | 12 | 200 | 171 |
 | Josh | 14 | 171 | 148 |
 | Rick | 1 | 15 | 13 |
 | Cathy | 0 | 13 | 13 |
@@ -120,7 +120,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 → 26 → 28 at 439860b** (Tyson 199, Josh 171 — the 11-13 journal pages pay Tyson four and Josh two, so the gap gave back two of the four it had closed): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 → 26 → 28 → 29 at a3ed4a6** (Tyson 200, Josh 171 — the free hotel-hallway post pays Luna and Tyson, so it moved both of them and not Josh): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has now sat anywhere between 17 and 30. Quote the two
@@ -690,6 +690,31 @@ Standing backlog, roughly prioritised:
   *(Second cast-promo piece in two days, after `tyson-qa`, and the third
   followed on 11-12. All three are free and none is a story beat — a category
   this file did not have a week ago and now the most active one on the board.)*
+- **`luna-ty-hotelhall` puts the New York night on the open site, and its entry
+  draws the lines very tightly.** *Just Go Straight*, a **free vertical post**,
+  2026-11-16, 34s, `about` **Luna and Tyson**: Tyson carries Luna piggyback down
+  a hotel corridor, both laughing, looking for the room, ending as they reach
+  the door. Canon from the entry, 2026-11-16: **it is the same night as
+  `luna-ty-nyc-hotel`**, and the wardrobe looks different only because Luna's
+  dress was hidden in post — **do not "correct" that**.
+  **Three rulings, and they are the point of the item.** **They are not sharing
+  a room** — they are heading to **Tyson's** room, a few drinks in after the
+  dinner party, and *"our room number"* is the drinks talking, which matches
+  the backstory on `luna-ty-nyc-vertical`. **The copy stays friends: playful
+  and close, nothing more.** And the title and caption are placeholders, hers
+  to replace.
+  **Do not harmonise the three sources on that night, and do not assert what
+  happened.** The free post's caption stops at the door. Luna's journal page
+  `new-york` (premium, same date) has her waking **in her own room, in the
+  dress**, not remembering how she got there, written *"before I have decided
+  what it was"*. The premium scene's own synopsis reads furthest — *"an ending
+  that says plainly what happens next without showing it"*. **A note follows the
+  post's limits, not the scene's synopsis**, says nothing the caption does not,
+  and leaves the reconciling to Melissa.
+  *(It carries `fullSceneSlug: "luna-ty-nyc-hotel"`. That field is **not new** —
+  six posts have it, five of them free — but this scene now has **two** posts
+  pointing at it, one free and one premium (`luna-ty-nyc-vertical`), so "which
+  post is this?" and "can a visitor watch the scene?" are separate questions.)*
 - **`luna-sidewalk-interview`** — *Too Dark?*, a **free vertical post**,
   2026-11-12, 33s, `about` **Luna alone**. **It is the third cast-promo piece
   in four days** and the first that is a post rather than a video, so it is
@@ -754,6 +779,19 @@ Standing backlog, roughly prioritised:
   `pickHero()` choosing something else). It is the first check that fires on a
   *window* rather than on repo state, so a run inside those five days can fail
   for a reason that was fine the day before.
+  **A private screening surface arrived on 2026-11-16, and a note must never
+  go near it.** `/screening/<token>` is a password page for a **festival
+  submission**, deliberately **outside the site**: nothing links to it, it is
+  `index: false`, robots keeps crawlers off it, and both analytics scripts are
+  kept off it. The health check grew **two new guards** the same day — *"Nothing
+  on the site links to a private screening"* (it greps `app`, `components` and
+  `lib` for `/screening/`) and *"Screenings stay noindex, out of robots and out
+  of analytics"* — plus a money-section line listing which screenings are open
+  and until when, so one is not left running after its festival. **The scene
+  behind a screening may be seasons from release.** Do not reference a
+  screening, its token, its contents or its existence in any copy, and do not
+  add a link to one from anywhere in the app — the first guard will fail the run
+  if you do, which is the point of it.
   **It also prints nothing at all when no pin is live, and that is the normal
   state.** The rule looks for a pin whose five days contain *now*
   (`scripts/health-check.ts:335`), so outside a window there is no `Hero:` line

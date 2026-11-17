@@ -608,6 +608,11 @@ export default async function AdminPage() {
                   value={String(commentCounts.length)}
                 />
               </div>
+              {sceneComments.length > unreadComments && (
+                <p className="mt-3 text-xs text-stone-dim">
+                  {sceneComments.length - unreadComments} read and archived.
+                </p>
+              )}
 
               {commentCounts.length > 1 && (
                 <p className="mt-4 text-xs leading-relaxed text-stone-dim">
@@ -624,12 +629,18 @@ export default async function AdminPage() {
                 </p>
               )}
 
+              {/* READ ONES ARE ARCHIVED, NOT SHOWN (Melissa, 2026-11-16:
+                  "archive them and remove them from admin"). They stay in
+                  scene_comments with handled = true and still count in the
+                  totals above; only the unread ones are listed. */}
+              {unreadComments === 0 && (
+                <p className="mt-5 text-sm text-stone-dim">
+                  Nothing unread.
+                </p>
+              )}
               <ul className="mt-5 divide-y divide-hairline">
-                {sceneComments.map((c) => (
-                  <li
-                    key={c.id}
-                    className={`py-4 ${c.handled ? "opacity-45" : ""}`}
-                  >
+                {sceneComments.filter((c) => !c.handled).map((c) => (
+                  <li key={c.id} className="py-4">
                     <p className="flex flex-wrap items-baseline gap-x-2 text-sm">
                       <Link
                         href={`/clips/${c.sceneSlug}`}

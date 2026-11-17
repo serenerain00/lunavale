@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ViewerProvider } from "@/components/access/Viewer";
 import { CaptureAttribution } from "@/components/analytics/CaptureAttribution";
@@ -8,6 +7,7 @@ import { authConfigured } from "@/lib/billing/provider";
 import { Caveat, Fraunces, Inter } from "next/font/google";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { SiteFooter } from "@/components/ui/SiteFooter";
+import { ClarityScript } from "@/components/analytics/ClarityScript";
 import "./globals.css";
 
 // Display serif for titles; highly readable sans for controls and metadata.
@@ -183,9 +183,7 @@ export default function RootLayout({
           path. Project id xr14rpnqlh.
         */}
         {process.env.NODE_ENV === "production" && (
-          <Script id="ms-clarity" strategy="afterInteractive">
-            {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xr14rpnqlh");`}
-          </Script>
+          <ClarityScript />
         )}
       </body>
     </html>

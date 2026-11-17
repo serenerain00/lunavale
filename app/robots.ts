@@ -48,6 +48,7 @@ const OFF_LIMITS = [
   // the bill. The plain /browse stays indexable, and its canonical already
   // points there.
   "/browse?",
+  "/screening/",
 ];
 
 /**

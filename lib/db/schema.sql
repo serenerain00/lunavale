@@ -682,3 +682,21 @@ CREATE TABLE IF NOT EXISTS ratings (
 );
 
 CREATE INDEX IF NOT EXISTS ratings_piece_idx ON ratings (kind, slug);
+
+-- ── Private screenings (festival submissions) ────────────────────────────────
+-- One private page per row at /screening/<token>, behind a password. Nothing
+-- here is in any catalog, sitemap or menu. The token and password live ONLY in
+-- this table (the repo is public), the password as a scrypt hash. closes_at
+-- turns the page off; so does deleting the row. See scripts/screening.mjs.
+CREATE TABLE IF NOT EXISTS screenings (
+  token          TEXT        PRIMARY KEY,
+  title          TEXT        NOT NULL,
+  credit         TEXT,
+  blob_path      TEXT        NOT NULL,
+  poster_path    TEXT,
+  password_hash  TEXT        NOT NULL,
+  cookie_secret  TEXT        NOT NULL,
+  closes_at      TIMESTAMPTZ NOT NULL,
+  note           TEXT,
+  created_at     TIMESTAMPTZ NOT NULL DEFAULT now()
+);

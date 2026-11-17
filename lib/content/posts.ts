@@ -1096,6 +1096,42 @@ const authored: Clip[] = [
     about: ["luna"],
     mature: false,
   },
+  {
+    /*
+      THE HOTEL HALLWAY. Melissa, 2026-11-16: "post this as a free IG clip
+      luna-ty-hotelhall". FREE: it runs on Instagram, so there is nothing to gate.
+
+      Ty carries Lu piggyback down a hotel corridor, both laughing, looking
+      for the room. Heard: "Okay, hold on." / "Lu, what's our room number?" /
+      "Ty, just go straight." / "Ty, you're really good at this." / "There's no
+      one here." It ends as they reach the door.
+
+      THE NEW YORK NIGHT, same as luna-ty-nyc-hotel (Melissa, 2026-11-16).
+      The wardrobe looks different because she hid Luna's dress with post
+      edits; cropped right, it doesn't break the scene. Do not "correct" it.
+
+      THEY ARE NOT SHARING A ROOM. They're heading to TYSON'S room, a bit
+      tipsy after the dinner party, and neither remembers much ("our room
+      number" is just the drinks talking). Matches the backstory on
+      luna-ty-nyc-vertical: more drinks in HIS room.
+
+      The copy stays friends: playful and close, nothing more. Title and
+      caption are placeholders, hers to replace.
+    */
+    id: "luna-ty-hotelhall",
+    title: "Just Go Straight",
+    caption:
+      "New York, after the dinner party. A few drinks in, on the way to his room, and neither of them can remember the number.",
+    file: "luna-ty-hotelhall.proxy.mp4",
+    poster: "/posters/luna-ty-hotelhall.jpg",
+    // 34.2, the whole file.
+    durationSeconds: 34,
+    addedOn: "2026-11-16",
+    about: ["luna", "tyson"],
+    mature: false,
+    // The rest of that night, members-only.
+    fullSceneSlug: "luna-ty-nyc-hotel",
+  },
 ];
 
 /**

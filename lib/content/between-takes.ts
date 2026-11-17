@@ -38,7 +38,7 @@
  * they now end on the generous reading, which is both truer to these people and
  * a great deal better to read.
  *
- * ACCESS: 5 of the 32 pages are open, deliberately few. They are the funny ones
+ * ACCESS: 5 of the 33 pages are open, deliberately few. They are the funny ones
  * and the ones that give away a technique rather than a turn — enough for a
  * visitor to know exactly what the rest of the notebook is, which is the whole
  * job of a shop window. Everything that explains a scene the visitor cannot
@@ -528,6 +528,22 @@ export const notes: SetNote[] = [
       "Then, right at the end, I get up. Once, and I am the only one who does. That is the architecture of the whole thing: you spend the scene establishing that neither man moves, so the one who finally moves owns everything after it.",
       "It buys exactly one line. “You think you’re handling it? You’re not.” I am talking about Luna and I will not say her name, and that is the closest I come in the entire film to admitting I thought she was worth something.",
       "The photograph on the shelf behind me is the two of them, years ago. Nobody looks at it and nobody mentions it. It is doing more work in that room than I am.",
+    ],
+  },
+  {
+    id: "rick-line-in-the-water",
+    author: "rick",
+    kind: "insight",
+    heading: "The line stays in the water",
+    dateline: "Day 20 · the far end of the lake",
+    sceneSlug: "josh-rick-lake",
+    place: "lake",
+    access: "premium",
+    body: [
+      "Melissa's one note for this was about my hands. I have a line in the water and I do not take it out — not when he asks me how to fix it, not while I answer him, not once in the whole take.",
+      "Which is the entire man, and I only worked that out by doing it. I am glad he came. I will also not stop fishing to look at him. Those two things living in one body is most of what is wrong with my son.",
+      "He has driven all the way out to ask me for a way back to her, and I already know where she is sleeping, because her mother told me. So he is a step behind in a conversation he started. We played that with no enjoyment in it at all — the moment I look pleased to be ahead of him it becomes a scene about a cruel man, and it is not that. It is worse. I had not noticed I was ahead.",
+      "Then I give him the only useful thing I have. Good — now you know how she felt. It is true, it might even help, and it is not remotely what he drove out here for. He asked me a straight question, which from him is rarer than it sounds, and what he got back was a verdict.",
     ],
   },
 

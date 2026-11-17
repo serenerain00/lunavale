@@ -42,18 +42,25 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-07-28:
+Counted, 2026-11-09 (`countFor` / `lockedCountFor` in
+`lib/content/characters.ts` — recount rather than edit these by hand):
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 8 | 44 | 23 |
-| Tyson | 8 | 44 | 33 |
-| Josh | 8 | 35 | 21 |
+| Luna | 12 | 267 | 224 |
+| Tyson | 12 | 190 | 163 |
+| Josh | 13 | 161 | 140 |
+| Rick | 2 | 15 | 14 |
 
-**Josh is the thinnest** and is the one who benefits most from more. He is the
-hardest character to hold an audience's sympathy for, the whole story depends
-on him being genuinely likeable before he turns, and he has the fewest pieces
-making that case.
+**Josh is the thinnest of the three leads** and is the one who benefits most
+from more. He is the hardest character to hold an audience's sympathy for, the
+whole story depends on him being genuinely likeable before he turns, and he has
+the fewest pieces making that case.
+
+**Rick is thinner than all of them by an order of magnitude**, and he has a hub
+of his own. He is tertiary and should stay that way — he exists to explain
+Josh, not to carry anything — but 15 pieces is not enough to do even that job,
+and every piece filed under him does double duty on the Josh problem above.
 
 Standing backlog, roughly prioritised:
 
@@ -72,3 +79,4 @@ not a changelog.
 | Week of | What shipped | Who |
 | --- | --- | --- |
 | 2026-07-28 | Character hubs built; 24 Between Takes notes (8 each), 7 free | all three |
+| 2026-11-09 | Between Takes note `rick-never-look-at-him` — Rick on `josh-rick-lake`, members-only. Second note he has; first on that scene | Rick (and Josh) |

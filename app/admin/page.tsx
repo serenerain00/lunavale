@@ -522,14 +522,14 @@ export default async function AdminPage() {
         {/* ----------------------------------------------- cancellations */}
         {/* Added 2026-11-18: the reason and comment a member leaves when they
             cancel used to live only on each subscription in Stripe. */}
-        <Section title="Why people cancelled">
+        <Section title="Why people canceled">
           {cancellations === null ? (
             <p className="text-sm text-stone-dim">
               Stripe could not be reached.
             </p>
           ) : cancellations.chose.length === 0 ? (
             <p className="text-sm text-stone-dim">
-              Nobody has cancelled in the last 30 days.
+              Nobody has canceled in the last 30 days.
             </p>
           ) : (
             <ul className="divide-y divide-hairline border-t border-hairline">
@@ -538,7 +538,7 @@ export default async function AdminPage() {
                   <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                     <span className="text-ivory">{c.name}</span>
                     <span className="text-xs text-stone-dim">
-                      cancelled {shortDate(c.at)} · joined {shortDate(c.joined)}
+                      canceled {shortDate(c.at)} · joined {shortDate(c.joined)}
                       {c.accessUntil && <> · access until {shortDate(c.accessUntil)}</>}
                     </span>
                   </div>

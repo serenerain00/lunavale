@@ -78,6 +78,8 @@ export const HERO_SLUGS: string[] = [
   // 2026-11-09, pinned for its first five days (NEW_EPISODE_DAYS below) and,
   // like the pilot, never in the rotation after.
   "episode-7",
+  // 2026-11-18, the same: pinned for its first five days, then out.
+  "episode-8",
 ];
 
 export interface Hero {
@@ -189,6 +191,7 @@ const WITH_AUDIO = new Set([
   "tyson-apt-thinking",
   "josh-ty-ricks-house",
   "episode-7",
+  "episode-8",
 ]);
 
 export function heroes(): Hero[] {

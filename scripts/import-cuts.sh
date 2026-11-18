@@ -895,6 +895,17 @@ CUTS=(
   # never served under the new name.
   "episode-7|stories/ep7/ep7-final-credits-v2.mp4|12|-|-|30"
 
+  # EPISODE 8, PART I, A DIFFERENT KIND OF CLOSE, 2026-11-18. Built from
+  # stories/ep8/ep8-music.mp4 by scripts/episode-credits.py --number 8
+  # --part I --name "A Different Kind of Close" --end 1889.93: Melissa's export cuts
+  # hard to black on Luna's "Are you serious?" in Tyson's hotel room, so the
+  # cut is kept and the end title follows on black (Episodes 4-6), not over
+  # the picture (Episode 7) where it would land on the line. 1786x1080, 30fps.
+  #
+  # POSTER AT 22s: Josh in the bedroom doorway, arms folded, while Luna packs
+  # for New York. Inside the free minute.
+  "episode-8|stories/ep8/ep8-final-credits.mp4|22|-|-|30"
+
   # THE INTERVIEW, 2026-10-09. A future season: Detectives Harris and
   # Bennett question Luna about the accident nine years ago, then she rings
   # Tyson from the car. Scored, 13:20, 1320x798 hevc at 60fps — down to 30

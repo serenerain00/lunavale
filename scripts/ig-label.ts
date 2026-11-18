@@ -87,6 +87,7 @@ function cta(c: string): Cta {
 }
 
 function storyline(c: string): string {
+  if (has(c, /ep ?8\b|episode 8|episode eight|a different kind of close/i)) return "episode-8";
   if (has(c, /ep ?7\b|episode 7|episode seven|the things we don.?t say/i)) return "episode-7";
   if (has(c, /ep ?6\b|episode 6|episode six|the event\b/i)) return "episode-6";
   if (has(c, /ep ?5\b|episode 5|episode five/i)) return "episode-5";

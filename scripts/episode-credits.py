@@ -96,7 +96,7 @@ def _finish(img, W, H, fade):
     return frame.convert("RGB")
 
 
-def opening_frame(t, W, H, number, name=None):
+def opening_frame(t, W, H, number, name=None, part=None):
     title_f = ImageFont.truetype(DIDOT, int(H * 0.115))
     sub_f = ImageFont.truetype(DIDOT, int(H * 0.038))
     img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -120,7 +120,24 @@ def opening_frame(t, W, H, number, name=None):
     s = clamp01((t - (O_HOLD + O_CONVERGE + 0.1)) / 0.9)
     if s > 0:
         st = 24 + (12 - 24) * ease_out_quint(s)
-        draw_tracked(d, f"EPISODE {WORDS.get(str(number), str(number))}", sub_f, st, y_sub, IVORY + (int(215 * s),), W)
+        line = f"EPISODE {WORDS.get(str(number), str(number))}"
+        # Episode 8 comes in parts (2026-11-18, "Episode 8 — Part I"). Roman
+        # numerals, which Didot sets as capitals, so no old-style figure.
+        if part:
+            line += f" \u2014 PART {part}"
+        draw_tracked(d, line, sub_f, st, y_sub, IVORY + (int(215 * s),), W)
+        # Didot has an advance for the em dash but no ink, so it set as a gap.
+        # Drawn by hand across its own advance, at the capitals' middle, the
+        # weight of the rule above.
+        if part:
+            x = (W - tracked_width(d, line, sub_f, st)) / 2
+            i = line.index("\u2014")
+            x += sum(d.textlength(c, font=sub_f) for c in line[:i]) + st * i
+            top, bot = d.textbbox((0, y_sub), "E", font=sub_f)[1::2]
+            w = d.textlength("\u2014", font=sub_f)
+            ym = (top + bot) / 2
+            d.line([(x + w * 0.1, ym), (x + w * 0.9, ym)],
+                   fill=IVORY + (int(215 * s),), width=max(1, H // 700))
     # The name, in the italic the credit line uses, after the number.
     n = clamp01((t - (O_HOLD + O_CONVERGE + 0.7)) / 1.0) if name else 0
     if n > 0:
@@ -190,7 +207,7 @@ def fade_under(a, src, out, W, H, fps):
     try:
         op, ti = tmp / "open.mov", tmp / "title.mov"
         n = int(round(opening_total(a.name) * fps))
-        frames_to_movie((opening_frame(i / fps, W, H, a.number, a.name) for i in range(n)), fps, op, W, H)
+        frames_to_movie((opening_frame(i / fps, W, H, a.number, a.name, a.part) for i in range(n)), fps, op, W, H)
 
         # The title with its alpha, as PNG-in-MOV.
         pngs = tmp / "t"
@@ -230,6 +247,7 @@ def main():
                     help="seconds: where the episode's own picture and sound are over")
     ap.add_argument("-o", "--out")
     ap.add_argument("--name", help="the episode's title, under its number")
+    ap.add_argument("--part", help="roman numeral for a multi-part episode, e.g. I")
     ap.add_argument("--credit", help="optional line before the end title; none by default")
     ap.add_argument("--still", action="store_true", help="write a few frames to look at")
     ap.add_argument("--fade-under", type=float, metavar="SECONDS",
@@ -243,8 +261,8 @@ def main():
 
     if a.still:
         outdir = src.parent
-        opening_frame(1.0, W, H, a.number, a.name).save(outdir / "credits-open-1s.jpg")
-        opening_frame(O_HOLD + O_CONVERGE + 2.0, W, H, a.number, a.name).save(outdir / "credits-open-settled.jpg")
+        opening_frame(1.0, W, H, a.number, a.name, a.part).save(outdir / "credits-open-1s.jpg")
+        opening_frame(O_HOLD + O_CONVERGE + 2.0, W, H, a.number, a.name, a.part).save(outdir / "credits-open-settled.jpg")
         if a.credit:
             credit_frame(C_TOTAL / 2, W, H, a.credit).save(outdir / "credits-line.jpg")
         end_title.render_frame(end_title.TOTAL - end_title.FADE_OUT - 0.5, W, H, 0.038).save(outdir / "credits-end.jpg")
@@ -258,7 +276,7 @@ def main():
     try:
         op, cl = tmp / "open.mov", tmp / "close.mov"
         n = int(round(opening_total(a.name) * fps))
-        frames_to_movie((opening_frame(i / fps, W, H, a.number, a.name) for i in range(n)), fps, op, W, H)
+        frames_to_movie((opening_frame(i / fps, W, H, a.number, a.name, a.part) for i in range(n)), fps, op, W, H)
         nc, ne = int(round(C_TOTAL * fps)), int(round(end_title.TOTAL * fps))
         closing = [credit_frame(i / fps, W, H, a.credit) for i in range(nc)] if a.credit else []
         closing += [end_title.render_frame(i / fps, W, H, 0.038) for i in range(ne)]

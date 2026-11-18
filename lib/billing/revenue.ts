@@ -431,3 +431,78 @@ export async function billingProblems(): Promise<BillingProblems | null> {
     return null;
   }
 }
+
+/** One member's cancellation, with whatever they told Stripe on the way out. */
+export interface Cancellation {
+  name: string;
+  at: Date;
+  joined: Date;
+  /** When their paid month runs out. Null if it ended on the spot. */
+  accessUntil: Date | null;
+  /** Stripe's tick-box reason in plain words, or null if they skipped it. */
+  reason: string | null;
+  comment: string | null;
+}
+
+const FEEDBACK: Record<string, string> = {
+  customer_service: "Customer service",
+  low_quality: "Low quality",
+  missing_features: "Missing features",
+  other: "Other",
+  switched_service: "Switched to something else",
+  too_complex: "Too complicated",
+  too_expensive: "Too expensive",
+  unused: "Not using it",
+};
+
+/**
+ * WHY PEOPLE CANCELLED (2026-11-18). Melissa asked where to see the reason
+ * and comment members leave when they cancel; the only place was each
+ * subscription in the Stripe dashboard. Read-only.
+ *
+ * Only cancellations the MEMBER chose: those are scheduled for the end of the
+ * period (`cancel_at` set), because that is what the customer portal does.
+ * Subscriptions ended on the spot are ours — a failed renewal under the
+ * past-due rule, or the duplicate guard refunding a second payment — and they
+ * are counted in `endedByUs` instead, because they say nothing about the show.
+ */
+export async function recentCancellations(
+  days = 30,
+): Promise<{ chose: Cancellation[]; endedByUs: number } | null> {
+  if (!stripeConfigured()) return null;
+  const since = Date.now() / 1000 - days * 86400;
+  try {
+    const chose: Cancellation[] = [];
+    let endedByUs = 0;
+    for await (const s of stripe().subscriptions.list({
+      status: "all",
+      limit: 100,
+      expand: ["data.customer"],
+    })) {
+      if (!s.canceled_at || s.canceled_at < since) continue;
+      if (!s.cancel_at) {
+        endedByUs++;
+        continue;
+      }
+      const customer = s.customer as Stripe.Customer | Stripe.DeletedCustomer;
+      const name =
+        ("name" in customer && customer.name?.replace(/\s+/g, " ").trim()) ||
+        ("email" in customer && customer.email) ||
+        "Unknown";
+      const fb = s.cancellation_details?.feedback;
+      chose.push({
+        name,
+        at: new Date(s.canceled_at * 1000),
+        joined: new Date(s.created * 1000),
+        accessUntil: new Date(s.cancel_at * 1000),
+        reason: fb ? (FEEDBACK[fb] ?? fb) : null,
+        comment: s.cancellation_details?.comment?.trim() || null,
+      });
+    }
+    chose.sort((a, b) => b.at.getTime() - a.at.getTime());
+    return { chose, endedByUs };
+  } catch (error) {
+    console.error("recentCancellations: Stripe lookup failed", error);
+    return null;
+  }
+}

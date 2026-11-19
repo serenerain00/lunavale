@@ -139,6 +139,12 @@ HEROES=(
   # 18.67 to 36.60 runs cut to cut: Luna at her laptop, Simone with the food,
   # "It's called editing" / "It's called needing food" (speech ends 36.3).
   "episode-7|stories/episode-7-v2.proxy.mp4|18.67|17.93|1"
+  # EPISODE 8, PART I, 2026-11-18, pinned for its first five days. Inside the
+  # free first minute (0-60), so the audio stays. 17.80 to 39.53 runs cut to
+  # cut, quiet at both ends: Luna packing, Josh in the doorway, "I just don't
+  # understand why he's got to go with you" through "it's a little weird,
+  # that's all".
+  "episode-8|stories/episode-8.proxy.mp4|17.80|21.73|1"
   #
   # NOT ADDED, and the reason matters because it is the standing test:
   #   luna-ty-apt-argue — the newest clip of the lot and excluded anyway. Its

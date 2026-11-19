@@ -158,6 +158,19 @@ export const SEASONS: Season[] = [
         runtimeSeconds: 1229,
         comingSoon: false,
       },
+      {
+        /*
+          LANDED 2026-11-18. Melissa named it "A Different Kind of Close"
+          (first "The Space Between", Episode 3's name, so renamed). Same
+          both-places rule as above.
+        */
+        number: 8,
+        title: "Episode 8, Part I: A Different Kind of Close",
+        slug: "episode-8",
+        poster: "/posters/episode-8.jpg",
+        runtimeSeconds: 1905,
+        comingSoon: false,
+      },
     ],
   },
 ];

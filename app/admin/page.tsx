@@ -7,6 +7,7 @@ import { isOwner } from "@/lib/access/owner";
 import {
   abandonedCheckouts,
   billingProblems,
+  recentCancellations,
   revenueSummary,
   formatCents,
 } from "@/lib/billing/revenue";
@@ -89,6 +90,7 @@ export default async function AdminPage() {
       billingProblems(),
       recentBillingActions(15),
     ]);
+  const cancellations = await recentCancellations(30);
   const unreadComments = sceneComments.filter((c) => !c.handled).length;
 
   // The two numbers Melissa actually wants off this page, pulled out of the
@@ -515,6 +517,51 @@ export default async function AdminPage() {
             projection, so if the two disagree it is the webhook that is behind,
             not the billing. A dash means Stripe could not be reached.
           </p>
+        </Section>
+
+        {/* ----------------------------------------------- cancellations */}
+        {/* Added 2026-11-18: the reason and comment a member leaves when they
+            cancel used to live only on each subscription in Stripe. */}
+        <Section title="Why people canceled">
+          {cancellations === null ? (
+            <p className="text-sm text-stone-dim">
+              Stripe could not be reached.
+            </p>
+          ) : cancellations.chose.length === 0 ? (
+            <p className="text-sm text-stone-dim">
+              Nobody has canceled in the last 30 days.
+            </p>
+          ) : (
+            <ul className="divide-y divide-hairline border-t border-hairline">
+              {cancellations.chose.map((c) => (
+                <li key={`${c.name}:${c.at.toISOString()}`} className="py-3 text-sm">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <span className="text-ivory">{c.name}</span>
+                    <span className="text-xs text-stone-dim">
+                      canceled {shortDate(c.at)} · joined {shortDate(c.joined)}
+                      {c.accessUntil && <> · access until {shortDate(c.accessUntil)}</>}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-stone">
+                    {c.reason ?? <span className="text-stone-dim">No reason given</span>}
+                  </p>
+                  {c.comment && (
+                    <p className="mt-1 max-w-2xl italic leading-relaxed text-stone">
+                      &ldquo;{c.comment}&rdquo;
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+          {cancellations && (
+            <p className="mt-4 text-xs leading-relaxed text-stone-dim">
+              Last 30 days, newest first, read live from Stripe. Only the ones
+              members chose: they keep access until their paid month runs out.
+              {cancellations.endedByUs > 0 &&
+                ` Not listed: ${cancellations.endedByUs} ended by us (a failed renewal card, or a second payment refunded), which say nothing about the show.`}
+            </p>
+          )}
         </Section>
 
         {/* ------------------------------------------------------- the room */}
@@ -1189,4 +1236,12 @@ function Check({
       </div>
     </li>
   );
+}
+
+function shortDate(d: Date): string {
+  return d.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    timeZone: "America/New_York",
+  });
 }

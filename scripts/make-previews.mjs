@@ -180,6 +180,11 @@ const OVERRIDES = {
   // on the energy.
   "episode-7": 63.0,
 
+  // EPISODE 8, PART I — THE FIRST MINUTE, as Episodes 6 and 7. From the top,
+  // title card included. Runs to 60.0: Josh's "I know, baby." (speech to
+  // 59.2), before Luna's "Remember that thing in Chicago?" from 60.3.
+  "episode-8": 60.0,
+
   // THE LAKEHOUSE FIGHT — THE FIRST TWO MINUTES (Melissa, 2026-10-27: "first
   // 2m is free. then members only"). Ends at 119.2, in the pause after "Do
   // you?" / "Yes." (speech to 118.0, quiet until "Because that's what you're

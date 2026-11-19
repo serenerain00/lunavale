@@ -45,6 +45,7 @@ import { SHORT_LINKS } from "@/lib/content/shortlinks";
 import { galleries } from "@/lib/content/gallery";
 import { heroes, newEpisodePins, pickHero } from "@/lib/content/hero";
 import { assertComplete, inStoryOrder } from "@/lib/content/chronology";
+import { SEASONS } from "@/lib/content/season";
 
 const ROOT = path.join(import.meta.dirname, "..");
 const offlineOnly = process.argv.includes("--offline");
@@ -809,6 +810,30 @@ async function checkOrder() {
   // Every position is reachable, and the first one really is first.
   const first = inStoryOrder()[0];
   if (first) ok(`The story starts on "${first.title}"`);
+
+  /*
+   * NO TWO EPISODES SHARE A NAME. 2026-11-18: Episode 8 Part I arrived as
+   * "The Space Between", which Episode 3 already is; caught by eye before it
+   * went up, and renamed "A Different Kind of Close". The name is the part
+   * after the colon in each season.ts title.
+   */
+  const named = new Map<string, string[]>();
+  for (const season of SEASONS) {
+    for (const ep of season.episodes) {
+      const name = (ep.title ?? "").split(":").slice(1).join(":").trim().toLowerCase();
+      const slug = ep.slug ?? `episode ${ep.number}`;
+      if (name) named.set(name, [...(named.get(name) ?? []), slug]);
+    }
+  }
+  const twice = [...named].filter(([, slugs]) => slugs.length > 1);
+  if (twice.length) {
+    fail(
+      `${twice.length} episode name(s) used twice`,
+      twice.map(([n, slugs]) => `"${n}": ${slugs.join(", ")}`).join("; "),
+    );
+  } else {
+    ok("Every episode has its own name");
+  }
 
   /*
    * THE WORD "FILM", in anything a visitor can read. Comments are exempt —

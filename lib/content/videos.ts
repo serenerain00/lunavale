@@ -3612,6 +3612,49 @@ export const videos: Video[] = [
   },
   {
     /*
+      EPISODE 8, PART I, A DIFFERENT KIND OF CLOSE, 2026-11-18. Title and
+      synopsis are Melissa's. She first called it "The Space Between", which
+      is Episode 3's name, and renamed it when that was pointed out.
+
+      Master: stories/ep8/ep8-final-credits.mp4, built from ep8-music.mp4 by
+      episode-credits.py --part I; the end title follows her hard cut to
+      black rather than coming up over it (see scripts/import-cuts.sh).
+
+      WHAT IS IN IT, from the transcript: opens at the lakehouse with Luna
+      packing and Josh in the doorway, "I just don't understand why he's got
+      to go with you"; the long conversation about coming home. The flight
+      to New York with Tyson, her photography night ("New York, let me hear
+      you make some noise"), Nathan the photographer, dancing, and Tyson's
+      hotel room after, "Can I ask you something?", ending on "Are you
+      serious?".
+
+      FREE: THE FIRST MINUTE, as Episodes 6 and 7, to 1:00.0 so it stops
+      between lines. Override in scripts/make-previews.mjs.
+    */
+    slug: "episode-8",
+    // Must match lib/content/season.ts.
+    title: "Episode 8, Part I: A Different Kind of Close",
+    synopsis:
+      "As Luna prepares for a weekend in New York, an emotional conversation with Josh exposes just how far apart they still are. But as she leaves Denver with Tyson, familiar moments begin to feel unexpectedly different, stirring feelings neither of them is ready to acknowledge.",
+    file: "episode-8.proxy.mp4",
+    poster: "/posters/episode-8.jpg",
+    durationSeconds: 1905,
+    addedOn: "2026-11-18",
+    access: "premium",
+    mature: false,
+    preview: {
+      file: "episode-8-preview.proxy.mp4",
+      // See the override in scripts/make-previews.mjs.
+      durationSeconds: 60,
+      hookStart: 0,
+      hookNote: "Luna packs for New York, and Josh doesn't understand why Tyson is going",
+    },
+    feelings: ["distance", "desire"],
+    place: "new-york",
+    about: ["luna", "josh", "tyson"],
+  },
+  {
+    /*
       LUNA AND JOSH, IN BLACK AND WHITE, Melissa, 2026-10-10. The landscape
       cut is this clip; the vertical is the post `luna-josh-bed-ig`. Both
       members-only (Melissa).

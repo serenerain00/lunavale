@@ -87,7 +87,7 @@ What that does and does not touch:
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-11-17 against `main` at a3ed4a6. **A touched `lib/content/` file
+re-run 2026-11-19 against `main` at b9ec50f. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -99,9 +99,9 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 284 | 237 |
-| Tyson | 12 | 200 | 171 |
-| Josh | 14 | 171 | 148 |
+| Luna | 12 | 285 | 238 |
+| Tyson | 12 | 201 | 172 |
+| Josh | 14 | 172 | 149 |
 | Rick | 1 | 15 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 9 | 9 |
@@ -120,7 +120,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 → 26 → 28 → 29 at a3ed4a6** (Tyson 200, Josh 171 — the free hotel-hallway post pays Luna and Tyson, so it moved both of them and not Josh): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 → 26 → 28 → 29 → 29 at b9ec50f** (Tyson 201, Josh 172 — Episode 8 is `about` all three leads, so it paid each of them one and left the gap exactly where it was): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has now sat anywhere between 17 and 30. Quote the two
@@ -411,16 +411,19 @@ Standing backlog, roughly prioritised:
   the slug, if you ever need the asset.** *(This item said "a fifth episode is
   promised and is not here yet" for two days, from the win-back email of 10-23.
   It is here. Do not restore the promise wording.)*
-- **The seven episodes carry no note between them.** This is the top of the
+- **The eight episodes carry no note between them.** This is the top of the
   list, and it keeps growing: `pilot` (*Episode 1*, 2026-09-21, 18:36,
   `notes: ["danger"]`), `episode-2` (*Breathe*, 22:23), `episode-3` (*The Space
   Between*, 21:35) and — new on 2026-10-18 — `episode-4` (*Peace and Quiet*,
   15:09, `notes: ["danger"]`), — new on 2026-10-25 — `episode-5`
   (*Everybody Has an Opinion*, 18:15), — new on 2026-11-02 — **`episode-6`
   (*The Event*, 26:24)**, and — new on 2026-11-09 — **`episode-7` (*The Things
-  We Don't Say*, 20:29)**. All seven are `premium` with a free opening
-  — `preview.durationSeconds` reads **190**, 124, 129, 158, 96, **63 and 63** as
-  of 2026-11-10, so **episodes 6 and 7 tie for the shortest episode opening**, so three minutes ten on the pilot, about two on the middle pair,
+  We Don't Say*, 20:29)**, and — new on 2026-11-18 — **`episode-8` (*Episode 8,
+  Part I: A Different Kind of Close*, 31:45)**. All eight are `premium` with a
+  free opening — `preview.durationSeconds` reads **190**, 124, 129, 158, 96, 63,
+  63 and **60** at b9ec50f, so **episode 8 now has the shortest opening on its
+  own**, and the 11-10 line saying 6 and 7 tie for it is retired rather than
+  reworded — **the third time this superlative has moved**. So three minutes ten on the pilot, about two on the middle pair,
   the firefight on episode 4, the taco scene on episode 5, and the
   **shortest opening of the six** on episode 6, the therapist's office a year
   ago. *(Episode 5 held "shortest of the five" for eight days. Don't restore
@@ -442,11 +445,15 @@ Standing backlog, roughly prioritised:
   table and buys nothing for the two who need it; and **episode 5 carries Luna,
   Tyson, Josh and Simone** — four people, more than any other episode, and the
   only episode that reaches Simone at all; **episode 6 is Luna, Josh and Tyson**,
-  so it buys nothing for Rick or Simone. *(**`episode-6` is now the longest thing
-  in the library at 1584s**, four minutes past `episode-2`, which held that for
-  six weeks and which this line credited until 2026-11-03. The pilot was never
-  it. Episode 4 is still the shortest. Don't restore any of it; read
-  `durationSeconds` in `videos.ts`.)* For the pilot, the
+  so it buys nothing for Rick or Simone; **episode 7 is Luna, Tyson, Josh and
+  Simone**, the second to reach her; and **episode 8 is Luna, Josh and Tyson**,
+  so it pays each of the three leads one and reaches neither Rick nor Simone.
+  *(**`episode-8` is now the longest thing in the library at 1905s**, five
+  minutes past `episode-6`, which held it for sixteen days and which this line
+  credited until 2026-11-19; `episode-2` held it before that; the pilot was
+  never it. **That is three different longest episodes in seven weeks** —
+  re-derive it rather than repeating any of them. Episode 4 is still the
+  shortest. Read `durationSeconds` in `videos.ts`.)* For the pilot, the
   entry's own comment says the constraint on everything about it is **not to
   spend the intro**. Read Melissa's synopsis in `videos.ts` for each rather than
   writing off frames — she replaced the frames-written ones there, and the
@@ -538,9 +545,10 @@ Standing backlog, roughly prioritised:
   beside *One Number Off*, and one beside **Come Home, a free clip whose page is
   members-only** — **five more on 2026-11-11, all beside Episode 7**, and **five
   more on 2026-11-13: three beside Episode 4 and two beside
-  `luna-josh-kitchen-argue`**, all `premium`. **Four of the seven episodes carry
+  `luna-josh-kitchen-argue`**, all `premium`. **Four of the eight episodes carry
   journal pages** — 4 has three, 5 has five, 6 has five, 7 has five; the pilot,
-  2 and 3 have none — while **no episode carries a Between Takes note**: two
+  2, 3 and **the new 8** have none — while **no episode carries a Between Takes
+  note**: two
   separate backlogs, and the one this file tracks is the notes. *(This line said
   "Episodes 6 and 7" on 11-11 and was **already wrong when written** — Episode 5
   had five pages by then. Derive it from `sceneSlug`, do not count the ones a
@@ -690,6 +698,32 @@ Standing backlog, roughly prioritised:
   *(Second cast-promo piece in two days, after `tyson-qa`, and the third
   followed on 11-12. All three are free and none is a story beat — a category
   this file did not have a week ago and now the most active one on the board.)*
+- **Episode 8 Part I is the New York weekend, and it changes what that night
+  is.** *Episode 8, Part I: A Different Kind of Close*, 2026-11-18, **premium**,
+  **31:45 — the longest thing in the library** — with a **60-second** free
+  opening, `about` **Luna, Josh and Tyson**, place `new-york`, `feelings`
+  distance and desire. From the entry: it opens at the lakehouse with Luna
+  packing and Josh in the doorway (*"I just don't understand why he's got to go
+  with you"*) and the long conversation about coming home; then the flight, her
+  photography night, dancing — and **Tyson's hotel room after, ending on *"Can
+  I ask you something?"* … *"Are you serious?"***
+  **It is Part I, and that is the point.** The episode **stops on the question**.
+  Melissa's own public synopsis says the trip stirs *"feelings neither of them
+  is ready to acknowledge"* — **that sentence is hers and it is already public**,
+  so it is quotable, but it is the furthest anything goes: **Part II is not
+  written here, and a note must not answer the question the episode leaves
+  open.** This is the fourth source on that night and it does **not** settle the
+  others — see the hotel-hallway item below and keep its rule.
+  **Nathan, the photographer, is named only in the entry comment** — not in the
+  synopsis, not in any visible copy, and with **no `lib/content/` entry**. He is
+  the Miller / Evan / Matt / Ashley / Frank bucket, and unlike Reed he is **not**
+  in copy at all. Leave him there.
+  *(Two firsts worth knowing. It is the **first multi-part episode** — hence
+  `--part` in `scripts/episode-credits.py` — so "Episode 8" alone does not
+  name a whole episode. And it arrived carrying **Episode 3's name**, *The Space
+  Between*, caught by eye and renamed; the health check grew a rule the same
+  day, **"Every episode has its own name"**, which compares the part of each
+  `season.ts` title after the colon.)*
 - **`luna-ty-hotelhall` puts the New York night on the open site, and its entry
   draws the lines very tightly.** *Just Go Straight*, a **free vertical post**,
   2026-11-16, 34s, `about` **Luna and Tyson**: Tyson carries Luna piggyback down
@@ -792,6 +826,10 @@ Standing backlog, roughly prioritised:
   screening, its token, its contents or its existence in any copy, and do not
   add a link to one from anywhere in the app — the first guard will fail the run
   if you do, which is the point of it.
+  **A pin is live again from 2026-11-18**: the run reads `Hero: episode-8, new,
+  until 2026-11-23`, so for those five days a hero failure is a real site
+  problem rather than a stale window. `public/hero/episode-8.mp4` and `.jpg`
+  shipped with the episode, and the slug is in `HERO_SLUGS` and `WITH_AUDIO`.
   **It also prints nothing at all when no pin is live, and that is the normal
   state.** The rule looks for a pin whose five days contain *now*
   (`scripts/health-check.ts:335`), so outside a window there is no `Hero:` line

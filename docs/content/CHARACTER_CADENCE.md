@@ -87,7 +87,7 @@ What that does and does not touch:
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-11-20 against `main` at dfcaabb. **A touched `lib/content/` file
+re-run 2026-11-20 against `main` at 545ff78. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -315,6 +315,12 @@ Josh item too.)*
 > reference as canonical* — so read the 10-20 entry and ignore the one below it.
 > **Miller** is still named-but-absent from `lib/content/`; **Cole** is published
 > in `tyson-cole-bar`. Check `lib/content/` rather than guessing which it is.
+> **`Jade` (2026-11-20) is the furthest case yet of named-but-absent**: she has
+> a **full character profile** in `BETWEEN_US_SECRET_CANON.md` — age, town, look,
+> voice, how she is with Tyson, and a list of what she must never be — and
+> **no `lib/content/` entry, no card, no name anywhere a visitor can read**.
+> `countFor` returns 0 for her. **A profile that detailed is not permission to
+> write her**; it is the opposite, and her entry says so.
 >
 > **THERE IS A CHARACTER BIBLE NOW, AND MOST OF IT MUST NOT REACH A NOTE.**
 > `docs/content/BETWEEN_US_CHARACTER_BIBLE.md` arrived 2026-10-14. It is
@@ -642,6 +648,13 @@ Standing backlog, roughly prioritised:
   **Read the synopsis and the canon addition, not the comment heading.** That is
   a new shape of the old trap: it has been commit messages that lie, and now a
   stale comment inside the entry can too.
+  **And from 2026-11-20 there is a third shape: the slug can name the wrong
+  person.** `ty-laura-bar` is the bar clip, and **there is no Laura** — the
+  woman in it is Jade, and the slug was deliberately left alone so the link
+  would keep working. A slug is an address, not a fact about who is in a piece:
+  **read `about`, the title and the entry, and never infer a character from a
+  slug.** The same file already holds `ty-laura-bar.jpg` and
+  `ty-laura-bar.proxy.mp4` for the same reason.
   **Matt and Ashley** (the boyfriend and the other woman in the scene at twenty)
   are **minor, have no character cards, and the site copy does not name them** —
   the same bucket as Evan, Frank and Miller. A note does not name them either.
@@ -704,16 +717,23 @@ Standing backlog, roughly prioritised:
   followed on 11-12. All three are free and none is a story beat — a category
   this file did not have a week ago and now the most active one on the board.)*
 - **`ty-laura-bar` shows present-day Tyson's feelings, and the entry draws the
-  line that keeps `tyson-no-early-feelings` intact.** *One at a Time*, **free,
-  in full**, 2026-11-19, 57s, `about` **Tyson and Luna**, place `bar`,
-  `feelings` desire and lies, **thirty-third of seventy-one** —
-  hand-placed as a guess just after `luna-ty-nyc-hotel`, Melissa's to move.
+  line that keeps `tyson-no-early-feelings` intact.** ***Someone Familiar***
+  (Melissa, 2026-11-20 — *"call it someone familiar"*; it shipped under the
+  placeholder *One at a Time*, which is still a line of dialogue in it but is
+  **no longer the title of anything**), **free, in full**, 2026-11-19, 57s,
+  `about` **Tyson and Luna**, place `bar`, `feelings` desire and lies,
+  **thirty-third of seventy-one** — hand-placed as a guess just after
+  `luna-ty-nyc-hotel`, Melissa's to move.
   Tyson plays pool with his buddy; the buddy says he heard Luna is seeing
   someone else; Tyson misses the shot, is pressed (*"You should just tell her,
-  right?"*) and answers *"I know I should, but I'm not… she's more than that,
-  you know."* Then *"No comment."* At the bar a woman notices him.
-  **Three rulings from the entry, all load-bearing.**
-  **(1) His feelings are now fair to show — but only now.** The entry says
+  right?"*) and answers *"I know I should, but I'm not."* Then *"No comment."*
+  At the bar a woman notices him. *(The 11-20 cut also puts **crowd lines under
+  the pool game** — *"he showed up two hours late"*, *"I don't believe you"* —
+  and trims his answer: the *"she's more than that, you know"* this file quoted
+  on 11-20 is **not in the cut on the site**. Quote from the entry, not from
+  here.)*
+  **Four rulings now, all load-bearing.**
+  **(1) His feelings are fair to show — but only now.** The entry says
   *"present-day Tyson, so his feelings now are fair to show; nothing says how
   long he has had them."* So this **does not retire `tyson-no-early-feelings`**:
   copy about an earlier scene is still loyalty and only loyalty. Do not read
@@ -721,16 +741,35 @@ Standing backlog, roughly prioritised:
   **(2) Luna is not seeing anyone.** The buddy says it to rattle him, or to get
   him to admit the feeling without saying it. **It is a tactic, not news** — a
   note must never repeat it as fact.
-  **(3) Two of the named people stay unnamed, and one of them is a second
-  Matt.** His buddy is **Matt — not the Matt Luna dated at twenty**; canon says
-  so outright and that the site names neither him nor the woman at the bar
-  (**Laura**), who is *"a stranger for now"* with nowhere written to go yet.
-  **Two different Matts now exist**, which is exactly why neither is named in
-  copy, and a note must not name either or join them up.
-  *(It was posted free, **taken down the same night** — Melissa: *"dont post
-  yet"* — and put back from her scored cut. One more reason to read the module
-  rather than the history: for a few hours this clip existed, then did not,
-  then did.)*
+  **(3) His buddy is a second Matt**, not the Matt Luna dated at twenty; canon
+  says so outright, and the site names him nowhere. **Two different Matts now
+  exist**, which is exactly why neither is named in copy, and a note must not
+  name either or join them up.
+  **(4) The woman at the bar is JADE, and she is a misdirect — this is the
+  tightest guard on the clip.** She was **Laura for one night**: that name, and
+  the ruling that she is *"a stranger for now"*, were **both false within a
+  day** and this file carried them. **Do not restore either.** Melissa's
+  profile (`BETWEEN_US_SECRET_CANON.md`, 2026-11-20) says she and Tyson have
+  known each other **about three years through the Colorado motorsports
+  community** — so *"somebody has noticed him"*, which is all the synopsis
+  says, is **deliberate misdirection the audience is meant to fall for**.
+  **Their history is not revealed yet, and she is not named on the site until
+  Melissa names her.** A note must not reveal it, hint at it, or let the title
+  do the hinting: *Someone Familiar* reads as a stranger-who-feels-familiar and
+  **must be left reading that way**. Also hers and off the site: she does
+  **not** know about Luna and Josh and must not be made aware of his feelings
+  for Luna; there is **no past romance or sex** between them and where it goes
+  is undecided; her job is **not yet decided**; and Tyson's **Porsche Carrera
+  and track driving** arrive with her profile and are writer knowledge too.
+  **Her rules are absolute:** never a jealous villain, a disposable girlfriend,
+  **a replacement for Luna** or a device to make Luna jealous, and **neither
+  woman is written as better than the other**. No backstory or romance for her
+  without Melissa.
+  *(The history is three states inside two days: posted free, **taken down the
+  same night** — Melissa: *"dont post yet"* — put back from her scored cut, and
+  then **replaced on 11-20** by `ty-jade-barPt1.-music`, retitled, with a new
+  poster. **The slug never moved, so it still says `ty-laura-bar`** — see the
+  slug trap below.)*
 - **Episode 8 Part I is the New York weekend, and it changes what that night
   is.** *Episode 8, Part I: A Different Kind of Close*, 2026-11-18, **premium**,
   **31:45 — the longest thing in the library** — with a **60-second** free

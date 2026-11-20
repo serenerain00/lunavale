@@ -87,7 +87,7 @@ What that does and does not touch:
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-11-19 against `main` at b9ec50f. **A touched `lib/content/` file
+re-run 2026-11-20 against `main` at dfcaabb. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -99,8 +99,8 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 285 | 238 |
-| Tyson | 12 | 201 | 172 |
+| Luna | 12 | 286 | 238 |
+| Tyson | 12 | 202 | 172 |
 | Josh | 14 | 172 | 149 |
 | Rick | 1 | 15 | 13 |
 | Cathy | 0 | 13 | 13 |
@@ -120,7 +120,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 → 26 → 28 → 29 → 29 at b9ec50f** (Tyson 201, Josh 172 — Episode 8 is `about` all three leads, so it paid each of them one and left the gap exactly where it was): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 → 26 → 28 → 29 → 29 → **30 at dfcaabb** (Tyson 202, Josh 172 — the free bar clip is `about` Tyson and Luna, so it put the gap back on its recorded ceiling of 30): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has now sat anywhere between 17 and 30. Quote the two
@@ -168,11 +168,13 @@ making that claim about anything.)* Seven other free pieces are uncovered as wel
 — `luna-ty-couch`, `ty-luna-young`, `luna-tyson-shaving`, `young-luna-ty-apt`,
 `young-luna-ty-seals` (new and free on 2026-10-13), `luna-ty-bulb` (*The Right
 Bulb*, free, 2026-10-14, thirty-nine seconds), `luna-truck-breakdown`,
-**`luna-ty-laundrymat`** (*Get to Know Her*, free, 2:51, 2026-10-27, sixty-sixth
-in the order — Luna's own page about it, `laundromat`, is **premium**, so the
+**`luna-ty-laundrymat`** (*Get to Know Her*, free, 2:51, 2026-10-27, **eighteenth
+of seventy-one** at dfcaabb — this read "sixty-sixth" until 2026-11-20 and was
+wrong by forty-eight places, the third and worst ordinal this file has had to
+correct — Luna's own page about it, `laundromat`, is **premium**, so the
 footage is the shop window and her interior is behind the wall) and
 **`luna-alley-attack`** (*Someone's Asking Questions*, free, 2:27, 2026-10-29,
-sixty-eighth in the order, **downtown, and `about` is Luna alone** — checked
+**last of seventy-one** at dfcaabb, not the "sixty-eighth" this file carried, **downtown, and `about` is Luna alone** — checked
 against every entry on this list at 1df359f, the only one that names a single
 character, which is the sort of claim to re-derive rather than trust) —
 but every one of them pays into the two characters who need it least.
@@ -484,7 +486,7 @@ Standing backlog, roughly prioritised:
   register as *Come Home*, and Josh asking a second time is not Luna answering.
 - **`luna-ty-garage-event`** — *Everybody Else*, published **premium** on
   2026-11-04, 380s (6:20) with a **62-second free opening**, Luna and Tyson,
-  place `garage`, **twenty-seventh of seventy in `STORY_ORDER`** (re-derived 2026-11-06) — the first
+  place `garage`, **twenty-seventh of seventy-one in `STORY_ORDER`** (re-derived 2026-11-20) — the first
   new clip in weeks to be placed *inside* the order rather than appended, which
   is what shifted the ordinals below. It is a scene from Episode 7, and
   for five days it shipped *ahead* of the episode, which made the boundary
@@ -519,14 +521,14 @@ Standing backlog, roughly prioritised:
   **And `ty-luna-garage` (*The Garage*, premium, 456s, published 2026-08-19) is
   a different scene in the same room.** Canon settles only that it is **not
   present day** and comes **well after Episode 7** — it sits sixty-second in the
-  order, **sixty-third of seventy** at 6dc6a46 — it read sixty-second one day
+  order, **sixty-fourth of seventy-one** at dfcaabb — it read sixty-second one day
   earlier, which is the warning below in miniature — after the wall and the
   bathtub. **Do not call it earlier than Episode 7 either**; "not present day" is the whole of what is settled, and a commit on
   11-04 exists specifically to stop that inference being made.
 - **`luna-josh-kitchen-argue`** — *I Don't Know Yet*, published **premium** on
   2026-11-05, 164s (2:44) with a **30-second free opening** (the shortest free
   window on any clip), **Luna, Josh and Tyson**, place `lakehouse`,
-  **thirty-third of seventy** in `STORY_ORDER` — **hand-placed as a guess, and
+  **thirty-fourth of seventy-one** in `STORY_ORDER` at dfcaabb, having been thirty-third until the bar clip was inserted above it — **hand-placed as a guess, and
   the entry says Melissa is to move it**, so do not build a note on where it
   falls. This is the strongest new Josh material in weeks and it pays all three
   leads: Josh comes inside about Tyson's truck, asks whether something is going
@@ -655,8 +657,11 @@ Standing backlog, roughly prioritised:
   leads, and the two free Josh clips (`josh-ty-kitchen-corner`, *Come Home*).
   Off it for not being story beats at all: **`tyson-qa`** (free, Tyson alone)
   and **`luna-josh-radio`** (free, Luna and Josh) — cast-promo pieces, both
-  exempt from `STORY_ORDER`. Counted at ddb7381, where free reads **18
-  published / 19 by `access`**.
+  exempt from `STORY_ORDER`. Counted at dfcaabb, where free reads **19
+  published / 20 by `access` / 20 watchable**.
+  **The 11-19 bar clip belongs ON the list, not outside it**: `ty-laura-bar` is
+  free, uncovered, and `about` **Tyson and Luna**, which is exactly the clause —
+  it is the ninth free-and-uncovered piece and does nothing to the exclusions.
   **This list is about free *videos* only, and `luna-sidewalk-interview` does
   not make it nine.** The 11-12 cast-promo piece is a **vertical post**, and
   posts were never on this list — they are not in `STORY_ORDER` at all, so
@@ -698,6 +703,34 @@ Standing backlog, roughly prioritised:
   *(Second cast-promo piece in two days, after `tyson-qa`, and the third
   followed on 11-12. All three are free and none is a story beat — a category
   this file did not have a week ago and now the most active one on the board.)*
+- **`ty-laura-bar` shows present-day Tyson's feelings, and the entry draws the
+  line that keeps `tyson-no-early-feelings` intact.** *One at a Time*, **free,
+  in full**, 2026-11-19, 57s, `about` **Tyson and Luna**, place `bar`,
+  `feelings` desire and lies, **thirty-third of seventy-one** —
+  hand-placed as a guess just after `luna-ty-nyc-hotel`, Melissa's to move.
+  Tyson plays pool with his buddy; the buddy says he heard Luna is seeing
+  someone else; Tyson misses the shot, is pressed (*"You should just tell her,
+  right?"*) and answers *"I know I should, but I'm not… she's more than that,
+  you know."* Then *"No comment."* At the bar a woman notices him.
+  **Three rulings from the entry, all load-bearing.**
+  **(1) His feelings are now fair to show — but only now.** The entry says
+  *"present-day Tyson, so his feelings now are fair to show; nothing says how
+  long he has had them."* So this **does not retire `tyson-no-early-feelings`**:
+  copy about an earlier scene is still loyalty and only loyalty. Do not read
+  this clip backwards into the kitchen corner, the laundromat or New York.
+  **(2) Luna is not seeing anyone.** The buddy says it to rattle him, or to get
+  him to admit the feeling without saying it. **It is a tactic, not news** — a
+  note must never repeat it as fact.
+  **(3) Two of the named people stay unnamed, and one of them is a second
+  Matt.** His buddy is **Matt — not the Matt Luna dated at twenty**; canon says
+  so outright and that the site names neither him nor the woman at the bar
+  (**Laura**), who is *"a stranger for now"* with nowhere written to go yet.
+  **Two different Matts now exist**, which is exactly why neither is named in
+  copy, and a note must not name either or join them up.
+  *(It was posted free, **taken down the same night** — Melissa: *"dont post
+  yet"* — and put back from her scored cut. One more reason to read the module
+  rather than the history: for a few hours this clip existed, then did not,
+  then did.)*
 - **Episode 8 Part I is the New York weekend, and it changes what that night
   is.** *Episode 8, Part I: A Different Kind of Close*, 2026-11-18, **premium**,
   **31:45 — the longest thing in the library** — with a **60-second** free
@@ -900,7 +933,7 @@ Standing backlog, roughly prioritised:
   so write it as Josh's account of the call, not as fact
 - **`luna-josh-frmhouse-comehome-horiz`** — *Come Home* (title a placeholder,
   hers to replace), published **free** on 2026-10-22, sixty seconds, Luna and
-  Josh, **nineteenth of seventy in `STORY_ORDER`** (re-derived 2026-11-06;
+  Josh, **nineteenth of seventy-one in `STORY_ORDER`** (re-derived 2026-11-20;
   this line said "sixty-fifth" and was wrong — see the ordinals warning below).
   The second free uncovered Josh piece, and
   the only one where Josh asks for something himself: a Sunday a few weeks into
@@ -1022,7 +1055,7 @@ Standing backlog, roughly prioritised:
   check `videos.ts` and `posts.ts` before calling anything a clip. The counter-
   example arrived the next morning — **`luna-ty-driving`** (*One Number Off*,
   **premium**, 4:03 with a 58-second free opening, Luna and Tyson, 2026-10-22,
-  **twenty-ninth of seventy in `STORY_ORDER`**, re-derived 2026-11-06 — this
+  **twenty-ninth of seventy-one in `STORY_ORDER`**, re-derived 2026-11-20 — this
   line said "sixty-fourth") came in as a *"new members clip"* and **is** a
   video. So the wording predicts the module in neither direction: open the two
   files. It is also one more premium piece paying the two leads who need it

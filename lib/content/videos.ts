@@ -4710,6 +4710,47 @@ export const videos: Video[] = [
     place: "farmhouse",
     about: ["luna", "josh"],
   },
+  {
+    /*
+      ONE AT A TIME, 2026-11-19. Melissa: "post this on the site for free".
+      Free, in full, 55s.
+
+      FROM THE TRANSCRIPT: Tyson at the pool table with his buddy Matt. "So I
+      heard Luna's seeing someone else." Tyson misses the shot. "You should
+      just tell her, right?" / "I know I should, but I'm not... she's more
+      than that, you know." / "I knew it." / "Matt, you don't know shit." /
+      "Ty, you don't miss those shots, bro." / "No comment." Then at the bar:
+      "Can I get two more Coronas?" / "You know they serve those one at a
+      time, right?"
+
+      MELISSA'S READING, 2026-11-19 (writer knowledge): a subtle reveal. Matt
+      says it to rattle Tyson into missing, or at least into admitting to
+      Matt that he has feelings for her without saying so. Luna is NOT
+      seeing anyone; it is Matt's line, not news. Then a cliffhanger: Laura,
+      a blonde at the bar, notices Tyson. Laura is a stranger "for now".
+
+      SITE COPY: Matt is not named (the Matt Luna dated at twenty is a
+      different person, and two Matts on a page reads as one), Laura is not
+      named, and nothing says where Laura goes next. Present-day Tyson, so
+      his feelings now are fair to show; nothing says how long he has had
+      them (see the note on the series description).
+
+      THE TITLE IS A PLACEHOLDER, hers to replace.
+    */
+    slug: "ty-laura-bar",
+    title: "One at a Time",
+    synopsis:
+      "A night of pool with his buddy, until one remark about Luna costs Tyson an easy shot, and he won't say why. At the bar, somebody has noticed him.",
+    file: "ty-laura-bar.proxy.mp4",
+    poster: "/posters/ty-laura-bar.jpg",
+    durationSeconds: 55,
+    addedOn: "2026-11-19",
+    access: "free",
+    mature: false,
+    feelings: ["desire", "lies"],
+    place: "bar",
+    about: ["tyson", "luna"],
+  },
 ];
 
 /**

@@ -906,6 +906,12 @@ CUTS=(
   # for New York. Inside the free minute.
   "episode-8|stories/ep8/ep8-final-credits.mp4|22|-|-|30"
 
+  # TYSON, MATT AND LAURA AT THE BAR, 2026-11-19 (Melissa: "post this on the
+  # site for free"). 1912x1080, 30fps, the whole file: the last line ends at
+  # 53.0 and the picture is black from 54.2. POSTER AT 2s: Tyson with the cue,
+  # looking back over his shoulder.
+  "ty-laura-bar|stories/ty-laura-bar/ty-laura-bar.mp4|2|-|-|30"
+
   # THE INTERVIEW, 2026-10-09. A future season: Detectives Harris and
   # Bennett question Luna about the accident nine years ago, then she rings
   # Tyson from the car. Scored, 13:20, 1320x798 hevc at 60fps — down to 30

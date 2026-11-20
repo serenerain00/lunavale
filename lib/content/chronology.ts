@@ -188,6 +188,10 @@ export const STORY_ORDER: readonly string[] = [
   "luna-ty-couch",
   "luna-ty-wasntplanningonit",
   "luna-ty-nyc-hotel",
+  // HAND-PLACED — A GUESS, 2026-11-19, Melissa to move it. Tyson, his buddy
+  // Matt and Laura at the bar: present day, and Laura is a thread that starts
+  // after New York (Episode 8), so it sits just after the hotel night.
+  "ty-laura-bar",
   // HAND-PLACED — A GUESS, 2026-11-05, Melissa to move it. Josh at the
   // lakehouse about Tyson's truck: Tyson is "here all the time" and Josh is
   // still trying to get her back ("I don't know yet"), so the settled middle,

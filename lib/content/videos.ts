@@ -4713,33 +4713,37 @@ export const videos: Video[] = [
   {
     /*
       ONE AT A TIME, 2026-11-19. Melissa: "post this on the site for free".
-      Free, in full. Taken down the same night ("dont post yet") and put back
-      from her scored cut, ty-laura-barPT1.mov ("it has music"), 57s.
+      Free, in full. Taken down the same night ("dont post yet"), put back
+      from her scored cut, and REPLACED 2026-11-20 by ty-jade-barPt1.-music:
+      the woman at the bar is JADE (she was Laura for one night). 57s.
 
       FROM THE TRANSCRIPT: Tyson at the pool table with his buddy Matt. "So I
       heard Luna's seeing someone else." Tyson misses the shot. "You should
-      just tell her, right?" / "I know I should, but I'm not... she's more
-      than that, you know." / "I knew it." / "Matt, you don't know shit." /
-      "Ty, you don't miss those shots, bro." / "No comment." Then at the bar:
-      "Can I get two more Coronas?" / "You know they serve those one at a
-      time, right?"
+      just tell her, right?" / "I know I should, but I'm not." / "I knew
+      it!" / "Matt, you don't know shit." / "Ty, you don't miss those shots,
+      bro." / "No comment." Then at the bar: "Can I get two more Coronas?" /
+      "You know they serve those one at a time, right?"
 
-      MELISSA'S READING, 2026-11-19 (writer knowledge): a subtle reveal. Matt
-      says it to rattle Tyson into missing, or at least into admitting to
-      Matt that he has feelings for her without saying so. Luna is NOT
-      seeing anyone; it is Matt's line, not news. Then a cliffhanger: Laura,
-      a blonde at the bar, notices Tyson. Laura is a stranger "for now".
+      MELISSA'S READING (writer knowledge): a subtle reveal. Matt says it to
+      rattle Tyson into missing, or to get him to admit his feelings for her
+      without saying so. Luna is NOT seeing anyone; it is Matt's line.
+
+      JADE IS A MISDIRECT (her profile, 2026-11-20, in
+      docs/content/BETWEEN_US_SECRET_CANON.md): the audience is meant to read
+      an attractive stranger noticing Tyson, but they already know each
+      other from the track. DO NOT REVEAL THAT, and do not name her, on the
+      site until Melissa does. "Somebody has noticed him" is the misdirect,
+      on purpose.
 
       SITE COPY: Matt is not named (the Matt Luna dated at twenty is a
-      different person, and two Matts on a page reads as one), Laura is not
-      named, and nothing says where Laura goes next. Present-day Tyson, so
-      his feelings now are fair to show; nothing says how long he has had
-      them (see the note on the series description).
+      different person). Present-day Tyson, so his feelings now are fair to
+      show; nothing says how long he has had them.
 
-      THE TITLE IS A PLACEHOLDER, hers to replace.
+      TITLE: Melissa, 2026-11-20, "call it someone familiar" (it was the
+      placeholder "One at a Time").
     */
     slug: "ty-laura-bar",
-    title: "One at a Time",
+    title: "Someone Familiar",
     synopsis:
       "A night of pool with his buddy, until one remark about Luna costs Tyson an easy shot, and he won't say why. At the bar, somebody has noticed him.",
     file: "ty-laura-bar.proxy.mp4",

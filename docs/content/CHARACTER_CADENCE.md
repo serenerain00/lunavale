@@ -42,13 +42,16 @@ couple of months.
 
 ## Where the gaps are
 
-As built, 2026-07-28:
+As counted by `countFor()` / `lockedCountFor()` (`lib/content/characters.ts`),
+2026-11-16. The Notes column counts everything filed to an author in
+`between-takes.ts`, replies included, which is what the helper counts.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 8 | 44 | 23 |
-| Tyson | 8 | 44 | 33 |
-| Josh | 8 | 35 | 21 |
+| Luna | 12 | 283 | 237 |
+| Tyson | 12 | 199 | 171 |
+| Josh | 13 | 170 | 147 |
+| Rick | 2 | 16 | 14 |
 
 **Josh is the thinnest** and is the one who benefits most from more. He is the
 hardest character to hold an audience's sympathy for, the whole story depends
@@ -72,3 +75,4 @@ not a changelog.
 | Week of | What shipped | Who |
 | --- | --- | --- |
 | 2026-07-28 | Character hubs built; 24 Between Takes notes (8 each), 7 free | all three |
+| 2026-11-16 | Between Takes note — Rick, "I never turn around" (`josh-rick-lake`) | Rick |

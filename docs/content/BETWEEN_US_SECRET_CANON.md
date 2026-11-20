@@ -1208,14 +1208,48 @@ or died is **not settled**. Don't state it on the site.
 
 Tone: intimate, mature, psychologically tense, subtly ominous.
 
-## Addition — 2026-11-19: Tyson, Matt and Laura at the bar (released, free)
+## Addition — 2026-11-19, revised 2026-11-20: Tyson, Matt and Jade at the bar (released, free)
 
 From Melissa's clip `ty-laura-bar` ("One at a Time", title a placeholder),
-posted free. Present day. Tyson plays pool with **his buddy Matt** (not the
-Matt Luna dated at twenty). Matt says he heard Luna is seeing someone else,
-and Tyson misses the shot. **Luna is not seeing anyone**: Matt says it to
-rattle him, or to get Tyson to admit to him that he has feelings for her
-without saying so. Tyson won't ("No comment"). It ends on a cliffhanger:
-**Laura**, a blonde at the bar, notices Tyson. She is a stranger "for now"
-(Melissa); where she goes is not yet written. The site names neither Matt
-nor Laura.
+posted free; replaced on 2026-11-20 by `ty-jade-barPt1.-music`. The woman at
+the bar was briefly called Laura; **she is Jade**. Present day. Tyson plays
+pool with **his buddy Matt** (not the Matt Luna dated at twenty). Matt says
+he heard Luna is seeing someone else, and Tyson misses the shot. **Luna is
+not seeing anyone**: Matt says it to rattle him, or to get Tyson to admit to
+him that he has feelings for her without saying so. Tyson won't ("No
+comment"). The site names neither Matt nor Jade.
+
+### Jade (Melissa's character profile, 2026-11-20)
+
+- **About 36, Denver.** A recurring supporting character and a potential
+  romantic interest. Known to Tyson for **about three years through the
+  Colorado motorsports community**. Tyson owns a **Porsche Carrera** and does
+  some track driving.
+- **Who she is:** confident, independent, quick-witted, a little rebellious, a
+  "guys' girl" as at home at a track as at a bar. Competitive, dry and
+  deadpan; gives people she likes a hard time. Not intimidated by Tyson's
+  size, tattoos or SEAL past, and treats him like a normal guy. She has her
+  own friends and life; her job is **not yet decided** (possibly a
+  performance shop or organizing track events).
+- **Look (keep consistent):** long, straight dirty-blonde hair with natural
+  highlights and a center part, light blue-green eyes, subtle freckles,
+  athletic and natural, clearly different from Luna. Bar outfit: distressed
+  dark leather racing jacket with red-and-cream stripes and a checkered-flag
+  patch, a fitted black top, layered silver necklaces.
+- **Voice:** lower-mid, slightly husky, a subtle Western accent; relaxed,
+  direct, understated sarcasm. No giggling and no performed flirting.
+- **With Tyson:** casual, familiar, competitive teasing about cars and
+  driving. They're glad to run into each other but don't talk constantly.
+  She knows he was a SEAL; **she does not know about Luna and Josh** and must
+  not be made aware of his feelings for Luna yet. **No past romance or sex
+  between them.** Mutual attraction is possible; where it goes isn't
+  decided.
+- **The bar introduction is a misdirect.** She's there with friends,
+  recognizes Tyson, overhears the two Coronas and teases him: "You know they
+  serve those one at a time, right?" / "I know, I'm just really thirsty." /
+  "Oh, is that right?" The audience should read a stranger flirting. **Their
+  history is not revealed yet;** it comes out later, naturally.
+- **Rules:** never a jealous villain, a disposable girlfriend, a replacement
+  for Luna, or a device to make Luna jealous; neither woman is portrayed as
+  better than the other. Don't add major backstory or romantic developments
+  without Melissa.

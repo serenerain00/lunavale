@@ -913,7 +913,15 @@ CUTS=(
   # 1912x1080, and is the one she chose. END 57.4: picture black from 55.4,
   # the score fades out under it to -68 dB at 57.2 (cut where the music
   # stops). POSTER AT 5s: Tyson lining up the shot, Matt behind him.
-  "ty-laura-bar|stories/ty-laura-bar/ty-laura-barPT1.mov|5|57.4|-|30"
+  #
+  # REPLACED 2026-11-20 by ty-jade-barPt1.-music.mov (Melissa: "replace the
+  # old ty-laura video with this one"). The woman at the bar is now JADE, not
+  # Laura, and the cut adds crowd lines under the pool game ("he showed up two
+  # hours late", "I don't believe you"). 1080x604, 30fps; her unscored
+  # ty-jade-barPt1.mp4 is 1912x1080 but she chose the scored one. END 57.0:
+  # picture black from 53.2, score down to -68 dB at 57.0. Slug unchanged so
+  # the link stays the same.
+  "ty-laura-bar|stories/ty-laura-bar/ty-jade-barPt1.-music.mov|5|57.0|-|30"
 
   # THE INTERVIEW, 2026-10-09. A future season: Detectives Harris and
   # Bennett question Luna about the accident nine years ago, then she rings

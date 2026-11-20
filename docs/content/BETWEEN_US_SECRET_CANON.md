@@ -1207,15 +1207,3 @@ conversation once happened with her, and it didn't work out. Whether she left
 or died is **not settled**. Don't state it on the site.
 
 Tone: intimate, mature, psychologically tense, subtly ominous.
-
-## Addition — 2026-11-19: Tyson, Matt and Laura at the bar (released, free)
-
-From Melissa's clip `ty-laura-bar` ("One at a Time", title a placeholder),
-posted free. Present day. Tyson plays pool with **his buddy Matt** (not the
-Matt Luna dated at twenty). Matt says he heard Luna is seeing someone else,
-and Tyson misses the shot. **Luna is not seeing anyone**: Matt says it to
-rattle him, or to get Tyson to admit to him that he has feelings for her
-without saying so. Tyson won't ("No comment"). It ends on a cliffhanger:
-**Laura**, a blonde at the bar, notices Tyson. She is a stranger "for now"
-(Melissa); where she goes is not yet written. The site names neither Matt
-nor Laura.

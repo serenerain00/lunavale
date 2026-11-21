@@ -87,7 +87,7 @@ What that does and does not touch:
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-11-20 against `main` at 545ff78. **A touched `lib/content/` file
+re-run 2026-11-21 against `main` at 0bed283. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -99,9 +99,9 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 286 | 238 |
-| Tyson | 12 | 202 | 172 |
-| Josh | 14 | 172 | 149 |
+| Luna | 12 | 291 | 243 |
+| Tyson | 12 | 207 | 177 |
+| Josh | 14 | 174 | 151 |
 | Rick | 1 | 15 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 9 | 9 |
@@ -120,10 +120,10 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 → 26 → 28 → 29 → 29 → **30 at dfcaabb** (Tyson 202, Josh 172 — the free bar clip is `about` Tyson and Luna, so it put the gap back on its recorded ceiling of 30): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 → 26 → 28 → 29 → 29 → 30 → 30 → **33 at 0bed283** (Tyson 207, Josh 174 — the five Episode 8 journal pages pay Luna five, Tyson five and Josh two, so **the ceiling moved three points in one merge**): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
-a single day since. **It has now sat anywhere between 17 and 30. Quote the two
+a single day since. **It has now sat anywhere between 17 and 33. Quote the two
 current numbers at a sha and do not characterise the movement at all** — an
 earlier version of this line said "noise in the high teens", which 22 killed.
 *(The ceiling was 28, set in late September and matched on 10-27. The 10-28
@@ -134,7 +134,14 @@ between 17 and 28", and it was true until it wasn't.** If a later merge passes
 29, extend the number and nothing else. **It did, on 11-05**: `luna-ty-garage-event`
 is a Luna-and-Tyson clip, so Tyson moved alone and the ceiling is now **30**. The
 number was extended and nothing else was. That is the third ceiling in nine days,
-which is an argument for quoting a sha rather than a range at all.)*
+which is an argument for quoting a sha rather than a range at all. **And it moved
+again on 11-21, to 33** — the five Episode 8 journal pages pay Luna and Tyson
+five each and Josh only two, so **one merge of pages took the ceiling three
+points past a figure that had held for sixteen days**. That is the fourth
+ceiling, and the largest single jump recorded: **journal pages move these numbers
+as hard as footage does**, and five of them outweighed everything the bar clip
+and Episode 8 had done. The span is **17 to 33**; extend the number and nothing
+else.)*
 *(This
 paragraph has now been wrong twice: it claimed the direction had never changed,
 which died on 2026-10-09, and then that the gap was closing, which died on
@@ -146,7 +153,7 @@ he turns. What to watch is how much of his material makes that case. **He is one
 of the three all three episodes are about**, and the episodes are the first
 thing a new member watches.
 
-**Rick is the real hole.** **Fifteen pieces against Josh's 171 at 2fbd94a** —
+**Rick is the real hole.** **Fifteen pieces against Josh's 174 at 0bed283** —
 and he is the entire explanation for Josh. Every note written for Rick is doing
 double duty on the character the story most needs an audience to like first,
 which makes him the cheapest way to feed Josh as well. **These two figures were
@@ -169,12 +176,12 @@ making that claim about anything.)* Seven other free pieces are uncovered as wel
 `young-luna-ty-seals` (new and free on 2026-10-13), `luna-ty-bulb` (*The Right
 Bulb*, free, 2026-10-14, thirty-nine seconds), `luna-truck-breakdown`,
 **`luna-ty-laundrymat`** (*Get to Know Her*, free, 2:51, 2026-10-27, **eighteenth
-of seventy-one** at dfcaabb — this read "sixty-sixth" until 2026-11-20 and was
+of seventy-one** at 0bed283 — this read "sixty-sixth" until 2026-11-20 and was
 wrong by forty-eight places, the third and worst ordinal this file has had to
 correct — Luna's own page about it, `laundromat`, is **premium**, so the
 footage is the shop window and her interior is behind the wall) and
 **`luna-alley-attack`** (*Someone's Asking Questions*, free, 2:27, 2026-10-29,
-**last of seventy-one** at dfcaabb, not the "sixty-eighth" this file carried, **downtown, and `about` is Luna alone** — checked
+**last of seventy-one** at 0bed283, not the "sixty-eighth" this file carried, **downtown, and `about` is Luna alone** — checked
 against every entry on this list at 1df359f, the only one that names a single
 character, which is the sort of claim to re-derive rather than trust) —
 but every one of them pays into the two characters who need it least.
@@ -527,14 +534,14 @@ Standing backlog, roughly prioritised:
   **And `ty-luna-garage` (*The Garage*, premium, 456s, published 2026-08-19) is
   a different scene in the same room.** Canon settles only that it is **not
   present day** and comes **well after Episode 7** — it sits sixty-second in the
-  order, **sixty-fourth of seventy-one** at dfcaabb — it read sixty-second one day
+  order, **sixty-fourth of seventy-one** at 0bed283 — it read sixty-second one day
   earlier, which is the warning below in miniature — after the wall and the
   bathtub. **Do not call it earlier than Episode 7 either**; "not present day" is the whole of what is settled, and a commit on
   11-04 exists specifically to stop that inference being made.
 - **`luna-josh-kitchen-argue`** — *I Don't Know Yet*, published **premium** on
   2026-11-05, 164s (2:44) with a **30-second free opening** (the shortest free
   window on any clip), **Luna, Josh and Tyson**, place `lakehouse`,
-  **thirty-fourth of seventy-one** in `STORY_ORDER` at dfcaabb, having been thirty-third until the bar clip was inserted above it — **hand-placed as a guess, and
+  **thirty-fourth of seventy-one** in `STORY_ORDER` at 0bed283, having been thirty-third until the bar clip was inserted above it — **hand-placed as a guess, and
   the entry says Melissa is to move it**, so do not build a note on where it
   falls. This is the strongest new Josh material in weeks and it pays all three
   leads: Josh comes inside about Tyson's truck, asks whether something is going
@@ -548,14 +555,15 @@ Standing backlog, roughly prioritised:
   *(Heading collision to avoid: **#1 is already titled "I don't know yet"**, so a
   note on this clip wants a different heading even though the clip's own title is
   hers.)*
-- **The journal is at 179 entries and still only 6 free.** Ten `premium` pages
+- **The journal is at 184 entries and still only 6 free.** Ten `premium` pages
   landed on 11-05 — five beside Episode 6, three beside *Everybody Else*, one
   beside *One Number Off*, and one beside **Come Home, a free clip whose page is
-  members-only** — **five more on 2026-11-11, all beside Episode 7**, and **five
+  members-only** — **five more on 2026-11-11, all beside Episode 7**, **five
   more on 2026-11-13: three beside Episode 4 and two beside
-  `luna-josh-kitchen-argue`**, all `premium`. **Four of the eight episodes carry
-  journal pages** — 4 has three, 5 has five, 6 has five, 7 has five; the pilot,
-  2, 3 and **the new 8** have none — while **no episode carries a Between Takes
+  `luna-josh-kitchen-argue`**, and **five more on 2026-11-20 beside Episode 8**,
+  all `premium`. **Five of the eight episodes carry
+  journal pages** — 4 has three, and 5, 6, 7 and 8 have five each; only the
+  pilot, 2 and 3 have none — while **no episode carries a Between Takes
   note**: two
   separate backlogs, and the one this file tracks is the notes. *(This line said
   "Episodes 6 and 7" on 11-11 and was **already wrong when written** — Episode 5
@@ -601,6 +609,41 @@ Standing backlog, roughly prioritised:
   how that open conflict is handled. Quoted on the pages: *"I don't have to beg
   him to show up"* and *"I don't know yet"*. **Not quoted: *"Don't grab me like
   that"*.**
+- **Five draft pages landed beside Episode 8 on 2026-11-20, and the biggest
+  thing in them is a canon conflict their own comment refuses to resolve.** All
+  five are `premium`, all say **DRAFT PROSE, replace it**. In the episode's
+  order: `the-same-things` (Josh in the doorway while she packs),
+  `fifteen-minutes` (the gallery, before she speaks), `allowed-to-miss-him`
+  (the bar, after Josh's text), `one-song` (the dancing) and
+  `careful-around-me` (the flight home, written after Tyson's room, and placed
+  in the file **after `new-york`** rather than with the other four).
+  **THE CONFLICT, flagged to Melissa on 11-20 and left open on purpose:**
+  `new-york` and The Whitmore (`luna-ty-nyc-hotel`) have the trip as **a company
+  dinner, five months in, before Josh calls**, with *"we did not talk about
+  anything"* in his room. **Episode 8 has her own photography show, Josh already
+  back in her life, and a real conversation in the room.** The pages follow the
+  episode because **the episode is newer** — CLAUDE.md's rule, *use the newest
+  approved reference as canonical* — but **nothing has settled it, so a note
+  must not harmonise the two and must not repeat either version as the
+  settled one.** That makes **five sources on that night**, and the count going
+  up has never once narrowed it.
+  **The guards in the comment are tight and they hold.** **Tyson: what she saw
+  and heard, nothing about what he feels** — and the page is built on her
+  *misreading* his carefulness as being about herself, which is what canon says
+  she does with his silences. **It does not answer the question Episode 8 stops
+  on, and neither may a note.** **Josh: making an effort, and she says so** —
+  and **the Tuesday dinner is the fight they have been having for ten years,
+  not a warning**, so it stays clear of the control arc. **Nathan: nice, ten
+  minutes at the bar, and nothing more is made of him.**
+  **One line is quoted per page at most, and the gallery page quotes nothing:**
+  *"I don't want to come home to the same things that made me leave"*, *"You're
+  allowed to miss him, Lu"*, *"I just think you look great tonight"*,
+  *"Sometimes your questions scare the shit out of me"*. Invented and hers to
+  cut: the back hallway, the crease from his sleeve, the window seat, *"the bag
+  zipped anyway"*.
+  *(These pages are also why the Josh gap jumped three points to its fourth
+  ceiling — see **Where the gaps are**. Five pages did more to the counts than
+  a 31-minute episode and a free clip managed between them.)*
 - **"The Night Everything Changed" (the house party): part of it is public now,
   and the sentence above it in this file lasted a day.** It read *"writer
   knowledge and must not be posted at all"*, written 2026-11-06 from the 11-04
@@ -670,7 +713,7 @@ Standing backlog, roughly prioritised:
   leads, and the two free Josh clips (`josh-ty-kitchen-corner`, *Come Home*).
   Off it for not being story beats at all: **`tyson-qa`** (free, Tyson alone)
   and **`luna-josh-radio`** (free, Luna and Josh) — cast-promo pieces, both
-  exempt from `STORY_ORDER`. Counted at dfcaabb, where free reads **19
+  exempt from `STORY_ORDER`. Counted at 0bed283, where free reads **19
   published / 20 by `access` / 20 watchable**.
   **The 11-19 bar clip belongs ON the list, not outside it**: `ty-laura-bar` is
   free, uncovered, and `about` **Tyson and Luna**, which is exactly the clause —
@@ -759,8 +802,17 @@ Standing backlog, roughly prioritised:
   **must be left reading that way**. Also hers and off the site: she does
   **not** know about Luna and Josh and must not be made aware of his feelings
   for Luna; there is **no past romance or sex** between them and where it goes
-  is undecided; her job is **not yet decided**; and Tyson's **Porsche Carrera
-  and track driving** arrive with her profile and are writer knowledge too.
+  is undecided; her job is **not yet decided**; and **how he knows her — the
+  Colorado motorsports community, and his track driving — is writer knowledge**.
+  *(**Correction, 11-21, and the error was this file's.** On 11-20 this line
+  swept **the Carrera** in with it as writer knowledge. It is not: `the-carrera`
+  is a **free journal entry from 2026-07-22**, `about` Tyson, on the open site —
+  *"The Carrera came out of the garage"*, him refusing to take a corner hard with
+  her in the car. **The car has been public for four months.** What Jade's
+  profile adds is the **track driving and the scene he met her in**, not the
+  car. Do not restore the wider claim: before calling anything of hers writer
+  knowledge, grep the free journal for it. This is the cost of writing a guard
+  from a canon block without checking what is already published.)*
   **Her rules are absolute:** never a jealous villain, a disposable girlfriend,
   **a replacement for Luna** or a device to make Luna jealous, and **neither
   woman is written as better than the other**. No backstory or romance for her
@@ -785,11 +837,20 @@ Standing backlog, roughly prioritised:
   so it is quotable, but it is the furthest anything goes: **Part II is not
   written here, and a note must not answer the question the episode leaves
   open.** This is the fourth source on that night and it does **not** settle the
-  others — see the hotel-hallway item below and keep its rule.
-  **Nathan, the photographer, is named only in the entry comment** — not in the
-  synopsis, not in any visible copy, and with **no `lib/content/` entry**. He is
-  the Miller / Evan / Matt / Ashley / Frank bucket, and unlike Reed he is **not**
-  in copy at all. Leave him there.
+  others — see the hotel-hallway item below and keep its rule, and the **fifth**
+  source, the five journal pages of 11-20, does not settle them either; it
+  flags the conflict instead.
+  **Nathan, the photographer, is in copy from 2026-11-20, and this line said
+  otherwise for two days.** It read *"named only in the entry comment … unlike
+  Reed he is not in copy at all"*. The journal page `one-song` names him in
+  prose — *"A photographer named Nathan, who I'd met by the prints earlier"* —
+  so he is now **the second of that bucket spoken in copy, after Reed**, though
+  only in a `premium` page and still with **no `lib/content/` entry** and
+  nothing in a synopsis. **Do not restore the "not in copy at all" claim.** The
+  page itself makes the restraint explicit — *"Nothing more is made of him"* —
+  so a note may say a photographer talked to her about the work and must not
+  make him a thread. Miller, Evan, Matt, Ashley, Jade and Frank are still
+  entirely absent from copy.
   *(Two firsts worth knowing. It is the **first multi-part episode** — hence
   `--part` in `scripts/episode-credits.py` — so "Episode 8" alone does not
   name a whole episode. And it arrived carrying **Episode 3's name**, *The Space

@@ -79,6 +79,40 @@ export default async function JournalIndexPage({
             What she wrote when nobody was going to read it — filed by the room
             she wrote it in, and by who it&rsquo;s about. One page each.
           </p>
+
+          {/*
+            HOW IT WORKS, for somebody who has never been here. Melissa,
+            2026-11-21: "explain the journals to the visitors". Three short
+            answers to the three questions a newcomer has: what is this, how
+            does it connect to the episodes, and what can I read. No counts
+            (her rule, 2026-09-16: no denominators on the shop window).
+          */}
+          <dl className="mt-8 grid max-w-4xl gap-x-8 gap-y-5 border-t border-hairline pt-6 text-sm leading-relaxed sm:grid-cols-3">
+            <div>
+              <dt className="font-display text-base text-ivory">What it is</dt>
+              <dd className="mt-1 text-stone">
+                Luna is the woman at the center of Between Us, and she keeps a
+                journal. These are her pages, in her voice: what she noticed,
+                what she didn&rsquo;t say, and what she thinks it all means.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-display text-base text-ivory">How it fits the show</dt>
+              <dd className="mt-1 text-stone">
+                Most pages are written the same night as a scene or an episode.
+                Watch what happened, then read what it was like for her. Each
+                clip&rsquo;s page shows the entries that go with it.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-display text-base text-ivory">What you can read</dt>
+              <dd className="mt-1 text-stone">
+                A few pages are free to everyone, no account needed. The rest
+                come with membership, and new pages are added alongside new
+                episodes.
+              </dd>
+            </div>
+          </dl>
         </header>
 
         {/* Plain links, no client JavaScript: filtering survives a refresh, is

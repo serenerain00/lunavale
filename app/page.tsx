@@ -6,6 +6,7 @@ import { PAGE } from "@/components/ui/layout";
 import { ClipCard } from "@/components/shelf/ClipCard";
 import { Hero } from "@/components/home/Hero";
 import { TrailerHero } from "@/components/home/TrailerHero";
+import { StoryIntro } from "@/components/home/StoryIntro";
 import { FollowForm } from "@/components/follow/FollowForm";
 import { SurveyDrawer } from "@/components/survey/SurveyDrawer";
 import { SiteHeader } from "@/components/ui/SiteHeader";
@@ -135,6 +136,10 @@ export default async function Home() {
           ) : (
             <Hero hero={hero} series={seriesFacts} />
           ))}
+
+        {/* Who these people are, before anything asks for money. The
+            hero's "Explore the series" lands here. 2026-11-21. */}
+        <StoryIntro />
 
         {/*
           THE BLURB, directly under the hero and deliberately one paragraph.
@@ -352,7 +357,9 @@ export default async function Home() {
                 href="/membership"
                 className="-my-3 inline-flex min-h-11 items-center shrink-0 text-sm text-amber transition-colors duration-(--duration-quick) hover:text-amber-soft"
               >
-                Watch it with a membership{" "}
+                {/* "Watch it with a membership" until 2026-11-21, when the
+                    pilot went free and that stopped being true of all of it. */}
+                Episode 1 is free · the rest with membership{" "}
                 <span aria-hidden="true">→</span>
               </Link>
             </Guest>
@@ -524,7 +531,9 @@ export default async function Home() {
         <Shelf
           title="Her journal"
           href="/journal"
-          note="What Luna wrote the same night, in her own words."
+          // Says what the journal IS before what it's like (Melissa,
+          // 2026-11-21: "explain the journals to the visitors").
+          note="Luna's private journal: her side of the scenes, written the same night. A few pages are free to read."
         >
           {openPages.map((e) => (
             <RailItem key={e.id}>
@@ -713,6 +722,8 @@ export default async function Home() {
  */
 function freeWeekNote(slug: string | undefined): string | undefined {
   const video = slug ? getVideo(slug) : undefined;
+  // An episode free for good (the pilot, 2026-11-21) has no end date to give.
+  if (video?.access === "free") return "Free to watch";
   if (!video?.openUntil || !openNow(video)) return undefined;
   return `Free to watch through ${freeThroughLabel(video.openUntil)}`;
 }

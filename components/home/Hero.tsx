@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Guest } from "@/components/access/Viewer";
+import { Guest, Member } from "@/components/access/Viewer";
+import { clarityEvent } from "@/components/analytics/clarity";
+import { STORY_HOOK } from "@/lib/content/story-intro";
 import { AmbientVideo } from "@/components/home/AmbientVideo";
 import { RatingBadge } from "@/components/ui/RatingBadge";
 import type { Hero as HeroContent } from "@/lib/content/hero";
@@ -10,7 +12,7 @@ import { getPlace } from "@/lib/content/taxonomy";
 import { formatDuration, freeThroughLabel, openNow } from "@/lib/content/videos";
 import { PAGE } from "@/components/ui/layout";
 import { useHeroSound } from "@/components/home/useHeroSound";
-import { SERIES_TITLE } from "@/lib/content/season";
+import { SERIES_TITLE, SEASONS } from "@/lib/content/season";
 import { SeriesHeroCopy, type SeriesFacts } from "@/components/home/FirstScreen";
 
 interface HeroProps {
@@ -68,6 +70,13 @@ export function Hero({ hero, series }: HeroProps) {
   // cached page stops saying "free" the moment it stops being true.
   const freeWeek = video.access !== "free" && openNow(video);
   const free = video.access === "free" || freeWeek;
+  // The pilot leads with the series, not the episode: see IntroCopy below.
+  const intro = video.slug === "pilot";
+  const newest = SEASONS.flatMap((s) => s.episodes).filter((e) => !e.comingSoon && e.slug).at(-1);
+  const latest = newest?.slug ? { slug: newest.slug, label: `Episode ${newest.number}` } : undefined;
+  const freeEpisode =
+    video.access === "free" &&
+    SEASONS.some((season) => season.episodes.some((e) => e.slug === video.slug));
   // Not every place has a walkable environment yet (the fair, Burnett's), so
   // the second button falls back to the world index rather than 404ing.
   const place = getPlace(video.place);
@@ -132,7 +141,10 @@ export function Hero({ hero, series }: HeroProps) {
         </button>
       )}
 
-      {series && <SeriesHeroCopy facts={series} />}
+      {series && !intro && <SeriesHeroCopy facts={series} />}
+      {intro ? (
+        <IntroCopy video={video} free={free} latest={latest} />
+      ) : (
       <div data-fs-variant="control" className={`${PAGE} pb-12 sm:pb-16`}>
         {/* THE SERIES MARK, above the clip's own title. From 2026-09-16 the
             hero is whichever clip went up most recently, so without this the
@@ -178,11 +190,19 @@ export function Hero({ hero, series }: HeroProps) {
             Free to watch through {freeThroughLabel(video.openUntil!)}
           </p>
         )}
+        {/* An episode that is free for good (the pilot, 2026-11-21) says so
+            just as loudly: episodes are otherwise members-only, so "free" is
+            the news. */}
+        {freeEpisode && (
+          <p className="mt-5 text-lg font-medium text-amber sm:text-xl">
+            Free to watch, no membership needed
+          </p>
+        )}
 
         {/* Clamped to three lines: the hero is a fixed share of the screen and
             anchored to the bottom, so a long synopsis (the pilot's is five
             sentences) pushed the series mark up under the header on phones and on short laptop screens. The full text is on the clip page. */}
-        <p className={`${freeWeek ? "mt-2" : "mt-5"} line-clamp-3 max-w-xl text-lg leading-relaxed text-stone sm:text-xl`}>
+        <p className={`${freeWeek || freeEpisode ? "mt-2" : "mt-5"} line-clamp-3 max-w-xl text-lg leading-relaxed text-stone sm:text-xl`}>
           {video.synopsis}
         </p>
 
@@ -221,7 +241,99 @@ export function Hero({ hero, series }: HeroProps) {
           </Guest>
         </div>
       </div>
+      )}
     </section>
+  );
+}
+
+/**
+ * THE NEWCOMER'S FIRST SCREEN, while the free pilot leads the hero
+ * (2026-11-21, Melissa's redesign brief). Says what the series is and why
+ * anybody would care before it names an episode, and makes the free pilot the
+ * first button. Copy and canon checks: lib/content/story-intro.ts.
+ *
+ * MEMBERS GET THEIR OWN BUTTONS: they know the story, so the first one goes to
+ * the newest episode, not the pilot. Both sets ship in the cached HTML and the
+ * Viewer layer shows one, as everywhere else on this page.
+ *
+ * No data-fs-variant: the first-screen experiment ended 2026-11-01, and this
+ * shows for everyone.
+ */
+function IntroCopy({
+  video,
+  free,
+  latest,
+}: {
+  video: HeroContent["video"];
+  free: boolean;
+  latest?: { slug: string; label: string };
+}) {
+  const primary =
+    "inline-flex min-h-12 items-center gap-2.5 rounded-full bg-ivory px-6 text-sm font-medium text-void transition-colors duration-(--duration-quick) hover:bg-white sm:px-7";
+  const secondary =
+    "inline-flex min-h-12 items-center gap-2.5 rounded-full bg-charcoal/70 px-6 text-sm text-ivory backdrop-blur-md transition-colors duration-(--duration-quick) hover:bg-charcoal sm:px-7";
+  return (
+    <div className={`${PAGE} pb-12 sm:pb-16`}>
+      <p className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-amber sm:text-base">
+        {SERIES_TITLE}
+      </p>
+      {/* Sized for a phone first: the hero is a fixed share of the screen and
+          bottom-anchored, so at text-4xl the first line slid under the header
+          on a 390x664 viewport (checked in an iPhone 13 emulation). */}
+      <h1 className="mt-2 max-w-3xl text-balance font-display text-[1.85rem] font-semibold leading-[1.05] tracking-tight text-ivory sm:mt-3 sm:text-6xl">
+        {STORY_HOOK.headline}
+      </h1>
+      <p className="mt-3 max-w-xl text-base leading-relaxed text-stone sm:mt-5 sm:text-xl">
+        {STORY_HOOK.blurb}
+      </p>
+      <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-stone">
+        <span>Episode 1 · Pilot</span>
+        <span aria-hidden>·</span>
+        <span className="tabular-nums">{formatDuration(video.durationSeconds)}</span>
+        {free && (
+          <>
+            <span aria-hidden>·</span>
+            <span className="font-medium text-amber">Free, no membership needed</span>
+          </>
+        )}
+        {video.mature && (
+          <>
+            <span aria-hidden>·</span>
+            <RatingBadge mature={video.mature} />
+          </>
+        )}
+      </div>
+      <div className="mt-5 flex flex-wrap gap-3 sm:mt-8 sm:gap-4">
+        <Guest>
+          <Link
+            href={`/clips/${video.slug}`}
+            onClick={() => clarityEvent("hero_pilot_click")}
+            className={primary}
+          >
+            <PlayGlyph />
+            {STORY_HOOK.primary}
+          </Link>
+          <a
+            href="#the-story"
+            onClick={() => clarityEvent("hero_explore_click")}
+            className={secondary}
+          >
+            {STORY_HOOK.secondary}
+          </a>
+        </Guest>
+        <Member>
+          {latest && (
+            <Link href={`/clips/${latest.slug}`} className={primary}>
+              <PlayGlyph />
+              Watch {latest.label}
+            </Link>
+          )}
+          <Link href={`/clips/${video.slug}`} className={secondary}>
+            Start from Episode 1
+          </Link>
+        </Member>
+      </div>
+    </div>
   );
 }
 

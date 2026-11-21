@@ -72,8 +72,8 @@ export const HERO_SLUGS: string[] = [
   "josh-ty-ricks-house",
   "luna-lkehouse-wine-shatter",
   "ty-luna-blonde-guy-bar",
-  // 2026-10-22, PINNED while the episode is free (HERO_PINS below), and kept
-  // out of the rotation (NOT_IN_HERO) so the front page is as it was after.
+  // PINNED for good since 2026-11-21, now the episode is free (HERO_PINS
+  // below). Out of the random rotation (NOT_IN_HERO) like every episode.
   "pilot",
   // 2026-11-09, pinned for its first five days (NEW_EPISODE_DAYS below) and,
   // like the pilot, never in the rotation after.
@@ -303,9 +303,21 @@ export function recentHeroes(): Hero[] {
  * still in force wins; the trailer's ends inside the pilot's, so it is
  * superseded rather than resumed.
  */
-const PILOT_OPEN_UNTIL = getVideo("pilot")?.openUntil;
+/*
+ * THE PILOT AGAIN, AND THIS TIME WITH NO END (Melissa, 2026-11-21: "lets make
+ * the pilot free and have it in the hero"). The episode is free for good, so
+ * it leads the front page for good: the door to the whole series, open.
+ *
+ * It wins over Episode 8's five days, which still had two to run when she
+ * asked. Episodes published AFTER this pin started still take the hero for
+ * their first five days (the rule below), then hand it back to the pilot.
+ *
+ * To let go of it, delete the pilot line here; the newest-first rotation
+ * takes over by itself.
+ */
+export const PILOT_PINNED_FROM = new Date("2026-11-21T05:00:00Z");
 const HERO_PINS: { slug: string; until: Date }[] = [
-  ...(PILOT_OPEN_UNTIL ? [{ slug: "pilot", until: new Date(PILOT_OPEN_UNTIL) }] : []),
+  { slug: "pilot", until: new Date("9999-12-31T00:00:00Z") },
   { slug: "between-us-trailer-one", until: new Date("2026-10-27T04:00:00Z") },
 ];
 
@@ -341,7 +353,12 @@ export function newEpisodePins(): { slug: string; until: Date }[] {
 }
 
 export function pickHero(now: Date = new Date()): Hero | undefined {
-  for (const pin of [...newEpisodePins(), ...HERO_PINS]) {
+  // A new episode's five days only outrank the pilot if it came out after
+  // the pilot was pinned; see PILOT_PINNED_FROM.
+  const fresh = newEpisodePins().filter(
+    (p) => p.until.getTime() - NEW_EPISODE_DAYS * 86_400_000 >= PILOT_PINNED_FROM.getTime(),
+  );
+  for (const pin of [...fresh, ...HERO_PINS]) {
     if (now >= pin.until) continue;
     const pinned = heroes().find((h) => h.slug === pin.slug);
     if (pinned) return pinned;

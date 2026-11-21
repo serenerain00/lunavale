@@ -64,7 +64,9 @@ export interface BetweenUsAnnouncement {
 
 export const BETWEEN_US: BetweenUsAnnouncement = {
   announced: true,
-  eyebrow: "Coming to the LunaVerse",
+  // "Coming to the LunaVerse" until 2026-11-21: eight episodes in, it had
+  // arrived.
+  eyebrow: "Now streaming",
   heading: "Between Us",
   /*
     WHAT IT IS, FROM MELISSA, 2026-09-03 — and it now leads, because it is the
@@ -127,7 +129,8 @@ export const BETWEEN_US: BetweenUsAnnouncement = {
   // reason in the header.
   offer: [
     "Season one is here, and new episodes land weekly. Not a scene and not a clip — episodes.",
-    "Every one is part of the membership. Nothing extra to buy, no season to wait for, and they stay yours to watch again.",
+    // Episode 1 free for good since 2026-11-21 (lib/content/videos.ts).
+    "Episode 1 is free for everyone. Every episode after it is part of the membership. Nothing extra to buy, no season to wait for, and they stay yours to watch again.",
     // NAMES THE CONSTRAINT rather than claiming exclusivity. "Exclusive" is a
     // word that can mean anything and that a reader has been trained to
     // discount; a length limit on a platform they use themselves is checkable,

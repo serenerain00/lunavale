@@ -531,7 +531,9 @@ export default async function Home() {
         <Shelf
           title="Her journal"
           href="/journal"
-          note="What Luna wrote the same night, in her own words."
+          // Says what the journal IS before what it's like (Melissa,
+          // 2026-11-21: "explain the journals to the visitors").
+          note="Luna's private journal: her side of the scenes, written the same night. A few pages are free to read."
         >
           {openPages.map((e) => (
             <RailItem key={e.id}>

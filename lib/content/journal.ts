@@ -3682,6 +3682,120 @@ export const journal: JournalEntry[] = [
     ],
   },
   /*
+    FIVE PAGES BESIDE EPISODE 8, PART I, A DIFFERENT KIND OF CLOSE, added
+    2026-11-20 (Melissa: "add 5 more journal entries"), members-only like the
+    episode past its first minute. In the episode's order: Josh in the
+    doorway while she packs, the gallery before she speaks, the text from
+    Josh after, the dancing, and Tyson's room (that one after `new-york`,
+    written on the flight home).
+
+    One line quoted per page at most, each from the footage: "I don't want
+    to come home to the same things that made me leave", "You're allowed to
+    miss him, Lu", "I just think you look great tonight", "Sometimes your
+    questions scare the shit out of me". The gallery page quotes nothing.
+
+    TYSON: what she saw and heard, nothing about what he feels. She reads
+    his carefulness as being about her, which is what the canon says she
+    does with his silences (see `new-york`).
+
+    JOSH: making an effort, and she says so. The Tuesday dinner is the
+    fight they have been having for ten years, not a warning.
+
+    NATHAN: the photographer from the footage, nice, ten minutes at the bar.
+    Nothing more is made of him.
+
+    CANON CONFLICT, flagged to Melissa 2026-11-20 and NOT resolved here:
+    `new-york` and The Whitmore (luna-ty-nyc-hotel) describe a company
+    dinner, five months in, before Josh calls, with "we did not talk about
+    anything" in his room. Episode 8 is her own photography show, Josh is
+    already back in her life, and the room has a real conversation in it.
+    The episode is newer. These pages follow it.
+
+    Invented and hers to cut: the back hallway at the gallery, the crease
+    from his sleeve, the window seat, "the bag zipped anyway".
+
+    DRAFT PROSE. Replace it.
+  */
+  {
+    id: "the-same-things",
+    addedOn: "2026-11-20",
+    dateline: "Packing for New York, and Josh in the doorway",
+    place: "lakehouse",
+    where: "The bedroom",
+    about: ["luna", "josh", "tyson"],
+    sceneSlug: "episode-8",
+    access: "premium",
+    mature: false,
+    body: [
+      "Josh stood in the bedroom doorway while I packed and asked why Ty has to come. I knew it wasn't about Ty before he'd finished the sentence.",
+      "Then he brought up Chicago. My feet killing me, him carrying my shoes around all night. He remembers it the way I do, and that undid me a little, because it means I didn't make the good years up afterward. He was there for them too.",
+      "And then the place we always end up. Last Tuesday, dinner made, a call at eight thirty. He said he lost track of time. I said I know, you always do, and I meant it as the plainest fact I have, and he heard it as a charge.",
+      "I have never needed him to stop working. I need not to be the only one who remembers for both of us.",
+      "\"I don't want to come home to the same things that made me leave.\" I've thought that sentence a hundred times out here. Today I finally said it to his face, and he didn't hear a door closing. He heard a list he could fix. Maybe he can. That's the most hopeful and the most frightening thing I know about him.",
+      "I told him Ty isn't replacing him. He said he never said he was. We were both telling the truth, and it still stood in the room with us like a third person.",
+      "He asked me not to give up on us. I'm not. I'm just not walking back into the same house with the same Tuesday waiting in it. I said we'd talk when I get back, gently, and I meant it, and I zipped the bag anyway.",
+    ],
+  },
+  {
+    id: "fifteen-minutes",
+    addedOn: "2026-11-20",
+    dateline: "Fifteen minutes before I have to talk",
+    place: "new-york",
+    where: "The gallery, a back hallway",
+    about: ["luna", "tyson"],
+    sceneSlug: "episode-8",
+    access: "premium",
+    mature: false,
+    body: [
+      "Fifteen minutes. I'm writing instead of breathing, which is a choice.",
+      "Ty says I packed my whole life. He also says he paid for an entire seat and I used most of it, which is fair, because my bag rode under his feet from Denver to New York and he narrated every inch of it until I threatened him.",
+      "Then I fell asleep on him. I don't remember deciding to. One minute I was arguing, and the next we were coming down and I had a crease from his sleeve on my cheek.",
+      "I don't sleep on planes. I haven't slept anywhere the way I used to in months. I'm not going to think about what that means fifteen minutes before I stand up in front of a room.",
+      "The room. They did such a good job. I walked in and my pictures were on the walls, big and properly lit, girls I watched find their feet in front of a lens, and I had to stop in the doorway for a second. I've been inside a hundred rooms like this. I've never been the reason for one.",
+      "Josh's question came with me too. It's in the bag somewhere. It can stay there until Sunday.",
+      "Okay. Lipstick. Go.",
+    ],
+  },
+  {
+    id: "allowed-to-miss-him",
+    addedOn: "2026-11-20",
+    dateline: "After the speech, and the text",
+    place: "new-york",
+    where: "The bar, after",
+    about: ["luna", "josh", "tyson"],
+    sceneSlug: "episode-8",
+    access: "premium",
+    mature: false,
+    body: [
+      "I spent years being looked at for a living, and three minutes of saying something true into a microphone nearly took me out. My hands were shaking. Nobody tells you that the camera is the easy side.",
+      "But I said it. The part I actually believe, that what I love now is watching a nineteen-year-old stop apologizing for taking up space in a frame. I've never said that out loud to a room. It sounded like mine.",
+      "Then Josh texted. He's proud of me.",
+      "And it was the right thing, and it was kind, and it made the whole night harder in one line. Because he should have been there. Because I'm the reason he wasn't. Both of those are true at once and I don't know how to hold them in the same hand.",
+      "Ty saw it on my face before I'd decided to have it there. \"You're allowed to miss him, Lu.\"",
+      "Nobody has said that to me. Everybody has an opinion about whether I should go home, and nobody has just let me miss him without it meaning anything. Ty did it in six words at a bar, and then said they were both proud of me, and put himself in the same sentence as Josh like that's simply where he stands.",
+      "Maybe it is. He's never once made me choose.",
+    ],
+  },
+  {
+    id: "one-song",
+    addedOn: "2026-11-20",
+    dateline: "Dancing, and forty-five minutes of negotiating",
+    place: "new-york",
+    where: "The dance floor",
+    about: ["luna", "tyson"],
+    sceneSlug: "episode-8",
+    access: "premium",
+    mature: false,
+    body: [
+      "I danced tonight like I used to. Not like somebody's wife at a work thing. Like me, at twenty-two, before I learned to check who was watching.",
+      "A photographer named Nathan, who I'd met by the prints earlier, sat with me at the bar for a while and was lovely, and said nice things about the work. That's all it was. I mention it because it was nice to be talked to as the person whose name is on the wall.",
+      "Ty does not dance. Ty has never danced. It took me forty-five minutes, by his count, and he'd like that on the record, to get one song out of him. A slow one, which I think he picked so he'd only have to sway.",
+      "He was looking at me oddly, and I told him he was being weird, and he said \"I just think you look great tonight.\" That's all. And I said thanks, baby, the way I say it to everybody, and it didn't come out the way I say it to everybody.",
+      "I don't know what to do with that, so I'm just writing it down where it happened.",
+      "What I do know is that I haven't felt like this in forever. Not happy, exactly. Awake. Like somebody turned the lights back on in a part of the house I'd closed off.",
+    ],
+  },
+  /*
     NEW YORK. Added 2026-09-08 with the scene and the vertical cut, and it is
     the largest thing that happens to these two inside the six months — the
     book had no page for it, which for a woman who writes down a dinner order
@@ -3780,6 +3894,27 @@ export const journal: JournalEntry[] = [
       "We have a car at four. I have to go down and have breakfast with him and be a person.",
       "The thing I keep coming back to is not what he did not say. It is that I did not say it either, and I had the whole night, and I have been telling myself for a month that I am waiting on him.",
       "One of us was going to have to and neither of us did, and we both got on a plane home about it.",
+    ],
+  },
+  {
+    // The fifth Episode 8 page; see the block above `the-same-things`.
+    id: "careful-around-me",
+    addedOn: "2026-11-20",
+    dateline: "The flight home",
+    place: "new-york",
+    where: "A window seat",
+    about: ["luna", "tyson"],
+    sceneSlug: "episode-8",
+    access: "premium",
+    mature: false,
+    body: [
+      "He's asleep. I have the window and the whole sky and one conversation I can't put down.",
+      "In his room I asked him if Nathan had bothered him, because he went strange when I mentioned him. He said he barely knew the guy, which was true and wasn't an answer. Then he reached past me for a bottle and said sorry. Sorry, for standing next to me.",
+      "Tyson has been in my space since I was eighteen. I told him so. He has never once apologized for it, and I've never once wanted him to.",
+      "So I pushed, the way I do, and he said \"Sometimes your questions scare the shit out of me.\" He said it came out wrong. I don't think it did. I think it's the most honest thing he's said to me in weeks, and it arrived as an apology.",
+      "I nearly left. I had my hand on the door, practically. And then he said he was being an asshole, he was tired, he was in his head, stay, and he put on the movie I'd wanted, and neither of us could remember what it was called. Just like that we were us again.",
+      "But I keep landing on careful. He's been careful around me, and I don't know when it started, and I've decided three different times since takeoff that it's because of something I did. That I've been leaning on him too hard. That he's being kind to a woman who's coming apart.",
+      "Maybe. I notice how fast I get there, though. And I notice I didn't ask him the real question either. I asked about Nathan.",
     ],
   },
   /*

@@ -83,11 +83,23 @@ What that does and does not touch:
   mounted in `app/layout.tsx`): copyright, `hello@lunavale38.com`, and a link to
   `/terms`. So **every page now carries a contact address and a terms link**,
   which is worth knowing before writing that any page is a dead end.
+- **The rewrite did not reach everywhere, and this is for Melissa rather than
+  for anyone here to fix.** Two visitor-facing surfaces still name her, both
+  older than 11-15 and untouched by it: the **survey drawer**
+  (`components/survey/SurveyDrawer.tsx`, which renders on the home page) says
+  *"Tell Melissa what's landing, how you'd rather watch it…"*, and
+  **`/welcome`** has a *"Tell Melissa"* button. Checked in the rendered page at
+  5b7da42 — her name is in the visible text of `/` right now. **It may well be
+  deliberate**: both are places a reader is being asked to write *to a person*,
+  which is not the product describing itself, and the 11-15 change was about the
+  product's voice. **Do not change public copy to "fix" it** — that needs her
+  approval — but do not cite the rule as fully applied either, and do not copy
+  the survey's phrasing into anything new.
 
 ## Where the gaps are
 
 Read off `countFor()` / `lockedCountFor()` in `lib/content/characters.ts`,
-re-run 2026-11-21 against `main` at 0bed283. **A touched `lib/content/` file
+re-run 2026-11-21 against `main` at 5b7da42. **A touched `lib/content/` file
 does not mean the figures moved** — two merges on 10-15 and 10-16 swapped the
 lead portraits one for one and changed nothing, so re-derive and say which it
 was. The reverse holds too, and is the cheaper check: diff the file list first,
@@ -99,9 +111,9 @@ visible.
 
 | | Notes | Total pieces | Members-only |
 | --- | --- | --- | --- |
-| Luna | 12 | 291 | 243 |
-| Tyson | 12 | 207 | 177 |
-| Josh | 14 | 174 | 151 |
+| Luna | 12 | 291 | 242 |
+| Tyson | 12 | 207 | 176 |
+| Josh | 14 | 174 | 150 |
 | Rick | 1 | 15 | 13 |
 | Cathy | 0 | 13 | 13 |
 | Avery | 0 | 9 | 9 |
@@ -120,7 +132,7 @@ week's note.*
 **Josh is the thinnest of the three leads, and the gap no longer has a
 direction.** He has the most *notes* of anyone and is still bottom on total
 pieces. Tyson's lead over him went 25 before the September launch → 28 → 19 →
-17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 → 26 → 28 → 29 → 29 → 30 → 30 → **33 at 0bed283** (Tyson 207, Josh 174 — the five Episode 8 journal pages pay Luna five, Tyson five and Josh two, so **the ceiling moved three points in one merge**): it widened for six weeks, snapped in hard when episodes
+17 → 18 → 19 → 22 → 23 → **24 → 23 → 22 → 24 → 25 → 23 → 24 → 24 → 27 → 28 → 29 → 29 → 29 → 30 → 28 → 28 → 30 → 26 → 26 → 28 → 29 → 29 → 30 → 30 → **33 at 5b7da42** (Tyson 207, Josh 174 — the five Episode 8 journal pages pay Luna five, Tyson five and Josh two, so **the ceiling moved three points in one merge**): it widened for six weeks, snapped in hard when episodes
 2 and 3 landed (both are about Luna, Josh and Tyson, so they pay the two of them
 equally while Josh started from behind), and has moved as much as three points in
 a single day since. **It has now sat anywhere between 17 and 33. Quote the two
@@ -153,7 +165,7 @@ he turns. What to watch is how much of his material makes that case. **He is one
 of the three all three episodes are about**, and the episodes are the first
 thing a new member watches.
 
-**Rick is the real hole.** **Fifteen pieces against Josh's 174 at 0bed283** —
+**Rick is the real hole.** **Fifteen pieces against Josh's 174 at 5b7da42** —
 and he is the entire explanation for Josh. Every note written for Rick is doing
 double duty on the character the story most needs an audience to like first,
 which makes him the cheapest way to feed Josh as well. **These two figures were
@@ -176,12 +188,12 @@ making that claim about anything.)* Seven other free pieces are uncovered as wel
 `young-luna-ty-seals` (new and free on 2026-10-13), `luna-ty-bulb` (*The Right
 Bulb*, free, 2026-10-14, thirty-nine seconds), `luna-truck-breakdown`,
 **`luna-ty-laundrymat`** (*Get to Know Her*, free, 2:51, 2026-10-27, **eighteenth
-of seventy-one** at 0bed283 — this read "sixty-sixth" until 2026-11-20 and was
+of seventy-one** at 5b7da42 — this read "sixty-sixth" until 2026-11-20 and was
 wrong by forty-eight places, the third and worst ordinal this file has had to
 correct — Luna's own page about it, `laundromat`, is **premium**, so the
 footage is the shop window and her interior is behind the wall) and
 **`luna-alley-attack`** (*Someone's Asking Questions*, free, 2:27, 2026-10-29,
-**last of seventy-one** at 0bed283, not the "sixty-eighth" this file carried, **downtown, and `about` is Luna alone** — checked
+**last of seventy-one** at 5b7da42, not the "sixty-eighth" this file carried, **downtown, and `about` is Luna alone** — checked
 against every entry on this list at 1df359f, the only one that names a single
 character, which is the sort of claim to re-derive rather than trust) —
 but every one of them pays into the two characters who need it least.
@@ -534,14 +546,14 @@ Standing backlog, roughly prioritised:
   **And `ty-luna-garage` (*The Garage*, premium, 456s, published 2026-08-19) is
   a different scene in the same room.** Canon settles only that it is **not
   present day** and comes **well after Episode 7** — it sits sixty-second in the
-  order, **sixty-fourth of seventy-one** at 0bed283 — it read sixty-second one day
+  order, **sixty-fourth of seventy-one** at 5b7da42 — it read sixty-second one day
   earlier, which is the warning below in miniature — after the wall and the
   bathtub. **Do not call it earlier than Episode 7 either**; "not present day" is the whole of what is settled, and a commit on
   11-04 exists specifically to stop that inference being made.
 - **`luna-josh-kitchen-argue`** — *I Don't Know Yet*, published **premium** on
   2026-11-05, 164s (2:44) with a **30-second free opening** (the shortest free
   window on any clip), **Luna, Josh and Tyson**, place `lakehouse`,
-  **thirty-fourth of seventy-one** in `STORY_ORDER` at 0bed283, having been thirty-third until the bar clip was inserted above it — **hand-placed as a guess, and
+  **thirty-fourth of seventy-one** in `STORY_ORDER` at 5b7da42, having been thirty-third until the bar clip was inserted above it — **hand-placed as a guess, and
   the entry says Melissa is to move it**, so do not build a note on where it
   falls. This is the strongest new Josh material in weeks and it pays all three
   leads: Josh comes inside about Tyson's truck, asks whether something is going
@@ -704,17 +716,38 @@ Standing backlog, roughly prioritised:
   *(One thing worth asking rather than fixing: `about` names **Josh**, and he is
   in neither half of the montage. It pays him a point in the counts. Left as
   Melissa set it.)*
-- **Eight free pieces sit deliberately outside the free-and-uncovered list
+- **The front page was rebuilt for newcomers on 2026-11-21, and its copy
+  applies this file's own guards — in public, where a note can be checked
+  against it.** `lib/content/story-intro.ts` (new) carries the words over the
+  hero while the free pilot leads it: the headline **"Ten years of love. Twenty
+  years of friendship. One secret that changes everything."**, a blurb
+  beginning *"She walked away from the man she still loves"*, and three
+  relationship cards each pointing at a **free** clip — Luna + Josh (*Come
+  Home*), Luna + Tyson (`luna-ty-couch`), and **"The secret"**
+  (`luna-alley-attack`). `components/home/StoryIntro.tsx` renders them, and
+  `app/journal/page.tsx` gained a public *"What it is"* explainer.
+  **Three rulings are visible in that copy and a note must not contradict
+  them.** It says Tyson is Josh's **"family"** and never "cousin", because
+  *cousin* versus **second cousin** is still unsettled — the cleanest handling
+  of that conflict yet, in copy a visitor reads. It says *"Something between
+  them is shifting"* in the **present tense**, deliberately, so
+  `tyson-no-early-feelings` survives contact with marketing. And it says a
+  secret exists **without naming it or the event** — the fact of it was already
+  public in Melissa's own synopsis and the free alley clip; what it *is* stays
+  writer knowledge. **The copy is marked DRAFT and hers to replace**, so quote
+  it as current rather than as settled.
+- **Nine free pieces sit deliberately outside the free-and-uncovered list
   below**, and the reasons are not all the same. The list's clause is that every
   piece on it pays **only into Luna and Tyson**, which is what makes it an
   argument rather than an inventory. Off it for paying someone else: the three
   free trailers (`between-us-trailer-one`, `luna-attack-trailer`,
   `luna-ty-drunk-trailer`) and `luna-ty-montage`, each of which pays all three
-  leads, and the two free Josh clips (`josh-ty-kitchen-corner`, *Come Home*).
+  leads, the two free Josh clips (`josh-ty-kitchen-corner`, *Come Home*), and
+  from 2026-11-21 **the pilot**, which is free for good and pays all three.
   Off it for not being story beats at all: **`tyson-qa`** (free, Tyson alone)
   and **`luna-josh-radio`** (free, Luna and Josh) — cast-promo pieces, both
-  exempt from `STORY_ORDER`. Counted at 0bed283, where free reads **19
-  published / 20 by `access` / 20 watchable**.
+  exempt from `STORY_ORDER`. Counted at 5b7da42, where free reads **20
+  published / 21 by `access` / 21 watchable**.
   **The 11-19 bar clip belongs ON the list, not outside it**: `ty-laura-bar` is
   free, uncovered, and `about` **Tyson and Luna**, which is exactly the clause —
   it is the ninth free-and-uncovered piece and does nothing to the exclusions.
@@ -959,10 +992,27 @@ Standing backlog, roughly prioritised:
   screening, its token, its contents or its existence in any copy, and do not
   add a link to one from anywhere in the app — the first guard will fail the run
   if you do, which is the point of it.
-  **A pin is live again from 2026-11-18**: the run reads `Hero: episode-8, new,
-  until 2026-11-23`, so for those five days a hero failure is a real site
-  problem rather than a stale window. `public/hero/episode-8.mp4` and `.jpg`
-  shipped with the episode, and the slug is in `HERO_SLUGS` and `WITH_AUDIO`.
+  **A pin was live again from 2026-11-18** — the run read `Hero: episode-8, new,
+  until 2026-11-23`. `public/hero/episode-8.mp4` and `.jpg` shipped with the
+  episode, and the slug is in `HERO_SLUGS` and `WITH_AUDIO`.
+  **THEN 2026-11-21 CHANGED THE WHOLE RULE, AND LEFT THAT LINE LYING.** Melissa
+  made the pilot **free for good and the permanent hero** — *"lets make the
+  pilot free and have it in the hero"* — so `HERO_PINS` now carries
+  `{ slug: "pilot", until: 9999-12-31 }` and a new `PILOT_PINNED_FROM`
+  (2026-11-21T05:00:00Z). **Episode 8's five days were superseded with two
+  still to run.** Only an episode published *after* that timestamp takes the
+  hero for its first five days and then hands it back; to let the pilot go,
+  delete its line and the newest-first rotation resumes by itself.
+  **THE `Hero:` LINE NO LONGER NAMES THE HERO, AND THIS IS THE TRAP.** The
+  check still prints `Hero: episode-8, new, until 2026-11-23` — the `ok()` sits
+  inside the new-episode loop, which still runs for an episode inside its five
+  days — while **`pickHero()` actually returns `pilot`**. Verified at 5b7da42:
+  the line says episode-8, the front page shows the pilot, and nothing fails,
+  because the new guard only compares them for episodes pinned after the pilot
+  was. **So do not read that line as the current hero, and do not treat a
+  mismatch between it and the front page as a bug — call `pickHero()`.** This
+  is the second time the hero rule has made a sentence here false in twelve
+  days, and the first time the check's own output has been the misleading part.
   **It also prints nothing at all when no pin is live, and that is the normal
   state.** The rule looks for a pin whose five days contain *now*
   (`scripts/health-check.ts:335`), so outside a window there is no `Hero:` line
@@ -987,12 +1037,22 @@ Standing backlog, roughly prioritised:
   `openNow()` in `videos.ts` is the test, and `streamable.ts` carries the field
   through. **The pilot carried the only window so far — 2026-10-22 to
   2026-10-29T07:00:00Z, the end of Wednesday 10-28 Pacific — and it was the home
-  hero and said so on both first-screen arms while it lasted.** The field is
-  still on the entry; `openNow(pilot)` now returns **false**, and `access`-free
-  and watchable-now agree again — both **fourteen** at 1df359f, both **fifteen**
-  at 944c369 once the free trailer landed. If another window
+  hero and said so on both first-screen arms while it lasted.** `access`-free
+  and watchable-now agreed again once it closed — both **fourteen** at 1df359f,
+  both **fifteen** at 944c369 once the free trailer landed. If another window
   opens, the two diverge by however many pieces carry one, and the list in this
   file is the `access` list.
+  **AND ON 2026-11-21 THE FIELD WENT AWAY ENTIRELY.** Melissa made the pilot
+  **free for good** — *"lets make the pilot free and have it in the hero"* — so
+  the entry is now plain `access: "free"` and **`openUntil` was deleted from
+  it**. It carried the only window there has ever been, so **no piece on the
+  site carries one now**: `openNow()` returns false for everything and
+  `canWatch()`, `openNow()` and `streamable.ts` all still work on a field
+  nothing uses. **Do not write that the mechanism is gone — it is unused, which
+  is a different thing**, and the pilot's entry says switching it back to
+  `premium` restores its 3:10 free window with nothing else to change. **The
+  3:10 preview is still defined and no longer served**, because the stream
+  route hands anyone who may watch the real file.
   *(**There is a third free count, and it is the one the health check prints.**
   That check counts `access === "free" && !hidden`, so it said **14 free** on
   10-31 while `access`-free was **15**: `interview` is free and `hidden: true`,

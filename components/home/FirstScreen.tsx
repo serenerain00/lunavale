@@ -58,7 +58,9 @@ export function SeriesHeroCopy({ facts, className = "" }: { facts: SeriesFacts; 
       </p>
       {freeWeek && (
         <p className="mt-3 text-lg font-medium text-amber sm:text-xl">
-          Episode 1 is free to watch through {freeThroughLabel(getVideo("pilot")!.openUntil!)}
+          {getVideo("pilot")!.openUntil
+            ? <>Episode 1 is free to watch through {freeThroughLabel(getVideo("pilot")!.openUntil!)}</>
+            : <>Episode 1 is free to watch</>}
         </p>
       )}
 
@@ -162,5 +164,6 @@ export function FirstScreenExposure() {
 /** The pilot's free week (Video.openUntil), so both test arms say it. */
 function pilotFreeWeek(): boolean {
   const pilot = getVideo("pilot");
-  return Boolean(pilot && openNow(pilot));
+  // Free for good since 2026-11-21 (access "free"), or inside a free week.
+  return Boolean(pilot && (pilot.access === "free" || openNow(pilot)));
 }

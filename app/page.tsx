@@ -713,6 +713,8 @@ export default async function Home() {
  */
 function freeWeekNote(slug: string | undefined): string | undefined {
   const video = slug ? getVideo(slug) : undefined;
+  // An episode free for good (the pilot, 2026-11-21) has no end date to give.
+  if (video?.access === "free") return "Free to watch";
   if (!video?.openUntil || !openNow(video)) return undefined;
   return `Free to watch through ${freeThroughLabel(video.openUntil)}`;
 }

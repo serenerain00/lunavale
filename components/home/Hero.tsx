@@ -10,7 +10,7 @@ import { getPlace } from "@/lib/content/taxonomy";
 import { formatDuration, freeThroughLabel, openNow } from "@/lib/content/videos";
 import { PAGE } from "@/components/ui/layout";
 import { useHeroSound } from "@/components/home/useHeroSound";
-import { SERIES_TITLE } from "@/lib/content/season";
+import { SERIES_TITLE, SEASONS } from "@/lib/content/season";
 import { SeriesHeroCopy, type SeriesFacts } from "@/components/home/FirstScreen";
 
 interface HeroProps {
@@ -68,6 +68,9 @@ export function Hero({ hero, series }: HeroProps) {
   // cached page stops saying "free" the moment it stops being true.
   const freeWeek = video.access !== "free" && openNow(video);
   const free = video.access === "free" || freeWeek;
+  const freeEpisode =
+    video.access === "free" &&
+    SEASONS.some((season) => season.episodes.some((e) => e.slug === video.slug));
   // Not every place has a walkable environment yet (the fair, Burnett's), so
   // the second button falls back to the world index rather than 404ing.
   const place = getPlace(video.place);
@@ -178,11 +181,19 @@ export function Hero({ hero, series }: HeroProps) {
             Free to watch through {freeThroughLabel(video.openUntil!)}
           </p>
         )}
+        {/* An episode that is free for good (the pilot, 2026-11-21) says so
+            just as loudly: episodes are otherwise members-only, so "free" is
+            the news. */}
+        {freeEpisode && (
+          <p className="mt-5 text-lg font-medium text-amber sm:text-xl">
+            Free to watch, no membership needed
+          </p>
+        )}
 
         {/* Clamped to three lines: the hero is a fixed share of the screen and
             anchored to the bottom, so a long synopsis (the pilot's is five
             sentences) pushed the series mark up under the header on phones and on short laptop screens. The full text is on the clip page. */}
-        <p className={`${freeWeek ? "mt-2" : "mt-5"} line-clamp-3 max-w-xl text-lg leading-relaxed text-stone sm:text-xl`}>
+        <p className={`${freeWeek || freeEpisode ? "mt-2" : "mt-5"} line-clamp-3 max-w-xl text-lg leading-relaxed text-stone sm:text-xl`}>
           {video.synopsis}
         </p>
 

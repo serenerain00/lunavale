@@ -3239,15 +3239,18 @@ export const videos: Video[] = [
     // 1116.23 from ffprobe.
     durationSeconds: 1116,
     addedOn: "2026-09-21",
-    access: "premium",
     /*
-      FREE TO EVERYONE FOR A WEEK, 2026-10-22. Melissa: "lets have the pilot
-      free to non members ... lets see what that does for subs", then "lets
-      make it expire next wednesday". The end of Wednesday Oct 28 in Pacific
-      time (still PDT), so it is free all of that day everywhere in the US.
-      The 3:10 preview below comes back by itself afterwards.
+      FREE FOR GOOD, 2026-11-21. Melissa: "lets make the pilot free and have
+      it in the hero". No end date: the whole episode, for everybody, signed
+      in or not. (Before this it was free for one week, 2026-10-22 to the end
+      of Oct 28, through `openUntil`, which is gone now.)
+
+      The preview below is no longer served, because the stream route gives
+      anybody who can watch the real file, but it stays defined so that
+      switching this back to "premium" brings back the 3:10 free window with
+      nothing else to change.
     */
-    openUntil: "2026-10-29T07:00:00Z",
+    access: "free",
     mature: true,
     notes: ["danger"],
     /*

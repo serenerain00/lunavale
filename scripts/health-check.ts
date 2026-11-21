@@ -43,7 +43,7 @@ import { videos } from "@/lib/content/videos";
 import { clips } from "@/lib/content/posts";
 import { SHORT_LINKS } from "@/lib/content/shortlinks";
 import { galleries } from "@/lib/content/gallery";
-import { heroes, newEpisodePins, pickHero } from "@/lib/content/hero";
+import { heroes, newEpisodePins, pickHero, PILOT_PINNED_FROM } from "@/lib/content/hero";
 import { assertComplete, inStoryOrder } from "@/lib/content/chronology";
 import { SEASONS } from "@/lib/content/season";
 
@@ -370,7 +370,12 @@ async function checkContent() {
         fail(`New episode ${live.slug} has no hero loop`,
           "It should lead the home page until " + live.until.toISOString().slice(0, 10) +
           ". Add it to scripts/make-hero-loop.sh (inside its free window), run it, and add the slug to HERO_SLUGS.");
-      } else if (pickHero(now)?.slug !== live.slug) {
+      } else if (
+        // Since 2026-11-21 the free pilot holds the hero, and only episodes
+        // published after it was pinned take over (lib/content/hero.ts).
+        live.until.getTime() - 5 * 86_400_000 >= PILOT_PINNED_FROM.getTime() &&
+        pickHero(now)?.slug !== live.slug
+      ) {
         fail(`New episode ${live.slug} is not the hero`, "pickHero() chose something else during its five days.");
       } else ok(`Hero: ${live.slug}, new, until ${live.until.toISOString().slice(0, 10)}`);
     }

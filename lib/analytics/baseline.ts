@@ -58,6 +58,12 @@ export const BREAKS: readonly BaselineBreak[] = [
     effect:
       "Pilot plays by non-members are whole-episode plays this week, so preview_end counts for the pilot drop to near zero and the Join box under the player is the pilot's only in-player route to checkout. Compare paid signups Oct 22–28 against the weeks either side, people not payments; the first-screen A/B runs through it, both arms equally.",
   },
+  {
+    on: "2026-11-21",
+    what: "Episode 1 (Pilot) free for good (no end date) and pinned as the home hero. The hero opens with the series premise (\"Ten years of love…\") and \"Watch Episode 1 free\" / \"Explore the series\"; a three-card \"The story\" section sits under it; episode pages link to the next episode; share cards add \"Watch Episode 1 free.\" New Clarity events: hero_pilot_click, hero_explore_click, pilot_25/50/90, pilot_complete.",
+    effect:
+      "Non-member pilot plays are whole-episode plays from here, so pilot preview_end drops to zero. Compare paid signups per week, people not payments, against Nov 7–20. The Oct 22–28 free week is the closest precedent (17 signups that week vs 20 the week before, during the Facebook launch).",
+  },
 ];
 
 /** Breaks that went live on or between two UTC days (inclusive). */

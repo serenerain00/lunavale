@@ -68,6 +68,25 @@ export function VideoPlayer({
   const counted = useRef(false);
   const viewer = useViewer();
 
+  /*
+   * HOW FAR INTO THE FREE PILOT, 2026-11-21 (the redesign brief's "Episode 1
+   * completion or meaningful watch progress"). Clarity events only, once per
+   * player: pilot_25 / pilot_50 / pilot_90, and pilot_complete on ended. No
+   * new provider and nothing stored server-side; they show up as Smart Events
+   * in Clarity next to video_play.
+   */
+  const reached = useRef(new Set<number>());
+  function trackProgress(v: HTMLVideoElement) {
+    if (slug !== "pilot" || !v.duration) return;
+    const pct = (v.currentTime / v.duration) * 100;
+    for (const mark of [25, 50, 90]) {
+      if (pct >= mark && !reached.current.has(mark)) {
+        reached.current.add(mark);
+        clarityEvent(`pilot_${mark}`);
+      }
+    }
+  }
+
   function countPlay() {
     if (counted.current) return;
     counted.current = true;
@@ -130,7 +149,11 @@ export function VideoPlayer({
         countPlay();
         onPlay?.();
       }}
-      onEnded={onEnded}
+      onTimeUpdate={(e) => trackProgress(e.currentTarget)}
+      onEnded={() => {
+        if (slug === "pilot") clarityEvent("pilot_complete");
+        onEnded?.();
+      }}
     >
       <source src={`/api/stream/${slug}`} type="video/mp4" />
     </video>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { SEASONS } from "@/lib/content/season";
 import { notFound } from "next/navigation";
 import { getVideo, videos, formatDuration, freeThroughLabel, openNow } from "@/lib/content/videos";
 import { PREMIUM_TIER, canWatch, isMember } from "@/lib/access/entitlement";
@@ -84,8 +85,18 @@ export default async function WatchPage({ params }: WatchPageProps) {
   // anything outside the story (the trailer, the cast interview), which is
   // correct: those are about it, not in it.
   const position = storyPosition(slug);
-  const previous = previousInStory(slug);
-  const next = nextInStory(slug);
+  // Episodes are not in the story order (lib/content/chronology.ts), so
+  // until 2026-11-21 the pilot ended with nowhere to go. An episode's
+  // neighbors are the episodes either side of it in its season.
+  const episodes = SEASONS.flatMap((s) => s.episodes).filter((e) => !e.comingSoon && e.slug);
+  const epIndex = episodes.findIndex((e) => e.slug === slug);
+  const epNeighbor = (i: number) => {
+    const e = episodes[i];
+    const v = e?.slug ? getVideo(e.slug) : undefined;
+    return v && !v.hidden ? v : undefined;
+  };
+  const previous = epIndex >= 0 ? epNeighbor(epIndex - 1) : previousInStory(slug);
+  const next = epIndex >= 0 ? epNeighbor(epIndex + 1) : nextInStory(slug);
   const stills = galleryForScene(slug);
 
   return (

@@ -6,6 +6,7 @@ import { PAGE } from "@/components/ui/layout";
 import { ClipCard } from "@/components/shelf/ClipCard";
 import { Hero } from "@/components/home/Hero";
 import { TrailerHero } from "@/components/home/TrailerHero";
+import { StoryIntro } from "@/components/home/StoryIntro";
 import { FollowForm } from "@/components/follow/FollowForm";
 import { SurveyDrawer } from "@/components/survey/SurveyDrawer";
 import { SiteHeader } from "@/components/ui/SiteHeader";
@@ -135,6 +136,10 @@ export default async function Home() {
           ) : (
             <Hero hero={hero} series={seriesFacts} />
           ))}
+
+        {/* Who these people are, before anything asks for money. The
+            hero's "Explore the series" lands here. 2026-11-21. */}
+        <StoryIntro />
 
         {/*
           THE BLURB, directly under the hero and deliberately one paragraph.
@@ -352,7 +357,9 @@ export default async function Home() {
                 href="/membership"
                 className="-my-3 inline-flex min-h-11 items-center shrink-0 text-sm text-amber transition-colors duration-(--duration-quick) hover:text-amber-soft"
               >
-                Watch it with a membership{" "}
+                {/* "Watch it with a membership" until 2026-11-21, when the
+                    pilot went free and that stopped being true of all of it. */}
+                Episode 1 is free · the rest with membership{" "}
                 <span aria-hidden="true">→</span>
               </Link>
             </Guest>
